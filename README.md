@@ -21,7 +21,9 @@ Data will be saved locally for better performance and this project should be mor
 
 ## In-app purchase
 Unlock some features and remove all ads
+
 |  IOS | Android | Windows 10 |
 |:----:|:-------:|:----------:|
 | 2.99 USD |   1.99 USD |     N/A  |
+
 Windows 10 is paid so it does not have any ads and in-app purchase
