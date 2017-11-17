@@ -1,0 +1,3 @@
+rootProject.name = 'WoWs_Info'
+
+include ':app'
