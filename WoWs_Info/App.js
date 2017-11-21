@@ -5,7 +5,7 @@ export default class App extends Component {
   render() {
     return (
       <View style={styles.viewStyle}>
-        <StatusBar barStyle='light-content' backgroundColor={Theme.bgColour}/>
+        <StatusBar barStyle='light-content'/>
         <Text style={styles.textStyle}>
           Hello World
         </Text>
@@ -16,7 +16,7 @@ export default class App extends Component {
 
 const styles = {
   viewStyle: {
-    backgroundColor: Theme.bgColour,
+    backgroundColor: 'white',
     flex: 1,
   },
   textStyle: {
