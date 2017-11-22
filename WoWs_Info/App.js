@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, StatusBar } from 'react-native';
+import strings from './src/localization';
 
 export default class App extends Component {
   render() {
@@ -7,7 +8,7 @@ export default class App extends Component {
       <View style={styles.viewStyle}>
         <StatusBar barStyle='light-content'/>
         <Text style={styles.textStyle}>
-          Hello World
+          {strings.download_data}
         </Text>
       </View>
     );
