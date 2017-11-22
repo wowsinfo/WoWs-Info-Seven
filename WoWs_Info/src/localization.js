@@ -1,4 +1,5 @@
 import LocalizedStrings from 'react-localization';
+import Language from './core/Language';
 
 let strings = new LocalizedStrings({
   en: {
@@ -15,13 +16,7 @@ let strings = new LocalizedStrings({
   },
 });
 
-// Get current language
-var DeviceInfo = require('react-native-device-info');
-var lang = DeviceInfo.getDeviceLocale();
-// Traditional Chinese
-if (lang.includes('zh-Hant')) lang = 'zh-Hant';
-// console.log(lang);
 // Set to current language
-strings.setLanguage(lang);
+strings.setLanguage(Language.getCurrentLanguage());
 
 export default strings;
