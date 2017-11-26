@@ -20,7 +20,8 @@
 		"babel-preset-react-native": "4.0.0",
 		"eslint-config-google": "^0.9.1",
 		"jest": "21.2.1",
-		"react-test-renderer": "16.0.0"
+		"react-test-renderer": "16.0.0",
+		"reactotron-react-native": "^1.13.2"
 	},
 	"jest": {
 		"preset": "react-native"

@@ -23,4 +23,4 @@ class StorageManager {
   }
 }
 
-export default StorageManager;
+export {StorageManager};
