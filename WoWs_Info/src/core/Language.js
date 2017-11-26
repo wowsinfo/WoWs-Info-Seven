@@ -8,6 +8,15 @@ class Language {
     // console.log(lang);
     return lang;
   }
+
+  // These two funtions are based on getCurrentLanguage
+  static getApiLanguage() {
+    
+  }
+
+  static getNewsLanguage() {
+
+  }
 }
 
 export default Language;

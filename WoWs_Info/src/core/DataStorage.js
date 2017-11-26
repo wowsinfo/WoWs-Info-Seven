@@ -1,5 +1,7 @@
 import { Platform, AsyncStorage } from 'react-native';
 import { IOSDataName, localDataName } from '../constant/value';
+import { WoWsInfo } from '../colour/colour';
+import Language from '../core/Language';
 
 class DataStorage {
   static setupLocalStorage() {
@@ -15,16 +17,10 @@ class DataStorage {
       AsyncStorage.setItem(localDataName.currServer, '3');
       AsyncStorage.setItem(localDataName.themeColour, JSON.stringify({tintColour: '', textColour: '', bgColour: ' '}));
       AsyncStorage.setItem(localDataName.firstLaunch, JSON.stringify(false));
-      AsyncStorage.setItem(localDataName.appLanguage, '');
-
-      AsyncStorage.getItem(localDataName.userInfo).then(value => {
-        console.log(value);
-        var data = JSON.parse(value);
-        console.log(data);
-      })
+      AsyncStorage.setItem(localDataName.appLanguage, Language.getCurrentLanguage());
     } catch (error) {
-      // Something is wrong
-      console.log(error);
+      // Fail to setup some data
+      console.error(error);
     }
   }
 }
