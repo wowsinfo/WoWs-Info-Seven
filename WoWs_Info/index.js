@@ -1,6 +1,6 @@
 import { AppRegistry } from 'react-native';
 import App from './App';
-import { DataStorage, GameVersion, StorageManager} from './src/core/';
+import { DataStorage, GameVersion, StorageManager, DateCalculator } from './src/core/util';
 import { localDataName } from './src/constant/value';
 import './reactotron';
 
@@ -11,8 +11,17 @@ if (StorageManager.getItem(localDataName.firstLaunch) != null) {
 }
 
 // Checking for updates
-if (GameVersion.hasUpdate) {
+if (GameVersion.hasUpdate()) {
   console.log('Updating data');
+}
+
+// A new day?
+if (DateCalculator.isNewDay()) {
+  console.log('A new day');
+  // Update access_token (in the future)
+  if (DateCalculator.shouldUpdateToken()) {
+    console.log('Update access_token');
+  }
 }
 
 AppRegistry.registerComponent('WoWs_Info', () => App);
