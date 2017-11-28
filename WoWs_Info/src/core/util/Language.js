@@ -11,11 +11,11 @@ class Language {
 
   // These two funtions are based on getCurrentLanguage
   static getApiLanguage() {
-    
+    return 'en';
   }
 
   static getNewsLanguage() {
-
+    return 'en';
   }
 }
 

@@ -27,6 +27,8 @@ class DataStorage {
       }
       await AsyncStorage.setItem(localDataName.firstLaunch, JSON.stringify(false));
       await AsyncStorage.setItem(localDataName.appLanguage, Language.getCurrentLanguage());
+      await AsyncStorage.setItem(localDataName.newsLanguage, Language.getNewsLanguage());
+      await AsyncStorage.setItem(localDataName.apiLanguage, Language.getApiLanguage());
 
       // Check again for userdefault
       if (currOS == 'ios') {

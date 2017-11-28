@@ -1,16 +1,23 @@
+import strings from '../localization';
+
 // This is my WarGaming Developer ID
-export const ApplicationID = '';
+// Please use yours or demo if you are running this app
+export const ApplicationID = '***ApplicationID***';
+
+export const serverCode = ['ru', 'eu', 'com', 'asia'];
+export const serverName = [strings.russia, strings.europe, strings.north_america, strings.asia];
 
 export const API = {
-
+  GameVersion: 'https://api.worldofwarships.' +  + '/wows/encyclopedia/info/?application_id=' + ApplicationID + '&language=en&fields=game_version'
 }
 
 // All supported game servers
 export const serverCode = {
   Russia: 0,
   Europe: 1,
-  NorthAmercia: 2,
+  NorthAmerica: 2,
   Asia: 3,
+  // Chinese server is difference from all other servers
   China: 4,
 }
 
@@ -36,4 +43,6 @@ export const localDataName = {
   themeColour: '@WoWs_Info:themeColour',
   firstLaunch: '@WoWs_Info:firstLaunch',
   appLanguage: '@WoWs_Info:appLanguage',
+  newsLanguage: '@WoWs_Info:newsLanguage',
+  apiLanguage: 'WoWs_Info:apiLanguage',
 }
