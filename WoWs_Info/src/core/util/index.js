@@ -4,4 +4,4 @@ export * from './Language';
 export * from './StorageManager';
 export * from './DateCalculator';
 export * from './PlayerConverter';
-export * from './ServerConverter';
+export * from './ServerManager';

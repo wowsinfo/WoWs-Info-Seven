@@ -29,28 +29,25 @@ class DateCalculator {
     }
   }
 
-  static isNewDay() {
-    let lastOpenDate = StorageManager.getItem(localDataName.currDate).then(date => {
-      let currDate = DateCalculator.getCurrDate();
-      console.log(date + '\n' + currDate);
-      if (lastOpenDate == currDate) return false;
-      else {
-        // Update currDate
-        StorageManager.setItem(localDataName.currDate, currDate);
-        return true;
-      }
-    })
+  static isNewDay(lastOpen) {
+    if (lastOpen == null) return;
+    let currDate = DateCalculator.getCurrDate();
+    console.log(lastOpen + '\n' + currDate);
+    if (lastOpen == currDate) return false;
+    else {
+      // Update currDate
+      StorageManager.setItem(localDataName.currDate, currDate);
+      return true;
+    }
   }
 
-  static shouldUpdateToken() {
-    let lastTokenDate = StorageManager.getItem(localDataName.tokenDate).then(token => {
-      if (token == '') return false;
-      let currDate = DateCalculator.getCurrDate();
-      let diff = DateCalculator.diffDate(token, currDate);
-      // It lasts 20 days
-      if (parseInt(diff) > 15) return true;
-      return false;
-    })
+  static shouldUpdateToken(token) {
+    if (token == null || token == '') return false;
+    let currDate = DateCalculator.getCurrDate();
+    let diff = DateCalculator.diffDate(token, currDate);
+    // It lasts 20 days
+    if (parseInt(diff) > 15) return true;
+    return false;
   }
 }
 
