@@ -11,11 +11,21 @@ class Language {
 
   // These two funtions are based on getCurrentLanguage
   static getApiLanguage() {
-    return 'en';
+    // Based on user selection
+    return Language.getCurrentLanguage();
   }
 
   static getNewsLanguage() {
-    return 'en';
+    let lang =  Language.getCurrentLanguage();
+    return lang;
+  }
+
+  static setApiLanguage() {
+
+  }
+
+  static setAppLanguage() {
+
   }
 }
 

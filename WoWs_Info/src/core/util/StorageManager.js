@@ -4,7 +4,7 @@ import { AsyncStorage } from 'react-native';
 class StorageManager {
   static async getItem(key) {
     try {
-      return await AsyncStorage.getItem(key);
+      return JSON.parse(await AsyncStorage.getItem(key));
     } catch (error) {
       // Fail to get data
       console.error(error);
@@ -16,6 +16,7 @@ class StorageManager {
     try {
       // Stringify object
       await AsyncStorage.setItem(key, JSON.stringify(object));
+      console.log(key, object);
     } catch (error) {
       // Fail to set data
       console.error(error);
