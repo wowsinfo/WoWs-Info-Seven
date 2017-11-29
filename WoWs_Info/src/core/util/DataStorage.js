@@ -7,7 +7,6 @@ import { DataManager } from '../data/';
 class DataStorage {
   static dataValidation() {
     // Setting up Data here
-    console.log(StorageManager.getItem(localDataName.firstLaunch));
     StorageManager.getItem(localDataName.firstLaunch).then(first => {
       if (first == null) {
         console.log('First Launch\nWelcome to WoWs Info >_<')
