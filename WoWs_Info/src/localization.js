@@ -3,6 +3,8 @@ import { Language } from './core/util';
 
 let strings = new LocalizedStrings({
   en: {
+    // Loading
+    loading: 'Loading...',
     download_data: 'Downloading data...',
     // Date
     today: 'Today',
@@ -16,6 +18,8 @@ let strings = new LocalizedStrings({
     server: 'server',
   },
   zh: {
+    // Loading
+    loading: '加载中...',
     download_data: '下载数据中...',
     // Date
     today: '今天',

@@ -22,7 +22,7 @@ class DataStorage {
         if (curr != saved) {
           console.log('Game update\nVersion: ' + curr + '\nBefore: ' + saved);
           DataManager.updateLocalData();
-          store.set(localDataName.gameVersion, curr);
+          store.update(localDataName.gameVersion, curr);
         }
       });
     })
@@ -42,31 +42,31 @@ class DataStorage {
   }
 
   static setupLocalStorage() {
-    store.set(localDataName.isPro, false);
-    store.set(localDataName.hasAds, true);
+    store.update(localDataName.isPro, false);
+    store.update(localDataName.hasAds, true);
     // I am more than happy to play in a division
-    store.set(localDataName.playerList, [{name: 'HenryQuan', id: '2011774448', server: '3'}]);
-    store.set(localDataName.userInfo, {name: '', id: '', server: '', access_token: ''});
-    store.set(localDataName.userData, '');
+    store.update(localDataName.playerList, [{name: 'HenryQuan', id: '2011774448', server: '3'}]);
+    store.update(localDataName.userInfo, {name: '', id: '', server: '', access_token: ''});
+    store.update(localDataName.userData, '');
     GameVersion.getCurrVersion().then(version => {
-      store.set(localDataName.gameVersion, version);
+      store.update(localDataName.gameVersion, version);
     })
-    store.set(localDataName.currDate, DateCalculator.getCurrDate());
-    store.set(localDataName.tokenDate, '');
-    store.set(localDataName.currServer, '3');
+    store.update(localDataName.currDate, DateCalculator.getCurrDate());
+    store.update(localDataName.tokenDate, '');
+    store.update(localDataName.currServer, '3');
 
     let currOS = Platform.OS;
     if (currOS == 'ios') {
-      store.set(localDataName.themeColour, {tintColour: 'white', textColour: 'white', bgColour: WoWsInfo.blue});
+      store.update(localDataName.themeColour, WoWsInfo.blue);
     } else if (currOS == 'android') {
-      store.set(localDataName.themeColour, {tintColour: 'white', textColour: 'white', bgColour: WoWsInfo.red});
+      store.update(localDataName.themeColour, WoWsInfo.red);
     } else {
-      store.set(localDataName.themeColour, {tintColour: 'white', textColour: 'white', bgColour: WoWsInfo.green});
+      store.update(localDataName.themeColour, WoWsInfo.green);
     }
-    store.set(localDataName.firstLaunch, false);
-    store.set(localDataName.appLanguage, Language.getCurrentLanguage());
-    store.set(localDataName.newsLanguage, Language.getNewsLanguage());
-    store.set(localDataName.apiLanguage, Language.getApiLanguage());
+    store.update(localDataName.firstLaunch, false);
+    store.update(localDataName.appLanguage, Language.getCurrentLanguage());
+    store.update(localDataName.newsLanguage, Language.getNewsLanguage());
+    store.update(localDataName.apiLanguage, Language.getApiLanguage());
 
     // Check again for userdefault
     if (currOS == 'ios') {
@@ -75,17 +75,17 @@ class DataStorage {
         if (data != null) {
           console.log('Retrieving userdefault...');
           UserDefaults.stringForKey(IOSDataName.server).then(server => {
-            store.set(localDataName.currServer, server);
+            store.update(localDataName.currServer, server);
           })
           UserDefaults.boolForKey(IOSDataName.hasPurchased).then(pro => {
-            store.set(localDataName.isPro, pro);
-            if (pro) store.set(localDataName.hasAds, false);
+            store.update(localDataName.isPro, pro);
+            if (pro) store.update(localDataName.hasAds, false);
           })
           UserDefaults.stringForKey(IOSDataName.userName).then(username => {
             if (username != '>_<') {
               var playerObj = PlayerConverter.fromString(username);
               playerObj[access_token] = '';
-              store.set(localDataName.userInfo, playerObj);
+              store.update(localDataName.userInfo, playerObj);
             }
           })
           UserDefaults.objectForKey(IOSDataName.friend).then(friend => {
@@ -94,7 +94,7 @@ class DataStorage {
               for (var i = 0; i < friend.length; i++) {
                 playerList.push(PlayerConverter.fromString(friend[i]));
               }
-              store.set(localDataName.playerList, playerList);
+              store.update(localDataName.playerList, playerList);
             }
           })
         }

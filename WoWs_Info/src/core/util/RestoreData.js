@@ -22,6 +22,9 @@ export const restoreData = () => {
       store.get(localDataName.newsLanguage).then(news => {
         global.newsLanguage = news;
       })
+      store.get(localDataName.themeColour).then(color => {
+        global.themeColour = color;
+      })
       store.get(localDataName.userInfo).then(info => {
         global.userInfo = info;
         success(true);
