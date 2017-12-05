@@ -11,19 +11,3 @@ export const WoWsInfo = {
   orange: '#FA963C',
   black: '#39393E',
 }
-
-export var Theme = {
-  textColour: 'white',
-  tintColour: 'white',
-  ...Platform.select({
-    ios: {
-      bgColour: WoWsInfo.blue,
-    },
-    android: {
-      bgColour: WoWsInfo.red,
-    },
-    windows: {
-      bgColour: WoWsInfo.green,
-    },
-  }),
-}
