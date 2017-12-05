@@ -43,5 +43,14 @@ export const localDataName = {
   firstLaunch: '@WoWs_Info:firstLaunch',
   appLanguage: '@WoWs_Info:appLanguage',
   newsLanguage: '@WoWs_Info:newsLanguage',
-  apiLanguage: 'WoWs_Info:apiLanguage',
+  apiLanguage: '@WoWs_Info:apiLanguage',
+}
+
+export const savedDataName = {
+  encyclopedia: '@Data:encyclopedia',
+  shipNation: '@Data:shipNation',
+  shipNation: '@Data:shipNation',
+  shipNation: '@Data:shipNation',
+  shipNation: '@Data:shipNation',
+  shipNation: '@Data:shipNation',
 }

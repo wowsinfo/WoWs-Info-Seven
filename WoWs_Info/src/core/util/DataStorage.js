@@ -19,8 +19,8 @@ class DataStorage {
     // Checking for updates
     store.get(localDataName.gameVersion).then(saved => {
       GameVersion.getCurrVersion().then(curr => {
+        console.log('Game Version\nCurr: ' + curr + '\nSaved: ' + saved);
         if (curr != saved) {
-          console.log('Game update\nVersion: ' + curr + '\nBefore: ' + saved);
           DataManager.updateLocalData();
           store.update(localDataName.gameVersion, curr);
         }
@@ -55,6 +55,7 @@ class DataStorage {
     store.update(localDataName.tokenDate, '');
     store.update(localDataName.currServer, '3');
 
+    // Theme Red Blue Green
     let currOS = Platform.OS;
     if (currOS == 'ios') {
       store.update(localDataName.themeColour, WoWsInfo.blue);
