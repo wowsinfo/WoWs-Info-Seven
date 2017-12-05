@@ -14,6 +14,7 @@ class LoadingScreen extends React.PureComponent {
   }
 }
 
+// This is the ratio I used for iPhone 7
 let LogoWidth = Dimensions.get('window').width * 0.341333;
 
 const styles = StyleSheet.create({
@@ -30,4 +31,4 @@ const styles = StyleSheet.create({
 
 const { ViewStyle, ImageStyle } = styles;
 
-export {LoadingScreen};
+export { LoadingScreen };
