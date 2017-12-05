@@ -1,10 +1,11 @@
 import { API, localDataName } from '../../constant/value';
-import { StorageManager, ServerManager } from './'; 
+import { ServerManager } from './'; 
+import store from 'react-native-simple-store';
 
 // Get current game version from api
 class GameVersion {
   static async getCurrVersion() {
-    let server = await StorageManager.getItem(localDataName.currServer);
+    let server = await store.get(localDataName.currServer);
     var format = require('string-format');
     let api = format(API.GameVersion, ServerManager.getDomainFrom(server));
     console.log(api);
