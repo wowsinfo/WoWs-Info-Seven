@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Text, View, StatusBar } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import { restoreData } from './core/util/RestoreData';
+import { LoadingScreen } from './screen';
+import { WoWsStatusBar } from './component/common';
 import strings from './localization';
 
 export default class App extends Component {
@@ -16,35 +18,30 @@ export default class App extends Component {
   }
 
   render() {
-    if (this.state.isReady) {
+    if (!this.state.isReady) {
       return (
-        <View style={styles.viewStyle}>
-          <StatusBar barStyle='light-content'/>
-          <Text style={styles.textStyle}>
-            {global.newsLanguage}
+        <View style={ViewStyle}>
+          <WoWsStatusBar />
+          <Text style={TextStyle}>
+            Ready
           </Text>
         </View>
       );
     } else {
-      return (
-        <View style={styles.viewStyle}>
-          <StatusBar barStyle='light-content'/>
-          <Text style={styles.textStyle}>
-            NotReady
-          </Text>
-        </View>
-      );
+      return <LoadingScreen />
     }
   }
 }
 
-const styles = {
-  viewStyle: {
+const styles = StyleSheet.create({
+  ViewStyle: {
     backgroundColor: 'white',
     flex: 1,
   },
-  textStyle: {
+  TextStyle: {
     textAlign: 'center',
     padding: 20,
   }
-}
+});
+
+const { ViewStyle, TextStyle } = styles;
