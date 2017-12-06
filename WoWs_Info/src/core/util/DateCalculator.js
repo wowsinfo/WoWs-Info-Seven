@@ -1,5 +1,5 @@
 import { localDataName } from '../../constant/value';
-import { StorageManager } from './';
+import store from 'react-native-simple-store';
 import strings from '../../localization'; 
 
 class DateCalculator {
@@ -36,7 +36,7 @@ class DateCalculator {
     if (lastOpen == currDate) return false;
     else {
       // Update currDate
-      StorageManager.setItem(localDataName.currDate, currDate);
+      store.update(localDataName.currDate, currDate);
       return true;
     }
   }

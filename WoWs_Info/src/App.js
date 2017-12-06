@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import { restoreData } from './core/util/RestoreData';
+import { DataStorage } from './core/util/';
 import { LoadingScreen } from './screen';
 import { WoWsStatusBar } from './component/common';
 import strings from './localization';
@@ -11,14 +11,14 @@ export default class App extends Component {
   }
   
   async componentWillMount() {
-    let ready = await restoreData();
+    let ready = await DataStorage.dataValidation();
     this.setState({
       isReady: ready,
     })
   }
 
   render() {
-    if (!this.state.isReady) {
+    if (this.state.isReady) {
       return (
         <View style={ViewStyle}>
           <WoWsStatusBar />

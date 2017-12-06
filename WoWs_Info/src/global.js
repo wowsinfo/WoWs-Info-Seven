@@ -2,6 +2,7 @@ import { Platform } from 'react-native';
 import { WoWsInfo } from '../src/colour/colour';
 
 global.server = 3;
+global.serverName = 'asia';
 global.userInfo = { name: '', id: '', server: '', access_token: '' };
 global.isPro = false;
 global.hasAds = true;
