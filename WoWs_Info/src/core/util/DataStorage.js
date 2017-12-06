@@ -1,7 +1,7 @@
 import { Platform } from 'react-native';
 import { IOSDataName, localDataName } from '../../constant/value';
 import { WoWsInfo } from '../../colour/colour';
-import { Language, GameVersion, DateCalculator, PlayerConverter } from './';
+import { Language, GameVersion, DateCalculator, PlayerConverter, ServerManager } from './';
 import store from 'react-native-simple-store';
 import { DataManager } from '../data/';
 
@@ -10,17 +10,19 @@ class DataStorage {
     try {
       // Setting up Data here
       let first = await store.get(localDataName.firstLaunch);
-      if (first == null) {
+      if (first != null) {
         console.log('First Launch\nWelcome to WoWs Info >_<')
         await DataStorage.setupLocalStorage();
+        await DataStorage.restoreData();
         await DataManager.updateLocalData();
       } else {
         // Checking for updates
-        let saved = await store.get(localDataName.gameVersion);
+        await DataStorage.restoreData();
+        let saved = global.gameVersion;
         let curr = await GameVersion.getCurrVersion();
         console.log('Game Version\nCurr: ' + curr + '\nSaved: ' + saved);
         if (curr != saved) {
-          DataManager.updateLocalData();
+          await DataManager.updateLocalData();
           await store.update(localDataName.gameVersion, curr);
         }
   
@@ -105,6 +107,19 @@ class DataStorage {
     } catch (error) {
       console.error(error);
     }
+  }
+
+  static async restoreData() {
+    global.server = await store.get(localDataName.currServer);
+    global.serverName = ServerManager.getDomainFrom(global.server);
+    global.userInfo = await store.get(localDataName.userInfo);
+    global.isPro = await store.get(localDataName.isPro);
+    global.hasAds = await store.get(localDataName.hasAds);
+    global.apiLanguage = await store.get(localDataName.apiLanguage);
+    global.appLanguage = await store.get(localDataName.appLanguage);
+    global.newsLanguage = await store.get(localDataName.newsLanguage);
+    global.gameVersion = await store.get(localDataName.gameVersion);
+    global.themeColour = await store.get(localDataName.themeColour);
   }
 }
 

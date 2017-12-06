@@ -5,3 +5,4 @@ export * from './Encyclopedia';
 export * from './GameMap';
 export * from './Consumable';
 export * from './Warship';
+export * from './Language';
