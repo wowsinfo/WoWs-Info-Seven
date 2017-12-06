@@ -1,4 +1,5 @@
 import store from 'react-native-simple-store';
+import { ServerManager } from './';
 import { localDataName } from '../../constant/value';
 
 export const restoreData = () => {
@@ -6,6 +7,7 @@ export const restoreData = () => {
     try {
       store.get(localDataName.currServer).then(server => {
         global.server = server;
+        global.serverName = ServerManager.getDomainFrom(server);
       })
       store.get(localDataName.isPro).then(pro => {
         global.isPro = pro;

@@ -1,10 +1,10 @@
 import { DataAPI, savedDataName } from '../../constant/value';
 
-class CommanderSkill {
+class GameMap {
   // Save ship nations, api languages, ship types and ship modules
-  static saveCommanderSkill() {
+  static saveGameMap() {
     
   }
 }
 
-export {CommanderSkill};
+export {GameMap};
