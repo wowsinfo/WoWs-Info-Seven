@@ -6,7 +6,7 @@ class Achievement {
   // Save ship nations, api languages, ship types and ship modules
   static async saveAchievement() {
     var format = require('string-format');
-    let api = format(DataAPI.Achievement, global.serverName) + Language.getLangStr();
+    let api = format(DataAPI.Achievement, global.serverName) + Language.getApiLangStr();
     console.log('AchievementData\n' + api);
     try {
       let response = await fetch(api);
