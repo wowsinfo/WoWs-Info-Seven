@@ -10,7 +10,7 @@ class Language {
   }
 
   // &language=en
-  static getLangStr() {
+  static getApiLangStr() {
     return '&language=' + global.apiLanguage;
   }
 
