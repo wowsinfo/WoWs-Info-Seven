@@ -6,100 +6,104 @@ import store from 'react-native-simple-store';
 import { DataManager } from '../data/';
 
 class DataStorage {
-  static dataValidation() {
-    // Setting up Data here
-    store.get(localDataName.firstLaunch).then(first => {
+  static async dataValidation() {
+    try {
+      // Setting up Data here
+      let first = await store.get(localDataName.firstLaunch);
       if (first == null) {
         console.log('First Launch\nWelcome to WoWs Info >_<')
-        DataStorage.setupLocalStorage();
-        DataManager.updateLocalData();
-      }
-    })
-
-    // Checking for updates
-    store.get(localDataName.gameVersion).then(saved => {
-      GameVersion.getCurrVersion().then(curr => {
+        await DataStorage.setupLocalStorage();
+        await DataManager.updateLocalData();
+      } else {
+        // Checking for updates
+        let saved = await store.get(localDataName.gameVersion);
+        let curr = await GameVersion.getCurrVersion();
         console.log('Game Version\nCurr: ' + curr + '\nSaved: ' + saved);
         if (curr != saved) {
           DataManager.updateLocalData();
-          store.update(localDataName.gameVersion, curr);
+          await store.update(localDataName.gameVersion, curr);
         }
-      });
-    })
-
-    store.get(localDataName.currDate).then(date => {
-      // A new day?
-      if (DateCalculator.isNewDay(date)) {
-        console.log('Another wonderful day');
-        // Update access_token (in the future)
-        store.get(localDataName.tokenDate).then(token => {
+  
+        let date = await store.get(localDataName.currDate);
+        // A new day?
+        if (DateCalculator.isNewDay(date)) {
+          console.log('Another wonderful day');
+          // Update access_token (in the future)
+          let token = await store.get(localDataName.tokenDate);
           if (DateCalculator.shouldUpdateToken(token)) {
             console.log('Update access_token');
           }
-        })
+        }
       }
-    })
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
   }
 
-  static setupLocalStorage() {
-    store.update(localDataName.isPro, false);
-    store.update(localDataName.hasAds, true);
-    // I am more than happy to play in a division
-    store.update(localDataName.playerList, [{name: 'HenryQuan', id: '2011774448', server: '3'}]);
-    store.update(localDataName.userInfo, {name: '', id: '', server: '', access_token: ''});
-    store.update(localDataName.userData, '');
-    GameVersion.getCurrVersion().then(version => {
-      store.update(localDataName.gameVersion, version);
-    })
-    store.update(localDataName.currDate, DateCalculator.getCurrDate());
-    store.update(localDataName.tokenDate, '');
-    store.update(localDataName.currServer, '3');
-
-    // Theme Red Blue Green
-    let currOS = Platform.OS;
-    if (currOS == 'ios') {
-      store.update(localDataName.themeColour, WoWsInfo.blue);
-    } else if (currOS == 'android') {
-      store.update(localDataName.themeColour, WoWsInfo.red);
-    } else {
-      store.update(localDataName.themeColour, WoWsInfo.green);
-    }
-    store.update(localDataName.firstLaunch, false);
-    store.update(localDataName.appLanguage, Language.getCurrentLanguage());
-    store.update(localDataName.newsLanguage, Language.getNewsLanguage());
-    store.update(localDataName.apiLanguage, Language.getApiLanguage());
-
-    // Check again for userdefault
-    if (currOS == 'ios') {
-      var UserDefaults = require('react-native-userdefaults-ios');
-      UserDefaults.objectForKey(IOSDataName.firstLaunch).then(data => {
+  static async setupLocalStorage() {
+    try {
+      await store.update(localDataName.isPro, false);
+      await store.update(localDataName.hasAds, true);
+      // I am more than happy to play in a division
+      await store.update(localDataName.playerList, [{name: 'HenryQuan', id: '2011774448', server: '3'}]);
+      await store.update(localDataName.userInfo, {name: '', id: '', server: '', access_token: ''});
+      await store.update(localDataName.userData, '');
+  
+      let version = await GameVersion.getCurrVersion();
+      await store.update(localDataName.gameVersion, version);
+  
+      await store.update(localDataName.currDate, DateCalculator.getCurrDate());
+      await store.update(localDataName.tokenDate, '');
+      await store.update(localDataName.currServer, '3');
+  
+      // Theme Red Blue Green
+      let currOS = Platform.OS;
+      if (currOS == 'ios') {
+        await store.update(localDataName.themeColour, WoWsInfo.blue);
+      } else if (currOS == 'android') {
+        await store.update(localDataName.themeColour, WoWsInfo.red);
+      } else {
+        await store.update(localDataName.themeColour, WoWsInfo.green);
+      }
+      await store.update(localDataName.firstLaunch, false);
+      await store.update(localDataName.appLanguage, Language.getCurrentLanguage());
+      await store.update(localDataName.newsLanguage, Language.getNewsLanguage());
+      await store.update(localDataName.apiLanguage, Language.getApiLanguage());
+  
+      // Check again for userdefault
+      if (currOS == 'ios') {
+        var UserDefaults = require('react-native-userdefaults-ios');
+        let data = await UserDefaults.objectForKey(IOSDataName.firstLaunch);
         if (data != null) {
           console.log('Retrieving userdefault...');
-          UserDefaults.stringForKey(IOSDataName.server).then(server => {
-            store.update(localDataName.currServer, server);
-          })
-          UserDefaults.boolForKey(IOSDataName.hasPurchased).then(pro => {
-            store.update(localDataName.isPro, pro);
-            if (pro) store.update(localDataName.hasAds, false);
-          })
-          UserDefaults.stringForKey(IOSDataName.userName).then(username => {
-            if (username != '>_<') {
-              var playerObj = PlayerConverter.fromString(username);
-              playerObj[access_token] = '';
-              store.update(localDataName.userInfo, playerObj);
+          let server = await UserDefaults.stringForKey(IOSDataName.server);
+          await store.update(localDataName.currServer, server);
+          
+          let pro = await UserDefaults.boolForKey(IOSDataName.hasPurchased);
+          await store.update(localDataName.isPro, pro);
+          if (pro) await store.update(localDataName.hasAds, false);
+          
+          let username = await UserDefaults.stringForKey(IOSDataName.userName);
+          if (username != '>_<') {
+            var playerObj = PlayerConverter.fromString(username);
+            playerObj[access_token] = '';
+            await store.update(localDataName.userInfo, playerObj);
+          }
+  
+          let friend = await UserDefaults.objectForKey(IOSDataName.friend);
+          if (friend != null) {
+            var playerList = [];
+            for (var i = 0; i < friend.length; i++) {
+              playerList.push(PlayerConverter.fromString(friend[i]));
             }
-          })
-          UserDefaults.objectForKey(IOSDataName.friend).then(friend => {
-            if (friend != null) {
-              var playerList = [];
-              for (var i = 0; i < friend.length; i++) {
-                playerList.push(PlayerConverter.fromString(friend[i]));
-              }
-              store.update(localDataName.playerList, playerList);
-            }
-          })
+            await store.update(localDataName.playerList, playerList);
+          }
         }
-      })
+      }
+    } catch (error) {
+      console.error(error);
     }
   }
 }

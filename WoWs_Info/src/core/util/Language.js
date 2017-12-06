@@ -9,6 +9,11 @@ class Language {
     return lang;
   }
 
+  // &language=en
+  static getLangStr() {
+    return '&language=' + global.apiLanguage;
+  }
+
   // These two funtions are based on getCurrentLanguage
   static getApiLanguage() {
     // Based on user selection
