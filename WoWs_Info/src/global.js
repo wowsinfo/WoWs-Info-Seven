@@ -18,3 +18,11 @@ switch (Platform.OS) {
     global.themeColor = WoWsInfo.green; break;
   default: break;
 }
+
+global.languageJson = {};
+global.achivementJson = {};
+global.consumableJson = {};
+global.encyclopediaJson = {};
+global.warshipJson = {};
+global.commanderSkillJson = {};
+global.gameMapJson = {};

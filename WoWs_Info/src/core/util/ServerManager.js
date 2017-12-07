@@ -15,7 +15,7 @@ class ServerManager {
   }
 
   static getDomainFrom(index) {
-    if (index > 3) return 'com';
+    if (index > 3) return 'asia';
     let domain = ['ru', 'eu', 'com', 'asia'];
     return domain[index];
   }

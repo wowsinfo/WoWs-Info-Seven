@@ -1,5 +1,5 @@
 import { Platform } from 'react-native';
-import { IOSDataName, localDataName } from '../../constant/value';
+import { IOSDataName, localDataName, savedDataName } from '../../constant/value';
 import { WoWsInfo } from '../../colour/colour';
 import { Language, GameVersion, DateCalculator, PlayerConverter, ServerManager } from './';
 import store from 'react-native-simple-store';
@@ -16,6 +16,7 @@ class DataStorage {
         await DataStorage.restoreData();
         await DataManager.updateLocalData();
       } else {
+        console.log('Welcome back');
         // Checking for updates
         await DataStorage.restoreData();
         let saved = global.gameVersion;
@@ -24,6 +25,8 @@ class DataStorage {
         if (curr != saved) {
           await DataManager.updateLocalData();
           await store.update(localDataName.gameVersion, curr);
+        } else {
+          await DataStorage.restoreSavedData();          
         }
   
         let date = await store.get(localDataName.currDate);
@@ -70,9 +73,12 @@ class DataStorage {
         await store.update(localDataName.themeColour, WoWsInfo.green);
       }
       await store.update(localDataName.firstLaunch, false);
-      await store.update(localDataName.appLanguage, Language.getCurrentLanguage());
-      await store.update(localDataName.newsLanguage, Language.getNewsLanguage());
-      await store.update(localDataName.apiLanguage, Language.getApiLanguage());
+
+      // Remove country code is needed
+      let lang = Language.getCurrentLanguage()
+      await store.update(localDataName.appLanguage, lang);
+      await store.update(localDataName.newsLanguage, lang);
+      await store.update(localDataName.apiLanguage, lang);
   
       // Check again for userdefault
       if (currOS == 'ios') {
@@ -120,6 +126,16 @@ class DataStorage {
     global.newsLanguage = await store.get(localDataName.newsLanguage);
     global.gameVersion = await store.get(localDataName.gameVersion);
     global.themeColour = await store.get(localDataName.themeColour);
+  }
+
+  static async restoreSavedData() {
+    global.languageJson = await store.get(savedDataName.language);
+    global.achivementJson = await store.get(savedDataName.achievement);
+    global.consumableJson = await store.get(savedDataName.consumable);
+    global.encyclopediaJson = await store.get(savedDataName.encyclopedia);
+    global.warshipJson = await store.get(savedDataName.warship);
+    global.commanderSkillJson = await store.get(savedDataName.commanderSkill);
+    global.gameMapJson = await store.get(savedDataName.gameMap);
   }
 }
 

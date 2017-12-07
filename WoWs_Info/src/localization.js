@@ -32,7 +32,7 @@ let strings = new LocalizedStrings({
     asia: '亚洲',
     server: '服务器',
   },
-  'zh-Hant': {
+  'zh-tw': {
   },
   ja: {
   },
