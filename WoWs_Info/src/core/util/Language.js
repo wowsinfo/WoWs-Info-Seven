@@ -3,30 +3,46 @@ class Language {
     // Get current language
     var DeviceInfo = require('react-native-device-info');
     var lang = DeviceInfo.getDeviceLocale();
-    // Traditional Chinese
-    if (lang.includes('zh-Hant')) lang = 'zh-Hant';
+    if (lang.includes('-')) {
+      // Simplify -> ja-US to ja only
+      lang = lang.split('-').slice(0, -1);
+      // Basic filter
+      switch (lang[0]) {
+        case 'cs':
+        case 'de':
+        case 'en':
+        case 'es':
+        case 'fr':
+        case 'ja':
+        case 'pl':
+        case 'pt':
+        case 'ru':
+        case 'th':
+        case 'tr':
+        case 'zh':
+          lang = lang.join('-'); break;
+        default:
+          // This language is not supported
+          lang = 'unknown'; break;
+      }
+    }
+
+    // Traditional Chinese following wargaming's naming
+    if (lang == 'zh-Hant') lang = 'zh-tw';
     // console.log(lang);
     return lang;
   }
 
   // &language=en
   static getApiLangStr() {
-    return '&language=' + global.apiLanguage;
-  }
-
-  // These two funtions are based on getCurrentLanguage
-  static getApiLanguage() {
-    // Based on user selection
-    return Language.getCurrentLanguage();
-  }
-
-  static getNewsLanguage() {
-    let lang =  Language.getCurrentLanguage();
-    return lang;
+    var lang = global.apiLanguage;
+    if (lang == 'unknown') lang = 'en';
+    if (lang == 'zh-Hans') lang = 'zh-cn';
+    return '&language=' + lang;
   }
 
   static setApiLanguage() {
-
+    
   }
 
   static setAppLanguage() {

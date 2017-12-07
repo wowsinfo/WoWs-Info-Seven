@@ -12,8 +12,10 @@ class Achievement {
       let response = await fetch(api);
       let json = await response.json();
       if (json != null && json.status == 'ok') {
-        console.log(json);
-        store.update(savedDataName.achievement, json.data);
+        let data = json.data.battle;
+        console.log(data);
+        global.achievementJson = data;
+        await store.update(savedDataName.achievement, data);
       }
     } catch (error) {
       console.error(error);
