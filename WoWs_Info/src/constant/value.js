@@ -53,10 +53,11 @@ export const localDataName = {
 }
 
 export const savedDataName = {
+  language: '@Data:language',
   encyclopedia: '@Data:encyclopedia',
   achievement: '@Data:achievement',
   commanderSkill: '@Data:commanderSkill',
   warship: '@Data:warship',
-  map: '@Data:map',
-  module: '@Data:module',
+  gameMap: '@Data:map',
+  consumable: '@Data:consumable',
 }
