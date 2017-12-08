@@ -1,5 +1,5 @@
 import { DataAPI, savedDataName } from '../../constant/value';
-import { Language } from '../util/';
+import { Language } from '../';
 import store from 'react-native-simple-store';
 
 class DataManager {

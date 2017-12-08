@@ -1,13 +1,13 @@
 import React from 'react';
 import { Image, ActivityIndicator, Text, View, StyleSheet, Dimensions } from 'react-native';
-import { WoWsStatusBar } from '../component/common';
+import { WoWsStatusBar } from '../../component/';
 
 class LoadingScreen extends React.PureComponent {
   render() {
     return (
       <View style={ViewStyle} backgroundColor={global.themeColor}>
         <WoWsStatusBar style={ImageStyle}/>
-        <Image source={require('../img/LogoWhite.png')}/>
+        <Image source={require('../../img/LogoWhite.png')}/>
         <ActivityIndicator color='white' size='large'/>
       </View>
     )
@@ -16,7 +16,6 @@ class LoadingScreen extends React.PureComponent {
 
 // This is the ratio I used for iPhone 7
 let LogoWidth = Dimensions.get('window').width * 0.341333;
-
 const styles = StyleSheet.create({
   ViewStyle: {
     flex: 1,
