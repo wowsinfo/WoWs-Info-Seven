@@ -58,6 +58,6 @@ export const savedDataName = {
   achievement: '@Data:achievement',
   commanderSkill: '@Data:commanderSkill',
   warship: '@Data:warship',
-  gameMap: '@Data:map',
+  gameMap: '@Data:gameMap',
   consumable: '@Data:consumable',
 }
