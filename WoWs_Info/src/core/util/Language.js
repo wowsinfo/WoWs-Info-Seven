@@ -41,6 +41,11 @@ class Language {
     return '&language=' + lang;
   }
 
+  static getNewsLangStr() {
+    var lang = global.apiLanguage;
+    return lang;
+  }
+
   static setApiLanguage() {
     
   }
