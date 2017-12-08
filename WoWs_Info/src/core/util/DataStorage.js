@@ -1,9 +1,9 @@
 import { Platform } from 'react-native';
 import { IOSDataName, localDataName, savedDataName } from '../../constant/value';
 import { WoWsInfo } from '../../colour/colour';
-import { Language, GameVersion, DateCalculator, PlayerConverter, ServerManager } from './';
+import { Language, GameVersion, DateCalculator, PlayerConverter, ServerManager } from '../';
 import store from 'react-native-simple-store';
-import { DataManager } from '../data/';
+import { DataManager } from '../';
 
 class DataStorage {
   static async dataValidation() {

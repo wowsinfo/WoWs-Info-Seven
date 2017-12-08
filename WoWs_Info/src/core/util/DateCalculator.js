@@ -32,7 +32,7 @@ class DateCalculator {
   static isNewDay(lastOpen) {
     if (lastOpen == null) return;
     let currDate = DateCalculator.getCurrDate();
-    console.log('New Day\n' + lastOpen + '\n' + currDate);
+    console.log('New Day??\n' + lastOpen + '\n' + currDate);
     if (lastOpen == currDate) return false;
     else {
       // Update currDate

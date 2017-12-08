@@ -1,5 +1,5 @@
 import { localDataName } from '../../constant/value';
-import { StorageManager } from './';
+import { StorageManager } from '../';
 import strings from '../../localization';
 
 class ServerManager {
