@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import { DataStorage } from './core/util/';
+import { DataStorage } from './core/';
 import { LoadingScreen } from './screen';
-import { WoWsStatusBar } from './component/common';
+import { WoWsStatusBar } from './component/';
 import strings from './localization';
 
 export default class App extends Component {
