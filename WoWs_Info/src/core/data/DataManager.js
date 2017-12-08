@@ -27,7 +27,7 @@ class DataManager {
         // There might be more data
         let page = json.meta.page_total;
         if (page != null) {
-          for (var i = 2; i <= json.meta.page_total; i++) {
+          for (var i = 2; i <= page; i++) {
             let new_api = api + '&page_no=' + i;
             // console.log(new_api);
             let response = await fetch(new_api);
