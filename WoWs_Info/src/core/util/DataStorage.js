@@ -10,7 +10,7 @@ class DataStorage {
     try {
       // Setting up Data here
       let first = await store.get(localDataName.firstLaunch);
-      if (first != null) {
+      if (first == null) {
         console.log('First Launch\nWelcome to WoWs Info >_<')
         await DataStorage.setupLocalStorage();
         await DataStorage.restoreData();
@@ -26,7 +26,18 @@ class DataStorage {
           await DataManager.updateLocalData();
           await store.update(localDataName.gameVersion, curr);
         } else {
-          await DataStorage.restoreSavedData();          
+          // Changing for language change
+          let currLang = Language.getCurrentLanguage();
+          console.log('Language\n' + currLang + '\n' + global.appLanguage);
+          if (global.apiLanguage != currLang) {
+            global.apiLanguage = currLang;
+            await DataManager.updateLocalData();
+            await store.update(localDataName.appLanguage, currLang);
+            await store.update(localDataName.apiLanguage, currLang);
+            await store.update(localDataName.newsLanguage, currLang);
+          } else {
+            await DataStorage.restoreSavedData();
+          }   
         }
   
         let date = await store.get(localDataName.currDate);
@@ -136,6 +147,8 @@ class DataStorage {
     global.warshipJson = await store.get(savedDataName.warship);
     global.commanderSkillJson = await store.get(savedDataName.commanderSkill);
     global.gameMapJson = await store.get(savedDataName.gameMap);
+    console.log(global.languageJson, global.achivementJson, global.consumableJson, 
+      global.encyclopediaJson, global.warshipJson, global.commanderSkillJson, global.gameMapJson);
   }
 }
 
