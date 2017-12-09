@@ -3,6 +3,7 @@ import { Text, View, StyleSheet } from 'react-native';
 import { DataStorage } from './core/';
 import { LoadingScreen } from './screen';
 import { WoWsStatusBar } from './component/';
+import { MainRouter } from './router';
 import strings from './localization';
 
 export default class App extends Component {
@@ -22,9 +23,7 @@ export default class App extends Component {
       return (
         <View style={ViewStyle}>
           <WoWsStatusBar />
-          <Text style={TextStyle}>
-            Ready
-          </Text>
+          <MainRouter />
         </View>
       );
     } else {
