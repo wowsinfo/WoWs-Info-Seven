@@ -35,6 +35,10 @@ let strings = new LocalizedStrings({
     north_america: '北美',
     asia: '亚洲',
     server: '服务器',
+    // Tabs
+    wiki: '维基',
+    news: '最新消息',
+    settings: '设置',
   },
   'zh-tw': {
   },
