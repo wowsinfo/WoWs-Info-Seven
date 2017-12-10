@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
+import { WikiScreen } from '../../screen';
 import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
-import strings from '../../localization'
+import strings from '../../localization';
 
 // Faster loading
 const initialLayout = {
@@ -30,7 +31,7 @@ class MainTab extends React.PureComponent {
     )
   }
   renderScene = SceneMap({
-    'wiki': placeholder,
+    'wiki': WikiScreen,
     'news': placeholder,
     'settings': placeholder,
   });
