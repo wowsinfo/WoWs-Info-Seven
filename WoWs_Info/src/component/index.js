@@ -1,1 +1,2 @@
-export * from './common/StatusBar';
+export * from './common/WoWsStatusBar';
+export * from './SearchButton/SearchButton';
