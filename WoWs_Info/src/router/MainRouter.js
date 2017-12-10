@@ -1,6 +1,8 @@
 import React from 'react';
-import { StyleSheet, Platform } from 'react-native';
-import { Router, Scene } from 'react-native-router-flux';
+import { StyleSheet, Platform, View, Text } from 'react-native';
+import { Router, Scene, Actions, Stack } from 'react-native-router-flux';
+import { SearchButton } from '../component';
+import { SearchScreen } from '../screen';
 import { MainTab } from '../tab/';
 
 var appTitle = 'WoWs Info ';
@@ -13,9 +15,11 @@ switch (Platform.OS) {
 
 const MainRouter = () => {
   return (
-    <Router>
-      <Scene key='root' titleStyle={titleStyle} navigationBarStyle={{backgroundColor: global.themeColor}}>
-        <Scene key='MainScreen' title={appTitle} component={MainTab}/>          
+    <Router sceneStyle={sceneStyle}>
+      <Scene key='root' headerTintColor='white' titleStyle={titleStyle} navigationBarStyle={{backgroundColor: global.themeColor}}>
+        <Scene key='MainScreen' title={appTitle} component={MainTab} renderRightButton={ <SearchButton onPress={() => Actions.SearchScreen()}/> } 
+        navigationBarStyle={{backgroundColor: global.themeColor, elevation: 0}}/>
+        <Scene key='SearchScreen' component={SearchScreen} modal/>
       </Scene>
     </Router>
   )
@@ -24,9 +28,11 @@ const MainRouter = () => {
 const styles = StyleSheet.create({
   titleStyle: {
     color: 'white',
+  },
+  sceneStyle: {
+    backgroundColor: 'white',
   }
 });
-
-const { titleStyle } = styles;
+const { titleStyle, sceneStyle } = styles;
 
 export {MainRouter};
