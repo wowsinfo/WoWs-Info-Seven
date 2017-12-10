@@ -17,9 +17,9 @@ const MainRouter = () => {
   return (
     <Router sceneStyle={sceneStyle}>
       <Scene key='root' headerTintColor='white' titleStyle={titleStyle} navigationBarStyle={{backgroundColor: global.themeColor}}>
-        <Scene key='MainScreen' title={appTitle} component={MainTab} renderRightButton={ <SearchButton onPress={() => Actions.SearchScreen()}/> } 
+        <Scene key='MainScreen' title={appTitle} component={MainTab} renderRightButton={ <SearchButton onPress={() => Actions.SearchScreen({hideNavBar: true})}/> } 
         navigationBarStyle={{backgroundColor: global.themeColor, elevation: 0}}/>
-        <Scene key='SearchScreen' component={SearchScreen} modal/>
+        <Scene key='SearchScreen' component={SearchScreen}/>
       </Scene>
     </Router>
   )
