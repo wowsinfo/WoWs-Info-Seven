@@ -16,6 +16,10 @@ let strings = new LocalizedStrings({
     north_america: 'North America',
     asia: 'Asia',
     server: 'server',
+    // Tabs
+    wiki: 'Wiki',
+    news: 'News',
+    settings: 'Settings',
   },
   zh: {
     // Loading

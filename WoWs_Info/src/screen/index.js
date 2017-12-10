@@ -2,3 +2,4 @@
 export * from './Basic/LoadingScreen';
 
 // More complex screens
+export * from './SearchScreen/SearchScreen';

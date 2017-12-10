@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
     width: LogoWidth,
   },
 });
-
 const { ViewStyle, ImageStyle } = styles;
 
 export { LoadingScreen };
