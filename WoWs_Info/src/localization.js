@@ -20,6 +20,8 @@ let strings = new LocalizedStrings({
     wiki: 'Wiki',
     news: 'News',
     settings: 'Settings',
+    // Back title
+    back: 'Back',
   },
   zh: {
     // Loading
@@ -30,7 +32,7 @@ let strings = new LocalizedStrings({
     yesterday: '昨天',
     days_ago: '天前',
     // Server
-    russia: '俄国',
+    russia: '俄罗斯',
     europe: '欧洲',
     north_america: '北美',
     asia: '亚洲',
@@ -39,6 +41,8 @@ let strings = new LocalizedStrings({
     wiki: '维基',
     news: '最新消息',
     settings: '设置',
+    // Back title
+    back: '返回',
   },
   'zh-tw': {
   },

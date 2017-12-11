@@ -15,14 +15,15 @@ export const WikiBasicCellStyles = StyleSheet.create({
 export const WikiCellStyles = StyleSheet.create({
   viewStyle: {
     flex: 1,
+    alignItems: 'center',
   },
-  cardStyle: {
-    padding: 4,
-    margin: 4,
+  imageStyle: {
+    width: 128,
+    height: 128,
+    borderRadius: 16,
   },
-  touchableStyle: {
-    padding: 0,
-    margin: 0,
-    flex: 1,
-  }
+  textStyle: {
+    textAlign: 'center',
+    marginTop: 4,
+  },
 })

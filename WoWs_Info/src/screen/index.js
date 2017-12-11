@@ -1,5 +1,6 @@
 // Some simple screens
 export * from './Basic/LoadingScreen';
+export * from './Basic/PlayerOnlineScreen';
 
 // More complex screens
 export * from './SearchScreen/SearchScreen';
