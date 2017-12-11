@@ -17,7 +17,7 @@ const WikiList = [
 class WikiScreen extends React.PureComponent {
   render() {
     return (
-      <GridView itemDimension={128} items={WikiList} renderItem={item => <WikiCell data={item}/>} />
+      <GridView itemDimension={160} items={WikiList} renderItem={item => <WikiCell data={item}/>} />
     )
   }
 }

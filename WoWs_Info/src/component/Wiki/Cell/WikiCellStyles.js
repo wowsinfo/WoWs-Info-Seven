@@ -6,13 +6,13 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   imageStyle: {
-    width: 128,
-    height: 128,
-    borderRadius: 16,
+    width: 160,
+    height: 160,
+    borderRadius: 20,
   },
   textStyle: {
     textAlign: 'center',
-    marginTop: 4,
+    margin: 8,
     fontSize: 16,
   },
 })

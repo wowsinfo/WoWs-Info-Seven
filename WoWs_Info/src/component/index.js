@@ -6,6 +6,8 @@ export * from './common/OnlineGroup';
 // Wiki Cell
 export * from './Wiki/Cell/WikiCell';
 export * from './Wiki/Cell/Basic/BasicCell';
+export * from './Wiki/Cell/MapCell';
+export * from './Wiki/Cell/WarshipCell';
 
 // Wiki Detail
 
