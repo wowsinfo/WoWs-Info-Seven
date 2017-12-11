@@ -20,7 +20,7 @@ switch (Platform.OS) {
 }
 
 global.languageJson = {};
-global.achivementJson = {};
+global.achievementJson = {};
 global.consumableJson = {};
 global.encyclopediaJson = {};
 global.warshipJson = {};
