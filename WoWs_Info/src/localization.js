@@ -22,6 +22,13 @@ let strings = new LocalizedStrings({
     settings: 'Settings',
     // Back title
     back: 'Back',
+    // Wiki
+    achievement: 'Achievement',
+    flag_camouflage: 'Flag/Camouflage',
+    upgrade: 'Upgrade',
+    commander: 'Commander',
+    warship: 'Warship',
+    map: 'Map',
   },
   zh: {
     // Loading
@@ -43,6 +50,13 @@ let strings = new LocalizedStrings({
     settings: '设置',
     // Back title
     back: '返回',
+    // Wiki
+    achievement: '成就',
+    flag_camouflage: '旗子/迷彩',
+    upgrade: '升级品',
+    commander: '舰长技能',
+    warship: '战舰',
+    map: '地图',
   },
   'zh-tw': {
   },
