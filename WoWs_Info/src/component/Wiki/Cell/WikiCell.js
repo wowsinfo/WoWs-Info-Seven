@@ -1,11 +1,14 @@
 import React from 'react';
 import { View, Image, Text, TouchableOpacity, Alert } from 'react-native';
-import { WikiCellStyles } from './StylesForAll';
+import { wikiIndex } from '../../../constant/value';
+import { styles } from './WikiCellStyles';
+import { Actions } from 'react-native-router-flux';
 
 class WikiCell extends React.PureComponent {
   componentWillMount() {
     this.name = this.props.data.name;
     this.icon = this.props.data.icon;
+    this.index = this.props.data.index;
   }
 
   render() {
@@ -20,10 +23,19 @@ class WikiCell extends React.PureComponent {
   }
 
   onWikiBtnPressed() {
-    Alert.alert('Yaho >_<');
+    switch (this.index) {
+      case wikiIndex.Achievement:
+        Actions.AchievementScreen(); break;
+      case wikiIndex.Flag_Camouflage:
+      case wikiIndex.Warshp:
+      case wikiIndex.Commander:
+      case wikiIndex.Upgrade:
+      case wikiIndex.Map:
+      default: return;
+    }
   }
 }
 
-const { viewStyle, imageStyle, textStyle } = WikiCellStyles;
+const { viewStyle, imageStyle, textStyle } = styles;
 
 export {WikiCell};
