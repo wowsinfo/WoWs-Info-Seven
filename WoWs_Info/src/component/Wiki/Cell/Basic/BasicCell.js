@@ -6,7 +6,7 @@ class BasicCell extends React.PureComponent {
   render() {
     return (
       <View style={viewStyle}>
-        <Image source={{uri: this.props.icon}} style={imageStyle}/>
+        <Image source={{uri: this.props.icon, cache: 'default'}} style={imageStyle} />
       </View>
     )
   }

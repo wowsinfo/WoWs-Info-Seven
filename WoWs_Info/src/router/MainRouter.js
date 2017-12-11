@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Platform } from 'react-native';
 import { Router, Scene, Actions } from 'react-native-router-flux';
 import { SearchButton, PlayerOnlineButton } from '../component';
-import { SearchScreen, PlayerOnlineScreen, AchievementScreen, CommanderScreen } from '../screen';
+import { SearchScreen, PlayerOnlineScreen, AchievementScreen, CommanderScreen, ConsumableScreen, MapScreen } from '../screen';
 import { MainTab } from '../tab/';
 import strings from '../localization';
 
@@ -25,6 +25,8 @@ const MainRouter = () => {
         
         <Scene key='AchievementScreen' component={AchievementScreen}/>
         <Scene key='CommanderScreen' component={CommanderScreen}/>
+        <Scene key='ConsumableScreen' component={ConsumableScreen}/>
+        <Scene key='MapScreen' component={MapScreen}/>
         
         <Scene key='PlayerOnlineScreen' component={PlayerOnlineScreen}/>
       </Scene>

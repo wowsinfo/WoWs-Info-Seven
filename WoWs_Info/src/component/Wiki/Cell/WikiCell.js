@@ -27,13 +27,15 @@ class WikiCell extends React.PureComponent {
       case wikiIndex.Achievement:
         Actions.AchievementScreen(); break;
       case wikiIndex.Flag_Camouflage:
+        Actions.ConsumableScreen({index: wikiIndex.Flag_Camouflage}); break;
         break;      
-      case wikiIndex.Warship:
+      case wikiIndex.Warship: break;
       case wikiIndex.Commander:
         Actions.CommanderScreen(); break;      
       case wikiIndex.Upgrade:
-        break;      
+        Actions.ConsumableScreen({index: wikiIndex.Upgrade}); break;      
       case wikiIndex.Map:
+        Actions.MapScreen(); break;
       default: return;
     }
   }
