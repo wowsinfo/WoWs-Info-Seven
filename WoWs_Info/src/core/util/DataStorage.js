@@ -141,13 +141,13 @@ class DataStorage {
 
   static async restoreSavedData() {
     global.languageJson = await store.get(savedDataName.language);
-    global.achivementJson = await store.get(savedDataName.achievement);
+    global.achievementJson = await store.get(savedDataName.achievement);
     global.consumableJson = await store.get(savedDataName.consumable);
     global.encyclopediaJson = await store.get(savedDataName.encyclopedia);
     global.warshipJson = await store.get(savedDataName.warship);
     global.commanderSkillJson = await store.get(savedDataName.commanderSkill);
     global.gameMapJson = await store.get(savedDataName.gameMap);
-    console.log(global.languageJson, global.achivementJson, global.consumableJson, 
+    console.log(global.languageJson, global.achievementJson, global.consumableJson, 
       global.encyclopediaJson, global.warshipJson, global.commanderSkillJson, global.gameMapJson);
   }
 }

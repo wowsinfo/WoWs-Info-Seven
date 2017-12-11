@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Platform } from 'react-native';
 import { Router, Scene, Actions } from 'react-native-router-flux';
 import { SearchButton, PlayerOnlineButton } from '../component';
-import { SearchScreen, PlayerOnlineScreen, AchievementScreen } from '../screen';
+import { SearchScreen, PlayerOnlineScreen, AchievementScreen, CommanderScreen } from '../screen';
 import { MainTab } from '../tab/';
 import strings from '../localization';
 
@@ -22,8 +22,11 @@ const MainRouter = () => {
           renderRightButton={ <SearchButton onPress={() => Actions.SearchScreen()}/> }
           renderLeftButton={ <PlayerOnlineButton onPress={() => Actions.PlayerOnlineScreen()}/> } />
         <Scene key='SearchScreen' component={SearchScreen}/>
-        <Scene key='PlayerOnlineScreen' component={PlayerOnlineScreen}/>
+        
         <Scene key='AchievementScreen' component={AchievementScreen}/>
+        <Scene key='CommanderScreen' component={CommanderScreen}/>
+        
+        <Scene key='PlayerOnlineScreen' component={PlayerOnlineScreen}/>
       </Scene>
     </Router>
   )
@@ -32,6 +35,7 @@ const MainRouter = () => {
 const styles = StyleSheet.create({
   titleStyle: {
     color: 'white',
+    width: '90%',
   },
   sceneStyle: {
     backgroundColor: 'white',
