@@ -1,5 +1,6 @@
 // Common
 export * from './common/WoWsStatusBar';
+export * from './common/WoWsLoading';
 
 // Wiki Cell
 export * from './Wiki/Cell/WikiCell';
@@ -8,4 +9,5 @@ export * from './Wiki/Cell/WikiCell';
 
 // Other
 export * from './SearchButton/SearchButton';
+export * from './PlayerOnlineButton/PlayerOnlineButton';
 

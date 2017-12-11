@@ -4,6 +4,7 @@ export const ApplicationID = '***ApplicationID***';
 
 export const API = {
   GameVersion: 'https://api.worldofwarships.{0}/wows/encyclopedia/info/?application_id=' +  ApplicationID + '&fields=game_version',
+  PlayerOnline: 'https://api.worldoftanks.{0}/wgn/servers/info/?application_id=' + ApplicationID + '&fields=players_online&game=wows'
 }
 
 export const DataAPI = {

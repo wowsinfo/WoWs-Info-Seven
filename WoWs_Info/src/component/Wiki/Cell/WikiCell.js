@@ -1,6 +1,5 @@
 import React from 'react';
-import { Card } from 'react-native-elements';
-import { View, TouchableWithoutFeedback, Alert } from 'react-native';
+import { View, Image, Text, TouchableOpacity, Alert } from 'react-native';
 import { WikiCellStyles } from './StylesForAll';
 
 class WikiCell extends React.PureComponent {
@@ -12,9 +11,10 @@ class WikiCell extends React.PureComponent {
   render() {
     return (
       <View style={viewStyle}>
-        <TouchableWithoutFeedback style={touchableStyle} onPress={() => this.onWikiBtnPressed()}>
-          <Card containerStyle={cardStyle} title={this.name}/>
-        </TouchableWithoutFeedback>
+        <TouchableOpacity onPress={() => this.onWikiBtnPressed()} >
+          <Image style={imageStyle} source={{uri: 'https://placeimg.com/128/128/any'}}/>          
+        </TouchableOpacity>
+        <Text style={textStyle}>{this.name}</Text>
       </View>
     )
   }
@@ -24,6 +24,6 @@ class WikiCell extends React.PureComponent {
   }
 }
 
-const { viewStyle, cardStyle, touchableStyle } = WikiCellStyles;
+const { viewStyle, imageStyle, textStyle } = WikiCellStyles;
 
 export {WikiCell};
