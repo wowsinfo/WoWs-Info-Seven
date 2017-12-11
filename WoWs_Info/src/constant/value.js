@@ -27,6 +27,15 @@ export const serverIndex = {
   China: 4,
 }
 
+export const wikiIndex = {
+  Achievement: 0,
+  Flag_Camouflage: 1,
+  Warshp: 2,
+  Commander: 3,
+  Upgrade: 4,
+  Map: 5,
+}
+
 // Data name from old IOS project
 export const IOSDataName = {
   firstLaunch: 'first_launch',
