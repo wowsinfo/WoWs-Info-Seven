@@ -30,7 +30,7 @@ export const serverIndex = {
 export const wikiIndex = {
   Achievement: 0,
   Flag_Camouflage: 1,
-  Warshp: 2,
+  Warship: 2,
   Commander: 3,
   Upgrade: 4,
   Map: 5,
