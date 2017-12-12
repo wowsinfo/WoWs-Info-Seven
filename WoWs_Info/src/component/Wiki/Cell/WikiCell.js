@@ -27,9 +27,9 @@ class WikiCell extends React.PureComponent {
       case wikiIndex.Achievement:
         Actions.AchievementScreen(); break;
       case wikiIndex.Flag_Camouflage:
-        Actions.ConsumableScreen({index: wikiIndex.Flag_Camouflage}); break;
-        break;      
-      case wikiIndex.Warship: break;
+        Actions.ConsumableScreen({index: wikiIndex.Flag_Camouflage}); break;    
+      case wikiIndex.Warship:
+        Actions.ShipScreen(); break;    
       case wikiIndex.Commander:
         Actions.CommanderScreen(); break;      
       case wikiIndex.Upgrade:
