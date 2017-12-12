@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.wows_info"
+    package="com.yihengquan.wowsinfo"
     android:versionCode="1"
     android:versionName="1.0">
 
@@ -18,7 +18,7 @@
       android:theme="@style/AppTheme">
       <activity
         android:name=".MainActivity"
-        android:label="WoWs Info Y"
+        android:label="@string/app_name"
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
         android:windowSoftInputMode="adjustResize">
         <intent-filter>

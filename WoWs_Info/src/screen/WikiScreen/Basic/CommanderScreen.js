@@ -12,12 +12,22 @@ class CommanderScreen extends React.PureComponent {
   componentWillMount() {
     // Prase global.achievementJson and make it readable
     var parsed = [];
-    for (key in global.commanderSkillJson) parsed.push(global.commanderSkillJson[key]);
+    for (key in global.commanderSkillJson) {
+      // Make naming unique
+      let entry = Object.assign({}, global.commanderSkillJson[key]); var text = '';
+      for (var i = 0; i < entry.perks.length; i++) text += entry.perks[i].description + '\n';
+      entry.text = text;
+      entry.key = key;
+      entry.image = entry.icon;
+      delete entry.icon;
+      delete entry.perks;
+      parsed.push(entry);
+    }
     // Sort by tier
     parsed.sort(function (a, b) {
       return (a.tier - b.tier);
     })
-   // console.log(parsed);
+    console.log(parsed);
     this.setState({
       isReady: true,
       data: parsed,
@@ -28,7 +38,7 @@ class CommanderScreen extends React.PureComponent {
     if (this.state.isReady) {
       return (
         <GridView itemDimension={80} items={this.state.data} 
-          renderItem={item => <BasicCell icon={item.icon}/>} />
+          renderItem={item => <BasicCell icon={item.image} data={item}/>} />
       )
     } else return <WoWsLoading />;
   }

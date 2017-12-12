@@ -15,7 +15,7 @@ class WikiCell extends React.PureComponent {
     return (
       <View style={viewStyle}>
         <TouchableOpacity onPress={() => this.onWikiBtnPressed()} >
-          <Image style={imageStyle} source={{uri: 'https://placeimg.com/128/128/any'}}/>          
+          <Image style={imageStyle} source={{uri: 'http://via.placeholder.com/160x160'}}/>          
         </TouchableOpacity>
         <Text style={textStyle}>{this.name}</Text>
       </View>
