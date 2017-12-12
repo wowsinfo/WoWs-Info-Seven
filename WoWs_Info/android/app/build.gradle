@@ -95,14 +95,14 @@ def enableProguardInReleaseBuilds = false
 
 android {
     compileSdkVersion 26
-    buildToolsVersion '27.0.1'
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
-        applicationId "com.yihengquan.wowsinfo"
+        applicationId "com.yihengquan.wows_info"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 2
-        versionName "0.1.1"
+        versionCode 1
+        versionName "1.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -151,7 +151,7 @@ dependencies {
     compile project(':react-native-vector-icons')
     compile project(':react-native-device-info')
     compile fileTree(dir: "libs", include: ["*.jar"])
-    compile "com.android.support:appcompat-v7:26.1.0"
+    compile "com.android.support:appcompat-v7:23.0.1"
     compile "com.facebook.react:react-native:+"  // From node_modules
 }
 

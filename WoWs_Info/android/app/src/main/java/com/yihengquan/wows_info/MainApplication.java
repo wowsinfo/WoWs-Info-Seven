@@ -1,4 +1,4 @@
-package com.yihengquan.wowsinfo;
+package com.yihengquan.wows_info;
 
 import android.app.Application;
 
@@ -26,7 +26,7 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
             new VectorIconsPackage(),
-              new RNDeviceInfo()
+            new RNDeviceInfo()
       );
     }
 
