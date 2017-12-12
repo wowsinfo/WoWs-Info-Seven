@@ -2,3 +2,6 @@
 wows_info/.eslintrc.js
 .vscode/settings.json
 third-party
+*.bundle
+*.meta
+*.apk
