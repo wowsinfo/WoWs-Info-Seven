@@ -14,11 +14,20 @@ class ConsumableScreen extends React.PureComponent {
     // Prase global.achievementJson and make it readable
     var parsed = [];
     for (key in global.consumableJson) {
-      let consumable = global.consumableJson[key];
+      // Make naming unique
+      let entry = Object.assign({}, global.consumableJson[key]);
+      console.log(entry);
+      var text = entry.description + '\n\n';
+      for (description in entry.profile) text += entry.profile[description].description + '\n';
+      
+      entry.text = text;
+      entry.key = key;
+      delete entry.description;
+      delete entry.profile;
       if (this.props.index == wikiIndex.Upgrade) {
-        if (consumable.type == 'Modernization') parsed.push(consumable);
+        if (entry.type == 'Modernization') parsed.push(entry);
       } else {
-        if (consumable.type != 'Modernization') parsed.push(consumable);
+        if (entry.type != 'Modernization') parsed.push(entry);
       }
     }
     // Sort by price
@@ -30,7 +39,7 @@ class ConsumableScreen extends React.PureComponent {
       if (a.price_gold || b.price_gold) return 1;
       else return (a.price_credit - b.price_credit);
     })
-    // console.log(parsed);
+     console.log(parsed);
     this.setState({
       isReady: true,
       data: parsed,
@@ -41,7 +50,7 @@ class ConsumableScreen extends React.PureComponent {
     if (this.state.isReady) {
       return (
         <GridView itemDimension={80} items={this.state.data} 
-          renderItem={item => <BasicCell icon={item.image}/>} />
+          renderItem={item => <BasicCell icon={item.image} data={item}/>} />
       )
     } else return <WoWsLoading />;
   }

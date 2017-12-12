@@ -9,7 +9,7 @@ class MapScreen extends React.PureComponent {
     data: [],
   }
 
-  keyExtractor = (item) => {return item.name}
+  keyExtractor = (item) => {return item.icon}
   componentWillMount() {
     // Prase global.achievementJson and make it readable
     var parsed = [];

@@ -1,4 +1,4 @@
-package com.wows_info;
+package com.yihengquan.wowsinfo;
 
 import com.facebook.react.ReactActivity;
 

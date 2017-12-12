@@ -5,6 +5,7 @@ export * from './Basic/PlayerOnlineScreen';
 // More complex screens
 export * from './SearchScreen/SearchScreen';
 export * from './WikiScreen/WikiScreen';
+export * from './WikiScreen/WikiDetailScreen';
 export * from './WikiScreen/Basic/AchievementScreen';
 export * from './WikiScreen/Basic/CommanderScreen';
 export * from './WikiScreen/Basic/ConsumableScreen';
