@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, Platform } from 'react-native';
 import { Router, Scene, Actions } from 'react-native-router-flux';
 import { SearchButton, PlayerOnlineButton } from '../component';
 import { SearchScreen, PlayerOnlineScreen, AchievementScreen, CommanderScreen, ConsumableScreen, MapScreen, ShipScreen, WikiDetailScreen } from '../screen';
 import { MainTab } from '../tab/';
 import strings from '../localization';
+import { Icon } from 'react-native-elements';
 
 var appTitle = 'WoWs Info ';
 switch (Platform.OS) {
@@ -14,27 +15,41 @@ switch (Platform.OS) {
   default: break;
 }
 
-const MainRouter = () => {
-  return (
-    <Router sceneStyle={sceneStyle}>
-      <Scene key='root' headerTintColor='white' backTitle='' leftButtonTextStyle={{color: 'white'}} titleStyle={titleStyle} navigationBarStyle={{backgroundColor: global.themeColor}}>
-        <Scene key='MainScreen' title={appTitle} component={MainTab} navigationBarStyle={{backgroundColor: global.themeColor, elevation: 0}}
-          renderRightButton={ <SearchButton onPress={() => Actions.SearchScreen()}/> }
-          renderLeftButton={ <PlayerOnlineButton onPress={() => Actions.PlayerOnlineScreen()}/> } />
-        <Scene key='SearchScreen' component={SearchScreen}/>
-        
-        <Scene key='AchievementScreen' component={AchievementScreen}/>
-        <Scene key='CommanderScreen' component={CommanderScreen}/>
-        <Scene key='ConsumableScreen' component={ConsumableScreen}/>
-        <Scene key='MapScreen' component={MapScreen}/>
-        <Scene key='ShipScreen' component={ShipScreen}/>
+class MainRouter extends Component {
+  render() {
+    return (
+      <Router sceneStyle={sceneStyle} backAndroidHandler={this.onBackPress}>
+        <Scene key='root' headerTintColor='white' backTitle='' leftButtonTextStyle={{color: 'white'}} titleStyle={titleStyle} 
+          navigationBarStyle={{backgroundColor: global.themeColor}} renderBackButton={this.backButton}>
+          <Scene key='MainScreen' title={appTitle} component={MainTab} navigationBarStyle={{backgroundColor: global.themeColor, elevation: 0}}
+            renderRightButton={ <SearchButton onPress={() => Actions.SearchScreen()}/> }
+            renderLeftButton={ <PlayerOnlineButton onPress={() => Actions.PlayerOnlineScreen()}/> } />
+          <Scene key='SearchScreen' component={SearchScreen}/>
+          
+          <Scene key='AchievementScreen' component={AchievementScreen}/>
+          <Scene key='CommanderScreen' component={CommanderScreen}/>
+          <Scene key='ConsumableScreen' component={ConsumableScreen}/>
+          <Scene key='MapScreen' component={MapScreen}/>
+          <Scene key='ShipScreen' component={ShipScreen}/>
+  
+          <Scene key='WikiDetailScreen' component={WikiDetailScreen}/>
+          
+          <Scene key='PlayerOnlineScreen' component={PlayerOnlineScreen}/>
+        </Scene>
+      </Router>
+    )
+  }
 
-        <Scene key='WikiDetailScreen' component={WikiDetailScreen}/>
-        
-        <Scene key='PlayerOnlineScreen' component={PlayerOnlineScreen}/>
-      </Scene>
-    </Router>
-  )
+  backButton = () => {
+    return (
+      <Icon name='arrow-back' iconStyle={iconStyle} color='white' underlayColor='transparent' onPress={() => Actions.pop()} />
+    )
+  }
+  
+  onBackPress = () => {
+    if (Actions.state.index == 0) return false;
+    else Actions.pop(); return true;
+  }
 }
 
 const styles = StyleSheet.create({
@@ -44,8 +59,11 @@ const styles = StyleSheet.create({
   },
   sceneStyle: {
     backgroundColor: 'white',
+  },
+  iconStyle: {
+    padding: 10,
   }
 });
-const { titleStyle, sceneStyle } = styles;
+const { titleStyle, sceneStyle, iconStyle } = styles;
 
 export {MainRouter};
