@@ -5,19 +5,27 @@ import { View, FlatList } from 'react-native';
 
 class NewsScreen extends React.PureComponent {
   state = {
-    isReady,
+    isReady: false,
     data: [],
   }
+
+  keyExtractor = (item) => {return item.title}  
   async componentWillMount() {
     let news = new NewsParser(global.server, global.newsLanguage);
-    await news.getNews();
+    let data = await news.getNews();
+    this.setState({
+      isReady: true,
+      data: data,
+    })
   }
 
   render() {
     if (this.state.isReady) {
       return (
         <View>
-          <FlatList />
+          <FlatList data={this.state.data} keyExtractor={this.keyExtractor} renderItem={({item}) => 
+            <NewsCell data={item}/>
+          } />
         </View>
       )
     } return <WoWsLoading />;
