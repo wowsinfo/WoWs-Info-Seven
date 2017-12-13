@@ -5,7 +5,7 @@ class NewsParser {
   constructor(index, language) {
     var format = require('string-format');
     var link = format(API.News, ServerManager.getDomainFrom(index));
-    console.log(index, language, link);
+    // console.log(index, language, link);
     this.baseUrl = link;
     switch (parseInt(index)) {
       case 0: this.url = link; break;
@@ -31,7 +31,6 @@ class NewsParser {
         }
         break;
       case 3:
-        console.log("Here");
         switch (language) {
           case 'ja':
           case 'ko':
