@@ -7,4 +7,6 @@ export * from './util/DateCalculator';
 export * from './util/PlayerConverter';
 export * from './util/ServerManager';
 
+export * from './news/NewsParser';
+
 export * from './PlayerOnline';
