@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
-import { WikiScreen } from '../../screen';
+import { WikiScreen, NewsScreen } from '../../screen';
 import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
 import strings from '../../localization';
 
@@ -32,7 +32,7 @@ class MainTab extends React.PureComponent {
   }
   renderScene = SceneMap({
     'wiki': WikiScreen,
-    'news': placeholder,
+    'news': NewsScreen,
     'settings': placeholder,
   });
 

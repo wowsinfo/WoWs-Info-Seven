@@ -10,7 +10,7 @@ class ConsumableScreen extends React.PureComponent {
     data: [],
   }
 
-  componentWillMount() {
+  componentDidMount() {
     // Prase global.achievementJson and make it readable
     var parsed = [];
     for (key in global.consumableJson) {
