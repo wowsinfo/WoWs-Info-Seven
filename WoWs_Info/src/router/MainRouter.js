@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Platform } from 'react-native';
 import { Router, Scene, Actions } from 'react-native-router-flux';
 import { SearchButton, PlayerOnlineButton } from '../component';
-import { SearchScreen, PlayerOnlineScreen, AchievementScreen, CommanderScreen, ConsumableScreen, MapScreen, ShipScreen, WikiDetailScreen, NewsScreen } from '../screen';
+import { SearchScreen, PlayerOnlineScreen, AchievementScreen, CommanderScreen, ConsumableScreen, MapScreen, ShipScreen, WikiDetailScreen, NewsScreen, InAppBrowser } from '../screen';
 import { MainTab } from '../tab/';
 import strings from '../localization';
 import { Icon } from 'react-native-elements';
@@ -37,6 +37,7 @@ class MainRouter extends Component {
           <Scene key='WikiDetailScreen' component={WikiDetailScreen}/>
           
           <Scene key='PlayerOnlineScreen' component={PlayerOnlineScreen}/>
+          <Scene key='InAppBrowser' component={InAppBrowser}/>
         </Scene>
       </Router>
     )

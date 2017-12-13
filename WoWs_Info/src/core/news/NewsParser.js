@@ -5,10 +5,33 @@ class NewsParser {
   constructor(index, language) {
     var format = require('string-format');
     var link = format(API.News, ServerManager.getDomainFrom(index));
+    console.log(index, language, link);
     this.baseUrl = link;
-    switch (index) {
-      case 0:  this.url = link; break;
+    switch (parseInt(index)) {
+      case 0: this.url = link; break;
       case 1:
+        switch (language) {
+          case 'cs':
+          case 'de':
+          case 'es':
+          case 'fr':
+          case 'it':
+          case 'pl':
+          case 'tr': this.url = link + language + '/'; break;
+          default: this.url = link + 'en/'; break;
+        }
+        break;
+      case 2:
+        switch (language) {
+          case 'es':
+          case 'es-mx': this.url = link + 'es-mx/'; break;
+          case 'pt':
+          case 'pt-br': this.url = link + 'pt-br/'; break;
+          default: this.url = link + 'en/'; break;
+        }
+        break;
+      case 3:
+        console.log("Here");
         switch (language) {
           case 'ja':
           case 'ko':
@@ -21,25 +44,7 @@ class NewsParser {
           case 'zh-tw': this.url = link + 'zh-tw/'; break;
           default: this.url = link + 'en/'; break;
         }
-      case 2:
-        switch (language) {
-          case 'es':
-          case 'es-mx': this.url = link + 'es-mx/'; break;
-          case 'pt':
-          case 'pt-br': this.url = link + 'pt-br/'; break;
-          default: this.url = link + 'en/'; break;
-        }
-      case 3:
-        switch (language) {
-          case 'cs':
-          case 'de':
-          case 'es':
-          case 'fr':
-          case 'it':
-          case 'pl':
-          case 'tr': this.url = link + language + '/'; break;
-          default: this.url = link + 'en/'; break;
-        }
+        break;
       // Chinese server... 
       default: this.url = 'https://worldofwarships.asia/zh-tw/'; break;
     }
@@ -59,7 +64,7 @@ class NewsParser {
       let rest = this.getNewsFrom(root, '._simple-layout');
       // Merge them together
       news = title.concat(rest);
-      console.log('News is here\n' + news);
+      console.log(news);
       return news;
     } catch (error) {
       console.error(error);
