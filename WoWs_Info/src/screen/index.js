@@ -1,6 +1,7 @@
 // Some simple screens
 export * from './Basic/LoadingScreen';
 export * from './Basic/PlayerOnlineScreen';
+export * from './Basic/InAppBrowser';
 
 // Search
 export * from './SearchScreen/SearchScreen';
