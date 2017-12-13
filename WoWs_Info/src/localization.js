@@ -29,6 +29,10 @@ let strings = new LocalizedStrings({
     commander: 'Commander',
     warship: 'Warship',
     map: 'Map',
+    // Settings
+    api_language: 'Change API language',
+    app_language: 'Change App language',
+    news_language: 'Change News language',
   },
   zh: {
     // Loading
@@ -57,6 +61,10 @@ let strings = new LocalizedStrings({
     commander: '舰长技能',
     warship: '战舰',
     map: '地图',
+    // Settings
+    api_language: '改变服务器语言',
+    app_language: '改变APP语言',
+    news_language: '改变最新消息语言',
   },
   'zh-tw': {
   },

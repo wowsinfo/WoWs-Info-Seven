@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
-import { WikiScreen, NewsScreen } from '../../screen';
+import { WikiScreen, NewsScreen, SettingsScreen } from '../../screen';
 import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
 import strings from '../../localization';
 
@@ -9,8 +9,6 @@ const initialLayout = {
   height: 0,
   width: Dimensions.get('window').width,
 };
-
-const placeholder = () => <View />;
 
 class MainTab extends React.PureComponent {
   state = {
@@ -33,7 +31,7 @@ class MainTab extends React.PureComponent {
   renderScene = SceneMap({
     'wiki': WikiScreen,
     'news': NewsScreen,
-    'settings': placeholder,
+    'settings': SettingsScreen,
   });
 
   render() {
