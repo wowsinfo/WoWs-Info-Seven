@@ -23,9 +23,8 @@ class NewsScreen extends React.PureComponent {
     if (this.state.isReady) {
       return (
         <View>
-          <FlatList data={this.state.data} keyExtractor={this.keyExtractor} renderItem={({item}) => 
-            <NewsCell data={item}/>
-          } />
+          <FlatList data={this.state.data} keyExtractor={this.keyExtractor} 
+            renderItem={({item}) => <NewsCell data={item}/>} />
         </View>
       )
     } return <WoWsLoading />;
