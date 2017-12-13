@@ -23,6 +23,7 @@ class WikiCell extends React.PureComponent {
   }
 
   onWikiBtnPressed() {
+    console.log(this.index);
     switch (this.index) {
       case wikiIndex.Achievement:
         Actions.AchievementScreen(); break;
