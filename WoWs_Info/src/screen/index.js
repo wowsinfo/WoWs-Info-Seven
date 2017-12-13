@@ -6,6 +6,9 @@ export * from './Basic/InAppBrowser';
 // Search
 export * from './SearchScreen/SearchScreen';
 
+// Settings
+export * from './SettingsScreen/SettingsScreen';
+
 // News
 export * from './NewsScreen/NewsScreen';
 

@@ -11,12 +11,12 @@ const WikiList = [{ name: strings.achievement, icon: '', index: 0},
   { name: strings.upgrade, icon: '', index: 4},
   { name: strings.map, icon: '', index: 5}]
 
-class WikiScreen extends React.Component {
+class WikiScreen extends React.PureComponent {
   keyExtractor = (item) => {return item.name}  
   render() {
     return (
       <View style={{flex: 1}}>
-        <FlatList data={WikiList} keyExtractor={this.keyExtractor} 
+        <FlatList style={{}} data={WikiList} keyExtractor={this.keyExtractor} 
             renderItem={({item}) => <WikiCell data={item}/>} />
       </View>
     )
