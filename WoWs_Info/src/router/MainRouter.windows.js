@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Platform } from 'react-native';
 import { Router, Scene, Actions } from 'react-native-router-flux';
 import { SearchButton, PlayerOnlineButton } from '../component';
-import { SearchScreen, PlayerOnlineScreen, AchievementScreen, CommanderScreen, ConsumableScreen, MapScreen, ShipScreen, WikiDetailScreen, NewsScreen } from '../screen';
+import { SearchScreen, PlayerOnlineScreen, AchievementScreen, CommanderScreen, ConsumableScreen, MapScreen, ShipScreen, WikiDetailScreen } from '../screen';
 import { MainTab } from '../tab/';
 import strings from '../localization';
 import { Icon } from 'react-native-elements';
@@ -20,13 +20,11 @@ class MainRouter extends Component {
     return (
       <Router sceneStyle={sceneStyle} backAndroidHandler={this.onBackPress}>
         <Scene key='root' headerTintColor='white' backTitle='' leftButtonTextStyle={{color: 'white'}} titleStyle={titleStyle} 
-          navigationBarStyle={{backgroundColor: global.themeColor}}>
+          navigationBarStyle={{backgroundColor: global.themeColor}} renderBackButton={this.backButton}>
           <Scene key='MainScreen' title={appTitle} component={MainTab} navigationBarStyle={{backgroundColor: global.themeColor, elevation: 0}}
             renderRightButton={ <SearchButton onPress={() => Actions.SearchScreen()}/> }
             renderLeftButton={ <PlayerOnlineButton onPress={() => Actions.PlayerOnlineScreen()}/> } />
-
           <Scene key='SearchScreen' component={SearchScreen}/>
-          <Scene key='NewsScreen' component={NewsScreen}/>          
           
           <Scene key='AchievementScreen' component={AchievementScreen}/>
           <Scene key='CommanderScreen' component={CommanderScreen}/>
@@ -39,6 +37,12 @@ class MainRouter extends Component {
           <Scene key='PlayerOnlineScreen' component={PlayerOnlineScreen}/>
         </Scene>
       </Router>
+    )
+  }
+
+  backButton = () => {
+    return (
+      <Icon name='arrow-back' iconStyle={iconStyle} color='white' underlayColor='transparent' onPress={() => Actions.pop()} />
     )
   }
   

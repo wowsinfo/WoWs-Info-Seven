@@ -2,8 +2,13 @@
 export * from './Basic/LoadingScreen';
 export * from './Basic/PlayerOnlineScreen';
 
-// More complex screens
+// Search
 export * from './SearchScreen/SearchScreen';
+
+// News
+export * from './NewsScreen/NewsScreen';
+
+// WIki
 export * from './WikiScreen/WikiScreen';
 export * from './WikiScreen/WikiDetailScreen';
 export * from './WikiScreen/Basic/AchievementScreen';
