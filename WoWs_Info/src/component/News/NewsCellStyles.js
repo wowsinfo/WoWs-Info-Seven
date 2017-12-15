@@ -2,11 +2,11 @@ import { StyleSheet, Dimensions } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
 // If user enters this app with landscape mode, it might look off since the image is quite big
-let imageWidth = (width < height) ? width * 0.3 : height * 0.3;
-
+let imageWidth = (width < height) ? width * 0.382 : height * 0.382;
 // Larger font for tablet
 let DeviceInfo = require('react-native-device-info');
 let isTablet = DeviceInfo.isTablet();
+
 export const styles = StyleSheet.create({
   mainViewStyle: {
     flex: 1,
