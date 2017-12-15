@@ -1,7 +1,7 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
 const { width, height } = Dimensions.get('window')
-let imageWidth = (width < height) ? width * 0.3 : height * 0.3;
+let imageWidth = (width < height) ? width * 0.382 : height * 0.382;
 // Larger font for tablet
 let DeviceInfo = require('react-native-device-info');
 let isTablet = DeviceInfo.isTablet();
