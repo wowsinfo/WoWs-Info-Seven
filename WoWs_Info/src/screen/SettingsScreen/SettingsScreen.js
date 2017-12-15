@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Button } from 'react-native';
 import { WoWsLoading } from '../../component';
 import ModalDropdown from 'react-native-modal-dropdown';
 import { styles } from './SettingsScreenStyles';
@@ -7,6 +7,7 @@ import { DataManager } from '../../core';
 import { localDataName } from '../../constant/value';
 import store from 'react-native-simple-store';
 import strings from '../../localization';
+import { Actions } from 'react-native-router-flux';
 
 class SettingsScreen extends React.PureComponent {
   state = {
@@ -37,9 +38,14 @@ class SettingsScreen extends React.PureComponent {
           <ModalDropdown onSelect={this.changeApiLanguage} style={btnStyle} textStyle={textStyle} showsVerticalScrollIndicator={false} defaultValue={strings.api_language} options={this.api}/>
           <ModalDropdown onSelect={this.changeAppLanguage} style={btnStyle} defaultValue={strings.app_language} options={this.app}/>
           <ModalDropdown onSelect={this.changeNewsLanguage} style={btnStyle} defaultValue={strings.news_language} options={this.news}/>
+          <Button onPress={this.changeThemeColour} title={strings.change_theme}/>
         </View>
       )
     }
+  }
+
+  changeThemeColour = () => {
+    Actions.ThemeScreen({reset: this.props.reset});
   }
 
   changeApiLanguage = (index, value) => {
@@ -49,6 +55,7 @@ class SettingsScreen extends React.PureComponent {
         // Update Data HERE
         global.apiLanguage = key;
         store.update(localDataName.apiLanguage, key);
+        // Change WoWsLoading
         this.setState({
           isUpdating: true,
         }, () => {
@@ -73,6 +80,8 @@ class SettingsScreen extends React.PureComponent {
     // Update global, store
     global.appLanguage = newLang;
     store.update(localDataName.appLanguage, newLang);
+    strings.setLanguage(newLang);
+    this.props.reset();    
   }
 }
 

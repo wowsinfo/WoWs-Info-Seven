@@ -14,7 +14,7 @@ class WikiDetailScreen extends React.PureComponent {
     return (
       <ScrollView contentContainerStyle={viewStyle}>
         <Image style={imageStyle} source={{uri: this.image}}/>
-        <Text style={[nameStyle, {color: global.themeColor}]}>{this.name}</Text>
+        <Text style={[nameStyle, {color: global.themeColour}]}>{this.name}</Text>
         <Text style={textStyle}>{this.text}</Text>
       </ScrollView>
     )

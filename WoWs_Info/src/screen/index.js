@@ -8,6 +8,7 @@ export * from './SearchScreen/SearchScreen';
 
 // Settings
 export * from './SettingsScreen/SettingsScreen';
+export * from './SettingsScreen/ThemeScreen';
 
 // News
 export * from './NewsScreen/NewsScreen';

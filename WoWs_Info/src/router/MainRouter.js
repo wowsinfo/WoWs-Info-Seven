@@ -6,6 +6,7 @@ import { SearchScreen, PlayerOnlineScreen, AchievementScreen, CommanderScreen, C
 import { MainTab } from '../tab/';
 import strings from '../localization';
 import { Icon } from 'react-native-elements';
+import { ThemeScreen } from '../screen/SettingsScreen/ThemeScreen';
 
 var appTitle = 'WoWs Info ';
 switch (Platform.OS) {
@@ -20,13 +21,14 @@ class MainRouter extends Component {
     return (
       <Router sceneStyle={sceneStyle} backAndroidHandler={this.onBackPress}>
         <Scene key='root' headerTintColor='white' backTitle='' leftButtonTextStyle={{color: 'white'}} titleStyle={titleStyle} 
-          navigationBarStyle={{backgroundColor: global.themeColor}}>
-          <Scene key='MainScreen' title={appTitle} component={MainTab} navigationBarStyle={{backgroundColor: global.themeColor, elevation: 0}}
+          navigationBarStyle={{backgroundColor: global.themeColour}}>
+          <Scene key='MainScreen' {...this.props} title={appTitle} component={MainTab} navigationBarStyle={{backgroundColor: global.themeColour, elevation: 0}}
             renderRightButton={ <SearchButton onPress={() => Actions.SearchScreen()}/> }
             renderLeftButton={ <PlayerOnlineButton onPress={() => Actions.PlayerOnlineScreen()}/> } />
 
           <Scene key='SearchScreen' component={SearchScreen}/>
           <Scene key='NewsScreen' component={NewsScreen}/>          
+          <Scene key='ThemeScreen' component={ThemeScreen}/>          
           
           <Scene key='AchievementScreen' component={AchievementScreen}/>
           <Scene key='CommanderScreen' component={CommanderScreen}/>
