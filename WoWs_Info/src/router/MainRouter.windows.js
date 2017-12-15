@@ -20,8 +20,8 @@ class MainRouter extends Component {
     return (
       <Router sceneStyle={sceneStyle} backAndroidHandler={this.onBackPress}>
         <Scene key='root' headerTintColor='white' backTitle='' leftButtonTextStyle={{color: 'white'}} titleStyle={titleStyle} 
-          navigationBarStyle={{backgroundColor: global.themeColor}} renderBackButton={this.backButton}>
-          <Scene key='MainScreen' title={appTitle} component={MainTab} navigationBarStyle={{backgroundColor: global.themeColor, elevation: 0}}
+          navigationBarStyle={{backgroundColor: global.themeColour}} renderBackButton={this.backButton}>
+          <Scene key='MainScreen' title={appTitle} component={MainTab} navigationBarStyle={{backgroundColor: global.themeColour, elevation: 0}}
             renderRightButton={ <SearchButton onPress={() => Actions.SearchScreen()}/> }
             renderLeftButton={ <PlayerOnlineButton onPress={() => Actions.PlayerOnlineScreen()}/> } />
           <Scene key='SearchScreen' component={SearchScreen}/>

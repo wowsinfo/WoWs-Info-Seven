@@ -1,9 +1,8 @@
 import React from 'react';
-import { Text, View, TouchableNativeFeedback, TouchableWithoutFeedback, Platform } from 'react-native';
+import { Text, View } from 'react-native';
+import { WoWsTouchable } from '../../../component';
 import { Actions } from 'react-native-router-flux';
 import { styles } from './MapCellStyles';
-
-const Touchable = (Platform.OS == 'android') ? TouchableNativeFeedback : TouchableWithoutFeedback;
 
 class MapCell extends React.PureComponent {
   componentWillMount() {
@@ -14,11 +13,11 @@ class MapCell extends React.PureComponent {
   render() {
     return (
       <View>
-        <Touchable onPress={this.showMapDetail}>
+        <WoWsTouchable onPress={this.showMapDetail}>
           <View style={viewStyle}>
-            <Text style={[textStyle, {color: global.themeColor}]}>{this.name}</Text>
+            <Text style={[textStyle, {color: global.themeColour}]}>{this.name}</Text>
           </View>
-        </Touchable>
+        </WoWsTouchable>
       </View>
     )
   }

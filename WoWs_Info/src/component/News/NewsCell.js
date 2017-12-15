@@ -1,10 +1,9 @@
 import React from 'react';
-import { View, Image, Text, TouchableWithoutFeedback, TouchableNativeFeedback, Platform } from 'react-native';
+import { View, Image, Text } from 'react-native';
+import { WoWsTouchable } from '../../component';
 import { styles } from './NewsCellStyles';
 import { InAppBrowser } from '../../screen';
 import { Actions } from 'react-native-router-flux';
-
-const Touchable = (Platform.OS == 'android') ? TouchableNativeFeedback : TouchableWithoutFeedback;
 
 class NewsCell extends React.PureComponent {
   componentWillMount() {
@@ -17,7 +16,7 @@ class NewsCell extends React.PureComponent {
   render() {
     return (
       <View>
-        <Touchable onPress={this.visitWebsite}>
+        <WoWsTouchable onPress={this.visitWebsite}>
           <View style={mainViewStyle}>
             <View style={imageViewStyle}>
               <Image source={{uri: this.image}} style={imageStyle} resizeMode='contain'/>
@@ -27,7 +26,7 @@ class NewsCell extends React.PureComponent {
               <Text style={timeStyle}>{this.time}</Text>
             </View>
           </View>
-        </Touchable>
+        </WoWsTouchable>
       </View>
     );
   }

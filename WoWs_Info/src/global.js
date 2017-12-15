@@ -11,11 +11,11 @@ global.appLanguage = 'en';
 global.newsLanguage = 'en';
 switch (Platform.OS) {
   case 'ios':
-    global.themeColor = WoWsInfo.blue; break;
+    global.themeColour = WoWsInfo.blue; break;
   case 'android':
-    global.themeColor = WoWsInfo.red; break;
+    global.themeColour = WoWsInfo.red; break;
   case 'windows':
-    global.themeColor = WoWsInfo.green; break;
+    global.themeColour = WoWsInfo.green; break;
   default: break;
 }
 
