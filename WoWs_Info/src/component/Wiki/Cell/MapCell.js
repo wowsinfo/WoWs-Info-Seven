@@ -1,18 +1,33 @@
 import React from 'react';
-import { Card } from 'react-native-elements';
-import { Text } from 'react-native';
-import { styles } from './WikiCellStyles';
+import { Text, View, TouchableNativeFeedback, TouchableWithoutFeedback, Platform } from 'react-native';
+import { Actions } from 'react-native-router-flux';
+import { styles } from './MapCellStyles';
+
+const Touchable = (Platform.OS == 'android') ? TouchableNativeFeedback : TouchableWithoutFeedback;
 
 class MapCell extends React.PureComponent {
+  componentWillMount() {
+    this.data = this.props.data;    
+    this.name = this.data.name;
+  }
+
   render() {
     return (
-      <Card title={this.props.name} containerStyle={cardStyle}>
-        <Text style={textStyle}>{this.props.info}</Text>
-      </Card>
+      <View>
+        <Touchable onPress={this.showMapDetail}>
+          <View style={viewStyle}>
+            <Text style={[textStyle, {color: global.themeColor}]}>{this.name}</Text>
+          </View>
+        </Touchable>
+      </View>
     )
+  }
+
+  showMapDetail = () => {
+    Actions.MapDetailScreen({title: this.name, data: this.data});
   }
 }
 
-const { textStyle, cardStyle } = styles;
+const { textStyle, viewStyle, touchableStyle } = styles;
 
 export {MapCell};
