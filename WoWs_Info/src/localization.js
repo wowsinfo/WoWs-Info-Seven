@@ -1,5 +1,4 @@
 import LocalizedStrings from 'react-localization';
-import { Language } from './core/';
 
 let strings = new LocalizedStrings({
   en: {
@@ -71,8 +70,5 @@ let strings = new LocalizedStrings({
   ja: {
   },
 });
-
-// Set to current language
-strings.setLanguage(Language.getCurrentLanguage());
 
 export default strings;

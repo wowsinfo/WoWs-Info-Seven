@@ -13,6 +13,34 @@ class DataManager {
     await DataManager.saveData(DataAPI.GameMap, savedDataName.gameMap);
     await DataManager.saveData(DataAPI.Consumable, savedDataName.consumable);
     await DataManager.saveData(DataAPI.Warship, savedDataName.warship);
+    // Additional information
+    await DataManager.saveAlias();
+  }
+
+  static async saveAlias() {
+    try {
+      let response = await fetch('http://xvm.qingcdn.com/wows/scripts/ships.js')
+      let text = await response.text();
+      // Make it readable
+      var formatted = text.replace('var shipDict=', '').replace('}};', '}}');
+      let data = JSON.parse(formatted);
+      for (key in data) {
+        let ship = data[key];
+        if (ship.country == 'japan') {
+          // Only Japanese ships
+          var name = ship.alias;
+          data[key] = name;
+        } else {
+          // We dont need it
+          delete data[key];
+        }
+      }
+      // console.log(json);
+      global.aliasJson = data;
+      await store.update(savedDataName.alias, data);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   static async saveData(dataAPIName, savedName) {

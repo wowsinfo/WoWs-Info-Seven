@@ -3,6 +3,7 @@ import { IOSDataName, localDataName, savedDataName } from '../../constant/value'
 import { WoWsInfo } from '../../colour/colour';
 import { Language, GameVersion, DateCalculator, PlayerConverter, ServerManager } from '../';
 import store from 'react-native-simple-store';
+import strings from '../../localization';
 import { DataManager } from '../';
 
 class DataStorage {
@@ -15,10 +16,15 @@ class DataStorage {
         await DataStorage.setupLocalStorage();
         await DataStorage.restoreData();
         await DataManager.updateLocalData();
+        // Set language here
+        strings.setLanguage(Language.getCurrentLanguage());
       } else {
+        global.firstLaunch = false;
         console.log('Welcome back');
         // Checking for updates
         await DataStorage.restoreData();
+        // Set language here
+        strings.setLanguage(Language.getCurrentLanguage());
         let saved = global.gameVersion;
         let curr = await GameVersion.getCurrVersion();
         console.log('Game Version\nCurr: ' + curr + '\nSaved: ' + saved);
@@ -26,18 +32,7 @@ class DataStorage {
           await DataManager.updateLocalData();
           await store.update(localDataName.gameVersion, curr);
         } else {
-          // Changing for language change
-          let currLang = Language.getCurrentLanguage();
-          console.log('Language\n' + currLang + '\n' + global.appLanguage);
-          if (global.apiLanguage != currLang) {
-            global.apiLanguage = currLang;
-            await DataManager.updateLocalData();
-            await store.update(localDataName.appLanguage, currLang);
-            await store.update(localDataName.apiLanguage, currLang);
-            await store.update(localDataName.newsLanguage, currLang);
-          } else {
-            await DataStorage.restoreSavedData();
-          }   
+          await DataStorage.restoreSavedData();
         }
   
         let date = await store.get(localDataName.currDate);
@@ -147,8 +142,9 @@ class DataStorage {
     global.warshipJson = await store.get(savedDataName.warship);
     global.commanderSkillJson = await store.get(savedDataName.commanderSkill);
     global.gameMapJson = await store.get(savedDataName.gameMap);
+    global.aliasJson = await store.get(savedDataName.alias);
     console.log(global.languageJson, global.achievementJson, global.consumableJson, 
-      global.encyclopediaJson, global.warshipJson, global.commanderSkillJson, global.gameMapJson);
+      global.encyclopediaJson, global.warshipJson, global.commanderSkillJson, global.gameMapJson, global.aliasJson);
   }
 }
 
