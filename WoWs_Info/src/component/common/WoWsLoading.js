@@ -5,7 +5,7 @@ class WoWsLoading extends React.PureComponent {
   render() {
     return (
       <View style={viewStyle}>
-        <ActivityIndicator color={global.themeColor} size='large'/>
+        <ActivityIndicator color={global.themeColour} size='large'/>
       </View>
     )
   }

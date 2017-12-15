@@ -6,7 +6,7 @@ class OnlineGroup extends React.PureComponent {
     return (
       <View style={viewStyle}>
         <Text style={titleStyle}>{this.props.title}</Text>
-        <Text style={[textStyle, {color: global.themeColor}]}>{this.props.info}</Text>
+        <Text style={[textStyle, {color: global.themeColour}]}>{this.props.info}</Text>
       </View>
     )
   }

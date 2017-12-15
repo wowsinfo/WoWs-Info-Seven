@@ -9,6 +9,7 @@ import strings from './localization';
 export default class App extends Component {
   state = {
     isReady: false,
+    resetCount: 0,
   }
   
   async componentWillMount() {
@@ -23,12 +24,18 @@ export default class App extends Component {
       return (
         <View style={ViewStyle}>
           <WoWsStatusBar />
-          <MainRouter />
+          <MainRouter reset={this.resetApp}/>
         </View>
       );
     } else {
       return <LoadingScreen />
     }
+  }
+
+  resetApp = () => {
+    this.setState({
+      resetCount: this.state.resetCount + 1,
+    })
   }
 }
 

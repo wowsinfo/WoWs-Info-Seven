@@ -1,19 +1,18 @@
 import React from 'react';
-import { View, Image, TouchableWithoutFeedback, TouchableNativeFeedback, Platform } from 'react-native';
+import { View, Image } from 'react-native';
+import { WoWsTouchable } from '../../../../component';
 import { Actions } from 'react-native-router-flux';
 import { styles } from './BasicCellStyles'; 
-
-const Touchable = (Platform.OS == 'android') ? TouchableNativeFeedback : TouchableWithoutFeedback;
 
 class BasicCell extends React.PureComponent {
   render() {
     return (
       <View>
-        <Touchable onPress={() => this.showDetail()}>
+        <WoWsTouchable onPress={() => this.showDetail()}>
           <View style={viewStyle}>
             <Image source={{uri: this.props.icon}} style={imageStyle} />
           </View>
-        </Touchable>
+        </WoWsTouchable>
       </View>
     )
   }

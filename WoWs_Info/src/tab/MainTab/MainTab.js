@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native';
+import { View, StyleSheet, Dimensions, Settings } from 'react-native';
 import { WikiScreen, NewsScreen, SettingsScreen } from '../../screen';
 import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
 import strings from '../../localization';
@@ -20,19 +20,25 @@ class MainTab extends React.PureComponent {
     ],
   };
 
+  renderSettings = () => (
+    <SettingsScreen reset={this.props.reset}/>
+  )
+
   // Setup stuff for tab view
   handleIndexChange = index => this.setState({index});
   renderHeader = props => {
     return (
       <TabBar {...props} indicatorStyle={indicatorStyle}
-        style={{backgroundColor: global.themeColor}} tabStyle={tabStyle}/>
+        style={{backgroundColor: global.themeColour}} tabStyle={tabStyle}/>
     )
   }
   renderScene = SceneMap({
     'wiki': WikiScreen,
     'news': NewsScreen,
-    'settings': SettingsScreen,
+    'settings': this.renderSettings,
   });
+
+  
 
   render() {
     return (
