@@ -19,6 +19,8 @@ switch (Platform.OS) {
   default: break;
 }
 
+global.firstLaunch = true;
+
 global.languageJson = {};
 global.achievementJson = {};
 global.consumableJson = {};
@@ -26,3 +28,4 @@ global.encyclopediaJson = {};
 global.warshipJson = {};
 global.commanderSkillJson = {};
 global.gameMapJson = {};
+global.aliasJson = {};

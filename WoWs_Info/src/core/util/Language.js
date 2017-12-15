@@ -1,29 +1,32 @@
 class Language {
   static getCurrentLanguage() {
-    // Get current language
-    var DeviceInfo = require('react-native-device-info');
-    var lang = DeviceInfo.getDeviceLocale();
-    if (lang.includes('-')) {
-      // Simplify -> ja-US to ja only
-      lang = lang.split('-').slice(0, -1);
-      // Basic filter
-      switch (lang[0]) {
-        case 'cs':
-        case 'de':
-        case 'en':
-        case 'es':
-        case 'fr':
-        case 'ja':
-        case 'pl':
-        case 'pt':
-        case 'ru':
-        case 'th':
-        case 'tr':
-        case 'zh':
-          lang = lang.join('-'); break;
-        default:
-          // This language is not supported
-          lang = 'unknown'; break;
+    var lang = global.appLanguage;
+    if (global.firstLaunch) {
+      // Get current language
+      var DeviceInfo = require('react-native-device-info');
+      lang = DeviceInfo.getDeviceLocale();
+      if (lang.includes('-')) {
+        // Simplify -> ja-US to ja only
+        lang = lang.split('-').slice(0, -1);
+        // Basic filter
+        switch (lang[0]) {
+          case 'cs':
+          case 'de':
+          case 'en':
+          case 'es':
+          case 'fr':
+          case 'ja':
+          case 'pl':
+          case 'pt':
+          case 'ru':
+          case 'th':
+          case 'tr':
+          case 'zh':
+            lang = lang.join('-'); break;
+          default:
+            // This language is not supported
+            lang = 'unknown'; break;
+        }
       }
     }
 
