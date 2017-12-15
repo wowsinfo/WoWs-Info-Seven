@@ -29,7 +29,7 @@ class ThemeCell extends React.PureComponent {
     Actions.pop();
     // Reset this app
     setTimeout(() => {
-      this.props.reset();
+      this.props.reset(this.colour);
     }, 1000)
   }
 }

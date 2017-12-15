@@ -9,13 +9,13 @@ import strings from './localization';
 export default class App extends Component {
   state = {
     isReady: false,
-    resetCount: 0,
   }
-  
+
   async componentWillMount() {
     let ready = await DataStorage.dataValidation();
     this.setState({
       isReady: ready,
+      colour: global.themeColour,
     })
   }
 
@@ -23,7 +23,7 @@ export default class App extends Component {
     if (this.state.isReady) {
       return (
         <View style={ViewStyle}>
-          <WoWsStatusBar />
+          <WoWsStatusBar themeColour={this.state.colour}/>
           <MainRouter reset={this.resetApp}/>
         </View>
       );
@@ -32,9 +32,9 @@ export default class App extends Component {
     }
   }
 
-  resetApp = () => {
+  resetApp = (colour) => {
     this.setState({
-      resetCount: this.state.resetCount + 1,
+      colour: colour,
     })
   }
 }
