@@ -24,9 +24,9 @@ class MapScreen extends React.PureComponent {
   render() {
     if (this.state.isReady) {
       return (
-        <View style={{flex: 1, paddingBottom: 8}}>
+        <View style={{flex: 1}}>
           <FlatList data={this.state.data} keyExtractor={this.keyExtractor} renderItem={({item}) => 
-            <MapCell name={item.name} info={item.description}/>
+            <MapCell data={item}/>
           } />
         </View>
       )
