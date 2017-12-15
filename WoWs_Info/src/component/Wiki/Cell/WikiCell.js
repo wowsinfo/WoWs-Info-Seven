@@ -1,8 +1,10 @@
 import React from 'react';
-import { View, Image, Text, TouchableOpacity, Alert } from 'react-native';
+import { View, Image, Text, TouchableWithoutFeedback, TouchableNativeFeedback, Platform } from 'react-native';
 import { wikiIndex } from '../../../constant/value';
 import { styles } from './WikiCellStyles';
 import { Actions } from 'react-native-router-flux';
+
+const Touchable = (Platform.OS == 'android') ? TouchableNativeFeedback : TouchableWithoutFeedback;
 
 class WikiCell extends React.PureComponent {
   componentWillMount() {
@@ -13,11 +15,13 @@ class WikiCell extends React.PureComponent {
 
   render() {
     return (
-      <View style={viewStyle}>
-        <TouchableOpacity onPress={() => this.onWikiBtnPressed()} >
-          <Image style={imageStyle} source={{uri: 'http://via.placeholder.com/160x160'}}/>          
-        </TouchableOpacity>
-        <Text style={textStyle}>{this.name}</Text>
+      <View>
+        <Touchable onPress={() => this.onWikiBtnPressed()} >
+          <View style={viewStyle}>
+            <Image style={imageStyle} source={{uri: 'http://via.placeholder.com/160x160'}}/> 
+            <Text style={textStyle}>{this.name}</Text>     
+          </View>        
+        </Touchable>
       </View>
     )
   }
