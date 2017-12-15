@@ -71,4 +71,5 @@ export const savedDataName = {
   warship: '@Data:warship',
   gameMap: '@Data:gameMap',
   consumable: '@Data:consumable',
+  alias: '@Data:alias',
 }

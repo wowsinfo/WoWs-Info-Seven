@@ -1,5 +1,6 @@
 import React from 'react';
 import { FlatList, View } from 'react-native';
+import ModalDropdown from 'react-native-modal-dropdown';
 import GridView from 'react-native-super-grid';
 import { Actions } from 'react-native-router-flux';
 import { WoWsLoading, WarshipCell } from '../../../component';
@@ -8,6 +9,17 @@ class ShipScreen extends React.PureComponent {
   state = {
     isReady: false,
     data: [],
+  }
+  
+  componentWillMount() {
+    // Format nation and type json
+    var nation = [];
+    for (key in global.encyclopediaJson.ship_nations) nation.push(global.encyclopediaJson.ship_nations[key]);
+    this.nation = nation;
+    var type = [];
+    for (key in global.encyclopediaJson.ship_types) type.push(global.encyclopediaJson.ship_types[key]);
+    this.type = type;
+    this.tier = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII         ', 'IX', 'X'];    
   }
 
   componentDidMount() {
@@ -30,7 +42,18 @@ class ShipScreen extends React.PureComponent {
     this.setState({
       isReady: true,
       data: parsed,
-    }, () => Actions.refresh({title: parsed.length}));
+      // Then user could now filter ships
+    }, () => Actions.refresh({renderTitle: this.renderFilter}));
+  }
+
+  renderFilter = () => {
+    return (
+      <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+        <ModalDropdown options={this.nation}/>
+        <ModalDropdown options={this.type} />
+        <ModalDropdown options={this.tier} />
+      </View>
+    )
   }
 
   render() {

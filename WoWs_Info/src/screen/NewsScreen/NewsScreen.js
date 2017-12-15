@@ -8,7 +8,7 @@ class NewsScreen extends React.PureComponent {
     isReady: false,
     data: [],
     isRefreshing: false,
-    language: global.apiLanguage
+    language: global.newsLanguage,
   }
 
   keyExtractor = (item) => {return item.title}  
@@ -38,12 +38,13 @@ class NewsScreen extends React.PureComponent {
   }
 
   async refreshNews() {
-    if (global.apiLanguage == this.state.language) return;
+    console.log(global.newsLanguage, this.state.language);
+    if (global.newsLanguage == this.state.language) return;
     else {
+      // Get news in another language
       this.setState({
         isRefreshing: true,
       })
-      // Get news in another language
       await this.loadNews();
     }
   }
