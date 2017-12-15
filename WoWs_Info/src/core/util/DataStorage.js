@@ -122,6 +122,7 @@ class DataStorage {
   }
 
   static async restoreData() {
+    global.themeColour = await store.get(localDataName.themeColour);    
     global.server = await store.get(localDataName.currServer);
     global.serverName = ServerManager.getDomainFrom(global.server);
     global.userInfo = await store.get(localDataName.userInfo);
@@ -131,7 +132,6 @@ class DataStorage {
     global.appLanguage = await store.get(localDataName.appLanguage);
     global.newsLanguage = await store.get(localDataName.newsLanguage);
     global.gameVersion = await store.get(localDataName.gameVersion);
-    global.themeColour = await store.get(localDataName.themeColour);
   }
 
   static async restoreSavedData() {
