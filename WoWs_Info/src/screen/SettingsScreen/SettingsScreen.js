@@ -81,7 +81,8 @@ class SettingsScreen extends React.PureComponent {
     global.appLanguage = newLang;
     store.update(localDataName.appLanguage, newLang);
     strings.setLanguage(newLang);
-    this.props.reset();    
+    // Dont forget to put in a colour here
+    this.props.reset(global.themeColour);    
   }
 }
 
