@@ -2,6 +2,9 @@ import LocalizedStrings from 'react-localization';
 
 let strings = new LocalizedStrings({
   en: {
+    // Permission
+    warning: 'Warning',
+    permission_is_necessary: 'This is necessary for WoWs Info to work properly',
     // Loading
     loading: 'Loading...',
     download_data: 'Downloading data...',
@@ -35,6 +38,9 @@ let strings = new LocalizedStrings({
     change_theme: 'Change theme colour',
   },
   zh: {
+    // Permission
+    warning: '提示',
+    permission_is_necessary: 'WoWs Info需要这个权限 否则将无法正常使用',
     // Loading
     loading: '加载中...',
     download_data: '下载数据中...',
