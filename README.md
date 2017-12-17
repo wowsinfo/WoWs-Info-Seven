@@ -66,5 +66,3 @@ Coming not so soon...
 | 2.99 USD |   1.99 USD |     N/A  | N/A |
 
 Windows 10 and Mac version will be paid so it does not have any ads and IAP.
-
-<p style="color:white">I used to love this game so much and I decided to do something for it. However, things are changing so rapidly. This is still a good game but it still has serious problems as a 2-year-old game. At least for me, nerf a ship heavily is the worst decision ever. I started playing this game for a single ship and you nerfed it... Why do I still need to love this game? Japanese DD is just not balanced. I am waiting for it, World of Warships. I still believe in you and that's why I am making this app. Please understand 2017.12.17</p>
