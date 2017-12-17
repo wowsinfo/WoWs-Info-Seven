@@ -2,9 +2,8 @@ import LocalizedStrings from 'react-localization';
 
 let strings = new LocalizedStrings({
   en: {
-    // Permission
-    warning: 'Warning',
-    permission_is_necessary: 'This is necessary for WoWs Info to work properly',
+    // Game Update
+    game_has_update: 'Please update your game',
     // Loading
     loading: 'Loading...',
     download_data: 'Downloading data...',
@@ -22,8 +21,6 @@ let strings = new LocalizedStrings({
     wiki: 'Wiki',
     news: 'News',
     settings: 'Settings',
-    // Back title
-    back: 'Back',
     // Wiki
     achievement: 'Achievement',
     flag_camouflage: 'Flag/Camouflage',
@@ -38,9 +35,8 @@ let strings = new LocalizedStrings({
     change_theme: 'Change theme colour',
   },
   zh: {
-    // Permission
-    warning: '提示',
-    permission_is_necessary: 'WoWs Info需要这个权限 否则将无法正常使用',
+    // Game Update
+    game_has_update: '请更新游戏',
     // Loading
     loading: '加载中...',
     download_data: '下载数据中...',
@@ -58,8 +54,6 @@ let strings = new LocalizedStrings({
     wiki: '维基',
     news: '最新消息',
     settings: '设置',
-    // Back title
-    back: '返回',
     // Wiki
     achievement: '成就',
     flag_camouflage: '旗子/迷彩',

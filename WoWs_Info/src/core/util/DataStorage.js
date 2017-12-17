@@ -1,4 +1,4 @@
-import { Platform, PermissionsAndroid, Alert } from 'react-native';
+import { Platform, Alert } from 'react-native';
 import { IOSDataName, localDataName, savedDataName } from '../../constant/value';
 import { WoWsInfo } from '../../colour/colour';
 import { Language, GameVersion, DateCalculator, PlayerConverter, ServerManager } from '../';
@@ -9,8 +9,6 @@ import { DataManager } from '../';
 class DataStorage {
   static async dataValidation() {
     try {
-      // Ask for permission
-      if (Platform.OS == 'android') await DataStorage.requestPermission();
       // Setting up Data here      
       let first = await store.get(localDataName.firstLaunch);
       if (first == null) {
@@ -31,6 +29,8 @@ class DataStorage {
         let curr = await GameVersion.getCurrVersion();
         console.log('Game Version\nCurr: ' + curr + '\nSaved: ' + saved);
         if (curr != saved) {
+          // There is an update
+          Alert.alert(curr, strings.game_has_update);
           await DataManager.updateLocalData();
           await store.update(localDataName.gameVersion, curr);
         } else {
@@ -52,29 +52,6 @@ class DataStorage {
     } catch (error) {
       console.error(error);
       return false;
-    }
-  }
-
-  static async requestPermission() {
-    try {
-      let canRead = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE);      
-      let canWrite = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE);
-      console.log(canWrite, canRead);
-      // Permissions have been granted
-      if (canWrite && canWrite) return;     
-      const isGranted = await PermissionsAndroid.requestMultiple(
-        [PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-        PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE]
-      )
-      // Check if they are granted
-      for (permission in isGranted) {
-        if (isGranted[permission] != PermissionsAndroid.RESULTS.GRANTED) {
-          Alert.alert(strings.warning, strings.permission_is_necessary);
-          break;
-        }
-      }
-    } catch (err) {
-      console.warn(err)
     }
   }
 
