@@ -18,12 +18,12 @@ class PlayerOnlineScreen extends React.PureComponent {
           isReady: true,
           serverInfo: info,
         }, () => {
-          this.ru = this.state.serverInfo.server[0];
-          this.eu = this.state.serverInfo.server[1];
-          this.na = this.state.serverInfo.server[2];
-          this.asia = this.state.serverInfo.server[3];
-          this.total = this.state.serverInfo.total;
-          Actions.refresh({title: this.total});
+          this.ru = info.server[0];
+          this.eu = info.server[1];
+          this.na = info.server[2];
+          this.asia = info.server[3];
+          this.total = info.total;
+          Actions.refresh({title: global.gameVersion});
         })
       }
     })
@@ -34,7 +34,8 @@ class PlayerOnlineScreen extends React.PureComponent {
       return (
         <View style={viewStyle}>
           <OnlineGroup title={strings.russia} info={this.ru}/>
-          <OnlineGroup title={strings.europe} info={this.eu}/>
+          <OnlineGroup title={strings.europe} info={this.eu}/>         
+          <Text style={[textStyle, {color: global.themeColour}]}>{this.total}</Text>
           <OnlineGroup title={strings.north_america} info={this.na}/>
           <OnlineGroup title={strings.asia} info={this.asia}/>
         </View>
@@ -47,11 +48,15 @@ class PlayerOnlineScreen extends React.PureComponent {
 
 const styles = StyleSheet.create({
   viewStyle: {
-    flexDirection: 'row',
+    flex: 1,
     paddingTop: 16,
     justifyContent: 'space-around',
+    alignItems: 'center',
+  },
+  textStyle: {
+    fontSize: 64,
   }
 })
-const { viewStyle } = styles;
+const { viewStyle, textStyle } = styles;
 
 export {PlayerOnlineScreen};
