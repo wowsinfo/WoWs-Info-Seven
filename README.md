@@ -1,6 +1,10 @@
 # WoWs Info
 This is an unofficial app for the game [World of Warships](https://worldofwarships.com/). Its predecessor is [WoWs Info Swift](https://github.com/HenryQuan/WoWs_Info_Swift) but it is only available on IOS. This project aims to build a cross platform version of WoWs Info for IOS, Android, Windows 10 (and maybe Mac OS).
 
+This app will be published on AppStore, Google Play and Microsoft Store. However, you are welcomed to play with the source code and run it on your own devices.
+
+**Please do NOT abuse my Wargaming developer id** and get your own ID [here](https://developers.wargaming.net). If you may, please support me with IAP and Ads.
+
 ## Features
 * [ ] Search players and clans
   - [ ] Detailed statistics
@@ -17,7 +21,7 @@ This is an unofficial app for the game [World of Warships](https://worldofwarshi
 * [ ] Free and open source (but there is an IAP)
   - [ ] Windows 10 version is not free (but no IAP)
   - [ ] There might be a Mac version
-* [x] Theme (probably in the following updates)
+* [x] Theme
 
 Data will be saved locally for better performance and this project should be more stable than WoWs Info Swift. (However, I found out that some Android devices could not save data to its storage and I have not found any solutions yet)
 
@@ -38,7 +42,7 @@ Data will be saved locally for better performance and this project should be mor
 * [react-native-userdefaults-ios](https://github.com/dsibiski/react-native-userdefaults-ios)
 * [string-format](https://github.com/davidchambers/string-format)
 
-This is a lot...
+Data are from [Wargaming API](https://developers.wargaming.net), [空中网](http://wows.kongzhong.com/) and [WoWs Numbers](http://wows-numbers.com).
 
 ## How to install it on my devices
 ~~~~
@@ -50,6 +54,9 @@ react-native run-ios (run-android/run-windows)
 It is available on [App Store]() but currently, it is the old build. Alternatively, you could clone this project and run it yourself.
 ### Android
 [Releases](https://github.com/HenryQuan/React-Native-WoWs-Info/releases) are available now.
+#### Google Play
+Google Play
+#### Github
 ### Windows 10
 Coming soon...
 ### Mac OS
@@ -60,9 +67,10 @@ Coming not so soon...
 - Show main account on launch
 - Check player stat inside clan
 - Check player clan inside player info
+- Pro logo
 
 |  IOS | Android | Windows 10 | Mac |
 |:----:|:-------:|:----------:|:----:|
 | 2.99 USD |   1.99 USD |     N/A  | N/A |
 
-Windows 10 and Mac version will be paid so it does not have any ads and IAP.
+Windows 10 and Mac version will be paid so it does not have any ads and IAP. The price for them are 0.99 USD and 1.99 USD respectively.

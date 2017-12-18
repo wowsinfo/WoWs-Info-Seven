@@ -123,6 +123,10 @@ class DataStorage {
     }
   }
 
+  static async restoreTheme() {
+    global.themeColour = await store.get(localDataName.themeColour);    
+  }
+
   static async restoreData() {
     global.themeColour = await store.get(localDataName.themeColour);    
     global.server = await store.get(localDataName.currServer);
