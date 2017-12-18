@@ -81,6 +81,7 @@ class DataStorage {
       await store.update(localDataName.apiLanguage, lang);
   
       // Check again for userdefault
+      let currOS = Platform.OS;
       if (currOS == 'ios') {
         var UserDefaults = require('react-native-userdefaults-ios');
         let data = await UserDefaults.objectForKey(IOSDataName.firstLaunch);
