@@ -19,7 +19,7 @@ class NewsScreen extends React.PureComponent {
   render() {
     if (this.state.isReady) {
       return (
-        <View>
+        <View style={{flex: 1}}>
           <FlatList data={this.state.data} keyExtractor={this.keyExtractor} onRefresh={() => this.refreshNews()}
             renderItem={({item}) => <NewsCell data={item}/>} refreshing={this.state.isRefreshing}/>
         </View>
