@@ -71,15 +71,7 @@ class DataStorage {
       await store.update(localDataName.tokenDate, '');
       await store.update(localDataName.currServer, '3');
   
-      // Theme Red Blue Green
-      let currOS = Platform.OS;
-      if (currOS == 'ios') {
-        await store.update(localDataName.themeColour, WoWsInfo.blue);
-      } else if (currOS == 'android') {
-        await store.update(localDataName.themeColour, WoWsInfo.red);
-      } else {
-        await store.update(localDataName.themeColour, WoWsInfo.green);
-      }
+      await DataStorage.setupTheme();
       await store.update(localDataName.firstLaunch, false);
 
       // Remove country code is needed
@@ -123,8 +115,23 @@ class DataStorage {
     }
   }
 
+  static async setupTheme() {
+    // Theme Red Blue Green
+    var colour = WoWsInfo.blue;
+    switch (Platform.OS) {
+      case 'android': colour = WoWsInfo.red;
+      case 'windows': colour = WoWsInfo.green;
+      default: break;
+    }
+    global.themeColour = colour;
+    await store.update(localDataName.themeColour, colour);
+  }
+
   static async restoreTheme() {
-    global.themeColour = await store.get(localDataName.themeColour);    
+    global.themeColour = await store.get(localDataName.themeColour); 
+    if (global.themeColour == null) {
+      await DataStorage.setupTheme();
+    }
   }
 
   static async restoreData() {
