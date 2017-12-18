@@ -29,6 +29,10 @@ let strings = new LocalizedStrings({
     warship: 'Warship',
     map: 'Map',
     // Settings
+    server_header: 'Server',
+    language_header: 'Language',
+    theme_header: 'Theme',
+    about_header: 'About',
     api_language: 'Change API language',
     app_language: 'Change App language',
     news_language: 'Change News language',
