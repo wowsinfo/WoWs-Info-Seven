@@ -17,12 +17,18 @@ class WikiCell extends React.PureComponent {
       <View>
         <WoWsTouchable onPress={() => this.onWikiBtnPressed()} >
           <View style={viewStyle}>
-            <Image style={imageStyle} source={{uri: 'http://via.placeholder.com/160x160'}}/> 
+            {this.renderImage()}
             <Text style={textStyle}>{this.name}</Text>     
           </View>        
         </WoWsTouchable>
       </View>
     )
+  }
+
+  renderImage() {
+    // Warship needs a background colour
+    if (this.index == 2) return <Image style={[imageStyle, {backgroundColor: global.themeColour}]} source={{uri: this.icon}}/>
+    else return <Image style={imageStyle} source={{uri: this.icon}}/> 
   }
 
   onWikiBtnPressed() {
