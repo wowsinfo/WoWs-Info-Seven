@@ -5,7 +5,7 @@ import { WoWsStatusBar } from '../../component/';
 class LoadingScreen extends React.PureComponent {
   render() {
     return (
-      <View style={ViewStyle} backgroundColor={global.themeColour}>
+      <View style={ViewStyle} backgroundColor={this.props.colour}>
         <WoWsStatusBar style={ImageStyle}/>
         <Image source={require('../../img/LogoWhite.png')}/>
         <ActivityIndicator color='white' size='large'/>
