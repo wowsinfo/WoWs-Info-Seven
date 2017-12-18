@@ -119,8 +119,8 @@ class DataStorage {
     // Theme Red Blue Green
     var colour = WoWsInfo.blue;
     switch (Platform.OS) {
-      case 'android': colour = WoWsInfo.red;
-      case 'windows': colour = WoWsInfo.green;
+      case 'android': colour = WoWsInfo.red; break
+      case 'windows': colour = WoWsInfo.green; break;
       default: break;
     }
     global.themeColour = colour;
