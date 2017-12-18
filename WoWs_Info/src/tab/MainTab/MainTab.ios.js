@@ -23,14 +23,12 @@ class MainTab extends React.PureComponent {
           onPress={() => this.setTab('Wiki')}>
           <WikiScreen />
         </TabBarIOS.Item>
-
         <TabBarIOS.Item title={strings.news}
           icon={require('../../img/News.png')}
           selected={this.state.selectedTab === 'News'}
           onPress={() => this.setTab('News')}>
           <NewsScreen />
         </TabBarIOS.Item>
-
         <TabBarIOS.Item title={strings.settings}
           icon={require('../../img/Settings.png')}
           selected={this.state.selectedTab === 'Settings'}
