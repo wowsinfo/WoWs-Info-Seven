@@ -36,7 +36,12 @@ export default class App extends Component {
       );
     } else {
       // Loading Screen now uses theme colour
-      return <LoadingScreen colour={this.state.colour}/>
+      return (
+        <View>
+          <WoWsStatusBar themeColour={this.state.colour}/>
+          <LoadingScreen colour={this.state.colour}/>
+        </View>
+      )
     }
   }
 
