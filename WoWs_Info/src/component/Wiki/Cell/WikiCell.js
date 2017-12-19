@@ -10,7 +10,7 @@ class WikiCell extends React.PureComponent {
     this.name = this.props.data.name;
     this.icon = this.props.data.icon;
     this.index = this.props.data.index;
-    console.log(this.icon);
+    // console.log(this.icon);
   }
 
   render() {

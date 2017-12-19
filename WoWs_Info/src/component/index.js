@@ -15,6 +15,10 @@ export * from './Wiki/Cell/WarshipCell';
 
 // Wiki Detail
 
+// Search
+export * from './PlayerSearch/SearchHeader';
+export * from './PlayerSearch/SearchRightButton';
+
 // Settings
 export * from './Settings/ThemeCell';
 
