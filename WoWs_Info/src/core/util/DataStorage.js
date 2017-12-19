@@ -1,4 +1,4 @@
-import { Platform, Alert } from 'react-native';
+import { Platform } from 'react-native';
 import { IOSDataName, localDataName, savedDataName } from '../../constant/value';
 import { WoWsInfo } from '../../colour/colour';
 import { Language, GameVersion, DateCalculator, PlayerConverter, ServerManager } from '../';
@@ -75,8 +75,10 @@ class DataStorage {
       await store.update(localDataName.firstLaunch, false);
 
       // Remove country code is needed
-      let lang = Language.getCurrentLanguage()
+      let lang = Language.getCurrentLanguage();
       await store.update(localDataName.appLanguage, lang);
+      // This is the cause of the mystery
+      if (lang == 'zh') lang = 'zh-cn';
       await store.update(localDataName.newsLanguage, lang);
       await store.update(localDataName.apiLanguage, lang);
   
