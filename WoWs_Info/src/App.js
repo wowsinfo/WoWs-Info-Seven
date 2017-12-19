@@ -13,7 +13,7 @@ export default class App extends Component {
 
   async componentWillMount() {
     await DataStorage.restoreTheme();
-    console.log(global.themeColour);
+    // console.log(global.themeColour);
     this.setState({
       isReady: false,
       colour: global.themeColour,
