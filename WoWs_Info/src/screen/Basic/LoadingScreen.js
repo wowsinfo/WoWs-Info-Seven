@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, ActivityIndicator, Text, View, StyleSheet, Dimensions } from 'react-native';
+import { ActivityIndicator, Image, Text, View, StyleSheet, Dimensions } from 'react-native';
 import { WoWsStatusBar } from '../../component/';
 
 class LoadingScreen extends React.PureComponent {
