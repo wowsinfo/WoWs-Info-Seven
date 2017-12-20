@@ -29,3 +29,4 @@ global.warshipJson = {};
 global.commanderSkillJson = {};
 global.gameMapJson = {};
 global.aliasJson = {};
+global.personalRatingJson = {};
