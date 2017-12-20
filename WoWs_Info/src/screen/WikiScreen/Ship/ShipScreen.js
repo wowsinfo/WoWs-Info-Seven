@@ -13,11 +13,12 @@ class ShipScreen extends React.PureComponent {
   
   componentWillMount() {
     // Format nation and type json
+    this.json = global.encyclopediaJson;    
     var nation = [];
-    for (key in global.encyclopediaJson.ship_nations) nation.push(global.encyclopediaJson.ship_nations[key]);
+    for (key in this.json.ship_nations) nation.push(this.json.ship_nations[key]);
     this.nation = nation;
     var type = [];
-    for (key in global.encyclopediaJson.ship_types) type.push(global.encyclopediaJson.ship_types[key]);
+    for (key in this.json.ship_types) type.push(this.json.ship_types[key]);
     this.type = type;
     this.tier = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII         ', 'IX', 'X'];    
   }
@@ -49,11 +50,73 @@ class ShipScreen extends React.PureComponent {
   renderFilter = () => {
     return (
       <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-        <ModalDropdown options={this.nation}/>
-        <ModalDropdown options={this.type} />
-        <ModalDropdown options={this.tier} />
+        <ModalDropdown options={this.nation} onSelect={this.filterNation}/>
+        <ModalDropdown options={this.type} onSelect={this.filterType}/>
+        <ModalDropdown options={this.tier} onSelect={this.filterTier}/>
       </View>
     )
+  }
+
+  filterNation = (index, value) => {
+    // Find key
+    var nationKey = '';
+    for (key in this.json.ship_nations) {
+      let nation = this.json.ship_nations[key];
+      if (value == nation) {
+        // This is the key we want
+        nationKey = key; break;
+      }
+    }   
+    // Filter data
+    var filtered = [];
+    for (var i = 0; i < this.state.data.length; i++) {
+      let entry = this.state.data[i];
+      if (entry.nation == nationKey) {      
+        filtered.push(entry);
+      }
+    }
+    // Update data
+    this.setState({
+      data: filtered,
+    })
+  }
+
+  filterType = (index, value) => {
+    // Find key
+    var typeKey = '';
+    for (key in this.json.ship_types) {
+      let type = this.json.ship_types[key];
+      if (value == type) {
+        // This is the key we want
+        typeKey = key; break;
+      }
+    }
+    // Filter data
+    var filtered = [];
+    for (var i = 0; i < this.state.data.length; i++) {
+      let entry = this.state.data[i];
+      if (entry.type == typeKey) {
+        filtered.push(entry);
+      }
+    }
+    // Update data
+    this.setState({
+      data: filtered,
+    })
+  }
+
+  filterTier = (index, value) => {
+    let tier = parseInt(index) + 1;
+    var filtered = [];
+    for (var i = 0; i < this.state.data.length; i++) {
+      let entry = this.state.data[i];
+      if (entry.tier == tier) {
+        filtered.push(entry);
+      }
+    }
+    this.setState({
+      data: filtered,
+    })
   }
 
   render() {

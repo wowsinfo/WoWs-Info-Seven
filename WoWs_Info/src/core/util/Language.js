@@ -1,5 +1,3 @@
-import { Alert } from 'react-native';
-
 class Language {
   static getCurrentLanguage() {
     var lang = global.appLanguage;
@@ -32,8 +30,7 @@ class Language {
         default:
           // This language is not supported
           lang = 'unknown'; break;
-      }
-      Alert.alert(lang);      
+      }  
     }
     // console.log(lang);
     return lang;
