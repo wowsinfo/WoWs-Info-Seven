@@ -28,6 +28,10 @@ let strings = new LocalizedStrings({
     commander: 'Commander',
     warship: 'Warship',
     map: 'Map',
+    // Ship Wiki
+    filter_nation: 'Nation',
+    filter_type: 'Type',
+    filter_tier: 'Tier',
     // Settings
     server_header: 'Server',
     language_header: 'Language',
@@ -65,6 +69,10 @@ let strings = new LocalizedStrings({
     commander: '舰长技能',
     warship: '战舰',
     map: '地图',
+    // Ship Wiki
+    filter_nation: '国家',
+    filter_type: '种类',
+    filter_tier: '等级',
     // Settings
     server_header: '服务器',
     language_header: '语言',
