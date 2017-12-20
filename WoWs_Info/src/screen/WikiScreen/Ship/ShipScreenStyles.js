@@ -3,7 +3,9 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   buttonStyle: {
     height: 30, 
-    width: 30, 
+    width: 30,
+    padding: 0,
+    margin: 0,
     backgroundColor: 'transparent',
   },
   filterButtonStyle: {

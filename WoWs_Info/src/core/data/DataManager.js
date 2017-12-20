@@ -29,6 +29,8 @@ class DataManager {
         if (ship.country == 'japan') {
           // Only Japanese ships
           var name = ship.alias;
+          if (name == 'HSF 春風') name = 'HSF 晴风';
+          name += '酱';
           data[key] = name;
         } else {
           // We dont need it

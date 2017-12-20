@@ -23,7 +23,7 @@ class ShipScreen extends React.PureComponent {
     var type = [];
     for (key in this.json.ship_types) type.push(this.json.ship_types[key]);
     this.type = type;
-    this.tier = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII         ', 'IX', 'X'];  
+    this.tier = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];  
     this.filter = {tier: '', nation: '', type: ''};  
   }
 
@@ -57,9 +57,9 @@ class ShipScreen extends React.PureComponent {
   renderFilter = () => {
     return (
       <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-        <ModalDropdown defaultValue={strings.filter_nation} options={this.nation} onSelect={this.filterNation} textStyle={filterButtonStyle} dropdownStyle={dropdownStyle} dropdownTextStyle={dropdownTextStyle} />
-        <ModalDropdown defaultValue={strings.filter_type} options={this.type} onSelect={this.filterType} textStyle={filterButtonStyle} dropdownStyle={dropdownStyle} dropdownTextStyle={dropdownTextStyle} />
-        <ModalDropdown defaultValue={strings.filter_tier} options={this.tier} onSelect={this.filterTier} textStyle={filterButtonStyle} dropdownStyle={dropdownStyle} dropdownTextStyle={dropdownTextStyle} />
+        <ModalDropdown ref={(ref) => this.nationDropdown = ref} defaultValue={strings.filter_nation} options={this.nation} onSelect={this.filterNation} textStyle={filterButtonStyle} dropdownStyle={dropdownStyle} dropdownTextStyle={dropdownTextStyle} showsVerticalScrollIndicator={false}/>
+        <ModalDropdown ref={(ref) => this.typeDropdown = ref} defaultValue={strings.filter_type} options={this.type} onSelect={this.filterType} textStyle={filterButtonStyle} dropdownStyle={dropdownStyle} dropdownTextStyle={dropdownTextStyle} showsVerticalScrollIndicator={false}/>
+        <ModalDropdown ref={(ref) => this.tierDropdown = ref} defaultValue={strings.filter_tier} options={this.tier} onSelect={this.filterTier} textStyle={filterButtonStyle} dropdownStyle={dropdownStyle} dropdownTextStyle={dropdownTextStyle} showsVerticalScrollIndicator={false}/>
       </View>
     )
   }
@@ -69,6 +69,10 @@ class ShipScreen extends React.PureComponent {
       <Button icon={{name: 'md-refresh', type: 'ionicon'}} 
         buttonStyle={buttonStyle} onPress={() => {
         // Reset stuff
+        this.filter = {tier: '', nation: '', type: ''};
+        this.nationDropdown.select(-1);          
+        this.typeDropdown.select(-1);          
+        this.tierDropdown.select(-1);          
         this.componentDidMount()
       }}/>
     )
@@ -123,6 +127,7 @@ class ShipScreen extends React.PureComponent {
     for (key in global.warshipJson) {
       let entry = global.warshipJson[key];
       // Check 3 times
+      if (entry.name[0] == '[') continue;
       if (this.filter.tier != '' && entry.tier != this.filter.tier) continue;
       if (this.filter.type != '' && entry.type != this.filter.type) continue;
       if (this.filter.nation != '' && entry.nation != this.filter.nation) continue;
