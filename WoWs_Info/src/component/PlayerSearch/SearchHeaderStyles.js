@@ -8,8 +8,8 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   inputStyle: {
-    height: 26, width: '100%', 
-    borderWidth: 0, borderColor: 'white', 
+    height: 50, width: '100%', 
+    borderColor: 'white', 
     color: 'white', 
     fontSize: 20, 
     textAlign: 'center',

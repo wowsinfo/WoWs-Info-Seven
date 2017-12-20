@@ -8,8 +8,8 @@ class SearchHeader extends React.PureComponent {
     const { onChangeText } = this.props;
     return (
       <View style={viewStyle}>
-        <TextInput style={inputStyle} onChangeText={onChangeText}
-          autoCorrect={false} autoFocus autoCapitalize='none' />
+        <TextInput style={inputStyle} onChangeText={onChangeText} underlineColorAndroid='transparent'
+          autoCorrect={false} autoFocus autoCapitalize='none' clearButtonMode='while-editing' returnKeyType='search'/>
       </View>
     )
   }

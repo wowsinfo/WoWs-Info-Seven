@@ -26,7 +26,7 @@ class MainRouter extends Component {
             renderRightButton={ <SearchButton onPress={() => Actions.SearchScreen()}/> }
             renderLeftButton={ <PlayerOnlineButton onPress={() => Actions.PlayerOnlineScreen()}/> } />
 
-          <Scene key='SearchScreen' component={SearchScreen}/>
+          <Scene key='SearchScreen' component={SearchScreen} title=''/>
           <Scene key='NewsScreen' component={NewsScreen}/>          
           <Scene key='ThemeScreen' component={ThemeScreen}/>          
           

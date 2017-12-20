@@ -18,6 +18,7 @@ export * from './Wiki/Cell/WarshipCell';
 // Search
 export * from './PlayerSearch/SearchHeader';
 export * from './PlayerSearch/SearchRightButton';
+export * from './PlayerSearch/Cell/SearchResultCell';
 
 // Settings
 export * from './Settings/ThemeCell';
