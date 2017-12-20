@@ -12,6 +12,7 @@ class WarshipCell extends React.PureComponent {
     }
   }
 
+  // Update saved data
   componentDidUpdate() {
     this.loadData(this.props.data);
     this.setState({
