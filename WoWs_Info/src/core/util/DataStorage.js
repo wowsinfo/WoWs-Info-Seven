@@ -159,8 +159,10 @@ class DataStorage {
     global.commanderSkillJson = await store.get(savedDataName.commanderSkill);
     global.gameMapJson = await store.get(savedDataName.gameMap);
     global.aliasJson = await store.get(savedDataName.alias);
+    global.personalRatingJson = await store.get(savedDataName.personalRating);
     console.log(global.languageJson, global.achievementJson, global.consumableJson, 
-      global.encyclopediaJson, global.warshipJson, global.commanderSkillJson, global.gameMapJson, global.aliasJson);
+      global.encyclopediaJson, global.warshipJson, global.commanderSkillJson, 
+      global.gameMapJson, global.aliasJson, global.personalRatingJson);
   }
 }
 

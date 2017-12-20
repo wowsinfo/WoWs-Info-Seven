@@ -72,4 +72,5 @@ export const savedDataName = {
   gameMap: '@Data:gameMap',
   consumable: '@Data:consumable',
   alias: '@Data:alias',
+  personalRating: '@Data:personalRating',
 }

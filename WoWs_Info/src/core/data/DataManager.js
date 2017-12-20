@@ -15,6 +15,21 @@ class DataManager {
     await DataManager.saveData(DataAPI.Warship, savedDataName.warship);
     // Additional information
     await DataManager.saveAlias();
+    // Personal Rating
+    await DataManager.savePersonalRating();
+  }
+
+  static async savePersonalRating() {
+    try {
+      let response = await fetch('https://wows-numbers.com/personal/rating/expected/json/')
+      data = await response.json();
+      if (data != null) data = data.data;
+      // console.log(data);
+      global.personalRatingJson = data;
+      await store.update(savedDataName.personalRating, data);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   static async saveAlias() {
