@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, TextInput, FlatList } from 'react-native';
-import { SearchHeader, SearchRightButton, WoWsTouchable } from '../../component';
+import { View, Text, TextInput, FlatList, Keyboard, SafeAreaView } from 'react-native';
+import { SearchHeader, SearchRightButton, WoWsTouchable, SearchResultCell } from '../../component';
+import { PlayerSearch } from '../../core';
 import { Actions } from 'react-native-router-flux';
 
 var SearchTimer;
@@ -15,23 +16,11 @@ class SearchScreen extends React.PureComponent {
     super();
     Actions.refresh({
       renderTitle: <SearchHeader onChangeText={this.searchPlayer}/>, 
-      right: <SearchRightButton />
+      right: <SearchRightButton reset={this.clearResult}/>
     })        
   }
 
-  searchPlayer = (text) => {
-    this.setState({showPlayerList: false});
-    // Real time request
-    if (text.length < 3) clearTimeout(SearchTimer);
-    else {
-      clearTimeout(SearchTimer);
-      SearchTimer = setTimeout(() => {
-        console.log('Working');
-      }, 1500);
-    }
-    
-  }
-
+  keyExtractor = (item) => {return item.nickname}  
   render() {
     if (this.state.player) {
       if (this.state.showPlayerList) {
@@ -39,10 +28,39 @@ class SearchScreen extends React.PureComponent {
         return null;
       } else {
         // After typing somethins
+        return (
+          <SafeAreaView>
+            <FlatList data={this.state.data} keyExtractor={this.keyExtractor} onScrollBeginDrag={Keyboard.dismiss}
+              renderItem={({item}) => <SearchResultCell data={item}/>}/>
+          </SafeAreaView>
+        )
       }
     } else {
       // This is for clan
+      return null;
     }
+  }
+
+  searchPlayer = (text) => {
+    this.setState({showPlayerList: false});
+    // Real time request
+    let input = text.split(' ').join('');
+    if (input.length < 3) clearTimeout(SearchTimer);
+    else {
+      clearTimeout(SearchTimer);
+      SearchTimer = setTimeout(() => {
+        let request = new PlayerSearch(global.server, input);
+        request.Search().then(result => {
+          this.setState({
+            data: result,
+          })
+        })
+      }, 1250);
+    }
+  }
+
+  clearResult = () => {
+    this.setState({data: []});
   }
 
   modeSwitcher() {
