@@ -3,7 +3,6 @@ import { WoWsTouchable } from '../../../component';
 import { Actions } from 'react-native-router-flux';
 import { styles } from './SearchResultCellStyles';
 import { View, Text } from 'react-native';
-import { ServerManager, WoWsNumbers } from '../../../core/';
 
 class SearchResultCell extends React.PureComponent {
   constructor(props) {
@@ -16,7 +15,7 @@ class SearchResultCell extends React.PureComponent {
     const { viewStyle, textStyle } = styles;
     return (
       <View>
-        <WoWsTouchable onPress={this.wows_number}>
+        <WoWsTouchable onPress={this.playerInfo}>
           <View style={viewStyle}>
             <Text style={textStyle}>{this.nickname + '|' + this.account_id}</Text> 
           </View>
@@ -25,9 +24,8 @@ class SearchResultCell extends React.PureComponent {
     )
   }
 
-  wows_number = () => {
-    let url = WoWsNumbers.getWebsiteUrl(this.nickname, this.account_id);
-    Actions.InAppBrowser({title: this.nickname, link: url});  
+  playerInfo = () => {
+    Actions.PlayerScreen({title: this.account_id});
   }
 }
 

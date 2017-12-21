@@ -41,6 +41,10 @@ let strings = new LocalizedStrings({
     app_language: 'Change App language',
     news_language: 'Change News language',
     change_theme: 'Change theme colour',
+    // Ratio
+    kill_death_ratio: 'K/D Ratio',
+    survival_rate: 'Survival Rate',
+    average_frag: 'Average Frag',
   },
   zh: {
     // Game Update
@@ -82,6 +86,10 @@ let strings = new LocalizedStrings({
     app_language: '改变APP语言',
     news_language: '改变最新消息语言',
     change_theme: '改变主题颜色',
+    // Ratio
+    kill_death_ratio: '杀死比',
+    survival_rate: '生存比',
+    average_frag: '平均击杀',
   },
   'zh-tw': {
     // Game Update
