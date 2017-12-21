@@ -43,8 +43,6 @@ class PlayerTab extends React.PureComponent {
     'rank': placeholder,
   });
 
-  
-
   render() {
     return (
       <TabViewAnimated
