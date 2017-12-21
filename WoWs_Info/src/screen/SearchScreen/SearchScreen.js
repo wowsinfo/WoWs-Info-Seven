@@ -53,7 +53,7 @@ class SearchScreen extends React.PureComponent {
         request.Search().then(result => {
           this.setState({
             data: result,
-          })
+          }, Keyboard.dismiss)
         })
       }, 1250);
     }
