@@ -7,6 +7,10 @@ export * from './common/WoWsTouchable';
 // News
 export * from './News/NewsCell';
 
+// Player
+export * from './PlayerInfo/Info3Cell.js';
+export * from './PlayerInfo/Basic8Cell.js';
+
 // Wiki Cell
 export * from './Wiki/Cell/WikiCell';
 export * from './Wiki/Cell/Basic/BasicCell';
