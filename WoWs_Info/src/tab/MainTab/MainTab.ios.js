@@ -4,7 +4,6 @@ import { WikiScreen, NewsScreen, SettingsScreen } from '../../screen';
 import strings from '../../localization';
 
 class MainTab extends React.PureComponent {
-
   constructor(props) {
     super(props);
     this.state = {selectedTab: 'News'};
