@@ -22,3 +22,6 @@ export * from './WikiScreen/Basic/ConsumableScreen';
 export * from './WikiScreen/Map/MapScreen';
 export * from './WikiScreen/Map/MapDetailScreen';
 export * from './WikiScreen/Ship/ShipScreen';
+
+// Player
+export * from './PlayerScreen/BasicInfoScreen';

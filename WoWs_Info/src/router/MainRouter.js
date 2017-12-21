@@ -3,7 +3,7 @@ import { StyleSheet, Platform } from 'react-native';
 import { Router, Scene, Actions } from 'react-native-router-flux';
 import { SearchButton, PlayerOnlineButton } from '../component';
 import { SearchScreen, PlayerOnlineScreen, AchievementScreen, CommanderScreen, ConsumableScreen, MapScreen, ShipScreen, WikiDetailScreen, NewsScreen, InAppBrowser, MapDetailScreen } from '../screen';
-import { MainTab } from '../tab/';
+import { MainTab, PlayerTab } from '../tab/';
 import strings from '../localization';
 import { Icon } from 'react-native-elements';
 import { ThemeScreen } from '../screen/SettingsScreen/ThemeScreen';
@@ -25,6 +25,7 @@ class MainRouter extends Component {
           <Scene key='MainScreen' {...this.props} title={appTitle} component={MainTab} navigationBarStyle={{backgroundColor: global.themeColour, elevation: 0}}
             renderRightButton={ <SearchButton onPress={() => Actions.SearchScreen()}/> }
             renderLeftButton={ <PlayerOnlineButton onPress={() => Actions.PlayerOnlineScreen()}/> } />
+          <Scene key='PlayerScreen' component={PlayerTab} navigationBarStyle={{backgroundColor: global.themeColour, elevation: 0}}/>
 
           <Scene key='SearchScreen' component={SearchScreen} title=''/>
           <Scene key='NewsScreen' component={NewsScreen}/>          
