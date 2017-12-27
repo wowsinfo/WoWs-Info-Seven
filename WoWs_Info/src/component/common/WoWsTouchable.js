@@ -1,8 +1,8 @@
 import React from 'react';
-import { TouchableNativeFeedback, TouchableWithoutFeedback, Platform } from 'react-native';
+import { TouchableNativeFeedback, TouchableOpacity, Platform } from 'react-native';
 
 // Only Android has native feedback
-const Touchable = (Platform.OS == 'android') ? TouchableNativeFeedback : TouchableWithoutFeedback;
+const Touchable = (Platform.OS == 'android') ? TouchableNativeFeedback : TouchableOpacity;
 
 class WoWsTouchable extends React.PureComponent {
   render() {

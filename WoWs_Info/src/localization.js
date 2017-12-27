@@ -43,8 +43,8 @@ let strings = new LocalizedStrings({
     change_theme: 'Change theme colour',
     // Ratio
     kill_death_ratio: 'K/D Ratio',
-    survival_rate: 'Survival Rate',
-    average_frag: 'Average Frag',
+    survival_rate: 'Survival\nRate',
+    average_frag: 'Average\nFrag',
     // PlayerInfo
     achievement_tab: 'Achievement',
     graph_tab: 'Graph',
