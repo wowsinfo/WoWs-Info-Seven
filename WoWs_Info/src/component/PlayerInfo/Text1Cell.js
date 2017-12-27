@@ -6,7 +6,7 @@ class Text1Cell extends React.PureComponent {
     const { name, text } = this.props;
     return (
       <View style={viewStyle}>
-        <Text style={nameStyle}>{name}</Text>
+        <Text numberOfLines={2} style={nameStyle}>{name}</Text>
         <Text style={textStyle}>{text}</Text>
       </View>
     )
@@ -15,7 +15,7 @@ class Text1Cell extends React.PureComponent {
 
 const styles = StyleSheet.create({
   nameStyle: {
-    fontSize: 20,
+    fontSize: 16,
     textAlign: 'center',
   },
   textStyle: {

@@ -38,7 +38,7 @@ class PlayerTab extends React.PureComponent {
   renderScene = SceneMap({
     'achievement': placeholder,
     'graph': placeholder,
-    'basic': BasicInfoScreen,
+    'basic': () => <BasicInfoScreen {...this.props}/>,
     'ship': placeholder,
     'rank': placeholder,
   });

@@ -29,7 +29,7 @@ class PlayerTab extends React.PureComponent {
         <TabBarIOS.Item icon={require('../../img/User.png')} title={strings.basic_tab}
           selected={this.state.selectedTab === 'User'}
           onPress={() => this.setTab('User')}>
-          <BasicInfoScreen />
+          <BasicInfoScreen {...this.props}/>
         </TabBarIOS.Item>
         <TabBarIOS.Item icon={require('../../img/Ship.png')} title={strings.warship_tab}
           selected={this.state.selectedTab === 'Ship'}
