@@ -1,6 +1,7 @@
 import React from 'react';
-import { Text, View, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { FadeInView } from '../../Animation';
 import { WoWsLoading, OnlineGroup } from '../../component';
 import { PlayerOnline } from '../../core/';
 import strings from '../../localization';
@@ -33,13 +34,15 @@ class PlayerOnlineScreen extends React.PureComponent {
     if (this.state.isReady) {
       return (
         <View style={viewStyle}>
-          <ScrollView contentContainerStyle={scrollViewStyle}>
-            <OnlineGroup title={strings.russia} info={this.ru}/>
-            <OnlineGroup title={strings.europe} info={this.eu}/>         
-            <Text style={[textStyle, {color: global.themeColour}]}>{this.total}</Text>
-            <OnlineGroup title={strings.north_america} info={this.na}/>
-            <OnlineGroup title={strings.asia} info={this.asia}/>
-          </ScrollView>
+          <FadeInView>
+            <ScrollView contentContainerStyle={scrollViewStyle}>
+              <OnlineGroup title={strings.russia} info={this.ru}/>
+              <OnlineGroup title={strings.europe} info={this.eu}/>         
+              <Text style={[textStyle, {color: global.themeColour}]}>{this.total}</Text>
+              <OnlineGroup title={strings.north_america} info={this.na}/>
+              <OnlineGroup title={strings.asia} info={this.asia}/>
+            </ScrollView>
+          </FadeInView>
         </View>
       )
     } else {
