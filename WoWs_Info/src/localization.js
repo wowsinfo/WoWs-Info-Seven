@@ -45,6 +45,12 @@ let strings = new LocalizedStrings({
     kill_death_ratio: 'K/D Ratio',
     survival_rate: 'Survival Rate',
     average_frag: 'Average Frag',
+    // PlayerInfo
+    achievement_tab: 'Achievement',
+    graph_tab: 'Graph',
+    basic_tab: 'Basic',
+    warship_tab: 'Warship',
+    rank_tab: 'Rank',
   },
   zh: {
     // Game Update
@@ -90,6 +96,12 @@ let strings = new LocalizedStrings({
     kill_death_ratio: '杀死比',
     survival_rate: '生存比',
     average_frag: '平均击杀',
+    // PlayerInfo
+    achievement_tab: '成就',
+    graph_tab: '图表',
+    basic_tab: '基本',
+    warship_tab: '战舰',
+    rank_tab: '排位',
   },
   'zh-tw': {
     // Game Update
