@@ -54,6 +54,7 @@ class SearchScreen extends React.PureComponent {
           this.setState({
             data: result,
           }, Keyboard.dismiss)
+          // Scroll to top for new results
           this.refs.listRef.scrollToOffset({animated: true, offset: 0});
         })
       }, 1250);
