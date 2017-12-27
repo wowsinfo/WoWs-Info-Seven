@@ -31,7 +31,7 @@ class SearchScreen extends React.PureComponent {
         return (
           <SafeAreaView>
             <FlatList data={this.state.data} keyExtractor={this.keyExtractor} onScrollBeginDrag={Keyboard.dismiss}
-              renderItem={({item}) => <SearchResultCell data={item}/>}/>
+              renderItem={({item}) => <SearchResultCell data={item}/>} ref='listRef'/>
           </SafeAreaView>
         )
       }
@@ -54,6 +54,7 @@ class SearchScreen extends React.PureComponent {
           this.setState({
             data: result,
           }, Keyboard.dismiss)
+          this.refs.listRef.scrollToOffset({animated: true, offset: 0});
         })
       }, 1250);
     }
