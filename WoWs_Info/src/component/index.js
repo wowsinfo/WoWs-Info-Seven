@@ -8,8 +8,9 @@ export * from './common/WoWsTouchable';
 export * from './News/NewsCell';
 
 // Player
-export * from './PlayerInfo/Info3Cell.js';
-export * from './PlayerInfo/Basic8Cell.js';
+export * from './PlayerInfo/Info3Cell';
+export * from './PlayerInfo/Basic8Cell';
+export * from './PlayerInfo/RecordCell';
 
 // Wiki Cell
 export * from './Wiki/Cell/WikiCell';

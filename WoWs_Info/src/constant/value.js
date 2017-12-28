@@ -7,6 +7,8 @@ export const API = {
   PlayerOnline: 'https://api.worldoftanks.{0}/wgn/servers/info/?application_id=' + ApplicationID + '&fields=players_online&game=wows',
   News: 'https://worldofwarships.{0}/',
   PlayerSearch: 'https://api.worldofwarships.{0}/wows/account/list/?application_id=' + ApplicationID + '&search=',
+  PlayerInfo: 'https://api.worldofwarships.{0}/wows/account/info/?application_id=' + ApplicationID + '&account_id=',
+  CreatedAt: 'https://api.worldoftanks.{0}/wgn/account/list/?application_id=' + ApplicationID + '&fields=created_at&search=',
 }
 
 export const DataAPI = {

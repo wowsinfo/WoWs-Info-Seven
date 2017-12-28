@@ -10,7 +10,7 @@ let strings = new LocalizedStrings({
     // Date
     today: 'Today',
     yesterday: 'Yesterday',
-    days_ago: ' days ago',
+    days_ago: ' Days',
     // Server
     russia: 'RU',
     europe: 'EU',
@@ -51,6 +51,20 @@ let strings = new LocalizedStrings({
     basic_tab: 'Basic',
     warship_tab: 'Warship',
     rank_tab: 'Rank',
+    // Basic Info
+    set_as_main: 'Set as Main',
+    xxx_days: ' Days',
+    level_xxx: 'Lv ',
+    // Record Info
+    max_damage: 'Max damage dealt',
+    max_exp: 'Max experienced gained',
+    max_kill: 'Max kills in a battle',
+    max_plane: 'Max planes killed',
+    max_main_battery: 'Main Battery',
+    max_secondary: 'Secondary Battery',
+    max_torpedo: 'Torpedoes',
+    max_ramming: 'Ramming',
+    max_aircraft: 'Aircraft',
   },
   zh: {
     // Game Update
@@ -102,6 +116,20 @@ let strings = new LocalizedStrings({
     basic_tab: '基本',
     warship_tab: '战舰',
     rank_tab: '排位',
+    // Basic Info
+    set_as_main: '设为主账号',
+    xxx_days: ' 天',
+    level_xxx: '等级 ',
+    // Record Info
+    max_damage: '最高伤害',
+    max_exp: '最多获得经验',
+    max_kill: '最多击杀',
+    max_plane: '最大飞机击落',
+    max_main_battery: '主炮击杀',
+    max_secondary: '副炮击杀',
+    max_torpedo: '鱼雷击杀',
+    max_ramming: '碰撞击杀',
+    max_aircraft: '飞机击杀',
   },
   'zh-tw': {
     // Game Update

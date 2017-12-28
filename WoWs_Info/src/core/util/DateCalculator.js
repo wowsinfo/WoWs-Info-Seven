@@ -10,6 +10,7 @@ class DateCalculator {
   static diffDate(dateBefore, dateAfter) {
     let before = new Date(dateBefore);
     let after = new Date(dateAfter);
+    console.log(before, after);
     let diff = after.getTime() - before.getTime();
     return Math.ceil(diff / (1000 * 3600 * 24));
   }
