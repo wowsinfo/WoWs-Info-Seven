@@ -15,10 +15,10 @@ class Basic8Cell extends React.PureComponent {
         <Info3Cell info={info}/>
         <View style={subViewStyle}>
           <Image1Cell image={require('../../img/EXP.png')} text={info.exp}/>
-          <Image1Cell image={require('../../img/HitRatio.png')} text={info.hitratio}/>
+          <Image1Cell image={require('../../img/HitRatio.png')} text={info.hitratio + '%'}/>
         </View>
         <View style={subViewStyle}>
-          <Text1Cell name={strings.survival_rate} text={info.survival}/>
+          <Text1Cell name={strings.survival_rate} text={info.survival + '%'}/>
           <Image1Cell image={require('../../img/KillDeathRatio.png')} text={info.killdeath}/>          
           <Text1Cell name={strings.average_frag} text={info.frag}/>
         </View>
