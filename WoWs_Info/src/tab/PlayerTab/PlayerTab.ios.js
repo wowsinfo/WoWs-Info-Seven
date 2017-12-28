@@ -1,6 +1,6 @@
 import React from 'react';
 import { TabBarIOS, View } from 'react-native';
-import { BasicInfoScreen } from '../../screen';
+import { BasicInfoScreen, ShipInfoScreen } from '../../screen';
 import strings from '../../localization';
 
 class PlayerTab extends React.PureComponent {
@@ -34,7 +34,7 @@ class PlayerTab extends React.PureComponent {
         <TabBarIOS.Item icon={require('../../img/Ship.png')} title={strings.warship_tab}
           selected={this.state.selectedTab === 'Ship'}
           onPress={() => this.setTab('Ship')}>
-          <View />
+          <ShipInfoScreen {...this.props}/>
         </TabBarIOS.Item>
         <TabBarIOS.Item icon={require('../../img/Rank.png')} title={strings.rank_tab}
           selected={this.state.selectedTab === 'Rank'}

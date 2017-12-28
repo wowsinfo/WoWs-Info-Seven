@@ -55,6 +55,7 @@ let strings = new LocalizedStrings({
     set_as_main: 'Set as Main',
     xxx_days: ' Days',
     level_xxx: 'Lv ',
+    never_judge_by_stat: 'Please do not judge others by stats',
     // Record Info
     max_damage: 'Max damage dealt',
     max_exp: 'Max experienced gained',
@@ -65,6 +66,15 @@ let strings = new LocalizedStrings({
     max_torpedo: 'Torpedoes',
     max_ramming: 'Ramming',
     max_aircraft: 'Aircraft',
+    // Personal Rating
+    improvement_needed: 'Improvement Needed',
+    below_average: 'Below Average',
+    average: 'Average',
+    good: 'Good',
+    very_good: 'Very Good',
+    great: 'Great',
+    unicum: 'Unicum',
+    super_unicum: 'Super Unicum',
   },
   zh: {
     // Game Update
@@ -120,6 +130,7 @@ let strings = new LocalizedStrings({
     set_as_main: '设为主账号',
     xxx_days: ' 天',
     level_xxx: '等级 ',
+    never_judge_by_stat: '请不要用数据来评价玩家',    
     // Record Info
     max_damage: '最高伤害',
     max_exp: '最多获得经验',
@@ -130,6 +141,15 @@ let strings = new LocalizedStrings({
     max_torpedo: '鱼雷击杀',
     max_ramming: '碰撞击杀',
     max_aircraft: '飞机击杀',
+    // Personal Rating
+    improvement_needed: '还需努力',
+    below_average: '低于平均值',
+    average: '平均水平',
+    good: '不错',
+    very_good: '非常好',
+    great: '很棒',
+    unicum: 'Unicum',
+    super_unicum: 'Super Unicum',
   },
   'zh-tw': {
     // Game Update

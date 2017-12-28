@@ -49,13 +49,13 @@ class SearchScreen extends React.PureComponent {
     else {
       clearTimeout(SearchTimer);
       SearchTimer = setTimeout(() => {
+        // Scroll to top for new results
+        this.refs.listRef.scrollToOffset({animated: true, offset: 0});
         let request = new PlayerSearch(global.server, input);
         request.Search().then(result => {
           this.setState({
             data: result,
           }, Keyboard.dismiss)
-          // Scroll to top for new results
-          this.refs.listRef.scrollToOffset({animated: true, offset: 0});
         })
       }, 1250);
     }

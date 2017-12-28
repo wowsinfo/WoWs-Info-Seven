@@ -69,34 +69,42 @@ class PlayerInfo {
       let max_damage = {};
       max_damage.title = strings.max_damage;
       ship = shipJson[pvp.max_damage_dealt_ship_id];
-      max_damage.name = ship.name;
-      max_damage.image = ship.images.small;
-      max_damage.number = pvp.max_damage_dealt;
-      record.push(max_damage);
+      if (ship != null) {
+        max_damage.name = ship.name;
+        max_damage.image = ship.images.small;
+        max_damage.number = pvp.max_damage_dealt;
+        record.push(max_damage);
+      }
       // Max EXP
       let max_exp = {};
       max_exp.title = strings.max_exp;
       ship = shipJson[pvp.max_xp_ship_id];
-      max_exp.name = ship.name;
-      max_exp.image = ship.images.small;
-      max_exp.number = pvp.max_xp;
-      record.push(max_exp);
+      if (ship != null) {
+        max_exp.name = ship.name;
+        max_exp.image = ship.images.small;
+        max_exp.number = pvp.max_xp;
+        record.push(max_exp);
+      }
       // Max Kill
       let max_kill = {};
       max_kill.title = strings.max_kill;
       ship = shipJson[pvp.max_frags_ship_id];
-      max_kill.name = ship.name;
-      max_kill.image = ship.images.small;
-      max_kill.number = pvp.max_frags_battle;
-      record.push(max_kill);
+      if (ship != null) {
+        max_kill.name = ship.name;
+        max_kill.image = ship.images.small;
+        max_kill.number = pvp.max_frags_battle;
+        record.push(max_kill);
+      }
       // Max Plane
       let max_plane = {};
       max_plane.title = strings.max_plane;
       ship = shipJson[pvp.max_planes_killed_ship_id];
-      max_plane.name = ship.name;
-      max_plane.image = ship.images.small;
-      max_plane.number = pvp.max_planes_killed;
-      record.push(max_plane);
+      if (ship != null) {
+        max_plane.name = ship.name;
+        max_plane.image = ship.images.small;
+        max_plane.number = pvp.max_planes_killed;
+        record.push(max_plane);
+      }
       return record;
     }
   }

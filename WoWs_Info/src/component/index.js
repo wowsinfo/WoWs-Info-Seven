@@ -11,6 +11,7 @@ export * from './News/NewsCell';
 export * from './PlayerInfo/Info3Cell';
 export * from './PlayerInfo/Basic8Cell';
 export * from './PlayerInfo/RecordCell';
+export * from './PlayerInfo/ShipInfoCell';
 
 // Wiki Cell
 export * from './Wiki/Cell/WikiCell';
