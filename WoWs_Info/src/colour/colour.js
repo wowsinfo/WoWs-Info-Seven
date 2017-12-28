@@ -11,3 +11,14 @@ export const WoWsInfo = {
   orange: '#FA963C',
   black: '#39393E',
 }
+
+export const PersonalRating = {
+  ImprovementNeeded: 'red',
+  BelowAverage: 'orange',
+  Average: '#FFC71F',
+  Good: 'green',
+  VeryGood: '#009E39',
+  Great: 'cyan',
+  Unicum: 'magenta',
+  SuperUnicum: 'purple',
+}
