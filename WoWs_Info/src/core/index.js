@@ -12,3 +12,4 @@ export * from './news/NewsParser';
 
 export * from './PlayerOnline';
 export * from './player/PlayerSearch';
+export * from './player/PlayerInfo';
