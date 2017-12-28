@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Dimensions, Settings, Image } from 'react-native';
-import { BasicInfoScreen } from '../../screen';
+import { BasicInfoScreen, ShipInfoScreen } from '../../screen';
 import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
 import strings from '../../localization';
 
@@ -39,7 +39,7 @@ class PlayerTab extends React.PureComponent {
     'achievement': placeholder,
     'graph': placeholder,
     'basic': () => <BasicInfoScreen {...this.props}/>,
-    'ship': placeholder,
+    'ship': () => <ShipInfoScreen {...this.props}/>,
     'rank': placeholder,
   });
 
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
   },
   tabStyle: {
     backgroundColor: 'transparent',
-    height: 36,
+    height: 50,
     padding: 0,
     margin: 0,
   },
