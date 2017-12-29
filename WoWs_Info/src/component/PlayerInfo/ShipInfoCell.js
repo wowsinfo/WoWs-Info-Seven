@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, Image } from 'react-native';
 import { WoWsTouchable } from '../../component';
 import { PersonalRating, ShipManager } from '../../core';
+import { Actions } from 'react-native-router-flux';
 import { styles } from './ShipInfoCellStyles';
 import { Info3Cell } from './Info3Cell';
 
@@ -23,15 +24,22 @@ class ShipInfoCell extends React.PureComponent {
     } else this.tierName += shipInfo.name;
     return (
       <View style={[mainViewStyle, {borderColor: shipColour}]}>
-        <WoWsTouchable>
-          <View style={subViewStyle}>
-            <Image resizeMode='contain' source={shipType} style={[imageStyle, {tintColor: global.themeColour}]}/>
-            <Text style={textStyle}>{this.tierName}</Text>
+        <WoWsTouchable onPress={this.gotoShipDetail}>
+          <View>
+            <View style={subViewStyle}>
+              <Image resizeMode='contain' source={shipType} style={[imageStyle, {tintColor: global.themeColour}]}/>
+              <Text style={textStyle}>{this.tierName}</Text>
+            </View>
+            <Info3Cell info={{battle: battle, winrate: win_rate, damage: avg_damage}}/>
           </View>
-          <Info3Cell info={{battle: battle, winrate: win_rate, damage: avg_damage}}/>
         </WoWsTouchable>
       </View>
     )
+  }
+
+  gotoShipDetail = () => {
+    const { info } = this.props;
+    Actions.ShipDetailScreen({title: info.ship_id, info: info})
   }
 
   getShipInfo(id) {
