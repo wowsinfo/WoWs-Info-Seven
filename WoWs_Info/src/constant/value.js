@@ -9,7 +9,7 @@ export const API = {
   PlayerSearch: 'https://api.worldofwarships.{0}/wows/account/list/?application_id=' + ApplicationID + '&search=',
   PlayerInfo: 'https://api.worldofwarships.{0}/wows/account/info/?application_id=' + ApplicationID + '&account_id=',
   CreatedAt: 'https://api.worldoftanks.{0}/wgn/account/list/?application_id=' + ApplicationID + '&fields=created_at&search=',
-  ShipInfo: 'https://api.worldofwarships.{0}/wows/ships/stats/?application_id=' + ApplicationID + '&fields=pvp.max_planes_killed%2Cpvp.damage_dealt%2Cpvp.wins%2Cpvp.max_damage_dealt%2Cpvp.ramming%2Cpvp.torpedoes%2Cpvp.aircraft%2Cpvp.frags%2Cpvp.battles%2Cpvp.max_xp%2Cpvp.survived_battles%2Cbattles%2Cship_id%2Cpvp.max_frags_battle%2Cpvp.main_battery%2Cpvp.second_battery%2Cpvp.xp&account_id=',
+  ShipInfo: 'https://api.worldofwarships.{0}/wows/ships/stats/?application_id=' + ApplicationID + '&fields=pvp.max_planes_killed%2Cpvp.damage_dealt%2Cpvp.wins%2Cpvp.max_damage_dealt%2Cpvp.ramming%2Cpvp.torpedoes%2Cpvp.aircraft%2Cpvp.frags%2Cpvp.battles%2Cpvp.max_xp%2Cpvp.survived_battles%2Cship_id%2Cpvp.max_frags_battle%2Cpvp.main_battery%2Cpvp.second_battery%2Cpvp.xp&account_id=',
 }
 
 export const DataAPI = {

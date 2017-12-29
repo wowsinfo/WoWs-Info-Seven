@@ -12,7 +12,7 @@ export const WoWsInfo = {
   black: '#39393E',
 }
 
-export const PersonalRating = {
+export const PR = {
   ImprovementNeeded: 'red',
   BelowAverage: 'orange',
   Average: '#FFC71F',

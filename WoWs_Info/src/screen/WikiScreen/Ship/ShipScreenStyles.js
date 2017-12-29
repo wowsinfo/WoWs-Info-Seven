@@ -20,5 +20,5 @@ export const styles = StyleSheet.create({
   dropdownTextStyle: {
     fontSize: 16,
     textAlign: 'center',
-  }
+  },
 })
