@@ -13,12 +13,14 @@ class ShipInfoScreen extends React.PureComponent {
   constructor(props) {
     super();
     // Get nation and tyle list
-    this.json = global.encyclopediaJson;    
+    this.json = global.encyclopediaJson;  
+    this.shipType = global.shipTypeJson;  
     var nation = [];
     for (key in this.json.ship_nations) nation.push(this.json.ship_nations[key]);
     this.nation = nation;
     var type = [];
-    for (key in this.json.ship_types) type.push(this.json.ship_types[key]);
+    for (key in this.shipType) type.push(this.shipType[key]);
+    console.log(this.shipType);
     this.type = type;
     this.filter = {name: '', nation: '', type: ''};
 
@@ -133,8 +135,8 @@ class ShipInfoScreen extends React.PureComponent {
 
   filterType = (index, value) => {
     // Find key
-    for (key in this.json.ship_types) {
-      let type = this.json.ship_types[key];
+    for (key in this.shipType) {
+      let type = this.shipType[key];
       if (value == type) {
         // This is the key we want
         this.filter.type = key; 
