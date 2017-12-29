@@ -11,7 +11,7 @@ class DataStorage {
     try {
       // Setting up Data here      
       let first = await store.get(localDataName.firstLaunch);
-      if (first == null) {
+      if (first != null) {
         console.log('First Launch\nWelcome to WoWs Info >_<');
         await DataStorage.setupLocalStorage();
         await DataStorage.restoreData();
@@ -155,6 +155,7 @@ class DataStorage {
     global.achievementJson = await store.get(savedDataName.achievement);
     global.consumableJson = await store.get(savedDataName.consumable);
     global.encyclopediaJson = await store.get(savedDataName.encyclopedia);
+    global.shipTypeJson = await store.get(savedDataName.shipType);
     global.warshipJson = await store.get(savedDataName.warship);
     global.commanderSkillJson = await store.get(savedDataName.commanderSkill);
     global.gameMapJson = await store.get(savedDataName.gameMap);
@@ -162,7 +163,7 @@ class DataStorage {
     global.personalRatingJson = await store.get(savedDataName.personalRating);
     console.log(global.languageJson, global.achievementJson, global.consumableJson, 
       global.encyclopediaJson, global.warshipJson, global.commanderSkillJson, 
-      global.gameMapJson, global.aliasJson, global.personalRatingJson);
+      global.gameMapJson, global.aliasJson, global.personalRatingJson, global.shipTypeJson);
   }
 }
 

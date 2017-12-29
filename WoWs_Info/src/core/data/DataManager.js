@@ -8,6 +8,7 @@ class DataManager {
     // Language has to be saved in order to load other data correctly
     await DataManager.saveData(DataAPI.Language, savedDataName.language);
     await DataManager.saveData(DataAPI.Encyclopedia, savedDataName.encyclopedia);    
+    await DataManager.saveData(DataAPI.ShipType, savedDataName.shipType);    
     await DataManager.saveData(DataAPI.Achievement, savedDataName.achievement);
     await DataManager.saveData(DataAPI.CommanderSkill, savedDataName.commanderSkill);
     await DataManager.saveData(DataAPI.GameMap, savedDataName.gameMap);
@@ -62,7 +63,8 @@ class DataManager {
 
   static async saveData(dataAPIName, savedName) {
     var format = require('string-format');
-    let api = format(dataAPIName, global.serverName) + Language.getApiLangStr();
+    var api = format(dataAPIName, global.serverName);
+    if (dataAPIName != DataAPI.ShipType) api += Language.getApiLangStr();
     // console.log(savedName + '\n' + api);
     try {
       let response = await fetch(api);
@@ -90,6 +92,9 @@ class DataManager {
           case savedDataName.commanderSkill: global.commanderSkillJson = data; break;
           case savedDataName.consumable: global.consumableJson = data; break;
           case savedDataName.encyclopedia: global.encyclopediaJson = data; break;
+          case savedDataName.shipType: 
+            data = data.ship_types;
+            global.shipTypeJson = data; break;
           case savedDataName.gameMap: global.gameMapJson = data; break;
           case savedDataName.language: 
             data = data.languages;

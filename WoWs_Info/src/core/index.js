@@ -8,6 +8,7 @@ export * from './util/PlayerConverter';
 export * from './util/ServerManager';
 export * from './util/WoWsNumbers';
 export * from './util/PersonalRating';
+export * from './util/ShipManager';
 
 export * from './news/NewsParser';
 

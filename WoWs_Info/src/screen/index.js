@@ -26,3 +26,4 @@ export * from './WikiScreen/Ship/ShipScreen';
 // Player
 export * from './PlayerScreen/BasicInfoScreen';
 export * from './PlayerScreen/ShipInfoScreen';
+export * from './PlayerScreen/ShipDetailScreen';

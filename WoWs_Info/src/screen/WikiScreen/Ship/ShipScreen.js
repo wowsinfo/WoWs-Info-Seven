@@ -60,7 +60,6 @@ class ShipScreen extends React.PureComponent {
         <ModalDropdown ref={(ref) => this.nationDropdown = ref} defaultValue={strings.filter_nation} options={this.nation} onSelect={this.filterNation} textStyle={filterButtonStyle} dropdownStyle={dropdownStyle} dropdownTextStyle={dropdownTextStyle} showsVerticalScrollIndicator={false}/>
         <ModalDropdown ref={(ref) => this.typeDropdown = ref} defaultValue={strings.filter_type} options={this.type} onSelect={this.filterType} textStyle={filterButtonStyle} dropdownStyle={dropdownStyle} dropdownTextStyle={dropdownTextStyle} showsVerticalScrollIndicator={false}/>
         <ModalDropdown ref={(ref) => this.tierDropdown = ref} defaultValue={strings.filter_tier} options={this.tier} onSelect={this.filterTier} textStyle={filterButtonStyle} dropdownStyle={dropdownStyle} dropdownTextStyle={dropdownTextStyle} showsVerticalScrollIndicator={false}/>
-        <Button />
       </View>
     )
   }
