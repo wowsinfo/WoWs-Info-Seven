@@ -16,12 +16,13 @@ class ShipScreen extends React.PureComponent {
   
   componentWillMount() {
     // Format nation and type json
-    this.json = global.encyclopediaJson;    
+    this.json = global.encyclopediaJson;   
+    this.shipType = global.shipTypeJson;   
     var nation = [];
     for (key in this.json.ship_nations) nation.push(this.json.ship_nations[key]);
     this.nation = nation;
     var type = [];
-    for (key in this.json.ship_types) type.push(this.json.ship_types[key]);
+    for (key in this.shipType) type.push(this.shipType[key]);
     this.type = type;
     this.tier = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];  
     this.filter = {tier: '', nation: '', type: ''};  
@@ -94,8 +95,8 @@ class ShipScreen extends React.PureComponent {
 
   filterType = (index, value) => {
     // Find key
-    for (key in this.json.ship_types) {
-      let type = this.json.ship_types[key];
+    for (key in this.shipType) {
+      let type = this.shipType[key];
       if (value == type) {
         // This is the key we want
         this.filter.type = key; 
