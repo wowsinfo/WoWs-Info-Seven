@@ -6,14 +6,14 @@ export const styles = StyleSheet.create({
   },
   ratingStyle: {
     textAlign: 'center',
-    fontSize: 32,
+    fontSize: 24,
     fontWeight: 'bold',
     margin: 4,
   },
   filterViewStyle: { 
     flexDirection: 'row', 
     alignItems: 'center', 
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   filterButtonStyle: {
     fontSize: 16,
@@ -42,4 +42,16 @@ export const styles = StyleSheet.create({
     margin: 0,
     backgroundColor: 'transparent',
   },
+  footerViewStyle: {
+    flex: 1,
+    flexDirection: 'row',
+    marginBottom: 20,
+  },
+  poweredStyle: {
+    flex: 0.9,
+  },
+  totalShipStyle: {
+    flex: 0.1,
+    alignItems: 'flex-end',
+  }
 })

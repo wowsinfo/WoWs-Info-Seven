@@ -75,6 +75,7 @@ let strings = new LocalizedStrings({
     great: 'Great',
     unicum: 'Unicum',
     super_unicum: 'Super Unicum',
+    powered_by_number: 'Powered by wows-numbers.com',
   },
   zh: {
     // Game Update
@@ -150,6 +151,7 @@ let strings = new LocalizedStrings({
     great: '很棒',
     unicum: 'Unicum',
     super_unicum: 'Super Unicum',
+    powered_by_number: '数据由wows-numbers.com提供',    
   },
   'zh-tw': {
     // Game Update
