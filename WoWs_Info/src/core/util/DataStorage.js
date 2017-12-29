@@ -11,7 +11,7 @@ class DataStorage {
     try {
       // Setting up Data here      
       let first = await store.get(localDataName.firstLaunch);
-      if (first != null) {
+      if (first == null) {
         console.log('First Launch\nWelcome to WoWs Info >_<');
         await DataStorage.setupLocalStorage();
         await DataStorage.restoreData();
