@@ -25,6 +25,7 @@ global.languageJson = {};
 global.achievementJson = {};
 global.consumableJson = {};
 global.encyclopediaJson = {};
+global.shipTypeJson = {};
 global.warshipJson = {};
 global.commanderSkillJson = {};
 global.gameMapJson = {};
