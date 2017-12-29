@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
   },
   tabStyle: {
     backgroundColor: 'transparent',
-    height: 50,
+    height: 40,
     padding: 0,
     margin: 0,
   },
