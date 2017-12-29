@@ -1,10 +1,10 @@
 import strings from '../../localization';
-import { PersonalRating } from '../../colour/colour';
+import { PR } from '../../colour/colour';
 
 class PersonalRating {
-  constructor(id, battle, damage, frag, win) {
-    let ship = global.personalRatingJson[id];
-    if (ship == null) {
+  constructor(id, battle, damage, win, frag) {
+    this.ship = global.personalRatingJson[id];
+    if (this.ship != null) {
       // This ship id is valid
       if (battle > 0) {
         this.avg_damage = damage / battle;
@@ -20,18 +20,18 @@ class PersonalRating {
   }
 
   getRating() {
-    let rDmg = this.avg_damage / ship.average_damage_dealt;
-    let rWins = this.win_rate / ship.win_rate;
-    let rFrags = this.avg_frag / ship.average_frags;
+    let rDmg = this.avg_damage / this.ship.average_damage_dealt;
+    let rWins = this.win_rate / this.ship.win_rate;
+    let rFrags = this.avg_frag / this.ship.average_frags;
 
     let nDmg = Math.max(0, (rDmg - 0.4) / (1 - 0.4));
     let nFrags = Math.max(0, (rFrags - 0.1) / (1 - 0.1));
     let nWins = Math.max(0, (rWins - 0.7) / (1 - 0.7));
 
-    return 700 * nDMG + 300 * nFrags + 150 * nWins;
+    return 700 * nDmg + 300 * nFrags + 150 * nWins;
   }
 
-  getIndex(pr) {
+  static getIndex(pr) {
     if (pr < 750) return 0;
     if (pr < 1100) return 1;
     if (pr < 1350) return 2;
@@ -42,14 +42,26 @@ class PersonalRating {
     return 7;
   }
 
-  getColour(index) {
-    let colour = [PersonalRating.ImprovementNeeded, PersonalRating.BelowAverage, PersonalRating.Average, PersonalRating.Good, PersonalRating.VeryGood, PersonalRating.Great, PersonalRating.Unicum, PersonalRating.SuperUnicum];
+  static getColour(index) {
+    let colour = [PR.ImprovementNeeded, PR.BelowAverage, PR.Average, PR.Good, PR.VeryGood, PR.Great, PR.Unicum, PR.SuperUnicum];
     return colour[index];
   }
 
-  getComment(index) {
+  static getComment(index) {
     let comment = [strings.improvement_needed, strings.below_average, strings.average, strings.good, strings.very_good, strings.great, strings.unicum, strings.super_unicum];
     return comment[index];
+  }
+
+  static getTotalRating(dmg, avg_dmg, win, avg_win, frag, avg_frag) {
+    let rDmg = dmg / avg_dmg;
+    let rWins = win / avg_win;
+    let rFrags = frag / avg_frag;
+
+    let nDmg = Math.max(0, (rDmg - 0.4) / (1 - 0.4));
+    let nFrags = Math.max(0, (rFrags - 0.1) / (1 - 0.1));
+    let nWins = Math.max(0, (rWins - 0.7) / (1 - 0.7));
+
+    return 700 * nDmg + 300 * nFrags + 150 * nWins;
   }
 }
 
