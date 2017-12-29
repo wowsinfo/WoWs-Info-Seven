@@ -7,16 +7,16 @@ import { Basic8Cell } from '../../component';
 class ShipDetailScreen extends React.PureComponent {
   render() {
     const { mainViewStyle, scrollViewStyle, imageStyle, shipNameStyle, ratingStyle } = styles;
-    const { index, pr, ship_id, } = this.props.info;
+    const { index, ship_id, } = this.props.info;
     let shipColour = PersonalRating.getColour(index);
     let shipComment = PersonalRating.getComment(index);
     let shipInfo = this.getShipInfo(ship_id);
     return (
       <View style={mainViewStyle}>
-        <ScrollView contentContainerStyle={scrollViewStyle}>
+        <ScrollView>
           <Image source={{uri: shipInfo.image}} style={imageStyle}/>
           <Text style={shipNameStyle}>{shipInfo.name}</Text>
-          <Text style={[ratingStyle, {color: shipColour}]}>{shipComment + ' ' + Math.round(pr)}</Text>
+          <Text style={[ratingStyle, {color: shipColour}]}>{shipComment}</Text>
           <Basic8Cell info={this.getBasic8CellInfo(this.props.info)}/>
         </ScrollView>
       </View>

@@ -1,22 +1,20 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
-const { width } = Dimensions.get('window');
-let imageWidth = width * 0.382; 
+const { width, height } = Dimensions.get('window');
+let imageHeight = height > width ? width * 0.382 : height * 0.382; 
 export const styles = StyleSheet.create({
   mainViewStyle: {
     flex: 1,
   },
-  scrollViewStyle: {
-  },
   imageStyle: {
-    width: imageWidth,
-    height: imageWidth / 1.697,
+    width: imageHeight * 1.697,
+    height: imageHeight,
     alignSelf: 'center',
   },
   shipNameStyle: {
     textAlign: 'center',
     fontSize: 20,
-    fontWeight: '200',
+    fontWeight: '300',
     margin: 4,
   },
   ratingStyle: {

@@ -20,7 +20,6 @@ class ShipInfoScreen extends React.PureComponent {
     this.nation = nation;
     var type = [];
     for (key in this.shipType) type.push(this.shipType[key]);
-    console.log(this.shipType);
     this.type = type;
     this.filter = {name: '', nation: '', type: ''};
 
@@ -42,7 +41,6 @@ class ShipInfoScreen extends React.PureComponent {
         }
         // Sort by  rating
         shipInfo.sort(function (a, b) {return b.pr - a.pr;})
-        console.log(shipInfo);
         this.shipInfo = shipInfo;
         this.overall = json.overall;
         this.setState({
