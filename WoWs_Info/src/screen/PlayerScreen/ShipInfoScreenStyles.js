@@ -34,5 +34,12 @@ export const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     textAlign: 'center',
-  }
+  },
+  resetBtnStyle: {
+    height: 30, 
+    width: 30,
+    padding: 0,
+    margin: 0,
+    backgroundColor: 'transparent',
+  },
 })
