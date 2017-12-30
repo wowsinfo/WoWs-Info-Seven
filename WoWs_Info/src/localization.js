@@ -56,6 +56,7 @@ let strings = new LocalizedStrings({
     xxx_days: ' Days',
     level_xxx: 'Lv ',
     never_judge_by_stat: 'Please do not judge others by stats',
+    no_ship_info: 'No data >_<',
     // Record Info
     max_damage: 'Most damage dealt',
     max_exp: 'Most experienced gained',
@@ -131,7 +132,8 @@ let strings = new LocalizedStrings({
     set_as_main: '设为主账号',
     xxx_days: ' 天',
     level_xxx: '等级 ',
-    never_judge_by_stat: '请不要用数据来评价玩家',    
+    never_judge_by_stat: '请不要用数据来评价玩家',
+    no_ship_info: '没有数据 >_<',    
     // Record Info
     max_damage: '最高伤害',
     max_exp: '最多获得经验',

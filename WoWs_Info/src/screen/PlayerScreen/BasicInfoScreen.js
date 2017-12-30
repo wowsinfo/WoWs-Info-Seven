@@ -45,7 +45,7 @@ class BasicInfoScreen extends React.PureComponent {
     if (this.state.isReady) {
       const { id, playerName } = this.props;
       const { level, created } = this.state.info;
-      const { playerNameStyle, scrollViewStyle, mainViewStyle, playerInfoStyle, playerViewStyle} = styles;
+      const { playerNameStyle, scrollViewStyle, mainViewStyle, playerInfoStyle, playerViewStyle, dontJudgeStyle } = styles;
       return (
         <SafeAreaView style={mainViewStyle}>
           <ScrollView containerStyle={scrollViewStyle}>
@@ -55,6 +55,7 @@ class BasicInfoScreen extends React.PureComponent {
               <Text style={playerInfoStyle}>{created + ' | Lv ' + level}</Text>
             </View>
             <Basic8Cell info={this.state.info}/>
+            <Text style={dontJudgeStyle}>{strings.never_judge_by_stat}</Text>
             <Divider style={{height: 1.5, backgroundColor: global.themeColour}}/>
             { this.renderRecord(this.state.record) }
             <Divider style={{height: 1.5, backgroundColor: global.themeColour}}/>

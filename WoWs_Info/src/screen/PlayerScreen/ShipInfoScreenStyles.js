@@ -1,6 +1,16 @@
 import { StyleSheet, Platform } from 'react-native';
 
 export const styles = StyleSheet.create({
+  noInfoViewStyle: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  noInfoTextStyle: {
+    textAlign: 'center',
+    fontSize: 24,
+    fontWeight: '300',
+    margin: 8,
+  },
   mainViewStyle: {
     flex: 1,
   },

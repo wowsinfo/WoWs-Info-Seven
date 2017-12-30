@@ -54,20 +54,29 @@ class ShipInfoScreen extends React.PureComponent {
 
   render() {
     if (this.state.isReady) {
-      const { mainViewStyle, filterViewStyle, filterButtonStyle, dropdownStyle, dropdownTextStyle, inputStyle, resetBtnStyle } = styles;
-      return (
-        <View style={mainViewStyle}>
-          <View style={[filterViewStyle, {backgroundColor: global.themeColour}]}>
-            <ModalDropdown ref='nationDropdown' defaultValue={strings.filter_nation} options={this.nation} onSelect={this.filterNation} textStyle={filterButtonStyle} dropdownStyle={dropdownStyle} dropdownTextStyle={dropdownTextStyle} showsVerticalScrollIndicator={false}/>
-            <ModalDropdown ref='typeDropdown' defaultValue={strings.filter_type} options={this.type} onSelect={this.filterType} textStyle={filterButtonStyle} dropdownStyle={dropdownStyle} dropdownTextStyle={dropdownTextStyle} showsVerticalScrollIndicator={false}/>
-            <TextInput ref='filterInput' style={inputStyle} underlineColorAndroid='transparent' autoCorrect={false} 
-              autoCapitalize='none' clearButtonMode='while-editing' returnKeyType='search' onChangeText={this.onChangeText}/>
-            { this.renderResetButton() }
+      if (this.state.data.length > 0) {
+        const { mainViewStyle, filterViewStyle, filterButtonStyle, dropdownStyle, dropdownTextStyle, inputStyle, resetBtnStyle } = styles;        
+        return (
+          <View style={mainViewStyle}>
+            <View style={[filterViewStyle, {backgroundColor: global.themeColour}]}>
+              <ModalDropdown ref='nationDropdown' defaultValue={strings.filter_nation} options={this.nation} onSelect={this.filterNation} textStyle={filterButtonStyle} dropdownStyle={dropdownStyle} dropdownTextStyle={dropdownTextStyle} showsVerticalScrollIndicator={false}/>
+              <ModalDropdown ref='typeDropdown' defaultValue={strings.filter_type} options={this.type} onSelect={this.filterType} textStyle={filterButtonStyle} dropdownStyle={dropdownStyle} dropdownTextStyle={dropdownTextStyle} showsVerticalScrollIndicator={false}/>
+              <TextInput ref='filterInput' style={inputStyle} underlineColorAndroid='transparent' autoCorrect={false} 
+                autoCapitalize='none' clearButtonMode='while-editing' returnKeyType='search' onChangeText={this.onChangeText}/>
+              { this.renderResetButton() }
+            </View>
+            <GridView itemDimension={300} items={this.state.data} renderHeader={this.renderHeader} contentInset={{bottom: 50}}
+              renderFooter={this.renderFooter} renderItem={item => <ShipInfoCell info={item}/>}/>
           </View>
-          <GridView itemDimension={300} items={this.state.data} renderHeader={this.renderHeader} contentInset={{bottom: 50}}
-            renderFooter={this.renderFooter} renderItem={item => <ShipInfoCell info={item}/>}/>
-        </View>
-      )
+        ) 
+      } else {
+        const { noInfoTextStyle, noInfoViewStyle } = styles;
+        return (
+          <View style={noInfoViewStyle}>
+            <Text style={noInfoTextStyle}>{strings.no_ship_info}</Text>
+          </View>
+        )
+      }
     } else return <WoWsLoading />;
   }
 
