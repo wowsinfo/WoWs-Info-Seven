@@ -37,4 +37,10 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     color: 'white'
   },
+  dontJudgeStyle: {
+    textAlign: 'center',
+    fontSize: 14,
+    fontWeight: '200',
+    marginBottom: 2,
+  }
 })

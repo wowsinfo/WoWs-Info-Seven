@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, Image, ScrollView } from 'react-native';
+import { Divider } from 'react-native-elements';
 import { PersonalRating } from '../../core';
 import { styles } from './ShipDetailScreenStyles';
 import { Basic8Cell } from '../../component';
@@ -19,6 +20,7 @@ class ShipDetailScreen extends React.PureComponent {
           <Text style={shipNameStyle}>{shipInfo.name}</Text>
           <Text style={[ratingStyle, {color: shipColour}]}>{shipComment}</Text>
           <Basic8Cell info={this.getBasic8CellInfo(this.props.info)}/>
+          <Divider style={{height: 1.5, backgroundColor: global.themeColour}}/>
           { this.renderDetailInfo(this.props.info) }
         </ScrollView>
       </View>
