@@ -3,6 +3,7 @@ import { View, Text, Image, ScrollView } from 'react-native';
 import { PersonalRating } from '../../core';
 import { styles } from './ShipDetailScreenStyles';
 import { Basic8Cell } from '../../component';
+import strings from '../../localization';
 
 class ShipDetailScreen extends React.PureComponent {
   render() {
@@ -18,6 +19,7 @@ class ShipDetailScreen extends React.PureComponent {
           <Text style={shipNameStyle}>{shipInfo.name}</Text>
           <Text style={[ratingStyle, {color: shipColour}]}>{shipComment}</Text>
           <Basic8Cell info={this.getBasic8CellInfo(this.props.info)}/>
+          { this.renderDetailInfo(this.props.info) }
         </ScrollView>
       </View>
     )
@@ -44,6 +46,46 @@ class ShipDetailScreen extends React.PureComponent {
     basicInfo.killdeath = Math.round(info.pvp.frags * 100 / death) / 100;
     basicInfo.frag = Math.round(info.pvp.frags * 100 / battle) / 100;
     return basicInfo;
+  }
+
+  renderDetailInfo(info) {
+    console.log(info);
+    var detailInfo = [];
+    let pvp = info.pvp;
+    let titleList = [strings.max_damage, strings.max_exp, strings.max_kill, strings.max_plane];
+    let dataList = [pvp.max_damage_dealt, pvp.max_xp, pvp.max_frags_battle, pvp.max_planes_killed];  
+    for (var i = 0; i < titleList.length; i++) {
+      let curr = dataList[i];
+      if (curr > 0) {
+        // Ignore it if it is zero!
+        var data = {};        
+        data.title = titleList[i];
+        data.number = curr;
+        detailInfo.push(data);
+      }
+    }  
+    let weaponTitleList = [strings.max_main_battery, strings.max_secondary, strings.max_torpedo, strings.max_ramming, strings.max_aircraft];
+    let weaponList = [pvp.main_battery, pvp.second_battery, pvp.torpedoes, pvp.ramming, pvp.aircraft];
+    for (var i = 0; i < weaponTitleList.length; i++) {
+      let curr = weaponList[i].frags;
+      if (curr > 0) {
+        // Ignore it if it is zero!
+      var data = {};        
+        data.title = weaponTitleList[i];
+        data.number = curr;
+        detailInfo.push(data);
+      }
+    }
+    
+    const { numberStyle, titleStyle, recordViewStyle } = styles;
+    return detailInfo.map((data, i) => {
+      return (
+        <View style={recordViewStyle} key={i}>
+          <Text style={titleStyle}>{data.title}</Text>
+          <Text style={numberStyle}>{data.number}</Text>
+        </View>
+      )
+    })
   }
 }
 
