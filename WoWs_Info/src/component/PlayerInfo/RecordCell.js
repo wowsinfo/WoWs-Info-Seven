@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text, Image } from 'react-native';
-import { Divider } from 'react-native-elements'; 
 import { styles } from './RecordCellStyles';
 
 class RecordCell extends React.PureComponent {
@@ -16,8 +15,7 @@ class RecordCell extends React.PureComponent {
             <Text style={nameStyle}>{name}</Text>          
           </View>
           <Text style={numberStyle}>{number}</Text>            
-        </View>
-        <Divider style={{height: 1.5, backgroundColor: global.themeColour}}/>              
+        </View>           
       </View>
     )
   }

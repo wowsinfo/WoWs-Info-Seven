@@ -3,10 +3,10 @@ import { View, Image, Text, StyleSheet } from 'react-native';
 
 class Image1Cell extends React.PureComponent {
   render() {
-    const { image, text } = this.props;
+    const { image, text, highlight } = this.props;
     return (
       <View style={viewStyle}>
-        <Image source={image} style={imageStyle} resizeMode='contain'/>
+        <Image source={image} style={[imageStyle, highlight]} resizeMode='contain'/>
         <Text style={textStyle}>{text}</Text>
       </View>
     )

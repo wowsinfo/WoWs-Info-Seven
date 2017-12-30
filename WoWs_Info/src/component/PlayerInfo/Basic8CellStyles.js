@@ -10,6 +10,6 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginTop: 16,
+    padding: 4,
   }
 })

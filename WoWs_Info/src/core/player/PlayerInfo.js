@@ -60,6 +60,34 @@ class PlayerInfo {
     }
   }
 
+  getRecordWeaponInfo(json) {
+    if (json != null) {
+      var recordWeapon = [];
+      var ship; let shipJson = global.warshipJson;
+      let pvp = json[this.id].statistics.pvp;
+      console.log(pvp);
+      let infoList = [pvp.main_battery, pvp.second_battery, pvp.torpedoes, pvp.ramming, pvp.aircraft];
+      let titleList = [strings.max_main_battery, strings.max_secondary, strings.max_torpedo, strings.max_ramming, strings.max_aircraft]
+      for (var i = 0; i < infoList.length; i++) {
+        let info = infoList[i];
+        if (info.frags > 0) {
+          // It is pointless if it is zero!
+          ship = shipJson[info.max_frags_ship_id];
+          if (ship != null) {
+            // This ship is legit
+            var entry = {};
+            entry.title = titleList[i];
+            entry.name = ship.name;
+            entry.image = ship.images.small;
+            entry.number = info.frags;
+            recordWeapon.push(entry);
+          }
+        }
+      }
+      return recordWeapon;
+    }
+  }
+
   getRecordInfo(json) {
     if (json != null) {
       var record = []; 

@@ -14,6 +14,7 @@ class BasicInfoScreen extends React.PureComponent {
       isReady: false,
       info: {},
       record: [],
+      weapon: [],
     }
   }
 
@@ -28,10 +29,13 @@ class BasicInfoScreen extends React.PureComponent {
         basic8Info.battle += ' (' + Math.round(parseFloat(basic8Info.battle) * 100 / parseFloat(info.created)) / 100 + ')';
         // Get record
         let recordInfo = player.getRecordInfo(json);
+        // Get record weapon
+        let recordWeaponInfo = player.getRecordWeaponInfo(json);
         this.setState({
           isReady: true,
           info: Object.assign({}, info, basic8Info),
           record: recordInfo,
+          weapon: recordWeaponInfo,
         })        
       });
     })
@@ -52,7 +56,9 @@ class BasicInfoScreen extends React.PureComponent {
             </View>
             <Basic8Cell info={this.state.info}/>
             <Divider style={{height: 1.5, backgroundColor: global.themeColour}}/>
-            { this.renderRecord() }
+            { this.renderRecord(this.state.record) }
+            <Divider style={{height: 1.5, backgroundColor: global.themeColour}}/>
+            { this.renderRecord(this.state.weapon) }
           </ScrollView>
         </SafeAreaView>
       )
@@ -71,8 +77,8 @@ class BasicInfoScreen extends React.PureComponent {
     )
   }
 
-  renderRecord() {
-    return this.state.record.map((data, i) => {
+  renderRecord(data) {
+    return data.map((data, i) => {
       return (
         <View key={i}>
           <RecordCell info={data}/>          

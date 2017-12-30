@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
   },
   playerNameStyle: {
     textAlign: 'center',
-    fontSize: 48,
+    fontSize: 36,
     width: '100%',
     fontWeight: '400',
     marginTop: 16,
