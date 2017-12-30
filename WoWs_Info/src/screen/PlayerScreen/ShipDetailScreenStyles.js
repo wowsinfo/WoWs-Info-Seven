@@ -24,4 +24,18 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     margin: 4,
   },
+  recordViewStyle: {
+    flex: 1,
+    margin: 8,
+  },
+  titleStyle: {
+    textAlign: 'center',
+    fontSize: 28,
+    fontWeight: '300',
+  },
+  numberStyle: {
+    textAlign: 'center',
+    fontSize: 34,
+    fontWeight: '200',
+  }
 })
