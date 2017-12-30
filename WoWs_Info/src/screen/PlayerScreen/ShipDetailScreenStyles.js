@@ -7,6 +7,7 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   imageStyle: {
+    marginTop: 8,
     width: imageHeight * 1.697,
     height: imageHeight,
     alignSelf: 'center',
