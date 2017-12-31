@@ -2,11 +2,9 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   buttonStyle: {
-    height: 30, 
-    width: 30,
-    padding: 0,
-    margin: 0,
-    backgroundColor: 'transparent',
+    margin: 16,
+    height: 40,
+    width: 40,
   },
   filterButtonStyle: {
     fontSize: 16,
@@ -21,4 +19,9 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
   },
+  numberStyle: {
+    marginLeft: 16,
+    color: 'white',
+    fontSize: 16,
+  }
 })
