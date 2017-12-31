@@ -1,12 +1,13 @@
 import React from 'react';
-import { styles, buttonIcon } from './Styles';
-import { Button } from 'react-native-elements'; 
+import { styles, sizeStyle } from './SearchButtonStyles';
+import { Icon } from 'react-native-elements'; 
 
-const { buttonStyle } = styles;
 class SearchButton extends React.PureComponent {
   render() {
+    const { buttonStyle } = styles;
     return (
-      <Button icon={buttonIcon} buttonStyle={buttonStyle} onPress={this.props.onPress}/>
+      <Icon name='search' color='white' underlayColor='transparent' size={sizeStyle}
+        type='evil-icons' containerStyle={buttonStyle} onPress={this.props.onPress}/>
     )
   }
 }
