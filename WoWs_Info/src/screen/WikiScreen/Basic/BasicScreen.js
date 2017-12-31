@@ -3,7 +3,7 @@ import GridView from 'react-native-super-grid';
 import { Actions } from 'react-native-router-flux';
 import { WoWsLoading, BasicCell } from '../../../component';
 
-class CommanderScreen extends React.PureComponent {
+class BasicScreen extends React.PureComponent {
   state = {
     isReady: false,
     data: [],
@@ -44,4 +44,4 @@ class CommanderScreen extends React.PureComponent {
   }
 }
 
-export {CommanderScreen};
+export {BasicScreen};

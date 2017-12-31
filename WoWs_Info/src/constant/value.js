@@ -21,6 +21,8 @@ export const DataAPI = {
   ShipType: 'https://api.worldofwarships.{0}/wows/encyclopedia/info/?application_id=' +  ApplicationID + '&fields=ship_types&language=en',
   Consumable: 'https://api.worldofwarships.{0}/wows/encyclopedia/consumables/?application_id=' +  ApplicationID + '&fields=type%2Cdescription%2Cname%2Cimage%2Cprice_credit%2Cprice_gold%2Cprofile.description',
   Warship: 'https://api.worldofwarships.{0}/wows/encyclopedia/ships/?application_id=' +  ApplicationID + '&fields=name%2Cnation%2Ctype%2Ctier%2Cship_id%2Cship_id_str%2Cimages.small',
+  Collection: 'https://api.worldofwarships.{0}/wows/encyclopedia/collections/?application_id=' + ApplicationID + '&fields=-card_cost%2C-tag',
+  CollectionItem: 'https://api.worldofwarships.{0}/wows/encyclopedia/collectioncards/?application_id=' + ApplicationID + '&fields=images.small%2Ccard_id%2Ccollection_id%2Cdescription%2Cname',
 }
 
 // All supported game servers
@@ -74,6 +76,8 @@ export const savedDataName = {
   shipType: '@Data:shipType',
   achievement: '@Data:achievement',
   commanderSkill: '@Data:commanderSkill',
+  collection: '@Data:collection',
+  collectionItem: '@Data:collectionItem',
   warship: '@Data:warship',
   gameMap: '@Data:gameMap',
   consumable: '@Data:consumable',

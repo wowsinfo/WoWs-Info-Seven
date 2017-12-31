@@ -14,6 +14,8 @@ class DataManager {
     await DataManager.saveData(DataAPI.GameMap, savedDataName.gameMap);
     await DataManager.saveData(DataAPI.Consumable, savedDataName.consumable);
     await DataManager.saveData(DataAPI.Warship, savedDataName.warship);
+    await DataManager.saveData(DataAPI.Collection, savedDataName.collection);
+    await DataManager.saveData(DataAPI.CollectionItem, savedDataName.collectionItem);
     // Additional information
     await DataManager.saveAlias();
     // Personal Rating
@@ -46,7 +48,6 @@ class DataManager {
           // Only Japanese ships
           var name = ship.alias;
           if (name == 'HSF 春風') name = 'HSF 晴风';
-          name += '酱';
           data[key] = name;
         } else {
           // We dont need it
@@ -85,12 +86,42 @@ class DataManager {
             }
           }
         }
+        // Simplify data
         switch (savedName) {
           case savedDataName.achievement: 
             data = data.battle;
+            for (key in data) {
+              let curr = data[key];
+              curr.key = key;
+              curr.text = curr.description; delete curr.description;
+              curr.icon = curr.image; delete curr.image;
+              curr.icon_inactive = curr.image_inactive; delete curr.image_inactive;
+            }
             global.achievementJson = data; break;
-          case savedDataName.commanderSkill: global.commanderSkillJson = data; break;
-          case savedDataName.consumable: global.consumableJson = data; break;
+          case savedDataName.commanderSkill: 
+            for (key in data) {
+              let curr = data[key];
+              curr.key = key;
+              var text = '';
+              for (var i = 0; i < curr.perks.length; i++) {
+                text += curr.perks[i].description + '\n';
+              }
+              curr.text = text; delete curr.perks;
+            }
+            global.commanderSkillJson = data; break;
+          case savedDataName.consumable: 
+            for (key in data) {
+              let curr = data[key];
+              curr.key = key;
+              curr.icon = curr.image; delete curr.image;
+              var text = curr.description + '\n\n'; delete curr.description;
+              for (info in curr.profile) {
+                text += curr.profile[info].description + '\n';
+              }
+              curr.text = text; delete curr.profile; 
+              delete curr.price_gold; delete curr.price_credit;     
+            }
+            global.consumableJson = data; break;
           case savedDataName.encyclopedia: global.encyclopediaJson = data; break;
           case savedDataName.shipType: 
             data = data.ship_types;
@@ -99,7 +130,29 @@ class DataManager {
           case savedDataName.language: 
             data = data.languages;
             global.languageJson = data; break;
-          case savedDataName.warship: global.warshipJson = data; break;
+          case savedDataName.warship: 
+            for (key in data) {
+              let curr = data[key];
+              curr.icon = curr.images.small; delete curr.images;              
+            }
+            global.warshipJson = data; break;
+          case savedDataName.collection: 
+            for (key in data) {
+              let curr = data[key];
+              curr.key = curr.collection_id; delete curr.collection_id;
+              curr.text = curr.description; delete curr.description;
+              curr.icon = curr.image; delete curr.image;
+            }
+            global.collectionJson = data; break;
+          case savedDataName.collectionItem: 
+            for (key in data) {
+              let curr = data[key];
+              curr.key = curr.card_id; delete curr.card_id;
+              curr.text = curr.description; delete curr.description;
+              curr.icon = curr.images.small; delete curr.images;
+              curr.collection = curr.collection_id; delete curr.collection_id;
+            }
+            global.collectionItemJson = data; break;
         }
         // console.log(data);
         await store.update(savedName, data);

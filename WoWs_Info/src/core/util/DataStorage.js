@@ -155,6 +155,8 @@ class DataStorage {
     global.achievementJson = await store.get(savedDataName.achievement);
     global.consumableJson = await store.get(savedDataName.consumable);
     global.encyclopediaJson = await store.get(savedDataName.encyclopedia);
+    global.collectionJson = await store.get(savedDataName.collection);
+    global.collectionItemJson = await store.get(savedDataName.collectionItem);
     global.shipTypeJson = await store.get(savedDataName.shipType);
     global.warshipJson = await store.get(savedDataName.warship);
     global.commanderSkillJson = await store.get(savedDataName.commanderSkill);
@@ -163,7 +165,7 @@ class DataStorage {
     global.personalRatingJson = await store.get(savedDataName.personalRating);
     console.log(global.languageJson, global.achievementJson, global.consumableJson, 
       global.encyclopediaJson, global.warshipJson, global.commanderSkillJson, 
-      global.gameMapJson, global.aliasJson, global.personalRatingJson, global.shipTypeJson);
+      global.gameMapJson, global.aliasJson, global.personalRatingJson, global.shipTypeJson, global.collectionJson, global.collectionItemJson);
   }
 }
 
