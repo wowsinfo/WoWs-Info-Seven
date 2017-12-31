@@ -9,6 +9,8 @@ import strings from './localization';
 export default class App extends Component {
   state = {
     isReady: false,
+    isPro: false,
+    hasAds: true,
   }
 
   async componentWillMount() {

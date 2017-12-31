@@ -15,8 +15,8 @@ class LoadingScreen extends React.PureComponent {
 
   renderLogo() {
     const { isPro } = this.props;
-    if (isPro) return <Image source={require('../../img/LogoPro.png')}/>   
-    else return <Image source={require('../../img/LogoWhite.png')}/>
+    if (isPro == true) return <Image source={require('../../img/LogoPro.png')}/>   
+    return <Image source={require('../../img/LogoWhite.png')}/>
   }
 }
 
