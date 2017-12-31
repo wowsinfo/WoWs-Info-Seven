@@ -1,6 +1,7 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { FadeInView } from '../../Animation';
 import { WoWsLoading, OnlineGroup } from '../../component';
 import { PlayerOnline } from '../../core/';
 import strings from '../../localization';
@@ -18,12 +19,12 @@ class PlayerOnlineScreen extends React.PureComponent {
           isReady: true,
           serverInfo: info,
         }, () => {
-          this.ru = this.state.serverInfo.server[0];
-          this.eu = this.state.serverInfo.server[1];
-          this.na = this.state.serverInfo.server[2];
-          this.asia = this.state.serverInfo.server[3];
-          this.total = this.state.serverInfo.total;
-          Actions.refresh({title: this.total});
+          this.ru = info.server[0];
+          this.eu = info.server[1];
+          this.na = info.server[2];
+          this.asia = info.server[3];
+          this.total = info.total;
+          Actions.refresh({title: global.gameVersion});
         })
       }
     })
@@ -33,10 +34,15 @@ class PlayerOnlineScreen extends React.PureComponent {
     if (this.state.isReady) {
       return (
         <View style={viewStyle}>
-          <OnlineGroup title={strings.russia} info={this.ru}/>
-          <OnlineGroup title={strings.europe} info={this.eu}/>
-          <OnlineGroup title={strings.north_america} info={this.na}/>
-          <OnlineGroup title={strings.asia} info={this.asia}/>
+          <FadeInView>
+            <ScrollView contentContainerStyle={scrollViewStyle}>
+              <OnlineGroup title={strings.russia} info={this.ru}/>
+              <OnlineGroup title={strings.europe} info={this.eu}/>         
+              <Text style={[textStyle, {color: global.themeColour}]}>{this.total}</Text>
+              <OnlineGroup title={strings.north_america} info={this.na}/>
+              <OnlineGroup title={strings.asia} info={this.asia}/>
+            </ScrollView>
+          </FadeInView>
         </View>
       )
     } else {
@@ -47,11 +53,17 @@ class PlayerOnlineScreen extends React.PureComponent {
 
 const styles = StyleSheet.create({
   viewStyle: {
-    flexDirection: 'row',
-    paddingTop: 16,
+    flex: 1,
+    alignItems: 'center',
+  },
+  scrollViewStyle: {
+    flex: 1,
     justifyContent: 'space-around',
+  },
+  textStyle: {
+    fontSize: 64,
   }
 })
-const { viewStyle } = styles;
+const { viewStyle, scrollViewStyle, textStyle } = styles;
 
 export {PlayerOnlineScreen};

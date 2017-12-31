@@ -10,6 +10,7 @@ class WikiCell extends React.PureComponent {
     this.name = this.props.data.name;
     this.icon = this.props.data.icon;
     this.index = this.props.data.index;
+    // console.log(this.icon);
   }
 
   render() {
@@ -17,12 +18,23 @@ class WikiCell extends React.PureComponent {
       <View>
         <WoWsTouchable onPress={() => this.onWikiBtnPressed()} >
           <View style={viewStyle}>
-            <Image style={imageStyle} source={{uri: 'http://via.placeholder.com/160x160'}}/> 
+            {this.renderImage()}
             <Text style={textStyle}>{this.name}</Text>     
           </View>        
         </WoWsTouchable>
       </View>
     )
+  }
+
+  renderImage() {
+    if (this.index == 1 || this.index == 5) {
+      return <Image style={imageStyle} source={{uri: this.icon}}/>  
+    } else {
+      // Warship needs a background colour
+      if (this.index == 2) 
+        return <Image style={[{backgroundColor: global.themeColour, overlayColor: 'white'}, imageStyle]} source={this.icon}/>
+      else return <Image style={imageStyle} source={this.icon}/> 
+    }
   }
 
   onWikiBtnPressed() {

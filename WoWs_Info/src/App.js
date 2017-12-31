@@ -12,6 +12,13 @@ export default class App extends Component {
   }
 
   async componentWillMount() {
+    await DataStorage.restoreTheme();
+    // console.log(global.themeColour);
+    this.setState({
+      isReady: false,
+      colour: global.themeColour,
+    })
+
     let ready = await DataStorage.dataValidation();
     this.setState({
       isReady: ready,
@@ -28,7 +35,10 @@ export default class App extends Component {
         </View>
       );
     } else {
-      return <LoadingScreen />
+      // Loading Screen now uses theme colour
+      return (
+        <LoadingScreen colour={this.state.colour}/>
+      )
     }
   }
 

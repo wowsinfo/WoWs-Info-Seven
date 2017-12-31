@@ -1,7 +1,8 @@
 import React from 'react';
 import { NewsParser } from '../../core';
+import { FadeInView } from '../../Animation';
 import { NewsCell, WoWsLoading } from '../../component';
-import { View, FlatList } from 'react-native';
+import { FlatList } from 'react-native';
 
 class NewsScreen extends React.PureComponent {
   state = {
@@ -19,10 +20,10 @@ class NewsScreen extends React.PureComponent {
   render() {
     if (this.state.isReady) {
       return (
-        <View>
-          <FlatList data={this.state.data} keyExtractor={this.keyExtractor} onRefresh={() => this.refreshNews()}
+        <FadeInView style={{flex: 1}}>
+          <FlatList data={this.state.data} keyExtractor={this.keyExtractor} onRefresh={() => this.refreshNews()} contentInset={{bottom: 50}}
             renderItem={({item}) => <NewsCell data={item}/>} refreshing={this.state.isRefreshing}/>
-        </View>
+        </FadeInView>
       )
     } return <WoWsLoading />;
   }

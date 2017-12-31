@@ -1,12 +1,13 @@
 import React from 'react';
-import { styles, buttonIcon } from './Styles';
-import { Button } from 'react-native-elements'; 
+import { styles, sizeStyle } from './PlayerOnlineButtonStyles';
+import { Icon } from 'react-native-elements'; 
 
-const { buttonStyle } = styles;
 class PlayerOnlineButton extends React.PureComponent {
   render() {
+    const { buttonStyle } = styles;
     return (
-      <Button icon={buttonIcon} buttonStyle={buttonStyle} onPress={this.props.onPress}/>
+      <Icon name='stop-circle' color='white' underlayColor='transparent' size={sizeStyle}
+      type='feather' containerStyle={buttonStyle} onPress={this.props.onPress}/>
     )
   }
 }

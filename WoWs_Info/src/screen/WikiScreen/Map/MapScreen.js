@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, View } from 'react-native';
+import { View, FlatList } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { WoWsLoading, MapCell } from '../../../component';
 

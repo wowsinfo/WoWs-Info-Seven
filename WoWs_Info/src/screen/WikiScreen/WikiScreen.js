@@ -6,12 +6,12 @@ import { View, FlatList } from 'react-native';
 
 class WikiScreen extends React.PureComponent {
   componentWillMount() {
-    this.WikiList = [{ name: strings.achievement, icon: '', index: 0}, 
-    { name: strings.flag_camouflage, icon: '', index: 1},
-    { name: strings.warship, icon: '', index: 2},  
-    { name: strings.commander, icon: '', index: 3},
-    { name: strings.upgrade, icon: '', index: 4},
-    { name: strings.map, icon: '', index: 5}];
+    this.WikiList = [{ name: strings.achievement, icon: require('../../img/Achievement.png'), index: 0}, 
+    { name: strings.flag_camouflage, icon: 'http://via.placeholder.com/256x256', index: 1},
+    { name: strings.warship, icon: require('../../img/LogoWhite.png'), index: 2},  
+    { name: strings.commander, icon: require('../../img/CommanderSkill.png'), index: 3},
+    { name: strings.upgrade, icon: require('../../img/Upgrade.png'), index: 4},
+    { name: strings.map, icon: 'http://via.placeholder.com/256x256', index: 5}];
   }
 
   keyExtractor = (item) => {return item.name}  
@@ -19,7 +19,7 @@ class WikiScreen extends React.PureComponent {
     return (
       <View style={{flex: 1}}>
         <FlatList data={this.WikiList} keyExtractor={this.keyExtractor} 
-            renderItem={({item}) => <WikiCell data={item}/>} />
+          renderItem={({item}) => <WikiCell data={item}/>} />
       </View>
     )
   }
