@@ -59,9 +59,10 @@ class DataStorage {
     try {
       await store.update(localDataName.isPro, false);
       await store.update(localDataName.hasAds, true);
+      await store.update(localDataName.moeMode, false);      
       // I am more than happy to play in a division
       await store.update(localDataName.playerList, [{name: 'HenryQuan', id: '2011774448', server: '3'}]);
-      await store.update(localDataName.userInfo, {name: '', id: '', server: '', access_token: ''});
+      await store.update(localDataName.userInfo, {name: '', id: '', server: '', access_token: '', created_at: ''});
       await store.update(localDataName.userData, '');
   
       let version = await GameVersion.getCurrVersion();
@@ -137,13 +138,16 @@ class DataStorage {
     }
   }
 
+  static async restorePlayerInfo() {
+    global.isPro = await store.get(localDataName.isPro);
+    global.hasAds = await store.get(localDataName.hasAds);
+    global.userInfo = await store.get(localDataName.userInfo);    
+  }
+
   static async restoreData() {
     global.themeColour = await store.get(localDataName.themeColour);    
     global.server = await store.get(localDataName.currServer);
     global.serverName = ServerManager.getDomainFrom(global.server);
-    global.userInfo = await store.get(localDataName.userInfo);
-    global.isPro = await store.get(localDataName.isPro);
-    global.hasAds = await store.get(localDataName.hasAds);
     global.apiLanguage = await store.get(localDataName.apiLanguage);
     global.appLanguage = await store.get(localDataName.appLanguage);
     global.newsLanguage = await store.get(localDataName.newsLanguage);

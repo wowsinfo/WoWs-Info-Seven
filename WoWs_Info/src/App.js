@@ -13,10 +13,13 @@ export default class App extends Component {
 
   async componentWillMount() {
     await DataStorage.restoreTheme();
+    await DataStorage.restorePlayerInfo();    
     // console.log(global.themeColour);
     this.setState({
       isReady: false,
       colour: global.themeColour,
+      isPro: global.isPro,
+      hasAds: global.hasAds,
     })
 
     let ready = await DataStorage.dataValidation();
@@ -37,7 +40,7 @@ export default class App extends Component {
     } else {
       // Loading Screen now uses theme colour
       return (
-        <LoadingScreen colour={this.state.colour}/>
+        <LoadingScreen colour={this.state.colour} isPro={this.state.isPro} hasAds={this.state.hasAds}/>
       )
     }
   }

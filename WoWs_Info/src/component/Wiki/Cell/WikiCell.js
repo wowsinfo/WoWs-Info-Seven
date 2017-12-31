@@ -6,20 +6,14 @@ import { styles } from './WikiCellStyles';
 import { Actions } from 'react-native-router-flux';
 
 class WikiCell extends React.PureComponent {
-  componentWillMount() {
-    this.name = this.props.data.name;
-    this.icon = this.props.data.icon;
-    this.index = this.props.data.index;
-    // console.log(this.icon);
-  }
-
   render() {
+    const { name } = this.props.data;
     return (
       <View>
-        <WoWsTouchable onPress={() => this.onWikiBtnPressed()} >
+        <WoWsTouchable onPress={() => this.onWikiBtnPressed()}>
           <View style={viewStyle}>
             {this.renderImage()}
-            <Text style={textStyle}>{this.name}</Text>     
+            <Text style={textStyle}>{name}</Text>     
           </View>        
         </WoWsTouchable>
       </View>
@@ -27,19 +21,21 @@ class WikiCell extends React.PureComponent {
   }
 
   renderImage() {
-    if (this.index == 1 || this.index > 5) {
-      return <Image style={imageStyle} source={{uri: this.icon}}/>  
+    const { index, icon } = this.props.data;
+    if (index == 1 || index >= 5) {
+      return <Image style={imageStyle} source={{uri: icon}}/>  
     } else {
       // Warship needs a background colour
-      if (this.index == 2) 
-        return <Image style={[{backgroundColor: global.themeColour, overlayColor: 'white'}, imageStyle]} source={this.icon}/>
-      else return <Image style={imageStyle} source={this.icon}/> 
+      if (index == 2) 
+        return <Image style={[{backgroundColor: global.themeColour, overlayColor: 'white'}, imageStyle]} source={icon}/>
+      else return <Image style={imageStyle} source={icon}/> 
     }
   }
 
   onWikiBtnPressed() {
     // console.log(this.index);
-    switch (this.index) {
+    const { index } = this.props.data;    
+    switch (index) {
       case wikiIndex.Achievement: Actions.AchievementScreen(); break;
       case wikiIndex.Flag_Camouflage: Actions.BasicScreen({info: global.consumableJson, upgrade: false}); break;    
       case wikiIndex.Warship: Actions.ShipScreen(); break;    

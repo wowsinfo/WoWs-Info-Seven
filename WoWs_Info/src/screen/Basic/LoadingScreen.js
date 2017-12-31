@@ -7,10 +7,16 @@ class LoadingScreen extends React.PureComponent {
     return (
       <View style={ViewStyle} backgroundColor={this.props.colour}>
         <WoWsStatusBar style={ImageStyle}/>
-        <Image source={require('../../img/LogoWhite.png')}/>
+        { this.renderLogo() }
         <ActivityIndicator color='white' size='large'/>
       </View>
     )
+  }
+
+  renderLogo() {
+    const { isPro } = this.props;
+    if (isPro) return <Image source={require('../../img/LogoPro.png')}/>   
+    else return <Image source={require('../../img/LogoWhite.png')}/>
   }
 }
 

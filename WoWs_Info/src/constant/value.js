@@ -69,6 +69,7 @@ export const localDataName = {
   appLanguage: '@WoWs_Info:appLanguage',
   newsLanguage: '@WoWs_Info:newsLanguage',
   apiLanguage: '@WoWs_Info:apiLanguage',
+  moeMode: '@WoWs_Info:moeMode',
 }
 
 export const savedDataName = {
