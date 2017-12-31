@@ -38,8 +38,6 @@ class MainTab extends React.PureComponent {
     'settings': this.renderSettings,
   });
 
-  
-
   render() {
     return (
       <TabViewAnimated
@@ -62,7 +60,7 @@ const styles = StyleSheet.create({
   },
   tabStyle: {
     backgroundColor: 'transparent',
-    height: 36,
+    height: 50,
     padding: 0,
     margin: 0,
   },

@@ -19,10 +19,6 @@ class ServerManager {
     let domain = ['ru', 'eu', 'com', 'asia'];
     return domain[index];
   }
-
-  static getNumberDomainFrom(index) {
-    return 'asia';
-  }
 }
 
 export {ServerManager};

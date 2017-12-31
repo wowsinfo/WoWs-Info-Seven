@@ -20,10 +20,11 @@ const styles = StyleSheet.create({
   },
   titleStyle: {
     textAlign: 'center',
-    fontSize: 16,
+    fontSize: 18,
   },
   textStyle: {
     textAlign: 'center',
+    fontSize: 24,    
   }
 })
 const { viewStyle, titleStyle, textStyle } = styles;

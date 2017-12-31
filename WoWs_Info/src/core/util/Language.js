@@ -4,34 +4,34 @@ class Language {
     if (global.firstLaunch) {
       // Get current language
       var DeviceInfo = require('react-native-device-info');
-      lang = DeviceInfo.getDeviceLocale();
-      if (lang.includes('-')) {
-        // Simplify -> ja-US to ja only
-        lang = lang.split('-').slice(0, -1);
-        // Basic filter
-        switch (lang[0]) {
-          case 'cs':
-          case 'de':
-          case 'en':
-          case 'es':
-          case 'fr':
-          case 'ja':
-          case 'pl':
-          case 'pt':
-          case 'ru':
-          case 'th':
-          case 'tr':
-          case 'zh':
-            lang = lang.join('-'); break;
-          default:
-            // This language is not supported
-            lang = 'unknown'; break;
-        }
-      }
+      lang = DeviceInfo.getDeviceLocale().toLocaleLowerCase() + '-';
+      // Simplify -> ja-US to ja only
+      let simplified = lang.split('-')[0];
+      // Basic filter
+      switch (simplified) {
+        case 'cs':
+        case 'de':
+        case 'en':
+        case 'fr':
+        case 'ja':
+        case 'pl':
+        case 'ru':
+        case 'th':
+        case 'tr': lang = simplified; break;          
+        case 'zh':
+          if (!lang.includes('zh-Hant') && !lang.includes('zh-tw')) lang = 'zh';
+          else lang = 'zh-tw';
+          break;
+        case 'es': 
+          if (lang.includes('es-mx')) lang = 'es-mx';
+          else lang = 'es';
+          break;
+        case 'pt': lang = 'pt-br'; break;          
+        default:
+          // This language is not supported
+          lang = 'unknown'; break;
+      }  
     }
-
-    // Traditional Chinese following wargaming's naming
-    if (lang == 'zh-Hant') lang = 'zh-tw';
     // console.log(lang);
     return lang;
   }
@@ -46,15 +46,8 @@ class Language {
 
   static getNewsLangStr() {
     var lang = global.apiLanguage;
+    if (lang.includes('zh')) lang = 'zh-tw';
     return lang;
-  }
-
-  static setApiLanguage() {
-    
-  }
-
-  static setAppLanguage() {
-
   }
 }
 
