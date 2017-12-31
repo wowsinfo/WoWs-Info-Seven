@@ -1,6 +1,6 @@
 import React from 'react';
-import { FlatList, View } from 'react-native';
-import { Button } from 'react-native-elements';
+import { FlatList, View, Text } from 'react-native';
+import { Icon } from 'react-native-elements';
 import ModalDropdown from 'react-native-modal-dropdown';
 import GridView from 'react-native-super-grid';
 import strings from '../../../localization';
@@ -61,14 +61,15 @@ class ShipScreen extends React.PureComponent {
         <ModalDropdown ref={(ref) => this.nationDropdown = ref} defaultValue={strings.filter_nation} options={this.nation} onSelect={this.filterNation} textStyle={filterButtonStyle} dropdownStyle={dropdownStyle} dropdownTextStyle={dropdownTextStyle} showsVerticalScrollIndicator={false}/>
         <ModalDropdown ref={(ref) => this.typeDropdown = ref} defaultValue={strings.filter_type} options={this.type} onSelect={this.filterType} textStyle={filterButtonStyle} dropdownStyle={dropdownStyle} dropdownTextStyle={dropdownTextStyle} showsVerticalScrollIndicator={false}/>
         <ModalDropdown ref={(ref) => this.tierDropdown = ref} defaultValue={strings.filter_tier} options={this.tier} onSelect={this.filterTier} textStyle={filterButtonStyle} dropdownStyle={dropdownStyle} dropdownTextStyle={dropdownTextStyle} showsVerticalScrollIndicator={false}/>
+        <Text style={numberStyle}>{this.state.data.length}</Text>
       </View>
     )
   }
 
   renderResetButton = () => {
     return (
-      <Button icon={{name: 'md-refresh', type: 'ionicon'}} 
-        buttonStyle={buttonStyle} onPress={() => {
+      <Icon name='md-refresh' type='ionicon' color='white' underlayColor='transparent'
+        containerStyle={buttonStyle} onPress={() => {
         // Reset stuff
         this.filter = {tier: '', nation: '', type: ''};
         this.nationDropdown.select(-1);          
@@ -143,6 +144,6 @@ class ShipScreen extends React.PureComponent {
   }
 }
 
-const { buttonStyle, filterButtonStyle, dropdownStyle, dropdownTextStyle } = styles;
+const { buttonStyle, filterButtonStyle, dropdownStyle, dropdownTextStyle, numberStyle } = styles;
 
 export {ShipScreen};
