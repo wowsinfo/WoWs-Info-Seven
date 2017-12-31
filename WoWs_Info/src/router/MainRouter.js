@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Platform } from 'react-native';
 import { Router, Scene, Actions } from 'react-native-router-flux';
 import { SearchButton, PlayerOnlineButton } from '../component';
-import { SearchScreen, PlayerOnlineScreen, AchievementScreen, CommanderScreen, ConsumableScreen, MapScreen, ShipScreen, WikiDetailScreen, NewsScreen, InAppBrowser, MapDetailScreen, ShipDetailScreen } from '../screen';
+import { SearchScreen, PlayerOnlineScreen, AchievementScreen, MapScreen, ShipScreen, NewsScreen, InAppBrowser, MapDetailScreen, ShipDetailScreen, BasicScreen, BasicDetailScreen, CollectionDetailScreen } from '../screen';
 import { MainTab, PlayerTab } from '../tab/';
 import strings from '../localization';
 import { Icon } from 'react-native-elements';
@@ -31,14 +31,15 @@ class MainRouter extends Component {
           <Scene key='NewsScreen' component={NewsScreen}/>          
           <Scene key='ThemeScreen' component={ThemeScreen}/>          
           
+          <Scene key='BasicScreen' component={BasicScreen}/>          
           <Scene key='AchievementScreen' component={AchievementScreen}/>
-          <Scene key='CommanderScreen' component={CommanderScreen}/>
-          <Scene key='ConsumableScreen' component={ConsumableScreen}/>
           <Scene key='MapScreen' component={MapScreen}/>
-          <Scene key='MapDetailScreen' component={MapDetailScreen}/>
           <Scene key='ShipScreen' component={ShipScreen}/>
-  
-          <Scene key='WikiDetailScreen' component={WikiDetailScreen}/>
+
+          <Scene key='BasicDetailScreen' component={BasicDetailScreen}/>
+          <Scene key='MapDetailScreen' component={MapDetailScreen}/>
+          <Scene key='CollectionDetailScreen' component={CollectionDetailScreen}/>
+          
           <Scene key='ShipDetailScreen' component={ShipDetailScreen}/>
           
           <Scene key='PlayerOnlineScreen' component={PlayerOnlineScreen}/>

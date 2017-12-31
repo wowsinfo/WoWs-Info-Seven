@@ -31,7 +31,7 @@ class ShipDetailScreen extends React.PureComponent {
     let ship = global.warshipJson[id];
     var shipInfo = {};
     shipInfo.name = ship.name;
-    shipInfo.image = ship.images.small;
+    shipInfo.image = ship.icon;
     return shipInfo;
   }
 

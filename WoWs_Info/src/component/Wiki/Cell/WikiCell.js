@@ -27,7 +27,7 @@ class WikiCell extends React.PureComponent {
   }
 
   renderImage() {
-    if (this.index == 1 || this.index == 5) {
+    if (this.index == 1 || this.index > 5) {
       return <Image style={imageStyle} source={{uri: this.icon}}/>  
     } else {
       // Warship needs a background colour
@@ -40,19 +40,13 @@ class WikiCell extends React.PureComponent {
   onWikiBtnPressed() {
     // console.log(this.index);
     switch (this.index) {
-      case wikiIndex.Achievement:
-        Actions.AchievementScreen(); break;
-      case wikiIndex.Flag_Camouflage:
-        Actions.ConsumableScreen({index: wikiIndex.Flag_Camouflage}); break;    
-      case wikiIndex.Warship:
-        Actions.ShipScreen(); break;    
-      case wikiIndex.Commander:
-        Actions.CommanderScreen(); break;      
-      case wikiIndex.Upgrade:
-        Actions.ConsumableScreen({index: wikiIndex.Upgrade}); break;      
-      case wikiIndex.Map:
-        Actions.MapScreen(); break;
-      default: return;
+      case wikiIndex.Achievement: Actions.AchievementScreen(); break;
+      case wikiIndex.Flag_Camouflage: Actions.BasicScreen({info: global.consumableJson, upgrade: false}); break;    
+      case wikiIndex.Warship: Actions.ShipScreen(); break;    
+      case wikiIndex.Commander: Actions.BasicScreen({info: global.commanderSkillJson}); break;      
+      case wikiIndex.Upgrade: Actions.BasicScreen({info: global.consumableJson, upgrade: true}); break;      
+      case wikiIndex.Map: Actions.MapScreen(); break;
+      case wikiIndex.Collection: Actions.BasicScreen({info: global.collectionJson}); break;
     }
   }
 }

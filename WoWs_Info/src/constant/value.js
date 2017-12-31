@@ -42,6 +42,7 @@ export const wikiIndex = {
   Commander: 3,
   Upgrade: 4,
   Map: 5,
+  Collection: 6,
 }
 
 // Data name from old IOS project

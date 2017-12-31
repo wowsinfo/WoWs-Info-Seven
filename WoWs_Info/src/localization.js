@@ -28,6 +28,7 @@ let strings = new LocalizedStrings({
     commander: 'Commander',
     warship: 'Warship',
     map: 'Map',
+    collection: 'Collection',
     // Ship Wiki
     filter_nation: 'Nation',
     filter_type: 'Type',
@@ -105,6 +106,7 @@ let strings = new LocalizedStrings({
     commander: '舰长技能',
     warship: '战舰',
     map: '地图',
+    collection: '收集品',    
     // Ship Wiki
     filter_nation: '国家',
     filter_type: '种类',

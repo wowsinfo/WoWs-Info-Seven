@@ -18,10 +18,10 @@ export * from './WikiScreen/WikiScreen';
 export * from './WikiScreen/Basic/AchievementScreen';
 export * from './WikiScreen/Basic/BasicScreen';
 export * from './WikiScreen/Basic/BasicDetailScreen';
-export * from './WikiScreen/Basic/ConsumableScreen';
 export * from './WikiScreen/Map/MapScreen';
 export * from './WikiScreen/Map/MapDetailScreen';
 export * from './WikiScreen/Ship/ShipScreen';
+export * from './WikiScreen/Collection/CollectionDetailScreen';
 
 // Player
 export * from './PlayerScreen/BasicInfoScreen';

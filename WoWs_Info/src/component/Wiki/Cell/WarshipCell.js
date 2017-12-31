@@ -22,7 +22,7 @@ class WarshipCell extends React.PureComponent {
   }
 
   loadData(data) {
-    this.image = data.images.small;
+    this.image = data.icon;
     let tierList = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
 
     // For Chinese user, replace Japanese ships' name

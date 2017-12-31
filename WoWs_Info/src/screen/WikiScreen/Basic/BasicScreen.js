@@ -10,24 +10,33 @@ class BasicScreen extends React.PureComponent {
   }
 
   componentDidMount() {
-    // Prase global.achievementJson and make it readable
-    var parsed = [];
-    for (key in global.commanderSkillJson) {
-      // Make naming unique
-      let entry = Object.assign({}, global.commanderSkillJson[key]); var text = '';
-      for (var i = 0; i < entry.perks.length; i++) text += entry.perks[i].description + '\n';
-      entry.text = text;
-      entry.key = key;
-      entry.image = entry.icon;
-      delete entry.icon;
-      delete entry.perks;
-      parsed.push(entry);
+    // Format data and make it readable
+    this.isCollection = false;
+    var parsed = []; const { info, upgrade } = this.props;
+    for (key in info) {
+      let curr = info[key];
+      // This is commander skill
+      if (curr.tier != null) parsed.push(curr);
+      // This is consumable
+      else if (curr.type != null) {
+        if (upgrade && curr.type == 'Modernization') parsed.push(curr);
+        else if (!upgrade && curr.type != 'Modernization') parsed.push(curr);
+      }
+      // This is collection
+      else parsed.push(curr);
     }
+    // Do sorting here
+    let firstEntry = parsed[0];
     // Sort by tier
-    parsed.sort(function (a, b) {
-      return (a.tier - b.tier);
-    })
-    console.log(parsed);
+    if (firstEntry.tier != null) parsed.sort(function (a, b) {return (a.tier - b.tier)})
+    // Sort by price
+    else if (firstEntry.type != null) {
+      parsed.sort(function(a, b) {
+        if (!upgrade && a.type != 'Flags') return 1;
+        else return a.price_credit - b.price_credit;
+      })
+    } else this.isCollection = true; // Special screen for you
+    // console.log(parsed);
     this.setState({
       isReady: true,
       data: parsed,
@@ -38,7 +47,7 @@ class BasicScreen extends React.PureComponent {
     if (this.state.isReady) {
       return (
         <GridView itemDimension={80} items={this.state.data} 
-          renderItem={item => <BasicCell icon={item.image} data={item}/>} />
+          renderItem={item => <BasicCell icon={item.icon} data={item} collection={this.isCollection}/>} />
       )
     } else return <WoWsLoading />;
   }

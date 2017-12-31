@@ -47,7 +47,7 @@ class ShipInfoCell extends React.PureComponent {
     let ship = global.warshipJson[id];
     if (ship != null) {
       shipInfo.name = ship.name;
-      shipInfo.image = ship.images.small;
+      shipInfo.image = ship.icon;
       shipInfo.type = ship.type;
       shipInfo.tier = ship.tier;
       shipInfo.nation = ship.nation;

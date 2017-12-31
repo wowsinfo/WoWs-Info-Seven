@@ -78,7 +78,7 @@ class PlayerInfo {
             var entry = {};
             entry.title = titleList[i];
             entry.name = ship.name;
-            entry.image = ship.images.small;
+            entry.image = ship.icon;
             entry.number = info.frags;
             recordWeapon.push(entry);
           }
@@ -103,7 +103,7 @@ class PlayerInfo {
         ship = shipJson[infoList[i]];
         if (ship != null) {
           info.name = ship.name;
-          info.image = ship.images.small;
+          info.image = ship.icon;
           info.number = dataList[i];
           record.push(info);
         }

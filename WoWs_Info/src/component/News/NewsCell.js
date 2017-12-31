@@ -6,24 +6,18 @@ import { InAppBrowser } from '../../screen';
 import { Actions } from 'react-native-router-flux';
 
 class NewsCell extends React.PureComponent {
-  componentWillMount() {
-    this.image = this.props.data.image;
-    this.link = this.props.data.link;
-    this.title = this.props.data.title;;
-    this.time = this.props.data.time;
-  }
-
   render() {
+    const { image, title, time } = this.props.data;
     return (
       <View>
         <WoWsTouchable onPress={this.visitWebsite}>
           <View style={mainViewStyle}>
             <View style={imageViewStyle}>
-              <Image source={{uri: this.image}} style={imageStyle} resizeMode='contain'/>
+              <Image source={{uri: image}} style={imageStyle} resizeMode='contain'/>
             </View>
             <View style={textViewStyle}>
-              <Text style={titleStyle}>{this.title}</Text>
-              <Text style={timeStyle}>{this.time}</Text>
+              <Text style={titleStyle}>{title}</Text>
+              <Text style={timeStyle}>{time}</Text>
             </View>
           </View>
         </WoWsTouchable>
@@ -32,6 +26,7 @@ class NewsCell extends React.PureComponent {
   }
 
   visitWebsite = () => {
+    const { link, time } = this.props.data;    
     Actions.InAppBrowser({link: this.link, title: this.time});
   }
 }

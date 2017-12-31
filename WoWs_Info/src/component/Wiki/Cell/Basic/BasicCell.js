@@ -18,8 +18,9 @@ class BasicCell extends React.PureComponent {
   }
 
   showDetail() {
-    let data = this.props.data;
-    Actions.WikiDetailScreen({data: data, title: data.key});
+    const { data, collection } = this.props;
+    if (collection) Actions.CollectionDetailScreen({data: data, title: data.key});
+    else Actions.BasicDetailScreen({data: data, title: data.key});
   }
 }
 

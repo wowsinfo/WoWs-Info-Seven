@@ -118,8 +118,7 @@ class DataManager {
               for (info in curr.profile) {
                 text += curr.profile[info].description + '\n';
               }
-              curr.text = text; delete curr.profile; 
-              delete curr.price_gold; delete curr.price_credit;     
+              curr.text = text; delete curr.profile;    
             }
             global.consumableJson = data; break;
           case savedDataName.encyclopedia: global.encyclopediaJson = data; break;
