@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, TextInput } from 'react-native';
-import { Button } from 'react-native-elements';
+import { View, Text, TextInput, Keyboard } from 'react-native';
+import { Icon } from 'react-native-elements';
 import { ShipInfoCell } from '../../component';
 import ModalDropdown from 'react-native-modal-dropdown';
 import GridView from 'react-native-super-grid';
@@ -54,7 +54,7 @@ class ShipInfoScreen extends React.PureComponent {
 
   render() {
     if (this.state.isReady) {
-      if (this.state.data.length > 0) {
+      if (this.shipInfo.length > 0) {
         const { mainViewStyle, filterViewStyle, filterButtonStyle, dropdownStyle, dropdownTextStyle, inputStyle, resetBtnStyle } = styles;        
         return (
           <View style={mainViewStyle}>
@@ -65,8 +65,8 @@ class ShipInfoScreen extends React.PureComponent {
                 autoCapitalize='none' clearButtonMode='while-editing' returnKeyType='search' onChangeText={this.onChangeText}/>
               { this.renderResetButton() }
             </View>
-            <GridView itemDimension={300} items={this.state.data} renderHeader={this.renderHeader} contentInset={{bottom: 50}}
-              renderFooter={this.renderFooter} renderItem={item => <ShipInfoCell info={item}/>}/>
+            <GridView itemDimension={300} items={this.state.data} renderHeader={this.renderHeader} contentInset={{bottom: 50}} onScroll={Keyboard.dismiss}
+              enableEmptySections renderFooter={this.renderFooter} renderItem={item => <ShipInfoCell info={item}/>}/>
           </View>
         ) 
       } else {
@@ -82,8 +82,7 @@ class ShipInfoScreen extends React.PureComponent {
 
   renderResetButton() {
     return (
-      <Button icon={{name: 'md-refresh', type: 'ionicon'}} 
-        buttonStyle={styles.resetBtnStyle} onPress={() => {
+      <Icon name='md-refresh' type='ionicon' color='white' underlayColor='transparent' containerStyle={styles.resetStyle} onPress={() => {
         // Reset stuff
         this.filter = {name: '', nation: '', type: ''};
         this.refs.nationDropdown.select(-1);          
