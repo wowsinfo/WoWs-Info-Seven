@@ -15,9 +15,9 @@ export const WoWsInfo = {
 export const PR = {
   ImprovementNeeded: 'red',
   BelowAverage: 'orange',
-  Average: '#FFC71F',
-  Good: 'green',
-  VeryGood: '#009E39',
+  Average: '#F5C84C',
+  Good: '#67AF34',
+  VeryGood: '#4A7D23',
   Great: 'cyan',
   Unicum: 'magenta',
   SuperUnicum: 'purple',

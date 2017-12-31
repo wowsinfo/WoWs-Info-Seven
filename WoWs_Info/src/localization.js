@@ -59,7 +59,7 @@ let strings = new LocalizedStrings({
     no_ship_info: 'No data >_<',
     // Record Info
     max_damage: 'Most damage dealt',
-    max_exp: 'Most experienced gained',
+    max_exp: 'Most XP gained',
     max_kill: 'Most kills in a battle',
     max_plane: 'Most planes killed',
     max_main_battery: 'Main Battery',

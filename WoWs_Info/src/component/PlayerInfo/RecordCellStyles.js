@@ -30,7 +30,7 @@ export const styles = StyleSheet.create({
     fontSize: 34,
     textAlign: 'center',
     fontWeight: '200',
-    width: 125,
-    height: 40,
+    width: 160,
+    height: 50,
   },
 })

@@ -45,12 +45,10 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
   },
-  resetBtnStyle: {
-    height: 30, 
-    width: 30,
-    padding: 0,
-    margin: 0,
-    backgroundColor: 'transparent',
+  resetStyle: {
+    marginLeft: 8,
+    height: 40,
+    width: 40,
   },
   footerViewStyle: {
     flex: 1,
