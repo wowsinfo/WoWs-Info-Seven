@@ -71,24 +71,19 @@ class DataStorage {
       await store.update(localDataName.tokenDate, '');
       await store.update(localDataName.currServer, '3');
   
-      // Theme Red Blue Green
-      let currOS = Platform.OS;
-      if (currOS == 'ios') {
-        await store.update(localDataName.themeColour, WoWsInfo.blue);
-      } else if (currOS == 'android') {
-        await store.update(localDataName.themeColour, WoWsInfo.red);
-      } else {
-        await store.update(localDataName.themeColour, WoWsInfo.green);
-      }
+      await DataStorage.setupTheme();
       await store.update(localDataName.firstLaunch, false);
 
       // Remove country code is needed
-      let lang = Language.getCurrentLanguage()
+      let lang = Language.getCurrentLanguage();
       await store.update(localDataName.appLanguage, lang);
+      // This is the cause of the mystery
+      if (lang == 'zh') lang = 'zh-cn';
       await store.update(localDataName.newsLanguage, lang);
       await store.update(localDataName.apiLanguage, lang);
   
       // Check again for userdefault
+      let currOS = Platform.OS;
       if (currOS == 'ios') {
         var UserDefaults = require('react-native-userdefaults-ios');
         let data = await UserDefaults.objectForKey(IOSDataName.firstLaunch);
@@ -123,6 +118,25 @@ class DataStorage {
     }
   }
 
+  static async setupTheme() {
+    // Theme Red Blue Green
+    var colour = WoWsInfo.blue;
+    switch (Platform.OS) {
+      case 'android': colour = WoWsInfo.red; break
+      case 'windows': colour = WoWsInfo.green; break;
+      default: break;
+    }
+    global.themeColour = colour;
+    await store.update(localDataName.themeColour, colour);
+  }
+
+  static async restoreTheme() {
+    global.themeColour = await store.get(localDataName.themeColour); 
+    if (global.themeColour == null) {
+      await DataStorage.setupTheme();
+    }
+  }
+
   static async restoreData() {
     global.themeColour = await store.get(localDataName.themeColour);    
     global.server = await store.get(localDataName.currServer);
@@ -141,12 +155,15 @@ class DataStorage {
     global.achievementJson = await store.get(savedDataName.achievement);
     global.consumableJson = await store.get(savedDataName.consumable);
     global.encyclopediaJson = await store.get(savedDataName.encyclopedia);
+    global.shipTypeJson = await store.get(savedDataName.shipType);
     global.warshipJson = await store.get(savedDataName.warship);
     global.commanderSkillJson = await store.get(savedDataName.commanderSkill);
     global.gameMapJson = await store.get(savedDataName.gameMap);
     global.aliasJson = await store.get(savedDataName.alias);
+    global.personalRatingJson = await store.get(savedDataName.personalRating);
     console.log(global.languageJson, global.achievementJson, global.consumableJson, 
-      global.encyclopediaJson, global.warshipJson, global.commanderSkillJson, global.gameMapJson, global.aliasJson);
+      global.encyclopediaJson, global.warshipJson, global.commanderSkillJson, 
+      global.gameMapJson, global.aliasJson, global.personalRatingJson, global.shipTypeJson);
   }
 }
 

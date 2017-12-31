@@ -6,6 +6,10 @@ export const API = {
   GameVersion: 'https://api.worldofwarships.{0}/wows/encyclopedia/info/?application_id=' +  ApplicationID + '&fields=game_version',
   PlayerOnline: 'https://api.worldoftanks.{0}/wgn/servers/info/?application_id=' + ApplicationID + '&fields=players_online&game=wows',
   News: 'https://worldofwarships.{0}/',
+  PlayerSearch: 'https://api.worldofwarships.{0}/wows/account/list/?application_id=' + ApplicationID + '&search=',
+  PlayerInfo: 'https://api.worldofwarships.{0}/wows/account/info/?application_id=' + ApplicationID + '&account_id=',
+  CreatedAt: 'https://api.worldoftanks.{0}/wgn/account/list/?application_id=' + ApplicationID + '&fields=created_at&search=',
+  ShipInfo: 'https://api.worldofwarships.{0}/wows/ships/stats/?application_id=' + ApplicationID + '&fields=pvp.max_planes_killed%2Cpvp.damage_dealt%2Cpvp.wins%2Cpvp.max_damage_dealt%2Cpvp.ramming%2Cpvp.torpedoes%2Cpvp.aircraft%2Cpvp.frags%2Cpvp.battles%2Cpvp.max_xp%2Cpvp.survived_battles%2Cship_id%2Cpvp.max_frags_battle%2Cpvp.main_battery%2Cpvp.second_battery%2Cpvp.xp&account_id=',
 }
 
 export const DataAPI = {
@@ -13,7 +17,8 @@ export const DataAPI = {
   CommanderSkill: 'https://api.worldofwarships.{0}/wows/encyclopedia/crewskills/?application_id=' +  ApplicationID + '&fields=icon%2Cname%2Ctier%2Cperks.description',
   GameMap: 'https://api.worldofwarships.{0}/wows/encyclopedia/battlearenas/?application_id=' +  ApplicationID + '&fields=name%2Cicon%2Cdescription',
   Language: 'https://api.worldofwarships.{0}/wows/encyclopedia/info/?application_id=' +  ApplicationID + '&fields=languages',
-  Encyclopedia: 'https://api.worldofwarships.{0}/wows/encyclopedia/info/?application_id=' +  ApplicationID + '&fields=ship_nations%2Cship_types%2Cship_modules',
+  Encyclopedia: 'https://api.worldofwarships.{0}/wows/encyclopedia/info/?application_id=' +  ApplicationID + '&fields=ship_nations%2Cship_modules',
+  ShipType: 'https://api.worldofwarships.{0}/wows/encyclopedia/info/?application_id=' +  ApplicationID + '&fields=ship_types&language=en',
   Consumable: 'https://api.worldofwarships.{0}/wows/encyclopedia/consumables/?application_id=' +  ApplicationID + '&fields=type%2Cdescription%2Cname%2Cimage%2Cprice_credit%2Cprice_gold%2Cprofile.description',
   Warship: 'https://api.worldofwarships.{0}/wows/encyclopedia/ships/?application_id=' +  ApplicationID + '&fields=name%2Cnation%2Ctype%2Ctier%2Cship_id%2Cship_id_str%2Cimages.small',
 }
@@ -66,10 +71,12 @@ export const localDataName = {
 export const savedDataName = {
   language: '@Data:language',
   encyclopedia: '@Data:encyclopedia',
+  shipType: '@Data:shipType',
   achievement: '@Data:achievement',
   commanderSkill: '@Data:commanderSkill',
   warship: '@Data:warship',
   gameMap: '@Data:gameMap',
   consumable: '@Data:consumable',
   alias: '@Data:alias',
+  personalRating: '@Data:personalRating',
 }

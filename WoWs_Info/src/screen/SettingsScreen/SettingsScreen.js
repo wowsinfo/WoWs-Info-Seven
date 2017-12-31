@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Button, ScrollView } from 'react-native';
+import { Text } from 'react-native-elements';
 import { WoWsLoading } from '../../component';
 import ModalDropdown from 'react-native-modal-dropdown';
 import { styles } from './SettingsScreenStyles';
@@ -27,7 +28,7 @@ class SettingsScreen extends React.PureComponent {
       default: this.news = ['zh']; break;
     } 
 
-    this.app = ['English', '简体中文', '繁体中文', '日本語'];
+    this.app = ['English', '简体中文', '繁體中文', '日本語'];
   }
 
   render() {
@@ -35,10 +36,15 @@ class SettingsScreen extends React.PureComponent {
     else {
       return (
         <View>
-          <ModalDropdown onSelect={this.changeApiLanguage} style={btnStyle} textStyle={textStyle} showsVerticalScrollIndicator={false} defaultValue={strings.api_language} options={this.api}/>
-          <ModalDropdown onSelect={this.changeAppLanguage} style={btnStyle} defaultValue={strings.app_language} options={this.app}/>
-          <ModalDropdown onSelect={this.changeNewsLanguage} style={btnStyle} defaultValue={strings.news_language} options={this.news}/>
-          <Button onPress={this.changeThemeColour} title={strings.change_theme}/>
+          <ScrollView>
+            <Text h2>{strings.language_header}</Text>
+            <ModalDropdown onSelect={this.changeApiLanguage} style={btnStyle} textStyle={textStyle} showsVerticalScrollIndicator={false} defaultValue={strings.api_language} options={this.api}/>
+            <ModalDropdown onSelect={this.changeAppLanguage} style={btnStyle} defaultValue={strings.app_language} options={this.app}/>
+            <ModalDropdown onSelect={this.changeNewsLanguage} style={btnStyle} defaultValue={strings.news_language} options={this.news}/>
+            <Text h2>{strings.theme_header}</Text>
+            <Button onPress={this.changeThemeColour} title={strings.change_theme}/>          
+            <Text h2>{strings.about_header}</Text>
+          </ScrollView>
         </View>
       )
     }
