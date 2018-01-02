@@ -9,7 +9,7 @@ class WikiCell extends React.PureComponent {
   render() {
     const { name } = this.props.data;
     return (
-      <View>
+      <View style={mainViewStyle}>
         <WoWsTouchable onPress={() => this.onWikiBtnPressed()}>
           <View style={viewStyle}>
             {this.renderImage()}
@@ -22,14 +22,10 @@ class WikiCell extends React.PureComponent {
 
   renderImage() {
     const { index, icon } = this.props.data;
-    if (index == 1 || index >= 5) {
-      return <Image style={imageStyle} source={{uri: icon}}/>  
-    } else {
       // Warship needs a background colour
-      if (index == 2) 
-        return <Image style={[{backgroundColor: global.themeColour, overlayColor: 'white'}, imageStyle]} source={icon}/>
-      else return <Image style={imageStyle} source={icon}/> 
-    }
+    if (index == 2) 
+      return <Image style={[{backgroundColor: global.themeColour, overlayColor: 'white'}, imageStyle]} source={icon}/>
+    else return <Image style={imageStyle} source={icon}/> 
   }
 
   onWikiBtnPressed() {
@@ -47,6 +43,6 @@ class WikiCell extends React.PureComponent {
   }
 }
 
-const { viewStyle, imageStyle, textStyle } = styles;
+const { viewStyle, imageStyle, textStyle, mainViewStyle } = styles;
 
 export {WikiCell};

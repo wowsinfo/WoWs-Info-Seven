@@ -6,6 +6,9 @@ let imageWidth = (width < height) ? width * 0.382 : height * 0.382;
 let DeviceInfo = require('react-native-device-info');
 let isTablet = DeviceInfo.isTablet();
 export const styles = StyleSheet.create({
+  mainViewStyle: {
+    flex: 1,
+  },
   viewStyle: {
     paddingTop: 8,
     flex: 1,

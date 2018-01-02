@@ -1,15 +1,24 @@
-import { Platform } from 'react-native';
-
 export const WoWsInfo = {
   red: '#FF6D6B',
+  pink: '#FF4081',  
+  purple: '#E040FB',
+  deep_purple: '#7C4DFF',
+  indigo: '#536DFE',
+  blue: '#55A3FF',  
+  light_blue: '#00B0FF',
+  cyan: '#00E5FF',
+  teal: '#1DE9B6',  
   green: '#2CCC72',
-  blue: '#55A3FF',
-  cyan: '#2DFFFF',
-  purple: '#6464C8',
-  brown: '#AB7754',
-  yellow: '#F9B534',
-  orange: '#FA963C',
-  black: '#39393E',
+  light_green: '#8BC34A',
+  lime: '#CDDC39',
+  yellow: '#FFEA00',    
+  amber: '#FFAB00',  
+  orange: '#FF9100',
+  deep_orange: '#FF3D00',  
+  brown: '#795548',  
+  grey: '#9E9E9E',
+  blue_grey: '#607D8B',  
+  black: '#39393E',  
 }
 
 export const PR = {

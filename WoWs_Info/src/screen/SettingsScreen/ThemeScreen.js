@@ -5,8 +5,9 @@ import { WoWsInfo } from '../../colour/colour';
 
 class ThemeScreen extends React.PureComponent {
   componentWillMount() {
-    this.colourList = [WoWsInfo.black, WoWsInfo.blue, WoWsInfo.brown, WoWsInfo.cyan, WoWsInfo.green, WoWsInfo.orange,
-      WoWsInfo.purple, WoWsInfo.red, WoWsInfo.yellow];
+    var colourList = [];
+    for (key in WoWsInfo) colourList.push(WoWsInfo[key]);
+    this.colourList = colourList;
   }
 
   keyExtractor = (item) => {return item}  
