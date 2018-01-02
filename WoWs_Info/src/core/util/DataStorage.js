@@ -56,10 +56,7 @@ class DataStorage {
   }
 
   static async setupLocalStorage() {
-    try {
-      await store.update(localDataName.isPro, false);
-      await store.update(localDataName.hasAds, true);
-      await store.update(localDataName.moeMode, false);      
+    try {   
       // I am more than happy to play in a division
       await store.update(localDataName.playerList, [{name: 'HenryQuan', id: '2011774448', server: '3'}]);
       await store.update(localDataName.userInfo, {name: '', id: '', server: '', access_token: '', created_at: ''});
@@ -73,7 +70,11 @@ class DataStorage {
       await store.update(localDataName.currServer, '3');
   
       await DataStorage.setupTheme();
-      await store.update(localDataName.firstLaunch, false);
+      await store.update(localDataName.firstLaunch, 'false');
+
+      await store.update(localDataName.isPro, 'false');
+      await store.update(localDataName.hasAds, 'true');
+      await store.update(localDataName.moeMode, 'false');
 
       // Remove country code is needed
       let lang = Language.getCurrentLanguage();
@@ -91,16 +92,20 @@ class DataStorage {
         if (data != null) {
           console.log('Retrieving userdefault...');
           let server = await UserDefaults.stringForKey(IOSDataName.server);
+          global.server = server;
           await store.update(localDataName.currServer, server);
           
-          let pro = await UserDefaults.boolForKey(IOSDataName.hasPurchased);
-          await store.update(localDataName.isPro, pro);
-          if (pro) await store.update(localDataName.hasAds, false);
+          let pro = await UserDefaults.objectForKey(IOSDataName.hasPurchased);         
+          if (pro == true) {
+            await store.update(localDataName.isPro, 'true');
+            await store.update(localDataName.hasAds, 'false');  
+          }
           
-          let username = await UserDefaults.stringForKey(IOSDataName.userName);
+          let username = await UserDefaults.stringForKey(IOSDataName.userName);       
           if (username != '>_<') {
             var playerObj = PlayerConverter.fromString(username);
-            playerObj[access_token] = '';
+            playerObj.access_token = '';
+            playerObj.created_at = '';
             await store.update(localDataName.userInfo, playerObj);
           }
   
@@ -112,6 +117,10 @@ class DataStorage {
             }
             await store.update(localDataName.playerList, playerList);
           }
+        } else if (currOS == 'windows') {
+          // All UWP are paid so they are all pro users
+          await store.update(localDataName.isPro, 'true');
+          await store.update(localDataName.hasAds, 'false');
         }
       }
     } catch (error) {
@@ -139,9 +148,9 @@ class DataStorage {
   }
 
   static async restorePlayerInfo() {
-    global.isPro = await store.get(localDataName.isPro);
-    global.hasAds = await store.get(localDataName.hasAds);
-    global.userInfo = await store.get(localDataName.userInfo);    
+    global.isPro = JSON.parse(await store.get(localDataName.isPro));
+    global.hasAds = JSON.parse(await store.get(localDataName.hasAds));
+    global.userInfo = await store.get(localDataName.userInfo);   
   }
 
   static async restoreData() {

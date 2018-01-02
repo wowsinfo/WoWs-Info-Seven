@@ -16,18 +16,16 @@ export default class App extends Component {
   async componentWillMount() {
     await DataStorage.restoreTheme();
     await DataStorage.restorePlayerInfo();    
-    // console.log(global.themeColour);
+    // console.log(global.themeColour, global.isPro);
     this.setState({
-      isReady: false,
-      colour: global.themeColour,
       isPro: global.isPro,
       hasAds: global.hasAds,
+      colour: global.themeColour,      
     })
 
     let ready = await DataStorage.dataValidation();
     this.setState({
       isReady: ready,
-      colour: global.themeColour,
     })
   }
 

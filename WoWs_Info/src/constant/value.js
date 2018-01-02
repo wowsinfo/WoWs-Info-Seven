@@ -52,6 +52,7 @@ export const IOSDataName = {
   userName: 'username',
   hasPurchased: 'hasPurchased',
   friend: 'friend_list',
+  isAdvancedUnlocked: 'advancedunlocked',
 }
 
 export const localDataName = {
