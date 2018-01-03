@@ -78,6 +78,8 @@ let strings = new LocalizedStrings({
     unicum: 'Unicum',
     super_unicum: 'Super Unicum',
     powered_by_number: 'Powered by wows-numbers.com',
+    // Rank Info
+    season: 'Season ',
   },
   zh: {
     // Game Update
@@ -156,6 +158,8 @@ let strings = new LocalizedStrings({
     unicum: 'Unicum',
     super_unicum: 'Super Unicum',
     powered_by_number: '数据由wows-numbers.com提供',    
+    // Rank Info
+    season: '赛季',
   },
   'zh-tw': {
     // Game Update

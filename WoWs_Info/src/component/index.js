@@ -12,6 +12,7 @@ export * from './PlayerInfo/Info3Cell';
 export * from './PlayerInfo/Basic8Cell';
 export * from './PlayerInfo/RecordCell';
 export * from './PlayerInfo/ShipInfoCell';
+export * from './PlayerInfo/RankCell';
 
 // Wiki Cell
 export * from './Wiki/Cell/WikiCell';

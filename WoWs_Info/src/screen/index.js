@@ -27,3 +27,5 @@ export * from './WikiScreen/Collection/CollectionDetailScreen';
 export * from './PlayerScreen/BasicInfoScreen';
 export * from './PlayerScreen/ShipInfoScreen';
 export * from './PlayerScreen/ShipDetailScreen';
+export * from './PlayerScreen/RankInfoScreen';
+export * from './PlayerScreen/RankDetailScreen';
