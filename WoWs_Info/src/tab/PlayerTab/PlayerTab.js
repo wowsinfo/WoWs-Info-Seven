@@ -16,7 +16,7 @@ class PlayerTab extends React.PureComponent {
   state = {
     index: 2,
     routes: [
-      {key: 'achievement', icon: require('../../img/User.png')},
+      {key: 'achievement', icon: require('../../img/AchievementTab.png')},
       {key: 'graph', icon: require('../../img/Graph.png')},
       {key: 'basic', icon: require('../../img/User.png')},
       {key: 'ship', icon: require('../../img/Ship.png')},

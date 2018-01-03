@@ -16,3 +16,4 @@ export * from './PlayerOnline';
 export * from './player/PlayerSearch';
 export * from './player/PlayerInfo';
 export * from './player/ShipInfo';
+export * from './player/RankInfo';

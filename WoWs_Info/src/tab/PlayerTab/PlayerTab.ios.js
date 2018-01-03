@@ -16,7 +16,7 @@ class PlayerTab extends React.PureComponent {
   render() {
     return (
       <TabBarIOS itemPositioning='center' tintColor={global.themeColour} translucent>
-        <TabBarIOS.Item icon={require('../../img/User.png')} title={strings.achievement_tab}
+        <TabBarIOS.Item icon={require('../../img/AchievementTab.png')} title={strings.achievement_tab}
           selected={this.state.selectedTab === 'Acievement'}
           onPress={() => this.setTab('Acievement')}>
           <View />

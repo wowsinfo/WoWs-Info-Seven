@@ -161,7 +161,22 @@ class ShipInfoScreen extends React.PureComponent {
       let entry = this.shipInfo[i];
       // Check 3 times
       let currShip = global.warshipJson[entry.ship_id];
-      if (this.filter.name != '' && !currShip.name.toLowerCase().includes(this.filter.name.toLowerCase())) continue;
+      if (this.filter.name != '') {
+        let number = parseInt(this.filter.name);
+        if (number != null && number > 0) {
+          // If it is a number
+          if (number > 0 && number <= 10) {
+            // Tier
+            if (currShip.tier != number) continue;
+          } else {
+            // Battle
+            if (entry.battle < number) continue;
+          }
+        } else {
+          // Filter by name
+          if (!currShip.name.toLowerCase().includes(this.filter.name.toLowerCase())) continue;
+        }
+      }
       if (this.filter.type != '' && currShip.type != this.filter.type) continue;
       if (this.filter.nation != '' && currShip.nation != this.filter.nation) continue;
       // Valid ship
