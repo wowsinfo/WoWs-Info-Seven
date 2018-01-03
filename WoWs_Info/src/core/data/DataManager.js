@@ -1,4 +1,4 @@
-import { DataAPI, savedDataName } from '../../constant/value';
+import { DataAPI, savedDataName, localDataName } from '../../constant/value';
 import { Language } from '../';
 import store from 'react-native-simple-store';
 
@@ -37,26 +37,30 @@ class DataManager {
 
   static async saveAlias() {
     try {
-      let response = await fetch('http://xvm.qingcdn.com/wows/scripts/ships.js')
-      let text = await response.text();
-      // Make it readable
-      var formatted = text.replace('var shipDict=', '').replace('}};', '}}');
-      let data = JSON.parse(formatted);
-      for (key in data) {
-        let ship = data[key];
-        if (ship.country == 'japan') {
-          // Only Japanese ships
-          var name = ship.alias;
-          if (name == 'HSF 春風') name = 'HSF 晴风';
-          data[key] = name;
-        } else {
-          // We dont need it
-          delete data[key];
+      if (global.apiLanguage.includes('zh')) {
+        // Then, get these names
+        let response = await fetch('http://xvm.qingcdn.com/wows/scripts/ships.js')
+        let text = await response.text();
+        // Make it readable
+        var formatted = text.replace('var shipDict=', '').replace('}};', '}}');
+        let data = JSON.parse(formatted);
+        for (key in data) {
+          let ship = data[key];
+          if (ship.country == 'japan') {
+            // Only Japanese ships
+            var name = ship.alias;         
+            if (name == 'HSF 春風') name = 'HSF 晴风';
+            if (name == '鲲') name = '武藏';
+            if (name == '鲔') name = '爱鹰';
+            if (name == '吹雪' || name == '岛风') name += '酱';
+            let curr = global.warshipJson[key];
+            if (curr == null || name[0].includes('[')) continue;  
+            curr.name = name; 
+          }
         }
+        // Update saved data
+        store.update(savedDataName.warship, global.warshipJson);
       }
-      // console.log(json);
-      global.aliasJson = data;
-      await store.update(savedDataName.alias, data);
     } catch (error) {
       console.error(error);
     }
@@ -153,7 +157,7 @@ class DataManager {
             }
             global.collectionItemJson = data; break;
         }
-        // console.log(data);
+        console.log(data);
         await store.update(savedName, data);
       }
     } catch (error) {

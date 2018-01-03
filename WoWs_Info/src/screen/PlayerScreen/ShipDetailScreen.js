@@ -9,7 +9,7 @@ import strings from '../../localization';
 class ShipDetailScreen extends React.PureComponent {
   render() {
     const { mainViewStyle, scrollViewStyle, imageStyle, shipNameStyle, ratingStyle } = styles;
-    const { index, ship_id, } = this.props.info;
+    const { index, ship_id } = this.props.info;
     let shipColour = PersonalRating.getColour(index);
     let shipComment = PersonalRating.getComment(index);
     let shipInfo = this.getShipInfo(ship_id);
@@ -29,9 +29,11 @@ class ShipDetailScreen extends React.PureComponent {
 
   getShipInfo(id) {
     let ship = global.warshipJson[id];
-    var shipInfo = {};
-    shipInfo.name = ship.name;
-    shipInfo.image = ship.icon;
+    var shipInfo = {name: strings.deleted_ships, image: ''};
+    if (ship != null) {
+      shipInfo.name = ship.name;
+      shipInfo.image = ship.icon;
+    }
     return shipInfo;
   }
 

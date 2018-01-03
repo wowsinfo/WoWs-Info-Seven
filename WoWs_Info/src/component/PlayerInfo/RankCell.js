@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { Rating } from 'react-native-elements';
 import { Info3Cell, WoWsTouchable } from '../../component';
+import { Actions } from 'react-native-router-flux';
 import { RankInfo } from '../../core';
 import strings from '../../localization';
 import { styles } from './RankCellStyles';
@@ -10,7 +11,7 @@ class RankCell extends React.PureComponent {
   render() {
     return (
       <View style={[mainViewStyle, {borderColor: global.themeColour}]}>
-        <WoWsTouchable>
+        <WoWsTouchable onPress={this.gotoDetail}>
           <View>
             { this.renderRankInfo() }
             { this.renderInfo3Cell() }
@@ -45,6 +46,16 @@ class RankCell extends React.PureComponent {
     const { battles, wins, damage_dealt } = this.props.rank.rank_solo;
     let info = {battle: battles, winrate: Math.round(wins * 10000 / battles) / 100, damage: Math.round(damage_dealt / battles)};
     return <Info3Cell info={info}/>
+  }
+
+  gotoDetail = () => {
+    const { ship, rank } = this.props;
+    var rankDetail = [];
+    for (var i = 0; i < ship.length; i++) {
+      let curr = ship[i];
+      if (curr.season == rank.season) rankDetail.push(curr);
+    }
+    Actions.RankDetailScreen({title: strings.season + rank.season, ship: rankDetail});
   }
 }
 

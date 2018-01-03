@@ -27,13 +27,7 @@ class WarshipCell extends React.PureComponent {
 
     // For Chinese user, replace Japanese ships' name
     var name = tierList[data.tier - 1] + ' ';
-    if (data.nation == 'japan' && global.apiLanguage.includes('zh')) {
-      let alias = global.aliasJson[data.ship_id];
-      // Might be null sometimes if kongzhong.net has not updated their name yet
-      if (alias != null) {
-        this.tierName = name + alias;
-      } else this.tierName = name + data.name;
-    } else this.tierName = name + data.name;
+    this.tierName = name + data.name;
   }
 
   render() {

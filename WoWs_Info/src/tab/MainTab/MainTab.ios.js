@@ -26,7 +26,7 @@ class MainTab extends React.PureComponent {
           icon={require('../../img/News.png')}
           selected={this.state.selectedTab === 'News'}
           onPress={() => this.setTab('News')}>
-          <NewsScreen />
+          <NewsScreen />            
         </TabBarIOS.Item>
         <TabBarIOS.Item title={strings.settings}
           icon={require('../../img/Settings.png')}

@@ -161,6 +161,7 @@ class ShipInfoScreen extends React.PureComponent {
       let entry = this.shipInfo[i];
       // Check 3 times
       let currShip = global.warshipJson[entry.ship_id];
+      if (currShip == null) continue;
       if (this.filter.name != '') {
         let number = parseInt(this.filter.name);
         if (number != null && number > 0) {

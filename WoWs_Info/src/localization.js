@@ -80,6 +80,8 @@ let strings = new LocalizedStrings({
     powered_by_number: 'Powered by wows-numbers.com',
     // Rank Info
     season: 'Season ',
+    // Deleted ships
+    deleted_ships: 'This is a deleted ship\nPls dont forget her',
   },
   zh: {
     // Game Update
@@ -160,6 +162,8 @@ let strings = new LocalizedStrings({
     powered_by_number: '数据由wows-numbers.com提供',    
     // Rank Info
     season: '赛季',
+    // Deleted ships
+    deleted_ships: '这是一艘被删除的船\n请不要忘记她',
   },
   'zh-tw': {
     // Game Update

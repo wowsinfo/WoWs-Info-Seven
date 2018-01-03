@@ -9,7 +9,7 @@ class NewsCell extends React.PureComponent {
   render() {
     const { image, title, time } = this.props.data;
     return (
-      <View>
+      <View style={{flex: 1}}>
         <WoWsTouchable onPress={this.visitWebsite}>
           <View style={mainViewStyle}>
             <View style={imageViewStyle}>

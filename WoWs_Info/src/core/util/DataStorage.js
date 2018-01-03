@@ -121,6 +121,10 @@ class DataStorage {
           // All UWP are paid so they are all pro users
           await store.update(localDataName.isPro, 'true');
           await store.update(localDataName.hasAds, 'false');
+        } else if (currOS == 'android') {
+          // All Android are plus so they are all pro users but with ads
+          await store.update(localDataName.isPro, 'true');
+          await store.update(localDataName.hasAds, 'true');
         }
       }
     } catch (error) {
@@ -174,11 +178,10 @@ class DataStorage {
     global.warshipJson = await store.get(savedDataName.warship);
     global.commanderSkillJson = await store.get(savedDataName.commanderSkill);
     global.gameMapJson = await store.get(savedDataName.gameMap);
-    global.aliasJson = await store.get(savedDataName.alias);
     global.personalRatingJson = await store.get(savedDataName.personalRating);
     console.log(global.languageJson, global.achievementJson, global.consumableJson, 
       global.encyclopediaJson, global.warshipJson, global.commanderSkillJson, 
-      global.gameMapJson, global.aliasJson, global.personalRatingJson, global.shipTypeJson, global.collectionJson, global.collectionItemJson);
+      global.gameMapJson, global.personalRatingJson, global.shipTypeJson, global.collectionJson, global.collectionItemJson);
   }
 }
 

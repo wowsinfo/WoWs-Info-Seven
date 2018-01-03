@@ -1,5 +1,5 @@
 import { API } from '../../constant/value';
-import { ServerManager } from '../../core';
+import { ServerManager, PersonalRating } from '../../core';
 
 class RankInfo {
   constructor(id, index) {
@@ -33,16 +33,28 @@ class RankInfo {
     let response = await fetch(this.rankShipInfoApi);
     let json = await response.json();
     if (json != null && json.status == 'ok') {
-      let info = json.data[this.id];
+      let info = json.data[this.id]; 
+      var shipData = [];     
       for (var i = 0; i < info.length; i++) {
-        let curr = info[i];
-        let data = curr.seasons;
-        let key = Object.keys(data)[0];
-        curr.season = key;
-        curr.rank_solo = data[key].rank_solo;
-        delete curr.seasons;
-      }     
-      return info;      
+        let data = info[i].seasons;
+        let ship_id = info[i].ship_id;
+        for (key in data) {
+          var curr = {ship_id: ship_id};
+          let ship = data[key];
+          curr.pvp = ship.rank_solo; delete curr.seasons;
+          const { battles, wins, frags, damage_dealt } = curr.pvp;
+          let pr = new PersonalRating(curr.ship_id, battles, damage_dealt, wins, frags);
+          let rating = pr.getRating();
+          curr.index = PersonalRating.getIndex(rating);
+          curr.avg_damage = Math.round(damage_dealt / battles);
+          curr.win_rate = Math.round(wins * 10000 / battles) / 100;
+          curr.battle = battles;
+          curr.season = key;
+          shipData.push(curr);          
+        }
+      }
+      console.log(shipData);
+      return shipData;      
     }
   }
 }

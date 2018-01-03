@@ -14,14 +14,7 @@ class ShipInfoCell extends React.PureComponent {
     let shipInfo = this.getShipInfo(ship_id);
     let shipColour = PersonalRating.getColour(index);
     let shipType = ShipManager.getImage(shipInfo.type);
-    this.tierName = tierList[shipInfo.tier - 1] + ' ';
-    if (shipInfo.nation == 'japan' && global.apiLanguage.includes('zh')) {
-      let alias = global.aliasJson[ship_id];
-      // Might be null sometimes if kongzhong.net has not updated their name yet
-      if (alias != null) {
-        this.tierName += alias;
-      } 
-    } else this.tierName += shipInfo.name;
+    this.tierName = tierList[shipInfo.tier - 1] + ' ' + shipInfo.name;
     return (
       <View style={[mainViewStyle, {borderColor: shipColour}]}>
         <WoWsTouchable onPress={this.gotoShipDetail}>

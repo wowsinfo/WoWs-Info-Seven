@@ -29,7 +29,7 @@ class ShipInfo {
           let frag = currShip.pvp.frags;
           // Accumulate total info
           let shipData = global.warshipJson[shipID];
-          if (shipData != null && battle > 0) {           
+          if (battle > 0) {           
             let shipRatingInfo = prJson[shipID];
             if (shipRatingInfo != null) {
               currShip.battle = battle;
