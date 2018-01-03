@@ -8,7 +8,7 @@ import strings from '../../localization';
 
 class ShipDetailScreen extends React.PureComponent {
   render() {
-    const { mainViewStyle, scrollViewStyle, imageStyle, shipNameStyle, ratingStyle } = styles;
+    const { mainViewStyle, scrollViewStyle, shipNameStyle, ratingStyle } = styles;
     const { index, ship_id } = this.props.info;
     let shipColour = PersonalRating.getColour(index);
     let shipComment = PersonalRating.getComment(index);
@@ -16,7 +16,7 @@ class ShipDetailScreen extends React.PureComponent {
     return (
       <View style={mainViewStyle}>
         <ScrollView>
-          <Image source={{uri: shipInfo.image}} style={imageStyle}/>
+          { this.renderImage(shipInfo, ship_id) }
           <Text style={shipNameStyle}>{shipInfo.name}</Text>
           <Text style={[ratingStyle, {color: shipColour}]}>{shipComment}</Text>
           <Basic8Cell info={this.getBasic8CellInfo(this.props.info)}/>
@@ -25,6 +25,14 @@ class ShipDetailScreen extends React.PureComponent {
         </ScrollView>
       </View>
     )
+  }
+
+  renderImage(info, id) {
+    if (id == 4183701200) {
+      return <Image source={require('../../img/fubuki.jpg')} style={{width: 200, height: 255, alignSelf: 'center'}}/>
+    } else {
+      return <Image source={{uri: info.image}} style={styles.imageStyle}/>
+    }
   }
 
   getShipInfo(id) {

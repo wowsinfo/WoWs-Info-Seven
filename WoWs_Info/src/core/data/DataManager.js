@@ -52,7 +52,7 @@ class DataManager {
             if (name == 'HSF 春風') name = 'HSF 晴风';
             if (name == '鲲') name = '武藏';
             if (name == '鲔') name = '爱鹰';
-            if (name == '吹雪' || name == '岛风') name += '酱';
+            if (name == '吹雪') name += '酱';
             let curr = global.warshipJson[key];
             if (curr == null || name[0].includes('[')) continue;  
             curr.name = name; 
@@ -136,7 +136,10 @@ class DataManager {
           case savedDataName.warship: 
             for (key in data) {
               let curr = data[key];
-              curr.icon = curr.images.small; delete curr.images;              
+              curr.icon = curr.images.small; delete curr.images;
+              if (curr.nation == 'japan' && curr.type == '') {
+                if (curr.name.toLowerCase() == 'fubuki') curr.name += ' chan';              
+              }
             }
             global.warshipJson = data; break;
           case savedDataName.collection: 
