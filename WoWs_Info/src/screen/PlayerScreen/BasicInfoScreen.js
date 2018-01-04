@@ -48,7 +48,7 @@ class BasicInfoScreen extends React.PureComponent {
       const { playerNameStyle, scrollViewStyle, mainViewStyle, playerInfoStyle, playerViewStyle, dontJudgeStyle } = styles;
       return (
         <View style={mainViewStyle}>
-          <ScrollView style={scrollViewStyle}>
+          <ScrollView style={scrollViewStyle} automaticallyAdjustContentInsets={false} contentInset={{bottom: 49}}>
             <View style={[playerViewStyle, {backgroundColor: global.themeColour}]}>
               <Text style={playerNameStyle}>{playerName}</Text>
               { this.renderSetAsMainBtn() }    

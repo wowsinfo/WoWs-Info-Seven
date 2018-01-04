@@ -21,8 +21,8 @@ class NewsScreen extends React.PureComponent {
     if (this.state.isReady) {
       return (
         <FadeInView>
-          <FlatList data={this.state.data} keyExtractor={this.keyExtractor} onRefresh={() => this.refreshNews()}
-            renderItem={({item}) => <NewsCell data={item}/>} refreshing={this.state.isRefreshing}/>
+          <FlatList data={this.state.data} keyExtractor={this.keyExtractor} onRefresh={() => this.refreshNews()} automaticallyAdjustContentInsets={false}
+            contentInset={{bottom: 49}} renderItem={({item}) => <NewsCell data={item}/>} refreshing={this.state.isRefreshing}/>
         </FadeInView>
       )
     } return <WoWsLoading />;

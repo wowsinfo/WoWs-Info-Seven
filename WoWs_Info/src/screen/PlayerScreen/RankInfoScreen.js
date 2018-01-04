@@ -26,8 +26,8 @@ class RankInfoScreen extends React.PureComponent {
     const { isReady, rank, ship } = this.state;
     if (isReady) {
       return (
-        <GridView itemDimension={300} items={rank} renderHeader={this.renderHeader} enableEmptySections
-          contentInset={{bottom: 50}} renderItem={item => <RankCell rank={item} ship={ship}/>} />
+        <GridView itemDimension={300} items={rank} renderHeader={this.renderHeader} enableEmptySections contentInset={{bottom: 49}}
+          automaticallyAdjustContentInsets={false} renderItem={item => <RankCell rank={item} ship={ship}/>} />
       )
     } else return <WoWsLoading />
   }
