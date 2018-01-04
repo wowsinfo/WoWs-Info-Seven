@@ -95,8 +95,8 @@ class DataStorage {
           global.server = server;
           await store.update(localDataName.currServer, server);
           
-          let pro = await UserDefaults.objectForKey(IOSDataName.hasPurchased);         
-          if (pro == true) {
+          let pro = await UserDefaults.objectForKey(IOSDataName.hasPurchased);     
+          if (pro) {
             await store.update(localDataName.isPro, 'true');
             await store.update(localDataName.hasAds, 'false');  
           }
@@ -117,15 +117,15 @@ class DataStorage {
             }
             await store.update(localDataName.playerList, playerList);
           }
-        } else if (currOS == 'windows') {
-          // All UWP are paid so they are all pro users
-          await store.update(localDataName.isPro, 'true');
-          await store.update(localDataName.hasAds, 'false');
-        } else if (currOS == 'android') {
-          // All Android are plus so they are all pro users but with ads
-          await store.update(localDataName.isPro, 'true');
-          await store.update(localDataName.hasAds, 'true');
         }
+      } else if (currOS == 'windows') {
+        // All UWP are paid so they are all pro users
+        await store.update(localDataName.isPro, 'true');
+        await store.update(localDataName.hasAds, 'false');
+      } else if (currOS == 'android') {
+        // All Android are plus so they are all pro users but with ads
+        await store.update(localDataName.isPro, 'true');
+        await store.update(localDataName.hasAds, 'true');
       }
     } catch (error) {
       console.error(error);

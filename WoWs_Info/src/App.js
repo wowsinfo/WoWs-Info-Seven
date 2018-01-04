@@ -30,17 +30,18 @@ export default class App extends Component {
   }
 
   render() {
-    if (this.state.isReady) {
+    const { isReady, colour, isPro, hasAds } = this.state;
+    if (isReady) {
       return (
         <View style={ViewStyle}>
-          <WoWsStatusBar themeColour={this.state.colour}/>
+          <WoWsStatusBar themeColour={colour}/>
           <MainRouter reset={this.resetApp}/>
         </View>
       );
     } else {
       // Loading Screen now uses theme colour
       return (
-        <LoadingScreen colour={this.state.colour} isPro={this.state.isPro} hasAds={this.state.hasAds}/>
+        <LoadingScreen colour={colour} isPro={isPro} hasAds={hasAds}/>
       )
     }
   }
