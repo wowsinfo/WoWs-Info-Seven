@@ -13,9 +13,7 @@ class DataStorage {
       let first = await store.get(localDataName.firstLaunch);
       if (first == null) {
         console.log('First Launch\nWelcome to WoWs Info >_<');
-        await DataStorage.setupLocalStorage();
-        await DataStorage.restoreData();
-        await DataManager.updateLocalData();
+        await DataStorage.setupAllData();
         // Set language here
         strings.setLanguage(Language.getCurrentLanguage());
       } else {
@@ -55,8 +53,15 @@ class DataStorage {
     }
   }
 
+  static async setupAllData() {
+    await DataStorage.setupLocalStorage();
+    await DataStorage.restoreData();
+    await DataManager.updateLocalData();
+  }
+
   static async setupLocalStorage() {
     try {   
+      console.log('Local Storage');
       // I am more than happy to play in a division
       await store.save(localDataName.playerList, {'2011774448': {name: 'HenryQuan', id: '2011774448', server: '3'}});
       await store.save(localDataName.userInfo, {name: '', id: '', server: '', access_token: '', created_at: ''});
@@ -87,37 +92,7 @@ class DataStorage {
       // Check again for userdefault
       let currOS = Platform.OS;
       if (currOS == 'ios') {
-        var UserDefaults = require('react-native-userdefaults-ios');
-        let data = await UserDefaults.objectForKey(IOSDataName.firstLaunch);
-        if (data != null) {
-          console.log('Retrieving userdefault...');
-          let server = await UserDefaults.stringForKey(IOSDataName.server);
-          await store.save(localDataName.currServer, server);
-          
-          let pro = await UserDefaults.objectForKey(IOSDataName.hasPurchased);     
-          if (pro) {
-            await store.save(localDataName.isPro, true);
-            await store.save(localDataName.hasAds, false);  
-          }
-          
-          let username = await UserDefaults.stringForKey(IOSDataName.userName);       
-          if (username != '>_<') {
-            var playerObj = PlayerConverter.fromString(username);
-            playerObj.access_token = '';
-            playerObj.created_at = '';
-            await store.save(localDataName.userInfo, playerObj);
-          }
-  
-          let friend = await UserDefaults.objectForKey(IOSDataName.friend);
-          if (friend != null) {
-            var playerList = [];
-            for (var i = 0; i < friend.length; i++) {
-              playerList.push(PlayerConverter.fromString(friend[i]));
-            }
-            global.playerList = playerList;
-            await store.save(localDataName.playerList, playerList);
-          }
-        }
+        await DataStorage.setupIOSData();
       } else if (currOS == 'windows') {
         // All UWP are paid so they are all pro users
         await store.save(localDataName.isPro, true);
@@ -129,6 +104,40 @@ class DataStorage {
       }
     } catch (error) {
       console.error(error);
+    }
+  }
+
+  static async setupIOSData() {
+    var UserDefaults = require('react-native-userdefaults-ios');
+    let data = await UserDefaults.objectForKey(IOSDataName.firstLaunch);
+    if (data != null) {
+      console.log('Retrieving userdefault...');
+      let server = await UserDefaults.stringForKey(IOSDataName.server);
+      await store.save(localDataName.currServer, server);
+      
+      let pro = await UserDefaults.objectForKey(IOSDataName.hasPurchased);     
+      if (pro) {
+        await store.save(localDataName.isPro, true);
+        await store.save(localDataName.hasAds, false);  
+      }
+      
+      let username = await UserDefaults.stringForKey(IOSDataName.userName);       
+      if (username != '>_<') {
+        var playerObj = PlayerConverter.fromString(username);
+        playerObj.access_token = '';
+        playerObj.created_at = '';
+        await store.save(localDataName.userInfo, playerObj);
+      }
+
+      let friend = await UserDefaults.objectForKey(IOSDataName.friend);
+      if (friend != null) {
+        var playerList = [];
+        for (var i = 0; i < friend.length; i++) {
+          playerList.push(PlayerConverter.fromString(friend[i]));
+        }
+        global.playerList = playerList;
+        await store.save(localDataName.playerList, playerList);
+      }
     }
   }
 

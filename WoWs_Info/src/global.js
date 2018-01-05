@@ -10,6 +10,8 @@ global.hasAds = true;
 global.apiLanguage = 'en';
 global.appLanguage = 'en';
 global.newsLanguage = 'en';
+// Just to prevent user resetting his/her app like crazy
+global.canReset = true;
 switch (Platform.OS) {
   case 'ios':
     global.themeColour = WoWsInfo.blue; break;

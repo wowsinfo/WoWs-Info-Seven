@@ -7,8 +7,6 @@ class DataManager {
   static async updateLocalData() {
     // Language has to be saved in order to load other data correctly
     await DataManager.saveData(DataAPI.Language, savedDataName.language);
-    // Additional information
-    await DataManager.saveAlias();
     // Personal Rating
     await DataManager.savePersonalRating();
     await DataManager.saveData(DataAPI.Encyclopedia, savedDataName.encyclopedia);    
@@ -18,6 +16,8 @@ class DataManager {
     await DataManager.saveData(DataAPI.GameMap, savedDataName.gameMap);
     await DataManager.saveData(DataAPI.Consumable, savedDataName.consumable);
     await DataManager.saveData(DataAPI.Warship, savedDataName.warship);
+    // Additional information
+    await DataManager.saveAlias();
     await DataManager.saveData(DataAPI.Collection, savedDataName.collection);
     await DataManager.saveData(DataAPI.CollectionItem, savedDataName.collectionItem);
   }

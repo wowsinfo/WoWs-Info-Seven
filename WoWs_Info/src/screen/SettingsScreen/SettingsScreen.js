@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, Button, ScrollView } from 'react-native';
+import { View, Button, ScrollView, Platform, Alert, AsyncStorage } from 'react-native';
 import { Text } from 'react-native-elements';
 import { WoWsLoading } from '../../component';
 import ModalDropdown from 'react-native-modal-dropdown';
 import { styles } from './SettingsScreenStyles';
-import { DataManager } from '../../core';
+import { DataManager, DataStorage } from '../../core';
 import { localDataName } from '../../constant/value';
 import store from 'react-native-simple-store';
 import strings from '../../localization';
@@ -35,18 +35,52 @@ class SettingsScreen extends React.PureComponent {
     if (this.state.isUpdating) return <WoWsLoading />
     else {
       return (
-        <View>
+        <View style={{flex: 1}}>
           <ScrollView>
-            <Text h2>{strings.language_header}</Text>
+            <Text h1>{strings.language_header}</Text>
             <ModalDropdown onSelect={this.changeApiLanguage} style={btnStyle} textStyle={textStyle} showsVerticalScrollIndicator={false} defaultValue={strings.api_language} options={this.api}/>
-            <ModalDropdown onSelect={this.changeAppLanguage} style={btnStyle} defaultValue={strings.app_language} options={this.app}/>
-            <ModalDropdown onSelect={this.changeNewsLanguage} style={btnStyle} defaultValue={strings.news_language} options={this.news}/>
-            <Text h2>{strings.theme_header}</Text>
+            <ModalDropdown onSelect={this.changeAppLanguage} style={btnStyle} textStyle={textStyle} defaultValue={strings.app_language} options={this.app}/>
+            <ModalDropdown onSelect={this.changeNewsLanguage} style={btnStyle} textStyle={textStyle} defaultValue={strings.news_language} options={this.news}/>
+            <Text h1>{strings.theme_header}</Text>
             <Button onPress={this.changeThemeColour} title={strings.change_theme}/>          
-            <Text h2>{strings.about_header}</Text>
+            <Text h1>{strings.about_header}</Text>
+            <Button onPress={this.resetAllData} title={strings.reset_data}/>          
+            <Button onPress={this.resetIOSData} title={strings.reset_ios_data}/>            
           </ScrollView>
         </View>
       )
+    }
+  }
+
+  resetAllData = () => {
+    if (global.canReset) {
+      Alert.alert(strings.warning, strings.are_your_sure, [
+        {text: 'YES', onPress: () => {
+          DataStorage.setupAllData().then(() => {
+            global.canReset = false;
+            this.props.reset(global.themeColour); 
+          })
+        }},
+        {text: 'NO', onPress: () => console.log('Cancel Pressed')},
+      ])
+    } else {
+      Alert.alert(strings.warning, strings.no_more_reset);
+    }
+  }
+
+  resetIOSData = () => {
+    if (Platform.OS == 'ios') {
+      Alert.alert(strings.warning, strings.are_your_sure, [
+        {text: 'YES', onPress: () => {
+          AsyncStorage.removeItem(localDataName.playerList);
+          DataStorage.setupIOSData().then(() => {
+            this.props.reset(global.themeColour);
+          })
+        }},
+        {text: 'NO', onPress: () => console.log('Cancel Pressed')},
+      ])
+    } else {
+      Alert.alert(strings.warning, strings.ios_only);
     }
   }
 

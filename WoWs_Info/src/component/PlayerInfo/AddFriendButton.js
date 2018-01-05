@@ -12,6 +12,7 @@ class AddFriendButton extends React.PureComponent {
   componentWillMount() {
     const { name, id, server } = this.props.info;
     let list = global.playerList;
+    console.log(list);
     if (list[id] != null) {
       this.setState({
         isFriend: true,
