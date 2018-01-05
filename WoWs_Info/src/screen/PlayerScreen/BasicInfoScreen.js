@@ -2,7 +2,8 @@ import React from 'react';
 import { Basic8Cell, WoWsLoading } from '../../component';
 import { View, ScrollView, Text } from 'react-native';
 import { Divider } from 'react-native-elements';
-import { WoWsTouchable, RecordCell } from '../../component';
+import { WoWsTouchable, RecordCell, AddFriendButton } from '../../component';
+import { Actions } from 'react-native-router-flux'; 
 import store from 'react-native-simple-store';
 import { PlayerInfo } from '../../core';
 import { localDataName } from '../../constant/value';
@@ -43,6 +44,10 @@ class BasicInfoScreen extends React.PureComponent {
           record: recordInfo,
           weapon: recordWeaponInfo,
           isMainAccount: isMain,
+        }, () => {
+          const { id, playerName, server } = this.props;
+          let info = {name: playerName, id: id, server: server};
+          Actions.refresh({right: <AddFriendButton info={info}/>})
         })        
       });
     })
@@ -95,7 +100,7 @@ class BasicInfoScreen extends React.PureComponent {
     const { created_at } = this.state.info;
     let info = {name: playerName, id: id, server: server, created_at: created_at};
     global.userInfo = info;
-    store.update(localDataName.userInfo, info);
+    store.save(localDataName.userInfo, info);
     this.setState({
       isMainAccount: true,
     })

@@ -37,7 +37,7 @@ class DateCalculator {
     if (lastOpen == currDate) return false;
     else {
       // Update currDate
-      store.update(localDataName.currDate, currDate);
+      store.save(localDataName.currDate, currDate);
       return true;
     }
   }

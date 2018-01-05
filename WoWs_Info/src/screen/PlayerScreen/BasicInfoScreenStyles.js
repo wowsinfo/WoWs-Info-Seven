@@ -25,6 +25,7 @@ export const styles = StyleSheet.create({
   playerInfoStyle: {
     textAlign: 'center',
     fontSize: 18,
+    width: '90%',
     fontWeight: '300',
     marginBottom: 8,
     color: 'white',    

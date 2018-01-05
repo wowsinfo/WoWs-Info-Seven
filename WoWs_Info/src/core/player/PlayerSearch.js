@@ -12,6 +12,12 @@ class PlayerSearch {
       let response = await fetch(this.api);
       let json = await response.json();
       if (json != null && json.status == 'ok') {
+        for (key in json.data) {
+          let curr = json.data[key];
+          curr.server = global.server;
+          curr.id = curr.account_id; delete curr.account_id;
+          curr.name = curr.nickname; delete curr.nickname;
+        }
         return json.data;
       }
     } catch (error) {

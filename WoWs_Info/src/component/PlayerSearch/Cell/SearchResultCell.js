@@ -6,19 +6,14 @@ import { View, Text } from 'react-native';
 import { FadeInView } from '../../../Animation';
 
 class SearchResultCell extends React.PureComponent {
-  constructor(props) {
-    super();
-    this.nickname = props.data.nickname;
-    this.account_id = props.data.account_id;
-  }
-
   render() {
     const { viewStyle, textStyle } = styles;
+    const { name, id } = this.props.data;
     return (
       <FadeInView>
         <WoWsTouchable onPress={this.playerInfo}>
           <View style={viewStyle}>
-            <Text style={textStyle}>{this.nickname + '|' + this.account_id}</Text> 
+            <Text style={textStyle}>{name + '|' + id}</Text> 
           </View>
         </WoWsTouchable>
       </FadeInView>
@@ -26,7 +21,8 @@ class SearchResultCell extends React.PureComponent {
   }
 
   playerInfo = () => {
-    Actions.PlayerScreen({title: this.account_id, playerName: this.nickname, id: this.account_id, server: global.server});
+    const { name, id, server } = this.props.data;
+    Actions.PlayerScreen({title: id, playerName: name, id: id, server: server});
   }
 }
 

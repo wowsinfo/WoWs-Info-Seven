@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TextInput, FlatList, Keyboard, SafeAreaView } from 'react-native';
-import { SearchHeader, SearchRightButton, WoWsTouchable, SearchResultCell, PlayerListCell } from '../../component';
+import { SearchHeader, SearchRightButton, WoWsTouchable, SearchResultCell } from '../../component';
 import { PlayerSearch } from '../../core';
 import { Actions } from 'react-native-router-flux';
 
@@ -9,19 +9,29 @@ class SearchScreen extends React.PureComponent {
   state = {
     showPlayerList: true,
     player: true,
-    data: global.playerList,
+    data: [],
   }
 
-  constructor() {
-    super();
+  componentWillMount() {
     Actions.refresh({
       renderTitle: <SearchHeader onChangeText={this.searchPlayer}/>, 
       right: <SearchRightButton reset={this.clearResult}/>
     })
+
+    var info = []; var hasHenry = false;
+    for (key in global.playerList) {
+      if (key == '2011774448') {
+        hasHenry = true; continue;
+      }
+      info.push(global.playerList[key]);
+    }
+    if (hasHenry) info.push({name: 'HenryQuan', id: '2011774448', server: '3'});
+    this.setState({
+      data: info.reverse(),
+    })
   }
 
-  keyExtractor = (item) => {return item.nickname}  
-  listExtractor = (item) => { console.log(item); return item.id}  
+  keyExtractor = (item) => {return item.id}
   render() {
     const { player, showPlayerList, data } = this.state;
     if (player) {
@@ -29,12 +39,12 @@ class SearchScreen extends React.PureComponent {
         // Before typing anything
         return (
           <SafeAreaView>
-            <FlatList data={data} keyExtractor={this.listExtractor}
-              renderItem={(item) => <PlayerListCell data={item}/>}/>
+            <FlatList data={data} keyExtractor={this.keyExtractor} onScrollBeginDrag={Keyboard.dismiss}
+              renderItem={({item}) => <SearchResultCell data={item}/>}/>
           </SafeAreaView>
         )
       } else {
-        // After typing somethins
+        // After typing somethins    
         return (
           <SafeAreaView>
             <FlatList data={data} keyExtractor={this.keyExtractor} onScrollBeginDrag={Keyboard.dismiss}

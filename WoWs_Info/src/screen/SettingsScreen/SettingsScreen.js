@@ -60,7 +60,7 @@ class SettingsScreen extends React.PureComponent {
       if (global.languageJson[key] == value) {
         // Update Data HERE
         global.apiLanguage = key;
-        store.update(localDataName.apiLanguage, key);
+        store.save(localDataName.apiLanguage, key);
         // Change WoWsLoading
         this.setState({
           isUpdating: true,
@@ -77,7 +77,7 @@ class SettingsScreen extends React.PureComponent {
 
   changeNewsLanguage = (index, value) => {
     global.newsLanguage = value;
-    store.update(localDataName.newsLanguage, value);
+    store.save(localDataName.newsLanguage, value);
   }
 
   changeAppLanguage = (index, value) => {
@@ -85,7 +85,7 @@ class SettingsScreen extends React.PureComponent {
     let newLang = langCode[index];
     // Update global, store
     global.appLanguage = newLang;
-    store.update(localDataName.appLanguage, newLang);
+    store.save(localDataName.appLanguage, newLang);
     strings.setLanguage(newLang);
     // Dont forget to put in a colour here
     this.props.reset(global.themeColour);    

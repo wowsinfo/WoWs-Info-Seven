@@ -14,6 +14,7 @@ export * from './PlayerInfo/Basic8Cell';
 export * from './PlayerInfo/RecordCell';
 export * from './PlayerInfo/ShipInfoCell';
 export * from './PlayerInfo/RankCell';
+export * from './PlayerInfo/AddFriendButton';
 
 // Wiki Cell
 export * from './Wiki/Cell/WikiCell';
@@ -27,7 +28,6 @@ export * from './Wiki/Cell/WarshipCell';
 export * from './PlayerSearch/SearchHeader';
 export * from './PlayerSearch/SearchRightButton';
 export * from './PlayerSearch/Cell/SearchResultCell';
-export * from './PlayerSearch/Cell/PlayerListCell';
 
 // Settings
 export * from './Settings/ThemeCell';

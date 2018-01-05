@@ -26,7 +26,7 @@ class SearchRightButton extends React.PureComponent {
   valueChanged = (index, value) => {
     // Update server index
     global.server = index;
-    store.update(localDataName.currServer, index);
+    store.save(localDataName.currServer, index);
     this.props.reset();
   }
 }

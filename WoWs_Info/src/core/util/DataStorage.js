@@ -32,7 +32,7 @@ class DataStorage {
           // There is an update
           Alert.alert(curr, strings.game_has_update);
           await DataManager.updateLocalData();
-          await store.update(localDataName.gameVersion, curr);
+          await store.save(localDataName.gameVersion, curr);
         } else {
           await DataStorage.restoreSavedData();
         }
@@ -58,31 +58,31 @@ class DataStorage {
   static async setupLocalStorage() {
     try {   
       // I am more than happy to play in a division
-      await store.update(localDataName.playerList, [{name: 'HenryQuan', id: '2011774448', server: '3'}]);
-      await store.update(localDataName.userInfo, {name: '', id: '', server: '', access_token: '', created_at: ''});
-      await store.update(localDataName.userData, '');
+      await store.save(localDataName.playerList, {'2011774448': {name: 'HenryQuan', id: '2011774448', server: '3'}});
+      await store.save(localDataName.userInfo, {name: '', id: '', server: '', access_token: '', created_at: ''});
+      await store.save(localDataName.userData, '');
   
       let version = await GameVersion.getCurrVersion();
-      await store.update(localDataName.gameVersion, version);
+      await store.save(localDataName.gameVersion, version);
   
-      await store.update(localDataName.currDate, DateCalculator.getCurrDate());
-      await store.update(localDataName.tokenDate, '');
-      await store.update(localDataName.currServer, '3');
+      await store.save(localDataName.currDate, DateCalculator.getCurrDate());
+      await store.save(localDataName.tokenDate, '');
+      await store.save(localDataName.currServer, '3');
   
       await DataStorage.setupTheme();
-      await store.update(localDataName.firstLaunch, 'false');
+      await store.save(localDataName.firstLaunch, false);
 
-      await store.update(localDataName.isPro, 'false');
-      await store.update(localDataName.hasAds, 'true');
-      await store.update(localDataName.moeMode, 'false');
+      await store.save(localDataName.isPro, false);
+      await store.save(localDataName.hasAds, true);
+      await store.save(localDataName.moeMode, false);
 
       // Remove country code is needed
       let lang = Language.getCurrentLanguage();
-      await store.update(localDataName.appLanguage, lang);
+      await store.save(localDataName.appLanguage, lang);
       // This is the cause of the mystery
       if (lang == 'zh') lang = 'zh-cn';
-      await store.update(localDataName.newsLanguage, lang);
-      await store.update(localDataName.apiLanguage, lang);
+      await store.save(localDataName.newsLanguage, lang);
+      await store.save(localDataName.apiLanguage, lang);
   
       // Check again for userdefault
       let currOS = Platform.OS;
@@ -92,12 +92,12 @@ class DataStorage {
         if (data != null) {
           console.log('Retrieving userdefault...');
           let server = await UserDefaults.stringForKey(IOSDataName.server);
-          await store.update(localDataName.currServer, server);
+          await store.save(localDataName.currServer, server);
           
           let pro = await UserDefaults.objectForKey(IOSDataName.hasPurchased);     
           if (pro) {
-            await store.update(localDataName.isPro, 'true');
-            await store.update(localDataName.hasAds, 'false');  
+            await store.save(localDataName.isPro, true);
+            await store.save(localDataName.hasAds, false);  
           }
           
           let username = await UserDefaults.stringForKey(IOSDataName.userName);       
@@ -105,7 +105,7 @@ class DataStorage {
             var playerObj = PlayerConverter.fromString(username);
             playerObj.access_token = '';
             playerObj.created_at = '';
-            await store.update(localDataName.userInfo, playerObj);
+            await store.save(localDataName.userInfo, playerObj);
           }
   
           let friend = await UserDefaults.objectForKey(IOSDataName.friend);
@@ -115,17 +115,17 @@ class DataStorage {
               playerList.push(PlayerConverter.fromString(friend[i]));
             }
             global.playerList = playerList;
-            await store.update(localDataName.playerList, playerList);
+            await store.save(localDataName.playerList, playerList);
           }
         }
       } else if (currOS == 'windows') {
         // All UWP are paid so they are all pro users
-        await store.update(localDataName.isPro, 'true');
-        await store.update(localDataName.hasAds, 'false');
+        await store.save(localDataName.isPro, true);
+        await store.save(localDataName.hasAds, false);
       } else if (currOS == 'android') {
         // All Android are plus so they are all pro users but with ads
-        await store.update(localDataName.isPro, 'true');
-        await store.update(localDataName.hasAds, 'true');
+        await store.save(localDataName.isPro, true);
+        await store.save(localDataName.hasAds, true);
       }
     } catch (error) {
       console.error(error);
@@ -141,7 +141,7 @@ class DataStorage {
       default: break;
     }
     global.themeColour = colour;
-    await store.update(localDataName.themeColour, colour);
+    await store.save(localDataName.themeColour, colour);
   }
 
   static async restoreTheme() {
@@ -152,8 +152,8 @@ class DataStorage {
   }
 
   static async restorePlayerInfo() {
-    global.isPro = JSON.parse(await store.get(localDataName.isPro));
-    global.hasAds = JSON.parse(await store.get(localDataName.hasAds));
+    global.isPro = await store.get(localDataName.isPro);
+    global.hasAds = await store.get(localDataName.hasAds);
     global.userInfo = await store.get(localDataName.userInfo);   
   }
 

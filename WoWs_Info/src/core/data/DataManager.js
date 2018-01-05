@@ -7,6 +7,10 @@ class DataManager {
   static async updateLocalData() {
     // Language has to be saved in order to load other data correctly
     await DataManager.saveData(DataAPI.Language, savedDataName.language);
+    // Additional information
+    await DataManager.saveAlias();
+    // Personal Rating
+    await DataManager.savePersonalRating();
     await DataManager.saveData(DataAPI.Encyclopedia, savedDataName.encyclopedia);    
     await DataManager.saveData(DataAPI.ShipType, savedDataName.shipType);    
     await DataManager.saveData(DataAPI.Achievement, savedDataName.achievement);
@@ -16,10 +20,6 @@ class DataManager {
     await DataManager.saveData(DataAPI.Warship, savedDataName.warship);
     await DataManager.saveData(DataAPI.Collection, savedDataName.collection);
     await DataManager.saveData(DataAPI.CollectionItem, savedDataName.collectionItem);
-    // Additional information
-    await DataManager.saveAlias();
-    // Personal Rating
-    await DataManager.savePersonalRating();
   }
 
   static async savePersonalRating() {
@@ -29,7 +29,7 @@ class DataManager {
       if (data != null) data = data.data;
       // console.log(data);
       global.personalRatingJson = data;
-      await store.update(savedDataName.personalRating, data);
+      await store.save(savedDataName.personalRating, data);
     } catch (error) {
       console.error(error);
     }
@@ -59,7 +59,7 @@ class DataManager {
           }
         }
         // Update saved data
-        store.update(savedDataName.warship, global.warshipJson);
+        store.save(savedDataName.warship, global.warshipJson);
       }
     } catch (error) {
       console.error(error);
@@ -161,7 +161,7 @@ class DataManager {
             global.collectionItemJson = data; break;
         }
         console.log(data);
-        await store.update(savedName, data);
+        await store.save(savedName, data);
       }
     } catch (error) {
       console.error(error);

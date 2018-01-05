@@ -25,7 +25,7 @@ class ThemeCell extends React.PureComponent {
 
   changeTheme = () => {
     global.themeColour = this.colour;
-    store.update(localDataName.themeColour, this.colour);
+    store.save(localDataName.themeColour, this.colour);
     Actions.pop();
     // Reset this app
     setTimeout(() => {
