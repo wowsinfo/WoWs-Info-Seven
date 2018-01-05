@@ -10,4 +10,9 @@ export const styles = StyleSheet.create({
     height: 80, 
     width: 80,
   },
+  textStyle: {
+    textAlign: 'center',
+    fontSize: 16,
+    fontWeight: '300',
+  }
 })

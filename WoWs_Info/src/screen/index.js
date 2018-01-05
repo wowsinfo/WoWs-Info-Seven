@@ -29,3 +29,4 @@ export * from './PlayerScreen/ShipInfoScreen';
 export * from './PlayerScreen/ShipDetailScreen';
 export * from './PlayerScreen/RankInfoScreen';
 export * from './PlayerScreen/RankDetailScreen';
+export * from './PlayerScreen/ShowroomScreen';

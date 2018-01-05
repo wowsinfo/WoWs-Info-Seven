@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Dimensions, Settings, Image } from 'react-native';
-import { BasicInfoScreen, ShipInfoScreen, RankInfoScreen } from '../../screen';
+import { BasicInfoScreen, ShipInfoScreen, RankInfoScreen, ShowroomScreen } from '../../screen';
 import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
 import strings from '../../localization';
 
@@ -36,7 +36,7 @@ class PlayerTab extends React.PureComponent {
     )
   }
   renderScene = SceneMap({
-    'achievement': placeholder,
+    'achievement': () => <ShowroomScreen {...this.props}/>,
     'graph': placeholder,
     'basic': () => <BasicInfoScreen {...this.props}/>,
     'ship': () => <ShipInfoScreen {...this.props}/>,
