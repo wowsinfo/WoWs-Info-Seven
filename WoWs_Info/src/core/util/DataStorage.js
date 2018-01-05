@@ -131,9 +131,10 @@ class DataStorage {
 
       let friend = await UserDefaults.objectForKey(IOSDataName.friend);
       if (friend != null) {
-        var playerList = [];
+        var playerList = {};
         for (var i = 0; i < friend.length; i++) {
-          playerList.push(PlayerConverter.fromString(friend[i]));
+          let obj = PlayerConverter.fromString(friend[i]);
+          playerList[obj.id] = obj;
         }
         global.playerList = playerList;
         await store.save(localDataName.playerList, playerList);

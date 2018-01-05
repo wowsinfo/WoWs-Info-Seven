@@ -72,7 +72,6 @@ class SettingsScreen extends React.PureComponent {
     if (Platform.OS == 'ios') {
       Alert.alert(strings.warning, strings.are_your_sure, [
         {text: 'YES', onPress: () => {
-          AsyncStorage.removeItem(localDataName.playerList);
           DataStorage.setupIOSData().then(() => {
             this.props.reset(global.themeColour);
           })
