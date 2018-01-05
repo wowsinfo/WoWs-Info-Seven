@@ -12,6 +12,7 @@ export const API = {
   ShipInfo: 'https://api.worldofwarships.{0}/wows/ships/stats/?application_id=' + ApplicationID + '&fields=pvp.max_planes_killed%2Cpvp.damage_dealt%2Cpvp.wins%2Cpvp.max_damage_dealt%2Cpvp.ramming%2Cpvp.torpedoes%2Cpvp.aircraft%2Cpvp.frags%2Cpvp.battles%2Cpvp.max_xp%2Cpvp.survived_battles%2Cship_id%2Cpvp.max_frags_battle%2Cpvp.main_battery%2Cpvp.second_battery%2Cpvp.xp&account_id=',
   RankInfo: 'https://api.worldofwarships.{0}/wows/seasons/accountinfo/?application_id=' + ApplicationID + '&fields=seasons.rank_solo.damage_dealt%2Cseasons.rank_solo.wins%2Cseasons.rank_solo.battles%2Cseasons.rank_info&account_id=',
   RankShipInfo: 'https://api.worldofwarships.{0}/wows/seasons/shipstats/?application_id=' + ApplicationID + '&fields=ship_id%2Cseasons.rank_solo&account_id=',
+  CurrRankInfo: 'https://api.worldofwarships.{0}/wows/seasons/accountinfo/?application_id=' + ApplicationID +'&fields=seasons.rank_info.rank&account_id=',
   AchievementInfo: 'https://api.worldofwarships.{0}/wows/account/achievements/?application_id=' + ApplicationID + '&language=en&fields=battle&account_id=',
 }
 

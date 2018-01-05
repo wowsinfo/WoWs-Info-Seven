@@ -51,7 +51,7 @@ class BasicInfoScreen extends React.PureComponent {
   render() {
     if (this.state.isReady) {
       const { id, playerName } = this.props;
-      const { level, created, last_battle } = this.state.info;
+      const { level, created, last_battle, rank } = this.state.info;
       const { playerNameStyle, scrollViewStyle, mainViewStyle, playerInfoStyle, playerViewStyle, dontJudgeStyle } = styles;
       return (
         <View style={mainViewStyle}>
@@ -59,7 +59,7 @@ class BasicInfoScreen extends React.PureComponent {
             <View style={[playerViewStyle, {backgroundColor: global.themeColour}]}>
               <Text style={playerNameStyle}>{playerName}</Text>
               <Text style={playerInfoStyle}>{last_battle}</Text>
-              <Text style={playerInfoStyle}>{created + ' | Lv ' + level}</Text>
+              <Text style={playerInfoStyle}>{created + ' | Lv ' + level + ' | ⭐️' + rank}</Text>
               { this.renderSetAsMainBtn() }              
             </View>
             <Basic8Cell info={this.state.info}/>

@@ -43,19 +43,34 @@ class PlayerInfo {
       info.level = player.leveling_tier;
       info.last_battle = new Date(player.last_battle_time * 1000).toLocaleString();
       var format = require('string-format');      
-      let api = format(API.CreatedAt, ServerManager.getDomainFrom(this.server)) + this.name;
+      let createdAtApi = format(API.CreatedAt, ServerManager.getDomainFrom(this.server)) + this.name;
+      let currRankApi = format(API.CurrRankInfo, ServerManager.getDomainFrom(this.server)) + this.id;
       // Get created at xxx
       try {
-        let response = await fetch(api);
-        let json = await response.json();
+        var response = await fetch(createdAtApi);
+        var json = await response.json();
         if (json != null && json.status == 'ok') {
           let created = json.data[0].created_at;
           info.created_at = created;
           let now = Math.floor(Date.now() / 1000);
           let diff = (now - created) / (3600 * 24);
           info.created = DateCalculator.diffToString(diff);
-          return info;
         }
+        response = await fetch(currRankApi);
+        json = await response.json();
+        if (json != null && json.status == 'ok') {
+          let data = json.data[this.id];
+          if (data != null) {
+            let currRank = data.seasons;
+            var lastest = 0;
+            for (key in currRank) {
+              let season = parseInt(key);
+              if (season > lastest) lastest = season;
+            }
+            info.rank = currRank[lastest].rank_info.rank;
+          } else info.rank = 0;
+        }
+        return info;
       } catch (error) {
         console.error(error);
       }
