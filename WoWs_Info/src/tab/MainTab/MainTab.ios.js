@@ -1,12 +1,26 @@
 import React from 'react';
 import { TabBarIOS } from 'react-native';
 import { WikiScreen, NewsScreen, SettingsScreen } from '../../screen';
+import { Actions } from 'react-native-router-flux';
 import strings from '../../localization';
 
 class MainTab extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {selectedTab: 'News'};
+  }
+
+  componentWillMount() {
+    let isPro = global.isPro;
+    let hasAds = global.hasAds;
+    let userInfo = global.userInfo;
+    console.log(isPro, hasAds, userInfo);
+    if (isPro && userInfo.id != ''){
+      Actions.PlayerScreen({title: userInfo.id, playerName: userInfo.name, id: userInfo.id, server: userInfo.server});      
+    }
+    if (hasAds) {
+      // Show ads here in the future
+    }
   }
 
   setTab(ID) {

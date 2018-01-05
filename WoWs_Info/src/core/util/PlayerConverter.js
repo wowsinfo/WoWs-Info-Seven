@@ -5,7 +5,7 @@ class PlayerConverter {
   }
 
   static toString(obj) {
-    if (obj == null) return;
+    if (obj == null || obj.id == '') return null;
     return [obj.name, obj.id, obj.server].join('|');
   }
 }

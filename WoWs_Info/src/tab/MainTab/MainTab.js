@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StyleSheet, Dimensions, Settings } from 'react-native';
 import { WikiScreen, NewsScreen, SettingsScreen } from '../../screen';
 import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
+import { Actions } from 'react-native-router-flux';
 import strings from '../../localization';
 
 // Faster loading
@@ -19,6 +20,19 @@ class MainTab extends React.PureComponent {
       {key: 'settings', title: strings.settings},
     ],
   };
+
+  componentWillMount() {
+    let isPro = global.isPro;
+    let hasAds = global.hasAds;
+    let userInfo = global.userInfo;
+    console.log(isPro, hasAds, userInfo);
+    if (isPro && userInfo.id != ''){
+      Actions.PlayerScreen({title: userInfo.id, playerName: userInfo.name, id: userInfo.id, server: userInfo.server});      
+    }
+    if (hasAds) {
+      // Show ads here in the future
+    }
+  }
 
   renderSettings = () => (
     <SettingsScreen reset={this.props.reset}/>
