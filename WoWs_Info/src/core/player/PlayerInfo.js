@@ -41,6 +41,7 @@ class PlayerInfo {
       let player = json[this.id];
       let info = {};
       info.level = player.leveling_tier;
+      info.last_battle = new Date(player.last_battle_time * 1000).toLocaleString();
       var format = require('string-format');      
       let api = format(API.CreatedAt, ServerManager.getDomainFrom(this.server)) + this.name;
       // Get created at xxx
@@ -49,6 +50,7 @@ class PlayerInfo {
         let json = await response.json();
         if (json != null && json.status == 'ok') {
           let created = json.data[0].created_at;
+          info.created_at = created;
           let now = Math.floor(Date.now() / 1000);
           let diff = (now - created) / (3600 * 24);
           info.created = DateCalculator.diffToString(diff);

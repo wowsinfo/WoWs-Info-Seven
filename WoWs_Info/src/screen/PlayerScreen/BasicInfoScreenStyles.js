@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
     fontSize: 36,
     width: '100%',
     fontWeight: '400',
-    marginTop: 16,
+    margin: 16,
     color: 'white',
   },
   playerInfoStyle: {
@@ -30,6 +30,7 @@ export const styles = StyleSheet.create({
     color: 'white',    
   },
   setasmainViewStyle: {
+    marginTop: 8,
     height: 32,
     width: '61.8%',
   },

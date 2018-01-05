@@ -1,7 +1,7 @@
 import React from 'react';
 import GridView from 'react-native-super-grid';
 import { Actions } from 'react-native-router-flux';
-import { WoWsLoading, BasicCell } from '../../../component';
+import { WoWsLoading, BasicCell, NoInformation } from '../../../component';
 
 class AchievementScreen extends React.PureComponent {
   state = {
@@ -51,9 +51,10 @@ class AchievementScreen extends React.PureComponent {
             else return <BasicCell icon={item.icon_inactive} data={item}/>}} />
       )
     } else {
-      return (
-        <GridView itemDimension={80} items={data} 
-          renderItem={item => <BasicCell icon={item.icon} data={item}/>}/>
+      if (data.length == 0) return <NoInformation />
+      else return (
+        <GridView itemDimension={80} items={data}
+        renderItem={item => <BasicCell icon={item.icon} data={item}/>}/>
       )
     }  
   }

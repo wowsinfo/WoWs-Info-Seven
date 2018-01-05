@@ -26,7 +26,7 @@ class SearchResultCell extends React.PureComponent {
   }
 
   playerInfo = () => {
-    Actions.PlayerScreen({title: this.account_id, playerName: this.nickname, id: this.account_id});
+    Actions.PlayerScreen({title: this.account_id, playerName: this.nickname, id: this.account_id, server: global.server});
   }
 }
 

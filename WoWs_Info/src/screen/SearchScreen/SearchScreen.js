@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TextInput, FlatList, Keyboard, SafeAreaView } from 'react-native';
-import { SearchHeader, SearchRightButton, WoWsTouchable, SearchResultCell } from '../../component';
+import { SearchHeader, SearchRightButton, WoWsTouchable, SearchResultCell, PlayerListCell } from '../../component';
 import { PlayerSearch } from '../../core';
 import { Actions } from 'react-native-router-flux';
 
@@ -9,7 +9,7 @@ class SearchScreen extends React.PureComponent {
   state = {
     showPlayerList: true,
     player: true,
-    data: [],
+    data: global.playerList,
   }
 
   constructor() {
@@ -17,20 +17,27 @@ class SearchScreen extends React.PureComponent {
     Actions.refresh({
       renderTitle: <SearchHeader onChangeText={this.searchPlayer}/>, 
       right: <SearchRightButton reset={this.clearResult}/>
-    })        
+    })
   }
 
   keyExtractor = (item) => {return item.nickname}  
+  listExtractor = (item) => { console.log(item); return item.id}  
   render() {
-    if (this.state.player) {
-      if (this.state.showPlayerList) {
+    const { player, showPlayerList, data } = this.state;
+    if (player) {
+      if (showPlayerList) {
         // Before typing anything
-        return null;
+        return (
+          <SafeAreaView>
+            <FlatList data={data} keyExtractor={this.listExtractor}
+              renderItem={(item) => <PlayerListCell data={item}/>}/>
+          </SafeAreaView>
+        )
       } else {
         // After typing somethins
         return (
           <SafeAreaView>
-            <FlatList data={this.state.data} keyExtractor={this.keyExtractor} onScrollBeginDrag={Keyboard.dismiss}
+            <FlatList data={data} keyExtractor={this.keyExtractor} onScrollBeginDrag={Keyboard.dismiss}
               renderItem={({item}) => <SearchResultCell data={item}/>} ref='listRef'/>
           </SafeAreaView>
         )
@@ -42,8 +49,8 @@ class SearchScreen extends React.PureComponent {
   }
 
   searchPlayer = (text) => {
-    this.setState({showPlayerList: false});
     // Real time request
+    this.setState({showPlayerList: false});    
     let input = text.split(' ').join('');
     if (input.length < 3) clearTimeout(SearchTimer);
     else {

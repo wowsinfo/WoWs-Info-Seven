@@ -9,7 +9,7 @@ class SearchHeader extends React.PureComponent {
     return (
       <View style={viewStyle}>
         <TextInput style={inputStyle} onChangeText={onChangeText} underlineColorAndroid='transparent'
-          autoCorrect={false} autoFocus autoCapitalize='none' clearButtonMode='while-editing' returnKeyType='search'/>
+          autoCorrect={false} autoCapitalize='none' clearButtonMode='while-editing' returnKeyType='search'/>
       </View>
     )
   }

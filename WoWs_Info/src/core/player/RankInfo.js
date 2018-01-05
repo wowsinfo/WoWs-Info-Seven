@@ -15,7 +15,9 @@ class RankInfo {
       let response = await fetch(this.rankInfoApi);
       let json = await response.json();
       if (json != null && json.status == 'ok') {
-        let info = json.data[this.id].seasons;
+        let data = json.data[this.id];
+        if (data == null) return null;
+        let info = data.seasons;
         var rank = [];
         for (key in info) {
           let curr = info[key];
@@ -58,7 +60,7 @@ class RankInfo {
             shipData.push(curr);          
           }
         }
-        console.log(shipData);
+        // console.log(shipData);
         return shipData;      
       }
     } catch (error) {

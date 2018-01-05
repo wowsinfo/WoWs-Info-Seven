@@ -92,7 +92,6 @@ class DataStorage {
         if (data != null) {
           console.log('Retrieving userdefault...');
           let server = await UserDefaults.stringForKey(IOSDataName.server);
-          global.server = server;
           await store.update(localDataName.currServer, server);
           
           let pro = await UserDefaults.objectForKey(IOSDataName.hasPurchased);     
@@ -115,6 +114,7 @@ class DataStorage {
             for (var i = 0; i < friend.length; i++) {
               playerList.push(PlayerConverter.fromString(friend[i]));
             }
+            global.playerList = playerList;
             await store.update(localDataName.playerList, playerList);
           }
         }
@@ -165,6 +165,8 @@ class DataStorage {
     global.appLanguage = await store.get(localDataName.appLanguage);
     global.newsLanguage = await store.get(localDataName.newsLanguage);
     global.gameVersion = await store.get(localDataName.gameVersion);
+    global.playerList = await store.get(localDataName.playerList);
+    DataStorage.restorePlayerInfo();
   }
 
   static async restoreSavedData() {

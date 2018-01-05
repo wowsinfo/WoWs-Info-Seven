@@ -10,8 +10,8 @@ class ShowroomScreen extends React.PureComponent {
   }
 
   componentWillMount() {
-    const { id } = this.props;
-    let info = new AchievementInfo(id, global.server);
+    const { id, server } = this.props;
+    let info = new AchievementInfo(id, server);
     info.getPlayerAchievement().then(achievement => {
       this.setState({
         isReady: true,

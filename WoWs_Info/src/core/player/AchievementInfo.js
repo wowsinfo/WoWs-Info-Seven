@@ -23,7 +23,7 @@ class AchievementInfo {
           info.push(copy);
         }
         info.sort(function(a, b) { return b.count - a.count })
-        console.log(global.achievementJson);
+        // console.log(global.achievementJson);
         return info;
       }
     } catch (error) {

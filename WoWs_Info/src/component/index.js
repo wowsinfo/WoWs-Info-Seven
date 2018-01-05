@@ -3,6 +3,7 @@ export * from './common/WoWsStatusBar';
 export * from './common/WoWsLoading';
 export * from './common/OnlineGroup';
 export * from './common/WoWsTouchable';
+export * from './common/NoInformation';
 
 // News
 export * from './News/NewsCell';
@@ -26,6 +27,7 @@ export * from './Wiki/Cell/WarshipCell';
 export * from './PlayerSearch/SearchHeader';
 export * from './PlayerSearch/SearchRightButton';
 export * from './PlayerSearch/Cell/SearchResultCell';
+export * from './PlayerSearch/Cell/PlayerListCell';
 
 // Settings
 export * from './Settings/ThemeCell';

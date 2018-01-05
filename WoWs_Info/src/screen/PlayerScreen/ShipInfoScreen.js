@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TextInput, Keyboard } from 'react-native';
 import { Icon } from 'react-native-elements';
-import { ShipInfoCell } from '../../component';
+import { ShipInfoCell, NoInformation } from '../../component';
 import ModalDropdown from 'react-native-modal-dropdown';
 import GridView from 'react-native-super-grid';
 import { styles } from './ShipInfoScreenStyles';
@@ -32,7 +32,8 @@ class ShipInfoScreen extends React.PureComponent {
 
   componentWillMount() {
     // Load data here and calculate personal rating
-    let ship = new ShipInfo(this.props.id, global.server);
+    const { id, server } = this.props;
+    let ship = new ShipInfo(id, server);
     ship.getShipInfo().then(json => {
       if (json != null) {
         var shipInfo = [];
@@ -71,11 +72,7 @@ class ShipInfoScreen extends React.PureComponent {
         ) 
       } else {
         const { noInfoTextStyle, noInfoViewStyle } = styles;
-        return (
-          <View style={noInfoViewStyle}>
-            <Text style={noInfoTextStyle}>{strings.no_ship_info}</Text>
-          </View>
-        )
+        return <NoInformation />
       }
     } else return <WoWsLoading />;
   }
