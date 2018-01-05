@@ -137,7 +137,7 @@ class DataManager {
             for (key in data) {
               let curr = data[key];
               curr.icon = curr.images.small; delete curr.images;
-              if (curr.nation == 'japan' && curr.type == '') {
+              if (curr.nation == 'japan') {
                 if (curr.name.toLowerCase() == 'fubuki') curr.name += ' chan';              
               }
             }

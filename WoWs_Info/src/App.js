@@ -39,9 +39,11 @@ export default class App extends Component {
         </View>
       );
     } else {
-      // Loading Screen now uses theme colour
       return (
-        <LoadingScreen colour={colour} isPro={isPro} hasAds={hasAds}/>
+        <View style={ViewStyle}>
+          <WoWsStatusBar themeColour={colour}/>
+          <LoadingScreen colour={colour} isPro={isPro} hasAds={hasAds}/>
+        </View>
       )
     }
   }
