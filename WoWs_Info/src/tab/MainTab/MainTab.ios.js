@@ -15,7 +15,7 @@ class MainTab extends React.PureComponent {
     let hasAds = global.hasAds;
     let userInfo = global.userInfo;
     console.log(isPro, hasAds, userInfo);
-    if (isPro && userInfo.id != ''){
+    if (isPro && userInfo.id != '' && global.showMainAccount){
       Actions.PlayerScreen({title: userInfo.id, playerName: userInfo.name, id: userInfo.id, server: userInfo.server});      
     }
     if (hasAds) {

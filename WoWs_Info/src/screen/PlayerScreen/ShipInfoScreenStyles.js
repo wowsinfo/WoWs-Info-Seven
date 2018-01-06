@@ -31,7 +31,6 @@ export const styles = StyleSheet.create({
   inputStyle: {
     width: '40%', 
     borderColor: 'white', 
-    color: 'white',
     fontSize: 16,
     textAlign: 'center',
   },

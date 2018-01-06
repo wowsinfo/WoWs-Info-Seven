@@ -7,11 +7,11 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="a348427e-43a8-4f61-adf2-7e6551af5da9"
+    Name="dd3fc5b2-5895-44ae-92f9-749d0dc5dcfd"
     Publisher="CN=Yiheng Quan"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="a348427e-43a8-4f61-adf2-7e6551af5da9" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="dd3fc5b2-5895-44ae-92f9-749d0dc5dcfd" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>WoWs_Info</DisplayName>

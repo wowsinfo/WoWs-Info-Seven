@@ -12,6 +12,8 @@ global.appLanguage = 'en';
 global.newsLanguage = 'en';
 // Just to prevent user resetting his/her app like crazy
 global.canReset = true;
+// Prevent show main account when theme or reset and other stuff
+global.showMainAccount = true;
 switch (Platform.OS) {
   case 'ios':
     global.themeColour = WoWsInfo.blue; break;

@@ -10,7 +10,6 @@ export const styles = StyleSheet.create({
   inputStyle: {
     height: 50, width: '100%', 
     borderColor: 'white', 
-    color: 'white', 
     fontSize: 20, 
     textAlign: 'center',
   },

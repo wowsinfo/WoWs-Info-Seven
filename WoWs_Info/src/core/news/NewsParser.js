@@ -1,5 +1,6 @@
 import { API } from '../../constant/value';
 import { ServerManager } from '../../core';
+import { Platform } from 'react-native';
 
 class NewsParser {
   constructor(index, language) {
@@ -52,7 +53,12 @@ class NewsParser {
   async getNews() {
     try {
       console.log(this.url);
-      let response = await fetch(this.url);
+      var response = await fetch(this.url);
+      if (Platform.OS == 'windows') {
+        // Handle 301
+        let newUrl = response.headers.map.location["0"];
+        response = await fetch(newUrl);
+      }
       let html = await response.text();
       var HTMLParser = require('fast-html-parser');
       let root = HTMLParser.parse(html);
