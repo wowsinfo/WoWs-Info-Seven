@@ -6,7 +6,6 @@ class LoadingScreen extends React.PureComponent {
   state = {
     isPro: false,
     hasAds: true,
-    color: '#2CCC72',
   }
 
   componentDidUpdate() {
@@ -14,13 +13,12 @@ class LoadingScreen extends React.PureComponent {
     this.setState({
       isPro: isPro,
       hasAds: hasAds,
-      colour: colour,
     })
   }
 
   render() {
     return (
-      <View style={ViewStyle} backgroundColor={this.state.colour}>
+      <View style={ViewStyle} backgroundColor={global.themeColour}>
         <WoWsStatusBar style={ImageStyle}/>
         { this.renderLogo() }
         <ActivityIndicator color='white' size='large'/>

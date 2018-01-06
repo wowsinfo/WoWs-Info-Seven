@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Animated, View } from 'react-native';
+import { Animated, ScrollView, Platform } from 'react-native';
 
 class FadeInView extends Component {
   state = {
@@ -21,6 +21,7 @@ class FadeInView extends Component {
   render() {
     const { opacityAnim } = this.state;
     const { style, children } = this.props;
+    if (Platform.OS == 'windows') return <ScrollView>{children}</ScrollView>;
     return (
       <Animated.View style={{...style, opacity: opacityAnim}}>
         {children}
