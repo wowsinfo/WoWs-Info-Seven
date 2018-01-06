@@ -10,6 +10,7 @@ class LoadingScreen extends React.PureComponent {
 
   componentDidUpdate() {
     const { isPro, hasAds } = this.props;   
+    console.log(this.props.colour);
     this.setState({
       isPro: isPro,
       hasAds: hasAds,

@@ -43,7 +43,7 @@ let strings = new LocalizedStrings({
     news_language: 'Change News language',
     change_theme: 'Change theme colour',
     reset_data: 'Reset all saved data',
-    reset_ios_data: 'Load local date (IOS)',
+    reset_ios_data: 'Load local data (IOS)',
     warning: 'Warning',
     ios_only: 'This is for IOS only',
     no_more_reset: 'No infinite reset',
