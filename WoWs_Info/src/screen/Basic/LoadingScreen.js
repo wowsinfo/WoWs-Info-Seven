@@ -6,20 +6,21 @@ class LoadingScreen extends React.PureComponent {
   state = {
     isPro: false,
     hasAds: true,
+    color: '#2CCC72',
   }
 
   componentDidUpdate() {
-    const { isPro, hasAds } = this.props;   
-    console.log(this.props.colour);
+    const { isPro, hasAds, colour } = this.props;   
     this.setState({
       isPro: isPro,
       hasAds: hasAds,
+      colour: colour,
     })
   }
 
   render() {
     return (
-      <View style={ViewStyle} backgroundColor={this.props.colour}>
+      <View style={ViewStyle} backgroundColor={this.state.colour}>
         <WoWsStatusBar style={ImageStyle}/>
         { this.renderLogo() }
         <ActivityIndicator color='white' size='large'/>
@@ -29,6 +30,7 @@ class LoadingScreen extends React.PureComponent {
 
   renderLogo() {
     const { isPro } = this.state;
+    console.log(isPro);
     if (isPro) return <Image source={require('../../img/LogoPro.png')}/>   
     return <Image source={require('../../img/LogoWhite.png')}/>
   }
