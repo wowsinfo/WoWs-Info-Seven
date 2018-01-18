@@ -17,7 +17,7 @@ class SearchRightButton extends React.PureComponent {
   render() {
     const { buttonStyle, dropdownStyle, dropdownTextStyle } = styles;
     return (
-      <Dropdown data={this.options} value={this.options[this.index].value}/>
+      <Dropdown data={this.options} value={this.options[this.index].value} labelHeight={28} />
     )
   }
 

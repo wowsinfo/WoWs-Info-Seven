@@ -155,9 +155,9 @@ class DataManager {
               let curr = data[key];
               curr.key = curr.card_id; delete curr.card_id;
               curr.text = curr.description; delete curr.description;
-              if (curr.text.includes('<h3>')) {
+              if (curr.text.includes('<')) {
                 // Remove HTML styling
-                curr.text = curr.text.replace(/<.*?>/gi, '');
+                curr.text = curr.text.replace(/\<.*?>/gi, '');
               }
               curr.icon = curr.images.small; delete curr.images;
               curr.collection = curr.collection_id; delete curr.collection_id;

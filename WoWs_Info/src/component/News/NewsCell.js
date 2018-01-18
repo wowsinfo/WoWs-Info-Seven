@@ -26,8 +26,8 @@ class NewsCell extends React.PureComponent {
   }
 
   visitWebsite = () => {
-    const { link, time } = this.props.data;    
-    Actions.InAppBrowser({link: this.link, title: this.time});
+    const { link, time } = this.props.data; 
+    Actions.InAppBrowser({link: link, title: time});
   }
 }
 
