@@ -54,7 +54,7 @@ class DataManager {
             if (name == '鲔') name = '爱鹰';
             if (name == '吹雪') name += '酱';
             let curr = global.warshipJson[key];
-            if (curr == null || name[0].includes('[')) continue;  
+            if (curr == null || name.includes('[')) continue;  
             curr.name = name; 
           }
         }
@@ -155,6 +155,10 @@ class DataManager {
               let curr = data[key];
               curr.key = curr.card_id; delete curr.card_id;
               curr.text = curr.description; delete curr.description;
+              if (curr.text.includes('<h3>')) {
+                // Remove HTML styling
+                curr.text = curr.text.replace(/<.*?>/gi, '');
+              }
               curr.icon = curr.images.small; delete curr.images;
               curr.collection = curr.collection_id; delete curr.collection_id;
             }

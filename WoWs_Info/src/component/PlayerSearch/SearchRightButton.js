@@ -1,5 +1,5 @@
 import React from 'react';
-import ModalDropdown from 'react-native-modal-dropdown';
+import { Dropdown } from 'react-native-material-dropdown';
 import strings from '../../localization';
 import { ServerManager } from '../../core';
 import { localDataName } from '../../constant/value';
@@ -11,15 +11,13 @@ class SearchRightButton extends React.PureComponent {
     super();
     this.index = global.server;
     this.selectedServer = ServerManager.getCurrName(this.index);
-    this.options = [strings.russia, strings.europe, strings.north_america, strings.asia];
+    this.options = [{value: strings.russia}, {value: strings.europe}, {value: strings.north_america}, {value: strings.asia}];
   }
 
   render() {
     const { buttonStyle, dropdownStyle, dropdownTextStyle } = styles;
     return (
-      <ModalDropdown defaultValue={this.selectedServer} options={this.options} 
-        textStyle={buttonStyle} dropdownStyle={dropdownStyle} dropdownTextStyle={dropdownTextStyle} 
-        onSelect={this.valueChanged} showsVerticalScrollIndicator={false}/>
+      <Dropdown data={this.options} value={this.options[this.index].value}/>
     )
   }
 

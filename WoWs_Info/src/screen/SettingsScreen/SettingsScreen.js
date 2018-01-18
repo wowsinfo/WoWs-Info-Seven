@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Button, ScrollView, Platform, Alert, AsyncStorage } from 'react-native';
 import { Text } from 'react-native-elements';
 import { WoWsLoading } from '../../component';
-import ModalDropdown from 'react-native-modal-dropdown';
+import { Dropdown } from 'react-native-material-dropdown';
 import { styles } from './SettingsScreenStyles';
 import { DataManager, DataStorage } from '../../core';
 import { localDataName } from '../../constant/value';
@@ -38,9 +38,6 @@ class SettingsScreen extends React.PureComponent {
         <View style={{flex: 1}}>
           <ScrollView>
             <Text h1>{strings.language_header}</Text>
-            <ModalDropdown onSelect={this.changeApiLanguage} style={btnStyle} textStyle={textStyle} showsVerticalScrollIndicator={false} defaultValue={strings.api_language} options={this.api}/>
-            <ModalDropdown onSelect={this.changeAppLanguage} style={btnStyle} textStyle={textStyle} defaultValue={strings.app_language} options={this.app}/>
-            <ModalDropdown onSelect={this.changeNewsLanguage} style={btnStyle} textStyle={textStyle} defaultValue={strings.news_language} options={this.news}/>
             <Text h1>{strings.theme_header}</Text>
             <Button onPress={this.changeThemeColour} title={strings.change_theme}/>          
             <Text h1>{strings.about_header}</Text>

@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TextInput, Keyboard } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { ShipInfoCell, NoInformation } from '../../component';
-import ModalDropdown from 'react-native-modal-dropdown';
+import { Dropdown } from 'react-native-material-dropdown';
 import GridView from 'react-native-super-grid';
 import { styles } from './ShipInfoScreenStyles';
 import { ShipInfo, PersonalRating } from '../../core';
@@ -60,8 +60,6 @@ class ShipInfoScreen extends React.PureComponent {
         return (
           <View style={mainViewStyle}>
             <View style={[filterViewStyle, {backgroundColor: global.themeColour}]}>
-              <ModalDropdown ref='nationDropdown' defaultValue={strings.filter_nation} options={this.nation} onSelect={this.filterNation} textStyle={filterButtonStyle} dropdownStyle={dropdownStyle} dropdownTextStyle={dropdownTextStyle} showsVerticalScrollIndicator={false}/>
-              <ModalDropdown ref='typeDropdown' defaultValue={strings.filter_type} options={this.type} onSelect={this.filterType} textStyle={filterButtonStyle} dropdownStyle={dropdownStyle} dropdownTextStyle={dropdownTextStyle} showsVerticalScrollIndicator={false}/>
               <TextInput ref='filterInput' style={inputStyle} underlineColorAndroid='transparent' autoCorrect={false} 
                 autoCapitalize='none' clearButtonMode='while-editing' returnKeyType='search' onChangeText={this.onChangeText}/>
               { this.renderResetButton() }
