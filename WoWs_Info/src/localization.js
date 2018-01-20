@@ -215,6 +215,7 @@ let strings = new LocalizedStrings({
     change_theme: '改變主題顏色',
   },
   ja: {
+    
   },
 });
 

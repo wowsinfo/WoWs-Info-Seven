@@ -1,6 +1,6 @@
 import React from 'react';
 import { Basic8Cell, WoWsLoading } from '../../component';
-import { View, ScrollView, Text } from 'react-native';
+import { View, SafeAreaView, ScrollView, Text } from 'react-native';
 import { Divider } from 'react-native-elements';
 import { WoWsTouchable, RecordCell, AddFriendButton } from '../../component';
 import { Actions } from 'react-native-router-flux'; 
@@ -59,8 +59,8 @@ class BasicInfoScreen extends React.PureComponent {
       const { level, created, last_battle, rank } = this.state.info;
       const { playerNameStyle, scrollViewStyle, mainViewStyle, playerInfoStyle, playerViewStyle, dontJudgeStyle } = styles;
       return (
-        <View style={mainViewStyle}>
-          <ScrollView style={scrollViewStyle} automaticallyAdjustContentInsets={false} contentInset={{bottom: 49}}>
+        <SafeAreaView style={mainViewStyle}>
+          <ScrollView style={scrollViewStyle} automaticallyAdjustContentInsets={false}>
             <View style={[playerViewStyle, {backgroundColor: global.themeColour}]}>
               <Text style={playerNameStyle}>{playerName}</Text>
               <Text style={playerInfoStyle}>{last_battle}</Text>
@@ -74,7 +74,7 @@ class BasicInfoScreen extends React.PureComponent {
             <Divider style={{height: 1.5, backgroundColor: global.themeColour}}/>
             { this.renderRecord(this.state.weapon) }
           </ScrollView>
-        </View>
+        </SafeAreaView>
       )
     } else return <WoWsLoading />
   }

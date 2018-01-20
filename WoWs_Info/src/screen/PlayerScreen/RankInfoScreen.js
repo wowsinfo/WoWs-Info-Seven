@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, SafeAreaView } from 'react-native';
 import { WoWsLoading, RankCell, NoInformation } from '../../component';
 import GridView from 'react-native-super-grid';
 import { RankInfo } from '../../core';
@@ -29,8 +29,10 @@ class RankInfoScreen extends React.PureComponent {
     if (isReady) {
       if (rank) {
         return (
-          <GridView itemDimension={300} items={rank} renderHeader={this.renderHeader} enableEmptySections contentInset={{bottom: 49}}
-            automaticallyAdjustContentInsets={false} renderItem={item => <RankCell rank={item} ship={ship}/>} />
+          <SafeAreaView>
+            <GridView itemDimension={300} items={rank} renderHeader={this.renderHeader} enableEmptySections
+              automaticallyAdjustContentInsets={false} renderItem={item => <RankCell rank={item} ship={ship}/>} />
+          </SafeAreaView>
         )
       } else return <NoInformation />
     } else return <WoWsLoading />

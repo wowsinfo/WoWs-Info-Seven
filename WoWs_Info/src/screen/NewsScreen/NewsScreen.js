@@ -1,8 +1,8 @@
 import React from 'react';
-import { NewsParser } from '../../core';
+import { NewsParser, ThisIsiPhoneX } from '../../core';
 import { FadeInView } from '../../Animation';
 import { NewsCell, WoWsLoading } from '../../component';
-import { FlatList } from 'react-native';
+import { FlatList, SafeAreaView } from 'react-native';
 
 class NewsScreen extends React.PureComponent {
   state = {
@@ -21,8 +21,10 @@ class NewsScreen extends React.PureComponent {
     if (this.state.isReady) {
       return (
         <FadeInView>
-          <FlatList data={this.state.data} keyExtractor={this.keyExtractor} onRefresh={() => this.refreshNews()} automaticallyAdjustContentInsets={false}
-            contentInset={{bottom: 49}} renderItem={({item}) => <NewsCell data={item}/>} refreshing={this.state.isRefreshing}/>
+          <SafeAreaView>
+            <FlatList data={this.state.data} keyExtractor={this.keyExtractor} onRefresh={() => this.refreshNews()} automaticallyAdjustContentInsets={false}
+               renderItem={({item}) => <NewsCell data={item}/>} refreshing={this.state.isRefreshing}/>
+          </SafeAreaView>
         </FadeInView>
       )
     } return <WoWsLoading />;
