@@ -2,7 +2,7 @@ import React from 'react';
 import GridView from 'react-native-super-grid';
 import { WikiCell } from '../../component';
 import strings from '../../localization';
-import { FlatList } from 'react-native'; 
+import { FlatList, SafeAreaView } from 'react-native'; 
 
 class WikiScreen extends React.PureComponent {
   componentWillMount() {
@@ -18,8 +18,10 @@ class WikiScreen extends React.PureComponent {
   keyExtractor = (item) => {return item.name}  
   render() {
     return (
-      <FlatList data={this.WikiList} keyExtractor={this.keyExtractor} numColumns={2}
-        renderItem={({item}) => <WikiCell data={item}/>} />
+      <SafeAreaView>
+        <FlatList data={this.WikiList} keyExtractor={this.keyExtractor} numColumns={2} automaticallyAdjustContentInsets={false}
+          renderItem={({item}) => <WikiCell data={item}/>} />
+      </SafeAreaView>
     )
   }
 }

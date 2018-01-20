@@ -29,8 +29,14 @@ class WikiCell extends React.PureComponent {
   }
 
   onWikiBtnPressed() {
-    // console.log(this.index);
-    const { index } = this.props.data;    
+    const { index } = this.props.data;  
+    // Fix double 
+    let action = global.wikiAction; action.push(index);
+    let length = action.length;
+    console.log(action);
+    if (length > 1 && (action[length - 1] == action[length - 2])) {
+      global.wikiAction = []; return;
+    }
     switch (index) {
       case wikiIndex.Achievement: Actions.AchievementScreen(); break;
       case wikiIndex.Flag_Camouflage: Actions.BasicScreen({info: global.consumableJson, upgrade: false}); break;    

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Button, ScrollView, Platform, Alert, AsyncStorage } from 'react-native';
-import { Text } from 'react-native-elements';
+import { Text, Divider } from 'react-native-elements';
 import { WoWsLoading } from '../../component';
 import { Dropdown } from 'react-native-material-dropdown';
 import { styles } from './SettingsScreenStyles';
@@ -35,17 +35,19 @@ class SettingsScreen extends React.PureComponent {
     if (this.state.isUpdating) return <WoWsLoading />
     else {
       return (
-        <View style={{flex: 1, padding: 8}}>
+        <View style={{flex: 1}}>
           <ScrollView>
             <Text h3>{strings.language_header}</Text>  
             <Dropdown pickerStyle={{padding: 0, margin: 0}} label={strings.app_language} data={this.app}/>
             <Dropdown label={strings.api_language} data={this.api}/>
             <Dropdown label={strings.news_language} data={this.news} itemCount={5}/>
+            <Divider />
             <Text h3>{strings.theme_header}</Text>
-            <Button onPress={this.changeThemeColour} title={strings.change_theme}/>          
+            <Button onPress={this.changeThemeColour} title={strings.change_theme}/>  
+            <Divider />                    
             <Text h3>{strings.about_header}</Text>
             <Button onPress={this.resetAllData} title={strings.reset_data}/>          
-            <Button onPress={this.resetIOSData} title={strings.reset_ios_data}/>            
+            <Button onPress={this.resetIOSData} title={strings.reset_ios_data}/>                        
           </ScrollView>
         </View>
       )

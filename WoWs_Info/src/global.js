@@ -25,6 +25,7 @@ switch (Platform.OS) {
 }
 
 global.firstLaunch = true;
+global.wikiAction = [];
 
 global.languageJson = {};
 global.achievementJson = {};
