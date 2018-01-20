@@ -53,8 +53,8 @@ class AchievementScreen extends React.PureComponent {
     } else {
       if (data.length == 0) return <NoInformation />
       else return (
-        <GridView itemDimension={80} items={data}
-        renderItem={item => <BasicCell icon={item.icon} data={item}/>}/>
+        <GridView itemDimension={80} items={data} automaticallyAdjustContentInsets={false} contentInset={{bottom: 49}}
+          renderItem={item => <BasicCell icon={item.icon} data={item}/>}/>
       )
     }  
   }

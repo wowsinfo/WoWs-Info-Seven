@@ -21,11 +21,11 @@ class SettingsScreen extends React.PureComponent {
     this.api = apiList;
 
     switch (parseInt(global.server)) {
-      case 0: this.news = ['ru']; break;
-      case 1: this.news = ['cs', 'de', 'en', 'es', 'fr', 'it', 'pl', 'tr']; break;
-      case 2: this.news = ['en', 'es-mx', 'pt-br']; break;
-      case 3: this.news = ['en', 'ja', 'ko', 'th', 'zh-tw']; break;
-      default: this.news = ['zh']; break;
+      case 0: this.news = [{value: 'ru'}]; break;
+      case 1: this.news = [{value: 'cs'}, {value: 'de'}, {value: 'en'}, {value: 'es'}, {value: 'fr'}, {value: 'it'}, {value: 'pl'}, {value: 'tr'}]; break;
+      case 2: this.news = [{value: 'en'}, {value: 'es-mx'}, {value: 'pt-br'}]; break;
+      case 3: this.news = [{value: 'en'}, {value: 'ja'}, {value: 'ko'}, {value: 'th'}, {value: 'zh-tw'}]; break;
+      default: this.news = [{value: 'zh'}]; break;
     } 
 
     this.app = ['English', '简体中文', '繁體中文', '日本語'];
@@ -35,12 +35,15 @@ class SettingsScreen extends React.PureComponent {
     if (this.state.isUpdating) return <WoWsLoading />
     else {
       return (
-        <View style={{flex: 1}}>
+        <View style={{flex: 1, padding: 8}}>
           <ScrollView>
-            <Text h1>{strings.language_header}</Text>
-            <Text h1>{strings.theme_header}</Text>
+            <Text h3>{strings.language_header}</Text>  
+            <Dropdown pickerStyle={{padding: 0, margin: 0}} label={strings.app_language} data={this.app}/>
+            <Dropdown label={strings.api_language} data={this.api}/>
+            <Dropdown label={strings.news_language} data={this.news} itemCount={5}/>
+            <Text h3>{strings.theme_header}</Text>
             <Button onPress={this.changeThemeColour} title={strings.change_theme}/>          
-            <Text h1>{strings.about_header}</Text>
+            <Text h3>{strings.about_header}</Text>
             <Button onPress={this.resetAllData} title={strings.reset_data}/>          
             <Button onPress={this.resetIOSData} title={strings.reset_ios_data}/>            
           </ScrollView>
