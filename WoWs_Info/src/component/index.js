@@ -26,6 +26,7 @@ export * from './Wiki/Cell/WarshipCell';
 
 // Search
 export * from './PlayerSearch/SearchField';
+export * from './PlayerSearch/SearchSegment';
 export * from './PlayerSearch/SearchRightButton';
 export * from './PlayerSearch/Cell/SearchResultCell';
 

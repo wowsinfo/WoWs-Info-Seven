@@ -1,23 +1,26 @@
 import React from 'react';
 import { View, Text, TextInput, FlatList, Keyboard, SafeAreaView } from 'react-native';
-import { SearchField, SearchRightButton, WoWsTouchable, SearchResultCell } from '../../component';
+import { SearchField, SearchRightButton, WoWsTouchable, SearchResultCell, SearchSegment } from '../../component';
 import { PlayerSearch } from '../../core';
 import { Actions } from 'react-native-router-flux';
 
 var SearchTimer;
 class SearchScreen extends React.PureComponent {
-  state = {
-    showPlayerList: true,
-    player: true,
-    data: [],
+  constructor(props) {
+    super();
+    this.state = {
+      showPlayerList: true,
+      player: true,
+      data: [],
+    }
+
+    Actions.refresh({
+      renderTitle: <SearchSegment />,
+      right: <SearchRightButton reset={this.clearResult}/>
+    })
   }
 
   componentWillMount() {
-    Actions.refresh({
-      renderTitle: <
-      right: <SearchRightButton reset={this.clearResult}/>
-    })
-
     var info = []; var hasHenry = false;
     for (key in global.playerList) {
       if (key == '2011774448') {
@@ -56,7 +59,13 @@ class SearchScreen extends React.PureComponent {
       }
     } else {
       // This is for clan
-      return null;
+      return (
+        <SafeAreaView>
+          <SearchField onChangeText={this.searchPlayer}/>
+          <FlatList data={data} keyExtractor={this.keyExtractor} onScrollBeginDrag={Keyboard.dismiss}
+            renderItem={({item}) => <SearchResultCell data={item}/>} ref='listRef'/>
+        </SafeAreaView>
+      );
     }
   }
 
@@ -78,6 +87,10 @@ class SearchScreen extends React.PureComponent {
         })
       }, 1250);
     }
+  }
+
+  searchClan = (text) => {
+    
   }
 
   clearResult = () => {

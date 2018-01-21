@@ -88,6 +88,9 @@ let strings = new LocalizedStrings({
     season: 'Season ',
     // Deleted ships
     deleted_ships: 'This is a deleted ship\nPls dont forget her',
+    // Player Search
+    search_player: 'Player',
+    search_clan: 'Clan',
   },
   zh: {
     // Game Update
@@ -176,6 +179,9 @@ let strings = new LocalizedStrings({
     season: '赛季',
     // Deleted ships
     deleted_ships: '这是一艘被删除的船\n请不要忘记她',
+    // Player Search
+    search_player: '玩家',
+    search_clan: '工会',
   },
   'zh-tw': {
     // Game Update
