@@ -7,8 +7,9 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   containerStyle: {
-    width: '100%', 
+    width: '80%', 
     alignSelf: 'center',
+    height: 26,
   },
   activeStyle: {
     backgroundColor: 'white',

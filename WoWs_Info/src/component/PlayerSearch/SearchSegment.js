@@ -10,7 +10,7 @@ class SearchSegment extends Component {
     return (
       <View style={viewStyle}>
         <SegmentedControlTab tabsContainerStyle={containerStyle} tabStyle={{backgroundColor: global.themeColour, borderColor: 'white'}} activeTabStyle={activeStyle} 
-          tabTextStyle={textStyle} activeTabTextStyle={{color: global.themeColour}} values={[strings.search_player, strings.search_clan]}/>
+          tabTextStyle={textStyle} activeTabTextStyle={{color: global.themeColour}} borderRadius={13} values={[strings.search_player, strings.search_clan]}/>
       </View>
     )
   }
