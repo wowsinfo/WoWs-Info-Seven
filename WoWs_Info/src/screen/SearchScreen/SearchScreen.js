@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TextInput, FlatList, Keyboard, SafeAreaView } from 'react-native';
-import { SearchHeader, SearchRightButton, WoWsTouchable, SearchResultCell } from '../../component';
+import { SearchField, SearchRightButton, WoWsTouchable, SearchResultCell } from '../../component';
 import { PlayerSearch } from '../../core';
 import { Actions } from 'react-native-router-flux';
 
@@ -14,7 +14,7 @@ class SearchScreen extends React.PureComponent {
 
   componentWillMount() {
     Actions.refresh({
-      renderTitle: <SearchHeader onChangeText={this.searchPlayer}/>, 
+      renderTitle: <
       right: <SearchRightButton reset={this.clearResult}/>
     })
 
@@ -39,6 +39,7 @@ class SearchScreen extends React.PureComponent {
         // Before typing anything
         return (
           <SafeAreaView>
+            <SearchField onChangeText={this.searchPlayer}/>
             <FlatList data={data} keyExtractor={this.keyExtractor} onScrollBeginDrag={Keyboard.dismiss}
               renderItem={({item}) => <SearchResultCell data={item}/>}/>
           </SafeAreaView>
@@ -47,6 +48,7 @@ class SearchScreen extends React.PureComponent {
         // After typing somethins    
         return (
           <SafeAreaView>
+            <SearchField onChangeText={this.searchPlayer}/>
             <FlatList data={data} keyExtractor={this.keyExtractor} onScrollBeginDrag={Keyboard.dismiss}
               renderItem={({item}) => <SearchResultCell data={item}/>} ref='listRef'/>
           </SafeAreaView>

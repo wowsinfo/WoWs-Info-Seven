@@ -1,8 +1,8 @@
 import React from 'react';
 import { TextInput, View } from 'react-native';
-import { styles } from './SearchHeaderStyles';
+import { styles } from './SearchFieldStyles';
 
-class SearchHeader extends React.PureComponent {
+class extends React.PureComponent {
   render() {
     const { inputStyle, viewStyle } = styles;
     const { onChangeText } = this.props;
@@ -15,4 +15,4 @@ class SearchHeader extends React.PureComponent {
   }
 }
 
-export {SearchHeader};
+export {SearchField};
