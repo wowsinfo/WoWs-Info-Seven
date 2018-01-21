@@ -20,6 +20,10 @@ class BasicInfoScreen extends React.PureComponent {
       weapon: [],
       isMainAccount: false,
     }
+
+    const { id, playerName, server } = props;
+    let info = {name: playerName, id: id, server: server};
+    Actions.refresh({right: <AddFriendButton info={info}/>})
   }
 
   componentWillMount() {
@@ -44,10 +48,6 @@ class BasicInfoScreen extends React.PureComponent {
           record: recordInfo,
           weapon: recordWeaponInfo,
           isMainAccount: isMain,
-        }, () => {
-          const { id, playerName, server } = this.props;
-          let info = {name: playerName, id: id, server: server};
-          Actions.refresh({right: <AddFriendButton info={info}/>})
         })        
       });
     })
