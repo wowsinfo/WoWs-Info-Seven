@@ -27,6 +27,7 @@ class ClanScreen extends React.PureComponent {
         delete curr.joined_at;
         memberList.push(curr);
       }
+      memberList.sort(function (a, b) { return a.role > b.role ? 1 : -1 });
       this.setState({
         data: clanInfo,
         member: memberList,
@@ -40,7 +41,7 @@ class ClanScreen extends React.PureComponent {
     if (this.state.isReady) {
       return (
         <FlatList data={this.state.member} keyExtractor={this.keyExtractor} ListHeaderComponent={this.renderHeader}
-          renderItem={({item}) => <SearchResultCell data={item}/>}/>
+          renderItem={({item}) => <SearchResultCell data={item} role={true}/>}/>
       )
     } else return <WoWsLoading />
   }
@@ -48,17 +49,17 @@ class ClanScreen extends React.PureComponent {
   renderHeader = () => {
     console.log(this.state.data);
     const { count, created_at, leader_name, name, tag, text} = this.state.data;
-    const { clanNameStyle, clanTextStyle, clanLeaderStyle, clanMemberStyle } = styles;
+    const { clanNameStyle, clanTextStyle, clanLeaderStyle, clanMemberStyle, leaderImage, leaderViewStyle, memberViewStyle } = styles;
     return (
       <View style={{flex: 1, backgroundColor: global.themeColour}}>
         <Text style={clanNameStyle}>{'[' + tag + '] ' + name}</Text>
         <Text style={clanTextStyle}>{text}</Text>
-        <View>
-          <Image />
+        <View style={leaderViewStyle}>
+          <Image source={require('../../img/Commander.png')} style={leaderImage}/>
           <Text style={clanLeaderStyle}>{leader_name}</Text>
         </View>
-        <View>
-          <Text style={clanMemberStyle}>{strings.member_count + '(' + count + ')'}</Text>
+        <View style={memberViewStyle}>
+          <Text style={clanMemberStyle}>{strings.member_count + ' (' + count + ')'}</Text>
           <Image />
         </View>
       </View>

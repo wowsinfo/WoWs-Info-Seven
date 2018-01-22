@@ -14,12 +14,27 @@ export const styles = StyleSheet.create({
   },
   clanLeaderStyle: {
     color: 'white', 
+    textAlign: 'center',    
     padding: 8,
     fontSize: 24,   
   },
   clanMemberStyle: {
     color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',        
     fontSize: 24,
     padding: 8,
+  },
+  leaderImage: {
+    width: 32,
+    height: 32,
+  },
+  leaderViewStyle: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  memberViewStyle: {
+    flexDirection: 'row',    
   }
 })
