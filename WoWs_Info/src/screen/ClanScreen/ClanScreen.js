@@ -1,7 +1,9 @@
 import React from 'react';
 import { View, Text, Image, FlatList } from 'react-native';
-import { SearchResultCell } from '../../component';
+import { SearchResultCell, WoWsLoading } from '../../component';
 import { ClanInfo } from '../../core/';
+import { styles } from './ClanScreenStyles';
+import strings from '../../localization';
 
 class ClanScreen extends React.PureComponent {
   constructor(props) {
@@ -9,7 +11,8 @@ class ClanScreen extends React.PureComponent {
     const {id, clanName, server} = props;
     this.state = {
       data: [],
-      member: []
+      member: [],
+      isReady: false,
     }
 
     let clan = new ClanInfo(clanName + '|' + id + '|' + server);
@@ -27,29 +30,35 @@ class ClanScreen extends React.PureComponent {
       this.setState({
         data: clanInfo,
         member: memberList,
+        isReady: true,        
       })
     })
   }
 
   keyExtractor = (item) => {return item.id}  
   render() {
-    return (
-      <FlatList data={this.state.member} keyExtractor={this.keyExtractor} automaticallyAdjustContentInsets={false}
-        renderItem={({item}) => <SearchResultCell data={item}/>} renderHeader={this.renderHeader}/>
-    )
+    if (this.state.isReady) {
+      return (
+        <FlatList data={this.state.member} keyExtractor={this.keyExtractor} ListHeaderComponent={this.renderHeader}
+          renderItem={({item}) => <SearchResultCell data={item}/>}/>
+      )
+    } else return <WoWsLoading />
   }
 
   renderHeader = () => {
+    console.log(this.state.data);
+    const { count, created_at, leader_name, name, tag, text} = this.state.data;
+    const { clanNameStyle, clanTextStyle, clanLeaderStyle, clanMemberStyle } = styles;
     return (
-      <View>
-        <Text></Text>
-        <Text></Text>
+      <View style={{flex: 1, backgroundColor: global.themeColour}}>
+        <Text style={clanNameStyle}>{'[' + tag + '] ' + name}</Text>
+        <Text style={clanTextStyle}>{text}</Text>
         <View>
           <Image />
-          <Text></Text>
+          <Text style={clanLeaderStyle}>{leader_name}</Text>
         </View>
         <View>
-          <Text></Text>
+          <Text style={clanMemberStyle}>{strings.member_count + '(' + count + ')'}</Text>
           <Image />
         </View>
       </View>

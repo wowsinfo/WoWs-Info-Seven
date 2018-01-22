@@ -91,6 +91,8 @@ let strings = new LocalizedStrings({
     // Player Search
     search_player: 'Player',
     search_clan: 'Clan',
+    // Clan
+    member_count: 'Members',
   },
   zh: {
     // Game Update
@@ -182,6 +184,8 @@ let strings = new LocalizedStrings({
     // Player Search
     search_player: '玩家',
     search_clan: '工会',
+    // Clan
+    member_count: '成员',
   },
   'zh-tw': {
     // Game Update
