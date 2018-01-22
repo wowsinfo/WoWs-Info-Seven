@@ -1,8 +1,11 @@
 import React from 'react';
-import { View, Text, TextInput, FlatList, Keyboard, SafeAreaView } from 'react-native';
-import { SearchField, SearchRightButton, WoWsTouchable, SearchResultCell, SearchSegment, ClanResultCell } from '../../component';
-import { PlayerSearch, ClanSearch } from '../../core';
+import { View, Text, TextInput, FlatList, Keyboard, SafeAreaView, Alert } from 'react-native';
+import { SearchField, SwitcherButton, WoWsTouchable, SearchResultCell, SearchSegment, ClanResultCell } from '../../component';
+import { PlayerSearch, ClanSearch, ServerManager, ThisIsiPhoneX } from '../../core';
 import { Actions } from 'react-native-router-flux';
+import store from 'react-native-simple-store';
+import strings from '../../localization';
+import { localDataName } from '../../constant/value';
 
 var SearchTimer;
 class SearchScreen extends React.PureComponent {
@@ -16,7 +19,7 @@ class SearchScreen extends React.PureComponent {
     this.index = 0;
     Actions.refresh({
       renderTitle: <SearchSegment tabPress={this.changeSearchMode} selectedIndex={this.index}/>,
-      right: <SearchRightButton reset={this.clearResult}/>
+      right: <SwitcherButton onPress={this.changeServer} imageStyle={{height: 24, width: 24, tintColor: 'white'}}/>
     })
   }
 
@@ -24,6 +27,22 @@ class SearchScreen extends React.PureComponent {
     this.setState({
       data: this.loadFriendList()
     })
+  }
+
+  changeServer = () => {
+    Alert.alert(strings.change_server, strings.curr_server + ServerManager.getCurrName(global.server), [
+      {text: strings.russia, onPress: () => this.updateServer(0)},
+      {text: strings.europe, onPress: () => this.updateServer(1)},
+      {text: strings.north_america, onPress: () => this.updateServer(2)},
+      {text: strings.asia, onPress: () => this.updateServer(3)},
+      {text: strings.china, onPress: () => this.updateServer(4)},
+    ])
+  }
+
+  updateServer(index) {
+    global.server = index;
+    store.save(localDataName.currServer, index);
+    this.setState({data: []});
   }
 
   loadFriendList() {
@@ -117,10 +136,6 @@ class SearchScreen extends React.PureComponent {
       })
       this.setState({player: true, showPlayerList: true, data: this.loadFriendList()})
     }
-  }
-
-  clearResult = () => {
-    this.setState({data: []});
   }
 }
 

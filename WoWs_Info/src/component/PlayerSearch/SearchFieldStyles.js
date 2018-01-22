@@ -8,9 +8,11 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   inputStyle: {
-    height: 50, width: '100%', 
+    height: 40, width: '90%', 
     borderColor: 'white', 
-    fontSize: 20, 
+    fontSize: 24, 
+    fontWeight: 'bold',
     textAlign: 'center',
+    alignSelf: 'center',
   },
 })

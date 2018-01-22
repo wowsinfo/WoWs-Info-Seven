@@ -41,6 +41,7 @@ class RankInfo {
       let json = await response.json();
       if (json != null && json.status == 'ok') {
         let info = json.data[this.id]; 
+        if (info == null) return;
         var shipData = [];     
         for (var i = 0; i < info.length; i++) {
           let data = info[i].seasons;

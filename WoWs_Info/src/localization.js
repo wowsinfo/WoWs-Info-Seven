@@ -12,10 +12,11 @@ let strings = new LocalizedStrings({
     yesterday: 'Yesterday',
     days_ago: ' Days',
     // Server
-    russia: 'RU',
-    europe: 'EU',
-    north_america: 'NA',
-    asia: 'ASIA',
+    russia: 'Russia',
+    europe: 'Europe',
+    north_america: 'North America',
+    asia: 'Asia',
+    china: 'China',
     server: 'server',
     // Tabs
     wiki: 'Wiki',
@@ -91,8 +92,10 @@ let strings = new LocalizedStrings({
     // Player Search
     search_player: 'Player',
     search_clan: 'Clan',
+    curr_server: 'Current server is ',
+    change_server: 'Changing Server',
     // Clan
-    member_count: 'Members',
+    member_count: 'Member(s)',
   },
   zh: {
     // Game Update
@@ -109,6 +112,7 @@ let strings = new LocalizedStrings({
     europe: '欧洲',
     north_america: '北美',
     asia: '亚洲',
+    asia: '中国',
     server: '服务器',
     // Tabs
     wiki: '维基',
@@ -184,6 +188,8 @@ let strings = new LocalizedStrings({
     // Player Search
     search_player: '玩家',
     search_clan: '工会',
+    curr_server: '当前的服务器是',
+    change_server: '改变服务器',
     // Clan
     member_count: '成员',
   },
