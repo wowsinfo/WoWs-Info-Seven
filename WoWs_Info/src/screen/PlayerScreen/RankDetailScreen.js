@@ -8,7 +8,7 @@ class RankDetailScreen extends React.PureComponent {
     let sorted = ship.sort(function(a, b) { return b.index - a.index })
     return (
       <GridView itemDimension={300} items={ship} renderHeader={this.renderHeader} enableEmptySections
-        renderFooter={this.renderFooter} renderItem={item => <ShipInfoCell info={item}/>}/>
+        automaticallyAdjustContentInsets={false} renderFooter={this.renderFooter} renderItem={item => <ShipInfoCell info={item}/>}/>
     )
   }
 }

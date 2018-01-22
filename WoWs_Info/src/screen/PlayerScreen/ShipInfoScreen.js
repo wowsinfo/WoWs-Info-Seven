@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, Keyboard } from 'react-native';
+import { View, Text, TextInput, Keyboard, SafeAreaView } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { ShipInfoCell, NoInformation } from '../../component';
 import { Dropdown } from 'react-native-material-dropdown';
@@ -64,8 +64,10 @@ class ShipInfoScreen extends React.PureComponent {
                 autoCapitalize='none' clearButtonMode='while-editing' returnKeyType='search' onChangeText={this.onChangeText}/>
               { this.renderResetButton() }
             </View>
-            <GridView itemDimension={300} items={this.state.data} renderHeader={this.renderHeader} contentInset={{bottom: 50}} onScroll={Keyboard.dismiss}
-              enableEmptySections renderFooter={this.renderFooter} renderItem={item => <ShipInfoCell info={item}/>}/>
+            <SafeAreaView>
+              <GridView itemDimension={300} items={this.state.data} renderHeader={this.renderHeader} contentInset={{bottom: 50}} onScroll={Keyboard.dismiss}
+                automaticallyAdjustContentInsets={false} enableEmptySections renderFooter={this.renderFooter} renderItem={item => <ShipInfoCell info={item}/>}/>
+            </SafeAreaView>
           </View>
         ) 
       } else {

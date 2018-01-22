@@ -49,7 +49,7 @@ class ShipScreen extends React.PureComponent {
   render() {
     if (this.state.isReady) {
       return (
-        <GridView itemDimension={110} items={this.state.data} 
+        <GridView itemDimension={110} items={this.state.data}
           renderItem={item => <WarshipCell data={item}/>} />
       )
     } else return <WoWsLoading />;
