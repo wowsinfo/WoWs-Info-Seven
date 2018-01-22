@@ -19,4 +19,7 @@ export * from './player/ShipInfo';
 export * from './player/RankInfo';
 export * from './player/AchievementInfo';
 
+export * from './clan/ClanSearch';
+export * from './clan/ClanInfo';
+
 export * from './util/ThisIsiPhoneX';

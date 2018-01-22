@@ -1,0 +1,29 @@
+import { ServerManager } from '../../core';
+import { API } from '../../constant/value';
+
+class ClanSearch {
+  constructor(server, input) {
+    var format = require('string-format');
+    this.api = format(API.ClanSearch, ServerManager.getDomainFrom(server)) + input;
+  }
+
+  async Search() {
+    try {
+      let response = await fetch(this.api);
+      let json = await response.json();
+      if (json != null && json.status == 'ok') {
+        for (var i = 0; i < json.data.length; i++) {
+          let curr = json.data[i];
+          curr.server = global.server;
+          curr.id = curr.clan_id; delete curr.clan_id;
+          curr.name = curr.tag; delete curr.tag;
+        }
+        return json.data;
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+}
+
+export {ClanSearch};

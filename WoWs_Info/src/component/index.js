@@ -30,6 +30,9 @@ export * from './PlayerSearch/SearchSegment';
 export * from './PlayerSearch/SearchRightButton';
 export * from './PlayerSearch/Cell/SearchResultCell';
 
+// Clan
+export * from './Clan/ClanResultCell';
+
 // Settings
 export * from './Settings/ThemeCell';
 

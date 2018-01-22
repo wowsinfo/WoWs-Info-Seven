@@ -30,3 +30,6 @@ export * from './PlayerScreen/ShipDetailScreen';
 export * from './PlayerScreen/RankInfoScreen';
 export * from './PlayerScreen/RankDetailScreen';
 export * from './PlayerScreen/ShowroomScreen';
+
+// Clan
+export * from './ClanScreen/ClanScreen';

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Platform } from 'react-native';
 import { Router, Scene, Actions } from 'react-native-router-flux';
 import { SearchButton, PlayerOnlineButton } from '../component';
-import { SearchScreen, PlayerOnlineScreen, AchievementScreen, MapScreen, ShipScreen, NewsScreen, InAppBrowser, MapDetailScreen, ShipDetailScreen, BasicScreen, BasicDetailScreen, CollectionDetailScreen, RankDetailScreen } from '../screen';
+import { SearchScreen, PlayerOnlineScreen, AchievementScreen, MapScreen, ShipScreen, NewsScreen, InAppBrowser, MapDetailScreen, ShipDetailScreen, BasicScreen, BasicDetailScreen, CollectionDetailScreen, RankDetailScreen, ClanScreen } from '../screen';
 import { MainTab, PlayerTab } from '../tab/';
 import strings from '../localization';
 import { Icon } from 'react-native-elements';
@@ -24,10 +24,11 @@ class MainRouter extends Component {
           navigationBarStyle={{backgroundColor: global.themeColour}}>
           <Scene key='MainScreen' {...this.props} title={appTitle} component={MainTab} navigationBarStyle={{backgroundColor: global.themeColour, elevation: 0}}
             renderRightButton={ <SearchButton onPress={() => Actions.SearchScreen()}/> }
-            renderLeftButton={ <PlayerOnlineButton onPress={() => Actions.PlayerOnlineScreen()}/> } />
+            renderLeftButton={ <PlayerOnlineButton onPress={() => Actions.PlayerOnlineScreen()}/> }/>
           <Scene key='PlayerScreen' component={PlayerTab} navigationBarStyle={{backgroundColor: global.themeColour, elevation: 0}}/>
+          <Scene key='ClanScreen' component={ClanScreen}/>
 
-          <Scene key='SearchScreen' component={SearchScreen} title=''/>
+          <Scene key='SearchScreen' component={SearchScreen}/>
           <Scene key='NewsScreen' component={NewsScreen}/>          
           <Scene key='ThemeScreen' component={ThemeScreen}/>          
           

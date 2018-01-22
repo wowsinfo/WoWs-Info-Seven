@@ -14,6 +14,8 @@ export const API = {
   RankShipInfo: 'https://api.worldofwarships.{0}/wows/seasons/shipstats/?application_id=' + ApplicationID + '&fields=ship_id%2Cseasons.rank_solo&account_id=',
   CurrRankInfo: 'https://api.worldofwarships.{0}/wows/seasons/accountinfo/?application_id=' + ApplicationID +'&fields=seasons.rank_info.rank&account_id=',
   AchievementInfo: 'https://api.worldofwarships.{0}/wows/account/achievements/?application_id=' + ApplicationID + '&language=en&fields=battle&account_id=',
+  ClanSearch: 'https://api.worldofwarships.{0}/wows/clans/list/?application_id=' + ApplicationID + '&fields=clan_id%2Ctag&search=',
+  ClanInfo: 'https://api.worldofwarships.{0}/wows/clans/info/?application_id=' + ApplicationID + '&extra=members&fields=-members_ids&clan_id=',
 }
 
 export const DataAPI = {
