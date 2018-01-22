@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Image, ScrollView } from 'react-native';
+import { Text, Image, ScrollView, View } from 'react-native';
 import { styles } from './BasicDetailScreenStyles';
 
 class BasicDetailScreen extends React.PureComponent {

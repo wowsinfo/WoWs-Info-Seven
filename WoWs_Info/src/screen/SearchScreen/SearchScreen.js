@@ -13,9 +13,9 @@ class SearchScreen extends React.PureComponent {
       player: true,
       data: [],
     }
-
+    this.index = 0;
     Actions.refresh({
-      renderTitle: <SearchSegment />,
+      renderTitle: <SearchSegment tabPress={this.changeSearchMode} selectedIndex={this.index}/>,
       right: <SearchRightButton reset={this.clearResult}/>
     })
   }
@@ -93,19 +93,32 @@ class SearchScreen extends React.PureComponent {
     
   }
 
-  clearResult = () => {
-    this.setState({data: []});
+  changeSearchMode = () => {
+    console.log(this.index);
+    if (this.index == 0) {
+      this.index = 1;
+      Actions.refresh({
+        renderTitle: <SearchSegment tabPress={this.changeSearchMode} selectedIndex={this.index}/>,
+      })
+      this.setState({
+        player: false,
+        data: [],
+      })
+    } else {
+      this.index = 0;
+      Actions.refresh({
+        renderTitle: <SearchSegment tabPress={this.changeSearchMode} selectedIndex={this.index}/>,
+      })
+      this.setState({
+        player: true,
+        showPlayerList: true,
+        data: [],
+      })
+    }
   }
 
-  modeSwitcher() {
-    // This is the button to switch mode
-    return (
-      <View>
-        <WoWsTouchable>
-          <Text></Text>
-        </WoWsTouchable>
-      </View>
-    )
+  clearResult = () => {
+    this.setState({data: []});
   }
 }
 
