@@ -10,7 +10,7 @@ class ServerManager {
       case 1: return strings.europe;
       case 2: return strings.north_america;
       case 3: return strings.asia;
-      default: return '';
+      default: return strings.china;
     }
   }
 

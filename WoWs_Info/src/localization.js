@@ -112,7 +112,7 @@ let strings = new LocalizedStrings({
     europe: '欧洲',
     north_america: '北美',
     asia: '亚洲',
-    asia: '中国',
+    china: '中国',
     server: '服务器',
     // Tabs
     wiki: '维基',

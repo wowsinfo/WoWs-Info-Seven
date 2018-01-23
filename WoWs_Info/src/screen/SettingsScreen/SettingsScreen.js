@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Button, ScrollView, Platform, Alert, AsyncStorage } from 'react-native';
 import { Text, Divider } from 'react-native-elements';
 import { WoWsLoading } from '../../component';
-import { Dropdown } from 'react-native-material-dropdown';
 import { styles } from './SettingsScreenStyles';
 import { DataManager, DataStorage } from '../../core';
 import { localDataName } from '../../constant/value';
@@ -38,9 +37,7 @@ class SettingsScreen extends React.PureComponent {
         <View style={{flex: 1}}>
           <ScrollView>
             <Text h3>{strings.language_header}</Text>  
-            <Dropdown pickerStyle={{padding: 0, margin: 0}} label={strings.app_language} data={this.app}/>
-            <Dropdown label={strings.api_language} data={this.api}/>
-            <Dropdown label={strings.news_language} data={this.news} itemCount={5}/>
+            
             <Divider />
             <Text h3>{strings.theme_header}</Text>
             <Button onPress={this.changeThemeColour} title={strings.change_theme}/>  

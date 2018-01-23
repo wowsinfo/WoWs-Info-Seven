@@ -6,9 +6,10 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    height: 50,
   },
   inputStyle: {
-    height: 40, width: '90%', 
+    width: '90%', 
     borderColor: 'white', 
     fontSize: 24, 
     fontWeight: 'bold',

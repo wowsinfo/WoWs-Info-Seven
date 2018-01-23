@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text, TextInput, Keyboard, SafeAreaView } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { ShipInfoCell, NoInformation } from '../../component';
-import { Dropdown } from 'react-native-material-dropdown';
 import GridView from 'react-native-super-grid';
 import { styles } from './ShipInfoScreenStyles';
 import { ShipInfo, PersonalRating } from '../../core';

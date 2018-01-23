@@ -17,9 +17,13 @@ class SearchScreen extends React.PureComponent {
       data: [],
     }
     this.index = 0;
+    let serverList = [{label: strings.russia, func: () => this.updateServer(0)},
+      {label: strings.europe, func: () => this.updateServer(1)}, {label: strings.north_america, func: () =>  this.updateServer(2)},
+      {label: strings.asia, func: () => this.updateServer(3)}, {label: strings.china, func: () => this.updateServer(4)}]
+    
     Actions.refresh({
       renderTitle: <SearchSegment tabPress={this.changeSearchMode} selectedIndex={this.index}/>,
-      right: <SwitcherButton onPress={this.changeServer} imageStyle={{height: 24, width: 24, tintColor: 'white'}}/>
+      right: <SwitcherButton data={serverList} imageStyle={{height: 24, width: 24, tintColor: 'white'}}/>
     })
   }
 
@@ -27,16 +31,6 @@ class SearchScreen extends React.PureComponent {
     this.setState({
       data: this.loadFriendList()
     })
-  }
-
-  changeServer = () => {
-    Alert.alert(strings.change_server, strings.curr_server + ServerManager.getCurrName(global.server), [
-      {text: strings.russia, onPress: () => this.updateServer(0)},
-      {text: strings.europe, onPress: () => this.updateServer(1)},
-      {text: strings.north_america, onPress: () => this.updateServer(2)},
-      {text: strings.asia, onPress: () => this.updateServer(3)},
-      {text: strings.china, onPress: () => this.updateServer(4)},
-    ])
   }
 
   updateServer(index) {

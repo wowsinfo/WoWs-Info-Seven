@@ -1,7 +1,6 @@
 import React from 'react';
 import { FlatList, View, Text } from 'react-native';
 import { Icon } from 'react-native-elements';
-import { Dropdown } from 'react-native-material-dropdown';
 import GridView from 'react-native-super-grid';
 import strings from '../../../localization';
 import { styles } from './ShipScreenStyles';
