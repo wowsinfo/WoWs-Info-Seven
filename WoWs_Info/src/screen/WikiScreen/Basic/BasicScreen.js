@@ -43,6 +43,10 @@ class BasicScreen extends React.PureComponent {
     }, () => Actions.refresh({title: parsed.length}));
   }
 
+  componentWillUnmount() {
+    global.wikiAction = [];
+  }
+
   render() {
     if (this.state.isReady) {
       return (

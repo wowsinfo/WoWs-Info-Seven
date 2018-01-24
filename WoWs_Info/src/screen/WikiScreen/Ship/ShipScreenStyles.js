@@ -23,5 +23,8 @@ export const styles = StyleSheet.create({
     marginLeft: 16,
     color: 'white',
     fontSize: 16,
+  },
+  filterTextStyle: {
+    color: 'white',
   }
 })

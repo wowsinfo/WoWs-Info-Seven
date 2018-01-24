@@ -23,7 +23,7 @@ class SearchScreen extends React.PureComponent {
     
     Actions.refresh({
       renderTitle: <SearchSegment tabPress={this.changeSearchMode} selectedIndex={this.index}/>,
-      right: <SwitcherButton data={serverList} imageStyle={{height: 24, width: 24, tintColor: 'white'}} />
+      right: <SwitcherButton data={serverList} imageStyle={{height: 24, width: 24, tintColor: 'white'}}/>
     })
   }
 

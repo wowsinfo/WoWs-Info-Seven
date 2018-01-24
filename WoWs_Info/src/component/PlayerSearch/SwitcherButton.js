@@ -1,12 +1,11 @@
 import React from 'react';
 import { WoWsTouchable } from '../../component';
-import { Image, View, Platform, Alert, Picker } from 'react-native';
-import strings from '../../localization';
+import { Image, View, Platform, Alert, Picker, Text } from 'react-native';
 import { ServerManager } from '../../core/';
 
 class SwitcherButton extends React.PureComponent {
   render() {
-    const { imageStyle, data, showImage } = this.props;
+    const { imageStyle, textStyle, data, showImage, label } = this.props;
     if (Platform.OS == 'ios') {
       if (label == null) {
         return (
@@ -17,13 +16,15 @@ class SwitcherButton extends React.PureComponent {
           </View>
         )
       } else {
-        <View style={{margin: 8}}>
-          <WoWsTouchable onPress={this.showAlert}>
-            <View>
-              <Text>{label}</Text>
-            </View>
-          </WoWsTouchable>
-        </View>
+        return (
+          <View style={{margin: 8}}>
+            <WoWsTouchable onPress={this.showAlert}>
+              <View>
+                <Text style={textStyle}>{label}</Text>
+              </View>
+            </WoWsTouchable>
+          </View>
+        )
       }
     } else {
       return (
@@ -49,7 +50,7 @@ class SwitcherButton extends React.PureComponent {
     // console.log(data);
     var funcList = [];
     for (var i = 0; i < data.length; i++) funcList.push({text: data[i].label, onPress: data[i].func});
-    Alert.alert(strings.change_server, strings.curr_server + ServerManager.getCurrName(global.server), funcList);
+    Alert.alert('', '', funcList);
   }
 }
 

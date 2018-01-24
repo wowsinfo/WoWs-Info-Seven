@@ -5,29 +5,54 @@ import GridView from 'react-native-super-grid';
 import strings from '../../../localization';
 import { styles } from './ShipScreenStyles';
 import { Actions } from 'react-native-router-flux';
-import { WoWsLoading, WarshipCell } from '../../../component';
+import { WoWsLoading, WarshipCell, SwitcherButton } from '../../../component';
 
 class ShipScreen extends React.PureComponent {
-  state = {
-    isReady: false,
-    data: [],
-  }
-  
-  componentWillMount() {
+  constructor(props) {
+    super();
+    this.state = {
+      isReady: false, data: []
+    }
+
     // Format nation and type json
-    this.json = global.encyclopediaJson;   
-    this.shipType = global.shipTypeJson;   
+    this.json = global.encyclopediaJson;
+    this.filter = {tier: '', nation: '', type: ''};
+
     var nation = [];
-    for (key in this.json.ship_nations) nation.push(this.json.ship_nations[key]);
+    for (key in this.json.ship_nations) nation.push({label: this.json.ship_nations[key], func: () => this.filterNation(key)});
     this.nation = nation;
+
     var type = [];
-    for (key in this.shipType) type.push(this.shipType[key]);
+    this.shipType = global.shipTypeJson;    
+    for (key in this.shipType) type.push({label: this.shipType[key], func: () => this.filterType(key)});
     this.type = type;
-    this.tier = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];  
-    this.filter = {tier: '', nation: '', type: ''};  
+
+    let tierList = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
+    var tier = [];
+    for (var i = 0; i < 10; i++) tier.push({label: tierList[i], func: () => this.filterTier(i)});
+    this.tier = tier;
   }
 
-  componentDidMount() {
+  filterNation(nation) {
+    this.filter.nation = nation; 
+    this.filterShip();
+  }
+
+  filterType(type) {
+    this.filter.type = type; 
+    this.filterShip();
+  }
+
+  filterTier(tier) {
+    this.filter.tier = tier + 1;
+    this.filterShip();    
+  }
+
+  componentWillUnmount() {
+    global.wikiAction = [];
+  }
+
+  componentWillMount() {
     // Prase global.achievementJson and make it readable
     var parsed = [];
     for (key in global.warshipJson) {
@@ -57,6 +82,9 @@ class ShipScreen extends React.PureComponent {
   renderFilter = () => {
     return (
       <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+        <SwitcherButton textStyle={styles.filterTextStyle} data={this.nation} label={strings.filter_nation}/>
+        <SwitcherButton textStyle={styles.filterTextStyle} data={this.type} label={strings.filter_type}/>
+        <SwitcherButton textStyle={styles.filterTextStyle} data={this.tier} label={strings.filter_tier}/>
         <Text style={numberStyle}>{this.state.data.length}</Text>
       </View>
     )
@@ -67,46 +95,10 @@ class ShipScreen extends React.PureComponent {
       <Icon name='md-refresh' type='ionicon' color='white' underlayColor='transparent'
         containerStyle={buttonStyle} onPress={() => {
         // Reset stuff
-        this.filter = {tier: '', nation: '', type: ''};
-        this.nationDropdown.select(-1);          
-        this.typeDropdown.select(-1);          
-        this.tierDropdown.select(-1);          
+        this.filter = {tier: '', nation: '', type: ''};      
         this.componentDidMount()
       }}/>
     )
-  }
-
-  filterNation = (index, value) => {
-    // Find key
-    var nationKey = '';
-    for (key in this.json.ship_nations) {
-      let nation = this.json.ship_nations[key];
-      if (value == nation) {
-        // This is the key we want
-        this.filter.nation = key; 
-        this.filterShip();
-        break;
-      }
-    }   
-  }
-
-  filterType = (index, value) => {
-    // Find key
-    for (key in this.shipType) {
-      let type = this.shipType[key];
-      if (value == type) {
-        // This is the key we want
-        this.filter.type = key; 
-        this.filterShip();
-        break;
-      }
-    }
-    
-  }
-
-  filterTier = (index, value) => {
-    this.filter.tier = parseInt(index) + 1;
-    this.filterShip();    
   }
 
   sortShip(ship) {
