@@ -23,7 +23,7 @@ class SearchScreen extends React.PureComponent {
     
     Actions.refresh({
       renderTitle: <SearchSegment tabPress={this.changeSearchMode} selectedIndex={this.index}/>,
-      right: <SwitcherButton data={serverList} imageStyle={{height: 24, width: 24, tintColor: 'white'}}/>
+      right: <SwitcherButton data={serverList} imageStyle={{height: 24, width: 24, tintColor: 'white'}} />
     })
   }
 
@@ -36,6 +36,7 @@ class SearchScreen extends React.PureComponent {
   updateServer(index) {
     global.server = index;
     store.save(localDataName.currServer, index);
+    if (index == 4) Actions.pop();
     this.setState({data: []});
   }
 
@@ -61,7 +62,7 @@ class SearchScreen extends React.PureComponent {
           <SafeAreaView>
             <SearchField onEndEditing={this.searchPlayer}/>
             <FlatList data={data} keyExtractor={this.keyExtractor} onScrollBeginDrag={Keyboard.dismiss}
-              renderItem={({item}) => <SearchResultCell data={item}/>}/>
+              renderItem={({item}) => <SearchResultCell data={item}/>} ref='listRef'/>
           </SafeAreaView>
         )
       } else {

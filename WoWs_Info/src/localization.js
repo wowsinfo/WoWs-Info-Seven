@@ -12,11 +12,11 @@ let strings = new LocalizedStrings({
     yesterday: 'Yesterday',
     days_ago: ' Days',
     // Server
-    russia: 'Russia',
-    europe: 'Europe',
-    north_america: 'North America',
-    asia: 'Asia',
-    china: 'China',
+    russia: 'RU',
+    europe: 'EU',
+    north_america: 'NA',
+    asia: 'ASIA',
+    china: 'CN',
     server: 'server',
     // Tabs
     wiki: 'Wiki',

@@ -6,22 +6,30 @@ import { ServerManager } from '../../core/';
 
 class SwitcherButton extends React.PureComponent {
   render() {
-    const { imageStyle, data } = this.props;
+    const { imageStyle, data, showImage } = this.props;
     if (Platform.OS == 'ios') {
-      return (
+      if (label == null) {
+        return (
+          <View style={{margin: 8}}>
+            <WoWsTouchable onPress={this.showAlert}>
+              <Image source={require('../../img/Switcher.png')} style={imageStyle}/>
+            </WoWsTouchable>
+          </View>
+        )
+      } else {
         <View style={{margin: 8}}>
           <WoWsTouchable onPress={this.showAlert}>
-            <Image source={require('../../img/Switcher.png')} style={imageStyle}/>
+            <View>
+              <Text>{label}</Text>
+            </View>
           </WoWsTouchable>
         </View>
-      )
+      }
     } else {
       return (
-        <View style={{margin: 8}}>
-          <Picker style={{height: 30, width: 30}} selectedValue={global.server} onValueChange={(value, index) => data[value].func()}>
-            { this.renderPickerItem(data) }
-          </Picker>
-        </View>
+        <Picker style={{height: 30, width: 30}} mode='dropdown' selectedValue={global.server} onValueChange={(value, index) => data[value].func()}>
+          { this.renderPickerItem(data) }
+        </Picker>
       )
     }
   }
