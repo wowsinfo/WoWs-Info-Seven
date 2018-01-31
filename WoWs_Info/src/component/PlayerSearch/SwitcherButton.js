@@ -10,7 +10,7 @@ class SwitcherButton extends React.PureComponent {
       if (label == null) {
         return (
           <View style={{margin: 8}}>
-            <WoWsTouchable onPress={this.showAlert}>
+            <WoWsTouchable onPress={() => this.showAlert()}>
               <Image source={require('../../img/Switcher.png')} style={imageStyle}/>
             </WoWsTouchable>
           </View>
@@ -18,7 +18,7 @@ class SwitcherButton extends React.PureComponent {
       } else {
         return (
           <View style={{margin: 8}}>
-            <WoWsTouchable onPress={this.showAlert}>
+            <WoWsTouchable onPress={this.showAlert()}>
               <View>
                 <Text style={textStyle}>{label}</Text>
               </View>
@@ -28,7 +28,7 @@ class SwitcherButton extends React.PureComponent {
       }
     } else {
       return (
-        <Picker style={{height: 30, width: 30}} mode='dropdown' selectedValue={global.server} onValueChange={(value, index) => data[value].func()}>
+        <Picker style={{height: 30, width: 30}} mode='dropdown' selectedValue={global.server} onValueChange={(value, index) => data[index].func}>
           { this.renderPickerItem(data) }
         </Picker>
       )
@@ -45,12 +45,12 @@ class SwitcherButton extends React.PureComponent {
   }
 
   // IOS
-  showAlert = () => {
+  showAlert() {
     const { data } = this.props;
     // console.log(data);
     var funcList = [];
     for (var i = 0; i < data.length; i++) funcList.push({text: data[i].label, onPress: data[i].func});
-    Alert.alert('', '', funcList);
+    Alert.alert('WoWs Info', '', funcList);
   }
 }
 

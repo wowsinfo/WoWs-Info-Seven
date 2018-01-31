@@ -33,17 +33,17 @@ class ShipScreen extends React.PureComponent {
     this.tier = tier;
   }
 
-  filterNation(nation) {
+  filterNation = (nation) => {
     this.filter.nation = nation; 
     this.filterShip();
   }
 
-  filterType(type) {
+  filterType = (type) => {
     this.filter.type = type; 
     this.filterShip();
   }
 
-  filterTier(tier) {
+  filterTier = (tier) => {
     this.filter.tier = tier + 1;
     this.filterShip();    
   }
@@ -112,6 +112,7 @@ class ShipScreen extends React.PureComponent {
   }
 
   filterShip() {
+    console.log(this.filter);
     // Filter ship according to this.filter
     var filtered = [];
     for (key in global.warshipJson) {
