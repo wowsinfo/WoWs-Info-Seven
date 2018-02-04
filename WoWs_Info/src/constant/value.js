@@ -1,6 +1,7 @@
 // This is my WarGaming Developer ID
 // Please use yours or demo if you are running this app
 export const ApplicationID = '***ApplicationID***';
+export const GameVersion = '0.1.6.1';
 
 export const API = {
   GameVersion: 'https://api.worldofwarships.{0}/wows/encyclopedia/info/?application_id=' +  ApplicationID + '&fields=game_version',
@@ -77,6 +78,7 @@ export const localDataName = {
   newsLanguage: '@WoWs_Info:newsLanguage',
   apiLanguage: '@WoWs_Info:apiLanguage',
   moeMode: '@WoWs_Info:moeMode',
+  gameVersion: '@WoWs_Info:gameVersion',
 }
 
 export const savedDataName = {
