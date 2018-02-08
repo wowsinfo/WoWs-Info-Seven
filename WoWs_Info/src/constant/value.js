@@ -1,7 +1,7 @@
 // This is my WarGaming Developer ID
 // Please use yours or demo if you are running this app
 export const ApplicationID = '***ApplicationID***';
-export const GameVersion = '0.1.6.1';
+export const CurrGameVersion = '0.1.6.1';
 
 export const API = {
   GameVersion: 'https://api.worldofwarships.{0}/wows/encyclopedia/info/?application_id=' +  ApplicationID + '&fields=game_version',

@@ -1,5 +1,5 @@
 import { Platform, Alert } from 'react-native';
-import { IOSDataName, localDataName, savedDataName, GameVersion } from '../../constant/value';
+import { IOSDataName, localDataName, savedDataName, CurrGameVersion } from '../../constant/value';
 import { WoWsInfo } from '../../colour/colour';
 import { Language, GameVersion, DateCalculator, PlayerConverter, ServerManager } from '../';
 import store from 'react-native-simple-store';
@@ -11,13 +11,13 @@ class DataStorage {
     try {
       // Setting up Data here      
       let first = await store.get(localDataName.firstLaunch);
-      let gameVersion = await StorageEvent.get(localDataName.gameVersion);
+      let gameVersion = await store.get(localDataName.gameVersion);
       if (first == null) {
         console.log('First Launch\nWelcome to WoWs Info >_<');
         await DataStorage.setupAllData();
         // Set language here
         strings.setLanguage(Language.getCurrentLanguage());
-      } else if (gameVersion != GameVersion) {
+      } else if (gameVersion != CurrGameVersion) {
         // Version update, download all data again
         await DataManager.updateLocalData();
         // Add more local if needed
@@ -66,7 +66,8 @@ class DataStorage {
   }
 
   static async setupAdditionalData() {
-
+    // Change this before version update
+    await store.save(localDataName.gameVersion, CurrGameVersion);
   }
 
   static async setupLocalStorage() {
@@ -74,7 +75,7 @@ class DataStorage {
       console.log('Local Storage');
 
       // Change this before version update
-      await store.save(localDataName.gameVersion, GameVersion');
+      await store.save(localDataName.gameVersion, CurrGameVersion);
 
       // I am more than happy to play in a division
       await store.save(localDataName.playerList, {'2011774448': {name: 'HenryQuan', id: '2011774448', server: '3'}});
