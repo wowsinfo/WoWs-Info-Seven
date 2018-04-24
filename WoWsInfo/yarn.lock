@@ -543,6 +543,10 @@ anymatch@^2.0.0:
     micromatch "^3.1.4"
     normalize-path "^2.1.1"
 
+apollojs@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/apollojs/-/apollojs-1.3.0.tgz#5f7b00304d9740e2a7be5b52c7c0807d51f9255e"
+
 append-transform@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/append-transform/-/append-transform-0.4.0.tgz#d76ebf8ca94d276e247a36bad44a4b74ab611991"
@@ -1353,6 +1357,10 @@ block-stream@*:
   dependencies:
     inherits "~2.0.0"
 
+bluebird@^2.9.25:
+  version "2.11.0"
+  resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-2.11.0.tgz#534b9033c022c9579c56ba3b3e5a5caafbb650e1"
+
 boom@2.x.x:
   version "2.10.1"
   resolved "https://registry.yarnpkg.com/boom/-/boom-2.10.1.tgz#39c8918ceff5799f83f9492a848f625add0c766f"
@@ -1853,6 +1861,10 @@ encoding@^0.1.11:
   dependencies:
     iconv-lite "~0.4.13"
 
+entities@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/entities/-/entities-1.1.1.tgz#6e5c2d0a5621b5dadaecef80b90edfb5cd7772f0"
+
 envinfo@^3.0.0:
   version "3.11.1"
   resolved "https://registry.yarnpkg.com/envinfo/-/envinfo-3.11.1.tgz#45968faf5079aa797b7dcdc3b123f340d4529e1c"
@@ -2089,6 +2101,13 @@ fancy-log@^1.3.2:
 fast-deep-equal@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-1.1.0.tgz#c053477817c86b51daa853c81e059b733d023614"
+
+fast-html-parser@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/fast-html-parser/-/fast-html-parser-1.0.1.tgz#4ecc9683b8bb79afe11a50807b7853e79256cea2"
+  dependencies:
+    apollojs "^1.3.0"
+    entities "^1.1.1"
 
 fast-json-stable-stringify@^2.0.0:
   version "2.0.0"
@@ -3376,6 +3395,10 @@ lodash.isempty@^4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/lodash.isempty/-/lodash.isempty-4.4.0.tgz#6f86cbedd8be4ec987be9aaf33c9684db1b31e7e"
 
+lodash.merge@4.6.0:
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.0.tgz#69884ba144ac33fe699737a6086deffadd0f89c5"
+
 lodash.pad@^4.1.0:
   version "4.5.1"
   resolved "https://registry.yarnpkg.com/lodash.pad/-/lodash.pad-4.5.1.tgz#4330949a833a7c8da22cc20f6a26c4d59debba70"
@@ -4266,6 +4289,10 @@ react-native-animatable@^1.2.4:
   dependencies:
     prop-types "^15.5.10"
 
+react-native-device-info@^0.21.5:
+  version "0.21.5"
+  resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-0.21.5.tgz#99478a2d68182e012297f2d63f2bd1b788106dee"
+
 react-native-elements@^1.0.0-beta4:
   version "1.0.0-beta4"
   resolved "https://registry.yarnpkg.com/react-native-elements/-/react-native-elements-1.0.0-beta4.tgz#53329ac450cbb6ac2dade45257ffa9debe26e1ad"
@@ -4293,6 +4320,12 @@ react-native-navigation@^1.1.444:
   dependencies:
     lodash "4.x.x"
 
+react-native-simple-store@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-simple-store/-/react-native-simple-store-1.3.0.tgz#84953a7b007b8e3c50ec768478e98dc3636ef092"
+  dependencies:
+    lodash.merge "4.6.0"
+
 react-native-super-grid@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/react-native-super-grid/-/react-native-super-grid-2.1.0.tgz#5025941f96580b9a4c5bf20a5eaffaf0a5dd4d29"
@@ -4304,6 +4337,12 @@ react-native-touchable-scale@2.0.0:
   resolved "https://registry.yarnpkg.com/react-native-touchable-scale/-/react-native-touchable-scale-2.0.0.tgz#13a83a9423e46049cad3e3cc306eba2130883cb1"
   dependencies:
     prop-types "^15.6.0"
+
+react-native-userdefaults-ios@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/react-native-userdefaults-ios/-/react-native-userdefaults-ios-0.1.3.tgz#6903fca55e0de7164e7b364097a438033228e0b5"
+  dependencies:
+    bluebird "^2.9.25"
 
 react-native-vector-icons@^4.6.0:
   version "4.6.0"
@@ -4999,6 +5038,10 @@ stealthy-require@^1.1.0:
 stream-buffers@~2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/stream-buffers/-/stream-buffers-2.2.0.tgz#91d5f5130d1cef96dcfa7f726945188741d09ee4"
+
+string-format@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/string-format/-/string-format-1.0.0.tgz#a43a829cd2a6c3cba22076070697ad4e4836eb3f"
 
 string-length@^2.0.0:
   version "2.0.0"
