@@ -1,5 +1,5 @@
 import { API } from '../constant/value';
-import { ServerManager } from '../../core';
+import { ServerManager } from '../core';
 
 class NewsParser {
   constructor(index, language) {

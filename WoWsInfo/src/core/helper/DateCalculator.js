@@ -7,6 +7,11 @@ class DateCalculator {
     return new Date().toDateString();
   }
 
+  /**
+   * Day difference between tow dates
+   * @param {*} dateBefore 
+   * @param {*} dateAfter 
+   */
   static diffDate(dateBefore, dateAfter) {
     let before = new Date(dateBefore);
     let after = new Date(dateAfter);
@@ -15,7 +20,10 @@ class DateCalculator {
     return Math.ceil(diff / (1000 * 3600 * 24));
   }
 
-  // Convert date difference to string
+  /**
+   * Date difference to string
+   * @param {*} diff 
+   */
   static diffToString(diff) {
     let diffDays = parseInt(diff);
     if (diffDays == 0) return language.today;
@@ -23,6 +31,10 @@ class DateCalculator {
     else return diffDays + language.days_ago;
   }
 
+  /**
+   * Check if it is a new day
+   * @param {*} lastOpen 
+   */
   static isNewDay(lastOpen) {
     if (lastOpen == null) return;
     let currDate = DateCalculator.getCurrDate();
