@@ -1,10 +1,9 @@
 import { Platform, Alert } from 'react-native';
-import { IOSData, LocalData, SavedData, VERSION, IOSData } from '../constant/value';
+import { IOSData, LocalData, SavedData, VERSION } from '../constant/value';
 import { Blue } from 'react-native-material-color';
-import { WoWsInfo } from '../../colour/colour';
 import { Language, GameVersion, DateCalculator, PlayerConverter, ServerManager } from './';
 import store from 'react-native-simple-store';
-import strings from '../../localization';
+import language from '../constant/language';
 import { DataManager } from './';
 
 class DataStorage {
@@ -30,7 +29,7 @@ class DataStorage {
         console.log('Game Version\nCurr: ' + curr + '\nSaved: ' + saved);
         if (curr != saved) {
           // There is an update
-          Alert.alert(curr, strings.game_has_update);
+          Alert.alert(curr, language.game_has_update);
           await DataManager.UpdateLocalData();
           await store.save(LocalData.game_version, curr);
         } else {
@@ -97,16 +96,16 @@ class DataStorage {
 
   static async SetupIOSData() {
     var UserDefaults = require('react-native-userdefaults-ios');
-    let data = await UserDefaults.objectForKey(IOSData.firstLaunch);
+    let data = await UserDefaults.objectForKey(IOSData.first_launch);
     if (data != null) {
       console.log('Retrieving userdefault...');
       let server = await UserDefaults.stringForKey(IOSData.server);
       await store.save(LocalData.server, server);
       
-      let pro = await UserDefaults.objectForKey(IOSData.hasPurchased);     
+      let pro = await UserDefaults.objectForKey(IOSData.has_purchased);     
       if (pro) await store.save(LocalData.has_ads, false);
       
-      let username = await UserDefaults.stringForKey(IOSData.userName);       
+      let username = await UserDefaults.stringForKey(IOSData.username);       
       if (username != '>_<') {
         var playerObj = PlayerConverter.fromString(username);
         playerObj.access_token = '';

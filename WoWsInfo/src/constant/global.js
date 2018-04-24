@@ -4,7 +4,7 @@ global.data_saver = false;
 
 global.theme = null;
 global.server = 3;
-global.domain = '';
+global.domain = 'asia';
 global.api_language = '';
 global.game_version = '';
 global.friend = [];
