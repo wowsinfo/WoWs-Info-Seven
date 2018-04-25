@@ -18,6 +18,14 @@ export default language = new LocalizedStrings({
     day_today: 'Today',
     day_yesterday: 'Yesterday',
     day_ago: ' ago',
+    // Wiki
+    wiki_warship: 'Warship',
+    wiki_achievement: 'Achievement',
+    wiki_flag_camouflage: 'Flag - Camouflage',
+    wiki_upgrade: 'Upgrade',
+    wiki_map: 'Map',
+    wiki_commander: 'Commander skill',
+    wiki_collection: 'Collection',
  },
  zh: {
    // Tabs
