@@ -3,7 +3,6 @@ import { IOSData, LocalData, SavedData, VERSION } from '../constant/value';
 import { Blue } from 'react-native-material-color';
 import { Language, GameVersion, DateCalculator, PlayerConverter, ServerManager } from './';
 import store from 'react-native-simple-store';
-import language from '../constant/language';
 import { DataManager } from './';
 
 class DataStorage {
@@ -24,12 +23,10 @@ class DataStorage {
 
         // Restore essential loca data
         await DataStorage.RestoreData();
-        let saved = global.gameVersion;
+        let saved = global.game_version;
         let curr = await GameVersion.getCurrVersion();
         console.log('Game Version\nCurr: ' + curr + '\nSaved: ' + saved);
         if (curr != saved) {
-          // There is an update
-          Alert.alert(curr, language.game_has_update);
           await DataManager.UpdateLocalData();
           await store.save(LocalData.game_version, curr);
         } else {

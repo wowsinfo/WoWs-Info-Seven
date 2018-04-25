@@ -4,7 +4,7 @@ import store from 'react-native-simple-store';
 
 class DataManager {
   // Update everything from server
-  static async updateLocalData() {
+  static async UpdateLocalData() {
     // Language has to be saved in order to load other data correctly
     await DataManager.saveData(DataAPI.Language, SavedData.language);
     // Personal Rating
@@ -27,11 +27,11 @@ class DataManager {
   static async savePersonalRating() {
     try {
       let response = await fetch(DataAPI.PersonalRating);
-      data = await response.json();
+      let data = await response.json();
       if (data != null) data = data.data;
       // console.log(data);
       global.data.personal_rating = data;
-      await store.save(SavedData.personalRating, data);
+      await store.save(SavedData.personal_rating, data);
     } catch (error) {
       console.error(error);
     }
@@ -137,7 +137,7 @@ class DataManager {
             }
             global.data.collection_item = data; break;
         }
-        console.log(data);
+        // console.log(data);
         await store.save(saved, data);
       }
     } catch (error) {

@@ -35,7 +35,7 @@ class Language {
           lang = 'en'; break;
       }  
     }
-    // console.log(lang);
+     console.log(lang);
     return lang;
   }
 
@@ -43,7 +43,7 @@ class Language {
    * Get API Language
    */
   static getApiLangStr() {
-    var lang = global.apiLanguage;
+    var lang = global.api_language;
     if (lang == 'zh-Hans') lang = 'zh-cn';
     return '&language=' + lang;
   }
