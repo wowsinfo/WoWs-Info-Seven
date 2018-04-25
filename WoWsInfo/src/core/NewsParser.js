@@ -4,7 +4,7 @@ import { ServerManager } from '../core';
 class NewsParser {
   constructor(index, language) {
     var format = require('string-format');
-    var link = format(API.News, ServerManager.getDomainFrom(index));
+    var link = format(API.News, ServerManager.getDomain(index));
     // console.log(index, language, link);
     this.baseUrl = link;
     switch (parseInt(index)) {
