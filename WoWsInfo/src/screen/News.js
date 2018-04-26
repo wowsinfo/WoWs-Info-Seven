@@ -5,6 +5,7 @@ import { NewsParser } from '../core';
 import * as Animatable from 'react-native-animatable';
 import Drawer from './Drawer';
 import { navStyle } from '../constant/colour';
+import language from '../constant/language';
 
 export default class News extends Component {
   state = {
@@ -22,8 +23,8 @@ export default class News extends Component {
         });
       } else if (event.id == 'search') {
         this.props.navigator.push({
-          title: 'Search',
-          screen: 'info.Settings',
+          title: language.search_title,
+          screen: 'info.search',
           navigatorStyle: navStyle()
         })
       }
@@ -42,7 +43,7 @@ export default class News extends Component {
       return (
         <Animatable.View animation='bounceInUp'>
           <FlatList data={data} keyExtractor={this.newsKey} onRefresh={() => this.refreshNews()}
-          renderItem={({item}) => <NewsCell data={item}/>} refreshing={isRefreshing}/>
+          renderItem={({item}) => <NewsCell data={item}/>} refreshing={isRefreshing} showsVerticalScrollIndicator={false}/>
         </Animatable.View>
       )
     } else return <WoWsLoading />
