@@ -37,25 +37,22 @@ const styles = StyleSheet.create({
   mainViewStyle: {
     flex: 1,
     flexDirection: 'row',
-    margin: 0,
-    padding: 0,
+    margin: 4,
   },
   imageViewStyle: {
     width: scale(120),
-    margin: 0,
-    padding: 4, elevation: 2,
+    padding: 4,
     justifyContent: 'center',
   },
   textViewStyle: {
     flex: 1,
-    margin: 0,
     padding: 8,
     justifyContent: 'space-around',
   },
   imageStyle: {
     width: scale(120),
     height: scale(120 / 1.52),
-    margin: 0, borderRadius: 4
+    borderRadius: 4
   },
   titleStyle: {
     fontSize: scale(14), fontWeight: '300',

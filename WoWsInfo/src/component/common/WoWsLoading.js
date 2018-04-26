@@ -1,19 +1,19 @@
 import React from 'react';
 import { ActivityIndicator, StyleSheet, View, Platform } from 'react-native';
+import { Blue } from 'react-native-material-color';
 
-const Android = Platform.OS == 'android';
 const WoWsLoading = () => {
   const { viewStyle } = styles;
   return (
     <View style={viewStyle}>
-      <ActivityIndicator color={Android ? global.theme : 'gray'} size='large'/>
+      <ActivityIndicator color={android ? Blue : 'gray'} size='large'/>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   viewStyle: {
-    justifyContent: Android ? 'flex-start' : 'center',
+    justifyContent: global.android ? 'flex-start' : 'center',
     alignItems: 'center',
     flex: 1, paddingTop: 8
   }

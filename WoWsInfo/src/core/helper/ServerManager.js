@@ -19,4 +19,4 @@ class ServerManager {
   }
 }
 
-export {ServerManager};
+export { ServerManager };

@@ -12,26 +12,14 @@ export default class Search extends Component {
   onNavigatorEvent(event) {
     if (event.type == 'NavBarButtonPress') {
       if (event.id == 'drawer') {
-        this.props.navigator.toggleDrawer({
-          side: 'left', to: 'open',
-          animated: true
-        });
+       
       }
     }
   }
 
   render() {
     return (
-      <View>
-        <Button title='search' onPress={() => this.props.navigator.showLightBox({
-          screen: 'info.Drawer',
-          title: 'HenryQuan',
-          backButtonTitle: '',
-          style: {
-            backgroundBlur: 'dark',
-            tapBackgroundToDismiss: true
-          },
-          })}/>
+      <View style={{flex: 1}}>
       </View>
     )
   }

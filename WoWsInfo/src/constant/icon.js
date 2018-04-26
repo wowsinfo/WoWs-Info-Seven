@@ -8,10 +8,10 @@ import Entypo from 'react-native-vector-icons/Entypo';
 const replaceSuffixPattern = /--(active|big|small|very-big)/g;
 const icons = {
   // Tab
-  'newspaper-o': [30, '#fff', FontAwesome],
-  'ios-search': [30, '#fff'],
-  'ios-settings': [30, '#fff'],
-  'menu': [30, '#fff', Entypo],
+  'newspaper-o': [26, '#fff', FontAwesome],
+  'ios-search': [26, '#fff'],
+  'ios-settings': [26, '#fff'],
+  'menu': [26, '#fff', Entypo],
 }
 
 const defaultIconProvider = Ionicons;
