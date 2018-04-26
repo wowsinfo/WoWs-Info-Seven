@@ -13,7 +13,18 @@ export function getTextColour(colour) {
   else return '#ffffff'
 }
 
-export function statusBarColour(colour) {
+function statusBarColour(colour) {
   if (getTextColour(colour) == '#000000') return 'dark';
   else return 'light';
+}
+
+export function navStyle() {
+  return {
+    navBarTextColor: getTextColour(global.theme[500]),
+    navBarBackgroundColor: global.theme[500],
+    statusBarTextColorScheme: statusBarColour(global.theme[500]),
+    navBarButtonColor: getTextColour(global.theme[500]),
+    statusBarColor: global.theme[700],
+    screenBackgroundColor: 'white'
+  }
 }

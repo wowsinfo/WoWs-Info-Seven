@@ -1,8 +1,12 @@
+import { Platform } from 'react-native';
+import { BLUE } from 'react-native-material-color';
+
+global.android = Platform.OS == 'android';
 global.first_launch = true;
 global.ads = true;
 global.data_saver = false;
 
-global.theme = null;
+global.theme = BLUE;
 global.server = 3;
 global.domain = 'asia';
 global.api_language = '';

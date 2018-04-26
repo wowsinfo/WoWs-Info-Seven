@@ -1,6 +1,6 @@
 import { Platform, Alert } from 'react-native';
 import { IOSData, LocalData, SavedData, VERSION } from '../constant/value';
-import { Blue } from 'react-native-material-color';
+import { BLUE } from 'react-native-material-color';
 import { Language, GameVersion, DateCalculator, PlayerConverter, ServerManager } from './';
 import store from 'react-native-simple-store';
 import { DataManager } from './';
@@ -125,8 +125,8 @@ class DataStorage {
 
   static async SetupTheme() {
     // Theme Red Blue Green
-    global.theme = Blue;
-    await store.save(LocalData.theme, Blue);
+    global.theme = BLUE;
+    await store.save(LocalData.theme, BLUE);
   }
 
   //

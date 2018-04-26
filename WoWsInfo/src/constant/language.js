@@ -26,6 +26,9 @@ export default language = new LocalizedStrings({
     wiki_map: 'Map',
     wiki_commander: 'Commander skill',
     wiki_collection: 'Collection',
+    // Drawer
+    drawer_player_online: 'Player Online',
+    drawer_wiki: 'WoWs Wiki',
  },
  zh: {
    // Tabs

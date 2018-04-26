@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import { View, Text, FlatList } from 'react-native';
-import { WoWsLoading, NewsCell } from '../component';
+import { View, Text, FlatList, DrawerLayoutAndroid } from 'react-native';
+import { WoWsLoading, NewsCell, DrawerCell } from '../component';
 import { NewsParser } from '../core';
 import * as Animatable from 'react-native-animatable';
+import Drawer from './Drawer';
+import { navStyle } from '../constant/colour';
 
 export default class News extends Component {
   state = {
@@ -14,30 +16,51 @@ export default class News extends Component {
   onNavigatorEvent(event) {
     if (event.type == 'NavBarButtonPress') {
       if (event.id == 'drawer') {
-        this.props.navigator.toggleDrawer({
-          side: 'left', to: 'open',
-          animated: true
-        });
+        this.refs['drawer'].openDrawer();
+      } else if (event.id == 'search') {
+        this.props.navigator.push({
+          title: 'Search',
+          screen: 'info.Settings',
+          navigatorStyle: navStyle()
+        })
       }
     }
   }
 
   async componentWillMount() {
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+    this.props.navigator.push({
+      scr
+    })
     await this.loadNews();
   }
 
   newsKey = (item) => {return item.title}        
   render() {
-    const { isReady, data, isRefreshing } = this.state;
-    if (isReady) {
-      return (
-        <Animatable.View animation='bounceInUp'>
-          <FlatList data={data} keyExtractor={this.newsKey} onRefresh={() => this.refreshNews()}
-          renderItem={({item}) => <NewsCell data={item}/>} refreshing={isRefreshing}/>
-        </Animatable.View>
-      )
+    if (this.state.isReady) {
+      if (android) {
+        return (
+          <DrawerLayoutAndroid drawerWidth={300} ref='drawer'
+            drawerPosition={DrawerLayoutAndroid.positions.Left}
+            renderNavigationView={() => Drawer}>
+            { this.renderNews() }
+          </DrawerLayoutAndroid>
+        )
+      } else return this.renderNews;
     } else return <WoWsLoading />
+  }
+
+  /**
+   * Render news list
+   */
+  renderNews = () => {
+    const { data, isRefreshing } = this.state;        
+    return (
+      <Animatable.View animation='bounceInUp'>
+        <FlatList data={data} keyExtractor={this.newsKey} onRefresh={() => this.refreshNews()}
+        renderItem={({item}) => <NewsCell data={item}/>} refreshing={isRefreshing}/>
+      </Animatable.View>
+    )
   }
 
   /**

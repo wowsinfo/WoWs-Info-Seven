@@ -22,7 +22,7 @@ class DrawerCell extends Component {
 const styles = StyleSheet.create({
   viewStyle: {
     flexDirection: 'row',
-    height: 54, paddingLeft: 8,
+    height: 54,
     alignItems: 'center'
   },
   imageStyle: {
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   textStyle: {
     fontWeight: '300', fontSize: 16,
     color: GREY[900],
-    padding: 8, width: '100%'
+    paddingLeft: 16, width: '100%'
   }
 })
 

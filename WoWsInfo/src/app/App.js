@@ -1,17 +1,17 @@
 import { Navigation } from 'react-native-navigation';
+import { Platform } from 'react-native';
 import { registerScreens } from '../screen';
 
 import { Blue, Green, Red, RED, BLUE, GREEN } from 'react-native-material-color';
-import { getTextColour, statusBarColour } from '../constant/colour';
+import { getTextColour, statusBarColour, navStyle } from '../constant/colour';
 
-import { Platform } from 'react-native';
 import language from '../constant/language';
 import { iconsLoaded, iconsMap } from '../constant/icon';
 
 // Loading icons
 iconsLoaded.then(() => {
   registerScreens();
-  Platform.OS == 'ios' ? startAppIOS() : startAppAndroid();
+  !android ? startAppIOS() : startAppAndroid();
 });
 
 /**
@@ -29,14 +29,6 @@ function startAppIOS() {
           statusBarTextColorScheme: statusBarColour(Red),
           navBarButtonColor: getTextColour(Red),
           statusBarColor: RED[700]
-        },
-        navigatorButtons: {
-          leftButtons: [
-            {
-              icon: iconsMap['menu'],
-              id: 'drawer'
-            }
-          ]
         }
       },
       {
@@ -48,14 +40,6 @@ function startAppIOS() {
           statusBarTextColorScheme: statusBarColour(Blue),
           navBarButtonColor: getTextColour(Blue),
           statusBarColor: BLUE[700]
-        },
-        navigatorButtons: {
-          leftButtons: [
-            {
-              icon: iconsMap['menu'],
-              id: 'drawer'
-            }
-          ]
         }
       },
       {
@@ -69,21 +53,9 @@ function startAppIOS() {
         }
       }
     ],
-    drawer: {
-      right: {
-        screen: 'info.Drawer'
-      },
-      style: {
-        drawerShadow: true,
-      },
-    },
     tabsStyle: {
       tabBarSelectedButtonColor: Blue,
       tabBarTranslucent: true,
-    },
-    appStyle: {
-      tabBarSelectedButtonColor: Blue,
-      forceTitlesDisplay: false,
     },
     animationType: 'fade'
   });
@@ -94,6 +66,27 @@ function startAppIOS() {
  */
 function startAppAndroid() {
   Navigation.startSingleScreenApp({
-    
+    screen: {
+      title: language.search_tab_title,
+      screen: 'info.News', icon: iconsMap['newspaper-o'],
+      navigatorStyle: navStyle(),
+      appStyle: {
+        forceTitlesDisplay: false
+      },
+      navigatorButtons: {
+        leftButtons: [
+          {
+            icon: iconsMap['menu'],
+            id: 'drawer'
+          }
+        ],
+        fab: {
+          collapsedId: 'search',
+          collapsedIcon: iconsMap['ios-search'],
+          collapsedIconColor: getTextColour(Blue),
+          backgroundColor: BLUE[500]
+        }
+      }
+    },
   })
 }
