@@ -36,6 +36,8 @@ export default language = new LocalizedStrings({
     search_player: 'Player',
     search_clan: 'Clan',
     search_title: 'WoWs Search',
+    // Settings
+    settings_theme: 'Change app theme'
  },
  zh: {
    // Tabs

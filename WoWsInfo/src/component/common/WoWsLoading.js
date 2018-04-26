@@ -6,7 +6,7 @@ const WoWsLoading = () => {
   const { viewStyle } = styles;
   return (
     <View style={viewStyle}>
-      <ActivityIndicator color={android ? Blue : 'gray'} size='large'/>
+      <ActivityIndicator color={android ? theme[500] : 'gray'} size='large'/>
     </View>
   )
 }

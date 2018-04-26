@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
-import { View, Text, FlatList, DrawerLayoutAndroid } from 'react-native';
-import { WoWsLoading, NewsCell, DrawerCell } from '../component';
+import { Text, FlatList, DrawerLayoutAndroid } from 'react-native';
+import { WoWsLoading, NewsCell } from '../component';
 import { NewsParser } from '../core';
-import * as Animatable from 'react-native-animatable';
+import { View } from 'react-native-animatable';
 import Drawer from './Drawer';
 import language from '../constant/language';
+import { navStyle } from '../constant/colour';
 
 export default class News extends Component {
   state = {
     isReady: false,
     data: [],
-    isRefreshing: false
+    isRefreshing: false,
+    server: server
   }
 
   onNavigatorEvent(event) {
@@ -40,10 +42,10 @@ export default class News extends Component {
     const { data, isRefreshing, isReady } = this.state;
     if (isReady) {
       return (
-        <Animatable.View animation='bounceInUp'>
+        <View animation='bounceInUp'>
           <FlatList data={data} keyExtractor={this.newsKey} onRefresh={() => this.refreshNews()}
           renderItem={({item}) => <NewsCell data={item}/>} refreshing={isRefreshing} showsVerticalScrollIndicator={false}/>
-        </Animatable.View>
+        </View>
       )
     } else return <WoWsLoading />
   }
@@ -65,8 +67,12 @@ export default class News extends Component {
    * Refreshing news from server (load again)
    */
   async refreshNews() {
-    // Get news again
-    this.setState({ isRefreshing: true })
-    await this.loadNews();
+    const { isRefreshing, server } = this.state;
+    if (server != global.server) {
+      console.log(server, global.server)
+      // Get news again
+      this.setState({ isRefreshing: true, server: global.server })
+      await this.loadNews();
+    }
   }
 }
