@@ -6,8 +6,8 @@ import Settings from './Settings';
 import Drawer from './Drawer';
 
 export function registerScreens() {
-  Navigation.registerComponent('info.Drawer', () => Drawer);  
-  Navigation.registerComponent('info.News', () => News);
-  Navigation.registerComponent('info.Search', () => Search);
-  Navigation.registerComponent('info.Settings', () => Settings);
+  Navigation.registerComponent('info.drawer', () => Drawer);  
+  Navigation.registerComponent('info.news', () => News);
+  Navigation.registerComponent('info.search', () => Search);
+  Navigation.registerComponent('info.settings', () => Settings);
 }

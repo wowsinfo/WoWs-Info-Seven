@@ -2,14 +2,16 @@ import React, { Component } from 'react'
 import { Text, StyleSheet, ScrollView, View } from 'react-native';
 import { GREY } from 'react-native-material-color';
 import language from '../constant/language';
-import { DrawerCell } from '../component';
+import { DrawerCell, TextCell } from '../component';
 import { Divider } from 'react-native-elements';
+import { VERSION } from '../constant/value';
+import { iconsMap } from '../constant/icon';
 
 export default class Drawer extends Component {
   render() {
-    const { viewStyle, textStyle, titleStyle } = styles;    
+    const { viewStyle, textStyle, titleStyle, dividerStyle, versionStyle } = styles;    
     return (
-      <ScrollView style={viewStyle} contentContainerStyle={{padding: 8,}}>
+      <ScrollView style={viewStyle} contentContainerStyle={{padding: 8}} showsVerticalScrollIndicator={false}>
           <Text style={titleStyle}>{language.drawer_wiki}</Text>
           <DrawerCell icon={require('../img/Achievement.png')} title={language.wiki_achievement}/>
           <DrawerCell icon={require('../img/Warship.png')} title={language.wiki_warship}/>
@@ -18,9 +20,9 @@ export default class Drawer extends Component {
           <DrawerCell icon={require('../img/Commander.png')} title={language.wiki_commander}/>
           <DrawerCell icon={require('../img/Map.png')} title={language.wiki_map}/>
           <DrawerCell icon={require('../img/Collection.png')} title={language.wiki_collection}/>
-          <Divider />
-          <DrawerCell icon={require('../img/Collection.png')} title={language.drawer_player_online}/>
-          <Divider />
+          <View style={dividerStyle}><Divider /></View>
+          <TextCell title={language.drawer_settings}/>
+          <Text style={versionStyle}>{VERSION}</Text>
       </ScrollView>
     )
   }
@@ -30,6 +32,9 @@ const styles = StyleSheet.create({
   viewStyle: {
     flex: 1, backgroundColor: 'white', width: '90%'
   },
+  dividerStyle: {
+    marginTop: 16
+  },
   textStyle: {
     paddingTop: 8, color: GREY[800],
     fontSize: 36, fontWeight: 'bold'
@@ -37,5 +42,9 @@ const styles = StyleSheet.create({
   titleStyle: {
     fontWeight: 'bold',
     color: GREY[800]
+  },
+  versionStyle: {
+    fontSize: 10, fontWeight: 'bold',
+    marginTop: 8, padding: 8
   }
 })

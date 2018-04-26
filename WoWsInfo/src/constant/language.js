@@ -14,6 +14,7 @@ export default language = new LocalizedStrings({
     server_europe: 'eu',
     server_north_america: 'com',
     server_asia: 'asia',
+    server_na: 'na',
     // Day difference
     day_today: 'Today',
     day_yesterday: 'Yesterday',
@@ -29,6 +30,12 @@ export default language = new LocalizedStrings({
     // Drawer
     drawer_player_online: 'Player Online',
     drawer_wiki: 'WoWs Wiki',
+    drawer_settings: 'Settings',
+    drawer_about: 'About',
+    // Search
+    search_player: 'Player',
+    search_clan: 'Clan',
+    search_title: 'WoWs Search',
  },
  zh: {
    // Tabs
