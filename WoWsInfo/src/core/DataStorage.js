@@ -142,6 +142,7 @@ class DataStorage {
     global.theme = await store.get(LocalData.theme);    
     global.server = await store.get(LocalData.server);
     global.domain = ServerManager.domainName(global.server);
+    console.log(server, domain);
     global.api_language = await store.get(LocalData.api_language);
     global.game_version = await store.get(LocalData.game_version);
     global.friend = await store.get(LocalData.friend);

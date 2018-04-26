@@ -7,12 +7,32 @@ import { getTextColour, statusBarColour, navStyle } from '../constant/colour';
 
 import language from '../constant/language';
 import { iconsLoaded, iconsMap } from '../constant/icon';
+import { DataStorage } from '../core';
 
 // Loading icons
 iconsLoaded.then(() => {
   registerScreens();
-  !android ? startAppIOS() : startAppAndroid();
+  loadingData();
+  DataStorage.DataValidation().then(() => {
+    !android ? startAppIOS() : startAppAndroid();
+  })
 });
+
+/**
+ * Loading data screen
+ */
+function loadingData() {
+  Navigation.startSingleScreenApp({
+    screen: {
+      screen: 'info.wowsinfo',
+      navigatorStyle: {
+        navBarHidden: true,
+        statusBarTextColorScheme: 'light'
+      },
+    },
+    animationType: 'none'
+  });
+}
 
 /**
  * Start this application IOS
@@ -37,7 +57,8 @@ function startAppIOS() {
       }
     ],
     tabsStyle: {
-      tabBarSelectedButtonColor: Blue,
+      tabBarSelectedButtonColor: theme[500],
+      tabBarBackgroundColor: getTextColour(theme[500]),
       tabBarTranslucent: true,
     },
     animationType: 'fade'
