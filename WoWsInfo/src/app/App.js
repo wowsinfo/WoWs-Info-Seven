@@ -88,5 +88,10 @@ function startAppAndroid() {
         }
       }
     },
+    drawer: {
+      left: {
+        screen: 'info.Drawer',
+      },
+    }
   })
 }
