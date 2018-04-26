@@ -4,7 +4,6 @@ import { WoWsLoading, NewsCell, DrawerCell } from '../component';
 import { NewsParser } from '../core';
 import * as Animatable from 'react-native-animatable';
 import Drawer from './Drawer';
-import { navStyle } from '../constant/colour';
 import language from '../constant/language';
 
 export default class News extends Component {
