@@ -1,12 +1,29 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native';
+import { View, Text, Button } from 'react-native';
+import language from '../constant/language';
+import { navStyle } from '../constant/colour';
 
 export default class Settings extends Component {
   render() {
     return (
       <View>
-        <Text>Settings</Text>
+        <Button title={language.settings_theme} onPress={this.showTheme}/>
       </View>
     )
+  }
+
+  componentWillReceiveProps() {
+    this.props.navigator.setStyle(navStyle());
+  }
+
+  /**
+   * Push to theme screen
+   */
+  showTheme = () => {
+    this.props.navigator.push({
+      screen: 'settings.theme',
+      title: language.settings_theme,
+      navigatorStyle: navStyle()
+    })
   }
 }

@@ -24,11 +24,12 @@ iconsLoaded.then(() => {
 function loadingData() {
   Navigation.startSingleScreenApp({
     screen: {
-      screen: 'info.wowsinfo',
+      screen: 'app.wowsinfo',
       navigatorStyle: {
         navBarHidden: true,
-        statusBarTextColorScheme: 'light'
-      },
+        statusBarTextColorScheme: 'light',
+        statusBarColor: BLUE[700], 
+      }
     },
     animationType: 'none'
   });
@@ -37,7 +38,7 @@ function loadingData() {
 /**
  * Start this application IOS
  */
-function startAppIOS() {
+export function startAppIOS() {
   Navigation.startTabBasedApp({
     tabs: [
       {
@@ -68,7 +69,7 @@ function startAppIOS() {
 /**
  * Start with app android
  */
-function startAppAndroid() {
+export function startAppAndroid() {
   Navigation.startSingleScreenApp({
     screen: {
       title: language.search_tab_title,
@@ -87,14 +88,14 @@ function startAppAndroid() {
         fab: {
           collapsedId: 'search',
           collapsedIcon: iconsMap['ios-search'],
-          collapsedIconColor: getTextColour(Blue),
-          backgroundColor: BLUE[500]
+          collapsedIconColor: getTextColour(theme[500]),
+          backgroundColor: theme[500],
         }
       }
     },
     drawer: {
       left: {
-        screen: 'info.drawer',
+        screen: 'app.drawer',
       },
     }
   })

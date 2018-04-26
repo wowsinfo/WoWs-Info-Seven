@@ -6,6 +6,7 @@ import { DrawerCell, TextCell } from '../component';
 import { Divider } from 'react-native-elements';
 import { VERSION } from '../constant/value';
 import { iconsMap } from '../constant/icon';
+import { navStyle } from '../constant/colour';
 
 export default class Drawer extends Component {
   render() {
@@ -21,10 +22,30 @@ export default class Drawer extends Component {
           <DrawerCell icon={require('../img/Map.png')} title={language.wiki_map}/>
           <DrawerCell icon={require('../img/Collection.png')} title={language.wiki_collection}/>
           <View style={dividerStyle}><Divider /></View>
-          <TextCell title={language.drawer_settings}/>
+          <TextCell title={language.drawer_settings} onPress={() => this.pushToScreen('info.settings', language.settings_tab_title)}/>
           <Text style={versionStyle}>{VERSION}</Text>
       </ScrollView>
     )
+  }
+
+  /**
+   * Push to a certain screen
+   * @param {*} screen 
+   * @param {*} name 
+   */
+  pushToScreen(screen, name) {
+    console.log(screen, name);
+    this.props.navigator.push({
+      screen: screen,
+      title: name,
+      navigatorStyle: navStyle()
+    })
+
+    // Hide drawer
+    this.props.navigator.toggleDrawer({
+      side: 'left',
+      to: 'closed'
+    });
   }
 }
 

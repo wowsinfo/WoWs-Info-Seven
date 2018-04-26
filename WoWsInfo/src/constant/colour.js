@@ -3,7 +3,8 @@
  * @param {*} colour 
  */
 export function getTextColour(colour) {
-  var number = colour.replace('#', '');
+  console.log(colour);
+  var number = String(colour).replace('#', '');
   // Get red green blue
   let red = parseInt(number.substr(0, 2), 16);
   let green = parseInt(number.substr(2, 2), 16);
@@ -20,11 +21,11 @@ function statusBarColour(colour) {
 
 export function navStyle() {
   return {
-    navBarTextColor: getTextColour(global.theme[500]),
-    navBarBackgroundColor: global.theme[500],
-    statusBarTextColorScheme: statusBarColour(global.theme[500]),
-    navBarButtonColor: getTextColour(global.theme[500]),
-    statusBarColor: global.theme[700],
+    navBarTextColor: getTextColour(theme[500]),
+    navBarBackgroundColor: theme[500],
+    statusBarTextColorScheme: statusBarColour(theme[500]),
+    navBarButtonColor: getTextColour(theme[500]),
+    statusBarColor: theme[700],
     screenBackgroundColor: 'white'
   }
 }
