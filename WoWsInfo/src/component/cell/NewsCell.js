@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     margin: 4,
   },
   imageViewStyle: {
-    width: scale(120),
+    width: 120,
     padding: 4,
     justifyContent: 'center',
   },
@@ -50,16 +50,16 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
   imageStyle: {
-    width: scale(120),
-    height: scale(120 / 1.52),
+    width: 120,
+    height: 120 / 1.52,
     borderRadius: 4
   },
   titleStyle: {
-    fontSize: scale(14), fontWeight: '300',
+    fontSize: 14, fontWeight: '300',
     color: GREY[900]
   },
   timeStyle: {
-    fontSize: scale(10), fontWeight: 'bold',
+    fontSize: 10, fontWeight: 'bold',
     textAlign: 'right', color: GREY[500]
   }
 })

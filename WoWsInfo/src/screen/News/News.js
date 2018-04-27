@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { Text, FlatList, DrawerLayoutAndroid } from 'react-native';
-import { WoWsLoading, NewsCell } from '../component';
-import { NewsParser } from '../core';
+import { Text, FlatList, DrawerLayoutAndroid, SafeAreaView } from 'react-native';
+import { WoWsLoading, NewsCell } from '../../component';
+import { NewsParser } from '../../core';
 import { View } from 'react-native-animatable';
-import Drawer from './Drawer';
-import language from '../constant/language';
-import { navStyle } from '../constant/colour';
+import Drawer from '../Drawer';
+import language from '../../constant/language';
+import { navStyle } from '../../constant/colour';
 
 export default class News extends Component {
   state = {
@@ -28,6 +28,8 @@ export default class News extends Component {
           screen: 'info.search',
           navigatorStyle: navStyle()
         })
+      } else if (event.id == 'more') {
+        
       }
     }
   }
@@ -42,10 +44,12 @@ export default class News extends Component {
     const { data, isRefreshing, isReady } = this.state;
     if (isReady) {
       return (
-        <View animation='bounceInUp'>
-          <FlatList data={data} keyExtractor={this.newsKey} onRefresh={() => this.refreshNews()}
-          renderItem={({item}) => <NewsCell data={item}/>} refreshing={isRefreshing} showsVerticalScrollIndicator={false}/>
-        </View>
+        <SafeAreaView>
+          <View animation='bounceInUp'>
+            <FlatList data={data} keyExtractor={this.newsKey} onRefresh={() => this.refreshNews()}
+            renderItem={({item}) => <NewsCell data={item}/>} refreshing={isRefreshing} showsVerticalScrollIndicator={false}/>
+          </View>
+        </SafeAreaView>
       )
     } else return <WoWsLoading />
   }

@@ -26,6 +26,6 @@ export function navStyle() {
     statusBarTextColorScheme: statusBarColour(theme[500]),
     navBarButtonColor: getTextColour(theme[500]),
     statusBarColor: theme[700],
-    screenBackgroundColor: 'white'
+    screenBackgroundColor: 'white' 
   }
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, Button } from 'react-native';
-import language from '../constant/language';
-import { navStyle } from '../constant/colour';
+import language from '../../constant/language';
+import { navStyle } from '../../constant/colour';
 
 export default class Settings extends Component {
   render() {
