@@ -5,7 +5,6 @@ import language from '../constant/language';
 import { DrawerCell, TextCell } from '../component';
 import { Divider } from 'react-native-elements';
 import { VERSION } from '../constant/value';
-import { iconsMap } from '../constant/icon';
 import { navStyle } from '../constant/colour';
 
 export default class Drawer extends Component {
@@ -35,17 +34,18 @@ export default class Drawer extends Component {
    */
   pushToScreen(screen, name) {
     console.log(screen, name);
-    this.props.navigator.push({
-      screen: screen,
-      title: name,
-      navigatorStyle: navStyle()
-    })
 
     // Hide drawer
     this.props.navigator.toggleDrawer({
       side: 'left',
       to: 'closed'
     });
+
+    this.props.navigator.push({
+      screen: screen,
+      title: name,
+      navigatorStyle: navStyle()
+    })
   }
 }
 

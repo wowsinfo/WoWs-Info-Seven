@@ -12,10 +12,6 @@ export default class Settings extends Component {
     )
   }
 
-  componentWillReceiveProps() {
-    this.props.navigator.setStyle(navStyle());
-  }
-
   /**
    * Push to theme screen
    */

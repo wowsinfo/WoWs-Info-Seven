@@ -9,15 +9,6 @@ import language from '../constant/language';
 import { iconsLoaded, iconsMap } from '../constant/icon';
 import { DataStorage } from '../core';
 
-// Loading icons
-iconsLoaded.then(() => {
-  registerScreens();
-  loadingData();
-  DataStorage.DataValidation().then(() => {
-    !android ? startAppIOS() : startAppAndroid();
-  })
-});
-
 /**
  * Loading data screen
  */
@@ -35,10 +26,24 @@ function loadingData() {
   });
 }
 
+// Loading icons
+iconsLoaded.then(() => {
+  registerScreens();
+  loadingData();
+  DataStorage.DataValidation().then(() => startApp());
+});
+
+/**
+ * Start this application
+ */
+export function startApp() {
+  android ? startAppAndroid() : startAppIOS();
+}
+
 /**
  * Start this application IOS
  */
-export function startAppIOS() {
+function startAppIOS() {
   Navigation.startTabBasedApp({
     tabs: [
       {
@@ -69,7 +74,7 @@ export function startAppIOS() {
 /**
  * Start with app android
  */
-export function startAppAndroid() {
+function startAppAndroid() {
   Navigation.startSingleScreenApp({
     screen: {
       title: language.search_tab_title,

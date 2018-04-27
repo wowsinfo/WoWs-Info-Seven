@@ -3,7 +3,7 @@
  * @param {*} colour 
  */
 export function getTextColour(colour) {
-  console.log(colour);
+  // console.log(colour);
   var number = String(colour).replace('#', '');
   // Get red green blue
   let red = parseInt(number.substr(0, 2), 16);
