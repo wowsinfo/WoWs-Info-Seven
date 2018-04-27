@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Image, ActivityIndicator, StyleSheet } from 'react-native';
 import { DataStorage } from '../core';
 import { Blue } from 'react-native-material-color';
-import { scale } from 'react-native-size-matters';
+import { verticalScale } from 'react-native-size-matters';
 
 export default class WoWsInfo extends Component {
   render() {
@@ -24,8 +24,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   imageStyle: {
-    height: scale(128),
-    width: scale(128),
+    height: 128, width: 128,
     margin: 16,
   }
 })

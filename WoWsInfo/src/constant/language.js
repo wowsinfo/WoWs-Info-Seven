@@ -9,6 +9,8 @@ export default language = new LocalizedStrings({
     search_tab_label: 'Search',
     settings_tab_title: 'Settings',
     settings_tab_label: 'Settings',
+    wiki_title: 'Wiki',
+    more_title: 'More',
     // Server
     server_russia: 'ru',
     server_europe: 'eu',

@@ -49,12 +49,28 @@ function startAppIOS() {
       {
         label: language.news_tab_label, title: language.news_tab_title,
         screen: 'info.news', icon: iconsMap['newspaper-o'],
-        navigatorStyle: navStyle()
+        navigatorStyle: navStyle(),
+        navigatorButtons: {
+          rightButtons: [
+            {
+              title: language.more_title,
+              id: 'more'
+            }
+          ]
+        }
       },
       {
         label: language.search_tab_label, title: language.search_tab_title,
         screen: 'info.search', icon: iconsMap['ios-search'],
-        navigatorStyle: navStyle()
+        navigatorStyle: navStyle(),
+        navigatorButtons: {
+          leftButtons: [
+            {
+              title: language.wiki_title,
+              id: 'wiki'
+            }
+          ]
+        }
       },
       {
         label: language.settings_tab_label, title: language.settings_tab_title,
@@ -88,6 +104,12 @@ function startAppAndroid() {
           {
             icon: iconsMap['menu'],
             id: 'drawer'
+          }
+        ],
+        rightButtons: [
+          {
+            title: language.more_title,
+            id: 'more'
           }
         ],
         fab: {
