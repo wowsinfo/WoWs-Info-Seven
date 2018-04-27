@@ -4,9 +4,11 @@ import { Blue } from 'react-native-material-color';
 
 const WoWsLoading = () => {
   const { viewStyle } = styles;
+  let color = String(theme[500]) == '#ffffff' ? Blue : theme[500];
+  console.log(theme[500]);
   return (
     <View style={viewStyle}>
-      <ActivityIndicator color={android ? theme[500] : 'gray'} size='large'/>
+      <ActivityIndicator color={android ? color : 'gray'} size='large'/>
     </View>
   )
 }

@@ -4,7 +4,7 @@ import store from 'react-native-simple-store';
 import { WoWsTouchable } from '..';
 import { LocalData } from '../../constant/value';
 import { getTextColour } from '../../constant/colour';
-import { startAppIOS, startAppAndroid } from '../../app/App';
+import { startApp } from '../../app/App';
 
 class ThemeCell extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class ThemeCell extends Component {
     return (
       <WoWsTouchable onPress={this.changeTheme}>
         <View style={[viewStyle, {backgroundColor: this.colour[500]}]}>
-          <Text style={{fontSize: 16, color: getTextColour(this.colour[500])}}>{this.colour[500]}</Text>
+          <Text style={{fontSize: 16, color: getTextColour(this.colour[500])}}>{String(this.colour[500]).toUpperCase()}</Text>
         </View>
       </WoWsTouchable>        
     )
@@ -25,8 +25,8 @@ class ThemeCell extends Component {
 
   changeTheme = () => {
     global.theme = this.colour;
+    startApp();
     store.save(LocalData.theme, this.colour);
-    !android ? startAppIOS() : startAppAndroid();
   }
 }
 

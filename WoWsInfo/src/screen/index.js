@@ -1,11 +1,13 @@
 import { Navigation } from 'react-native-navigation';
 
-import News from './News';
+import News from './News/News';
+
 import Search from './Search';
-import Settings from './Settings';
 import Drawer from './Drawer';
 import WoWsInfo from './WoWsInfo';
-import Theme from './Theme';
+
+import Settings from './Settings/Settings';
+import Theme from './Settings/Theme';
 
 export function registerScreens() {
   Navigation.registerComponent('app.wowsinfo', () => WoWsInfo);    

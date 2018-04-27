@@ -6,8 +6,10 @@ import { BLUE, RED, GREEN, PINK, PURPLE, DEEPPRUPLE, INDIGO, LIGHTBLUE, CYAN, TE
 export default class ThemeScreen extends Component {
   constructor() {
     super();
+    let WHITE = { 500: '#ffffff', 700: '#ffffff' };
+    let BLACK = { 500: '#000000', 700: '#000000' };
     this.colourList = [RED, PINK, PURPLE, DEEPPRUPLE, INDIGO, BLUE, LIGHTBLUE, CYAN, TEAL, GREEN, LIGHTGREEN, LIME, 
-      YELLOW, AMBER, ORANGE, DEEPORANGE, BROWN, GREY, BLUEGREY];
+      YELLOW, AMBER, ORANGE, DEEPORANGE, BROWN, GREY, BLUEGREY, BLACK, WHITE];
   }
 
   keyExtractor = (item, index) => String(index)
