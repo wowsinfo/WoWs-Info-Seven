@@ -1,6 +1,7 @@
 import { Navigation } from 'react-native-navigation';
 
 import News from './News/News';
+import More from './News/More';
 
 import Search from './Search';
 import Drawer from './Drawer';
@@ -13,6 +14,7 @@ export function registerScreens() {
   Navigation.registerComponent('app.wowsinfo', () => WoWsInfo);    
   Navigation.registerComponent('app.drawer', () => Drawer);  
   Navigation.registerComponent('info.news', () => News);
+  Navigation.registerComponent('news.more', () => More);
   Navigation.registerComponent('info.search', () => Search);
   Navigation.registerComponent('info.settings', () => Settings);
   Navigation.registerComponent('settings.theme', () => Theme);

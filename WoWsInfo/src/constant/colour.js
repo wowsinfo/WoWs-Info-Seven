@@ -14,7 +14,7 @@ export function getTextColour(colour) {
   else return '#ffffff'
 }
 
-function statusBarColour(colour) {
+export function statusBarColour(colour) {
   if (getTextColour(colour) == '#000000') return 'dark';
   else return 'light';
 }
