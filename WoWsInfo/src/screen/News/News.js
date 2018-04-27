@@ -26,10 +26,14 @@ export default class News extends Component {
         this.props.navigator.push({
           title: language.search_title,
           screen: 'info.search',
-          navigatorStyle: navStyle()
+          navigatorStyle: navStyle
         })
       } else if (event.id == 'more') {
-        
+        this.props.navigator.push({
+          title: language.more_header,
+          screen: 'news.more',
+          navigatorStyle: navStyle()
+        })
       }
     }
   }
