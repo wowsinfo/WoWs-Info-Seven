@@ -31,17 +31,17 @@ export default class Search extends PureComponent {
     const { inputStyle, textStyle } = styles;
     return (
       <View style={{flex: 1, padding: 8}} animation='slideInDown'>
-          <TextInput style={inputStyle} underlineColorAndroid='white' onEndEditing={this.search}
-            onChangeText={(text) => this.setState({input: text})} value={input}/>
-          { showPicker ? this.renderPicker() : null }
-          <GridView itemDimension={256} items={data} renderItem={item => {
-            return (
-              <WoWsTouchable style={{height: 44, justifyContent: 'center'}}>
-                <SafeAreaView>
-                  <Text animation='flipInX' style={textStyle}>{item.name + '|' + item.id}</Text>                          
-                </SafeAreaView>
-              </WoWsTouchable>
-            )}} showsVerticalScrollIndicator={false}/>
+        <TextInput style={inputStyle} underlineColorAndroid='white' onEndEditing={this.search} autoCorrect={false}
+          onChangeText={(text) => this.setState({input: text})} autoCapitalize='none' value={input}/>
+        { showPicker ? this.renderPicker() : null }
+        <GridView itemDimension={256} items={data} renderItem={item => {
+          return (
+            <WoWsTouchable>
+              <SafeAreaView style={{height: 44, justifyContent: 'center'}}>
+                <Text animation='flipInX' style={textStyle}>{'[' + item.id + '] ' + item.name}</Text>                          
+              </SafeAreaView>
+            </WoWsTouchable>
+          )}} showsVerticalScrollIndicator={false}/>
       </View>
     )
   }
