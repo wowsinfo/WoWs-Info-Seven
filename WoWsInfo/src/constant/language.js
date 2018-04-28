@@ -42,7 +42,24 @@ export default language = new LocalizedStrings({
     search_clan: 'Clan',
     search_title: 'WoWs Search',
     // Settings
-    settings_theme: 'Change app theme'
+    settings_theme: 'Change app theme',
+    // Website
+    web_official_title: 'Official websites',
+    web_official: 'World of Warships',
+    web_premium_store: 'Premium store',
+    web_official_wiki: 'Global Wiki',
+    web_statistics_title: 'Statistics websites',
+    web_number: 'WoWs Number',
+    web_today: 'Warships Today',
+    web_information_title: 'Supertest information',
+    web_sea_group: 'Sea Group',
+    web_daily_bounce: 'The Daily Bounce',
+    web_facebook: 'Developer Blog',
+    web_ranking_title: 'Ranking',
+    web_ranking: 'Player Ranking [Suihei Koubou]',
+    // Tool
+    tool_wrinfo: '[Windows] WRInfo',
+    tool_assist: '[Android] Community Assistant'
  },
  zh: {
    // Tabs
