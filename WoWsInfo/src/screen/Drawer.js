@@ -6,6 +6,7 @@ import { DrawerCell, TextCell } from '../component';
 import { Divider } from 'react-native-elements';
 import { VERSION } from '../constant/value';
 import { navStyle } from '../constant/colour';
+import Wiki from './Wiki/Wiki';
 
 export default class Drawer extends Component {
   render() {
@@ -13,13 +14,7 @@ export default class Drawer extends Component {
     return (
       <ScrollView style={viewStyle} contentContainerStyle={{padding: 8}} showsVerticalScrollIndicator={false}>
           <Text style={titleStyle}>{language.drawer_wiki}</Text>
-          <DrawerCell icon={require('../img/Achievement.png')} title={language.wiki_achievement}/>
-          <DrawerCell icon={require('../img/Warship.png')} title={language.wiki_warship}/>
-          <DrawerCell icon={require('../img/Upgrade.png')} title={language.wiki_upgrade}/>
-          <DrawerCell icon={require('../img/Camouflage.png')} title={language.wiki_flag_camouflage}/>
-          <DrawerCell icon={require('../img/Commander.png')} title={language.wiki_commander}/>
-          <DrawerCell icon={require('../img/Map.png')} title={language.wiki_map}/>
-          <DrawerCell icon={require('../img/Collection.png')} title={language.wiki_collection}/>
+          <Wiki />
           <View style={dividerStyle}><Divider /></View>
           <TextCell title={language.drawer_settings} onPress={() => this.pushToScreen('info.settings', language.settings_tab_title)}/>
           <Text style={versionStyle}>{VERSION}</Text>

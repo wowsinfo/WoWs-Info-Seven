@@ -11,6 +11,7 @@ export default language = new LocalizedStrings({
     settings_tab_label: 'Settings',
     wiki_title: 'Wiki',
     more_title: 'More',
+    open_in_browser_title: 'Open in browser',
     more_header: 'Websites & Tools',
     more_website_title: 'Website',
     more_tool_title: 'Tool',

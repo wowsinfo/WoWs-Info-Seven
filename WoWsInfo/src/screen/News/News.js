@@ -51,11 +51,23 @@ export default class News extends Component {
         <SafeAreaView>
           <View animation='bounceInUp'>
             <FlatList data={data} keyExtractor={this.newsKey} onRefresh={() => this.refreshNews()}
-            renderItem={({item}) => <NewsCell data={item}/>} refreshing={isRefreshing} showsVerticalScrollIndicator={false}/>
+            renderItem={({item}) => <NewsCell browser={() => this.pushToBrowser(item)} data={item}/>} refreshing={isRefreshing} showsVerticalScrollIndicator={false}/>
           </View>
         </SafeAreaView>
       )
     } else return <WoWsLoading />
+  }
+
+  /**
+   * Show website in browser
+   */
+  pushToBrowser(item) {
+    console.log(this.state);
+    this.props.navigator.push({
+      screen: 'info.browser',
+      passProps: {link: item.link},
+      navigatorStyle: navStyle()
+    })
   }
 
   /**

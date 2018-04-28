@@ -20,8 +20,14 @@ export default class Search extends PureComponent {
 
   onNavigatorEvent(event) {
     if (event.type == 'NavBarButtonPress') {
-      if (event.id == 'drawer') {
-       
+      if (event.id == 'wiki') {
+        this.props.navigator.showLightBox({
+          screen: 'info.wiki',
+          style: {
+            backgroundBlur: 'light',
+            tapBackgroundToDismiss: true
+          },
+        })
       }
     }
   }

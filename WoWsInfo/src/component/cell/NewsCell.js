@@ -10,7 +10,7 @@ class NewsCell extends Component {
     const { mainViewStyle, imageViewStyle, textViewStyle, imageStyle, titleStyle, timeStyle } = styles;    
     return (
       <View style={{flex: 1}}>
-        <WoWsTouchable onPress={this.visitWebsite}>
+        <WoWsTouchable onPress={() => this.props.browser()}>
           <View style={mainViewStyle}>
             { data_saver ? null : (
               <View style={imageViewStyle}>
@@ -25,11 +25,6 @@ class NewsCell extends Component {
         </WoWsTouchable>
       </View>
     );
-  }
-
-  visitWebsite = () => {
-    const { link } = this.props.data;
-    Linking.openURL(link);
   }
 }
 
