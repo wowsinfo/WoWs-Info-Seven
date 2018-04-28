@@ -8,6 +8,7 @@ import store from 'react-native-simple-store';
 import { LocalData } from '../constant/value';
 import { PlayerSearch } from '../core';
 import { GREY } from 'react-native-material-color';
+import { navStyle } from '../constant/colour';
 
 export default class Search extends PureComponent {
   constructor(props) {
@@ -21,12 +22,11 @@ export default class Search extends PureComponent {
   onNavigatorEvent(event) {
     if (event.type == 'NavBarButtonPress') {
       if (event.id == 'wiki') {
-        this.props.navigator.showLightBox({
+        this.props.navigator.push({
+          title: language.wiki_title,
           screen: 'info.wiki',
-          style: {
-            backgroundBlur: 'light',
-            tapBackgroundToDismiss: true
-          },
+          backButtonTitle: '',
+          navigatorStyle: navStyle()
         })
       }
     }
@@ -36,7 +36,7 @@ export default class Search extends PureComponent {
     const { showPicker, data, input } = this.state;
     const { inputStyle, textStyle } = styles;
     return (
-      <View style={{flex: 1, padding: 8}} animation='slideInDown'>
+      <View style={{flex: 1, padding: 8}} animation='fadeInDown'>
         <TextInput style={inputStyle} underlineColorAndroid='white' onEndEditing={this.search} autoCorrect={false}
           onChangeText={(text) => this.setState({input: text})} autoCapitalize='none' value={input}/>
         { showPicker ? this.renderPicker() : null }

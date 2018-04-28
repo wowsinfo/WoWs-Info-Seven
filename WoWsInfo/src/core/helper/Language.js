@@ -4,10 +4,11 @@ class Language {
    */
   static getCurrentLanguage() {
     var lang = global.api_language;
-    if (global.first_faunch) {
+    if (global.first_faunch == true) {
       // Get current language
       var DeviceInfo = require('react-native-device-info');
       lang = DeviceInfo.getDeviceLocale().toLocaleLowerCase() + '-';
+      console.log(lang);
       // Simplify -> ja-US to ja only
       let simplified = lang.split('-')[0];
       // Basic filter

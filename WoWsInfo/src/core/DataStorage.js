@@ -168,7 +168,7 @@ class DataStorage {
     global.data.commander = await store.get(SavedData.commander_skill);
     global.data.map = await store.get(SavedData.map);
     global.data.personal_rating = await store.get(SavedData.personal_rating);
-    console.log('SavedData\n' + global.data);
+    console.log(global.data);
   }
 }
 
