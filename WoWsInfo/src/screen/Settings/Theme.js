@@ -19,7 +19,7 @@ export default class ThemeScreen extends Component {
   keyExtractor = (item, index) => String(index)
   render() {
     return (
-      <FlatList data={this.colourList} keyExtractor={this.keyExtractor} 
+      <FlatList data={this.colourList} keyExtractor={this.keyExtractor} showsVerticalScrollIndicator={false}
         renderItem={({item}) => <ThemeCell colour={item}/>} />
     )
   }

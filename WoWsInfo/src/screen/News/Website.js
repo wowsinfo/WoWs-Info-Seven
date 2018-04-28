@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { ScrollView, Text } from 'react-native';
+import { View } from 'react-native-animatable';
 import { TextCell } from '../../component';
 import language from '../../constant/language';
 import { Divider } from 'react-native-elements';
@@ -13,8 +14,10 @@ const data = [[language.web_official_title, {title: language.web_official}, {tit
 
 export default Website = () => {
   return (
-    <ScrollView>
-      { renderWebsite(data) }
+    <ScrollView showsVerticalScrollIndicator={false}>
+      <View animation='fadeIn'>
+        { renderWebsite(data) }
+      </View>
     </ScrollView>
   )
 }

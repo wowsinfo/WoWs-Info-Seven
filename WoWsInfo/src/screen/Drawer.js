@@ -14,7 +14,7 @@ export default class Drawer extends Component {
     return (
       <ScrollView style={viewStyle} contentContainerStyle={{padding: 8}} showsVerticalScrollIndicator={false}>
           <Text style={titleStyle}>{language.drawer_wiki}</Text>
-          <Wiki />
+          <Wiki navigator={this.props.navigator} drawer={this.closeDrawer}/>
           <View style={dividerStyle}><Divider /></View>
           <TextCell title={language.drawer_settings} onPress={() => this.pushToScreen('info.settings', language.settings_tab_title)}/>
           <Text style={versionStyle}>{VERSION}</Text>
@@ -30,17 +30,25 @@ export default class Drawer extends Component {
   pushToScreen(screen, name) {
     console.log(screen, name);
 
-    // Hide drawer
-    this.props.navigator.toggleDrawer({
-      side: 'left',
-      to: 'closed'
-    });
+    this.closeDrawer();
 
     this.props.navigator.push({
       screen: screen,
       title: name,
       navigatorStyle: navStyle()
     })
+  }
+
+  /**
+   * Close drawer for android
+   */
+  closeDrawer = () => {
+    // Hide drawer
+    this.props.navigator.toggleDrawer({
+      side: 'left',
+      animation: false,
+      to: 'closed'
+    });
   }
 }
 
