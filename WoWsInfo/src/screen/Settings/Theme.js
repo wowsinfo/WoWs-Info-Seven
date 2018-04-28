@@ -12,6 +12,10 @@ export default class ThemeScreen extends Component {
       YELLOW, AMBER, ORANGE, DEEPORANGE, BROWN, GREY, BLUEGREY, BLACK, WHITE];
   }
 
+  static navigatorStyle = {
+    tabBarHidden: true
+  }
+
   keyExtractor = (item, index) => String(index)
   render() {
     return (
