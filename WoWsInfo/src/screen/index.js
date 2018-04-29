@@ -17,6 +17,7 @@ import MapDetail from './Wiki/MapDetail';
 import GameMap from './Wiki/GameMap';
 import Ship from './Wiki/Ship';
 import ShipFilter from './Wiki/ShipFilter';
+import ShipDetail from './Wiki/ShipDetail';
 
 // Settings
 import Settings from './Settings/Settings';
@@ -35,6 +36,7 @@ export function registerScreens() {
   Navigation.registerComponent('map.detail', () => MapDetail);
   Navigation.registerComponent('wiki.ship', () => Ship);  
   Navigation.registerComponent('ship.filter', () => ShipFilter);  
+  Navigation.registerComponent('ship.detail', () => ShipDetail);  
   Navigation.registerComponent('wiki.achievement', () => Achievement);
   Navigation.registerComponent('basic.detail', () => BasicDetail);
   Navigation.registerComponent('info.settings', () => Settings);
