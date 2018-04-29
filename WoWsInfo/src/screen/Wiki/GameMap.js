@@ -26,7 +26,7 @@ export default class GameMap extends Component {
             return (
               <WoWsTouchable onPress={() => this.showMapDetail(item)}>
                 <View style={viewStyle}>
-                  <Text style={[textStyle, {color: theme[500] == '#000000' ? Blue : theme[500]}]}>{item.name}</Text>
+                  <Text style={[textStyle, {color: theme[500] == '#ffffff' ? Blue : theme[500]}]}>{item.name}</Text>
                 </View>
               </WoWsTouchable>
             )}} showsVerticalScrollIndicator={false}/>

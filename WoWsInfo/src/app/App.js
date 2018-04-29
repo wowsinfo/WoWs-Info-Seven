@@ -9,6 +9,14 @@ import language from '../constant/language';
 import { iconsLoaded, iconsMap } from '../constant/icon';
 import { DataStorage } from '../core';
 
+
+// Loading icons
+iconsLoaded.then(() => {
+  registerScreens();
+  loadingData();
+  DataStorage.DataValidation().then(() => startApp());
+});
+
 /**
  * Loading data screen
  */
@@ -25,13 +33,6 @@ function loadingData() {
     animationType: 'none'
   });
 }
-
-// Loading icons
-iconsLoaded.then(() => {
-  registerScreens();
-  loadingData();
-  DataStorage.DataValidation().then(() => startApp());
-});
 
 /**
  * Start this application
@@ -51,12 +52,7 @@ function startAppIOS() {
         screen: 'info.news', icon: iconsMap['newspaper-o'],
         navigatorStyle: navStyle(),
         navigatorButtons: {
-          rightButtons: [
-            {
-              title: language.more_title,
-              id: 'more'
-            }
-          ]
+          rightButtons: [{title: language.more_title, id: 'more'}]
         }
       },
       {
@@ -64,12 +60,7 @@ function startAppIOS() {
         screen: 'info.search', icon: iconsMap['ios-search'],
         navigatorStyle: navStyle(),
         navigatorButtons: {
-          leftButtons: [
-            {
-              title: language.wiki_title,
-              id: 'wiki'
-            }
-          ]
+          leftButtons: [{ title: language.wiki_title, id: 'wiki'}]
         }
       },
       {
@@ -100,18 +91,8 @@ function startAppAndroid() {
         forceTitlesDisplay: false
       },
       navigatorButtons: {
-        leftButtons: [
-          {
-            icon: iconsMap['menu'],
-            id: 'drawer'
-          }
-        ],
-        rightButtons: [
-          {
-            title: language.more_title,
-            id: 'more'
-          }
-        ],
+        leftButtons: [{icon: iconsMap['menu'], id: 'drawer'}],
+        rightButtons: [{title: language.more_title, id: 'more'}],
         fab: {
           collapsedId: 'search',
           collapsedIcon: iconsMap['ios-search'],
