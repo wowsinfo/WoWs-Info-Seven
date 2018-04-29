@@ -8,15 +8,19 @@ import Search from './Search';
 import Drawer from './Drawer';
 import WoWsInfo from './WoWsInfo';
 
+// Wiki
 import Wiki from './Wiki/Wiki';
-import BasicWiki from './Wiki/BasicWiki';
-import Theme from './Settings/Theme';
-import BasicDetail from './Wiki/BasicDetail';
-
-import Settings from './Settings/Settings';
 import Achievement from './Wiki/Achievement';
+import BasicWiki from './Wiki/BasicWiki';
+import BasicDetail from './Wiki/BasicDetail';
 import MapDetail from './Wiki/MapDetail';
 import GameMap from './Wiki/GameMap';
+import Ship from './Wiki/Ship';
+import ShipFilter from './Wiki/ShipFilter';
+
+// Settings
+import Settings from './Settings/Settings';
+import Theme from './Settings/Theme';
 
 export function registerScreens() {
   Navigation.registerComponent('app.wowsinfo', () => WoWsInfo);    
@@ -29,6 +33,8 @@ export function registerScreens() {
   Navigation.registerComponent('wiki.basic', () => BasicWiki);
   Navigation.registerComponent('wiki.map', () => GameMap);
   Navigation.registerComponent('map.detail', () => MapDetail);
+  Navigation.registerComponent('wiki.ship', () => Ship);  
+  Navigation.registerComponent('ship.filter', () => ShipFilter);  
   Navigation.registerComponent('wiki.achievement', () => Achievement);
   Navigation.registerComponent('basic.detail', () => BasicDetail);
   Navigation.registerComponent('info.settings', () => Settings);

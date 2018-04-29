@@ -12,6 +12,9 @@ const icons = {
   'ios-search': [26, '#fff'],
   'ios-settings': [26, '#fff'],
   'menu': [26, '#fff', Entypo],
+  // Wiki
+  'undo': [24, '#fff', FontAwesome],
+  'filter': [26, '#fff', FontAwesome]
 }
 
 const defaultIconProvider = Ionicons;
