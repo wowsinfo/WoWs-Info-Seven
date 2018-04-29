@@ -60,7 +60,9 @@ export default language = new LocalizedStrings({
     web_ranking: 'Player Ranking [Suihei Koubou]',
     // Tool
     tool_wrinfo: '[Windows] WRInfo',
-    tool_assist: '[Android] Community Assistant'
+    tool_assist: '[Android] Community Assistant',
+    // Extra
+    no_information: 'No information'
  },
  zh: {
    // Tabs

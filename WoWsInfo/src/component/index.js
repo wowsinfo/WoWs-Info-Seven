@@ -1,6 +1,7 @@
 // Common
 export * from './common/WoWsLoading';
 export * from './common/WoWsTouchable';
+export * from './common/NoInformation';
 
 // Cell
 export * from './cell/NewsCell';

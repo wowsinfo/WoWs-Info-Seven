@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import GridView from 'react-native-super-grid';
-import { Actions } from 'react-native-router-flux';
-import { WoWsLoading, BasicCell, NoInformation } from '../../../component';
-import { SafeAreaView } from 'react-native';
+import { WoWsLoading, BasicCell, NoInformation } from '../../component';
 
 export default class Achievement extends Component {
   state = {
@@ -54,10 +52,8 @@ export default class Achievement extends Component {
     } else {
       if (data.length == 0) return <NoInformation />
       else return (
-        <SafeAreaView>
-          <GridView itemDimension={80} items={data} automaticallyAdjustContentInsets={false}
-            renderItem={item => <BasicCell icon={item.icon} data={item}/>}/>
-        </SafeAreaView>
+        <GridView itemDimension={80} items={data} automaticallyAdjustContentInsets={false}
+          renderItem={item => <BasicCell icon={item.icon} data={item}/>}/>
       )
     }  
   }
