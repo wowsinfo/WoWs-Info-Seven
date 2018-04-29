@@ -3,6 +3,7 @@ import { FlatList, View, Text, StyleSheet, Image } from 'react-native';
 import GridView from 'react-native-super-grid';
 import { WoWsLoading, WoWsTouchable } from '../../component';
 import { navStyle } from '../../constant/colour';
+import * as Animatable from 'react-native-animatable';
 
 const Tier = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
 
@@ -26,11 +27,14 @@ export default class Ship extends PureComponent {
         this.props.navigator.showModal({
           screen: 'ship.filter',
           navigatorStyle: navStyle(),
-          passProps: { filter: this.setFilter }
+          passProps: { filter: this.setFilter, curr: this.filter }
         })
       } else if (event.id == 'reset') {
+        const { tier, type, nation } = this.filter;
+        if (tier == '' && type == '' & nation == '') return;
         this.filter = {tier: '', nation: '', type: ''};
         this.setState({data: this.parsed});
+        this.refs['allship'].bounceInDown(800)       
       }
     }
   }
@@ -54,15 +58,17 @@ export default class Ship extends PureComponent {
     if (isReady) {
       const { viewStyle, textStyle, imageStyle } = styles;
       return (
-        <GridView itemDimension={110} items={data} showsVerticalScrollIndicator={false}
-        renderItem={item => { return (
-          <WoWsTouchable>
-            <View style={viewStyle}>
-              {data_saver ? null : <Image source={{uri: item.icon, cache: 'default'}} style={imageStyle} resizeMode='contain'/>}
-              <Text style={textStyle}>{Tier[item.tier - 1] + ' ' + item.name}</Text>
-            </View>
-          </WoWsTouchable>
-        )}} />
+        <Animatable.View animation='fadeInRight' ref='allship'>
+          <GridView itemDimension={110} items={data} showsVerticalScrollIndicator={false}
+            renderItem={item => { return (
+              <WoWsTouchable>
+                <View style={viewStyle}>
+                  {data_saver ? null : <Image source={{uri: item.icon, cache: 'default'}} style={imageStyle} resizeMode='contain'/>}
+                  <Text style={textStyle}>{Tier[item.tier - 1] + ' ' + item.name}</Text>
+                </View>
+              </WoWsTouchable>
+            )}} />
+        </Animatable.View>
       )
     } else return <WoWsLoading />;
   }
@@ -85,6 +91,7 @@ export default class Ship extends PureComponent {
    * Set ship filter
    */
   setFilter = (filter) => {
+    if (this.filter == filter) return;
     this.filter = filter;
     this.filterShip();
   }
@@ -94,7 +101,9 @@ export default class Ship extends PureComponent {
    */
   filterShip() {
     console.log(this.filter);
-    if (this.filter == {tier: '', nation: '', type: ''}) return;
+    // Remove repeat
+    const { tier, type, nation } = this.filter;
+    if (tier == '' && type == '' & nation == '') return;
     // Filter ship according to this.filter
     var filtered = [];
     for (key in data.warship) {
@@ -110,6 +119,7 @@ export default class Ship extends PureComponent {
     // Sort by tier as always
     filtered = this.sortShip(filtered);
     this.setState({data: filtered})
+    this.refs['allship'].bounceInUp(800)
   }
 }
 
@@ -120,7 +130,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   textStyle: {
-    textAlign: 'center',
+    textAlign: 'center', 
+    fontSize: 14, fontWeight: '300'
   },
   imageStyle: {
     height: 66,

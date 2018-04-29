@@ -3,6 +3,7 @@ import { View, FlatList, StyleSheet, Text } from 'react-native';
 import { WoWsLoading, MapCell, WoWsTouchable } from '../../component';
 import { navStyle } from '../../constant/colour';
 import { Blue } from 'react-native-material-color';
+import * as Animatable from 'react-native-animatable';
 
 export default class GameMap extends Component {
   state = { isReady: false, data: [] }
@@ -21,7 +22,7 @@ export default class GameMap extends Component {
     if (isReady) {
       const { viewStyle, textStyle } = styles;
       return (
-        <View style={{flex: 1}}>
+        <Animatable.View style={{flex: 1}} animation='fadeInRight'>
           <FlatList data={data} keyExtractor={this.mapKey} renderItem={({item}) => {
             return (
               <WoWsTouchable onPress={() => this.showMapDetail(item)}>
@@ -30,7 +31,7 @@ export default class GameMap extends Component {
                 </View>
               </WoWsTouchable>
             )}} showsVerticalScrollIndicator={false}/>
-        </View>
+        </Animatable.View>
       )
     } else return <WoWsLoading />;
   }
