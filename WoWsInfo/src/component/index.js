@@ -2,6 +2,7 @@
 export * from './common/WoWsLoading';
 export * from './common/WoWsTouchable';
 export * from './common/NoInformation';
+export * from './common/WoWsProgress';
 
 // Cell
 export * from './cell/NewsCell';

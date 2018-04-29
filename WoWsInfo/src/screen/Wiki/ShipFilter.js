@@ -20,19 +20,19 @@ export default class ShipFilter extends Component {
     for (key in ship_type) types.push({text: ship_type[key], key: key});
 
     return (
-      <ScrollView style={scrollStyle}>
+      <View style={scrollStyle}>
         <View style={viewStyle}>        
-          <Picker selectedValue={nation} mode='dropdown' style={{flex: 0.4}}
+          <Picker selectedValue={nation} mode='dropdown' style={{flex: 0.5}}
             onValueChange={(value, index) => this.setState({nation: value})}>
             <Picker.Item label={language.filter_none} value=''/>
             { this.renderOther(ship_nation) }
           </Picker>
-          <Picker selectedValue={tier} mode='dropdown' style={{flex: 0.1}}
+          <Picker selectedValue={tier} mode='dropdown' style={{width: 80}}
             onValueChange={(value, index) => this.setState({tier: value})}>
             <Picker.Item label='0' value=''/>
             { this.renderTier() }
           </Picker>
-          <Picker selectedValue={type} mode='dropdown' style={{flex: 0.4}}
+          <Picker selectedValue={type} mode='dropdown' style={{flex: 0.5}}
             onValueChange={(value, index) => this.setState({type: value})}>
             <Picker.Item label={language.filter_none} value=''/>
             { this.renderOther(types) }
@@ -41,8 +41,8 @@ export default class ShipFilter extends Component {
         <Button title={language.filter_done} onPress={() => {
           this.props.filter(this.state);
           this.props.navigator.dismissModal();
-        }}/>        
-      </ScrollView>
+        }}/>   
+      </View>
     )
   }
 
@@ -67,9 +67,10 @@ export default class ShipFilter extends Component {
 
 const styles = StyleSheet.create({
   scrollStyle: {
-    flex: 1, paddingTop: 40
+    paddingTop: 40
   },
   viewStyle: {
-    flex: 1, flexDirection: 'row', alignSelf: 'center'
+    flex: 1, flexDirection: 'row', alignSelf: 'center',
+    marginBottom: 8
   }
 })

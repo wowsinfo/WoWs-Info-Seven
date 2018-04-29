@@ -60,8 +60,9 @@ export default class Ship extends PureComponent {
       return (
         <Animatable.View animation='fadeInRight' ref='allship'>
           <GridView itemDimension={110} items={data} showsVerticalScrollIndicator={false}
-            renderItem={item => { return (
-              <WoWsTouchable>
+            renderItem={item => {
+            return (
+              <WoWsTouchable onPress={() => this.pushToDetail(item)}>
                 <View style={viewStyle}>
                   {data_saver ? null : <Image source={{uri: item.icon, cache: 'default'}} style={imageStyle} resizeMode='contain'/>}
                   <Text style={textStyle}>{Tier[item.tier - 1] + ' ' + item.name}</Text>
@@ -71,6 +72,15 @@ export default class Ship extends PureComponent {
         </Animatable.View>
       )
     } else return <WoWsLoading />;
+  }
+
+  pushToDetail(info) {
+    this.props.navigator.push({
+      screen: 'ship.detail',
+      title: '[' + info.ship_id_str + '] ' + info.ship_id,
+      passProps: {info: info},
+      navigatorStyle: navStyle()
+    })
   }
 
   /**
@@ -100,6 +110,7 @@ export default class Ship extends PureComponent {
    * Filter ship with tier, type, nation
    */
   filterShip() {
+    this.setState({data: []});
     console.log(this.filter);
     // Remove repeat
     const { tier, type, nation } = this.filter;
@@ -130,7 +141,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   textStyle: {
-    textAlign: 'center', 
+    textAlign: 'center', flex: 1, width: '100%',
     fontSize: 14, fontWeight: '300'
   },
   imageStyle: {

@@ -7,6 +7,10 @@ import language from '../../constant/language';
 import { iconsMap } from '../../constant/icon';
 
 export default class Wiki extends Component {
+  static navigatorStyle = {
+    tabBarHidden: true
+  }
+
   render() {
     const { achievement, commander, consumable, collection, warship, map } = data;
     return (
@@ -44,9 +48,12 @@ export default class Wiki extends Component {
    * Push to map screen
    */
   pushToMap = () => {
+    // Close drawer for android
+    if (android) this.props.drawer();
     this.props.navigator.push({
       screen: 'wiki.map',
-      title: language.wiki_map
+      title: language.wiki_map,
+      navigatorStyle: navStyle()
     })
   }
 
@@ -54,6 +61,8 @@ export default class Wiki extends Component {
    * Push to warship screen
    */
   pushToWarship() {
+    // Close drawer for android
+    if (android) this.props.drawer();
     this.props.navigator.push({
       screen: 'wiki.ship',
       title: language.wiki_warship,
@@ -62,7 +71,8 @@ export default class Wiki extends Component {
           {id: 'reset', icon: iconsMap['undo']},
           {id: 'filter', icon: iconsMap['filter']}
         ]
-      }
+      },
+      navigatorStyle: navStyle()
     })
   }
 }
