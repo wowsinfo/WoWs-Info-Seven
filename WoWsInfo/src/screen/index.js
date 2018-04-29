@@ -10,10 +10,13 @@ import WoWsInfo from './WoWsInfo';
 
 import Wiki from './Wiki/Wiki';
 import BasicWiki from './Wiki/BasicWiki';
+import Theme from './Settings/Theme';
 import BasicDetail from './Wiki/BasicDetail';
 
 import Settings from './Settings/Settings';
-import Theme from './Settings/Theme';
+import Achievement from './Wiki/Achievement';
+import MapDetail from './Wiki/MapDetail';
+import GameMap from './Wiki/GameMap';
 
 export function registerScreens() {
   Navigation.registerComponent('app.wowsinfo', () => WoWsInfo);    
@@ -24,6 +27,9 @@ export function registerScreens() {
   Navigation.registerComponent('info.search', () => Search);
   Navigation.registerComponent('info.wiki', () => Wiki);
   Navigation.registerComponent('wiki.basic', () => BasicWiki);
+  Navigation.registerComponent('wiki.map', () => GameMap);
+  Navigation.registerComponent('map.detail', () => MapDetail);
+  Navigation.registerComponent('wiki.achievement', () => Achievement);
   Navigation.registerComponent('basic.detail', () => BasicDetail);
   Navigation.registerComponent('info.settings', () => Settings);
   Navigation.registerComponent('settings.theme', () => Theme);
