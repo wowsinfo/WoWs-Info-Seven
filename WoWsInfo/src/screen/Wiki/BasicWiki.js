@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import GridView from 'react-native-super-grid';
 import { WoWsLoading, BasicCell } from '../../component';
 import { navStyle } from '../../constant/colour';
+import { View } from 'react-native-animatable';
 
 export default class BasicWiki extends React.PureComponent {
   state = { isReady: false, data: [] };
@@ -36,8 +37,10 @@ export default class BasicWiki extends React.PureComponent {
     const { isReady, data } = this.state;
     if (isReady) {
       return (
-        <GridView itemDimension={80} items={data} showsVerticalScrollIndicator={false}
+        <View animation='fadeInRight'>
+          <GridView itemDimension={80} items={data} showsVerticalScrollIndicator={false}
           renderItem={item => <BasicCell icon={item.icon} data={item} detail={this.pushToDetail} collection={this.isCollection}/>} />
+        </View>
       )
     } else return <WoWsLoading />;
   }

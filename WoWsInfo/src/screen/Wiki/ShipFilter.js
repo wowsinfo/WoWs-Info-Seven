@@ -4,7 +4,7 @@ import language from '../../constant/language';
 
 const tierList = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
 export default class ShipFilter extends Component {
-  state = { tier: '', nation: '', type: '' };
+  state = this.props.curr;
 
   static navigatorStyle = { navBarHidden: true }
 
