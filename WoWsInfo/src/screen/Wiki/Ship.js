@@ -111,7 +111,6 @@ export default class Ship extends PureComponent {
    */
   filterShip() {
     this.setState({data: []});
-    console.log(this.filter);
     // Remove repeat
     const { tier, type, nation } = this.filter;
     if (tier == '' && type == '' & nation == '') return;

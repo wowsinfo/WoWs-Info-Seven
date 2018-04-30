@@ -43,6 +43,8 @@ export default language = new LocalizedStrings({
     detail_maneuverabilty: 'Maneuverabilty',
     detail_concealment: 'Concealment',
     detail_aircraft: 'Aircraft',
+    detail_upgrade_title: 'Upgrade',
+    detail_next_ship_title: 'Next ship(s)',
     // Drawer
     drawer_player_online: 'Player Online',
     drawer_wiki: 'WoWs Wiki',
