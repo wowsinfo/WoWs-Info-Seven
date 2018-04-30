@@ -5,7 +5,7 @@ import { WoWsProgress, WoWsTouchable } from '../../component';
 import language from '../../constant/language';
 import { Blue, Orange, Grey } from 'react-native-material-color';
 import { ShipDetailedInfo } from '../../core';
-import { getTextColour } from '../../constant/colour';
+import { getTextColour, navStyle } from '../../constant/colour';
 
 const Tier = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
 export default class ShipDetail extends Component {
@@ -38,6 +38,8 @@ export default class ShipDetail extends Component {
         <View animation='fadeInRight' ref='mainView'>
           { this.renderBasic() }
           { this.getStatus() }
+          { this.renderSurvivability() }
+          { this.renderMainBattery() }
           { this.renderUpgrade() }
           { this.renderNextShip() }
         </View>
@@ -64,16 +66,25 @@ export default class ShipDetail extends Component {
    * Render basic information for warship
    */
   renderBasic() {
-    const { basicViewStyle, imageStyle, descriptionStyle, tierTextStyle, basicTextStyle } = styles;
+    const { basicViewStyle, imageStyle, descriptionStyle, tierTextStyle, basicTextStyle, horizontalViewStyle } = styles;
     const { tier, name, icon, nation, type } = this.props.info;
-    const { description, price_credit, price_gold, is_premium, is_special } = this.state.data; 
+    const { description, price_credit, price_gold, is_premium, is_special, ship_id } = this.state.data; 
     const { encyclopedia, ship_type } = global.data;
+    // Special or Premium
+    const isPremium = is_premium || is_special;
+    // Show avergae data
+    const pr = data.personal_rating[ship_id];
     return (
       <View style={basicViewStyle}>
         {data_saver ? null : <Image source={{uri: icon, cache: 'default'}} style={imageStyle} resizeMode='contain'/>}
         <Text style={tierTextStyle}>{Tier[tier - 1] + ' ' + name}</Text>
         <Text style={basicTextStyle}>{encyclopedia.ship_nations[nation] + '\n' + ship_type[type]}</Text>
-        <Text style={[basicTextStyle, {color: is_premium ? Orange : Grey}]}>{is_premium ? price_gold : price_credit}</Text>  
+        <Text style={[basicTextStyle, {color: isPremium ? Orange : Grey}]}>{isPremium ? price_gold : price_credit}</Text> 
+        <View style={horizontalViewStyle}>
+          <Text style={basicTextStyle}>{Number(pr.average_damage_dealt).toFixed(0)}</Text>
+          <Text style={basicTextStyle}>{Number(pr.win_rate).toFixed(2) + '%'}</Text>
+          <Text style={basicTextStyle}>{Number(pr.average_frags).toFixed(2)}</Text>
+        </View> 
         <Text style={descriptionStyle}>{description}</Text>
       </View>
     )
@@ -85,7 +96,9 @@ export default class ShipDetail extends Component {
   getStatus() {  
     const { mobility, weaponry, concealment, armour } = this.state.data.default_profile;
     const { anti_aircraft, aircraft, artillery, torpedoes } = weaponry;
-    const tintColor = theme[500] == '#ffffff' ? Blue : theme[500];    
+
+    // White -> Blue
+    const tintColor = theme[500] == '#ffffff' ? Blue : theme[500];
     return (
       <View>
         { this.renderTitle(language.detail_status_title) }
@@ -98,6 +111,79 @@ export default class ShipDetail extends Component {
         <WoWsProgress color={tintColor} value={aircraft} title={language.detail_aircraft}/>
       </View>
     )
+  }
+
+  /**
+   * Render information about health, armour
+   */
+  renderSurvivability() {
+    const { flood_prob, range, health } = this.state.data.default_profile.armour;
+    const { horizontalViewStyle, basicTextStyle, basicTitleStyle, basicViewStyle } = styles;
+    return (
+      <View >
+        { this.renderTitle(language.detail_survivability) }
+        <View style={horizontalViewStyle}>
+          <View style={basicViewStyle}>
+            <Text style={basicTitleStyle}>{language.survivability_health}</Text>
+            <Text style={basicTextStyle}>{health}</Text>          
+          </View>
+          <View style={basicViewStyle}>
+            <Text style={basicTitleStyle}>{language.survivability_armour}</Text>
+            <Text style={basicTextStyle}>{range.max + 'mm - ' + range.min + 'mm'}</Text>
+          </View>
+          { flood_prob == 0 ? null : 
+          <View style={basicViewStyle}>
+            <Text style={basicTitleStyle}>{language.survivability_protection}</Text>
+            <Text style={basicTextStyle}>{flood_prob + '%'}</Text>
+          </View> }
+        </View>
+      </View>
+    )
+  }
+
+  /**
+   * Render main battery and secondary information
+   */
+  renderMainBattery() {
+    const { horizontalViewStyle, basicTextStyle, basicTitleStyle } = styles;
+    const { artillery } = this.state.data.default_profile;
+    if (artillery != null) {
+      const { max_dispersion, gun_rate, distance, rotation_time, slots, shells } = artillery;
+      const { AP, HE } = shells;
+      // Get all guns
+      var mainGun = '', gunName = '';
+      for (gun in slots) mainGun += slots[gun].guns + ' x ' + slots[gun].barrels + '  '; gunName = slots[gun].name;
+      // Get gun penetration
+      let calibar = Math.round(parseInt(gunName.split(' ')[0]) / 6);
+
+      return (
+        <View>
+          { artillery == null ? null : <View>
+            { this.renderTitle(language.artillery_main) }
+            <View style={horizontalViewStyle}>
+              <Text>{Number(60 / gun_rate).toFixed(1) + ' s'}</Text> 
+              <Text>{Number(distance).toFixed(2) + ' km'}</Text> 
+              <Text>{mainGun}</Text> 
+            </View>
+            <Text style={basicTextStyle}>{gunName + ' | ' + calibar + ' mm'}</Text>
+            <View style={horizontalViewStyle}>
+              { HE == null ? null : <View>
+                <Text style={basicTitleStyle}>HE</Text>
+                <Text style={basicTextStyle}>{'🔥' + HE.burn_probability + '%'}</Text> 
+                <Text style={basicTextStyle}>{HE.damage}</Text> 
+                <Text style={basicTextStyle}>{HE.bullet_speed + ' m/s'}</Text>
+              </View>}
+              { AP == null ? null : <View>
+                <Text style={basicTitleStyle}>AP</Text>                
+                <Text style={basicTextStyle}>-0-</Text> 
+                <Text style={basicTextStyle}>{AP.damage}</Text> 
+                <Text style={basicTextStyle}>{AP.bullet_speed + ' m/s'}</Text>
+              </View>}
+            </View>
+          </View>}
+        </View>
+      )
+    } else return null;
   }
 
   /**
@@ -129,18 +215,27 @@ export default class ShipDetail extends Component {
     else {
       // Get all ships from next_ships
       var ships = []; for (key in next_ships) ships.push({key: key, exp: next_ships[key]});
+      shipKey = (value, index) => index;      
       return (
         <View>
           { this.renderTitle(language.detail_next_ship_title) }
-          { ships.map(function(value, index) {
-            let curr = data.warship[value.key];
+          <FlatList data={ships} keyExtractor={shipKey} renderItem={({item}) => {  
+            let curr = data.warship[item.key];
             return (
-              <View>
-                <Image source={{uri: curr.icon}} style={{width: 128, height: 128}} resizeMode='contain'/>
-                <Text>{curr.name}</Text>
-              </View>
-            )
-          })}
+              <WoWsTouchable onPress={() => {
+                this.props.navigator.pop();
+                this.props.navigator.push({
+                  screen: 'ship.detail',
+                  title: '[' + curr.ship_id_str + '] ' + curr.ship_id,
+                  passProps: {info: curr},
+                  navigatorStyle: navStyle()
+                })}}>
+                <View style={{alignSelf: 'center'}}>
+                  <Image source={{uri: curr.icon}} style={{width: 128, height: 64}} resizeMode='contain'/>
+                  <Text style={{textAlign: 'center', fontWeight: 'bold'}}>{curr.name}</Text>
+                </View>
+              </WoWsTouchable>
+            )}}/>
         </View>
       )
     }
@@ -152,21 +247,30 @@ const styles = StyleSheet.create({
     
   },
   titleTextStyle: {
-    fontSize: 32, textAlign: 'center',
-    fontWeight: '500', margin: 4, height: 40
+    fontSize: 32, textAlign: 'center', borderRadius: 25,
+    fontWeight: '500', margin: 4, height: android ? 50 : 40, marginTop: 16,
   },
   tierTextStyle: {
     fontSize: 24, marginBottom: 4
   },
+  basicViewStyle: {
+    flex: 1
+  },
   basicTextStyle: {
-    textAlign: 'center',
+    textAlign: 'center', margin: 2, fontWeight: '300', width: '100%', flex: 1
+  },
+  basicTitleStyle: {
+    textAlign: 'center', fontSize: 16, fontWeight: 'bold', width: '100%', flex: 1
+  },
+  horizontalViewStyle: {
+    justifyContent: 'space-around', flexDirection: 'row', alignItems: 'center', flex: 1
   },
   descriptionStyle: {
     padding: 4, fontWeight: '300', textAlign: 'center', 
     marginTop: 8, marginBottom: 8
   },
   basicViewStyle: {
-    alignItems: 'center'
+    alignItems: 'center', flex: 1
   },
   imageStyle: {
     height: 128,
