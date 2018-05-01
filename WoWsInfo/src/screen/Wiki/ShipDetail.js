@@ -11,7 +11,7 @@ const Tier = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
 export default class ShipDetail extends Component {
   constructor(props) {
     super(props);
-    this.state = {data: {}, isReady: false};
+    this.state = {data: {}, isReady: false, profile: {}};
   }
 
   componentWillMount() {
@@ -24,7 +24,7 @@ export default class ShipDetail extends Component {
       // Ship description
       parsed.description = description;
       // Collect status from everywhere
-      this.setState({data: data, isReady: true});
+      this.setState({data: data, isReady: true, profile: data.default_profile});
     })
   }
 
@@ -35,11 +35,17 @@ export default class ShipDetail extends Component {
     const { status, description } = data;
     if (isReady) { return (
       <ScrollView showsVerticalScrollIndicator={false}>  
-        <View animation='fadeInRight' ref='mainView'>
+        <View animation='fadeInUp' ref='mainView'>
           { this.renderBasic() }
           { this.getStatus() }
           { this.renderSurvivability() }
           { this.renderMainBattery() }
+          { this.renderSecondary() }
+          { this.renderAircraft() }
+          { this.renderTorpedo() }
+          { this.renderAADefense() }
+          { this.renderConcealment() }
+          { this.renderMobility() }
           { this.renderUpgrade() }
           { this.renderNextShip() }
         </View>
@@ -57,8 +63,9 @@ export default class ShipDetail extends Component {
    * @param {*} text 
    */
   renderTitle(text) {
+    let color = theme[500], textColor = getTextColour(theme[500]);
     return (
-      <Text style={[styles.titleTextStyle, {backgroundColor: theme[500], color: getTextColour(theme[500])}]}>{text}</Text>      
+      <Text style={[styles.titleTextStyle, {backgroundColor: android ? textColor : color, color: android ? color : textColor}]}>{text}</Text>
     )
   }
 
@@ -94,7 +101,7 @@ export default class ShipDetail extends Component {
    * Get general status for warship
    */
   getStatus() {  
-    const { mobility, weaponry, concealment, armour } = this.state.data.default_profile;
+    const { mobility, weaponry, concealment, armour } = this.state.profile
     const { anti_aircraft, aircraft, artillery, torpedoes } = weaponry;
 
     // White -> Blue
@@ -146,7 +153,7 @@ export default class ShipDetail extends Component {
    */
   renderMainBattery() {
     const { horizontalViewStyle, basicTextStyle, basicTitleStyle } = styles;
-    const { artillery } = this.state.data.default_profile;
+    const { artillery } = this.state.profile
     if (artillery != null) {
       const { max_dispersion, gun_rate, distance, rotation_time, slots, shells } = artillery;
       const { AP, HE } = shells;
@@ -165,7 +172,7 @@ export default class ShipDetail extends Component {
               <Text>{Number(distance).toFixed(2) + ' km'}</Text> 
               <Text>{mainGun}</Text> 
             </View>
-            <Text style={basicTextStyle}>{gunName}</Text>            
+            <Text style={basicTitleStyle}>{gunName}</Text>            
             <View style={[horizontalViewStyle, {paddingBottom: 8}]}>
               <Text>{max_dispersion + ' m'}</Text>
               <Text>{rotation_time + ' s'}</Text>
@@ -190,6 +197,193 @@ export default class ShipDetail extends Component {
         </View>
       )
     } else return null;
+  }
+
+  /**
+   * Render secondary information
+   */
+  renderSecondary() {
+    const { horizontalViewStyle, basicTextStyle, basicTitleStyle, basicViewStyle } = styles;
+    const { atbas } = this.state.profile
+    if (atbas != null) {
+      const { distance, slots } = atbas;
+      var guns = []; for (gun in slots) guns.push(slots[gun]);
+      return (
+        <View>
+          { this.renderTitle(language.artillery_secondary + ' (' + distance + ' km)') }
+          { guns.map(function(value, index) { 
+            const { burn_probability, bullet_speed, name, gun_rate, damage, type } = value;            
+            return (
+              <View key={index} style={basicViewStyle}>
+                <Text style={basicTitleStyle}>{type + ' - ' + name}</Text>
+                <View style={horizontalViewStyle}>
+                  <Text style={basicTextStyle}>{Number(60 / gun_rate).toFixed(1) + ' s'}</Text>
+                  <Text style={basicTextStyle}>{bullet_speed + ' m/s'}</Text>
+                  { burn_probability == null ? null : <Text style={basicTextStyle}>{'🔥'+ burn_probability + '%'}</Text> }
+                  <Text style={basicTextStyle}>{damage}</Text>
+                </View>
+              </View>
+          )})}
+        </View>
+      )
+    } else return null;
+  }
+
+  /**
+   * Render aircraft information
+   */
+  renderAircraft() {
+    const { basicTextStyle } = styles;
+    const { flight_control } = this.state.profile;
+    if (flight_control != null) {
+      const { fighter_squadrons, torpedo_squadrons, bomber_squadrons } = flight_control;
+      return (
+        <View>
+          { this.renderTitle(language.detail_aircraft) }
+          { this.renderFighter() }
+          { this.renderTorpedoBomber() }
+          { this.renderBomber() }
+          <Text style={basicTextStyle}>{fighter_squadrons + ' - ' + torpedo_squadrons + ' - ' + bomber_squadrons}</Text>
+        </View>
+      )
+    } else return null;
+  }
+
+  renderFighter() {
+    const { horizontalViewStyle, basicTextStyle, basicTitleStyle, basicViewStyle } = styles;
+    const { fighters } = this.state.profile;
+    if (fighters != null) {
+      const {} = fighters;
+      return (
+        <View>
+          <Text style={basicTitleStyle}>{language.aircraft_fighter}</Text>
+        </View>
+      )
+    } else return null;
+  }
+
+  renderTorpedoBomber() {
+    const { horizontalViewStyle, basicTextStyle, basicTitleStyle, basicViewStyle } = styles;
+    const { torpedo_bomber } = this.state.profile;
+    if (torpedo_bomber != null) {
+      return (
+        <View>
+          <Text style={basicTitleStyle}>{language.aircraft_torpedo_bomber}</Text>
+        </View>
+      )
+    } else return null;
+  }
+  
+  renderBomber() {
+    const { horizontalViewStyle, basicTextStyle, basicTitleStyle, basicViewStyle } = styles;
+    const { dive_bomber } = this.state.profile;
+    if (dive_bomber != null) {
+      return (
+        <View>
+          <Text style={basicTitleStyle}>{language.aircraft_bomber}</Text>
+        </View>
+      )
+    } else return null;
+  }
+
+  /**
+   * Render torpedo information
+   */
+  renderTorpedo() {
+    const { horizontalViewStyle, basicTextStyle, basicTitleStyle } = styles;
+    const { torpedoes } = this.state.profile;
+    if (torpedoes != null) {
+      const { visibility_dist, distance, torpedo_name, reload_time, torpedo_speed, slots, max_damage } = torpedoes;
+      var torps = ''; for (torp in slots) torps += slots[torp].guns + ' x ' + slots[torp].barrels + '  ';
+      return (
+        <View>
+          { this.renderTitle(language.detail_torpedoes) }
+          <View style={horizontalViewStyle}>
+            <Text>{reload_time + ' s'}</Text>
+            <Text>{distance + ' km'}</Text>
+            <Text>{torps}</Text>
+          </View>
+          <Text style={basicTitleStyle}>{torpedo_name + ' (' + Number(visibility_dist * 1000 / 2.6 / torpedo_speed).toFixed(1) + ' s)'}</Text>
+          <View style={horizontalViewStyle}>
+            <Text>{visibility_dist + ' km'}</Text>
+            <Text>{max_damage}</Text>
+            <Text>{torpedo_speed + ' kt'}</Text>
+          </View>
+        </View>
+      )
+    } else return null;
+  }
+
+  /**
+   * Render aa defense information
+   */
+  renderAADefense() {
+    const { horizontalViewStyle, basicTextStyle, basicTitleStyle, basicViewStyle } = styles;
+    const { anti_aircraft } = this.state.profile;
+    if (anti_aircraft != null) {
+      const { slots } = anti_aircraft;
+      var AAValues = []; for (aa in slots) AAValues.push(slots[aa]);
+      console.log(AAValues, slots)
+      return (
+        <View>
+          { this.renderTitle(language.detail_aa) }
+          { AAValues.map(function(value, index) {
+            const { distance, avg_damage, name, guns } = value;
+            return (
+              <View key={index} style={basicViewStyle}>
+                <Text style={basicTitleStyle}>{name}</Text>
+                <View style={horizontalViewStyle}>
+                  <Text style={basicTextStyle}>{guns + 'x'}</Text>                  
+                  <Text style={basicTextStyle}>{distance + ' km'}</Text>
+                  <Text style={basicTextStyle}>{avg_damage + ' dps'}</Text>
+                </View>
+              </View>
+            )
+          })}
+        </View>
+      )
+    } else return null;
+  }
+
+  /**
+   * Render mobility information
+   */
+  renderMobility() {
+    const { horizontalViewStyle, basicTextStyle } = styles;
+    const { rudder_time, turning_radius, max_speed } = this.state.profile.mobility
+    return (
+      <View>
+        { this.renderTitle(language.detail_maneuverabilty) }
+        <View style={horizontalViewStyle}>
+          <Text style={basicTextStyle}>{rudder_time + ' s'}</Text>
+          <Text style={basicTextStyle}>{max_speed + ' kt'}</Text>
+          <Text style={basicTextStyle}>{turning_radius + ' m'}</Text>
+        </View>
+      </View>
+    )
+  }
+
+  /**
+   * Render concealment information
+   */
+  renderConcealment() {
+    const { horizontalViewStyle, basicTextStyle, basicViewStyle, basicTitleStyle } = styles;
+    const { detect_distance_by_plane, detect_distance_by_ship } = this.state.profile.concealment
+    return (
+      <View>
+        { this.renderTitle(language.detail_concealment) }
+        <View style={horizontalViewStyle}>
+          <View style={basicViewStyle}>
+            <Text style={basicTitleStyle}>{language.concealment_plane}</Text>
+            <Text style={basicTextStyle}>{detect_distance_by_plane + ' km'}</Text>
+          </View>
+          <View style={basicViewStyle}>
+            <Text style={basicTitleStyle}>{language.concealment_ship}</Text>
+            <Text style={basicTextStyle}>{detect_distance_by_ship + ' km'}</Text>
+          </View>
+        </View>
+      </View>
+    )
   }
 
   /**
@@ -253,14 +447,14 @@ const styles = StyleSheet.create({
     
   },
   titleTextStyle: {
-    fontSize: 32, textAlign: android ? 'left' : 'center',
+    fontSize: 32, textAlign: 'center',
     fontWeight: '500', margin: 4, height: android ? 50: 40, marginTop: 16,
   },
   tierTextStyle: {
     fontSize: 24, marginBottom: 4
   },
   basicViewStyle: {
-    flex: 1
+    flex: 1, paddingTop: 4
   },
   basicTextStyle: {
     textAlign: 'center', margin: 2, fontWeight: '300', width: '100%', flex: 1
