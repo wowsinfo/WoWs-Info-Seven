@@ -80,11 +80,11 @@ export default class ShipDetail extends Component {
         <Text style={tierTextStyle}>{Tier[tier - 1] + ' ' + name}</Text>
         <Text style={basicTextStyle}>{encyclopedia.ship_nations[nation] + '\n' + ship_type[type]}</Text>
         <Text style={[basicTextStyle, {color: isPremium ? Orange : Grey}]}>{isPremium ? price_gold : price_credit}</Text> 
-        <View style={horizontalViewStyle}>
+        { pr == null ? null : <View style={horizontalViewStyle}>
           <Text style={basicTextStyle}>{Number(pr.average_damage_dealt).toFixed(0)}</Text>
           <Text style={basicTextStyle}>{Number(pr.win_rate).toFixed(2) + '%'}</Text>
           <Text style={basicTextStyle}>{Number(pr.average_frags).toFixed(2)}</Text>
-        </View> 
+        </View>}
         <Text style={descriptionStyle}>{description}</Text>
       </View>
     )
@@ -165,17 +165,23 @@ export default class ShipDetail extends Component {
               <Text>{Number(distance).toFixed(2) + ' km'}</Text> 
               <Text>{mainGun}</Text> 
             </View>
-            <Text style={basicTextStyle}>{gunName + ' | ' + calibar + ' mm'}</Text>
+            <Text style={basicTextStyle}>{gunName}</Text>            
+            <View style={[horizontalViewStyle, {paddingBottom: 8}]}>
+              <Text>{max_dispersion + ' m'}</Text>
+              <Text>{rotation_time + ' s'}</Text>
+            </View>
             <View style={horizontalViewStyle}>
               { HE == null ? null : <View>
                 <Text style={basicTitleStyle}>HE</Text>
                 <Text style={basicTextStyle}>{'🔥' + HE.burn_probability + '%'}</Text> 
-                <Text style={basicTextStyle}>{HE.damage}</Text> 
+                <Text style={basicTextStyle}>{HE.bullet_mass + ' kg'}</Text>                
+                <Text style={basicTextStyle}>{HE.damage + ' (' + calibar + ' mm)'}</Text> 
                 <Text style={basicTextStyle}>{HE.bullet_speed + ' m/s'}</Text>
               </View>}
               { AP == null ? null : <View>
                 <Text style={basicTitleStyle}>AP</Text>                
                 <Text style={basicTextStyle}>-0-</Text> 
+                <Text style={basicTextStyle}>{AP.bullet_mass + ' kg'}</Text> 
                 <Text style={basicTextStyle}>{AP.damage}</Text> 
                 <Text style={basicTextStyle}>{AP.bullet_speed + ' m/s'}</Text>
               </View>}
@@ -191,7 +197,7 @@ export default class ShipDetail extends Component {
    */
   renderUpgrade() {
     const { mod_slots, upgrades } = this.state.data;
-    upgradeKey = (value, index) => index;
+    upgradeKey = (value, index) => String(index);
     return (
       <View>
         { this.renderTitle(language.detail_upgrade_title + ' (' + mod_slots + ')') }
@@ -247,8 +253,8 @@ const styles = StyleSheet.create({
     
   },
   titleTextStyle: {
-    fontSize: 32, textAlign: 'center', borderRadius: 25,
-    fontWeight: '500', margin: 4, height: android ? 50 : 40, marginTop: 16,
+    fontSize: 32, textAlign: android ? 'left' : 'center',
+    fontWeight: '500', margin: 4, height: android ? 50: 40, marginTop: 16,
   },
   tierTextStyle: {
     fontSize: 24, marginBottom: 4
