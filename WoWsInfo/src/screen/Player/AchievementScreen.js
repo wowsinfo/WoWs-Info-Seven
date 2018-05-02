@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 
-class Graph extends Component {
+class AchievementScreen extends Component {
   render() {
     return (
       <View></View>
@@ -9,4 +9,4 @@ class Graph extends Component {
   }
 }
 
-export { Graph };
+export { AchievementScreen };
