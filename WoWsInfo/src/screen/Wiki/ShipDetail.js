@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, StyleSheet, Image, ScrollView, FlatList, Alert } from 'react-native';
 import { View } from 'react-native-animatable';
-import { WoWsProgress, WoWsTouchable } from '../../component';
+import { WoWsProgress, WoWsTouchable, WoWsLoading } from '../../component';
 import language from '../../constant/language';
 import { Blue, Orange, Grey } from 'react-native-material-color';
 import { ShipDetailedInfo } from '../../core';
@@ -12,6 +12,10 @@ export default class ShipDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {data: {}, isReady: false, profile: {}};
+  }
+
+  static navigatorStyle = {
+    tabBarHidden: true
   }
 
   componentWillMount() {
@@ -29,11 +33,7 @@ export default class ShipDetail extends Component {
   }
 
   render() {
-    const { tier, name, ship_id, icon } = this.props.info;
-    const { basicViewStyle, imageStyle } = styles;    
-    const { data, isReady } = this.state;
-    const { status, description } = data;
-    if (isReady) { return (
+    if (this.state.isReady) { return (
       <ScrollView showsVerticalScrollIndicator={false}>  
         <View animation='fadeInUp' ref='mainView'>
           { this.renderBasic() }
@@ -50,12 +50,7 @@ export default class ShipDetail extends Component {
           { this.renderNextShip() }
         </View>
       </ScrollView>
-    )} else { return (
-      <View style={basicViewStyle}>
-        {data_saver ? null : <Image source={{uri: icon, cache: 'default'}} style={imageStyle} resizeMode='contain'/>}
-        <Text>{Tier[tier - 1] + ' ' + name}</Text>
-      </View>
-    )}
+    )} else return <WoWsLoading />
   }
 
   /**
@@ -64,9 +59,7 @@ export default class ShipDetail extends Component {
    */
   renderTitle(text) {
     let color = theme[500], textColor = getTextColour(theme[500]);
-    return (
-      <Text style={[styles.titleTextStyle, {backgroundColor: android ? textColor : color, color: android ? color : textColor}]}>{text}</Text>
-    )
+    return <Text style={[styles.titleTextStyle, {backgroundColor: android ? textColor : color, color: android ? color : textColor}]}>{text}</Text>
   }
 
   /**
