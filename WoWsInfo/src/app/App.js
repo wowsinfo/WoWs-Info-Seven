@@ -60,8 +60,8 @@ function startAppIOS() {
         screen: 'info.search', icon: iconsMap['ios-search'],
         navigatorStyle: navStyle(),
         navigatorButtons: {
-          leftButtons: [{ title: language.wiki_title, id: 'wiki'}],
-          rightButtons: [{ icon: iconsMap['undo'], id: 'reset'}]
+          rightButtons: [{icon: iconsMap['undo'], id: 'reset'}],          
+          leftButtons: [{ title: language.wiki_title, id: 'wiki'}]
         }
       },
       {

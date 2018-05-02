@@ -15,6 +15,11 @@ export default language = new LocalizedStrings({
     more_header: 'Websites & Tools',
     more_website_title: 'Website',
     more_tool_title: 'Tool',
+    achievement_tab_title: 'Achievement',
+    graph_tab_title: 'Graph',
+    basic_tab_title: 'Basic',
+    warship_tab_title: 'Warship',
+    rank_tab_title: 'Rank',
     // Server
     server_russia: 'ru',
     server_europe: 'eu',
@@ -64,6 +69,16 @@ export default language = new LocalizedStrings({
     search_player: 'Player',
     search_clan: 'Clan',
     search_title: 'WoWs Search',
+    // Player
+    player_max_damage_dealt: 'Max damage dealt',
+    player_max_xp: 'Max XP',
+    player_max_kill: 'Max kill',
+    player_max_plane: 'Max plane destroyed',
+    player_max_main_battery: 'Main Battery',
+    player_max_secondary: 'Secondary',
+    player_max_torpedo: 'Torpedoes',
+    player_max_ramming: 'Ramming',
+    player_max_aircraft: 'Aircraft',
     // Settings
     settings_theme: 'Change app theme',
     // Website
