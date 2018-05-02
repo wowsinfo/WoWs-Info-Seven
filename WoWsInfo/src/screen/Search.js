@@ -46,7 +46,13 @@ export default class Search extends PureComponent {
           onChangeText={(text) => this.setState({input: text})} autoCapitalize='none' value={input}/>
         <GridView itemDimension={256} items={data} renderItem={item => {
           return (
-            <WoWsTouchable>
+            <WoWsTouchable onPress={() => this.props.navigator.push({
+              title: item.name,
+              screen: 'search.player',
+              backButtonTitle: '',              
+              navigatorStyle: navStyle(),
+              passProps: item
+            })}>
               <SafeAreaView style={{height: 44, justifyContent: 'center'}}>
                 <Text animation='flipInX' style={textStyle}>{'[' + item.id + '] ' + item.name}</Text>                          
               </SafeAreaView>
@@ -126,7 +132,7 @@ export default class Search extends PureComponent {
 
 const styles = StyleSheet.create({
   pickerViewStyle: {
-    flex: 1, flexDirection: 'row', padding: 4,
+    flexDirection: 'row', padding: 4,
     height: 50
   },
   pickerStyle: {

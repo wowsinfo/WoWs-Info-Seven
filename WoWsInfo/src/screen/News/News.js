@@ -6,6 +6,7 @@ import { View } from 'react-native-animatable';
 import Drawer from '../Drawer';
 import language from '../../constant/language';
 import { navStyle } from '../../constant/colour';
+import { iconsMap } from '../../constant/icon';
 
 export default class News extends Component {
   state = {
@@ -26,7 +27,8 @@ export default class News extends Component {
         this.props.navigator.push({
           title: language.search_title,
           screen: 'info.search',
-          navigatorStyle: navStyle()
+          navigatorStyle: navStyle(),
+          navigatorButtons: {rightButtons: [{icon: iconsMap['undo'], id: 'reset'}]}
         })
       } else if (event.id == 'more') {
         this.props.navigator.push({

@@ -13,7 +13,7 @@ const icons = {
   'ios-settings': [26, '#fff'],
   'menu': [26, '#fff', Entypo],
   // Wiki
-  'undo': [24, '#fff', FontAwesome],
+  'undo': [22, '#fff', FontAwesome],
   'filter': [26, '#fff', FontAwesome]
 }
 

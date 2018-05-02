@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, StyleSheet, Dimensions, Settings, Image } from 'react-native';
+import { View, StyleSheet, Dimensions, Image } from 'react-native';
 import { AchievementScreen, Basic, Graph, Rank, Ship } from './';
 import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
-import strings from '../../localization';
+import { getTextColour } from '../../constant/colour';
 
 // Faster loading
 const initialLayout = {
@@ -10,9 +10,7 @@ const initialLayout = {
   width: Dimensions.get('window').width,
 };
 
-const placeholder = () => <View />;
-
-class PlayerTab extends React.PureComponent {
+export default class PlayerTab extends React.PureComponent {
   state = {
     index: 2,
     routes: [
@@ -21,18 +19,23 @@ class PlayerTab extends React.PureComponent {
       {key: 'basic', icon: require('../../img/User.png')},
       {key: 'ship', icon: require('../../img/Ship.png')},
       {key: 'rank', icon: require('../../img/Rank.png')},
-    ],
+    ]
   };
+
+  static navigatorStyle = {
+    navBarNoBorder: true,
+    topBarElevationShadowEnabled: false
+  }
 
   // Setup stuff for tab view
   handleIndexChange = index => this.setState({index});
   renderIcon = ({route}) => (
-    <Image source={route.icon} style={imageStyle} resizeMode='contain'/>
+    <Image source={route.icon} style={[imageStyle, {tintColor: getTextColour(theme[500])}]} resizeMode='contain'/>
   );
   renderHeader = props => {
     return (
-      <TabBar {...props} indicatorStyle={indicatorStyle} renderIcon={this.renderIcon}
-        style={{backgroundColor: global.themeColour}} tabStyle={tabStyle}/>
+      <TabBar {...props} indicatorStyle={{backgroundColor: getTextColour(theme[500])}} renderIcon={this.renderIcon}
+        style={{backgroundColor: theme[500]}} tabStyle={tabStyle}/>
     )
   }
   renderScene = SceneMap({
@@ -45,11 +48,9 @@ class PlayerTab extends React.PureComponent {
 
   render() {
     return (
-      <TabViewAnimated
-        style={tabViewStyle}
+      <TabViewAnimated style={tabViewStyle}
         navigationState={this.state}
-        renderScene={this.renderScene}
-        renderHeader={this.renderHeader}
+        renderScene={this.renderScene} renderHeader={this.renderHeader}
         onIndexChange={this.handleIndexChange}
         initialLayout={initialLayout} />
     )
@@ -59,9 +60,6 @@ class PlayerTab extends React.PureComponent {
 const styles = StyleSheet.create({
   tabViewStyle: {
     flex: 1,
-  },
-  indicatorStyle: {
-    backgroundColor: 'white',
   },
   tabStyle: {
     backgroundColor: 'transparent',
@@ -75,6 +73,4 @@ const styles = StyleSheet.create({
     tintColor: 'white',
   }
 })
-const { tabViewStyle, indicatorStyle, tabStyle, imageStyle } = styles;
-
-export {PlayerTab};
+const { tabViewStyle, tabStyle, imageStyle } = styles;
