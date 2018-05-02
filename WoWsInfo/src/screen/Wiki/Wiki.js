@@ -7,10 +7,6 @@ import language from '../../constant/language';
 import { iconsMap } from '../../constant/icon';
 
 export default class Wiki extends Component {
-  static navigatorStyle = {
-    tabBarHidden: true
-  }
-
   render() {
     const { achievement, commander, consumable, collection, warship, map } = data;
     return (

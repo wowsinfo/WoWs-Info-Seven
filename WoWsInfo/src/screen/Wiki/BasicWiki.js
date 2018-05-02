@@ -39,10 +39,23 @@ export default class BasicWiki extends React.PureComponent {
       return (
         <View animation='fadeInRight'>
           <GridView itemDimension={80} items={data} showsVerticalScrollIndicator={false}
-          renderItem={item => <BasicCell icon={item.icon} data={item} detail={this.pushToDetail} collection={this.isCollection}/>} />
+          renderItem={item => <BasicCell icon={item.icon} data={item} collection={this.pushToCollection} 
+            detail={this.pushToDetail} isCollection={this.isCollection}/>} />
         </View>
       )
     } else return <WoWsLoading />;
+  }
+
+  /**
+   * Show collection item
+   */
+  pushToCollection = (data) => {
+    this.props.navigator.push({
+      screen: 'wiki.collection',
+      title: data.name,
+      navigatorStyle: navStyle(),
+      passProps: {collectionKey: data.key, detail: this.pushToDetail, data: data}
+    })
   }
 
   /**

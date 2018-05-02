@@ -15,15 +15,15 @@ class BasicCell extends PureComponent {
   }
 
   renderCount() {
-    const { data, collection } = this.props;
-    if (!collection && data.count != null) return <Text style={textStyle}>{data.count}</Text>
+    const { data, isCollection } = this.props;
+    if (!isCollection && data.count != null) return <Text style={textStyle}>{data.count}</Text>
     else return null;
   }
 
   showDetail() {
-    const { data, collection, detail } = this.props;
-    console.log(data);
-    if (!collection) detail(data);
+    const { data, isCollection, detail, collection } = this.props;
+    if (!isCollection) detail(data);
+    else collection(data);
   }
 }
 

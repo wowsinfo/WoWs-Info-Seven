@@ -49,7 +49,7 @@ export default class News extends Component {
     if (isReady) {
       return (
         <SafeAreaView>
-          <View animation='bounceInUp'>
+          <View ref='news'>
             <FlatList data={data} keyExtractor={this.newsKey} onRefresh={() => this.refreshNews()}
             renderItem={({item}) => <NewsCell browser={() => this.pushToBrowser(item)} data={item}/>} refreshing={isRefreshing} showsVerticalScrollIndicator={false}/>
           </View>
@@ -79,8 +79,8 @@ export default class News extends Component {
     this.setState({
       isReady: true,
       data: data,
-      isRefreshing: false,
-    })
+      isRefreshing: false, 
+    }, () =>this.refs['news'].bounceInUp(800))
   }
 
   /**
