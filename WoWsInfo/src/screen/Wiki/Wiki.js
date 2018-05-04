@@ -5,8 +5,21 @@ import { DrawerCell } from '../../component';
 import { navStyle } from '../../constant/colour';
 import language from '../../constant/language';
 import { iconsMap } from '../../constant/icon';
+import { LocalData } from '../../constant/value';
 
 export default class Wiki extends Component {
+  constructor(props) {
+    super(props);
+    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));    
+  }
+
+  onNavigatorEvent(event) {
+    if (event.id === 'bottomTabSelected') {
+      let store = require('react-native-simple-store');
+      store.save(LocalData.saved_tab, 2);
+    }
+  }
+
   render() {
     const { achievement, commander, consumable, collection, warship, map } = data;
     return (

@@ -79,6 +79,7 @@ class DataStorage {
       await DataStorage.SetupTheme();
       await store.save(LocalData.has_ads, true);
       await store.save(LocalData.data_saver, false);
+      await store.save(LocalData.saved_tab, 0);
 
       let lang = Language.getCurrentLanguage();
       await store.save(LocalData.api_language, lang);
@@ -147,6 +148,7 @@ class DataStorage {
     global.game_version = await store.get(LocalData.game_version);
     global.friend = await store.get(LocalData.friend);
     global.data_saver = await store.get(LocalData.data_saver);
+    global.saved_tab = await store.get(LocalData.saved_tab);
     DataStorage.RestorePlayerInfo();
   }
 

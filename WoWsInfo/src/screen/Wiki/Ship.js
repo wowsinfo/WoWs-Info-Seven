@@ -59,7 +59,7 @@ export default class Ship extends PureComponent {
       const { viewStyle, textStyle, imageStyle } = styles;
       return (
         <Animatable.View animation='fadeInRight' ref='allship'>
-          <GridView itemDimension={110} items={data} showsVerticalScrollIndicator={false}
+          <GridView itemDimension={110} items={data}
             renderItem={item => {
             return (
               <WoWsTouchable onPress={() => this.pushToDetail(item)}>

@@ -82,6 +82,7 @@ export default language = new LocalizedStrings({
     // Settings
     settings_theme: 'Change app theme',
     // Website
+    web_done_btn: 'Done',
     web_official_title: 'Official websites',
     web_official: 'World of Warships',
     web_premium_store: 'Premium store',

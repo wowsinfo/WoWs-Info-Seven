@@ -12,9 +12,22 @@ const initialLayout = {
 };
 
 export default class More extends Component {
-  state = {
-    index: 0,
-    routes: [{key: 'website', title: language.more_website_title}, {key: 'tool', title: language.more_tool_title}]
+  constructor(props) {
+    super(props);
+    console.log(this.props);
+    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));  
+    this.state = {
+      index: 0,
+      routes: [{key: 'website', title: language.more_website_title}, {key: 'tool', title: language.more_tool_title}]
+    }  
+  }
+
+  onNavigatorEvent(event) {
+    if (event.type == 'NavBarButtonPress') {
+      if (event.id == 'done') {
+        this.props.navigator.dismissModal();
+      }
+    }
   }
 
   static navigatorStyle = {

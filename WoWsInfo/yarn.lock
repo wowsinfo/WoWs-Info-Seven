@@ -4307,6 +4307,10 @@ react-native-elements@^1.0.0-beta4:
     prop-types "^15.5.8"
     react-native-touchable-scale "2.0.0"
 
+react-native-haptic@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/react-native-haptic/-/react-native-haptic-1.0.5.tgz#91fff9233a0eb0a4e420a00c2bf5cf29610946ed"
+
 react-native-localization@^1.0.7:
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/react-native-localization/-/react-native-localization-1.0.7.tgz#abc3d718f1e65e63d005be402462c10d9f0e3b76"

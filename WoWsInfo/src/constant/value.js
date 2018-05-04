@@ -76,6 +76,8 @@ export const LocalData = {
   theme: '@WoWs_Info:themeColour',
   first_launch: '@WoWs_Info:firstLaunch',
   api_language: '@WoWs_Info:apiLanguage',
+  // IOS Tab
+  saved_tab: '@WoWs_Info:savedTab',
 }
 
 export const SavedData = {

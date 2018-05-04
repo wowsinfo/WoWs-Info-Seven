@@ -7,6 +7,7 @@ import Drawer from '../Drawer';
 import language from '../../constant/language';
 import { navStyle } from '../../constant/colour';
 import { iconsMap } from '../../constant/icon';
+import { LocalData } from '../../constant/value';
 
 export default class News extends Component {
   state = {
@@ -31,17 +32,23 @@ export default class News extends Component {
           navigatorButtons: {rightButtons: [{icon: iconsMap['undo'], id: 'reset'}]}
         })
       } else if (event.id == 'more') {
-        this.props.navigator.push({
+        this.props.navigator.showModal({
           title: language.more_header,
           screen: 'news.more',
-          navigatorStyle: navStyle()
+          navigatorStyle: navStyle(),
+          navigatorButtons: {rightButtons: [{title: language.web_done_btn, id: 'done'}]}
         })
       }
+    } else if (event.id === 'bottomTabSelected') {
+      let store = require('react-native-simple-store');
+      store.save(LocalData.saved_tab, 1);
     }
   }
 
   async componentWillMount() {
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+    let store = require('react-native-simple-store');
+    store.save(LocalData.saved_tab, 1);
     await this.loadNews();
   }
 
@@ -53,7 +60,7 @@ export default class News extends Component {
         <SafeAreaView>
           <View ref='news'>
             <FlatList data={data} keyExtractor={this.newsKey} onRefresh={() => this.refreshNews()}
-            renderItem={({item}) => <NewsCell browser={() => this.pushToBrowser(item)} data={item}/>} refreshing={isRefreshing} showsVerticalScrollIndicator={false}/>
+            renderItem={({item}) => <NewsCell browser={() => this.pushToBrowser(item)} data={item}/>} refreshing={isRefreshing}/>
           </View>
         </SafeAreaView>
       )

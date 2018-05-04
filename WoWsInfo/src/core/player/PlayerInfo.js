@@ -151,7 +151,7 @@ class PlayerInfo {
    * @param {*} pvp 
    */
   static calBasic8CellInfo(pvp) {
-    const { battles, damage_dealt, wins, xp, main_battery, main_battery, survived_battles, frags } = pvp;
+    const { battles, damage_dealt, wins, xp, main_battery, survived_battles, frags } = pvp;
     let info = {battle: battles, winrate: 0, killdeath: 0, damage: 0, hitratio: 0, survival: 0, frag: 0, exp: 0};
     if (battles > 0) {
       info.damage = Math.round(damage_dealt / battles);

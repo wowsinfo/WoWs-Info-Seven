@@ -14,7 +14,8 @@ const icons = {
   'menu': [26, '#fff', Entypo],
   // Wiki
   'undo': [22, '#fff', FontAwesome],
-  'filter': [26, '#fff', FontAwesome]
+  'filter': [26, '#fff', FontAwesome],
+  'wikipedia-w': [24, '#fff', FontAwesome],
 }
 
 const defaultIconProvider = Ionicons;
