@@ -34,7 +34,7 @@ export default class ShipDetail extends Component {
 
   render() {
     if (this.state.isReady) { return (
-      <ScrollView showsVerticalScrollIndicator={false}>  
+      <ScrollView>  
         <View animation='fadeInUp' ref='mainView'>
           { this.renderBasic() }
           { this.getStatus() }

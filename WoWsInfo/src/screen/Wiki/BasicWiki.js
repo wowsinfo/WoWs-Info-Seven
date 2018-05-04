@@ -38,7 +38,7 @@ export default class BasicWiki extends React.PureComponent {
     if (isReady) {
       return (
         <View animation='fadeInRight'>
-          <GridView itemDimension={80} items={data} showsVerticalScrollIndicator={false}
+          <GridView itemDimension={80} items={data}
           renderItem={item => <BasicCell icon={item.icon} data={item} collection={this.pushToCollection} 
             detail={this.pushToDetail} isCollection={this.isCollection}/>} />
         </View>

@@ -10,6 +10,7 @@ import { PlayerSearch } from '../core';
 import { GREY, Blue } from 'react-native-material-color';
 import { navStyle } from '../constant/colour';
 import { Divider } from 'react-native-elements';
+import { hapticFeedback } from '../app/App';
 
 export default class Search extends PureComponent {
   constructor(props) {
@@ -30,9 +31,13 @@ export default class Search extends PureComponent {
           navigatorStyle: navStyle()
         })
       } else if (event.id == 'reset') {
+        hapticFeedback();
         this.setState({mode: 0, server: server, showPicker: true, data: [], input: ''})
         this.refs['search'].bounceInDown(800);
       }
+    } else if (event.id === 'bottomTabSelected') {
+      let store = require('react-native-simple-store');
+      store.save(LocalData.saved_tab, 0);
     }
   }
 
@@ -57,7 +62,7 @@ export default class Search extends PureComponent {
                 <Text animation='flipInX' style={textStyle}>{'[' + item.id + '] ' + item.name}</Text>                          
               </SafeAreaView>
             </WoWsTouchable>
-          )}} showsVerticalScrollIndicator={false}/>
+          )}}/>
       </View>
     )
   }

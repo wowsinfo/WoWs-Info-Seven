@@ -13,6 +13,7 @@
     "react-native-animatable": "^1.2.4",
     "react-native-device-info": "^0.21.5",
     "react-native-elements": "^1.0.0-beta4",
+    "react-native-haptic": "^1.0.5",
     "react-native-localization": "^1.0.7",
     "react-native-material-color": "^1.0.15",
     "react-native-navigation": "^1.1.444",

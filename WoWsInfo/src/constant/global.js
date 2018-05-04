@@ -14,6 +14,7 @@ global.game_version = '';
 global.friend = [];
 global.user_info = {};
 global.user_data = {};
+global.saved_tab = 0;
 
 // JSON data
 global.data = {

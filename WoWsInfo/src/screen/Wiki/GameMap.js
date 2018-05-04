@@ -30,7 +30,7 @@ export default class GameMap extends Component {
                   <Text style={[textStyle, {color: theme[500] == '#ffffff' ? Blue : theme[500]}]}>{item.name}</Text>
                 </View>
               </WoWsTouchable>
-            )}} showsVerticalScrollIndicator={false}/>
+            )}}/>
         </Animatable.View>
       )
     } else return <WoWsLoading />;

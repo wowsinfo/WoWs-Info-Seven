@@ -48,6 +48,7 @@
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		82BF6826B8BC4F2CB8235324 /* libReactNativeNavigation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67FCD73EEB8646E48C8A49B3 /* libReactNativeNavigation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		8DD64140B7F24951986212F6 /* libReactNativeHaptic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91DEAE18C4FA46E794A1DA6A /* libReactNativeHaptic.a */; };
 		A49E920F0DD64033962C99AF /* libReactNativeLocalization.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 40EB85DF850A485C8B507E5E /* libReactNativeLocalization.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		BAA28D99208F581A00B61E6A /* libRNUserDefaultsIOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BAA28D95208F581300B61E6A /* libRNUserDefaultsIOS.a */; };
@@ -331,6 +332,13 @@
 			remoteGlobalIDString = 358F4ED71D1E81A9004DF814;
 			remoteInfo = RCTBlob;
 		};
+		BA494093209C9D9900FF90CF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C0FFD3355C974764AB2297DA /* ReactNativeHaptic.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = ReactNativeHaptic;
+		};
 		BA8F0E2620899B4D008A4503 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 533D77B5A9DF4051B4244C39 /* ReactNativeLocalization.xcodeproj */;
@@ -419,12 +427,14 @@
 		80508EF957334C3EB5E05708 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		817F3D38AAC341D0965DE4D1 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		91DEAE18C4FA46E794A1DA6A /* libReactNativeHaptic.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeHaptic.a; sourceTree = "<group>"; };
 		97A024C3ABFB48CF88E4381E /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		A75FF153C3184C658AE3B6AE /* libRNDeviceInfo-tvOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libRNDeviceInfo-tvOS.a"; sourceTree = "<group>"; };
 		AC982A307EC247FA84468684 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		B9BB331984CB447A8B6CBF0F /* libRNDeviceInfo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNDeviceInfo.a; sourceTree = "<group>"; };
 		BAA28D66208F581300B61E6A /* RNUserDefaultsIOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNUserDefaultsIOS.xcodeproj; path = "../node_modules/react-native-userdefaults-ios/RNUserDefaultsIOS.xcodeproj"; sourceTree = "<group>"; };
+		C0FFD3355C974764AB2297DA /* ReactNativeHaptic.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeHaptic.xcodeproj; path = "../node_modules/react-native-haptic/ios/ReactNativeHaptic.xcodeproj"; sourceTree = "<group>"; };
 		CE4669D391DA4F0EAE12D83F /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		D550499EAEDC4A61B69CDF4D /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		D5F573DE5479413A8338B279 /* ReactNativeNavigation.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeNavigation.xcodeproj; path = "../node_modules/react-native-navigation/ios/ReactNativeNavigation.xcodeproj"; sourceTree = "<group>"; };
@@ -463,6 +473,7 @@
 				82BF6826B8BC4F2CB8235324 /* libReactNativeNavigation.a in Frameworks */,
 				5A3EC94BD780413B88EF2276 /* libRNVectorIcons.a in Frameworks */,
 				04BF2D4EEC6A44E0BFC23856 /* libRNDeviceInfo.a in Frameworks */,
+				8DD64140B7F24951986212F6 /* libReactNativeHaptic.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -655,6 +666,7 @@
 				D5F573DE5479413A8338B279 /* ReactNativeNavigation.xcodeproj */,
 				817F3D38AAC341D0965DE4D1 /* RNVectorIcons.xcodeproj */,
 				F1680FD9A0644872A3792B4D /* RNDeviceInfo.xcodeproj */,
+				C0FFD3355C974764AB2297DA /* ReactNativeHaptic.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -722,6 +734,14 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		BA494090209C9D9800FF90CF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BA494094209C9D9900FF90CF /* libReactNativeHaptic.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		BA8F0DFB20899B4A008A4503 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -730,6 +750,7 @@
 				AC982A307EC247FA84468684 /* libRNVectorIcons.a */,
 				B9BB331984CB447A8B6CBF0F /* libRNDeviceInfo.a */,
 				A75FF153C3184C658AE3B6AE /* libRNDeviceInfo-tvOS.a */,
+				91DEAE18C4FA46E794A1DA6A /* libReactNativeHaptic.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -937,6 +958,10 @@
 				{
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+				},
+				{
+					ProductGroup = BA494090209C9D9800FF90CF /* Products */;
+					ProjectRef = C0FFD3355C974764AB2297DA /* ReactNativeHaptic.xcodeproj */;
 				},
 				{
 					ProductGroup = BA8F0DFC20899B4D008A4503 /* Products */;
@@ -1229,6 +1254,13 @@
 			remoteRef = ADBDB9261DFEBF0700ED6528 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		BA494094209C9D9900FF90CF /* libReactNativeHaptic.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libReactNativeHaptic.a;
+			remoteRef = BA494093209C9D9900FF90CF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		BA8F0E2720899B4D008A4503 /* libReactNativeLocalization.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1433,11 +1465,15 @@
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-device-info/ios/RNDeviceInfo",
+					"$(SRCROOT)/../node_modules/react-native-haptic/ios/**",
 				);
 				INFOPLIST_FILE = WoWsInfoTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1458,11 +1494,15 @@
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-device-info/ios/RNDeviceInfo",
+					"$(SRCROOT)/../node_modules/react-native-haptic/ios/**",
 				);
 				INFOPLIST_FILE = WoWsInfoTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1485,6 +1525,7 @@
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-device-info/ios/RNDeviceInfo",
+					"$(SRCROOT)/../node_modules/react-native-haptic/ios/**",
 				);
 				INFOPLIST_FILE = WoWsInfo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1512,6 +1553,7 @@
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-device-info/ios/RNDeviceInfo",
+					"$(SRCROOT)/../node_modules/react-native-haptic/ios/**",
 				);
 				INFOPLIST_FILE = WoWsInfo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1545,10 +1587,14 @@
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-device-info/ios/RNDeviceInfo",
+					"$(SRCROOT)/../node_modules/react-native-haptic/ios/**",
 				);
 				INFOPLIST_FILE = "WoWsInfo-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1579,10 +1625,14 @@
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-device-info/ios/RNDeviceInfo",
+					"$(SRCROOT)/../node_modules/react-native-haptic/ios/**",
 				);
 				INFOPLIST_FILE = "WoWsInfo-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1612,10 +1662,14 @@
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-device-info/ios/RNDeviceInfo",
+					"$(SRCROOT)/../node_modules/react-native-haptic/ios/**",
 				);
 				INFOPLIST_FILE = "WoWsInfo-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1645,10 +1699,14 @@
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-device-info/ios/RNDeviceInfo",
+					"$(SRCROOT)/../node_modules/react-native-haptic/ios/**",
 				);
 				INFOPLIST_FILE = "WoWsInfo-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",

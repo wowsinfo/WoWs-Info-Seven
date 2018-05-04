@@ -14,7 +14,7 @@ const data = [[language.web_official_title, {title: language.web_official}, {tit
 
 export default Website = () => {
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
+    <ScrollView>
       <View animation='fadeIn'>
         { renderWebsite(data) }
       </View>

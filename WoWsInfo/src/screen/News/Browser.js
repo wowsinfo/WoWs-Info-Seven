@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { WebView, Linking } from 'react-native';
 import language from '../../constant/language';
+import { hapticFeedback } from '../../app/App';
 
 export default class Browser extends PureComponent {
   constructor(props) {
@@ -26,7 +27,7 @@ export default class Browser extends PureComponent {
 
   render() {
     return (
-      <WebView source={{uri: this.props.link}}/>
+      <WebView onLoadEnd={() => hapticFeedback()} source={{uri: this.props.link}}/>
     )
   }
 }

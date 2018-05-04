@@ -17,6 +17,13 @@ iconsLoaded.then(() => {
   DataStorage.DataValidation().then(() => startApp());
 });
 
+export function hapticFeedback() {
+  if (!android) {
+    let ReactNativeHaptic = require('react-native-haptic').default;
+    ReactNativeHaptic.generate('selection');
+  }
+}
+
 /**
  * Loading data screen
  */
@@ -38,6 +45,7 @@ function loadingData() {
  * Start this application
  */
 export function startApp() {
+  hapticFeedback();
   android ? startAppAndroid() : startAppIOS();
 }
 
@@ -48,6 +56,14 @@ function startAppIOS() {
   Navigation.startTabBasedApp({
     tabs: [
       {
+        label: language.search_tab_label, title: language.search_tab_title,
+        screen: 'info.search', icon: iconsMap['ios-search'],
+        navigatorStyle: navStyle(),
+        navigatorButtons: {
+          rightButtons: [{icon: iconsMap['undo'], id: 'reset'}],
+        }
+      },
+      {
         label: language.news_tab_label, title: language.news_tab_title,
         screen: 'info.news', icon: iconsMap['newspaper-o'],
         navigatorStyle: navStyle(),
@@ -56,13 +72,9 @@ function startAppIOS() {
         }
       },
       {
-        label: language.search_tab_label, title: language.search_tab_title,
-        screen: 'info.search', icon: iconsMap['ios-search'],
-        navigatorStyle: navStyle(),
-        navigatorButtons: {
-          rightButtons: [{icon: iconsMap['undo'], id: 'reset'}],          
-          leftButtons: [{ title: language.wiki_title, id: 'wiki'}]
-        }
+        label: language.wiki_title, title: language.drawer_wiki,
+        screen: 'info.wiki', icon: iconsMap['wikipedia-w'],
+        navigatorStyle: navStyle()
       },
       {
         label: language.settings_tab_label, title: language.settings_tab_title,
@@ -74,6 +86,7 @@ function startAppIOS() {
       tabBarSelectedButtonColor: theme[500],
       tabBarBackgroundColor: getTextColour(theme[500]),
       tabBarTranslucent: true,
+      initialTabIndex: saved_tab,
     },
     animationType: 'fade'
   });
