@@ -4,6 +4,7 @@ import { View } from 'react-native-animatable';
 import GridView from 'react-native-super-grid';
 import { WoWsLoading, BasicCell } from '../../component';
 import { navStyle } from '../../constant/colour';
+import { Blue } from 'react-native-material-color';
 
 export default class Collection extends Component {
   constructor(props) {
@@ -42,10 +43,11 @@ export default class Collection extends Component {
   renderHeader = () => {
     const { name, icon, text } = this.props.data;       
     const { viewStyle, imageStyle, nameStyle, textStyle } = styles; 
+    let color = theme[500] == '#ffffff' ? Blue : theme[500];      
     return (
       <View style={viewStyle}>
         <Image style={imageStyle} source={{uri: icon}}/>
-        <Text style={[nameStyle, {color: global.themeColour}]}>{name}</Text>
+        <Text style={[nameStyle, {color: color}]}>{name}</Text>
         <Text style={textStyle}>{text}</Text>
       </View>
     )

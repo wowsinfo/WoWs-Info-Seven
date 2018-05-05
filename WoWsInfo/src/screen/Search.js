@@ -52,7 +52,7 @@ export default class Search extends PureComponent {
         <GridView itemDimension={256} items={data} renderItem={item => {
           return (
             <WoWsTouchable onPress={() => this.props.navigator.push({
-              title: item.name,
+              title: String(item.id),
               screen: 'search.player',
               backButtonTitle: '',              
               navigatorStyle: navStyle(),

@@ -20,8 +20,8 @@ class PlayerInfo {
       let response = await fetch(this.api);
       let json = await response.json();
       if (json != null && json.status == 'ok') {
-        // This player is not hidden       
-        if (json.meta.hidden == null) return json.data;
+        // This player is not hidden  
+        if (json.meta.hidden == null) return json.data[this.id];
       }
     } catch (error) {
       console.error(error);
@@ -34,8 +34,7 @@ class PlayerInfo {
    */
   getBasic8Info(json) {
     if (json != null) {
-      let player = json[this.id];
-      let pvp = player.statistics.pvp;
+      let pvp = json.statistics.pvp;
       return PlayerInfo.calBasic8CellInfo(pvp);
     }
   }
@@ -46,10 +45,9 @@ class PlayerInfo {
    */
   async getPlayerBasicInfo(json) {
     if (json != null) {
-      let player = json[this.id];
       let info = {};
-      info.level = player.leveling_tier;
-      info.last_battle = new Date(player.last_battle_time * 1000).toLocaleString();
+      info.level = json.leveling_tier;
+      info.last_battle = new Date(json.last_battle_time * 1000).toLocaleString();
       var format = require('string-format');      
       let createdAtApi = format(API.CreatedAt, ServerManager.domainName(this.server)) + this.name;
       let currRankApi = format(API.CurrRankInfo, ServerManager.domainName(this.server)) + this.id;
@@ -92,8 +90,8 @@ class PlayerInfo {
   getRecordWeaponInfo(json) {
     if (json != null) {
       var recordWeapon = [];
-      var ship; let shipJson = global.warshipJson;
-      const { main_battery, second_battery, torpedoes, ramming, aircraft } = json[this.id].statistics.pvp;
+      var ship; let shipJson = data.warship;
+      const { main_battery, second_battery, torpedoes, ramming, aircraft } = json.statistics.pvp;
       // console.log(pvp);
       let infoList = [main_battery, second_battery, torpedoes, ramming, aircraft];
       let titleList = [language.player_max_main_battery, language.player_max_secondary, language.player_max_torpedo, language.player_max_ramming, language.player_max_aircraft];
@@ -124,9 +122,9 @@ class PlayerInfo {
   getRecordInfo(json) {
     if (json != null) {
       var record = []; 
-      var ship; let shipJson = global.warshipJson;
+      var ship; let shipJson = data.warship;
       const { max_damage_dealt_ship_id, max_xp_ship_id, max_frags_ship_id, max_planes_killed_ship_id,
-        max_damage_dealt, max_xp, max_frags_battle, max_planes_killed } = json[this.id].statistics.pvp;
+        max_damage_dealt, max_xp, max_frags_battle, max_planes_killed } = json.statistics.pvp;
 
       let titleList = [language.player_max_damage_dealt, language.player_max_xp, language.player_max_kill, language.player_max_plane];
       let infoList = [max_damage_dealt_ship_id, max_xp_ship_id, max_frags_ship_id, max_planes_killed_ship_id];

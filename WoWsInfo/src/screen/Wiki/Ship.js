@@ -4,6 +4,7 @@ import GridView from 'react-native-super-grid';
 import { WoWsLoading, WoWsTouchable } from '../../component';
 import { navStyle } from '../../constant/colour';
 import * as Animatable from 'react-native-animatable';
+import { hapticFeedback } from '../../app/App';
 
 const Tier = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
 
@@ -128,6 +129,7 @@ export default class Ship extends PureComponent {
     }
     // Sort by tier as always
     filtered = this.sortShip(filtered);
+    hapticFeedback();
     this.setState({data: filtered})
     this.refs['allship'].bounceInUp(800)
   }

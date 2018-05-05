@@ -29,3 +29,14 @@ export function navStyle() {
     screenBackgroundColor: 'white' 
   }
 }
+
+export const PRColour = {
+  ImprovementNeeded: 'red',
+  BelowAverage: 'orange',
+  Average: '#F5C84C',
+  Good: '#67AF34',
+  VeryGood: '#4A7D23',
+  Great: 'cyan',
+  Unicum: 'magenta',
+  SuperUnicum: 'purple',
+}
