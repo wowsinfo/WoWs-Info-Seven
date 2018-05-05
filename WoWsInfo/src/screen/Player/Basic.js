@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet, SafeAreaView, ScrollView, Text } from 'react-native';
 import { PlayerInfo } from '../../core';
-import { WoWsLoading } from '../../component';
+import { WoWsLoading, Basic8Cell, RecordCell } from '../../component';
+import { Divider } from 'react-native-elements';
+import language from '../../constant/language';
+import { Blue } from 'react-native-material-color';
 
 class Basic extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
       isReady: false,
       info: {}, record: [], weapon: []
@@ -18,10 +20,8 @@ class Basic extends Component {
     const { id, name, server } = this.props;   
     let player = new PlayerInfo(name, id, server);
     player.Search().then(json => {
-      if (json == null || json == undefined) return;
       let basic8Info = player.getBasic8Info(json);
-      player.getPlayerBasicInfo(json).then(info => {
-        if (info == null || info == undefined) return;        
+      player.getPlayerBasicInfo(json).then(info => {     
         // Get average battle per day
         basic8Info.battle += ' (' + Math.round(parseFloat(basic8Info.battle) * 100 / parseFloat(info.created)) / 100 + ')';
         // Get record
@@ -39,29 +39,89 @@ class Basic extends Component {
 
   render() {
     if (this.state.isReady) {
-      const { id, playerName } = this.props;
+      const { id, name } = this.props;
       const { level, created, last_battle, rank } = this.state.info;
       const { playerNameStyle, scrollViewStyle, mainViewStyle, playerInfoStyle, playerViewStyle, dontJudgeStyle } = styles;
+      let color = theme[500] == '#ffffff' ? Blue : theme[500];  
       return (
         <SafeAreaView style={mainViewStyle}>
-          <ScrollView style={scrollViewStyle} automaticallyAdjustContentInsets={false}>
-            <View style={[playerViewStyle, {backgroundColor: global.themeColour}]}>
-              <Text style={playerNameStyle}>{playerName}</Text>
+          <ScrollView style={scrollViewStyle}>
+            <View style={[playerViewStyle, {backgroundColor: color}]}>
+              <Text style={playerNameStyle}>{name}</Text>
               <Text style={playerInfoStyle}>{last_battle}</Text>
-              <Text style={playerInfoStyle}>{created + ' | Lv ' + level + ' | ⭐️' + rank}</Text>
-              { this.renderSetAsMainBtn() }              
+              <Text style={playerInfoStyle}>{created + ' | Lv ' + level + ' | ⭐️' + rank}</Text>             
             </View>
             <Basic8Cell info={this.state.info}/>
-            <Text style={dontJudgeStyle}>{strings.never_judge_by_stat}</Text>
-            <Divider style={{height: 1.5, backgroundColor: global.themeColour}}/>
+            <Text style={dontJudgeStyle}>{language.player_respect}</Text>
             { this.renderRecord(this.state.record) }
-            <Divider style={{height: 1.5, backgroundColor: global.themeColour}}/>
             { this.renderRecord(this.state.weapon) }
           </ScrollView>
         </SafeAreaView>
       )
     } else return <WoWsLoading />
   }
+
+  /**
+   * Render player record
+   * @param {*} data 
+   */
+  renderRecord(data) {
+    return data.map((data, i) => {
+      return (
+        <View key={i}>
+          <RecordCell info={data}/>          
+        </View>
+      )
+    })
+  }
 }
+
+const styles = StyleSheet.create({
+  mainViewStyle: {
+    flex: 1,
+  },
+  scrollViewStyle: {
+    flex: 1,
+  },
+  playerViewStyle: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 16,
+    padding: 16,
+  },
+  playerNameStyle: {
+    textAlign: 'center',
+    fontSize: 36,
+    width: '100%',
+    fontWeight: '400',
+    margin: 16,
+    color: 'white',
+  },
+  playerInfoStyle: {
+    textAlign: 'center',
+    fontSize: 18,
+    width: '90%',
+    fontWeight: '300',
+    marginBottom: 8,
+    color: 'white',    
+  },
+  setasmainViewStyle: {
+    marginTop: 8,
+    height: 32,
+    width: '61.8%',
+  },
+  setasmainTextStyle: {
+    fontSize: 18,
+    textAlign: 'center',
+    color: 'white'
+  },
+  dontJudgeStyle: {
+    textAlign: 'center',
+    fontSize: 14,
+    fontWeight: '200',
+    marginBottom: 2,
+  }
+})
 
 export { Basic };

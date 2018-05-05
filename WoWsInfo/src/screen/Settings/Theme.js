@@ -7,7 +7,7 @@ export default class ThemeScreen extends Component {
   constructor() {
     super();
     let WHITE = { 500: '#ffffff', 700: '#ffffff' };
-    let BLACK = { 500: '#000000', 700: '#000000' };
+    let BLACK = { 500: '#212121', 700: '#212121' };
     this.colourList = [RED, PINK, PURPLE, DEEPPRUPLE, INDIGO, BLUE, LIGHTBLUE, CYAN, TEAL, GREEN, LIGHTGREEN, LIME, 
       YELLOW, AMBER, ORANGE, DEEPORANGE, BROWN, GREY, BLUEGREY, BLACK, WHITE];
   }

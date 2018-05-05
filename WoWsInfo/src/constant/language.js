@@ -29,7 +29,7 @@ export default language = new LocalizedStrings({
     // Day difference
     day_today: 'Today',
     day_yesterday: 'Yesterday',
-    day_ago: ' ago',
+    day_ago: ' days ago',
     // Wiki
     wiki_warship: 'Warship',
     wiki_achievement: 'Achievement',
@@ -79,6 +79,9 @@ export default language = new LocalizedStrings({
     player_max_torpedo: 'Torpedoes',
     player_max_ramming: 'Ramming',
     player_max_aircraft: 'Aircraft',
+    player_respect: 'Please respect everyone\nDo not judge other player by statistics',
+    player_survival_rate: 'Survival\nRate',
+    player_average_frag: 'Average\nFrag',
     // Settings
     settings_theme: 'Change app theme',
     // Website

@@ -14,3 +14,4 @@ export * from './helper/GameVersion';
 export * from './helper/DateCalculator';
 export * from './helper/ServerManager';
 export * from './helper/NewsParser';
+export * from './helper/PersonalRating';

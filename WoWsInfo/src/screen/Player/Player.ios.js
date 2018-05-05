@@ -19,9 +19,8 @@ export default class PlayerTab extends React.PureComponent {
 
   render() {
     let color = theme[500];
-    let barStyle = getTextColour(color) == '#000000' ? 'black' : 'default';
     return (
-      <TabBarIOS itemPositioning='center' tintColor={color} barStyle={barStyle} translucent>
+      <TabBarIOS itemPositioning='center' tintColor={color} barTintColor={getTextColour(color)}>
         <TabBarIOS.Item icon={require('../../img/AchievementTab.png')} title={language.achievement_tab_title}
           selected={this.state.selectedTab === 'Acievement'}
           onPress={() => this.setTab('Acievement')}>
