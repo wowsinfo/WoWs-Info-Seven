@@ -9,20 +9,12 @@ import language from '../constant/language';
 import { iconsLoaded, iconsMap } from '../constant/icon';
 import { DataStorage } from '../core';
 
-
 // Loading icons
 iconsLoaded.then(() => {
   registerScreens();
   loadingData();
-  DataStorage.DataValidation().then(() => startApp());
+  DataStorage.DataValidation().then(() => startApp())
 });
-
-export function hapticFeedback() {
-  if (!android) {
-    let ReactNativeHaptic = require('react-native-haptic').default;
-    ReactNativeHaptic.generate('selection');
-  }
-}
 
 /**
  * Loading data screen
@@ -99,11 +91,8 @@ function startAppAndroid() {
   Navigation.startSingleScreenApp({
     screen: {
       title: language.search_tab_title,
-      screen: 'info.news', icon: iconsMap['newspaper-o'],
+      screen: 'info.news',
       navigatorStyle: navStyle(),
-      appStyle: {
-        forceTitlesDisplay: false
-      },
       navigatorButtons: {
         leftButtons: [{icon: iconsMap['menu'], id: 'drawer'}],
         rightButtons: [{title: language.more_title, id: 'more'}],
@@ -121,4 +110,39 @@ function startAppAndroid() {
       },
     }
   })
+}
+
+/**
+ *  screen: {
+      title: language.search_tab_title,
+      screen: 'info.news', icon: iconsMap['newspaper-o'],
+      navigatorStyle: navStyle(),
+      navigatorButtons: {
+        leftButtons: [{icon: iconsMap['menu'], id: 'drawer'}],
+        rightButtons: [{title: language.more_title, id: 'more'}],
+        fab: {
+          collapsedId: 'search',
+          collapsedIcon: iconsMap['ios-search'],
+          collapsedIconColor: getTextColour(theme[500]),
+          backgroundColor: theme[500],
+        }
+      }
+    },
+    appStyle: navStyle(),
+    drawer: {
+      left: {
+        screen: 'app.drawer',
+      },
+    }
+  })
+ */
+
+/**
+ * Haptic feedback for android
+ */
+export function hapticFeedback() {
+  if (!android) {
+    let ReactNativeHaptic = require('react-native-haptic').default;
+    ReactNativeHaptic.generate('selection');
+  }
 }

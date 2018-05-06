@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { View, Image, ActivityIndicator, StyleSheet } from 'react-native';
-import { DataStorage } from '../core';
 import { Blue } from 'react-native-material-color';
 import { verticalScale } from 'react-native-size-matters';
 
