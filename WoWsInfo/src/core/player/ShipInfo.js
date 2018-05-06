@@ -18,7 +18,7 @@ class ShipInfo {
           let ships = json.data[this.id];
           // For personal rating for all ships
           var totalDamage = 0, totalWin = 0, totalFrag = 0, expectedDamage = 0, expectedWin = 0, expectedFrag = 0;
-          let prJson = global.personalRatingJson;
+          let prJson = data.personal_rating;
           for (var i = 0; i < ships.length; i++) {
             // Calculate rating for each ship and for all ships
             let currShip = ships[i];

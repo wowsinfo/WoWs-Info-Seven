@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Text, Image, ScrollView, View, StyleSheet } from 'react-native';
-import { Blue } from 'react-native-material-color';
+import { getTheme } from '../../constant/colour';
 
 export default class BasicDetail extends Component {
   render() {
     const { icon, name, text } = this.props;
     const { viewStyle, imageStyle, textStyle, nameStyle } = styles;  
-    let color = theme[500] == '#ffffff' ? Blue : theme[500];  
+    let color = getTheme();
     return (
       <ScrollView contentContainerStyle={viewStyle}>
         <Image style={imageStyle} source={{uri: icon}}/>

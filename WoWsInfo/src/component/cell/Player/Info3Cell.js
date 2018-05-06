@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Image1Cell } from './Image1Cell';
+import { getTheme } from '../../../constant/colour';
 
 class Info3Cell extends Component {
   render() {

@@ -3,8 +3,7 @@ import { Image, Text, StyleSheet } from 'react-native';
 import { View } from 'react-native-animatable';
 import GridView from 'react-native-super-grid';
 import { WoWsLoading, BasicCell } from '../../component';
-import { navStyle } from '../../constant/colour';
-import { Blue } from 'react-native-material-color';
+import { navStyle, getTheme } from '../../constant/colour';
 
 export default class Collection extends Component {
   constructor(props) {
@@ -43,7 +42,7 @@ export default class Collection extends Component {
   renderHeader = () => {
     const { name, icon, text } = this.props.data;       
     const { viewStyle, imageStyle, nameStyle, textStyle } = styles; 
-    let color = theme[500] == '#ffffff' ? Blue : theme[500];      
+    let color = getTheme();    
     return (
       <View style={viewStyle}>
         <Image style={imageStyle} source={{uri: icon}}/>

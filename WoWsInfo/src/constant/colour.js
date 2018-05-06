@@ -1,3 +1,5 @@
+import { Blue } from "react-native-material-color";
+
 /**
  * Get text colour depending on tint colour (white or black)
  * @param {*} colour 
@@ -19,6 +21,16 @@ export function statusBarColour(colour) {
   else return 'light';
 }
 
+/**
+ * Get global theme colour
+ */
+export function getTheme() {
+  return theme[500] == '#ffffff' ? Blue : theme[500];
+}
+
+/**
+ * General navigation style
+ */
 export function navStyle() {
   return {
     navBarTextColor: getTextColour(theme[500]),
@@ -30,6 +42,9 @@ export function navStyle() {
   }
 }
 
+/**
+ * Personal Rating colours
+ */
 export const PRColour = {
   ImprovementNeeded: 'red',
   BelowAverage: 'orange',
