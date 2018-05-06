@@ -113,31 +113,6 @@ function startAppAndroid() {
 }
 
 /**
- *  screen: {
-      title: language.search_tab_title,
-      screen: 'info.news', icon: iconsMap['newspaper-o'],
-      navigatorStyle: navStyle(),
-      navigatorButtons: {
-        leftButtons: [{icon: iconsMap['menu'], id: 'drawer'}],
-        rightButtons: [{title: language.more_title, id: 'more'}],
-        fab: {
-          collapsedId: 'search',
-          collapsedIcon: iconsMap['ios-search'],
-          collapsedIconColor: getTextColour(theme[500]),
-          backgroundColor: theme[500],
-        }
-      }
-    },
-    appStyle: navStyle(),
-    drawer: {
-      left: {
-        screen: 'app.drawer',
-      },
-    }
-  })
- */
-
-/**
  * Haptic feedback for android
  */
 export function hapticFeedback() {

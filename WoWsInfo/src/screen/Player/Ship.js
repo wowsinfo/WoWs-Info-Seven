@@ -1,10 +1,14 @@
 import React, { PureComponent } from 'react';
-import { View, Text, TextInput, Keyboard, StyleSheet } from 'react-native';
+import { Text, TextInput, Keyboard, StyleSheet, Image } from 'react-native';
+import { View } from 'react-native-animatable';
 import { Icon } from 'react-native-elements';
-import { NoInformation, WoWsLoading, ShipInfoCell } from '../../component';
+import { NoInformation, WoWsLoading, ShipInfoCell, WoWsTouchable } from '../../component';
 import GridView from 'react-native-super-grid';
 import { ShipInfo, PersonalRating } from '../../core';
 import language from '../../constant/language';
+import { getTheme, navStyle } from '../../constant/colour';
+import { iconsMap } from '../../constant/icon';
+import { hapticFeedback } from '../../app/App';
 
 class Ship extends PureComponent {
   constructor(props) {
@@ -43,50 +47,109 @@ class Ship extends PureComponent {
   render() {
     const { isReady, data } = this.state;
     if (isReady) {
-      if (data.length > 0) {
-        const { footerViewStyle, poweredStyle, totalShipStyle, mainViewStyle, filterViewStyle, filterButtonStyle, dropdownStyle, dropdownTextStyle, inputStyle, resetBtnStyle } = styles;        
-        return (
-          <View>
-            <View style={footerViewStyle}>
-              <Text style={poweredStyle}>{language.player_powered_by_number}</Text>
-              <Text style={totalShipStyle}>{data.length}</Text>
-            </View>
-            { this.renderHeader() }
-            <View>
-              <GridView itemDimension={300} items={data} onScroll={Keyboard.dismiss}
-                renderItem={item => <ShipInfoCell info={item}/>}/>
-            </View>
-            
-          </View>
-        ) 
-      } else {
-        const { noInfoTextStyle, noInfoViewStyle } = styles;
-        return <NoInformation />
-      }
+      const { mainViewStyle, filterViewStyle, filterButtonStyle, dropdownStyle, dropdownTextStyle, inputStyle, resetBtnStyle } = styles;        
+      return (
+        <View style={mainViewStyle} ref='playership'>
+          { this.renderRating() }
+          <GridView itemDimension={300} items={data} onScroll={Keyboard.dismiss}
+            contentInset={{bottom:59}} renderItem={item => <ShipInfoCell info={item}/>}/>
+        </View>
+      )
     } else return <WoWsLoading />;
   }
 
-  renderResetButton() {
+  renderRating = () => {
+    const { overall, data } = this.state;
+    let ratingInfo = this.getOverallRatingInfo(overall); 
+    console.log(ratingInfo);
+    const { iconStyle, iconViewStyle, footerViewStyle, ratingViewStyle, poweredStyle, totalShipStyle, ratingStyle } = styles;   
     return (
-      <Icon name='md-refresh' type='ionicon' color='white' underlayColor='transparent' containerStyle={styles.resetStyle} onPress={() => {
-        // Reset stuff
-        this.filter = {name: '', nation: '', type: ''};
-        this.refs.nationDropdown.select(-1);          
-        this.refs.typeDropdown.select(-1);
-        this.refs.filterInput.clear(0);
-        this.setState({
-          data: this.shipInfo,
-          overall: this.overall,
-        })
-      }}/>
+      <View>
+        <View style={footerViewStyle}>
+          <Text style={poweredStyle}>{language.player_powered_by_number}</Text>
+          <Text style={totalShipStyle}>{data.length}</Text>
+        </View>
+        <View style={ratingViewStyle}>
+          <Text style={[ratingStyle, {color: ratingInfo.colour}]}>{ratingInfo.comment}</Text> 
+          <View style={iconViewStyle}>
+            <WoWsTouchable onPress={this.resetFilter}><Image source={iconsMap['undo']} style={iconStyle}/></WoWsTouchable>
+            <WoWsTouchable onPress={this.pushToFilter}><Image source={iconsMap['filter']} style={iconStyle}/></WoWsTouchable>
+          </View>
+        </View>      
+      </View>     
     )
   }
 
-  renderHeader = () => {
-    let ratingInfo = this.getOverallRatingInfo(this.state.overall);    
-    return (
-      <Text style={[styles.ratingStyle, {color: ratingInfo.colour}]}>{ratingInfo.comment}</Text>      
-    )
+  /**
+   * Reset current filter and show animation
+   */
+  resetFilter = () => {
+    const { tier, type, nation } = this.filter;
+    if (tier == '' && type == '' & nation == '') return;
+    this.filter = {tier: '', nation: '', type: ''};
+    this.setState({data: this.shipInfo, overall: this.overall});
+    this.refs['playership'].bounceInDown(800) 
+  }
+
+  /**
+   * Goto filter screen
+   */
+  pushToFilter = () => {
+    this.props.navigator.showModal({
+      screen: 'ship.filter',
+      navigatorStyle: navStyle(),
+      passProps: {filter: this.setFilter, curr: this.filter}
+    })
+  }
+
+  /**
+  * Set ship filter
+  */
+  setFilter = (filter) => {
+    this.filter = filter;
+    this.filterShip();
+  }
+
+  /**
+   * Filter ship with tier, type, nation
+   */
+  filterShip() {
+    this.setState({data: []});
+    // Remove repeat
+    const { tier, type, nation } = this.filter;
+    if (tier == '' && type == '' & nation == '') return;
+    var totalDamage = 0, totalWin = 0, totalFrag = 0, expectedDamage = 0, expectedWin = 0, expectedFrag = 0;    
+    // Filter ship according to this.filter
+    var filtered = [];
+    for (key in this.shipInfo) {
+      let entry = this.shipInfo[key];
+      let ship = data.warship[entry.ship_id];
+      if (ship == undefined) continue;
+      if (tier != '' && ship.tier != tier + 1) continue;
+      if (type != '' && ship.type != type) continue;
+      if (nation != '' && ship.nation != nation) continue;
+
+      // Also calculate new rating here      
+      let currRating = data.personal_rating[entry.ship_id];
+      if (currRating == null) continue;
+      const { avg_damage, avg_frag } = entry;
+      const { average_damage_dealt, win_rate, average_frags } = currRating;
+      totalDamage += avg_damage;
+      totalWin += entry.win_rate;
+      totalFrag += avg_frag;
+      expectedDamage += average_damage_dealt;
+      expectedWin += win_rate;
+      expectedFrag += average_frags;
+      // Valid ship
+      filtered.push(entry);
+    }
+    // Sort by AP
+    filtered.sort(function (a, b) {return b.ap - a.ap})
+    // Get new rating
+    let pr = PersonalRating.getTotalRating(totalDamage, expectedDamage, totalWin, expectedWin, totalFrag, expectedFrag);
+    hapticFeedback();
+    this.setState({data: filtered, overall: PersonalRating.getIndex(pr)})
+    this.refs['playership'].bounceInUp(800)
   }
 
   getOverallRatingInfo(index) {
@@ -95,98 +158,28 @@ class Ship extends PureComponent {
     ratingInfo.comment = PersonalRating.getComment(index);
     return ratingInfo;
   }
-
-  onChangeText = (text) => {
-    this.filter.name = text;
-    this.filterShip();
-  }
-
-  filterNation = (index, value) => {
-    // Find key
-    var nationKey = '';
-    for (key in this.json.ship_nations) {
-      let nation = this.json.ship_nations[key];
-      if (value == nation) {
-        // This is the key we want
-        this.filter.nation = key; 
-        this.filterShip();
-        break;
-      }
-    }   
-  }
-
-  filterType = (index, value) => {
-    // Find key
-    for (key in this.shipType) {
-      let type = this.shipType[key];
-      if (value == type) {
-        // This is the key we want
-        this.filter.type = key; 
-        this.filterShip();
-        break;
-      }
-    }
-    
-  }
-
-  filterShip() {
-    // Filter ship according to this.filter
-    var filtered = [];
-    var totalDamage = 0, totalWin = 0, totalFrag = 0, expectedDamage = 0, expectedWin = 0, expectedFrag = 0;    
-    for (var i = 0; i < this.shipInfo.length; i++) {
-      let entry = this.shipInfo[i];
-      // Check 3 times
-      let currShip = global.warshipJson[entry.ship_id];
-      if (currShip == null) continue;
-      if (this.filter.name != '') {
-        let number = parseInt(this.filter.name);
-        if (number != null && number > 0) {
-          // If it is a number
-          if (number > 0 && number <= 10) {
-            // Tier
-            if (currShip.tier != number) continue;
-          } else {
-            // Battle
-            if (entry.battle < number) continue;
-          }
-        } else {
-          // Filter by name
-          if (!currShip.name.toLowerCase().includes(this.filter.name.toLowerCase())) continue;
-        }
-      }
-      if (this.filter.type != '' && currShip.type != this.filter.type) continue;
-      if (this.filter.nation != '' && currShip.nation != this.filter.nation) continue;
-      // Valid ship
-      filtered.push(entry);
-      // Also calculate new rating here
-      let currRating = global.personalRatingJson[entry.ship_id];
-      totalDamage += entry.avg_damage;
-      totalWin += entry.win_rate;
-      totalFrag += entry.avg_frag;
-      expectedDamage += currRating.average_damage_dealt;
-      expectedWin += currRating.win_rate;
-      expectedFrag += currRating.average_frags;
-    }
-    // Sort by tier as always
-    filtered.sort(function (a, b) {return b.pr - a.pr;})
-    // Get new rating
-    let pr = PersonalRating.getTotalRating(totalDamage, expectedDamage, totalWin, expectedWin, totalFrag, expectedFrag);
-    this.setState({
-      data: filtered,
-      overall: PersonalRating.getIndex(pr),
-    })
-  }
 }
 
 const styles = StyleSheet.create({
   mainViewStyle: {
     flex: 1,
   },
+  ratingViewStyle: {
+    flexDirection: 'row', justifyContent: 'flex-end'
+  },
+  iconViewStyle: {
+    flexDirection: 'row',
+    justifyContent: 'center', alignItems: 'center'   
+  },
+  iconStyle: {
+    height: 28, width: 28, 
+    tintColor: getTheme(), margin: 6
+  },
   ratingStyle: {
-    textAlign: 'center',
+    textAlign: 'left',
     fontSize: 24,
     fontWeight: 'bold',
-    margin: 4,
+    paddingLeft: 8, flex: 1
   },
   filterViewStyle: { 
     flexDirection: 'row', 
