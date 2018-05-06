@@ -1,5 +1,5 @@
 import React from 'react';
-import { TabBarIOS, View, ScrollView } from 'react-native';
+import { TabBarIOS, View } from 'react-native';
 import { AchievementScreen, Basic, Graph, Rank, Ship } from './';
 import language from '../../constant/language';
 import { Blue } from 'react-native-material-color';
@@ -20,7 +20,7 @@ export default class PlayerTab extends React.PureComponent {
   render() {
     let color = theme[500];
     return (
-      <TabBarIOS style={{flex: 1}} itemPositioning='center' tintColor={color} barTintColor={getTextColour(color)}>
+      <TabBarIOS itemPositioning='center' tintColor={color} barTintColor={getTextColour(color)}>
         <TabBarIOS.Item icon={require('../../img/AchievementTab.png')} title={language.achievement_tab_title}
           selected={this.state.selectedTab === 'Acievement'}
           onPress={() => this.setTab('Acievement')}>
@@ -39,7 +39,7 @@ export default class PlayerTab extends React.PureComponent {
         <TabBarIOS.Item icon={require('../../img/Ship.png')} title={language.warship_tab_title}
           selected={this.state.selectedTab === 'Ship'}
           onPress={() => this.setTab('Ship')}>
-          <ScrollView><Ship {...this.props}/></ScrollView>
+          <Ship {...this.props}/>
         </TabBarIOS.Item>
         <TabBarIOS.Item icon={require('../../img/Rank.png')} title={language.rank_tab_title}
           selected={this.state.selectedTab === 'Rank'}

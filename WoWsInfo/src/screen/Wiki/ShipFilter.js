@@ -6,8 +6,6 @@ const tierList = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
 export default class ShipFilter extends Component {
   state = this.props.curr;
 
-  static navigatorStyle = { navBarHidden: true }
-
   render() {
     const { scrollStyle, viewStyle } = styles;
     const { tier, nation, type } = this.state;
@@ -27,7 +25,7 @@ export default class ShipFilter extends Component {
             <Picker.Item label={language.filter_none} value=''/>
             { this.renderOther(ship_nation) }
           </Picker>
-          <Picker selectedValue={tier} mode='dropdown' style={{width: 80}}
+          <Picker selectedValue={tier} mode='dropdown' style={{width: 100}}
             onValueChange={(value, index) => this.setState({tier: value})}>
             <Picker.Item label='0' value=''/>
             { this.renderTier() }

@@ -5,6 +5,7 @@ import { PersonalRating } from '../../../core';
 import { Info3Cell } from './Info3Cell';
 import { getTheme } from '../../../constant/colour';
 import { getImage } from '../../../constant/icon';
+import language from '../../../constant/language';
 
 class ShipInfoCell extends Component {
   render() {
@@ -14,7 +15,9 @@ class ShipInfoCell extends Component {
     let shipInfo = this.getShipInfo(ship_id);
     let shipColour = PersonalRating.getColour(index);
     let shipType = getImage(shipInfo.type);
-    this.tierName = tierList[shipInfo.tier - 1] + ' ' + shipInfo.name;
+    var name = shipInfo.name; if (name == undefined) name = language.player_deleted_ship;
+    var tier = tierList[shipInfo.tier - 1]; if (tier == undefined) tier = 'XI';
+    this.tierName = tier + ' ' + name;
     let color = getTheme();        
     return (
       <WoWsTouchable>
@@ -61,6 +64,7 @@ const styles = StyleSheet.create({
   mainViewStyle: {
     borderWidth: 1.8,
     borderRadius: 10,
+    padding: 2
   },
   subViewStyle: {
     flex: 1,

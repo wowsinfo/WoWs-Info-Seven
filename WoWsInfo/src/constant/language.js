@@ -83,6 +83,7 @@ export default language = new LocalizedStrings({
     player_survival_rate: 'Survival\nRate',
     player_average_frag: 'Average\nFrag',
     player_powered_by_number: 'Powered by WoWs Numbers',
+    player_deleted_ship: 'DELETED SHIP',
     // Personal Rating
     rating_bad: 'Improvement Needed',
     rating_below_average: 'Below Average',

@@ -7,7 +7,7 @@ export default class MapDetail extends Component {
     const { viewStyle, imageStyle, textStyle, scrollViewStyle } = styles;    
     return (
       <ScrollView contentContainerStyle={scrollViewStyle}>
-        <Image style={imageStyle} source={{uri : icon}}/>
+        <Image style={imageStyle} source={{uri: icon}}/>
         <Text style={textStyle}>{description}</Text>
       </ScrollView>
     )

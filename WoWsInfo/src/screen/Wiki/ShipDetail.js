@@ -41,7 +41,7 @@ export default class ShipDetail extends Component {
           { this.renderSurvivability() }
           { this.renderMainBattery() }
           { this.renderSecondary() }
-          { this.renderAircraft() }
+          { /*this.renderAircraft()*/ }
           { this.renderTorpedo() }
           { this.renderAADefense() }
           { this.renderConcealment() }
@@ -441,7 +441,7 @@ const styles = StyleSheet.create({
   },
   titleTextStyle: {
     fontSize: 32, textAlign: 'center',
-    fontWeight: '500', margin: 4, height: android ? 50: 40, marginTop: 16,
+    fontWeight: '500', margin: 4, marginTop: 16,
   },
   tierTextStyle: {
     fontSize: 24, marginBottom: 4
