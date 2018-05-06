@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { View, FlatList, StyleSheet, Text } from 'react-native';
 import { WoWsLoading, MapCell, WoWsTouchable } from '../../component';
-import { navStyle } from '../../constant/colour';
-import { Blue } from 'react-native-material-color';
+import { navStyle, getTheme } from '../../constant/colour';
 import * as Animatable from 'react-native-animatable';
 
 export default class GameMap extends Component {
@@ -27,7 +26,7 @@ export default class GameMap extends Component {
             return (
               <WoWsTouchable onPress={() => this.showMapDetail(item)}>
                 <View style={viewStyle}>
-                  <Text style={[textStyle, {color: theme[500] == '#ffffff' ? Blue : theme[500]}]}>{item.name}</Text>
+                  <Text style={[textStyle, {color: getTheme()}]}>{item.name}</Text>
                 </View>
               </WoWsTouchable>
             )}}/>

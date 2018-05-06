@@ -1,11 +1,10 @@
 import React from 'react';
 import { ActivityIndicator, StyleSheet, View, Platform } from 'react-native';
-import { Blue } from 'react-native-material-color';
+import { getTheme } from '../../constant/colour';
 
 const WoWsLoading = () => {
   const { viewStyle } = styles;
-  let color = String(theme[500]) == '#ffffff' ? Blue : theme[500];
-  console.log(theme[500]);
+  let color = getTheme();
   return (
     <View style={viewStyle}>
       <ActivityIndicator color={android ? color : 'gray'} size='large'/>

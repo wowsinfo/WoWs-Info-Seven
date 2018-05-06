@@ -82,6 +82,16 @@ export default language = new LocalizedStrings({
     player_respect: 'Please respect everyone\nDo not judge other player by statistics',
     player_survival_rate: 'Survival\nRate',
     player_average_frag: 'Average\nFrag',
+    player_powered_by_number: 'Powered by WoWs Numbers',
+    // Personal Rating
+    rating_bad: 'Improvement Needed',
+    rating_below_average: 'Below Average',
+    rating_average: 'Average',
+    rating_good: 'Good',
+    rating_very_good: 'Very Good',
+    rating_great: 'Great',
+    rating_unicum: 'Unicum',
+    rating_super_unicum: 'Super Unicum',
     // Settings
     settings_theme: 'Change app theme',
     // Website

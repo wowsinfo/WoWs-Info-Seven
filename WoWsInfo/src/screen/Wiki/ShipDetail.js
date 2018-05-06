@@ -3,9 +3,9 @@ import { Text, StyleSheet, Image, ScrollView, FlatList, Alert } from 'react-nati
 import { View } from 'react-native-animatable';
 import { WoWsProgress, WoWsTouchable, WoWsLoading } from '../../component';
 import language from '../../constant/language';
-import { Blue, Orange, Grey } from 'react-native-material-color';
+import { Orange, Grey } from 'react-native-material-color';
 import { ShipDetailedInfo } from '../../core';
-import { getTextColour, navStyle } from '../../constant/colour';
+import { navStyle, getTheme } from '../../constant/colour';
 
 const Tier = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
 export default class ShipDetail extends Component {
@@ -58,8 +58,8 @@ export default class ShipDetail extends Component {
    * @param {*} text 
    */
   renderTitle(text) {
-    let color = theme[500], textColor = getTextColour(theme[500]);
-    return <Text style={[styles.titleTextStyle, {backgroundColor: android ? textColor : color, color: android ? color : textColor}]}>{text}</Text>
+    let textColor = getTheme();
+    return <Text style={[styles.titleTextStyle, {color: textColor}]}>{text}</Text>
   }
 
   /**
@@ -98,7 +98,7 @@ export default class ShipDetail extends Component {
     const { anti_aircraft, aircraft, artillery, torpedoes } = weaponry;
 
     // White -> Blue
-    const tintColor = theme[500] == '#ffffff' ? Blue : theme[500];
+    const tintColor = getTheme();
     return (
       <View>
         { this.renderTitle(language.detail_status_title) }

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
-import { Blue } from 'react-native-material-color';
+import { getTheme } from '../../../constant/colour';
 
 class RecordCell extends Component {
   render() {
     const { title, image, name, number } = this.props.info;
     const { mainViewStyle, titleStyle, subViewStyle, imageStyle, numberStyle, nameStyle, imageViewStyle, numberViewStyle } = styles;
-    let color = theme[500] == '#ffffff' ? Blue : theme[500];    
+    let color = getTheme();   
     return (
       <View style={[mainViewStyle, {borderColor: color}]}>
         <Text style={titleStyle}>{title}</Text>

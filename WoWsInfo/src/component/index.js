@@ -16,5 +16,6 @@ export * from './cell/Player/Image1Cell';
 export * from './cell/Player/Info3Cell';
 export * from './cell/Player/Text1Cell';
 export * from './cell/Player/RecordCell';
+export * from './cell/Player/ShipInfoCell';
 
 // List

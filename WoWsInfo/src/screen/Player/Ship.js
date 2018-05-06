@@ -1,31 +1,19 @@
 import React, { PureComponent } from 'react';
-import { View, Text, TextInput, Keyboard, SafeAreaView } from 'react-native';
+import { View, Text, TextInput, Keyboard, StyleSheet } from 'react-native';
 import { Icon } from 'react-native-elements';
-import { ShipInfoCell, NoInformation } from '../../component';
+import { NoInformation, WoWsLoading, ShipInfoCell } from '../../component';
 import GridView from 'react-native-super-grid';
-import { styles } from './ShipInfoScreenStyles';
 import { ShipInfo, PersonalRating } from '../../core';
-import strings from '../../localization';
-import { WoWsLoading } from '../../component/index';
+import language from '../../constant/language';
 
 class Ship extends PureComponent {
   constructor(props) {
-    super();
-    // Get nation and tyle list
-    this.json = global.encyclopediaJson;  
-    this.shipType = global.shipTypeJson;  
-    var nation = [];
-    for (key in this.json.ship_nations) nation.push(this.json.ship_nations[key]);
-    this.nation = nation;
-    var type = [];
-    for (key in this.shipType) type.push(this.shipType[key]);
-    this.type = type;
-    this.filter = {name: '', nation: '', type: ''};
+    super(props);
 
+    // Format nation and type json
+    this.filter = {tier: '', nation: '', type: ''};
     this.state = {
-      isReady: false,
-      data: [],
-      overall: 0,
+      isReady: false, data: [], overall: 0
     }  
   }
 
@@ -37,12 +25,12 @@ class Ship extends PureComponent {
       if (json != null) {
         var shipInfo = [];
         for (var i = 0; i < json.length; i++) {
-          if (json[i].battle != null) shipInfo.push(json[i]);
+          if (json[i].battles != null) shipInfo.push(json[i]);
         }
         // Sort by  rating
-        shipInfo.sort(function (a, b) {return b.pr - a.pr;})
+        shipInfo.sort(function (a, b) {return b.ap - a.ap;})
         this.shipInfo = shipInfo;
-        this.overall = json.overall;
+        this.overall = json.overall;     
         this.setState({
           isReady: true,
           data: shipInfo,
@@ -53,20 +41,22 @@ class Ship extends PureComponent {
   }
 
   render() {
-    if (this.state.isReady) {
-      if (this.shipInfo.length > 0) {
-        const { mainViewStyle, filterViewStyle, filterButtonStyle, dropdownStyle, dropdownTextStyle, inputStyle, resetBtnStyle } = styles;        
+    const { isReady, data } = this.state;
+    if (isReady) {
+      if (data.length > 0) {
+        const { footerViewStyle, poweredStyle, totalShipStyle, mainViewStyle, filterViewStyle, filterButtonStyle, dropdownStyle, dropdownTextStyle, inputStyle, resetBtnStyle } = styles;        
         return (
-          <View style={mainViewStyle}>
-            <View style={[filterViewStyle, {backgroundColor: global.themeColour}]}>
-              <TextInput ref='filterInput' style={inputStyle} underlineColorAndroid='transparent' autoCorrect={false} 
-                autoCapitalize='none' clearButtonMode='while-editing' returnKeyType='search' onChangeText={this.onChangeText}/>
-              { this.renderResetButton() }
+          <View>
+            <View style={footerViewStyle}>
+              <Text style={poweredStyle}>{language.player_powered_by_number}</Text>
+              <Text style={totalShipStyle}>{data.length}</Text>
             </View>
-            <SafeAreaView>
-              <GridView itemDimension={300} items={this.state.data} renderHeader={this.renderHeader} contentInset={{bottom: 50}} onScroll={Keyboard.dismiss}
-                automaticallyAdjustContentInsets={false} enableEmptySections renderFooter={this.renderFooter} renderItem={item => <ShipInfoCell info={item}/>}/>
-            </SafeAreaView>
+            { this.renderHeader() }
+            <View>
+              <GridView itemDimension={300} items={data} onScroll={Keyboard.dismiss}
+                renderItem={item => <ShipInfoCell info={item}/>}/>
+            </View>
+            
           </View>
         ) 
       } else {
@@ -96,16 +86,6 @@ class Ship extends PureComponent {
     let ratingInfo = this.getOverallRatingInfo(this.state.overall);    
     return (
       <Text style={[styles.ratingStyle, {color: ratingInfo.colour}]}>{ratingInfo.comment}</Text>      
-    )
-  }
-
-  renderFooter = () => {
-    const { footerViewStyle, poweredStyle, totalShipStyle } = styles;
-    return (
-      <View style={footerViewStyle}>
-        <Text style={poweredStyle}>{strings.powered_by_number}</Text>
-        <Text style={totalShipStyle}>{this.state.data.length}</Text>
-      </View>
     )
   }
 
@@ -196,7 +176,58 @@ class Ship extends PureComponent {
       overall: PersonalRating.getIndex(pr),
     })
   }
-
 }
+
+const styles = StyleSheet.create({
+  mainViewStyle: {
+    flex: 1,
+  },
+  ratingStyle: {
+    textAlign: 'center',
+    fontSize: 24,
+    fontWeight: 'bold',
+    margin: 4,
+  },
+  filterViewStyle: { 
+    flexDirection: 'row', 
+    alignItems: 'center', 
+    justifyContent: 'center',
+  },
+  filterButtonStyle: {
+    fontSize: 16,
+    textAlign: 'center',
+    color: 'white',
+    margin: 8,
+  },
+  dropdownStyle: {
+    height: 400,
+  },
+  dropdownTextStyle: {
+    fontSize: 16,
+    textAlign: 'center',
+  },
+  inputStyle: {
+    width: '40%', 
+    borderColor: 'white', 
+    fontSize: 16,
+    textAlign: 'center',
+  },
+  resetStyle: {
+    marginLeft: 8,
+    height: 40,
+    width: 40,
+  },
+  footerViewStyle: {
+    flexDirection: 'row',
+  },
+  poweredStyle: {
+    flex: 0.9,
+    paddingLeft: 8
+  },
+  totalShipStyle: {
+    flex: 0.1,
+    alignItems: 'flex-end',
+  }
+})
 
 export {Ship};

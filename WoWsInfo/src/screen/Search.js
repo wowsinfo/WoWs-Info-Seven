@@ -7,8 +7,8 @@ import language from '../constant/language';
 import store from 'react-native-simple-store';
 import { LocalData } from '../constant/value';
 import { PlayerSearch } from '../core';
-import { GREY, Blue } from 'react-native-material-color';
-import { navStyle } from '../constant/colour';
+import { GREY } from 'react-native-material-color';
+import { navStyle, getTheme } from '../constant/colour';
 import { Divider } from 'react-native-elements';
 import { hapticFeedback } from '../app/App';
 
@@ -116,7 +116,7 @@ export default class Search extends PureComponent {
         </View>
       )
     } else {
-      let color = theme[500] == '#ffffff' ? Blue : theme[500]; 
+      let color = getTheme();
       return (
         <View style={segmentStyle}>
           <SegmentedControlIOS values={[RU, EU, NA, ASIA]} selectedIndex={server}

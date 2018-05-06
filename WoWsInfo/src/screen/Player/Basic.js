@@ -4,7 +4,7 @@ import { PlayerInfo } from '../../core';
 import { WoWsLoading, Basic8Cell, RecordCell } from '../../component';
 import { Divider } from 'react-native-elements';
 import language from '../../constant/language';
-import { Blue } from 'react-native-material-color';
+import { getTheme } from '../../constant/colour';
 
 class Basic extends Component {
   constructor(props) {
@@ -42,7 +42,7 @@ class Basic extends Component {
       const { id, name } = this.props;
       const { level, created, last_battle, rank } = this.state.info;
       const { playerNameStyle, scrollViewStyle, mainViewStyle, playerInfoStyle, playerViewStyle, dontJudgeStyle } = styles;
-      let color = theme[500] == '#ffffff' ? Blue : theme[500];  
+      let color = getTheme();  
       return (
         <SafeAreaView style={mainViewStyle}>
           <ScrollView style={scrollViewStyle}>

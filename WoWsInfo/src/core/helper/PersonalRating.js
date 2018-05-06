@@ -1,5 +1,5 @@
-import strings from '../../localization';
-import { PR } from '../../colour/colour';
+import { PRColour } from "../../constant/colour";
+import language from "../../constant/language";
 
 class PersonalRating {
   constructor(id, battle, damage, win, frag) {
@@ -27,7 +27,7 @@ class PersonalRating {
       let nFrags = Math.max(0, (rFrags - 0.1) / (1 - 0.1));
       let nWins = Math.max(0, (rWins - 0.7) / (1 - 0.7));
   
-      this.rating = 700 * nDmg + 300 * nFrags + 150 * nWins;
+      this.rating = Number(700 * nDmg + 300 * nFrags + 150 * nWins).toFixed(0);
     } else this.rating = 1;
   }
 
@@ -42,7 +42,9 @@ class PersonalRating {
    * @return get ability point
    */
   getAbilityPoint() {
-    return Math.log10(this.battle) * this.rating;
+    var battle = Math.log10(this.battle);
+    if (battle < 1) battle = 1;
+    return Number(battle * this.rating).toFixed(0);
   }
 
   static getIndex(pr) {
@@ -57,12 +59,12 @@ class PersonalRating {
   }
 
   static getColour(index) {
-    let colour = [PR.ImprovementNeeded, PR.BelowAverage, PR.Average, PR.Good, PR.VeryGood, PR.Great, PR.Unicum, PR.SuperUnicum];
+    let colour = [PRColour.ImprovementNeeded, PRColour.BelowAverage, PRColour.Average, PRColour.Good, PRColour.VeryGood, PRColour.Great, PRColour.Unicum, PRColour.SuperUnicum];
     return colour[index];
   }
 
   static getComment(index) {
-    let comment = [strings.improvement_needed, strings.below_average, strings.average, strings.good, strings.very_good, strings.great, strings.unicum, strings.super_unicum];
+    let comment = [language.rating_bad, language.rating_below_average, language.rating_average, language.rating_good, language.rating_very_good, language.rating_great, language.rating_unicum, language.rating_super_unicum];
     return comment[index];
   }
 
