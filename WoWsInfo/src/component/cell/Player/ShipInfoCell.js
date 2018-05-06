@@ -17,7 +17,7 @@ class ShipInfoCell extends Component {
     this.tierName = tierList[shipInfo.tier - 1] + ' ' + shipInfo.name;
     let color = getTheme();        
     return (
-      <WoWsTouchable onPress={this.gotoShipDetail}>
+      <WoWsTouchable>
         <View style={[mainViewStyle, {borderColor: shipColour}]}>
           <View style={subViewStyle}>
             <Image resizeMode='contain' source={shipType} style={[imageStyle, {tintColor: color}]}/>
