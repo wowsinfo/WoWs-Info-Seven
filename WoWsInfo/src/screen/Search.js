@@ -11,28 +11,23 @@ import { GREY } from 'react-native-material-color';
 import { navStyle, getTheme } from '../constant/colour';
 import { Divider } from 'react-native-elements';
 import { hapticFeedback } from '../app/App';
+import { iconsMap } from '../constant/icon';
 
 export default class Search extends PureComponent {
   constructor(props) {
     super();
     props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
     this.state = {
-      mode: 0, server: server, showPicker: true, data: [], input: ''
+      mode: 0, server: server, showPicker: true, 
+      data: friend, input: ''
     }
   }
 
   onNavigatorEvent(event) {
     if (event.type == 'NavBarButtonPress') {
-      if (event.id == 'wiki') {
-        this.props.navigator.push({
-          title: language.wiki_title,
-          screen: 'info.wiki',
-          backButtonTitle: '',
-          navigatorStyle: navStyle()
-        })
-      } else if (event.id == 'reset') {
+      if (event.id == 'reset') {
         hapticFeedback();
-        this.setState({mode: 0, server: server, showPicker: true, data: [], input: ''})
+        this.setState({mode: 0, server: server, showPicker: true, data: friend, input: ''})
         this.refs['search'].bounceInDown(800);
       }
     } else if (event.id === 'bottomTabSelected') {
@@ -42,29 +37,51 @@ export default class Search extends PureComponent {
   }
 
   render() {
-    const { showPicker, data, input } = this.state;
+    const { showPicker, data, input, mode } = this.state;
     const { inputStyle, textStyle } = styles;
     return (
       <View style={{flex: 1, padding: 8}} ref='search'>
         { showPicker ? this.renderPicker() : null }      
         <TextInput style={inputStyle} underlineColorAndroid='white' onEndEditing={this.search} autoCorrect={false}
-          onChangeText={(text) => this.setState({input: text})} autoCapitalize='none' value={input}/>
+          clearButtonMode='while-editing' onChangeText={(text) => this.setState({input: text})} autoCapitalize='none' value={input}/>
+        { showPicker ? this.renderMain() : null }  
         <GridView itemDimension={256} items={data} renderItem={item => {
           return (
-            <WoWsTouchable onPress={() => this.props.navigator.push({
-              title: String(item.id),
-              screen: 'search.player',
-              backButtonTitle: '',              
-              navigatorStyle: navStyle(),
-              passProps: item
-            })}>
+            <WoWsTouchable onPress={() => mode == 0 ? this.pushToPlayer(item) : null}>
               <SafeAreaView style={{height: 44, justifyContent: 'center'}}>
-                <Text animation='flipInX' style={textStyle}>{'[' + item.id + '] ' + item.name}</Text>                          
+                <Text style={textStyle}>{'[' + item.id + '] ' + item.name}</Text>                          
               </SafeAreaView>
             </WoWsTouchable>
           )}}/>
       </View>
     )
+  }
+
+  /**
+   * Push to player screen
+   * @param {*} item 
+   */
+  pushToPlayer(item) {
+    this.props.navigator.push({
+      title: String(item.id),
+      screen: 'search.player',
+      backButtonTitle: '',              
+      navigatorStyle: navStyle(),
+      navigatorButtons: item.id == user_info.id ? null : {
+        rightButtons: friend.find(x => x.id === item.id) 
+          ? [{icon: iconsMap['star'], id: 'star-o'}]
+          : [{icon: iconsMap['star-o'], id: 'star'}]
+      },
+      passProps: item
+    })
+  }
+
+  /**
+   * Push to clan screen
+   * @param {*} item 
+   */
+  pushToClan(item) {
+
   }
 
   /**
@@ -77,7 +94,10 @@ export default class Search extends PureComponent {
       // Player
       let player = new PlayerSearch(server, input);
       player.Search().then(data => {
-        if (data != undefined) this.setState({data: data, showPicker: false})
+        if (data != undefined) {
+          this.setState({data: data, showPicker: false});
+          this.refs['search'].bounceInUp(800);
+        }
       })
     } else {
       // Clan
@@ -102,6 +122,7 @@ export default class Search extends PureComponent {
               this.setState({server: value});
               global.server = value; // Update server
               store.save(LocalData.server, value);
+              console.log(value, index);
             }}>
             <Picker.Item label={RU} value={0}/>
             <Picker.Item label={EU} value={1}/>
@@ -109,7 +130,7 @@ export default class Search extends PureComponent {
             <Picker.Item label={ASIA} value={3}/>
           </Picker>
           <Picker selectedValue={mode} style={pickerStyle} mode='dropdown'
-            onValueChange={(value, index) => this.setState({mode: value})}>
+            onValueChange={(value, index) => this.setState({mode: value, data: value == 0 ? friend : []})}>
             <Picker.Item label={language.search_player} value={0}/>
             <Picker.Item label={language.search_clan} value={1}/>
           </Picker>
@@ -128,10 +149,23 @@ export default class Search extends PureComponent {
             }}/>
           <View style={{margin: 2}}></View>
           <SegmentedControlIOS values={[language.search_player, language.search_clan]} selectedIndex={mode}
-            tintColor={color} onChange={(event) => this.setState({mode: event.nativeEvent.selectedSegmentIndex})}/>
+            tintColor={color} onChange={(event) => this.setState({mode: event.nativeEvent.selectedSegmentIndex,  data: event.nativeEvent.selectedSegmentIndex == 0 ? friend : []})}/>
         </View>
       )
     }
+  }
+
+  /**
+   * Render main account
+   */
+  renderMain = () => {
+    const { id, name } = user_info;
+    if (user_info.id == "") return null;
+    else return (
+      <WoWsTouchable onPress={() => this.pushToPlayer(user_info)}>
+        <View style={{padding: 8}}><Text style={{fontSize: 18, fontWeight: 'bold'}}>{language.search_main_account + name + '|' + id}</Text></View>
+      </WoWsTouchable>
+    )
   }
 }
 

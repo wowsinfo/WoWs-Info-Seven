@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, SafeAreaView, ScrollView, Text } from 'react-native';
+import { StyleSheet, ScrollView, Text } from 'react-native';
+import { View } from 'react-native-animatable';
 import { PlayerInfo } from '../../core';
-import { WoWsLoading, Basic8Cell, RecordCell } from '../../component';
+import { WoWsLoading, Basic8Cell, RecordCell, WoWsTouchable } from '../../component';
 import { Divider } from 'react-native-elements';
+import store from 'react-native-simple-store';
 import language from '../../constant/language';
-import { getTheme } from '../../constant/colour';
+import { getTheme, getTextColour } from '../../constant/colour';
+import { LocalData } from '../../constant/value';
 
 class Basic extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isReady: false,
+      isReady: false, isMain: false,
       info: {}, record: [], weapon: []
     }
   }
@@ -28,8 +31,9 @@ class Basic extends Component {
         let recordInfo = player.getRecordInfo(json);
         // Get record weapon
         let recordWeaponInfo = player.getRecordWeaponInfo(json);
+        var isMain = this.props.id == user_info.id;
         this.setState({
-          isReady: true,
+          isReady: true, isMain: isMain,
           info: Object.assign({}, info, basic8Info),
           record: recordInfo, weapon: recordWeaponInfo
         })        
@@ -44,21 +48,40 @@ class Basic extends Component {
       const { playerNameStyle, scrollViewStyle, mainViewStyle, playerInfoStyle, playerViewStyle, dontJudgeStyle } = styles;
       let color = getTheme();  
       return (
-        <SafeAreaView style={mainViewStyle}>
-          <ScrollView style={scrollViewStyle}>
+        <View style={mainViewStyle} animation='fadeInUp'>
+          <ScrollView style={scrollViewStyle} contentInset={{bottom:50}}>
             <View style={[playerViewStyle, {backgroundColor: color}]}>
               <Text style={playerNameStyle}>{name}</Text>
               <Text style={playerInfoStyle}>{last_battle}</Text>
-              <Text style={playerInfoStyle}>{created + ' | Lv ' + level + ' | ⭐️' + rank}</Text>             
+              <Text style={playerInfoStyle}>{created + ' | Lv ' + level + ' | ⭐️' + rank}</Text>
+              { this.renderSetAsMain() }             
             </View>
             <Basic8Cell info={this.state.info}/>
             <Text style={dontJudgeStyle}>{language.player_respect}</Text>
             { this.renderRecord(this.state.record) }
             { this.renderRecord(this.state.weapon) }
           </ScrollView>
-        </SafeAreaView>
+        </View>
       )
     } else return <WoWsLoading />
+  }
+
+  /**
+   * Render Set as main account
+   */
+  renderSetAsMain() {
+    if (this.state.isMain) return null; 
+    else return (
+      <WoWsTouchable onPress={() => {
+        // Set as main account
+        const { id, name, server } = this.props;
+        user_info = {id: id, name: name, server: server};
+        store.save(LocalData.user_info, user_info);
+        this.setState({isMain: true});
+      }}>
+        <View><Text style={{fontSize: 16, color: getTextColour(getTheme())}}>{language.player_set_as_main}</Text></View>
+      </WoWsTouchable>
+    )
   }
 
   /**
