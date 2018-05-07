@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import GridView from 'react-native-super-grid';
 import { WoWsLoading, BasicCell, NoInformation } from '../../component';
 
-export default class Achievement extends Component {
+class Achievement extends Component {
   state = {
     isReady: false,
     data: [],
@@ -42,19 +42,12 @@ export default class Achievement extends Component {
 
   renderGridView() {
     const { data, withCount } = this.state;
-    if (!withCount) {
-      return (
-        <GridView itemDimension={80} items={data} 
-          renderItem={item => {
-            if (!item.hidden) return <BasicCell icon={item.icon} data={item}/>
-            else return <BasicCell icon={item.icon_inactive} data={item}/>}} />
-      )
-    } else {
-      if (data.length == 0) return <NoInformation />
-      else return (
-        <GridView itemDimension={80} items={data} automaticallyAdjustContentInsets={false}
-          renderItem={item => <BasicCell icon={item.icon} data={item}/>}/>
-      )
-    }  
+    if (data.length == 0) return <NoInformation />
+    else return (
+      <GridView itemDimension={80} items={data} contentInset={{bottom:50}} 
+        renderItem={item => <BasicCell icon={item.icon} data={item}/>}/>
+    )
   }
 }
+
+export { Achievement };
