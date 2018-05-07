@@ -3,6 +3,7 @@ import { View, StyleSheet, Dimensions, Image } from 'react-native';
 import { AchievementScreen, Basic, Graph, Rank, Ship } from './';
 import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
 import { getTextColour } from '../../constant/colour';
+import store from 'react-native-simple-store';
 
 // Faster loading
 const initialLayout = {
@@ -11,20 +12,43 @@ const initialLayout = {
 };
 
 export default class PlayerTab extends React.PureComponent {
-  state = {
-    index: 2,
-    routes: [
-      {key: 'achievement', icon: require('../../img/AchievementTab.png')},
-      {key: 'graph', icon: require('../../img/Graph.png')},
-      {key: 'basic', icon: require('../../img/User.png')},
-      {key: 'ship', icon: require('../../img/Ship.png')},
-      {key: 'rank', icon: require('../../img/Rank.png')},
-    ]
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      index: 2, routes: [
+        {key: 'achievement', icon: require('../../img/AchievementTab.png')},
+        {key: 'graph', icon: require('../../img/Graph.png')},
+        {key: 'basic', icon: require('../../img/User.png')},
+        {key: 'ship', icon: require('../../img/Ship.png')},
+        {key: 'rank', icon: require('../../img/Rank.png')},
+      ]
+    };
+    props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));    
+  }
 
   static navigatorStyle = {
     navBarNoBorder: true,
     topBarElevationShadowEnabled: false
+  }
+
+  onNavigatorEvent(event) {
+    if (event.type == 'NavBarButtonPress') {
+      // Get object for player
+      const { id, name, server } = this.props;
+      let player = {id: id, name: name, server: server};
+      if (event.id == 'star') {
+        friend.push(player);
+        this.props.navigator.setButtons({
+          rightButtons:[{icon: iconsMap['star'], id: 'star-o'}]
+        })
+      } else if (event.id == 'star-o') {
+        friend = friend.filter(function(obj) {return obj.id !== id})
+        this.props.navigator.setButtons({
+          rightButtons:[{icon: iconsMap['star-o'], id: 'star'}]
+        })
+      }
+      store.save(LocalData.friend, friend);      
+    }
   }
 
   // Setup stuff for tab view

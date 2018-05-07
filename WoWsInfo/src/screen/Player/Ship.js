@@ -52,7 +52,7 @@ class Ship extends PureComponent {
         <View style={mainViewStyle} ref='playership'>
           { this.renderRating() }
           <GridView itemDimension={300} items={data} onScroll={Keyboard.dismiss}
-            contentInset={{bottom:59}} renderItem={item => <ShipInfoCell info={item}/>}/>
+            contentInset={{bottom:50}} renderItem={item => <ShipInfoCell info={item}/>}/>
         </View>
       )
     } else return <WoWsLoading />;
@@ -72,8 +72,8 @@ class Ship extends PureComponent {
         <View style={ratingViewStyle}>
           <Text style={[ratingStyle, {color: ratingInfo.colour}]}>{ratingInfo.comment}</Text> 
           <View style={iconViewStyle}>
-            <WoWsTouchable onPress={this.resetFilter}><Image source={iconsMap['undo']} style={iconStyle}/></WoWsTouchable>
-            <WoWsTouchable onPress={this.pushToFilter}><Image source={iconsMap['filter']} style={iconStyle}/></WoWsTouchable>
+            <WoWsTouchable onPress={this.resetFilter}><Image source={iconsMap['undo']} style={[iconStyle, {tintColor: getTheme()}]}/></WoWsTouchable>
+            <WoWsTouchable onPress={this.pushToFilter}><Image source={iconsMap['filter']} style={[iconStyle, {tintColor: getTheme()}]}/></WoWsTouchable>
           </View>
         </View>      
       </View>     
@@ -106,6 +106,7 @@ class Ship extends PureComponent {
   * Set ship filter
   */
   setFilter = (filter) => {
+    if (filter == this.filter) return;
     this.filter = filter;
     this.filterShip();
   }
@@ -173,11 +174,11 @@ const styles = StyleSheet.create({
   },
   iconStyle: {
     height: 28, width: 28, 
-    tintColor: getTheme(), margin: 6
+    margin: 6
   },
   ratingStyle: {
     textAlign: 'left',
-    fontSize: 24,
+    fontSize: 32,
     fontWeight: 'bold',
     paddingLeft: 8, flex: 1
   },

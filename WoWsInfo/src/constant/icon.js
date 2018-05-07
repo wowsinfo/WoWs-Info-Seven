@@ -16,6 +16,9 @@ const icons = {
   'undo': [22, '#fff', FontAwesome],
   'filter': [26, '#fff', FontAwesome],
   'wikipedia-w': [24, '#fff', FontAwesome],
+  // Player
+  'star': [24, '#fff', FontAwesome],
+  'star-o': [24, '#fff', FontAwesome],  
 }
 
 const defaultIconProvider = Ionicons;

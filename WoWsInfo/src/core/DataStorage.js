@@ -37,7 +37,6 @@ class DataStorage {
         // A new day?
         if (DateCalculator.isNewDay(date)) {
           console.log('A new day...');
-          
         }
       }
     } catch (error) {
@@ -67,7 +66,7 @@ class DataStorage {
       // Change this before version update
       await store.save(LocalData.curr_version, VERSION);
 
-      await store.save(LocalData.friend, {'2011774448': {name: 'HenryQuan', id: '2011774448', server: '3'}});
+      await store.save(LocalData.friend, []);
       await store.save(LocalData.user_info, {name: '', id: '', server: ''});
       await store.save(LocalData.userdata, {});
 
@@ -113,10 +112,10 @@ class DataStorage {
 
       let friend = await UserDefaults.objectForKey(IOSData.friend);
       if (friend != null) {
-        var playerList = {};
+        var playerList = [];
         for (var i = 0; i < friend.length; i++) {
           let obj = PlayerConverter.fromString(friend[i]);
-          playerList[obj.id] = obj;
+          playerList.push(obj);
         }
         global.friend = playerList;
         await store.save(LocalData.friend, playerList);
