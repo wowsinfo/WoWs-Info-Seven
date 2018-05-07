@@ -24,6 +24,7 @@ import ShipDetail from './Wiki/ShipDetail';
 import Settings from './Settings/Settings';
 import Theme from './Settings/Theme';
 import PlayerTab from './Player/Player';
+import Clan from './Player/Clan';
 
 export function registerScreens() {
   Navigation.registerComponent('app.wowsinfo', () => WoWsInfo);    
@@ -33,6 +34,7 @@ export function registerScreens() {
   Navigation.registerComponent('news.more', () => More);
   Navigation.registerComponent('info.search', () => Search);
   Navigation.registerComponent('search.player', () => PlayerTab);
+  Navigation.registerComponent('search.clan', () => Clan);
   Navigation.registerComponent('info.wiki', () => Wiki);
   Navigation.registerComponent('wiki.basic', () => BasicWiki);
   Navigation.registerComponent('wiki.collection', () => Collection);

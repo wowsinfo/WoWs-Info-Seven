@@ -44,14 +44,14 @@ class Basic extends Component {
   render() {
     if (this.state.isReady) {
       const { id, name } = this.props;
-      const { level, created, last_battle, rank } = this.state.info;
+      const { level, created, last_battle, rank, clan } = this.state.info;
       const { playerNameStyle, scrollViewStyle, mainViewStyle, playerInfoStyle, playerViewStyle, dontJudgeStyle } = styles;
       let color = getTheme();  
       return (
         <View style={mainViewStyle} animation='fadeInUp'>
           <ScrollView style={scrollViewStyle} contentInset={{bottom:50}}>
             <View style={[playerViewStyle, {backgroundColor: color}]}>
-              <Text style={playerNameStyle}>{name}</Text>
+              <Text style={playerNameStyle}>{'[' + clan + ']\n' + name}</Text>
               <Text style={playerInfoStyle}>{last_battle}</Text>
               <Text style={playerInfoStyle}>{created + ' | Lv ' + level + ' | ⭐️' + rank}</Text>
               { this.renderSetAsMain() }             
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 16,
-    padding: 16,
+    paddingBottom: 16
   },
   playerNameStyle: {
     textAlign: 'center',

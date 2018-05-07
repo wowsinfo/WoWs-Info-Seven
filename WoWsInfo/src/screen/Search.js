@@ -6,12 +6,13 @@ import { WoWsLoading, WoWsTouchable } from '../component';
 import language from '../constant/language';
 import store from 'react-native-simple-store';
 import { LocalData } from '../constant/value';
-import { PlayerSearch } from '../core';
+import { PlayerSearch, ClanSearch } from '../core';
 import { GREY } from 'react-native-material-color';
 import { navStyle, getTheme } from '../constant/colour';
 import { Divider } from 'react-native-elements';
 import { hapticFeedback } from '../app/App';
 import { iconsMap } from '../constant/icon';
+import { ClanInfo } from '../core/player/ClanInfo';
 
 export default class Search extends PureComponent {
   constructor(props) {
@@ -47,7 +48,7 @@ export default class Search extends PureComponent {
         { showPicker ? this.renderMain() : null }  
         <GridView itemDimension={256} items={data} renderItem={item => {
           return (
-            <WoWsTouchable onPress={() => mode == 0 ? this.pushToPlayer(item) : null}>
+            <WoWsTouchable onPress={() => mode == 0 ? this.pushToPlayer(item) : this.pushToClan(item)}>
               <SafeAreaView style={{height: 44, justifyContent: 'center'}}>
                 <Text style={textStyle}>{'[' + item.id + '] ' + item.name}</Text>                          
               </SafeAreaView>
@@ -81,7 +82,13 @@ export default class Search extends PureComponent {
    * @param {*} item 
    */
   pushToClan(item) {
-
+    this.props.navigator.push({
+      title: String(item.id),
+      screen: 'search.clan',
+      backButtonTitle: '',              
+      navigatorStyle: navStyle(),
+      passProps: item
+    })
   }
 
   /**
@@ -101,6 +108,13 @@ export default class Search extends PureComponent {
       })
     } else {
       // Clan
+      let clan = new ClanSearch(server, input);
+      clan.Search().then(data => {
+        if (data != undefined) {
+          this.setState({data: data, showPicker: false});
+          this.refs['search'].bounceInUp(800);
+        }
+      })
     }
   }
 
@@ -163,7 +177,7 @@ export default class Search extends PureComponent {
     if (user_info.id == "") return null;
     else return (
       <WoWsTouchable onPress={() => this.pushToPlayer(user_info)}>
-        <View style={{padding: 8}}><Text style={{fontSize: 18, fontWeight: 'bold'}}>{language.search_main_account + name + '|' + id}</Text></View>
+        <View style={{padding: 8}}><Text style={{fontSize: 18, fontWeight: 'bold', textAlign: 'center'}}>{name + '|' + id}</Text></View>
       </WoWsTouchable>
     )
   }
