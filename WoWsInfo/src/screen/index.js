@@ -10,7 +10,7 @@ import WoWsInfo from './WoWsInfo';
 
 // Wiki
 import Wiki from './Wiki/Wiki';
-import Achievement from './Wiki/Achievement';
+export * from './Wiki/Achievement';
 import BasicWiki from './Wiki/BasicWiki';
 import BasicDetail from './Wiki/BasicDetail';
 import Collection from './Wiki/Collection';
@@ -43,7 +43,6 @@ export function registerScreens() {
   Navigation.registerComponent('wiki.ship', () => Ship);  
   Navigation.registerComponent('ship.filter', () => ShipFilter);  
   Navigation.registerComponent('ship.detail', () => ShipDetail);  
-  Navigation.registerComponent('wiki.achievement', () => Achievement);
   Navigation.registerComponent('basic.detail', () => BasicDetail);
   Navigation.registerComponent('info.settings', () => Settings);
   Navigation.registerComponent('settings.theme', () => Theme);
