@@ -1,4 +1,3 @@
-
 export * from './DataManager';
 export * from './DataStorage';
 
@@ -7,6 +6,8 @@ export * from './player/PlayerSearch';
 export * from './player/PlayerConverter';
 export * from './player/PlayerInfo';
 export * from './player/ShipInfo';
+export * from './player/ClanInfo';
+export * from './player/ClanSearch';
 
 export * from './wiki/ShipDetailedInfo';
 

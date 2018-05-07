@@ -7,6 +7,7 @@ class PlayerInfo {
     // playerStr -> HenryQuan|2011774448|3
     var format = require('string-format');
     this.api = format(API.PlayerInfo, ServerManager.domainName(server)) + id;
+    this.clan = format(API.PlayerClan, ServerManager.domainName(server)) + id;
     this.server = server;
     this.id = id;
     this.name = name;
@@ -17,11 +18,20 @@ class PlayerInfo {
    */
   async Search() {
     try {
-      let response = await fetch(this.api);
-      let json = await response.json();
+      var response = await fetch(this.api);
+      var json = await response.json();
       if (json != null && json.status == 'ok') {
         // This player is not hidden  
-        if (json.meta.hidden == null) return json.data[this.id];
+        if (json.meta.hidden == null) {
+          let player = json.data[this.id];
+          // Get player clan tag
+          response = await fetch(this.clan);
+          json = await response.json();
+          if (json != null && json.status == 'ok') {
+            if (json.data[this.id] != null) player.clan = json.data[this.id].clan.tag;
+            return player;
+          }
+        }
       }
     } catch (error) {
       console.error(error);
@@ -46,6 +56,7 @@ class PlayerInfo {
   async getPlayerBasicInfo(json) {
     if (json != null) {
       let info = {};
+      info.clan = json.clan;
       info.level = json.leveling_tier;
       info.last_battle = new Date(json.last_battle_time * 1000).toLocaleString();
       var format = require('string-format');      

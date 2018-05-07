@@ -69,7 +69,6 @@ export default language = new LocalizedStrings({
     search_player: 'Player',
     search_clan: 'Clan',
     search_title: 'WoWs Search',
-    search_main_account: 'Main: ',
     // Player
     player_max_damage_dealt: 'Max damage dealt',
     player_max_xp: 'Max XP',
@@ -86,6 +85,7 @@ export default language = new LocalizedStrings({
     player_powered_by_number: 'Powered by WoWs Numbers',
     player_deleted_ship: 'DELETED SHIP',
     player_set_as_main: 'Set as Main',
+    clan_member_count: 'Member',
     // Personal Rating
     rating_bad: 'Improvement Needed',
     rating_below_average: 'Below Average',
