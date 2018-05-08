@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { View } from 'react-native-animatable';
 import GridView from 'react-native-super-grid';
-import { NoInformation, WoWsLoading } from '../../component';
+import { NoInformation, WoWsLoading, RankCell } from '../../component';
+import { RankInfo } from '../../core';
+import { navStyle } from '../../constant/colour';
+import language from '../../constant/language';
 
 class Rank extends Component {
   state = {
@@ -13,6 +16,7 @@ class Rank extends Component {
     let rank = new RankInfo(id, server);
     let rankInfo = await rank.getRankInfo();
     let shipInfo = await rank.getRankShipInfo();
+    console.log(rankInfo, shipInfo);
     this.setState({
       isReady: true, rank: rankInfo, ship: shipInfo
     })
@@ -25,11 +29,21 @@ class Rank extends Component {
         return (
           <View animation='fadeInUp'>
             <GridView itemDimension={300} items={rank} contentInset={{bottom: 50}}
-              renderItem={item => <RankCell rank={item} ship={ship}/>}/>
+              renderItem={item => <RankCell detail={this.pushToShip} rank={item} ship={ship}/>}/>
           </View>
         )
       } else return <NoInformation />
     } else return <WoWsLoading />
+  }
+
+  pushToShip = (item) => {
+    console.log(item)
+    this.props.navigator.push({
+      screen: 'rank.ship',
+      title: language.rank_season + item.season,
+      navigatorStyle: navStyle(),
+      passProps: {rank: item}
+    })
   }
 }
 

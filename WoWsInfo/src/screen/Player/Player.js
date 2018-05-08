@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Dimensions, Image } from 'react-native';
-import { AchievementScreen, Basic, Graph, Rank, Ship } from './';
+import { AchievementScreen, Basic, Graph, Rank, PlayerShip } from './';
 import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
 import { getTextColour } from '../../constant/colour';
 import store from 'react-native-simple-store';
@@ -68,7 +68,7 @@ export default class PlayerTab extends React.PureComponent {
     'achievement': () => <AchievementScreen {...this.props}/>,
     'graph': () => <Graph {...this.props}/>,
     'basic': () => <Basic {...this.props}/>,
-    'ship': () => <Ship {...this.props}/>,
+    'ship': () => <PlayerShip {...this.props}/>,
     'rank': () => <Rank {...this.props}/>,
   });
 

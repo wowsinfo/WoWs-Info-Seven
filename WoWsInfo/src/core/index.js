@@ -8,6 +8,7 @@ export * from './player/PlayerInfo';
 export * from './player/ShipInfo';
 export * from './player/ClanInfo';
 export * from './player/ClanSearch';
+export * from './player/RankInfo';
 export * from './player/AchievementInfo';
 
 export * from './wiki/ShipDetailedInfo';

@@ -2,4 +2,4 @@ export * from './AchievementScreen';
 export * from './Basic';
 export * from './Graph';
 export * from './Rank';
-export * from './Ship';
+export * from './PlayerShip';
