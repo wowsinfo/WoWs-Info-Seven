@@ -73,18 +73,12 @@ export default class ShipDetail extends Component {
     // Special or Premium
     const isPremium = is_premium || is_special;
     // Show avergae data
-    const pr = data.personal_rating[ship_id];
     return (
       <View style={basicViewStyle}>
         {data_saver ? null : <Image source={{uri: icon, cache: 'default'}} style={imageStyle} resizeMode='contain'/>}
         <Text style={tierTextStyle}>{Tier[tier - 1] + ' ' + name}</Text>
         <Text style={basicTextStyle}>{encyclopedia.ship_nations[nation] + '\n' + ship_type[type]}</Text>
         <Text style={[basicTextStyle, {color: isPremium ? Orange : Grey}]}>{isPremium ? price_gold : price_credit}</Text> 
-        { pr == null ? null : <View style={horizontalViewStyle}>
-          <Text style={basicTextStyle}>{Number(pr.average_damage_dealt).toFixed(0)}</Text>
-          <Text style={basicTextStyle}>{Number(pr.win_rate).toFixed(2) + '%'}</Text>
-          <Text style={basicTextStyle}>{Number(pr.average_frags).toFixed(2)}</Text>
-        </View>}
         <Text style={descriptionStyle}>{description}</Text>
       </View>
     )

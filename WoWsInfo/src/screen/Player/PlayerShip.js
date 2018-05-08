@@ -49,7 +49,7 @@ class PlayerShip extends PureComponent {
     if (isReady) {
       const { mainViewStyle, filterViewStyle, filterButtonStyle, dropdownStyle, dropdownTextStyle, inputStyle, resetBtnStyle } = styles;        
       return (
-        <View style={mainViewStyle} ref='playership' animation='fadeInUp'>
+        <View style={mainViewStyle} ref='playership' animation={this.props.rank != null ? '' :'fadeInUp'}>
           { this.renderRating() }
           <GridView itemDimension={300} items={data} onScroll={Keyboard.dismiss}
             contentInset={{bottom: 50}} renderItem={item => <ShipInfoCell detail={this.pushToDetail} info={item}/>}/>

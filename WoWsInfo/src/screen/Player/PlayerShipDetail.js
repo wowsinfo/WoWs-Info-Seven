@@ -9,17 +9,23 @@ import { getTheme } from '../../constant/colour';
 
 export default class PlayerShipDetail extends Component {
   render() {
-    const { mainViewStyle, scrollViewStyle, shipNameStyle, imageStyle, ratingStyle } = styles;
+    const { mainViewStyle, scrollViewStyle, shipNameStyle, prTextStyle, imageStyle, ratingStyle, horizontalViewStyle } = styles;
     const { info } = this.props;
     const { index, ship_id } = info;
     let shipColour = PersonalRating.getColour(index);
     let shipComment = PersonalRating.getComment(index);
     let shipInfo = this.getShipInfo(ship_id);
+    const pr = data.personal_rating[ship_id];    
     return (
       <View style={mainViewStyle}>
         <ScrollView contentInset={{bottom: 50}}>
           <Image source={{uri: shipInfo.image}} style={imageStyle}/>
           <Text style={shipNameStyle}>{shipInfo.name}</Text>
+          { pr == null || pr.win_rate == null ? null : <View style={horizontalViewStyle}>
+            <Text style={prTextStyle}>{Number(pr.average_damage_dealt).toFixed(0)}</Text>
+            <Text style={prTextStyle}>{Number(pr.win_rate).toFixed(2) + '%'}</Text>
+            <Text style={prTextStyle}>{Number(pr.average_frags).toFixed(2)}</Text>
+          </View>}
           <Text style={[ratingStyle, {color: shipColour}]}>{shipComment}</Text>
           <Basic8Cell info={this.getBasic8CellInfo(info)}/>
           <Divider style={{height: 1.5, backgroundColor: getTheme()}}/>
@@ -83,6 +89,12 @@ export default class PlayerShipDetail extends Component {
 const styles = StyleSheet.create({
   mainViewStyle: {
     flex: 1,
+  },
+  horizontalViewStyle: {
+    justifyContent: 'space-around', flexDirection: 'row', alignItems: 'center', flex: 1
+  },
+  prTextStyle: {
+    textAlign: 'center', margin: 2, fontWeight: '300', width: '100%', flex: 1
   },
   imageStyle: {
     marginTop: 8,
