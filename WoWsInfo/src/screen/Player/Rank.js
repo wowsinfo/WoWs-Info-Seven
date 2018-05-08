@@ -27,7 +27,7 @@ class Rank extends Component {
     if (isReady) {
       if (rank) {
         return (
-          <View animation='fadeInUp'>
+          <View animation='fadeInLeft'>
             <GridView itemDimension={300} items={rank} contentInset={{bottom: 50}}
               renderItem={item => <RankCell detail={this.pushToShip} rank={item} ship={ship}/>}/>
           </View>

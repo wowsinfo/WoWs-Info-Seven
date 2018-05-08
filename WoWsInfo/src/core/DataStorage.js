@@ -30,6 +30,8 @@ class DataStorage {
           await DataManager.UpdateLocalData();
           await store.save(LocalData.game_version, curr);
         } else {
+          // 10% to update personal rating
+          if (Math.floor(Math.random() * 20) == 0) await DataManager.savePersonalRating();
           await DataStorage.RestoreSavedData();
         }
   
@@ -57,6 +59,8 @@ class DataStorage {
   static async SetupAdditionalData() {
     // Update wows info version
     await store.save(LocalData.curr_version, VERSION);
+    // Update everything when software updates occurs
+    await DataManager.UpdateLocalData();
   }
 
   static async SetupLocalStorage() {
