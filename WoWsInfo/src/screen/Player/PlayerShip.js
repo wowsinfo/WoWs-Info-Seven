@@ -10,7 +10,7 @@ import { getTheme, navStyle } from '../../constant/colour';
 import { iconsMap } from '../../constant/icon';
 import { hapticFeedback } from '../../app/App';
 
-class Ship extends PureComponent {
+class PlayerShip extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -23,9 +23,9 @@ class Ship extends PureComponent {
 
   componentWillMount() {
     // Load data here and calculate personal rating
-    const { id, server } = this.props;
+    const { id, server, rank } = this.props;
     let ship = new ShipInfo(id, server);
-    ship.getShipInfo().then(json => {
+    ship.getShipInfo(rank).then(json => {
       if (json != null) {
         var shipInfo = [];
         for (var i = 0; i < json.length; i++) {
@@ -34,7 +34,7 @@ class Ship extends PureComponent {
         // Sort by  rating
         shipInfo.sort(function (a, b) {return b.ap - a.ap;})
         this.shipInfo = shipInfo;
-        this.overall = json.overall;   
+        this.overall = json.overall;
         this.setState({
           isReady: true,
           data: shipInfo,
@@ -233,4 +233,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export {Ship};
+export { PlayerShip };

@@ -86,6 +86,7 @@ export default language = new LocalizedStrings({
     player_deleted_ship: 'DELETED SHIP',
     player_set_as_main: 'Set as Main',
     clan_member_count: 'Member',
+    rank_season: 'Season ',
     // Personal Rating
     rating_bad: 'Improvement Needed',
     rating_below_average: 'Below Average',

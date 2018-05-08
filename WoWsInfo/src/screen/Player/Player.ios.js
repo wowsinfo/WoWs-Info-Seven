@@ -1,6 +1,6 @@
 import React from 'react';
 import { TabBarIOS, View } from 'react-native';
-import { AchievementScreen, Basic, Graph, Rank, Ship } from './';
+import { AchievementScreen, Basic, Graph, Rank, PlayerShip } from './';
 import language from '../../constant/language';
 import { Blue } from 'react-native-material-color';
 import { getTextColour } from '../../constant/colour';
@@ -62,7 +62,7 @@ export default class PlayerTab extends React.PureComponent {
         <TabBarIOS.Item icon={require('../../img/Ship.png')} title={language.warship_tab_title}
           selected={this.state.selectedTab === 'Ship'}
           onPress={() => this.setTab('Ship')}>
-          <Ship {...this.props}/>
+          <PlayerShip {...this.props}/>
         </TabBarIOS.Item>
         <TabBarIOS.Item icon={require('../../img/Rank.png')} title={language.rank_tab_title}
           selected={this.state.selectedTab === 'Rank'}
