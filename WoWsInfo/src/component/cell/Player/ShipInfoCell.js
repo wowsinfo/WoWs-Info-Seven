@@ -9,7 +9,8 @@ import language from '../../../constant/language';
 
 class ShipInfoCell extends Component {
   render() {
-    const { ship_id, battles, avg_damage, win_rate, index, ap } = this.props.info;
+    const { info, detail } = this.props;
+    const { ship_id, battles, avg_damage, win_rate, index, ap } = info;
     const { mainViewStyle, subViewStyle, imageStyle, textStyle, apStyle } = styles;
     let tierList = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
     let shipInfo = this.getShipInfo(ship_id);
@@ -20,7 +21,7 @@ class ShipInfoCell extends Component {
     this.tierName = tier + ' ' + name;
     let color = getTheme();        
     return (
-      <WoWsTouchable>
+      <WoWsTouchable onPress={() => detail(this.props.info)}>
         <View style={[mainViewStyle, {borderColor: shipColour}]}>
           <View style={subViewStyle}>
             <Image resizeMode='contain' source={shipType} style={[imageStyle, {tintColor: color}]}/>
@@ -31,14 +32,6 @@ class ShipInfoCell extends Component {
         </View>
       </WoWsTouchable>
     )
-  }
-
-  /**
-   * Show detailed ship information
-   */
-  gotoShipDetail = () => {
-    const { info } = this.props;
-    Actions.ShipDetailScreen({title: info.ship_id, info: info})
   }
 
   /**

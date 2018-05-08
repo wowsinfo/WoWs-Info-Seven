@@ -49,7 +49,7 @@ class Basic extends Component {
       let color = getTheme();  
       return (
         <View style={mainViewStyle} animation='fadeInUp'>
-          <ScrollView style={scrollViewStyle} contentInset={{bottom:50}}>
+          <ScrollView style={scrollViewStyle} contentInset={{bottom: 50}}>
             <View style={[playerViewStyle, {backgroundColor: color}]}>
               <Text style={playerNameStyle}>{'[' + clan + ']\n' + name}</Text>
               <Text style={playerInfoStyle}>{last_battle}</Text>

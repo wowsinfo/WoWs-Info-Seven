@@ -6,6 +6,11 @@ import { Text1Cell } from './Text1Cell';
 import language from '../../../constant/language';
 
 class Basic8Cell extends Component {
+  constructor(props) {
+    super(props);
+    // TODO: in the future, all calculation will be done here
+  }
+
   render() {
     const { mainViewStyle, subViewStyle } = styles;
     const { info } = this.props;

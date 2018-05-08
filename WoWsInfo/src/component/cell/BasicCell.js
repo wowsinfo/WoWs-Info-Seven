@@ -4,10 +4,11 @@ import { WoWsTouchable } from '../../component';
 
 class BasicCell extends PureComponent {
   render() {
+    const { icon, player } = this.props;
     return (
-      <WoWsTouchable onPress={() => this.showDetail()}>
+      <WoWsTouchable onPress={() => player ? null : this.showDetail()}>
         <View style={viewStyle}>
-          <Image source={{uri: this.props.icon}} style={imageStyle} />
+          <Image source={{uri: icon}} style={imageStyle} />
           { this.renderCount() }
         </View>
       </WoWsTouchable>
