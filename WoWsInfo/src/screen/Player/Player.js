@@ -4,6 +4,8 @@ import { AchievementScreen, Basic, Graph, Rank, Ship } from './';
 import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
 import { getTextColour } from '../../constant/colour';
 import store from 'react-native-simple-store';
+import { iconsMap } from '../../constant/icon';
+import { LocalData } from '../../constant/value';
 
 // Faster loading
 const initialLayout = {

@@ -34,7 +34,7 @@ class Ship extends PureComponent {
         // Sort by  rating
         shipInfo.sort(function (a, b) {return b.ap - a.ap;})
         this.shipInfo = shipInfo;
-        this.overall = json.overall;     
+        this.overall = json.overall;   
         this.setState({
           isReady: true,
           data: shipInfo,
@@ -49,13 +49,22 @@ class Ship extends PureComponent {
     if (isReady) {
       const { mainViewStyle, filterViewStyle, filterButtonStyle, dropdownStyle, dropdownTextStyle, inputStyle, resetBtnStyle } = styles;        
       return (
-        <View style={mainViewStyle} ref='playership'>
+        <View style={mainViewStyle} ref='playership' animation='fadeInUp'>
           { this.renderRating() }
           <GridView itemDimension={300} items={data} onScroll={Keyboard.dismiss}
-            contentInset={{bottom:50}} renderItem={item => <ShipInfoCell info={item}/>}/>
+            contentInset={{bottom: 50}} renderItem={item => <ShipInfoCell detail={this.pushToDetail} info={item}/>}/>
         </View>
       )
     } else return <WoWsLoading />;
+  }
+
+  pushToDetail = (item) => {
+    this.props.navigator.push({
+      screen: 'player.ship',
+      title: String(item.ship_id),
+      navigatorStyle: navStyle(),
+      passProps: {info: item}
+    })
   }
 
   renderRating = () => {
