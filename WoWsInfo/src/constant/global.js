@@ -10,6 +10,7 @@ global.theme = BLUE;
 global.server = 3;
 global.domain = 'asia';
 global.api_language = 'en';
+global.news_language = 'en';
 global.game_version = '';
 global.friend = [];
 global.user_info = {};

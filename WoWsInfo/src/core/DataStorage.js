@@ -13,6 +13,7 @@ class DataStorage {
      
       if (first == null) {
         console.log('First Launch\nWelcome to WoWs Info >_<');
+        global.first_launch = true;     
         await DataStorage.SetupAllData();
       } else {
         console.log('Welcome back');
@@ -86,6 +87,7 @@ class DataStorage {
 
       let lang = Language.getCurrentLanguage();
       await store.save(LocalData.api_language, lang);
+      await store.save(LocalData.news_language, lang);
       // Check for userdefault ios
       if (Platform.OS == 'ios') await DataStorage.SetupIOSData(); 
       // Finish setup
@@ -148,6 +150,7 @@ class DataStorage {
     global.domain = ServerManager.domainName(global.server);
     console.log(server, domain);
     global.api_language = await store.get(LocalData.api_language);
+    global.news_language = await store.get(LocalData.news_language);
     global.game_version = await store.get(LocalData.game_version);
     global.friend = await store.get(LocalData.friend);
     global.data_saver = await store.get(LocalData.data_saver);
