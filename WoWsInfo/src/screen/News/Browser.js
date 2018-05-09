@@ -27,7 +27,8 @@ export default class Browser extends PureComponent {
 
   render() {
     return (
-      <WebView onLoadEnd={() => hapticFeedback()} source={{uri: this.props.link}}/>
+      <WebView onLoad={() => hapticFeedback()} source={{uri: this.props.link}}
+        onLoadEnd={this.props.navigator.setTitle({title: ''})}/>
     )
   }
 }

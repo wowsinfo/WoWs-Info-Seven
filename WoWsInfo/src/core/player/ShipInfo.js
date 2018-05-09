@@ -53,7 +53,6 @@ class ShipInfo {
             currShip.pr = pr;
             currShip.ap = rating.getAbilityPoint();
             currShip.index = index;
-            console.log(currShip);
             playerShip.push(currShip);
           }
         }

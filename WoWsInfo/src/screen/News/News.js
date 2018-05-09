@@ -74,6 +74,7 @@ export default class News extends Component {
     console.log(this.state);
     this.props.navigator.push({
       screen: 'info.browser',
+      title: language.web_loading,
       passProps: {link: item.link},
       navigatorStyle: navStyle()
     })

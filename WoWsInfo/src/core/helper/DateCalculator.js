@@ -28,7 +28,7 @@ class DateCalculator {
     let diffDays = parseInt(diff);
     if (diffDays == 0) return language.day_today;
     else if (diffDays == 1) return language.day_yesterday;
-    else return diffDays + language.day_ago;
+    else return diffDays + language.day_old;
   }
 
   /**

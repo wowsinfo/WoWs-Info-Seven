@@ -44,8 +44,7 @@ class DataManager {
    */
   static async saveData(dataAPI, saved) {
     var format = require('string-format');
-    var api = format(dataAPI, global.domain);
-    if (dataAPI != DataAPI.ShipType) api += Language.getApiLangStr();
+    var api = format(dataAPI, global.domain) + Language.getApiLangStr();
     // console.log(saved + '\n' + api);
     try {
       let response = await fetch(api);
