@@ -31,7 +31,7 @@ class DataStorage {
           await DataManager.UpdateLocalData();
           await store.save(LocalData.game_version, curr);
         } else {
-          // 10% to update personal rating
+          // 5% to update personal rating
           if (Math.floor(Math.random() * 20) == 0) await DataManager.savePersonalRating();
           await DataStorage.RestoreSavedData();
         }
@@ -77,8 +77,9 @@ class DataStorage {
 
       let version = await GameVersion.getCurrVersion();
       await store.save(LocalData.game_version, version);
-
-      await store.save(LocalData.date, DateCalculator.getCurrDate());
+      let currDate = DateCalculator.getCurrDate()
+      await store.save(LocalData.date, currDate);
+      await store.save(LocalData.last_update, currDate);
       await store.save(LocalData.server, 3);
       await DataStorage.SetupTheme();
       await store.save(LocalData.has_ads, true);

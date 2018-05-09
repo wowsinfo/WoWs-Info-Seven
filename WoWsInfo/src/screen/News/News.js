@@ -14,7 +14,7 @@ export default class News extends Component {
     isReady: false,
     data: [],
     isRefreshing: false,
-    server: server
+    server: server, lang: news_language
   }
 
   onNavigatorEvent(event) {
@@ -97,11 +97,11 @@ export default class News extends Component {
    * Refreshing news from server (load again)
    */
   async refreshNews() {
-    const { isRefreshing, server } = this.state;
-    if (server != global.server) {
-      console.log(server, global.server)
+    const { isRefreshing, server, lang } = this.state;
+    console.log(server, news_language);    
+    if (server != server || lang != news_language) {
       // Get news again
-      this.setState({ isRefreshing: true, server: global.server })
+      this.setState({ isRefreshing: true, server: server, lang: news_language })
       await this.loadNews();
     }
   }

@@ -5,6 +5,7 @@ global.android = Platform.OS == 'android';
 global.first_launch = true;
 global.ads = true;
 global.data_saver = false;
+global.api_update = true;
 
 global.theme = BLUE;
 global.server = 3;
