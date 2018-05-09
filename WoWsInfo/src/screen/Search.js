@@ -135,6 +135,8 @@ export default class Search extends PureComponent {
             onValueChange={(value, index) => {
               this.setState({server: value});
               global.server = value; // Update server
+              if (value == 0) global.news_language = 'ru';
+              else global.news_language = 'en';
               store.save(LocalData.server, value);
               console.log(value, index);
             }}>

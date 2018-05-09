@@ -4,6 +4,10 @@ import { Blue } from 'react-native-material-color';
 import { verticalScale } from 'react-native-size-matters';
 
 export default class WoWsInfo extends Component {
+  static navigatorStyle = {
+    navBarHidden: true, tabBarHidden: true
+  }
+
   render() {
     const { viewStyle, imageStyle } = styles;
     return (

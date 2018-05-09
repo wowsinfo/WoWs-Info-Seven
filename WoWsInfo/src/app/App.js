@@ -1,5 +1,5 @@
 import { Navigation } from 'react-native-navigation';
-import { Platform } from 'react-native';
+import { Platform, NetInfo, Alert } from 'react-native';
 import { registerScreens } from '../screen';
 
 import { Blue, Green, Red, RED, BLUE, GREEN } from 'react-native-material-color';
@@ -9,17 +9,27 @@ import language from '../constant/language';
 import { iconsLoaded, iconsMap } from '../constant/icon';
 import { DataStorage } from '../core';
 
+
 // Loading icons
 iconsLoaded.then(() => {
   registerScreens();
-  loadingData();
-  DataStorage.DataValidation().then(() => startApp())
+  NetInfo.isConnected.fetch().then(() => {
+    NetInfo.isConnected.fetch().then(isConnected => {
+      console.log(isConnected);
+      loadingData();    
+      if (isConnected) {
+        DataStorage.DataValidation().then(() => startApp())
+      } else {
+        Alert.alert(language.no_internet);
+      }
+    });
+  });
 });
 
 /**
  * Loading data screen
  */
-function loadingData() {
+export function loadingData() {
   Navigation.startSingleScreenApp({
     screen: {
       screen: 'app.wowsinfo',
