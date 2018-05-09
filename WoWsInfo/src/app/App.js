@@ -9,21 +9,11 @@ import language from '../constant/language';
 import { iconsLoaded, iconsMap } from '../constant/icon';
 import { DataStorage } from '../core';
 
-
 // Loading icons
 iconsLoaded.then(() => {
   registerScreens();
-  NetInfo.isConnected.fetch().then(() => {
-    NetInfo.isConnected.fetch().then(isConnected => {
-      console.log(isConnected);
-      loadingData();    
-      if (isConnected) {
-        DataStorage.DataValidation().then(() => startApp())
-      } else {
-        Alert.alert(language.no_internet);
-      }
-    });
-  });
+  loadingData();   
+  DataStorage.DataValidation().then(() => startApp())     
 });
 
 /**
