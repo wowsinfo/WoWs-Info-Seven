@@ -3,12 +3,12 @@ class Language {
    * Return current user system language
    */
   static getCurrentLanguage() {
-    var lang = global.api_language;
-    if (global.first_faunch == true) {
+    var lang = api_language;
+    if (global.first_launch == true) {
       // Get current language
       var DeviceInfo = require('react-native-device-info');
       lang = DeviceInfo.getDeviceLocale().toLocaleLowerCase() + '-';
-      console.log(lang);
+      console.log(lang);   
       // Simplify -> ja-US to ja only
       let simplified = lang.split('-')[0];
       // Basic filter
@@ -23,7 +23,7 @@ class Language {
         case 'th':
         case 'tr': lang = simplified; break;          
         case 'zh':
-          if (!lang.includes('zh-Hant') && !lang.includes('zh-tw')) lang = 'zh';
+          if (!lang.includes('zh-Hant') && !lang.includes('zh-tw')) lang = 'zh-cn';
           else lang = 'zh-tw';
           break;
         case 'es': 
@@ -35,8 +35,8 @@ class Language {
           // This language is not supported
           lang = 'en'; break;
       }  
-    }
-     console.log(lang);
+    }  
+    // console.log(lang);
     return lang;
   }
 
@@ -44,7 +44,7 @@ class Language {
    * Get API Language
    */
   static getApiLangStr() {
-    var lang = global.api_language;
+    var lang = api_language;
     if (lang == 'zh-Hans') lang = 'zh-cn';
     return '&language=' + lang;
   }

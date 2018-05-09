@@ -1,6 +1,11 @@
 // Please use your id or demo if you are running this app
 export const ApplicationID = '4e54ba74077a8230e457bf3e7e9ae858';
+
 export const VERSION = '1.0.0';
+export const Github = 'https://github.com/HenryQuan/WoWs-Info-Ultimate';
+export const AppStore = 'https://github.com/HenryQuan/WoWs-Info-Ultimate';
+export const GooglePlay = 'https://github.com/HenryQuan/WoWs-Info-Ultimate';
+export const Developer = 'mailto:development.henryquan@gmail.com';
 
 export const API = {
   GameVersion: 'https://api.worldofwarships.{0}/wows/encyclopedia/info/?application_id=' +  ApplicationID + '&fields=game_version',
@@ -77,6 +82,7 @@ export const LocalData = {
   theme: '@WoWs_Info:themeColour',
   first_launch: '@WoWs_Info:firstLaunch',
   api_language: '@WoWs_Info:apiLanguage',
+  news_language: '@WoWs_Info:newsLanguage',
   // IOS Tab
   saved_tab: '@WoWs_Info:savedTab',
 }

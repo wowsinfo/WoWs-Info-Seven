@@ -84,7 +84,7 @@ export default class News extends Component {
    * Loading news from server
    */
   async loadNews() {
-    let news = new NewsParser(server, api_language);
+    let news = new NewsParser(server, news_language);
     let data = await news.getNews();
     this.setState({
       isReady: true,
