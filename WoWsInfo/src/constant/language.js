@@ -29,7 +29,7 @@ export default language = new LocalizedStrings({
     // Day difference
     day_today: 'Today',
     day_yesterday: 'Yesterday',
-    day_ago: ' days ago',
+    day_old: ' days old',
     // Wiki
     wiki_warship: 'Warship',
     wiki_achievement: 'Achievement',
@@ -97,8 +97,23 @@ export default language = new LocalizedStrings({
     rating_unicum: 'Unicum',
     rating_super_unicum: 'Super Unicum',
     // Settings
+    settings_theme_title: 'Theme',
     settings_theme: 'Change app theme',
+    settings_language_title: 'Language',
+    settings_news_language: 'News language',
+    settings_api_language: 'API language',
+    settings_iap_title: 'In-App Purchase',
+    settings_remove_ads: 'Remove ads',
+    settings_donation: 'Donation',
+    settings_about_title: 'About',
+    settings_email_feedback: 'Email feedback',
+    settings_write_review: 'Write a review',
+    settings_source_code: 'Source code',
+    settings_check_update: 'Check for update',
+    settings_done: 'Done',
+    settings_cancel: 'Cancel',
     // Website
+    web_loading: 'Loading...',
     web_done_btn: 'Done',
     web_official_title: 'Official websites',
     web_official: 'World of Warships',

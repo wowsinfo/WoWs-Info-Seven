@@ -6,10 +6,10 @@ import { GREY } from 'react-native-material-color';
 
 class DrawerCell extends Component {
   render() {
-    const { icon, title, onPress } = this.props; 
+    const { icon, title, ...props } = this.props; 
     const { viewStyle, imageStyle, textStyle } = styles
     return (
-      <WoWsTouchable onPress={onPress}>
+      <WoWsTouchable {...props}>
         <View style={viewStyle}>
           <Image source={icon} style={imageStyle}/>
           <Text style={textStyle}>{title}</Text>

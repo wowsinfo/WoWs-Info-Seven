@@ -6,6 +6,7 @@ import language from '../../constant/language';
 import { Orange, Grey } from 'react-native-material-color';
 import { ShipDetailedInfo } from '../../core';
 import { navStyle, getTheme } from '../../constant/colour';
+import { Divider } from 'react-native-elements';
 
 const Tier = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
 export default class ShipDetail extends Component {
@@ -59,7 +60,12 @@ export default class ShipDetail extends Component {
    */
   renderTitle(text) {
     let textColor = getTheme();
-    return <Text style={[styles.titleTextStyle, {color: textColor}]}>{text}</Text>
+    return (
+      <View>
+        <View style={{paddingTop: 16}}><Divider /></View>
+        <Text style={[styles.titleTextStyle, {color: textColor}]}>{text}</Text>
+      </View>
+    )
   }
 
   /**
@@ -435,7 +441,7 @@ const styles = StyleSheet.create({
   },
   titleTextStyle: {
     fontSize: 32, textAlign: 'center',
-    fontWeight: '500', margin: 4, marginTop: 16,
+    fontWeight: '500', padding: 4
   },
   tierTextStyle: {
     fontSize: 24, marginBottom: 4
