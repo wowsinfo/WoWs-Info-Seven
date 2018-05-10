@@ -1,18 +1,45 @@
 import React, { Component } from 'react'
-import { View, Text, Button, ScrollView, StyleSheet, Linking } from 'react-native';
+import { View, Text, Button, ScrollView, StyleSheet, Linking, Alert } from 'react-native';
 import language from '../../constant/language';
 import store from 'react-native-simple-store';
-import { WoWsTouchable } from '../../component';
+import { WoWsTouchable, QuickInput, TextCell } from '../../component';
 import SelectInput from 'react-native-select-input-ios';
 import { navStyle, getTheme } from '../../constant/colour';
 import { Divider } from 'react-native-elements';
-import { VERSION, Developer, Github, LocalData } from '../../constant/value';
+import { Developer, Github, LocalData, AndroidVersion, IOSVersion, AppStore, GooglePlay } from '../../constant/value';
 import { GREY } from 'react-native-material-color';
 import { DataManager } from '../../core';
-import { startApp, loadingData } from '../../app/App';
+import { startApp } from '../../app/App';
+
+import { NativeModules } from 'react-native'
+const { InAppUtils } = NativeModules;
+products = ['com.yihengquan.WoWsInfo.Pro'];
 
 export default class Settings extends Component {
-  state = { langAPI: api_language, langNews: news_language }
+  constructor(props) {
+    super(props);
+    this.state = { langAPI: api_language, langNews: news_language, price: '' } 
+    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+
+    if (!android) InAppUtils.loadProducts(products, (error, products) => {
+      console.log(products);
+      if (products[0] != undefined) {
+        const { currencyCode, price } = products[0];
+        this.setState({price: price + ' ' + currencyCode}) 
+      } 
+    });
+  }
+
+  onNavigatorEvent(event) {
+    switch (event.id) {
+      case "willAppear":
+        this.props.navigator.setDrawerEnabled({side: "left", enabled: false});
+        break;
+      case "willDisappear":
+        this.props.navigator.setDrawerEnabled({side: "left", enabled: true});
+        break;
+    }
+  }
 
   render() {
     return (
@@ -20,7 +47,8 @@ export default class Settings extends Component {
         { this.renderAbout() }        
         { this.renderLanguage() }
         { this.renderTheme() }
-        <Text style={styles.versionStyle}>{VERSION}</Text>
+        { android ? null : this.renderIAP() }
+        <Text style={styles.versionStyle}>{android ? AndroidVersion : IOSVersion}</Text>
       </ScrollView>
     )
   }
@@ -42,11 +70,7 @@ export default class Settings extends Component {
    * Render entry button
    */
   renderEntry = (text, onPress) => {
-    return (
-      <WoWsTouchable onPress={onPress}>
-        <Text style={styles.basicTextStyle}>{text}</Text>
-      </WoWsTouchable>
-    )
+    return <TextCell title={text} onPress={onPress}/>
   }
 
   /**
@@ -72,22 +96,20 @@ export default class Settings extends Component {
         { this.renderTitle(language.settings_language_title) }
         <View style={horizonntalViewStyle}>
           <Text style={basicTextStyle}>{language.settings_api_language}</Text>
-          <SelectInput style={basicTextStyle} cancelKeyText={language.settings_cancel} submitKeyText={language.settings_done}
-            options={api} value={langAPI} mode='dropdown' onSubmitEditing={(value, index) => {
-              this.props.navigator.push({
-                screen: 'app.wowsinfo',
-                navigatorStyle: navStyle()
-              })
-              this.setState({langAPI: value});
-              global.api_language = value;
-              store.save(LocalData.api_language, value);
-              DataManager.UpdateLocalData().then(() => startApp())
-            }}/>
+          <QuickInput options={api} value={langAPI} action={(value, index) => {
+            this.props.navigator.push({
+              screen: 'app.wowsinfo',
+              navigatorStyle: navStyle()
+            })
+            this.setState({langAPI: value});
+            global.api_language = value;
+            store.save(LocalData.api_language, value);
+            DataManager.UpdateLocalData().then(() => startApp())
+          }}/>
         </View>
         <View style={horizonntalViewStyle}>
-          <Text style={basicTextStyle}>{language.settings_news_language}</Text>            
-          <SelectInput style={basicTextStyle} cancelKeyText={language.settings_cancel} submitKeyText={language.settings_done}
-            options={news} value={langNews} mode='dropdown' onSubmitEditing={(value, index) => {
+          <Text style={basicTextStyle}>{language.settings_news_language}</Text>   
+          <QuickInput options={news} value={langNews} action={(value, index) => {
               this.setState({langNews: value});
               global.news_language = value;
               store.save(LocalData.news_language, value);
@@ -120,9 +142,9 @@ export default class Settings extends Component {
     return (
       <View style={basicViewStyle}>
         { this.renderTitle(language.settings_iap_title) }
-        { this.renderEntry(language.settings_remove_ads, null) }
-        { this.renderEntry(language.settings_donation, null) }
-        { this.renderEntry(language.settings_restore_purchase, null) }        
+        { !ads ? null : this.renderEntry(language.settings_remove_ads, () => this.buyIAP()) }
+        { /*this.renderEntry(language.settings_donation, null)*/ }
+        { !ads ? null : this.renderEntry(language.settings_restore_purchase, () => this.restoreIAP()) }        
       </View>
     )
   }
@@ -136,10 +158,55 @@ export default class Settings extends Component {
       <View style={basicViewStyle}>
         { this.renderEntry(language.settings_email_feedback, () => Linking.openURL(Developer)) }        
         { this.renderEntry(language.settings_source_code, () => Linking.openURL(Github)) }        
-        { /*this.renderEntry(language.settings_write_review, null)*/ }                    
+        { this.renderEntry(language.settings_write_review, () => Linking.openURL(android ? GooglePlay : AppStore)) }                    
         { /*this.renderEntry(language.settings_open_source_library, null)*/ }                    
       </View>
     )
+  }
+
+  /**
+   * Remove ads
+   */
+  buyIAP = () => {
+    // Check if payment is possible
+    InAppUtils.canMakePayments((canMakePayments) => {
+      if(!canMakePayments) {
+        Alert.alert(language.iap_no_itunes)
+      } else {
+        // Buy pro version
+        InAppUtils.purchaseProduct(products[0], (error, response) => {
+          // NOTE for v3.0: User can cancel the payment which will be available as error object here.
+          console.log(response);
+          if(response && response.productIdentifier) {
+            Alert.alert(language.iap_success);
+            global.ads = false;
+            store.save(LocalData.has_ads, false);
+            startApp();
+          } else Alert.alert(language.iap_failed);
+        });
+      }
+   })
+  }
+
+  /**
+   * Restore purchase  
+   */
+  restoreIAP = () => {
+    InAppUtils.restorePurchases((error, response) => {
+      if(error) Alert.alert(language.iap_no_itunes);
+      else {
+        if (response.length !== 0) {
+          response.forEach((purchase) => {
+            if (purchase.productIdentifier === products[0]) {
+              Alert.alert(language.iap_success);
+              global.ads = false;
+              store.save(LocalData.has_ads, false);
+              startApp();
+            }
+          });
+        }
+      }
+    });
   }
 
   /**
@@ -160,19 +227,19 @@ const styles = StyleSheet.create({
     flex: 1, margin: 8
   },
   versionStyle: {
-    padding: 16, fontSize: 12, 
+    paddingLeft: 16, fontSize: 12, 
     color: GREY[500], fontWeight: '300'
   },
   horizonntalViewStyle: {
-    flexDirection: 'row', justifyContent: 'space-around'
+    flexDirection: 'row', justifyContent: 'center',
+    alignItems: 'center'
   },
   basicHeaderStyle: {
-    fontWeight: 'bold', fontSize: 14,
-    margin: 8
+    fontSize: 12, fontWeight: 'bold',
+    margin: 8, paddingTop: 8, paddingBottom: 8
   },
   basicTextStyle: {
     padding: 8, color: 'black', flex: 1,
-    paddingTop: 16,
-    fontSize: 16, fontWeight: '300'
+    fontSize: 14, fontWeight: 'bold'
   }
 })

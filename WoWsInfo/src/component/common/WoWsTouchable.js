@@ -3,11 +3,11 @@ import { TouchableNativeFeedback, TouchableOpacity, Platform, View } from 'react
 
 class WoWsTouchable extends Component {
   render() {
-    const { children, ...props  } = this.props;
+    const { children, style, ...props  } = this.props;
     const Touchable = (Platform.OS == 'android') ? TouchableNativeFeedback : TouchableOpacity;    
     return (
       <Touchable {...props}>
-        <View>
+        <View style={style}>
           {children}
         </View>
       </Touchable>

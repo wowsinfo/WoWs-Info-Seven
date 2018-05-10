@@ -136,6 +136,9 @@ export default language = new LocalizedStrings({
     // Extra
     no_information: 'No information',
     no_internet: 'No Internet connection',
+    iap_failed: 'Your purchase could not be completed',
+    iap_no_itunes: 'No response from AppStore',
+    iap_success: 'Thank you for your purchase',
  },
  zh: {
    // Tabs
@@ -273,6 +276,9 @@ export default language = new LocalizedStrings({
    // Extra
    no_information: '无数据',
    no_internet: '无网络连接',
+   iap_failed: '无法完成您的购买',
+   iap_no_itunes: '无法连接到AppStore',
+   iap_success: '感谢您的购买',
  },
  ja: {
  }

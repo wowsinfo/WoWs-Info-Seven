@@ -94,13 +94,13 @@ def enableSeparateBuildPerCPUArchitecture = false
 def enableProguardInReleaseBuilds = false
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.1"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.1"
 
     defaultConfig {
         applicationId "com.wowsinfo"
         minSdkVersion 16
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0.0"
         ndk {
@@ -140,6 +140,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-admob')
     compile project(':react-native-device-info')
     compile project(':react-native-vector-icons')
     compile project(':react-native-navigation')
