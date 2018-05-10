@@ -1,6 +1,7 @@
 package com.wowsinfo;
 
 import com.facebook.react.ReactPackage;
+import com.sbugert.rnadmob.RNAdMobPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.babisoft.ReactNativeLocalization.ReactNativeLocalizationPackage;
@@ -23,7 +24,8 @@ public class MainApplication extends NavigationApplication {
     return Arrays.<ReactPackage>asList(
             new RNDeviceInfo(),
               new VectorIconsPackage(),
-                new ReactNativeLocalizationPackage()
+                new ReactNativeLocalizationPackage(),
+                  new RNAdMobPackage()
     );
   }
 

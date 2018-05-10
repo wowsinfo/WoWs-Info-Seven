@@ -7,7 +7,7 @@ class Image1Cell extends Component {
     const { imageStyle, textStyle, viewStyle } = styles;    
     return (
       <View style={viewStyle}>
-        <Image source={image} style={[imageStyle, highlight]} resizeMode='contain'/>
+        <Image source={image} style={[imageStyle, highlight]} resizeMethod='resize'/>
         <Text style={textStyle}>{text}</Text>
       </View>
     )

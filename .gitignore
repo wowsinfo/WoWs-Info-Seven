@@ -1,5 +1,5 @@
-
 *.bundle
 *.meta
 WoWsInfo/android/app/release/output.json
 WoWsInfo/android/app/release/app-release.apk
+WoWsInfo/ios/GoogleMobileAds.framework/

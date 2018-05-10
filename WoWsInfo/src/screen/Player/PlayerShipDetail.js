@@ -3,7 +3,7 @@ import { Text, Image, ScrollView, StyleSheet } from 'react-native';
 import { View } from 'react-native-animatable';
 import { Divider } from 'react-native-elements';
 import { PersonalRating } from '../../core';
-import { Basic8Cell } from '../../component';
+import { Basic8Cell, SimpleBanner } from '../../component';
 import language from '../../constant/language';
 import { getTheme } from '../../constant/colour';
 
@@ -19,6 +19,7 @@ export default class PlayerShipDetail extends Component {
     return (
       <View style={mainViewStyle}>
         <ScrollView contentInset={{bottom: 50}}>
+          <SimpleBanner />
           <Image source={{uri: shipInfo.image}} style={imageStyle}/>
           <Text style={shipNameStyle}>{shipInfo.name}</Text>
           { pr == null || pr.win_rate == null ? null : <View style={horizontalViewStyle}>
