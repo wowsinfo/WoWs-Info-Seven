@@ -1,5 +1,6 @@
 import { Navigation } from 'react-native-navigation';
 import { Platform, NetInfo, Alert } from 'react-native';
+import { AdMobInterstitial } from 'react-native-admob';
 import { registerScreens } from '../screen';
 
 import { Blue, Green, Red, RED, BLUE, GREEN } from 'react-native-material-color';
@@ -39,6 +40,11 @@ export function loadingData() {
 export function startApp() {
   hapticFeedback();
   android ? startAppAndroid() : startAppIOS();
+  if (ads && !android) {
+    AdMobInterstitial.setAdUnitID('ca-app-pub-5048098651344514/7499671184');
+    AdMobInterstitial.setTestDevices([AdMobInterstitial.simulatorId]);
+    AdMobInterstitial.requestAd().then(() => AdMobInterstitial.showAd());
+  }
 }
 
 /**
@@ -59,9 +65,9 @@ function startAppIOS() {
         label: language.news_tab_label, title: language.news_tab_title,
         screen: 'info.news', icon: iconsMap['newspaper-o'],
         navigatorStyle: navStyle(),
-        navigatorButtons: {
+        /*navigatorButtons: {
           rightButtons: [{title: language.more_title, id: 'more'}]
-        }
+        }*/
       },
       {
         label: language.wiki_title, title: language.drawer_wiki,
@@ -95,7 +101,7 @@ function startAppAndroid() {
       navigatorStyle: navStyle(),
       navigatorButtons: {
         leftButtons: [{icon: iconsMap['menu'], id: 'drawer'}],
-        rightButtons: [{title: language.more_title, id: 'more'}],
+        /*rightButtons: [{title: language.more_title, id: 'more'}],*/
         fab: {
           collapsedId: 'search',
           collapsedIcon: iconsMap['ios-search'],

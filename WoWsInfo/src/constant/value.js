@@ -2,9 +2,11 @@
 export const ApplicationID = '4e54ba74077a8230e457bf3e7e9ae858';
 
 export const VERSION = '1.0.0';
+export const IOSVersion = '1.5.0';
+export const AndroidVersion = '1.0.2';
 export const Github = 'https://github.com/HenryQuan/WoWs-Info-Ultimate';
-export const AppStore = 'https://github.com/HenryQuan/WoWs-Info-Ultimate';
-export const GooglePlay = 'https://github.com/HenryQuan/WoWs-Info-Ultimate';
+export const AppStore = 'https://itunes.apple.com/app/id1202750166';
+export const GooglePlay = 'https://play.google.com/store/apps/details?id=com.yihengquan.wows_info';
 export const Developer = 'mailto:development.henryquan@gmail.com';
 
 export const API = {

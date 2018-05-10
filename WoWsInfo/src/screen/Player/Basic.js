@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, ScrollView, Text } from 'react-native';
 import { View } from 'react-native-animatable';
 import { PlayerInfo } from '../../core';
-import { WoWsLoading, Basic8Cell, RecordCell, WoWsTouchable } from '../../component';
+import { WoWsLoading, Basic8Cell, RecordCell, WoWsTouchable, SimpleBanner } from '../../component';
 import { Divider } from 'react-native-elements';
 import store from 'react-native-simple-store';
 import language from '../../constant/language';
@@ -47,15 +47,17 @@ class Basic extends Component {
       const { level, created, last_battle, rank, clan } = this.state.info;
       const { playerNameStyle, scrollViewStyle, mainViewStyle, playerInfoStyle, playerViewStyle, dontJudgeStyle } = styles;
       let color = getTheme();  
+      let clanTag = clan == undefined ? '' : '[' + clan + ']\n';
       return (
         <View style={mainViewStyle} animation='fadeInUp'>
           <ScrollView style={scrollViewStyle} contentInset={{bottom: 50}}>
             <View style={[playerViewStyle, {backgroundColor: color}]}>
-              <Text style={playerNameStyle}>{'[' + clan + ']\n' + name}</Text>
+              <Text style={playerNameStyle}>{clanTag + name}</Text>
               <Text style={playerInfoStyle}>{last_battle}</Text>
               <Text style={playerInfoStyle}>{created + ' | Lv ' + level + ' | ⭐️' + rank}</Text>
               { this.renderSetAsMain() }             
             </View>
+            <SimpleBanner />
             <Basic8Cell info={this.state.info}/>
             <Text style={dontJudgeStyle}>{language.player_respect}</Text>
             { this.renderRecord(this.state.record) }
