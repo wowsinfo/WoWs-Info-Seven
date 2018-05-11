@@ -1,4 +1,4 @@
-import { Blue } from "react-native-material-color";
+import { GREY } from "react-native-material-color";
 
 /**
  * Get text colour depending on tint colour (white or black)
@@ -25,7 +25,7 @@ export function statusBarColour(colour) {
  * Get global theme colour
  */
 export function getTheme() {
-  return theme[500] == '#ffffff' ? Blue : theme[500];
+  return theme[500] == '#ffffff' ? GREY[800] : theme[500];
 }
 
 /**
