@@ -1,4 +1,4 @@
-package com.wowsinfo;
+package com.yihengquan.wowsinfo;
 
 import com.facebook.react.ReactPackage;
 import com.sbugert.rnadmob.RNAdMobPackage;

@@ -17,7 +17,7 @@ class SimpleBanner extends Component {
 
 const styles = StyleSheet.create({
   viewStyle: {
-    width: '100%', flexDirection: 'row',
+    width: '100%', 
     alignItems: 'center', justifyContent: 'space-around'
   },
 })
