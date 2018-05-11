@@ -42,13 +42,14 @@ export default class Settings extends Component {
   }
 
   render() {
+    const appVersion = (android ? AndroidVersion : IOSVersion) + ' (' + game_version + ')';
     return (
       <ScrollView>
         { this.renderAbout() }        
         { this.renderLanguage() }
         { this.renderTheme() }
         { android ? null : this.renderIAP() }
-        <Text style={styles.versionStyle}>{android ? AndroidVersion : IOSVersion}</Text>
+        <Text style={styles.versionStyle}>{appVersion}</Text>
       </ScrollView>
     )
   }
@@ -159,7 +160,9 @@ export default class Settings extends Component {
         { this.renderEntry(language.settings_email_feedback, () => Linking.openURL(Developer)) }        
         { this.renderEntry(language.settings_source_code, () => Linking.openURL(Github)) }        
         { this.renderEntry(language.settings_write_review, () => Linking.openURL(android ? GooglePlay : AppStore)) }                    
-        { /*this.renderEntry(language.settings_open_source_library, null)*/ }                    
+        { this.renderEntry(language.settings_open_source_library, () => this.props.navigator.push({
+          screen: 'settings.opensource', title: language.settings_open_source_library, navigatorStyle: navStyle()
+        })) }                    
       </View>
     )
   }

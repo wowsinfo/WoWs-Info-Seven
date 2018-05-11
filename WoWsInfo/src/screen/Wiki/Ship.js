@@ -102,7 +102,8 @@ export default class Ship extends PureComponent {
    * Set ship filter
    */
   setFilter = (filter) => {
-    if (this.filter == filter) return;
+    const { tier, type, nation } = filter;
+    if (tier == '' && type == '' & nation == '') return;
     this.filter = filter;
     this.filterShip();
   }

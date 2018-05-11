@@ -12,6 +12,7 @@
 @class DFPBannerView;
 @class DFPCustomRenderedAd;
 
+GAD_ASSUME_NONNULL_BEGIN
 
 /// The DFPCustomRenderedAd banner view delegate protocol for notifying the delegate of changes to
 /// custom rendered banners.

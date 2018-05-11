@@ -139,6 +139,7 @@ export default language = new LocalizedStrings({
     iap_failed: 'Your purchase could not be completed',
     iap_no_itunes: 'No response from AppStore',
     iap_success: 'Thank you for your purchase',
+    why_opensource: 'WoWs Info is possible with all these wonderful libraries. This application is also open source because I want to be one of them who want to make this world better.',
  },
  zh: {
    // Tabs
@@ -279,6 +280,7 @@ export default language = new LocalizedStrings({
    iap_failed: '无法完成您的购买',
    iap_no_itunes: '无法连接到AppStore',
    iap_success: '感谢您的购买',
+   why_opensource: '没有这些开源项目就没有WoWs Info, 这个APP也是开源软件，因为我也想成为他们之一',   
  },
  ja: {
  }

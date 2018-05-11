@@ -59,8 +59,7 @@ export default class News extends Component {
       return (
         <SafeAreaView>
           <View ref='news'>
-            <SimpleBanner />
-            <FlatList data={data} keyExtractor={this.newsKey} onRefresh={() => this.refreshNews()}
+            <FlatList data={data} keyExtractor={this.newsKey} onRefresh={() => this.refreshNews()} ListHeaderComponent={<SimpleBanner />}
             renderItem={({item}) => <NewsCell browser={() => this.pushToBrowser(item)} data={item}/>} refreshing={isRefreshing}/>
           </View>
         </SafeAreaView>
