@@ -4,25 +4,30 @@ import { View } from 'react-native-animatable';
 import ElevatedView from 'react-native-elevated-view';
 import { Divider } from 'react-native-elements';
 import { PersonalRating } from '../../core';
-import { Basic8Cell, SimpleBanner } from '../../component';
+import { Basic8Cell, SimpleBanner, WoWsTouchable } from '../../component';
 import language from '../../constant/language';
-import { getTheme } from '../../constant/colour';
+import { getTheme, navStyle } from '../../constant/colour';
 
 export default class PlayerShipDetail extends Component {
   render() {
     const { mainViewStyle, scrollViewStyle, shipNameStyle, prTextStyle, imageStyle, ratingStyle, horizontalViewStyle } = styles;
     const { info } = this.props;
     const { index, ship_id } = info;
+    
     let shipColour = PersonalRating.getColour(index);
     let shipComment = PersonalRating.getComment(index);
     let shipInfo = this.getShipInfo(ship_id);
+    
     const pr = data.personal_rating[ship_id];    
+    const shipData = data.warship[ship_id];    
     return (
       <View style={mainViewStyle}>
         <ScrollView>
           <ElevatedView elevation={2} style={{margin: 8}}>
             <SimpleBanner />
-            <Image source={{uri: shipInfo.image}} style={imageStyle}/>
+            <WoWsTouchable onPress={() => this.pushToDetail(shipData)}>
+              <Image source={{uri: shipInfo.image}} style={imageStyle}/>
+            </WoWsTouchable>
             <Text style={shipNameStyle}>{shipInfo.name}</Text>
             { pr == null || pr.win_rate == null ? null : <View style={horizontalViewStyle}>
               <Text style={prTextStyle}>{Number(pr.average_damage_dealt).toFixed(0)}</Text>
@@ -38,6 +43,16 @@ export default class PlayerShipDetail extends Component {
         </ScrollView>
       </View>
     )
+  }
+
+  pushToDetail(info) {
+    if (info == undefined) return;
+    this.props.navigator.push({
+      screen: 'ship.detail',
+      title: '[' + info.ship_id_str + '] ' + info.ship_id,
+      passProps: {info: info},
+      navigatorStyle: navStyle()
+    })
   }
 
   getShipInfo(id) {
