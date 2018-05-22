@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, Button, ScrollView, StyleSheet, Linking, Alert } from 'react-native';
 import language from '../../constant/language';
 import store from 'react-native-simple-store';
+import ElevatedView from 'react-native-elevated-view';
 import { WoWsTouchable, QuickInput, TextCell } from '../../component';
 import SelectInput from 'react-native-select-input-ios';
 import { navStyle, getTheme } from '../../constant/colour';
@@ -93,7 +94,7 @@ export default class Settings extends Component {
 
     const { langAPI, langNews } = this.state;
     return (
-      <View style={basicViewStyle}>
+      <ElevatedView elevation={2} style={basicViewStyle}>
         { this.renderTitle(language.settings_language_title) }
         <View style={horizonntalViewStyle}>
           <Text style={basicTextStyle}>{language.settings_api_language}</Text>
@@ -116,7 +117,7 @@ export default class Settings extends Component {
               store.save(LocalData.news_language, value);
             }}/>            
         </View>
-      </View>
+      </ElevatedView>
     )
   }
 
@@ -127,10 +128,10 @@ export default class Settings extends Component {
   renderTheme = () => {
     const { basicViewStyle, basicTextStyle } = styles;    
     return (
-      <View style={basicViewStyle}>
+      <ElevatedView elevation={2} style={basicViewStyle}>
         { this.renderTitle(language.settings_theme_title) }
         { this.renderEntry(language.settings_theme, this.showTheme) }
-      </View>
+      </ElevatedView>
     )
   }
 
@@ -156,14 +157,14 @@ export default class Settings extends Component {
   renderAbout = () => {
     const { basicViewStyle, basicTextStyle } = styles;
     return (
-      <View style={basicViewStyle}>
+      <ElevatedView elevation={2} style={basicViewStyle}>
         { this.renderEntry(language.settings_email_feedback, () => Linking.openURL(Developer)) }        
         { this.renderEntry(language.settings_source_code, () => Linking.openURL(Github)) }        
         { this.renderEntry(language.settings_write_review, () => Linking.openURL(android ? GooglePlay : AppStore)) }                    
         { this.renderEntry(language.settings_open_source_library, () => this.props.navigator.push({
           screen: 'settings.opensource', title: language.settings_open_source_library, navigatorStyle: navStyle()
         })) }                    
-      </View>
+      </ElevatedView>
     )
   }
 
@@ -226,11 +227,10 @@ export default class Settings extends Component {
 
 const styles = StyleSheet.create({
   basicViewStyle: {
-    elevation: 1,
     flex: 1, margin: 8
   },
   versionStyle: {
-    paddingLeft: 16, fontSize: 12, 
+    padding: 8, fontSize: 12, 
     color: GREY[500], fontWeight: '300'
   },
   horizonntalViewStyle: {
@@ -239,7 +239,7 @@ const styles = StyleSheet.create({
   },
   basicHeaderStyle: {
     fontSize: 12, fontWeight: 'bold',
-    margin: 8, paddingTop: 8, paddingBottom: 8
+    padding: 8, paddingTop: 8, paddingBottom: 8
   },
   basicTextStyle: {
     padding: 8, color: 'black', flex: 1,

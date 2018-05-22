@@ -23,9 +23,9 @@ public class MainApplication extends NavigationApplication {
     // No need to add RnnPackage and MainReactPackage
     return Arrays.<ReactPackage>asList(
             new RNDeviceInfo(),
-              new VectorIconsPackage(),
-                new ReactNativeLocalizationPackage(),
-                  new RNAdMobPackage()
+            new VectorIconsPackage(),
+            new ReactNativeLocalizationPackage(),
+            new RNAdMobPackage()
     );
   }
 

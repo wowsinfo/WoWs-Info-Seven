@@ -25,19 +25,23 @@ export default class Wiki extends Component {
     return (
       <ScrollView>
         <View ref={(ref) => (this.preview = ref)} animation='fadeInRight' style={{padding: android ? 0 : 8}}>
-          <DrawerCell icon={require('../../img/Achievement.png')} title={language.wiki_achievement + ' (' + Object.keys(achievement).length + ')'} 
+          <DrawerCell icon={android ? require('../../img/Achievement-Android.png') : require('../../img/Achievement.png')} 
+            title={language.wiki_achievement + ' (' + Object.keys(achievement).length + ')'} 
             onPress={() => this.pushToBasic(language.wiki_achievement, {info: achievement}, true)}/>
-          <DrawerCell icon={require('../../img/Warship.png')} title={language.wiki_warship + ' (' + Object.keys(warship).length + ')'} 
+          <DrawerCell icon={android ? require('../../img/Warship-Android.png') : require('../../img/Warship.png')} 
+            title={language.wiki_warship + ' (' + Object.keys(warship).length + ')'} 
             onPress={() => this.pushToWarship()}/>
-          <DrawerCell icon={require('../../img/Upgrade.png')} title={language.wiki_upgrade} 
+          <DrawerCell icon={android ? require('../../img/Upgrade-Android.png') : require('../../img/Upgrade.png')} title={language.wiki_upgrade} 
             onPress={() => this.pushToBasic(language.wiki_upgrade, {info: consumable, upgrade: true})}/>
-          <DrawerCell icon={require('../../img/Camouflage.png')} title={language.wiki_flag_camouflage} 
+          <DrawerCell icon={android ? require('../../img/Camouflage-Android.png') : require('../../img/Camouflage.png')} 
+            title={language.wiki_flag_camouflage} 
             onPress={() => this.pushToBasic(language.wiki_flag_camouflage, {info: consumable})}/>
-          <DrawerCell icon={require('../../img/CommanderSkill.png')} title={language.wiki_commander} 
-            onPress={() => this.pushToBasic(language.wiki_commander, {info: commander})}/>
-          <DrawerCell icon={require('../../img/Map.png')} title={language.wiki_map + ' (' + Object.keys(map).length + ')'} 
-            onPress={() => this.pushToMap()}/>
-          <DrawerCell icon={require('../../img/Collection.png')} title={language.wiki_collection} 
+          <DrawerCell icon={android ? require('../../img/CommanderSkill-Android.png') : require('../../img/CommanderSkill.png')} 
+            title={language.wiki_commander} onPress={() => this.pushToBasic(language.wiki_commander, {info: commander})}/>
+          <DrawerCell icon={android ? require('../../img/Map-Android.png') : require('../../img/Map.png')} 
+            title={language.wiki_map + ' (' + Object.keys(map).length + ')'} onPress={() => this.pushToMap()}/>
+          <DrawerCell icon={android ? require('../../img/Collection-Android.png') : require('../../img/Collection.png')} 
+            title={language.wiki_collection} 
             onPress={() => this.pushToBasic(language.wiki_collection, {info: collection})}/>
         </View>
       </ScrollView>

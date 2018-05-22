@@ -60,7 +60,7 @@ export default class News extends Component {
         <SafeAreaView>
           <View ref='news'>
             <FlatList data={data} keyExtractor={this.newsKey} onRefresh={() => this.refreshNews()} ListHeaderComponent={<SimpleBanner />}
-            renderItem={({item}) => <NewsCell browser={() => this.pushToBrowser(item)} data={item}/>} refreshing={isRefreshing}/>
+            renderItem={({item}) => <NewsCell data={item}/>} refreshing={isRefreshing}/>
           </View>
         </SafeAreaView>
       )
@@ -70,7 +70,7 @@ export default class News extends Component {
   /**
    * Show website in browser
    */
-  pushToBrowser(item) {
+  /*pushToBrowser(item) {
     console.log(this.state);
     this.props.navigator.push({
       screen: 'info.browser',
@@ -78,7 +78,7 @@ export default class News extends Component {
       passProps: {link: item.link},
       navigatorStyle: navStyle()
     })
-  }
+  }*/
 
   /**
    * Loading news from server

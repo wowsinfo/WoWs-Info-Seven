@@ -16,8 +16,8 @@ class Image1Cell extends Component {
 
 const styles = StyleSheet.create({
   imageStyle: {
-    height: 42,
-    width: 42,
+    height: 28,
+    width: 28,
   },
   textStyle: {
     paddingTop: 4,

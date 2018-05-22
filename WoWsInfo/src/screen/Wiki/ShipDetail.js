@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, StyleSheet, Image, ScrollView, FlatList, Alert } from 'react-native';
 import { View } from 'react-native-animatable';
+import ElevatedView from 'react-native-elevated-view';
 import { WoWsProgress, WoWsTouchable, WoWsLoading } from '../../component';
 import language from '../../constant/language';
 import { Orange, Grey } from 'react-native-material-color';
@@ -62,7 +63,6 @@ export default class ShipDetail extends Component {
     let textColor = getTheme();
     return (
       <View>
-        <View style={{paddingTop: 16}}><Divider /></View>
         <Text style={[styles.titleTextStyle, {color: textColor}]}>{text}</Text>
       </View>
     )
@@ -80,13 +80,13 @@ export default class ShipDetail extends Component {
     const isPremium = is_premium || is_special;
     // Show avergae data
     return (
-      <View style={basicViewStyle}>
+      <ElevatedView elevation={2} style={[basicViewStyle, {margin: 8}]}>
         {data_saver ? null : <Image source={{uri: icon, cache: 'default'}} style={imageStyle} resizeMode='contain'/>}
         <Text style={tierTextStyle}>{Tier[tier - 1] + ' ' + name}</Text>
         <Text style={basicTextStyle}>{encyclopedia.ship_nations[nation] + '\n' + ship_type[type]}</Text>
         <Text style={[basicTextStyle, {color: isPremium ? Orange : Grey}]}>{isPremium ? price_gold : price_credit}</Text> 
         <Text style={descriptionStyle}>{description}</Text>
-      </View>
+      </ElevatedView>
     )
   }
 
@@ -100,7 +100,7 @@ export default class ShipDetail extends Component {
     // White -> Blue
     const tintColor = getTheme();
     return (
-      <View>
+      <ElevatedView elevation={2} style={{margin: 8}}>
         { this.renderTitle(language.detail_status_title) }
         <WoWsProgress color={tintColor} value={armour.total} title={language.detail_survivability}/>
         <WoWsProgress color={tintColor} value={artillery} title={language.detail_artillery}/>
@@ -109,7 +109,7 @@ export default class ShipDetail extends Component {
         <WoWsProgress color={tintColor} value={mobility.total} title={language.detail_maneuverabilty}/>
         <WoWsProgress color={tintColor} value={concealment.total} title={language.detail_concealment}/>
         <WoWsProgress color={tintColor} value={aircraft} title={language.detail_aircraft}/>
-      </View>
+      </ElevatedView>
     )
   }
 
@@ -120,7 +120,7 @@ export default class ShipDetail extends Component {
     const { flood_prob, range, health } = this.state.data.default_profile.armour;
     const { horizontalViewStyle, basicTextStyle, basicTitleStyle, basicViewStyle } = styles;
     return (
-      <View >
+      <ElevatedView elevation={2} style={{margin: 8}}>
         { this.renderTitle(language.detail_survivability) }
         <View style={horizontalViewStyle}>
           <View style={basicViewStyle}>
@@ -137,7 +137,7 @@ export default class ShipDetail extends Component {
             <Text style={basicTextStyle}>{flood_prob + '%'}</Text>
           </View> }
         </View>
-      </View>
+      </ElevatedView>
     )
   }
 
@@ -157,7 +157,7 @@ export default class ShipDetail extends Component {
       let calibar = Math.round(parseInt(gunName.split(' ')[0]) / 6);
 
       return (
-        <View>
+        <ElevatedView elevation={2} style={{margin: 8}}>
           { artillery == null ? null : <View>
             { this.renderTitle(language.artillery_main) }
             <View style={horizontalViewStyle}>
@@ -187,7 +187,7 @@ export default class ShipDetail extends Component {
               </View>}
             </View>
           </View>}
-        </View>
+        </ElevatedView>
       )
     } else return null;
   }
@@ -202,7 +202,7 @@ export default class ShipDetail extends Component {
       const { distance, slots } = atbas;
       var guns = []; for (gun in slots) guns.push(slots[gun]);
       return (
-        <View>
+        <ElevatedView elevation={2} style={{margin: 8}}>
           { this.renderTitle(language.artillery_secondary + ' (' + distance + ' km)') }
           { guns.map(function(value, index) { 
             const { burn_probability, bullet_speed, name, gun_rate, damage, type } = value;            
@@ -217,7 +217,7 @@ export default class ShipDetail extends Component {
                 </View>
               </View>
           )})}
-        </View>
+        </ElevatedView>
       )
     } else return null;
   }
@@ -231,13 +231,13 @@ export default class ShipDetail extends Component {
     if (flight_control != null) {
       const { fighter_squadrons, torpedo_squadrons, bomber_squadrons } = flight_control;
       return (
-        <View>
+        <ElevatedView elevation={2} style={{margin: 8}}>
           { this.renderTitle(language.detail_aircraft) }
           { this.renderFighter() }
           { this.renderTorpedoBomber() }
           { this.renderBomber() }
           <Text style={basicTextStyle}>{fighter_squadrons + ' - ' + torpedo_squadrons + ' - ' + bomber_squadrons}</Text>
-        </View>
+        </ElevatedView>
       )
     } else return null;
   }
@@ -248,9 +248,9 @@ export default class ShipDetail extends Component {
     if (fighters != null) {
       const {} = fighters;
       return (
-        <View>
+        <ElevatedView elevation={2} style={{margin: 8}}>
           <Text style={basicTitleStyle}>{language.aircraft_fighter}</Text>
-        </View>
+        </ElevatedView>
       )
     } else return null;
   }
@@ -260,9 +260,9 @@ export default class ShipDetail extends Component {
     const { torpedo_bomber } = this.state.profile;
     if (torpedo_bomber != null) {
       return (
-        <View>
+        <ElevatedView elevation={2} style={{margin: 8}}>
           <Text style={basicTitleStyle}>{language.aircraft_torpedo_bomber}</Text>
-        </View>
+        </ElevatedView>
       )
     } else return null;
   }
@@ -272,9 +272,9 @@ export default class ShipDetail extends Component {
     const { dive_bomber } = this.state.profile;
     if (dive_bomber != null) {
       return (
-        <View>
+        <ElevatedView elevation={2} style={{margin: 8}}>
           <Text style={basicTitleStyle}>{language.aircraft_bomber}</Text>
-        </View>
+        </ElevatedView>
       )
     } else return null;
   }
@@ -289,7 +289,7 @@ export default class ShipDetail extends Component {
       const { visibility_dist, distance, torpedo_name, reload_time, torpedo_speed, slots, max_damage } = torpedoes;
       var torps = ''; for (torp in slots) torps += slots[torp].guns + ' x ' + slots[torp].barrels + '  ';
       return (
-        <View>
+        <ElevatedView elevation={2} style={{margin: 8}}>
           { this.renderTitle(language.detail_torpedoes) }
           <View style={horizontalViewStyle}>
             <Text>{reload_time + ' s'}</Text>
@@ -302,7 +302,7 @@ export default class ShipDetail extends Component {
             <Text>{max_damage}</Text>
             <Text>{torpedo_speed + ' kt'}</Text>
           </View>
-        </View>
+        </ElevatedView>
       )
     } else return null;
   }
@@ -318,7 +318,7 @@ export default class ShipDetail extends Component {
       var AAValues = []; for (aa in slots) AAValues.push(slots[aa]);
       console.log(AAValues, slots)
       return (
-        <View>
+        <ElevatedView elevation={2} style={{margin: 8}}>
           { this.renderTitle(language.detail_aa) }
           { AAValues.map(function(value, index) {
             const { distance, avg_damage, name, guns } = value;
@@ -333,7 +333,7 @@ export default class ShipDetail extends Component {
               </View>
             )
           })}
-        </View>
+        </ElevatedView>
       )
     } else return null;
   }
@@ -345,14 +345,14 @@ export default class ShipDetail extends Component {
     const { horizontalViewStyle, basicTextStyle } = styles;
     const { rudder_time, turning_radius, max_speed } = this.state.profile.mobility
     return (
-      <View>
+      <ElevatedView elevation={2} style={{margin: 8}}>
         { this.renderTitle(language.detail_maneuverabilty) }
         <View style={horizontalViewStyle}>
           <Text style={basicTextStyle}>{rudder_time + ' s'}</Text>
           <Text style={basicTextStyle}>{max_speed + ' kt'}</Text>
           <Text style={basicTextStyle}>{turning_radius + ' m'}</Text>
         </View>
-      </View>
+      </ElevatedView>
     )
   }
 
@@ -363,7 +363,7 @@ export default class ShipDetail extends Component {
     const { horizontalViewStyle, basicTextStyle, basicViewStyle, basicTitleStyle } = styles;
     const { detect_distance_by_plane, detect_distance_by_ship } = this.state.profile.concealment
     return (
-      <View>
+      <ElevatedView elevation={2} style={{margin: 8}}>
         { this.renderTitle(language.detail_concealment) }
         <View style={horizontalViewStyle}>
           <View style={basicViewStyle}>
@@ -375,7 +375,7 @@ export default class ShipDetail extends Component {
             <Text style={basicTextStyle}>{detect_distance_by_ship + ' km'}</Text>
           </View>
         </View>
-      </View>
+      </ElevatedView>
     )
   }
 
@@ -386,7 +386,7 @@ export default class ShipDetail extends Component {
     const { mod_slots, upgrades } = this.state.data;
     upgradeKey = (value, index) => String(index);
     return (
-      <View>
+      <ElevatedView elevation={2} style={{margin: 8}}>
         { this.renderTitle(language.detail_upgrade_title + ' (' + mod_slots + ')') }
         <FlatList keyExtractor={upgradeKey} showsHorizontalScrollIndicator={false} horizontal data={upgrades} renderItem={({item}) => {
           let curr = data.consumable[item];
@@ -395,7 +395,7 @@ export default class ShipDetail extends Component {
             <View><Image style={{width: 64, height: 64}} source={{uri: curr.icon}}/></View>
           </WoWsTouchable>
         )}}/>
-      </View>
+      </ElevatedView>
     )
   }
 
@@ -410,7 +410,7 @@ export default class ShipDetail extends Component {
       var ships = []; for (key in next_ships) ships.push({key: key, exp: next_ships[key]});
       shipKey = (value, index) => index;      
       return (
-        <View>
+        <ElevatedView elevation={2} style={{margin: 8}}>
           { this.renderTitle(language.detail_next_ship_title) }
           <FlatList data={ships} keyExtractor={shipKey} renderItem={({item}) => {  
             let curr = data.warship[item.key];
@@ -429,25 +429,22 @@ export default class ShipDetail extends Component {
                 </View>
               </WoWsTouchable>
             )}}/>
-        </View>
+        </ElevatedView>
       )
     }
   }
 }
 
 const styles = StyleSheet.create({
-  mainViewStyle: {
-    
-  },
   titleTextStyle: {
-    fontSize: 32, textAlign: 'center',
-    fontWeight: '500', padding: 4
+    textAlign: android ? 'left' : 'center', fontSize: 18,
+    fontWeight: 'bold', padding: 8, paddingLeft: android ? 8 : 0
   },
   tierTextStyle: {
     fontSize: 24, marginBottom: 4
   },
   basicViewStyle: {
-    flex: 1, paddingTop: 4
+    flex: 1, paddingTop: 4, padding: 8, margin: 8
   },
   basicTextStyle: {
     textAlign: 'center', margin: 2, fontWeight: '300', width: '100%', flex: 1

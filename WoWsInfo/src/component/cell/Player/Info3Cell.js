@@ -10,7 +10,7 @@ class Info3Cell extends Component {
     return (
       <View style={viewStyle}>
         <Image1Cell image={require('../../../img/Battle.png')} text={info.battle}/>
-        <Image1Cell image={require('../../../img/WinRate.png')} text={info.winrate + '%'} highlight={{height: 56, width: 56}}/>
+        <Image1Cell image={require('../../../img/WinRate.png')} text={info.winrate + '%'} highlight={{height: 36, width: 36}}/>
         <Image1Cell image={require('../../../img/Damage.png')} text={info.damage}/>
       </View>
     )

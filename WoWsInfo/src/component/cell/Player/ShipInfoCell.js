@@ -55,8 +55,8 @@ class ShipInfoCell extends Component {
 
 const styles = StyleSheet.create({
   mainViewStyle: {
-    borderWidth: 1.8,
-    borderRadius: 10,
+    borderWidth: 1,
+    borderRadius: 6,
     padding: 2
   },
   subViewStyle: {
