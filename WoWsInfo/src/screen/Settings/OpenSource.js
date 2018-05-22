@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, ScrollView, Text, StyleSheet, Linking } from 'react-native';
 import { WoWsTouchable } from '../../component';
 import { getTheme } from '../../constant/colour';
+import ElevatedView from 'react-native-elevated-view';
 import language from '../../constant/language';
 
 export default class OpenSource extends Component {
@@ -15,6 +16,7 @@ export default class OpenSource extends Component {
     {name: 'react-native-haptic', link: 'https://github.com/AppAndFlow/react-native-haptic'},
     {name: 'react-native-in-app-utils', link: 'https://github.com/chirag04/react-native-in-app-utils/blob/master/LICENCE.txt'},
     {name: 'react-native-localization', link: 'https://github.com/stefalda/ReactNativeLocalization/blob/master/LICENSE'},
+    {name: 'react-native-elevated-view', link: 'https://github.com/alekhurst/react-native-elevated-view/blob/master/LICENSE'},
     {name: 'react-native-material-color', link: 'https://github.com/DerayGa/react-native-material-color'},
     {name: 'react-native-navigation', link: 'https://github.com/wix/react-native-navigation/blob/master/LICENSE'},
     {name: 'react-native-select-input-ios', link: 'https://github.com/markuswind/react-native-select-input-ios/blob/master/LICENSE'},
@@ -31,12 +33,15 @@ export default class OpenSource extends Component {
       <ScrollView>
         { libraries.map(function(value, index) {
           return (
-            <WoWsTouchable key={index} onPress={() => Linking.openURL(value.link)}
-              style={{borderWidth: 0.75, borderRadius: 6, elevation: 2, borderColor: getTheme(), margin: 8}}>
-              <Text style={styles.textStyle}>{value.name}</Text>
-            </WoWsTouchable>
+            <ElevatedView key={index} style={{margin: 8}} elevation={1}>
+              <WoWsTouchable onPress={() => Linking.openURL(value.link)}>
+                <Text style={styles.textStyle}>{value.name}</Text> 
+              </WoWsTouchable>
+            </ElevatedView>
         )}) }
-        <Text style={styles.textStyle}>{language.why_opensource}</Text>
+        <ElevatedView elevation={1} style={{margin: 8}}>
+          <Text style={styles.textStyle}>{language.why_opensource}</Text>
+        </ElevatedView>
       </ScrollView>
     )
   }

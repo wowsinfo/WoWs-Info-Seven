@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, Image, ScrollView, StyleSheet } from 'react-native';
 import { View } from 'react-native-animatable';
+import ElevatedView from 'react-native-elevated-view';
 import { Divider } from 'react-native-elements';
 import { PersonalRating } from '../../core';
 import { Basic8Cell, SimpleBanner } from '../../component';
@@ -18,19 +19,22 @@ export default class PlayerShipDetail extends Component {
     const pr = data.personal_rating[ship_id];    
     return (
       <View style={mainViewStyle}>
-        <ScrollView contentInset={{bottom: 50}}>
-          <SimpleBanner />
-          <Image source={{uri: shipInfo.image}} style={imageStyle}/>
-          <Text style={shipNameStyle}>{shipInfo.name}</Text>
-          { pr == null || pr.win_rate == null ? null : <View style={horizontalViewStyle}>
-            <Text style={prTextStyle}>{Number(pr.average_damage_dealt).toFixed(0)}</Text>
-            <Text style={prTextStyle}>{Number(pr.win_rate).toFixed(2) + '%'}</Text>
-            <Text style={prTextStyle}>{Number(pr.average_frags).toFixed(2)}</Text>
-          </View>}
-          <Text style={[ratingStyle, {color: shipColour}]}>{shipComment}</Text>
-          <Basic8Cell info={this.getBasic8CellInfo(info)}/>
-          <Divider style={{height: 1.5, backgroundColor: getTheme()}}/>
-          { this.renderDetailInfo(info) }
+        <ScrollView>
+          <ElevatedView elevation={2} style={{margin: 8}}>
+            <SimpleBanner />
+            <Image source={{uri: shipInfo.image}} style={imageStyle}/>
+            <Text style={shipNameStyle}>{shipInfo.name}</Text>
+            { pr == null || pr.win_rate == null ? null : <View style={horizontalViewStyle}>
+              <Text style={prTextStyle}>{Number(pr.average_damage_dealt).toFixed(0)}</Text>
+              <Text style={prTextStyle}>{Number(pr.win_rate).toFixed(2) + '%'}</Text>
+              <Text style={prTextStyle}>{Number(pr.average_frags).toFixed(2)}</Text>
+            </View>}
+            <Text style={[ratingStyle, {color: shipColour}]}>{shipComment}</Text>
+            <Basic8Cell info={this.getBasic8CellInfo(info)}/>
+          </ElevatedView>
+          <ElevatedView elevation={2} style={{margin: 8}}>
+            { this.renderDetailInfo(info) }
+          </ElevatedView>          
         </ScrollView>
       </View>
     )

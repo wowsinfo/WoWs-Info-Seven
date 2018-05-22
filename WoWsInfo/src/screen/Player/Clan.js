@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, Image } from 'react-native';
 import { View } from 'react-native-animatable';
 import GridView from 'react-native-super-grid';
+import ElevatedView from 'react-native-elevated-view';
 import { ClanInfo } from '../../core';
 import { getTheme, getTextColour, navStyle } from '../../constant/colour';
 import { WoWsLoading, WoWsTouchable } from '../../component';
@@ -57,7 +58,9 @@ export default class Clan extends Component {
                 },
                 passProps: item
               })}}>
-              <View style={clanCellViewStyle}><Text style={textStyle}>{'[' + item.id + '] ' + item.name}</Text></View>
+              <ElevatedView elevation={2}>
+                <View style={clanCellViewStyle}><Text style={textStyle}>{'[' + item.id + '] ' + item.name}</Text></View>
+              </ElevatedView>
             </WoWsTouchable>
           )}}/>
         </View>
@@ -69,7 +72,7 @@ export default class Clan extends Component {
     const { count, created_at, leader_name, name, tag, text} = this.state.data;
     const { clanNameStyle, clanTextStyle, clanLeaderStyle, clanMemberStyle, leaderImage, leaderViewStyle, memberViewStyle } = styles;
     return (
-      <View style={{flex: 1, backgroundColor: getTheme()}}>
+      <ElevatedView elevation={2} style={{margin: 8, marginTop: 0, flex: 1, backgroundColor: getTheme()}}>
         <Text style={[clanNameStyle, {color: getTextColour(getTheme())}]}>{'[' + tag + '] ' + name}</Text>
         <Text style={[clanTextStyle, {color: getTextColour(getTheme())}]}>{text}</Text>
         <View style={leaderViewStyle}>
@@ -80,7 +83,7 @@ export default class Clan extends Component {
           <Text style={[clanMemberStyle, {color: getTextColour(getTheme())}]}>{language.clan_member_count + ' (' + count + ')'}</Text>
           <Image />
         </View>
-      </View>
+      </ElevatedView>
     )
   }
 }
@@ -120,7 +123,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',    
   },
   clanCellViewStyle: {
-    height: 44, justifyContent: 'center'
+    height: 44, justifyContent: 'center', padding: 8
   },
   textStyle: {
     fontSize: 16, fontWeight: '300',

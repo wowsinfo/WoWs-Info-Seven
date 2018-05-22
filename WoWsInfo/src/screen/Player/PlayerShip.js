@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Text, TextInput, Keyboard, StyleSheet, Image } from 'react-native';
 import { View } from 'react-native-animatable';
-import { Icon } from 'react-native-elements';
+import { Icon, Divider } from 'react-native-elements';
 import { NoInformation, WoWsLoading, ShipInfoCell, WoWsTouchable } from '../../component';
 import GridView from 'react-native-super-grid';
 import { ShipInfo, PersonalRating } from '../../core';
@@ -84,7 +84,8 @@ class PlayerShip extends PureComponent {
             <WoWsTouchable onPress={this.resetFilter}><Image source={iconsMap['undo']} style={[iconStyle, {tintColor: getTheme()}]}/></WoWsTouchable>
             <WoWsTouchable onPress={this.pushToFilter}><Image source={iconsMap['filter']} style={[iconStyle, {tintColor: getTheme()}]}/></WoWsTouchable>
           </View>
-        </View>      
+        </View> 
+        <Divider />  
       </View>     
     )
   }
@@ -224,11 +225,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   poweredStyle: {
-    flex: 0.9,
+    flex: 1,
     paddingLeft: 8
   },
   totalShipStyle: {
-    flex: 0.1,
+    paddingRight: 4,
     alignItems: 'flex-end',
   }
 })

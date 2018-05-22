@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Rating } from 'react-native-elements';
+import ElevatedView from 'react-native-elevated-view';
 import { Info3Cell, WoWsTouchable } from '../../../component';
 import { RankInfo } from '../../../core';
 import { getTheme } from '../../../constant/colour';
@@ -10,12 +11,12 @@ import { Red } from 'react-native-material-color';
 class RankCell extends Component {
   render() {
     return (
-      <WoWsTouchable onPress={this.gotoDetail}>
-        <View style={[styles.mainViewStyle, {borderColor: getTheme()}]}>
-          { this.renderRankInfo() }
-          { this.renderInfo3Cell() }
-        </View>
-      </WoWsTouchable>
+      <ElevatedView elevation={2} style={styles.mainViewStyle}>
+        <WoWsTouchable onPress={this.gotoDetail}>
+            { this.renderRankInfo() }
+            { this.renderInfo3Cell() }
+        </WoWsTouchable>
+      </ElevatedView>
     )
   }
 
@@ -62,8 +63,6 @@ class RankCell extends Component {
 
 const styles = StyleSheet.create({
   mainViewStyle: {
-    borderWidth: 1.25,
-    borderRadius: 8,
     padding: 4,
     marginBottom: 4,
   },
