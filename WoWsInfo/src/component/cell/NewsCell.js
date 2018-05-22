@@ -10,7 +10,7 @@ class NewsCell extends Component {
     const { image, title, time, link } = this.props.data;
     const { mainViewStyle, imageViewStyle, textViewStyle, imageStyle, titleStyle, timeStyle } = styles;    
     return (
-      <ElevatedView elevation={1} style={{margin: 8}}>
+      <ElevatedView elevation={2} style={{margin: 8}}>
         <WoWsTouchable onPress={() => Linking.openURL(link)}>
           <View style={mainViewStyle}>
             { data_saver ? null : (
