@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
+import ElevatedView from 'react-native-elevated-view';
 import { getTheme } from '../../../constant/colour';
 
 class RecordCell extends Component {
@@ -8,7 +9,7 @@ class RecordCell extends Component {
     const { mainViewStyle, titleStyle, subViewStyle, imageStyle, numberStyle, nameStyle, imageViewStyle, numberViewStyle } = styles;
     let color = getTheme();   
     return (
-      <View style={[mainViewStyle, {borderColor: color}]}>
+      <View style={mainViewStyle}>
         <Text style={titleStyle}>{title}</Text>
         <View style={subViewStyle}>
           <View style={imageViewStyle}>
@@ -25,10 +26,8 @@ class RecordCell extends Component {
 const styles = StyleSheet.create({
   mainViewStyle: {
     flex: 1,
-    margin: 6,
-    paddingTop: 2, paddingBottom: 2,   
-    borderWidth: 1,
-    borderRadius: 8
+    margin: 8,
+    paddingTop: 4, paddingBottom: 4
   },
   titleStyle: {
     textAlign: 'center',

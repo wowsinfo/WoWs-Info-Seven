@@ -10,12 +10,12 @@ import Wiki from './Wiki/Wiki';
 
 export default class Drawer extends Component {
   render() {
-    const { viewStyle, textStyle, titleStyle, dividerStyle, versionStyle } = styles;    
+    const { viewStyle, textStyle, titleStyle, versionStyle } = styles;    
     return (
-      <ScrollView style={viewStyle} contentContainerStyle={{padding: 8}} showsVerticalScrollIndicator={false}>
+      <ScrollView style={viewStyle} showsVerticalScrollIndicator={false}>
           <Text style={titleStyle}>{language.drawer_wiki}</Text>
           <Wiki navigator={this.props.navigator} drawer={this.closeDrawer}/>
-          <View style={dividerStyle}><Divider /></View>
+          <Divider />
           <TextCell title={language.drawer_settings} onPress={() => this.pushToScreen('info.settings', language.settings_tab_title)}/>
           <Text style={versionStyle}>{VERSION}</Text>
       </ScrollView>
@@ -56,15 +56,12 @@ const styles = StyleSheet.create({
   viewStyle: {
     flex: 1, backgroundColor: 'white', width: '90%'
   },
-  dividerStyle: {
-    marginTop: 16
-  },
   textStyle: {
     paddingTop: 8, color: GREY[800],
     fontSize: 36, fontWeight: 'bold'
   },
   titleStyle: {
-    fontWeight: 'bold',
+    fontWeight: 'bold', padding: 8,
     color: GREY[800]
   },
   versionStyle: {

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { View, Text } from 'react-native-animatable';
-import { TextInput, Picker, StyleSheet, SafeAreaView, SegmentedControlIOS } from 'react-native';
+import { TextInput, Picker, StyleSheet, SegmentedControlIOS } from 'react-native';
 import GridView from 'react-native-super-grid';
 import { WoWsLoading, WoWsTouchable, SimpleBanner } from '../component';
 import language from '../constant/language';
@@ -41,7 +41,7 @@ export default class Search extends PureComponent {
     const { showPicker, data, input, mode } = this.state;
     const { inputStyle, textStyle } = styles;
     return (
-      <View style={{flex: 1, padding: 8}} ref='search'>
+      <View style={{flex: 1, margin: 4}} ref='search'>
         { showPicker ? this.renderPicker() : null }
         <TextInput style={inputStyle} underlineColorAndroid='white' onEndEditing={this.search} autoCorrect={false}
           clearButtonMode='while-editing' onChangeText={(text) => this.setState({input: text})} autoCapitalize='none' value={input}/>
@@ -50,9 +50,7 @@ export default class Search extends PureComponent {
         <GridView itemDimension={256} items={data} renderItem={item => {
           return (
             <WoWsTouchable onPress={() => mode == 0 ? this.pushToPlayer(item) : this.pushToClan(item)}>
-              <SafeAreaView style={{height: 44, justifyContent: 'center'}}>
-                <Text style={textStyle}>{'[' + item.id + '] ' + item.name}</Text>                          
-              </SafeAreaView>
+              <Text style={textStyle}>{'[' + item.id + '] ' + item.name}</Text>
             </WoWsTouchable>
           )}}/>
       </View>
@@ -198,14 +196,13 @@ const styles = StyleSheet.create({
     paddingBottom: 8
   },
   inputStyle: {
-    borderRadius: 8, elevation: 1,
     textAlign: 'center', fontSize: 18,
     height: android ? 46 : 36,
-    borderWidth: android ? 0 : 1,
+    borderWidth: 1,
     borderColor: GREY[300]
   },
   textStyle: {
     fontSize: 16, fontWeight: '300',
-    color: GREY[900]
+    color: GREY[900], padding: 8
   }
 })

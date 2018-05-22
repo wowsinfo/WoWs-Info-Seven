@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-#import <UIKit/UIK.h>
+#import <UIKit/UIKit.h>
 
 #import "AppDelegate.h"
 

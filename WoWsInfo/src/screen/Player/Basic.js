@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, ScrollView, Text } from 'react-native';
 import { View } from 'react-native-animatable';
 import { PlayerInfo } from '../../core';
+import ElevatedView from 'react-native-elevated-view';
 import { WoWsLoading, Basic8Cell, RecordCell, WoWsTouchable, SimpleBanner } from '../../component';
 import { Divider } from 'react-native-elements';
 import store from 'react-native-simple-store';
@@ -51,17 +52,21 @@ class Basic extends Component {
       return (
         <View style={mainViewStyle} animation='fadeInUp'>
           <ScrollView style={scrollViewStyle} contentInset={{bottom: 50}}>
-            <View style={[playerViewStyle, {backgroundColor: color}]}>
+            <ElevatedView elevation={2} style={[playerViewStyle, {backgroundColor: color, margin: 8}]}>
               <Text style={playerNameStyle}>{clanTag + name}</Text>
               <Text style={playerInfoStyle}>{last_battle}</Text>
               <Text style={playerInfoStyle}>{created + ' | Lv ' + level + ' | ⭐️' + rank}</Text>
               { this.renderSetAsMain() }             
-            </View>
-            <SimpleBanner />
-            <Basic8Cell info={this.state.info}/>
-            <Text style={dontJudgeStyle}>{language.player_respect}</Text>
-            { this.renderRecord(this.state.record) }
-            { this.renderRecord(this.state.weapon) }
+            </ElevatedView>
+            <ElevatedView elevation={2} style={{margin: 8}}>
+              <SimpleBanner />
+              <Basic8Cell info={this.state.info}/>
+              <Text style={dontJudgeStyle}>{language.player_respect}</Text>
+            </ElevatedView>        
+            <ElevatedView elevation={2} style={{margin: 8}}>
+              { this.renderRecord(this.state.record) }
+              { this.renderRecord(this.state.weapon) }
+            </ElevatedView>
           </ScrollView>
         </View>
       )

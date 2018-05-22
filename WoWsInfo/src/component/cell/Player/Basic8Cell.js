@@ -34,7 +34,7 @@ class Basic8Cell extends Component {
 const styles = StyleSheet.create({
   mainViewStyle: {
     flex: 1,
-    margin: 16,
+    margin: 8,
   },
   subViewStyle: {
     flex: 1,

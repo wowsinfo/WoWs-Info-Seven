@@ -22,13 +22,13 @@ class WoWsProgress extends Component {
 const styles = StyleSheet.create({
   viewStyle: {
     flexDirection: 'row', flex: 1,
-    alignItems: 'center'
+    alignItems: 'center', marginTop: 8
   },
   textStyle: {
     padding: 4, fontWeight: 'bold', width: 46, textAlign: 'center'
   },
   titleStyle: {
-    paddingLeft: 4, fontWeight: '300'
+    paddingLeft: 8, fontWeight: '300'
   },
   progressStyle: {
     flex: 1, marginLeft: 4
