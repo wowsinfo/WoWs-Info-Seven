@@ -33,13 +33,13 @@ export default class OpenSource extends Component {
       <ScrollView>
         { libraries.map(function(value, index) {
           return (
-            <ElevatedView key={index} style={{margin: 8}} elevation={1}>
+            <ElevatedView key={index} style={{margin: 8}} elevation={2}>
               <WoWsTouchable onPress={() => Linking.openURL(value.link)}>
                 <Text style={styles.textStyle}>{value.name}</Text> 
               </WoWsTouchable>
             </ElevatedView>
         )}) }
-        <ElevatedView elevation={1} style={{margin: 8}}>
+        <ElevatedView elevation={2} style={{margin: 8}}>
           <Text style={styles.textStyle}>{language.why_opensource}</Text>
         </ElevatedView>
       </ScrollView>

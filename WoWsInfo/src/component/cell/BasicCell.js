@@ -1,12 +1,13 @@
 import React, { PureComponent } from 'react';
-import { View, Image, Text, StyleSheet } from 'react-native';
+import { View, Image, Text, StyleSheet, Alert } from 'react-native';
 import { WoWsTouchable } from '../../component';
 
 class BasicCell extends PureComponent {
   render() {
-    const { icon, player } = this.props;
+    const { icon, player, data } = this.props;
+    console.log(data);
     return (
-      <WoWsTouchable onPress={() => player ? null : this.showDetail()}>
+      <WoWsTouchable onPress={() => player ? Alert.alert(data.name, data.text) : this.showDetail()}>
         <View style={viewStyle}>
           <Image source={{uri: icon}} style={imageStyle} />
           { this.renderCount() }
