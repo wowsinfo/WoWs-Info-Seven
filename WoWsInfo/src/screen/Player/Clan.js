@@ -58,9 +58,7 @@ export default class Clan extends Component {
                 },
                 passProps: item
               })}}>
-              <ElevatedView elevation={2}>
-                <View style={clanCellViewStyle}><Text style={textStyle}>{'[' + item.id + '] ' + item.name}</Text></View>
-              </ElevatedView>
+              <View style={clanCellViewStyle}><Text style={textStyle}>{'[' + item.id + '] ' + item.name}</Text></View>
             </WoWsTouchable>
           )}}/>
         </View>
@@ -72,7 +70,7 @@ export default class Clan extends Component {
     const { count, created_at, leader_name, name, tag, text} = this.state.data;
     const { clanNameStyle, clanTextStyle, clanLeaderStyle, clanMemberStyle, leaderImage, leaderViewStyle, memberViewStyle } = styles;
     return (
-      <ElevatedView elevation={2} style={{margin: 8, marginTop: 0, flex: 1, backgroundColor: getTheme()}}>
+      <View style={{margin: 8, marginTop: 0, flex: 1, backgroundColor: getTheme()}}>
         <Text style={[clanNameStyle, {color: getTextColour(getTheme())}]}>{'[' + tag + '] ' + name}</Text>
         <Text style={[clanTextStyle, {color: getTextColour(getTheme())}]}>{text}</Text>
         <View style={leaderViewStyle}>
@@ -83,7 +81,7 @@ export default class Clan extends Component {
           <Text style={[clanMemberStyle, {color: getTextColour(getTheme())}]}>{language.clan_member_count + ' (' + count + ')'}</Text>
           <Image />
         </View>
-      </ElevatedView>
+      </View>
     )
   }
 }

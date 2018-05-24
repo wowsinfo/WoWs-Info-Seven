@@ -13,8 +13,8 @@ class RankCell extends Component {
     return (
       <ElevatedView elevation={2} style={styles.mainViewStyle}>
         <WoWsTouchable onPress={this.gotoDetail}>
-            { this.renderRankInfo() }
-            { this.renderInfo3Cell() }
+          { this.renderRankInfo() }
+          { this.renderInfo3Cell() }
         </WoWsTouchable>
       </ElevatedView>
     )

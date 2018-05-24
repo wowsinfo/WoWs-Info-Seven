@@ -6,17 +6,17 @@ import store from 'react-native-simple-store';
 import { DataManager } from './';
 
 class DataStorage {
-  static async DataValidation() {
+  static async DataValidation(updateText) {
     try {
       // Setting up Data here      
       let first = await store.get(LocalData.first_launch);
      
       if (first == null) {
-        console.log('First Launch\nWelcome to WoWs Info >_<');
         global.first_launch = true;     
-        await DataStorage.SetupAllData();
+        updateText('Welcome to WoWs Info');
+        await DataStorage.SetupAllData(updateText);
       } else {
-        console.log('Welcome back');
+        updateText('Welcome back');        
         global.first_launch = false; 
         // Check for App Update
         let appVersion = await store.get(LocalData.curr_version);
@@ -25,14 +25,20 @@ class DataStorage {
         // Restore essential loca data
         await DataStorage.RestoreData();
         let saved = global.game_version;
+        updateText("Checking for update...");        
         let curr = await GameVersion.getCurrVersion();
         console.log('Game Version\nCurr: ' + curr + '\nSaved: ' + saved);
         if (curr != saved) {
-          await DataManager.UpdateLocalData();
+          updateText("Updating data...");
+          await DataManager.UpdateLocalData(updateText);
           await store.save(LocalData.game_version, curr);
         } else {
           // 5% to update personal rating
-          if (Math.floor(Math.random() * 20) == 0) await DataManager.savePersonalRating();
+          if (Math.floor(Math.random() * 20) == 0) {
+            updateText("Updating ship data");
+            await DataManager.savePersonalRating();
+          }
+          updateText("App is ready");           
           await DataStorage.RestoreSavedData();
         }
   
@@ -51,10 +57,10 @@ class DataStorage {
   // Setup data
   //
 
-  static async SetupAllData() {
+  static async SetupAllData(updateText) {
     await DataStorage.SetupLocalStorage();
     await DataStorage.RestoreData();
-    await DataManager.UpdateLocalData();
+    await DataManager.UpdateLocalData(updateText);
   }
 
   static async SetupAdditionalData() {

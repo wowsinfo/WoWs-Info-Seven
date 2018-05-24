@@ -1,21 +1,46 @@
-import React, { Component } from 'react';
-import { View, Image, ActivityIndicator, StyleSheet } from 'react-native';
+import React, { PureComponent } from 'react';
+import { View, Image, NetInfo, StyleSheet, Text, ActivityIndicator } from 'react-native';
 import { Blue } from 'react-native-material-color';
 import { verticalScale } from 'react-native-size-matters';
+import { DataStorage } from '../core';
+import { startApp } from '../app/App';
+import language from '../constant/language';
 
-export default class WoWsInfo extends Component {
-  static navigatorStyle = {
-    navBarHidden: true, tabBarHidden: true
-  }
-
+export default class WoWsInfo extends PureComponent {
+  static navigatorStyle = { navBarHidden: true, tabBarHidden: true }
+  
+  state = { net: 'unknown', status: '', isFirst: true };
   render() {
-    const { viewStyle, imageStyle } = styles;
+    // Updating api data
+    const { net, status, isFirst } = this.state;    
+    if (!this.props.api && isFirst) {
+      NetInfo.getConnectionInfo().then((info) => this.setState({net: info.type}));
+      NetInfo.addEventListener('connectionChange', (info) => {
+        if (info.type == 'none' || info.type == 'unknown') {
+          this.setState({status: language.no_internet});
+        } else this.setState({net: info.type});
+      });
+  
+      console.log(net);
+      if (net == 'wifi' || net == 'cellular') {
+        console.log('Device is online');      
+        this.setState({isFirst: false});        
+        DataStorage.DataValidation(this.updateText).then(() => startApp());
+      }
+    }
+
+    const { viewStyle, imageStyle, textStyle } = styles;    
     return (
       <View style={viewStyle}>
         <Image style={imageStyle} source={require('../img/Logo.png')}/>
-        <ActivityIndicator size='large' color='white'/>
+        <Text style={textStyle}>{status}</Text>        
+        { net == 'unknown' ? null :  <ActivityIndicator size='large' color='white'/> }
       </View>
     )
+  }
+
+  updateText = (text) => {
+    this.setState({status: text});
   }
 }
 
@@ -29,5 +54,10 @@ const styles = StyleSheet.create({
   imageStyle: {
     height: 128, width: 128,
     margin: 16,
+  }, 
+  textStyle: {
+    color: 'white',
+    padding: 10,
+    marginBottom: 20
   }
 })

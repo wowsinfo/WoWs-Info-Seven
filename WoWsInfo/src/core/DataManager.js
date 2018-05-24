@@ -4,20 +4,30 @@ import store from 'react-native-simple-store';
 
 class DataManager {
   // Update everything from server
-  static async UpdateLocalData() {
+  static async UpdateLocalData(updateText) {
     // Language has to be saved in order to load other data correctly
     await DataManager.saveData(DataAPI.Language, SavedData.language);
+    updateText(".");
     // Personal Rating
     await DataManager.savePersonalRating();
-    await DataManager.saveData(DataAPI.Encyclopedia, SavedData.encyclopedia);    
+    updateText("..");    
+    await DataManager.saveData(DataAPI.Encyclopedia, SavedData.encyclopedia);
+    updateText("...");    
     await DataManager.saveData(DataAPI.ShipType, SavedData.ship_type);    
+    updateText("....");    
     await DataManager.saveData(DataAPI.Achievement, SavedData.achievement);
+    updateText(".....");    
     await DataManager.saveData(DataAPI.CommanderSkill, SavedData.commander_skill);
+    updateText("......");    
     await DataManager.saveData(DataAPI.GameMap, SavedData.map);
+    updateText(".......");    
     await DataManager.saveData(DataAPI.Consumable, SavedData.consumable);
+    updateText("........");    
     await DataManager.saveData(DataAPI.Warship, SavedData.warship);
+    updateText(".........");    
     // Additional information
     await DataManager.saveData(DataAPI.Collection, SavedData.collection);
+    updateText("App is ready");    
     await DataManager.saveData(DataAPI.CollectionItem, SavedData.collection_item);
   }
 
