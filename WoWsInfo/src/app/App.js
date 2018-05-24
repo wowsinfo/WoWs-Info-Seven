@@ -1,5 +1,5 @@
 import { Navigation } from 'react-native-navigation';
-import { Platform, NetInfo, Alert } from 'react-native';
+import { Platform, Alert, Dimensions } from 'react-native';
 import { AdMobInterstitial } from 'react-native-admob';
 import { registerScreens } from '../screen';
 
@@ -10,11 +10,14 @@ import language from '../constant/language';
 import { iconsLoaded, iconsMap } from '../constant/icon';
 import { DataStorage } from '../core';
 
+AdMobInterstitial.setAdUnitID('ca-app-pub-5048098651344514/7499671184');
+AdMobInterstitial.setTestDevices([AdMobInterstitial.simulatorId]);
+
 // Loading icons
 iconsLoaded.then(() => {
+  // Load data
   registerScreens();
   loadingData();   
-  DataStorage.DataValidation().then(() => startApp())     
 });
 
 /**
@@ -28,8 +31,8 @@ export function loadingData() {
         navBarHidden: true,
         statusBarTextColorScheme: 'light',
         statusBarColor: BLUE[700], 
-      }
-    },
+      },
+    },      
     animationType: 'none'
   });
 }
@@ -39,12 +42,8 @@ export function loadingData() {
  */
 export function startApp() {
   hapticFeedback();
-  android ? startAppAndroid() : startAppIOS();
-  if (ads && !android) {
-    AdMobInterstitial.setAdUnitID('ca-app-pub-5048098651344514/7499671184');
-    AdMobInterstitial.setTestDevices([AdMobInterstitial.simulatorId]);
-    AdMobInterstitial.requestAd().then(() => AdMobInterstitial.showAd());
-  }
+  android ? startAppAndroid() : startAppIOS(); 
+  AdMobInterstitial.requestAd().then(() => AdMobInterstitial.showAd());
 }
 
 /**
@@ -126,4 +125,17 @@ export function hapticFeedback() {
     let ReactNativeHaptic = require('react-native-haptic').default;
     ReactNativeHaptic.generate('selection');
   }
+}
+
+/**
+ * Determine if device is iphone x
+ */
+export function isIphoneX() {
+  const dimen = Dimensions.get('window');
+  return (
+      Platform.OS === 'ios' &&
+      !Platform.isPad &&
+      !Platform.isTVOS &&
+      (dimen.height === 812 || dimen.width === 812)
+  );
 }
