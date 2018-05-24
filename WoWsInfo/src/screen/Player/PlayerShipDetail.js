@@ -4,7 +4,7 @@ import { View } from 'react-native-animatable';
 import ElevatedView from 'react-native-elevated-view';
 import { Divider } from 'react-native-elements';
 import { PersonalRating } from '../../core';
-import { Basic8Cell, SimpleBanner, WoWsTouchable } from '../../component';
+import { Basic8Cell, WoWsTouchable } from '../../component';
 import language from '../../constant/language';
 import { getTheme, navStyle } from '../../constant/colour';
 
@@ -24,7 +24,6 @@ export default class PlayerShipDetail extends Component {
       <View style={mainViewStyle}>
         <ScrollView>
           <ElevatedView elevation={2} style={{margin: 8}}>
-            <SimpleBanner />
             <WoWsTouchable onPress={() => this.pushToDetail(shipData)}>
               <Image source={{uri: shipInfo.image}} style={imageStyle}/>
             </WoWsTouchable>

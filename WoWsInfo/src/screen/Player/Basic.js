@@ -3,7 +3,7 @@ import { StyleSheet, ScrollView, Text } from 'react-native';
 import { View } from 'react-native-animatable';
 import { PlayerInfo } from '../../core';
 import ElevatedView from 'react-native-elevated-view';
-import { WoWsLoading, Basic8Cell, RecordCell, WoWsTouchable, SimpleBanner } from '../../component';
+import { WoWsLoading, Basic8Cell, RecordCell, WoWsTouchable } from '../../component';
 import { Divider } from 'react-native-elements';
 import store from 'react-native-simple-store';
 import language from '../../constant/language';
@@ -59,7 +59,6 @@ class Basic extends Component {
               { this.renderSetAsMain() }             
             </ElevatedView>
             <ElevatedView elevation={2} style={{margin: 8}}>
-              <SimpleBanner />
               <Basic8Cell info={this.state.info}/>
               <Text style={dontJudgeStyle}>{language.player_respect}</Text>
             </ElevatedView>        

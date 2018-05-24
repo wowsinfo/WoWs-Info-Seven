@@ -99,9 +99,10 @@ export default class Settings extends Component {
         <View style={horizonntalViewStyle}>
           <Text style={basicTextStyle}>{language.settings_api_language}</Text>
           <QuickInput options={api} value={langAPI} action={(value, index) => {
-            this.props.navigator.push({
+            this.props.navigator.showModal({
               screen: 'app.wowsinfo',
-              navigatorStyle: navStyle()
+              navigatorStyle: navStyle(),
+              passProps: {api: true}
             })
             this.setState({langAPI: value});
             global.api_language = value;
