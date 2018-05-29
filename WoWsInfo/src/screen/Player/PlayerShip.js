@@ -116,7 +116,8 @@ class PlayerShip extends PureComponent {
   * Set ship filter
   */
   setFilter = (filter) => {
-    if (filter == this.filter) return;
+    const { tier, type, nation } = filter;
+    if (tier == '' && type == '' & nation == '') return;    
     this.filter = filter;
     this.filterShip();
   }
