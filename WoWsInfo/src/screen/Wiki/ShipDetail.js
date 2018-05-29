@@ -22,13 +22,14 @@ export default class ShipDetail extends Component {
 
   componentWillMount() {
     ShipDetailedInfo.getDefault(this.props.info.ship_id).then(data => {
-      var parsed = {};
       // Get almost everything from data
       const { default_profile, description, is_premium, is_special, mod_slot, price_credit, price_gold, upgrades, next_ships, modules_tree } = data;
       const { engine, torpedo_bomber, anti_aircraft, mobility, hull, atbas, artillery, torpedoes, fighters, fire_control, 
         weaponry, battle_level_range_max, battle_level_range_min, flight_control, concealment, armour, dive_bomber } = default_profile;
-      // Ship description
-      parsed.description = description;
+      for (module in modules_tree) {
+        let curr = modules_tree[module];
+        if (curr.next_modules != null) console.log(curr);
+      }
       // Collect status from everywhere
       this.setState({data: data, isReady: true, profile: data.default_profile});
     })
@@ -316,7 +317,6 @@ export default class ShipDetail extends Component {
     if (anti_aircraft != null) {
       const { slots } = anti_aircraft;
       var AAValues = []; for (aa in slots) AAValues.push(slots[aa]);
-      console.log(AAValues, slots)
       return (
         <ElevatedView elevation={2} style={{margin: 8}}>
           { this.renderTitle(language.detail_aa) }
@@ -408,7 +408,7 @@ export default class ShipDetail extends Component {
     else {
       // Get all ships from next_ships
       var ships = []; for (key in next_ships) ships.push({key: key, exp: next_ships[key]});
-      shipKey = (value, index) => index;      
+      shipKey = (value, index) => String(index);      
       return (
         <ElevatedView elevation={2} style={{margin: 8}}>
           { this.renderTitle(language.detail_next_ship_title) }
