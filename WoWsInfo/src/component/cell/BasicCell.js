@@ -5,7 +5,7 @@ import { WoWsTouchable } from '../../component';
 class BasicCell extends PureComponent {
   render() {
     const { icon, player, data } = this.props;
-    console.log(data);
+    // console.log(data);
     return (
       <WoWsTouchable onPress={() => player ? Alert.alert(data.name, data.text) : this.showDetail()}>
         <View style={viewStyle}>
