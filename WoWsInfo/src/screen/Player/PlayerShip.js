@@ -70,7 +70,7 @@ class PlayerShip extends PureComponent {
   renderRating = () => {
     const { overall, data } = this.state;
     let ratingInfo = this.getOverallRatingInfo(overall); 
-    console.log(ratingInfo);
+    // console.log(ratingInfo);
     const { iconStyle, iconViewStyle, footerViewStyle, ratingViewStyle, poweredStyle, totalShipStyle, ratingStyle } = styles;   
     return (
       <View>
