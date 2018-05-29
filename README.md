@@ -20,7 +20,7 @@ react-native run-ios (run-android/run-wpf)
 ### Android
 [Google Play](https://play.google.com/store/apps/details?id=com.yihengquan.wowsinfo)
 
-## Suport development
+## Support development
 - Star this repository
 - Download WoWs Info
 - [Support on Patreon](https://www.patreon.com/henryquan)
