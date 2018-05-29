@@ -33,8 +33,8 @@ class DataStorage {
           await DataManager.UpdateLocalData(updateText);
           await store.save(LocalData.game_version, curr);
         } else {
-          // 5% to update personal rating
-          if (Math.floor(Math.random() * 20) == 0) {
+          // 2% to update personal rating
+          if (Math.floor(Math.random() * 50) == 0) {
             updateText("Updating ship data");
             await DataManager.savePersonalRating();
           }

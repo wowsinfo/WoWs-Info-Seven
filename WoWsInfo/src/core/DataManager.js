@@ -31,6 +31,23 @@ class DataManager {
     await DataManager.saveData(DataAPI.CollectionItem, SavedData.collection_item);
   }
 
+  static async UpdateLocalData() {
+    // Language has to be saved in order to load other data correctly
+    await DataManager.saveData(DataAPI.Language, SavedData.language);
+    // Personal Rating
+    await DataManager.savePersonalRating();  
+    await DataManager.saveData(DataAPI.Encyclopedia, SavedData.encyclopedia); 
+    await DataManager.saveData(DataAPI.ShipType, SavedData.ship_type);     
+    await DataManager.saveData(DataAPI.Achievement, SavedData.achievement);  
+    await DataManager.saveData(DataAPI.CommanderSkill, SavedData.commander_skill);
+    await DataManager.saveData(DataAPI.GameMap, SavedData.map);
+    await DataManager.saveData(DataAPI.Consumable, SavedData.consumable);
+    await DataManager.saveData(DataAPI.Warship, SavedData.warship);
+    // Additional information
+    await DataManager.saveData(DataAPI.Collection, SavedData.collection);   
+    await DataManager.saveData(DataAPI.CollectionItem, SavedData.collection_item);
+  }
+
   /**
    * Download new personal rating json file from server
    */
