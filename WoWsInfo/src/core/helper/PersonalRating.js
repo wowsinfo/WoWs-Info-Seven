@@ -4,31 +4,28 @@ import language from "../../constant/language";
 class PersonalRating {
   constructor(id, battle, damage, win, frag) {
     this.ship = data.personal_rating[id];
-    if (this.ship != null && this.ship.win_rate != null) {
-      // This ship id is valid
-      this.battle = battle;
-      if (battle > 0) {
-        this.avg_damage = damage / battle;
-        this.win_rate = win / battle * 100;
-        this.avg_frag = frag / battle;
-      } else {
-        // No battle no rating
-        this.avg_damage = 0;
-        this.win_rate = 0;
-        this.avg_frag = 0;
-      }
+    this.battle = battle;
+    if (battle > 0) {
+      this.avg_damage = damage / battle;
+      this.win_rate = win / battle * 100;
+      this.avg_frag = frag / battle;
+    } else {
+      // No battle no rating
+      this.avg_damage = 0;
+      this.win_rate = 0;
+      this.avg_frag = 0;
+    }
 
-      // Calculate rating
-      let rDmg = this.avg_damage / this.ship.average_damage_dealt;
-      let rWins = this.win_rate / this.ship.win_rate;
-      let rFrags = this.avg_frag / this.ship.average_frags;
-  
-      let nDmg = Math.max(0, (rDmg - 0.4) / (1 - 0.4));
-      let nFrags = Math.max(0, (rFrags - 0.1) / (1 - 0.1));
-      let nWins = Math.max(0, (rWins - 0.7) / (1 - 0.7));
-  
-      this.rating = Number(700 * nDmg + 300 * nFrags + 150 * nWins).toFixed(0);
-    } else this.rating = 1;
+    // Calculate rating
+    let rDmg = this.avg_damage / this.ship.average_damage_dealt;
+    let rWins = this.win_rate / this.ship.win_rate;
+    let rFrags = this.avg_frag / this.ship.average_frags;
+
+    let nDmg = Math.max(0, (rDmg - 0.4) / (1 - 0.4));
+    let nFrags = Math.max(0, (rFrags - 0.1) / (1 - 0.1));
+    let nWins = Math.max(0, (rWins - 0.7) / (1 - 0.7));
+
+    this.rating = Number(700 * nDmg + 300 * nFrags + 150 * nWins).toFixed(0);
   }
 
   /**
@@ -44,7 +41,9 @@ class PersonalRating {
   getAbilityPoint() {
     var battle = Math.log10(this.battle);
     if (battle < 1) battle = 1;
-    return Number(battle * this.rating).toFixed(0);
+    var ap = battle * this.rating;
+    if (ap < 1) ap = 1;
+    return Number(ap).toFixed(0);
   }
 
   static getIndex(pr) {
