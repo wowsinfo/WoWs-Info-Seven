@@ -132,6 +132,12 @@ export default language = new LocalizedStrings({
     // Tool
     tool_wrinfo: '[Windows] WRInfo',
     tool_assist: '[Android] Community Assistant',
+    // Loading screen
+    loading_welcome: 'Welcome to WoWs Info',
+    loading_welcome_back: 'Welcome back',
+    loading_check_update: 'Updating...',
+    loading_pr: 'Installing pr plugin',
+    loading_ready: 'All GREEN',
     // Extra
     no_information: 'No information',
     no_internet: 'No Internet connection',
@@ -272,6 +278,12 @@ export default language = new LocalizedStrings({
    // Tool
    tool_wrinfo: '[Windows] WRInfo',
    tool_assist: '[安卓] Community Assistant',
+  // Loading screen
+  loading_welcome: '欢迎使用WoWs Info',
+  loading_welcome_back: '欢迎回来',
+  loading_check_update: '更新中...',
+  loading_pr: '安装PR插件',
+  loading_ready: '完成更新',
    // Extra
    no_information: '无数据',
    no_internet: '无网络连接',
