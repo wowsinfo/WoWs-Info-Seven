@@ -86,6 +86,13 @@ export default language = new LocalizedStrings({
     player_set_as_main: 'Set as Main',
     clan_member_count: 'Member',
     rank_season: 'Season ',
+    // Graph
+    graph_tier: 'Battles per Tier',
+    graph_damage: 'Damage - Top 8',
+    graph_battle: 'Battle - Top 8',
+    graph_winarte: 'Winrate - Top 8',
+    graph_type: 'Battles by Type',
+    graph_top: ' - Top 8',
     // Personal Rating
     rating_bad: 'Improvement Needed',
     rating_below_average: 'Below Average',
@@ -232,6 +239,13 @@ export default language = new LocalizedStrings({
    player_set_as_main: '设置为主账号',
    clan_member_count: '成员',
    rank_season: '赛季 ',
+   // Graph
+   graph_tier: '个级别的战斗数',
+   graph_damage: '伤害 - 前八名',
+   graph_battle: '战斗数 - 前八名',
+   graph_winarte: '胜率 - 前八名',
+   graph_type: '个船体的战斗书',
+   graph_top: ' - 前八名',
    // Personal Rating
    rating_bad: '还需提高',
    rating_below_average: '低于平均值',
@@ -377,6 +391,13 @@ export default language = new LocalizedStrings({
    player_set_as_main: 'Set as Main',
    clan_member_count: '成員',
    rank_season: 'シーズン ',
+   // Graph
+   graph_tier: 'Battles per Tier',
+   graph_damage: 'Damage - Top 8',
+   graph_battle: 'Battle - Top 8',
+   graph_winarte: 'Winrate - Top 8',
+   graph_type: 'Battles by Type',
+   graph_top: ' - Top 8',
    // Personal Rating
    rating_bad: 'きっと未来がある',
    rating_below_average: '普通以下',
