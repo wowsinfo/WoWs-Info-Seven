@@ -72,6 +72,7 @@ class DataManager {
             if (name == 'HSF 春風') name = 'HSF 晴风';
             if (name == '鲲') name = '武藏';
             if (name == '鲔') name = '爱鹰';
+            if (name == '柊') name = '朝潮';
             if (name == '吹雪') name += '酱';
             let curr = global.data.warship[key];
             if (curr == null || name.includes('[')) continue;  
