@@ -5,6 +5,7 @@ import com.sbugert.rnadmob.RNAdMobPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.babisoft.ReactNativeLocalization.ReactNativeLocalizationPackage;
+import com.horcrux.svg.SvgPackage;
 
 import com.reactnativenavigation.NavigationApplication;
 import java.util.Arrays;
@@ -25,7 +26,8 @@ public class MainApplication extends NavigationApplication {
             new RNDeviceInfo(),
             new VectorIconsPackage(),
             new ReactNativeLocalizationPackage(),
-            new RNAdMobPackage()
+            new RNAdMobPackage(),
+            new SvgPackage()
     );
   }
 

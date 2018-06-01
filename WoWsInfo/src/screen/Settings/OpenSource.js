@@ -26,6 +26,8 @@ export default class OpenSource extends Component {
     {name: 'react-native-tab-view', link: 'https://github.com/react-native-community/react-native-tab-view/blob/master/LICENSE.md'},
     {name: 'react-native-userdefaults-ios', link: 'https://github.com/dsibiski/react-native-userdefaults-ios'},
     {name: 'react-native-vector-icons', link: 'https://github.com/oblador/react-native-vector-icons/blob/master/LICENSE'},
+    {name: 'victory-native', link: 'https://github.com/FormidableLabs/victory-native/blob/master/LICENSE.txt'},
+    {name: 'react-native-svg', link: 'https://github.com/react-native-community/react-native-svg/blob/master/LICENSE'},
     {name: 'fast-html-parser', link: 'https://github.com/ashi009/node-fast-html-parser'},
     {name: 'string-format', link: 'https://github.com/davidchambers/string-format/blob/master/MIT-LICENSE'}];
 

@@ -5,7 +5,7 @@ export default language = new LocalizedStrings({
     // Tabs
     news_tab_title: 'WoWs News',
     news_tab_label: 'News',
-    search_tab_title: 'WoWs Info Ultimate',
+    search_tab_title: 'WoWs Info Go',
     search_tab_label: 'Search',
     settings_tab_title: 'Settings',
     settings_tab_label: 'Settings',
@@ -145,7 +145,7 @@ export default language = new LocalizedStrings({
    // Tabs
    news_tab_title: '最新消息',
    news_tab_label: '新闻',
-   search_tab_title: 'WoWs Info 究极版',
+   search_tab_title: 'WoWs Info Go',
    search_tab_label: '搜索',
    settings_tab_title: '设置',
    settings_tab_label: '设置',
@@ -278,7 +278,7 @@ export default language = new LocalizedStrings({
    iap_failed: '无法完成您的购买',
    iap_no_itunes: '无法连接到AppStore',
    iap_success: '感谢您的购买',
-   why_opensource: '没有这些开源项目就没有WoWs Info。WoWs Info也是开源软件，因为开发者也想成为他们之一',   
+   why_opensource: '没有这些开源项目就没有WoWs Info。WoWs Info也是开源软件，因为开发者也想成为他们之一。',   
  },
  ja: {
  }
