@@ -101,8 +101,8 @@ android {
         applicationId "com.yihengquan.wowsinfo"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 3
-        versionName "1.0.1"
+        versionCode 4
+        versionName "1.0.2"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -113,7 +113,6 @@ android {
     splits {
         abi {
             reset()
-            enable enableSeparateBuildPerCPUArchitecture
             universalApk false  // If true, also generate a universal APK
             include "armeabi-v7a", "x86"
         }
