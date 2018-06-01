@@ -32,7 +32,8 @@ class ShipInfo {
         let shipData = data.warship[ship_id];
         if (battles > 0) { 
           let shipRatingInfo = prJson[ship_id];
-          if (shipRatingInfo != null) {
+          // Ignore new ship until wows numbers provide information
+          if (shipRatingInfo != null && shipRatingInfo.win_rate != null) {
             currShip.battles = battles;
             let avg_damage = damage_dealt / battles;
             totalDamage += avg_damage;

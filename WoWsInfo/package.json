@@ -9,7 +9,7 @@
   "dependencies": {
     "fast-html-parser": "^1.0.1",
     "react": "16.3.1",
-    "react-native": "^0.55.3",
+    "react-native": "^0.55.4",
     "react-native-admob": "^2.0.0-beta.5",
     "react-native-animatable": "^1.2.4",
     "react-native-cardview": "^1.1.5",
