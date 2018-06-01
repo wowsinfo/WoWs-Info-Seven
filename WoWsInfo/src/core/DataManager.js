@@ -1,6 +1,7 @@
 import { DataAPI, SavedData } from '../constant/value';
 import { Language } from './';
 import store from 'react-native-simple-store';
+import language from '../constant/language';
 
 class DataManager {
   // Update everything from server
@@ -27,7 +28,7 @@ class DataManager {
     updateText(".........");    
     // Additional information
     await DataManager.saveData(DataAPI.Collection, SavedData.collection);
-    updateText("App is ready");    
+    updateText(language.loading_ready);    
     await DataManager.saveData(DataAPI.CollectionItem, SavedData.collection_item);
   }
 
