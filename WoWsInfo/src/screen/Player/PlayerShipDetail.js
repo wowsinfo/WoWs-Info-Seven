@@ -12,7 +12,7 @@ export default class PlayerShipDetail extends Component {
   render() {
     const { mainViewStyle, scrollViewStyle, shipNameStyle, prTextStyle, imageStyle, ratingStyle, horizontalViewStyle } = styles;
     const { info } = this.props;
-    const { index, ship_id } = info;
+    const { index, ship_id, avg_damage, avg_frag, win_rate } = info;
     
     let shipColour = PersonalRating.getColour(index);
     let shipComment = PersonalRating.getComment(index);
@@ -20,19 +20,28 @@ export default class PlayerShipDetail extends Component {
     
     const pr = data.personal_rating[ship_id];    
     const shipData = data.warship[ship_id];    
+
+    // Player compare to average
+    let pdamage = avg_damage - pr.average_damage_dealt;
+    let pwin = win_rate - pr.win_rate;
+    let pfrags = avg_frag - pr.average_frags;
+
+    textStyle = (num) => [prTextStyle, {color: num > 0 ? 'green' : 'red'}]
+    showPlus = (num) => num > 0 ? '+' : ''
+
     return (
       <View style={mainViewStyle}>
         <ScrollView>
           <ElevatedView elevation={2} style={{margin: 8}}>
             <WoWsTouchable onPress={() => this.pushToDetail(shipData)}>
-              <Image source={{uri: shipInfo.image}} style={imageStyle}/>
+              <Image source={{uri: shipInfo.image}} resizeMode='contain' style={imageStyle}/>
             </WoWsTouchable>
             <Text style={shipNameStyle}>{shipInfo.name}</Text>
-            { pr == null || pr.win_rate == null ? null : <View style={horizontalViewStyle}>
-              <Text style={prTextStyle}>{Number(pr.average_damage_dealt).toFixed(0)}</Text>
-              <Text style={prTextStyle}>{Number(pr.win_rate).toFixed(2) + '%'}</Text>
-              <Text style={prTextStyle}>{Number(pr.average_frags).toFixed(2)}</Text>
-            </View>}
+            { pr == null || pr.win_rate == null ? null : <View style={[horizontalViewStyle, {marginBottom: 8}]}>
+              <Text style={textStyle(pdamage)}>{showPlus(pdamage) + Number(pdamage).toFixed(0)}</Text>
+              <Text style={textStyle(pwin)}>{showPlus(pwin) + Number(pwin).toFixed(2) + '%'}</Text>
+              <Text style={textStyle(pfrags)}>{showPlus(pfrags) + Number(pfrags).toFixed(2)}</Text>
+            </View> }
             <Text style={[ratingStyle, {color: shipColour}]}>{shipComment}</Text>
             <Basic8Cell info={this.getBasic8CellInfo(info)}/>
           </ElevatedView>
