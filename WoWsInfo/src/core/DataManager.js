@@ -25,8 +25,10 @@ class DataManager {
     await DataManager.saveData(DataAPI.Consumable, SavedData.consumable);
     updateText("........");    
     await DataManager.saveData(DataAPI.Warship, SavedData.warship);
-    updateText(".........");    
     // Additional information
+    updateText(".........");        
+    await DataManager.saveAlias();
+    updateText("..........");    
     await DataManager.saveData(DataAPI.Collection, SavedData.collection);
     updateText(language.loading_ready);    
     await DataManager.saveData(DataAPI.CollectionItem, SavedData.collection_item);
@@ -45,8 +47,43 @@ class DataManager {
     await DataManager.saveData(DataAPI.Consumable, SavedData.consumable);
     await DataManager.saveData(DataAPI.Warship, SavedData.warship);
     // Additional information
+    await DataManager.saveAlias();    
     await DataManager.saveData(DataAPI.Collection, SavedData.collection);   
     await DataManager.saveData(DataAPI.CollectionItem, SavedData.collection_item);
+  }
+
+  /**
+   * Save chinese name for japanese ship
+   */
+  static async saveAlias() {
+    try {
+      if (api_language.includes('zh')) {
+        // Then, get these names
+        let response = await fetch('http://xvm.qingcdn.com/wows/scripts/ships.js')
+        let text = await response.text();
+        // Make it readable
+        var formatted = text.replace('var shipDict=', '').replace('}};', '}}');
+        let data = JSON.parse(formatted);
+        for (key in data) {
+          let ship = data[key];
+          if (ship.country == 'japan') {
+            // Only Japanese ships
+            var name = ship.alias;         
+            if (name == 'HSF 春風') name = 'HSF 晴风';
+            if (name == '鲲') name = '武藏';
+            if (name == '鲔') name = '爱鹰';
+            if (name == '吹雪') name += '酱';
+            let curr = global.data.warship[key];
+            if (curr == null || name.includes('[')) continue;  
+            curr.name = name; 
+          }
+        }
+        // Update saved data
+        store.save(SavedData.warship, global.data.warship);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   /**
