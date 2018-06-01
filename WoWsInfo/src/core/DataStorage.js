@@ -4,6 +4,7 @@ import { BLUE } from 'react-native-material-color';
 import { Language, GameVersion, DateCalculator, PlayerConverter, ServerManager } from './';
 import store from 'react-native-simple-store';
 import { DataManager } from './';
+import language from '../constant/language';
 
 class DataStorage {
   static async DataValidation(updateText) {
@@ -13,32 +14,32 @@ class DataStorage {
      
       if (first == null) {
         global.first_launch = true;     
-        updateText('Welcome to WoWs Info');
+        updateText(language.loading_welcome);
         await DataStorage.SetupAllData(updateText);
       } else {
-        updateText('Welcome back');        
+        updateText(language.loading_welcome_back);        
         global.first_launch = false; 
         // Check for App Update
         let appVersion = await store.get(LocalData.curr_version);
-        if (appVersion != VERSION) await this.SetupAdditionalData();
+        if (appVersion != VERSION) await this.SetupAdditionalData(updateText);
 
         // Restore essential loca data
         await DataStorage.RestoreData();
         let saved = global.game_version;
-        updateText("Checking for update...");        
+        updateText(language.loading_check_update);        
         let curr = await GameVersion.getCurrVersion();
         console.log('Game Version\nCurr: ' + curr + '\nSaved: ' + saved);
         if (curr != saved) {
-          updateText("Updating data...");
+          updateText(saved + ' -> ' + curr);
           await DataManager.UpdateLocalData(updateText);
           await store.save(LocalData.game_version, curr);
         } else {
           // 2% to update personal rating
           if (Math.floor(Math.random() * 50) == 0) {
-            updateText("Updating ship data");
+            updateText(language.loading_pr);
             await DataManager.savePersonalRating();
           }
-          updateText("App is ready");           
+          updateText(language.loading_ready);           
           await DataStorage.RestoreSavedData();
         }
   
@@ -63,11 +64,11 @@ class DataStorage {
     await DataManager.UpdateLocalData(updateText);
   }
 
-  static async SetupAdditionalData() {
+  static async SetupAdditionalData(updateText) {
     // Update wows info version
     await store.save(LocalData.curr_version, VERSION);
     // Update everything when software updates occurs
-    await DataManager.UpdateLocalData();
+    await DataManager.UpdateLocalData(updateText);
   }
 
   static async SetupLocalStorage() {
