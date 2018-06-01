@@ -116,7 +116,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 16,
     paddingBottom: 16
   },
   playerNameStyle: {

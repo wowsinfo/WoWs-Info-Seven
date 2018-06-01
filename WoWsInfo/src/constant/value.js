@@ -1,8 +1,8 @@
 // Please use your id or demo if you are running this app
 export const ApplicationID = '4e54ba74077a8230e457bf3e7e9ae858';
 
-export const VERSION = '1.0.1';
-export const IOSVersion = '1.5.2';
+export const VERSION = '1.0.2';
+export const IOSVersion = '1.5.1';
 export const AndroidVersion = '1.0.2';
 export const Github = 'https://github.com/HenryQuan/WoWs-Info-Go';
 export const AppStore = 'https://itunes.apple.com/app/id1202750166';
