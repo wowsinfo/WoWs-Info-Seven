@@ -7,19 +7,31 @@ import { Divider } from 'react-native-elements';
 import { VERSION } from '../constant/value';
 import { navStyle } from '../constant/colour';
 import Wiki from './Wiki/Wiki';
+import { iconsMap } from '../constant/icon';
 
 export default class Drawer extends Component {
+  state = { selected: '' }
+
   render() {
     const { viewStyle, textStyle, titleStyle, versionStyle } = styles;    
     return (
       <ScrollView style={viewStyle} showsVerticalScrollIndicator={false}>
-          <Text style={titleStyle}>{language.drawer_wiki}</Text>
-          <Wiki navigator={this.props.navigator} drawer={this.closeDrawer}/>
-          <Divider />
-          <TextCell title={language.drawer_settings} onPress={() => this.pushToScreen('info.settings', language.settings_tab_title)}/>
-          <Text style={versionStyle}>{VERSION}</Text>
+        <DrawerCell icon={iconsMap['home']} title='Home' onPress={() => this.pushToHome()}/>
+        <Divider />
+        <Wiki navigator={this.props.navigator} drawer={this.closeDrawer}/>       
+        <Divider />        
+        <DrawerCell icon={iconsMap['ios-settings']} title={language.drawer_settings} onPress={() => this.pushToScreen('info.settings', language.settings_tab_title)}/>
+        <DrawerCell icon={iconsMap['md-information-circle']} title='About' onPress={() => this.pushToScreen('info.about', language.settings_tab_title)}/>
       </ScrollView>
     )
+  }
+
+  /**
+   * Pop everything
+   */
+  pushToHome() {
+    this.closeDrawer();
+    this.props.navigator.popToRoot({animated: true});
   }
 
   /**
@@ -29,9 +41,8 @@ export default class Drawer extends Component {
    */
   pushToScreen(screen, name) {
     console.log(screen, name);
-
+    // Close drawer and push to screen
     this.closeDrawer();
-
     this.props.navigator.push({
       screen: screen,
       title: name,

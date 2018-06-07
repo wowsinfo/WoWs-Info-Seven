@@ -31,6 +31,8 @@ class DataStorage {
         console.log('Game Version\nCurr: ' + curr + '\nSaved: ' + saved);
         if (curr != saved) {
           updateText(saved + ' -> ' + curr);
+          // Update game version
+          global.game_version = curr;
           await DataManager.UpdateLocalData(updateText);
           await store.save(LocalData.game_version, curr);
         } else {

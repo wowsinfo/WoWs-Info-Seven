@@ -43,7 +43,7 @@ export function loadingData() {
 export function startApp() {
   hapticFeedback();
   android ? startAppAndroid() : startAppIOS(); 
-  AdMobInterstitial.requestAd().then(() => AdMobInterstitial.showAd());
+  //AdMobInterstitial.requestAd().then(() => AdMobInterstitial.showAd());
 }
 
 /**

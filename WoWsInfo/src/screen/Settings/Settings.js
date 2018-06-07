@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { View, Text, Button, ScrollView, StyleSheet, Linking, Alert } from 'react-native';
 import language from '../../constant/language';
 import store from 'react-native-simple-store';
@@ -45,12 +45,10 @@ export default class Settings extends Component {
   render() {
     const appVersion = (android ? AndroidVersion : IOSVersion) + ' (' + game_version + ')';
     return (
-      <ScrollView>
-        { this.renderAbout() }        
+      <ScrollView>       
         { this.renderLanguage() }
         { this.renderTheme() }
         { android ? null : this.renderIAP() }
-        <Text style={styles.versionStyle}>{appVersion}</Text>
       </ScrollView>
     )
   }
@@ -149,23 +147,6 @@ export default class Settings extends Component {
         { /*this.renderEntry(language.settings_donation, null)*/ }
         { !ads ? null : this.renderEntry(language.settings_restore_purchase, () => this.restoreIAP()) }        
       </View>
-    )
-  }
-
-  /**
-   * Render about section
-   */
-  renderAbout = () => {
-    const { basicViewStyle, basicTextStyle } = styles;
-    return (
-      <ElevatedView elevation={2} style={basicViewStyle}>
-        { this.renderEntry(language.settings_email_feedback, () => Linking.openURL(Developer)) }        
-        { this.renderEntry(language.settings_source_code, () => Linking.openURL(Github)) }        
-        { this.renderEntry(language.settings_write_review, () => Linking.openURL(android ? GooglePlay : AppStore)) }                    
-        { this.renderEntry(language.settings_open_source_library, () => this.props.navigator.push({
-          screen: 'settings.opensource', title: language.settings_open_source_library, navigatorStyle: navStyle()
-        })) }                    
-      </ElevatedView>
     )
   }
 

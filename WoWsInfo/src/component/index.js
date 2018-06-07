@@ -9,6 +9,7 @@ export * from './common/SimpleBanner';
 // Cell
 export * from './cell/NewsCell';
 export * from './cell/DrawerCell';
+export * from './cell/WikiCell';
 export * from './cell/TextCell';
 export * from './cell/ThemeCell';
 export * from './cell/BasicCell';
