@@ -45,7 +45,7 @@ export default class Collection extends Component {
     let color = getTheme();    
     return (
       <View style={viewStyle}>
-        <Image style={imageStyle} source={{uri: icon}}/>
+        <Image style={imageStyle} source={{uri: icon}} resizeMode='contain'/>
         <Text style={[nameStyle, {color: color}]}>{name}</Text>
         <Text style={textStyle}>{text}</Text>
       </View>

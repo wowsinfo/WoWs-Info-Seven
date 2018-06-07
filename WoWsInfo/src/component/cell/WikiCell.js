@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Image, Text, StyleSheet } from 'react-native';
 import { WoWsTouchable } from '../../component';
 import { scale } from 'react-native-size-matters';
 import { GREY } from 'react-native-material-color';
+import { getTheme } from '../../constant/colour';
 
-class TextCell extends Component {
+class WikiCell extends Component {
   render() {
-    const { title, onPress } = this.props; 
-    const { viewStyle, textStyle } = styles
+    const { icon, title, ...props } = this.props; 
+    const { viewStyle, textStyle } = styles;
     return (
-      <WoWsTouchable onPress={onPress}>
+      <WoWsTouchable {...props}>
         <View style={viewStyle}>
+          <Image source={icon} style={{width: 36, height: 36}}/>
           <Text style={textStyle}>{title}</Text>
         </View>
       </WoWsTouchable>
@@ -21,13 +23,12 @@ class TextCell extends Component {
 const styles = StyleSheet.create({
   viewStyle: {
     flexDirection: 'row',
-    height: 44,
+    height: 44, margin: 4, paddingLeft: 8,
     alignItems: 'center'
   },
   textStyle: {
-    color: GREY[900],
-    paddingLeft: 8, width: '100%'
+    paddingLeft: 16, width: '100%', color: GREY[900]
   }
 })
 
-export { TextCell };
+export { WikiCell };

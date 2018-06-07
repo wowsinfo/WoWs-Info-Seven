@@ -41,7 +41,7 @@ export default class Search extends PureComponent {
     const { showPicker, data, input, mode } = this.state;
     const { inputStyle, textStyle } = styles;
     return (
-      <View style={{flex: 1, margin: 4}} ref='search'>
+      <View style={{flex: 1, padding: 4}} ref='search'>
         { showPicker ? this.renderPicker() : null }
         <TextInput style={inputStyle} underlineColorAndroid='white' onEndEditing={this.search} autoCorrect={false}
           clearButtonMode='while-editing' onChangeText={(text) => this.setState({input: text})} autoCapitalize='none' value={input}/>

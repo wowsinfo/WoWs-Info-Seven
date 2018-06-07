@@ -4,21 +4,31 @@
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import { GREY } from 'react-native-material-color';
 
 const replaceSuffixPattern = /--(active|big|small|very-big)/g;
 const icons = {
   // Tab
   'newspaper-o': [26, '#fff', FontAwesome],
-  'ios-search': [26, '#fff'],
-  'ios-settings': [26, '#fff'],
+  'ios-search': [26, GREY[600]],
+  'ios-settings': [24, GREY[600]],
   'menu': [26, '#fff', Entypo],
   // Wiki
   'undo': [22, '#fff', FontAwesome],
   'filter': [26, '#fff', FontAwesome],
-  'wikipedia-w': [24, '#fff', FontAwesome],
+  'wikipedia-w': [24, GREY[600], FontAwesome],
   // Player
   'star': [24, '#fff', FontAwesome],
   'star-o': [24, '#fff', FontAwesome],  
+  // Drawer
+  'home': [24, GREY[600], Entypo],  
+  // Settings
+  'email': [24, GREY[600], MaterialIcons],
+  'color-lens': [24, GREY[600], MaterialIcons],
+  'logo-github': [24, GREY[600]],
+  'md-git-commit': [24, GREY[600]],
+  'md-information-circle': [24, GREY[600]],
 }
 
 const defaultIconProvider = Ionicons;

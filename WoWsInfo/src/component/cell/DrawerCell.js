@@ -9,11 +9,10 @@ class DrawerCell extends Component {
   render() {
     const { icon, title, ...props } = this.props; 
     const { viewStyle, textStyle } = styles;
-    const width = android ? 28 : 46;
     return (
       <WoWsTouchable {...props}>
         <View style={viewStyle}>
-          <Image source={icon} style={{height: width, width: width, tintColor: android ? getTheme() : null}}/>
+          <Image source={icon} resizeMode='contain' style={{width: 18, height: 18, tintColor: getTheme()}}/>
           <Text style={textStyle}>{title}</Text>
         </View>
       </WoWsTouchable>
@@ -24,12 +23,11 @@ class DrawerCell extends Component {
 const styles = StyleSheet.create({
   viewStyle: {
     flexDirection: 'row',
-    height: 54, paddingLeft: android ? 12 : 4,
+    height: 44, paddingLeft: 16,
     alignItems: 'center'
   },
   textStyle: {
-    fontWeight: android ? 'bold' : '300',
-    paddingLeft: 16, width: '100%'
+    paddingLeft: 24, width: '100%', color: GREY[900]
   }
 })
 
