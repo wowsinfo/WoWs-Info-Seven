@@ -3,7 +3,7 @@ import { View, Text, Button, ScrollView, StyleSheet, Linking, Alert } from 'reac
 import language from '../../constant/language';
 import store from 'react-native-simple-store';
 import ElevatedView from 'react-native-elevated-view';
-import { WoWsTouchable, QuickInput, TextCell } from '../../component';
+import { WoWsTouchable, QuickInput, TextCell, DrawerCell } from '../../component';
 import SelectInput from 'react-native-select-input-ios';
 import { navStyle, getTheme } from '../../constant/colour';
 import { Divider } from 'react-native-elements';
@@ -13,6 +13,7 @@ import { DataManager } from '../../core';
 import { startApp } from '../../app/App';
 
 import { NativeModules } from 'react-native'
+import { iconsMap } from '../../constant/icon';
 const { InAppUtils } = NativeModules;
 products = ['com.yihengquan.WoWsInfo.Pro'];
 
@@ -49,6 +50,9 @@ export default class Settings extends Component {
         { this.renderLanguage() }
         { this.renderTheme() }
         { android ? null : this.renderIAP() }
+        { android ? null : <DrawerCell icon={iconsMap['md-information-circle']} title={language.drawer_about} onPress={() => this.props.navigator.push({
+          screen: 'info.about', title: language.drawer_about, navigatorStyle: navStyle()
+        })}/> }     
       </ScrollView>
     )
   }
