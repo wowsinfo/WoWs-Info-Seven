@@ -28,6 +28,7 @@ import Clan from './Player/Clan';
 import PlayerShipDetail from './Player/PlayerShipDetail';
 import { PlayerShip } from './Player/PlayerShip';
 import OpenSource from './Settings/OpenSource';
+import About from './Settings/About';
 
 export function registerScreens() {
   Navigation.registerComponent('app.wowsinfo', () => WoWsInfo);    
@@ -52,4 +53,5 @@ export function registerScreens() {
   Navigation.registerComponent('info.settings', () => Settings);
   Navigation.registerComponent('settings.theme', () => Theme);
   Navigation.registerComponent('settings.opensource', () => OpenSource);
+  Navigation.registerComponent('info.about', () => About);
 }

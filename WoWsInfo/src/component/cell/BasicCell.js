@@ -9,7 +9,7 @@ class BasicCell extends PureComponent {
     return (
       <WoWsTouchable onPress={() => player ? Alert.alert(data.name, data.text) : this.showDetail()}>
         <View style={viewStyle}>
-          <Image source={{uri: icon}} style={imageStyle} />
+          <Image source={{uri: icon}} style={imageStyle} resizeMode='contain'/>
           { this.renderCount() }
         </View>
       </WoWsTouchable>
