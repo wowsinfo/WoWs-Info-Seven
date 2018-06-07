@@ -21,7 +21,7 @@ export default class Drawer extends Component {
         <Wiki navigator={this.props.navigator} drawer={this.closeDrawer}/>       
         <Divider />        
         <DrawerCell icon={iconsMap['ios-settings']} title={language.drawer_settings} onPress={() => this.pushToScreen('info.settings', language.settings_tab_title)}/>
-        <DrawerCell icon={iconsMap['md-information-circle']} title='About' onPress={() => this.pushToScreen('info.about', language.settings_tab_title)}/>
+        <DrawerCell icon={iconsMap['md-information-circle']} title={language.drawer_about} onPress={() => this.pushToScreen('info.about', language.drawer_about)}/>
       </ScrollView>
     )
   }
