@@ -5,6 +5,7 @@ import { WoWsLoading, WoWsTouchable } from '../../component';
 import { navStyle } from '../../constant/colour';
 import * as Animatable from 'react-native-animatable';
 import { hapticFeedback } from '../../app/App';
+import { Orange, GREY } from 'react-native-material-color';
 
 const Tier = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
 
@@ -66,7 +67,7 @@ export default class Ship extends PureComponent {
               <WoWsTouchable onPress={() => this.pushToDetail(item)}>
                 <View style={viewStyle}>
                   {data_saver ? null : <Image source={{uri: item.icon, cache: 'default'}} style={imageStyle} resizeMode='contain'/>}
-                  <Text style={textStyle}>{Tier[item.tier - 1] + ' ' + item.name}</Text>
+                  <Text style={[textStyle, [{color: item.is_premium || item.is_special ? Orange : GREY[900]}]]}>{Tier[item.tier - 1] + ' ' + item.name}</Text>
                 </View>
               </WoWsTouchable>
             )}} />

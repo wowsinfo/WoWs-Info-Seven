@@ -40,6 +40,7 @@ export default class ShipDetail extends Component {
       <ScrollView>  
         <View animation='fadeInUp' ref='mainView'>
           { this.renderBasic() }
+          { this.renderModule() }
           { this.getStatus() }
           { this.renderSurvivability() }
           { this.renderMainBattery() }
@@ -81,13 +82,24 @@ export default class ShipDetail extends Component {
     const isPremium = is_premium || is_special;
     // Show avergae data
     return (
-      <ElevatedView elevation={2} style={[basicViewStyle, {margin: 8}]}>
-        {data_saver ? null : <Image source={{uri: icon, cache: 'default'}} style={imageStyle} resizeMode='contain'/>}
-        <Text style={tierTextStyle}>{Tier[tier - 1] + ' ' + name}</Text>
-        <Text style={basicTextStyle}>{encyclopedia.ship_nations[nation] + '\n' + ship_type[type]}</Text>
-        <Text style={[basicTextStyle, {color: isPremium ? Orange : Grey}]}>{isPremium ? price_gold : price_credit}</Text> 
-        <Text style={descriptionStyle}>{description}</Text>
-      </ElevatedView>
+      <WoWsTouchable>
+        <ElevatedView elevation={2} style={[basicViewStyle, {margin: 8}]}>
+          {data_saver ? null : <Image source={{uri: icon, cache: 'default'}} style={imageStyle} resizeMode='contain'/>}
+          <Text style={tierTextStyle}>{Tier[tier - 1] + ' ' + name}</Text>
+          <Text style={basicTextStyle}>{encyclopedia.ship_nations[nation] + '\n' + ship_type[type]}</Text>
+          <Text style={[basicTextStyle, {color: isPremium ? Orange : Grey}]}>{isPremium ? price_gold : price_credit}</Text> 
+          <Text style={descriptionStyle}>{description}</Text>
+        </ElevatedView>
+      </WoWsTouchable>
+    )
+  }
+
+  /**
+   * Render upgradable components
+   */
+  renderModule() {
+    return (
+      null
     )
   }
 
