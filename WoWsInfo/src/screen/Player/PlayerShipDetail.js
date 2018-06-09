@@ -35,15 +35,15 @@ export default class PlayerShipDetail extends Component {
           <ElevatedView elevation={2} style={{margin: 8}}>
             <WoWsTouchable onPress={() => this.pushToDetail(shipData)}>
               <Image source={{uri: shipInfo.image}} resizeMode='contain' style={imageStyle}/>
+              <Text style={shipNameStyle}>{shipInfo.name}</Text>
+              { pr == null || pr.win_rate == null ? null : <View style={[horizontalViewStyle, {marginBottom: 8}]}>
+                <Text style={textStyle(pdamage)}>{showPlus(pdamage) + Number(pdamage).toFixed(0)}</Text>
+                <Text style={textStyle(pwin)}>{showPlus(pwin) + Number(pwin).toFixed(2) + '%'}</Text>
+                <Text style={textStyle(pfrags)}>{showPlus(pfrags) + Number(pfrags).toFixed(2)}</Text>
+              </View> }
+              <Text style={[ratingStyle, {color: shipColour}]}>{shipComment}</Text>
+              <Basic8Cell info={this.getBasic8CellInfo(info)}/>
             </WoWsTouchable>
-            <Text style={shipNameStyle}>{shipInfo.name}</Text>
-            { pr == null || pr.win_rate == null ? null : <View style={[horizontalViewStyle, {marginBottom: 8}]}>
-              <Text style={textStyle(pdamage)}>{showPlus(pdamage) + Number(pdamage).toFixed(0)}</Text>
-              <Text style={textStyle(pwin)}>{showPlus(pwin) + Number(pwin).toFixed(2) + '%'}</Text>
-              <Text style={textStyle(pfrags)}>{showPlus(pfrags) + Number(pfrags).toFixed(2)}</Text>
-            </View> }
-            <Text style={[ratingStyle, {color: shipColour}]}>{shipComment}</Text>
-            <Basic8Cell info={this.getBasic8CellInfo(info)}/>
           </ElevatedView>
           <ElevatedView elevation={2} style={{margin: 8}}>
             { this.renderDetailInfo(info) }
