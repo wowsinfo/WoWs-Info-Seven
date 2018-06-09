@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, StyleSheet, Image, ScrollView, FlatList, Alert, Button } from 'react-native';
 import { View } from 'react-native-animatable';
 import ElevatedView from 'react-native-elevated-view';
-import { WoWsProgress, WoWsTouchable, WoWsLoading } from '../../component';
+import { WoWsProgress, WoWsTouchable, WoWsLoading, QuickInput } from '../../component';
 import language from '../../constant/language';
 import { Orange, Grey } from 'react-native-material-color';
 import { ShipDetailedInfo } from '../../core';
@@ -104,11 +104,18 @@ export default class ShipDetail extends Component {
       <ElevatedView elevation={2} style={{margin: 8}}>
         { this.renderTitle(language.detail_module_title) }
         { Object.keys(modules).map(function (value, index) {
-          console.log(value);
+          let moduleData = [];
+          // Default module will have a bigger number
+          modules[value].sort(function (a, b) { return (b - a) });
           for (id in modules[value]) {
             let curr = modules[value][id];
-            console.log(curr, modules_tree[curr]);
+            moduleData.push({value: curr, label: modules_tree[curr].name});
           }
+          console.log(moduleData);
+
+          return <QuickInput options={moduleData} value={moduleData[0].value} action={(value, index) => {
+                console.log(value);
+          }}/>
         })}
         <Button title='Apply this configuration' color={getTheme()}/>
       </ElevatedView>
