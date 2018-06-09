@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, Image, ScrollView, FlatList, Alert } from 'react-native';
+import { Text, StyleSheet, Image, ScrollView, FlatList, Alert, Button } from 'react-native';
 import { View } from 'react-native-animatable';
 import ElevatedView from 'react-native-elevated-view';
 import { WoWsProgress, WoWsTouchable, WoWsLoading } from '../../component';
@@ -22,13 +22,12 @@ export default class ShipDetail extends Component {
 
   componentWillMount() {
     ShipDetailedInfo.getDefault(this.props.info.ship_id).then(data => {
-      // Get almost everything from data
-      const { default_profile, description, is_premium, is_special, mod_slot, price_credit, price_gold, upgrades, next_ships, modules_tree } = data;
-      const { engine, torpedo_bomber, anti_aircraft, mobility, hull, atbas, artillery, torpedoes, fighters, fire_control, 
-        weaponry, battle_level_range_max, battle_level_range_min, flight_control, concealment, armour, dive_bomber } = default_profile;
-      for (module in modules_tree) {
-        let curr = modules_tree[module];
-        if (curr.next_modules != null) console.log(curr);
+      // Clean up modules
+      const { modules_tree, modules } = data;
+      for (module in modules) {
+        let curr = modules[module];
+        // Remove unnecessary modules
+        if (curr.length < 2) delete modules[module];
       }
       // Collect status from everywhere
       this.setState({data: data, isReady: true, profile: data.default_profile});
@@ -98,8 +97,21 @@ export default class ShipDetail extends Component {
    * Render upgradable components
    */
   renderModule() {
-    return (
-      null
+    const { modules, modules_tree } = this.state.data;
+    // Do not render anything when there is not a single update
+    if (Object.keys(modules).length == 0) return null;
+    else return (
+      <ElevatedView elevation={2} style={{margin: 8}}>
+        { this.renderTitle(language.detail_module_title) }
+        { Object.keys(modules).map(function (value, index) {
+          console.log(value);
+          for (id in modules[value]) {
+            let curr = modules[value][id];
+            console.log(curr, modules_tree[curr]);
+          }
+        })}
+        <Button title='Apply this configuration' color={getTheme()}/>
+      </ElevatedView>
     )
   }
 
@@ -107,7 +119,7 @@ export default class ShipDetail extends Component {
    * Get general status for warship
    */
   getStatus() {  
-    const { mobility, weaponry, concealment, armour } = this.state.profile
+    const { mobility, weaponry, concealment, armour } = this.state.profile;
     const { anti_aircraft, aircraft, artillery, torpedoes } = weaponry;
 
     // White -> Blue
