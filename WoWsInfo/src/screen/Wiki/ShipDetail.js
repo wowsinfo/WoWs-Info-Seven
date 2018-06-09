@@ -1,17 +1,17 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { Text, StyleSheet, Image, ScrollView, FlatList, Alert, Button } from 'react-native';
 import { View } from 'react-native-animatable';
 import ElevatedView from 'react-native-elevated-view';
 import { WoWsProgress, WoWsTouchable, WoWsLoading, QuickInput } from '../../component';
 import language from '../../constant/language';
 import { Orange, Grey } from 'react-native-material-color';
-import { ShipDetailedInfo } from '../../core';
+import { ShipDetailedInfo, ModuleInfo } from '../../core';
 import { navStyle, getTheme } from '../../constant/colour';
 import { Divider } from 'react-native-elements';
 
 const Tier = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
 
-export default class ShipDetail extends PureComponent {
+export default class ShipDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {data: {}, isReady: false, profile: {}, module: [], module_tree: {}};
@@ -37,9 +37,8 @@ export default class ShipDetail extends PureComponent {
           for (i = 0; i < curr.length; i++) {
             // Collect module information
             let currModule = modules_tree[curr[i]];
-            currModule.value = currModule.module_id;
             currModule.label = currModule.name;
-            delete currModule.module_id; delete currModule.module_id_str; delete currModule.name;
+            delete currModule.module_id_str; delete currModule.name;
             delete currModule.price_xp; delete currModule.price_credit;
             currModule.name = moduleName[currModule.type];
             delete currModule.next_ships; delete currModule.type;
@@ -47,7 +46,13 @@ export default class ShipDetail extends PureComponent {
           }
           // From default to more advance module
           curr.sort(function (a, b) { return (b.is_default || b.next_module != null) ? 1 : -1 })
-          moduleInfo.push({value: curr[0].value, label: curr[0].label, type: curr[0].name, key: module});
+          for (i = 0; i < curr.length; i++) {
+            let currModule = curr[i];
+            currModule.value = i;
+            delete currModule.next_module; delete currModule.is_default;
+          }
+          moduleInfo.push({value: curr[0].value, label: curr[0].label, 
+            type: curr[0].name, key: module, id: curr[0].module_id});
         }
       }
       // Collect status from everywhere
@@ -119,28 +124,36 @@ export default class ShipDetail extends PureComponent {
    */
   renderModule() {
     const { module, module_tree } = this.state;
+    const { ship_id } = this.state.data; 
     // Do not render anything when there is not a single update
     if (Object.keys(module).length == 0) return null;
     else return (
       <ElevatedView elevation={2} style={{margin: 8}}>
         { this.renderTitle(language.detail_module_title) }
-        { Object.keys(module).map((value, index) => {
+        { Object.keys(module).map((value, keyIndex) => {
           let curr = module[value];
-          let moduleIndex = index;
           return (
             <View>
               <Text style={{paddingLeft: 8, fontWeight: '300', marginBottom: -8}}>{curr.type}</Text>
-              <QuickInput options={module_tree[curr.key]} value={curr.value} action={(i, value) => {
-                let mod = module[moduleIndex];
-                let tree = module_tree[curr.key][i];
-                console.log(value, module_tree[curr.key], i);
-                mod.label = tree.label; mod.value = tree.value;
-                this.setState({module: module});
+              <QuickInput options={module_tree[curr.key]} value={curr.value} action={(value) => {
+                let currModule = Object.assign(module, {});
+                let mod = currModule[keyIndex];
+                let tree = module_tree[curr.key][value];
+                mod.label = tree.label; mod.value = tree.value; mod.id = tree.module_id;
+                console.log(module);
+                this.setState({module: currModule});
               }}/>
             </View>
           )
         })}
-        <Button title='Apply' color={getTheme()}/>
+        <Button title='Apply' color={getTheme()} onPress={() => {
+          // Request updated data
+          this.setState({isReady: false})
+          ModuleInfo.getUpdatedInfo(ship_id, module).then(data => {
+            if (data != null) this.setState({profile: data})
+            this.setState({isReady: true});
+          })
+        }}/>
       </ElevatedView>
     )
   }
@@ -172,7 +185,7 @@ export default class ShipDetail extends PureComponent {
    * Render information about health, armour
    */
   renderSurvivability() {
-    const { flood_prob, range, health } = this.state.data.default_profile.armour;
+    const { flood_prob, range, health } = this.state.profile.armour;
     const { horizontalViewStyle, basicTextStyle, basicTitleStyle, basicViewStyle } = styles;
     return (
       <ElevatedView elevation={2} style={{margin: 8}}>
