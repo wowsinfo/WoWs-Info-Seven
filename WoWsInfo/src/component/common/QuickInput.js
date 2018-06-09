@@ -9,7 +9,7 @@ class QuickInput extends Component {
     const { options, value, action } = this.props;
     return (
       <SelectInput style={android ? viewStyle : textStyle} labelStyle={android ? viewStyle : textStyle} cancelKeyText={language.settings_cancel} submitKeyText={language.settings_done}
-      options={options} value={value} mode='dropdown' onSubmitEditing={action}/>
+        options={options} value={value} mode='dropdown' onSubmitEditing={action}/>
     )
   }
 }

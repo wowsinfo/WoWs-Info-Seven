@@ -24,7 +24,8 @@ export const API = {
   AchievementInfo: 'https://api.worldofwarships.{0}/wows/account/achievements/?application_id=' + ApplicationID + '&language=en&fields=battle&account_id=',
   ClanSearch: 'https://api.worldofwarships.{0}/wows/clans/list/?application_id=' + ApplicationID + '&fields=clan_id%2Ctag&search=',
   ClanInfo: 'https://api.worldofwarships.{0}/wows/clans/info/?application_id=' + ApplicationID + '&extra=members&fields=-members_ids&clan_id=',
-  Ship_Wiki: 'https://api.worldofwarships.{0}/wows/encyclopedia/ships/?application_id=' + ApplicationID + '&ship_id={1}'
+  Ship_Wiki: 'https://api.worldofwarships.{0}/wows/encyclopedia/ships/?application_id=' + ApplicationID + '&ship_id={1}',
+  ShipModule: 'https://api.worldofwarships.asia/wows/encyclopedia/shipprofile/?application_id=' + ApplicationID,
 }
 
 export const DataAPI = {
