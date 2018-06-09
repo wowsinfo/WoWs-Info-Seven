@@ -18,7 +18,6 @@ export default class OpenSource extends Component {
     {name: 'react-native-localization', link: 'https://github.com/stefalda/ReactNativeLocalization/blob/master/LICENSE'},
     {name: 'react-native-elevated-view', link: 'https://github.com/alekhurst/react-native-elevated-view/blob/master/LICENSE'},
     {name: 'react-native-material-color', link: 'https://github.com/DerayGa/react-native-material-color'},
-    {name: 'react-native-actionsheet', link: 'https://github.com/beefe/react-native-actionsheet/blob/master/LICENSE'},
     {name: 'react-native-navigation', link: 'https://github.com/wix/react-native-navigation/blob/master/LICENSE'},
     {name: 'react-native-select-input-ios', link: 'https://github.com/markuswind/react-native-select-input-ios/blob/master/LICENSE'},
     {name: 'react-native-simple-store', link: 'https://github.com/jasonmerino/react-native-simple-store/blob/master/LICENSE'},
