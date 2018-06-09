@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Text, StyleSheet, Image, ScrollView, FlatList, Alert, Button } from 'react-native';
 import { View } from 'react-native-animatable';
 import ElevatedView from 'react-native-elevated-view';
@@ -10,10 +10,11 @@ import { navStyle, getTheme } from '../../constant/colour';
 import { Divider } from 'react-native-elements';
 
 const Tier = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
-export default class ShipDetail extends Component {
+
+export default class ShipDetail extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {data: {}, isReady: false, profile: {}};
+    this.state = {data: {}, isReady: false, profile: {}, module: [], module_tree: {}};
   }
 
   static navigatorStyle = {
@@ -22,15 +23,35 @@ export default class ShipDetail extends Component {
 
   componentWillMount() {
     ShipDetailedInfo.getDefault(this.props.info.ship_id).then(data => {
-      // Clean up modules
       const { modules_tree, modules } = data;
+      // Get module data for rendering
+      let moduleData = []; var type = '';
+      let moduleName = global.data.encyclopedia.ship_modules;
+      let moduleInfo = [];
+
       for (module in modules) {
         let curr = modules[module];
         // Remove unnecessary modules
         if (curr.length < 2) delete modules[module];
+        else {
+          for (i = 0; i < curr.length; i++) {
+            // Collect module information
+            let currModule = modules_tree[curr[i]];
+            currModule.value = currModule.module_id;
+            currModule.label = currModule.name;
+            delete currModule.module_id; delete currModule.module_id_str; delete currModule.name;
+            delete currModule.price_xp; delete currModule.price_credit;
+            currModule.name = moduleName[currModule.type];
+            delete currModule.next_ships; delete currModule.type;
+            curr[i] = currModule;
+          }
+          // From default to more advance module
+          curr.sort(function (a, b) { return (b.is_default || b.next_module != null) ? 1 : -1 })
+          moduleInfo.push({value: curr[0].value, label: curr[0].label, type: curr[0].name, key: module});
+        }
       }
       // Collect status from everywhere
-      this.setState({data: data, isReady: true, profile: data.default_profile});
+      this.setState({data: data, isReady: true, profile: data.default_profile, module_tree: modules, module: moduleInfo});
     })
   }
 
@@ -97,27 +118,29 @@ export default class ShipDetail extends Component {
    * Render upgradable components
    */
   renderModule() {
-    const { modules, modules_tree } = this.state.data;
+    const { module, module_tree } = this.state;
     // Do not render anything when there is not a single update
-    if (Object.keys(modules).length == 0) return null;
+    if (Object.keys(module).length == 0) return null;
     else return (
       <ElevatedView elevation={2} style={{margin: 8}}>
         { this.renderTitle(language.detail_module_title) }
-        { Object.keys(modules).map(function (value, index) {
-          let moduleData = [];
-          // Default module will have a bigger number
-          modules[value].sort(function (a, b) { return (b - a) });
-          for (id in modules[value]) {
-            let curr = modules[value][id];
-            moduleData.push({value: curr, label: modules_tree[curr].name});
-          }
-          console.log(moduleData);
-
-          return <QuickInput options={moduleData} value={moduleData[0].value} action={(value, index) => {
-                console.log(value);
-          }}/>
+        { Object.keys(module).map((value, index) => {
+          let curr = module[value];
+          let moduleIndex = index;
+          return (
+            <View>
+              <Text style={{paddingLeft: 8, fontWeight: '300', marginBottom: -8}}>{curr.type}</Text>
+              <QuickInput options={module_tree[curr.key]} value={curr.value} action={(i, value) => {
+                let mod = module[moduleIndex];
+                let tree = module_tree[curr.key][i];
+                console.log(value, module_tree[curr.key], i);
+                mod.label = tree.label; mod.value = tree.value;
+                this.setState({module: module});
+              }}/>
+            </View>
+          )
         })}
-        <Button title='Apply this configuration' color={getTheme()}/>
+        <Button title='Apply' color={getTheme()}/>
       </ElevatedView>
     )
   }
@@ -178,7 +201,7 @@ export default class ShipDetail extends Component {
    */
   renderMainBattery() {
     const { horizontalViewStyle, basicTextStyle, basicTitleStyle } = styles;
-    const { artillery } = this.state.profile
+    const { artillery } = this.state.profile;
     if (artillery != null) {
       const { max_dispersion, gun_rate, distance, rotation_time, slots, shells } = artillery;
       const { AP, HE } = shells;
