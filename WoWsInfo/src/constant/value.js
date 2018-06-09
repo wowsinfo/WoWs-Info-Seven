@@ -1,9 +1,9 @@
 // Please use your id or demo if you are running this app
 export const ApplicationID = '4e54ba74077a8230e457bf3e7e9ae858';
 
-export const VERSION = '1.0.2';
-export const IOSVersion = '1.5.1';
-export const AndroidVersion = '1.0.2';
+export const VERSION = '1.0.3';
+export const IOSVersion = '1.5.2';
+export const AndroidVersion = '1.0.3';
 export const Github = 'https://github.com/HenryQuan/WoWs-Info-Go';
 export const AppStore = 'https://itunes.apple.com/app/id1202750166';
 export const GooglePlay = 'https://play.google.com/store/apps/details?id=com.yihengquan.wowsinfo';
@@ -36,7 +36,7 @@ export const DataAPI = {
   Encyclopedia: 'https://api.worldofwarships.{0}/wows/encyclopedia/info/?application_id=' +  ApplicationID + '&fields=ship_nations%2Cship_modules',
   ShipType: 'https://api.worldofwarships.{0}/wows/encyclopedia/info/?application_id=' +  ApplicationID + '&fields=ship_types',
   Consumable: 'https://api.worldofwarships.{0}/wows/encyclopedia/consumables/?application_id=' +  ApplicationID + '&fields=type%2Cdescription%2Cname%2Cimage%2Cprice_credit%2Cprice_gold%2Cprofile.description',
-  Warship: 'https://api.worldofwarships.{0}/wows/encyclopedia/ships/?application_id=' +  ApplicationID + '&fields=name%2Cnation%2Ctype%2Ctier%2Cship_id%2Cship_id_str%2Cimages.small',
+  Warship: 'https://api.worldofwarships.{0}/wows/encyclopedia/ships/?application_id=' +  ApplicationID + '&fields=name%2Cnation%2Ctype%2Ctier%2Cship_id%2Cship_id_str%2Cimages.small%2Cis_premium%2Cis_special',
   Collection: 'https://api.worldofwarships.{0}/wows/encyclopedia/collections/?application_id=' + ApplicationID + '&fields=-card_cost%2C-tag',
   CollectionItem: 'https://api.worldofwarships.{0}/wows/encyclopedia/collectioncards/?application_id=' + ApplicationID + '&fields=images.small%2Ccard_id%2Ccollection_id%2Cdescription%2Cname',
 }

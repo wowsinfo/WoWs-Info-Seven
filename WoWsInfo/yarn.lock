@@ -4391,12 +4391,6 @@ react-native-animatable@^1.2.4:
   dependencies:
     prop-types "^15.5.10"
 
-react-native-cardview@^1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/react-native-cardview/-/react-native-cardview-1.1.5.tgz#c068fa7bf57c3dcd35af4327cc5173cea51baa62"
-  dependencies:
-    prop-types "^15.6.0"
-
 react-native-device-info@^0.21.5:
   version "0.21.5"
   resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-0.21.5.tgz#99478a2d68182e012297f2d63f2bd1b788106dee"
