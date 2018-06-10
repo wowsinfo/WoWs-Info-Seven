@@ -27,7 +27,7 @@ class SettingCell extends Component {
           <View>
             <View style={viewAndroidStyle}>
               <Text style={titleStyle}>{title}</Text>
-              <Text style={subtitleStyle}>{subtitle}</Text>
+              { subtitle ? <Text style={subtitleStyle}>{subtitle}</Text> : null }
             </View>
             { divider ? <Divider /> : null }
           </View>
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   },
   imageStyle: {
     height: 29, width: 29,
-    borderRadius: 4, backgroundColor: '#333'
+    borderRadius: 4
   },
   textStyle: {
     fontSize: 16, flex: 1,
