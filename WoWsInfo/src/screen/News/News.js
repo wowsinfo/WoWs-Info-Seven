@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import { Text, FlatList, DrawerLayoutAndroid, SafeAreaView } from 'react-native';
-import { WoWsLoading, NewsCell, SimpleBanner } from '../../component';
+import { FlatList, SafeAreaView } from 'react-native';
+import { WoWsLoading, NewsCell, SettingCell } from '../../component';
 import { NewsParser } from '../../core';
 import { View } from 'react-native-animatable';
-import Drawer from '../Drawer';
 import language from '../../constant/language';
 import { navStyle } from '../../constant/colour';
 import { iconsMap } from '../../constant/icon';
@@ -60,7 +59,7 @@ export default class News extends Component {
         <SafeAreaView>
           <View ref='news'>
             <FlatList data={data} keyExtractor={this.newsKey} onRefresh={() => this.refreshNews()}
-            renderItem={({item}) => <NewsCell data={item}/>} refreshing={isRefreshing}/>
+              renderItem={({item}) => <NewsCell data={item}/>} refreshing={isRefreshing}/>
           </View>
         </SafeAreaView>
       )
