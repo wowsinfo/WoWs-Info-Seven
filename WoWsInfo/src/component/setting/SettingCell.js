@@ -5,13 +5,13 @@ import { GREY } from 'react-native-material-color';
 
 class SettingCell extends Component {
   render() {
-    const { image, title, subtitle, divider, ...props } = this.props;
-    const { viewStyle, imageStyle, horizontalViewStyle, textStyle, titleStyle, subtitleStyle } = styles;
+    const { image, title, subtitle, divider, onPress, ...props } = this.props;
+    const { viewIOSStyle, viewAndroidStyle, imageStyle, horizontalViewStyle, textStyle, titleStyle, subtitleStyle } = styles;
     if (!android) {
       // Icon with text
       return (
-        <TouchableHighlight onPress={() => null}>
-          <View style={viewStyle}>
+        <TouchableHighlight onPress={onPress}>
+          <View style={viewIOSStyle}>
             <View style={horizontalViewStyle}>
               <Image source={image} style={imageStyle} resizeMode='contain'/>
               <Text style={textStyle}>{title}</Text>
@@ -22,14 +22,28 @@ class SettingCell extends Component {
       )
     } else {
       // Text with subtitle
+      return (
+        <TouchableNativeFeedback onPress={onPress}>
+          <View>
+            <View style={viewAndroidStyle}>
+              <Text style={titleStyle}>{title}</Text>
+              <Text style={subtitleStyle}>{subtitle}</Text>
+            </View>
+            { divider ? <Divider /> : null }
+          </View>
+        </TouchableNativeFeedback>
+      )
     }
   }
 }
 
 const styles = StyleSheet.create({
-  viewStyle: {
+  viewIOSStyle: {
     paddingLeft: 8, 
     backgroundColor: '#FFF'
+  },
+  viewAndroidStyle: {
+    padding: 12
   },
   horizontalViewStyle: {
     flexDirection: 'row',
@@ -45,10 +59,11 @@ const styles = StyleSheet.create({
     paddingLeft: 16
   },
   titleStyle: {
-    color: GREY[900], fontSize: 18,
+    color: GREY[900], 
+    fontWeight: '300', fontSize: 16,
   },
   subtitleStyle: {
-    fontSize: 14,
+    fontSize: 14
   }
 })
 
