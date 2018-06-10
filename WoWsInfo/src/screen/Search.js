@@ -2,17 +2,15 @@ import React, { PureComponent } from 'react'
 import { View, Text } from 'react-native-animatable';
 import { TextInput, Picker, StyleSheet, SegmentedControlIOS } from 'react-native';
 import GridView from 'react-native-super-grid';
-import { WoWsLoading, WoWsTouchable, SimpleBanner } from '../component';
+import { WoWsTouchable, SimpleBanner } from '../component';
 import language from '../constant/language';
 import store from 'react-native-simple-store';
 import { LocalData } from '../constant/value';
 import { PlayerSearch, ClanSearch } from '../core';
 import { GREY } from 'react-native-material-color';
 import { navStyle, getTheme } from '../constant/colour';
-import { Divider } from 'react-native-elements';
 import { hapticFeedback } from '../app/App';
 import { iconsMap } from '../constant/icon';
-import { ClanInfo } from '../core/player/ClanInfo';
 
 export default class Search extends PureComponent {
   constructor(props) {

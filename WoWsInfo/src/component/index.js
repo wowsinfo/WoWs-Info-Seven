@@ -22,4 +22,6 @@ export * from './cell/Player/RecordCell';
 export * from './cell/Player/ShipInfoCell';
 export * from './cell/Player/RankCell';
 
-// List
+// Settings
+export * from './setting/SettingCell';
+export * from './setting/SettingView';
