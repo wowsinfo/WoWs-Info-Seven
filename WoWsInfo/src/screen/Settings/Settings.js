@@ -3,11 +3,10 @@ import { View, Text, Button, ScrollView, StyleSheet, Linking, Alert } from 'reac
 import language from '../../constant/language';
 import store from 'react-native-simple-store';
 import ElevatedView from 'react-native-elevated-view';
-import { WoWsTouchable, QuickInput, TextCell, DrawerCell } from '../../component';
-import SelectInput from 'react-native-select-input-ios';
+import { QuickInput, TextCell, DrawerCell, SettingCell } from '../../component';
 import { navStyle, getTheme } from '../../constant/colour';
 import { Divider } from 'react-native-elements';
-import { Developer, Github, LocalData, AndroidVersion, IOSVersion, AppStore, GooglePlay } from '../../constant/value';
+import { LocalData, AndroidVersion, IOSVersion, AppStore, GooglePlay } from '../../constant/value';
 import { GREY } from 'react-native-material-color';
 import { DataManager } from '../../core';
 import { startApp } from '../../app/App';
@@ -52,7 +51,9 @@ export default class Settings extends Component {
         { android ? null : this.renderIAP() }
         { android ? null : <DrawerCell icon={iconsMap['md-information-circle']} title={language.drawer_about} onPress={() => this.props.navigator.push({
           screen: 'info.about', title: language.drawer_about, navigatorStyle: navStyle()
-        })}/> }     
+        })}/> }    
+        <Divider />
+        <Text style={{margin: 16}}>{appVersion}</Text>     
       </ScrollView>
     )
   }
@@ -74,7 +75,7 @@ export default class Settings extends Component {
    * Render entry button
    */
   renderEntry = (text, onPress) => {
-    return <TextCell title={text} onPress={onPress}/>
+    return <SettingCell title={text} onPress={onPress}/>
   }
 
   /**
@@ -131,10 +132,10 @@ export default class Settings extends Component {
   renderTheme = () => {
     const { basicViewStyle, basicTextStyle } = styles;    
     return (
-      <ElevatedView elevation={2} style={basicViewStyle}>
+      <View>
         { this.renderTitle(language.settings_theme_title) }
         { this.renderEntry(language.settings_theme, this.showTheme) }
-      </ElevatedView>
+      </View>
     )
   }
 
