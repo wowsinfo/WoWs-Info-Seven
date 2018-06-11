@@ -1,7 +1,6 @@
 import { Platform, Alert } from 'react-native';
 import { IOSData, LocalData, SavedData, VERSION } from '../constant/value';
 import { BLUE } from 'react-native-material-color';
-import { AdMobInterstitial } from 'react-native-admob';
 import { Language, GameVersion, DateCalculator, PlayerConverter, ServerManager } from './';
 import store from 'react-native-simple-store';
 import { DataManager } from './';
@@ -171,8 +170,6 @@ class DataStorage {
 
   static async RestorePlayerInfo() {
     global.ads = await store.get(LocalData.has_ads);
-    // Whether show ads or not
-    if (ads) AdMobInterstitial.requestAd().then(() => AdMobInterstitial.showAd());
     global.user_info = await store.get(LocalData.user_info);
     global.user_data = await store.get(LocalData.userdata);
   }
