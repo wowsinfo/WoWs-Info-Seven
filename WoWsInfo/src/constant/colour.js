@@ -38,7 +38,7 @@ export function navStyle() {
     statusBarTextColorScheme: statusBarColour(theme[500]),
     navBarButtonColor: getTextColour(theme[500]),
     statusBarColor: theme[700],
-    screenBackgroundColor: android ? GREY[50] : '#FEFEFE'
+    screenBackgroundColor: '#FEFEFE'
   }
 }
 

@@ -1,27 +1,29 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, ScrollView, View } from 'react-native';
+import { View, Image, Text, StyleSheet, ScrollView } from 'react-native';
 import { GREY } from 'react-native-material-color';
 import language from '../constant/language';
 import { DrawerCell, TextCell } from '../component';
 import { Divider } from 'react-native-elements';
-import { VERSION } from '../constant/value';
-import { navStyle } from '../constant/colour';
+import { navStyle, getTheme, getTextColour } from '../constant/colour';
 import Wiki from './Wiki/Wiki';
 import { iconsMap } from '../constant/icon';
+import { AndroidVersion, IOSVersion } from '../constant/value';
 
 export default class Drawer extends Component {
   state = { selected: '' }
 
   render() {
-    const { viewStyle, textStyle, titleStyle, versionStyle } = styles;    
+    const { viewStyle, titleStyle, versionStyle, imageStyle, imageViewStyle } = styles;  
+    const appVersion = (android ? AndroidVersion : IOSVersion) + ' (' + game_version + ')';
     return (
-      <ScrollView style={viewStyle} showsVerticalScrollIndicator={false}>
+      <ScrollView style={[viewStyle, {backgroundColor: getTheme()}]} showsVerticalScrollIndicator={false}>
+        <View style={[imageViewStyle, {backgroundColor: getTheme()}]}><Image source={require('../img/Warship-Android.png')} style={[imageStyle, {tintColor: getTextColour()}]}/></View>
         <DrawerCell icon={iconsMap['home']} title='Home' onPress={() => this.pushToHome()}/>
         <Divider />
         <Wiki navigator={this.props.navigator} drawer={this.closeDrawer}/>       
         <Divider />        
         <DrawerCell icon={iconsMap['ios-settings']} title={language.drawer_settings} onPress={() => this.pushToScreen('info.settings', language.settings_tab_title)}/>
-        <DrawerCell icon={iconsMap['md-information-circle']} title={language.drawer_about} onPress={() => this.pushToScreen('info.about', language.drawer_about)}/>
+        <Text style={[versionStyle, {color: getTextColour()}]}>{appVersion}</Text>
       </ScrollView>
     )
   }
@@ -67,16 +69,19 @@ const styles = StyleSheet.create({
   viewStyle: {
     flex: 1, backgroundColor: 'white', width: '90%'
   },
-  textStyle: {
-    paddingTop: 8, color: GREY[800],
-    fontSize: 36, fontWeight: 'bold'
-  },
   titleStyle: {
     fontWeight: 'bold', padding: 8,
     color: GREY[800]
   },
   versionStyle: {
-    fontSize: 10, fontWeight: 'bold',
-    marginTop: 8, padding: 8
+    fontSize: 12, fontWeight: '500',
+    paddingLeft: 16, padding: 8
+  },
+  imageViewStyle: {
+    paddingLeft: 16, height: 128,
+    justifyContent: 'center'
+  },
+  imageStyle: {
+    height: 80, width: 80
   }
 })

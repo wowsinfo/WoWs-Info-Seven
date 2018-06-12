@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, StyleSheet, Image, ScrollView, FlatList, Alert, Button } from 'react-native';
 import { View } from 'react-native-animatable';
 import ElevatedView from 'react-native-elevated-view';
-import { WoWsProgress, WoWsTouchable, WoWsLoading, QuickInput } from '../../component';
+import { WoWsProgress, WoWsTouchable, WoWsLoading, QuickInput, SimpleBanner } from '../../component';
 import language from '../../constant/language';
 import { Orange, Grey } from 'react-native-material-color';
 import { ShipDetailedInfo, ModuleInfo } from '../../core';
@@ -46,6 +46,7 @@ export default class ShipDetail extends Component {
           }
           // From default to more advance module
           curr.sort(function (a, b) { return (b.is_default || b.next_module != null) ? 1 : -1 })
+
           for (i = 0; i < curr.length; i++) {
             let currModule = curr[i];
             currModule.value = i;
@@ -65,6 +66,7 @@ export default class ShipDetail extends Component {
       <ScrollView>  
         <View animation='fadeInUp' ref='mainView'>
           { this.renderBasic() }
+          <SimpleBanner />
           { this.renderModule() }
           { this.getStatus() }
           { this.renderSurvivability() }

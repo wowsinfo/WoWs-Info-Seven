@@ -10,7 +10,7 @@ class NewsCell extends Component {
     const { mainViewStyle, imageViewStyle, textViewStyle, imageStyle, titleStyle, timeStyle } = styles;    
     const Touchable = android ? WoWsTouchable : WoWsBounce;
     return (
-      <ElevatedView elevation={2} style={{margin: 8}}>
+      <ElevatedView elevation={2} style={{margin: 6}}>
         <Touchable onPress={() => Linking.openURL(link)}>
           <View style={mainViewStyle}>
             { data_saver ? null : (
@@ -43,8 +43,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
   imageStyle: {
-    width: 120,
-    height: 120 / 1.52
+    width: 124,
+    height: 124 / 1.52
   },
   titleStyle: {
     fontSize: 14, fontWeight: '300',
