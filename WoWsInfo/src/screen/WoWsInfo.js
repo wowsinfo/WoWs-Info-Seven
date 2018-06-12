@@ -1,14 +1,13 @@
 import React, { PureComponent } from 'react';
 import { View, Image, NetInfo, StyleSheet, Text, ActivityIndicator } from 'react-native';
-import { Blue } from 'react-native-material-color';
-import { verticalScale } from 'react-native-size-matters';
+import { Blue, GREY } from 'react-native-material-color';
 import { DataStorage } from '../core';
 import { startApp } from '../app/App';
 import language from '../constant/language';
 
 export default class WoWsInfo extends PureComponent {
   static navigatorStyle = { navBarHidden: true, tabBarHidden: true }
-  
+
   state = { net: 'unknown', status: '', isFirst: true };
   render() {
     // Updating api data
@@ -29,9 +28,10 @@ export default class WoWsInfo extends PureComponent {
       }
     }
 
-    const { viewStyle, imageStyle, textStyle } = styles;    
+    const { viewStyle, imageStyle, textStyle } = styles;  
+    let currHour = new Date().getHours();
     return (
-      <View style={viewStyle}>
+      <View style={[viewStyle, {backgroundColor: currHour >= 18 ? GREY[800] : Blue}]}>
         <Image style={imageStyle} source={require('../img/Logo.png')}/>
         <Text style={textStyle}>{status}</Text>        
         { net == 'unknown' ? null :  <ActivityIndicator size='large' color='white'/> }
