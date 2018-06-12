@@ -3,7 +3,7 @@ import { Platform, Alert, Dimensions } from 'react-native';
 import { AdMobInterstitial } from 'react-native-admob';
 import { registerScreens } from '../screen';
 
-import { Blue, Green, Red, RED, BLUE, GREEN } from 'react-native-material-color';
+import { GREY, BLUErr } from 'react-native-material-color';
 import { getTextColour, statusBarColour, navStyle } from '../constant/colour';
 
 import language from '../constant/language';
@@ -30,7 +30,7 @@ export function loadingData() {
       navigatorStyle: {
         navBarHidden: true,
         statusBarTextColorScheme: 'light',
-        statusBarColor: BLUE[700], 
+        statusBarColor: new Date().getHours() >= 18 ? GREY[700] : BLUE[700], 
       },
     },      
     animationType: 'none'
