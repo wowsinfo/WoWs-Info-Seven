@@ -5,7 +5,7 @@ import store from 'react-native-simple-store';
 import { QuickInput, SettingCell, SettingView } from '../../component';
 import { navStyle, getTheme } from '../../constant/colour';
 import { Divider } from 'react-native-elements';
-import { LocalData, AndroidVersion, IOSVersion, AppStore, GooglePlay, Developer } from '../../constant/value';
+import { LocalData, AndroidVersion, IOSVersion, AppStore, GooglePlay, Developer, Github } from '../../constant/value';
 import { GREY } from 'react-native-material-color';
 import { DataManager } from '../../core';
 import { startApp } from '../../app/App';
