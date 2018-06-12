@@ -1,6 +1,7 @@
 // Common
 export * from './common/WoWsLoading';
 export * from './common/WoWsTouchable';
+export * from './common/WoWsBounce';
 export * from './common/NoInformation';
 export * from './common/WoWsProgress';
 export * from './common/QuickInput';
