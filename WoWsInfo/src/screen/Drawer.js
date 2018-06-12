@@ -17,14 +17,14 @@ export default class Drawer extends Component {
     const appVersion = (android ? AndroidVersion : IOSVersion) + ' (' + game_version + ')';
     let theme = getTheme();
     return (
-      <ScrollView style={[viewStyle, {backgroundColor: theme}]} showsVerticalScrollIndicator={false}>
+      <ScrollView style={viewStyle} showsVerticalScrollIndicator={false}>
         <View style={[imageViewStyle, {backgroundColor: theme}]}><Image source={require('../img/Warship-Android.png')} style={[imageStyle, {tintColor: getTextColour(theme)}]}/></View>
         <DrawerCell icon={iconsMap['home']} title='Home' onPress={() => this.pushToHome()}/>
         <Divider />
         <Wiki navigator={this.props.navigator} drawer={this.closeDrawer}/>       
         <Divider />        
         <DrawerCell icon={iconsMap['ios-settings']} title={language.drawer_settings} onPress={() => this.pushToScreen('info.settings', language.settings_tab_title)}/>
-        <Text style={[versionStyle, {color: getTextColour(theme)}]}>{appVersion}</Text>
+        <Text style={versionStyle}>{appVersion}</Text>
       </ScrollView>
     )
   }
@@ -34,7 +34,7 @@ export default class Drawer extends Component {
    */
   pushToHome() {
     this.closeDrawer();
-    this.props.navigator.popToRoot({animated: true});
+    this.props.navigator.popToRoot({animated: false});
   }
 
   /**
