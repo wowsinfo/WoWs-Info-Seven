@@ -12,7 +12,7 @@ class DrawerCell extends Component {
     const { viewStyle, textStyle } = styles;
     return (
       <WoWsTouchable {...props} useForeground onPressIn={() => this.setState({colour: getTheme()})} 
-        delayPressOut={200} onPressOut={() => this.setState({colour: GREY[600]})}>
+        delayPressOut={10} onPressOut={() => this.setState({colour: GREY[600]})}>
         <View style={viewStyle}>
           <Image source={icon} resizeMode='contain' style={{width: 20, height: 20, tintColor: colour}}/>
           <Text style={[textStyle, {color: colour}]}>{title}</Text>
@@ -25,7 +25,7 @@ class DrawerCell extends Component {
 const styles = StyleSheet.create({
   viewStyle: {
     flexDirection: 'row',
-    height: 44, paddingLeft: 16,
+    height: 44, paddingLeft: 16, margin: 4,
     alignItems: 'center', backgroundColor: 'white'
   },
   textStyle: {
