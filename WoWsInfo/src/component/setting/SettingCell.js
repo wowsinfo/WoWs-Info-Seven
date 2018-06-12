@@ -55,14 +55,14 @@ const styles = StyleSheet.create({
     borderRadius: 4, marginRight: 16
   },
   textStyle: {
-    fontSize: 16, flex: 1,
+    fontSize: 17, flex: 1, fontWeight: '500'
   },
   titleStyle: {
     color: GREY[900], 
-    fontWeight: '300', fontSize: 16,
+    fontWeight: '300', fontSize: 17,
   },
   subtitleStyle: {
-    fontSize: 14
+    fontSize: 13
   }
 })
 
