@@ -3,12 +3,11 @@ import { Platform, Alert, Dimensions } from 'react-native';
 import { AdMobInterstitial } from 'react-native-admob';
 import { registerScreens } from '../screen';
 
-import { GREY, BLUErr } from 'react-native-material-color';
-import { getTextColour, statusBarColour, navStyle } from '../constant/colour';
+import { GREY, BLUE } from 'react-native-material-color';
+import { getTextColour, navStyle } from '../constant/colour';
 
 import language from '../constant/language';
 import { iconsLoaded, iconsMap } from '../constant/icon';
-import { DataStorage } from '../core';
 
 AdMobInterstitial.setAdUnitID('ca-app-pub-5048098651344514/7499671184');
 AdMobInterstitial.setTestDevices([AdMobInterstitial.simulatorId]);
