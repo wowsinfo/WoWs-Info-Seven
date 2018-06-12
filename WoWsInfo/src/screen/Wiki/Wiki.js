@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ScrollView } from 'react-native';
 import { View } from 'react-native-animatable';
-import { WikiCell } from '../../component';
+import { WikiCell, DrawerCell } from '../../component';
 import { navStyle } from '../../constant/colour';
 import language from '../../constant/language';
 import { iconsMap } from '../../constant/icon';
@@ -22,7 +22,30 @@ export default class Wiki extends Component {
 
   render() {
     const { achievement, commander, consumable, collection, warship, map } = data;
-    return (
+    if (android) {
+      return (
+        <View>
+          <DrawerCell icon={require('../../img/Achievement-Android.png')} 
+            title={language.wiki_achievement + ' (' + Object.keys(achievement).length + ')'} 
+            onPress={() => this.pushToBasic(language.wiki_achievement, {info: achievement}, true)}/>
+          <DrawerCell icon={require('../../img/Warship-Android.png')} 
+            title={language.wiki_warship + ' (' + Object.keys(warship).length + ')'} 
+            onPress={() => this.pushToWarship()}/>
+          <DrawerCell icon={require('../../img/Upgrade-Android.png')} title={language.wiki_upgrade} 
+            onPress={() => this.pushToBasic(language.wiki_upgrade, {info: consumable, upgrade: true})}/>
+          <DrawerCell icon={require('../../img/Camouflage-Android.png')} 
+            title={language.wiki_flag_camouflage} 
+            onPress={() => this.pushToBasic(language.wiki_flag_camouflage, {info: consumable})}/>
+          <DrawerCell icon={require('../../img/CommanderSkill-Android.png')} 
+            title={language.wiki_commander} onPress={() => this.pushToBasic(language.wiki_commander, {info: commander})}/>
+          <DrawerCell icon={iconsMap['map']} 
+            title={language.wiki_map + ' (' + Object.keys(map).length + ')'} onPress={() => this.pushToMap()}/>
+          <DrawerCell icon={require('../../img/Collection-Android.png')} 
+            title={language.wiki_collection} 
+            onPress={() => this.pushToBasic(language.wiki_collection, {info: collection})}/>
+        </View>
+      )
+    } else return (
       <ScrollView>
         <View ref={(ref) => (this.preview = ref)} animation='fadeInRight' style={{padding: android ? 0 : 8}}>
           <WikiCell icon={require('../../img/Achievement.png')} 

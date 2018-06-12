@@ -12,7 +12,7 @@ class DrawerCell extends Component {
     return (
       <WoWsTouchable {...props}>
         <View style={viewStyle}>
-          <Image source={icon} resizeMode='contain' style={{width: 18, height: 18, tintColor: getTheme()}}/>
+          <Image source={icon} resizeMode='contain' style={{width: 20, height: 20, tintColor: GREY[600]}}/>
           <Text style={textStyle}>{title}</Text>
         </View>
       </WoWsTouchable>
@@ -24,10 +24,10 @@ const styles = StyleSheet.create({
   viewStyle: {
     flexDirection: 'row',
     height: 44, paddingLeft: 16,
-    alignItems: 'center'
+    alignItems: 'center', backgroundColor: 'white'
   },
   textStyle: {
-    paddingLeft: 24, width: '100%', color: GREY[900]
+    paddingLeft: 24, width: '100%', fontWeight: '500'
   }
 })
 

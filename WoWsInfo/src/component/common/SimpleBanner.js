@@ -6,12 +6,12 @@ class SimpleBanner extends Component {
   state = { showAds: true }
   render() {
     const { showAds } = this.state;
-    if (showAds) { return (
+    /*if (showAds) { return (
       <View styles={styles.viewStyle}>
-        { ads ? <AdMobBanner adSize={android ? 'banner' : 'smartBannerLandscape'} adUnitID='ca-app-pub-5048098651344514/4703363983'
+        { ads ? <AdMobBanner adSize={'smartBannerLandscape'} adUnitID='ca-app-pub-5048098651344514/4703363983'
           testDevices={[AdMobBanner.simulatorId]} onAdFailedToLoad={() => this.setState({showAds: false})}/> : null }
       </View>
-    )} else return null;
+    )} else*/ return null;
   }
 }
 

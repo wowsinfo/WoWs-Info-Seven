@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import { View, Text } from 'react-native-animatable';
 import { TextInput, Picker, StyleSheet, SegmentedControlIOS } from 'react-native';
 import GridView from 'react-native-super-grid';
-import { WoWsTouchable, SimpleBanner } from '../component';
+import { WoWsTouchable } from '../component';
 import language from '../constant/language';
 import store from 'react-native-simple-store';
 import { LocalData } from '../constant/value';
@@ -43,7 +43,6 @@ export default class Search extends PureComponent {
         { showPicker ? this.renderPicker() : null }
         <TextInput style={inputStyle} underlineColorAndroid='white' onEndEditing={this.search} autoCorrect={false}
           clearButtonMode='while-editing' onChangeText={(text) => this.setState({input: text})} autoCapitalize='none' value={input}/>
-        <SimpleBanner />
         { showPicker ? this.renderMain() : null }  
         <GridView itemDimension={256} items={data} renderItem={item => {
           return (

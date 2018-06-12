@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
-import { FlatList, View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import GridView from 'react-native-super-grid';
-import { WoWsLoading, WoWsTouchable } from '../../component';
+import { WoWsLoading, WoWsTouchable, WoWsBounce } from '../../component';
 import { navStyle } from '../../constant/colour';
 import * as Animatable from 'react-native-animatable';
 import { hapticFeedback } from '../../app/App';
@@ -57,6 +57,7 @@ export default class Ship extends PureComponent {
 
   render() {
     const { isReady, data } = this.state;
+    var Touchable = android ? WoWsTouchable : WoWsBounce;
     if (isReady) {
       const { viewStyle, textStyle, imageStyle } = styles;
       return (
@@ -64,12 +65,12 @@ export default class Ship extends PureComponent {
           <GridView itemDimension={110} items={data}
             renderItem={item => {
             return (
-              <WoWsTouchable onPress={() => this.pushToDetail(item)}>
+              <Touchable onPress={() => this.pushToDetail(item)}>
                 <View style={viewStyle}>
                   {data_saver ? null : <Image source={{uri: item.icon, cache: 'default'}} style={imageStyle} resizeMode='contain'/>}
                   <Text style={[textStyle, [{color: item.is_premium || item.is_special ? Orange : GREY[900]}]]}>{Tier[item.tier - 1] + ' ' + item.name}</Text>
                 </View>
-              </WoWsTouchable>
+              </Touchable>
             )}} />
         </Animatable.View>
       )
