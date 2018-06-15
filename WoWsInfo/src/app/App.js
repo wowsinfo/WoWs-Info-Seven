@@ -29,7 +29,7 @@ export function loadingData() {
       navigatorStyle: {
         navBarHidden: true,
         statusBarTextColorScheme: 'light',
-        statusBarColor: new Date().getHours() >= 18 ? GREY[700] : BLUE[700], 
+        statusBarColor: new Date().getHours() >= 18 ? GREY[900] : BLUE[700], 
       },
     },      
     animationType: 'none'

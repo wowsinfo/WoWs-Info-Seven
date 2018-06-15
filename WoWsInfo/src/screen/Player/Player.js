@@ -6,6 +6,7 @@ import { getTextColour } from '../../constant/colour';
 import store from 'react-native-simple-store';
 import { iconsMap } from '../../constant/icon';
 import { LocalData } from '../../constant/value';
+import { Divider } from 'react-native-elements';
 
 // Faster loading
 const initialLayout = {
@@ -74,11 +75,9 @@ export default class PlayerTab extends React.PureComponent {
 
   render() {
     return (
-      <TabViewAnimated style={tabViewStyle}
-        navigationState={this.state}
+      <TabViewAnimated style={tabViewStyle} navigationState={this.state}
         renderScene={this.renderScene} renderHeader={this.renderHeader}
-        onIndexChange={this.handleIndexChange}
-        initialLayout={initialLayout} />
+        onIndexChange={this.handleIndexChange} initialLayout={initialLayout} />
     )
   }
 }
@@ -89,7 +88,7 @@ const styles = StyleSheet.create({
   },
   tabStyle: {
     backgroundColor: 'transparent',
-    height: 40,
+    height: 44,
     padding: 0,
     margin: 0,
   },
