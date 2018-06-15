@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import { Text, Image, ScrollView, StyleSheet } from 'react-native';
 import { View } from 'react-native-animatable';
 import ElevatedView from 'react-native-elevated-view';
-import { Divider } from 'react-native-elements';
 import { PersonalRating } from '../../core';
 import { Basic8Cell, WoWsTouchable } from '../../component';
 import language from '../../constant/language';
-import { getTheme, navStyle } from '../../constant/colour';
+import { navStyle } from '../../constant/colour';
 
 export default class PlayerShipDetail extends Component {
   render() {
@@ -41,9 +40,11 @@ export default class PlayerShipDetail extends Component {
                 <Text style={textStyle(pwin)}>{showPlus(pwin) + Number(pwin).toFixed(2) + '%'}</Text>
                 <Text style={textStyle(pfrags)}>{showPlus(pfrags) + Number(pfrags).toFixed(2)}</Text>
               </View> }
-              <Text style={[ratingStyle, {color: shipColour}]}>{shipComment}</Text>
-              <Basic8Cell info={this.getBasic8CellInfo(info)}/>
             </WoWsTouchable>
+          </ElevatedView>
+          <ElevatedView elevation={2} style={{margin: 8}}>
+            <Text style={[ratingStyle, {color: shipColour}]}>{shipComment}</Text>
+            <Basic8Cell info={this.getBasic8CellInfo(info)}/>
           </ElevatedView>
           <ElevatedView elevation={2} style={{margin: 8}}>
             { this.renderDetailInfo(info) }
