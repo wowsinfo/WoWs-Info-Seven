@@ -196,6 +196,7 @@ const styles = StyleSheet.create({
     textAlign: 'center', fontSize: 18,
     height: android ? 46 : 36,
     borderWidth: 1,
+    borderRadius: 8,
     borderColor: GREY[300]
   },
   textStyle: {
