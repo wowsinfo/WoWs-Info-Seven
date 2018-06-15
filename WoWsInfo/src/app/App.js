@@ -25,7 +25,7 @@ iconsLoaded.then(() => {
 export function loadingData() {
   Navigation.startSingleScreenApp({
     screen: {
-      screen: 'app.wowsinfo',
+      screen: 'info.website',
       navigatorStyle: {
         navBarHidden: true,
         statusBarTextColorScheme: 'light',
