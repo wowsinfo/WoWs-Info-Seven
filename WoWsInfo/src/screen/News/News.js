@@ -31,11 +31,10 @@ export default class News extends Component {
           navigatorButtons: {rightButtons: [{icon: iconsMap['undo'], id: 'reset'}]}
         })
       } else if (event.id == 'more') {
-        this.props.navigator.showModal({
+        this.props.navigator.push({
           title: language.more_header,
-          screen: 'news.more',
-          navigatorStyle: navStyle(),
-          navigatorButtons: {rightButtons: [{title: language.web_done_btn, id: 'done'}]}
+          screen: 'info.website',
+          navigatorStyle: navStyle()
         })
       }
     } else if (event.id === 'bottomTabSelected') {
@@ -66,19 +65,6 @@ export default class News extends Component {
       )
     } else return <WoWsLoading />
   }
-
-  /**
-   * Show website in browser
-   */
-  /*pushToBrowser(item) {
-    console.log(this.state);
-    this.props.navigator.push({
-      screen: 'info.browser',
-      title: language.web_loading,
-      passProps: {link: item.link},
-      navigatorStyle: navStyle()
-    })
-  }*/
 
   /**
    * Loading news from server
