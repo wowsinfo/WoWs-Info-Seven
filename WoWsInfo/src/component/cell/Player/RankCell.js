@@ -11,7 +11,7 @@ import { Red } from 'react-native-material-color';
 class RankCell extends Component {
   render() {
     return (
-      <ElevatedView elevation={2} style={styles.mainViewStyle}>
+      <ElevatedView elevation={3} style={styles.mainViewStyle}>
         <WoWsTouchable onPress={this.gotoDetail}>
           { this.renderRankInfo() }
           { this.renderInfo3Cell() }

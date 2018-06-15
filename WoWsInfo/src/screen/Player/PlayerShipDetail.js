@@ -31,7 +31,7 @@ export default class PlayerShipDetail extends Component {
     return (
       <View style={mainViewStyle}>
         <ScrollView>
-          <ElevatedView elevation={2} style={{margin: 8}}>
+          <ElevatedView elevation={3} style={{margin: 8}}>
             <WoWsTouchable onPress={() => this.pushToDetail(shipData)}>
               <Image source={{uri: shipInfo.image}} resizeMode='contain' style={imageStyle}/>
               <Text style={shipNameStyle}>{shipInfo.name}</Text>
@@ -42,11 +42,11 @@ export default class PlayerShipDetail extends Component {
               </View> }
             </WoWsTouchable>
           </ElevatedView>
-          <ElevatedView elevation={2} style={{margin: 8}}>
+          <ElevatedView elevation={3} style={{margin: 8}}>
             <Text style={[ratingStyle, {color: shipColour}]}>{shipComment}</Text>
             <Basic8Cell info={this.getBasic8CellInfo(info)}/>
           </ElevatedView>
-          <ElevatedView elevation={2} style={{margin: 8}}>
+          <ElevatedView elevation={3} style={{margin: 8}}>
             { this.renderDetailInfo(info) }
           </ElevatedView>          
         </ScrollView>

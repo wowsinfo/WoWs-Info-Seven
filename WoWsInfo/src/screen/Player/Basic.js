@@ -52,20 +52,20 @@ class Basic extends Component {
       return (
         <View style={mainViewStyle} animation='fadeInUp'>
           <ScrollView style={scrollViewStyle} contentInset={{bottom: 50}}>
-            <ElevatedView elevation={2} style={[playerViewStyle, {backgroundColor: color, margin: 8}]}>
+            <ElevatedView elevation={3} style={[playerViewStyle, {backgroundColor: color, margin: 8}]}>
               <Text style={playerNameStyle}>{clanTag + name}</Text>
               <Text style={playerInfoStyle}>{last_battle}</Text>
               <Text style={playerInfoStyle}>{created + ' | Lv ' + level + ' | ⭐️' + rank}</Text>
               { this.renderSetAsMain() }             
             </ElevatedView>
-            <ElevatedView elevation={2} style={{margin: 8}}>
+            <ElevatedView elevation={3} style={{margin: 8}}>
               <Basic8Cell info={this.state.info}/>
               <Text style={dontJudgeStyle}>{language.player_respect}</Text>
             </ElevatedView>        
-            <ElevatedView elevation={2} style={{margin: 8}}>
+            <ElevatedView elevation={3} style={{margin: 8}}>
               { this.renderRecord(this.state.record) }
             </ElevatedView>
-            <ElevatedView elevation={2} style={{margin: 8}}>
+            <ElevatedView elevation={3} style={{margin: 8}}>
               { this.renderRecord(this.state.weapon) }
             </ElevatedView>
           </ScrollView>
