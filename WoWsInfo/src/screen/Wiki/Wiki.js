@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ScrollView } from 'react-native';
 import { View } from 'react-native-animatable';
-import { WikiCell, DrawerCell } from '../../component';
+import { WikiCell, DrawerCell, SettingCell, SettingView } from '../../component';
 import { navStyle } from '../../constant/colour';
 import language from '../../constant/language';
 import { iconsMap } from '../../constant/icon';
@@ -47,25 +47,27 @@ export default class Wiki extends Component {
       )
     } else return (
       <ScrollView>
-        <View ref={(ref) => (this.preview = ref)} animation='fadeInRight' style={{padding: android ? 0 : 8}}>
-          <WikiCell icon={require('../../img/Achievement.png')} 
-            title={language.wiki_achievement + ' (' + Object.keys(achievement).length + ')'} 
-            onPress={() => this.pushToBasic(language.wiki_achievement, {info: achievement}, true)}/>
-          <WikiCell icon={require('../../img/Warship.png')} 
-            title={language.wiki_warship + ' (' + Object.keys(warship).length + ')'} 
-            onPress={() => this.pushToWarship()}/>
-          <WikiCell icon={require('../../img/Upgrade.png')} title={language.wiki_upgrade} 
-            onPress={() => this.pushToBasic(language.wiki_upgrade, {info: consumable, upgrade: true})}/>
-          <WikiCell icon={require('../../img/Camouflage.png')} 
-            title={language.wiki_flag_camouflage} 
-            onPress={() => this.pushToBasic(language.wiki_flag_camouflage, {info: consumable})}/>
-          <WikiCell icon={require('../../img/CommanderSkill.png')} 
-            title={language.wiki_commander} onPress={() => this.pushToBasic(language.wiki_commander, {info: commander})}/>
-          <WikiCell icon={require('../../img/Map.png')} 
-            title={language.wiki_map + ' (' + Object.keys(map).length + ')'} onPress={() => this.pushToMap()}/>
-          <WikiCell icon={require('../../img/Collection.png')} 
-            title={language.wiki_collection} 
-            onPress={() => this.pushToBasic(language.wiki_collection, {info: collection})}/>
+        <View ref={(ref) => (this.preview = ref)} animation='fadeInRight'>
+          <SettingView>
+            <SettingCell divider image={require('../../img/Achievement.png')} 
+              title={language.wiki_achievement + ' (' + Object.keys(achievement).length + ')'} 
+              onPress={() => this.pushToBasic(language.wiki_achievement, {info: achievement}, true)}/>
+            <SettingCell divider  image={require('../../img/Warship.png')} 
+              title={language.wiki_warship + ' (' + Object.keys(warship).length + ')'} 
+              onPress={() => this.pushToWarship()}/>
+            <SettingCell divider  image={require('../../img/Upgrade.png')} title={language.wiki_upgrade} 
+              onPress={() => this.pushToBasic(language.wiki_upgrade, {info: consumable, upgrade: true})}/>
+            <SettingCell divider  image={require('../../img/Camouflage.png')} 
+              title={language.wiki_flag_camouflage} 
+              onPress={() => this.pushToBasic(language.wiki_flag_camouflage, {info: consumable})}/>
+            <SettingCell divider  image={require('../../img/CommanderSkill.png')} 
+              title={language.wiki_commander} onPress={() => this.pushToBasic(language.wiki_commander, {info: commander})}/>
+            <SettingCell divider  image={require('../../img/Map.png')} 
+              title={language.wiki_map + ' (' + Object.keys(map).length + ')'} onPress={() => this.pushToMap()}/>
+            <SettingCell image={require('../../img/Collection.png')} 
+              title={language.wiki_collection} 
+              onPress={() => this.pushToBasic(language.wiki_collection, {info: collection})}/>
+          </SettingView>
         </View>
       </ScrollView>
     )

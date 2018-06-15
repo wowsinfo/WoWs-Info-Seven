@@ -32,7 +32,7 @@ export default class News extends Component {
         })
       } else if (event.id == 'more') {
         this.props.navigator.push({
-          title: language.more_header,
+          title: language.website_title,
           screen: 'info.website',
           navigatorStyle: navStyle()
         })
