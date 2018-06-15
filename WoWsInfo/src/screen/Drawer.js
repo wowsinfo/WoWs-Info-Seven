@@ -22,7 +22,9 @@ export default class Drawer extends Component {
         <DrawerCell icon={iconsMap['home']} title='Home' onPress={() => this.pushToHome()}/>
         <Divider />
         <Wiki navigator={this.props.navigator} drawer={this.closeDrawer}/>       
-        <Divider />        
+        <Divider />
+        <DrawerCell icon={iconsMap['ios-settings']} title={language.more_header} onPress={() => this.pushToScreen('info.website', language.more_header)}/>
+        <Divider />
         <DrawerCell icon={iconsMap['ios-settings']} title={language.drawer_settings} onPress={() => this.pushToScreen('info.settings', language.settings_tab_title)}/>
         <Text style={versionStyle}>{appVersion}</Text>
       </ScrollView>

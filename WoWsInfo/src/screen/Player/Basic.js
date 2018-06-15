@@ -64,6 +64,8 @@ class Basic extends Component {
             </ElevatedView>        
             <ElevatedView elevation={2} style={{margin: 8}}>
               { this.renderRecord(this.state.record) }
+            </ElevatedView>
+            <ElevatedView elevation={2} style={{margin: 8}}>
               { this.renderRecord(this.state.weapon) }
             </ElevatedView>
           </ScrollView>
