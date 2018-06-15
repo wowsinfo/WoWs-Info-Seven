@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { View, Text, StyleSheet, Image, TextInput } from 'react-native';
 import GridView from 'react-native-super-grid';
 import { WoWsLoading, WoWsTouchable } from '../../component';
-import { navStyle } from '../../constant/colour';
+import { navStyle, getTheme } from '../../constant/colour';
 import * as Animatable from 'react-native-animatable';
 import { hapticFeedback } from '../../app/App';
 import { Orange, GREY } from 'react-native-material-color';
@@ -63,11 +63,11 @@ export default class Ship extends PureComponent {
       return (
         <Animatable.View animation='fadeInRight' ref='allship' style={{flex: 1}}>
           <View>
-            <TextInput style={inputStyle} onChangeText={(name) => this.setState({input: name})} clearButtonMode='while-editing'
+            <TextInput style={android ? null : inputStyle} onChangeText={(name) => this.setState({input: name})} clearButtonMode='while-editing'
               onEndEditing={() => {
                 this.filter = {tier: '', nation: '', type: ''};
                 if (this.state.input != '') this.filterShip();
-              }} autoCapitalize='none' autoCorrect={false} value={input}/>
+              }} autoCapitalize='none' autoCorrect={false} value={input} underlineColorAndroid={getTheme()}/>
             <Divider />
           </View>
           <GridView itemDimension={110} items={data}

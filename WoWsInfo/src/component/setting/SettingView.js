@@ -24,7 +24,7 @@ class SettingView extends Component {
           <Divider />
           { children }
           <Divider />
-          { footer ? <Text style={footerStyle}>{footer}</Text> : <View style={{height: 8, backgroundColor: '#EFEFF4'}}/> }
+          { footer ? <Text style={footerStyle}>{footer}</Text> : null }
         </View>
       )
     }

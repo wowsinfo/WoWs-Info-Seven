@@ -23,7 +23,7 @@ export default class Drawer extends Component {
         <Divider />
         <Wiki navigator={this.props.navigator} drawer={this.closeDrawer}/>       
         <Divider />
-        <DrawerCell icon={iconsMap['ios-settings']} title={language.more_header} onPress={() => this.pushToScreen('info.website', language.more_header)}/>
+        <DrawerCell icon={iconsMap['md-browsers']} title={language.website_title} onPress={() => this.pushToScreen('info.website', language.website_title)}/>
         <Divider />
         <DrawerCell icon={iconsMap['ios-settings']} title={language.drawer_settings} onPress={() => this.pushToScreen('info.settings', language.settings_tab_title)}/>
         <Text style={versionStyle}>{appVersion}</Text>
