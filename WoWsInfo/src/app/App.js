@@ -63,7 +63,7 @@ function startAppIOS() {
         screen: 'info.news', icon: iconsMap['newspaper-o'],
         navigatorStyle: navStyle(),
         navigatorButtons: {
-          rightButtons: [{title: language.more_title, id: 'more'}]
+          //rightButtons: [{title: language.more_title, id: 'more'}]
         }
       },
       {
