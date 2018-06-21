@@ -100,6 +100,7 @@ export default class Settings extends Component {
               DataManager.UpdateLocalData().then(() => startApp())
             }}/>
           </View>
+          <Divider />
           <View style={horizonntalViewStyle}>
             <Text style={basicTextStyle}>{language.settings_news_language}</Text>   
             <QuickInput options={news} value={langNews} action={(value, index) => {
