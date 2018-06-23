@@ -1,8 +1,0 @@
-IOS:
-react-native bundle --entry-file index.js --bundle-output ios/WoWs_Info/main.jsbundle --dev=false --platform ios --assets-dest ios
-
-Android:
-react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/
-
-Windows:
-react-native bundle --platform windows --entry-file index.js --bundle-output windows\WoWs_Info\ReactAssets\index.windows.bundle --assets-dest windows\WoWs_Info\ReactAssets --dev false
