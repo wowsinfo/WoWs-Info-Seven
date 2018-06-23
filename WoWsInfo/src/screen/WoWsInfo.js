@@ -31,7 +31,7 @@ export default class WoWsInfo extends PureComponent {
     const { viewStyle, imageStyle, textStyle } = styles;  
     let currHour = new Date().getHours();
     return (
-      <View style={[viewStyle, {backgroundColor: currHour >= 18 ? GREY[800] : Blue}]}>
+      <View style={[viewStyle, {backgroundColor: currHour >= 18 ? GREY[900] : Blue}]}>
         <Image style={imageStyle} source={require('../img/Logo.png')}/>
         <Text style={textStyle}>{status}</Text>        
         { net == 'unknown' ? null :  <ActivityIndicator size='large' color='white'/> }
