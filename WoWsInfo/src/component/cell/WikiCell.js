@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { View, Image, Text, StyleSheet } from 'react-native';
-import { WoWsTouchable } from '../../component';
-import { scale } from 'react-native-size-matters';
+import { WoWsTouchable } from '../../component';;
 import { GREY } from 'react-native-material-color';
-import { getTheme } from '../../constant/colour';
 
 class WikiCell extends Component {
   render() {
@@ -27,7 +25,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   textStyle: {
-    paddingLeft: 16, width: '100%', color: GREY[900]
+    paddingLeft: 16, fontSize: 17, color: GREY[900]
   }
 })
 

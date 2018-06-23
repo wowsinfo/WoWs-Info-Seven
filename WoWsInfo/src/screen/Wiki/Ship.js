@@ -1,10 +1,12 @@
 import React, { PureComponent } from 'react';
-import { FlatList, View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, TextInput } from 'react-native';
 import GridView from 'react-native-super-grid';
 import { WoWsLoading, WoWsTouchable } from '../../component';
-import { navStyle } from '../../constant/colour';
+import { navStyle, getTheme } from '../../constant/colour';
 import * as Animatable from 'react-native-animatable';
 import { hapticFeedback } from '../../app/App';
+import { Orange, GREY } from 'react-native-material-color';
+import { Divider } from 'react-native-elements';
 
 const Tier = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
 
@@ -12,7 +14,7 @@ export default class Ship extends PureComponent {
   constructor(props) {
     super(props);
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
-    this.state = {isReady: false, data: []}
+    this.state = {isReady: false, data: [], input: ''}
 
     // Format nation and type json
     this.filter = {tier: '', nation: '', type: ''};
@@ -32,9 +34,9 @@ export default class Ship extends PureComponent {
         })
       } else if (event.id == 'reset') {
         const { tier, type, nation } = this.filter;
-        if (tier == '' && type == '' & nation == '') return;
+        if (tier == '' && type == '' & nation == '' && this.state.input == '') return;
         this.filter = {tier: '', nation: '', type: ''};
-        this.setState({data: this.parsed});
+        this.setState({data: this.parsed, input: ''});
         this.refs['allship'].bounceInDown(800)       
       }
     }
@@ -55,18 +57,26 @@ export default class Ship extends PureComponent {
   }
 
   render() {
-    const { isReady, data } = this.state;
+    const { isReady, data, input } = this.state;
     if (isReady) {
-      const { viewStyle, textStyle, imageStyle } = styles;
+      const { viewStyle, textStyle, imageStyle, inputStyle } = styles;
       return (
-        <Animatable.View animation='fadeInRight' ref='allship'>
+        <Animatable.View animation='fadeInRight' ref='allship' style={{flex: 1}}>
+          <View>
+            <TextInput style={android ? null : inputStyle} onChangeText={(name) => this.setState({input: name})} clearButtonMode='while-editing'
+              onEndEditing={() => {
+                this.filter = {tier: '', nation: '', type: ''};
+                if (this.state.input != '') this.filterShip();
+              }} autoCapitalize='none' autoCorrect={false} value={input} underlineColorAndroid={getTheme()}/>
+            <Divider />
+          </View>
           <GridView itemDimension={110} items={data}
             renderItem={item => {
             return (
               <WoWsTouchable onPress={() => this.pushToDetail(item)}>
                 <View style={viewStyle}>
                   {data_saver ? null : <Image source={{uri: item.icon, cache: 'default'}} style={imageStyle} resizeMode='contain'/>}
-                  <Text style={textStyle}>{Tier[item.tier - 1] + ' ' + item.name}</Text>
+                  <Text style={[textStyle, [{color: item.is_premium || item.is_special ? Orange : GREY[900]}]]}>{Tier[item.tier - 1] + ' ' + item.name}</Text>
                 </View>
               </WoWsTouchable>
             )}} />
@@ -104,6 +114,7 @@ export default class Ship extends PureComponent {
   setFilter = (filter) => {
     const { tier, type, nation } = filter;
     if (tier == '' && type == '' & nation == '') return;
+    this.setState({input: ''});
     this.filter = filter;
     this.filterShip();
   }
@@ -115,24 +126,26 @@ export default class Ship extends PureComponent {
     this.setState({data: []});
     // Remove repeat
     const { tier, type, nation } = this.filter;
-    if (tier == '' && type == '' & nation == '') return;
+    const { input } = this.state;
+    if (tier == '' && type == '' && nation == '' && input == '') return;
     // Filter ship according to this.filter
     var filtered = [];
     for (key in data.warship) {
       let entry = data.warship[key];
       // Check 3 times
       if (entry.name[0] == '[') continue;
-      if (this.filter.tier != '' && entry.tier != this.filter.tier + 1) continue;
-      if (this.filter.type != '' && entry.type != this.filter.type) continue;
-      if (this.filter.nation != '' && entry.nation != this.filter.nation) continue;
+      if (tier != '' && entry.tier != tier + 1) continue;
+      if (type != '' && entry.type != type) continue;
+      if (nation != '' && entry.nation != nation) continue;
+      if (input != '' && !String(entry.name).toLowerCase().includes(input.toLowerCase())) continue;
       // Valid ship
       filtered.push(entry);
     }
-    // Sort by tier as always
+    // Sort by tier as always∂
     filtered = this.sortShip(filtered);
     hapticFeedback();
     this.setState({data: filtered})
-    this.refs['allship'].bounceInUp(800)
+    if (input == '') this.refs['allship'].bounceInUp(800)
   }
 }
 
@@ -149,5 +162,12 @@ const styles = StyleSheet.create({
   imageStyle: {
     height: 66,
     width: 112,
-  }
+  },
+  inputStyle: {
+    textAlign: 'center', fontSize: 18,
+    height: android ? 46 : 36,
+    borderWidth: 1, borderRadius: 8,
+    borderColor: GREY[300],
+    margin: 8
+  },
 })

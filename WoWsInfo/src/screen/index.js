@@ -1,8 +1,7 @@
 import { Navigation } from 'react-native-navigation';
 
 import News from './News/News';
-import More from './News/More';
-import Browser from './News/Browser';
+import Website from './News/Website';
 
 import Search from './Search';
 import Drawer from './Drawer';
@@ -28,14 +27,12 @@ import Clan from './Player/Clan';
 import PlayerShipDetail from './Player/PlayerShipDetail';
 import { PlayerShip } from './Player/PlayerShip';
 import OpenSource from './Settings/OpenSource';
-import About from './Settings/About';
 
 export function registerScreens() {
   Navigation.registerComponent('app.wowsinfo', () => WoWsInfo);    
   Navigation.registerComponent('app.drawer', () => Drawer);  
   Navigation.registerComponent('info.news', () => News);
-  Navigation.registerComponent('info.browser', () => Browser);
-  Navigation.registerComponent('news.more', () => More);
+  Navigation.registerComponent('info.website', () => Website);
   Navigation.registerComponent('info.search', () => Search);
   Navigation.registerComponent('search.player', () => PlayerTab);
   Navigation.registerComponent('player.ship', () => PlayerShipDetail);
@@ -53,5 +50,4 @@ export function registerScreens() {
   Navigation.registerComponent('info.settings', () => Settings);
   Navigation.registerComponent('settings.theme', () => Theme);
   Navigation.registerComponent('settings.opensource', () => OpenSource);
-  Navigation.registerComponent('info.about', () => About);
 }

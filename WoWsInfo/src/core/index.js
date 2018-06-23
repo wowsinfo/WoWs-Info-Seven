@@ -12,6 +12,7 @@ export * from './player/RankInfo';
 export * from './player/AchievementInfo';
 
 export * from './wiki/ShipDetailedInfo';
+export * from './wiki/ModuleInfo';
 
 export * from './helper/Language';
 export * from './helper/GameVersion';
