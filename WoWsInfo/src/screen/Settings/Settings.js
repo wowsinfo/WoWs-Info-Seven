@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Button, ScrollView, StyleSheet, Linking, Alert } from 'react-native';
+import { View, Text, Share, ScrollView, StyleSheet, Linking, Alert } from 'react-native';
 import language from '../../constant/language';
 import store from 'react-native-simple-store';
 import { QuickInput, SettingCell, SettingView } from '../../component';
@@ -63,13 +63,6 @@ export default class Settings extends Component {
         <Text style={[basicHeaderStyle, {color: getTheme()}]}>{title}</Text>
       </View>
     )
-  } 
-
-  /**
-   * Render entry button
-   */
-  renderEntry = (text, onPress) => {
-    return <SettingCell title={text} onPress={onPress}/>
   }
 
   /**
@@ -92,7 +85,7 @@ export default class Settings extends Component {
     const { langAPI, langNews } = this.state;
     return (
       <SettingView header={language.settings_language_title}>
-        <View style={{backgroundColor: 'white', paddingLeft: 8}}>
+        <View style={{backgroundColor: 'white', paddingLeft: 10}}>
           <View style={horizonntalViewStyle}>
             <Text style={basicTextStyle}>{language.settings_api_language}</Text>
             <QuickInput options={api} value={langAPI} action={(value, index) => {
@@ -107,6 +100,7 @@ export default class Settings extends Component {
               DataManager.UpdateLocalData().then(() => startApp())
             }}/>
           </View>
+          <Divider />
           <View style={horizonntalViewStyle}>
             <Text style={basicTextStyle}>{language.settings_news_language}</Text>   
             <QuickInput options={news} value={langNews} action={(value, index) => {
@@ -127,7 +121,7 @@ export default class Settings extends Component {
   renderTheme = () => {
     return (
       <SettingView header={language.settings_theme_title}>
-        { this.renderEntry(language.settings_theme, this.showTheme) }        
+        <SettingCell title={language.settings_theme}  onPress={() => this.showTheme()}/>       
       </SettingView>
     )
   }
@@ -140,6 +134,8 @@ export default class Settings extends Component {
           divider image={iconsMap['email']} onPress={() => Linking.openURL(Developer)}/>
         <SettingCell title={language.settings_source_code} subtitle={language.settings_source_code_sub}
           divider image={iconsMap['logo-github']} onPress={() => Linking.openURL(Github)}/>
+        <SettingCell title={language.settings_share_app} 
+          divider image={iconsMap['md-share']} onPress={() => Share.share({url: android ? GooglePlay : AppStore})}/>
         <SettingCell title={language.settings_write_review} 
           divider image={iconsMap['star']} onPress={() => Linking.openURL(android ? GooglePlay : AppStore)}/>
         <SettingCell title={language.settings_open_source_library} 
@@ -158,9 +154,9 @@ export default class Settings extends Component {
     const { basicViewStyle, basicTextStyle } = styles;    
     return (
       <SettingView header={language.settings_support_title}>
-        { !ads ? null : this.renderEntry(language.settings_remove_ads, () => this.buyIAP()) }
+        { !ads ? null : <SettingCell divider title={language.settings_remove_ads} onPress={() => this.this.buyIAP()}/> }
         { /*this.renderEntry(language.settings_donation, null)*/ }
-        { !ads ? null : this.renderEntry(language.settings_restore_purchase, () => this.restoreIAP()) }      
+        { !ads ? null : <SettingCell title={language.settings_restore_purchase} onPress={() => this.restoreIAP()}/> }      
       </SettingView>
     )
   }

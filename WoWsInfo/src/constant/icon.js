@@ -19,12 +19,14 @@ const icons = {
   'filter': [26, '#fff', FontAwesome],
   'wikipedia-w': [24, GREY[600], FontAwesome],
   // Player
-  'star': [24, '#fff', FontAwesome],
+  'star': [24, GREY[600], FontAwesome],
   'star-o': [24, '#fff', FontAwesome],  
   // Drawer
   'home': [24, GREY[600], Entypo],  
   'map': [24, GREY[600], Entypo],
+  'md-browsers': [24, GREY[600]],
   // Settings
+  'md-share': [24, GREY[600]],
   'email': [24, GREY[600], MaterialIcons],
   'color-lens': [24, GREY[600], MaterialIcons],
   'logo-github': [24, GREY[600]],
