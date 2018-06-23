@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, Image, ScrollView, FlatList, Alert } from 'react-native';
+import { Text, StyleSheet, Image, ScrollView, FlatList, Alert, Button } from 'react-native';
 import { View } from 'react-native-animatable';
 import ElevatedView from 'react-native-elevated-view';
-import { WoWsProgress, WoWsTouchable, WoWsLoading } from '../../component';
+import { WoWsProgress, WoWsTouchable, WoWsLoading, QuickInput, SimpleBanner } from '../../component';
 import language from '../../constant/language';
 import { Orange, Grey } from 'react-native-material-color';
-import { ShipDetailedInfo } from '../../core';
+import { ShipDetailedInfo, ModuleInfo } from '../../core';
 import { navStyle, getTheme } from '../../constant/colour';
-import { Divider } from 'react-native-elements';
 
 const Tier = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
+
 export default class ShipDetail extends Component {
   constructor(props) {
     super(props);
-    this.state = {data: {}, isReady: false, profile: {}};
+    this.state = {data: {}, isReady: false, profile: {}, module: [], module_tree: {}};
   }
 
   static navigatorStyle = {
@@ -22,16 +22,41 @@ export default class ShipDetail extends Component {
 
   componentWillMount() {
     ShipDetailedInfo.getDefault(this.props.info.ship_id).then(data => {
-      // Get almost everything from data
-      const { default_profile, description, is_premium, is_special, mod_slot, price_credit, price_gold, upgrades, next_ships, modules_tree } = data;
-      const { engine, torpedo_bomber, anti_aircraft, mobility, hull, atbas, artillery, torpedoes, fighters, fire_control, 
-        weaponry, battle_level_range_max, battle_level_range_min, flight_control, concealment, armour, dive_bomber } = default_profile;
-      for (module in modules_tree) {
-        let curr = modules_tree[module];
-        if (curr.next_modules != null) console.log(curr);
+      const { modules_tree, modules } = data;
+      // Get module data for rendering
+      let moduleData = []; var type = '';
+      let moduleName = global.data.encyclopedia.ship_modules;
+      let moduleInfo = [];
+
+      for (module in modules) {
+        let curr = modules[module];
+        // Remove unnecessary modules
+        if (curr.length < 2) delete modules[module];
+        else {
+          for (i = 0; i < curr.length; i++) {
+            // Collect module information
+            let currModule = modules_tree[curr[i]];
+            currModule.label = currModule.name;
+            delete currModule.module_id_str; delete currModule.name;
+            delete currModule.price_xp; delete currModule.price_credit;
+            currModule.name = moduleName[currModule.type];
+            delete currModule.next_ships; delete currModule.type;
+            curr[i] = currModule;
+          }
+          // From default to more advance module
+          curr.sort(function (a, b) { return (b.is_default || b.next_module != null) ? 1 : -1 })
+
+          for (i = 0; i < curr.length; i++) {
+            let currModule = curr[i];
+            currModule.value = i;
+            delete currModule.next_module; delete currModule.is_default;
+          }
+          moduleInfo.push({value: curr[0].value, label: curr[0].label, 
+            type: curr[0].name, key: module, id: curr[0].module_id});
+        }
       }
       // Collect status from everywhere
-      this.setState({data: data, isReady: true, profile: data.default_profile});
+      this.setState({data: data, isReady: true, profile: data.default_profile, module_tree: modules, module: moduleInfo});
     })
   }
 
@@ -40,6 +65,8 @@ export default class ShipDetail extends Component {
       <ScrollView>  
         <View animation='fadeInUp' ref='mainView'>
           { this.renderBasic() }
+          <SimpleBanner />
+          { this.renderModule() }
           { this.getStatus() }
           { this.renderSurvivability() }
           { this.renderMainBattery() }
@@ -81,12 +108,53 @@ export default class ShipDetail extends Component {
     const isPremium = is_premium || is_special;
     // Show avergae data
     return (
-      <ElevatedView elevation={2} style={[basicViewStyle, {margin: 8}]}>
-        {data_saver ? null : <Image source={{uri: icon, cache: 'default'}} style={imageStyle} resizeMode='contain'/>}
-        <Text style={tierTextStyle}>{Tier[tier - 1] + ' ' + name}</Text>
-        <Text style={basicTextStyle}>{encyclopedia.ship_nations[nation] + '\n' + ship_type[type]}</Text>
-        <Text style={[basicTextStyle, {color: isPremium ? Orange : Grey}]}>{isPremium ? price_gold : price_credit}</Text> 
-        <Text style={descriptionStyle}>{description}</Text>
+      <WoWsTouchable>
+        <ElevatedView elevation={3} style={[basicViewStyle, {margin: 8}]}>
+          {data_saver ? null : <Image source={{uri: icon, cache: 'default'}} style={imageStyle} resizeMode='contain'/>}
+          <Text style={tierTextStyle}>{Tier[tier - 1] + ' ' + name}</Text>
+          <Text style={basicTextStyle}>{encyclopedia.ship_nations[nation] + '\n' + ship_type[type]}</Text>
+          <Text style={[basicTextStyle, {color: isPremium ? Orange : Grey}]}>{isPremium ? price_gold : price_credit}</Text> 
+          <Text style={descriptionStyle}>{description}</Text>
+        </ElevatedView>
+      </WoWsTouchable>
+    )
+  }
+
+  /**
+   * Render upgradable components
+   */
+  renderModule() {
+    const { module, module_tree } = this.state;
+    const { ship_id } = this.state.data; 
+    // Do not render anything when there is not a single update
+    if (Object.keys(module).length == 0) return null;
+    else return (
+      <ElevatedView elevation={3} style={{margin: 8}}>
+        { this.renderTitle(language.detail_module_title) }
+        { Object.keys(module).map((value, keyIndex) => {
+          let curr = module[value];
+          return (
+            <View>
+              <Text style={{paddingLeft: 8, fontWeight: '300', marginBottom: -8}}>{curr.type}</Text>
+              <QuickInput options={module_tree[curr.key]} value={curr.value} action={(value) => {
+                let currModule = Object.assign(module, {});
+                let mod = currModule[keyIndex];
+                let tree = module_tree[curr.key][value];
+                mod.label = tree.label; mod.value = tree.value; mod.id = tree.module_id;
+                console.log(module);
+                this.setState({module: currModule});
+              }}/>
+            </View>
+          )
+        })}
+        <Button title='Apply' color={getTheme()} onPress={() => {
+          // Request updated data
+          this.setState({isReady: false})
+          ModuleInfo.getUpdatedInfo(ship_id, module).then(data => {
+            if (data != null) this.setState({profile: data})
+            this.setState({isReady: true});
+          })
+        }}/>
       </ElevatedView>
     )
   }
@@ -95,13 +163,13 @@ export default class ShipDetail extends Component {
    * Get general status for warship
    */
   getStatus() {  
-    const { mobility, weaponry, concealment, armour } = this.state.profile
+    const { mobility, weaponry, concealment, armour } = this.state.profile;
     const { anti_aircraft, aircraft, artillery, torpedoes } = weaponry;
 
     // White -> Blue
     const tintColor = getTheme();
     return (
-      <ElevatedView elevation={2} style={{margin: 8}}>
+      <ElevatedView elevation={3} style={{margin: 8}}>
         { this.renderTitle(language.detail_status_title) }
         <WoWsProgress color={tintColor} value={armour.total} title={language.detail_survivability}/>
         <WoWsProgress color={tintColor} value={artillery} title={language.detail_artillery}/>
@@ -118,10 +186,10 @@ export default class ShipDetail extends Component {
    * Render information about health, armour
    */
   renderSurvivability() {
-    const { flood_prob, range, health } = this.state.data.default_profile.armour;
+    const { flood_prob, range, health } = this.state.profile.armour;
     const { horizontalViewStyle, basicTextStyle, basicTitleStyle, basicViewStyle } = styles;
     return (
-      <ElevatedView elevation={2} style={{margin: 8}}>
+      <ElevatedView elevation={3} style={{margin: 8}}>
         { this.renderTitle(language.detail_survivability) }
         <View style={horizontalViewStyle}>
           <View style={basicViewStyle}>
@@ -147,7 +215,7 @@ export default class ShipDetail extends Component {
    */
   renderMainBattery() {
     const { horizontalViewStyle, basicTextStyle, basicTitleStyle } = styles;
-    const { artillery } = this.state.profile
+    const { artillery } = this.state.profile;
     if (artillery != null) {
       const { max_dispersion, gun_rate, distance, rotation_time, slots, shells } = artillery;
       const { AP, HE } = shells;
@@ -158,7 +226,7 @@ export default class ShipDetail extends Component {
       let calibar = Math.round(parseInt(gunName.split(' ')[0]) / 6);
 
       return (
-        <ElevatedView elevation={2} style={{margin: 8}}>
+        <ElevatedView elevation={3} style={{margin: 8}}>
           { artillery == null ? null : <View>
             { this.renderTitle(language.artillery_main) }
             <View style={horizontalViewStyle}>
@@ -181,7 +249,7 @@ export default class ShipDetail extends Component {
               </View>}
               { AP == null ? null : <View>
                 <Text style={basicTitleStyle}>AP</Text>                
-                <Text style={basicTextStyle}>-0-</Text> 
+                <Text style={basicTextStyle}>--</Text> 
                 <Text style={basicTextStyle}>{AP.bullet_mass + ' kg'}</Text> 
                 <Text style={basicTextStyle}>{AP.damage}</Text> 
                 <Text style={basicTextStyle}>{AP.bullet_speed + ' m/s'}</Text>
@@ -203,7 +271,7 @@ export default class ShipDetail extends Component {
       const { distance, slots } = atbas;
       var guns = []; for (gun in slots) guns.push(slots[gun]);
       return (
-        <ElevatedView elevation={2} style={{margin: 8}}>
+        <ElevatedView elevation={3} style={{margin: 8}}>
           { this.renderTitle(language.artillery_secondary + ' (' + distance + ' km)') }
           { guns.map(function(value, index) { 
             const { burn_probability, bullet_speed, name, gun_rate, damage, type } = value;            
@@ -232,7 +300,7 @@ export default class ShipDetail extends Component {
     if (flight_control != null) {
       const { fighter_squadrons, torpedo_squadrons, bomber_squadrons } = flight_control;
       return (
-        <ElevatedView elevation={2} style={{margin: 8}}>
+        <ElevatedView elevation={3} style={{margin: 8}}>
           { this.renderTitle(language.detail_aircraft) }
           { this.renderFighter() }
           { this.renderTorpedoBomber() }
@@ -249,7 +317,7 @@ export default class ShipDetail extends Component {
     if (fighters != null) {
       const {} = fighters;
       return (
-        <ElevatedView elevation={2} style={{margin: 8}}>
+        <ElevatedView elevation={3} style={{margin: 8}}>
           <Text style={basicTitleStyle}>{language.aircraft_fighter}</Text>
         </ElevatedView>
       )
@@ -261,7 +329,7 @@ export default class ShipDetail extends Component {
     const { torpedo_bomber } = this.state.profile;
     if (torpedo_bomber != null) {
       return (
-        <ElevatedView elevation={2} style={{margin: 8}}>
+        <ElevatedView elevation={3} style={{margin: 8}}>
           <Text style={basicTitleStyle}>{language.aircraft_torpedo_bomber}</Text>
         </ElevatedView>
       )
@@ -273,7 +341,7 @@ export default class ShipDetail extends Component {
     const { dive_bomber } = this.state.profile;
     if (dive_bomber != null) {
       return (
-        <ElevatedView elevation={2} style={{margin: 8}}>
+        <ElevatedView elevation={3} style={{margin: 8}}>
           <Text style={basicTitleStyle}>{language.aircraft_bomber}</Text>
         </ElevatedView>
       )
@@ -290,7 +358,7 @@ export default class ShipDetail extends Component {
       const { visibility_dist, distance, torpedo_name, reload_time, torpedo_speed, slots, max_damage } = torpedoes;
       var torps = ''; for (torp in slots) torps += slots[torp].guns + ' x ' + slots[torp].barrels + '  ';
       return (
-        <ElevatedView elevation={2} style={{margin: 8}}>
+        <ElevatedView elevation={3} style={{margin: 8}}>
           { this.renderTitle(language.detail_torpedoes) }
           <View style={horizontalViewStyle}>
             <Text>{reload_time + ' s'}</Text>
@@ -318,7 +386,7 @@ export default class ShipDetail extends Component {
       const { slots } = anti_aircraft;
       var AAValues = []; for (aa in slots) AAValues.push(slots[aa]);
       return (
-        <ElevatedView elevation={2} style={{margin: 8}}>
+        <ElevatedView elevation={3} style={{margin: 8}}>
           { this.renderTitle(language.detail_aa) }
           { AAValues.map(function(value, index) {
             const { distance, avg_damage, name, guns } = value;
@@ -345,7 +413,7 @@ export default class ShipDetail extends Component {
     const { horizontalViewStyle, basicTextStyle } = styles;
     const { rudder_time, turning_radius, max_speed } = this.state.profile.mobility
     return (
-      <ElevatedView elevation={2} style={{margin: 8}}>
+      <ElevatedView elevation={3} style={{margin: 8}}>
         { this.renderTitle(language.detail_maneuverabilty) }
         <View style={horizontalViewStyle}>
           <Text style={basicTextStyle}>{rudder_time + ' s'}</Text>
@@ -363,7 +431,7 @@ export default class ShipDetail extends Component {
     const { horizontalViewStyle, basicTextStyle, basicViewStyle, basicTitleStyle } = styles;
     const { detect_distance_by_plane, detect_distance_by_ship } = this.state.profile.concealment
     return (
-      <ElevatedView elevation={2} style={{margin: 8}}>
+      <ElevatedView elevation={3} style={{margin: 8}}>
         { this.renderTitle(language.detail_concealment) }
         <View style={horizontalViewStyle}>
           <View style={basicViewStyle}>
@@ -386,9 +454,9 @@ export default class ShipDetail extends Component {
     const { mod_slots, upgrades } = this.state.data;
     upgradeKey = (value, index) => String(index);
     return (
-      <ElevatedView elevation={2} style={{margin: 8}}>
+      <ElevatedView elevation={3} style={{margin: 8}}>
         { this.renderTitle(language.detail_upgrade_title + ' (' + mod_slots + ')') }
-        <FlatList keyExtractor={upgradeKey} showsHorizontalScrollIndicator={false} horizontal data={upgrades} renderItem={({item}) => {
+        <FlatList keyExtractor={upgradeKey} horizontal data={upgrades} renderItem={({item}) => {
           let curr = data.consumable[item];
           return (
           <WoWsTouchable onPress={() => Alert.alert(curr.name, '\n' + curr.text, [{text: String(curr.price_credit)}])}>
@@ -410,7 +478,7 @@ export default class ShipDetail extends Component {
       var ships = []; for (key in next_ships) ships.push({key: key, exp: next_ships[key]});
       shipKey = (value, index) => String(index);      
       return (
-        <ElevatedView elevation={2} style={{margin: 8}}>
+        <ElevatedView elevation={3} style={{margin: 8}}>
           { this.renderTitle(language.detail_next_ship_title) }
           <FlatList data={ships} keyExtractor={shipKey} renderItem={({item}) => {  
             let curr = data.warship[item.key];
@@ -447,13 +515,14 @@ const styles = StyleSheet.create({
     flex: 1, paddingTop: 4, padding: 8, margin: 8
   },
   basicTextStyle: {
-    textAlign: 'center', margin: 2, fontWeight: '300', width: '100%', flex: 1
+    textAlign: 'center', padding: 4, fontWeight: '300', width: '100%', flex: 1
   },
   basicTitleStyle: {
     textAlign: 'center', fontSize: 16, fontWeight: 'bold', width: '100%', flex: 1
   },
   horizontalViewStyle: {
-    justifyContent: 'space-around', flexDirection: 'row', alignItems: 'center', flex: 1
+    justifyContent: 'space-around', flexDirection: 'row', alignItems: 'center', 
+    flex: 1, padding: 4
   },
   descriptionStyle: {
     padding: 4, fontWeight: '300', textAlign: 'center', 

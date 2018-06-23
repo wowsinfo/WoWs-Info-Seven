@@ -1,14 +1,13 @@
 import { Navigation } from 'react-native-navigation';
-import { Platform, Alert, Dimensions } from 'react-native';
+import { Platform, Dimensions } from 'react-native';
 import { AdMobInterstitial } from 'react-native-admob';
 import { registerScreens } from '../screen';
 
-import { Blue, Green, Red, RED, BLUE, GREEN } from 'react-native-material-color';
-import { getTextColour, statusBarColour, navStyle } from '../constant/colour';
+import { GREY, BLUE } from 'react-native-material-color';
+import { getTextColour, navStyle } from '../constant/colour';
 
 import language from '../constant/language';
 import { iconsLoaded, iconsMap } from '../constant/icon';
-import { DataStorage } from '../core';
 
 AdMobInterstitial.setAdUnitID('ca-app-pub-5048098651344514/7499671184');
 AdMobInterstitial.setTestDevices([AdMobInterstitial.simulatorId]);
@@ -30,7 +29,7 @@ export function loadingData() {
       navigatorStyle: {
         navBarHidden: true,
         statusBarTextColorScheme: 'light',
-        statusBarColor: BLUE[700], 
+        statusBarColor: new Date().getHours() >= 18 ? GREY[900] : BLUE[700], 
       },
     },      
     animationType: 'none'
@@ -43,7 +42,6 @@ export function loadingData() {
 export function startApp() {
   hapticFeedback();
   android ? startAppAndroid() : startAppIOS(); 
-  //AdMobInterstitial.requestAd().then(() => AdMobInterstitial.showAd());
 }
 
 /**
@@ -64,9 +62,9 @@ function startAppIOS() {
         label: language.news_tab_label, title: language.news_tab_title,
         screen: 'info.news', icon: iconsMap['newspaper-o'],
         navigatorStyle: navStyle(),
-        /*navigatorButtons: {
-          rightButtons: [{title: language.more_title, id: 'more'}]
-        }*/
+        navigatorButtons: {
+          //rightButtons: [{title: language.more_title, id: 'more'}]
+        }
       },
       {
         label: language.wiki_title, title: language.drawer_wiki,
@@ -100,7 +98,6 @@ function startAppAndroid() {
       navigatorStyle: navStyle(),
       navigatorButtons: {
         leftButtons: [{icon: iconsMap['menu'], id: 'drawer'}],
-        /*rightButtons: [{title: language.more_title, id: 'more'}],*/
         fab: {
           collapsedId: 'search',
           collapsedIcon: iconsMap['ios-search'],
@@ -130,7 +127,7 @@ export function hapticFeedback() {
 /**
  * Determine if device is iphone x
  */
-export function isIphoneX() {
+export function isX() {
   const dimen = Dimensions.get('window');
   return (
       Platform.OS === 'ios' &&

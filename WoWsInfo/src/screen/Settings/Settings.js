@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text, Button, ScrollView, StyleSheet, Linking, Alert } from 'react-native';
+import { View, Text, Share, ScrollView, StyleSheet, Linking, Alert } from 'react-native';
 import language from '../../constant/language';
 import store from 'react-native-simple-store';
-import ElevatedView from 'react-native-elevated-view';
-import { WoWsTouchable, QuickInput, TextCell, DrawerCell } from '../../component';
-import SelectInput from 'react-native-select-input-ios';
+import { QuickInput, SettingCell, SettingView } from '../../component';
 import { navStyle, getTheme } from '../../constant/colour';
 import { Divider } from 'react-native-elements';
-import { Developer, Github, LocalData, AndroidVersion, IOSVersion, AppStore, GooglePlay } from '../../constant/value';
+import { LocalData, AndroidVersion, IOSVersion, AppStore, GooglePlay, Developer, Github } from '../../constant/value';
 import { GREY } from 'react-native-material-color';
 import { DataManager } from '../../core';
 import { startApp } from '../../app/App';
@@ -44,15 +42,12 @@ export default class Settings extends Component {
   }
 
   render() {
-    const appVersion = (android ? AndroidVersion : IOSVersion) + ' (' + game_version + ')';
     return (
-      <ScrollView>       
+      <ScrollView style={{backgroundColor: android ? 'white' : '#EFEFF4'}}>       
         { this.renderLanguage() }
         { this.renderTheme() }
         { android ? null : this.renderIAP() }
-        { android ? null : <DrawerCell icon={iconsMap['md-information-circle']} title={language.drawer_about} onPress={() => this.props.navigator.push({
-          screen: 'info.about', title: language.drawer_about, navigatorStyle: navStyle()
-        })}/> }     
+        { this.renderWoWsInfo() }
       </ScrollView>
     )
   }
@@ -68,13 +63,6 @@ export default class Settings extends Component {
         <Text style={[basicHeaderStyle, {color: getTheme()}]}>{title}</Text>
       </View>
     )
-  } 
-
-  /**
-   * Render entry button
-   */
-  renderEntry = (text, onPress) => {
-    return <TextCell title={text} onPress={onPress}/>
   }
 
   /**
@@ -82,7 +70,7 @@ export default class Settings extends Component {
    * News and API language
    */
   renderLanguage = () => {
-    const { horizonntalViewStyle, basicTextStyle, basicViewStyle } = styles;
+    const { horizonntalViewStyle, basicTextStyle } = styles;
 
     // Create language list
     let api = [];
@@ -96,31 +84,33 @@ export default class Settings extends Component {
 
     const { langAPI, langNews } = this.state;
     return (
-      <ElevatedView elevation={2} style={basicViewStyle}>
-        { this.renderTitle(language.settings_language_title) }
-        <View style={horizonntalViewStyle}>
-          <Text style={basicTextStyle}>{language.settings_api_language}</Text>
-          <QuickInput options={api} value={langAPI} action={(value, index) => {
-            this.props.navigator.push({
-              screen: 'app.wowsinfo',
-              navigatorStyle: navStyle(),
-              passProps: {api: true}
-            })
-            this.setState({langAPI: value});
-            global.api_language = value;
-            store.save(LocalData.api_language, value);
-            DataManager.UpdateLocalData().then(() => startApp())
-          }}/>
+      <SettingView header={language.settings_language_title}>
+        <View style={{backgroundColor: 'white', paddingLeft: 10}}>
+          <View style={horizonntalViewStyle}>
+            <Text style={basicTextStyle}>{language.settings_api_language}</Text>
+            <QuickInput options={api} value={langAPI} action={(value, index) => {
+              this.props.navigator.push({
+                screen: 'app.wowsinfo',
+                navigatorStyle: navStyle(),
+                passProps: {api: true}
+              })
+              this.setState({langAPI: value});
+              global.api_language = value;
+              store.save(LocalData.api_language, value);
+              DataManager.UpdateLocalData().then(() => startApp())
+            }}/>
+          </View>
+          <Divider />
+          <View style={horizonntalViewStyle}>
+            <Text style={basicTextStyle}>{language.settings_news_language}</Text>   
+            <QuickInput options={news} value={langNews} action={(value, index) => {
+                this.setState({langNews: value});
+                global.news_language = value;
+                store.save(LocalData.news_language, value);
+              }}/>            
+          </View>
         </View>
-        <View style={horizonntalViewStyle}>
-          <Text style={basicTextStyle}>{language.settings_news_language}</Text>   
-          <QuickInput options={news} value={langNews} action={(value, index) => {
-              this.setState({langNews: value});
-              global.news_language = value;
-              store.save(LocalData.news_language, value);
-            }}/>            
-        </View>
-      </ElevatedView>
+      </SettingView>
     )
   }
 
@@ -129,12 +119,30 @@ export default class Settings extends Component {
    * 
    */
   renderTheme = () => {
-    const { basicViewStyle, basicTextStyle } = styles;    
     return (
-      <ElevatedView elevation={2} style={basicViewStyle}>
-        { this.renderTitle(language.settings_theme_title) }
-        { this.renderEntry(language.settings_theme, this.showTheme) }
-      </ElevatedView>
+      <SettingView header={language.settings_theme_title}>
+        <SettingCell title={language.settings_theme}  onPress={() => this.showTheme()}/>       
+      </SettingView>
+    )
+  }
+
+  renderWoWsInfo = () => {
+    const appVersion = (android ? AndroidVersion : IOSVersion) + ' (' + game_version + ')';
+    return (
+      <SettingView header='WoWs Info' footer={appVersion}>
+        <SettingCell title={language.settings_email_feedback} subtitle={language.settings_email_feedback_sub}
+          divider image={iconsMap['email']} onPress={() => Linking.openURL(Developer)}/>
+        <SettingCell title={language.settings_source_code} subtitle={language.settings_source_code_sub}
+          divider image={iconsMap['logo-github']} onPress={() => Linking.openURL(Github)}/>
+        <SettingCell title={language.settings_share_app} 
+          divider image={iconsMap['md-share']} onPress={() => Share.share({url: android ? GooglePlay : AppStore})}/>
+        <SettingCell title={language.settings_write_review} 
+          divider image={iconsMap['star']} onPress={() => Linking.openURL(android ? GooglePlay : AppStore)}/>
+        <SettingCell title={language.settings_open_source_library} 
+          image={iconsMap['md-git-commit']} onPress={() => this.props.navigator.push({
+          screen: 'settings.opensource', title: language.settings_open_source_library, navigatorStyle: navStyle()
+        })}/>
+      </SettingView>
     )
   }
 
@@ -145,12 +153,11 @@ export default class Settings extends Component {
   renderIAP = () => {
     const { basicViewStyle, basicTextStyle } = styles;    
     return (
-      <View style={basicViewStyle}>
-        { this.renderTitle(language.settings_iap_title) }
-        { !ads ? null : this.renderEntry(language.settings_remove_ads, () => this.buyIAP()) }
+      <SettingView header={language.settings_support_title}>
+        { !ads ? null : <SettingCell divider title={language.settings_remove_ads} onPress={() => this.this.buyIAP()}/> }
         { /*this.renderEntry(language.settings_donation, null)*/ }
-        { !ads ? null : this.renderEntry(language.settings_restore_purchase, () => this.restoreIAP()) }        
-      </View>
+        { !ads ? null : <SettingCell title={language.settings_restore_purchase} onPress={() => this.restoreIAP()}/> }      
+      </SettingView>
     )
   }
 
@@ -221,14 +228,14 @@ const styles = StyleSheet.create({
   },
   horizonntalViewStyle: {
     flexDirection: 'row', justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center', margin: -4
   },
   basicHeaderStyle: {
     fontSize: 12, fontWeight: 'bold',
     padding: 8, paddingTop: 8, paddingBottom: 8
   },
   basicTextStyle: {
-    padding: 8, color: 'black', flex: 1,
-    fontSize: 14, fontWeight: 'bold'
+    padding: 8, flex: 1,
+    fontSize: 17, color: GREY[900]
   }
 })
