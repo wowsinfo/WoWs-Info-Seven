@@ -1,8 +1,5 @@
-.vscode
-wows_info/.eslintrc.js
-.vscode/settings.json
-third-party
 *.bundle
 *.meta
-*.apk
-*.jsbundle
+WoWsInfo/android/app/release/output.json
+WoWsInfo/android/app/release/app-release.apk
+WoWsInfo/ios/GoogleMobileAds.framework/
