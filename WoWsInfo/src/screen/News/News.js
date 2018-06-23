@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import { Text, FlatList, DrawerLayoutAndroid, SafeAreaView } from 'react-native';
+import { FlatList, SafeAreaView } from 'react-native';
 import { WoWsLoading, NewsCell, SimpleBanner } from '../../component';
 import { NewsParser } from '../../core';
 import { View } from 'react-native-animatable';
-import Drawer from '../Drawer';
 import language from '../../constant/language';
 import { navStyle } from '../../constant/colour';
 import { iconsMap } from '../../constant/icon';
@@ -32,11 +31,10 @@ export default class News extends Component {
           navigatorButtons: {rightButtons: [{icon: iconsMap['undo'], id: 'reset'}]}
         })
       } else if (event.id == 'more') {
-        this.props.navigator.showModal({
-          title: language.more_header,
-          screen: 'news.more',
-          navigatorStyle: navStyle(),
-          navigatorButtons: {rightButtons: [{title: language.web_done_btn, id: 'done'}]}
+        this.props.navigator.push({
+          title: language.website_title,
+          screen: 'info.website',
+          navigatorStyle: navStyle()
         })
       }
     } else if (event.id === 'bottomTabSelected') {
@@ -59,26 +57,14 @@ export default class News extends Component {
       return (
         <SafeAreaView>
           <View ref='news'>
+            <SimpleBanner />
             <FlatList data={data} keyExtractor={this.newsKey} onRefresh={() => this.refreshNews()}
-            renderItem={({item}) => <NewsCell data={item}/>} refreshing={isRefreshing}/>
+              renderItem={({item}) => <NewsCell data={item}/>} refreshing={isRefreshing}/>
           </View>
         </SafeAreaView>
       )
     } else return <WoWsLoading />
   }
-
-  /**
-   * Show website in browser
-   */
-  /*pushToBrowser(item) {
-    console.log(this.state);
-    this.props.navigator.push({
-      screen: 'info.browser',
-      title: language.web_loading,
-      passProps: {link: item.link},
-      navigatorStyle: navStyle()
-    })
-  }*/
 
   /**
    * Loading news from server

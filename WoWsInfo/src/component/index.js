@@ -1,6 +1,7 @@
 // Common
 export * from './common/WoWsLoading';
 export * from './common/WoWsTouchable';
+export * from './common/WoWsBounce';
 export * from './common/NoInformation';
 export * from './common/WoWsProgress';
 export * from './common/QuickInput';
@@ -22,4 +23,6 @@ export * from './cell/Player/RecordCell';
 export * from './cell/Player/ShipInfoCell';
 export * from './cell/Player/RankCell';
 
-// List
+// Settings
+export * from './setting/SettingCell';
+export * from './setting/SettingView';
