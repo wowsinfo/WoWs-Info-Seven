@@ -29,5 +29,3 @@ Thank you for supporting WoWs Info.
 
 ***
 I hope that World of Warships team could develop their own application but it is not happening yet. Also, feel free to open issues and pull requests.
-
-WoWs Info xxx, xxx does not mean anything. For now, it is ultimate but there is no special meanings to it.
