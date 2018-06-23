@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   textStyle: {
-    paddingLeft: 16, width: '100%', color: GREY[900]
+    paddingLeft: 16, fontSize: 17, color: GREY[900]
   }
 })
 

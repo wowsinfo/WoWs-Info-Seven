@@ -10,7 +10,7 @@ class NewsCell extends Component {
     const { mainViewStyle, imageViewStyle, textViewStyle, imageStyle, titleStyle, timeStyle } = styles;    
     const Touchable = android ? WoWsTouchable : WoWsBounce;
     return (
-      <ElevatedView elevation={2} style={{margin: 6}}>
+      <ElevatedView elevation={3} style={{margin: 6}}>
         <Touchable onPress={() => Linking.openURL(link)}>
           <View style={mainViewStyle}>
             { data_saver ? null : (
@@ -31,7 +31,7 @@ class NewsCell extends Component {
 
 const styles = StyleSheet.create({
   mainViewStyle: {
-    flex: 1, flexDirection: 'row', 
+    flexDirection: 'row', 
   },
   imageViewStyle: {
     width: 120,
@@ -44,7 +44,8 @@ const styles = StyleSheet.create({
   },
   imageStyle: {
     width: 124,
-    height: 124 / 1.52
+    height: 124 / 1.52,
+    borderRadius: 8
   },
   titleStyle: {
     fontSize: 14, fontWeight: '300',
