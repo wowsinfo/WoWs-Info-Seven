@@ -28,7 +28,8 @@ class PlayerInfo {
           response = await fetch(this.clan);
           json = await response.json();
           if (json != null && json.status == 'ok') {
-            if (json.data[this.id] != null) player.clan = json.data[this.id].clan.tag;
+            if (json.data[this.id] != null && json.data[this.id].clan != null) 
+              player.clan = json.data[this.id].clan.tag;
             return player;
           }
         }
