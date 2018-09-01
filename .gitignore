@@ -4,3 +4,4 @@ WoWsInfo/android/app/release/output.json
 *.apk
 *.framework/
 *.ttf
+WoWsInfo/ios/assets/src/img/
