@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     borderRadius: 4, marginRight: 16
   },
   textStyle: {
-    fontSize: 17, flex: 1, fontWeight: '500'
+    fontSize: 17, flex: 1
   },
   titleStyle: {
     color: GREY[900], 
