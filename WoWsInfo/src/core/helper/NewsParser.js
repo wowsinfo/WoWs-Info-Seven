@@ -63,6 +63,7 @@ class NewsParser {
       let title = this.getNewsFrom(root, '._super-layout');
       let rest = this.getNewsFrom(root, '._simple-layout');
       // Merge them together
+      if (title == null || rest == title) return;
       news = title.concat(rest);
       console.log(news);
       return news;
@@ -78,7 +79,9 @@ class NewsParser {
    */
   getNewsFrom(root, className) {
     var news = [];
-    let title = root.querySelector(className).childNodes;
+    let newsData = root.querySelector(className);
+    if (newsData == null) return;
+    let title = newsData.childNodes;
     for (var i = 0; i < title.length; i++) {
       var curr = title[i];
       if (curr.isWhitespace) continue;
