@@ -101,7 +101,7 @@ android {
         applicationId "com.yihengquan.wowsinfo"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 6
+        versionCode 7
         versionName "1.0.4"
         ndk {
             abiFilters "armeabi-v7a", "x86"
