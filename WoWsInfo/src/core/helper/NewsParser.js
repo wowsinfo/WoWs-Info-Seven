@@ -53,20 +53,19 @@ class NewsParser {
   async getNews() {
     try {
       console.log(this.url);
-      var response = await fetch(this.url);
+      // it returns data from a source now
+      var response = await fetch(this.url + 'news/?pjax=1');
       let html = await response.text();
+      print(html);
       var HTMLParser = require('fast-html-parser');
       let root = HTMLParser.parse(html);
-
+      console.log(root);
       // Title and rest
-      var news = [];
-      let title = this.getNewsFrom(root, '._super-layout');
-      let rest = this.getNewsFrom(root, '._simple-layout');
+      let tiles = this.getNewsFrom(root, '.news-tiles__container');
       // Merge them together
-      if (title == null || rest == title) return;
-      news = title.concat(rest);
-      console.log(news);
-      return news;
+      if (tiles == null) return;
+      console.log(tiles);
+      return tiles;
     } catch (error) {
       console.error(error);
     }
@@ -81,6 +80,7 @@ class NewsParser {
     var news = [];
     let newsData = root.querySelector(className);
     if (newsData == null) return;
+    console.log(newsData);
     let title = newsData.childNodes;
     for (var i = 0; i < title.length; i++) {
       var curr = title[i];
