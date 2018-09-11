@@ -1,4 +1,4 @@
-import { Platform, Alert } from 'react-native';
+import { Platform, AsyncStorage } from 'react-native';
 import { IOSData, LocalData, SavedData, VERSION } from '../constant/value';
 import { BLUE } from 'react-native-material-color';
 import { Language, GameVersion, DateCalculator, PlayerConverter, ServerManager } from './';
@@ -11,7 +11,6 @@ class DataStorage {
     try {
       // Setting up Data here      
       let first = await store.get(LocalData.first_launch);
-     
       if (first == null) {
         global.first_launch = true;     
         updateText(language.loading_welcome);
