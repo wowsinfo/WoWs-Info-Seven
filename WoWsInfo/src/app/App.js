@@ -58,14 +58,14 @@ function startAppIOS() {
           rightButtons: [{icon: iconsMap['undo'], id: 'reset'}],
         }
       },
-      {
-        label: language.news_tab_label, title: language.news_tab_title,
-        screen: 'info.news', icon: iconsMap['newspaper-o'],
-        navigatorStyle: navStyle(),
-        navigatorButtons: {
-          //rightButtons: [{title: language.more_title, id: 'more'}]
-        }
-      },
+      // {
+      //   label: language.news_tab_label, title: language.news_tab_title,
+      //   screen: 'info.news', icon: iconsMap['newspaper-o'],
+      //   navigatorStyle: navStyle(),
+      //   navigatorButtons: {
+      //     //rightButtons: [{title: language.more_title, id: 'more'}]
+      //   }
+      // },
       {
         label: language.wiki_title, title: language.drawer_wiki,
         screen: 'info.wiki', icon: iconsMap['wikipedia-w'],
@@ -94,16 +94,17 @@ function startAppAndroid() {
   Navigation.startSingleScreenApp({
     screen: {
       title: language.search_tab_title,
-      screen: 'info.news',
+      screen: 'info.search',
       navigatorStyle: navStyle(),
       navigatorButtons: {
         leftButtons: [{icon: iconsMap['menu'], id: 'drawer'}],
-        fab: {
-          collapsedId: 'search',
-          collapsedIcon: iconsMap['ios-search'],
-          collapsedIconColor: getTextColour(theme[500]),
-          backgroundColor: theme[500],
-        }
+        rightButtons: [{icon: iconsMap['undo'], id: 'reset'}],
+        // fab: {
+        //   collapsedId: 'search',
+        //   collapsedIcon: iconsMap['ios-search'],
+        //   collapsedIconColor: getTextColour(theme[500]),
+        //   backgroundColor: theme[500],
+        // }
       }
     },
     drawer: {

@@ -28,7 +28,12 @@ export default class Search extends PureComponent {
         hapticFeedback();
         this.setState({mode: 0, server: server, showPicker: true, data: friend, input: ''})
         this.refs['search'].bounceInDown(800);
-      }
+      } else if (event.id == 'drawer') {
+        this.props.navigator.toggleDrawer({
+          side: 'left',
+          animated: true
+        });
+      } 
     } else if (event.id === 'bottomTabSelected') {
       let store = require('react-native-simple-store');
       store.save(LocalData.saved_tab, 0);
