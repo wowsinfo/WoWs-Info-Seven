@@ -5,3 +5,6 @@ WoWsInfo/android/app/release/output.json
 *.framework/
 *.ttf
 WoWsInfo/ios/assets/src/img/
+
+# git_cleanup output file
+_*.txt
