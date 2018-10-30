@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import GridView from 'react-native-super-grid';
 import { Divider } from 'react-native-elements';
+import { ShipInfo, PlayerSearch } from '../../core';
 import {API} from '../../constant/value';
 import sample from '../../local.json';
 import { WoWsTouchable } from '../../component/';
@@ -62,6 +63,21 @@ export default class Realtime extends Component {
       <View style={basicInfo}>
         <GridView itemDimension={256} items={vehicles} renderItem={item => {
         const { shipId, relation, name } = item;
+        // We need to get user id and then get user stat for shipId
+        if (!name.startsWith(':')) {
+          let player = new PlayerSearch(global.server, name);
+          player.Search().then(data => {
+            if (data) {
+              let id = data[0].id;
+              let ship = new ShipInfo(`${id}&ship_id=${shipId}`, global.server)
+              ship.getShipInfo().then(shipData => {
+                if (shipData) {
+                  console.log(shipData);
+                }
+              })
+            }
+          })
+        }
         return (
           <WoWsTouchable onPress={() => null}>
             <Text style={{color: relation < 2 ? 'green' : 'red'}}>{`${shipId} ${relation} ${name}`}</Text>
