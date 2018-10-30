@@ -18,6 +18,8 @@ global.user_info = {};
 global.user_data = {};
 global.saved_tab = 0;
 
+global.rslist = [];
+
 // JSON data
 global.data = {
   achievement: {},

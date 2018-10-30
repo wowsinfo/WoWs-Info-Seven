@@ -59,22 +59,28 @@ export default class Realtime extends Component {
   renderBasicInfo() {
     const { json } = this.state;
     if (json) {
-      const { duration, gameLogic, mapDisplayName,
-        name, matchGroup, playerName, playerVehicle, } = json;
-      const { basicInfo, logic } = styles;
+      const { duration, gameLogic, mapName,
+        name, matchGroup, playerName } = json;
+      const { basicInfo, logic, horizontal } = styles;
   
       let min = duration / 60;
-      let ship = playerVehicle.split('-').pop();
-      let map = mapDisplayName.split('_').slice(2).join(' ').toUpperCase();
+      let map = mapName.split('_').slice(2).join(' ').toUpperCase();
   
       return (
         <View style={basicInfo}>
           <Text style={logic}>{map}</Text>
-          <Text>{gameLogic}</Text>
-          <Text>{name}</Text>
-          <Text>---</Text>
-          <Text>{matchGroup}</Text>
-          <Text>{`${min} min`}</Text>
+          <View style={horizontal}>
+            <View>
+              <Text>{matchGroup}</Text>
+            </View>
+            <View>
+              <Text>{gameLogic}</Text>
+              <Text>{name}</Text>
+            </View>
+            <View>
+              <Text>{`${min} min`}</Text>
+            </View>
+          </View>
         </View>
       )
     }
@@ -119,6 +125,13 @@ export default class Realtime extends Component {
                 curr.relation = relation;
                 curr.id = id;
                 curr.name = name;
+                if (rslist.findIndex(p => p === name) > -1) {
+                  // We met before
+                  curr.friend = true;
+                } else {
+                  // Add name to rslist to keep track of met players
+                  global.rslist.push(name);
+                }
                 curr.server = global.server;
                 playerList.push(curr);
               }
@@ -179,5 +192,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     width: '100%',
     fontWeight: '500'
+  },
+  horizontal: {
+    flexDirection: 'row',
+    justifyContent: 'space-around'
   }
 })

@@ -6,7 +6,7 @@ import { Info3Cell } from './Info3Cell';
 import { getTheme } from '../../../constant/colour';
 import { getImage } from '../../../constant/icon';
 import language from '../../../constant/language';
-import { Green, Red } from 'react-native-material-color';
+import { Green, Red, Orange } from 'react-native-material-color';
 
 class ShipInfoCell extends Component {
   render() {
@@ -33,7 +33,7 @@ class ShipInfoCell extends Component {
         <View style={[mainViewStyle, {borderColor: shipColour}]}>
           <View style={subViewStyle}>
             <Image resizeMode='contain' source={shipType} style={[imageStyle, {tintColor: color}]}/>
-            <Text style={textStyle}>{this.tierName}</Text>
+            <Text style={[textStyle, {color: info.friend ? Orange : null}]}>{this.tierName}</Text>
             <Text style={apStyle}>{'(' + ap + ')'}</Text>
           </View>
           <Info3Cell info={{battle: battles, winrate: win_rate, damage: avg_damage}}/>
