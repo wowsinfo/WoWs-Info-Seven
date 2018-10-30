@@ -99,13 +99,12 @@ export default class Realtime extends Component {
   }
 
   async getAllPlayerInfo() {
-    this.setState({list: null});
     let res = await fetch(`http://${this.state.input}:8605`)
     if (res.status === 200) {
       let rs = await res.json();
       // Prevent duplicate data loading
-      if (rs.length > 0) {
-        this.setState({json: rs})
+      if (rs.length != 0) {
+        this.setState({json: rs, list: null})
         const { vehicles } = rs;
         // We need to get user id and then get user stat for shipId
         let playerList = [];
@@ -137,7 +136,6 @@ export default class Realtime extends Component {
 
         this.setState({list: playerList});
       }
-      
     } else {
       alert('Please check your IP address')
     }
