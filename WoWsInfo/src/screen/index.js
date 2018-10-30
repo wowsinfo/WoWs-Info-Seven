@@ -28,6 +28,9 @@ import PlayerShipDetail from './Player/PlayerShipDetail';
 import { PlayerShip } from './Player/PlayerShip';
 import OpenSource from './Settings/OpenSource';
 
+// TEsting realtime
+import Realtime from './RS/Realtime';
+
 export function registerScreens() {
   Navigation.registerComponent('app.wowsinfo', () => WoWsInfo);    
   Navigation.registerComponent('app.drawer', () => Drawer);  
@@ -50,4 +53,5 @@ export function registerScreens() {
   Navigation.registerComponent('info.settings', () => Settings);
   Navigation.registerComponent('settings.theme', () => Theme);
   Navigation.registerComponent('settings.opensource', () => OpenSource);
+  Navigation.registerComponent('rs.realtime', () => Realtime);
 }
