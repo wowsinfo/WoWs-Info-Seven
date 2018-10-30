@@ -9,8 +9,8 @@ import { getTextColour, navStyle } from '../constant/colour';
 import language from '../constant/language';
 import { iconsLoaded, iconsMap } from '../constant/icon';
 
-AdMobInterstitial.setAdUnitID('ca-app-pub-5048098651344514/7499671184');
-AdMobInterstitial.setTestDevices([AdMobInterstitial.simulatorId]);
+//.setAdUnitID('ca-app-pub-5048098651344514/7499671184');
+//AdMobInterstitial.setTestDevices([AdMobInterstitial.simulatorId]);
 
 // Loading icons
 iconsLoaded.then(() => {

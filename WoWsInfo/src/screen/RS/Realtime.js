@@ -127,6 +127,8 @@ const styles = StyleSheet.create({
   },
   logic: {
     fontSize: 32,
+    textAlign: 'center',
+    width: '100%',
     fontWeight: '500'
   }
 })
