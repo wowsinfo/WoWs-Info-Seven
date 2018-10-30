@@ -6,7 +6,6 @@ class PlayerSearch {
   constructor(index, input) {
     var format = require('string-format');
     this.api = format(API.PlayerSearch, ServerManager.domainName(index)) + input
-    console.log(this.api);
   }
 
   async Search() {

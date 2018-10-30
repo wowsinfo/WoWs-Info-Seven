@@ -5,7 +5,6 @@ class ShipInfo {
   constructor(id, server) {
     let format = require('string-format');
     this.api = format(API.ShipInfo, ServerManager.domainName(server)) + id;
-    console.log(id);
     this.id = String(id).includes('&') ? id.split('&')[0] : id;
   }
 
