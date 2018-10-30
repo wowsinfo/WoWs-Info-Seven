@@ -3,10 +3,12 @@ import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import GridView from 'react-native-super-grid';
 import { Divider } from 'react-native-elements';
 import { ShipInfo, PlayerSearch } from '../../core';
-import {API} from '../../constant/value';
+import { API } from '../../constant/value';
 import sample from '../../local.json';
 import { ShipInfoCell, WoWsLoading } from '../../component/';
 import { Language } from '../../core';
+import { navStyle } from '../../constant/colour';
+import { iconsMap } from '../../constant/icon';
 
 export default class Realtime extends Component {
   static navigatorStyle = {
@@ -26,13 +28,23 @@ export default class Realtime extends Component {
           let id = playerData[0].id;
           let ship = new ShipInfo(`${id}&ship_id=${shipId}`, global.server);
           let shipData = await ship.getShipInfo();
-          console.log(shipData[0]);
-          shipData[0].id = id;
-          shipData[0].server = global.server;
-          if (shipData[0]) playerList.push(shipData[0])
+          if (shipData[0]) {
+            let curr = Object.assign(shipData[0]);
+            console.log(curr);
+            curr.id = id;
+            curr.name = name;
+            curr.server = global.server;
+            playerList.push(curr);
+          }
         }
       }
     }
+
+    // Sort by AP
+    playerList.sort((x, y) => {
+      return y.ap - x.ap;
+    })
+
     this.setState({list: playerList});
   }
 
