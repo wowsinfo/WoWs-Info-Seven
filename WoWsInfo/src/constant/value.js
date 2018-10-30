@@ -1,5 +1,5 @@
 // Use your own application id
-export const ApplicationID = '***ApplicationID***';
+export const ApplicationID = '4e54ba74077a8230e457bf3e7e9ae858';
 
 export const VERSION = '1.0.4.2';
 export const IOSVersion = '1.5.5';
