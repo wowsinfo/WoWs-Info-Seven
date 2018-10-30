@@ -102,38 +102,42 @@ export default class Realtime extends Component {
     this.setState({list: null});
     let res = await fetch(`http://${this.state.input}:8605`)
     if (res.status === 200) {
-      let rs = await res.text();
-      this.setState({json: rs})
-      const { vehicles } = rs;
-      // We need to get user id and then get user stat for shipId
-      let playerList = [];
-      for (let player of vehicles) {
-        const { shipId, relation, name } = player;
-        if (!name.startsWith(':')) {
-          let player = new PlayerSearch(global.server, name);
-          let playerData = await player.Search();
-          if (playerData) {
-            let id = playerData[0].id;
-            let ship = new ShipInfo(`${id}&ship_id=${shipId}`, global.server);
-            let shipData = await ship.getShipInfo();
-            if (shipData[0]) {
-              let curr = Object.assign(shipData[0]);
-              console.log(curr);
-              curr.id = id;
-              curr.name = name;
-              curr.server = global.server;
-              playerList.push(curr);
+      let rs = await res.json();
+      // Prevent duplicate data loading
+      if (rs.length > 0) {
+        this.setState({json: rs})
+        const { vehicles } = rs;
+        // We need to get user id and then get user stat for shipId
+        let playerList = [];
+        for (let player of vehicles) {
+          const { shipId, relation, name } = player;
+          if (!name.startsWith(':')) {
+            let player = new PlayerSearch(global.server, name);
+            let playerData = await player.Search();
+            if (playerData) {
+              let id = playerData[0].id;
+              let ship = new ShipInfo(`${id}&ship_id=${shipId}`, global.server);
+              let shipData = await ship.getShipInfo();
+              if (shipData[0]) {
+                let curr = Object.assign(shipData[0]);
+                console.log(curr);
+                curr.id = id;
+                curr.name = name;
+                curr.server = global.server;
+                playerList.push(curr);
+              }
             }
           }
         }
+
+        // Sort by AP
+        playerList.sort((x, y) => {
+          return y.ap - x.ap;
+        })
+
+        this.setState({list: playerList});
       }
-
-      // Sort by AP
-      playerList.sort((x, y) => {
-        return y.ap - x.ap;
-      })
-
-      this.setState({list: playerList});
+      
     } else {
       alert('Please check your IP address')
     }
