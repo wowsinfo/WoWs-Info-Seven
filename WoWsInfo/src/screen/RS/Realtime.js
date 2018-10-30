@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TextInput } from 'react-native';
 import GridView from 'react-native-super-grid';
 import { Divider } from 'react-native-elements';
 import { ShipInfo, PlayerSearch } from '../../core';
@@ -15,47 +15,33 @@ export default class Realtime extends Component {
     tabBarHidden: true
   }
 
-  async componentWillMount() {
-    const { vehicles } = sample;
-    // We need to get user id and then get user stat for shipId
-    let playerList = []
-    for (let player of vehicles) {
-      const { shipId, relation, name } = player;
-      if (!name.startsWith(':')) {
-        let player = new PlayerSearch(global.server, name);
-        let playerData = await player.Search();
-        if (playerData) {
-          let id = playerData[0].id;
-          let ship = new ShipInfo(`${id}&ship_id=${shipId}`, global.server);
-          let shipData = await ship.getShipInfo();
-          if (shipData[0]) {
-            let curr = Object.assign(shipData[0]);
-            console.log(curr);
-            curr.id = id;
-            curr.name = name;
-            curr.server = global.server;
-            playerList.push(curr);
-          }
-        }
-      }
-    }
-
-    // Sort by AP
-    playerList.sort((x, y) => {
-      return y.ap - x.ap;
-    })
-
-    this.setState({list: playerList});
+  state = {
+    port: '',
+    list: null,
+    input: ''
   }
 
   render() {
     const { container } = styles;
-    return (
-      <View style={container}>
-        { this.renderBasicInfo(sample) }
-        { this.renderPlayers() }
-      </View>
-    )
+    const { port, input } = this.state;
+    console.log(this.state);
+    if (port === '') {
+      return (
+        <View>
+          <TextInput value={input} ref='input' placeholder='Please enter the address you see (eg 192.168.1.*)' 
+            onChangeText={t => this.setState({input: t})} onEndEditing={() => {
+              this.getAllPlayerInfo().then(() => this.setState({port: 'done'}))
+          }}/>
+        </View>
+      )
+    } else {
+      return (
+        <View style={container}>
+          { this.renderBasicInfo(sample) }
+          { this.renderPlayers() }
+        </View>
+      )
+    }
   }
 
   /**
@@ -99,6 +85,45 @@ export default class Realtime extends Component {
         </ScrollView>
       )
     } else return <WoWsLoading />
+  }
+
+  async getAllPlayerInfo() {
+    let res = await fetch(`http://${this.state.input}:8605`)
+    if (res.status === 200) {
+      let rs = await res.json();
+      const { vehicles } = rs;
+      // We need to get user id and then get user stat for shipId
+      let playerList = [];
+      for (let player of vehicles) {
+        const { shipId, relation, name } = player;
+        if (!name.startsWith(':')) {
+          let player = new PlayerSearch(global.server, name);
+          let playerData = await player.Search();
+          if (playerData) {
+            let id = playerData[0].id;
+            let ship = new ShipInfo(`${id}&ship_id=${shipId}`, global.server);
+            let shipData = await ship.getShipInfo();
+            if (shipData[0]) {
+              let curr = Object.assign(shipData[0]);
+              console.log(curr);
+              curr.id = id;
+              curr.name = name;
+              curr.server = global.server;
+              playerList.push(curr);
+            }
+          }
+        }
+      }
+
+      // Sort by AP
+      playerList.sort((x, y) => {
+        return y.ap - x.ap;
+      })
+
+      this.setState({list: playerList});
+    } else {
+      alert('Please check your IP address')
+    }
   }
 
   /**
