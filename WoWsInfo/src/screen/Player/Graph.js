@@ -19,6 +19,7 @@ class Graph extends Component {
     let ship = new ShipInfo(id, server);
     ship.getShipInfo().then(json => {
       if (json != null) {
+        console.log(json);
         var shipInfo = [];
         let shipTypeInfo = {Destroyer: [], Cruiser: [], Battleship: [], AirCarrier: []};
         let tierInfo = [{name: 'I', count: 0}, {name: 'II', count: 0}, {name: 'III', count: 0}, {name: 'IV', count: 0}, {name: 'V', count: 0}, 

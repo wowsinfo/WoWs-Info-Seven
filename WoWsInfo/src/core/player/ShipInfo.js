@@ -5,7 +5,8 @@ class ShipInfo {
   constructor(id, server) {
     let format = require('string-format');
     this.api = format(API.ShipInfo, ServerManager.domainName(server)) + id;
-    this.id = id;
+    console.log(id);
+    this.id = String(id).includes('&') ? id.split('&')[0] : id;
   }
 
   async getShipInfo(rank) {
@@ -17,8 +18,11 @@ class ShipInfo {
         let json = await response.json();
         if (json != null && json.status == 'ok') {
           if (json.meta.hidden == null) ships = json.data[this.id];
+          console.log(json);
         }
       }
+
+      console.log(ships);
       // For personal rating for all ships
       var totalDamage = 0, totalWin = 0, totalFrag = 0, expectedDamage = 0, expectedWin = 0, expectedFrag = 0;
       let prJson = data.personal_rating; 
