@@ -142,7 +142,6 @@ dependencies {
     compile project(':react-native-navigation')
     compile project(':react-native-localization')
     compile project(':react-native-device-info')
-    compile project(':react-native-admob')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
     implementation "com.facebook.react:react-native:+"  // From node_modules
