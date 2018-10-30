@@ -6,6 +6,7 @@ import { Info3Cell } from './Info3Cell';
 import { getTheme } from '../../../constant/colour';
 import { getImage } from '../../../constant/icon';
 import language from '../../../constant/language';
+import { Green, Red } from 'react-native-material-color';
 
 class ShipInfoCell extends Component {
   render() {
@@ -18,10 +19,15 @@ class ShipInfoCell extends Component {
     let shipType = getImage(shipInfo.type);
     var name = shipInfo.name; if (name == undefined) name = language.player_deleted_ship;
     // For real time stat
-    if (info.name) name = `${info.name}\n${name}`
+    if (info.name) name = `${name}|${info.name} `
     var tier = tierList[shipInfo.tier - 1]; if (tier == undefined) tier = 'XI';
     this.tierName = tier + ' ' + name;
-    let color = getTheme();        
+    var color = getTheme();
+    // Red for enemy, green for friends
+    let relation = info.relation;
+    if (relation) {
+      color = relation < 2 ? Green : Red;
+    }       
     return (
       <WoWsTouchable onPress={() => detail(this.props.info)}>
         <View style={[mainViewStyle, {borderColor: shipColour}]}>
