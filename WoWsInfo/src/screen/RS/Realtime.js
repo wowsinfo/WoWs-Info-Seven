@@ -69,16 +69,12 @@ export default class Realtime extends Component {
   
       return (
         <View style={basicInfo}>
-          <Text style={logic}>{gameLogic}</Text>
-          <Text>{map}</Text>
+          <Text style={logic}>{map}</Text>
+          <Text>{gameLogic}</Text>
           <Text>{name}</Text>
           <Text>---</Text>
           <Text>{matchGroup}</Text>
           <Text>{`${min} min`}</Text>
-          <Text>---</Text>
-  
-          <Text>{playerName}</Text>
-          <Text>{ship}</Text>
         </View>
       )
     }
@@ -120,6 +116,7 @@ export default class Realtime extends Component {
               if (shipData[0]) {
                 let curr = Object.assign(shipData[0]);
                 console.log(curr);
+                curr.relation = relation;
                 curr.id = id;
                 curr.name = name;
                 curr.server = global.server;
