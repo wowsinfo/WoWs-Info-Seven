@@ -17,6 +17,8 @@ class ShipInfoCell extends Component {
     let shipColour = PersonalRating.getColour(index);
     let shipType = getImage(shipInfo.type);
     var name = shipInfo.name; if (name == undefined) name = language.player_deleted_ship;
+    // For real time stat
+    if (info.name) name = `${info.name}\n${name}`
     var tier = tierList[shipInfo.tier - 1]; if (tier == undefined) tier = 'XI';
     this.tierName = tier + ' ' + name;
     let color = getTheme();        
