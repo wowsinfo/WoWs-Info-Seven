@@ -27,6 +27,8 @@ export default class Realtime extends Component {
           let ship = new ShipInfo(`${id}&ship_id=${shipId}`, global.server);
           let shipData = await ship.getShipInfo();
           console.log(shipData[0]);
+          shipData[0].id = id;
+          shipData[0].server = global.server;
           if (shipData[0]) playerList.push(shipData[0])
         }
       }
@@ -80,7 +82,7 @@ export default class Realtime extends Component {
       return (
         <ScrollView>
           <GridView itemDimension={256} items={this.state.list} renderItem={item => {
-            return <ShipInfoCell detail={this.pushToDetail} info={item}/>
+            return <ShipInfoCell detail={this.pushToPlayer} info={item}/>
           }}/>
         </ScrollView>
       )
@@ -99,13 +101,18 @@ export default class Realtime extends Component {
     }).catch(error => console.error(error));
   }
 
-  pushToDetail = (item) => {
-    console.log(item);
+  pushToPlayer = (item) => {
     this.props.navigator.push({
-      screen: 'player.ship',
-      title: String(item.ship_id),
+      title: String(item.id),
+      screen: 'search.player',
+      backButtonTitle: '',              
       navigatorStyle: navStyle(),
-      passProps: {info: item}
+      navigatorButtons: item.id == user_info.id ? null : {
+        rightButtons: friend.find(x => x.id === item.id) 
+          ? [{icon: iconsMap['star'], id: 'star-o'}]
+          : [{icon: iconsMap['star-o'], id: 'star'}]
+      },
+      passProps: item
     })
   }
 }
