@@ -18,7 +18,8 @@ export default class Realtime extends Component {
   state = {
     port: '',
     list: null,
-    input: ''
+    input: '',
+    json: ''
   }
 
   render() {
@@ -30,14 +31,21 @@ export default class Realtime extends Component {
         <View>
           <TextInput value={input} ref='input' placeholder='Please enter the address you see (eg 192.168.1.*)' 
             onChangeText={t => this.setState({input: t})} onEndEditing={() => {
-              this.getAllPlayerInfo().then(() => this.setState({port: 'done'}))
+              this.getAllPlayerInfo().then(() => {
+                // Add interval to keep updating
+                setInterval(() => {
+                  this.getAllPlayerInfo()
+                }, 15000);
+                // Update state
+                this.setState({port: 'done'});
+              })
           }}/>
         </View>
       )
     } else {
       return (
         <View style={container}>
-          { this.renderBasicInfo(sample) }
+          { this.renderBasicInfo() }
           { this.renderPlayers() }
         </View>
       )
@@ -48,35 +56,38 @@ export default class Realtime extends Component {
    * Render basic map information
    * @param {*} data 
    */
-  renderBasicInfo(data) {
-    const { duration, gameLogic, mapDisplayName,
-      name, matchGroup, playerName, playerVehicle, } = data;
-    const { basicInfo, logic } = styles;
-
-    let min = duration / 60;
-    let ship = playerVehicle.split('-').pop();
-    let map = mapDisplayName.split('_').slice(2).join(' ').toUpperCase();
-
-    return (
-      <View style={basicInfo}>
-        <Text style={logic}>{gameLogic}</Text>
-        <Text>{map}</Text>
-        <Text>{name}</Text>
-        <Text>---</Text>
-        <Text>{matchGroup}</Text>
-        <Text>{`${min} min`}</Text>
-        <Text>---</Text>
-
-        <Text>{playerName}</Text>
-        <Text>{ship}</Text>
-      </View>
-    )
+  renderBasicInfo() {
+    const { json } = this.state;
+    if (json) {
+      const { duration, gameLogic, mapDisplayName,
+        name, matchGroup, playerName, playerVehicle, } = json;
+      const { basicInfo, logic } = styles;
+  
+      let min = duration / 60;
+      let ship = playerVehicle.split('-').pop();
+      let map = mapDisplayName.split('_').slice(2).join(' ').toUpperCase();
+  
+      return (
+        <View style={basicInfo}>
+          <Text style={logic}>{gameLogic}</Text>
+          <Text>{map}</Text>
+          <Text>{name}</Text>
+          <Text>---</Text>
+          <Text>{matchGroup}</Text>
+          <Text>{`${min} min`}</Text>
+          <Text>---</Text>
+  
+          <Text>{playerName}</Text>
+          <Text>{ship}</Text>
+        </View>
+      )
+    }
   }
 
-  renderPlayers(data) {
+  renderPlayers() {
     const { basicInfo } = styles;
     console.log(this.state);
-    if (this.state) {
+    if (this.state.list) {
       return (
         <ScrollView>
           <GridView itemDimension={256} items={this.state.list} renderItem={item => {
@@ -88,9 +99,11 @@ export default class Realtime extends Component {
   }
 
   async getAllPlayerInfo() {
+    this.setState({list: null});
     let res = await fetch(`http://${this.state.input}:8605`)
     if (res.status === 200) {
-      let rs = await res.json();
+      let rs = await res.text();
+      this.setState({json: rs})
       const { vehicles } = rs;
       // We need to get user id and then get user stat for shipId
       let playerList = [];
