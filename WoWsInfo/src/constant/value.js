@@ -26,6 +26,7 @@ export const API = {
   ClanInfo: 'https://api.worldofwarships.{0}/wows/clans/info/?application_id=' + ApplicationID + '&extra=members&fields=-members_ids&clan_id=',
   Ship_Wiki: 'https://api.worldofwarships.{0}/wows/encyclopedia/ships/?application_id=' + ApplicationID + '&ship_id={1}',
   ShipModule: 'https://api.worldofwarships.{0}/wows/encyclopedia/shipprofile/?application_id=' + ApplicationID + '&ship_id={1}',
+  GameMode: 'https://api.worldofwarships.{0}/wows/encyclopedia/battletypes/?application_id=' + ApplicationID + '&fields=-description'
 }
 
 export const DataAPI = {
