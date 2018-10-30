@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { View, Text } from 'react-native-animatable';
-import { TextInput, Picker, StyleSheet, SegmentedControlIOS } from 'react-native';
+import { TextInput, Picker, StyleSheet, SegmentedControlIOS, Button } from 'react-native';
 import GridView from 'react-native-super-grid';
 import { WoWsTouchable } from '../component';
 import language from '../constant/language';
@@ -54,8 +54,19 @@ export default class Search extends PureComponent {
             <WoWsTouchable onPress={() => mode == 0 ? this.pushToPlayer(item) : this.pushToClan(item)}>
               <Text style={textStyle}>{'[' + item.id + '] ' + item.name}</Text>
             </WoWsTouchable>
-          )}}/>
+          )}} ListFooterComponent={() => this.renderFooter()}/>
       </View>
+    )
+  }
+
+  renderFooter() {
+    return (
+      <Button onPress={() => this.props.navigator.push({
+        title: 'RS Beta',
+        screen: 'rs.realtime',
+        backButtonTitle: '',              
+        navigatorStyle: navStyle()
+      })} title='Try RS Beta'/>
     )
   }
 
