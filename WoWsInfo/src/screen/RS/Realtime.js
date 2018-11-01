@@ -24,14 +24,14 @@ export default class Realtime extends Component {
   }
 
   render() {
-    const { container } = styles;
+    const { container, inputView } = styles;
     const { port, input } = this.state;
     console.log(this.state);
     if (port === '') {
       return (
-        <View>
+        <View style={inputView}>
           <TextInput value={input} ref='input' placeholder='Please enter the address you see (eg 192.168.1.*)' 
-            onChangeText={t => this.setState({input: t})} onEndEditing={() => {
+            keyboardType='decimal-pad' onChangeText={t => this.setState({input: t})} onEndEditing={() => {
               this.getAllPlayerInfo().then(() => {
                 // Add interval to keep updating
                 // setInterval(() => {
@@ -62,7 +62,7 @@ export default class Realtime extends Component {
     if (json) {
       const { duration, gameLogic, mapName,
         name, matchGroup, playerName } = json;
-      const { basicInfo, logic, horizontal, mapInfo } = styles;
+      const { basicInfo, logic, mapInfo, listHeader } = styles;
   
       let min = duration / 60;
       let map = mapName.split('_').slice(2).join(' ').toUpperCase();
@@ -70,7 +70,7 @@ export default class Realtime extends Component {
       return (
         <View style={basicInfo}>
           <Text style={logic}>{map}</Text>
-          <View style={horizontal}>
+          <View style={listHeader}>
             <View style={mapInfo}>
               <Text>{matchGroup}</Text>
               <Text style={{color: Green, fontSize: 24}}>Allies</Text>
@@ -99,12 +99,12 @@ export default class Realtime extends Component {
       console.log(allies);
       return (
         <View style={horizontal}>
-          <FlatList data={allies} renderItem={({item}) => {
+          <FlatList data={allies} ListHeaderComponent={<Text>END</Text>} renderItem={({item}) => {
             return this.renderPlayerCell(item);
-          }} showsVerticalScrollIndicator={false} contentInset={{bottom: 59}}/>
-          <FlatList data={enemies} renderItem={({item}) => {
+          }} showsVerticalScrollIndicator={false} />
+          <FlatList data={enemies} ListHeaderComponent={<Text>END</Text>} renderItem={({item}) => {
             return this.renderPlayerCell(item);
-          }} showsVerticalScrollIndicator={false} contentInset={{bottom: 59}}/>
+          }} showsVerticalScrollIndicator={false} />
         </View>
       )
     } else return <WoWsLoading />
@@ -131,7 +131,7 @@ export default class Realtime extends Component {
             <Text numberOfLines={1} style={playerName}>{name}</Text>
             <Text style={stat}>{`${battles} - ${win_rate}% - ${avg_damage}`}</Text>
             <View style={{width: width / 2 - 16, borderRadius: 8, height: 16,
-              marginBottom: 16, backgroundColor: ratingColour}} />
+              marginBottom: 8, backgroundColor: ratingColour}} />
           </WoWsTouchable>
         </View>
       )
@@ -248,10 +248,24 @@ const styles = StyleSheet.create({
     fontSize: 16
   },
   horizontal: {
-    padding: 8,
+    flex: 1,
     width: '100%',
+    padding: 8,
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-around'
+  },
+  listHeader: {
+    width: '100%',
+    padding: 8,
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-around'
+  },
+  inputView: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 8
   }
 })
