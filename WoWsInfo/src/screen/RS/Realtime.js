@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView, TextInput } from 'react-native';
+import { View, Text, Image, StyleSheet, FlatList, TextInput, Dimensions } from 'react-native';
 import GridView from 'react-native-super-grid';
 import { Divider } from 'react-native-elements';
-import { ShipInfo, PlayerSearch } from '../../core';
+import { ShipInfo, PlayerSearch, PersonalRating } from '../../core';
 import { API } from '../../constant/value';
 import sample from '../../local.json';
 import { ShipInfoCell, WoWsLoading } from '../../component/';
 import { Language } from '../../core';
 import { navStyle } from '../../constant/colour';
 import { iconsMap } from '../../constant/icon';
+import { Green, Red } from 'react-native-material-color';
 
 export default class Realtime extends Component {
   static navigatorStyle = {
@@ -70,12 +71,18 @@ export default class Realtime extends Component {
         <View style={basicInfo}>
           <Text style={logic}>{map}</Text>
           <View style={horizontal}>
-            <Text>{matchGroup}</Text>
+            <View style={mapInfo}>
+              <Text>{matchGroup}</Text>
+              <Text style={{color: Green, fontSize: 24}}>Allies</Text>
+            </View>
             <View style={mapInfo}>
               <Text>{gameLogic}</Text>
               <Text>{name}</Text>
             </View>
-            <Text>{`${min} min`}</Text>
+            <View style={mapInfo}>
+              <Text>{`${min} min`}</Text>
+              <Text style={{color: Red, fontSize: 24}}>Enemies</Text>
+            </View>
           </View>
         </View>
       )
@@ -85,18 +92,51 @@ export default class Realtime extends Component {
   renderPlayers() {
     const { horizontal } = styles;
     console.log(this.state);
-    if (this.state.list) {
+    const { list } = this.state;
+    let allies = Array.prototype.filter.call(list, p => p.relation <= 1);
+    let enemies = Array.prototype.filter.call(list, p => p.relation > 1);
+    console.log(allies);
+    if (list) {
       return (
         <View style={horizontal}>
-          <GridView itemDimension={256} items={this.state.list} renderItem={item => {
-            return <ShipInfoCell detail={this.pushToPlayer} info={item}/>
+          <FlatList data={allies} renderItem={({item}) => {
+            return this.renderPlayerCell(item);
           }}/>
-          <GridView itemDimension={256} items={this.state.list} renderItem={item => {
-            return <ShipInfoCell detail={this.pushToPlayer} info={item}/>
+          <FlatList data={enemies} renderItem={({item}) => {
+            return this.renderPlayerCell(item);
           }}/>
         </View>
       )
     } else return <WoWsLoading />
+  }
+
+  renderPlayerCell(item) {
+    const { ap, avg_damage, battles, win_rate, name, ship_id, index } = item;
+    const { playerName, shipName, stat } = styles;
+    let ship = data.warship[ship_id];
+    if (ship) {
+      const { icon, type } = ship;
+      let shipName = ship.name;
+
+      // get ship width
+      const { width } = Dimensions.get('window');
+      let ratingColour = PersonalRating.getColour(index);
+      let comment = PersonalRating.getComment(index);
+
+      return (
+        <View>
+          <Text style={shipName}>{`${shipName} (${ap})`}</Text>
+          <Image source={{uri: icon}} resizeMode='contain' 
+            style={{alignItems: 'center', height: 100, width: width / 2 - 16}}/>
+          <Text numberOfLines={1} style={playerName}>{name}</Text>
+          <Text style={stat}>{`${battles} - ${win_rate}% - ${avg_damage}`}</Text>
+          <View style={{width: width / 2 - 16, borderRadius: 8, height: 16,
+            marginBottom: 16, backgroundColor: ratingColour}} />
+        </View>
+      )
+    } else {
+      return <Text>UNKNOWN</Text>
+    }
   }
 
   async getAllPlayerInfo() {
@@ -195,7 +235,19 @@ const styles = StyleSheet.create({
     width: '100%',
     fontWeight: '500'
   },
+  playerName: {
+    fontWeight: '500',
+    fontSize: 17
+  },
+  shipName: {
+    fontWeight: '300',
+  },
+  stat: {
+    fontWeight: '300',
+    fontSize: 16
+  },
   horizontal: {
+    padding: 8,
     width: '100%',
     alignItems: 'center',
     flexDirection: 'row',
