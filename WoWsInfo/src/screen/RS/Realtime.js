@@ -5,11 +5,11 @@ import { Divider } from 'react-native-elements';
 import { ShipInfo, PlayerSearch, PersonalRating } from '../../core';
 import { API } from '../../constant/value';
 import sample from '../../local.json';
-import { ShipInfoCell, WoWsLoading } from '../../component/';
+import { ShipInfoCell, WoWsLoading, WoWsTouchable } from '../../component/';
 import { Language } from '../../core';
 import { navStyle } from '../../constant/colour';
 import { iconsMap } from '../../constant/icon';
-import { Green, Red } from 'react-native-material-color';
+import { Green, Red, Orange } from 'react-native-material-color';
 
 export default class Realtime extends Component {
   static navigatorStyle = {
@@ -93,25 +93,25 @@ export default class Realtime extends Component {
     const { horizontal } = styles;
     console.log(this.state);
     const { list } = this.state;
-    let allies = Array.prototype.filter.call(list, p => p.relation <= 1);
-    let enemies = Array.prototype.filter.call(list, p => p.relation > 1);
-    console.log(allies);
     if (list) {
+      let allies = Array.prototype.filter.call(list, p => p.relation <= 1);
+      let enemies = Array.prototype.filter.call(list, p => p.relation > 1);
+      console.log(allies);
       return (
         <View style={horizontal}>
           <FlatList data={allies} renderItem={({item}) => {
             return this.renderPlayerCell(item);
-          }}/>
+          }} showsVerticalScrollIndicator={false} contentInset={{bottom: 59}}/>
           <FlatList data={enemies} renderItem={({item}) => {
             return this.renderPlayerCell(item);
-          }}/>
+          }} showsVerticalScrollIndicator={false} contentInset={{bottom: 59}}/>
         </View>
       )
     } else return <WoWsLoading />
   }
 
   renderPlayerCell(item) {
-    const { ap, avg_damage, battles, win_rate, name, ship_id, index } = item;
+    const { ap, avg_damage, battles, win_rate, name, ship_id, index, friend } = item;
     const { playerName, shipName, stat } = styles;
     let ship = data.warship[ship_id];
     if (ship) {
@@ -121,17 +121,18 @@ export default class Realtime extends Component {
       // get ship width
       const { width } = Dimensions.get('window');
       let ratingColour = PersonalRating.getColour(index);
-      let comment = PersonalRating.getComment(index);
 
       return (
         <View>
-          <Text style={shipName}>{`${shipName} (${ap})`}</Text>
           <Image source={{uri: icon}} resizeMode='contain' 
             style={{alignItems: 'center', height: 100, width: width / 2 - 16}}/>
-          <Text numberOfLines={1} style={playerName}>{name}</Text>
-          <Text style={stat}>{`${battles} - ${win_rate}% - ${avg_damage}`}</Text>
-          <View style={{width: width / 2 - 16, borderRadius: 8, height: 16,
-            marginBottom: 16, backgroundColor: ratingColour}} />
+          <WoWsTouchable onPress={() => this.pushToPlayer(item)}>
+            <Text style={[shipName, {color: friend ? Orange : null}]}>{`${shipName} (${ap})`}</Text>
+            <Text numberOfLines={1} style={playerName}>{name}</Text>
+            <Text style={stat}>{`${battles} - ${win_rate}% - ${avg_damage}`}</Text>
+            <View style={{width: width / 2 - 16, borderRadius: 8, height: 16,
+              marginBottom: 16, backgroundColor: ratingColour}} />
+          </WoWsTouchable>
         </View>
       )
     } else {

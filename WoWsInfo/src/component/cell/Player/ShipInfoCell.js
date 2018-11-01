@@ -23,17 +23,12 @@ class ShipInfoCell extends Component {
     var tier = tierList[shipInfo.tier - 1]; if (tier == undefined) tier = 'XI';
     this.tierName = tier + ' ' + name;
     var color = getTheme();
-    // Red for enemy, green for friends
-    let relation = info.relation;
-    if (relation) {
-      color = relation < 2 ? Green : Red;
-    }       
     return (
       <WoWsTouchable onPress={() => detail(this.props.info)}>
         <View style={[mainViewStyle, {borderColor: shipColour}]}>
           <View style={subViewStyle}>
             <Image resizeMode='contain' source={shipType} style={[imageStyle, {tintColor: color}]}/>
-            <Text style={[textStyle, {color: info.friend ? Orange : null}]}>{this.tierName}</Text>
+            <Text style={textStyle}>{this.tierName}</Text>
             <Text style={apStyle}>{'(' + ap + ')'}</Text>
           </View>
           <Info3Cell info={{battle: battles, winrate: win_rate, damage: avg_damage}}/>
