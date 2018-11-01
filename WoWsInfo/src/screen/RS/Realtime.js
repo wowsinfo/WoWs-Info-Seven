@@ -33,9 +33,9 @@ export default class Realtime extends Component {
             onChangeText={t => this.setState({input: t})} onEndEditing={() => {
               this.getAllPlayerInfo().then(() => {
                 // Add interval to keep updating
-                setInterval(() => {
-                  this.getAllPlayerInfo()
-                }, 15000);
+                // setInterval(() => {
+                //   this.getAllPlayerInfo()
+                // }, 15000);
                 // Update state
                 this.setState({port: 'done'});
               })
@@ -61,7 +61,7 @@ export default class Realtime extends Component {
     if (json) {
       const { duration, gameLogic, mapName,
         name, matchGroup, playerName } = json;
-      const { basicInfo, logic, horizontal } = styles;
+      const { basicInfo, logic, horizontal, mapInfo } = styles;
   
       let min = duration / 60;
       let map = mapName.split('_').slice(2).join(' ').toUpperCase();
@@ -70,16 +70,12 @@ export default class Realtime extends Component {
         <View style={basicInfo}>
           <Text style={logic}>{map}</Text>
           <View style={horizontal}>
-            <View>
-              <Text>{matchGroup}</Text>
-            </View>
-            <View>
+            <Text>{matchGroup}</Text>
+            <View style={mapInfo}>
               <Text>{gameLogic}</Text>
               <Text>{name}</Text>
             </View>
-            <View>
-              <Text>{`${min} min`}</Text>
-            </View>
+            <Text>{`${min} min`}</Text>
           </View>
         </View>
       )
@@ -87,15 +83,18 @@ export default class Realtime extends Component {
   }
 
   renderPlayers() {
-    const { basicInfo } = styles;
+    const { horizontal } = styles;
     console.log(this.state);
     if (this.state.list) {
       return (
-        <ScrollView>
+        <View style={horizontal}>
           <GridView itemDimension={256} items={this.state.list} renderItem={item => {
             return <ShipInfoCell detail={this.pushToPlayer} info={item}/>
           }}/>
-        </ScrollView>
+          <GridView itemDimension={256} items={this.state.list} renderItem={item => {
+            return <ShipInfoCell detail={this.pushToPlayer} info={item}/>
+          }}/>
+        </View>
       )
     } else return <WoWsLoading />
   }
@@ -181,11 +180,14 @@ export default class Realtime extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   basicInfo: {
     marginTop: 8,
     alignItems: 'center',
+  },
+  mapInfo: {
+    alignItems: 'center'
   },
   logic: {
     fontSize: 32,
@@ -194,6 +196,8 @@ const styles = StyleSheet.create({
     fontWeight: '500'
   },
   horizontal: {
+    width: '100%',
+    alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-around'
   }
