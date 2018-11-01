@@ -33,10 +33,10 @@ export default class Realtime extends Component {
           <TextInput value={input} ref='input' placeholder='Please enter the address you see (eg 192.168.1.*)' 
             keyboardType='decimal-pad' onChangeText={t => this.setState({input: t})} onEndEditing={() => {
               this.getAllPlayerInfo().then(() => {
-                // Add interval to keep updating
-                // setInterval(() => {
-                //   this.getAllPlayerInfo()
-                // }, 15000);
+                //Add interval to keep updating
+                setInterval(() => {
+                  this.getAllPlayerInfo()
+                }, 15000);
                 // Update state
                 this.setState({port: 'done'});
               })
@@ -73,7 +73,6 @@ export default class Realtime extends Component {
           <View style={listHeader}>
             <View style={mapInfo}>
               <Text>{matchGroup}</Text>
-              <Text style={{color: Green, fontSize: 24}}>Allies</Text>
             </View>
             <View style={mapInfo}>
               <Text>{gameLogic}</Text>
@@ -81,7 +80,6 @@ export default class Realtime extends Component {
             </View>
             <View style={mapInfo}>
               <Text>{`${min} min`}</Text>
-              <Text style={{color: Red, fontSize: 24}}>Enemies</Text>
             </View>
           </View>
         </View>
@@ -99,15 +97,49 @@ export default class Realtime extends Component {
       console.log(allies);
       return (
         <View style={horizontal}>
-          <FlatList data={allies} ListHeaderComponent={<Text>END</Text>} renderItem={({item}) => {
-            return this.renderPlayerCell(item);
-          }} showsVerticalScrollIndicator={false} />
-          <FlatList data={enemies} ListHeaderComponent={<Text>END</Text>} renderItem={({item}) => {
-            return this.renderPlayerCell(item);
-          }} showsVerticalScrollIndicator={false} />
+          <FlatList data={allies} renderItem={({item}) => this.renderPlayerCell(item)} 
+            showsVerticalScrollIndicator={false} ListHeaderComponent={() => this.renderTeamInfo(allies, 'Allies')} />
+          <FlatList data={enemies} renderItem={({item}) => this.renderPlayerCell(item)} s
+            howsVerticalScrollIndicator={false} ListHeaderComponent={() => this.renderTeamInfo(enemies, 'Enemies')} />
         </View>
       )
     } else return <WoWsLoading />
+  }
+
+  renderTeamInfo(team, name) {
+    var avg_ap = 0;
+    var damage = 0;
+    var battle = 0;
+    var win = 0;
+    var avg_pr = 0;
+
+    console.log(team);
+    let count = team.length;
+    for (let player of team) {
+      const { ap, avg_damage, win_rate, battles, pr } = player;
+      avg_ap += parseInt(ap);
+      damage += avg_damage;
+      win += win_rate * battles / 100;
+      battle += battles;
+      avg_pr += parseInt(pr);
+    }
+
+    avg_ap = (avg_ap / count).toFixed(0);
+    damage = (damage / count).toFixed(0);
+    win = (win / battle * 100).toFixed(2);
+    avg_pr /= count;
+    console.log(avg_pr);
+
+    const { width } = Dimensions.get('window');
+    let ratingColour = PersonalRating.getColour(PersonalRating.getIndex(avg_pr));
+    return (
+      <View>
+        <Text style={{color: name === 'Allies' ? Green : Red, fontSize: 20}}>{`${name} (${avg_ap})`}</Text>
+        <Text>{`${battle} - ${win}% - ${damage}`}</Text>
+        <View style={{width: width / 2 - 16, borderRadius: 8, height: 16,
+              marginBottom: 8, backgroundColor: ratingColour}} />
+      </View>
+    )
   }
 
   renderPlayerCell(item) {
