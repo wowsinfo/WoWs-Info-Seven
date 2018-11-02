@@ -108,38 +108,27 @@ export default class Realtime extends Component {
   }
 
   renderTeamInfo(team, name) {
-    var avg_ap = 0;
     var damage = 0;
     var battle = 0;
     var win = 0;
-    var avg_pr = 0;
 
     console.log(team);
     let count = team.length;
     for (let player of team) {
-      const { ap, avg_damage, win_rate, battles, pr } = player;
-      avg_ap += parseInt(ap);
+      const { avg_damage, win_rate, battles } = player;
       damage += avg_damage;
       win += win_rate * battles / 100;
       battle += battles;
-      avg_pr += parseInt(pr);
     }
 
-    avg_ap = (avg_ap / count).toFixed(0);
     damage = (damage / count).toFixed(0);
     win = (win / battle * 100).toFixed(2);
-    avg_pr /= count;
-    console.log(avg_pr);
 
-    const { width } = Dimensions.get('window');
-    let ratingColour = PersonalRating.getColour(PersonalRating.getIndex(avg_pr));
     let align = {textAlign: name === 'Enemies' ? 'right' : null};
-    const { playerName, shipName, stat } = styles;
+    const { playerName, stat } = styles;
     return (
       <View>
-        <Text style={[playerName, align, {color: name === 'Allies' ? Green : Red}]}>{`${name} (${avg_ap})`}</Text>
-        <View style={{width: width, borderRadius: 8, height: 4,
-          backgroundColor: ratingColour}} />
+        <Text style={[playerName, align, {color: name === 'Allies' ? Green : Red}]}>{`${name}`}</Text>
         <Text style={[stat, align]}>{`${battle} - ${win}% - ${damage}`}</Text>
       </View>
     )
