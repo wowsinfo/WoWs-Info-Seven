@@ -9,7 +9,7 @@ import { ShipInfoCell, WoWsLoading, WoWsTouchable } from '../../component/';
 import { Language } from '../../core';
 import { navStyle } from '../../constant/colour';
 import { iconsMap } from '../../constant/icon';
-import { Green, Red, Orange } from 'react-native-material-color';
+import { Green, Red, Orange, Grey } from 'react-native-material-color';
 
 export default class Realtime extends Component {
   static navigatorStyle = {
@@ -33,10 +33,11 @@ export default class Realtime extends Component {
           <TextInput value={input} ref='input' placeholder='Please enter the address you see (eg 192.168.1.*)' 
             keyboardType='decimal-pad' onChangeText={t => this.setState({input: t})} onEndEditing={() => {
               this.getAllPlayerInfo().then(() => {
-                //Add interval to keep updating
-                setInterval(() => {
-                  this.getAllPlayerInfo()
-                }, 15000);
+                // Add interval to keep updating
+                // setInterval(() => {
+                //   this.getAllPlayerInfo()
+                // }, 15000);
+
                 // Update state
                 this.setState({port: 'done'});
               })
@@ -99,7 +100,7 @@ export default class Realtime extends Component {
         <View style={horizontal}>
           <FlatList data={allies} renderItem={({item}) => this.renderPlayerCell(item)} 
             showsVerticalScrollIndicator={false} ListHeaderComponent={() => this.renderTeamInfo(allies, 'Allies')} />
-          <FlatList data={enemies} renderItem={({item}) => this.renderPlayerCell(item)} s
+          <FlatList data={enemies} renderItem={({item}) => this.renderPlayerCell(item)}
             howsVerticalScrollIndicator={false} ListHeaderComponent={() => this.renderTeamInfo(enemies, 'Enemies')} />
         </View>
       )
@@ -132,40 +133,39 @@ export default class Realtime extends Component {
 
     const { width } = Dimensions.get('window');
     let ratingColour = PersonalRating.getColour(PersonalRating.getIndex(avg_pr));
+    let align = {textAlign: name === 'Enemies' ? 'right' : null};
+    const { playerName, shipName, stat } = styles;
     return (
       <View>
-        <Text style={{color: name === 'Allies' ? Green : Red, fontSize: 20}}>{`${name} (${avg_ap})`}</Text>
-        <Text>{`${battle} - ${win}% - ${damage}`}</Text>
-        <View style={{width: width / 2 - 16, borderRadius: 8, height: 16,
-              marginBottom: 8, backgroundColor: ratingColour}} />
+        <Text style={[playerName, align, {color: name === 'Allies' ? Green : Red}]}>{`${name} (${avg_ap})`}</Text>
+        <View style={{width: width, borderRadius: 8, height: 4,
+          backgroundColor: ratingColour}} />
+        <Text style={[stat, align]}>{`${battle} - ${win}% - ${damage}`}</Text>
       </View>
     )
   }
 
   renderPlayerCell(item) {
-    const { ap, avg_damage, battles, win_rate, name, ship_id, index, friend } = item;
+    const { ap, avg_damage, battles, win_rate, name, ship_id, index, friend, relation } = item;
     const { playerName, shipName, stat } = styles;
     let ship = data.warship[ship_id];
     if (ship) {
       const { icon, type } = ship;
-      let shipName = ship.name;
+      let shipStr = ship.name;
 
       // get ship width
       const { width } = Dimensions.get('window');
       let ratingColour = PersonalRating.getColour(index);
+      // determine text align
+      let align = {textAlign: relation > 1 ? 'right' : null};
 
       return (
-        <View>
-          <Image source={{uri: icon}} resizeMode='contain' 
-            style={{alignItems: 'center', height: 100, width: width / 2 - 16}}/>
-          <WoWsTouchable onPress={() => this.pushToPlayer(item)}>
-            <Text style={[shipName, {color: friend ? Orange : null}]}>{`${shipName} (${ap})`}</Text>
-            <Text numberOfLines={1} style={playerName}>{name}</Text>
-            <Text style={stat}>{`${battles} - ${win_rate}% - ${avg_damage}`}</Text>
-            <View style={{width: width / 2 - 16, borderRadius: 8, height: 16,
-              marginBottom: 8, backgroundColor: ratingColour}} />
+          <WoWsTouchable style={{paddingTop: 24}} onPress={() => this.pushToPlayer(item)}>
+            <Text numberOfLines={1} style={[playerName, align, {color: friend ? Grey : null}]}>{name}</Text>
+            <Text style={[shipName, align, {color: ratingColour}]}>{`${shipStr}\n(${ap})`}</Text>
+            <View style={{width: width / 2 - 16, borderRadius: 8, height: 2}} />
+            <Text style={[stat, align]}>{`${battles} - ${win_rate}% - ${avg_damage}`}</Text>
           </WoWsTouchable>
-        </View>
       )
     } else {
       return <Text>UNKNOWN</Text>
@@ -269,11 +269,12 @@ const styles = StyleSheet.create({
     fontWeight: '500'
   },
   playerName: {
-    fontWeight: '500',
+    fontWeight: '300',
     fontSize: 17
   },
   shipName: {
-    fontWeight: '300',
+    fontWeight: '500',
+    fontSize: 20
   },
   stat: {
     fontWeight: '300',
