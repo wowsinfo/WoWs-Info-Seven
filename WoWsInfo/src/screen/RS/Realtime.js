@@ -34,9 +34,9 @@ export default class Realtime extends Component {
             keyboardType={android ? 'decimal-pad' : 'numbers-and-punctuation'} onChangeText={t => this.setState({input: t})} onEndEditing={() => {
               this.getAllPlayerInfo().then(() => {
                 // Add interval to keep updating
-                // setInterval(() => {
-                //   this.getAllPlayerInfo()
-                // }, 15000);
+                setInterval(() => {
+                  this.getAllPlayerInfo()
+                }, 15000);
 
                 // Update state
                 this.setState({port: 'done'});
@@ -267,7 +267,6 @@ const styles = StyleSheet.create({
   },
   stat: {
     fontWeight: '300',
-    fontSize: 16
   },
   horizontal: {
     flex: 1,
