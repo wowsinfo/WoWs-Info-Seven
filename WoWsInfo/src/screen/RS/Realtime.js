@@ -31,7 +31,7 @@ export default class Realtime extends Component {
       return (
         <View style={inputView}>
           <TextInput value={input} ref='input' placeholder='Please enter the address you see (eg 192.168.1.*)' 
-            keyboardType='decimal-pad' onChangeText={t => this.setState({input: t})} onEndEditing={() => {
+            keyboardType={android ? 'decimal-pad' : 'numbers-and-punctuation'} onChangeText={t => this.setState({input: t})} onEndEditing={() => {
               this.getAllPlayerInfo().then(() => {
                 // Add interval to keep updating
                 // setInterval(() => {
