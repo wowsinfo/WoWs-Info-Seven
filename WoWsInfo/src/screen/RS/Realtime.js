@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, FlatList, TextInput, Dimensions } from 'react-native';
+import { View, Text, Image, StyleSheet, FlatList, ScrollView, TextInput, Dimensions } from 'react-native';
 import GridView from 'react-native-super-grid';
 import { Divider } from 'react-native-elements';
 import { ShipInfo, PlayerSearch, PersonalRating } from '../../core';
@@ -9,7 +9,7 @@ import { ShipInfoCell, WoWsLoading, WoWsTouchable } from '../../component/';
 import { Language } from '../../core';
 import { navStyle } from '../../constant/colour';
 import { iconsMap } from '../../constant/icon';
-import { Green, Red, Orange, Grey } from 'react-native-material-color';
+import { Green, Red, Blue } from 'react-native-material-color';
 
 export default class Realtime extends Component {
   static navigatorStyle = {
@@ -34,9 +34,9 @@ export default class Realtime extends Component {
             keyboardType={android ? 'decimal-pad' : 'numbers-and-punctuation'} onChangeText={t => this.setState({input: t})} onEndEditing={() => {
               this.getAllPlayerInfo().then(() => {
                 // Add interval to keep updating
-                setInterval(() => {
-                  this.getAllPlayerInfo()
-                }, 15000);
+                // setInterval(() => {
+                //   this.getAllPlayerInfo()
+                // }, 15000);
 
                 // Update state
                 this.setState({port: 'done'});
@@ -46,10 +46,12 @@ export default class Realtime extends Component {
       )
     } else {
       return (
-        <View style={container}>
-          { this.renderBasicInfo() }
-          { this.renderPlayers() }
-        </View>
+        <ScrollView>
+          <View style={container}>
+            { this.renderBasicInfo() }
+            { this.renderPlayers() }
+          </View>
+        </ScrollView>
       )
     }
   }
@@ -70,6 +72,7 @@ export default class Realtime extends Component {
   
       return (
         <View style={basicInfo}>
+          { json.battleMode ? <Image style={{width: 128, height: 128}} source={{uri: json.battleMode.image}}/> : null}
           <Text style={logic}>{map}</Text>
           <View style={listHeader}>
             <View style={mapInfo}>
@@ -95,15 +98,30 @@ export default class Realtime extends Component {
     if (list) {
       let allies = Array.prototype.filter.call(list, p => p.relation <= 1);
       let enemies = Array.prototype.filter.call(list, p => p.relation > 1);
-      console.log(allies);
-      return (
+      if (enemies.length === 0) {
         <View style={horizontal}>
           <FlatList data={allies} renderItem={({item}) => this.renderPlayerCell(item)} 
             showsVerticalScrollIndicator={false} ListHeaderComponent={() => this.renderTeamInfo(allies, 'Allies')} />
-          <FlatList data={enemies} renderItem={({item}) => this.renderPlayerCell(item)}
-            howsVerticalScrollIndicator={false} ListHeaderComponent={() => this.renderTeamInfo(enemies, 'Enemies')} />
         </View>
-      )
+      } else {
+        // Make them even
+        while (allies.length != enemies.length) {
+          if (allies.length < enemies.length) {
+            allies.push({});
+          } else {
+            enemies.push({});
+          }
+        }
+        console.log(allies);
+        return (
+          <View style={horizontal}>
+            <FlatList data={allies} renderItem={({item}) => this.renderPlayerCell(item)} 
+              showsVerticalScrollIndicator={false} ListHeaderComponent={() => this.renderTeamInfo(allies, 'Allies')} />
+            <FlatList data={enemies} renderItem={({item}) => this.renderPlayerCell(item)}
+              showsVerticalScrollIndicator={false} ListHeaderComponent={() => this.renderTeamInfo(enemies, 'Enemies')} />
+          </View>
+        )
+      } 
     } else return <WoWsLoading />
   }
 
@@ -123,13 +141,13 @@ export default class Realtime extends Component {
 
     damage = (damage / count).toFixed(0);
     win = (win / battle * 100).toFixed(2);
+    battle = (battle / count).toFixed(0);
 
-    let align = {textAlign: name === 'Enemies' ? 'right' : null};
     const { playerName, stat } = styles;
     return (
       <View>
-        <Text style={[playerName, align, {color: name === 'Allies' ? Green : Red}]}>{`${name}`}</Text>
-        <Text style={[stat, align]}>{`${battle} - ${win}% - ${damage}`}</Text>
+        <Text style={[playerName, {color: name === 'Allies' ? Green : Red, fontSize: 20}]}>{`${name}`}</Text>
+        <Text style={stat}>{`${battle} - ${win}% - ${damage}`}</Text>
       </View>
     )
   }
@@ -145,19 +163,24 @@ export default class Realtime extends Component {
       // get ship width
       const { width } = Dimensions.get('window');
       let ratingColour = PersonalRating.getColour(index);
-      // determine text align
-      let align = {textAlign: relation > 1 ? 'right' : null};
 
       return (
-          <WoWsTouchable style={{paddingTop: 24}} onPress={() => this.pushToPlayer(item)}>
-            <Text numberOfLines={1} style={[playerName, align, {color: friend ? Grey : null}]}>{name}</Text>
-            <Text style={[shipName, align, {color: ratingColour}]}>{`${shipStr}\n(${ap})`}</Text>
-            <View style={{width: width / 2 - 16, borderRadius: 8, height: 2}} />
-            <Text style={[stat, align]}>{`${battles} - ${win_rate}% - ${avg_damage}`}</Text>
+          <WoWsTouchable style={{padding: 4}} onPress={() => this.pushToPlayer(item)}>
+            <Divider />
+            <Text numberOfLines={1} style={[playerName, {color: friend ? Blue : null}]}>{name}</Text>
+            <Text style={[shipName, {color: ratingColour}]}>{`${shipStr}`}</Text>
+            <Text style={stat}>{`${battles} - ${win_rate}% - ${avg_damage}`}</Text>
           </WoWsTouchable>
       )
     } else {
-      return <Text>UNKNOWN</Text>
+      return (
+        <View style={{padding: 4}} >
+          <Divider />
+          <Text style={playerName}>HIDDEN</Text>
+          <Text style={shipName}>UNKNOWN</Text>
+          <Text style={stat}>???</Text>
+        </View>
+      )
     }
   }
 
@@ -168,6 +191,10 @@ export default class Realtime extends Component {
       // Prevent duplicate data loading
       if (rs.length != 0) {
         this.setState({json: rs, list: null})
+        let modeJson = await this.getGameMode();
+        if (modeJson.data) {
+          rs.battleMode = modeJson.data;
+        }
         const { vehicles } = rs;
         // We need to get user id and then get user stat for shipId
         let playerList = [];
@@ -259,14 +286,17 @@ const styles = StyleSheet.create({
   },
   playerName: {
     fontWeight: '300',
-    fontSize: 17
+    fontSize: 17,
+    textAlign: 'center',
   },
   shipName: {
     fontWeight: '500',
-    fontSize: 20
+    fontSize: 20,
+    textAlign: 'center',
   },
   stat: {
     fontWeight: '300',
+    textAlign: 'center',
   },
   horizontal: {
     flex: 1,
