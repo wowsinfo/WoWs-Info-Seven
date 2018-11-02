@@ -13,7 +13,8 @@ import { Green, Red, Blue } from 'react-native-material-color';
 
 export default class Realtime extends Component {
   static navigatorStyle = {
-    tabBarHidden: true
+    tabBarHidden: true,
+    navBarHidden: true,
   }
 
   state = {
@@ -69,12 +70,15 @@ export default class Realtime extends Component {
   
       let min = duration / 60;
       let map = mapName.split('_').slice(2).join(' ').toUpperCase();
-  
+      let battleMode = json.battleMode[matchGroup.toUpperCase()].image;
+
       return (
         <View style={basicInfo}>
-          { json.battleMode ? <Image style={{width: 128, height: 128}} source={{uri: json.battleMode.image}}/> : null}
+          <Image style={{width: 128, height: 128}} source={{uri: battleMode}}/>
           <Text style={logic}>{map}</Text>
-          <View style={listHeader}>
+          {
+            /**
+            <View style={listHeader}>
             <View style={mapInfo}>
               <Text>{matchGroup}</Text>
             </View>
@@ -86,6 +90,8 @@ export default class Realtime extends Component {
               <Text>{`${min} min`}</Text>
             </View>
           </View>
+             */
+          }
         </View>
       )
     }
@@ -132,7 +138,8 @@ export default class Realtime extends Component {
 
     console.log(team);
     let count = team.length;
-    for (let player of team) {
+    let noHidden = team.filter(p => p.battles);
+    for (let player of noHidden) {
       const { avg_damage, win_rate, battles } = player;
       damage += avg_damage;
       win += win_rate * battles / 100;
