@@ -35,9 +35,9 @@ export default class Realtime extends Component {
             keyboardType={android ? 'decimal-pad' : 'numbers-and-punctuation'} onChangeText={t => this.setState({input: t})} onEndEditing={() => {
               this.getAllPlayerInfo().then(() => {
                 // Add interval to keep updating
-                // setInterval(() => {
-                //   this.getAllPlayerInfo()
-                // }, 15000);
+                setInterval(() => {
+                  this.getAllPlayerInfo()
+                }, 15000);
 
                 // Update state
                 this.setState({port: 'done'});
@@ -70,14 +70,13 @@ export default class Realtime extends Component {
   
       let min = duration / 60;
       let map = mapName.split('_').slice(2).join(' ').toUpperCase();
-      let battleMode = json.battleMode[matchGroup.toUpperCase()].image;
 
       return (
         <View style={basicInfo}>
-          <Image style={{width: 128, height: 128}} source={{uri: battleMode}}/>
           <Text style={logic}>{map}</Text>
           {
             /**
+             <Image style={{width: 128, height: 128}} source={{uri: battleMode}}/>
             <View style={listHeader}>
             <View style={mapInfo}>
               <Text>{matchGroup}</Text>
@@ -198,10 +197,6 @@ export default class Realtime extends Component {
       // Prevent duplicate data loading
       if (rs.length != 0) {
         this.setState({json: rs, list: null})
-        let modeJson = await this.getGameMode();
-        if (modeJson.data) {
-          rs.battleMode = modeJson.data;
-        }
         const { vehicles } = rs;
         // We need to get user id and then get user stat for shipId
         let playerList = [];
@@ -210,7 +205,7 @@ export default class Realtime extends Component {
           if (!name.startsWith(':')) {
             let player = new PlayerSearch(global.server, name);
             let playerData = await player.Search();
-            if (playerData) {
+            if (playerData[0]) {
               let id = playerData[0].id;
               let ship = new ShipInfo(`${id}&ship_id=${shipId}`, global.server);
               let shipData = await ship.getShipInfo();
