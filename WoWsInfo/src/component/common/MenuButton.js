@@ -4,10 +4,10 @@ import { Button } from 'react-native-paper';
 
 class MenuButton extends Component {
   render() {
-    const { container } = styles;
+    const { container, button } = styles;
     return (
       <View style={container}>
-        <Button icon='menu' mode='contained' onPress={() => console.log('Pressed')}>
+        <Button style={button} icon='menu' mode='contained' onPress={() => console.log('Pressed')}>
           Menu
         </Button>
       </View>
@@ -19,6 +19,10 @@ const styles = StyleSheet.create({
   container: {
     position: 'absolute',
     bottom: 8, right: -16,
+  },
+  button: {
+    borderTopLeftRadius: 100,
+    borderBottomLeftRadius: 100
   }
 })
 
