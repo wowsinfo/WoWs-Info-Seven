@@ -8,10 +8,10 @@ export default class App extends Component {
     const { container, playerLabel, header, card } = styles;
     return (
       <View style={container}>
-        <StatusBar />
+        <StatusBar barStyle='dark-content' backgroundColor={Colors.grey200}/>
         <SafeAreaView style={{height: '100%'}}>
           <View style={header}>
-            <Text style={playerLabel}>HenryQuan</Text>
+            <Text numberOfLines={1} style={playerLabel}>HenryQuan</Text>
             <IconButton icon='settings' size={24} color={Colors.grey500}
               onPress={() => console.log('Pressed')}/>
           </View>
@@ -75,10 +75,13 @@ const styles = StyleSheet.create({
   header: {
     width: '100%', 
     flexDirection: 'row', 
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
   playerLabel: {
     fontSize: 32,
+    padding: 8,
+    width: '80%',
     fontWeight: 'bold'
   },
   card: {
