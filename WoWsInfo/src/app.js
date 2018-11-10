@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, StatusBar, SafeAreaView, ScrollView, View } from 'react-native';
-import { IconButton, Colors, Divider, Surface, Card, Title, Paragraph } from 'react-native-paper';
-import { MenuButton } from './component';
+import { StyleSheet, Text, StatusBar, SafeAreaView, ScrollView, View, ActivityIndicator } from 'react-native';
+import { IconButton, Colors, Divider, Surface, Card, Title, Paragraph, Portal, Modal } from 'react-native-paper';
+import { MenuButton, LoadingModal } from './component';
 
 export default class App extends Component {
   render() {
@@ -56,11 +56,11 @@ export default class App extends Component {
             <Card style={card}>
               <Card.Content>
                 <Title>Card title</Title>
-                <Paragraph>Card content</Paragraph>
               </Card.Content>
             </Card>
           </ScrollView>
           <MenuButton />
+          <LoadingModal />
         </SafeAreaView>
       </View>
     );
