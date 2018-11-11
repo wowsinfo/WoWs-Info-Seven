@@ -7,7 +7,8 @@ class HomeButton extends Component {
     const { container, button } = styles;
     return (
       <View style={container}>
-        <Button style={button} icon='home' mode='contained' onPress={() => console.log('Pressed')}>
+        <Button style={button} primary icon='home' mode='contained' 
+          onPress={() => console.log('Pressed')} accessibilityLabel='Go back to Home'>
           Home
         </Button>
       </View>

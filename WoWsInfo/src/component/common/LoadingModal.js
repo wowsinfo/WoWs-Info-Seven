@@ -7,7 +7,7 @@ class LoadingModal extends Component {
     const { container, text } = styles;
     return (
       <Portal>
-        <Modal visible={true} onDismiss={this._hideModal}>
+        <Modal visible={false} onDismiss={this._hideModal}>
           <View style={container}>
             <ActivityIndicator color='white' size='large'/>
             <Text style={text}>Loading...</Text>
