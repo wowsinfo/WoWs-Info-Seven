@@ -15,7 +15,7 @@ class Menu extends Component {
   render() {
     const { container, title } = styles;
     return (
-      <ScrollView style={container}>
+      <ScrollView style={container} showsVerticalScrollIndicator={false}>
         <Title style={title}>Encyclopedia</Title>
         <List.Item title='Achievements'/>
         <List.Item title='Warships'/>
@@ -42,7 +42,9 @@ class Menu extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    width: '68%',
+    alignSelf: 'center'
   },
   title: {
     margin: 16
