@@ -15,25 +15,25 @@ class Menu extends Component {
   });
 
   render() {
-    const { container, title } = styles;
+    const { container, icon } = styles;
     return (
       <Surface style={container}>
         <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{paddingBottom: 32}}>
           <List.Section title='Encyclopedia'>
             <List.Item title='Achievements' 
-              left={() => <List.Icon color={Colors.blue300} icon={require('../img/Achievement.png')}/>}/>
+              left={() => <List.Icon style={icon} color={Colors.blue300} icon={require('../img/Achievement.png')}/>}/>
             <List.Item title='Warships'
-              left={() => <List.Icon color={Colors.blue300} icon={require('../img/Warship.png')}/>}/>
+              left={() => <List.Icon style={icon} color={Colors.blue300} icon={require('../img/Warship.png')}/>}/>
             <List.Item title='Upgrades'
-              left={() => <List.Icon color={Colors.blue300} icon={require('../img/Upgrade.png')}/>}/>
+              left={() => <List.Icon style={icon} color={Colors.blue300} icon={require('../img/Upgrade.png')}/>}/>
             <List.Item title='Flag/Camouflage'
-              left={() => <List.Icon color={Colors.blue300} icon={require('../img/Camouflage.png')}/>}/>
+              left={() => <List.Icon style={icon} color={Colors.blue300} icon={require('../img/Camouflage.png')}/>}/>
             <List.Item title='Commander Skills'
-              left={() => <List.Icon color={Colors.blue300} icon={require('../img/CommanderSkill.png')}/>}/>
+              left={() => <List.Icon style={icon} color={Colors.blue300} icon={require('../img/CommanderSkill.png')}/>}/>
             <List.Item title='Maps'
-              left={() => <List.Icon color={Colors.blue300} icon='map'/>}/>
+              left={() => <List.Icon style={icon} color={Colors.blue300} icon='map'/>}/>
             <List.Item title='Collections'
-              left={() => <List.Icon color={Colors.blue300} icon={require('../img/Collection.png')}/>}/>
+              left={() => <List.Icon style={icon} color={Colors.blue300} icon={require('../img/Collection.png')}/>}/>
           </List.Section>
           <Divider />
           <List.Section title='Extra'>
@@ -72,8 +72,9 @@ const styles = StyleSheet.create({
     width: isTablet ? '68%' : '100%',
     alignSelf: 'center'
   },
-  title: {
-    margin: 16
+  icon: {
+    backgroundColor: Colors.blueGrey50, 
+    borderRadius: 100
   }
 });
 
