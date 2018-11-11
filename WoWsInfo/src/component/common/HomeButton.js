@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
 
-class MenuButton extends Component {
+class HomeButton extends Component {
   render() {
     const { container, button } = styles;
     return (
       <View style={container}>
-        <Button style={button} icon='menu' mode='contained' onPress={() => console.log('Pressed')}>
-          Menu
+        <Button style={button} icon='home' mode='contained' onPress={() => console.log('Pressed')}>
+          Home
         </Button>
       </View>
     )
@@ -26,4 +26,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export { MenuButton };
+export { HomeButton };
