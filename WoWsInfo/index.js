@@ -7,11 +7,23 @@ import { DefaultTheme, DarkTheme, Provider as PaperProvider, Colors } from 'reac
 import { name as appName } from './app.json';
 import { Menu } from './src/page';
 
-const theme = {
+const Light = {
   ...DefaultTheme,
   roundness: 8,
   colors: {
     ...DefaultTheme.colors,
+    surface: Colors.grey50,
+    primary: Colors.blue500,
+    accent: Colors.blue300,
+  }
+};
+
+const Dark = {
+  ...DarkTheme,
+  roundness: 8,
+  colors: {
+    ...DarkTheme.colors,
+    surface: Colors.grey900,
     primary: Colors.blue500,
     accent: Colors.blue300,
   }
@@ -19,7 +31,7 @@ const theme = {
 
 export default function Main() {
   return (
-    <PaperProvider theme={theme}>
+    <PaperProvider theme={Light}>
       <Menu />
     </PaperProvider>
   );
