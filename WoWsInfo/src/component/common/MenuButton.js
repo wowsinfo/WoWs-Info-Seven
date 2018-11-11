@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { isIos } from 'react-native-device-detection';
 import { Button } from 'react-native-paper';
 
 class MenuButton extends Component {
@@ -18,7 +19,7 @@ class MenuButton extends Component {
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    bottom: 8, right: 0,
+    bottom: 8, right: isIos ? -8 : 0,
   },
   button: {
     borderTopLeftRadius: 100,

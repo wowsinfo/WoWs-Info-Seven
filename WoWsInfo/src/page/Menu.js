@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, StyleSheet } from 'react-native';
+import { SafeAreaView, ScrollView, Text, StyleSheet } from 'react-native';
 import { isTablet } from 'react-native-device-detection';
 import { List, Colors, Title, Subheading, Divider, Surface } from 'react-native-paper';
 import { HomeButton } from '../component';
@@ -18,6 +18,7 @@ class Menu extends Component {
     const { container, icon } = styles;
     return (
       <Surface style={container}>
+        <SafeAreaView>
         <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{paddingBottom: 32}}>
           <List.Section title='Encyclopedia'>
             <List.Item title='Achievements' 
@@ -60,6 +61,7 @@ class Menu extends Component {
             </List.Accordion>
           </List.Section>
         </ScrollView>
+        </SafeAreaView>
         <HomeButton />
       </Surface>
     )
