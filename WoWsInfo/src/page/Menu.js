@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, ScrollView, Text, StyleSheet } from 'react-native';
 import { isTablet } from 'react-native-device-detection';
-import { List, Colors, Title, Subheading } from 'react-native-paper';
+import { List, Colors, Title, Subheading, Divider, Surface } from 'react-native-paper';
 import { HomeButton } from '../component';
 
 class Menu extends Component {
@@ -17,7 +17,7 @@ class Menu extends Component {
   render() {
     const { container, title } = styles;
     return (
-      <View style={container}>
+      <Surface style={container}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <Title style={title}>Encyclopedia</Title>
           <List.Item title='Achievements'/>
@@ -27,6 +27,7 @@ class Menu extends Component {
           <List.Item title='Commander Skills'/>
           <List.Item title='Maps'/>
           <List.Item title='Collections'/>
+          <Divider />
           <Title style={title}>Websites</Title>
           <List.Item title='World of Warships' description='https://worldofwarships.com/'/>
           <List.Item title='Premium Shop' description='https://asia.wargaming.net/shop/wows/'/>
@@ -37,6 +38,7 @@ class Menu extends Component {
           <List.Item title='Warships.Today' description='https://warships.today/'/>
           <List.Item title='Player Ranking' description='http://maplesyrup.sweet.coocan.jp/wows/ranking/'/>
           <List.Item title='Warships Models' description='https://sketchfab.com/tags/world-of-warships'/>
+          <Divider />          
           <Title style={title}>Youtubers</Title>
           <List.Item title='WoWs Official' description='https://www.youtube.com/user/worldofwarshipsCOM'/>
           <List.Item title='Flambass' description='https://www.youtube.com/user/Flambass'/>
@@ -48,7 +50,7 @@ class Menu extends Component {
           <List.Item title='NoZoupForYou' description='https://www.youtube.com/user/ZoupGaming'/>
         </ScrollView>
         <HomeButton />
-      </View>
+      </Surface>
     )
   };
 }

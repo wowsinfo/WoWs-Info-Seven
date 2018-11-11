@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, StatusBar, SafeAreaView, ScrollView, View, ActivityIndicator } from 'react-native';
-import { IconButton, Colors, Divider, Surface, Card, Title, Paragraph, Portal, Modal } from 'react-native-paper';
+import { StyleSheet, StatusBar, SafeAreaView, ScrollView, ActivityIndicator } from 'react-native';
+import { IconButton, Text, Colors, Divider, Surface, Card, Title, Paragraph } from 'react-native-paper';
 import { MenuButton, LoadingModal } from './component';
 
 export default class App extends Component {
   render() {
     const { container, playerLabel, header, card } = styles;
     return (
-      <View style={container}>
+      <Surface style={container}>
         <StatusBar barStyle='dark-content' backgroundColor={Colors.grey200}/>
-        <SafeAreaView style={{height: '100%'}}>
-          <View style={header}>
+        <SafeAreaView style={{height: '100%', padding: 8}}>
+          <Surface style={header}>
             <Text numberOfLines={1} style={playerLabel}>HenryQuan</Text>
             <IconButton icon='settings' size={24} color={Colors.grey500}
               onPress={() => console.log('Pressed')}/>
-          </View>
+          </Surface>
           <Divider/>
           <ScrollView contentContainerStyle={{paddingBottom: 24}}>
             <Card style={card}>
@@ -62,7 +62,7 @@ export default class App extends Component {
           <MenuButton />
           <LoadingModal />
         </SafeAreaView>
-      </View>
+      </Surface>
     );
   }
 }
@@ -70,7 +70,6 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 8
   },
   header: {
     width: '100%', 
