@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, ScrollView, Text, StyleSheet } from 'react-native';
+import { isTablet } from 'react-native-device-detection';
 import { List, Colors, Title, Subheading } from 'react-native-paper';
 
 class Menu extends Component {
@@ -43,7 +44,7 @@ class Menu extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: '68%',
+    width: isTablet ? '68%' : '100%',
     alignSelf: 'center'
   },
   title: {
