@@ -4,6 +4,7 @@ import { isTablet } from 'react-native-device-detection';
 import GridView from 'react-native-super-grid';
 import { List, Colors, Surface } from 'react-native-paper';
 import { FloatingButton } from '../component';
+import lang from '../value/lang';
 
 class Menu extends Component {
   state = {
@@ -19,29 +20,27 @@ class Menu extends Component {
     const { container, icon } = styles;
 
     // Data for the list
-    const wiki = [];
+    const wiki = [{t: lang.wiki_achievement, i: require('../img/Achievement.png')},
+                  {t: lang.wiki_warships, i: require('../img/Warship.png')},
+                  {t: lang.wiki_upgrades, i: require('../img/Upgrade.png')},
+                  {t: lang.wiki_flags, i: require('../img/Camouflage.png')},
+                  {t: lang.wiki_skills, i: require('../img/CommanderSkill.png')},
+                  {t: lang.wiki_maps, i: 'map'},
+                  {t: lang.wiki_collections, i: require('../img/Collection.png')}];
     const websites = [];
     const youtubers = [];
 
     return (
       <Surface style={container}>
         <SafeAreaView>
-        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{paddingBottom: 32}}>
-          <List.Section title='Encyclopedia'>
-            <List.Item title='Achievements' 
-              left={() => <List.Icon style={icon} color={Colors.blue300} icon={require('../img/Achievement.png')}/>}/>
-            <List.Item title='Warships'
-              left={() => <List.Icon style={icon} color={Colors.blue300} icon={require('../img/Warship.png')}/>}/>
-            <List.Item title='Upgrades'
-              left={() => <List.Icon style={icon} color={Colors.blue300} icon={require('../img/Upgrade.png')}/>}/>
-            <List.Item title='Flag/Camouflage'
-              left={() => <List.Icon style={icon} color={Colors.blue300} icon={require('../img/Camouflage.png')}/>}/>
-            <List.Item title='Commander Skills'
-              left={() => <List.Icon style={icon} color={Colors.blue300} icon={require('../img/CommanderSkill.png')}/>}/>
-            <List.Item title='Maps'
-              left={() => <List.Icon style={icon} color={Colors.blue300} icon='map'/>}/>
-            <List.Item title='Collections'
-              left={() => <List.Icon style={icon} color={Colors.blue300} icon={require('../img/Collection.png')}/>}/>
+        <ScrollView showsVerticalScrollIndicator={false} 
+          contentContainerStyle={{paddingBottom: 32, height: '100%'}}>
+          <List.Section title={lang.wiki_section_title}>
+            <GridView itemDimension={200} items={wiki} 
+              renderItem={item => (
+                <List.Item title={item.t} style={{padding: 0}}
+                  left={() => <List.Icon style={icon} color={Colors.blue300} icon={item.i}/>}/>
+              )}/>
           </List.Section>
           <List.Section title='Extra'>
             <List.Accordion title='Websites'>
