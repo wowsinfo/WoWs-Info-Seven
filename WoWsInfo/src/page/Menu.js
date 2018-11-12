@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { SafeAreaView, ScrollView, Text, StyleSheet } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 import { isTablet } from 'react-native-device-detection';
-import { List, Colors, Title, Subheading, Divider, Surface } from 'react-native-paper';
+import GridView from 'react-native-super-grid';
+import { List, Colors, Surface } from 'react-native-paper';
 import { FloatingButton } from '../component';
 
 class Menu extends Component {
@@ -16,6 +17,12 @@ class Menu extends Component {
 
   render() {
     const { container, icon } = styles;
+
+    // Data for the list
+    const wiki = [];
+    const websites = [];
+    const youtubers = [];
+
     return (
       <Surface style={container}>
         <SafeAreaView>
@@ -36,7 +43,6 @@ class Menu extends Component {
             <List.Item title='Collections'
               left={() => <List.Icon style={icon} color={Colors.blue300} icon={require('../img/Collection.png')}/>}/>
           </List.Section>
-          <Divider />
           <List.Section title='Extra'>
             <List.Accordion title='Websites'>
               <List.Item title='World of Warships' description='https://worldofwarships.com/'/>
@@ -71,7 +77,7 @@ class Menu extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: isTablet ? '68%' : '100%',
+    width: isTablet ? '61%' : '100%',
     alignSelf: 'center'
   },
   icon: {
