@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, StatusBar, SafeAreaView, ScrollView, ActivityIndicator } from 'react-native';
+import { StyleSheet, StatusBar, SafeAreaView, ScrollView } from 'react-native';
+import { isTablet } from 'react-native-device-detection';
 import { IconButton, Text, Colors, Divider, Surface, Card, Title, Paragraph } from 'react-native-paper';
 import { FloatingButton, LoadingModal } from './component';
 
@@ -70,6 +71,8 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingLeft: isTablet ? '20%' : null,
+    paddingRight: isTablet ? '20%': null,
   },
   header: {
     width: '100%', 
