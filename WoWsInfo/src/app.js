@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, StatusBar, SafeAreaView, ScrollView, ActivityIndicator } from 'react-native';
 import { IconButton, Text, Colors, Divider, Surface, Card, Title, Paragraph } from 'react-native-paper';
-import { MenuButton, LoadingModal } from './component';
+import { FloatingButton, LoadingModal } from './component';
 
 export default class App extends Component {
   render() {
@@ -59,7 +59,7 @@ export default class App extends Component {
               </Card.Content>
             </Card>
           </ScrollView>
-          <MenuButton />
+          <FloatingButton mode='Menu'/>
           <LoadingModal />
         </SafeAreaView>
       </Surface>

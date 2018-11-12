@@ -1,3 +1,2 @@
-export * from './common/MenuButton';
-export * from './common/HomeButton';
+export * from './common/FloatingButton';
 export * from './common/LoadingModal';
