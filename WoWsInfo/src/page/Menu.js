@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, Linking } from 'react-native';
 import { isTablet } from 'react-native-device-detection';
 import GridView from 'react-native-super-grid';
 import { List, Colors, Surface } from 'react-native-paper';
@@ -53,34 +53,26 @@ class Menu extends Component {
           <ScrollView showsVerticalScrollIndicator={false} 
             contentContainerStyle={{paddingBottom: 32}}>
             <List.Section title={lang.wiki_section_title}>
-              <GridView itemDimension={200} items={wiki} 
+              <GridView itemDimension={200} items={wiki}
                 renderItem={item => (
                   <List.Item title={item.t} style={{padding: 0}}
                     left={() => <List.Icon style={icon} color={Colors.blue300} icon={item.i}/>}/>
                 )}/>
             </List.Section>
-            <List.Section title='Extra'>
-              <List.Accordion title='Websites'>
-                <List.Item title='World of Warships' description='https://worldofwarships.com/'/>
-                <List.Item title='Premium Shop' description='https://asia.wargaming.net/shop/wows/'/>
-                <List.Item title='Global Wiki' description='http://wiki.wargaming.net/en/World_of_Warships/'/>
-                <List.Item title='Sea Group' description='https://sea-group.org/'/>
-                <List.Item title='The Daily Bounce' description='https://thedailybounce.net/category/world-of-warships/'/>
-                <List.Item title='WoWS Stats & Numbers' description='https://wows-numbers.com/'/>
-                <List.Item title='Warships.Today' description='https://warships.today/'/>
-                <List.Item title='Player Ranking' description='http://maplesyrup.sweet.coocan.jp/wows/ranking/'/>
-                <List.Item title='Warships Models' description='https://sketchfab.com/tags/world-of-warships'/>
+            <List.Section title={lang.extra_section_title}>
+              <List.Accordion title={lang.website_title}>
+                <GridView itemDimension={200} items={websites} 
+                  renderItem={item => (
+                    <List.Item title={item.t} description={item.d}
+                      onPress={() => Linking.openURL(item.d)}/>
+                  )}/>
               </List.Accordion>
-              <List.Accordion title='YouTubers'>
-                <List.Item title='WoWs Official' description='https://www.youtube.com/user/worldofwarshipsCOM'/>
-                <List.Item title='Flambass' description='https://www.youtube.com/user/Flambass'/>
-                <List.Item title='Notser' description='https://www.youtube.com/user/MrNotser'/>
-                <List.Item title='The Mighty Jingles' description='https://www.youtube.com/user/BohemianEagle'/>
-                <List.Item title='Panzerknacker' description='https://www.youtube.com/user/pzkpasch'/>
-                <List.Item title='Flamu' description='https://www.youtube.com/user/cheesec4t'/>
-                <List.Item title='Yuro' description='https://www.youtube.com/user/spzjess'/>
-                <List.Item title='iChaseGaming' description='https://www.youtube.com/user/ichasegaming'/>
-                <List.Item title='NoZoupForYou' description='https://www.youtube.com/user/ZoupGaming'/>
+              <List.Accordion title={lang.website_title}>
+                <GridView itemDimension={200} items={youtubers} 
+                  renderItem={item => (
+                    <List.Item title={item.t} description={item.d}
+                      onPress={() => Linking.openURL(item.d)}/>
+                  )}/>
               </List.Accordion>
             </List.Section>
           </ScrollView>
