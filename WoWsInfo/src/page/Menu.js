@@ -53,22 +53,22 @@ class Menu extends Component {
           <ScrollView showsVerticalScrollIndicator={false} 
             contentContainerStyle={{paddingBottom: 32}}>
             <List.Section title={lang.wiki_section_title}>
-              <GridView itemDimension={200} items={wiki}
+              <GridView itemDimension={280} items={wiki} spacing={0}
                 renderItem={item => (
-                  <List.Item title={item.t} style={{padding: 0}}
+                  <List.Item title={item.t}
                     left={() => <List.Icon style={icon} color={Colors.blue300} icon={item.i}/>}/>
                 )}/>
             </List.Section>
             <List.Section title={lang.extra_section_title}>
               <List.Accordion title={lang.website_title}>
-                <GridView itemDimension={200} items={websites} 
+                <GridView itemDimension={280} items={websites} spacing={0}
                   renderItem={item => (
                     <List.Item title={item.t} description={item.d}
                       onPress={() => Linking.openURL(item.d)}/>
                   )}/>
               </List.Accordion>
-              <List.Accordion title={lang.website_title}>
-                <GridView itemDimension={200} items={youtubers} 
+              <List.Accordion title={lang.youtuber_title}>
+                <GridView itemDimension={280} items={youtubers} spacing={0}
                   renderItem={item => (
                     <List.Item title={item.t} description={item.d}
                       onPress={() => Linking.openURL(item.d)}/>
