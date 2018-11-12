@@ -32,7 +32,7 @@ const Dark = {
 export default function Main() {
   return (
     <PaperProvider theme={Light}>
-      <Menu />
+      <App />
     </PaperProvider>
   );
 }

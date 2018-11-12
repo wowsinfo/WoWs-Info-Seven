@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { SafeAreaView, ScrollView, Text, StyleSheet } from 'react-native';
 import { isTablet } from 'react-native-device-detection';
 import { List, Colors, Title, Subheading, Divider, Surface } from 'react-native-paper';
-import { HomeButton } from '../component';
+import { FloatingButton } from '../component';
 
 class Menu extends Component {
   state = {
@@ -49,7 +49,7 @@ class Menu extends Component {
               <List.Item title='Player Ranking' description='http://maplesyrup.sweet.coocan.jp/wows/ranking/'/>
               <List.Item title='Warships Models' description='https://sketchfab.com/tags/world-of-warships'/>
             </List.Accordion>
-            <List.Accordion title='Youtubers'>
+            <List.Accordion title='YouTubers'>
               <List.Item title='WoWs Official' description='https://www.youtube.com/user/worldofwarshipsCOM'/>
               <List.Item title='Flambass' description='https://www.youtube.com/user/Flambass'/>
               <List.Item title='Notser' description='https://www.youtube.com/user/MrNotser'/>
@@ -62,7 +62,7 @@ class Menu extends Component {
           </List.Section>
         </ScrollView>
         </SafeAreaView>
-        <HomeButton />
+        <FloatingButton mode='Home'/>
       </Surface>
     )
   };
