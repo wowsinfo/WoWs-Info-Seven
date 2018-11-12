@@ -9,14 +9,14 @@ export default class App extends Component {
     return (
       <Surface style={container}>
         <StatusBar barStyle='dark-content' backgroundColor={Colors.grey200}/>
-        <SafeAreaView style={{height: '100%', padding: 8}}>
+        <SafeAreaView style={{height: '100%'}}>
           <Surface style={header}>
             <Text numberOfLines={1} style={playerLabel}>HenryQuan</Text>
             <IconButton icon='settings' size={24} color={Colors.grey500}
               onPress={() => console.log('Pressed')}/>
           </Surface>
           <Divider/>
-          <ScrollView contentContainerStyle={{paddingBottom: 24}}>
+          <ScrollView contentContainerStyle={{padding: 8}}>
             <Card style={card}>
               <Card.Content>
                 <Title>Card title</Title>
@@ -75,7 +75,8 @@ const styles = StyleSheet.create({
     width: '100%', 
     flexDirection: 'row', 
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
+    padding: 8
   },
   playerLabel: {
     fontSize: 32,

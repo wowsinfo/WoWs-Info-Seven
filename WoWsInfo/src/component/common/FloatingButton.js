@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   container: {
     position: 'absolute', alignItems: 'center',
     left: 0, right: 0, 
-    bottom: isIphoneX ? 16 : 8 
+    bottom: isIphoneX ? 14 : 8 
   },
   button: {
     borderRadius: 100,
