@@ -10,6 +10,7 @@
     "react": "16.6.0-alpha.8af6728",
     "react-native": "0.57.4",
     "react-native-device-detection": "^0.2.0",
+    "react-native-localization": "^2.0.3",
     "react-native-paper": "^2.2.4",
     "react-native-super-grid": "^2.4.3",
     "react-native-vector-icons": "^6.0.2"
