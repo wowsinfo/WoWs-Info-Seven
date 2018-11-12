@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, Linking } from 'react-native';
 import { isTablet } from 'react-native-device-detection';
-import { List, Colors, Surface } from 'react-native-paper';
+import { List, Colors, Surface, Searchbar } from 'react-native-paper';
 import { FloatingButton } from '../component';
 import lang from '../value/lang';
 
@@ -45,6 +45,7 @@ class Menu extends Component {
     return (
       <Surface style={container}>
         <SafeAreaView style={{flex: 1}}>
+          <Searchbar style={{margin: 8}}/>
           <ScrollView showsVerticalScrollIndicator={false} 
             contentContainerStyle={{paddingBottom: 32}}>
             <List.Section title={lang.wiki_section_title}>
