@@ -12,7 +12,6 @@ const Light = {
   roundness: 8,
   colors: {
     ...DefaultTheme.colors,
-    surface: Colors.grey50,
     primary: Colors.blue500,
     accent: Colors.blue300,
   }
