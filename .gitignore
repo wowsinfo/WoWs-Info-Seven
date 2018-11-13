@@ -3,3 +3,6 @@
 *.class
 WoWsInfo/src/value/key.js
 API/parser.py
+API/node_modules/
+API/package-lock.json
+API/temp.json
