@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, Linking, Animated, Dimensions } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, Linking } from 'react-native';
 import { isTablet, isAndroid } from 'react-native-device-detection';
 import { List, Colors, Surface, Searchbar } from 'react-native-paper';
-import { FloatingButton } from '../component';
+import { FloatingButton, BackButton } from '../component';
 import lang from '../value/lang';
 
 class Menu extends Component {
 
   constructor(props) {
     super(props);
-
-    this.state = {
-      scrollY: new Animated.Value(0)
-    };
 
     // Data for the list
     this.wiki = [{t: lang.wiki_achievement, i: require('../img/Achievement.png')},
@@ -45,27 +41,12 @@ class Menu extends Component {
 
   render() {
     const { container, icon } = styles;
-    const { height } = Dimensions.get('window');
-    const searchBarTop = this.state.scrollY.interpolate({
-      inputRange: [0, height],
-      outputRange: [0, -128],
-      extrapolate: 'clamp',
-    });
-    const searchBarHeight = this.state.scrollY.interpolate({
-      inputRange: [64, 200],
-      outputRange: [64, 0],
-      extrapolate: 'clamp',
-    })
     return (
       <Surface style={container}>
         <SafeAreaView style={{flex: 1}}>
-          <Animated.View style={{top: searchBarTop, height: searchBarHeight}}>
-            <Searchbar style={{margin: 16}}/>
-          </Animated.View>
-          <ScrollView showsVerticalScrollIndicator={false} onScroll={Animated.event([
-            // so that we could use this for animation
-            {nativeEvent: {contentOffset: {y: this.state.scrollY}}}
-          ])} contentContainerStyle={{paddingBottom: 32}}>
+          <Searchbar style={{margin: 16}}/>
+          <ScrollView showsVerticalScrollIndicator={false}
+            contentContainerStyle={{paddingBottom: 32}}>
             <List.Section title={lang.wiki_section_title}>
               { this.wiki.map(item => { return (
                 <List.Item title={item.t} style={{padding: 0, paddingLeft: 8}} onPress={() => console.log('Placeholder')} key={item.t}
@@ -90,6 +71,7 @@ class Menu extends Component {
           </ScrollView>
         </SafeAreaView>
         <FloatingButton mode='Home'/>
+        <BackButton />
       </Surface>
     )
   };
