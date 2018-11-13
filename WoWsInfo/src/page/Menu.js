@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, Linking } from 'react-native';
-import { isAndroid } from 'react-native-device-detection';
+import { isAndroid, isIphoneX } from 'react-native-device-detection';
 import { List, Colors, Surface, Searchbar } from 'react-native-paper';
 import { FloatingButton, BackButton } from '../component';
 import lang from '../value/lang';
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
   searchBar: {
     position: 'absolute',
     zIndex: 2,
-    top: 16,
+    top: isIphoneX ? 48 : 16,
     left: 16, right: 16,
     borderRadius: 100
   },
