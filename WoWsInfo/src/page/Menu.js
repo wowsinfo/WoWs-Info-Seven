@@ -40,13 +40,13 @@ class Menu extends Component {
   }
 
   render() {
-    const { container, icon } = styles;
+    const { container, icon, searchBar, scroll } = styles;
     return (
       <Surface style={container}>
         <SafeAreaView style={{flex: 1}}>
-          <Searchbar style={{margin: 16}}/>
+          <Searchbar style={searchBar}/>
           <ScrollView showsVerticalScrollIndicator={false}
-            contentContainerStyle={{paddingBottom: 32}}>
+            contentContainerStyle={scroll}>
             <List.Section title={lang.wiki_section_title}>
               { this.wiki.map(item => { return (
                 <List.Item title={item.t} style={{padding: 0, paddingLeft: 8}} onPress={() => console.log('Placeholder')} key={item.t}
@@ -84,6 +84,15 @@ const styles = StyleSheet.create({
   icon: {
     backgroundColor: Colors.blueGrey50, 
     borderRadius: 100
+  },
+  searchBar: {
+    position: 'absolute',
+    top: 16,
+    left: 16, right: 16
+  },
+  scroll: {
+    paddingTop: 48,
+    paddingBottom: 32
   }
 });
 

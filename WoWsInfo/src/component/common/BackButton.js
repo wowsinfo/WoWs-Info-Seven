@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import { View,  StyleSheet } from 'react-native';
-import { isIphoneX } from 'react-native-device-detection';
-import { List, Colors } from 'react-native-paper';
+import { isIphoneX, isAndroid } from 'react-native-device-detection';
+import { IconButton, Colors } from 'react-native-paper';
+import { Actions } from 'react-native-router-flux';
 
 class BackButton extends Component {
   render() {
     const { container } = styles;
+    // Android has a back button so we dont have to add another one
+    if (isAndroid) return null;
     return (
       <View style={container}>
-        <List.Icon color={Colors.grey500} icon='arrow-back' />
+        <IconButton color={Colors.grey500} icon='arrow-back' 
+          onPress={() => Actions.pop()}/>
       </View>
     )
   }
@@ -17,7 +21,7 @@ class BackButton extends Component {
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    bottom: isIphoneX ? 6 : 0,
+    bottom: isIphoneX ? 8 : 0,
     left: 0
   },
 })
