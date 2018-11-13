@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, Linking, Animated } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, Linking, Animated, Dimensions } from 'react-native';
 import { isTablet, isAndroid } from 'react-native-device-detection';
 import { List, Colors, Surface, Searchbar } from 'react-native-paper';
 import { FloatingButton } from '../component';
@@ -9,6 +9,10 @@ class Menu extends Component {
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      scrollY: new Animated.Value(0)
+    };
 
     // Data for the list
     this.wiki = [{t: lang.wiki_achievement, i: require('../img/Achievement.png')},
@@ -37,27 +41,30 @@ class Menu extends Component {
     {t: lang.youtuber_yuro, d: 'https://www.youtube.com/user/spzjess'},
     {t: lang.youtuber_iChaseGaming, d: 'https://www.youtube.com/user/ichasegaming'},
     {t: lang.youtuber_NoZoupForYou, d: 'https://www.youtube.com/user/ZoupGaming'}];
-
-    // Hide search bar when scrolling
-    this.scrollY = new Animated.Value(0);
-    this.searchBarHeight = this.scrollY.interpolate({
-      inputRange: [0, 24, 48],
-      outputRange: [48, 24, 0],
-  });
   }
 
   render() {
     const { container, icon } = styles;
-
+    const { height } = Dimensions.get('window');
+    const searchBarTop = this.state.scrollY.interpolate({
+      inputRange: [0, height],
+      outputRange: [0, -128],
+      extrapolate: 'clamp',
+    });
+    const searchBarHeight = this.state.scrollY.interpolate({
+      inputRange: [64, 200],
+      outputRange: [64, 0],
+      extrapolate: 'clamp',
+    })
     return (
       <Surface style={container}>
         <SafeAreaView style={{flex: 1}}>
-          <Animated.View >
+          <Animated.View style={{top: searchBarTop, height: searchBarHeight}}>
             <Searchbar style={{margin: 16}}/>
           </Animated.View>
           <ScrollView showsVerticalScrollIndicator={false} onScroll={Animated.event([
             // so that we could use this for animation
-            {nativeEvent: {contentOffset: {y: this.scrollY }}}
+            {nativeEvent: {contentOffset: {y: this.state.scrollY}}}
           ])} contentContainerStyle={{paddingBottom: 32}}>
             <List.Section title={lang.wiki_section_title}>
               { this.wiki.map(item => { return (
