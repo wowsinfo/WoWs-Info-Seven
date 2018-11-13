@@ -1,4 +1,8 @@
 # My API
-This is some data I have collected for WoWs Info. They are all in json format.
+Some data collected for WoWs Info. They will be in json format.
 
-- Ship model
+### Ship model
+~~~
+https://sketchfab.com/models/<model>/embed?autostart=1&preload=1
+~~~
+This allows you to view the ship model online.

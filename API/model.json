@@ -1,6 +1,7 @@
 {
   "3445536592": {
-    "name": "Brennus"
+    "name": "Brennus",
+    "model": "30f302c884e44728af99f79f6cd5c9e6"
   },
   "3522082512": {
     "name": "ARP Nachi",
@@ -123,7 +124,8 @@
     "model": "eeac2dbb85f34d95a1bcb6ad873a36c8"
   },
   "3760109552": {
-    "name": "Alaska"
+    "name": "Alaska",
+    "model": "ddc64c5b59c94336bf808fc5eb2d6352"
   },
   "3760142160": {
     "name": "Bourgogne"
@@ -291,7 +293,8 @@
     "model": "949a8ffd9dda4ce9994a54bcd1995214"
   },
   "3764336432": {
-    "name": "Prinz Eitel Friedrich"
+    "name": "Prinz Eitel Friedrich",
+    "model": "ff600eba4c3442f6addcc16da160b7c7"
   },
   "3764336464": {
     "name": "Dunkerque",
