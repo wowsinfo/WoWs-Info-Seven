@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, Linking } from 'react-native';
-import { isTablet, isAndroid } from 'react-native-device-detection';
+import { isAndroid } from 'react-native-device-detection';
 import { List, Colors, Surface, Searchbar } from 'react-native-paper';
 import { FloatingButton, BackButton } from '../component';
 import lang from '../value/lang';
@@ -80,8 +80,6 @@ class Menu extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingLeft: isTablet ? '20%' : null,
-    paddingRight: isTablet ? '20%': null,
   },
   icon: {
     backgroundColor: Colors.blueGrey50, 

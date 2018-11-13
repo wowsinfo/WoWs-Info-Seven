@@ -4,8 +4,7 @@ import * as React from 'react';
 import { AppRegistry } from 'react-native';
 import App from './src/app';
 import { DefaultTheme, DarkTheme, Provider as PaperProvider, Colors } from 'react-native-paper';
-import { name as appName } from './app.json';
-import { Menu } from './src/page';
+import { name as WoWsInfo } from './app.json';
 
 const Light = {
   ...DefaultTheme,
@@ -31,9 +30,9 @@ const Dark = {
 export default function Main() {
   return (
     <PaperProvider theme={Light}>
-      <Menu />
+      <App />
     </PaperProvider>
   );
 }
 
-AppRegistry.registerComponent(appName, () => Main);
+AppRegistry.registerComponent(WoWsInfo, () => Main);
