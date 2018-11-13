@@ -22,7 +22,7 @@ const Dark = {
   roundness: 8,
   colors: {
     ...DarkTheme.colors,
-    surface: Colors.grey900,
+    surface: Colors.grey800,
     primary: Colors.blue500,
     accent: Colors.blue300,
   }
@@ -30,8 +30,8 @@ const Dark = {
 
 export default function Main() {
   return (
-    <PaperProvider theme={Dark}>
-      <App />
+    <PaperProvider theme={Light}>
+      <Menu />
     </PaperProvider>
   );
 }
