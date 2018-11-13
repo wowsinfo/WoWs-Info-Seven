@@ -2,3 +2,4 @@
 .project
 *.class
 WoWsInfo/src/value/key.js
+API/parser.py
