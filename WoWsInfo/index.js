@@ -30,8 +30,8 @@ const Dark = {
 
 export default function Main() {
   return (
-    <PaperProvider theme={Light}>
-      <Menu />
+    <PaperProvider theme={Dark}>
+      <App />
     </PaperProvider>
   );
 }
