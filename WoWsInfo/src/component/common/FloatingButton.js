@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { isIphoneX } from 'react-native-device-detection';
 import { Button } from 'react-native-paper';
+import { Actions } from 'react-native-router-flux';
 
 class FloatingButton extends Component {
   render() {
-    const { container, button } = styles;
-    const { mode, icon } = this.props;
+    const { container } = styles;
+    const { mode } = this.props;
     return (
       <View style={container}>
         { this.renderButton(mode) }
@@ -16,16 +17,22 @@ class FloatingButton extends Component {
 
   renderButton(mode) {
     const { button } = styles;
+    const curr = this.props.mode;
     return (
-      <Button style={button} primary icon={mode === 'Home' ? 'home' : 'menu'} mode='contained' 
+      <Button style={button} primary icon={curr === 'Home' ? 'home' : 'menu'} mode='contained' 
         onPress={() => this.navigate()}>
-        { mode }
+        { curr }
       </Button>
     )
   }
 
   navigate() {
-
+    const { mode } = this.props;
+    if (mode === 'Menu') {
+      Actions.Menu();
+    } else {
+      Actions.popTo('Home');
+    }
   }
 }
 
