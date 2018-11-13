@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, Linking } from 'react-native';
-import { isTablet } from 'react-native-device-detection';
+import { SafeAreaView, ScrollView, StyleSheet, Linking, Animated } from 'react-native';
+import { isTablet, isAndroid } from 'react-native-device-detection';
 import { List, Colors, Surface, Searchbar } from 'react-native-paper';
 import { FloatingButton } from '../component';
 import lang from '../value/lang';
@@ -37,6 +37,13 @@ class Menu extends Component {
     {t: lang.youtuber_yuro, d: 'https://www.youtube.com/user/spzjess'},
     {t: lang.youtuber_iChaseGaming, d: 'https://www.youtube.com/user/ichasegaming'},
     {t: lang.youtuber_NoZoupForYou, d: 'https://www.youtube.com/user/ZoupGaming'}];
+
+    // Hide search bar when scrolling
+    this.scrollY = new Animated.Value(0);
+    this.searchBarHeight = this.scrollY.interpolate({
+      inputRange: [0, 24, 48],
+      outputRange: [48, 24, 0],
+  });
   }
 
   render() {
@@ -45,30 +52,32 @@ class Menu extends Component {
     return (
       <Surface style={container}>
         <SafeAreaView style={{flex: 1}}>
-          <Searchbar style={{margin: 8}}/>
-          <ScrollView showsVerticalScrollIndicator={false} 
-            contentContainerStyle={{paddingBottom: 32}}>
+          <Animated.View >
+            <Searchbar style={{margin: 16}}/>
+          </Animated.View>
+          <ScrollView showsVerticalScrollIndicator={false} onScroll={Animated.event([
+            // so that we could use this for animation
+            {nativeEvent: {contentOffset: {y: this.scrollY }}}
+          ])} contentContainerStyle={{paddingBottom: 32}}>
             <List.Section title={lang.wiki_section_title}>
               { this.wiki.map(item => { return (
-                  <List.Item title={item.t} onPress={() => console.log('Placeholder')} key={item.t}
-                  left={() => <List.Icon style={icon} color={Colors.blue300} icon={item.i}/>}/>
-                )
-              })}
+                <List.Item title={item.t} style={{padding: 0, paddingLeft: 8}} onPress={() => console.log('Placeholder')} key={item.t}
+                left={() => <List.Icon style={icon} color={Colors.blue300} icon={item.i}/>}
+                right={() => isAndroid ? null : <List.Icon icon='keyboard-arrow-right'/>} />
+              )})}
             </List.Section>
             <List.Section title={lang.extra_section_title}>
               <List.Accordion title={lang.website_title} >
                 { this.websites.map(item => { return (
-                    <List.Item title={item.t} description={item.d} key={item.t}
-                    onPress={() => Linking.openURL(item.d)}/>
-                  )
-                })}
+                  <List.Item title={item.t} description={item.d} key={item.t}
+                  onPress={() => Linking.openURL(item.d)}/>
+                )})}
               </List.Accordion>
               <List.Accordion title={lang.youtuber_title}>
                 { this.youtubers.map(item => { return (
-                    <List.Item title={item.t} description={item.d} key={item.t}
-                    onPress={() => Linking.openURL(item.d)}/>
-                  )
-                })}
+                  <List.Item title={item.t} description={item.d} key={item.t}
+                  onPress={() => Linking.openURL(item.d)}/>
+                )})}
               </List.Accordion>
             </List.Section>
           </ScrollView>
