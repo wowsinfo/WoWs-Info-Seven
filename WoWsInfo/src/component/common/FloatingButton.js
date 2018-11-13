@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { isIphoneX } from 'react-native-device-detection';
-import { Button } from 'react-native-paper';
+import { Button, FAB } from 'react-native-paper';
 import { Actions } from 'react-native-router-flux';
 
 class FloatingButton extends Component {
@@ -19,17 +19,18 @@ class FloatingButton extends Component {
     const { button } = styles;
     const curr = this.props.mode;
     return (
-      <Button style={button} primary icon={curr === 'Home' ? 'home' : 'menu'} mode='contained' 
+      <FAB style={button} icon={curr === 'Home' ? 'home' : 'menu'} mode='contained' 
         onPress={() => this.navigate()}>
         { curr }
-      </Button>
+      </FAB>
     )
   }
 
   navigate() {
     const { mode } = this.props;
     if (mode === 'Menu') {
-      Actions.Menu();
+      // Add guard so that it wont push twice
+      Actions.currentScene !== 'Menu' && Actions.Menu();
     } else {
       Actions.popTo('Home');
     }
@@ -38,13 +39,16 @@ class FloatingButton extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute', alignItems: 'center',
-    left: 0, right: 0, 
-    bottom: isIphoneX ? 14 : 8 
+    position: 'absolute',
+    right: 16, 
+    bottom: isIphoneX ? 24 : 16 
   },
   button: {
-    borderRadius: 100,
-    width: '38.5%'
+    height: 64,
+    width: 64,
+    borderRadius: 32,
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 })
 

@@ -3,6 +3,8 @@ import LocalizedStrings from 'react-native-localization';
 export default lang = new LocalizedStrings({
   en: {
     /// Menu section
+    // Search bar
+    search_placeholder: 'Search players or clans',
     // Wiki
     wiki_section_title: 'Encyclopedia',
     wiki_achievement: 'Achievement',

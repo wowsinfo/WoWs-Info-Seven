@@ -44,7 +44,7 @@ class Menu extends Component {
     return (
       <Surface style={container}>
         <SafeAreaView style={{flex: 1}}>
-          <Searchbar style={searchBar}/>
+          <Searchbar style={searchBar} placeholder={lang.search_placeholder}/>
           <ScrollView showsVerticalScrollIndicator={false}
             contentContainerStyle={scroll}>
             <List.Section title={lang.wiki_section_title}>
