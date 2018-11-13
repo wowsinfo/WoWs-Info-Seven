@@ -87,8 +87,10 @@ const styles = StyleSheet.create({
   },
   searchBar: {
     position: 'absolute',
+    zIndex: 2,
     top: 16,
-    left: 16, right: 16
+    left: 16, right: 16,
+    borderRadius: 100
   },
   scroll: {
     paddingTop: 64,
