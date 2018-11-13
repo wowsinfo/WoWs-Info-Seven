@@ -51,7 +51,7 @@ class Menu extends Component {
               { this.wiki.map(item => { return (
                 <List.Item title={item.t} style={{padding: 0, paddingLeft: 8}} onPress={() => console.log('Placeholder')} key={item.t}
                 left={() => <List.Icon style={icon} color={Colors.blue300} icon={item.i}/>}
-                right={() => isAndroid ? null : <List.Icon icon='keyboard-arrow-right'/>} />
+                right={() => isAndroid ? null : <List.Icon color={Colors.grey500} icon='keyboard-arrow-right'/>} />
               )})}
             </List.Section>
             <List.Section title={lang.extra_section_title}>
