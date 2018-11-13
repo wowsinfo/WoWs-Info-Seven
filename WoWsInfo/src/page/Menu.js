@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     left: 16, right: 16
   },
   scroll: {
-    paddingTop: 48,
+    paddingTop: 64,
     paddingBottom: 32
   }
 });
