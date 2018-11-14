@@ -23,6 +23,7 @@ class Home extends Component {
   render() {
     const { container, playerLabel, header, card } = styles;
     const { loading } = this.state;
+    // Show loading modal while getting all data from Asyncstorage
     if (loading) return <LoadingModal />
     return (
       <Surface style={container}>
