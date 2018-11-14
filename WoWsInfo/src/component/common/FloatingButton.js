@@ -6,28 +6,20 @@ import { Actions } from 'react-native-router-flux';
 class FloatingButton extends Component {
   render() {
     const { container } = styles;
-    const { mode } = this.props;
     return (
       <SafeAreaView style={container}>
-        { this.renderButton(mode) }
+        <FAB onPress={() => this.navigate()} mode='contained' icon={'menu'} />
       </SafeAreaView>
     )
   }
 
-  renderButton(mode) {
-    return (
-      <FAB onPress={() => this.navigate()} mode='contained' 
-        icon={mode === 'Home' ? 'home' : 'menu'}>{mode}</FAB>
-    )
-  }
-
   navigate() {
-    const { mode } = this.props;
-    if (mode === 'Menu') {
-      // Add guard so that it wont push twice
-      Actions.currentScene !== 'Menu' && Actions.Menu();
-    } else {
-      Actions.popTo('Home');
+    if (Actions.state.routes.findIndex(r => r.routeName === 'Menu') > 0) {
+      // Pop to menu 
+      Actions.popTo('Menu');
+    } else if (Actions.currentScene !== 'Menu') {
+      // Add guard so that it wont push twice]
+      Actions.Menu();
     }
   }
 }
