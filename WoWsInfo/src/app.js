@@ -10,7 +10,7 @@ export default class App extends Component {
     const { container, scene } = styles;
     return (
       <Surface style={container}>
-        <Router sceneStyle={[scene, {backgroundColor: 'white'}]}>
+        <Router sceneStyle={scene}>
           <Stack key='root' hideNavBar>
             <Scene key='Home' component={Home}/>
             <Scene key='Menu' component={Menu}/>
