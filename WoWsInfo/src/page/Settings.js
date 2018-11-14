@@ -37,7 +37,7 @@ class Settings extends Component {
             <List.Section title='Theme'>
               <List.Item title='Dark Theme' right={() => <Checkbox status='checked'/>}/>
               <List.Item title='Tint Colour' right={() => <View style={{height: 36, width: 36, backgroundColor: Colors.blue500}}/>}/>              
-              <Caption>Please restart WoWs Info to apply the new theme</Caption>
+              <Caption style={{paddingLeft: 16}}>Please restart WoWs Info to apply the new theme</Caption>
             </List.Section>
           </ScrollView>
         </SafeAreaView>
