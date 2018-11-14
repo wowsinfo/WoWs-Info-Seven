@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, SafeAreaView, ScrollView } from 'react-native';
 import { IconButton, Text, Colors, Divider, Surface, Card, Title, Paragraph } from 'react-native-paper';
-import { FloatingButton, LoadingModal } from '../component';
+import { FloatingButton, LoadingModal } from '../../component';
 import { Actions } from 'react-native-router-flux';
 
 class Home extends Component {
