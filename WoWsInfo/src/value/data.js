@@ -1,9 +1,4 @@
-/*
- * This is the format for pre 1.0.6 version
- * The data conversion will last for a few months
- */
-
-export const LocalData = {
+export const LOCAL = {
   has_ads: '@WoWs_Info:hasAds',
   friend: '@WoWs_Info:playerList',
   user_info: '@WoWs_Info:userInfo',
@@ -23,7 +18,7 @@ export const LocalData = {
   saved_tab: '@WoWs_Info:savedTab',
 }
 
-export const SavedData = {
+export const SAVED = {
   language: '@Data:language',
   encyclopedia: '@Data:encyclopedia',
   ship_type: '@Data:ship_type',
