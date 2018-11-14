@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, ScrollView, SafeAreaView, StyleSheet } from 'react-native';
 import { Surface, List, Button, Caption, Checkbox, Colors, Divider } from 'react-native-paper';
 import { Actions } from 'react-native-router-flux';
-import { BackButton, WoWsInfo } from '../component';
+import { BackButton, WoWsInfo, DividerPlus } from '../component';
 
 class Settings extends Component {
   render() {
@@ -34,7 +34,7 @@ class Settings extends Component {
                 </ScrollView>
               </List.Accordion>
             </List.Section>
-            <Divider />
+            <DividerPlus />
             <List.Section title='Theme'>
               <List.Item title='Dark Theme' right={() => <Checkbox status='checked'/>}/>
               <List.Item title='Tint Colour' right={() => <View style={{height: 36, width: 36, backgroundColor: Colors.blue500}}/>}/>              

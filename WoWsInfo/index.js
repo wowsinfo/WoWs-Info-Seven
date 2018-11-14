@@ -29,7 +29,7 @@ const Dark = {
 
 export default function Main() {
   return (
-    <PaperProvider theme={Dark}>
+    <PaperProvider theme={Light}>
       <App />
     </PaperProvider>
   );
