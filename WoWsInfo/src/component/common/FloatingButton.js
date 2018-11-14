@@ -8,7 +8,7 @@ class FloatingButton extends Component {
     const { container } = styles;
     return (
       <SafeAreaView style={container}>
-        <FAB onPress={() => this.navigate()} mode='contained' icon={'menu'} />
+        <FAB onPress={() => this.navigate()} mode='contained' icon={require('../../img/Ship.png')} />
       </SafeAreaView>
     )
   }

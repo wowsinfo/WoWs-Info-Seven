@@ -20,7 +20,7 @@ class Home extends Component {
     DataLoader.loadAll().then(data => {
       global.DATA = data;
       const appTheme = Guard(DATA, `${LOCAL.theme}`, BLUE);
-      const darkMode = Guard(DATA, `${LOCAL.darkMode}`, true);
+      const darkMode = Guard(DATA, `${LOCAL.darkMode}`, false);
 
       let customised = {};
       // Decide whether dark mode is enabled
@@ -31,7 +31,7 @@ class Home extends Component {
             surface: Colors.grey900,
             text: GREY[50],
             primary: appTheme[500],
-            accent: appTheme[300],
+            accent: appTheme[500],
           }
         };
       } else {
@@ -39,7 +39,7 @@ class Home extends Component {
           colors: {
             ...DefaultTheme.colors,
             primary: appTheme[500],
-            accent: appTheme[300],
+            accent: appTheme[500],
           }
         };
       }
@@ -60,7 +60,7 @@ class Home extends Component {
     // Show loading modal while getting all data from Asyncstorage
     if (loading) return <LoadingModal />
     return (
-      <Surface style={container}>
+      <Surface theme={{surface: GREY[800]}} style={container}>
         <StatusBar barStyle={dark ? 'light-content' : 'dark-content'} 
           backgroundColor={dark ? GREY[900] : GREY[200]}/>
         <SafeAreaView style={{height: '100%'}}>
