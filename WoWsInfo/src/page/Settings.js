@@ -6,7 +6,7 @@ import { BackButton, WoWsInfo, DividerPlus } from '../component';
 
 class Settings extends Component {
   render() {
-    const { container, bottom } = styles;
+    const { container } = styles;
     return (
       <Surface style={container}>
         <SafeAreaView style={{flex: 1}}>
@@ -40,16 +40,17 @@ class Settings extends Component {
               <List.Item title='Tint Colour' right={() => <View style={{height: 36, width: 36, backgroundColor: Colors.blue500}}/>}/>              
               <Caption style={{paddingLeft: 16}}>Please restart WoWs Info to apply the new theme</Caption>
             </List.Section>
-            <Divider />
+            <DividerPlus />
             <List.Section title='WoWs Info'>
               <List.Item title='Feedback' description='Send email to developer'/>
               <List.Item title='Write a review' />
               <List.Item title='Share with friends'/>
-              <Divider />
+            </List.Section>
+            <DividerPlus />
+            <List.Section title='Open Source'>
               <List.Item title='Github' description='https://github.com/HenryQuan/WoWs-Info'/>
               <List.Item title='Licences' description='Many libraries are used for building WoWs Info'/>
-              <Divider />
-              <List.Item title='Support Development' description='v1.0.6'/>
+              <List.Item style={{marginTop: -16}} description='v1.0.6'/>
             </List.Section>
             <WoWsInfo />
           </ScrollView>
