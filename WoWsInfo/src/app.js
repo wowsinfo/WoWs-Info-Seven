@@ -4,8 +4,14 @@ import { Router, Stack, Scene } from 'react-native-router-flux';
 import { isTablet } from 'react-native-device-detection';
 import { Surface, Colors } from 'react-native-paper';
 import { Home, Menu, Settings } from './page';
+import { Downloader } from './core';
 
 export default class App extends Component {
+  constructor() {
+    super();
+    let d = new Downloader();
+  }
+
   render() {
     const { container, scene } = styles;
     return (
