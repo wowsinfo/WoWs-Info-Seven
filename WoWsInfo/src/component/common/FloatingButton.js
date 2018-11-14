@@ -44,8 +44,7 @@ const styles = StyleSheet.create({
     bottom: isIphoneX ? 24 : 16 
   },
   button: {
-    height: 64,
-    width: 64,
+    height: 64, width: 64,
     borderRadius: 32,
     alignItems: 'center',
     justifyContent: 'center'
