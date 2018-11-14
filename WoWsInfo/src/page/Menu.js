@@ -33,6 +33,7 @@ class Menu extends Component {
     this.websites = [{t: lang.website_official_site, d: 'https://worldofwarships.com/'},
     {t: lang.website_premium, d: 'https://asia.wargaming.net/shop/wows/'},
     {t: lang.website_global_wiki, d: 'http://wiki.wargaming.net/en/World_of_Warships/'},
+    {t: lang.website_dev_blog, d: 'https://www.facebook.com/wowsdevblog/'},
     {t: lang.website_sea_group, d: 'https://sea-group.org/'},
     {t: lang.website_daily_bounce, d: 'https://thedailybounce.net/category/world-of-warships/'},
     {t: lang.website_numbers, d: 'https://wows-numbers.com/'},

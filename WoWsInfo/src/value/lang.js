@@ -22,6 +22,7 @@ export default lang = new LocalizedStrings({
     website_official_site: 'World of Warships',
     website_premium: 'Premium Shop',
     website_global_wiki: 'Global Wiki',
+    website_dev_blog: 'Developer Blog',
     website_sea_group: 'Sea Group',
     website_daily_bounce: 'The Daily Bounce',
     website_numbers: 'WoWS Stats & Numbers',
