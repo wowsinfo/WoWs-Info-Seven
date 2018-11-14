@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { isIphoneX } from 'react-native-device-detection';
-import { Button, FAB } from 'react-native-paper';
+import { SafeAreaView, StyleSheet } from 'react-native';
+import { FAB } from 'react-native-paper';
 import { Actions } from 'react-native-router-flux';
 
 class FloatingButton extends Component {
@@ -9,9 +8,9 @@ class FloatingButton extends Component {
     const { container } = styles;
     const { mode } = this.props;
     return (
-      <View style={container}>
+      <SafeAreaView style={container}>
         { this.renderButton(mode) }
-      </View>
+      </SafeAreaView>
     )
   }
 
@@ -19,10 +18,8 @@ class FloatingButton extends Component {
     const { button } = styles;
     const curr = this.props.mode;
     return (
-      <FAB style={button} icon={curr === 'Home' ? 'home' : 'menu'} mode='contained' 
-        onPress={() => this.navigate()}>
-        { curr }
-      </FAB>
+      <FAB style={button} onPress={() => this.navigate()} mode='contained' 
+        icon={curr === 'Home' ? 'home' : 'menu'}>{curr}</FAB>
     )
   }
 
@@ -41,7 +38,7 @@ const styles = StyleSheet.create({
   container: {
     position: 'absolute',
     right: 16, 
-    bottom: isIphoneX ? 24 : 16 
+    bottom: 16
   },
   button: {
     height: 64, width: 64,
