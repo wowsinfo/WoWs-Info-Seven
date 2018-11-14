@@ -1,8 +1,15 @@
+/**
+ * Menu.js
+ * 
+ * Menu shows wiki and extra
+ * It also has the ability to search players and clans
+ */
+
 import React, { Component } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, Linking } from 'react-native';
 import { isAndroid, isIphoneX } from 'react-native-device-detection';
 import { List, Colors, Surface, Searchbar } from 'react-native-paper';
-import { FloatingButton, BackButton } from '../component';
+import { BackButton } from '../component';
 import lang from '../value/lang';
 
 class Menu extends Component {
@@ -54,7 +61,6 @@ class Menu extends Component {
             onChangeText={text => this.setState({search: text})} autoCorrect={false} autoCapitalize='none'/>
           { this.renderContent() }
         </SafeAreaView>
-        <FloatingButton mode='Home'/>
         <BackButton />
       </Surface>
     );
