@@ -15,11 +15,9 @@ class FloatingButton extends Component {
   }
 
   renderButton(mode) {
-    const { button } = styles;
-    const curr = this.props.mode;
     return (
-      <FAB style={button} onPress={() => this.navigate()} mode='contained' 
-        icon={curr === 'Home' ? 'home' : 'menu'}>{curr}</FAB>
+      <FAB onPress={() => this.navigate()} mode='contained' 
+        icon={mode === 'Home' ? 'home' : 'menu'}>{mode}</FAB>
     )
   }
 
@@ -39,12 +37,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 16, 
     bottom: 16
-  },
-  button: {
-    height: 64, width: 64,
-    borderRadius: 32,
-    alignItems: 'center',
-    justifyContent: 'center'
   }
 })
 
