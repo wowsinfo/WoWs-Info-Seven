@@ -2,6 +2,6 @@
 export * from './Menu';
 
 import Home from './home/Home';
-export { Home };
-export * from './Settings';
+import Settings from './Settings';
+export { Home, Settings };
 export * from './About';
