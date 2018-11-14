@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { View, ScrollView, SafeAreaView, StyleSheet } from 'react-native';
-import { Surface, List, Button, Caption, Checkbox, Colors } from 'react-native-paper';
+import { Surface, List, Button, Caption, Checkbox, Colors, Divider } from 'react-native-paper';
 import { Actions } from 'react-native-router-flux';
-import { BackButton } from '../component';
+import { BackButton, WoWsInfo } from '../component';
 
 class Settings extends Component {
   render() {
@@ -34,11 +34,24 @@ class Settings extends Component {
                 </ScrollView>
               </List.Accordion>
             </List.Section>
+            <Divider />
             <List.Section title='Theme'>
               <List.Item title='Dark Theme' right={() => <Checkbox status='checked'/>}/>
               <List.Item title='Tint Colour' right={() => <View style={{height: 36, width: 36, backgroundColor: Colors.blue500}}/>}/>              
               <Caption style={{paddingLeft: 16}}>Please restart WoWs Info to apply the new theme</Caption>
             </List.Section>
+            <Divider />
+            <List.Section title='WoWs Info'>
+              <List.Item title='Feedback' description='Send email to developer'/>
+              <List.Item title='Write a review' />
+              <List.Item title='Share with friends'/>
+              <Divider />
+              <List.Item title='Github' description='https://github.com/HenryQuan/WoWs-Info'/>
+              <List.Item title='Licences' description='Many libraries are used for building WoWs Info'/>
+              <Divider />
+              <List.Item title='Support Development' description='v1.0.6'/>
+            </List.Section>
+            <WoWsInfo />
           </ScrollView>
         </SafeAreaView>
         <BackButton />
