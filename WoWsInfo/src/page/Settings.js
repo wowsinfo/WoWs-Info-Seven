@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, ScrollView, SafeAreaView, StyleSheet } from 'react-native';
-import { Surface, List, Button, Caption, Checkbox, Colors, Divider } from 'react-native-paper';
+import { Surface, List, Button, Caption, Checkbox, Colors, withTheme } from 'react-native-paper';
 import { Actions } from 'react-native-router-flux';
 import { BackButton, WoWsInfo, DividerPlus } from '../component';
 
@@ -36,9 +36,13 @@ class Settings extends Component {
             </List.Section>
             <DividerPlus />
             <List.Section title='Theme'>
-              <List.Item title='Dark Theme' right={() => <Checkbox status='checked'/>}/>
+              <List.Item title='Dark Theme' onPress={() => {
+                // Real time is possible
+                this.props.theme.dark ? this.props.theme.colors.surface = 'white' : this.props.theme.colors.surface = 'black';
+                this.props.theme.dark = !this.props.theme.dark;
+                Actions.reset('Home');
+              }} right={() => <Checkbox status='checked'/>}/>
               <List.Item title='Tint Colour' right={() => <View style={{height: 36, width: 36, backgroundColor: Colors.blue500}}/>}/>              
-              <Caption style={{paddingLeft: 16}}>Please restart WoWs Info to apply the new theme</Caption>
             </List.Section>
             <DividerPlus />
             <List.Section title='WoWs Info'>
@@ -73,4 +77,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export { Settings };
+export default withTheme(Settings);
