@@ -1,12 +1,29 @@
 import React, { Component } from 'react';
 import { StyleSheet, SafeAreaView, ScrollView } from 'react-native';
-import { IconButton, Text, Colors, Divider, Surface, Card, Title, Paragraph } from 'react-native-paper';
+import { withTheme, IconButton, Text, Colors, Divider, Surface, Card, Title, Paragraph } from 'react-native-paper';
 import { FloatingButton, LoadingModal } from '../../component';
 import { Actions } from 'react-native-router-flux';
+import { DataLoader } from '../../core';
 
 class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: true
+    }
+
+    DataLoader.loadAll().then(data => {
+      global.DATA = data;
+      props.theme.colors.accent = 'green';
+      this.setState({loading: false});
+      console.log(props);
+    })
+  }
+
   render() {
     const { container, playerLabel, header, card } = styles;
+    const { loading } = this.state;
+    if (loading) return <LoadingModal />
     return (
       <Surface style={container}>
         <SafeAreaView style={{height: '100%'}}>
@@ -60,7 +77,6 @@ class Home extends Component {
             </Card>
           </ScrollView>
           <FloatingButton />
-          <LoadingModal />
         </SafeAreaView>
       </Surface>
     );
@@ -91,4 +107,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export { Home };
+export default withTheme(Home);

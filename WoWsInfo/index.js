@@ -5,6 +5,7 @@ import { AppRegistry } from 'react-native';
 import App from './src/app';
 import { DefaultTheme, DarkTheme, Provider as PaperProvider, Colors } from 'react-native-paper';
 import { name as WoWsInfo } from './app.json';
+import './src/value/global';
 
 const Light = {
   ...DefaultTheme,
@@ -27,7 +28,7 @@ const Dark = {
   }
 };
 
-export default function Main() {
+export function Main() {
   return (
     <PaperProvider theme={Light}>
       <App />
