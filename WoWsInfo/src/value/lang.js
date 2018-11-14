@@ -2,6 +2,7 @@ import LocalizedStrings from 'react-native-localization';
 
 export default lang = new LocalizedStrings({
   en: {
+    /// Home section
     /// Menu section
     // Search bar
     search_placeholder: 'Search players or clans',
@@ -38,6 +39,21 @@ export default lang = new LocalizedStrings({
     youtuber_yuro: 'Yuro',
     youtuber_iChaseGaming: 'iChaseGaming',
     youtuber_NoZoupForYou: 'NoZoupForYou',
+    /// App name section
+    wowsinfo_x: 'X',
+    wowsinfo_y: 'Y',
+    wowsinfo_z: 'Z',
+    wowsinfo: '',
+    wowsinfo_black: 'Black',
+    wowsinfo_white: 'White',
+    wowsinfo_ultra: 'Ultra',
+    wowsinfo_ultimate: 'Ultimate',
+    wowsinfo_pro: 'Pro',
+    wowsinfo_omega: 'Ω',
+    wowsinfo_phi: 'Ф',
+    wowsinfo_infinite: '∞',
+    wowsinfo_new: 'New',
+    wowsinfo_go: 'Go',
   },
   zh: {
 

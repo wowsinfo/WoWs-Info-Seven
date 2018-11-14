@@ -59,7 +59,7 @@ class Home extends Component {
               </Card.Content>
             </Card>
           </ScrollView>
-          <FloatingButton mode='Menu'/>
+          <FloatingButton />
           <LoadingModal />
         </SafeAreaView>
       </Surface>

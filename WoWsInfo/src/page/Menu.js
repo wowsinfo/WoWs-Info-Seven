@@ -9,7 +9,7 @@ import React, { Component } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, Linking } from 'react-native';
 import { isAndroid, isIphoneX } from 'react-native-device-detection';
 import { List, Colors, Surface, Searchbar } from 'react-native-paper';
-import { BackButton } from '../component';
+import { BackButton, WoWsInfo } from '../component';
 import lang from '../value/lang';
 
 class Menu extends Component {
@@ -96,6 +96,7 @@ class Menu extends Component {
               )})}
             </List.Accordion>
           </List.Section>
+          <WoWsInfo />
         </ScrollView>
       )
     }
@@ -119,7 +120,6 @@ const styles = StyleSheet.create({
   },
   scroll: {
     paddingTop: 64,
-    paddingBottom: 32
   }
 });
 
