@@ -1,5 +1,5 @@
 export const LOCAL = {
-  ADs: '@WoWs_Info:hasAds',
+  ads: '@WoWs_Info:hasAds',
   friendList: '@WoWs_Info:playerList',
   userInfo: '@WoWs_Info:userInfo',
   userData: '@WoWs_Info:userData',
@@ -11,6 +11,7 @@ export const LOCAL = {
   lastUpdate: '@WoWs_Info:lastUpdate',
   // data_saver: '@WoWs_Info:dataSaver',
   theme: '@WoWs_Info:themeColour',
+  darkMode: '@WoWs_Info:darkMode',
   firstLaunch: '@WoWs_Info:firstLaunch',
   apiLanguage: '@WoWs_Info:apiLanguage',
 }

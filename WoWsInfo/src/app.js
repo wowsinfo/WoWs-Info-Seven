@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, StatusBar } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Router, Stack, Scene } from 'react-native-router-flux';
 import { isTablet } from 'react-native-device-detection';
 import { Surface, Colors } from 'react-native-paper';
@@ -10,7 +10,6 @@ export default class App extends Component {
     const { container, scene } = styles;
     return (
       <Surface style={container}>
-        <StatusBar barStyle='dark-content' backgroundColor={Colors.grey200}/>
         <Router sceneStyle={[scene, {backgroundColor: 'white'}]}>
           <Stack key='root' hideNavBar>
             <Scene key='Home' component={Home}/>
