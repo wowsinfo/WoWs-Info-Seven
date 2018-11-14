@@ -46,6 +46,7 @@ class Menu extends Component {
   render() {
     const { container, searchBar } = styles;
     const { search } = this.state;
+
     return (
       <Surface style={container}>
         <SafeAreaView style={{flex: 1}}>
@@ -106,7 +107,7 @@ const styles = StyleSheet.create({
   searchBar: {
     position: 'absolute',
     zIndex: 2,
-    top: isIphoneX ? 48 : 16,
+    top: isIphoneX ? 56 : 16,
     left: 16, right: 16,
     borderRadius: 100
   },
