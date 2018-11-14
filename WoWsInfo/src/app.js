@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, StatusBar } from 'react-native';
-import { Router, Stack, Scene, Actions } from 'react-native-router-flux';
+import { Router, Stack, Scene } from 'react-native-router-flux';
 import { isTablet } from 'react-native-device-detection';
-import { Surface, Colors, withTheme } from 'react-native-paper';
+import { Surface, Colors } from 'react-native-paper';
 import { Home, Menu, Settings } from './page';
 
 export default class App extends Component {
