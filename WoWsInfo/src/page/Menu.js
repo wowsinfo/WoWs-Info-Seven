@@ -44,47 +44,55 @@ class Menu extends Component {
   }
 
   render() {
-    const { container, icon, searchBar, scroll } = styles;
+    const { container, searchBar } = styles;
+    const { search } = this.state;
+    return (
+      <Surface style={container}>
+        <SafeAreaView style={{flex: 1}}>
+          <Searchbar value={search} style={searchBar} placeholder={lang.search_placeholder}
+            onChangeText={text => this.setState({search: text})} autoCorrect={false} autoCapitalize='none'/>
+          { this.renderContent() }
+        </SafeAreaView>
+        <FloatingButton mode='Home'/>
+        <BackButton />
+      </Surface>
+    );
+  }
+
+  renderContent() {
+    const { icon, scroll } = styles;
     const { search } = this.state;
     if (search.length > 0) {
-
+      return null;
     } else {
       return (
-        <Surface style={container}>
-          <SafeAreaView style={{flex: 1}}>
-            <Searchbar style={searchBar} placeholder={lang.search_placeholder}
-              autoCorrect={false} autoCapitalize='none'/>
-            <ScrollView showsVerticalScrollIndicator={false}
-              contentContainerStyle={scroll}>
-              <List.Section title={lang.wiki_section_title}>
-                { this.wiki.map(item => { return (
-                  <List.Item title={item.t} style={{padding: 0, paddingLeft: 8}} onPress={() => console.log('Placeholder')} key={item.t}
-                  left={() => <List.Icon style={icon} color={Colors.blue300} icon={item.i}/>}
-                  right={() => isAndroid ? null : <List.Icon color={Colors.grey500} icon='keyboard-arrow-right'/>} />
-                )})}
-              </List.Section>
-              <List.Section title={lang.extra_section_title}>
-                <List.Accordion title={lang.website_title} >
-                  { this.websites.map(item => { return (
-                    <List.Item title={item.t} description={item.d} key={item.t}
-                    onPress={() => Linking.openURL(item.d)}/>
-                  )})}
-                </List.Accordion>
-                <List.Accordion title={lang.youtuber_title}>
-                  { this.youtubers.map(item => { return (
-                    <List.Item title={item.t} description={item.d} key={item.t}
-                    onPress={() => Linking.openURL(item.d)}/>
-                  )})}
-                </List.Accordion>
-              </List.Section>
-            </ScrollView>
-          </SafeAreaView>
-          <FloatingButton mode='Home'/>
-          <BackButton />
-        </Surface>
+        <ScrollView showsVerticalScrollIndicator={false}
+          contentContainerStyle={scroll}>
+          <List.Section title={lang.wiki_section_title}>
+            { this.wiki.map(item => { return (
+              <List.Item title={item.t} style={{padding: 0, paddingLeft: 8}} onPress={() => console.log('Placeholder')} key={item.t}
+              left={() => <List.Icon style={icon} color={Colors.blue300} icon={item.i}/>}
+              right={() => isAndroid ? null : <List.Icon color={Colors.grey500} icon='keyboard-arrow-right'/>} />
+            )})}
+          </List.Section>
+          <List.Section title={lang.extra_section_title}>
+            <List.Accordion title={lang.website_title} >
+              { this.websites.map(item => { return (
+                <List.Item title={item.t} description={item.d} key={item.t}
+                onPress={() => Linking.openURL(item.d)}/>
+              )})}
+            </List.Accordion>
+            <List.Accordion title={lang.youtuber_title}>
+              { this.youtubers.map(item => { return (
+                <List.Item title={item.t} description={item.d} key={item.t}
+                onPress={() => Linking.openURL(item.d)}/>
+              )})}
+            </List.Accordion>
+          </List.Section>
+        </ScrollView>
       )
     }
-  };
+  }
 }
 
 const styles = StyleSheet.create({
