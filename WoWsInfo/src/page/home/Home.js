@@ -1,28 +1,20 @@
 import React, { Component } from 'react';
-import { StyleSheet, SafeAreaView, ScrollView, StatusBar } from 'react-native';
+import { StyleSheet, SafeAreaView, ScrollView } from 'react-native';
 import { IconButton, Text, Colors, Surface, 
   Card, Title, Paragraph } from 'react-native-paper';
 import { FloatingButton } from '../../component';
 import { Actions } from 'react-native-router-flux';
-import { LOCAL } from '../../value/data';
 import { GREY } from 'react-native-material-color';
 
 class Home extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      dark: DATA[LOCAL.theme]
-    }
   }
 
   render() {
     const { container, playerLabel, header, card } = styles;
-    const { dark } = this.state;
     return (
       <Surface theme={{colors: {background: GREY[800]}}} style={container}>
-        <StatusBar barStyle={dark ? 'light-content' : 'dark-content'} 
-          backgroundColor={dark ? 'black' : GREY[200]}/>
         <SafeAreaView style={{height: '100%'}}>
           <Surface style={header}>
             <Text numberOfLines={1} style={playerLabel}>HenryQuan</Text>
