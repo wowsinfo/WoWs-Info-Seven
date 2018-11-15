@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import { View, ScrollView, SafeAreaView, StyleSheet } from 'react-native';
-import { Surface, List, Button, Caption, Checkbox, Colors, withTheme } from 'react-native-paper';
+import { View, ScrollView, SafeAreaView, StyleSheet, Linking, Share } from 'react-native';
+import { isAndroid } from 'react-native-device-detection';
+import { Surface, List, Button, Checkbox, Colors, withTheme } from 'react-native-paper';
 import { Actions } from 'react-native-router-flux';
 import { BackButton, WoWsInfo, DividerPlus } from '../component';
+import { APP } from '../value/data';
 
 class Settings extends Component {
   render() {
     const { container, tint } = styles;
+    const store = isAndroid ? APP.GooglePlay : APP.AppStore;
     return (
       <Surface style={container}>
         <SafeAreaView style={{flex: 1}}>
@@ -43,9 +46,12 @@ class Settings extends Component {
             </List.Section>
             <DividerPlus />
             <List.Section title='WoWs Info'>
-              <List.Item title='Feedback' description='Send email to developer'/>
-              <List.Item title='Write a review' />
-              <List.Item title='Share with friends'/>
+              <List.Item title='Feedback' description='Send email to developer'
+                onPress={() => Linking.openURL(APP.Developer)}/>
+              <List.Item title='Write a review' 
+                onPress={() => Linking.openURL(store)}/>
+              <List.Item title='Share with friends'
+                onPress={() => Share.share({url: store})}/>
             </List.Section>
             <DividerPlus />
             <List.Section title='Open Source'>
