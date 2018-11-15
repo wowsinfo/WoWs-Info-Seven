@@ -63,15 +63,12 @@ class Settings extends Component {
       </Surface>
     )
   };
-<<<<<<< Updated upstream
-=======
 
   /**
    * Update app theme real time
    */
   updateTheme() {
   }
->>>>>>> Stashed changes
 }
 
 const styles = StyleSheet.create({
