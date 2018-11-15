@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Surface, Text } from 'react-native-paper';
+import { BackButton } from '../component';
 
 class About extends Component {
   render() {
@@ -8,6 +9,7 @@ class About extends Component {
     return (
       <Surface style={container}>
         <Text>About</Text>
+        <BackButton />
       </Surface>
     )
   };
