@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import { View, ScrollView, SafeAreaView, StyleSheet } from 'react-native';
-import { Surface, List, Button, Caption, Checkbox, Colors, withTheme } from 'react-native-paper';
+import { View, ScrollView, SafeAreaView, StyleSheet, Linking, Share } from 'react-native';
+import { isAndroid } from 'react-native-device-detection';
+import { Surface, List, Button, Checkbox, Colors, withTheme } from 'react-native-paper';
 import { Actions } from 'react-native-router-flux';
 import { BackButton, WoWsInfo, DividerPlus } from '../component';
+import { APP } from '../value/data';
 
 class Settings extends Component {
   render() {
-    const { container } = styles;
+    const { container, tint } = styles;
+    const store = isAndroid ? APP.GooglePlay : APP.AppStore;
     return (
       <Surface style={container}>
         <SafeAreaView style={{flex: 1}}>
@@ -36,25 +39,24 @@ class Settings extends Component {
             </List.Section>
             <DividerPlus />
             <List.Section title='Theme'>
-              <List.Item title='Dark Theme' onPress={() => {
-                // Real time is possible
-                this.props.theme.dark ? this.props.theme.colors.surface = 'white' : this.props.theme.colors.surface = 'black';
-                this.props.theme.dark = !this.props.theme.dark;
-                Actions.reset('Home');
-              }} right={() => <Checkbox status='checked'/>}/>
-              <List.Item title='Tint Colour' right={() => <View style={{height: 36, width: 36, backgroundColor: Colors.blue500}}/>}/>              
+              <List.Item title='Dark Theme' onPress={() => this.updateTheme()} 
+                right={() => <Checkbox status='checked'/>}/>
+              <List.Item title='Tint Colour' 
+                right={() => <View style={[tint, {backgroundColor: Colors.blue500}]}/>}/>              
             </List.Section>
             <DividerPlus />
             <List.Section title='WoWs Info'>
-              <List.Item title='Feedback' description='Send email to developer'/>
-              <List.Item title='Write a review' />
-              <List.Item title='Share with friends'/>
+              <List.Item title='Feedback' description='Send email to developer'
+                onPress={() => Linking.openURL(APP.Developer)}/>
+              <List.Item title='Write a review' 
+                onPress={() => Linking.openURL(store)}/>
+              <List.Item title='Share with friends'
+                onPress={() => Share.share({url: store})}/>
             </List.Section>
             <DividerPlus />
             <List.Section title='Open Source'>
               <List.Item title='Github' description='https://github.com/HenryQuan/WoWs-Info'/>
               <List.Item title='Licences' description='Many libraries are used for building WoWs Info'/>
-              <List.Item style={{marginTop: -16}} description='v1.0.6'/>
             </List.Section>
             <WoWsInfo />
           </ScrollView>
@@ -80,6 +82,10 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
+  },
+  tint: {
+    height: 36, width: 36, 
+    borderRadius: 18, 
   }
 });
 

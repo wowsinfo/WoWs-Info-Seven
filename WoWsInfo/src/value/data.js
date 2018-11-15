@@ -1,3 +1,18 @@
+/**
+ * App information
+ */
+export const APP = {
+  Version: '1.0.6',
+  IOSVersion: '1.6.6',
+  Github: 'https://github.com/HenryQuan/WoWs-Info-Go',
+  AppStore: 'https://itunes.apple.com/app/id1202750166',
+  GooglePlay: 'https://play.google.com/store/apps/details?id=com.yihengquan.wowsinfo',
+  Developer: 'mailto:development.henryquan@gmail.com?subject=[WoWs Info 1.0.6] ',
+}
+
+/**
+ * User perference
+ */
 export const LOCAL = {
   ads: '@WoWs_Info:hasAds',
   friendList: '@WoWs_Info:playerList',
@@ -16,6 +31,9 @@ export const LOCAL = {
   apiLanguage: '@WoWs_Info:apiLanguage',
 }
 
+/**
+ * Cached data from Wargming server
+ */
 export const SAVED = {
   language: '@Data:language',
   encyclopedia: '@Data:encyclopedia',
