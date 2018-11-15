@@ -1,68 +1,20 @@
 import React, { Component } from 'react';
-import { StyleSheet, SafeAreaView, ScrollView, StatusBar } from 'react-native';
-import { withTheme, IconButton, Text, Colors, Surface, 
-  Card, Title, Paragraph, DarkTheme, DefaultTheme } from 'react-native-paper';
-import { FloatingButton, LoadingModal } from '../../component';
+import { StyleSheet, SafeAreaView, ScrollView } from 'react-native';
+import { IconButton, Text, Colors, Surface, 
+  Card, Title, Paragraph } from 'react-native-paper';
+import { FloatingButton } from '../../component';
 import { Actions } from 'react-native-router-flux';
-import { DataLoader, Guard } from '../../core';
-import { LOCAL } from '../../value/data';
-import { BLUE, GREY } from 'react-native-material-color';
+import { GREY } from 'react-native-material-color';
 
 class Home extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      loading: true,
-      dark: false
-    }
-
-    DataLoader.loadAll().then(data => {
-      global.DATA = data;
-      const appTheme = Guard(DATA, `${LOCAL.theme}`, BLUE);
-      const darkMode = Guard(DATA, `${LOCAL.darkMode}`, true);
-
-      let customised = {};
-      // Decide whether dark mode is enabled
-      if (darkMode) {
-        customised = {
-          colors: {
-            ...DarkTheme.colors,
-            surface: 'black',
-            text: GREY[50],
-            primary: appTheme[500],
-            accent: appTheme[500],
-          }
-        };
-      } else {
-        customised = {
-          colors: {
-            ...DefaultTheme.colors,
-            primary: appTheme[500],
-            accent: appTheme[500],
-          }
-        };
-      }
-
-      console.log(customised);
-      props.theme.roundness = 8;
-      props.theme.dark = darkMode;
-      props.theme.colors = customised.colors;
-
-      this.setState({loading: false, dark: darkMode});
-      // console.log(props);
-    })
   }
 
   render() {
     const { container, playerLabel, header, card } = styles;
-    const { loading, dark } = this.state;
-    // Show loading modal while getting all data from Asyncstorage
-    if (loading) return <LoadingModal />
     return (
       <Surface theme={{colors: {background: GREY[800]}}} style={container}>
-        <StatusBar barStyle={dark ? 'light-content' : 'dark-content'} 
-          backgroundColor={dark ? 'black' : GREY[200]}/>
         <SafeAreaView style={{height: '100%'}}>
           <Surface style={header}>
             <Text numberOfLines={1} style={playerLabel}>HenryQuan</Text>
@@ -143,4 +95,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default withTheme(Home);
+export { Home };

@@ -1,7 +1,7 @@
 // This is the menu that we could access from anywhere
 export * from './Menu';
 
-import Home from './home/Home';
-import Settings from './Settings';
-export { Home, Settings };
+export * from './home/Home';
 export * from './About';
+import Settings from './Settings';
+export { Settings };

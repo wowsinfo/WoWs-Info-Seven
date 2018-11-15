@@ -3,6 +3,7 @@ import { SafeAreaView, Text, StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
 import { isAndroid } from 'react-native-device-detection';
 import lang from '../../value/lang';
+import { Actions } from 'react-native-router-flux';
 
 class WoWsInfo extends Component {
   constructor(props) {
@@ -20,10 +21,20 @@ class WoWsInfo extends Component {
     const { container, title } = styles;
     return (
       <SafeAreaView style={container}>
-        <Button style={title}>{`WoWs Info ${this.lucky}`}</Button>
+        <Button onPress={() => this.navigate()} style={title}>{`WoWs Info ${this.lucky}`}</Button>
       </SafeAreaView>
     )
   };
+
+  /**
+   * Navigate to About page
+   */
+  navigate() {
+    if (Actions.currentScene !== 'About') {
+      // Add guard so that it wont push twice]
+      Actions.About();
+    }
+  }
 }
 
 const styles = StyleSheet.create({
