@@ -57,7 +57,6 @@ class Settings extends Component {
             <List.Section title='Open Source'>
               <List.Item title='Github' description='https://github.com/HenryQuan/WoWs-Info'/>
               <List.Item title='Licences' description='Many libraries are used for building WoWs Info'/>
-              <List.Item style={{marginTop: -16}} description='v1.0.6'/>
             </List.Section>
             <WoWsInfo />
           </ScrollView>
