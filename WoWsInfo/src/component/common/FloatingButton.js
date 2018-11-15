@@ -13,6 +13,9 @@ class FloatingButton extends Component {
     )
   }
 
+  /**
+   * Navigate to Menu page
+   */
   navigate() {
     if (Actions.state.routes.findIndex(r => r.routeName === 'Menu') > 0) {
       // Pop to menu 
