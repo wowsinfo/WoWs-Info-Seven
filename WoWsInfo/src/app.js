@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, StatusBar } from 'react-native';
 import { Router, Stack, Scene } from 'react-native-router-flux';
 import { isTablet } from 'react-native-device-detection';
-import { Surface, Colors, DarkTheme, DefaultTheme, withTheme } from 'react-native-paper';
+import { Surface, DarkTheme, DefaultTheme, withTheme } from 'react-native-paper';
 import { Home, Menu, Settings } from './page';
 import { LOCAL } from './value/data';
 import { DataLoader, Guard } from './core';
 import { BLUE, GREY } from 'react-native-material-color';
+import { LoadingModal } from './component';
 
 class App extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       loading: true,
-      updating: true
+      updating: true,
+      dark: false
     };
 
     DataLoader.loadAll().then(data => {
@@ -48,15 +51,19 @@ class App extends Component {
       props.theme.dark = darkMode;
       props.theme.colors = customised.colors;
 
-      this.setState({loading: false});
+      this.setState({loading: false, dark: darkMode});
       // console.log(props);
     });
   }
 
   render() {
     const { container, scene } = styles;
+    const { loading, updating, dark } = this.state;
+    if (loading) return <LoadingModal />
     return (
       <Surface style={container}>
+        <StatusBar barStyle={dark ? 'light-content' : 'dark-content'} 
+          backgroundColor={dark ? 'black' : GREY[200]}/>
         <Router sceneStyle={[scene, {backgroundColor: 'transparent'}]}>
           <Stack key='root' hideNavBar>
             <Scene key='Home' component={Home}/>
