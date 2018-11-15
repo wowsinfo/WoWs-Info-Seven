@@ -6,7 +6,7 @@ import { BackButton, WoWsInfo, DividerPlus } from '../component';
 
 class Settings extends Component {
   render() {
-    const { container } = styles;
+    const { container, tint } = styles;
     return (
       <Surface style={container}>
         <SafeAreaView style={{flex: 1}}>
@@ -36,13 +36,10 @@ class Settings extends Component {
             </List.Section>
             <DividerPlus />
             <List.Section title='Theme'>
-              <List.Item title='Dark Theme' onPress={() => {
-                // Real time is possible
-                this.props.theme.dark ? this.props.theme.colors.surface = 'white' : this.props.theme.colors.surface = 'black';
-                this.props.theme.dark = !this.props.theme.dark;
-                Actions.reset('Home');
-              }} right={() => <Checkbox status='checked'/>}/>
-              <List.Item title='Tint Colour' right={() => <View style={{height: 36, width: 36, backgroundColor: Colors.blue500}}/>}/>              
+              <List.Item title='Dark Theme' onPress={() => this.updateTheme()} 
+                right={() => <Checkbox status='checked'/>}/>
+              <List.Item title='Tint Colour' 
+                right={() => <View style={[tint, {backgroundColor: Colors.blue500}]}/>}/>              
             </List.Section>
             <DividerPlus />
             <List.Section title='WoWs Info'>
@@ -63,6 +60,14 @@ class Settings extends Component {
       </Surface>
     )
   };
+
+  updateTheme() {
+    // Real time is possible
+    let dark = this.props.theme.dark;
+    this.props.theme.colors = dark ? LIGHT.colors : DARK.colors;
+    dark = !dark;
+    Actions.refresh();
+  }
 }
 
 const styles = StyleSheet.create({
@@ -74,6 +79,10 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
+  },
+  tint: {
+    height: 36, width: 36, 
+    borderRadius: 18, 
   }
 });
 

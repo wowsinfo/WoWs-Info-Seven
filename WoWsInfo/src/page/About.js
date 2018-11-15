@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import { Surface, Text } from 'react-native-paper';
 
 class About extends Component {
   render() {
     const { container } = styles;
     return (
-      <View style={container}>
+      <Surface style={container}>
         <Text>About</Text>
-      </View>
+      </Surface>
     )
   };
 }
