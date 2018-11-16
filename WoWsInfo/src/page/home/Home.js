@@ -14,7 +14,7 @@ class Home extends Component {
       index: 0,
       // there are three tabs (statistics, friends and rs)
       routes: [
-        { key: 'stat', title: 'My statistics' },
+        { key: 'stat', title: 'Statistics' },
         { key: 'friend', title: 'Friends' },
         { key: 'rs', title: 'RS Beta' },
       ],
@@ -22,7 +22,7 @@ class Home extends Component {
   }
 
   render() {
-    const { container, playerLabel, header, bottom } = styles;
+    const { container, playerLabel, header } = styles;
     return (
       <Surface theme={{colors: {background: GREY[800]}}} style={container}>
         <SafeAreaView style={{height: '100%'}}>
@@ -33,7 +33,7 @@ class Home extends Component {
           </Surface>
           <TabView
             renderTabBar={props =>
-              <TabBar {...props} renderLabel={r => <Text>{r.route.title}</Text>}
+              <TabBar {...props} renderLabel={r => <Text style={{fontWeight: '300', fontSize: 17}}>{r.route.title}</Text>}
                 style={{ backgroundColor: 'transparent' }}
                 indicatorStyle={{ backgroundColor: 'transparent' }}
               />
@@ -91,10 +91,6 @@ const styles = StyleSheet.create({
     padding: 8,
     width: '80%',
     fontWeight: 'bold'
-  },
-  bottom: {
-    flexDirection: 'row',
-    justifyContent: 'space-around'
   }
 });
 

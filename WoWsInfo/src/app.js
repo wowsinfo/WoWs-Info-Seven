@@ -23,7 +23,7 @@ class App extends Component {
     DataLoader.loadAll().then(data => {
       global.DATA = data;
       const appTheme = Guard(DATA, `${LOCAL.theme}`, BLUE);
-      const darkMode = Guard(DATA, `${LOCAL.darkMode}`, true);
+      const darkMode = Guard(DATA, `${LOCAL.darkMode}`, false);
 
       // Setup global dark theme
       global.DARK = {
