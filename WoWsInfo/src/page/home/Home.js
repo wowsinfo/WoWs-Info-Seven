@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, SafeAreaView, ScrollView } from 'react-native';
-import { IconButton, Text, Colors, Surface, 
-  Card, Title, Paragraph, Button } from 'react-native-paper';
+import { StyleSheet, View, SafeAreaView, ScrollView, Dimensions } from 'react-native';
+import { IconButton, Text, Colors, Surface } from 'react-native-paper';
+import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
 import { FloatingButton } from '../../component';
 import { Actions } from 'react-native-router-flux';
 import { GREY } from 'react-native-material-color';
@@ -11,8 +11,13 @@ class Home extends Component {
     super(props);
 
     this.state = {
+      index: 0,
       // there are three tabs (statistics, friends and rs)
-      tab: 'statistics'
+      routes: [
+        { key: 'stat', title: 'My statistics' },
+        { key: 'friend', title: 'Friends' },
+        { key: 'rs', title: 'RS Beta' },
+      ],
     }
   }
 
@@ -26,9 +31,22 @@ class Home extends Component {
             <IconButton icon='settings' size={24} color={Colors.grey500}
               onPress={() => Actions.Settings()}/>
           </Surface>
-          <ScrollView contentContainerStyle={{flex: 1, padding: 8}}>
-            <Text>Hello</Text>
-          </ScrollView>
+          <TabView
+            renderTabBar={props =>
+              <TabBar {...props} renderLabel={r => <Text>{r.route.title}</Text>}
+                style={{ backgroundColor: 'transparent' }}
+                indicatorStyle={{ backgroundColor: 'transparent' }}
+              />
+            }
+            navigationState={this.state}
+            renderScene={SceneMap({
+              stat: () => this.renderStatistics(),
+              friend: () => this.renderFriends(),
+              rs: () => this.renderFriends()
+            })}
+            onIndexChange={index => this.setState({index})}
+            initialLayout={{width: Dimensions.get('window').width}}
+          />
           <FloatingButton />
         </SafeAreaView>
       </Surface>
@@ -39,21 +57,21 @@ class Home extends Component {
    * This is the stats part and it is basically a player stat screen
    */
   renderStatistics() {
-
+    return <Text>Stat</Text>;
   }
 
   /**
    * A simple list with friends
    */
   renderFriends() {
-
+    return <Text>Friends</Text>;
   }
 
   /**
    * This is the beta version of real stat
    */
   renderRS() {
-
+    return <Text>RS</Text>;
   }
 }
 
