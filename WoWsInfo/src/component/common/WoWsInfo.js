@@ -40,7 +40,7 @@ class WoWsInfo extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: 'center'
   },
   title: {
     fontSize: 17, fontWeight: isAndroid ? 'bold' : '300',
