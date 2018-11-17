@@ -21,10 +21,10 @@ class App extends Component {
 
     // Load all data from AsyncStorage
     DataLoader.loadAll().then(data => {
-      // console.log(data);
+      console.log(data);
       global.DATA = data;
-      const appTheme = Guard(DATA, `${LOCAL.theme}`, BLUE);
-      const darkMode = Guard(DATA, `${LOCAL.darkMode}`, false);
+      const appTheme = DATA[LOCAL.theme];
+      const darkMode = DATA[LOCAL.darkMode];
 
       // Setup global dark theme
       global.DARK = {
@@ -45,7 +45,8 @@ class App extends Component {
         }
       };
 
-      props.theme.roundness = 8;
+      // 
+      props.theme.roundness = 99;
       props.theme.dark = darkMode;
       props.theme.colors = darkMode ? DARK.colors : LIGHT.colors;
 

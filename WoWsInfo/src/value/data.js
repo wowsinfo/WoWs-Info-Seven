@@ -14,7 +14,7 @@ export const APP = {
  * User perference
  */
 export const LOCAL = {
-  ads: '@WoWs_Info:hasAds',
+  // ads: '@WoWs_Info:hasAds',
   friendList: '@WoWs_Info:playerList',
   userInfo: '@WoWs_Info:userInfo',
   userData: '@WoWs_Info:userData',
