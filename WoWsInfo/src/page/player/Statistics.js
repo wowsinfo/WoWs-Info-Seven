@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import { View, ActivityIndicator, SafeAreaView, Text, StyleSheet } from 'react-native';
-import { Surface, Button } from 'react-native-paper';
+import { Surface, Button, IconButton } from 'react-native-paper';
+import { LOCAL } from '../../value/data';
+import { GREY } from 'react-native-material-color';
 
 class Statistics extends PureComponent {
   constructor(props) {
@@ -11,7 +13,7 @@ class Statistics extends PureComponent {
       name: 'HenryQuan',
       server: 3,
       // To check if certain data have been loaded correctly
-      achievement: false,
+      achievement: true,
       rank: false,
       ship: false,
       basic: false,
@@ -20,16 +22,19 @@ class Statistics extends PureComponent {
   }
 
   render() {
-    const { container } = styles;
+    const { container, buttons } = styles;
     return (
       <Surface style={container}>
         <SafeAreaView>
           <Text>{this.state.name}</Text>
           { this.renderBasic() }
-          { this.renderAchievement() }
-          { this.renderShip() }
-          { this.renderGraph() }
-          { this.renderRank() }
+          <View style={buttons}>
+            { this.renderAchievement() }
+            { this.renderShip() }
+            { this.renderGraph() }
+            { this.renderRank() }
+          </View>
+
         </SafeAreaView>
       </Surface>
     )
@@ -40,32 +45,47 @@ class Statistics extends PureComponent {
   // their own state to check if the button could be rendered
   ///
 
+  renderBasic() {
+    const { container, buttons } = styles;
+    const { basic } = this.state;
+
+    if (!basic) return <ActivityIndicator />
+    return (
+      <View>
+      </View>
+    )
+  }
+
   renderAchievement() {
+    const { container, buttons } = styles;
     const { achievement } = this.state;
+
     if (!achievement) return <ActivityIndicator />
-    return <Button>achievement</Button>
+    return (
+      <Button>Achievement</Button>
+    )
   }
 
   renderShip() {
+    const { container, buttons } = styles;
     const { ship } = this.state;
+
     if (!ship) return <ActivityIndicator />
     return <Button>ship</Button>    
   }
 
   renderRank() {
+    const { container, buttons } = styles;
     const { rank } = this.state;
+
     if (!rank) return <ActivityIndicator />
     return <Button>rank</Button>
   }
 
-  renderBasic() {
-    const { basic } = this.state;
-    if (!basic) return <ActivityIndicator />
-    return <Button>basic</Button>
-  }
-
   renderGraph() {
+    const { container, buttons } = styles;
     const { graph } = this.state;
+
     if (!graph) return <ActivityIndicator />
     return <Button>graph</Button>
   }
@@ -75,6 +95,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16
+  },
+  buttons: {
+    flexDirection: 'row',
+    justifyContent: 'space-around'
   }
 });
 
