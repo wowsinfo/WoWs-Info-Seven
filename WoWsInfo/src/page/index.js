@@ -7,6 +7,8 @@ export * from './home/Setup';
 export * from './home/Friend';
 export * from './home/RS';
 
+export * from './player/Statistics';
+
 export * from './About';
 import Settings from './Settings';
 export { Settings };

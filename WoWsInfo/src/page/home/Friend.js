@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
 import { List, Text, Colors, IconButton } from 'react-native-paper';
 import { LOCAL } from '../../value/data';
 
-class Friend extends Component {
+class Friend extends PureComponent {
   render() {
     const { container } = styles;
     return (
