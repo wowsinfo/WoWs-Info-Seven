@@ -3,7 +3,7 @@ import { StyleSheet, StatusBar } from 'react-native';
 import { Router, Stack, Scene } from 'react-native-router-flux';
 import { isTablet } from 'react-native-device-detection';
 import { Surface, DarkTheme, DefaultTheme, withTheme } from 'react-native-paper';
-import { Home, Menu, Settings, About } from './page';
+import { Home, Menu, Settings, About, Setup } from './page';
 import { LOCAL } from './value/data';
 import { DataLoader, Guard } from './core';
 import { BLUE, GREY } from 'react-native-material-color';
@@ -65,6 +65,7 @@ class App extends Component {
         <Router sceneStyle={scene}>
           <Stack key='root' hideNavBar>
             <Scene key='Home' component={Home}/>
+            <Scene key='Setup' component={Setup} initial={DATA[LOCAL.firstLaunch]}/>
             <Scene key='Menu' component={Menu}/>
             <Scene key='Settings' component={Settings}/>
             <Scene key='About' component={About}/>
