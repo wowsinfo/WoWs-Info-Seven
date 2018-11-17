@@ -6,7 +6,7 @@ import { FloatingButton } from '../../component';
 import { Actions } from 'react-native-router-flux';
 import { GREY } from 'react-native-material-color';
 import { LOCAL } from '../../value/data';
-import { Friend, RS } from '../';
+import { Friend, RS, Statistics } from '../';
 
 class Home extends Component {
   constructor(props) {
@@ -43,7 +43,7 @@ class Home extends Component {
             }
             navigationState={this.state}
             renderScene={SceneMap({
-              stat: () => <Text>Placeholder</Text>,
+              stat: () => <Statistics info={DATA[LOCAL.userInfo]}/>,
               friend: Friend,
               rs: RS
             })}
