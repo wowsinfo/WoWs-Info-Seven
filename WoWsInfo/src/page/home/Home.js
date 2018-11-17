@@ -6,6 +6,7 @@ import { FloatingButton } from '../../component';
 import { Actions } from 'react-native-router-flux';
 import { GREY } from 'react-native-material-color';
 import { LOCAL } from '../../value/data';
+import { Friend, RS } from '../';
 
 class Home extends Component {
   constructor(props) {
@@ -42,9 +43,9 @@ class Home extends Component {
             }
             navigationState={this.state}
             renderScene={SceneMap({
-              stat: () => this.renderStatistics(),
-              friend: () => this.renderFriends(),
-              rs: () => this.renderFriends()
+              stat: () => <Text>Placeholder</Text>,
+              friend: Friend,
+              rs: RS
             })}
             onIndexChange={index => this.setState({index})}
             initialLayout={{width: Dimensions.get('window').width}}
@@ -63,27 +64,6 @@ class Home extends Component {
     const user = DATA[LOCAL.userInfo];
     if (user.name === '') return 'WoWs Info';
     return user.name;
-  }
-
-  /**
-   * This is the stats part and it is basically a player stat screen
-   */
-  renderStatistics() {
-    return <Text>Stat</Text>;
-  }
-
-  /**
-   * A simple list with friends
-   */
-  renderFriends() {
-    return <Text>Friends</Text>;
-  }
-
-  /**
-   * This is the beta version of real stat
-   */
-  renderRS() {
-    return <Text>RS</Text>;
   }
 }
 
