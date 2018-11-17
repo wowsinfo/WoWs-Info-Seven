@@ -31,6 +31,10 @@ class SafeStorage {
     // Stringify values to json format
     AsyncStorage.setItem(key, JSON.stringify(value));
   }
+
+  static clear() {
+    AsyncStorage.clear();
+  }
 }
 
 export { SafeStorage };
