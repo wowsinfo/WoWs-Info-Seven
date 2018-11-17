@@ -11,6 +11,7 @@ class DataLoader {
    * Return an object with all data
    */
   static async loadAll() {
+    SafeStorage.clear();
     let data = {};
     const { apiLanguage, appVersion, gameVersion, firstLaunch, friendList, userData, 
       userInfo, userServer, lastUpdate, theme, darkMode, date } = LOCAL;
