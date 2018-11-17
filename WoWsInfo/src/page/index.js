@@ -5,3 +5,5 @@ export * from './home/Home';
 export * from './About';
 import Settings from './Settings';
 export { Settings };
+
+export * from './player/Statistics';
