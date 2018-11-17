@@ -2,6 +2,9 @@ import LocalizedStrings from 'react-native-localization';
 
 export default lang = new LocalizedStrings({
   en: {
+    /// Setup section
+    setup_title: 'Setup WoWs Info',
+    setup_done_button: 'Done',
     /// Home section
     /// Menu section
     // Search bar
