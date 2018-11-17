@@ -5,20 +5,31 @@
  */
 
 import React, { Component } from 'react';
-import { View, SafeAreaView, StyleSheet } from 'react-native';
-import { Text, Button, Surface } from 'react-native-paper';
+import { View, SafeAreaView, ScrollView, StyleSheet } from 'react-native';
+import { Text, Button, Surface, Headline, List, RadioButton } from 'react-native-paper';
 import { Actions } from 'react-native-router-flux';
+import lang from '../../value/lang';
 
 class Setup extends Component {
   render() {
-    const { container } = styles;
+    const { container, top } = styles;
     return (
       <Surface style={container}>
-        <SafeAreaView style={{flex: 1}}>
-          <Text>Setup</Text>
+        <SafeAreaView style={top}>
+          <ScrollView>
+            <Headline>{lang.setup_title}</Headline>
+            <List.Section title='Game Server'>
+              { /** This is a radio group */}
+            </List.Section>
+            <List.Section title='API Language'>
+              { /** This is another radio group */}              
+            </List.Section>
+          </ScrollView>
         </SafeAreaView>
         <SafeAreaView>
-          <Button onPress={() => Actions.reset('Home')}>Done</Button>
+          <Button onPress={() => Actions.reset('Home')}>
+            {lang.setup_done_button}
+          </Button>
         </SafeAreaView>        
       </Surface>
     )
@@ -28,6 +39,10 @@ class Setup extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding: 16
+  },
+  top: {
+    flex: 1
   }
 });
 
