@@ -28,14 +28,14 @@ class Home extends Component {
       <Surface theme={{colors: {background: GREY[800]}}} style={container}>
         <SafeAreaView style={{height: '100%'}}>
           <Surface style={header}>
-            <Text numberOfLines={1} style={playerLabel}>HenryQuan</Text>
+            <Text numberOfLines={1} style={playerLabel}>{this.getUsername()}</Text>
             <IconButton icon='settings' size={24} color={Colors.grey500}
               onPress={() => Actions.Settings()}/>
           </Surface>
           <TabView
             renderTabBar={props =>
               <TabBar {...props} renderLabel={r => {
-                return <Text style={{fontWeight: '300', fontSize: 17, color: DATA[LOCAL.theme][700]}}>{r.route.title}</Text>
+                return <Text style={{fontWeight: '500', fontSize: 17, color: DATA[LOCAL.theme][700]}}>{r.route.title}</Text>
               }} style={{ backgroundColor: 'transparent' }}
                 indicatorStyle={{ backgroundColor: 'transparent' }}
               />
@@ -53,6 +53,16 @@ class Home extends Component {
         </SafeAreaView>
       </Surface>
     );
+  }
+
+  /**
+   * Load user from global and display 'WoWs Info' if not account has yet been set
+   */
+  getUsername() {
+    // Get from userInfo
+    const user = DATA[LOCAL.userInfo];
+    if (user.name === '') return 'WoWs Info';
+    return user.name;
   }
 
   /**
