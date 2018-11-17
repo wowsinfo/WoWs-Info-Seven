@@ -5,6 +5,7 @@ import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
 import { FloatingButton } from '../../component';
 import { Actions } from 'react-native-router-flux';
 import { GREY } from 'react-native-material-color';
+import { LOCAL } from '../../value/data';
 
 class Home extends Component {
   constructor(props) {
@@ -33,8 +34,9 @@ class Home extends Component {
           </Surface>
           <TabView
             renderTabBar={props =>
-              <TabBar {...props} renderLabel={r => <Text style={{fontWeight: '300', fontSize: 17}}>{r.route.title}</Text>}
-                style={{ backgroundColor: 'transparent' }}
+              <TabBar {...props} renderLabel={r => {
+                return <Text style={{fontWeight: '300', fontSize: 17, color: DATA[LOCAL.theme][700]}}>{r.route.title}</Text>
+              }} style={{ backgroundColor: 'transparent' }}
                 indicatorStyle={{ backgroundColor: 'transparent' }}
               />
             }
