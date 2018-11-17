@@ -2,6 +2,8 @@
 export * from './Menu';
 
 export * from './home/Home';
+// Go to this page when app is first launched
+export * from './home/Setup';
 export * from './home/Friend';
 export * from './home/RS';
 
