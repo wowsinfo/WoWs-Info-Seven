@@ -2,6 +2,9 @@
 export * from './Menu';
 
 export * from './home/Home';
+export * from './home/Friend';
+export * from './home/RS';
+
 export * from './About';
 import Settings from './Settings';
 export { Settings };
