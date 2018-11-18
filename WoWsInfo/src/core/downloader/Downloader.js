@@ -26,6 +26,18 @@ class Downloader {
       // Download language
       await this.getLanguage();
 
+      // Download ship type, nation and module names for Wiki
+      await this.getShipType();
+      await this.getNationAndModule();
+
+      // Wiki
+      await this.getWarship();
+      await this.getAchievement();
+      await this.getCollectionAndItem();
+      await this.getCommanderSkill();
+      await this.getConsumable();
+      await this.getMap();
+      await this.getPR();
     }
     // Update this value only if all data are saved correctly
     SafeStorage.set(LOCAL.gameVersion, gameVersion);
@@ -61,10 +73,46 @@ class Downloader {
       'ja': '日本語',
       'es': 'Español'
     };
-
+    
     // Update DATA and save it locally
     DATA[SAVED.language] = language;
     SafeStorage(SAVED.language, language);
+  }
+  
+  async getShipType() {
+    
+  }
+
+  async getNationAndModule() {
+
+  }
+
+  async getWarship() {
+
+  }
+
+  async getAchievement() {
+
+  }
+
+  async getCollectionAndItem() {
+    
+  }
+
+  async getCommanderSkill() {
+    
+  }
+
+  async getConsumable() {
+    
+  }
+
+  async getMap() {
+    
+  }
+
+  async getPR() {
+    
   }
 }
 
