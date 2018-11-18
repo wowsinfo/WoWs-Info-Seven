@@ -5,7 +5,7 @@ import { isTablet } from 'react-native-device-detection';
 import { Surface, DarkTheme, DefaultTheme, withTheme } from 'react-native-paper';
 import { Home, Menu, Settings, About, Setup } from './page';
 import { LOCAL } from './value/data';
-import { DataLoader, Guard } from './core';
+import { DataLoader, Guard, Downloader } from './core';
 import { BLUE, GREY } from 'react-native-material-color';
 import { LoadingModal } from './component';
 
@@ -45,12 +45,15 @@ class App extends Component {
         }
       };
 
-      // 
       props.theme.roundness = 99;
       props.theme.dark = darkMode;
       props.theme.colors = darkMode ? DARK.colors : LIGHT.colors;
 
       this.setState({loading: false, dark: darkMode});
+
+      // Update data here as well
+      let dn = new Downloader(DATA[LOCAL.userServer]);
+      dn.updateAll();
     });
   }
 
