@@ -1,7 +1,8 @@
-import { WoWsAPI } from "../../value/api";
-import { SERVER, APP, LOCAL } from "../../value/data";
+import { WoWsAPI, WikiAPI } from '../../value/api';
+import { SERVER, APP, LOCAL, SAVED } from '../../value/data';
 import { SafeFetch } from '../';
-import { Guard } from "../util/SafeGuard";
+import { Guard } from '../util/SafeGuard';
+import { SafeStorage } from '../util/SafeStorage';
 
 class Downloader {
   constructor(server) {
@@ -24,7 +25,10 @@ class Downloader {
       console.log('Downloader\nUpdating all data from API');
       // Download language
       await this.getLanguage();
+
     }
+    // Update this value only if all data are saved correctly
+    SafeStorage.set(LOCAL.gameVersion, gameVersion);
   }
 
   /**
@@ -37,10 +41,26 @@ class Downloader {
   }
 
   /**
-   * Get all supported languages from API
+   * Get all supported languages locally
    */
   async getLanguage() {
-    console.log('Download languages first so that user could choose from setup or from settings');
+    // I dont think they gonna update this anytime soon
+    DATA[SAVED.language] = {
+      'ru': 'Русский',
+      'fr': 'Français',
+      'en': 'English',
+      'zh-tw': '繁體中文',
+      'de': 'Deutsch',
+      'tr': 'Türkçe',
+      'es-mx': 'Español (México)',
+      'zh-cn': '中文',
+      'pt-br': 'Português do Brasil',
+      'pl': 'Polski',
+      'th': 'ไทย',
+      'cs': 'Čeština',
+      'ja': '日本語',
+      'es': 'Español'
+    }
   }
 }
 
