@@ -1,6 +1,7 @@
 import { WoWsAPI } from "../../value/api";
-import { SERVER } from "../../value/data";
+import { SERVER, APP, LOCAL } from "../../value/data";
 import { SafeFetch } from '../';
+import { Guard } from "../util/SafeGuard";
 
 class Downloader {
   constructor(server) {
@@ -15,7 +16,13 @@ class Downloader {
   async updateAll(force=false) {
     // Get server version
     console.log('Downloader\nChecking for new version');
-    this.getVersion();
+    let gameVersion = await this.getVersion();
+    let currVersion = DATA[LOCAL.gameVersion];
+    console.log(`Current: ${currVersion}\nAPI: ${gameVersion}`);
+    if (gameVersion > currVersion || force) {
+      // Update all data
+      console.log('Downloader\nUpdating all data from API')
+    }
   }
 
   /**
@@ -23,10 +30,8 @@ class Downloader {
    */
   async getVersion() {
     let json = await SafeFetch.get(WoWsAPI.GameVersion, this.server);
-    if (json) {
-      // Json data is valid
-      console.log(json);
-    }
+    // Guard ensures that there is always a value returned
+    return Guard(json, 'data.game_version', APP.GameVersion);
   }
 }
 
