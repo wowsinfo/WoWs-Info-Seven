@@ -45,7 +45,7 @@ class Downloader {
    */
   async getLanguage() {
     // I dont think they gonna update this anytime soon
-    DATA[SAVED.language] = {
+    const language = {
       'ru': 'Русский',
       'fr': 'Français',
       'en': 'English',
@@ -60,7 +60,11 @@ class Downloader {
       'cs': 'Čeština',
       'ja': '日本語',
       'es': 'Español'
-    }
+    };
+
+    // Update DATA and save it locally
+    DATA[SAVED.language] = language;
+    SafeStorage(SAVED.language, language);
   }
 }
 
