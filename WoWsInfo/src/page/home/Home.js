@@ -25,6 +25,7 @@ class Home extends Component {
 
   render() {
     const { container, playerLabel, header } = styles;
+    const appTheme = DATA[LOCAL.theme];
     return (
       <Surface theme={{colors: {background: GREY[800]}}} style={container}>
         <SafeAreaView style={{height: '100%'}}>
@@ -33,21 +34,18 @@ class Home extends Component {
             <IconButton icon='settings' size={24} color={Colors.grey500}
               onPress={() => Actions.Settings()}/>
           </Surface>
-          <TabView
-            renderTabBar={props =>
+          <TabView renderTabBar={props =>
               <TabBar {...props} renderLabel={r => {
-                return <Text style={{fontWeight: '500', fontSize: 17, color: DATA[LOCAL.theme][700]}}>{r.route.title}</Text>
+                return <Text style={{fontWeight: '500', fontSize: 17, color: appTheme[700]}}>{r.route.title}</Text>
               }} style={{ backgroundColor: 'transparent' }}
-                indicatorStyle={{ backgroundColor: 'transparent' }}
+                indicatorStyle={{ backgroundColor: 'transparent'}}
               />
-            }
-            navigationState={this.state}
+            } navigationState={this.state}
             renderScene={SceneMap({
               stat: () => <Statistics info={DATA[LOCAL.userInfo]}/>,
               friend: Friend,
               rs: RS
-            })}
-            onIndexChange={index => this.setState({index})}
+            })} onIndexChange={index => this.setState({index})}
             initialLayout={{width: Dimensions.get('window').width}}
           />
           <FloatingButton />
