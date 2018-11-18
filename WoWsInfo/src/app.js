@@ -52,8 +52,9 @@ class App extends Component {
       this.setState({loading: false, dark: darkMode});
 
       // Update data here as well
+      let first = DATA[LOCAL.firstLaunch];
       let dn = new Downloader(DATA[LOCAL.userServer]);
-      dn.updateAll();
+      dn.updateAll(first);
     });
   }
 

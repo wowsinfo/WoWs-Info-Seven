@@ -21,7 +21,9 @@ class Downloader {
     console.log(`Current: ${currVersion}\nAPI: ${gameVersion}`);
     if (gameVersion > currVersion || force) {
       // Update all data
-      console.log('Downloader\nUpdating all data from API')
+      console.log('Downloader\nUpdating all data from API');
+      // Download language
+      await this.getLanguage();
     }
   }
 
@@ -32,6 +34,13 @@ class Downloader {
     let json = await SafeFetch.get(WoWsAPI.GameVersion, this.server);
     // Guard ensures that there is always a value returned
     return Guard(json, 'data.game_version', APP.GameVersion);
+  }
+
+  /**
+   * Get all supported languages from API
+   */
+  async getLanguage() {
+    console.log('Download languages first so that user could choose from setup or from settings');
   }
 }
 
