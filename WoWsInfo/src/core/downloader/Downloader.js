@@ -1,9 +1,10 @@
 import { WoWsAPI } from "../../value/api";
+import { SERVER } from "../../value/data";
 
 class Downloader {
   constructor(server) {
     // Convert server index to string
-    this.server = server;
+    this.server = SERVER[server];
   }
   /**
    * Update all data if there is a new version except for force mode
@@ -18,7 +19,9 @@ class Downloader {
    * Get game server version of WoWs
    */
   static async getVersion() {
-    WoWsAPI.GameVersion;
+    const format = require('string-format');
+    let link = format(WoWsAPI.GameVersion, this.server);
+    
   }
 }
 
