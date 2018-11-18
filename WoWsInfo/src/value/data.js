@@ -11,6 +11,11 @@ export const APP = {
 }
 
 /**
+ * Convert index to server string
+ */
+export const SERVER = ['ru', 'eu', 'com', 'asia'];
+
+/**
  * User perference
  */
 export const LOCAL = {
