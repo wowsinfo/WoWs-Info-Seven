@@ -29,7 +29,7 @@ class Home extends Component {
       <Surface theme={{colors: {background: GREY[800]}}} style={container}>
         <SafeAreaView style={{height: '100%'}}>
           <Surface style={header}>
-            <Text numberOfLines={1} style={playerLabel}>{this.getUsername()}</Text>
+            <Text numberOfLines={1} style={playerLabel}>WoWs Info</Text>
             <IconButton icon='settings' size={24} color={Colors.grey500}
               onPress={() => Actions.Settings()}/>
           </Surface>
@@ -54,16 +54,6 @@ class Home extends Component {
         </SafeAreaView>
       </Surface>
     );
-  }
-
-  /**
-   * Load user from global and display 'WoWs Info' if not account has yet been set
-   */
-  getUsername() {
-    // Get from userInfo
-    const user = DATA[LOCAL.userInfo];
-    if (user.name === '') return 'WoWs Info';
-    return user.name;
   }
 }
 
