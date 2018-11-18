@@ -14,15 +14,19 @@ class Downloader {
    */
   async updateAll(force=false) {
     // Get server version
-    console.log('Checking for new version');
-    await this.getVersion();
+    console.log('Downloader\nChecking for new version');
+    this.getVersion();
   }
 
   /**
    * Get game server version of WoWs
    */
-  static async getVersion() {
-    SafeFetch.get(WoWsAPI.GameVersion, this.server);
+  async getVersion() {
+    let json = await SafeFetch.get(WoWsAPI.GameVersion, this.server);
+    if (json) {
+      // Json data is valid
+      console.log(json);
+    }
   }
 }
 
