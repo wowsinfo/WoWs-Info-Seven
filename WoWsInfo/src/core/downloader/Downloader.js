@@ -1,13 +1,12 @@
 import { WoWsAPI, WikiAPI } from '../../value/api';
 import { SERVER, APP, LOCAL, SAVED } from '../../value/data';
-import { SafeFetch } from '../';
-import { Guard } from '../util/SafeGuard';
-import { SafeStorage } from '../util/SafeStorage';
+import { SafeFetch, Guard, SafeStorage, langStr } from '../';
 
 class Downloader {
   constructor(server) {
     // Convert server index to string
     this.server = SERVER[server];
+    this.language = langStr();
     console.log(`Downloader\nYou server is '${this.server}'`);
   }
   /**
@@ -24,11 +23,9 @@ class Downloader {
       // Update all data
       console.log('Downloader\nUpdating all data from API');
       // Download language
-      await this.getLanguage();
-
+      DATA[SAVED.language] = await this.getLanguage();
       // Download ship type, nation and module names for Wiki
-      await this.getShipType();
-      await this.getNationAndModule();
+      DATA[SAVED.encyclopedia] = await this.getEncyclopedia();
 
       // Wiki
       await this.getWarship();
@@ -38,6 +35,8 @@ class Downloader {
       await this.getConsumable();
       await this.getMap();
       await this.getPR();
+
+      console.log(DATA);
     }
     // Update this value only if all data are saved correctly
     SafeStorage.set(LOCAL.gameVersion, gameVersion);
@@ -56,35 +55,22 @@ class Downloader {
    * Get all supported languages locally
    */
   async getLanguage() {
-    // I dont think they gonna update this anytime soon
-    const language = {
-      'ru': 'Русский',
-      'fr': 'Français',
-      'en': 'English',
-      'zh-tw': '繁體中文',
-      'de': 'Deutsch',
-      'tr': 'Türkçe',
-      'es-mx': 'Español (México)',
-      'zh-cn': '中文',
-      'pt-br': 'Português do Brasil',
-      'pl': 'Polski',
-      'th': 'ไทย',
-      'cs': 'Čeština',
-      'ja': '日本語',
-      'es': 'Español'
-    };
-    
-    // Update DATA and save it locally
-    DATA[SAVED.language] = language;
-    SafeStorage(SAVED.language, language);
+    let json = await SafeFetch.get(WikiAPI.Language, this.server);
+    let valid = Guard(json, 'data.languages', {});
+    // Save data
+    await SafeStorage.set(SAVED.language, valid);
+    return valid; 
   }
   
-  async getShipType() {
-    
-  }
+  /**
+   * Get ship types, nations and module names
+   */
 
-  async getNationAndModule() {
-
+  async getEncyclopedia() {
+    let json = await SafeFetch.get(WikiAPI.Encyclopedia, this.server, this.language);
+    let valid = Guard(json, 'data', {});
+    await SafeStorage.set(SAVED.encyclopedia, valid);
+    return valid;
   }
 
   async getWarship() {

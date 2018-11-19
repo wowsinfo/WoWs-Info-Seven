@@ -40,6 +40,5 @@ export const WikiAPI = {
   CollectionItem: `https://api.worldofwarships.{0}/wows/encyclopedia/collectioncards/?application_id=${AppKey}&fields=images.small%2Ccard_id%2Ccollection_id%2Cdescription%2Cname`,
   // Extra info for wiki
   Language: `https://api.worldofwarships.{0}/wows/encyclopedia/info/?application_id=${AppKey}&fields=languages`,
-  Encyclopedia: `https://api.worldofwarships.{0}/wows/encyclopedia/info/?application_id=${AppKey}&fields=ship_nations%2Cship_modules`,
-  ShipType: `https://api.worldofwarships.{0}/wows/encyclopedia/info/?application_id=${AppKey}&fields=ship_types`,
+  Encyclopedia: `https://api.worldofwarships.{0}/wows/encyclopedia/info/?application_id=${AppKey}&fields=ship_nations%2Cship_modules%2Cship_types`,
 }
