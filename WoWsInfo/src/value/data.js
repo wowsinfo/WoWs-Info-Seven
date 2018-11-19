@@ -43,7 +43,7 @@ export const LOCAL = {
 export const SAVED = {
   language: '@Data:language',
   encyclopedia: '@Data:encyclopedia',
-  shipType: '@Data:ship_type',
+  // shipType: '@Data:ship_type',
   achievement: '@Data:achievement',
   commanderDkill: '@Data:commander_skill',
   collection: '@Data:collection',
