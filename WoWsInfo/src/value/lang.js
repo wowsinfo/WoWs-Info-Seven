@@ -57,11 +57,11 @@ export default lang = new LocalizedStrings({
     wowsinfo_go: 'Go',
     /// RS section
     // Tips
-    rs_tip_download: 'Download',
+    rs_tip_download: '1. Download',
     rs_tip_one: 'Please visit this Github repository and download the latest release. This program does not use lots of RAM and storage. Currently, it is in its beta stage and has no GUI.\n',
-    rs_tip_setup: 'Setup',
+    rs_tip_setup: '2. Setup',
     rs_tip_two: "Copy and paste the path of your game folder into this program and you have to run it with admin or it will not work. It won't do anything harmful to your computer.\n",
-    rs_tip_enjoy: 'Enjoy',
+    rs_tip_enjoy: '3. Enjoy',
     rs_tip_three: 'Enter the IP address you see on the screen and WoWs Info will start giving your real-time statistics for both teams.\n',
   },
   zh: {
