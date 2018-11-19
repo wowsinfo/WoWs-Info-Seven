@@ -47,7 +47,7 @@ class RS extends Component {
   renderDialog(tip) {
     return (
       <Portal>
-        <Dialog visible={tip} dismissable={true} theme={{roundness: 8}}
+        <Dialog visible={tip} dismissable={true} theme={{roundness: 16}}
           style={{maxHeight: '61.8%'}} onDismiss={() => this.setState({tip: false})}>
           <Dialog.Content>
             <ScrollView showsVerticalScrollIndicator={false}>
