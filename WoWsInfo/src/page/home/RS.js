@@ -57,7 +57,7 @@ class RS extends Component {
               <Text>{lang.rs_tip_two}</Text>
               <Title>{lang.rs_tip_enjoy}</Title>
               <Text>{lang.rs_tip_three}</Text>
-              <Caption>{'\n\n- HenryQuan'}</Caption>
+              <Caption>{'\nHenryQuan'}</Caption>
             </ScrollView>
           </Dialog.Content>
         </Dialog>
@@ -75,7 +75,8 @@ const styles = StyleSheet.create({
   input: {
     fontSize: 17,
     width: '90%',
-    textAlign: 'center'
+    textAlign: 'center',
+    marginBottom: 8
   }
 });
 
