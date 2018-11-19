@@ -9,6 +9,7 @@ class Downloader {
     this.language = langStr();
     console.log(`Downloader\nYou server is '${this.server}'`);
   }
+
   /**
    * Update all data if there is a new version except for force mode
    * @param {Boolean} force 
@@ -28,13 +29,13 @@ class Downloader {
       DATA[SAVED.encyclopedia] = await this.getEncyclopedia();
 
       // Wiki
-      await this.getWarship();
-      await this.getAchievement();
-      await this.getCollectionAndItem();
-      await this.getCommanderSkill();
-      await this.getConsumable();
-      await this.getMap();
-      await this.getPR();
+      DATA[SAVED.warship] = await this.getWarship();
+      DATA[SAVED.achievement] = await this.getAchievement();
+      DATA[SAVED.collection] = await this.getCollectionAndItem();
+      DATA[SAVED.commanderSkill] = await this.getCommanderSkill();
+      DATA[SAVED.consumable] = await this.getConsumable();
+      DATA[SAVED.map] = await this.getMap();
+      DATA[SAVED.pr] = await this.getPR();
 
       console.log(DATA);
     }
@@ -56,10 +57,10 @@ class Downloader {
    */
   async getLanguage() {
     let json = await SafeFetch.get(WikiAPI.Language, this.server);
-    let valid = Guard(json, 'data.languages', {});
+    let data = Guard(json, 'data.languages', {});
     // Save data
-    await SafeStorage.set(SAVED.language, valid);
-    return valid; 
+    await SafeStorage.set(SAVED.language, data);
+    return data; 
   }
   
   /**
@@ -68,13 +69,52 @@ class Downloader {
 
   async getEncyclopedia() {
     let json = await SafeFetch.get(WikiAPI.Encyclopedia, this.server, this.language);
-    let valid = Guard(json, 'data', {});
-    await SafeStorage.set(SAVED.encyclopedia, valid);
-    return valid;
+    let data = Guard(json, 'data', {});
+    await SafeStorage.set(SAVED.encyclopedia, data);
+    return data;
   }
 
-  async getWarship() {
+  ///
+  //  UPDATE API to my unique data format
+  //
+  //  icon -> This is the icon the list will use
+  //  description -> This is used under the icon
+  //  name -> ship name, consumable name...
+  //  new -> if this entry is new
+  //
+  ///
 
+  async getWarship() {
+    const tierList = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
+    
+    let pageTotal = 1;
+    let page = 0;
+    let all = {};
+
+    while (page < pageTotal) {
+      // page + 1 to get actually page not index
+      let json = await SafeFetch.get(WikiAPI.Warship, this.server, `&page_no=${page+1}&${this.language}`);
+      pageTotal = Guard(json, 'meta.page_total', 1);
+      let data = Guard(json, 'data', {});
+
+      for (let id in data) {
+        let curr = data[id];
+        if (curr.name.startsWith('[')) {
+          delete data[id];
+        } else {
+          curr.icon = curr.images; 
+          delete curr.images.small;
+          // If it is undefined then it is new
+          curr.new = DATA[SAVED.warship][id] ? false : true;
+        }
+      }
+
+      // Add to all
+      Object.assign(all, data);
+      page++;
+    }
+
+    return all;
   }
 
   async getAchievement() {
