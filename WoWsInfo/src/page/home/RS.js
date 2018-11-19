@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, ScrollView, TextInput, StyleSheet, KeyboardAvoidingView, Alert } from 'react-native';
-import { Text, Portal, Surface, Button, Dialog, Title, Caption  } from 'react-native-paper';
+import { isAndroid } from 'react-native-device-detection';
+import { Text, Portal, Surface, Button, Dialog, Title, Caption } from 'react-native-paper';
 import lang from '../../value/lang';
 
 class RS extends Component {
@@ -21,6 +22,7 @@ class RS extends Component {
     return (
       <KeyboardAvoidingView style={container} behavior='padding' enabled>
         <TextInput style={input} value={ip} placeholder='192.168.1.x' 
+          keyboardType={isAndroid ? 'decimal-pad' : 'numbers-and-punctuation'}
           onChangeText={t => this.setState({ip: t})}
           onEndEditing={() => this.validIP(ip)}/>
         <Button onPress={() => this.setState({tip: true})}>How to use?</Button>
