@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
 import { Text, Portal, Surface, Button, Dialog, TextInput, Title, Caption  } from 'react-native-paper';
+import lang from '../../value/lang';
 
 class RS extends Component {
   constructor(props) {
@@ -30,23 +31,12 @@ class RS extends Component {
           style={{maxHeight: '61.8%'}} onDismiss={() => this.setState({tip: false})}>
           <Dialog.Content>
             <ScrollView showsVerticalScrollIndicator={false}>
-              <Title>Download</Title>
-              <Text>
-                Please visit this Github repository and download the latest release.
-                This program does not use lots of RAM and storage.
-                Currently, it is in its beta stage and has no GUI.
-              </Text>
-              <Title>Setup</Title>
-              <Text>
-                Copy and paste the path of your game folder into this program and 
-                you have to run it with admin or it will not work.
-                It won't do anything harmful to your computer.
-              </Text>
-              <Title>Enjoy</Title>
-              <Text>
-                Enter the IP address you see on the screen and WoWs Info will start
-                giving your real-time statistics for both teams.
-              </Text>
+              <Title>{lang.rs_tip_download}</Title>
+              <Text>{lang.rs_tip_one}</Text>
+              <Title>{lang.rs_tip_setup}</Title>
+              <Text>{lang.rs_tip_two}</Text>
+              <Title>{lang.rs_tip_enjoy}</Title>
+              <Text>{lang.rs_tip_three}</Text>
               <Caption>{'\n\n- HenryQuan'}</Caption>
             </ScrollView>
           </Dialog.Content>
