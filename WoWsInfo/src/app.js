@@ -70,7 +70,7 @@ class App extends Component {
         <Router sceneStyle={scene}>
           <Stack key='root' hideNavBar>
             <Scene key='Home' component={Home}/>
-            <Scene key='Setup' component={Setup} /*initial={DATA[LOCAL.firstLaunch]}*//>
+            <Scene key='Setup' component={Setup} initial={DATA[LOCAL.firstLaunch]}/>
             
             <Scene key='Menu' component={Menu}/>
 

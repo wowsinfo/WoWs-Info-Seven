@@ -9,6 +9,8 @@ import { View, SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 import { Text, Button, Surface, Headline, List, RadioButton } from 'react-native-paper';
 import { Actions } from 'react-native-router-flux';
 import lang from '../../value/lang';
+import { LOCAL } from '../../value/data';
+import { SafeStorage } from '../../core';
 
 class Setup extends Component {
   render() {
@@ -27,13 +29,23 @@ class Setup extends Component {
           </ScrollView>
         </SafeAreaView>
         <SafeAreaView>
-          <Button onPress={() => Actions.reset('Home')}>
+          <Button onPress={() => this.finishSetup()}>
             {lang.setup_done_button}
           </Button>
         </SafeAreaView>        
       </Surface>
     )
   };
+
+  // Get selection and download data from api
+  finishSetup() {
+    Actions.reset('Home');
+
+    // Download data
+
+    DATA[LOCAL.firstLaunch] = false;
+    SafeStorage.set(LOCAL.firstLaunch, false);
+  }
 }
 
 const styles = StyleSheet.create({
