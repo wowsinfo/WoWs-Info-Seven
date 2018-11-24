@@ -49,12 +49,13 @@ class App extends Component {
       props.theme.dark = darkMode;
       props.theme.colors = darkMode ? DARK.colors : LIGHT.colors;
 
-      this.setState({loading: false, dark: darkMode});
-
-      // Update data here as well
+      // Update data here as well, force update when first launch
       let first = DATA[LOCAL.firstLaunch];
       let dn = new Downloader(DATA[LOCAL.userServer]);
-      dn.updateAll(first);
+      dn.updateAll(first).then(() => {
+        // Make sure it finishes downloading
+        this.setState({loading: false, dark: darkMode});
+      });
     });
   }
 
