@@ -166,7 +166,23 @@ class Downloader {
   }
 
   async getPR() {
-    
+    console.log(`Not SafeFetch\n${WikiAPI.PersonalRating}`);
+    let res = await fetch(WikiAPI.PersonalRating);
+
+    let json = {};
+    if (res.status === 200) {
+      json = Guard(await res.json(), 'data', {});
+      // Cleanup empty key
+      for (let key in json) {
+        let curr = json[key];
+        if (curr.length === 0) {
+          delete json[key];
+        }
+      }
+    }
+      
+    await SafeStorage.set(SAVED.pr, json);
+    return json;
   }
 }
 
