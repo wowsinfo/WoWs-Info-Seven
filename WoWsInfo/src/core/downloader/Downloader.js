@@ -128,11 +128,27 @@ class Downloader {
   }
 
   async getCollectionAndItem() {
-    
+    let all = {};
+
+    let collection = await SafeFetch.get(WikiAPI.Collection, this.server, `${this.language}`);
+    let item = await SafeFetch.get(WikiAPI.CollectionItem, this.server, `${this.language}`);
+
+    all['collection'] = Guard(collection, 'data', {});
+    all['item'] = Guard(item, 'data', {});
+
+    await SafeStorage.set(SAVED.collection, all);
+    return all;
   }
 
   async getCommanderSkill() {
-    
+    let json = await SafeFetch.get(WikiAPI.CommanderSkill, this.server, `${this.language}`);
+
+    let skill = Guard(json, 'data', []);
+    let data = Object.keys(skill).map(k => skill[k]);
+    data.sort((a, b) => a.tier - b.tier);
+
+    await SafeStorage.set(SAVED.commanderSkill, data);
+    return data;
   }
 
   async getConsumable() {
@@ -140,7 +156,13 @@ class Downloader {
   }
 
   async getMap() {
-    
+    let json = await SafeFetch.get(WikiAPI.GameMap, this.server, `${this.language}`);
+
+    let map = Guard(json, 'data', []);
+    let data = Object.keys(map).map(k => map[k]);
+
+    await SafeStorage.set(SAVED.map, data);
+    return data;
   }
 
   async getPR() {
