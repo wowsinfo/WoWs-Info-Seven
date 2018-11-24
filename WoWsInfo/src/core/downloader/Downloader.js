@@ -152,7 +152,11 @@ class Downloader {
   }
 
   async getConsumable() {
-    
+    let json = await SafeFetch.get(WikiAPI.Consumable, this.server, `${this.language}`);
+    let data = Guard(json, 'data', {});
+
+    await SafeStorage.set(SAVED.consumable, data);
+    return data;
   }
 
   async getMap() {
