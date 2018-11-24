@@ -85,8 +85,6 @@ class Downloader {
   ///
 
   async getWarship() {
-    const tierList = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
-    
     let pageTotal = 1;
     let page = 0;
     let all = {};
@@ -102,8 +100,12 @@ class Downloader {
         if (curr.name.startsWith('[')) {
           delete data[id];
         } else {
-          curr.icon = curr.images; 
-          delete curr.images.small;
+          curr.icon = curr.images.small;
+          delete curr.images;
+          // Orange name or not
+          curr.premium = curr.is_premium || curr.is_special;
+          delete curr.is_premium;
+          delete curr.is_special;
           // If it is undefined then it is new
           curr.new = DATA[SAVED.warship][id] ? false : true;
         }
@@ -114,11 +116,15 @@ class Downloader {
       page++;
     }
 
+    await SafeStorage.set(SAVED.warship, all);
     return all;
   }
 
   async getAchievement() {
-
+    let json = await SafeFetch.get(WikiAPI.Achievement, this.server, `${this.language}`);
+    let data = Guard(json, 'data.battle', {});
+    await SafeStorage.set(SAVED.achievement, data);
+    return data;
   }
 
   async getCollectionAndItem() {
