@@ -46,7 +46,7 @@ class Home extends Component {
               friend: Friend,
               rs: RS
             })} onIndexChange={index => this.setState({index})}
-            initialLayout={{width: Dimensions.get('window').width}}
+            initialLayout={Dimensions.get('window')}
           />
           <FloatingButton />
         </SafeAreaView>
