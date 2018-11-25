@@ -3,10 +3,10 @@ import { StyleSheet, StatusBar } from 'react-native';
 import { Router, Stack, Scene } from 'react-native-router-flux';
 import { isTablet } from 'react-native-device-detection';
 import { Surface, DarkTheme, DefaultTheme, withTheme } from 'react-native-paper';
-import { Home, Menu, Settings, About, Setup, Consumable } from './page';
+import { Home, Menu, Settings, About, Setup, Consumable, BasicDetail } from './page';
 import { LOCAL } from './value/data';
-import { DataLoader, Guard, Downloader } from './core';
-import { BLUE, GREY } from 'react-native-material-color';
+import { DataLoader, Downloader } from './core';
+import { GREY } from 'react-native-material-color';
 import { LoadingModal } from './component';
 
 class App extends Component {
@@ -75,6 +75,7 @@ class App extends Component {
             <Scene key='Menu' component={Menu}/>
 
             <Scene key='Consumable' component={Consumable}/>
+            <Scene key='BasicDetail' component={BasicDetail}/>
 
             <Scene key='Settings' component={Settings}/>
             <Scene key='About' component={About}/>
