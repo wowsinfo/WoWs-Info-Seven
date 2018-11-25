@@ -123,6 +123,10 @@ class Downloader {
   async getAchievement() {
     let json = await SafeFetch.get(WikiAPI.Achievement, this.server, `${this.language}`);
     let data = Guard(json, 'data.battle', {});
+    for (let id in data) {
+      let curr = data[id];
+      curr.new = DATA[SAVED.achievement][id] ? false : true;
+    }
     await SafeStorage.set(SAVED.achievement, data);
     return data;
   }
@@ -132,6 +136,11 @@ class Downloader {
 
     let collection = await SafeFetch.get(WikiAPI.Collection, this.server, `${this.language}`);
     let item = await SafeFetch.get(WikiAPI.CollectionItem, this.server, `${this.language}`);
+
+    for (let id in collection) {
+      let curr = data[id];
+      curr.new = DATA[SAVED.collection]['collection'][id] ? false : true;
+    }
 
     all['collection'] = Guard(collection, 'data', {});
     all['item'] = Guard(item, 'data', {});
@@ -154,6 +163,11 @@ class Downloader {
   async getConsumable() {
     let json = await SafeFetch.get(WikiAPI.Consumable, this.server, `${this.language}`);
     let data = Guard(json, 'data', {});
+
+    for (let id in data) {
+      let curr = data[id];
+      curr.new = DATA[SAVED.consumable][id] ? false : true;
+    }
 
     await SafeStorage.set(SAVED.consumable, data);
     return data;
