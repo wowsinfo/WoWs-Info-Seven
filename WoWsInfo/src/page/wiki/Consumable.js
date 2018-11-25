@@ -6,21 +6,23 @@
  */
 
 import React, { Component } from 'react';
-import { SafeAreaView, Image, StyleSheet } from 'react-native';
+import { View, SafeAreaView, Image, StyleSheet } from 'react-native';
 import GridView from 'react-native-super-grid';
-import { Surface } from 'react-native-paper';
+import { Surface, Text } from 'react-native-paper';
 import { BackButton, LoadingModal } from '../../component';
-import { SAVED } from '../../value/data';
+import { SAVED, LOCAL } from '../../value/data';
 
 class Consumable extends Component {
   constructor(props) {
     super(props);
     const { upgrade } = props;
+
     // Load data depending on 'upgrade' prop
     let data = [];
     let consumable = DATA[SAVED.consumable];
     for (let key in consumable) {
       let curr = consumable[key];
+
       if (upgrade && curr.type === 'Modernization') {
         data.push(curr);
       } else if (!upgrade && curr.type !== 'Modernization') {
@@ -28,7 +30,6 @@ class Consumable extends Component {
       }
     }
 
-    // Sort by price
     data.sort((a, b) => {
       if (!upgrade) {
         // Flags first then camouflages
@@ -36,6 +37,7 @@ class Consumable extends Component {
         else return 1;
       }
 
+      // Sort by price
       if (a.price_gold === 0) {
         return a.price_credit - b.price_credit;
       } else {
@@ -67,7 +69,13 @@ class Consumable extends Component {
 
     return (
       <GridView itemDimension={64} items={data} renderItem={item => {
-        return <Image source={{uri: item.image}} style={{height: 64, width: 64}} />
+        return (
+          <View style={{alignItems: 'center'}}>
+            <View style={{position: 'absolute', borderRadius: 99, backgroundColor: DATA[LOCAL.theme][500],
+            height: 12, width: 12, zIndex: 1, bottom: 0}}/>
+            <Image source={{uri: item.image}} style={{height: 64, width: 64}} />
+          </View>
+        )
       }}/>
     )
   }
