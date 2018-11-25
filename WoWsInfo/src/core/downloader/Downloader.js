@@ -138,7 +138,7 @@ class Downloader {
     let item = await SafeFetch.get(WikiAPI.CollectionItem, this.server, `${this.language}`);
 
     for (let id in collection) {
-      let curr = data[id];
+      let curr = collection[id];
       curr.new = DATA[SAVED.collection]['collection'][id] ? false : true;
     }
 
@@ -161,16 +161,28 @@ class Downloader {
   }
 
   async getConsumable() {
-    let json = await SafeFetch.get(WikiAPI.Consumable, this.server, `${this.language}`);
-    let data = Guard(json, 'data', {});
+    let pageTotal = 1;
+    let page = 0;
+    let all = {};
 
-    for (let id in data) {
-      let curr = data[id];
-      curr.new = DATA[SAVED.consumable][id] ? false : true;
+    while (page < pageTotal) {
+      // page + 1 to get actually page not index
+      let json = await SafeFetch.get(WikiAPI.Consumable, this.server, `&page_no=${page+1}&${this.language}`);
+      pageTotal = Guard(json, 'meta.page_total', 1);
+      let data = Guard(json, 'data', {});
+
+      for (let id in data) {
+        let curr = data[id];
+        curr.new = DATA[SAVED.consumable][id] ? false : true;
+      }
+
+      // Add to all
+      Object.assign(all, data);
+      page++;
     }
 
-    await SafeStorage.set(SAVED.consumable, data);
-    return data;
+    await SafeStorage.set(SAVED.consumable, all);
+    return all;
   }
 
   async getMap() {
