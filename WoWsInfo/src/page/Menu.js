@@ -11,6 +11,7 @@ import { isAndroid, isIphoneX } from 'react-native-device-detection';
 import { List, Colors, Surface, Searchbar } from 'react-native-paper';
 import { BackButton, WoWsInfo } from '../component';
 import lang from '../value/lang';
+import { Actions } from 'react-native-router-flux';
 
 class Menu extends Component {
 
@@ -22,13 +23,14 @@ class Menu extends Component {
     }
 
     // Data for the list
-    this.wiki = [{t: lang.wiki_achievement, i: require('../img/Achievement.png')},
-    {t: lang.wiki_warships, i: require('../img/Warship.png')},
-    {t: lang.wiki_upgrades, i: require('../img/Upgrade.png')},
-    {t: lang.wiki_flags, i: require('../img/Camouflage.png')},
-    {t: lang.wiki_skills, i: require('../img/CommanderSkill.png')},
-    {t: lang.wiki_maps, i: 'map'},
-    {t: lang.wiki_collections, i: require('../img/Collection.png')}];
+    this.wiki = [{t: lang.wiki_achievement, i: require('../img/Achievement.png'), p: () => Actions.Consumable()},
+    {t: lang.wiki_warships, i: require('../img/Warship.png'), p: () => Actions.Consumable()},
+    {t: lang.wiki_upgrades, i: require('../img/Upgrade.png'), p: () => Actions.Consumable({upgrade: true})},
+    {t: lang.wiki_flags, i: require('../img/Camouflage.png'), p: () => Actions.Consumable()},
+    {t: lang.wiki_skills, i: require('../img/CommanderSkill.png'), p: () => Actions.Consumable()},
+    {t: lang.wiki_maps, i: 'map', p: () => Actions.Consumable()},
+    {t: lang.wiki_collections, i: require('../img/Collection.png'), p: () => Actions.Consumable()}];
+
     // TODO: change links base on player server
     this.websites = [{t: lang.website_official_site, d: 'https://worldofwarships.com/'},
     {t: lang.website_premium, d: 'https://asia.wargaming.net/shop/wows/'},
@@ -78,7 +80,7 @@ class Menu extends Component {
           contentContainerStyle={scroll}>
           <List.Section title={lang.wiki_section_title}>
             { this.wiki.map(item => { return (
-              <List.Item title={item.t} style={{padding: 0, paddingLeft: 8}} onPress={() => console.log('Placeholder')} key={item.t}
+              <List.Item title={item.t} style={{padding: 0, paddingLeft: 8}} onPress={() => item.p()} key={item.t}
               left={() => <List.Icon style={icon} color={Colors.blue300} icon={item.i}/>}
               right={() => isAndroid ? null : <List.Icon color={Colors.grey500} icon='keyboard-arrow-right'/>} />
             )})}
