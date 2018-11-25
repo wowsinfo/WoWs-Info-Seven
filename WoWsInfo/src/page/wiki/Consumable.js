@@ -11,6 +11,7 @@ import GridView from 'react-native-super-grid';
 import { Surface, Text } from 'react-native-paper';
 import { BackButton, LoadingModal, WikiIcon } from '../../component';
 import { SAVED, LOCAL } from '../../value/data';
+import { Actions } from 'react-native-router-flux';
 
 class Consumable extends Component {
   constructor(props) {
@@ -71,7 +72,7 @@ class Consumable extends Component {
 
     return (
       <GridView itemDimension={64} items={data} renderItem={item => {
-        return <WikiIcon item={item}/>
+        return <WikiIcon item={item} onPress={() => Actions.BasicDetail()}/>
       }}/>
     )
   }
