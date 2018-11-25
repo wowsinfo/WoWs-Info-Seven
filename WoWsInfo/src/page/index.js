@@ -8,6 +8,7 @@ export * from './home/Friend';
 export * from './home/RS';
 
 export * from './wiki/Consumable';
+export * from './wiki/BasicDetail';
 
 export * from './player/Statistics';
 

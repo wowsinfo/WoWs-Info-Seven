@@ -9,7 +9,7 @@ import React, { Component } from 'react';
 import { View, SafeAreaView, Image, StyleSheet } from 'react-native';
 import GridView from 'react-native-super-grid';
 import { Surface, Text } from 'react-native-paper';
-import { BackButton, LoadingModal } from '../../component';
+import { BackButton, LoadingModal, WikiIcon } from '../../component';
 import { SAVED, LOCAL } from '../../value/data';
 
 class Consumable extends Component {
@@ -29,6 +29,8 @@ class Consumable extends Component {
         data.push(curr);
       }
     }
+
+    // Create sections for new and old consumables
 
     data.sort((a, b) => {
       if (!upgrade) {
@@ -69,13 +71,7 @@ class Consumable extends Component {
 
     return (
       <GridView itemDimension={64} items={data} renderItem={item => {
-        return (
-          <View style={{alignItems: 'center'}}>
-            <View style={{position: 'absolute', borderRadius: 99, backgroundColor: DATA[LOCAL.theme][500],
-            height: 12, width: 12, zIndex: 1, bottom: 0}}/>
-            <Image source={{uri: item.image}} style={{height: 64, width: 64}} />
-          </View>
-        )
+        return <WikiIcon item={item}/>
       }}/>
     )
   }

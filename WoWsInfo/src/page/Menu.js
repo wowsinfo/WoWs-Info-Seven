@@ -19,7 +19,8 @@ class Menu extends Component {
     super(props);
 
     this.state = {
-      search: ''
+      search: '',
+      server: ''
     }
 
     // Data for the list
@@ -55,7 +56,7 @@ class Menu extends Component {
 
   render() {
     const { container, searchBar } = styles;
-    const { search } = this.state;
+    const { search, server } = this.state;
 
     return (
       <Surface style={container}>
