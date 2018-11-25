@@ -7,16 +7,17 @@
 import React, { Component } from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 import { LOCAL } from '../../value/data';
+import { Touchable } from '../common/Touchable';
 
 class WikiIcon extends Component {
   render() {
     const { container, newLabel } = styles;
-    const { item } = this.props;
+    const { item, ...props } = this.props;
     return (
-      <View style={container}>
+      <Touchable style={container} {...props}>
         <View style={[newLabel, {backgroundColor: DATA[LOCAL.theme][500]}]}/>
         <Image source={{uri: item.image ? item.image : item.icon}} style={{height: 64, width: 64}} resizeMode='contain'/>
-      </View>
+      </Touchable>
     )
   };
 }
