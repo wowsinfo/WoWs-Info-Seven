@@ -8,13 +8,14 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Surface } from 'react-native-paper';
+import { FloatingButton } from '../../component';
 
 class BasicDetail extends Component {
   render() {
     const { container } = styles;
     return (
       <Surface style={container}>
-        <Text>BasicDetail</Text>
+        <FloatingButton />
       </Surface>
     )
   };
