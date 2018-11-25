@@ -1,3 +1,9 @@
+/*
+ * WoWsInfo.js
+ *
+ * This is used as a footer if no name is passed, it is a about button
+ */
+
 import React, { Component } from 'react';
 import { SafeAreaView, Text, StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
@@ -39,8 +45,7 @@ class WoWsInfo extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: 'center'
+    alignItems: 'center',
   },
   title: {
     fontSize: 17, fontWeight: isAndroid ? 'bold' : '300',
