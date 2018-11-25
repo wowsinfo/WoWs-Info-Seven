@@ -15,19 +15,27 @@ import { SAVED } from '../../value/data';
 class Consumable extends Component {
   constructor(props) {
     super(props);
-
+    const { upgrade } = props;
     // Load data depending on 'upgrade' prop
     let data = [];
     let consumable = DATA[SAVED.consumable];
     for (let key in consumable) {
       let curr = consumable[key];
-      if (curr.type === 'Modernization') {
+      if (upgrade && curr.type === 'Modernization') {
+        data.push(curr);
+      } else if (!upgrade && curr.type !== 'Modernization') {
         data.push(curr);
       }
     }
 
     // Sort by price
     data.sort((a, b) => {
+      if (!upgrade) {
+        // Flags first then camouflages
+        if (a.type === 'Flags') return -1;
+        else return 1;
+      }
+
       if (a.price_gold === 0) {
         return a.price_credit - b.price_credit;
       } else {
