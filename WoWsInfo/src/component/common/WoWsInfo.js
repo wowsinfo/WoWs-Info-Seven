@@ -26,14 +26,14 @@ class WoWsInfo extends Component {
 
   render() {
     const { container, text } = styles;
-    const { children, title } = this.props;
+    const { children, title, noBack, style } = this.props;
     return (
-      <Surface style={container}>
+      <Surface style={[container, style]}>
         <SafeAreaView style={container}>
           <Surface style={container}>
             { children }
           </Surface>
-          <BackButton />
+          { noBack ? null : <BackButton /> }
           <Button onPress={this.pressEvent} style={text}>
             { title ? title : `WoWs Info ${this.lucky}`}
           </Button>

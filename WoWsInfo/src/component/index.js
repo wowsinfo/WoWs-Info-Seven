@@ -3,6 +3,7 @@ export * from './common/BackButton';
 export * from './common/Touchable';
 
 export * from './common/WoWsInfo';
+export * from './common/SafeView';
 export * from './common/DividerPlus';
 export * from './common/LoadingModal';
 

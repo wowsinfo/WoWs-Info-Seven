@@ -28,7 +28,7 @@ class Menu extends Component {
     {t: lang.wiki_warships, i: require('../img/Warship.png'), p: () => Actions.Consumable()},
     {t: lang.wiki_upgrades, i: require('../img/Upgrade.png'), p: () => Actions.Consumable({upgrade: true})},
     {t: lang.wiki_flags, i: require('../img/Camouflage.png'), p: () => Actions.Consumable()},
-    {t: lang.wiki_skills, i: require('../img/CommanderSkill.png'), p: () => Actions.Consumable()},
+    {t: lang.wiki_skills, i: require('../img/CommanderSkill.png'), p: () => Actions.CommanderSkill()},
     {t: lang.wiki_maps, i: 'map', p: () => Actions.Consumable()},
     {t: lang.wiki_collections, i: require('../img/Collection.png'), p: () => Actions.Consumable()}];
 

@@ -11,29 +11,24 @@ import { Actions } from 'react-native-router-flux';
 import lang from '../../value/lang';
 import { LOCAL } from '../../value/data';
 import { SafeStorage } from '../../core';
+import { SafeView, WoWsInfo } from '../../component';
 
 class Setup extends Component {
   render() {
     const { container, top } = styles;
     return (
-      <Surface style={container}>
-        <SafeAreaView style={top}>
-          <ScrollView>
-            <Headline>{lang.setup_title}</Headline>
-            <List.Section title='Game Server'>
-              { /** This is a radio group */}
-            </List.Section>
-            <List.Section title='API Language'>
-              { /** This is another radio group */}              
-            </List.Section>
-          </ScrollView>
-        </SafeAreaView>
-        <SafeAreaView>
-          <Button onPress={() => this.finishSetup()}>
-            {lang.setup_done_button}
-          </Button>
-        </SafeAreaView>        
-      </Surface>
+      <WoWsInfo style={container} title={lang.setup_done_button} 
+        noBack onPress={() => this.finishSetup()}>
+        <ScrollView>
+          <Headline>{lang.setup_title}</Headline>
+          <List.Section title='Game Server'>
+            { /** This is a radio group */}
+          </List.Section>
+          <List.Section title='API Language'>
+            { /** This is another radio group */}              
+          </List.Section>
+        </ScrollView>
+      </WoWsInfo>
     )
   };
 
