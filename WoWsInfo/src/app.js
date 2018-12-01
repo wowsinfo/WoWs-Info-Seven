@@ -52,9 +52,13 @@ class App extends Component {
       // Update data here as well, force update when first launch
       let first = DATA[LOCAL.firstLaunch];
       let dn = new Downloader(DATA[LOCAL.userServer]);
-      dn.updateAll(first).then(() => {
+      dn.updateAll(first).then(success => {
         // Make sure it finishes downloading
-        this.setState({loading: false, dark: darkMode});
+        if (success) {
+          this.setState({loading: false, dark: darkMode});
+        } else {
+          // Reset to a special page
+        }
       });
     });
   }
@@ -69,8 +73,8 @@ class App extends Component {
           backgroundColor={dark ? 'black' : GREY[200]}/>
         <Router sceneStyle={scene}>
           <Stack key='root' hideNavBar>
-            <Scene key='Setup' component={Setup} initial={DATA[LOCAL.firstLaunch]}/>
             <Scene key='Home' component={Home}/>
+            <Scene key='Setup' component={Setup} initial={DATA[LOCAL.firstLaunch]}/>
             
             <Scene key='Menu' component={Menu}/>
 
