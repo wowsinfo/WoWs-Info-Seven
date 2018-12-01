@@ -26,7 +26,7 @@ class WoWsInfo extends Component {
 
   render() {
     const { container, text } = styles;
-    const { children, title, onPress } = this.props;
+    const { children, title } = this.props;
     return (
       <Surface style={container}>
         <SafeAreaView style={container}>
@@ -34,13 +34,23 @@ class WoWsInfo extends Component {
             { children }
           </Surface>
           <BackButton />
-          <Button onPress={onPress ? onPress : () => this.navigate()} style={text}>
+          <Button onPress={this.pressEvent} style={text}>
             { title ? title : `WoWs Info ${this.lucky}`}
           </Button>
         </SafeAreaView>
       </Surface>
     )
   };
+
+  /**
+   * Handle press event, dont always go to about page
+   */
+  pressEvent = () => {
+    const { onPress, about } = this.props;
+    if (onPress) return onPress();
+    else if (about) return this.navigate();
+    else return null;
+  }
 
   /**
    * Navigate to About page
