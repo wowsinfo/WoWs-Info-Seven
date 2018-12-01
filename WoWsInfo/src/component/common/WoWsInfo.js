@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 17, fontWeight: isAndroid ? 'bold' : '300',
     textAlign: 'center', alignSelf: 'center',
-    width: '61%',
+    width: '70%',
     marginBottom: 4
   }
 });

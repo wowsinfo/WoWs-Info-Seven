@@ -54,8 +54,6 @@ class Consumable extends Component {
   }
 
   render() {
-    const { container } = styles;
-
     return (
       <WoWsInfo>
         { this.renderGrid() }
@@ -70,7 +68,7 @@ class Consumable extends Component {
     return (
       <View style={{flex: 1}}>
         <GridView itemDimension={64} items={data} renderItem={item => {
-          return <WikiIcon item={item} onPress={() => Actions.BasicDetail()}/>
+          return <WikiIcon item={item} onPress={() => Actions.BasicDetail({item: item})}/>
         }}/>
       </View>
     )
