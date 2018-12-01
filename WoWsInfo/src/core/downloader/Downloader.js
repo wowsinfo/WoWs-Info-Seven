@@ -19,30 +19,35 @@ class Downloader {
   async updateAll(force=false) {
     // Get server version
     console.log('Downloader\nChecking for new version');
-    let gameVersion = await this.getVersion();
-    let currVersion = DATA[LOCAL.gameVersion];
-    console.log(`Current: ${currVersion}\nAPI: ${gameVersion}`);
-    if (gameVersion > currVersion || force) {
-      // Update all data
-      console.log('Downloader\nUpdating all data from API');
-      // Download language
-      DATA[SAVED.language] = await this.getLanguage();
-      // Download ship type, nation and module names for Wiki
-      DATA[SAVED.encyclopedia] = await this.getEncyclopedia();
-
-      // Wiki
-      DATA[SAVED.warship] = await this.getWarship();
-      DATA[SAVED.achievement] = await this.getAchievement();
-      DATA[SAVED.collection] = await this.getCollectionAndItem();
-      DATA[SAVED.commanderSkill] = await this.getCommanderSkill();
-      DATA[SAVED.consumable] = await this.getConsumable();
-      DATA[SAVED.map] = await this.getMap();
-      DATA[SAVED.pr] = await this.getPR();
-
-      console.log(DATA);
+    try {
+      let gameVersion = await this.getVersion();
+      let currVersion = DATA[LOCAL.gameVersion];
+      console.log(`Current: ${currVersion}\nAPI: ${gameVersion}`);
+      if (gameVersion > currVersion || force) {
+        // Update all data
+        console.log('Downloader\nUpdating all data from API');
+        // Download language
+        DATA[SAVED.language] = await this.getLanguage();
+        // Download ship type, nation and module names for Wiki
+        DATA[SAVED.encyclopedia] = await this.getEncyclopedia();
+  
+        // Wiki
+        DATA[SAVED.warship] = await this.getWarship();
+        DATA[SAVED.achievement] = await this.getAchievement();
+        DATA[SAVED.collection] = await this.getCollectionAndItem();
+        DATA[SAVED.commanderSkill] = await this.getCommanderSkill();
+        DATA[SAVED.consumable] = await this.getConsumable();
+        DATA[SAVED.map] = await this.getMap();
+        DATA[SAVED.pr] = await this.getPR();
+  
+        console.log(DATA);
+      }
+      // Update this value only if all data are saved correctly
+      SafeStorage.set(LOCAL.gameVersion, gameVersion);
+      return true;
+    } catch (err) {
+      return false;
     }
-    // Update this value only if all data are saved correctly
-    SafeStorage.set(LOCAL.gameVersion, gameVersion);
   }
 
   /**

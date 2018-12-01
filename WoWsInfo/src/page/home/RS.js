@@ -57,7 +57,7 @@ class RS extends Component {
               <Text>{lang.rs_tip_two}</Text>
               <Title>{lang.rs_tip_enjoy}</Title>
               <Text>{lang.rs_tip_three}</Text>
-              <Caption>{'\nHenryQuan'}</Caption>
+              <Caption>{'HenryQuan'}</Caption>
             </ScrollView>
           </Dialog.Content>
         </Dialog>
