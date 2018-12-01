@@ -57,13 +57,9 @@ class Consumable extends Component {
     const { container } = styles;
 
     return (
-      <Surface style={container}>
-        <SafeAreaView>
-          { this.renderGrid() }
-          <WoWsInfo />
-          <BackButton />
-        </SafeAreaView>
-      </Surface>
+      <WoWsInfo>
+        { this.renderGrid() }
+      </WoWsInfo>
     )
   };
 

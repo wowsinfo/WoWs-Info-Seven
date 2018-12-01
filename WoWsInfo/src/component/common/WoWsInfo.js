@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     fontSize: 17, fontWeight: isAndroid ? 'bold' : '300',
     textAlign: 'center', alignSelf: 'center',
     width: '61%',
-    marginBottom: 8
+    marginBottom: 4
   }
 });
 
