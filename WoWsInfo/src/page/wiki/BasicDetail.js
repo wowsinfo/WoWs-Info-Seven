@@ -8,18 +8,15 @@
 import React, { Component } from 'react';
 import { SafeAreaView, Text, StyleSheet } from 'react-native';
 import { Surface, Title, Paragraph, Caption } from 'react-native-paper';
-import { FloatingButton, WikiIcon } from '../../component';
+import { FloatingButton, WikiIcon, SafeView } from '../../component';
 
 class BasicDetail extends Component {
   render() {
-    const { item } = this.props;
     return (
-      <Surface style={{flex: 1}}>
-        <SafeAreaView style={{flex: 1}}>
-          { this.renderDetail() }
-          <FloatingButton />
-        </SafeAreaView>
-      </Surface>
+      <SafeView>
+        { this.renderDetail() }
+        <FloatingButton />
+      </SafeView>
     )
   };
 
