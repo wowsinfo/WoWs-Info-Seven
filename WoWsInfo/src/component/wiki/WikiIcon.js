@@ -17,7 +17,7 @@ class WikiIcon extends Component {
       <Touchable style={container} {...props}>
         <View style={[newLabel, {backgroundColor: DATA[LOCAL.theme][500]}]}/>
         <Image source={{uri: item.image ? item.image : item.icon}} resizeMode='contain'
-          defaultSource={require('../../img/Warship.png')} style={{height: 64, width: 64}} />
+          defaultSource={require('../../img/Loading.png')} style={{height: 64, width: 64}} />
       </Touchable>
     )
   };
