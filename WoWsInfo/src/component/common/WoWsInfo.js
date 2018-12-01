@@ -5,11 +5,12 @@
  */
 
 import React, { Component } from 'react';
-import { SafeAreaView, Text, StyleSheet } from 'react-native';
-import { Button } from 'react-native-paper';
+import { SafeAreaView, StyleSheet } from 'react-native';
+import { Button, Surface } from 'react-native-paper';
 import { isAndroid } from 'react-native-device-detection';
 import lang from '../../value/lang';
 import { Actions } from 'react-native-router-flux';
+import { BackButton } from './BackButton';
 
 class WoWsInfo extends Component {
   constructor(props) {
@@ -24,11 +25,20 @@ class WoWsInfo extends Component {
   }
 
   render() {
-    const { container, title } = styles;
+    const { container, text } = styles;
+    const { children, title, onPress } = this.props;
     return (
-      <SafeAreaView style={container}>
-        <Button onPress={() => this.navigate()} style={title}>{`WoWs Info ${this.lucky}`}</Button>
-      </SafeAreaView>
+      <Surface style={container}>
+        <SafeAreaView style={container}>
+          <Surface style={container}>
+            { children }
+          </Surface>
+          <BackButton />
+          <Button onPress={onPress ? onPress : () => this.navigate()} style={text}>
+            { title ? title : `WoWs Info ${this.lucky}`}
+          </Button>
+        </SafeAreaView>
+      </Surface>
     )
   };
 
@@ -45,11 +55,12 @@ class WoWsInfo extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
+    flex: 1,
   },
-  title: {
+  text: {
     fontSize: 17, fontWeight: isAndroid ? 'bold' : '300',
-    textAlign: 'center',
+    textAlign: 'center', alignSelf: 'center',
+    width: '61%',
     marginBottom: 8
   }
 });
