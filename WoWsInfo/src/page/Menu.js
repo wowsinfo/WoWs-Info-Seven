@@ -59,14 +59,11 @@ class Menu extends Component {
     const { search, server } = this.state;
 
     return (
-      <Surface style={container}>
-        <SafeAreaView style={{flex: 1}}>
-          <Searchbar value={search} style={searchBar} placeholder={lang.search_placeholder}
-            onChangeText={text => this.setState({search: text})} autoCorrect={false} autoCapitalize='none'/>
-          { this.renderContent() }
-        </SafeAreaView>
-        <BackButton />
-      </Surface>
+      <WoWsInfo title={lang.menu_footer} onPress={() => this.refs['search'].focus()}>
+        <Searchbar ref='search' value={search} style={searchBar} placeholder={lang.search_placeholder}
+          onChangeText={text => this.setState({search: text})} autoCorrect={false} autoCapitalize='none'/>
+        { this.renderContent() }
+      </WoWsInfo>
     );
   }
 
@@ -100,7 +97,6 @@ class Menu extends Component {
               )})}
             </List.Accordion>
           </List.Section>
-          <WoWsInfo />
         </ScrollView>
       )
     }
@@ -118,7 +114,7 @@ const styles = StyleSheet.create({
   searchBar: {
     position: 'absolute',
     zIndex: 2,
-    top: isIphoneX ? 56 : 16,
+    top: 16,
     left: 16, right: 16,
     borderRadius: 100
   },

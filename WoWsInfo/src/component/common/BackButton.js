@@ -8,7 +8,7 @@ class BackButton extends Component {
   render() {
     const { container } = styles;
     // Android has a back button so we dont have to add another one
-    if (isAndroid) return null;
+    // if (isAndroid) return null;
     return (
       <SafeAreaView style={container}>
         <IconButton color={Colors.grey500} icon='arrow-back' 

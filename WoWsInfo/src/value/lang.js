@@ -7,8 +7,10 @@ export default lang = new LocalizedStrings({
     setup_done_button: 'Done',
     /// Home section
     /// Menu section
+    // Footer
+    menu_footer: 'Search',
     // Search bar
-    search_placeholder: 'Search players or clans',
+    search_placeholder: 'Server: ',
     // Wiki
     wiki_section_title: 'Encyclopedia',
     wiki_achievement: 'Achievement',
