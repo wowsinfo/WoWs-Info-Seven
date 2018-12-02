@@ -29,7 +29,7 @@ class Menu extends Component {
     {t: lang.wiki_upgrades, i: require('../img/Upgrade.png'), p: () => Actions.push('Consumable', {upgrade: true})},
     {t: lang.wiki_flags, i: require('../img/Camouflage.png'), p: () => Actions.push('Consumable')},
     {t: lang.wiki_skills, i: require('../img/CommanderSkill.png'), p: () => Actions.push('CommanderSkill')},
-    {t: lang.wiki_maps, i: 'map', p: () => Actions.Consumable()},
+    {t: lang.wiki_maps, i: 'map', p: () => Actions.push('Map')},
     {t: lang.wiki_collections, i: require('../img/Collection.png'), p: () => Actions.Consumable()}];
 
     // TODO: change links base on player server

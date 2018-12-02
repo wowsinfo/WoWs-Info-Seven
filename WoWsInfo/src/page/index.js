@@ -11,6 +11,7 @@ export * from './wiki/Consumable';
 export * from './wiki/BasicDetail';
 export * from './wiki/CommanderSkill';
 export * from './wiki/Achievement';
+export * from './wiki/Map';
 
 export * from './player/Statistics';
 

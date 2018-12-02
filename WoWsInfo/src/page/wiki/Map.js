@@ -1,0 +1,64 @@
+/**
+ * Map.js
+ * 
+ * 
+ */
+
+import React, { Component } from 'react';
+import { Image, StyleSheet, FlatList, Dimensions, ActivityIndicator } from 'react-native';
+import { WoWsInfo } from '../../component';
+import { SAVED } from '../../value/data';
+import { List, Portal, Dialog } from 'react-native-paper';
+
+class Map extends Component {
+  constructor(props) {
+    super(props);
+
+    console.log('WIKI - Map');
+
+    let map = DATA[SAVED.map];
+    console.log(map);
+    this.state = {
+      data: map,
+      shown: false,
+      map: '',
+      loading: true,
+    }
+  }
+
+  render() {
+    const { data, shown, map, loading } = this.state;
+
+    // Get map dimension
+    const { width, height } = Dimensions.get('window');
+    let imageWidth = width > height ? height : width;
+    imageWidth -= 20;
+
+    return (
+      <WoWsInfo>
+        <FlatList data={data} keyExtractor={(item) => item.name} renderItem={({item}) => {
+          return <List.Item title={item.name} description={item.description}
+            onPress={() => this.setState({shown: true, map: item.icon})}/>
+        }}/>
+        <Portal>
+          <Dialog visible={shown} onDismiss={() => this.setState({shown: false, loading: true})} 
+            dismissable theme={{roundness: 16}} style={{height: imageWidth, width: imageWidth, alignSelf: 'center'}}>
+              <Image source={{uri: map}} onLoadEnd={() => this.setState({loading: false})}
+                style={{flex: 1, height: null, width: null, borderRadius: 16}}/>
+              { loading ? <ActivityIndicator size='large'/> : null }
+          </Dialog>
+        </Portal>
+      </WoWsInfo>
+    )
+  };
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
+});
+
+export { Map };
