@@ -26,7 +26,7 @@ class Menu extends Component {
 
     // Data for the list
     this.wiki = [{t: lang.wiki_achievement, i: require('../img/Achievement.png'), p: () => SafeAction('Achievement')},
-    {t: lang.wiki_warships, i: require('../img/Warship.png'), p: () => Actions.Consumable()},
+    {t: lang.wiki_warships, i: require('../img/Warship.png'), p: () => SafeAction('Warship')},
     {t: lang.wiki_upgrades, i: require('../img/Upgrade.png'), p: () => SafeAction('Consumable', {upgrade: true})},
     {t: lang.wiki_flags, i: require('../img/Camouflage.png'), p: () => SafeAction('Consumable')},
     {t: lang.wiki_skills, i: require('../img/CommanderSkill.png'), p: () => SafeAction('CommanderSkill')},

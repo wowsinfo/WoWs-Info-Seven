@@ -13,6 +13,8 @@ export * from './wiki/CommanderSkill';
 export * from './wiki/Achievement';
 export * from './wiki/Map';
 export * from './wiki/Collection';
+export * from './wiki/Warship';
+export * from './wiki/WarshipDetail';
 
 export * from './player/Statistics';
 
