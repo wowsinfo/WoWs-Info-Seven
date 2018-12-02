@@ -6,7 +6,7 @@
  */
 
 import React, { Component } from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { Text, ScrollView, StyleSheet } from 'react-native';
 import { Surface, Title, Paragraph, Caption } from 'react-native-paper';
 import { FloatingButton, WikiIcon, SafeView } from '../../component';
 
@@ -33,13 +33,13 @@ class BasicDetail extends Component {
       }, "");
 
       return (
-        <Surface style={container}>
+        <ScrollView contentContainerStyle={container}>
           <WikiIcon item={item}/>
           <Title style={label}>{name}</Title>
           <Text style={label}>{price + "\n"}</Text>
           <Paragraph style={label}>{description + "\n"}</Paragraph>
           <Caption style={label}>{bonus}</Caption>
-        </Surface>
+        </ScrollView>
       )
     } else if (item.perks) {
       // This is commander skill
@@ -49,22 +49,22 @@ class BasicDetail extends Component {
       }, "");
 
       return (
-        <Surface style={container}>
+        <ScrollView contentContainerStyle={container}>
           <WikiIcon item={item}/>
           <Title style={label}>{name}</Title>
           <Paragraph style={label}>{bonus}</Paragraph>
-        </Surface>
+        </ScrollView>
       )
-    } else if (item.image_inactive) {
-      // This is achievement
+    } else if (item.image_inactive || item.card_id) {
+      // This is achievement or collection item
       const { description, name } = item;
 
       return (
-        <Surface style={container}>
+        <ScrollView contentContainerStyle={container}>
           <WikiIcon item={item}/>
           <Title style={label}>{name}</Title>
           <Paragraph style={label}>{description}</Paragraph>
-        </Surface>
+        </ScrollView>
       )
     }
   }
@@ -72,7 +72,7 @@ class BasicDetail extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    height: '100%',
     alignItems: 'center',
     justifyContent: 'center'
   },
