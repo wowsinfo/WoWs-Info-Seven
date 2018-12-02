@@ -43,7 +43,7 @@ class CommanderSkill extends Component {
     return (
       <WoWsInfo>
         <SuperGridSectionList itemDimension={64} sections={data}
-          renderItem={({item}) => <WikiIcon item={item} onPress={() => Actions.BasicDetail({item: item})}/>}
+          renderItem={({item}) => <WikiIcon item={item} onPress={() => Actions.push('BasicDetail', {item: item})}/>}
           renderSectionHeader={({section}) => <Title style={header}>{section.title}</Title>}/>
       </WoWsInfo>
     )
