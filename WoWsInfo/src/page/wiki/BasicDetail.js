@@ -6,7 +6,7 @@
  */
 
 import React, { Component } from 'react';
-import { SafeAreaView, Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 import { Surface, Title, Paragraph, Caption } from 'react-native-paper';
 import { FloatingButton, WikiIcon, SafeView } from '../../component';
 
@@ -53,6 +53,17 @@ class BasicDetail extends Component {
           <WikiIcon item={item}/>
           <Title style={label}>{name}</Title>
           <Paragraph style={label}>{bonus}</Paragraph>
+        </Surface>
+      )
+    } else if (item.image_inactive) {
+      // This is achievement
+      const { description, name } = item;
+
+      return (
+        <Surface style={container}>
+          <WikiIcon item={item}/>
+          <Title style={label}>{name}</Title>
+          <Paragraph style={label}>{description}</Paragraph>
         </Surface>
       )
     }

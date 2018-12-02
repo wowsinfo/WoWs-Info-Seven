@@ -26,10 +26,6 @@ class Achievement extends Component {
     sorted.forEach((item, index) => {
       // Make it an object
       sorted[index] = Object.assign(item[1]);
-      // Set correct icon depending on hidden
-      if (item.hidden === 1) {
-        item.image = item.image_inactive;
-      }
     });
     console.log(sorted);
 
@@ -39,7 +35,6 @@ class Achievement extends Component {
   }
 
   render() {
-    const { container } = styles;
     const { data } = this.state;
     return (
       <WoWsInfo>
