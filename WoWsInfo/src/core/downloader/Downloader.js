@@ -7,8 +7,11 @@ class Downloader {
     // Convert server index to string
     this.server = SERVER[server];
     this.language = langStr();
+
     // To prevent when first launch, everything is new and too many dots
     this.new = !DATA[LOCAL.firstLaunch];
+    console.log(this.new);
+
     console.log(`Downloader\nYou server is '${this.server}'`);
   }
 
@@ -102,19 +105,19 @@ class Downloader {
       pageTotal = Guard(json, 'meta.page_total', 1);
       let data = Guard(json, 'data', {});
 
-      if (this.new) {
-        for (let id in data) {
-          let curr = data[id];
-          if (curr.name.startsWith('[')) {
-            delete data[id];
-          } else {
-            curr.icon = curr.images.small;
-            delete curr.images;
-            // Orange name or not
-            curr.premium = curr.is_premium || curr.is_special;
-            delete curr.is_premium;
-            delete curr.is_special;
-            // If it is undefined then it is new
+      for (let id in data) {
+        let curr = data[id];
+        if (curr.name.startsWith('[')) {
+          delete data[id];
+        } else {
+          curr.icon = curr.images.small;
+          delete curr.images;
+          // Orange name or not
+          curr.premium = curr.is_premium || curr.is_special;
+          delete curr.is_premium;
+          delete curr.is_special;
+          // If it is undefined then it is new
+          if (this.new === true) {
             curr.new = DATA[SAVED.warship][id] ? false : true;
           }
         }
@@ -132,9 +135,10 @@ class Downloader {
   async getAchievement() {
     let json = await SafeFetch.get(WikiAPI.Achievement, this.server, `${this.language}`);
     let data = Guard(json, 'data.battle', {});
-    if (this.new) {
+    if (this.new === true) {
       for (let id in data) {
         let curr = data[id];
+        console.log(DATA[SAVED.achievement][id]);
         curr.new = DATA[SAVED.achievement][id] ? false : true;
       }
     }
@@ -147,16 +151,25 @@ class Downloader {
 
     let collection = await SafeFetch.get(WikiAPI.Collection, this.server, `${this.language}`);
     let item = await SafeFetch.get(WikiAPI.CollectionItem, this.server, `${this.language}`);
+
+    collection = Guard(collection, 'data', {});
+    item = Guard(item, 'data', {});
     
-    if (this.new) {
+    for (let id in item) {
+      let curr = item[id];
+      curr.image = curr.images.small;
+      delete curr.images;
+    }
+
+    if (this.new === true) {
       for (let id in collection) {
         let curr = collection[id];
         curr.new = DATA[SAVED.collection]['collection'][id] ? false : true;
       }
     }
 
-    all['collection'] = Guard(collection, 'data', {});
-    all['item'] = Guard(item, 'data', {});
+    all['collection'] = collection;
+    all['item'] = item;
 
     await SafeStorage.set(SAVED.collection, all);
     return all;
@@ -184,7 +197,7 @@ class Downloader {
       pageTotal = Guard(json, 'meta.page_total', 1);
       let data = Guard(json, 'data', {});
 
-      if (this.new) {
+      if (this.new === true) {
         for (let id in data) {
           let curr = data[id];
           curr.new = DATA[SAVED.consumable][id] ? false : true;

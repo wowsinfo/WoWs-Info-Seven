@@ -24,7 +24,7 @@ class WikiIcon extends Component {
     const { item, ...props } = this.props;
     return (
       <Touchable style={container} {...props}>
-        <View style={[newLabel, {backgroundColor: DATA[LOCAL.theme][500]}]}/>
+        { item.new ? <View style={[newLabel, {backgroundColor: DATA[LOCAL.theme][500]}]}/> : null }
         <Image source={{uri: item.image ? item.image : item.icon}} resizeMode='contain'
           onLoadEnd={() => this.setState({loading: false})} style={{height: 64, width: 64, borderRadius: 16}} />
         { loading ? <ActivityIndicator style={indicator}/> : null }
