@@ -48,6 +48,8 @@ class Consumable extends Component {
       }
     })
 
+    console.log(data);
+
     this.state = {
       data: data
     }

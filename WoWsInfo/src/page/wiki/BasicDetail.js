@@ -22,7 +22,7 @@ class BasicDetail extends Component {
 
   renderDetail() {
     const { item } = this.props;
-    const { container } = styles;    
+    const { container, label } = styles;    
     console.log(item);
     if (item.profile) {
       // Consumables
@@ -35,10 +35,24 @@ class BasicDetail extends Component {
       return (
         <Surface style={container}>
           <WikiIcon item={item}/>
-          <Title style={styles.name}>{name}</Title>
-          <Text style={styles.price}>{price + "\n"}</Text>
-          <Paragraph style={styles.name}>{description + "\n"}</Paragraph>
-          <Caption style={styles.bonus}>{bonus}</Caption>
+          <Title style={label}>{name}</Title>
+          <Text style={label}>{price + "\n"}</Text>
+          <Paragraph style={label}>{description + "\n"}</Paragraph>
+          <Caption style={label}>{bonus}</Caption>
+        </Surface>
+      )
+    } else if (item.perks) {
+      // This is commander skill
+      const { name, perks } = item;
+      let bonus = Object.entries(perks).reduce((total, curr) => {
+        return total + curr[1].description + "\n"
+      }, "");
+
+      return (
+        <Surface style={container}>
+          <WikiIcon item={item}/>
+          <Title style={label}>{name}</Title>
+          <Paragraph style={label}>{bonus}</Paragraph>
         </Surface>
       )
     }
@@ -51,15 +65,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
-  name: {
+  label: {
     textAlign: 'center',
+    margin: 8
   },
-  price: {
-    textAlign: 'center',
-  },
-  bonus: {
-    textAlign: 'center',
-  }
 });
 
 export { BasicDetail };
