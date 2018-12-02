@@ -3,7 +3,8 @@ import { StyleSheet, StatusBar } from 'react-native';
 import { Router, Stack, Scene } from 'react-native-router-flux';
 import { isTablet } from 'react-native-device-detection';
 import { Surface, DarkTheme, DefaultTheme, withTheme } from 'react-native-paper';
-import { Home, Menu, Settings, About, Setup, Consumable, CommanderSkill, BasicDetail, Achievement } from './page';
+import { Home, Menu, Settings, About, Setup, Consumable, CommanderSkill, 
+  BasicDetail, Achievement, Map as GameMap } from './page';
 import { LOCAL } from './value/data';
 import { DataLoader, Downloader } from './core';
 import { GREY } from 'react-native-material-color';
@@ -81,6 +82,7 @@ class App extends Component {
             <Scene key='Consumable' component={Consumable}/>
             <Scene key='CommanderSkill' component={CommanderSkill}/>
             <Scene key='Achievement' component={Achievement}/>
+            <Scene key='Map' component={GameMap}/>
             <Scene key='BasicDetail' component={BasicDetail}/>
 
             <Scene key='Settings' component={Settings}/>

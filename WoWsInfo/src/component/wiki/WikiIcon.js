@@ -5,19 +5,29 @@
  */
 
 import React, { Component } from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import { View, Image, ActivityIndicator, StyleSheet } from 'react-native';
 import { LOCAL } from '../../value/data';
 import { Touchable } from '../common/Touchable';
 
 class WikiIcon extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      loading: true
+    }
+  }
+  
   render() {
-    const { container, newLabel } = styles;
+    const { container, newLabel, indicator } = styles;
+    const { loading } = this.state;
     const { item, ...props } = this.props;
     return (
       <Touchable style={container} {...props}>
         <View style={[newLabel, {backgroundColor: DATA[LOCAL.theme][500]}]}/>
         <Image source={{uri: item.image ? item.image : item.icon}} resizeMode='contain'
-          defaultSource={require('../../img/Loading.png')} style={{height: 64, width: 64, borderRadius: 16}} />
+          onLoadEnd={() => this.setState({loading: false})} style={{height: 64, width: 64, borderRadius: 16}} />
+        { loading ? <ActivityIndicator style={indicator}/> : null }
       </Touchable>
     )
   };
@@ -25,12 +35,16 @@ class WikiIcon extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   newLabel: {
     position: 'absolute', zIndex: 1,
     borderRadius: 99, bottom: 0,
     height: 8, width: 8
+  },
+  indicator: {
+    position: 'absolute',
   }
 });
 
