@@ -28,6 +28,7 @@ class Map extends Component {
 
   render() {
     const { data, shown, map, loading } = this.state;
+    const { indicator } = styles; 
 
     // Get map dimension
     const { width, height } = Dimensions.get('window');
@@ -45,7 +46,7 @@ class Map extends Component {
             dismissable theme={{roundness: 16}} style={{height: imageWidth, width: imageWidth, alignSelf: 'center'}}>
               <Image source={{uri: map}} onLoadEnd={() => this.setState({loading: false})}
                 style={{flex: 1, height: null, width: null, borderRadius: 16}}/>
-              { loading ? <ActivityIndicator size='large'/> : null }
+              { loading ? <ActivityIndicator size='large' style={indicator}/> : null }
           </Dialog>
         </Portal>
       </WoWsInfo>
@@ -54,10 +55,10 @@ class Map extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
+  indicator: {
+    position: 'absolute',
+    top: 0, bottom: 0,
+    left: 0, right: 0
   }
 });
 
