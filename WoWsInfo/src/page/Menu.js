@@ -31,7 +31,7 @@ class Menu extends Component {
     {t: lang.wiki_flags, i: require('../img/Camouflage.png'), p: () => SafeAction('Consumable')},
     {t: lang.wiki_skills, i: require('../img/CommanderSkill.png'), p: () => SafeAction('CommanderSkill')},
     {t: lang.wiki_maps, i: 'map', p: () => SafeAction('Map')},
-    {t: lang.wiki_collections, i: require('../img/Collection.png'), p: () => Actions.Consumable()}];
+    {t: lang.wiki_collections, i: require('../img/Collection.png'), p: () => SafeAction('Collection')}];
 
     // TODO: change links base on player server
     this.websites = [{t: lang.website_official_site, d: 'https://worldofwarships.com/'},
