@@ -6,6 +6,14 @@ export default lang = new LocalizedStrings({
     setup_title: 'Setup WoWs Info',
     setup_done_button: 'Done',
     /// Home section
+    /// Wiki section
+    wiki_warship_footer: 'Filter',
+    wiki_warship_filter_btn: 'Apply',
+    wiki_warship_filter_placeholder: 'Enter a ship name',
+    wiki_warship_filter_tier: 'Select a tier',
+    wiki_warship_filter_nation: 'Select a nation',
+    wiki_warship_filter_type: 'Select a ship type',
+    wiki_warship_filter_premiumm: 'Premium ship',
     /// Menu section
     // Footer
     menu_footer: 'Search',
