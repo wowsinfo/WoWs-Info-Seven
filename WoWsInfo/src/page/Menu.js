@@ -12,6 +12,7 @@ import { List, Colors, Surface, Searchbar } from 'react-native-paper';
 import { BackButton, WoWsInfo } from '../component';
 import lang from '../value/lang';
 import { Actions } from 'react-native-router-flux';
+import { SafeAction } from '../core';
 
 class Menu extends Component {
 
@@ -24,12 +25,12 @@ class Menu extends Component {
     }
 
     // Data for the list
-    this.wiki = [{t: lang.wiki_achievement, i: require('../img/Achievement.png'), p: () => Actions.push('Achievement')},
+    this.wiki = [{t: lang.wiki_achievement, i: require('../img/Achievement.png'), p: () => SafeAction('Achievement')},
     {t: lang.wiki_warships, i: require('../img/Warship.png'), p: () => Actions.Consumable()},
-    {t: lang.wiki_upgrades, i: require('../img/Upgrade.png'), p: () => Actions.push('Consumable', {upgrade: true})},
-    {t: lang.wiki_flags, i: require('../img/Camouflage.png'), p: () => Actions.push('Consumable')},
-    {t: lang.wiki_skills, i: require('../img/CommanderSkill.png'), p: () => Actions.push('CommanderSkill')},
-    {t: lang.wiki_maps, i: 'map', p: () => Actions.push('Map')},
+    {t: lang.wiki_upgrades, i: require('../img/Upgrade.png'), p: () => SafeAction('Consumable', {upgrade: true})},
+    {t: lang.wiki_flags, i: require('../img/Camouflage.png'), p: () => SafeAction('Consumable')},
+    {t: lang.wiki_skills, i: require('../img/CommanderSkill.png'), p: () => SafeAction('CommanderSkill')},
+    {t: lang.wiki_maps, i: 'map', p: () => SafeAction('Map')},
     {t: lang.wiki_collections, i: require('../img/Collection.png'), p: () => Actions.Consumable()}];
 
     // TODO: change links base on player server

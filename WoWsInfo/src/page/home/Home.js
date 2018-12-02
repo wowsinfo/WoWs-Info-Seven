@@ -7,6 +7,7 @@ import { Actions } from 'react-native-router-flux';
 import { GREY } from 'react-native-material-color';
 import { LOCAL } from '../../value/data';
 import { Friend, RS, Statistics } from '../';
+import { SafeAction } from '../../core';
 
 class Home extends Component {
   constructor(props) {
@@ -31,7 +32,7 @@ class Home extends Component {
         <Surface style={header}>
           <Text numberOfLines={1} style={playerLabel}>WoWs Info</Text>
           <IconButton icon='settings' size={24} color={Colors.grey500}
-            onPress={() => Actions.Settings()}/>
+            onPress={() => SafeAction('Settings')}/>
         </Surface>
         <TabView renderTabBar={props =>
             <TabBar {...props} renderLabel={r => {
