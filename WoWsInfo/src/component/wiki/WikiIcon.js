@@ -21,12 +21,16 @@ class WikiIcon extends Component {
   render() {
     const { container, newLabel, indicator } = styles;
     const { loading } = this.state;
-    const { item, ...props } = this.props;
+    const { item, scale, ...props } = this.props;
+    let width = 64;
+    if (scale) width *= scale;
+
     return (
       <Touchable style={container} {...props}>
         { item.new ? <View style={[newLabel, {backgroundColor: DATA[LOCAL.theme][500]}]}/> : null }
         <Image source={{uri: item.image ? item.image : item.icon}} resizeMode='contain'
-          onLoadEnd={() => this.setState({loading: false})} style={{height: 64, width: 64, borderRadius: 16}} />
+          onLoadEnd={() => this.setState({loading: false})} 
+          style={{height: width, width: width, borderRadius: 8}} />
         { loading ? <ActivityIndicator style={indicator}/> : null }
       </Touchable>
     )

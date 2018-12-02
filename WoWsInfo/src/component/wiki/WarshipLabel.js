@@ -5,24 +5,27 @@
  */
 
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import { Caption } from 'react-native-paper';
+import { getTierLabel } from '../../core';
 
 class WarshipLabel extends Component {
   render() {
-    const { container } = styles;
+    const { label } = styles;
+    const { style } = this.props;
+    const { tier, name, premium } = this.props.item;
+
     return (
-      <View style={container}>
-        <Text>WarshipLabel</Text>
-      </View>
+      <Caption numberOfLines={1} style={[style, label, {color: premium ? 'orange' : null}]}>
+        {`${getTierLabel(tier)} ${name}`}
+      </Caption>
     )
   };
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
+  label: {
+    textAlign: 'center',
   }
 });
 
