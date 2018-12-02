@@ -11,6 +11,7 @@ import { SAVED } from '../../value/data';
 import { WoWsInfo, WikiIcon } from '../../component';
 import { SuperGridSectionList } from 'react-native-super-grid';
 import { Actions } from 'react-native-router-flux';
+import { SafeAction } from '../../core';
 
 class CommanderSkill extends Component {
   constructor(props) {
@@ -43,7 +44,7 @@ class CommanderSkill extends Component {
     return (
       <WoWsInfo>
         <SuperGridSectionList itemDimension={64} sections={data}
-          renderItem={({item}) => <WikiIcon item={item} onPress={() => Actions.push('BasicDetail', {item: item})}/>}
+          renderItem={({item}) => <WikiIcon item={item} onPress={() => SafeAction('BasicDetail', {item: item})}/>}
           renderSectionHeader={({section}) => <Title style={header}>{section.title}</Title>}/>
       </WoWsInfo>
     )

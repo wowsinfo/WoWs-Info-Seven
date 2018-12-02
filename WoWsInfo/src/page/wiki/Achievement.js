@@ -10,6 +10,7 @@ import GridView from 'react-native-super-grid';
 import { SafeView, WikiIcon, WoWsInfo } from '../../component';
 import { SAVED } from '../../value/data';
 import { Actions } from 'react-native-router-flux';
+import { SafeAction } from '../../core';
 
 class Achievement extends Component {
   constructor(props) {
@@ -39,7 +40,7 @@ class Achievement extends Component {
     return (
       <WoWsInfo>
         <GridView itemDimension={64} items={data} renderItem={item => {
-          return <WikiIcon item={item} onPress={() => Actions.push('BasicDetail', {item: item})}/>
+          return <WikiIcon item={item} onPress={() => SafeAction('BasicDetail', {item: item})}/>
         }}/>
       </WoWsInfo>
     )

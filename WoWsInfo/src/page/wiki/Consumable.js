@@ -12,6 +12,7 @@ import { Surface, Text } from 'react-native-paper';
 import { BackButton, LoadingModal, WikiIcon, WoWsInfo } from '../../component';
 import { SAVED, LOCAL } from '../../value/data';
 import { Actions } from 'react-native-router-flux';
+import { SafeAction } from '../../core';
 
 class Consumable extends Component {
   constructor(props) {
@@ -70,7 +71,7 @@ class Consumable extends Component {
     return (
       <View style={{flex: 1}}>
         <GridView itemDimension={64} items={data} renderItem={item => {
-          return <WikiIcon item={item} onPress={() => Actions.BasicDetail({item: item})}/>
+          return <WikiIcon item={item} onPress={() => SafeAction('BasicDetail', {item: item})}/>
         }}/>
       </View>
     )

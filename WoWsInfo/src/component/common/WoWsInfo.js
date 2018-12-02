@@ -11,6 +11,7 @@ import { isAndroid } from 'react-native-device-detection';
 import lang from '../../value/lang';
 import { Actions } from 'react-native-router-flux';
 import { BackButton } from './BackButton';
+import { SafeAction } from '../../core';
 
 class WoWsInfo extends Component {
   constructor(props) {
@@ -57,10 +58,7 @@ class WoWsInfo extends Component {
    * Navigate to About page
    */
   navigate() {
-    if (Actions.currentScene !== 'About') {
-      // Add guard so that it wont push twice]
-      Actions.About();
-    }
+    SafeAction('About');
   }
 }
 
