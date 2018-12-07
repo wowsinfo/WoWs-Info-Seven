@@ -39,7 +39,7 @@ class Achievement extends Component {
     const { data } = this.state;
     return (
       <WoWsInfo>
-        <GridView itemDimension={64} items={data} renderItem={item => {
+        <GridView itemDimension={80} items={data} renderItem={item => {
           return <WikiIcon item={item} onPress={() => SafeAction('BasicDetail', {item: item})}/>
         }}/>
       </WoWsInfo>

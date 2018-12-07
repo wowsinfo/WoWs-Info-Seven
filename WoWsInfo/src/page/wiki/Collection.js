@@ -45,7 +45,7 @@ class Collection extends Component {
     const { data, collection, header } = this.state;
     return (
       <WoWsInfo>
-        <GridView inverted={!collection} itemDimension={64} items={data} renderItem={item => {
+        <GridView inverted={!collection} itemDimension={80} items={data} renderItem={item => {
           return <WikiIcon item={item} onPress={() => this.itemOrCollection(item)}/>
         }} ListHeaderComponent={() => {
           if (collection) {
