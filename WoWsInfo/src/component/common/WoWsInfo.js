@@ -27,7 +27,7 @@ class WoWsInfo extends Component {
   }
 
   render() {
-    const { container, text } = styles;
+    const { container, text, footer } = styles;
     const { children, title, noBack, style } = this.props;
     return (
       <Surface style={[container, style]}>
@@ -35,10 +35,12 @@ class WoWsInfo extends Component {
           <Surface style={container}>
             { children }
           </Surface>
-          { noBack ? null : <BackButton /> }
-          <Button onPress={this.pressEvent} style={text}>
-            { title ? title : `WoWs Info ${this.lucky}`}
-          </Button>
+          <Surface style={footer}>
+            { noBack ? null : <BackButton /> }
+            <Button onPress={this.pressEvent} style={text}>
+              { title ? title : `WoWs Info ${this.lucky}`}
+            </Button>
+          </Surface>
         </SafeAreaView>
       </Surface>
     )
@@ -64,13 +66,17 @@ class WoWsInfo extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
   },
   text: {
     fontSize: 17, fontWeight: isAndroid ? 'bold' : '300',
     textAlign: 'center', alignSelf: 'center',
     width: '70%',
-    marginBottom: 4
+  },
+  footer: {
+    height: 48, 
+    justifyContent: 'center',
+    borderWidth: 1
   }
 });
 

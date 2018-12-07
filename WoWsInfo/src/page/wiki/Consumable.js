@@ -70,7 +70,7 @@ class Consumable extends Component {
 
     return (
       <View style={{flex: 1}}>
-        <GridView itemDimension={64} items={data} renderItem={item => {
+        <GridView itemDimension={80} items={data} renderItem={item => {
           return <WikiIcon item={item} onPress={() => SafeAction('BasicDetail', {item: item})}/>
         }}/>
       </View>

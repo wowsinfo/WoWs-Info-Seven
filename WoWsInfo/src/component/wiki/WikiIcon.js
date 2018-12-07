@@ -22,7 +22,7 @@ class WikiIcon extends Component {
     const { container, newLabel, indicator } = styles;
     const { loading } = this.state;
     const { item, scale, ...props } = this.props;
-    let width = 64;
+    let width = 80;
     if (scale) width *= scale;
 
     return (

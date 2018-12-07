@@ -43,7 +43,7 @@ class Warship extends Component {
   }
 
   render() {
-    const { container, input } = styles;
+    const { container, input, apply } = styles;
     const { data, filter, tier, nation, type, name, premium, accordion } = this.state;
 
     const tierList = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'XI', 'X'];
@@ -70,8 +70,7 @@ class Warship extends Component {
               <TextInput style={input} value={name} onChangeText={text => this.setState({name: text})}
                 autoCorrect={false} autoCapitalize='none' placeholder={lang.wiki_warship_filter_placeholder}/>
               <List.Item title={lang.wiki_warship_filter_premiumm} 
-                right={() => <Checkbox status={premium ? 'checked' : 'unchecked'}/>}/>
-              <Divider />              
+                right={() => <Checkbox status={premium ? 'checked' : 'unchecked'}/>}/>             
               <List.Accordion title={tier} expanded={accordion === 1}
                 onPress={() => this.hideAccordion(1)}>
                 <FlatList data={tierList} renderItem={({item}) => {
@@ -90,10 +89,7 @@ class Warship extends Component {
                     return <Button color={textColour} style={{flex: 1}} onPress={() => null}>{item}</Button>
                   }} numColumns={2} keyExtractor={item => item}/>
               </List.Accordion>
-              <Divider />
-              <Dialog.Actions>
-                <Button onPress={this.dismissFilter}>{lang.wiki_warship_filter_btn}</Button>
-              </Dialog.Actions>
+              <Button style={apply} onPress={this.dismissFilter}>{lang.wiki_warship_filter_btn}</Button>
             </Dialog.ScrollArea>
           </Dialog>
         </Portal>
@@ -117,7 +113,10 @@ const styles = StyleSheet.create({
     left: 0
   },
   input: {
-    padding: 16
+    padding: 16, marginTop: 16
+  },
+  apply: {
+    padding: 8
   }
 });
 

@@ -43,7 +43,7 @@ class CommanderSkill extends Component {
     const { header } = styles;
     return (
       <WoWsInfo>
-        <SuperGridSectionList itemDimension={64} sections={data}
+        <SuperGridSectionList itemDimension={80} sections={data}
           renderItem={({item}) => <WikiIcon item={item} onPress={() => SafeAction('BasicDetail', {item: item})}/>}
           renderSectionHeader={({section}) => <Title style={header}>{section.title}</Title>}/>
       </WoWsInfo>
