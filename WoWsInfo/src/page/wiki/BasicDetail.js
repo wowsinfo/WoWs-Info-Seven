@@ -8,15 +8,14 @@
 import React, { Component } from 'react';
 import { Text, ScrollView, StyleSheet } from 'react-native';
 import { Surface, Title, Paragraph, Caption } from 'react-native-paper';
-import { FloatingButton, WikiIcon, SafeView } from '../../component';
+import { FloatingButton, WikiIcon, WoWsInfo } from '../../component';
 
 class BasicDetail extends Component {
   render() {
     return (
-      <SafeView>
+      <WoWsInfo>
         { this.renderDetail() }
-        <FloatingButton />
-      </SafeView>
+      </WoWsInfo>
     )
   };
 
@@ -28,16 +27,17 @@ class BasicDetail extends Component {
       // Consumables
       const { name, description, price_credit, price_gold, profile } = item;
       let price = price_gold == 0 ? price_credit : price_gold;
+      let priceColour = price_credit == 0 ? 'orange' : 'grey'; 
       let bonus = Object.entries(profile).reduce((total, curr) => {
-        return total + curr[1].description + "\n"
+        return total + curr[1].description;
       }, "");
 
       return (
         <ScrollView contentContainerStyle={container}>
-          <WikiIcon item={item}/>
+          <WikiIcon scale={1.6} item={item}/>
           <Title style={label}>{name}</Title>
-          <Text style={label}>{price + "\n"}</Text>
-          <Paragraph style={label}>{description + "\n"}</Paragraph>
+          <Text style={[label, {color: priceColour}]}>{price}</Text>
+          <Paragraph style={label}>{description}</Paragraph>
           <Caption style={label}>{bonus}</Caption>
         </ScrollView>
       )
@@ -45,12 +45,12 @@ class BasicDetail extends Component {
       // This is commander skill
       const { name, perks } = item;
       let bonus = Object.entries(perks).reduce((total, curr) => {
-        return total + curr[1].description + "\n"
+        return total + curr[1].description;
       }, "");
 
       return (
         <ScrollView contentContainerStyle={container}>
-          <WikiIcon item={item}/>
+          <WikiIcon scale={1.6} item={item}/>
           <Title style={label}>{name}</Title>
           <Paragraph style={label}>{bonus}</Paragraph>
         </ScrollView>
@@ -61,7 +61,7 @@ class BasicDetail extends Component {
 
       return (
         <ScrollView contentContainerStyle={container}>
-          <WikiIcon item={item}/>
+          <WikiIcon scale={1.6} item={item}/>
           <Title style={label}>{name}</Title>
           <Paragraph style={label}>{description}</Paragraph>
         </ScrollView>
@@ -78,7 +78,8 @@ const styles = StyleSheet.create({
   },
   label: {
     textAlign: 'center',
-    margin: 8
+    margin: 8,
+    marginTop: 8
   },
 });
 
