@@ -11,7 +11,7 @@ class Settings extends Component {
     const { container, tint } = styles;
     const store = isAndroid ? APP.GooglePlay : APP.AppStore;
     return (
-      <WoWsInfo about>
+      <WoWsInfo about noLeft>
         <ScrollView>
           <List.Section title='API Settings'>
             <List.Accordion title='Game Server - ASIA'>

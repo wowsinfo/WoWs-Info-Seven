@@ -20,7 +20,7 @@ class FooterButton extends Component {
 
   pressEvent() {
     const { icon } = this.props;
-    if (icon === 'setting') SafeAction('Settings');
+    if (icon === 'settings') SafeAction('Settings');
     else if (icon === 'arrow-back') Actions.pop();
     else if (icon === 'home') Actions.popTo('Menu');
     else SafeAction('Menu');

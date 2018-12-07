@@ -29,11 +29,6 @@ class Home extends Component {
     const appTheme = DATA[LOCAL.theme];
     return (
       <WoWsInfo style={container} home about>
-        <Surface style={header}>
-          <Text numberOfLines={1} style={playerLabel}>WoWs Info</Text>
-          <IconButton icon='settings' size={24} color={Colors.grey500}
-            onPress={() => SafeAction('Settings')}/>
-        </Surface>
         <TabView renderTabBar={props =>
             <TabBar {...props} renderLabel={r => {
               return <Text style={{fontWeight: '500', fontSize: 17, color: appTheme[700]}}>{r.route.title}</Text>
