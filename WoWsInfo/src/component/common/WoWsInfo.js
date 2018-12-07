@@ -10,7 +10,7 @@ import { Button, Surface } from 'react-native-paper';
 import { isAndroid } from 'react-native-device-detection';
 import lang from '../../value/lang';
 import { Actions } from 'react-native-router-flux';
-import { BackButton } from './BackButton';
+import { FooterButton } from './FooterButton';
 import { SafeAction } from '../../core';
 
 class WoWsInfo extends Component {
@@ -28,23 +28,36 @@ class WoWsInfo extends Component {
 
   render() {
     const { container, text, footer } = styles;
-    const { children, title, noBack, style } = this.props;
+    const { children, style } = this.props;
     return (
       <Surface style={[container, style]}>
         <SafeAreaView style={container}>
           <Surface style={container}>
             { children }
           </Surface>
-          <Surface style={footer}>
-            { noBack ? null : <BackButton /> }
-            <Button onPress={this.pressEvent} style={text}>
-              { title ? title : `WoWs Info ${this.lucky}`}
-            </Button>
-          </Surface>
+          { this.renderFooter() }
         </SafeAreaView>
       </Surface>
     )
   };
+
+  renderFooter() {
+    const { title, noBack, home } = this.props;
+    if (home) {
+      return (
+null
+      )
+    } else {
+      return (
+        <Surface style={footer}>
+          { noBack ? null : <FooterButton /> }
+          <Button onPress={this.pressEvent} style={text}>
+            { title ? title : `WoWs Info ${this.lucky}`}
+          </Button>
+        </Surface>
+      )
+    }
+  }
 
   /**
    * Handle press event, dont always go to about page

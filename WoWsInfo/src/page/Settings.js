@@ -3,7 +3,7 @@ import { View, ScrollView, SafeAreaView, StyleSheet, Linking, Share } from 'reac
 import { isAndroid } from 'react-native-device-detection';
 import { Surface, List, Button, Checkbox, Colors, withTheme } from 'react-native-paper';
 import { Actions } from 'react-native-router-flux';
-import { BackButton, WoWsInfo, DividerPlus } from '../component';
+import { FooterButton, WoWsInfo, DividerPlus } from '../component';
 import { APP } from '../value/data';
 
 class Settings extends Component {

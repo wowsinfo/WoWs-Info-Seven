@@ -1,5 +1,5 @@
 export * from './common/FloatingButton';
-export * from './common/BackButton';
+export * from './common/FooterButton';
 export * from './common/Touchable';
 
 export * from './common/WoWsInfo';
