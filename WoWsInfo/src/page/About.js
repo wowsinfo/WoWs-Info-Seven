@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Image, ScrollView, StyleSheet } from 'react-native';
 import { Surface, Text, Title } from 'react-native-paper';
-import { BackButton } from '../component';
+import { FooterButton } from '../component';
 import { APP } from '../value/data';
 
 class About extends Component {
@@ -18,7 +18,7 @@ class About extends Component {
           <Title>WoWs Info</Title>
           <Text>{APP.Version}</Text>
         </ScrollView>
-        <BackButton />
+        <FooterButton />
       </Surface>
     )
   };

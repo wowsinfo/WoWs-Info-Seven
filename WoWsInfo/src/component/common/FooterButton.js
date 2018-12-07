@@ -4,7 +4,7 @@ import { isAndroid } from 'react-native-device-detection';
 import { IconButton, Colors } from 'react-native-paper';
 import { Actions } from 'react-native-router-flux';
 
-class BackButton extends Component {
+class FooterButton extends Component {
   render() {
     const { container } = styles;
     // Android has a back button so we dont have to add another one
@@ -25,4 +25,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export { BackButton };
+export { FooterButton };
