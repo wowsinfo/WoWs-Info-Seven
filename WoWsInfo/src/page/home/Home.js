@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, SafeAreaView, ScrollView, Dimensions } from 'react-native';
 import { IconButton, Text, Colors, Surface } from 'react-native-paper';
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
-import { FloatingButton, SafeView } from '../../component';
+import { FloatingButton, SafeView, WoWsInfo } from '../../component';
 import { Actions } from 'react-native-router-flux';
 import { GREY } from 'react-native-material-color';
 import { LOCAL } from '../../value/data';
@@ -28,7 +28,7 @@ class Home extends Component {
     const { container, playerLabel, header } = styles;
     const appTheme = DATA[LOCAL.theme];
     return (
-      <SafeView theme={{colors: {background: GREY[800]}}} style={container}>
+      <WoWsInfo style={container} home about>
         <Surface style={header}>
           <Text numberOfLines={1} style={playerLabel}>WoWs Info</Text>
           <IconButton icon='settings' size={24} color={Colors.grey500}
@@ -48,8 +48,7 @@ class Home extends Component {
           })} onIndexChange={index => this.setState({index})}
           initialLayout={Dimensions.get('window')}
         />
-        <FloatingButton />
-      </SafeView>
+      </WoWsInfo>
     );
   }
 }
