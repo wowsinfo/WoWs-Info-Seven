@@ -14,7 +14,7 @@ class WarshipCell extends Component {
     const { item } = this.props;
     return (
       <View style={container}>
-        <WikiIcon item={item} scale={1.5}/>
+        <WikiIcon item={item} scale={1.4}/>
         <WarshipLabel style={{marginTop: -16}}item={item}/>
       </View>
     )

@@ -97,7 +97,6 @@ const styles = StyleSheet.create({
   footer: {
     height: 48, 
     justifyContent: 'center',
-    borderWidth: 1
   }
 });
 
