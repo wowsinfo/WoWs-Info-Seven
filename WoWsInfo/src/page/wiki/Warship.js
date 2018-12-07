@@ -60,9 +60,9 @@ class Warship extends Component {
 
     return (
       <WoWsInfo title={lang.wiki_warship_footer} onPress={() => this.setState({filter: true})}>
-        {/* <GridView itemDimension={96} items={data} renderItem={(item) => {
+        <GridView itemDimension={100} items={data} renderItem={(item) => {
           return <WarshipCell item={item}/>
-        }}/> */}
+        }}/>
 
         <Portal>
           <Dialog theme={{roundness: 16}} visible={filter} onDismiss={this.dismissFilter}>
