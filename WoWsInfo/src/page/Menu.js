@@ -56,11 +56,11 @@ class Menu extends Component {
   }
 
   render() {
-    const { container, searchBar } = styles;
-    const { search, server } = this.state;
+    const { searchBar } = styles;
+    const { search } = this.state;
 
     return (
-      <WoWsInfo title={lang.menu_footer} onPress={() => this.refs['search'].focus()}>
+      <WoWsInfo noLeft title={lang.menu_footer} onPress={() => this.refs['search'].focus()}>
         <Searchbar ref='search' value={search} style={searchBar} placeholder={lang.search_placeholder}
           onChangeText={text => this.setState({search: text})} autoCorrect={false} autoCapitalize='none'/>
         { this.renderContent() }

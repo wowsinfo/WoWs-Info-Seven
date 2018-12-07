@@ -27,7 +27,7 @@ class WoWsInfo extends Component {
   }
 
   render() {
-    const { container, text, footer } = styles;
+    const { container } = styles;
     const { children, style } = this.props;
     return (
       <Surface style={[container, style]}>
@@ -42,18 +42,26 @@ class WoWsInfo extends Component {
   };
 
   renderFooter() {
-    const { title, noBack, home } = this.props;
+    const { text, footer } = styles;
+    const { title, noRight, noLeft, home } = this.props;
     if (home) {
       return (
-null
+        <Surface style={footer}>
+          { noLeft ? null : <FooterButton icon='settings' left/> }
+          <Button onPress={this.pressEvent} style={text}>
+            { title ? title : `WoWs Info ${this.lucky}`}
+          </Button>
+          { noRight ? null : <FooterButton icon={require('../../img/Warship.png')}/> }
+        </Surface>
       )
     } else {
       return (
         <Surface style={footer}>
-          { noBack ? null : <FooterButton /> }
+          { noLeft ? null : <FooterButton icon='home' left/> }
           <Button onPress={this.pressEvent} style={text}>
             { title ? title : `WoWs Info ${this.lucky}`}
           </Button>
+          { noRight ? null : <FooterButton icon='arrow-back'/> }
         </Surface>
       )
     }
