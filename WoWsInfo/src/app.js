@@ -72,7 +72,7 @@ class App extends Component {
       <Surface style={container}>
         <StatusBar barStyle={dark ? 'light-content' : 'dark-content'} 
           backgroundColor={dark ? 'black' : GREY[200]}/>
-        <Router sceneStyle={scene}>
+        <Router sceneStyle={[scene, {backgroundColor: dark ? 'black' : 'white'}]}>
           <Stack key='root' hideNavBar>
             <Scene key='Home' component={Home}/>
             <Scene key='Setup' component={Setup} initial={DATA[LOCAL.firstLaunch]}/>
