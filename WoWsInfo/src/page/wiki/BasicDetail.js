@@ -8,7 +8,7 @@
 import React, { Component } from 'react';
 import { Text, ScrollView, StyleSheet } from 'react-native';
 import { Surface, Title, Paragraph, Caption } from 'react-native-paper';
-import { FloatingButton, WikiIcon, WoWsInfo } from '../../component';
+import { FloatingButton, WikiIcon, WoWsInfo, PriceLabel } from '../../component';
 
 class BasicDetail extends Component {
   render() {
@@ -25,9 +25,7 @@ class BasicDetail extends Component {
     console.log(item);
     if (item.profile) {
       // Consumables
-      const { name, description, price_credit, price_gold, profile } = item;
-      let price = price_gold == 0 ? price_credit : price_gold;
-      let priceColour = price_credit == 0 ? 'orange' : 'grey'; 
+      const { name, description, profile } = item;
       let bonus = Object.entries(profile).reduce((total, curr) => {
         return total + curr[1].description;
       }, "");
@@ -36,7 +34,7 @@ class BasicDetail extends Component {
         <ScrollView contentContainerStyle={container}>
           <WikiIcon scale={1.6} item={item}/>
           <Title style={label}>{name}</Title>
-          <Text style={[label, {color: priceColour}]}>{price}</Text>
+          <PriceLabel item={item}/>
           <Paragraph style={label}>{description}</Paragraph>
           <Caption style={label}>{bonus}</Caption>
         </ScrollView>

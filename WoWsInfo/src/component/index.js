@@ -11,3 +11,4 @@ export * from './common/LoadingModal';
 export * from './wiki/WikiIcon';
 export * from './wiki/WarshipCell';
 export * from './wiki/WarshipLabel';
+export * from './wiki/PriceLabel';
