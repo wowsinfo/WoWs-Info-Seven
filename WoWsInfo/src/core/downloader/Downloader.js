@@ -44,7 +44,7 @@ class Downloader {
         DATA[SAVED.pr] = await this.getPR();
   
         console.log(DATA);
-        
+
         // Make sure it is also great than current version
         // Update this value only if all data are saved correctly
         SafeStorage.set(LOCAL.gameVersion, gameVersion);
@@ -155,7 +155,6 @@ class Downloader {
     if (this.new === true) {
       for (let id in data) {
         let curr = data[id];
-        console.log(DATA[SAVED.achievement][id]);
         curr.new = DATA[SAVED.achievement][id] ? false : true;
       }
     }
