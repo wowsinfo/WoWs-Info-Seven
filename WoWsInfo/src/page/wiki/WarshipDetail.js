@@ -38,6 +38,8 @@ class WarshipDetail extends PureComponent {
       loading: true,
       data: {}
     };
+
+    this.delayedRequest = null;
   }
 
   componentWillMount() {
@@ -125,7 +127,7 @@ class WarshipDetail extends PureComponent {
           <FlatList keyExtractor={item => item.name} horizontal data={similar} renderItem={({item}) => {
             return <WarshipCell item={item} scale={1.4} onPress={() => {
               this.setState({curr: item, loading: true}, 
-                () => this.requestData(item.ship_id));
+                () => this.efficientDataRequest(item.ship_id));
             }}/>
           }}/>
         </View>
@@ -133,12 +135,15 @@ class WarshipDetail extends PureComponent {
     } else return null;
   }
 
-  async requestData(id) {
-    let json = await SafeFetch.get(WoWsAPI.ShipWiki, this.server, id, langStr());
-    let data = Guard(json, 'data', {});
-
-    console.log(data);
-    this.setState({data: data[id], loading: false});
+  efficientDataRequest(id) {
+    clearTimeout(this.delayedRequest);
+    this.delayedRequest = setTimeout(() => {
+      SafeFetch.get(WoWsAPI.ShipWiki, this.server, id, langStr()).then(json => {
+        let data = Guard(json, 'data', {});
+        console.log(data);
+        this.setState({data: data[id], loading: false});
+      });
+    }, 1000);
   }
 }
 

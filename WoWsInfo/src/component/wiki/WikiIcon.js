@@ -29,7 +29,7 @@ class WikiIcon extends Component {
       return (
         <View style={container}>
           { item.new ? <View style={[newLabel, {backgroundColor: DATA[LOCAL.theme][500]}]}/> : null }
-          <Image source={{uri: item.image ? item.image : item.icon}} resizeMode='contain'
+          <Image source={{uri: item.image ? item.image : item.icon, cache: 'default'}} resizeMode='contain'
             onLoadEnd={() => this.setState({loading: false})} 
             style={{width: width, height: width / 1.7, borderRadius: 8}} />
           { loading ? <ActivityIndicator style={indicator}/> : null }
@@ -39,7 +39,7 @@ class WikiIcon extends Component {
       return (
         <Touchable style={container} {...props}>
           { item.new ? <View style={[newLabel, {backgroundColor: DATA[LOCAL.theme][500]}]}/> : null }
-          <Image source={{uri: item.image ? item.image : item.icon}} resizeMode='contain'
+          <Image source={{uri: item.image ? item.image : item.icon, cache: 'default'}} resizeMode='contain'
             onLoadEnd={() => this.setState({loading: false})} 
             style={{height: width, width: width, borderRadius: 8}} />
           { loading ? <ActivityIndicator style={indicator}/> : null }
