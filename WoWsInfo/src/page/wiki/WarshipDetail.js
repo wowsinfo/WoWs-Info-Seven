@@ -4,16 +4,16 @@
  * 
  */
 
-import React, { Component } from 'react';
-import { View, FlatList, Linking, ScrollView, StyleSheet } from 'react-native';
-import { Text, Title, Subheading, Headline, Button, Surface, Paragraph } from 'react-native-paper';
-import { WoWsInfo, WikiIcon, WarshipCell, LoadingModal } from '../../component';
+import React, { PureComponent } from 'react';
+import { View, FlatList, ActivityIndicator,Linking, ScrollView, StyleSheet } from 'react-native';
+import { Text, Title, Subheading, Headline, Button, Surface, Paragraph, List } from 'react-native-paper';
+import { WoWsInfo, WikiIcon, WarshipCell, LoadingModal, PriceLabel } from '../../component';
 import { SAVED, SERVER, LOCAL } from '../../value/data';
 import lang from '../../value/lang';
 import { SafeFetch, langStr, Guard } from '../../core';
 import { WoWsAPI } from '../../value/api';
 
-class WarshipDetail extends Component {
+class WarshipDetail extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -46,13 +46,14 @@ class WarshipDetail extends Component {
   }
 
   render() {
-    const { curr, loading, similar } = this.state;
+    const { curr, similar } = this.state;
     if (curr) {
       return (
-        <WoWsInfo title={curr.ship_id}>
-            <ScrollView style={{flex: 1}}>
-              { this.renderContent() }
-            </ScrollView> 
+        <WoWsInfo title={`${curr.ship_id_str} ${curr.ship_id}`}>
+          <ScrollView style={{flex: 1}}>
+            <WikiIcon warship item={curr} scale={3}/>
+            { this.renderContent() }
+          </ScrollView> 
           { this.renderSimilar(similar) }
         </WoWsInfo>
       )
@@ -64,36 +65,52 @@ class WarshipDetail extends Component {
   renderContent() {
     const { curr, loading, data } = this.state;
     if (loading) {
-      return <LoadingModal />
+      return <ActivityIndicator />
     } else {
       return (
-        <Surface>
-          <WikiIcon warship item={curr} scale={3}/>
-          { this.renderBasic(curr, data) }
-          { this.renderAll(data) }
-        </Surface>
+       <View>
+        { this.renderBasic(curr, data) }
+        { this.renderAll(data) }
+       </View>
       )
     }
   }
 
   renderBasic(curr, data) {
-    const { container, shipTitle } = styles;
+    const { container, shipTitle, centerText, modelBtn } = styles;
     const { name, model, type, nation } = curr;
-    const { description } = this.state.data;
+    const { description } = data;
 
     return (
       <View style={container}>
         <Title style={shipTitle}>{name}</Title>
         <Text>{nation.toUpperCase()}</Text>
         <Text>{type}</Text>
-        { model ? <Button onPress={() => Linking.openURL(`https://sketchfab.com/models/${model}/embed?autostart=1&preload=1`)}>{lang.warship_model}</Button> : null }
-        <Paragraph>{description}</Paragraph>
+        <PriceLabel item={data}/>
+        { model ? <Button style={modelBtn} onPress={() => Linking.openURL(`https://sketchfab.com/models/${model}/embed?autostart=1&preload=1`)}>
+          {lang.warship_model}
+        </Button> : null }
+        <Paragraph style={centerText}>{description}</Paragraph>
       </View>
     )
   }
 
   renderAll(curr) {
-
+    const { default_profile, modules_tree, modules, next_ships } = curr;
+    return (
+      <View>
+        <List.Accordion title='Hello'>
+        </List.Accordion>
+        <List.Accordion title='Hello'>
+        </List.Accordion>
+        <List.Accordion title='Hello'>
+        </List.Accordion>
+        <List.Accordion title='Hello'>
+        </List.Accordion>
+        <List.Accordion title='Hello'>
+        </List.Accordion>
+      </View>
+    )
   }
 
   /**
@@ -107,7 +124,6 @@ class WarshipDetail extends Component {
         <View style={{height: 76}}>
           <FlatList keyExtractor={item => item.name} horizontal data={similar} renderItem={({item}) => {
             return <WarshipCell item={item} scale={1.4} onPress={() => {
-              if (item.ship_id === curr.ship_id) return;
               this.setState({curr: item, loading: true}, 
                 () => this.requestData(item.ship_id));
             }}/>
@@ -133,7 +149,14 @@ const styles = StyleSheet.create({
   },
   shipTitle: {
     fontSize: 24,
-    marginBottom: 16
+    paddingBottom: 16
+  },
+  modelBtn: {
+    marginTop: 8
+  },
+  centerText: {
+    textAlign: 'center',
+    padding: 8
   }
 });
 
