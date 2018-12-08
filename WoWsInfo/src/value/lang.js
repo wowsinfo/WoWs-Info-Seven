@@ -14,6 +14,8 @@ export default lang = new LocalizedStrings({
     wiki_warship_filter_nation: 'Select a nation',
     wiki_warship_filter_type: 'Select a ship type',
     wiki_warship_filter_premiumm: 'Premium ship',
+    // Warship Detail
+    warship_model: '3D Model',
     /// Menu section
     // Footer
     menu_footer: 'Search',
