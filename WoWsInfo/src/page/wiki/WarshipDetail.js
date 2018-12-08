@@ -44,7 +44,7 @@ class WarshipDetail extends PureComponent {
 
   componentWillMount() {
     // Start loading data here
-    this.requestData(this.props.item.ship_id);
+    this.efficientDataRequest(this.props.item.ship_id);
   }
 
   render() {
