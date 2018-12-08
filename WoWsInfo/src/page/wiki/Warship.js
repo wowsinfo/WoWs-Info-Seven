@@ -11,6 +11,7 @@ import GridView from 'react-native-super-grid';
 import { SAVED, LOCAL } from '../../value/data';
 import { Portal, Dialog, Button, Divider, List, Checkbox, Colors } from 'react-native-paper';
 import lang from '../../value/lang';
+import { SafeAction } from '../../core';
 
 class Warship extends Component {
   constructor(props) {
@@ -61,7 +62,7 @@ class Warship extends Component {
     return (
       <WoWsInfo title={lang.wiki_warship_footer} onPress={() => this.setState({filter: true})}>
         <GridView itemDimension={100} items={data} renderItem={(item) => {
-          return <WarshipCell item={item}/>
+          return <WarshipCell scale={1.4} item={item} onPress={() => SafeAction('WarshipDetail', {item: item})}/>
         }}/>
 
         <Portal>

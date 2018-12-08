@@ -16,7 +16,7 @@ class WarshipLabel extends Component {
     const { tier, name, premium } = this.props.item;
 
     return (
-      <Caption numberOfLines={1} style={[style, label, {color: premium ? 'orange' : null}]}>
+      <Caption numberOfLines={1} style={[style, label, premium ? {color: 'orange'} : {}]}>
         {`${getTierLabel(tier)} ${name}`}
       </Caption>
     )
