@@ -99,6 +99,17 @@ class Downloader {
     let page = 0;
     let all = {};
 
+    // Download data from Github
+    console.log('API from Github')
+    let res = await fetch(WikiAPI.HenryQuan);
+
+    let Henry = {};
+    if (res.status === 200) {
+      Henry = await res.json();
+    }
+
+    console.log(Henry);
+    
     while (page < pageTotal) {
       // page + 1 to get actually page not index
       let json = await SafeFetch.get(WikiAPI.Warship, this.server, `&page_no=${page+1}&${this.language}`);
@@ -119,6 +130,10 @@ class Downloader {
           // If it is undefined then it is new
           if (this.new === true) {
             curr.new = DATA[SAVED.warship][id] ? false : true;
+          }
+          // If it has some extra data
+          if (Henry[id]) {
+            curr.model = Henry[id].model;
           }
         }
       }
