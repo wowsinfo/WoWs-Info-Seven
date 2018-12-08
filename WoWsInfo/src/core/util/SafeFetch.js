@@ -6,7 +6,9 @@ class SafeFetch {
    */
   static get(api, ...extra) {
     const format = require('string-format');
-    let link = format(api, ...extra) + extra.pop();
+    let lang = '';
+    if (extra.length > 1) lang = extra.pop();
+    let link = format(api, ...extra) + lang; 
     console.log(`SafeFetch\n${link}`);
     return fetch(link).then(res => {
       // To make sure request is valid

@@ -6,7 +6,7 @@
 
 import React, { Component } from 'react';
 import { View, FlatList, Linking, ScrollView, StyleSheet } from 'react-native';
-import { Text, Title, Subheading, Headline, Button, Surface } from 'react-native-paper';
+import { Text, Title, Subheading, Headline, Button, Surface, Paragraph } from 'react-native-paper';
 import { WoWsInfo, WikiIcon, WarshipCell, LoadingModal } from '../../component';
 import { SAVED, SERVER, LOCAL } from '../../value/data';
 import lang from '../../value/lang';
@@ -62,29 +62,32 @@ class WarshipDetail extends Component {
   };
 
   renderContent() {
-    const { curr, loading } = this.state;
+    const { curr, loading, data } = this.state;
     if (loading) {
       return <LoadingModal />
     } else {
       return (
         <Surface>
           <WikiIcon warship item={curr} scale={3}/>
-          { this.renderBasic(curr) }
-          { this.renderAll(curr) }
+          { this.renderBasic(curr, data) }
+          { this.renderAll(data) }
         </Surface>
       )
     }
   }
 
-  renderBasic(curr) {
+  renderBasic(curr, data) {
     const { container, shipTitle } = styles;
-    const { ship_id, name, model, type, nation } = curr;
+    const { name, model, type, nation } = curr;
+    const { description } = this.state.data;
+
     return (
       <View style={container}>
         <Title style={shipTitle}>{name}</Title>
         <Text>{nation.toUpperCase()}</Text>
         <Text>{type}</Text>
         { model ? <Button onPress={() => Linking.openURL(`https://sketchfab.com/models/${model}/embed?autostart=1&preload=1`)}>{lang.warship_model}</Button> : null }
+        <Paragraph>{description}</Paragraph>
       </View>
     )
   }
@@ -119,7 +122,7 @@ class WarshipDetail extends Component {
     let data = Guard(json, 'data', {});
 
     console.log(data);
-    this.setState({data: data, loading: false});
+    this.setState({data: data[id], loading: false});
   }
 }
 
