@@ -32,8 +32,8 @@ class Home extends Component {
         <TabView renderTabBar={props =>
             <TabBar {...props} renderLabel={r => {
               return <Text style={{fontWeight: '500', fontSize: 17, color: appTheme[700]}}>{r.route.title}</Text>
-            }} style={{ backgroundColor: 'transparent' }}
-              indicatorStyle={{ backgroundColor: 'transparent'}}
+            }} style={{ backgroundColor: null }}
+              indicatorStyle={{ backgroundColor: null}}
             />
           } navigationState={this.state}
           renderScene={SceneMap({

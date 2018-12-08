@@ -7,16 +7,17 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { WikiIcon, WarshipLabel } from '../';
+import { Touchable } from '../common/Touchable';
 
 class WarshipCell extends Component {
   render() {
     const { container } = styles;
-    const { item } = this.props;
+    const { item, scale, onPress } = this.props;
     return (
-      <View style={container}>
-        <WikiIcon item={item} scale={1.4}/>
-        <WarshipLabel style={{marginTop: -16}}item={item}/>
-      </View>
+      <Touchable style={container} onPress={onPress}>
+        <WikiIcon warship item={item} scale={scale}/>
+        <WarshipLabel style={{marginTop: -8}} item={item}/>
+      </Touchable>
     )
   };
 }
