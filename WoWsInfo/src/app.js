@@ -25,7 +25,7 @@ class App extends Component {
       console.log(data);
       global.DATA = data;
       const appTheme = DATA[LOCAL.theme];
-      const darkMode = !DATA[LOCAL.darkMode];
+      const darkMode = DATA[LOCAL.darkMode];
 
       // Setup global dark theme
       global.DARK = {
