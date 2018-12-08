@@ -6,14 +6,18 @@
 
 import React, { Component } from 'react';
 import { View, FlatList, Linking, ScrollView, StyleSheet } from 'react-native';
-import { Text, Title, Subheading, Headline, Button } from 'react-native-paper';
-import { WoWsInfo, WikiIcon, WarshipCell } from '../../component';
-import { SAVED } from '../../value/data';
+import { Text, Title, Subheading, Headline, Button, Surface } from 'react-native-paper';
+import { WoWsInfo, WikiIcon, WarshipCell, LoadingModal } from '../../component';
+import { SAVED, SERVER, LOCAL } from '../../value/data';
 import lang from '../../value/lang';
+import { SafeFetch, langStr, Guard } from '../../core';
+import { WoWsAPI } from '../../value/api';
 
 class WarshipDetail extends Component {
   constructor(props) {
     super(props);
+
+    this.server = SERVER[DATA[LOCAL.userServer]];
 
     let curr = props.item;
     console.log(curr);
@@ -30,25 +34,47 @@ class WarshipDetail extends Component {
 
     this.state = {
       curr: props.item,
-      similar: similar
+      similar: similar,
+      loading: true,
+      data: {}
     };
   }
 
+  componentWillMount() {
+    // Start loading data here
+    this.requestData(this.props.item.ship_id);
+  }
+
   render() {
-    const { curr, similar } = this.state;
+    const { curr, loading, similar } = this.state;
     if (curr) {
       return (
         <WoWsInfo title={curr.ship_id}>
-          <ScrollView>
-            <WikiIcon warship item={curr} scale={3}/>
-            { this.renderBasic(curr) }
-            { this.renderAll(curr) }
-          </ScrollView>
+            <ScrollView style={{flex: 1}}>
+              { this.renderContent() }
+            </ScrollView> 
           { this.renderSimilar(similar) }
         </WoWsInfo>
       )
-    } 
+    } else {
+      // Bug here
+    }
   };
+
+  renderContent() {
+    const { curr, loading } = this.state;
+    if (loading) {
+      return <LoadingModal />
+    } else {
+      return (
+        <Surface>
+          <WikiIcon warship item={curr} scale={3}/>
+          { this.renderBasic(curr) }
+          { this.renderAll(curr) }
+        </Surface>
+      )
+    }
+  }
 
   renderBasic(curr) {
     const { container, shipTitle } = styles;
@@ -79,7 +105,8 @@ class WarshipDetail extends Component {
           <FlatList keyExtractor={item => item.name} horizontal data={similar} renderItem={({item}) => {
             return <WarshipCell item={item} scale={1.4} onPress={() => {
               if (item.ship_id === curr.ship_id) return;
-              this.setState({curr: item});
+              this.setState({curr: item, loading: true}, 
+                () => this.requestData(item.ship_id));
             }}/>
           }}/>
         </View>
@@ -87,8 +114,12 @@ class WarshipDetail extends Component {
     } else return null;
   }
 
-  requestData(id) {
+  async requestData(id) {
+    let json = await SafeFetch.get(WoWsAPI.ShipWiki, this.server, id, langStr());
+    let data = Guard(json, 'data', {});
 
+    console.log(data);
+    this.setState({data: data, loading: false});
   }
 }
 

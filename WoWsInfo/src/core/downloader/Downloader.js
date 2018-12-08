@@ -44,9 +44,11 @@ class Downloader {
         DATA[SAVED.pr] = await this.getPR();
   
         console.log(DATA);
+        
+        // Make sure it is also great than current version
+        // Update this value only if all data are saved correctly
+        SafeStorage.set(LOCAL.gameVersion, gameVersion);
       }
-      // Update this value only if all data are saved correctly
-      SafeStorage.set(LOCAL.gameVersion, gameVersion);
       return true;
     } catch (err) {
       return false;

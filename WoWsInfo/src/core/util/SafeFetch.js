@@ -1,7 +1,12 @@
 class SafeFetch {
-  static get(api, server, extra='') {
+  /**
+   * Make sure language is at the end
+   * @param {*} api 
+   * @param  {...any} extra 
+   */
+  static get(api, ...extra) {
     const format = require('string-format');
-    let link = format(api, server) + extra;
+    let link = format(api, ...extra) + extra.pop();
     console.log(`SafeFetch\n${link}`);
     return fetch(link).then(res => {
       // To make sure request is valid
