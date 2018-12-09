@@ -12,7 +12,8 @@ class Settings extends Component {
     super(props);
 
     this.state = {
-      server: lang.server[DATA[LOCAL.userServer]]
+      server_name: lang.server_name[DATA[LOCAL.userServer]],
+      apiLanguage: DATA[LOCAL.apiLanguage].toUpperCase()
     };
   }
 
@@ -23,33 +24,29 @@ class Settings extends Component {
       <WoWsInfo about>
         <ScrollView>
           <List.Section title='API Settings'>
-            <List.Accordion title={'Game Server - ' + this.state.server_name }>
+            <List.Accordion title={'Game Server - ' + this.state.server_name}>
               <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
-                <Button onPress={() => this.updateServer(0)}>
-                  {lang.server_name[0]}
-                </Button>
-                <Button onPress={() => this.updateServer(1)}>
-                  {lang.server_name[1]}
-                </Button>
-                <Button onPress={() => this.updateServer(2)}>
-                  {lang.server_name[2]}
-                </Button>
-                <Button onPress={() => this.updateServer(3)}>
-                  {lang.server_name[3]}
-                </Button>
+                {lang.server_name.map((object, index) => 
+                  <Button 
+                    key = {object}
+                    onPress={() => this.updateServer(index)}
+                  >
+                    {lang.server_name[index]}
+                  </Button>
+                )}
               </View>
             </List.Accordion>
-            <List.Accordion title='API Language - English'>
+            <List.Accordion title={'API Language - ' + this.state.apiLanguage}>
               <ScrollView horizontal
                 contentContainerStyle={{flexDirection: 'row'}}>
-                <Button>RU</Button>
-                <Button>RU</Button>
-                <Button>RU</Button>
-                <Button>RU</Button>
-                <Button>RU</Button>
-                <Button>RU</Button>
-                <Button>RU</Button>
-                <Button>RU</Button>
+                {Object.keys(DATA[SAVED.language]).map((language) => 
+                  <Button 
+                  key = {language}
+                  onPress={() => this.updateApiLanguage(language)}
+                  >
+                    {language}
+                  </Button>
+                )}
               </ScrollView>
             </List.Accordion>
           </List.Section>
@@ -89,8 +86,16 @@ class Settings extends Component {
    * Update server that's being used
    */
   updateServer(index) {
-    DATA[LOCAL.userServer] = index; 
-    this.setState({server: lang.server_name[DATA[LOCAL.userServer]]});
+    DATA[LOCAL.userServer] = index;
+    this.setState({server_name: lang.server_name[DATA[LOCAL.userServer]]});    
+  }
+
+  /**
+   * Update apiLanguage that's being used
+   */
+  updateApiLanguage(language) {
+    DATA[LOCAL.apiLanguage] = language;
+    this.setState({apiLanguage: DATA[LOCAL.apiLanguage].toUpperCase()});
   }
 }
 
