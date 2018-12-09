@@ -9,7 +9,7 @@ import { TextInput, FlatList, StyleSheet } from 'react-native';
 import { WoWsInfo, WarshipCell } from '../../component';
 import GridView from 'react-native-super-grid';
 import { SAVED, LOCAL } from '../../value/data';
-import { Portal, Dialog, Button, Divider, List, Checkbox, Colors } from 'react-native-paper';
+import { Portal, Dialog, Button, Divider, List, Modal, Checkbox, Colors, Surface } from 'react-native-paper';
 import lang from '../../value/lang';
 import { SafeAction } from '../../core';
 
@@ -66,7 +66,8 @@ class Warship extends Component {
         }}/>
 
         <Portal>
-          <Dialog theme={{roundness: 16}} visible={filter} onDismiss={this.dismissFilter}>
+          <Modal theme={{roundness: 16}} visible={filter} onDismiss={this.dismissFilter}>
+            <Surface>
               <TextInput style={input} value={name} onChangeText={text => this.setState({name: text})}
                 autoCorrect={false} autoCapitalize='none' placeholder={lang.wiki_warship_filter_placeholder}/>
               <List.Item title={lang.wiki_warship_filter_premiumm} 
@@ -90,7 +91,8 @@ class Warship extends Component {
                   }} numColumns={2} keyExtractor={item => item}/>
               </List.Accordion>
               <Button style={apply} onPress={this.dismissFilter}>{lang.wiki_warship_filter_btn}</Button>
-          </Dialog>
+            </Surface>
+          </Modal>
         </Portal>
       </WoWsInfo>
     )
