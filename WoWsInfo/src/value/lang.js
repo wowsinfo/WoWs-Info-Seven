@@ -67,6 +67,8 @@ export default lang = new LocalizedStrings({
     wowsinfo_pro: 'Pro',
     wowsinfo_new: 'New',
     wowsinfo_go: 'Go',
+    wowsinfo_origin: 'Origin',
+    wowsinfo_free: 'Free',
     /// RS section
     // Tips
     rs_tip_download: '1. Download',
