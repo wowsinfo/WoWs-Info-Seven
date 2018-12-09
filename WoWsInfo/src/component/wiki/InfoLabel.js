@@ -14,8 +14,8 @@ class InfoLabel extends Component {
     const { title, info } = this.props;
     return (
       <View style={container}>
-        <Caption>{title}</Caption>
-        <Text>{info}</Text>
+        <Caption style={{textAlign: 'center', marginBottom: -4}}>{title}</Caption>
+        <Text style={{textAlign: 'center'}}>{info}</Text>
       </View>
     )
   };
