@@ -5,10 +5,10 @@
  */
 
 import React, { Component } from 'react';
-import { ActivityIndicator, ProgressBarAndroid, StyleSheet } from 'react-native';
+import { ActivityIndicator, StyleSheet } from 'react-native';
 import { isIos } from 'react-native-device-detection';
 import { LOCAL } from '../../value/data';
-import { BLUE } from 'react-native-material-color';
+import { BLUE, Grey } from 'react-native-material-color';
 
 class LoadingIndicator extends Component {
   render() {
@@ -18,7 +18,7 @@ class LoadingIndicator extends Component {
     if (!appTheme) appTheme = BLUE;
 
     return <ActivityIndicator size={isIos ? 'small' : 'large'} 
-      color={isIos ? 'white' : appTheme[500]} style={style}/>;
+      color={Grey} style={style} />;
   };
 }
 
