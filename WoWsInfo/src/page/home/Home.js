@@ -31,7 +31,7 @@ class Home extends Component {
       <WoWsInfo style={container} home about>
         <TabView renderTabBar={props =>
             <TabBar {...props} renderLabel={r => {
-              return <Text style={{fontWeight: '500', fontSize: 17, color: appTheme[700]}}>{r.route.title}</Text>
+              return <Text style={{fontWeight: '300', fontSize: 17, color: appTheme[700]}}>{r.route.title}</Text>
             }} style={{ backgroundColor: null }}
               indicatorStyle={{ backgroundColor: null}}
             />

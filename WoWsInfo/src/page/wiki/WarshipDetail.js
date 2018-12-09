@@ -5,9 +5,9 @@
  */
 
 import React, { PureComponent } from 'react';
-import { View, FlatList, ActivityIndicator,Linking, ScrollView, StyleSheet } from 'react-native';
+import { View, FlatList,Linking, ScrollView, StyleSheet } from 'react-native';
 import { Text, Title, Subheading, Headline, Button, Surface, Paragraph, List, Divider } from 'react-native-paper';
-import { WoWsInfo, WikiIcon, WarshipCell, LoadingModal, PriceLabel } from '../../component';
+import { WoWsInfo, WikiIcon, WarshipCell, LoadingModal, PriceLabel, LoadingIndicator } from '../../component';
 import { SAVED, SERVER, LOCAL } from '../../value/data';
 import lang from '../../value/lang';
 import { SafeFetch, langStr, Guard } from '../../core';
@@ -68,7 +68,7 @@ class WarshipDetail extends PureComponent {
   renderContent() {
     const { curr, loading, data } = this.state;
     if (loading) {
-      return <ActivityIndicator />
+      return <LoadingIndicator />
     } else {
       return (
        <View>

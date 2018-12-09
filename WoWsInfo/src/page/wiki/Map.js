@@ -5,8 +5,8 @@
  */
 
 import React, { Component } from 'react';
-import { Image, StyleSheet, FlatList, Dimensions, ActivityIndicator } from 'react-native';
-import { WoWsInfo } from '../../component';
+import { Image, StyleSheet, FlatList, Dimensions } from 'react-native';
+import { WoWsInfo, LoadingIndicator } from '../../component';
 import { SAVED } from '../../value/data';
 import { List, Portal, Dialog } from 'react-native-paper';
 
@@ -46,7 +46,7 @@ class Map extends Component {
             dismissable theme={{roundness: 16}} style={{height: imageWidth, width: imageWidth, alignSelf: 'center'}}>
               <Image source={{uri: map}} onLoadEnd={() => this.setState({loading: false})}
                 style={{flex: 1, height: null, width: null, borderRadius: 16}}/>
-              { loading ? <ActivityIndicator size='large' style={indicator}/> : null }
+              { loading ? <LoadingIndicator style={indicator}/> : null }
           </Dialog>
         </Portal>
       </WoWsInfo>
