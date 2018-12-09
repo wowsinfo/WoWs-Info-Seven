@@ -4,7 +4,7 @@ import { isAndroid } from 'react-native-device-detection';
 import { Surface, List, Button, Checkbox, Colors, withTheme } from 'react-native-paper';
 import { Actions } from 'react-native-router-flux';
 import { BackButton, WoWsInfo, DividerPlus } from '../component';
-import { LOCAL, SAVED, APP, SERVER } from '../value/data';
+import { LOCAL, SAVED, APP } from '../value/data';
 import lang from '../value/lang';
 
 class Settings extends Component {
@@ -23,16 +23,20 @@ class Settings extends Component {
       <WoWsInfo about>
         <ScrollView>
           <List.Section title='API Settings'>
-            <List.Accordion title={'Game Server - ' + this.state.server }>
+            <List.Accordion title={'Game Server - ' + this.state.server_name }>
               <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
-                <Button 
-                onPress={() => this.updateServer(0)}>{lang.server[0]}</Button>
-                <Button 
-                onPress={() => this.updateServer(1)}>{lang.server[1]}</Button>
-                <Button 
-                onPress={() => this.updateServer(2)}>{lang.server[2]}</Button>
-                <Button 
-                onPress={() => this.updateServer(3)}>{lang.server[3]}</Button>
+                <Button onPress={() => this.updateServer(0)}>
+                  {lang.server_name[0]}
+                </Button>
+                <Button onPress={() => this.updateServer(1)}>
+                  {lang.server_name[1]}
+                </Button>
+                <Button onPress={() => this.updateServer(2)}>
+                  {lang.server_name[2]}
+                </Button>
+                <Button onPress={() => this.updateServer(3)}>
+                  {lang.server_name[3]}
+                </Button>
               </View>
             </List.Accordion>
             <List.Accordion title='API Language - English'>
@@ -86,7 +90,7 @@ class Settings extends Component {
    */
   updateServer(index) {
     DATA[LOCAL.userServer] = index; 
-    this.setState({server: lang.server[DATA[LOCAL.userServer]]});
+    this.setState({server: lang.server_name[DATA[LOCAL.userServer]]});
   }
 }
 

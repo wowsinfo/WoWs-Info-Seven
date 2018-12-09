@@ -8,7 +8,7 @@ export default lang = new LocalizedStrings({
     /// Home section
     /// Menu section
     /// Settings section
-    server:['RU','EU','NA','ASIA'],
+    server_name:['RUSSIA','EUROPE','NORTH AMERICA','ASIA'],
     // Footer
     menu_footer: 'Search',
     // Search bar
