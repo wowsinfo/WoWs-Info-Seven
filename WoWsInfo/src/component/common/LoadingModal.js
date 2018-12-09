@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { Modal, Portal } from 'react-native-paper';
+import { LoadingIndicator } from './LoadingIndicator';
 
 class LoadingModal extends Component {
   render() {
@@ -9,7 +10,7 @@ class LoadingModal extends Component {
       <Portal>
         <Modal visible={true} dismissable={false} onDismiss={this._hideModal}>
           <View style={container}>
-            <ActivityIndicator color='white' size='large'/>
+            <LoadingIndicator />
             <Text style={text}>Loading...</Text>
           </View>
         </Modal>

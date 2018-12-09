@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { View, Image, ActivityIndicator, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet } from 'react-native';
 import { LOCAL } from '../../value/data';
 import { Touchable } from '../common/Touchable';
 
@@ -32,7 +32,7 @@ class WikiIcon extends Component {
           <Image source={{uri: item.image ? item.image : item.icon, cache: 'default'}} resizeMode='contain'
             onLoadEnd={() => this.setState({loading: false})} 
             style={{width: width, height: width / 1.7, borderRadius: 8}} />
-          { loading ? <ActivityIndicator style={indicator}/> : null }
+          { loading ? <LoadingIndicator style={indicator}/> : null }
         </View>
       )
     } else {
@@ -42,7 +42,7 @@ class WikiIcon extends Component {
           <Image source={{uri: item.image ? item.image : item.icon, cache: 'default'}} resizeMode='contain'
             onLoadEnd={() => this.setState({loading: false})} 
             style={{height: width, width: width, borderRadius: 8}} />
-          { loading ? <ActivityIndicator style={indicator}/> : null }
+          { loading ? <LoadingIndicator style={indicator}/> : null }
         </Touchable>
       )
     }

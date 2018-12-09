@@ -6,6 +6,7 @@ export * from './common/WoWsInfo';
 export * from './common/SafeView';
 export * from './common/DividerPlus';
 export * from './common/LoadingModal';
+export * from './common/LoadingIndicator';
 
 // Wiki
 export * from './wiki/WikiIcon';
