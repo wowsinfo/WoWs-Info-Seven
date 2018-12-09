@@ -16,6 +16,13 @@ export default lang = new LocalizedStrings({
     wiki_warship_filter_premiumm: 'Premium ship',
     // Warship Detail
     warship_model: '3D Model',
+    warship_survivability: 'Survivablity',
+    warship_artillery: 'Artillery',
+    warship_torpedoes: 'Torpedoes',
+    warship_antiaircraft: 'AA Defense',
+    warship_maneuverabilty: 'Maneuverabilty',
+    warship_aircraft: 'Aircraft',
+    warship_concealment: 'Concealment',
     /// Menu section
     // Footer
     menu_footer: 'Search',
