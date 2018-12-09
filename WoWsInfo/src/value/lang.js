@@ -7,6 +7,11 @@ export default lang = new LocalizedStrings({
     setup_done_button: 'Done',
     /// Home section
     /// Menu section
+    /// Settings section
+    ru_server: 'RU',
+    eu_server: 'EU',
+    na_server: 'NA',
+    asia_server: 'ASIA',
     // Footer
     menu_footer: 'Search',
     // Search bar

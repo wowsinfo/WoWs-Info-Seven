@@ -4,7 +4,8 @@ import { isAndroid } from 'react-native-device-detection';
 import { Surface, List, Button, Checkbox, Colors, withTheme } from 'react-native-paper';
 import { Actions } from 'react-native-router-flux';
 import { BackButton, WoWsInfo, DividerPlus } from '../component';
-import { APP } from '../value/data';
+import { LOCAL, SAVED, APP } from '../value/data';
+import lang from '../value/lang';
 
 class Settings extends Component {
   render() {
@@ -16,10 +17,14 @@ class Settings extends Component {
           <List.Section title='API Settings'>
             <List.Accordion title='Game Server - ASIA'>
               <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
-                <Button>RU</Button>
-                <Button>EU</Button>
-                <Button>NA</Button>
-                <Button>ASIA</Button>
+                <Button 
+                onPress={() => this.updateServer(0)}>{lang.ru_server}</Button>
+                <Button 
+                onPress={() => this.updateServer(1)}>{lang.eu_server}</Button>
+                <Button 
+                onPress={() => this.updateServer(2)}>{lang.na_server}</Button>
+                <Button 
+                onPress={() => this.updateServer(3)}>{lang.asia_server}</Button>
               </View>
             </List.Accordion>
             <List.Accordion title='API Language - English'>
@@ -66,6 +71,13 @@ class Settings extends Component {
    * Update app theme real time
    */
   updateTheme() {
+  }
+
+  /**
+   * Update server that's being used
+   */
+  updateServer(index) {
+    DATA[LOCAL.userServer] = index; 
   }
 }
 
