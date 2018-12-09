@@ -13,3 +13,5 @@ export * from './wiki/WikiIcon';
 export * from './wiki/WarshipCell';
 export * from './wiki/WarshipLabel';
 export * from './wiki/PriceLabel';
+export * from './wiki/InfoLabel';
+export * from './wiki/WarshipStat';

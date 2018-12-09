@@ -7,7 +7,7 @@
 import React, { PureComponent } from 'react';
 import { View, FlatList,Linking, ScrollView, StyleSheet } from 'react-native';
 import { Text, Title, Subheading, Headline, Button, Surface, Paragraph, List, Divider } from 'react-native-paper';
-import { WoWsInfo, WikiIcon, WarshipCell, LoadingModal, PriceLabel, LoadingIndicator } from '../../component';
+import { WoWsInfo, WikiIcon, WarshipCell, LoadingModal, PriceLabel, LoadingIndicator, WarshipStat } from '../../component';
 import { SAVED, SERVER, LOCAL } from '../../value/data';
 import lang from '../../value/lang';
 import { SafeFetch, langStr, Guard } from '../../core';
@@ -100,18 +100,11 @@ class WarshipDetail extends PureComponent {
 
   renderAll(curr) {
     const { default_profile, modules_tree, modules, next_ships } = curr;
+
     return (
       <View>
-        <List.Accordion title='Hello'>
-        </List.Accordion>
-        <List.Accordion title='Hello'>
-        </List.Accordion>
-        <List.Accordion title='Hello'>
-        </List.Accordion>
-        <List.Accordion title='Hello'>
-        </List.Accordion>
-        <List.Accordion title='Hello'>
-        </List.Accordion>
+        { default_profile ? <WarshipStat profile={default_profile}/> : null }
+
       </View>
     )
   }
@@ -138,6 +131,7 @@ class WarshipDetail extends PureComponent {
 
   efficientDataRequest(id) {
     clearTimeout(this.delayedRequest);
+    // This will not work if you device time is faster than actual time
     this.delayedRequest = setTimeout(() => {
       SafeFetch.get(WoWsAPI.ShipWiki, this.server, id, langStr()).then(json => {
         let data = Guard(json, 'data', {});

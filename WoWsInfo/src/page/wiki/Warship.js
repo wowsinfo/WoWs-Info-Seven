@@ -65,9 +65,9 @@ class Warship extends Component {
           return <WarshipCell scale={1.4} item={item} onPress={() => SafeAction('WarshipDetail', {item: item})}/>
         }}/>
 
-        <Portal>
+        { filter ? <Portal>
           <Modal theme={{roundness: 16}} visible={filter} onDismiss={this.dismissFilter}>
-            { filter ? <Surface>
+            <Surface>
               <TextInput style={input} value={name} onChangeText={text => this.setState({name: text})}
                 autoCorrect={false} autoCapitalize='none' placeholder={lang.wiki_warship_filter_placeholder}/>
               <List.Item title={lang.wiki_warship_filter_premiumm} 
@@ -91,9 +91,9 @@ class Warship extends Component {
                   }} numColumns={2} keyExtractor={item => item}/>
               </List.Accordion>
               <Button style={apply} onPress={this.dismissFilter}>{lang.wiki_warship_filter_btn}</Button>
-            </Surface> : null}
+            </Surface>
           </Modal>
-        </Portal>
+        </Portal> : null}
       </WoWsInfo>
     )
   };
