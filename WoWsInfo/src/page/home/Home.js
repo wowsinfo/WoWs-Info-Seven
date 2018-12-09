@@ -33,7 +33,7 @@ class Home extends Component {
             <TabBar pressOpacity={0.5} {...props} renderLabel={r => {
               return <Text style={{fontWeight: '300', fontSize: 17, color: appTheme[500]}}>{r.route.title}</Text>
             }} style={{ backgroundColor: null }}
-              indicatorStyle={{ backgroundColor: null}}
+              indicatorStyle={{ backgroundColor: appTheme[700]}}
             />
           } navigationState={this.state}
           renderScene={SceneMap({
