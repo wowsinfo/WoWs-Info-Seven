@@ -67,7 +67,6 @@ class Warship extends Component {
 
         <Portal>
           <Dialog theme={{roundness: 16}} visible={filter} onDismiss={this.dismissFilter}>
-            <Dialog.ScrollArea>
               <TextInput style={input} value={name} onChangeText={text => this.setState({name: text})}
                 autoCorrect={false} autoCapitalize='none' placeholder={lang.wiki_warship_filter_placeholder}/>
               <List.Item title={lang.wiki_warship_filter_premiumm} 
@@ -91,7 +90,6 @@ class Warship extends Component {
                   }} numColumns={2} keyExtractor={item => item}/>
               </List.Accordion>
               <Button style={apply} onPress={this.dismissFilter}>{lang.wiki_warship_filter_btn}</Button>
-            </Dialog.ScrollArea>
           </Dialog>
         </Portal>
       </WoWsInfo>

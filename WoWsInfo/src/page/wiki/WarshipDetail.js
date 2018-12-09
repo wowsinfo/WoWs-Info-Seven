@@ -6,7 +6,7 @@
 
 import React, { PureComponent } from 'react';
 import { View, FlatList, ActivityIndicator,Linking, ScrollView, StyleSheet } from 'react-native';
-import { Text, Title, Subheading, Headline, Button, Surface, Paragraph, List } from 'react-native-paper';
+import { Text, Title, Subheading, Headline, Button, Surface, Paragraph, List, Divider } from 'react-native-paper';
 import { WoWsInfo, WikiIcon, WarshipCell, LoadingModal, PriceLabel } from '../../component';
 import { SAVED, SERVER, LOCAL } from '../../value/data';
 import lang from '../../value/lang';
@@ -56,6 +56,7 @@ class WarshipDetail extends PureComponent {
             <WikiIcon warship item={curr} scale={3}/>
             { this.renderContent() }
           </ScrollView> 
+          <Divider />
           { this.renderSimilar(similar) }
         </WoWsInfo>
       )
@@ -123,13 +124,13 @@ class WarshipDetail extends PureComponent {
     const { curr } = this.state;
     if (Object.keys(similar).length > 0) {
       return (
-        <View style={{height: 76}}>
+        <View style={{height: 86}}>
           <FlatList keyExtractor={item => item.name} horizontal data={similar} renderItem={({item}) => {
             return <WarshipCell item={item} scale={1.4} onPress={() => {
               this.setState({curr: item, loading: true}, 
                 () => this.efficientDataRequest(item.ship_id));
             }}/>
-          }}/>
+          }} showsHorizontalScrollIndicator={false}/>
         </View>
       )
     } else return null;

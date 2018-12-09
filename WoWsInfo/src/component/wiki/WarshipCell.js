@@ -16,7 +16,7 @@ class WarshipCell extends Component {
     return (
       <Touchable style={container} onPress={onPress}>
         <WikiIcon warship item={item} scale={scale}/>
-        <WarshipLabel style={{marginTop: -8}} item={item}/>
+        <WarshipLabel item={item}/>
       </Touchable>
     )
   };
