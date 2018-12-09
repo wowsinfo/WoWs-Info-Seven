@@ -44,7 +44,7 @@ class Warship extends Component {
   }
 
   render() {
-    const { container, input, apply } = styles;
+    const { input, apply } = styles;
     const { data, filter, tier, nation, type, name, premium, accordion } = this.state;
 
     const tierList = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'XI', 'X'];
@@ -67,7 +67,7 @@ class Warship extends Component {
 
         <Portal>
           <Modal theme={{roundness: 16}} visible={filter} onDismiss={this.dismissFilter}>
-            <Surface>
+            { filter ? <Surface>
               <TextInput style={input} value={name} onChangeText={text => this.setState({name: text})}
                 autoCorrect={false} autoCapitalize='none' placeholder={lang.wiki_warship_filter_placeholder}/>
               <List.Item title={lang.wiki_warship_filter_premiumm} 
@@ -91,14 +91,14 @@ class Warship extends Component {
                   }} numColumns={2} keyExtractor={item => item}/>
               </List.Accordion>
               <Button style={apply} onPress={this.dismissFilter}>{lang.wiki_warship_filter_btn}</Button>
-            </Surface>
+            </Surface> : null}
           </Modal>
         </Portal>
       </WoWsInfo>
     )
   };
 
-  dismissFilter = () => this.setState({filter: false});
+  dismissFilter = () => this.setState({filter: false, accordion: 0});
 
   hideAccordion(num) {
     const { accordion } = this.state;
