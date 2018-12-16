@@ -106,6 +106,7 @@ class WarshipDetail extends PureComponent {
         { this.renderStatus(Guard(curr, 'default_profile', null)) }
         { this.renderSurvivability(Guard(curr, 'default_profile.armour', null)) }
         { this.renderMainBattery(Guard(curr, 'default_profile.artillery', null)) }
+        { this.renderSecondary(Guard(curr, 'default_profile.atbas', null)) }
       </View>
     )
   }
@@ -115,14 +116,15 @@ class WarshipDetail extends PureComponent {
    * @param {*} profile 
    */
   renderStatus(profile) {
-    if (profile) return <WarshipStat profile={profile} />;
-    else return null;
+    if (!profile) return null;
+    return <WarshipStat profile={profile} />;
   }
 
   /**
    * Render information about health, armour
    */
   renderSurvivability(armour) {
+    if (!armour) return null;
     const { flood_prob, range, health } = armour;
     const { horizontal, centerText } = styles;
     return (
@@ -134,86 +136,86 @@ class WarshipDetail extends PureComponent {
           { flood_prob == 0 ? null : <InfoLabel title={lang.warship_survivability_protection} info={`${flood_prob}%`}/> }
         </View>
       </View>
-    )
+    );
   }
 
   /**
    * Render main battery and secondary information
    */
   renderMainBattery(artillery) {
-    if (artillery) {
-      const { horizontal, centerText } = styles;
-      const { max_dispersion, gun_rate, distance, rotation_time, slots, shells } = artillery;
-      const { AP, HE } = shells;
+    if (!artillery) return null;
+    const { horizontal, centerText } = styles;
+    const { max_dispersion, gun_rate, distance, rotation_time, slots, shells } = artillery;
+    const { AP, HE } = shells;
 
-      // Get all guns
-      var mainGun = '', gunName = '';
-      for (gun in slots) mainGun += slots[gun].guns + ' x ' + slots[gun].barrels + '  '; gunName = slots[gun].name;
-      // Get gun penetration
-      let calibar = Math.round(parseInt(gunName.split(' ')[0]) / 6);
+    // Get all guns
+    var mainGun = '', gunName = '';
+    for (gun in slots) mainGun += slots[gun].guns + ' x ' + slots[gun].barrels + '  '; gunName = slots[gun].name;
+    // Get gun penetration
+    let calibar = Math.round(parseInt(gunName.split(' ')[0]) / 6);
 
-      return (
-        <View style={{margin: 8}}>
-          <Headline style={centerText}>{lang.warship_artillery_main}</Headline>
-          <View style={horizontal}>
-            <InfoLabel title={lang.warship_artillery_main_reload} info={`${Number(60 / gun_rate).toFixed(1)} s`}/>
-            <InfoLabel title={lang.warship_artillery_main_range} info={`${Number(distance).toFixed(2)} km`}/>
-            <InfoLabel title={lang.warship_artillery_main_guns} info={mainGun}/>
-          </View>
-          <View style={horizontal}>
-            <InfoLabel title={lang.warship_artillery_main_dispersion} info={`${max_dispersion} m`}/>
-            <InfoLabel title={lang.warship_artillery_main_rotation} info={`${rotation_time} s`}/>
-          </View>
-          <Title style={centerText}>{gunName}</Title>            
-          <View style={horizontal}>
-            { HE == null ? null : <View>
-              <Title style={centerText}>HE</Title>
-              <InfoLabel title={lang.warship_artillery_main_fire_chance} info={`🔥${HE.burn_probability}%`}/>
-              <InfoLabel title={lang.warship_artillery_main_weight} info={`${HE.bullet_mass} kg`}/>
-              <InfoLabel title={lang.warship_artillery_main_damage} info={`${HE.damage} (${calibar} mm)`}/>
-              <InfoLabel title={lang.warship_artillery_main_velocity} info={`${HE.bullet_speed} m/s`}/>
-            </View> }
-            { AP == null ? null : <View>
-              <Title style={centerText}>AP</Title>          
-              <InfoLabel title={lang.warship_artillery_main_fire_chance} info='---'/>
-              <InfoLabel title={lang.warship_artillery_main_weight} info={`${AP.bullet_mass} kg`}/>
-              <InfoLabel title={lang.warship_artillery_main_damage} info={`${AP.damage} (${calibar} mm)`}/>
-              <InfoLabel title={lang.warship_artillery_main_velocity} info={`${AP.bullet_speed} m/s`}/>
-            </View> }
-          </View>
+    return (
+      <View style={{margin: 8}}>
+        <Headline style={centerText}>{lang.warship_artillery_main}</Headline>
+        <View style={horizontal}>
+          <InfoLabel title={lang.warship_weapon_reload} info={`${Number(60 / gun_rate).toFixed(1)} s`}/>
+          <InfoLabel title={lang.warship_weapon_range} info={`${Number(distance).toFixed(2)} km`}/>
+          <InfoLabel title={lang.warship_weapon_configuration} info={mainGun}/>
         </View>
-      )
-    } else return null;
+        <View style={horizontal}>
+          <InfoLabel title={lang.warship_weapon_dispersion} info={`${max_dispersion} m`}/>
+          <InfoLabel title={lang.warship_weapon_rotation} info={`${rotation_time} s`}/>
+        </View>
+        <Title style={centerText}>{gunName}</Title>            
+        <View style={horizontal}>
+          { HE == null ? null : <View>
+            <Title style={centerText}>HE</Title>
+            <InfoLabel title={lang.warship_weapon_fire_chance} info={`🔥${HE.burn_probability}%`}/>
+            <InfoLabel title={lang.warship_artillery_main_weight} info={`${HE.bullet_mass} kg`}/>
+            <InfoLabel title={lang.warship_weapon_damage} info={`${HE.damage}`}/>
+            <InfoLabel title={lang.warship_weapon_speed} info={`${HE.bullet_speed} m/s`}/>
+          </View> }
+          { AP == null ? null : <View>
+            <Title style={centerText}>AP</Title>          
+            <InfoLabel title={lang.warship_weapon_fire_chance} info='---'/>
+            <InfoLabel title={lang.warship_artillery_main_weight} info={`${AP.bullet_mass} kg`}/>
+            <InfoLabel title={lang.warship_weapon_damage} info={`${AP.damage}`}/>
+            <InfoLabel title={lang.warship_weapon_speed} info={`${AP.bullet_speed} m/s`}/>
+          </View> }
+        </View>
+      </View>
+    );
   }
 
   /**
    * Render secondary information
    */
-  renderSecondary() {
-    const { horizontalViewStyle, basicTextStyle, basicTitleStyle, basicViewStyle } = styles;
-    const { atbas } = this.state.profile
-    if (atbas != null) {
-      const { distance, slots } = atbas;
-      var guns = []; for (gun in slots) guns.push(slots[gun]);
-      return (
-        <View style={{margin: 8}}>
-          { this.renderTitle(language.artillery_secondary + ' (' + distance + ' km)') }
-          { guns.map(function(value, index) { 
-            const { burn_probability, bullet_speed, name, gun_rate, damage, type } = value;            
-            return (
-              <View key={index} style={basicViewStyle}>
-                <Text style={basicTitleStyle}>{type + ' - ' + name}</Text>
-                <View style={horizontalViewStyle}>
-                  <Text style={basicTextStyle}>{Number(60 / gun_rate).toFixed(1) + ' s'}</Text>
-                  <Text style={basicTextStyle}>{bullet_speed + ' m/s'}</Text>
-                  { burn_probability == null ? null : <Text style={basicTextStyle}>{'🔥'+ burn_probability + '%'}</Text> }
-                  <Text style={basicTextStyle}>{damage}</Text>
-                </View>
+  renderSecondary(secondary) {
+    if (!secondary) return null;
+    const { horizontal, centerText } = styles;
+    const { distance, slots } = secondary;
+
+    var guns = []; for (gun in slots) guns.push(slots[gun]);
+    return (
+      <View style={{margin: 8}}>
+        <Headline style={centerText}>{`${lang.warship_artillery_secondary} (${distance} km)`}</Headline>
+        { guns.map((value, index) => { 
+          const { burn_probability, bullet_speed, name, gun_rate, damage, type } = value;            
+          return (
+            <View key={index}>
+              <Title style={centerText}>{`${type} - ${name}`}</Title>
+              <View style={horizontal}>
+                <InfoLabel title={lang.warship_weapon_reload} info={Number(60 / gun_rate).toFixed(1) + ' s'}/>
+                <InfoLabel title={lang.warship_weapon_speed} info={`${bullet_speed} m/s`}/>
+                { burn_probability == null ? null : 
+                  <InfoLabel title={lang.warship_weapon_fire_chance} info={`🔥 ${burn_probability}%`} /> }
+                <InfoLabel title={lang.warship_weapon_damage} info={damage}/>
               </View>
-          )})}
-        </View>
-      )
-    } else return null;
+            </View>
+          );
+        })}
+      </View>
+    );
   }
 
   /**
@@ -474,6 +476,10 @@ const styles = StyleSheet.create({
   },
   centerText: {
     textAlign: 'center',
+  },
+  weaponTitle: {
+    textAlign: 'center',
+    margin: -16
   },
   horizontal: {
     flexDirection: 'row',
