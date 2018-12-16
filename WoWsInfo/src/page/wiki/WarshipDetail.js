@@ -113,6 +113,7 @@ class WarshipDetail extends PureComponent {
         <Divider />
         { this.renderTorpedo(Guard(curr, 'default_profile.torpedoes', null)) }
         <Divider />
+        { this.renderAADefense(Guard(curr, 'default_profile.anti_aircraft', null)) }
       </View>
     )
   }
@@ -312,31 +313,30 @@ class WarshipDetail extends PureComponent {
   /**
    * Render aa defense information
    */
-  renderAADefense() {
-    const { horizontalViewStyle, basicTextStyle, basicTitleStyle, basicViewStyle } = styles;
-    const { anti_aircraft } = this.state.profile;
-    if (anti_aircraft != null) {
-      const { slots } = anti_aircraft;
-      var AAValues = []; for (aa in slots) AAValues.push(slots[aa]);
-      return (
-        <View style={{margin: 8}}>
-          { this.renderTitle(language.detail_aa) }
-          { AAValues.map(function(value, index) {
-            const { distance, avg_damage, name, guns } = value;
-            return (
-              <View key={index} style={basicViewStyle}>
-                <Text style={basicTitleStyle}>{name}</Text>
-                <View style={horizontalViewStyle}>
-                  <Text style={basicTextStyle}>{guns + 'x'}</Text>                  
-                  <Text style={basicTextStyle}>{distance + ' km'}</Text>
-                  <Text style={basicTextStyle}>{avg_damage + ' dps'}</Text>
-                </View>
+  renderAADefense(anti_aircraft) {
+    if (!anti_aircraft) return null;
+    const { horizontal, centerText } = styles;
+    const { slots } = anti_aircraft;
+
+    var AAValues = []; for (aa in slots) AAValues.push(slots[aa]);
+    return (
+      <View style={{margin: 8}}>
+        <Headline style={centerText}>{lang.warship_antiaircraft}</Headline>
+        { AAValues.map((value, index) => {
+          const { distance, avg_damage, name, guns } = value;
+          return (
+            <View key={index}>
+              <Title style={centerText}>{name}</Title>
+              <View style={horizontal}>
+                <InfoLabel title={lang.warship_weapon_configuration} info={`${guns}x`} />
+                <InfoLabel title={lang.warship_weapon_range} info={`${distance} km`} />
+                <InfoLabel title={lang.warship_weapon_damage} info={`${avg_damage} dps`} />
               </View>
-            )
-          })}
-        </View>
-      )
-    } else return null;
+            </View>
+          );
+        })}
+      </View>
+    );
   }
 
   /**
@@ -413,7 +413,7 @@ class WarshipDetail extends PureComponent {
       return (
         <View style={{margin: 8}}>
           { this.renderTitle(language.detail_next_ship_title) }
-          <FlatList data={ships} keyExtractor={shipKey} renderItem={({item}) => {  
+          <FlatList data={ships} horizontal keyExtractor={shipKey} renderItem={({item}) => {  
             let curr = data.warship[item.key];
             return (
               <WoWsTouchable onPress={() => {
