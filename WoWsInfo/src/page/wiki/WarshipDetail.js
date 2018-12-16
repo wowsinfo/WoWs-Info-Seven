@@ -359,30 +359,24 @@ class WarshipDetail extends PureComponent {
           <InfoLabel title={lang.warship_maneuverabilty_turning} info={`${turning_radius} m`}/>
         </View>
       </View>
-    )
+    );
   }
 
   /**
    * Render concealment information
    */
-  renderConcealment() {
-    const { horizontalViewStyle, basicTextStyle, basicViewStyle, basicTitleStyle } = styles;
-    const { detect_distance_by_plane, detect_distance_by_ship } = this.state.profile.concealment
+  renderConcealment(concealment) {
+    if (!concealment) return null;
+    const { horizontal, centerText } = styles;
+    const { detect_distance_by_plane, detect_distance_by_ship } = concealment;
     return (
       <View style={{margin: 8}}>
-        { this.renderTitle(language.detail_concealment) }
-        <View style={horizontalViewStyle}>
-          <View style={basicViewStyle}>
-            <Text style={basicTitleStyle}>{language.concealment_plane}</Text>
-            <Text style={basicTextStyle}>{detect_distance_by_plane + ' km'}</Text>
-          </View>
-          <View style={basicViewStyle}>
-            <Text style={basicTitleStyle}>{language.concealment_ship}</Text>
-            <Text style={basicTextStyle}>{detect_distance_by_ship + ' km'}</Text>
-          </View>
+        <Title>{lang.warship_concealment}</Title>
+        <View style={horizontal}>
+          
         </View>
       </View>
-    )
+    );
   }
 
   /**

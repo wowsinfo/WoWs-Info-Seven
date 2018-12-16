@@ -27,7 +27,7 @@ class BasicDetail extends Component {
       // Consumables
       const { name, description, profile } = item;
       let bonus = Object.entries(profile).reduce((total, curr) => {
-        return total + curr[1].description;
+        return total + curr[1].description + '\n';
       }, "");
 
       return (
@@ -43,7 +43,7 @@ class BasicDetail extends Component {
       // This is commander skill
       const { name, perks } = item;
       let bonus = Object.entries(perks).reduce((total, curr) => {
-        return total + curr[1].description;
+        return total + curr[1].description + '\n';
       }, "");
 
       return (
