@@ -10,7 +10,7 @@ import { Text, Title, Subheading, Headline, Button, Surface, Paragraph, List, Di
 import { WoWsInfo, WikiIcon, WarshipCell, LoadingModal, PriceLabel, LoadingIndicator, WarshipStat, InfoLabel, DividerPlus } from '../../component';
 import { SAVED, SERVER, LOCAL } from '../../value/data';
 import lang from '../../value/lang';
-import { SafeFetch, langStr, Guard } from '../../core';
+import { SafeFetch, langStr, Guard, getColourWithRange } from '../../core';
 import { WoWsAPI } from '../../value/api';
 
 class WarshipDetail extends PureComponent {
@@ -348,10 +348,11 @@ class WarshipDetail extends PureComponent {
     if (!mobility) return null;
     const { horizontal, centerText } = styles;
     const { rudder_time, turning_radius, max_speed } = mobility;
+    let good = getColourWithRange(20, max_speed, 45);
     let speedFlag = Number(max_speed * 1.05).toFixed(0);
     return (
       <View style={{margin: 8}}>
-        <Headline style={centerText}>{lang.warship_maneuverabilty}</Headline>
+        <Headline style={[centerText, {color: good}]}>{lang.warship_maneuverabilty}</Headline>
         <View style={horizontal}>
           <InfoLabel title={lang.warship_maneuverabilty_rudder_time} info={`${rudder_time} s`}/>
           <InfoLabel title={lang.warship_maneuverabilty_speed} info={`${max_speed} kt - ${speedFlag} kt`}/>
