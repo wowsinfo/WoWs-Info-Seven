@@ -107,6 +107,7 @@ class WarshipDetail extends PureComponent {
         { this.renderSurvivability(Guard(curr, 'default_profile.armour', null)) }
         { this.renderMainBattery(Guard(curr, 'default_profile.artillery', null)) }
         { this.renderSecondary(Guard(curr, 'default_profile.atbas', null)) }
+        { this.renderTorpedo(Guard(curr, 'default_profile.torpedoes', null)) }
       </View>
     )
   }
@@ -278,29 +279,29 @@ class WarshipDetail extends PureComponent {
   /**
    * Render torpedo information
    */
-  renderTorpedo() {
-    const { horizontalViewStyle, basicTextStyle, basicTitleStyle } = styles;
-    const { torpedoes } = this.state.profile;
-    if (torpedoes != null) {
-      const { visibility_dist, distance, torpedo_name, reload_time, torpedo_speed, slots, max_damage } = torpedoes;
-      var torps = ''; for (torp in slots) torps += slots[torp].guns + ' x ' + slots[torp].barrels + '  ';
-      return (
-        <View style={{margin: 8}}>
-          { this.renderTitle(language.detail_torpedoes) }
-          <View style={horizontalViewStyle}>
-            <Text>{reload_time + ' s'}</Text>
-            <Text>{distance + ' km'}</Text>
-            <Text>{torps}</Text>
-          </View>
-          <Text style={basicTitleStyle}>{torpedo_name + ' (' + Number(visibility_dist * 1000 / 2.6 / torpedo_speed).toFixed(1) + ' s)'}</Text>
-          <View style={horizontalViewStyle}>
-            <Text>{visibility_dist + ' km'}</Text>
-            <Text>{max_damage}</Text>
-            <Text>{torpedo_speed + ' kt'}</Text>
-          </View>
+  renderTorpedo(torpedoes) {
+    if (!torpedoes) return null;
+    const { horizontal, centerText } = styles;
+    const { visibility_dist, distance, torpedo_name, reload_time, torpedo_speed, slots, max_damage } = torpedoes;
+
+    let torps = ''; for (torp in slots) torps += slots[torp].guns + ' x ' + slots[torp].barrels + '  ';
+    let reactionTime = Number(visibility_dist * 1000 / 2.6 / torpedo_speed).toFixed(1);
+    return (
+      <View style={{margin: 8}}>
+        { this.renderTitle(language.detail_torpedoes) }
+        <View style={horizontalViewStyle}>
+          <Text>{reload_time + ' s'}</Text>
+          <Text>{distance + ' km'}</Text>
+          <Text>{torps}</Text>
         </View>
-      )
-    } else return null;
+        <Text style={basicTitleStyle}>{torpedo_name + ' (' + reactionTime + ' s)'}</Text>
+        <View style={horizontalViewStyle}>
+          <Text>{visibility_dist + ' km'}</Text>
+          <Text>{max_damage}</Text>
+          <Text>{torpedo_speed + ' kt'}</Text>
+        </View>
+      </View>
+    );
   }
 
   /**
