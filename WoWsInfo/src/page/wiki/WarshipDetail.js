@@ -7,7 +7,7 @@
 import React, { PureComponent } from 'react';
 import { View, FlatList,Linking, ScrollView, StyleSheet } from 'react-native';
 import { Text, Title, Subheading, Headline, Button, Surface, Paragraph, List, Divider } from 'react-native-paper';
-import { WoWsInfo, WikiIcon, WarshipCell, LoadingModal, PriceLabel, LoadingIndicator, WarshipStat, InfoLabel } from '../../component';
+import { WoWsInfo, WikiIcon, WarshipCell, LoadingModal, PriceLabel, LoadingIndicator, WarshipStat, InfoLabel, DividerPlus } from '../../component';
 import { SAVED, SERVER, LOCAL } from '../../value/data';
 import lang from '../../value/lang';
 import { SafeFetch, langStr, Guard } from '../../core';
@@ -104,10 +104,15 @@ class WarshipDetail extends PureComponent {
     return (
       <View>
         { this.renderStatus(Guard(curr, 'default_profile', null)) }
+        <DividerPlus />
         { this.renderSurvivability(Guard(curr, 'default_profile.armour', null)) }
+        <Divider />
         { this.renderMainBattery(Guard(curr, 'default_profile.artillery', null)) }
+        <Divider />
         { this.renderSecondary(Guard(curr, 'default_profile.atbas', null)) }
+        <Divider />
         { this.renderTorpedo(Guard(curr, 'default_profile.torpedoes', null)) }
+        <Divider />
       </View>
     )
   }
@@ -288,17 +293,17 @@ class WarshipDetail extends PureComponent {
     let reactionTime = Number(visibility_dist * 1000 / 2.6 / torpedo_speed).toFixed(1);
     return (
       <View style={{margin: 8}}>
-        { this.renderTitle(language.detail_torpedoes) }
-        <View style={horizontalViewStyle}>
-          <Text>{reload_time + ' s'}</Text>
-          <Text>{distance + ' km'}</Text>
-          <Text>{torps}</Text>
+        <Headline style={centerText}>{lang.warship_torpedoes}</Headline>
+        <View style={horizontal}>
+          <InfoLabel title={lang.warship_weapon_reload} info={`${reload_time} s`}/>
+          <InfoLabel title={lang.warship_weapon_range} info={`${distance} km`}/>
+          <InfoLabel title={lang.warship_weapon_configuration} info={torps}/>
         </View>
-        <Text style={basicTitleStyle}>{torpedo_name + ' (' + reactionTime + ' s)'}</Text>
-        <View style={horizontalViewStyle}>
-          <Text>{visibility_dist + ' km'}</Text>
-          <Text>{max_damage}</Text>
-          <Text>{torpedo_speed + ' kt'}</Text>
+        <Title style={centerText}>{`${torpedo_name} (${reactionTime} s)`}</Title>
+        <View style={horizontal}>
+          <InfoLabel title={lang.warship_torpedoes_visible_distance} info={`${visibility_dist} km`}/>
+          <InfoLabel title={lang.warship_weapon_damage} info={max_damage}/>
+          <InfoLabel title={lang.warship_weapon_speed} info={`${torpedo_speed} kt`}/>
         </View>
       </View>
     );
