@@ -116,6 +116,8 @@ class WarshipDetail extends PureComponent {
         { this.renderAADefense(Guard(curr, 'default_profile.anti_aircraft', null)) }
         <Divider />
         { this.renderMobility(Guard(curr, 'default_profile.mobility', null)) }
+        <Divider />
+        { this.renderConcealment(curr) }
       </View>
     )
   }
@@ -365,15 +367,24 @@ class WarshipDetail extends PureComponent {
   /**
    * Render concealment information
    */
-  renderConcealment(concealment) {
+  renderConcealment(curr) {
+    if (!curr) return null;
+    let concealment = Guard(curr, 'default_profile.concealment', null);
     if (!concealment) return null;
+
     const { horizontal, centerText } = styles;
     const { detect_distance_by_plane, detect_distance_by_ship } = concealment;
+
+    // Check if ship has concealment module
+    let upgrades = Guard(curr, 'upgrades', null);
+    let modifier = upgrades.findIndex(u => u === 4265791408) > -1 ? 0.9 : 1;
+    let max_concealment = Number(detect_distance_by_ship * 0.9 * modifier * 0.97).toFixed(1);
     return (
       <View style={{margin: 8}}>
-        <Title>{lang.warship_concealment}</Title>
+        <Title style={centerText}>{lang.warship_concealment}</Title>
         <View style={horizontal}>
-          
+          <InfoLabel title={lang.warship_concealment_detect_by_plane} info={`${detect_distance_by_plane} km`}/>
+          <InfoLabel title={lang.warship_concealment_detect_by_ship} info={`${detect_distance_by_ship} km - ${max_concealment} km`}/>
         </View>
       </View>
     );

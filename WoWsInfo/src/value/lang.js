@@ -41,6 +41,8 @@ export default lang = new LocalizedStrings({
     warship_maneuverabilty_rudder_time: 'Rudder Time',
     warship_aircraft: 'Aircraft',
     warship_concealment: 'Concealment',
+    warship_concealment_detect_by_ship: 'Detection by Ship',
+    warship_concealment_detect_by_plane: 'Detection by Plane',
     /// Menu section
     // Footer
     menu_footer: 'Search',
