@@ -33,6 +33,7 @@ export default lang = new LocalizedStrings({
     warship_weapon_speed: 'Speed',
     warship_artillery_secondary: 'Secondary',
     warship_torpedoes: 'Torpedoes',
+    warship_torpedoes_visible_distance: 'Detection',
     warship_antiaircraft: 'AA Defense',
     warship_maneuverabilty: 'Maneuverabilty',
     warship_aircraft: 'Aircraft',
