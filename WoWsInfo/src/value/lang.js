@@ -36,6 +36,9 @@ export default lang = new LocalizedStrings({
     warship_torpedoes_visible_distance: 'Detection',
     warship_antiaircraft: 'AA Defense',
     warship_maneuverabilty: 'Maneuverabilty',
+    warship_maneuverabilty_turning: 'Turning Radius',
+    warship_maneuverabilty_speed: 'Max Speed',
+    warship_maneuverabilty_rudder_time: 'Rudder Time',
     warship_aircraft: 'Aircraft',
     warship_concealment: 'Concealment',
     /// Menu section

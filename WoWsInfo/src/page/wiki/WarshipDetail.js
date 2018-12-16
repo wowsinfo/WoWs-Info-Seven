@@ -114,6 +114,8 @@ class WarshipDetail extends PureComponent {
         { this.renderTorpedo(Guard(curr, 'default_profile.torpedoes', null)) }
         <Divider />
         { this.renderAADefense(Guard(curr, 'default_profile.anti_aircraft', null)) }
+        <Divider />
+        { this.renderMobility(Guard(curr, 'default_profile.mobility', null)) }
       </View>
     )
   }
@@ -342,16 +344,18 @@ class WarshipDetail extends PureComponent {
   /**
    * Render mobility information
    */
-  renderMobility() {
-    const { horizontalViewStyle, basicTextStyle } = styles;
-    const { rudder_time, turning_radius, max_speed } = this.state.profile.mobility
+  renderMobility(mobility) {
+    if (!mobility) return null;
+    const { horizontal, centerText } = styles;
+    const { rudder_time, turning_radius, max_speed } = mobility;
+    let speedFlag = Number(max_speed * 1.05).toFixed(0);
     return (
       <View style={{margin: 8}}>
-        { this.renderTitle(language.detail_maneuverabilty) }
-        <View style={horizontalViewStyle}>
-          <Text style={basicTextStyle}>{rudder_time + ' s'}</Text>
-          <Text style={basicTextStyle}>{max_speed + ' kt'}</Text>
-          <Text style={basicTextStyle}>{turning_radius + ' m'}</Text>
+        <Headline style={centerText}>{lang.warship_maneuverabilty}</Headline>
+        <View style={horizontal}>
+          <InfoLabel title={lang.warship_maneuverabilty_rudder_time} info={`${rudder_time} s`}/>
+          <InfoLabel title={lang.warship_maneuverabilty_speed} info={`${max_speed} kt - ${speedFlag} kt`}/>
+          <InfoLabel title={lang.warship_maneuverabilty_turning} info={`${turning_radius} m`}/>
         </View>
       </View>
     )
