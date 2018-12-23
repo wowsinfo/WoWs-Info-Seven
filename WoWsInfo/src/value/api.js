@@ -28,7 +28,7 @@ export const WikiAPI = {
   // Personal rating and ship model
   PersonalRating: 'https://wows-numbers.com/personal/rating/expected/json/',
   // TODO: update this link when I remove this branch
-  ShipModel: 'https://raw.githubusercontent.com/HenryQuan/WoWs-Info-Ultra/localdata/API/model.json',
+  ShipModel: 'https://raw.githubusercontent.com/HenryQuan/WoWs-Info-Ultra/API/json/model.json',
   // Wiki
   Achievement: `https://api.worldofwarships.{0}/wows/encyclopedia/achievements/?application_id=${AppKey}&fields=battle.hidden%2Cbattle.name%2Cbattle.image%2Cbattle.image_inactive%2Cbattle.description`,
   Warship: `https://api.worldofwarships.{0}/wows/encyclopedia/ships/?application_id=${AppKey}&fields=name%2Cnation%2Ctype%2Ctier%2Cship_id%2Cship_id_str%2Cimages.small%2Cis_premium%2Cis_special`,
