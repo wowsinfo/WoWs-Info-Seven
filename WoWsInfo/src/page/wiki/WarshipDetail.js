@@ -104,7 +104,7 @@ class WarshipDetail extends PureComponent {
     return (
       <View>
         { this.renderStatus(Guard(curr, 'default_profile', null)) }
-        <DividerPlus />
+        <Divider />
         { this.renderSurvivability(Guard(curr, 'default_profile.armour', null)) }
         <Divider />
         { this.renderMainBattery(Guard(curr, 'default_profile.artillery', null)) }
@@ -381,7 +381,7 @@ class WarshipDetail extends PureComponent {
     let max_concealment = Number(detect_distance_by_ship * 0.9 * modifier * 0.97).toFixed(1);
     return (
       <View style={{margin: 8}}>
-        <Title style={centerText}>{lang.warship_concealment}</Title>
+        <Headline style={centerText}>{lang.warship_concealment}</Headline>
         <View style={horizontal}>
           <InfoLabel title={lang.warship_concealment_detect_by_plane} info={`${detect_distance_by_plane} km`}/>
           <InfoLabel title={lang.warship_concealment_detect_by_ship} info={`${detect_distance_by_ship} km - ${max_concealment} km`}/>
