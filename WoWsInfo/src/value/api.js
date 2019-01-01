@@ -43,5 +43,6 @@ export const WikiAPI = {
   Encyclopedia: `https://api.worldofwarships.{0}/wows/encyclopedia/info/?application_id=${AppKey}&fields=ship_nations%2Cship_modules%2Cship_types`,
   // Additional data collected by me
   // Currently support model
-  HenryQuan: 'https://raw.githubusercontent.com/HenryQuan/WoWs-Info-Ultra/API/model.json'
+  Github_Model: 'https://raw.githubusercontent.com/HenryQuan/WoWs-Info-Ultra/API/json/model.json',
+  Github_Slot: 'https://github.com/HenryQuan/WoWs-Info-Ultra/blob/API/json/slot.json'
 }

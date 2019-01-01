@@ -103,7 +103,7 @@ class Downloader {
 
     // Download data from Github
     console.log('API from Github')
-    let res = await fetch(WikiAPI.HenryQuan);
+    let res = await fetch(WikiAPI.Github_Model);
 
     let Henry = {};
     if (res.status === 200) {
