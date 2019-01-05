@@ -102,15 +102,7 @@ class Downloader {
     let all = {};
 
     // Download data from Github
-    console.log('API from Github')
-    let res = await fetch(WikiAPI.Github_Model);
-
-    let Henry = {};
-    if (res.status === 200) {
-      Henry = await res.json();
-    }
-
-    console.log(Henry);
+    let Henry = await SafeFetch.normal(WikiAPI.Github_Model);
     
     while (page < pageTotal) {
       // page + 1 to get actually page not index
@@ -208,25 +200,23 @@ class Downloader {
     let all = {};
 
     // Add slot info
-    console.log(`Not SafeFetch\n${WikiAPI.Github_Slot}`);
-    let slot = await fetch(WikiAPI.Github_Slot);
-
+    let slot = await SafeFetch.normal(WikiAPI.Github_Slot);
+console.log(slot);
     while (page < pageTotal) {
       // page + 1 to get actually page not index
       let json = await SafeFetch.get(WikiAPI.Consumable, this.server, `&page_no=${page+1}&${this.language}`);
       pageTotal = Guard(json, 'meta.page_total', 1);
       let data = Guard(json, 'data', {});
 
-      if (this.new === true) {
-        for (let id in data) {
-          let curr = data[id];
+      for (let id in data) {
+        let curr = data[id];
+        if (this.new === true)
+        {
           curr.new = DATA[SAVED.consumable][id] ? false : true;
-          if (slot[id])
-          {
-            // Add slot info
-            curr.slot = slot[id].slot;
-            console.log(curr.slot);
-          }
+        } 
+        if (slot[id]) {
+          // Add slot info
+          curr.slot = slot[id].slot;
         }
       }
 
@@ -250,18 +240,13 @@ class Downloader {
   }
 
   async getPR() {
-    console.log(`Not SafeFetch\n${WikiAPI.PersonalRating}`);
-    let res = await fetch(WikiAPI.PersonalRating);
-
-    let json = {};
-    if (res.status === 200) {
-      json = Guard(await res.json(), 'data', {});
-      // Cleanup empty key
-      for (let key in json) {
-        let curr = json[key];
-        if (curr.length === 0) {
-          delete json[key];
-        }
+    let res = await SafeFetch.normal(WikiAPI.PersonalRating);
+    let json = Guard(res, 'data', {});;
+    // Cleanup empty key
+    for (let key in json) {
+      let curr = json[key];
+      if (curr.length === 0) {
+        delete json[key];
       }
     }
       

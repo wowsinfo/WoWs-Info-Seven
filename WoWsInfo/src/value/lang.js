@@ -86,7 +86,6 @@ export default lang = new LocalizedStrings({
     wowsinfo_x: 'X',
     wowsinfo_y: 'Y',
     wowsinfo_z: 'Z',
-    wowsinfo: '',
     wowsinfo_black: 'Black',
     wowsinfo_white: 'White',
     wowsinfo_ultra: 'Ultra',

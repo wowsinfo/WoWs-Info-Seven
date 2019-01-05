@@ -1,3 +1,5 @@
+import { Guard } from './SafeGuard';
+
 class SafeFetch {
   /**
    * Make sure language is at the end
@@ -13,9 +15,24 @@ class SafeFetch {
     return fetch(link).then(res => {
       // To make sure request is valid
       if (res.status === 200) return res.json();
-      else return null;
     }).then(json => {
       if (json && json.status === 'ok') return json;
+      else return {};
+    });
+  }
+
+  /**
+   * A simple wrapper around fetch api
+   * @param {*} api 
+   */
+  static normal(api)
+  {
+    console.log(`NormalFetch\n${api}`);
+    return fetch(api).then(res => {
+      // To make sure request is valid
+      if (res.status === 200) return res.json();
+    }).then(json => {
+      return Guard(json, '', {});
     });
   }
 }

@@ -18,11 +18,11 @@ class WoWsInfo extends Component {
   constructor(props) {
     super(props);
 
-    const name = [lang.wowsinfo, lang.wowsinfo_black, lang.wowsinfo_go, lang.wowsinfo_new, 
+    const name = [lang.wowsinfo_black, lang.wowsinfo_go, lang.wowsinfo_new, 
                  lang.wowsinfo_pro, lang.wowsinfo_ultimate, lang.wowsinfo_ultra, lang.wowsinfo_white, 
                  lang.wowsinfo_x, lang.wowsinfo_y, lang.wowsinfo_z, '>_<', '#', 
-                 '0_0', '^_^', '★', 'α', 'θ', 'Ω', 'Ф', '∞', '░', '( ͡° ͜ʖ ͡°)', '¯\_(ツ)_/¯',
-                 '2018', '?', '!', '2017', '2016'];
+                 '0_0', '', '^_^', '★', 'α', 'θ', 'Ω', 'Ф', '∞', '░', '( ͡° ͜ʖ ͡°)', '¯\_(ツ)_/¯',
+                 '2018', '?!', '!!', '?!', '2017', '2016'];
     // Get a name from used names
     this.lucky = name[Math.floor(Math.random() * name.length)];
   }
@@ -95,8 +95,7 @@ const styles = StyleSheet.create({
     textAlign: 'center', alignSelf: 'center',
     width: '70%',
   },
-  safeView:
-  {
+  safeView: {
     flex: 1,
     backgroundColor: GREY[50],
   },
