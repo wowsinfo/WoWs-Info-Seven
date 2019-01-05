@@ -1,7 +1,7 @@
 /**
  * WarshipDetail.js
  * 
- * 
+ * Display detailed info of a ship and also show similar ships
  */
 
 import React, { PureComponent } from 'react';
@@ -105,7 +105,7 @@ class WarshipDetail extends PureComponent {
       <View>
         { this.renderStatus(Guard(curr, 'default_profile', null)) }
         <Divider />
-        { this.renderSurvivability(Guard(curr, 'default_profile.armour', null)) }
+        { this.renderSurvivability(curr) }
         <Divider />
         { this.renderMainBattery(Guard(curr, 'default_profile.artillery', null)) }
         <Divider />
@@ -118,6 +118,8 @@ class WarshipDetail extends PureComponent {
         { this.renderMobility(Guard(curr, 'default_profile.mobility', null)) }
         <Divider />
         { this.renderConcealment(curr) }
+        <Divider />
+        { this.renderUpgrade(curr) }
       </View>
     )
   }
@@ -134,15 +136,18 @@ class WarshipDetail extends PureComponent {
   /**
    * Render information about health, armour
    */
-  renderSurvivability(armour) {
-    if (!armour) return null;
+  renderSurvivability(curr) {
+    if (!curr) return null;
+    let armour = Guard(curr, 'default_profile.armour', null);
+    let tier = Guard(curr, 'tier', null);
+
     const { flood_prob, range, health } = armour;
     const { horizontal, centerText } = styles;
     return (
       <View style={{margin: 8}}>
         <Headline style={centerText}>{lang.warship_survivability}</Headline>
         <View style={horizontal}>
-          <InfoLabel title={lang.warship_survivability_health} info={health}/>
+          <InfoLabel title={lang.warship_survivability_health} info={`${health} - ${health + tier * 350}`}/>
           <InfoLabel title={lang.warship_survivability_armour} info={range.max + 'mm - ' + range.min + 'mm'}/>
           { flood_prob == 0 ? null : <InfoLabel title={lang.warship_survivability_protection} info={`${flood_prob}%`}/> }
         </View>
@@ -163,7 +168,11 @@ class WarshipDetail extends PureComponent {
     var mainGun = '', gunName = '';
     for (gun in slots) mainGun += slots[gun].guns + ' x ' + slots[gun].barrels + '  '; gunName = slots[gun].name;
     // Get gun penetration
-    let calibar = Math.round(parseInt(gunName.split(' ')[0]) / 6);
+    let calibar = parseInt(gunName.split(' ')[0]);
+    if (HE) {
+      var fireRate = calibar > 160 ? 4 : 3;
+      fireRate += HE.burn_probability;
+    }
 
     return (
       <View style={{margin: 8}}>
@@ -181,14 +190,14 @@ class WarshipDetail extends PureComponent {
         <View style={horizontal}>
           { HE == null ? null : <View>
             <Title style={centerText}>HE</Title>
-            <InfoLabel title={lang.warship_weapon_fire_chance} info={`🔥${HE.burn_probability}%`}/>
+            <InfoLabel title={lang.warship_weapon_fire_chance} info={`🔥 ${HE.burn_probability}% - ${fireRate}%`}/>
             <InfoLabel title={lang.warship_artillery_main_weight} info={`${HE.bullet_mass} kg`}/>
             <InfoLabel title={lang.warship_weapon_damage} info={`${HE.damage}`}/>
             <InfoLabel title={lang.warship_weapon_speed} info={`${HE.bullet_speed} m/s`}/>
           </View> }
           { AP == null ? null : <View>
             <Title style={centerText}>AP</Title>          
-            <InfoLabel title={lang.warship_weapon_fire_chance} info='---'/>
+            <InfoLabel title={lang.warship_weapon_fire_chance} info='0% 🔥'/>
             <InfoLabel title={lang.warship_artillery_main_weight} info={`${AP.bullet_mass} kg`}/>
             <InfoLabel title={lang.warship_weapon_damage} info={`${AP.damage}`}/>
             <InfoLabel title={lang.warship_weapon_speed} info={`${AP.bullet_speed} m/s`}/>
@@ -393,19 +402,38 @@ class WarshipDetail extends PureComponent {
   /**
    * Render upgrade list
    */
-  renderUpgrade() {
-    const { mod_slots, upgrades } = this.state.data;
-    upgradeKey = (value, index) => String(index);
+  renderUpgrade(curr) {
+    if (!curr) return null;
+    let upgrades = Guard(curr, 'upgrades', null);
+    let slots = Guard(curr, 'mod_slots', null);
+    if (!upgrades || !slots) return null;
+    
+    // follow the order from global wiki
+    upgrades.sort((a, b) => b - a);
+    for (let index in upgrades) {
+      let id = upgrades[index];
+      upgrades[index] = Object.assign(DATA[SAVED.consumable][id]);
+    }
+
+    let count = [];
+    for (let i = 0; i < slots; i++) {
+      count.push(i);
+    }
+
+    const { centerText } = styles;
     return (
       <View style={{margin: 8}}>
-        { this.renderTitle(language.detail_upgrade_title + ' (' + mod_slots + ')') }
-        <FlatList keyExtractor={upgradeKey} horizontal data={upgrades} renderItem={({item}) => {
-          let curr = data.consumable[item];
-          return (
-          <WoWsTouchable onPress={() => Alert.alert(curr.name, '\n' + curr.text, [{text: String(curr.price_credit)}])}>
-            <View><Image style={{width: 64, height: 64}} source={{uri: curr.icon}}/></View>
-          </WoWsTouchable>
-        )}}/>
+        <Headline style={centerText}>{lang.warship_upgrades}</Headline>
+        <ScrollView>
+          { count.map(num => {
+            let all = upgrades.filter(u => u.slot == num + 1);
+            return (
+              <View style={{flexDirection: 'row'}} key={num}>
+                <Title>{`${num + 1}.`}</Title>
+                { all.map(item => <WikiIcon key={item.name} item={item}/>) }
+              </View>
+            )})}
+        </ScrollView>
       </View>
     )
   }
