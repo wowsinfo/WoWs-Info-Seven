@@ -44,5 +44,5 @@ export const WikiAPI = {
   // Additional data collected by me
   // Currently support model
   Github_Model: 'https://raw.githubusercontent.com/HenryQuan/WoWs-Info-Ultra/API/json/model.json',
-  Github_Slot: 'https://github.com/HenryQuan/WoWs-Info-Ultra/blob/API/json/slot.json'
+  Github_Slot: 'https://raw.githubusercontent.com/HenryQuan/WoWs-Info-Ultra/API/json/slot.json'
 }
