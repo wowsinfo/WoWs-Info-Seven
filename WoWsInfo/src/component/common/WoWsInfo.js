@@ -12,6 +12,7 @@ import lang from '../../value/lang';
 import { Actions } from 'react-native-router-flux';
 import { FooterButton } from './FooterButton';
 import { SafeAction } from '../../core';
+import { GREY } from 'react-native-material-color';
 
 class WoWsInfo extends Component {
   constructor(props) {
@@ -27,11 +28,11 @@ class WoWsInfo extends Component {
   }
 
   render() {
-    const { container } = styles;
+    const { container, safeView } = styles;
     const { children, style } = this.props;
     return (
       <Surface style={[container, style]}>
-        <SafeAreaView style={container}>
+        <SafeAreaView style={safeView}>
           <Surface style={container}>
             { children }
           </Surface>
@@ -87,15 +88,21 @@ class WoWsInfo extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   text: {
     fontSize: 17, fontWeight: isAndroid ? 'bold' : '300',
     textAlign: 'center', alignSelf: 'center',
     width: '70%',
   },
+  safeView:
+  {
+    flex: 1,
+    backgroundColor: GREY[50],
+  },
   footer: {
     height: 48, 
+    backgroundColor: GREY[50],
     justifyContent: 'center',
   }
 });

@@ -12,7 +12,7 @@ class DataLoader {
    */
   static async loadAll() {
     // For debugging only
-    // SafeStorage.clear();
+    SafeStorage.clear();
 
     let data = {};
     const { apiLanguage, appVersion, gameVersion, firstLaunch, friendList, userData, 

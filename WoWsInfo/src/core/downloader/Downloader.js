@@ -207,6 +207,10 @@ class Downloader {
     let page = 0;
     let all = {};
 
+    // Add slot info
+    console.log(`Not SafeFetch\n${WikiAPI.Github_Slot}`);
+    let slot = await fetch(WikiAPI.Github_Slot);
+
     while (page < pageTotal) {
       // page + 1 to get actually page not index
       let json = await SafeFetch.get(WikiAPI.Consumable, this.server, `&page_no=${page+1}&${this.language}`);
@@ -217,6 +221,12 @@ class Downloader {
         for (let id in data) {
           let curr = data[id];
           curr.new = DATA[SAVED.consumable][id] ? false : true;
+          if (slot[id])
+          {
+            // Add slot info
+            curr.slot = slot[id].slot;
+            console.log(curr.slot);
+          }
         }
       }
 
@@ -224,7 +234,7 @@ class Downloader {
       Object.assign(all, data);
       page++;
     }
-
+    
     await SafeStorage.set(SAVED.consumable, all);
     return all;
   }
