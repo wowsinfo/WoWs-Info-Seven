@@ -43,8 +43,13 @@ class Collection extends Component {
   render() {
     const { label } = styles;
     const { data, collection, header } = this.state;
+
+    let ID = '';
+    // This is to prevent setting ID inside the collection page
+    if (data.length > 0 && data[0].card_id) ID = data[0].collection_id;
+
     return (
-      <WoWsInfo>
+      <WoWsInfo title={ID}>
         <GridView inverted={!collection} itemDimension={80} items={data} renderItem={item => {
           return <WikiIcon item={item} onPress={() => this.itemOrCollection(item)}/>
         }} ListHeaderComponent={() => {

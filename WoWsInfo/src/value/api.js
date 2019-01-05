@@ -30,12 +30,12 @@ export const WikiAPI = {
   // TODO: update this link when I remove this branch
   ShipModel: 'https://raw.githubusercontent.com/HenryQuan/WoWs-Info-Ultra/API/json/model.json',
   // Wiki
-  Achievement: `https://api.worldofwarships.{0}/wows/encyclopedia/achievements/?application_id=${AppKey}&fields=battle.hidden%2Cbattle.name%2Cbattle.image%2Cbattle.image_inactive%2Cbattle.description`,
+  Achievement: `https://api.worldofwarships.{0}/wows/encyclopedia/achievements/?application_id=${AppKey}&fields=battle.hidden%2Cbattle.achievement_id%2Cbattle.name%2Cbattle.image%2Cbattle.image_inactive%2Cbattle.description`,
   Warship: `https://api.worldofwarships.{0}/wows/encyclopedia/ships/?application_id=${AppKey}&fields=name%2Cnation%2Ctype%2Ctier%2Cship_id%2Cship_id_str%2Cimages.small%2Cis_premium%2Cis_special`,
   CommanderSkill: `https://api.worldofwarships.{0}/wows/encyclopedia/crewskills/?application_id=${AppKey}&fields=icon%2Cname%2Ctier%2Cperks.description`,
   GameMap: `https://api.worldofwarships.{0}/wows/encyclopedia/battlearenas/?application_id=${AppKey}&fields=name%2Cicon%2Cdescription`,
   // Flags, camouflages and upgrades
-  Consumable: `https://api.worldofwarships.{0}/wows/encyclopedia/consumables/?application_id=${AppKey}&fields=type%2Cdescription%2Cname%2Cimage%2Cprice_credit%2Cprice_gold%2Cprofile.description`,
+  Consumable: `https://api.worldofwarships.{0}/wows/encyclopedia/consumables/?application_id=${AppKey}&fields=type%2Cconsumable_id%2Cdescription%2Cname%2Cimage%2Cprice_credit%2Cprice_gold%2Cprofile.description`,
   Collection: `https://api.worldofwarships.{0}/wows/encyclopedia/collections/?application_id=${AppKey}&fields=-card_cost%2C-tag`,
   CollectionItem: `https://api.worldofwarships.{0}/wows/encyclopedia/collectioncards/?application_id=${AppKey}&fields=images.small%2Ccard_id%2Ccollection_id%2Cdescription%2Cname`,
   // Extra info for wiki

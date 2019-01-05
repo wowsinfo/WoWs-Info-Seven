@@ -12,8 +12,16 @@ import { FloatingButton, WikiIcon, WoWsInfo, PriceLabel } from '../../component'
 
 class BasicDetail extends Component {
   render() {
+    const { item } = this.props;
+    console.log(item);
+
+    let ID = '';
+    if (item.consumable_id) ID = item.consumable_id;
+    else if (item.achievement_id) ID = item.achievement_id;
+    else if (item.collection_id) ID = item.card_id;
+
     return (
-      <WoWsInfo>
+      <WoWsInfo title={ID}>
         { this.renderDetail() }
       </WoWsInfo>
     )
@@ -22,7 +30,7 @@ class BasicDetail extends Component {
   renderDetail() {
     const { item } = this.props;
     const { container, label } = styles;    
-    console.log(item);
+
     if (item.profile) {
       // Consumables
       const { name, description, profile } = item;

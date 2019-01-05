@@ -75,7 +75,6 @@ class WoWsInfo extends Component {
     const { onPress, about } = this.props;
     if (onPress) return onPress();
     else if (about) return this.navigate();
-    else return null;
   }
 
   /**
