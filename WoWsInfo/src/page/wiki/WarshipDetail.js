@@ -424,7 +424,7 @@ class WarshipDetail extends PureComponent {
 
     const { centerText } = styles;
     return (
-      <View style={{margin: 8}}>
+      <View style={{margin: 16}}>
         <Headline style={centerText}>{lang.warship_upgrades}</Headline>
         <ScrollView>
           { count.map(num => {
