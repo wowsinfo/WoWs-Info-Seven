@@ -93,7 +93,7 @@ class WarshipDetail extends PureComponent {
         { model ? <Button style={modelBtn} onPress={() => Linking.openURL(`https://sketchfab.com/models/${model}/embed?autostart=1&preload=1`)}>
           {lang.warship_model}
         </Button> : null }
-        <Paragraph style={centerText}>{description}</Paragraph>
+        <Paragraph style={[centerText, {margin: 8}]}>{description}</Paragraph>
       </View>
     )
   }
@@ -422,17 +422,17 @@ class WarshipDetail extends PureComponent {
       count.push(i);
     }
 
-    const { centerText } = styles;
+    const { centerText, upgradeView } = styles;
     return (
-      <View style={{margin: 16}}>
+      <View style={{margin: 8}}>
         <Headline style={centerText}>{lang.warship_upgrades}</Headline>
         <ScrollView>
           { count.map(num => {
             let all = upgrades.filter(u => u.slot == num + 1);
             return (
-              <View style={{flexDirection: 'row'}} key={num}>
-                <Title>{`${num + 1}.`}</Title>
-                { all.map(item => <WikiIcon key={item.name} item={item} 
+              <View style={upgradeView} key={num}>
+                <Title style={{margin: 8}}>{`${num + 1}.`}</Title>
+                { all.map(item => <WikiIcon key={item.name} item={item} scale={0.8}
                   onPress={() => Alert.alert(item.name, item.description, [{text: String(item.price_credit)}])}/>) }
               </View>
             )})}
@@ -527,6 +527,10 @@ const styles = StyleSheet.create({
   weaponTitle: {
     textAlign: 'center',
     margin: -16
+  },
+  upgradeView: {
+    flexDirection: 'row', 
+    alignItems: 'center'
   },
   horizontal: {
     flexDirection: 'row',
