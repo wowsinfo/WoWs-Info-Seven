@@ -303,21 +303,28 @@ class WarshipDetail extends PureComponent {
     const { horizontal, centerText } = styles;
     const { visibility_dist, distance, torpedo_name, reload_time, torpedo_speed, slots, max_damage } = torpedoes;
 
+    let dist = Number(distance).toFixed(1);
     let torps = ''; for (torp in slots) torps += slots[torp].guns + ' x ' + slots[torp].barrels + '  ';
     let reactionTime = Number(visibility_dist * 1000 / 2.6 / torpedo_speed).toFixed(1);
+
+    // With Torpedo acceleration
+    let shortDist = Number(distance * 0.8).toFixed(1);
+    let fastestSpeed = torpedo_speed + 5;
+    let reactionTimeP = Number(visibility_dist * 1000 / 2.6 / fastestSpeed).toFixed(1);
+
     return (
       <View style={{margin: 8}}>
         <Headline style={centerText}>{lang.warship_torpedoes}</Headline>
         <View style={horizontal}>
           <InfoLabel title={lang.warship_weapon_reload} info={`${reload_time} s`}/>
-          <InfoLabel title={lang.warship_weapon_range} info={`${distance} km`}/>
+          <InfoLabel title={lang.warship_weapon_range} info={`${dist} km - ${shortDist} km`}/>
           <InfoLabel title={lang.warship_weapon_configuration} info={torps}/>
         </View>
-        <Title style={centerText}>{`${torpedo_name} (${reactionTime} s)`}</Title>
+        <Title style={centerText}>{`${torpedo_name} (${reactionTime} s - ${reactionTimeP} s)`}</Title>
         <View style={horizontal}>
           <InfoLabel title={lang.warship_torpedoes_visible_distance} info={`${visibility_dist} km`}/>
           <InfoLabel title={lang.warship_weapon_damage} info={max_damage}/>
-          <InfoLabel title={lang.warship_weapon_speed} info={`${torpedo_speed} kt`}/>
+          <InfoLabel title={lang.warship_weapon_speed} info={`${torpedo_speed} kt - ${fastestSpeed} kt`}/>
         </View>
       </View>
     );
