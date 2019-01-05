@@ -117,7 +117,7 @@ class WarshipDetail extends PureComponent {
         <Divider />
         { this.renderMobility(Guard(curr, 'default_profile.mobility', null)) }
         <Divider />
-        { this.renderConcealment(curr) }
+        { this.renderConcealment(Guard(curr, 'default_profile.concealment', null)) }
         <Divider />
         { this.renderUpgrade(curr) }
       </View>
@@ -167,6 +167,7 @@ class WarshipDetail extends PureComponent {
     // Get all guns
     var mainGun = '', gunName = '';
     for (gun in slots) mainGun += slots[gun].guns + ' x ' + slots[gun].barrels + '  '; gunName = slots[gun].name;
+    
     // Get gun penetration
     let calibar = parseInt(gunName.split(' ')[0]);
     if (HE) {
@@ -174,33 +175,49 @@ class WarshipDetail extends PureComponent {
       fireRate += HE.burn_probability;
     }
 
+    // Get best reload
+    let reload = Number(60 / gun_rate).toFixed(1);
+    let re1 = calibar <= 139 ? 0.9 : 1;
+    let re2 = this.upgrades.findIndex(u => u === 4280471472) > -1 ? 0.88 : 1;
+    let bestReload = Number((60 / gun_rate) * re1 * re2).toFixed(1);
+    let reloadMsg = `${reload}s - ${bestReload}s`;
+    if (reload === bestReload) reloadMsg = `${reload}s`;
+
+    // Get best range
+    let range = Number(distance).toFixed(1);
+    let ra1 = calibar <= 139 ? 1.2 : 1;
+    let ra2 = this.upgrades.findIndex(u => u === 4278374320) > -1 ? 1.16 : 1;
+    let bestRange = Number(distance * ra1 * ra2).toFixed(1);
+    let rangeMsg = `${range}km - ${bestRange}km`;
+    if (range === bestRange) reloadMsg = `${range}km`;
+
     return (
       <View style={{margin: 8}}>
         <Headline style={centerText}>{lang.warship_artillery_main}</Headline>
         <View style={horizontal}>
-          <InfoLabel title={lang.warship_weapon_reload} info={`${Number(60 / gun_rate).toFixed(1)} s`}/>
-          <InfoLabel title={lang.warship_weapon_range} info={`${Number(distance).toFixed(2)} km`}/>
+          <InfoLabel title={lang.warship_weapon_reload} info={reloadMsg}/>
+          <InfoLabel title={lang.warship_weapon_range} info={rangeMsg}/>
           <InfoLabel title={lang.warship_weapon_configuration} info={mainGun}/>
         </View>
         <View style={horizontal}>
-          <InfoLabel title={lang.warship_weapon_dispersion} info={`${max_dispersion} m`}/>
-          <InfoLabel title={lang.warship_weapon_rotation} info={`${rotation_time} s`}/>
+          <InfoLabel title={lang.warship_weapon_dispersion} info={`${max_dispersion}m`}/>
+          <InfoLabel title={lang.warship_weapon_rotation} info={`${rotation_time}s`}/>
         </View>
         <Title style={centerText}>{gunName}</Title>            
         <View style={horizontal}>
           { HE == null ? null : <View>
             <Title style={centerText}>HE</Title>
-            <InfoLabel title={lang.warship_weapon_fire_chance} info={`🔥 ${HE.burn_probability}% - ${fireRate}%`}/>
-            <InfoLabel title={lang.warship_artillery_main_weight} info={`${HE.bullet_mass} kg`}/>
+            <InfoLabel title={lang.warship_weapon_fire_chance} info={`🔥${HE.burn_probability}% - ${fireRate}%`}/>
+            <InfoLabel title={lang.warship_artillery_main_weight} info={`${HE.bullet_mass}kg`}/>
             <InfoLabel title={lang.warship_weapon_damage} info={`${HE.damage}`}/>
-            <InfoLabel title={lang.warship_weapon_speed} info={`${HE.bullet_speed} m/s`}/>
+            <InfoLabel title={lang.warship_weapon_speed} info={`${HE.bullet_speed}m/s`}/>
           </View> }
           { AP == null ? null : <View>
             <Title style={centerText}>AP</Title>          
-            <InfoLabel title={lang.warship_weapon_fire_chance} info='0% 🔥'/>
-            <InfoLabel title={lang.warship_artillery_main_weight} info={`${AP.bullet_mass} kg`}/>
+            <InfoLabel title={lang.warship_weapon_fire_chance} info='0%🔥'/>
+            <InfoLabel title={lang.warship_artillery_main_weight} info={`${AP.bullet_mass}kg`}/>
             <InfoLabel title={lang.warship_weapon_damage} info={`${AP.damage}`}/>
-            <InfoLabel title={lang.warship_weapon_speed} info={`${AP.bullet_speed} m/s`}/>
+            <InfoLabel title={lang.warship_weapon_speed} info={`${AP.bullet_speed}m/s`}/>
           </View> }
         </View>
       </View>
@@ -218,15 +235,15 @@ class WarshipDetail extends PureComponent {
     var guns = []; for (gun in slots) guns.push(slots[gun]);
     return (
       <View style={{margin: 8}}>
-        <Headline style={centerText}>{`${lang.warship_artillery_secondary} (${distance} km)`}</Headline>
+        <Headline style={centerText}>{`${lang.warship_artillery_secondary} (${distance}km)`}</Headline>
         { guns.map((value, index) => { 
           const { burn_probability, bullet_speed, name, gun_rate, damage, type } = value;            
           return (
             <View key={index}>
               <Title style={centerText}>{`${type} - ${name}`}</Title>
               <View style={horizontal}>
-                <InfoLabel title={lang.warship_weapon_reload} info={Number(60 / gun_rate).toFixed(1) + ' s'}/>
-                <InfoLabel title={lang.warship_weapon_speed} info={`${bullet_speed} m/s`}/>
+                <InfoLabel title={lang.warship_weapon_reload} info={Number(60 / gun_rate).toFixed(1) + 's'}/>
+                <InfoLabel title={lang.warship_weapon_speed} info={`${bullet_speed}m/s`}/>
                 { burn_probability == null ? null : 
                   <InfoLabel title={lang.warship_weapon_fire_chance} info={`🔥 ${burn_probability}%`} /> }
                 <InfoLabel title={lang.warship_weapon_damage} info={damage}/>
@@ -312,19 +329,23 @@ class WarshipDetail extends PureComponent {
     let fastestSpeed = torpedo_speed + 5;
     let reactionTimeP = Number(visibility_dist * 1000 / 2.6 / fastestSpeed).toFixed(1);
 
+    // check for torpedo upgrade
+    let modifier = this.upgrades.findIndex(u => u === 4279422896) > -1 ? 0.85 : 1;
+    let minReload = Number(reload_time * 0.9 * modifier).toFixed(1);
+
     return (
       <View style={{margin: 8}}>
         <Headline style={centerText}>{lang.warship_torpedoes}</Headline>
         <View style={horizontal}>
-          <InfoLabel title={lang.warship_weapon_reload} info={`${reload_time} s`}/>
-          <InfoLabel title={lang.warship_weapon_range} info={`${dist} km - ${shortDist} km`}/>
+          <InfoLabel title={lang.warship_weapon_reload} info={`${reload_time}s - ${minReload}s`}/>
+          <InfoLabel title={lang.warship_weapon_range} info={`${dist}km - ${shortDist}km`}/>
           <InfoLabel title={lang.warship_weapon_configuration} info={torps}/>
         </View>
-        <Title style={centerText}>{`${torpedo_name} (${reactionTime} s - ${reactionTimeP} s)`}</Title>
+        <Title style={centerText}>{`${torpedo_name} (${reactionTime}s - ${reactionTimeP}s)`}</Title>
         <View style={horizontal}>
-          <InfoLabel title={lang.warship_torpedoes_visible_distance} info={`${visibility_dist} km`}/>
+          <InfoLabel title={lang.warship_torpedoes_visible_distance} info={`${visibility_dist}km`}/>
           <InfoLabel title={lang.warship_weapon_damage} info={max_damage}/>
-          <InfoLabel title={lang.warship_weapon_speed} info={`${torpedo_speed} kt - ${fastestSpeed} kt`}/>
+          <InfoLabel title={lang.warship_weapon_speed} info={`${torpedo_speed}kt - ${fastestSpeed}kt`}/>
         </View>
       </View>
     );
@@ -349,8 +370,8 @@ class WarshipDetail extends PureComponent {
               <Title style={centerText}>{name}</Title>
               <View style={horizontal}>
                 <InfoLabel title={lang.warship_weapon_configuration} info={`${guns}x`} />
-                <InfoLabel title={lang.warship_weapon_range} info={`${distance} km`} />
-                <InfoLabel title={lang.warship_weapon_damage} info={`${avg_damage} dps`} />
+                <InfoLabel title={lang.warship_weapon_range} info={`${distance}km`} />
+                <InfoLabel title={lang.warship_weapon_damage} info={`${avg_damage}dps`} />
               </View>
             </View>
           );
@@ -366,15 +387,23 @@ class WarshipDetail extends PureComponent {
     if (!mobility) return null;
     const { horizontal, centerText } = styles;
     const { rudder_time, turning_radius, max_speed } = mobility;
+
     let good = getColourWithRange(20, max_speed, 45);
     let speedFlag = Number(max_speed * 1.05).toFixed(0);
+
+    // Best stat with upgrades
+    let m1 = this.upgrades.findIndex(u => u === 4267888560) > -1 ? 0.8 : 1;
+    let m2 = this.upgrades.findIndex(u => u === 4257402800) > -1 ? 0.6 : 1;
+    let modifier = m1 + m2 - 1;
+    let maxRudder = Number(rudder_time * modifier).toFixed(1);
+
     return (
       <View style={{margin: 8}}>
         <Headline style={[centerText, {color: good}]}>{lang.warship_maneuverabilty}</Headline>
         <View style={horizontal}>
-          <InfoLabel title={lang.warship_maneuverabilty_rudder_time} info={`${rudder_time} s`}/>
-          <InfoLabel title={lang.warship_maneuverabilty_speed} info={`${max_speed} kt - ${speedFlag} kt`}/>
-          <InfoLabel title={lang.warship_maneuverabilty_turning} info={`${turning_radius} m`}/>
+          <InfoLabel title={lang.warship_maneuverabilty_rudder_time} info={`${rudder_time}s - ${maxRudder}s`}/>
+          <InfoLabel title={lang.warship_maneuverabilty_speed} info={`${max_speed}kt - ${speedFlag}kt`}/>
+          <InfoLabel title={lang.warship_maneuverabilty_turning} info={`${turning_radius}m`}/>
         </View>
       </View>
     );
@@ -383,24 +412,21 @@ class WarshipDetail extends PureComponent {
   /**
    * Render concealment information
    */
-  renderConcealment(curr) {
-    if (!curr) return null;
-    let concealment = Guard(curr, 'default_profile.concealment', null);
+  renderConcealment(concealment) {
     if (!concealment) return null;
 
     const { horizontal, centerText } = styles;
     const { detect_distance_by_plane, detect_distance_by_ship } = concealment;
 
     // Check if ship has concealment module
-    let upgrades = Guard(curr, 'upgrades', null);
-    let modifier = upgrades.findIndex(u => u === 4265791408) > -1 ? 0.9 : 1;
+    let modifier = this.upgrades.findIndex(u => u === 4265791408) > -1 ? 0.9 : 1;
     let max_concealment = Number(detect_distance_by_ship * 0.9 * modifier * 0.97).toFixed(1);
     return (
       <View style={{margin: 8}}>
         <Headline style={centerText}>{lang.warship_concealment}</Headline>
         <View style={horizontal}>
-          <InfoLabel title={lang.warship_concealment_detect_by_plane} info={`${detect_distance_by_plane} km`}/>
-          <InfoLabel title={lang.warship_concealment_detect_by_ship} info={`${detect_distance_by_ship} km - ${max_concealment} km`}/>
+          <InfoLabel title={lang.warship_concealment_detect_by_plane} info={`${detect_distance_by_plane}km`}/>
+          <InfoLabel title={lang.warship_concealment_detect_by_ship} info={`${detect_distance_by_ship}km - ${max_concealment}km`}/>
         </View>
       </View>
     );
@@ -510,6 +536,7 @@ class WarshipDetail extends PureComponent {
       SafeFetch.get(WoWsAPI.ShipWiki, this.server, id, langStr()).then(json => {
         let data = Guard(json, 'data', {});
         console.log(data);
+        this.upgrades = Guard(data[id], 'upgrades', []);
         this.setState({data: data[id], loading: false});
       });
     }, 1000);
