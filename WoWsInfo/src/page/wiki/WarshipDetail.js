@@ -5,7 +5,7 @@
  */
 
 import React, { PureComponent } from 'react';
-import { View, FlatList,Linking, ScrollView, StyleSheet } from 'react-native';
+import { View, FlatList,Linking, ScrollView, StyleSheet, Alert } from 'react-native';
 import { Text, Title, Subheading, Headline, Button, Surface, Paragraph, List, Divider } from 'react-native-paper';
 import { WoWsInfo, WikiIcon, WarshipCell, LoadingModal, PriceLabel, LoadingIndicator, WarshipStat, InfoLabel, DividerPlus } from '../../component';
 import { SAVED, SERVER, LOCAL } from '../../value/data';
@@ -414,7 +414,9 @@ class WarshipDetail extends PureComponent {
       let id = upgrades[index];
       upgrades[index] = Object.assign(DATA[SAVED.consumable][id]);
     }
+    console.log(upgrades);
 
+    // For looping only
     let count = [];
     for (let i = 0; i < slots; i++) {
       count.push(i);
@@ -430,7 +432,8 @@ class WarshipDetail extends PureComponent {
             return (
               <View style={{flexDirection: 'row'}} key={num}>
                 <Title>{`${num + 1}.`}</Title>
-                { all.map(item => <WikiIcon key={item.name} item={item}/>) }
+                { all.map(item => <WikiIcon key={item.name} item={item} 
+                  onPress={() => Alert.alert(item.name, item.description, [{text: String(item.price_credit)}])}/>) }
               </View>
             )})}
         </ScrollView>
