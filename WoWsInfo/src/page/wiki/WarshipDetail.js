@@ -10,8 +10,9 @@ import { Text, Title, Subheading, Headline, Button, Surface, Paragraph, List, Di
 import { WoWsInfo, WikiIcon, WarshipCell, LoadingModal, PriceLabel, LoadingIndicator, WarshipStat, InfoLabel, DividerPlus } from '../../component';
 import { SAVED, SERVER, LOCAL } from '../../value/data';
 import lang from '../../value/lang';
-import { SafeFetch, langStr, Guard, getColourWithRange } from '../../core';
+import { SafeFetch, langStr, Guard, getColourWithRange, SafeAction } from '../../core';
 import { WoWsAPI } from '../../value/api';
+import { Actions } from 'react-native-router-flux';
 
 class WarshipDetail extends PureComponent {
   constructor(props) {
@@ -99,8 +100,6 @@ class WarshipDetail extends PureComponent {
   }
 
   renderAll(curr) {
-    const { default_profile, modules_tree, modules, next_ships } = curr;
-
     return (
       <View>
         { this.renderStatus(Guard(curr, 'default_profile', null)) }
@@ -120,6 +119,8 @@ class WarshipDetail extends PureComponent {
         { this.renderConcealment(Guard(curr, 'default_profile.concealment', null)) }
         <Divider />
         { this.renderUpgrade(curr) }
+        <Divider />
+        { this.renderNextShip(Guard(curr, 'next_ships'), null) }
       </View>
     )
   }
@@ -486,36 +487,25 @@ class WarshipDetail extends PureComponent {
   /**
    * Render next ship
    */
-  renderNextShip() {
-    const { next_ships } = this.state.data;
-    if (Object.keys(next_ships).length == 0) return null;
-    else {
-      // Get all ships from next_ships
-      var ships = []; for (key in next_ships) ships.push({key: key, exp: next_ships[key]});
-      shipKey = (value, index) => String(index);      
-      return (
-        <View style={{margin: 8}}>
-          { this.renderTitle(language.detail_next_ship_title) }
-          <FlatList data={ships} horizontal keyExtractor={shipKey} renderItem={({item}) => {  
-            let curr = data.warship[item.key];
-            return (
-              <WoWsTouchable onPress={() => {
-                this.props.navigator.pop();
-                this.props.navigator.push({
-                  screen: 'ship.detail',
-                  title: '[' + curr.ship_id_str + '] ' + curr.ship_id,
-                  passProps: {info: curr},
-                  navigatorStyle: navStyle()
-                })}}>
-                <View style={{alignSelf: 'center'}}>
-                  <Image source={{uri: curr.icon}} style={{width: 128, height: 64}} resizeMode='contain'/>
-                  <Text style={{textAlign: 'center', fontWeight: 'bold'}}>{curr.name}</Text>
-                </View>
-              </WoWsTouchable>
-            )}}/>
-        </View>
-      )
-    }
+  renderNextShip(next_ships) {
+    if (!next_ships || Object.keys(next_ships).length == 0) return null;
+    // Get all ships from next_ships
+    var ships = []; for (key in next_ships) ships.push({key: key, exp: next_ships[key]});
+    shipKey = (index) => String(index);
+    
+    const { centerText } = styles;
+    return (
+      <View style={{margin: 8}}>
+        <Headline style={centerText}>{lang.warship_next_ship}</Headline>
+        <FlatList data={ships} horizontal keyExtractor={shipKey} renderItem={({item}) => {  
+          let curr = DATA[SAVED.warship][item.key];
+          return <WarshipCell scale={1.4} item={curr} onPress={() => {
+            Actions.pop();
+            SafeAction('WarshipDetail', {item: curr}, 1)
+          }}/>
+        }}/>
+      </View>
+    )
   }
 
   /**
