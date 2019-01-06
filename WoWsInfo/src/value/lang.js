@@ -59,6 +59,8 @@ export default lang = new LocalizedStrings({
     wiki_upgrades: 'Upgrades',
     wiki_flags: 'Flags/Camouflages',
     wiki_skills: 'Commander Skills',
+    wiki_skills_reset: 'Reset',
+    wiki_skills_point: 'point(s)',
     wiki_maps: 'Maps',
     wiki_collections: 'Collections',
     // Extra
