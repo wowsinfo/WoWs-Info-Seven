@@ -22,14 +22,15 @@ class WikiIcon extends Component {
   render() {
     const { container, newLabel, indicator } = styles;
     const { loading } = this.state;
-    const { item, scale, warship, ...props } = this.props;
+    const { item, scale, warship, selected, ...props } = this.props;
     let width = 80;
     if (scale) width *= scale;
+    let theme = DATA[LOCAL.theme];
 
     if (warship) {
       return (
         <View style={container}>
-          { item.new ? <View style={[newLabel, {backgroundColor: DATA[LOCAL.theme][500]}]}/> : null }
+          { item.new ? <View style={[newLabel, {backgroundColor: theme[500]}]}/> : null }
           <Image source={{uri: item.image ? item.image : item.icon, cache: 'default'}} resizeMode='contain'
             onLoadEnd={() => this.setState({loading: false})} 
             style={{width: width, height: width / 1.7, borderRadius: 8}} />
@@ -38,7 +39,7 @@ class WikiIcon extends Component {
       )
     } else {
       return (
-        <Touchable style={container} {...props}>
+        <Touchable style={[container, selected ? {borderColor: theme[500], borderWidth: 1.5, borderRadius: 8} : null]} {...props}>
           { item.new ? <View style={[newLabel, {backgroundColor: DATA[LOCAL.theme][500]}]}/> : null }
           <Image source={{uri: item.image ? item.image : item.icon, cache: 'default'}} resizeMode='contain'
             onLoadEnd={() => this.setState({loading: false})} 

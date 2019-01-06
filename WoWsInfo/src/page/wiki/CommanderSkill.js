@@ -9,9 +9,10 @@ import { View, Text, StyleSheet } from 'react-native';
 import { Surface, Title } from 'react-native-paper';
 import { SAVED } from '../../value/data';
 import { WoWsInfo, WikiIcon } from '../../component';
-import { SuperGridSectionList } from 'react-native-super-grid';
+import GridView from 'react-native-super-grid';
 import { Actions } from 'react-native-router-flux';
 import { SafeAction } from '../../core';
+import lang from '../../value/lang';
 
 class CommanderSkill extends Component {
   constructor(props) {
@@ -19,36 +20,41 @@ class CommanderSkill extends Component {
 
     console.log("WIKI - Commander Skill");
     let skill = DATA[SAVED.commanderSkill];
-    // Get current max tier
-    let maxTier = skill.reduce((max, curr) => Math.max(max, curr.tier), 0);
-    if (maxTier != NaN) {
-      let section = [];
-      let length = 0;
-      // Make section list, remember to change to INDEX
-      while (length < maxTier) {
-        section.push({title: `Lv ${length + 1}`, data: []});
-        length++;
-      }
+    console.log(skill);
   
-      skill.forEach(s => section[s.tier - 1].data.push(s));
-      console.log(section);
-      this.state = {
-        data: section
-      };
-    }
+    this.state = {
+      data: skill,
+      point: 19
+    };
   }
 
   render() {
-    const { data } = this.state;
-    const { header } = styles;
+    const { data, point } = this.state;
+
     return (
-      <WoWsInfo>
-        <SuperGridSectionList itemDimension={80} sections={data}
-          renderItem={({item}) => <WikiIcon item={item} onPress={() => SafeAction('BasicDetail', {item: item})}/>}
-          renderSectionHeader={({section}) => <Title style={header}>{section.title}</Title>}/>
+      <WoWsInfo title={`${point} ${lang.wiki_skills_point}`} onPress={() => this.reset()}>
+        <GridView itemDimension={80} items={data} renderItem={item => {
+          return <WikiIcon item={item} selected={item.selected} onPress={() => {
+            // If you do not have enough point do nothing
+            if (item.selected) return;
+
+            let pointLeft = point - item.tier;
+            if (pointLeft >= 0) {
+              item.selected = true;
+              if (pointLeft == 0) this.setState({point: lang.wiki_skills_reset})
+              else this.setState({point: pointLeft})
+            } 
+          }} onLongPress={() => SafeAction('BasicDetail', {item: item})}/>
+        }}/>
       </WoWsInfo>
     )
   };
+
+  reset() {
+    const { data } = this.state;
+    data.forEach(s => delete s.selected);
+    this.setState({point: 19, data: data});
+  }
 }
 
 const styles = StyleSheet.create({
