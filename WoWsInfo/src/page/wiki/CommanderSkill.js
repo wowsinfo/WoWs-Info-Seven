@@ -20,10 +20,10 @@ class CommanderSkill extends Component {
 
     console.log("WIKI - Commander Skill");
     let skill = DATA[SAVED.commanderSkill];
-    console.log(skill);
+    let backup = JSON.stringify(skill);
   
     this.state = {
-      data: Object.assign(skill),
+      data: JSON.parse(backup),
       point: 19
     };
   }

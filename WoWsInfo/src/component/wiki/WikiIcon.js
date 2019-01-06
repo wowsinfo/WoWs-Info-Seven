@@ -33,18 +33,17 @@ class WikiIcon extends Component {
           { item.new ? <View style={[newLabel, {backgroundColor: theme[500]}]}/> : null }
           <Image source={{uri: item.image ? item.image : item.icon, cache: 'default'}} resizeMode='contain'
             onLoadEnd={() => this.setState({loading: false})} 
-            style={{width: width, height: width / 1.7, borderRadius: 8}} />
+            style={{width: width, height: width / 1.7}} />
           { loading ? <LoadingIndicator style={indicator}/> : null }
         </View>
       )
     } else {
       return (
-        <Touchable style={container} {...props}>
+        <Touchable style={[container, selected ? {borderColor: theme[500]} : null]} {...props}>
           { item.new ? <View style={[newLabel, {backgroundColor: DATA[LOCAL.theme][500]}]}/> : null }
           <Image source={{uri: item.image ? item.image : item.icon, cache: 'default'}} resizeMode='contain'
             onLoadEnd={() => this.setState({loading: false})} 
-            style={[{height: width, width: width, borderRadius: 8}, 
-            selected ? {borderColor: theme[500], borderWidth: 1.5, borderRadius: 8} : null]} />
+            style={{height: width, width: width}} />
           { loading ? <LoadingIndicator style={indicator}/> : null }
         </Touchable>
       )
@@ -56,6 +55,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'center',
+    borderRadius: 8, borderWidth: 1, borderColor: 'transparent'
   },
   newLabel: {
     position: 'absolute', zIndex: 1,
