@@ -39,11 +39,12 @@ class WikiIcon extends Component {
       )
     } else {
       return (
-        <Touchable style={[container, selected ? {borderColor: theme[500], borderWidth: 1.5, borderRadius: 8} : null]} {...props}>
+        <Touchable style={container} {...props}>
           { item.new ? <View style={[newLabel, {backgroundColor: DATA[LOCAL.theme][500]}]}/> : null }
           <Image source={{uri: item.image ? item.image : item.icon, cache: 'default'}} resizeMode='contain'
             onLoadEnd={() => this.setState({loading: false})} 
-            style={{height: width, width: width, borderRadius: 8}} />
+            style={[{height: width, width: width, borderRadius: 8}, 
+            selected ? {borderColor: theme[500], borderWidth: 1.5, borderRadius: 8} : null]} />
           { loading ? <LoadingIndicator style={indicator}/> : null }
         </Touchable>
       )
