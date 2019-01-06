@@ -23,7 +23,7 @@ class CommanderSkill extends Component {
     console.log(skill);
   
     this.state = {
-      data: skill,
+      data: Object.assign(skill),
       point: 19
     };
   }
