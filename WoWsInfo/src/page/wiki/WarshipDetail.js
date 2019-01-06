@@ -172,7 +172,14 @@ class WarshipDetail extends PureComponent {
     let calibar = parseInt(gunName.split(' ')[0]);
     if (HE) {
       var fireRate = calibar > 160 ? 4 : 3;
+      // Mark the penetration 1/6 and 1/4
+      var penetration = `1/6 - ${Number(calibar / 6).toFixed(0)}mm\n1/4 - ${Number(calibar / 4).toFixed(0)}mm`;
       fireRate += HE.burn_probability;
+    }
+
+    if (AP) {
+      // Overmatch 14.3x
+      var overmatch = `${Number(calibar / 14.3).toFixed(2)}mm\n`;
     }
 
     // Get best reload
@@ -189,7 +196,7 @@ class WarshipDetail extends PureComponent {
     let ra2 = this.upgrades.findIndex(u => u === 4278374320) > -1 ? 1.16 : 1;
     let bestRange = Number(distance * ra1 * ra2).toFixed(1);
     let rangeMsg = `${range}km - ${bestRange}km`;
-    if (range === bestRange) reloadMsg = `${range}km`;
+    if (range === bestRange) rangeMsg = `${range}km`;
 
     return (
       <View style={{margin: 8}}>
@@ -211,6 +218,7 @@ class WarshipDetail extends PureComponent {
             <InfoLabel title={lang.warship_artillery_main_weight} info={`${HE.bullet_mass}kg`}/>
             <InfoLabel title={lang.warship_weapon_damage} info={`${HE.damage}`}/>
             <InfoLabel title={lang.warship_weapon_speed} info={`${HE.bullet_speed}m/s`}/>
+            <InfoLabel title={lang.warship_weapon_he_penetration} info={penetration}/>
           </View> }
           { AP == null ? null : <View>
             <Title style={centerText}>AP</Title>          
@@ -218,6 +226,7 @@ class WarshipDetail extends PureComponent {
             <InfoLabel title={lang.warship_artillery_main_weight} info={`${AP.bullet_mass}kg`}/>
             <InfoLabel title={lang.warship_weapon_damage} info={`${AP.damage}`}/>
             <InfoLabel title={lang.warship_weapon_speed} info={`${AP.bullet_speed}m/s`}/>
+            <InfoLabel title={lang.warship_weapon_ap_overmatch} info={`${overmatch}`}/>
           </View> }
         </View>
       </View>
