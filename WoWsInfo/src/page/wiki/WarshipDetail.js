@@ -500,8 +500,9 @@ class WarshipDetail extends PureComponent {
         <FlatList data={ships} horizontal keyExtractor={shipKey} renderItem={({item}) => {  
           let curr = DATA[SAVED.warship][item.key];
           return <WarshipCell scale={1.4} item={curr} onPress={() => {
+            // Pop and go to another ships
             Actions.pop();
-            SafeAction('WarshipDetail', {item: curr}, 1)
+            SafeAction('WarshipDetail', {item: curr}, 1);
           }}/>
         }}/>
       </View>
