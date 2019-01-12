@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
+import { SafeAreaView, StyleSheet, StatusBar } from 'react-native';
 import { Button, Surface } from 'react-native-paper';
 import { isAndroid } from 'react-native-device-detection';
 import lang from '../../value/lang';
@@ -13,7 +13,7 @@ import { Actions } from 'react-native-router-flux';
 import { FooterButton } from './FooterButton';
 import { SafeAction } from '../../core';
 import { GREY } from 'react-native-material-color';
-import { ThemeBackColour } from '../../value/colour';
+import { ThemeBackColour, ThemeColour } from '../../value/colour';
 
 class WoWsInfo extends Component {
   constructor(props) {
@@ -34,6 +34,8 @@ class WoWsInfo extends Component {
     return (
       <Surface style={[container, style]}>
         <SafeAreaView style={[safeView, ThemeBackColour()]}>
+          <StatusBar barStyle={DARKMODE ? 'light-content' : 'dark-content'} 
+            backgroundColor={ThemeColour()}/>
           <Surface style={container}>
             { children }
           </Surface>
