@@ -13,7 +13,7 @@ import { FooterButton, WoWsInfo } from '../component';
 import lang from '../value/lang';
 import { Actions } from 'react-native-router-flux';
 import { SafeAction } from '../core';
-import { ThemeBackColour } from '../value/colour';
+import { ThemeBackColour, TintColour } from '../value/colour';
 
 class Menu extends Component {
 
@@ -82,7 +82,7 @@ class Menu extends Component {
           <List.Section title={lang.wiki_section_title}>
             { this.wiki.map(item => { return (
               <List.Item title={item.t} style={{padding: 0, paddingLeft: 8}} onPress={() => item.p()} key={item.t}
-              left={() => <List.Icon style={[icon, ThemeBackColour()]} color={Colors.blue300} icon={item.i}/>}
+              left={() => <List.Icon style={[icon, ThemeBackColour()]} color={TintColour()[300]} icon={item.i}/>}
               right={() => isAndroid ? null : <List.Icon color={Colors.grey500} icon='keyboard-arrow-right'/>} />
             )})}
           </List.Section>
@@ -111,7 +111,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   icon: {
-    backgroundColor: Colors.blueGrey50, 
     borderRadius: 100
   },
   searchBar: {

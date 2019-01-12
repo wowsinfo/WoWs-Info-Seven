@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, StatusBar } from 'react-native';
-import { Router, Stack, Scene } from 'react-native-router-flux';
+import { Router, Stack, Scene, Actions } from 'react-native-router-flux';
 import { isTablet } from 'react-native-device-detection';
 import { Surface, DarkTheme, DefaultTheme, withTheme } from 'react-native-paper';
 import { Home, Menu, Settings, About, Setup, Consumable, CommanderSkill, 
@@ -9,6 +9,7 @@ import { LOCAL } from './value/data';
 import { DataLoader, Downloader } from './core';
 import { GREY } from 'react-native-material-color';
 import { LoadingModal } from './component';
+import { TintColour } from './value/colour';
 
 class App extends Component {
   constructor(props) {
@@ -24,7 +25,7 @@ class App extends Component {
     DataLoader.loadAll().then(data => {
       console.log(data);
       global.DATA = data;
-      const appTheme = DATA[LOCAL.theme];
+      const appTheme = TintColour();
       DARKMODE = DATA[LOCAL.darkMode];
 
       // Setup global dark theme
@@ -70,9 +71,6 @@ class App extends Component {
     const { loading, updating, dark } = this.state;
     if (loading) return <LoadingModal />
     return (
-      <Surface style={container}>
-        <StatusBar barStyle={dark ? 'light-content' : 'dark-content'} 
-          backgroundColor={dark ? 'black' : GREY[200]}/>
         <Router sceneStyle={[scene, {backgroundColor: dark ? 'black' : 'white'}]}>
           <Stack key='root' hideNavBar>
             <Scene key='Home' component={Home}/>
@@ -93,7 +91,6 @@ class App extends Component {
             <Scene key='About' component={About}/>
           </Stack>
         </Router>
-      </Surface>
     );
   }
 }
