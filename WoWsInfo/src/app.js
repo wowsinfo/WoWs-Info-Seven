@@ -9,7 +9,7 @@ import { LOCAL } from './value/data';
 import { DataLoader, Downloader } from './core';
 import { GREY } from 'react-native-material-color';
 import { LoadingModal } from './component';
-import { TintColour } from './value/colour';
+import { TintColour, UpdateTintColour } from './value/colour';
 
 class App extends Component {
   constructor(props) {
