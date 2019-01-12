@@ -5,13 +5,13 @@
  */
 
 import React, { Component } from 'react';
-import { TextInput, FlatList, StyleSheet } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
 import { WoWsInfo, WarshipCell } from '../../component';
 import GridView from 'react-native-super-grid';
 import { SAVED, LOCAL } from '../../value/data';
-import { Portal, Dialog, Button, Divider, List, Modal, Checkbox, Colors, Surface } from 'react-native-paper';
+import { Portal, TextInput, Button, Divider, List, Modal, Checkbox, Colors, Surface } from 'react-native-paper';
 import lang from '../../value/lang';
-import { SafeAction } from '../../core';
+import { SafeAction, getKeyByValue } from '../../core';
 
 class Warship extends Component {
   constructor(props) {
@@ -41,13 +41,13 @@ class Warship extends Component {
       // 0 for none expanded
       accordion: 0
     };
+
+    this.tierList = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'XI', 'X'];
   }
 
   render() {
     const { input, apply } = styles;
     const { data, filter, tier, nation, type, name, premium, accordion } = this.state;
-
-    const tierList = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'XI', 'X'];
 
     let nations = DATA[SAVED.encyclopedia].ship_nations;
     let nationList = [];
@@ -60,37 +60,37 @@ class Warship extends Component {
     const textColour = DATA[LOCAL.darkMode] ? 'white' : Colors.grey900;
 
     return (
-      <WoWsInfo title={lang.wiki_warship_footer} onPress={() => this.setState({filter: true})}>
+      <WoWsInfo title={`${lang.wiki_warship_footer} - ${data.length}`} onPress={() => this.setState({filter: true})}>
         <GridView itemDimension={100} items={data} renderItem={(item) => {
           return <WarshipCell scale={1.4} item={item} onPress={() => SafeAction('WarshipDetail', {item: item})}/>
         }}/>
 
         { filter ? <Portal>
-          <Modal theme={{roundness: 16}} visible={filter} onDismiss={this.dismissFilter}>
+          <Modal theme={{roundness: 16}} dismissable={false} visible={filter} onDismiss={this.dismissFilter}>
             <Surface>
               <TextInput style={input} value={name} onChangeText={text => this.setState({name: text})}
                 autoCorrect={false} autoCapitalize='none' placeholder={lang.wiki_warship_filter_placeholder}/>
-              <List.Item title={lang.wiki_warship_filter_premiumm} 
+              <List.Item title={lang.wiki_warship_filter_premiumm} onPress={() => this.setState({premium: !premium})}
                 right={() => <Checkbox status={premium ? 'checked' : 'unchecked'}/>}/>             
               <List.Accordion title={tier} expanded={accordion === 1}
                 onPress={() => this.hideAccordion(1)}>
-                <FlatList data={tierList} renderItem={({item}) => {
-                  return <Button color={textColour} style={{flex: 1}} onPress={() => null}>{item}</Button>
+                <FlatList data={this.tierList} renderItem={({item}) => {
+                  return <Button color={textColour} style={{flex: 1}} onPress={() => this.setState({tier: item, accordion: 0})}>{item}</Button>
                 }} numColumns={2} keyExtractor={item => item}/>
               </List.Accordion>
               <List.Accordion title={nation} expanded={accordion === 2}
                 onPress={() => this.hideAccordion(2)}>
                 <FlatList data={nationList} renderItem={({item}) => {
-                    return <Button color={textColour} style={{flex: 1}} onPress={() => null}>{item}</Button>
+                    return <Button color={textColour} style={{flex: 1}} onPress={() => this.setState({nation: item, accordion: 0})}>{item}</Button>
                   }} numColumns={2} keyExtractor={item => item}/>
               </List.Accordion>
               <List.Accordion title={type} expanded={accordion === 3}
                 onPress={() => this.hideAccordion(3)}>
                 <FlatList data={typeList} renderItem={({item}) => {
-                    return <Button color={textColour} style={{flex: 1}} onPress={() => null}>{item}</Button>
+                    return <Button color={textColour} style={{flex: 1}} onPress={() => this.setState({type: item, accordion: 0})}>{item}</Button>
                   }} numColumns={2} keyExtractor={item => item}/>
               </List.Accordion>
-              <Button style={apply} onPress={this.dismissFilter}>{lang.wiki_warship_filter_btn}</Button>
+              <Button style={apply} onPress={() => this.searchWarship()}>{lang.wiki_warship_filter_btn}</Button>
             </Surface>
           </Modal>
         </Portal> : null}
@@ -98,7 +98,67 @@ class Warship extends Component {
     )
   };
 
-  dismissFilter = () => this.setState({filter: false, accordion: 0});
+  searchWarship() {
+    const { tier, nation, type, name, premium } = this.state;
+
+    console.log(tier, nation, type, name, premium);
+
+    let fname = name.toLowerCase();
+    let ftier = this.tierList.indexOf(tier) + 1;
+    let fnation = getKeyByValue(DATA[SAVED.encyclopedia].ship_nations, nation);
+    let ftype = getKeyByValue(DATA[SAVED.encyclopedia].ship_types, type);
+
+    console.log(DATA[SAVED.encyclopedia], ftier, fnation, ftype, fname, premium);
+    
+    let warship = DATA[SAVED.warship];
+    let filtered = [];
+    for (let ID in warship) {
+      let curr = warship[ID];
+
+      let filterTier = false;
+      let filterName = false;
+      let filterNation = false;
+      let filterType = false;
+      let filterPremium = false;
+
+      // It includes this name or name is empty
+      if (curr.name.toLowerCase().includes(fname) || fname.trim() === "") {
+        filterName = true;
+      }
+
+      // A simple match
+      filterPremium = curr.premium === premium;
+
+      // SAme tier or ftier is 0 (no value)
+      if (curr.tier === ftier || ftier === 0) {
+        filterTier = true;
+      }
+
+      // Match or no value
+      if (curr.nation === fnation || !fnation) {
+        filterNation = true;
+      }
+
+      // Match or no value
+      if (curr.type === ftype || !ftype) {
+        filterType = true;
+      }
+
+      console.log(filterName, filterNation, filterPremium, filterTier, filterType);
+      // Add this ship if all condition matches
+      if (filterName && filterNation && filterPremium && filterTier && filterType) {
+        filtered.push(curr);
+      }
+    }
+
+    let sorted = filtered.sort((a, b) => {
+      // Sort by tier, then by type
+      if (a.tier === b.tier) return a.type.localeCompare(b.type);
+      else return b.tier - a.tier;
+    });
+
+    this.setState({data: sorted, filter: false, accordion: 0});
+  }
 
   hideAccordion(num) {
     const { accordion } = this.state;
@@ -114,7 +174,7 @@ const styles = StyleSheet.create({
     left: 0
   },
   input: {
-    padding: 16, marginTop: 16
+    padding: 4
   },
   apply: {
     padding: 8
