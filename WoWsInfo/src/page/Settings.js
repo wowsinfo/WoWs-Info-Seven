@@ -59,8 +59,7 @@ class Settings extends Component {
           </List.Section>
           <DividerPlus />
           <List.Section title='Theme'>
-            <List.Item title='Dark Theme' onPress={() => this.updateTheme()} 
-              right={() => <Checkbox status={darkMode ? 'checked' : 'unchecked'}/>}/>
+            <List.Item title='Dark Theme' onPress={() => this.updateTheme()} />
             <List.Item title='Tint Colour' onPress={() => this.setState({showColour: true})}
               right={() => <View style={[tint, {backgroundColor: tintColour[500]}]}/>}/>              
           </List.Section>
@@ -110,7 +109,14 @@ class Settings extends Component {
    */
   updateTint(tint) {
     UpdateTintColour(tint);
-    this.props.theme.colors = DARKMODE ? DARK.colors : LIGHT.colors;
+    
+    DARK.colors.primary = tint[500];
+    DARK.colors.accent = tint[500];
+    LIGHT.colors.accent = tint[500];
+    LIGHT.colors.primary = tint[500];
+    
+    this.props.theme.colors = DARK.colors;
+
     this.setState({showColour: false, tintColour: tint});
   }
 }
