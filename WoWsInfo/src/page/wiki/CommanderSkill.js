@@ -35,15 +35,23 @@ class CommanderSkill extends Component {
       <WoWsInfo title={`${point} ${lang.wiki_skills_point}`} onPress={() => this.reset()}>
         <GridView itemDimension={80} items={data} renderItem={item => {
           return <WikiIcon item={item} selected={item.selected} onPress={() => {
-            // If you do not have enough point do nothing
-            if (item.selected) return;
-
-            let pointLeft = point - item.tier;
-            if (pointLeft >= 0) {
-              item.selected = true;
-              if (pointLeft == 0) this.setState({point: lang.wiki_skills_reset})
-              else this.setState({point: pointLeft})
-            } 
+            let pointLeft = point;
+            if (item.selected == true) {
+              // Remember to set it to a number otherwise you will have weird issues
+              if (pointLeft == lang.wiki_skills_reset) pointLeft = 0;
+              pointLeft += item.tier;
+              // Deselect this skill and return your points
+              item.selected = false;
+              this.setState({point: pointLeft});
+            } else {
+              pointLeft -= item.tier;
+              if (pointLeft >= 0) {
+                item.selected = true;
+                // If you do not have enough point do nothing
+                if (pointLeft == 0) this.setState({point: lang.wiki_skills_reset});
+                else this.setState({point: pointLeft});
+              }
+            }
           }} onLongPress={() => SafeAction('BasicDetail', {item: item})}/>
         }}/>
       </WoWsInfo>

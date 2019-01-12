@@ -524,7 +524,6 @@ class WarshipDetail extends PureComponent {
    * @param {*} similar 
    */
   renderSimilar(similar) {
-    const { curr } = this.state;
     if (Object.keys(similar).length > 0) {
       return (
         <View style={{height: 90, backgroundColor: GREY[100]}}>
