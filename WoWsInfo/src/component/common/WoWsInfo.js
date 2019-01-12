@@ -13,6 +13,7 @@ import { Actions } from 'react-native-router-flux';
 import { FooterButton } from './FooterButton';
 import { SafeAction } from '../../core';
 import { GREY } from 'react-native-material-color';
+import { ThemeBackColour } from '../../value/colour';
 
 class WoWsInfo extends Component {
   constructor(props) {
@@ -32,7 +33,7 @@ class WoWsInfo extends Component {
     const { children, style } = this.props;
     return (
       <Surface style={[container, style]}>
-        <SafeAreaView style={safeView}>
+        <SafeAreaView style={[safeView, ThemeBackColour()]}>
           <Surface style={container}>
             { children }
           </Surface>
@@ -47,7 +48,7 @@ class WoWsInfo extends Component {
     const { title, noRight, noLeft, home } = this.props;
     if (home) {
       return (
-        <Surface style={footer}>
+        <Surface style={[footer, ThemeBackColour()]}>
           { noLeft ? null : <FooterButton icon='settings' left/> }
           <Button onPress={this.pressEvent} style={text}>
             { title ? title : `WoWs Info ${this.lucky}`}
@@ -57,7 +58,7 @@ class WoWsInfo extends Component {
       )
     } else {
       return (
-        <Surface style={footer}>
+        <Surface style={[footer, ThemeBackColour()]}>
           { noLeft ? null : <FooterButton icon='home' left/> }
           <Button onPress={this.pressEvent} style={text}>
             { title ? title : `WoWs Info ${this.lucky}`}
@@ -96,11 +97,9 @@ const styles = StyleSheet.create({
   },
   safeView: {
     flex: 1,
-    backgroundColor: GREY[100],
   },
   footer: {
     height: 48, 
-    backgroundColor: GREY[100],
     justifyContent: 'center',
   }
 });

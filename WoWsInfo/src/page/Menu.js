@@ -13,6 +13,7 @@ import { FooterButton, WoWsInfo } from '../component';
 import lang from '../value/lang';
 import { Actions } from 'react-native-router-flux';
 import { SafeAction } from '../core';
+import { ThemeBackColour } from '../value/colour';
 
 class Menu extends Component {
 
@@ -44,6 +45,7 @@ class Menu extends Component {
     {t: lang.website_today, d: 'https://warships.today/'},
     {t: lang.website_ranking, d: 'http://maplesyrup.sweet.coocan.jp/wows/ranking/'},
     {t: lang.website_models, d: 'https://sketchfab.com/tags/world-of-warships'}];
+    
     this.youtubers = [{t: lang.youtuber_official, d: 'https://www.youtube.com/user/worldofwarshipsCOM'},
     {t: lang.youtuber_flambass, d: 'https://www.youtube.com/user/Flambass'},
     {t: lang.youtuber_notser, d: 'https://www.youtube.com/user/MrNotser'},
@@ -80,7 +82,7 @@ class Menu extends Component {
           <List.Section title={lang.wiki_section_title}>
             { this.wiki.map(item => { return (
               <List.Item title={item.t} style={{padding: 0, paddingLeft: 8}} onPress={() => item.p()} key={item.t}
-              left={() => <List.Icon style={icon} color={Colors.blue300} icon={item.i}/>}
+              left={() => <List.Icon style={[icon, ThemeBackColour()]} color={Colors.blue300} icon={item.i}/>}
               right={() => isAndroid ? null : <List.Icon color={Colors.grey500} icon='keyboard-arrow-right'/>} />
             )})}
           </List.Section>

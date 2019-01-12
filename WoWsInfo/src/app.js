@@ -25,7 +25,7 @@ class App extends Component {
       console.log(data);
       global.DATA = data;
       const appTheme = DATA[LOCAL.theme];
-      const darkMode = !DATA[LOCAL.darkMode];
+      DARKMODE = DATA[LOCAL.darkMode];
 
       // Setup global dark theme
       global.DARK = {
@@ -37,6 +37,7 @@ class App extends Component {
           accent: appTheme[500],
         }
       };
+
       // Setup global light theme
       global.LIGHT = {
         colors: {
@@ -47,8 +48,8 @@ class App extends Component {
       };
 
       props.theme.roundness = 99;
-      props.theme.dark = darkMode;
-      props.theme.colors = darkMode ? DARK.colors : LIGHT.colors;
+      props.theme.dark = DARKMODE;
+      props.theme.colors = DARKMODE ? DARK.colors : LIGHT.colors;
 
       // Update data here as well, force update when first launch
       let first = DATA[LOCAL.firstLaunch];
@@ -56,7 +57,7 @@ class App extends Component {
       dn.updateAll(first).then(success => {
         // Make sure it finishes downloading
         if (success) {
-          this.setState({loading: false, dark: darkMode});
+          this.setState({loading: false, dark: DARKMODE});
         } else {
           // Reset to a special page
         }
