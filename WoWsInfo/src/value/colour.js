@@ -1,5 +1,4 @@
 import { GREY, BLUE } from 'react-native-material-color';
-import { DarkTheme, DefaultTheme } from 'react-native-paper';
 import { LOCAL } from './data';
 import { SafeStorage } from '../core';
 
@@ -21,29 +20,6 @@ export const TintColour = () => {
 }
 
 export const UpdateTintColour = (tint) => {
-  // In case, user uses BLACK or WHITE, reset it to BLUE 
-  if (!tint[50]) tint = BLUE;
-
   DATA[LOCAL.theme] = tint;
   SafeStorage.set(LOCAL.theme, tint);
-
-  // Setup global dark theme
-  global.DARK = {
-    colors: {
-      ...DarkTheme.colors,
-      surface: 'black',
-      text: GREY[50],
-      primary: tint[500],
-      accent: tint[500],
-    }
-  };
-
-  // Setup global light theme
-  global.LIGHT = {
-    colors: {
-      ...DefaultTheme.colors,
-      primary: tint[500],
-      accent: tint[500],
-    }
-  };
 }

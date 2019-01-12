@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { StyleSheet, StatusBar } from 'react-native';
 import { Router, Stack, Scene, Actions } from 'react-native-router-flux';
 import { isTablet } from 'react-native-device-detection';
-import { withTheme } from 'react-native-paper';
+import { withTheme, DarkTheme, DefaultTheme } from 'react-native-paper';
 import { Home, Menu, Settings, About, Setup, Consumable, CommanderSkill, 
   BasicDetail, Achievement, Map as GameMap, Collection, Warship, WarshipDetail } from './page';
 import { LOCAL } from './value/data';
 import { DataLoader, Downloader } from './core';
-import { GREY } from 'react-native-material-color';
+import { GREY, BLUE } from 'react-native-material-color';
 import { LoadingModal } from './component';
 import { TintColour, UpdateTintColour } from './value/colour';
 
@@ -24,10 +24,32 @@ class App extends Component {
     // Load all data from AsyncStorage
     DataLoader.loadAll().then(data => {
       console.log(data);
-      global.DATA = data;
 
+      global.DATA = data;
       DARKMODE = DATA[LOCAL.darkMode];
-      UpdateTintColour(TintColour());
+
+      let tint = TintColour();
+      if (!tint[50]) tint = BLUE;
+
+      // Setup global dark theme
+      global.DARK = {
+        colors: {
+          ...DarkTheme.colors,
+          surface: 'black',
+          text: GREY[50],
+          primary: tint[500],
+          accent: tint[500],
+        }
+      };
+
+      // Setup global light theme
+      global.LIGHT = {
+        colors: {
+          ...DefaultTheme.colors,
+          primary: tint[500],
+          accent: tint[500],
+        }
+      };
 
       props.theme.roundness = 99;
       props.theme.dark = DARKMODE;
