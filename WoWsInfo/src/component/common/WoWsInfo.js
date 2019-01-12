@@ -96,11 +96,11 @@ const styles = StyleSheet.create({
   },
   safeView: {
     flex: 1,
-    backgroundColor: GREY[50],
+    backgroundColor: GREY[100],
   },
   footer: {
     height: 48, 
-    backgroundColor: GREY[50],
+    backgroundColor: GREY[100],
     justifyContent: 'center',
   }
 });
