@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, StatusBar } from 'react-native';
 import { Router, Stack, Scene, Actions } from 'react-native-router-flux';
 import { isTablet } from 'react-native-device-detection';
-import { Surface, DarkTheme, DefaultTheme, withTheme } from 'react-native-paper';
+import { withTheme } from 'react-native-paper';
 import { Home, Menu, Settings, About, Setup, Consumable, CommanderSkill, 
   BasicDetail, Achievement, Map as GameMap, Collection, Warship, WarshipDetail } from './page';
 import { LOCAL } from './value/data';
@@ -25,28 +25,9 @@ class App extends Component {
     DataLoader.loadAll().then(data => {
       console.log(data);
       global.DATA = data;
-      const appTheme = TintColour();
+
       DARKMODE = DATA[LOCAL.darkMode];
-
-      // Setup global dark theme
-      global.DARK = {
-        colors: {
-          ...DarkTheme.colors,
-          surface: 'black',
-          text: GREY[50],
-          primary: appTheme[500],
-          accent: appTheme[500],
-        }
-      };
-
-      // Setup global light theme
-      global.LIGHT = {
-        colors: {
-          ...DefaultTheme.colors,
-          primary: appTheme[500],
-          accent: appTheme[500],
-        }
-      };
+      UpdateTintColour(TintColour());
 
       props.theme.roundness = 99;
       props.theme.dark = DARKMODE;
