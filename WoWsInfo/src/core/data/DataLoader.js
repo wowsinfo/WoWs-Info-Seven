@@ -29,6 +29,8 @@ class DataLoader {
     this.loadEntry(data, userServer, 3);
     this.loadEntry(data, lastUpdate, new Date().toDateString());
     this.loadEntry(data, theme, BLUE);
+    // In case, user uses BLACK or WHITE, reset it to BLUE
+    if (!data[theme][50]) data[theme] = BLUE;
     this.loadEntry(data, darkMode, false);
     this.loadEntry(data, date, new Date().toDateString());
 
