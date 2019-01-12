@@ -14,6 +14,7 @@ import { SafeFetch, langStr, Guard, getColourWithRange, SafeAction } from '../..
 import { WoWsAPI } from '../../value/api';
 import { Actions } from 'react-native-router-flux';
 import { GREY } from 'react-native-material-color';
+import { ThemeBackColour } from '../../value/colour';
 
 class WarshipDetail extends PureComponent {
   constructor(props) {
@@ -399,10 +400,10 @@ class WarshipDetail extends PureComponent {
    */
   renderMobility(mobility) {
     if (!mobility) return null;
+
     const { horizontal, centerText } = styles;
     const { rudder_time, turning_radius, max_speed } = mobility;
 
-    let good = getColourWithRange(20, max_speed, 45);
     let speedFlag = Number(max_speed * 1.05).toFixed(0);
 
     // Best stat with upgrades
@@ -417,10 +418,10 @@ class WarshipDetail extends PureComponent {
 
     return (
       <View style={{margin: 8}}>
-        <Headline style={[centerText, {color: good}]}>{lang.warship_maneuverabilty}</Headline>
+        <Headline style={centerText}>{lang.warship_maneuverabilty}</Headline>
         <View style={horizontal}>
           <InfoLabel title={lang.warship_maneuverabilty_rudder_time} info={rudderMsg}/>
-          <InfoLabel title={lang.warship_maneuverabilty_speed} info={`${max_speed} - ${speedFlag}kt`}/>
+          <InfoLabel title={lang.warship_maneuverabilty_speed} info={`${max_speed} - ${speedFlag} kt`}/>
           <InfoLabel title={lang.warship_maneuverabilty_turning} info={`${turning_radius} m`}/>
         </View>
       </View>
@@ -526,7 +527,7 @@ class WarshipDetail extends PureComponent {
   renderSimilar(similar) {
     if (Object.keys(similar).length > 0) {
       return (
-        <View style={{height: 90, backgroundColor: GREY[100]}}>
+        <View style={[{height: 90}, ThemeBackColour()]}>
           <FlatList keyExtractor={item => item.name} horizontal data={similar} renderItem={({item}) => {
             return <WarshipCell item={item} scale={1.4} onPress={() => {
               this.setState({curr: item, loading: true}, 
