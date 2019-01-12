@@ -13,11 +13,10 @@ import { TintColour } from '../../value/colour';
 
 class LoadingIndicator extends Component {
   render() {
-    //<ActivityIndicator color='white' size='large'/>
     const { style } = this.props;
     let appTheme = TintColour();
     if (!appTheme) appTheme = Blue;
-
+    
     return <ActivityIndicator size={isIos ? 'small' : 'large'} 
       color={!isIos ? appTheme[500] : Grey} style={style} />;
   };
