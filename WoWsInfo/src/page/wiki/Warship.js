@@ -5,13 +5,14 @@
  */
 
 import React, { Component } from 'react';
-import { FlatList, StyleSheet } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 import { WoWsInfo, WarshipCell } from '../../component';
 import GridView from 'react-native-super-grid';
 import { SAVED, LOCAL } from '../../value/data';
 import { Portal, TextInput, Button, Divider, List, Modal, Checkbox, Colors, Surface } from 'react-native-paper';
 import lang from '../../value/lang';
 import { SafeAction, getKeyByValue } from '../../core';
+import { ThemeColour } from '../../value/colour';
 
 class Warship extends Component {
   constructor(props) {
@@ -65,9 +66,9 @@ class Warship extends Component {
           return <WarshipCell scale={1.4} item={item} onPress={() => SafeAction('WarshipDetail', {item: item})}/>
         }}/>
 
-        { filter ? <Portal>
-          <Modal theme={{roundness: 16}} dismissable={false} visible={filter} onDismiss={this.dismissFilter}>
-            <Surface>
+        <Portal>
+          <Modal theme={{roundness: 16}} dismissable visible={filter} onDismiss={() => this.setState({filter: false})}>
+            <View style={{flex: 1, backgroundColor: ThemeColour()}}>
               <TextInput style={input} value={name} onChangeText={text => this.setState({name: text})}
                 autoCorrect={false} autoCapitalize='none' placeholder={lang.wiki_warship_filter_placeholder}/>
               <List.Item title={lang.wiki_warship_filter_premiumm} onPress={() => this.setState({premium: !premium})}
@@ -90,13 +91,23 @@ class Warship extends Component {
                     return <Button color={textColour} style={{flex: 1}} onPress={() => this.setState({type: item, accordion: 0})}>{item}</Button>
                   }} numColumns={2} keyExtractor={item => item}/>
               </List.Accordion>
+              <Button style={apply} onPress={this.resetFilter}>{lang.wiki_warship_reset_btn}</Button>
               <Button style={apply} onPress={() => this.searchWarship()}>{lang.wiki_warship_filter_btn}</Button>
-            </Surface>
+            </View>
           </Modal>
-        </Portal> : null}
+        </Portal>
       </WoWsInfo>
     )
   };
+
+  resetFilter = () => this.setState({
+    tier: lang.wiki_warship_filter_tier,
+    nation: lang.wiki_warship_filter_nation,
+    type: lang.wiki_warship_filter_type,
+    name: '',
+    premium: false, 
+    accordion: 0
+  })
 
   searchWarship() {
     const { tier, nation, type, name, premium } = this.state;
@@ -126,8 +137,10 @@ class Warship extends Component {
         filterName = true;
       }
 
-      // A simple match
-      filterPremium = curr.premium === premium;
+      // ANote that if premium is not selected, all ships are valid
+      if (curr.premium === premium || premium === false) {
+        filterPremium = true;
+      }
 
       // SAme tier or ftier is 0 (no value)
       if (curr.tier === ftier || ftier === 0) {
@@ -144,7 +157,6 @@ class Warship extends Component {
         filterType = true;
       }
 
-      console.log(filterName, filterNation, filterPremium, filterTier, filterType);
       // Add this ship if all condition matches
       if (filterName && filterNation && filterPremium && filterTier && filterType) {
         filtered.push(curr);
@@ -157,7 +169,8 @@ class Warship extends Component {
       else return b.tier - a.tier;
     });
 
-    this.setState({data: sorted, filter: false, accordion: 0});
+    this.setState({data: sorted, filter: false});
+    this.resetFilter();
   }
 
   hideAccordion(num) {
