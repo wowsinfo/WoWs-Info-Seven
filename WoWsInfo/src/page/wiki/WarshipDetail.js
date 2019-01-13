@@ -439,8 +439,11 @@ class WarshipDetail extends PureComponent {
 
     // Check if ship has concealment module
     let modifier = this.upgrades.findIndex(u => u === 4265791408) > -1 ? 0.9 : 1;
-    let max_ship_concealment = Number(detect_distance_by_ship * 0.9 * modifier * 0.97).toFixed(1);
-    let max_plane_concealment = Number(detect_distance_by_plane * 0.9 * modifier * 0.97).toFixed(1);
+    // Premium ship already included it
+    let camouflage = 0.97;
+    let deduction = 0.9 * modifier * camouflage;
+    let max_ship_concealment = Number(detect_distance_by_ship * deduction).toFixed(1);
+    let max_plane_concealment = Number(detect_distance_by_plane * deduction).toFixed(1);
 
     return (
       <View style={{margin: 8}}>
