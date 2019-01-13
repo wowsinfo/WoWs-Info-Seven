@@ -490,7 +490,7 @@ class WarshipDetail extends PureComponent {
               <View style={upgradeView} key={num}>
                 <Title style={{margin: 8}}>{`${num + 1}.`}</Title>
                 { all.map(item => <WikiIcon key={item.name} item={item} scale={0.8}
-                  onPress={() => Alert.alert(item.name, item.description, [{text: String(item.price_credit)}])}/>) }
+                  onPress={() => SafeAction('BasicDetail', {item: item})}/>) }
               </View>
             )})}
         </ScrollView>
