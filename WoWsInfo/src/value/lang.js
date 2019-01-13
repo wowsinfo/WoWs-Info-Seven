@@ -9,6 +9,7 @@ export default lang = new LocalizedStrings({
     /// Wiki section
     wiki_warship_footer: 'Filter',
     wiki_warship_filter_btn: 'Apply',
+    wiki_warship_reset_btn: 'Reset',
     wiki_warship_filter_placeholder: 'Enter a ship name',
     wiki_warship_filter_tier: 'Select a tier',
     wiki_warship_filter_nation: 'Select a nation',
