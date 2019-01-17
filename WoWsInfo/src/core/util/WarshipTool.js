@@ -33,3 +33,7 @@ export const getColourWithRange = (min, curr, max) => {
 export const getKeyByValue = (object, value) => {
   return Object.keys(object).find(key => object[key] === value);
 }
+
+export const getTierList = () => {
+  return ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'XI', 'X'];
+}

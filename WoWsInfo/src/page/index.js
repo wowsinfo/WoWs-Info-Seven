@@ -1,5 +1,6 @@
 // This is the menu that we could access from anywhere
 export * from './common/Menu';
+export * from './common/Filter';
 
 export * from './home/Home';
 // Go to this page when app is first launched

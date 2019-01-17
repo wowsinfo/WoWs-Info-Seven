@@ -4,7 +4,8 @@ import { Router, Stack, Scene, Actions } from 'react-native-router-flux';
 import { isTablet } from 'react-native-device-detection';
 import { withTheme, DarkTheme, DefaultTheme } from 'react-native-paper';
 import { Home, Menu, Settings, About, Setup, Consumable, CommanderSkill, 
-  BasicDetail, Achievement, Map as GameMap, Collection, Warship, WarshipDetail } from './page';
+  BasicDetail, Achievement, Map as GameMap, Collection, Warship, WarshipDetail, 
+  Filter } from './page';
 import { LOCAL } from './value/data';
 import { DataLoader, Downloader } from './core';
 import { GREY, BLUE } from 'react-native-material-color';
@@ -80,6 +81,7 @@ class App extends Component {
             <Scene key='Setup' component={Setup} initial={DATA[LOCAL.firstLaunch]}/>
             
             <Scene key='Menu' component={Menu}/>
+            <Scene key='Filter' component={Filter}/>
 
             <Scene key='Consumable' component={Consumable}/>
             <Scene key='CommanderSkill' component={CommanderSkill}/>
