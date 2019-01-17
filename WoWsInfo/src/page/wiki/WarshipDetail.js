@@ -82,9 +82,15 @@ class WarshipDetail extends PureComponent {
   }
 
   renderBasic(curr, data) {
-    const { container, shipTitle, centerText, modelBtn } = styles;
-    const { name, model, type, nation } = curr;
+    const { container, horizontal, shipTitle, centerText, modelBtn } = styles;
+    const { name, model, type, nation, ship_id } = curr;
     const { description } = data;
+
+    let currShip = DATA[SAVED.pr][ship_id];
+    let avgDamage = Guard(currShip, 'average_damage_dealt', 0);
+    let avgWinrate = Guard(currShip, 'win_rate', 0);
+    let avgFrag = Guard(currShip, 'average_frags', 0);
+    console.log(currShip);
 
     return (
       <View style={container}>
@@ -92,9 +98,16 @@ class WarshipDetail extends PureComponent {
         <Text>{nation.toUpperCase()}</Text>
         <Text>{type}</Text>
         <PriceLabel item={data}/>
-        { model ? <Button style={modelBtn} onPress={() => Linking.openURL(`https://sketchfab.com/models/${model}/embed?autostart=1&preload=1`)}>
-          {lang.warship_model}
-        </Button> : null }
+        { model ? 
+          <Button style={modelBtn} onPress={() => Linking.openURL(`https://sketchfab.com/models/${model}/embed?autostart=1&preload=1`)}>
+            {lang.warship_model}
+          </Button> : null }
+        { currShip ? 
+          <View style={horizontal}>
+            <InfoLabel title={lang.warship_avg_damage} info={Number(avgDamage).toFixed(0)}/>
+            <InfoLabel title={lang.warship_avg_winrate} info={`${Number(avgWinrate).toFixed(1)}%`}/>
+            <InfoLabel title={lang.warship_avg_frag} info={Number(avgFrag).toFixed(2)}/>
+          </View> : null }
         <Paragraph style={[centerText, {margin: 8}]}>{description}</Paragraph>
       </View>
     )
