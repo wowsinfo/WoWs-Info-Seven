@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Image, ScrollView, StyleSheet } from 'react-native';
 import { Surface, Text, Title } from 'react-native-paper';
-import { FooterButton, WoWsInfo } from '../component';
-import { APP } from '../value/data';
+import { FooterButton, WoWsInfo } from '../../component';
+import { APP } from '../../value/data';
 
 class About extends Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class About extends Component {
     return (
       <WoWsInfo style={container} noLeft>
         <ScrollView contentContainerStyle={scroll}>
-          <Image style={logo} source={require('../img/Logo.png')}/>
+          <Image style={logo} source={require('../../img/Logo.png')}/>
           <Title>WoWs Info</Title>
           <Text>{APP.Version}</Text>
         </ScrollView>

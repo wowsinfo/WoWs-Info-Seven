@@ -9,11 +9,11 @@ import React, { Component } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, Linking } from 'react-native';
 import { isAndroid, isIphoneX } from 'react-native-device-detection';
 import { List, Colors, Surface, Searchbar } from 'react-native-paper';
-import { FooterButton, WoWsInfo } from '../component';
-import lang from '../value/lang';
+import { FooterButton, WoWsInfo } from '../../component';
+import lang from '../../value/lang';
 import { Actions } from 'react-native-router-flux';
-import { SafeAction } from '../core';
-import { ThemeBackColour, TintColour } from '../value/colour';
+import { SafeAction } from '../../core';
+import { ThemeBackColour, TintColour } from '../../value/colour';
 
 class Menu extends Component {
 

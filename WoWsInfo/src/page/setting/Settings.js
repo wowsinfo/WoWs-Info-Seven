@@ -3,10 +3,10 @@ import { View, ScrollView, FlatList, StyleSheet, Linking, Share } from 'react-na
 import { isAndroid } from 'react-native-device-detection';
 import { Surface, List, Button, Checkbox, Colors, withTheme, Portal, Dialog, Text } from 'react-native-paper';
 import { Actions } from 'react-native-router-flux';
-import { WoWsInfo, DividerPlus, Touchable } from '../component';
-import { APP, LOCAL } from '../value/data';
-import { TintColour, UpdateTintColour, UpdateDarkMode } from '../value/colour';
-import { SafeStorage } from '../core';
+import { WoWsInfo, DividerPlus, Touchable } from '../../component';
+import { APP, LOCAL } from '../../value/data';
+import { TintColour, UpdateTintColour, UpdateDarkMode } from '../../value/colour';
+import { SafeStorage } from '../../core';
 import { BLUE, RED, GREEN, PINK, PURPLE, DEEPPRUPLE, INDIGO, LIGHTBLUE, CYAN, TEAL, LIGHTGREEN, LIME, YELLOW, AMBER, ORANGE, DEEPORANGE, BROWN, GREY, BLUEGREY } from 'react-native-material-color';
 
 class Settings extends Component {

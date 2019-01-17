@@ -1,5 +1,5 @@
 // This is the menu that we could access from anywhere
-export * from './Menu';
+export * from './common/Menu';
 
 export * from './home/Home';
 // Go to this page when app is first launched
@@ -18,6 +18,6 @@ export * from './wiki/WarshipDetail';
 
 export * from './player/Statistics';
 
-export * from './About';
-import Settings from './Settings';
+export * from './setting/About';
+import Settings from './setting/Settings';
 export { Settings };
