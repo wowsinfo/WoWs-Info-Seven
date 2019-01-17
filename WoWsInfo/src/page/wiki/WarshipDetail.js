@@ -59,7 +59,6 @@ class WarshipDetail extends PureComponent {
             <WikiIcon warship item={curr} scale={3}/>
             { this.renderContent() }
           </ScrollView> 
-          <Divider />
           { this.renderSimilar(similar) }
         </WoWsInfo>
       )
@@ -528,9 +527,10 @@ class WarshipDetail extends PureComponent {
    * @param {*} similar 
    */
   renderSimilar(similar) {
+    const { similarView } = styles;
     if (Object.keys(similar).length > 0) {
       return (
-        <View style={[{height: 90}, ThemeBackColour()]}>
+        <View style={[similarView, ThemeBackColour()]}>
           <FlatList keyExtractor={item => item.name} horizontal data={similar} renderItem={({item}) => {
             return <WarshipCell item={item} scale={1.4} onPress={() => {
               this.setState({curr: item, loading: true}, 
@@ -578,6 +578,11 @@ const styles = StyleSheet.create({
   upgradeView: {
     flexDirection: 'row', 
     alignItems: 'center'
+  },
+  similarView: {
+    height: 90,
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16
   },
   horizontal: {
     flexDirection: 'row',
