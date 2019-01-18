@@ -100,7 +100,7 @@ class WarshipDetail extends PureComponent {
             <InfoLabel title={lang.warship_avg_winrate} info={`${Number(avgWinrate).toFixed(1)}%`}/>
             <InfoLabel title={lang.warship_avg_frag} info={Number(avgFrag).toFixed(2)}/>
           </View> : null }
-        <Title style={shipTitle}>{name}</Title>
+        <Title style={[shipTitle, {marginTop: 8}]}>{name}</Title>
         <Text>{nation.toUpperCase()}</Text>
         <Text>{type}</Text>
         <PriceLabel item={data}/>
