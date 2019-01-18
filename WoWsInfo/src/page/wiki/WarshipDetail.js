@@ -94,6 +94,12 @@ class WarshipDetail extends PureComponent {
 
     return (
       <View style={container}>
+        { currShip ? 
+          <View style={horizontal}>
+            <InfoLabel title={lang.warship_avg_damage} info={Number(avgDamage).toFixed(0)}/>
+            <InfoLabel title={lang.warship_avg_winrate} info={`${Number(avgWinrate).toFixed(1)}%`}/>
+            <InfoLabel title={lang.warship_avg_frag} info={Number(avgFrag).toFixed(2)}/>
+          </View> : null }
         <Title style={shipTitle}>{name}</Title>
         <Text>{nation.toUpperCase()}</Text>
         <Text>{type}</Text>
@@ -102,12 +108,6 @@ class WarshipDetail extends PureComponent {
           <Button style={modelBtn} onPress={() => Linking.openURL(`https://sketchfab.com/models/${model}/embed?autostart=1&preload=1`)}>
             {lang.warship_model}
           </Button> : null }
-        { currShip ? 
-          <View style={horizontal}>
-            <InfoLabel title={lang.warship_avg_damage} info={Number(avgDamage).toFixed(0)}/>
-            <InfoLabel title={lang.warship_avg_winrate} info={`${Number(avgWinrate).toFixed(1)}%`}/>
-            <InfoLabel title={lang.warship_avg_frag} info={Number(avgFrag).toFixed(2)}/>
-          </View> : null }
         <Paragraph style={[centerText, {margin: 8}]}>{description}</Paragraph>
       </View>
     )
