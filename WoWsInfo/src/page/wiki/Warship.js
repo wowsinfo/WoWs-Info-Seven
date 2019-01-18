@@ -38,14 +38,6 @@ class Warship extends Component {
   render() {
     const { data } = this.state;
 
-    let nations = DATA[SAVED.encyclopedia].ship_nations;
-    let nationList = [];
-    Object.keys(nations).forEach(k => nationList.push(nations[k]));
-
-    let types = DATA[SAVED.encyclopedia].ship_types;
-    let typeList = [];
-    Object.keys(types).forEach(k => typeList.push(types[k]));
-
     return (
       <WoWsInfo title={`${lang.wiki_warship_footer} - ${data.length}`} onPress={() => SafeAction('WarshipFilter')}>
         <GridView itemDimension={100} items={data} renderItem={(item) => {
