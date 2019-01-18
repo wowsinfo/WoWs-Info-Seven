@@ -47,7 +47,7 @@ class Warship extends Component {
     Object.keys(types).forEach(k => typeList.push(types[k]));
 
     return (
-      <WoWsInfo title={`${lang.wiki_warship_footer} - ${data.length}`} onPress={() => this.setState({filter: true})}>
+      <WoWsInfo title={`${lang.wiki_warship_footer} - ${data.length}`} onPress={() => SafeAction('WarshipFilter')}>
         <GridView itemDimension={100} items={data} renderItem={(item) => {
           return <WarshipCell scale={1.4} item={item} onPress={() => SafeAction('WarshipDetail', {item: item})}/>
         }}/>
