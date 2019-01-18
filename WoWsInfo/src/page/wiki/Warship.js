@@ -31,7 +31,7 @@ class Warship extends Component {
     console.log(sorted);
 
     this.state = {
-      data: sorted,
+      data: sorted
     };
   }
 
@@ -54,15 +54,6 @@ class Warship extends Component {
       </WoWsInfo>
     )
   };
-
-  resetFilter = () => this.setState({
-    tier: lang.wiki_warship_filter_tier,
-    nation: lang.wiki_warship_filter_nation,
-    type: lang.wiki_warship_filter_type,
-    name: '',
-    premium: false, 
-    accordion: 0
-  })
 
   searchWarship() {
     const { tier, nation, type, name, premium } = this.state;
@@ -126,12 +117,6 @@ class Warship extends Component {
 
     this.setState({data: sorted, filter: false});
     this.resetFilter();
-  }
-
-  hideAccordion(num) {
-    const { accordion } = this.state;
-    if (accordion === num) this.setState({accordion: 0});
-    else this.setState({accordion: num});
   }
 }
 
