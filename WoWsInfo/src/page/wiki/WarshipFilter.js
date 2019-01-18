@@ -5,15 +5,17 @@
  */
 
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import { Surface, Text } from 'react-native-paper';
+import { WoWsInfo } from '../../component';
 
 class WarshipFilter extends Component {
   render() {
     const { container } = styles;
     return (
-      <View style={container}>
+      <WoWsInfo>
         <Text>WarshipFilter</Text>
-      </View>
+      </WoWsInfo>
     )
   };
 }
