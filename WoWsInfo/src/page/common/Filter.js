@@ -36,7 +36,7 @@ class Filter extends Component {
         <View style={{flex: 1, backgroundColor: ThemeColour()}}>
           <TextInput style={input} value={name} onChangeText={text => this.setState({name: text})}
             autoCorrect={false} autoCapitalize='none' placeholder={lang.wiki_warship_filter_placeholder}/>
-          <List.Item title={lang.wiki_warship_filter_premiumm} onPress={() => this.setState({premium: !premium})}
+          <List.Item title={lang.wiki_warship_filter_premium} onPress={() => this.setState({premium: !premium})}
             right={() => <Checkbox status={premium ? 'checked' : 'unchecked'}/>}/>             
           <List.Accordion title={tier} expanded={accordion === 1}
             onPress={() => this.hideAccordion(1)}>
