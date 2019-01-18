@@ -16,6 +16,8 @@ export * from './wiki/Map';
 export * from './wiki/Collection';
 export * from './wiki/Warship';
 export * from './wiki/WarshipDetail';
+export * from './wiki/WarshipFilter';
+export * from './wiki/WarshipModule';
 
 export * from './player/Statistics';
 
