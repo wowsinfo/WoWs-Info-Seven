@@ -26,13 +26,13 @@ class Menu extends Component {
     }
 
     // Data for the list
-    this.wiki = [{t: lang.wiki_achievement, i: require('../img/Achievement.png'), p: () => SafeAction('Achievement')},
-    {t: lang.wiki_warships, i: require('../img/Warship.png'), p: () => SafeAction('Warship')},
-    {t: lang.wiki_upgrades, i: require('../img/Upgrade.png'), p: () => SafeAction('Consumable', {upgrade: true})},
-    {t: lang.wiki_flags, i: require('../img/Camouflage.png'), p: () => SafeAction('Consumable')},
-    {t: lang.wiki_skills, i: require('../img/CommanderSkill.png'), p: () => SafeAction('CommanderSkill')},
+    this.wiki = [{t: lang.wiki_achievement, i: require('../../img/Achievement.png'), p: () => SafeAction('Achievement')},
+    {t: lang.wiki_warships, i: require('../../img/Warship.png'), p: () => SafeAction('Warship')},
+    {t: lang.wiki_upgrades, i: require('../../img/Upgrade.png'), p: () => SafeAction('Consumable', {upgrade: true})},
+    {t: lang.wiki_flags, i: require('../../img/Camouflage.png'), p: () => SafeAction('Consumable')},
+    {t: lang.wiki_skills, i: require('../../img/CommanderSkill.png'), p: () => SafeAction('CommanderSkill')},
     {t: lang.wiki_maps, i: 'map', p: () => SafeAction('Map')},
-    {t: lang.wiki_collections, i: require('../img/Collection.png'), p: () => SafeAction('Collection')}];
+    {t: lang.wiki_collections, i: require('../../img/Collection.png'), p: () => SafeAction('Collection')}];
 
     // TODO: change links base on player server
     this.websites = [{t: lang.website_official_site, d: 'https://worldofwarships.com/'},
