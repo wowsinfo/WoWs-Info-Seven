@@ -62,17 +62,17 @@ class WarshipFilter extends Component {
         <ScrollView ref='scrollview'>
           <Space />
           <List.Section title={lang.wiki_warship_filter_tier}>
-            <Text style={selectionText}>{`${tier.join('.')} `}</Text>
+            <Text style={selectionText}>{`${tier.join(' | ')} `}</Text>
             <FlatList data={tierList} numColumns={5} keyExtractor={item => item}
               renderItem={({item}) => this.renderButton(item, () => this.addData(item, MODE.TIER))}/>
           </List.Section>
           <List.Section title={lang.wiki_warship_filter_nation}>
-            <Text style={selectionText}>{`${nation.join('.')} `}</Text>
+            <Text style={selectionText}>{`${nation.join(' | ')} `}</Text>
             <FlatList data={nationList} numColumns={3} keyExtractor={item => item}
               renderItem={({item}) => this.renderButton(item, () => this.addData(item, MODE.NATION))}/>
           </List.Section> 
           <List.Section title={lang.wiki_warship_filter_type}>
-            <Text style={selectionText}>{`${type.join('.')} `}</Text>
+            <Text style={selectionText}>{`${type.join(' | ')} `}</Text>
             <FlatList data={typeList} numColumns={2} keyExtractor={item => item}
               renderItem={({item}) => this.renderButton(item, () => this.addData(item, MODE.TYPE))}/>
           </List.Section>
