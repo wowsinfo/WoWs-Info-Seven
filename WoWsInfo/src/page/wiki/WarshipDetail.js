@@ -7,7 +7,7 @@
 import React, { PureComponent } from 'react';
 import { View, FlatList,Linking, ScrollView, StyleSheet, Alert } from 'react-native';
 import { Text, Title, Subheading, Headline, Button, Surface, Paragraph, List, Divider } from 'react-native-paper';
-import { WoWsInfo, WikiIcon, WarshipCell, LoadingModal, PriceLabel, LoadingIndicator, WarshipStat, InfoLabel, DividerPlus } from '../../component';
+import { WoWsInfo, WikiIcon, WarshipCell, LoadingModal, PriceLabel, LoadingIndicator, WarshipStat, InfoLabel, DividerPlus, FooterPlus } from '../../component';
 import { SAVED, SERVER, LOCAL } from '../../value/data';
 import lang from '../../value/lang';
 import { SafeFetch, langStr, Guard, getColourWithRange, SafeAction } from '../../core';
@@ -540,17 +540,16 @@ class WarshipDetail extends PureComponent {
    * @param {*} similar 
    */
   renderSimilar(similar) {
-    const { similarView } = styles;
     if (Object.keys(similar).length > 0) {
       return (
-        <View style={[similarView, ThemeBackColour()]}>
+        <FooterPlus>
           <FlatList keyExtractor={item => item.name} horizontal data={similar} renderItem={({item}) => {
             return <WarshipCell item={item} scale={1.4} onPress={() => {
               this.setState({curr: item, loading: true}, 
                 () => this.efficientDataRequest(item.ship_id));
             }}/>
           }} showsHorizontalScrollIndicator={false}/>
-        </View>
+        </FooterPlus>
       )
     } else return null;
   }
@@ -591,11 +590,6 @@ const styles = StyleSheet.create({
   upgradeView: {
     flexDirection: 'row', 
     alignItems: 'center'
-  },
-  similarView: {
-    height: 90,
-    borderTopLeftRadius: 16,
-    borderTopRightRadius: 16
   },
   horizontal: {
     flexDirection: 'row',
