@@ -99,10 +99,10 @@ class WarshipFilter extends Component {
   });
 
   applyAll = () => {
-    Actions.pop();
+    Actions.popTo('Warship');
     setTimeout(() => {
       Actions.refresh({filter: Object.assign(this.state)});
-    });
+    })
   };
 
   renderButton(item, event) {
