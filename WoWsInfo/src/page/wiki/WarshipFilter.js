@@ -13,28 +13,33 @@ import { SAVED } from '../../value/data';
 import { getTierList } from '../../core';
 import { Actions } from 'react-native-router-flux';
 
+const MODE = {
+  TIER: 1,
+  NATION: 2,
+  TYPE: 3,
+};
+
 class WarshipFilter extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
-
+    
     this.state = {
       premium: false,
       name: '',
-      nation: [],
-      type: [],
-      tier : []
+      nation: new Array(0),
+      type: new Array(0),
+      tier: new Array(0)
     };
   }
-
+  
   componentDidMount() {
     // After component has been rendered or it will be undefined
     this.refs['scrollview'].scrollTo({x: 0, y: 128, animated: true});
   }
-
+  
   render() {
-    const { horizontal, button } = styles;
-    const { premium, name } = this.state;
+    const { horizontal, button, selectionText } = styles;
+    const { premium, name, nation, type, tier } = this.state;
 
     let tierList = getTierList();
 
@@ -46,6 +51,7 @@ class WarshipFilter extends Component {
     let typeList = [];
     Object.keys(types).forEach(k => typeList.push(types[k]));
 
+    console.log(tier);
     return (
       <WoWsInfo title={lang.wiki_warship_filter_placeholder} onPress={() => this.refs['search'].focus()}>
         <TextInput label={lang.wiki_warship_filter_placeholder} ref='search' autoCorrect={false}
@@ -56,16 +62,19 @@ class WarshipFilter extends Component {
         <ScrollView ref='scrollview'>
           <Space />
           <List.Section title={lang.wiki_warship_filter_tier}>
-            <FlatList data={tierList} renderItem={({item}) => this.renderButton(item)}
-              numColumns={5} keyExtractor={item => item}/>
+            <Text style={selectionText}>{tier.join('.')}</Text>
+            <FlatList data={tierList} numColumns={5} keyExtractor={item => item}
+              renderItem={({item}) => this.renderButton(item, () => this.addData(item, MODE.TIER))}/>
           </List.Section>
           <List.Section title={lang.wiki_warship_filter_nation}>
-            <FlatList data={nationList} renderItem={({item}) => this.renderButton(item)}
-              numColumns={3} keyExtractor={item => item}/>
+            <Text style={selectionText}>{nation.join('.')}</Text>
+            <FlatList data={nationList} numColumns={3} keyExtractor={item => item}
+              renderItem={({item}) => this.renderButton(item, () => this.addData(item, MODE.NATION))}/>
           </List.Section> 
           <List.Section title={lang.wiki_warship_filter_type}>
-            <FlatList data={typeList} renderItem={({item}) => this.renderButton(item)}
-              numColumns={2} keyExtractor={item => item}/>
+            <Text style={selectionText}>{type.join('.')}</Text>
+            <FlatList data={typeList} numColumns={2} keyExtractor={item => item}
+              renderItem={({item}) => this.renderButton(item, () => this.addData(item, MODE.TYPE))}/>
           </List.Section>
           <Space />
         </ScrollView>
@@ -98,8 +107,28 @@ class WarshipFilter extends Component {
 
   renderButton(item, event) {
     return (
-      <Button>{item}</Button>
+      <Button onPress={event}>{item}</Button>
     )
+  }
+
+  addData(item, mode) {
+    const { tier, nation, type } = this.state;
+    let arr = null;
+    switch (mode) {
+      case MODE.TIER: arr = tier; break;
+      case MODE.NATION: arr = nation; break;
+      case MODE.TYPE: arr = type; break;
+    }
+
+    // Same as last added item
+    if (arr.slice(-1)[0] === item) return;
+    arr.push(item);
+
+    switch (mode) {
+      case MODE.TIER: this.setState({tier: arr}); break;
+      case MODE.NATION: this.setState({nation: arr}); break;
+      case MODE.TYPE: this.setState({type: arr}); break;
+    }
   }
 }
 
@@ -109,6 +138,10 @@ const styles = StyleSheet.create({
   },
   button: {
     flex: 1
+  },
+  selectionText: {
+    paddingLeft: 16,
+    paddingRight: 16 
   }
 });
 
