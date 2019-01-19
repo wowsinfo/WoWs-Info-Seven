@@ -6,6 +6,11 @@ export default lang = new LocalizedStrings({
     setup_title: 'Setup WoWs Info',
     setup_done_button: 'Done',
     /// Home section
+    // Button section
+    button_settings_label: 'Settings',
+    button_menu_label: 'Menu',
+    button_back_label: 'Go Back',
+    button_home_label: 'Home',
     /// Wiki section
     wiki_warship_footer: 'Filter',
     wiki_warship_filter_btn: 'Apply',
