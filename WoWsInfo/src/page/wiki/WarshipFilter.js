@@ -22,6 +22,7 @@ const MODE = {
 class WarshipFilter extends Component {
   constructor(props) {
     super(props);
+    console.log(props);
     
     this.state = {
       premium: false,
@@ -51,7 +52,6 @@ class WarshipFilter extends Component {
     let typeList = [];
     Object.keys(types).forEach(k => typeList.push(types[k]));
 
-    console.log(tier);
     return (
       <WoWsInfo title={lang.wiki_warship_filter_placeholder} onPress={() => this.refs['search'].focus()}>
         <TextInput label={lang.wiki_warship_filter_placeholder} ref='search' autoCorrect={false}

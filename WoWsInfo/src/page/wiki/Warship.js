@@ -28,6 +28,7 @@ class Warship extends Component {
 
     // Remove extra information (ship id)
     sorted.forEach((s, i) => sorted[i] = Object.assign(s[1]));
+    this.original = sorted;
     console.log(sorted);
 
     this.state = {
@@ -50,7 +51,88 @@ class Warship extends Component {
 
   filterShip(data) {
     const { premium, name, nation, type, tier } = data;
-    console.log(data);
+    
+    if (premium === false && name == '' && nation === [] && type === [] && tier === []) {
+      this.setState({data: this.original});
+    }
+    
+    normalise = (nation, type, tier) => {
+      let data = {nation: {}, type: {}, tier: {}};
+  
+      nation.forEach(i => {
+        data.nation[getKeyByValue(DATA[SAVED.encyclopedia].ship_nations, i)] = true;
+      });
+  
+      type.forEach(i => {
+        data.type[getKeyByValue(DATA[SAVED.encyclopedia].ship_types, i)] = true;
+      });
+  
+      tier.forEach(i => {
+        data.tier[getTierList().indexOf(i) + 1] = true;
+      });
+  
+      return data;
+    }
+
+    // nation, type and tier need to be normalised
+    let fname = name.toLowerCase();
+    let fdata = normalise(nation, type, tier);
+    let ftier = fdata.tier;
+    let fnation = fdata.nation;
+    let ftype = fdata.type;
+
+    console.log(fdata);
+
+    let warship = DATA[SAVED.warship];
+    let filtered = [];
+    for (let ID in warship) {
+      let curr = warship[ID];
+
+      let filterTier = false;
+      let filterName = false;
+      let filterNation = false;
+      let filterType = false;
+      let filterPremium = false;
+
+      // It includes this name or name is empty
+      if (curr.name.toLowerCase().includes(fname) || fname.trim() === "") {
+        filterName = true;
+      }
+
+      // ANote that if premium is not selected, all ships are valid
+      if (curr.premium === premium || premium === false) {
+        filterPremium = true;
+      }
+
+      // SAme tier or ftier is 0 (no value)
+      if (ftier[curr.tier] || ftier === 0) {
+        filterTier = true;
+      }
+
+      // Match or no value
+      if (fnation[curr.nation] || !fnation) {
+        filterNation = true;
+      }
+
+      // Match or no value
+      if (ftype[curr.type] || !ftype) {
+        filterType = true;
+      }
+
+      // Add this ship if all condition matches
+      if (filterName && filterNation && filterPremium && filterTier && filterType) {
+        filtered.push(curr);
+      }
+    }
+
+    let sorted = filtered.sort((a, b) => {
+      // Sort by tier, then by type
+      if (a.tier === b.tier) return a.type.localeCompare(b.type);
+      else return b.tier - a.tier;
+    });
+
+    console.log(sorted);
+    this.setState({data: sorted});
   }
 
   searchWarship() {
