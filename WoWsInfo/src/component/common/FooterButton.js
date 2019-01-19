@@ -4,15 +4,21 @@ import { isAndroid } from 'react-native-device-detection';
 import { IconButton, Colors } from 'react-native-paper';
 import { Actions } from 'react-native-router-flux';
 import { SafeAction } from '../../core';
+import lang from '../../value/lang';
 
 class FooterButton extends Component {
   render() {
     const { icon, left } = this.props;
-    // Android has a back button so we dont have to add another one
-    // if (isAndroid) return null;
+
+    let al = '';
+    if (icon === 'settings') al = lang.button_settings_label;
+    else if (icon === 'arrow-back') al = lang.button_back_label;
+    else if (icon === 'home') al = lang.button_home_label;
+    else al = lang.button_menu_label;
+
     return (
       <SafeAreaView style={{position: 'absolute', left: left ? 0 : null, right: left ? null : 0}}>
-        <IconButton color={Colors.grey500} icon={icon} 
+        <IconButton color={Colors.grey500} icon={icon} accessibilityLabel={al}
           onPress={() => this.pressEvent()}/>
       </SafeAreaView>
     )
