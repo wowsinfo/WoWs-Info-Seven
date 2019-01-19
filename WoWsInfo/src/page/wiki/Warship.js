@@ -32,16 +32,18 @@ class Warship extends Component {
     console.log(sorted);
 
     this.state = {
-      data: sorted
+      data: sorted,
+      filter: {}
     };
-
-    console.log(props);
   }
 
-  componentWillReceiveProps() {
+  componentDidUpdate() {
     const { filter } = this.props;
     console.log(this.props);
     if (filter) {
+      // Prevent repetitive update
+      if (filter === this.state.filter) return;
+      this.setState({filter: filter});
       this.filterShip(filter);
     }
   }
