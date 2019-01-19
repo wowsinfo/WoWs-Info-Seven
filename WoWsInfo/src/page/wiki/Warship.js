@@ -34,6 +34,16 @@ class Warship extends Component {
     this.state = {
       data: sorted
     };
+
+    console.log(props);
+  }
+
+  componentWillReceiveProps() {
+    const { filter } = this.props;
+    console.log(this.props);
+    if (filter) {
+      this.filterShip(filter);
+    }
   }
 
   render() {
@@ -55,28 +65,10 @@ class Warship extends Component {
     if (premium === false && name == '' && nation === [] && type === [] && tier === []) {
       this.setState({data: this.original});
     }
-    
-    normalise = (nation, type, tier) => {
-      let data = {nation: {}, type: {}, tier: {}};
-  
-      nation.forEach(i => {
-        data.nation[getKeyByValue(DATA[SAVED.encyclopedia].ship_nations, i)] = true;
-      });
-  
-      type.forEach(i => {
-        data.type[getKeyByValue(DATA[SAVED.encyclopedia].ship_types, i)] = true;
-      });
-  
-      tier.forEach(i => {
-        data.tier[getTierList().indexOf(i) + 1] = true;
-      });
-  
-      return data;
-    }
 
     // nation, type and tier need to be normalised
     let fname = name.toLowerCase();
-    let fdata = normalise(nation, type, tier);
+    let fdata = this.normalise(nation, type, tier);
     let ftier = fdata.tier;
     let fnation = fdata.nation;
     let ftype = fdata.type;
@@ -105,17 +97,17 @@ class Warship extends Component {
       }
 
       // SAme tier or ftier is 0 (no value)
-      if (ftier[curr.tier] || ftier === 0) {
+      if (ftier[curr.tier] || this.isEmpty(ftier)) {
         filterTier = true;
       }
 
       // Match or no value
-      if (fnation[curr.nation] || !fnation) {
+      if (fnation[curr.nation] || this.isEmpty(fnation)) {
         filterNation = true;
       }
 
       // Match or no value
-      if (ftype[curr.type] || !ftype) {
+      if (ftype[curr.type] || this.isEmpty(ftype)) {
         filterType = true;
       }
 
@@ -135,68 +127,26 @@ class Warship extends Component {
     this.setState({data: sorted});
   }
 
-  searchWarship() {
-    const { tier, nation, type, name, premium } = this.state;
+  isEmpty = (obj) => {
+    return Object.keys(obj).length === 0;
+  }
 
-    console.log(tier, nation, type, name, premium);
+  normalise(nation, type, tier) {
+    let data = {nation: {}, type: {}, tier: {}};
 
-    let fname = name.toLowerCase();
-    let ftier = getTierList().indexOf(tier) + 1;
-    let fnation = getKeyByValue(DATA[SAVED.encyclopedia].ship_nations, nation);
-    let ftype = getKeyByValue(DATA[SAVED.encyclopedia].ship_types, type);
-
-    console.log(DATA[SAVED.encyclopedia], ftier, fnation, ftype, fname, premium);
-    
-    let warship = DATA[SAVED.warship];
-    let filtered = [];
-    for (let ID in warship) {
-      let curr = warship[ID];
-
-      let filterTier = false;
-      let filterName = false;
-      let filterNation = false;
-      let filterType = false;
-      let filterPremium = false;
-
-      // It includes this name or name is empty
-      if (curr.name.toLowerCase().includes(fname) || fname.trim() === "") {
-        filterName = true;
-      }
-
-      // ANote that if premium is not selected, all ships are valid
-      if (curr.premium === premium || premium === false) {
-        filterPremium = true;
-      }
-
-      // SAme tier or ftier is 0 (no value)
-      if (curr.tier === ftier || ftier === 0) {
-        filterTier = true;
-      }
-
-      // Match or no value
-      if (curr.nation === fnation || !fnation) {
-        filterNation = true;
-      }
-
-      // Match or no value
-      if (curr.type === ftype || !ftype) {
-        filterType = true;
-      }
-
-      // Add this ship if all condition matches
-      if (filterName && filterNation && filterPremium && filterTier && filterType) {
-        filtered.push(curr);
-      }
-    }
-
-    let sorted = filtered.sort((a, b) => {
-      // Sort by tier, then by type
-      if (a.tier === b.tier) return a.type.localeCompare(b.type);
-      else return b.tier - a.tier;
+    nation.forEach(i => {
+      data.nation[getKeyByValue(DATA[SAVED.encyclopedia].ship_nations, i)] = true;
     });
 
-    this.setState({data: sorted, filter: false});
-    this.resetFilter();
+    type.forEach(i => {
+      data.type[getKeyByValue(DATA[SAVED.encyclopedia].ship_types, i)] = true;
+    });
+
+    tier.forEach(i => {
+      data.tier[getTierList().indexOf(i) + 1] = true;
+    });
+
+    return data;
   }
 }
 
