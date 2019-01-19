@@ -3,7 +3,9 @@ export * from './common/FooterButton';
 export * from './common/Touchable';
 
 export * from './common/WoWsInfo';
+export * from './common/FooterPlus';
 export * from './common/SafeView';
+export * from './common/Space';
 export * from './common/DividerPlus';
 export * from './common/LoadingModal';
 export * from './common/LoadingIndicator';
