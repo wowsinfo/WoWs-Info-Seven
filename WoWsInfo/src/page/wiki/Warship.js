@@ -39,13 +39,19 @@ class Warship extends Component {
     const { data } = this.state;
 
     return (
-      <WoWsInfo title={`${lang.wiki_warship_footer} - ${data.length}`} onPress={() => SafeAction('WarshipFilter')}>
+      <WoWsInfo title={`${lang.wiki_warship_footer} - ${data.length}`} 
+        onPress={() => SafeAction('WarshipFilter', {applyFunc: this.filterShip})}>
         <GridView itemDimension={100} items={data} renderItem={(item) => {
           return <WarshipCell scale={1.4} item={item} onPress={() => SafeAction('WarshipDetail', {item: item})}/>
         }}/>
       </WoWsInfo>
     )
   };
+
+  filterShip(data) {
+    const { premium, name, nation, type, tier } = data;
+    console.log(data);
+  }
 
   searchWarship() {
     const { tier, nation, type, name, premium } = this.state;

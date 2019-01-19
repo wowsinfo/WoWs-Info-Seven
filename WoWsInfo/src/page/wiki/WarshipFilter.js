@@ -11,10 +11,12 @@ import { WoWsInfo, Touchable, DividerPlus, FooterPlus, Space } from '../../compo
 import lang from '../../value/lang';
 import { SAVED } from '../../value/data';
 import { getTierList } from '../../core';
+import { Actions } from 'react-native-router-flux';
 
 class WarshipFilter extends Component {
   constructor(props) {
     super(props);
+    console.log(props);
 
     this.state = {
       premium: false,
@@ -68,12 +70,12 @@ class WarshipFilter extends Component {
             right={() => <Checkbox status={premium ? 'checked' : 'unchecked'}/>}/>
           <View style={horizontal}>
             <Button style={button} onPress={this.resetAll}>{lang.wiki_warship_reset_btn}</Button>
-            <Button style={button}>{lang.wiki_warship_filter_btn}</Button>
+            <Button style={button} onPress={this.applyAll}>{lang.wiki_warship_filter_btn}</Button>
           </View>
         </FooterPlus>
       </WoWsInfo>
     )
-  };
+  }
 
   resetAll = () => this.setState({
     premium: false,
@@ -82,6 +84,13 @@ class WarshipFilter extends Component {
     type: [],
     tier : []
   });
+
+  applyAll = () => {
+    Actions.pop();
+
+    // Call the filter function here
+    this.props.applyFunc(Object.assign(this.state));
+  };
 
   renderButton(item, event) {
     return (
