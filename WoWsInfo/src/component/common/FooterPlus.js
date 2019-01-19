@@ -23,7 +23,7 @@ class FooterPlus extends Component {
 const styles = StyleSheet.create({
   similarView: {
     borderTopLeftRadius: 16,
-    borderTopRightRadius: 16
+    borderTopRightRadius: 16,
   },
 });
 
