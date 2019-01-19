@@ -34,7 +34,7 @@ class WarshipFilter extends Component {
 
   render() {
     const { horizontal, button } = styles;
-    const { premium } = this.state;
+    const { premium, name } = this.state;
 
     let tierList = getTierList();
 
@@ -48,7 +48,11 @@ class WarshipFilter extends Component {
 
     return (
       <WoWsInfo title={lang.wiki_warship_filter_placeholder} onPress={() => this.refs['search'].focus()}>
-        <TextInput label={lang.wiki_warship_filter_placeholder} ref='search' theme={{roundness: 0}}/>
+        <TextInput label={lang.wiki_warship_filter_placeholder} ref='search' autoCorrect={false}
+          theme={{roundness: 0}} onChangeText={t => this.setState({name: t})} onEndEditing={() => {
+            // Do not go back if it is still empty
+            if (name.trim(' ').length > 0) this.applyAll();
+          }} clearButtonMode='while-editing' autoCapitalize='none'/>
         <ScrollView ref='scrollview'>
           <Space />
           <List.Section title={lang.wiki_warship_filter_tier}>
