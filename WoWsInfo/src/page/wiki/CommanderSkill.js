@@ -22,9 +22,18 @@ class CommanderSkill extends Component {
     console.log("WIKI - Commander Skill");
     let skill = DATA[SAVED.commanderSkill];
     let backup = JSON.stringify(skill);
+
+    let section = [];
+    let cloned = JSON.parse(backup);
+    cloned.forEach(i => {
+      let index = i.tier - 1;
+      // Data is sorted so we wont need to worry about not in order
+      if (!section[index]) section.push({title: `Tier ${i.tier}`, data: []});
+      section[index].data.push(i);
+    });
   
     this.state = {
-      data: JSON.parse(backup),
+      data: section,
       point: 19
     };
   }
@@ -32,18 +41,9 @@ class CommanderSkill extends Component {
   render() {
     const { data, point } = this.state;
 
-    let section = [];
-    data.forEach(i => {
-      let index = i.tier - 1;
-      // Data is sorted so we wont need to worry about not in order
-      if (!section[index]) section.push({title: `Tier ${i.tier}`, data: []});
-      section[index].data.push(i);
-    });
-    console.log(section);
-
     return (
       <WoWsInfo title={`${point} ${lang.wiki_skills_point}`} onPress={() => this.reset()}>
-        <SectionGrid itemDimension={80} sections={section} renderItem={({item}) => {
+        <SectionGrid itemDimension={80} sections={data} renderItem={({item}) => {
           return <WikiIcon item={item} selected={item.selected} onPress={() => this.skillSelected(item)} 
           onLongPress={() => SafeAction('BasicDetail', {item: item})}/>
         }} renderSectionHeader={({section}) => (
