@@ -5,14 +5,15 @@
  */
 
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Surface, Title } from 'react-native-paper';
+import { StyleSheet } from 'react-native';
+import { Surface, Title, List } from 'react-native-paper';
 import { SAVED } from '../../value/data';
 import { WoWsInfo, WikiIcon } from '../../component';
-import { FlatGrid } from 'react-native-super-grid';
+import { SectionGrid } from 'react-native-super-grid';
 import { Actions } from 'react-native-router-flux';
 import { SafeAction } from '../../core';
 import lang from '../../value/lang';
+import { ThemeBackColour } from '../../value/colour';
 
 class CommanderSkill extends Component {
   constructor(props) {
@@ -31,12 +32,23 @@ class CommanderSkill extends Component {
   render() {
     const { data, point } = this.state;
 
+    let section = [];
+    data.forEach(i => {
+      let index = i.tier - 1;
+      // Data is sorted so we wont need to worry about not in order
+      if (!section[index]) section.push({title: `Tier ${i.tier}`, data: []});
+      section[index].data.push(i);
+    });
+    console.log(section);
+
     return (
       <WoWsInfo title={`${point} ${lang.wiki_skills_point}`} onPress={() => this.reset()}>
-        <FlatGrid itemDimension={80} items={data} renderItem={({item}) => {
+        <SectionGrid itemDimension={80} sections={section} renderItem={({item}) => {
           return <WikiIcon item={item} selected={item.selected} onPress={() => this.skillSelected(item)} 
           onLongPress={() => SafeAction('BasicDetail', {item: item})}/>
-        }}/>
+        }} renderSectionHeader={({section}) => (
+          <List.Item title={section.title} style={ThemeBackColour()}/>
+        )}/>
       </WoWsInfo>
     )
   };
