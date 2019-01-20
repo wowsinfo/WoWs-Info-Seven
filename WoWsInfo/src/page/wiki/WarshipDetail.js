@@ -6,7 +6,7 @@
 
 import React, { PureComponent } from 'react';
 import { View, FlatList,Linking, ScrollView, StyleSheet, Alert } from 'react-native';
-import { Text, Title, Subheading, Headline, Button, Surface, Paragraph, List, Divider } from 'react-native-paper';
+import { Text, Title, Subheading, Headline, Button, Surface, Paragraph, List } from 'react-native-paper';
 import { WoWsInfo, WikiIcon, WarshipCell, LoadingModal, PriceLabel, LoadingIndicator, WarshipStat, InfoLabel, DividerPlus, FooterPlus } from '../../component';
 import { SAVED, SERVER, LOCAL } from '../../value/data';
 import lang from '../../value/lang';
@@ -14,7 +14,7 @@ import { SafeFetch, langStr, Guard, getColourWithRange, SafeAction } from '../..
 import { WoWsAPI } from '../../value/api';
 import { Actions } from 'react-native-router-flux';
 import { GREY } from 'react-native-material-color';
-import { ThemeBackColour } from '../../value/colour';
+import { ThemeBackColour, TintColour } from '../../value/colour';
 
 class WarshipDetail extends PureComponent {
   constructor(props) {
@@ -43,6 +43,7 @@ class WarshipDetail extends PureComponent {
     };
 
     this.delayedRequest = null;
+    this.sectionTitle = [styles.centerText, {color: TintColour()[500]}];
   }
 
   componentWillMount() {
@@ -117,26 +118,17 @@ class WarshipDetail extends PureComponent {
     return (
       <View>
         { this.renderStatus(Guard(curr, 'default_profile', null)) }
-        <Divider />
         { this.renderSurvivability(curr) }
-        <Divider />
         { this.renderMainBattery(Guard(curr, 'default_profile.artillery', null)) }
-        <Divider />
         { this.renderSecondary(Guard(curr, 'default_profile.atbas', null)) }
-        <Divider />
         { this.renderTorpedo(Guard(curr, 'default_profile.torpedoes', null)) }
-        <Divider />
         { this.renderAADefense(Guard(curr, 'default_profile.anti_aircraft', null)) }
-        <Divider />
         { this.renderMobility(Guard(curr, 'default_profile.mobility', null)) }
-        <Divider />
         { this.renderConcealment(Guard(curr, 'default_profile.concealment', null)) }
-        <Divider />
         { this.renderUpgrade(curr) }
-        <Divider />
         { this.renderNextShip(Guard(curr, 'next_ships'), null) }
       </View>
-    )
+    );
   }
 
   /**
@@ -157,10 +149,10 @@ class WarshipDetail extends PureComponent {
     let tier = Guard(curr, 'tier', null);
 
     const { flood_prob, range, health } = armour;
-    const { horizontal, centerText } = styles;
+    const { horizontal } = styles;
     return (
       <View style={{margin: 8}}>
-        <Headline style={centerText}>{lang.warship_survivability}</Headline>
+        <Headline style={this.sectionTitle}>{lang.warship_survivability}</Headline>
         <View style={horizontal}>
           <InfoLabel title={lang.warship_survivability_health} info={`${health} - ${health + tier * 350}`}/>
           <InfoLabel title={lang.warship_survivability_armour} info={`${range.min} - ${range.max} mm`}/>
@@ -218,7 +210,7 @@ class WarshipDetail extends PureComponent {
 
     return (
       <View style={{margin: 8}}>
-        <Headline style={centerText}>{lang.warship_artillery_main}</Headline>
+        <Headline style={this.sectionTitle}>{lang.warship_artillery_main}</Headline>
         <View style={horizontal}>
           <InfoLabel title={lang.warship_weapon_reload} info={reloadMsg}/>
           <InfoLabel title={lang.warship_weapon_range} info={rangeMsg}/>
@@ -262,7 +254,7 @@ class WarshipDetail extends PureComponent {
     var guns = []; for (gun in slots) guns.push(slots[gun]);
     return (
       <View style={{margin: 8}}>
-        <Headline style={centerText}>{`${lang.warship_artillery_secondary} (${distance} km)`}</Headline>
+        <Headline style={this.sectionTitle}>{`${lang.warship_artillery_secondary} (${distance} km)`}</Headline>
         { guns.map((value, index) => { 
           const { burn_probability, bullet_speed, name, gun_rate, damage, type } = value;            
           return (
@@ -362,7 +354,7 @@ class WarshipDetail extends PureComponent {
 
     return (
       <View style={{margin: 8}}>
-        <Headline style={centerText}>{lang.warship_torpedoes}</Headline>
+        <Headline style={this.sectionTitle}>{lang.warship_torpedoes}</Headline>
         <View style={horizontal}>
           <InfoLabel title={lang.warship_weapon_reload} info={`${reload_time} - ${minReload} s`}/>
           <InfoLabel title={lang.warship_weapon_range} info={`${dist} - ${shortDist} km`}/>
@@ -389,7 +381,7 @@ class WarshipDetail extends PureComponent {
     var AAValues = []; for (aa in slots) AAValues.push(slots[aa]);
     return (
       <View style={{margin: 8}}>
-        <Headline style={centerText}>{lang.warship_antiaircraft}</Headline>
+        <Headline style={this.sectionTitle}>{lang.warship_antiaircraft}</Headline>
         { AAValues.map((value, index) => {
           const { distance, avg_damage, name, guns } = value;
           return (
@@ -413,7 +405,7 @@ class WarshipDetail extends PureComponent {
   renderMobility(mobility) {
     if (!mobility) return null;
 
-    const { horizontal, centerText } = styles;
+    const { horizontal } = styles;
     const { rudder_time, turning_radius, max_speed } = mobility;
 
     let speedFlag = Number(max_speed * 1.05).toFixed(0);
@@ -430,7 +422,7 @@ class WarshipDetail extends PureComponent {
 
     return (
       <View style={{margin: 8}}>
-        <Headline style={centerText}>{lang.warship_maneuverabilty}</Headline>
+        <Headline style={this.sectionTitle}>{lang.warship_maneuverabilty}</Headline>
         <View style={horizontal}>
           <InfoLabel title={lang.warship_maneuverabilty_rudder_time} info={rudderMsg}/>
           <InfoLabel title={lang.warship_maneuverabilty_speed} info={`${max_speed} - ${speedFlag} kt`}/>
@@ -446,7 +438,7 @@ class WarshipDetail extends PureComponent {
   renderConcealment(concealment) {
     if (!concealment) return null;
 
-    const { horizontal, centerText } = styles;
+    const { horizontal } = styles;
     const { detect_distance_by_plane, detect_distance_by_ship } = concealment;
 
     // Check if ship has concealment module
@@ -459,7 +451,7 @@ class WarshipDetail extends PureComponent {
 
     return (
       <View style={{margin: 8}}>
-        <Headline style={centerText}>{lang.warship_concealment}</Headline>
+        <Headline style={this.sectionTitle}>{lang.warship_concealment}</Headline>
         <View style={horizontal}>
           <InfoLabel title={lang.warship_concealment_detect_by_plane} info={`${detect_distance_by_plane} - ${max_plane_concealment} km`}/>
           <InfoLabel title={lang.warship_concealment_detect_by_ship} info={`${detect_distance_by_ship} - ${max_ship_concealment} km`}/>
@@ -491,10 +483,10 @@ class WarshipDetail extends PureComponent {
       count.push(i);
     }
 
-    const { centerText, upgradeView } = styles;
+    const { upgradeView } = styles;
     return (
       <View style={{margin: 8}}>
-        <Headline style={centerText}>{lang.warship_upgrades}</Headline>
+        <Headline style={this.sectionTitle}>{lang.warship_upgrades}</Headline>
         <ScrollView>
           { count.map(num => {
             let all = upgrades.filter(u => u.slot == num + 1);
@@ -519,10 +511,9 @@ class WarshipDetail extends PureComponent {
     var ships = []; for (key in next_ships) ships.push({key: key, exp: next_ships[key]});
     shipKey = (index) => String(index);
     
-    const { centerText } = styles;
     return (
       <View style={{margin: 8}}>
-        <Headline style={centerText}>{lang.warship_next_ship}</Headline>
+        <Headline style={this.sectionTitle}>{lang.warship_next_ship}</Headline>
         <FlatList data={ships} horizontal keyExtractor={shipKey} renderItem={({item}) => {  
           let curr = DATA[SAVED.warship][item.key];
           return <WarshipCell scale={1.4} item={curr} onPress={() => {
