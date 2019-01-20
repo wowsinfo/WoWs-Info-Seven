@@ -6,7 +6,7 @@
 
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import GridView from 'react-native-super-grid';
+import { FlatGrid } from 'react-native-super-grid';
 import { WoWsInfo, WikiIcon } from '../../component';
 import { SAVED } from '../../value/data';
 import { SafeAction } from '../../core';
@@ -50,7 +50,7 @@ class Collection extends Component {
 
     return (
       <WoWsInfo title={ID}>
-        <GridView inverted={!collection} itemDimension={80} items={data} renderItem={item => {
+        <FlatGrid inverted={!collection} itemDimension={80} items={data} renderItem={({item}) => {
           return <WikiIcon item={item} onPress={() => this.itemOrCollection(item)}/>
         }} ListHeaderComponent={() => {
           if (collection) {
