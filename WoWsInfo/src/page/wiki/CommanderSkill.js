@@ -21,15 +21,14 @@ class CommanderSkill extends Component {
 
     console.log("WIKI - Commander Skill");
     let skill = DATA[SAVED.commanderSkill];
-    let backup = JSON.stringify(skill);
-
+    let cloned = JSON.parse(JSON.stringify(skill));
+    
     let section = [];
-    let cloned = JSON.parse(backup);
     cloned.forEach(i => {
       let index = i.tier - 1;
       // Data is sorted so we wont need to worry about not in order
       if (!section[index]) section.push({title: `Tier ${i.tier}`, data: []});
-      section[index].data.push(i);
+      section[index].data.push(Object.assign(i));
     });
   
     this.state = {
@@ -76,7 +75,9 @@ class CommanderSkill extends Component {
 
   reset() {
     const { data } = this.state;
-    data.forEach(s => delete s.selected);
+    data.forEach(i => {
+      i.data.forEach(j => delete j.selected)
+    });
     this.setState({point: 19, data: data});
   }
 }
