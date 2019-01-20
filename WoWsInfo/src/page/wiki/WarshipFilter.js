@@ -35,7 +35,9 @@ class WarshipFilter extends Component {
   
   componentDidMount() {
     // After component has been rendered or it will be undefined
-    this.refs['scrollview'].scrollTo({x: 0, y: 128, animated: true});
+    setTimeout(() => {
+      this.refs['scrollview'].scrollTo({x: 0, y: 128, animated: false});
+    });
   }
   
   render() {
