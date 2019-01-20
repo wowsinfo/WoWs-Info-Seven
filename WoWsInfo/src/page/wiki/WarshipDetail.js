@@ -10,7 +10,7 @@ import { Text, Title, Subheading, Headline, Button, Surface, Paragraph, List } f
 import { WoWsInfo, WikiIcon, WarshipCell, LoadingModal, PriceLabel, LoadingIndicator, WarshipStat, InfoLabel, DividerPlus, FooterPlus } from '../../component';
 import { SAVED, SERVER, LOCAL } from '../../value/data';
 import lang from '../../value/lang';
-import { SafeFetch, langStr, Guard, getColourWithRange, SafeAction } from '../../core';
+import { SafeFetch, langStr, Guard, getColourWithRange, SafeAction, getCurrServer } from '../../core';
 import { WoWsAPI } from '../../value/api';
 import { Actions } from 'react-native-router-flux';
 import { GREY } from 'react-native-material-color';
@@ -20,7 +20,7 @@ class WarshipDetail extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.server = SERVER[DATA[LOCAL.userServer]];
+    this.server = getCurrServer();
 
     let curr = props.item;
     console.log(curr);
