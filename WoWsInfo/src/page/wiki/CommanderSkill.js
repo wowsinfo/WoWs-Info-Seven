@@ -27,7 +27,7 @@ class CommanderSkill extends Component {
     cloned.forEach(i => {
       let index = i.tier - 1;
       // Data is sorted so we wont need to worry about not in order
-      if (!section[index]) section.push({title: `Tier ${i.tier}`, data: []});
+      if (!section[index]) section.push({title: `${lang.wiki_skills_tier} ${i.tier}`, data: []});
       section[index].data.push(Object.assign(i));
     });
   
