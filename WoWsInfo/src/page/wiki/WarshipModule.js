@@ -9,6 +9,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { WoWsInfo } from '../../component';
 import { SafeFetch, langStr, getCurrServer } from '../../core';
 import { WoWsAPI } from '../../value/api';
+import { Actions } from 'react-native-router-flux';
 
 class WarshipModule extends Component {
   constructor(props) {
@@ -30,8 +31,6 @@ class WarshipModule extends Component {
       torpedo_bomber: '',
       torpedoes: ''
     };
-
-    this.makeAPIStr();
   }
 
   render() {
@@ -43,7 +42,7 @@ class WarshipModule extends Component {
     )
   };
 
-  makeAPIStr() {
+  getNewModule() {
     const {
       ship_id,
       artillery,
@@ -59,7 +58,14 @@ class WarshipModule extends Component {
 
     SafeFetch.get(WoWsAPI.ShipModule, this.server, ship_id, artillery, dive_bomber, engine, fighter, 
       fire_control, flight_control, hull, torpedo_bomber, torpedoes, langStr()).then(json => {
-      console.log(json);
+      Actions.popTo('WarshipDetail');
+      if (json) {
+        setTimeout(() => {
+          Actions.refresh({module: json});
+        })
+      } else {
+        // Error
+      }
     });
   }
 }
