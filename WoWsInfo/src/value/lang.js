@@ -22,6 +22,7 @@ export default lang = new LocalizedStrings({
     wiki_warship_filter_premium: 'Premium ship',
     // Warship Detail
     warship_model: '3D Model',
+    warship_update_module: 'Update ship modules',
     warship_survivability: 'Survivablity',
     warship_survivability_health: 'Health',
     warship_survivability_armour: 'Armour',

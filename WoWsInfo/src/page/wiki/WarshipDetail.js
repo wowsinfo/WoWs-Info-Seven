@@ -115,9 +115,24 @@ class WarshipDetail extends PureComponent {
   }
 
   renderAll(curr) {
+    // Check if there are modules available
+    let module = Guard(curr, 'modules', {});
+    let hasModule = false;
+    for (let id in module) {
+      let curr = module[id];
+      if (curr.length > 1) {
+        hasModule = true;
+        break;
+      }
+    }
+
     return (
       <View>
         { this.renderStatus(Guard(curr, 'default_profile', null)) }
+        { hasModule ? <Button theme={{roundness: 0}} mode='contained' 
+          onPress={() => SafeAction('WarshipModule', {data: curr})}>
+            {lang.warship_update_module}
+          </Button> : null }
         { this.renderSurvivability(curr) }
         { this.renderMainBattery(Guard(curr, 'default_profile.artillery', null)) }
         { this.renderSecondary(Guard(curr, 'default_profile.atbas', null)) }
