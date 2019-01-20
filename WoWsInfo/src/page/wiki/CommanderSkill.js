@@ -34,29 +34,33 @@ class CommanderSkill extends Component {
     return (
       <WoWsInfo title={`${point} ${lang.wiki_skills_point}`} onPress={() => this.reset()}>
         <FlatGrid itemDimension={80} items={data} renderItem={({item}) => {
-          return <WikiIcon item={item} selected={item.selected} onPress={() => {
-            let pointLeft = point;
-            if (item.selected == true) {
-              // Remember to set it to a number otherwise you will have weird issues
-              if (pointLeft == lang.wiki_skills_reset) pointLeft = 0;
-              pointLeft += item.tier;
-              // Deselect this skill and return your points
-              item.selected = false;
-              this.setState({point: pointLeft});
-            } else {
-              pointLeft -= item.tier;
-              if (pointLeft >= 0) {
-                item.selected = true;
-                // If you do not have enough point do nothing
-                if (pointLeft == 0) this.setState({point: lang.wiki_skills_reset});
-                else this.setState({point: pointLeft});
-              }
-            }
-          }} onLongPress={() => SafeAction('BasicDetail', {item: item})}/>
+          return <WikiIcon item={item} selected={item.selected} onPress={() => this.skillSelected(item)} 
+          onLongPress={() => SafeAction('BasicDetail', {item: item})}/>
         }}/>
       </WoWsInfo>
     )
   };
+
+  skillSelected(item) {
+    const { point } = this.state;
+    let pointLeft = point;
+    if (item.selected == true) {
+      // Remember to set it to a number otherwise you will have weird issues
+      if (pointLeft == lang.wiki_skills_reset) pointLeft = 0;
+      pointLeft += item.tier;
+      // Deselect this skill and return your points
+      item.selected = false;
+      this.setState({point: pointLeft});
+    } else {
+      pointLeft -= item.tier;
+      if (pointLeft >= 0) {
+        item.selected = true;
+        // If you do not have enough point do nothing
+        if (pointLeft == 0) this.setState({point: lang.wiki_skills_reset});
+        else this.setState({point: pointLeft});
+      }
+    }
+  }
 
   reset() {
     const { data } = this.state;
