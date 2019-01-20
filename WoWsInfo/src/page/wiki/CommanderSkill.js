@@ -9,7 +9,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { Surface, Title } from 'react-native-paper';
 import { SAVED } from '../../value/data';
 import { WoWsInfo, WikiIcon } from '../../component';
-import GridView from 'react-native-super-grid';
+import { FlatGrid } from 'react-native-super-grid';
 import { Actions } from 'react-native-router-flux';
 import { SafeAction } from '../../core';
 import lang from '../../value/lang';
@@ -33,7 +33,7 @@ class CommanderSkill extends Component {
 
     return (
       <WoWsInfo title={`${point} ${lang.wiki_skills_point}`} onPress={() => this.reset()}>
-        <GridView itemDimension={80} items={data} renderItem={item => {
+        <FlatGrid itemDimension={80} items={data} renderItem={({item}) => {
           return <WikiIcon item={item} selected={item.selected} onPress={() => {
             let pointLeft = point;
             if (item.selected == true) {

@@ -6,7 +6,7 @@
 
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import GridView from 'react-native-super-grid';
+import { FlatGrid } from 'react-native-super-grid';
 import { SafeView, WikiIcon, WoWsInfo } from '../../component';
 import { SAVED } from '../../value/data';
 import { Actions } from 'react-native-router-flux';
@@ -39,7 +39,7 @@ class Achievement extends Component {
     const { data } = this.state;
     return (
       <WoWsInfo>
-        <GridView itemDimension={80} items={data} renderItem={item => {
+        <FlatGrid itemDimension={80} items={data} renderItem={({item}) => {
           return <WikiIcon item={item} onPress={() => SafeAction('BasicDetail', {item: item})}/>
         }}/>
       </WoWsInfo>

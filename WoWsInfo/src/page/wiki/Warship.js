@@ -7,7 +7,7 @@
 import React, { Component } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import { WoWsInfo, WarshipCell } from '../../component';
-import GridView from 'react-native-super-grid';
+import { FlatGrid } from 'react-native-super-grid';
 import { SAVED, LOCAL } from '../../value/data';
 import { Portal, TextInput, Button, Divider, List, Modal, Checkbox, Colors, Surface } from 'react-native-paper';
 import lang from '../../value/lang';
@@ -54,7 +54,7 @@ class Warship extends Component {
     return (
       <WoWsInfo title={`${lang.wiki_warship_footer} - ${data.length}`} 
         onPress={() => SafeAction('WarshipFilter', {applyFunc: this.filterShip})}>
-        <GridView itemDimension={100} items={data} renderItem={(item) => {
+        <FlatGrid itemDimension={100} items={data} renderItem={({item}) => {
           return <WarshipCell scale={1.4} item={item} onPress={() => SafeAction('WarshipDetail', {item: item})}/>
         }}/>
       </WoWsInfo>
