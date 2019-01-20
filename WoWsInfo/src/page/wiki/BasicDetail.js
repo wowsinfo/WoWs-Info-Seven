@@ -9,6 +9,7 @@ import React, { Component } from 'react';
 import { Text, ScrollView, StyleSheet } from 'react-native';
 import { Surface, Title, Paragraph, Caption } from 'react-native-paper';
 import { FloatingButton, WikiIcon, WoWsInfo, PriceLabel } from '../../component';
+import { TintColour } from '../../value/colour';
 
 class BasicDetail extends Component {
   render() {
@@ -29,7 +30,9 @@ class BasicDetail extends Component {
 
   renderDetail() {
     const { item } = this.props;
-    const { container, label } = styles;    
+    const { container, label } = styles;
+    // Make title colour tint colour
+    let title = [label, {color: TintColour()[500]}];
 
     if (item.profile) {
       // Consumables
@@ -41,7 +44,7 @@ class BasicDetail extends Component {
       return (
         <ScrollView contentContainerStyle={container}>
           <WikiIcon scale={1.6} item={item}/>
-          <Title style={label}>{name}</Title>
+          <Title style={title}>{name}</Title>
           <PriceLabel item={item}/>
           <Paragraph style={label}>{description}</Paragraph>
           <Caption style={label}>{bonus}</Caption>
@@ -57,7 +60,7 @@ class BasicDetail extends Component {
       return (
         <ScrollView contentContainerStyle={container}>
           <WikiIcon scale={1.6} item={item}/>
-          <Title style={label}>{name}</Title>
+          <Title style={title}>{name}</Title>
           <Paragraph style={label}>{bonus}</Paragraph>
         </ScrollView>
       )
@@ -68,7 +71,7 @@ class BasicDetail extends Component {
       return (
         <ScrollView contentContainerStyle={container}>
           <WikiIcon scale={1.6} item={item}/>
-          <Title style={label}>{name}</Title>
+          <Title style={title}>{name}</Title>
           <Paragraph style={label}>{description}</Paragraph>
         </ScrollView>
       )
@@ -86,7 +89,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 8,
     marginTop: 8
-  },
+  }
 });
 
 export { BasicDetail };
