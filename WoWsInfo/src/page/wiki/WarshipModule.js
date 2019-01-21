@@ -48,7 +48,7 @@ class WarshipModule extends Component {
           { 
             section.map(s => {
               return (
-                <View>
+                <View key={s.title}>
                   <List.Section title={s.title}>
                     { s.data.map(d => {
                       return this.renderModule(tree[d]);
@@ -74,7 +74,7 @@ class WarshipModule extends Component {
   }
 
   makeSection(data) {
-    const { modules } = data;
+    const { modules, modules_tree } = data;
 
     let moduleName = DATA[SAVED.encyclopedia].ship_modules;
 
@@ -83,7 +83,13 @@ class WarshipModule extends Component {
       let curr = modules[key];
       if (curr.length > 1) {
         // Ignore empty or one module, you cannot update them anyway
-        let obj = {title: moduleName[this.normaliseKey(key)], data: curr};
+        let sorted = curr.sort((a, b) => {
+          let aXP = modules_tree[a].price_xp;
+          let bXP = modules_tree[b].price_xp;
+          // Sort by XP (more xp, more advanced)
+          return modules_tree[a].price_xp - modules_tree[b].price_xp;
+        });
+        let obj = {title: moduleName[this.normaliseKey(key)], data: sorted};
         section.push(obj);
       }
     }

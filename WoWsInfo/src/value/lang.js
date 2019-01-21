@@ -23,6 +23,7 @@ export default lang = new LocalizedStrings({
     // Warship Detail
     warship_model: '3D Model',
     warship_update_module: 'Update ship modules',
+    warship_default_module: 'Default',
     warship_survivability: 'Survivablity',
     warship_survivability_health: 'Health',
     warship_survivability_armour: 'Armour',
