@@ -84,11 +84,21 @@ class WarshipModule extends Component {
       if (curr.length > 1) {
         // Ignore empty or one module, you cannot update them anyway
         let sorted = curr.sort((a, b) => {
-          let aXP = modules_tree[a].price_xp;
-          let bXP = modules_tree[b].price_xp;
-          // Sort by XP (more xp, more advanced)
-          return modules_tree[a].price_xp - modules_tree[b].price_xp;
+          let aM = modules_tree[a];
+          let bM = modules_tree[b];
+          if (aM.price_xp !== bM.price_xp) {
+            // Sort by XP (more xp, more advanced)
+            return aM.price_xp - bM.price_xp;
+          } else if (aM.next_modules != null && bM.next_modules != null) {
+            // They all have next module, we need to check check the id
+            if (aM.next_modules[0] == b) return -1;
+            else return 1;
+          } else {
+            // Whoever is not null comes first
+            return aM.next_modules != null ? -1 : 1;
+          }
         });
+        
         let obj = {title: moduleName[this.normaliseKey(key)], data: sorted};
         section.push(obj);
       }
