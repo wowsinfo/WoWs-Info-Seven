@@ -139,8 +139,8 @@ class WarshipModule extends Component {
       if (json && json.data[ship_id]) {
         // Just pass profile back (override default_profile)
         setTimeout(() => {
-          Actions.refresh({newModule: json.data[ship_id]});
-        })
+          Actions.refresh({module: json.data[ship_id]});
+        });
       } else {
         // Error
       }

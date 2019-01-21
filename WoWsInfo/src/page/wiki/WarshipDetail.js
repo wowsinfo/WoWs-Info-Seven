@@ -36,7 +36,7 @@ class WarshipDetail extends PureComponent {
     console.log(similar);
 
     this.state = {
-      curr: props.item,
+      curr: curr,
       similar: similar,
       loading: true,
       data: {}
@@ -44,15 +44,11 @@ class WarshipDetail extends PureComponent {
 
     this.delayedRequest = null;
     this.sectionTitle = [styles.centerText, {color: TintColour()[500]}];
+    this.efficientDataRequest(curr.ship_id);
   }
 
   componentDidUpdate() {
     console.log(this.props);
-  }
-
-  componentWillMount() {
-    // Start loading data here
-    this.efficientDataRequest(this.props.item.ship_id);
   }
 
   render() {
