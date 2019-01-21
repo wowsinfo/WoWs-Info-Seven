@@ -46,6 +46,10 @@ class WarshipDetail extends PureComponent {
     this.sectionTitle = [styles.centerText, {color: TintColour()[500]}];
   }
 
+  componentDidUpdate() {
+    console.log(this.props);
+  }
+
   componentWillMount() {
     // Start loading data here
     this.efficientDataRequest(this.props.item.ship_id);
@@ -91,7 +95,6 @@ class WarshipDetail extends PureComponent {
     let avgDamage = Guard(currShip, 'average_damage_dealt', 0);
     let avgWinrate = Guard(currShip, 'win_rate', 0);
     let avgFrag = Guard(currShip, 'average_frags', 0);
-    console.log(currShip);
 
     return (
       <View style={container}>

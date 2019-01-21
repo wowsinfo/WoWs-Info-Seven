@@ -14,6 +14,7 @@ import { SAVED } from '../../value/data';
 import { SectionGrid } from 'react-native-super-grid';
 import { ThemeBackColour } from '../../value/colour';
 import { List, Text, Caption } from 'react-native-paper';
+import lang from '../../value/lang';
 
 class WarshipModule extends Component {
   constructor(props) {
@@ -43,7 +44,7 @@ class WarshipModule extends Component {
     const {  } = styles;
     const { section, tree } = this.state;
     return (
-      <WoWsInfo>
+      <WoWsInfo title={lang.warship_apply_module} onPress={() => this.getNewModule()}>
         <FlatList data={section} renderItem={({item}) => {
           return (
             <View key={item.title}>
@@ -54,7 +55,7 @@ class WarshipModule extends Component {
               </List.Section>
             </View>
           );
-        }} keyExtractor={d => d.title} inverted ListFooterComponent={<Space />}/>
+        }} keyExtractor={(_, i) => String(i)} inverted ListFooterComponent={<Space />}/>
       </WoWsInfo>
     )
   };
@@ -64,7 +65,7 @@ class WarshipModule extends Component {
     const { name, price_xp, price_credit } = item;
     const { xp } = styles;
     return (
-      <List.Item title={name} description={price_credit}
+      <List.Item title={name} description={price_credit} onPress={() => null}
         right={() => price_xp > 0 ? <Caption style={xp}>{`${price_xp} xp`}</Caption> : null}/>
     );
   }
@@ -138,7 +139,7 @@ class WarshipModule extends Component {
       if (json && json.data[ship_id]) {
         // Just pass profile back (override default_profile)
         setTimeout(() => {
-          Actions.refresh({module: json.data[ship_id]});
+          Actions.refresh({newModule: json.data[ship_id]});
         })
       } else {
         // Error
