@@ -5,8 +5,8 @@
  */
 
 import React, { Component } from 'react';
-import { View, ScrollView, StyleSheet } from 'react-native';
-import { WoWsInfo, PriceLabel } from '../../component';
+import { View, FlatList, StyleSheet } from 'react-native';
+import { WoWsInfo, PriceLabel, Space } from '../../component';
 import { SafeFetch, langStr, getCurrServer } from '../../core';
 import { WoWsAPI } from '../../value/api';
 import { Actions } from 'react-native-router-flux';
@@ -44,21 +44,17 @@ class WarshipModule extends Component {
     const { section, tree } = this.state;
     return (
       <WoWsInfo>
-        <ScrollView invert>
-          { 
-            section.map(s => {
-              return (
-                <View key={s.title}>
-                  <List.Section title={s.title}>
-                    { s.data.map(d => {
-                      return this.renderModule(tree[d]);
-                    }) }
-                  </List.Section>
-                </View>
-              );
-            })
-          }
-        </ScrollView>
+        <FlatList data={section} renderItem={({item}) => {
+          return (
+            <View key={item.title}>
+              <List.Section title={item.title}>
+                { item.data.map(d => {
+                  return this.renderModule(tree[d]);
+                }) }
+              </List.Section>
+            </View>
+          );
+        }} keyExtractor={d => d.title} inverted ListFooterComponent={<Space />}/>
       </WoWsInfo>
     )
   };
@@ -98,7 +94,7 @@ class WarshipModule extends Component {
             return aM.next_modules != null ? -1 : 1;
           }
         });
-        
+
         let obj = {title: moduleName[this.normaliseKey(key)], data: sorted};
         section.push(obj);
       }
