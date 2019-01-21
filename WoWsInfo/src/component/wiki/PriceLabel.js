@@ -12,13 +12,15 @@ class PriceLabel extends Component {
   render() {
     const { container } = styles;
     const { item } = this.props;
+    const { price_credit, price_gold } = item;
 
-    let price = item.price_gold;
+    let price = price_gold;
     let colour = 'orange';
-    if (item.price_gold === 0) {
+    if (!price_gold || price_gold === 0) {
       price = item.price_credit;
       colour = 'grey';
     }
+    console.log(item);
 
     return (
       <Text style={{color: colour, textAlign: 'center'}}>{price}</Text>
