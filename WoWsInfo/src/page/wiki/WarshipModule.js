@@ -25,15 +25,17 @@ class WarshipModule extends Component {
 
     this.state = {
       ship_id: ship_id,
-      artillery: '',
-      dive_bomber: '',
-      engine: '',
-      fighter: '',
-      fire_control: '',
-      flight_control: '',
-      hull: '',
-      torpedo_bomber: '',
-      torpedoes: '',
+      module: {
+        Artillery: '',
+        DiveBomber: '',
+        Engine: '',
+        Fighter: '',
+        FlightControl: '',
+        Hull: '',
+        Suo: '',
+        TorpedoBomber: '',
+        Torpedoes: ''
+      },
       tree: modules_tree,
       // Data needed for section grid
       section: this.makeSection(props.data)
@@ -41,8 +43,7 @@ class WarshipModule extends Component {
   }
 
   render() {
-    const {  } = styles;
-    const { section, tree } = this.state;
+    const { section } = this.state;
     return (
       <WoWsInfo title={lang.warship_apply_module} onPress={() => this.getNewModule()}>
         <FlatList data={section} renderItem={({item}) => {
@@ -50,7 +51,7 @@ class WarshipModule extends Component {
             <View key={item.title}>
               <List.Section title={item.title}>
                 { item.data.map(d => {
-                  return this.renderModule(tree[d]);
+                  return this.renderModule(d);
                 }) }
               </List.Section>
             </View>
@@ -60,14 +61,29 @@ class WarshipModule extends Component {
     )
   };
 
-  renderModule(item) {
-    if (!item) return null;
-    const { name, price_xp, price_credit } = item;
+  renderModule(ID) {
+    const { tree, module } = this.state;
+    const { name, price_xp, price_credit } = tree[ID];
     const { xp } = styles;
+
+    let selected = false;
+    for (let name in module) {
+      if (module[name] === ID) {
+        selected = true;
+        break;
+      }
+    }
+
     return (
-      <List.Item title={name} description={price_credit} onPress={() => null}
+      <List.Item style={selected ? ThemeBackColour() : null} title={name} description={price_credit} onPress={() => this.updateModule(tree, ID)}
         right={() => price_xp > 0 ? <Caption style={xp}>{`${price_xp} xp`}</Caption> : null}/>
     );
+  }
+
+  updateModule(tree, ID) {
+    let module = Object.assign(this.state.module);
+    module[tree[ID].type] = ID;
+    this.setState({module});
   }
 
   makeSection(data) {
@@ -120,21 +136,23 @@ class WarshipModule extends Component {
   }
 
   getNewModule() {
+    const { ship_id, module } = this.state;
     const {
-      ship_id,
-      artillery,
-      dive_bomber,
-      engine,
-      fighter,
-      fire_control,
-      flight_control,
-      hull,
-      torpedo_bomber,
-      torpedoes
-    } = this.state;
+      Artillery,
+      DiveBomber,
+      Engine,
+      Fighter,
+      FlightControl,
+      Hull,
+      Suo,
+      TorpedoBomber,
+      Torpedoes
+    } = module;
 
-    SafeFetch.get(WoWsAPI.ShipModule, this.server, ship_id, artillery, dive_bomber, engine, fighter, 
-      fire_control, flight_control, hull, torpedo_bomber, torpedoes, langStr()).then(json => {
+    console.log(module);
+
+    SafeFetch.get(WoWsAPI.ShipModule, this.server, ship_id, Artillery, DiveBomber, Engine, Fighter, 
+      Suo, FlightControl, Hull, TorpedoBomber, Torpedoes, langStr()).then(json => {
       Actions.popTo('WarshipDetail');
       if (json && json.data[ship_id]) {
         // Just pass profile back (override default_profile)
