@@ -12,8 +12,8 @@ import { WoWsAPI } from '../../value/api';
 import { Actions } from 'react-native-router-flux';
 import { SAVED } from '../../value/data';
 import { SectionGrid } from 'react-native-super-grid';
-import { ThemeBackColour } from '../../value/colour';
-import { List, Text, Caption } from 'react-native-paper';
+import { ThemeBackColour, TintColour } from '../../value/colour';
+import { List, Caption, Title } from 'react-native-paper';
 import lang from '../../value/lang';
 
 class WarshipModule extends Component {
@@ -49,11 +49,10 @@ class WarshipModule extends Component {
         <FlatList data={section} renderItem={({item}) => {
           return (
             <View key={item.title}>
-              <List.Section title={item.title}>
-                { item.data.map(d => {
-                  return this.renderModule(d);
-                }) }
-              </List.Section>
+              <Title style={{paddingLeft: 16, color: TintColour()[500]}}>{item.title}</Title>
+              { item.data.map(d => {
+                return this.renderModule(d);
+              }) }
             </View>
           );
         }} keyExtractor={(_, i) => String(i)} inverted ListFooterComponent={<Space />}/>

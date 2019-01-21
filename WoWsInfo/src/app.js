@@ -55,6 +55,7 @@ class App extends Component {
       props.theme.roundness = 99;
       props.theme.dark = DARKMODE;
       props.theme.colors = DARKMODE ? DARK.colors : LIGHT.colors;
+      console.log(props.theme);
 
       // Update data here as well, force update when first launch
       let first = DATA[LOCAL.firstLaunch];
