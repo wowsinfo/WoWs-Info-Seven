@@ -10,7 +10,7 @@ import { Text, Title, Subheading, Headline, Button, Surface, Paragraph, List } f
 import { WoWsInfo, WikiIcon, WarshipCell, LoadingModal, PriceLabel, LoadingIndicator, WarshipStat, InfoLabel, DividerPlus, FooterPlus } from '../../component';
 import { SAVED, SERVER, LOCAL } from '../../value/data';
 import lang from '../../value/lang';
-import { SafeFetch, langStr, Guard, getColourWithRange, SafeAction, getCurrServer } from '../../core';
+import { SafeFetch, langStr, Guard, getColourWithRange, SafeAction, getCurrServer, copy } from '../../core';
 import { WoWsAPI } from '../../value/api';
 import { Actions } from 'react-native-router-flux';
 import { GREY } from 'react-native-material-color';
@@ -483,13 +483,15 @@ class WarshipDetail extends PureComponent {
     let slots = Guard(curr, 'mod_slots', null);
     if (!upgrades || !slots) return null;
     
+    // You must clone this and you should never touch the original data
+    let clone = copy(upgrades);
     // follow the order from global wiki
-    upgrades.sort((a, b) => b - a);
-    for (let index in upgrades) {
-      let id = upgrades[index];
-      upgrades[index] = Object.assign(DATA[SAVED.consumable][id]);
+    clone.sort((a, b) => b - a);
+    for (let index in clone) {
+      let id = clone[index];
+      clone[index] = Object.assign(DATA[SAVED.consumable][id]);
     }
-    console.log(upgrades);
+    console.log(clone);
 
     // For looping only
     let count = [];
@@ -503,7 +505,7 @@ class WarshipDetail extends PureComponent {
         <Headline style={this.sectionTitle}>{lang.warship_upgrades}</Headline>
         <ScrollView>
           { count.map(num => {
-            let all = upgrades.filter(u => u.slot == num + 1);
+            let all = clone.filter(u => u.slot == num + 1);
             return (
               <View style={upgradeView} key={num}>
                 <Title style={{margin: 8}}>{`${num + 1}.`}</Title>

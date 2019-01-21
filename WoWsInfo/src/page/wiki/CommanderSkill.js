@@ -11,7 +11,7 @@ import { SAVED } from '../../value/data';
 import { WoWsInfo, WikiIcon } from '../../component';
 import { SectionGrid } from 'react-native-super-grid';
 import { Actions } from 'react-native-router-flux';
-import { SafeAction } from '../../core';
+import { SafeAction, copy } from '../../core';
 import lang from '../../value/lang';
 import { ThemeBackColour } from '../../value/colour';
 
@@ -21,7 +21,7 @@ class CommanderSkill extends Component {
 
     console.log("WIKI - Commander Skill");
     let skill = DATA[SAVED.commanderSkill];
-    let cloned = JSON.parse(JSON.stringify(skill));
+    let cloned = copy(skill);
     
     let section = [];
     cloned.forEach(i => {
