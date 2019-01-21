@@ -39,7 +39,7 @@ class WarshipDetail extends PureComponent {
       curr: curr,
       similar: similar,
       loading: true,
-      data: {}
+      data: {},
     };
 
     this.delayedRequest = null;
@@ -52,12 +52,15 @@ class WarshipDetail extends PureComponent {
     const { data } = this.state;
     if (module) {
       if (data.default_profile === module) return;
-      console.log('Module updated');
-      // Update module
-      let newData = Object.assign(data);
-      delete newData.default_profile;
-      newData.default_profile = module;
-      this.setState({data: newData});
+      this.setState({loading: true});
+      setTimeout(() => {
+        console.log('Module updated', module, data);
+        // Update module
+        let newData = Object.assign(data);
+        delete newData.default_profile;
+        newData.default_profile = module;
+        this.setState({loading: false, data: newData, shouldUpdateModule: false});
+      });
     }
   }
 
