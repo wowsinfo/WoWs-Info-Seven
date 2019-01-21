@@ -6,14 +6,14 @@
 
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { WoWsInfo } from '../../component';
+import { WoWsInfo, PriceLabel } from '../../component';
 import { SafeFetch, langStr, getCurrServer } from '../../core';
 import { WoWsAPI } from '../../value/api';
 import { Actions } from 'react-native-router-flux';
 import { SAVED } from '../../value/data';
 import { SectionGrid } from 'react-native-super-grid';
 import { ThemeBackColour } from '../../value/colour';
-import { List } from 'react-native-paper';
+import { List, Headline, Caption } from 'react-native-paper';
 
 class WarshipModule extends Component {
   constructor(props) {
@@ -45,13 +45,25 @@ class WarshipModule extends Component {
     return (
       <WoWsInfo>
         <SectionGrid itemDimension={320} sections={section} renderItem={({item}) => {
-          return <Text>{tree[item].name}</Text>
+          return this.renderModule(tree[item]);
         }} renderSectionHeader={({section}) => (
           <List.Item title={section.title} style={ThemeBackColour()}/>
         )}/>
       </WoWsInfo>
     )
   };
+
+  renderModule(item) {
+    if (!item) return null;
+    const { name, price_xp } = item;
+    return (
+      <View>
+        <Headline>{name}</Headline>
+        <PriceLabel item={item}/>
+        { price_xp > 0 ? <Caption>{price_xp}</Caption> : null }
+      </View>
+    );
+  }
 
   makeSection(data) {
     const { modules } = data;
