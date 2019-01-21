@@ -11,16 +11,14 @@ import { Text } from 'react-native-paper';
 class PriceLabel extends Component {
   render() {
     const { container } = styles;
-    const { item } = this.props;
-    const { price_credit, price_gold } = item;
+    const { price_credit, price_gold } = this.props.item;
 
     let price = price_gold;
     let colour = 'orange';
     if (!price_gold || price_gold === 0) {
-      price = item.price_credit;
+      price = price_credit;
       colour = 'grey';
     }
-    console.log(item);
 
     return (
       <Text style={{color: colour, textAlign: 'center'}}>{price}</Text>
