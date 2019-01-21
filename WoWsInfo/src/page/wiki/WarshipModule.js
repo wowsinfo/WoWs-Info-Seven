@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, ScrollView, StyleSheet } from 'react-native';
 import { WoWsInfo, PriceLabel } from '../../component';
 import { SafeFetch, langStr, getCurrServer } from '../../core';
 import { WoWsAPI } from '../../value/api';
@@ -13,7 +13,7 @@ import { Actions } from 'react-native-router-flux';
 import { SAVED } from '../../value/data';
 import { SectionGrid } from 'react-native-super-grid';
 import { ThemeBackColour } from '../../value/colour';
-import { List, Headline, Caption } from 'react-native-paper';
+import { List, Text, Caption } from 'react-native-paper';
 
 class WarshipModule extends Component {
   constructor(props) {
@@ -44,24 +44,32 @@ class WarshipModule extends Component {
     const { section, tree } = this.state;
     return (
       <WoWsInfo>
-        <SectionGrid itemDimension={320} sections={section} renderItem={({item}) => {
-          return this.renderModule(tree[item]);
-        }} renderSectionHeader={({section}) => (
-          <List.Item title={section.title} style={ThemeBackColour()}/>
-        )}/>
+        <ScrollView invert>
+          { 
+            section.map(s => {
+              return (
+                <View>
+                  <List.Section title={s.title}>
+                    { s.data.map(d => {
+                      return this.renderModule(tree[d]);
+                    }) }
+                  </List.Section>
+                </View>
+              );
+            })
+          }
+        </ScrollView>
       </WoWsInfo>
     )
   };
 
   renderModule(item) {
     if (!item) return null;
-    const { name, price_xp } = item;
+    const { name, price_xp, price_credit } = item;
+    const { xp } = styles;
     return (
-      <View>
-        <Headline>{name}</Headline>
-        <PriceLabel item={item}/>
-        { price_xp > 0 ? <Caption>{price_xp}</Caption> : null }
-      </View>
+      <List.Item title={name} description={price_credit}
+        right={() => price_xp > 0 ? <Caption style={xp}>{`${price_xp} xp`}</Caption> : null}/>
     );
   }
 
@@ -75,7 +83,7 @@ class WarshipModule extends Component {
       let curr = modules[key];
       if (curr.length > 1) {
         // Ignore empty or one module, you cannot update them anyway
-        let obj = {title: moduleName[this.normaliseKey(key)], data: curr.reverse()};
+        let obj = {title: moduleName[this.normaliseKey(key)], data: curr};
         section.push(obj);
       }
     }
@@ -132,6 +140,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  xp: {
+    paddingRight: 4,
+    alignSelf: 'center'
   }
 });
 
