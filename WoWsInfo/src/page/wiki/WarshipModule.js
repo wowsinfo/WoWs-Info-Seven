@@ -45,7 +45,7 @@ class WarshipModule extends Component {
   render() {
     const { section } = this.state;
     return (
-      <WoWsInfo title={lang.warship_apply_module} onPress={() => this.getNewModule()}>
+      <WoWsInfo title={lang.warship_apply_module} onPress={() => this.apply()}>
         <FlatList data={section} renderItem={({item}) => {
           return (
             <View key={item.title}>
@@ -59,6 +59,13 @@ class WarshipModule extends Component {
       </WoWsInfo>
     )
   };
+
+  apply() {
+    Actions.popTo('WarshipDetail');
+    setTimeout(() => {
+      Actions.refresh({module: Object.assign(this.state)});
+    });
+  }
 
   renderModule(ID) {
     const { tree, module } = this.state;
@@ -132,36 +139,6 @@ class WarshipModule extends Component {
     // Seriously??
     if (name === 'FireControl') name = 'Suo';
     return name;
-  }
-
-  getNewModule() {
-    const { ship_id, module } = this.state;
-    const {
-      Artillery,
-      DiveBomber,
-      Engine,
-      Fighter,
-      FlightControl,
-      Hull,
-      Suo,
-      TorpedoBomber,
-      Torpedoes
-    } = module;
-
-    console.log(module);
-
-    SafeFetch.get(WoWsAPI.ShipModule, this.server, ship_id, Artillery, DiveBomber, Engine, Fighter, 
-      Suo, FlightControl, Hull, TorpedoBomber, Torpedoes, langStr()).then(json => {
-      Actions.popTo('WarshipDetail');
-      if (json && json.data[ship_id]) {
-        // Just pass profile back (override default_profile)
-        setTimeout(() => {
-          Actions.refresh({module: json.data[ship_id]});
-        });
-      } else {
-        // Error
-      }
-    });
   }
 }
 

@@ -51,17 +51,41 @@ class WarshipDetail extends PureComponent {
     const { module } = this.props;
     const { data } = this.state;
     if (module) {
-      if (data.default_profile === module) return;
-      this.setState({loading: true});
-      setTimeout(() => {
-        console.log('Module updated', module, data);
-        // Update module
-        let newData = Object.assign(data);
-        delete newData.default_profile;
-        newData.default_profile = module;
-        this.setState({loading: false, data: newData, shouldUpdateModule: false});
+      if (this.state.module === module) return;
+      this.setState({loading: true, module: module});
+      this.getNewModule(module).then(json => {
+        const newModule = Guard(json, `data.${module.ship_id}`, null);
+        if (newModule) {
+          // Copy data
+          let newData = Object.assign(data);
+          // Update module info
+          delete newData.default_profile;
+          newData.default_profile = newModule;
+          this.setState({loading: false, data: newData});
+          console.log('Module updated');
+        }
       });
     }
+  }
+
+  getNewModule(data) {
+    const { ship_id, module } = data;
+    const {
+      Artillery,
+      DiveBomber,
+      Engine,
+      Fighter,
+      FlightControl,
+      Hull,
+      Suo,
+      TorpedoBomber,
+      Torpedoes
+    } = module;
+
+    console.log(module);
+
+    return SafeFetch.get(WoWsAPI.ShipModule, this.server, ship_id, Artillery, DiveBomber, Engine, Fighter, 
+      Suo, FlightControl, Hull, TorpedoBomber, Torpedoes, langStr());
   }
 
   render() {
