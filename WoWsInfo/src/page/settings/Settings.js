@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, ScrollView, FlatList, StyleSheet, Linking, Share } from 'react-native';
-import { isAndroid } from 'react-native-device-detection';
+import { isAndroid, isIos } from 'react-native-device-detection';
 import { Surface, List, Button, Checkbox, Colors, withTheme, Portal, Dialog, Text } from 'react-native-paper';
 import { Actions } from 'react-native-router-flux';
 import { WoWsInfo, DividerPlus, Touchable } from '../../component';
@@ -24,6 +24,7 @@ class Settings extends Component {
     
     this.colourList = [RED, PINK, PURPLE, DEEPPRUPLE, INDIGO, BLUE, LIGHTBLUE, CYAN, TEAL, GREEN, LIGHTGREEN, LIME, 
       YELLOW, AMBER, ORANGE, DEEPORANGE, BROWN, GREY, BLUEGREY];
+    this.store = isAndroid ? APP.GooglePlay : APP.AppStore;
   }
 
   componentWillUnmount() {
@@ -33,7 +34,6 @@ class Settings extends Component {
   render() {
     const { container, tint } = styles;
     const { darkMode, showColour, tintColour, server, APILanguage } = this.state;
-    const store = isAndroid ? APP.GooglePlay : APP.AppStore;
     return (
       <WoWsInfo about noLeft>
         <ScrollView>
@@ -64,7 +64,6 @@ class Settings extends Component {
               </ScrollView>
             </List.Accordion>
           </List.Section>
-          <DividerPlus />
           <List.Section title={lang.settings_app_settings}>
             <List.Item title={lang.settings_app_dark_mode} onPress={() => this.updateTheme()} />
             <List.Item title={lang.settings_app_theme_colour} onPress={() => this.setState({showColour: true})}
@@ -72,19 +71,19 @@ class Settings extends Component {
             <List.Item title={lang.settings_app_swap_buttons}/>
             <List.Item title={lang.settings_app_clean_mode}/>
           </List.Section>
-          <DividerPlus />
-          <List.Section title='WoWs Info'>
-            <List.Item title='Feedback' description='Send email to developer'
+          <List.Section title={lang.app_name}>
+            <List.Item title={lang.settings_app_send_feedback}
               onPress={() => Linking.openURL(APP.Developer)}/>
-            <List.Item title='Write a review' 
-              onPress={() => Linking.openURL(store)}/>
-            <List.Item title='Share with friends'
-              onPress={() => Share.share({url: store})}/>
+            <List.Item title={lang.settings_app_report_issues}
+              onPress={() => Linking.openURL(`${APP.Github}/issues`)}/>
+            <List.Item title={lang.settings_app_write_review}
+              onPress={() => Linking.openURL(this.store)}/>
+            <List.Item title={lang.settings_app_share} onPress={this.shareApp}/>
           </List.Section>
-          <DividerPlus />
-          <List.Section title='Open Source'>
-            <List.Item title='Github' description='https://github.com/HenryQuan/WoWs-Info'/>
-            <List.Item title='Licences' description='Many libraries are used for building WoWs Info'/>
+          <List.Section title={lang.settings_open_source}>
+            <List.Item title={lang.settings_open_source_github}
+              onPress={() => Linking.openURL(APP.Github)}/>
+            <List.Item title={lang.settings_open_source_licence} />
           </List.Section>
         </ScrollView>
         <Portal>
@@ -100,6 +99,14 @@ class Settings extends Component {
       </WoWsInfo>
     )
   };
+
+  shareApp = () => {
+    if (isIos) {
+      Share.share({url: this.store});
+    } else {
+      Share.share({message: `${lang.app_name}\n${this.store}`});
+    }
+  }
 
   /**
    * Update app theme real time

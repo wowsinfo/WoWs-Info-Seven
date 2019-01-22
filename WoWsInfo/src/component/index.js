@@ -9,11 +9,11 @@ export * from './common/Space';
 export * from './common/DividerPlus';
 export * from './common/LoadingModal';
 export * from './common/LoadingIndicator';
+export * from './common/InfoLabel';
 
 // Wiki
 export * from './wiki/WikiIcon';
 export * from './wiki/WarshipCell';
 export * from './wiki/WarshipLabel';
 export * from './wiki/PriceLabel';
-export * from './wiki/InfoLabel';
 export * from './wiki/WarshipStat';
