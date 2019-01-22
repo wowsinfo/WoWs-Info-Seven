@@ -21,6 +21,6 @@ export * from './wiki/WarshipModule';
 
 export * from './player/Statistics';
 
-export * from './setting/About';
-import Settings from './setting/Settings';
+export * from './settings/About';
+import Settings from './settings/Settings';
 export { Settings };
