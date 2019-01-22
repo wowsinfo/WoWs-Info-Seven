@@ -4,10 +4,11 @@ import { isAndroid } from 'react-native-device-detection';
 import { Surface, List, Button, Checkbox, Colors, withTheme, Portal, Dialog, Text } from 'react-native-paper';
 import { Actions } from 'react-native-router-flux';
 import { WoWsInfo, DividerPlus, Touchable } from '../../component';
-import { APP, LOCAL, SAVED, getCurrServer } from '../../value/data';
+import { APP, LOCAL, SAVED, getCurrServer, getAPILanguage } from '../../value/data';
 import { TintColour, UpdateTintColour, UpdateDarkMode } from '../../value/colour';
 import { SafeStorage } from '../../core';
 import { BLUE, RED, GREEN, PINK, PURPLE, DEEPPRUPLE, INDIGO, LIGHTBLUE, CYAN, TEAL, LIGHTGREEN, LIME, YELLOW, AMBER, ORANGE, DEEPORANGE, BROWN, GREY, BLUEGREY } from 'react-native-material-color';
+import lang from '../../value/lang';
 
 class Settings extends Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class Settings extends Component {
       tintColour: TintColour(),
       showColour: false,
       server: getCurrServer(),
-      APILanguage: '',
+      APILanguage: getAPILanguage(),
     };
     
     this.colourList = [RED, PINK, PURPLE, DEEPPRUPLE, INDIGO, BLUE, LIGHTBLUE, CYAN, TEAL, GREEN, LIGHTGREEN, LIME, 
@@ -31,13 +32,13 @@ class Settings extends Component {
 
   render() {
     const { container, tint } = styles;
-    const { darkMode, showColour, tintColour } = this.state;
+    const { darkMode, showColour, tintColour, server, APILanguage } = this.state;
     const store = isAndroid ? APP.GooglePlay : APP.AppStore;
     return (
       <WoWsInfo about noLeft>
         <ScrollView>
-          <List.Section title='API Settings'>
-            <List.Accordion title={'Game Server - ' + this.state.server_name}>
+          <List.Section title={lang.settings_api_settings}>
+            <List.Accordion title={`Game server: ${lang.server_name[server]}`}>
               <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
                 {lang.server_name.map((object, index) => 
                   <Button 
@@ -49,7 +50,7 @@ class Settings extends Component {
                 )}
               </View>
             </List.Accordion>
-            <List.Accordion title={'API Language - ' + this.state.apiLanguage}>
+            <List.Accordion title={`API language: ${APILanguage}`}>
               <ScrollView horizontal
                 contentContainerStyle={{flexDirection: 'row'}}>
                 {Object.keys(DATA[SAVED.language]).map((language) => 
@@ -64,10 +65,12 @@ class Settings extends Component {
             </List.Accordion>
           </List.Section>
           <DividerPlus />
-          <List.Section title='Theme'>
-            <List.Item title='Dark Theme' onPress={() => this.updateTheme()} />
-            <List.Item title='Tint Colour' onPress={() => this.setState({showColour: true})}
+          <List.Section title={lang.settings_app_settings}>
+            <List.Item title={lang.settings_app_dark_mode} onPress={() => this.updateTheme()} />
+            <List.Item title={lang.settings_app_theme_colour} onPress={() => this.setState({showColour: true})}
               right={() => <View style={[tint, {backgroundColor: tintColour[500]}]}/>}/>              
+            <List.Item title={lang.settings_app_swap_buttons}/>
+            <List.Item title={lang.settings_app_clean_mode}/>
           </List.Section>
           <DividerPlus />
           <List.Section title='WoWs Info'>
