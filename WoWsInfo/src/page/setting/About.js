@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Image, ScrollView, StyleSheet } from 'react-native';
 import { Surface, Text, Title } from 'react-native-paper';
-import { BackButton } from '../component';
-import { APP } from '../value/data';
+import { FooterButton, WoWsInfo } from '../../component';
+import { APP } from '../../value/data';
 
 class About extends Component {
   constructor(props) {
@@ -12,14 +12,13 @@ class About extends Component {
   render() {
     const { container, scroll, logo } = styles;
     return (
-      <Surface style={container}>
+      <WoWsInfo style={container} noLeft>
         <ScrollView contentContainerStyle={scroll}>
-          <Image style={logo} source={require('../img/Logo.png')}/>
+          <Image style={logo} source={require('../../img/Logo.png')}/>
           <Title>WoWs Info</Title>
           <Text>{APP.Version}</Text>
         </ScrollView>
-        <BackButton />
-      </Surface>
+      </WoWsInfo>
     )
   };
 }

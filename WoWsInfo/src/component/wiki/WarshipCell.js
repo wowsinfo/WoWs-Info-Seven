@@ -6,23 +6,26 @@
 
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { WikiIcon, WarshipLabel } from '../';
+import { Touchable } from '../common/Touchable';
 
 class WarshipCell extends Component {
   render() {
     const { container } = styles;
+    const { item, scale, onPress } = this.props;
     return (
-      <View style={container}>
-        <Text>WarshipCell</Text>
-      </View>
+      <Touchable style={container} onPress={onPress}>
+        <WikiIcon warship item={item} scale={scale}/>
+        <WarshipLabel item={item}/>
+      </Touchable>
     )
   };
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });
 

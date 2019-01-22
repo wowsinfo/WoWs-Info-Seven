@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { StyleSheet, StatusBar } from 'react-native';
-import { Router, Stack, Scene } from 'react-native-router-flux';
+import { Router, Stack, Scene, Actions } from 'react-native-router-flux';
 import { isTablet } from 'react-native-device-detection';
-import { Surface, DarkTheme, DefaultTheme, withTheme } from 'react-native-paper';
+import { withTheme, DarkTheme, DefaultTheme } from 'react-native-paper';
 import { Home, Menu, Settings, About, Setup, Consumable, CommanderSkill, 
-  BasicDetail, Achievement, Map as GameMap, Collection } from './page';
+  BasicDetail, Achievement, Map as GameMap, Collection, Warship, WarshipDetail, 
+  WarshipFilter, WarshipModule } from './page';
 import { LOCAL } from './value/data';
 import { DataLoader, Downloader } from './core';
-import { GREY } from 'react-native-material-color';
+import { GREY, BLUE } from 'react-native-material-color';
 import { LoadingModal } from './component';
+import { TintColour, UpdateTintColour } from './value/colour';
 
 class App extends Component {
   constructor(props) {
@@ -23,9 +25,12 @@ class App extends Component {
     // Load all data from AsyncStorage
     DataLoader.loadAll().then(data => {
       console.log(data);
+
       global.DATA = data;
-      const appTheme = DATA[LOCAL.theme];
-      const darkMode = DATA[LOCAL.darkMode];
+      DARKMODE = DATA[LOCAL.darkMode];
+
+      let tint = TintColour();
+      if (!tint[50]) tint = BLUE;
 
       // Setup global dark theme
       global.DARK = {
@@ -33,22 +38,24 @@ class App extends Component {
           ...DarkTheme.colors,
           surface: 'black',
           text: GREY[50],
-          primary: appTheme[500],
-          accent: appTheme[500],
+          primary: tint[500],
+          accent: tint[500],
         }
       };
+
       // Setup global light theme
       global.LIGHT = {
         colors: {
           ...DefaultTheme.colors,
-          primary: appTheme[500],
-          accent: appTheme[500],
+          primary: tint[500],
+          accent: tint[500],
         }
       };
 
       props.theme.roundness = 99;
-      props.theme.dark = darkMode;
-      props.theme.colors = darkMode ? DARK.colors : LIGHT.colors;
+      props.theme.dark = DARKMODE;
+      props.theme.colors = DARKMODE ? DARK.colors : LIGHT.colors;
+      console.log(props.theme);
 
       // Update data here as well, force update when first launch
       let first = DATA[LOCAL.firstLaunch];
@@ -56,7 +63,7 @@ class App extends Component {
       dn.updateAll(first).then(success => {
         // Make sure it finishes downloading
         if (success) {
-          this.setState({loading: false, dark: darkMode});
+          this.setState({loading: false, dark: DARKMODE});
         } else {
           // Reset to a special page
         }
@@ -69,10 +76,7 @@ class App extends Component {
     const { loading, updating, dark } = this.state;
     if (loading) return <LoadingModal />
     return (
-      <Surface style={container}>
-        <StatusBar barStyle={dark ? 'light-content' : 'dark-content'} 
-          backgroundColor={dark ? 'black' : GREY[200]}/>
-        <Router sceneStyle={scene}>
+        <Router sceneStyle={[scene, {backgroundColor: dark ? 'black' : 'white'}]}>
           <Stack key='root' hideNavBar>
             <Scene key='Home' component={Home}/>
             <Scene key='Setup' component={Setup} initial={DATA[LOCAL.firstLaunch]}/>
@@ -84,13 +88,16 @@ class App extends Component {
             <Scene key='Achievement' component={Achievement}/>
             <Scene key='Map' component={GameMap}/>
             <Scene key='Collection' component={Collection}/>
+            <Scene key='Warship' component={Warship}/>
+            <Scene key='WarshipFilter' component={WarshipFilter}/>
+            <Scene key='WarshipDetail' component={WarshipDetail}/>
+            <Scene key='WarshipModule' component={WarshipModule}/>
             <Scene key='BasicDetail' component={BasicDetail}/>
 
             <Scene key='Settings' component={Settings}/>
             <Scene key='About' component={About}/>
           </Stack>
         </Router>
-      </Surface>
     );
   }
 }
@@ -103,7 +110,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingLeft: isTablet ? '20%' : null,
     paddingRight: isTablet ? '20%': null,
-    backgroundColor: 'transparent'
   },
 });
 

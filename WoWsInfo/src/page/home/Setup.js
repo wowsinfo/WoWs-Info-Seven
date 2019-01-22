@@ -18,7 +18,7 @@ class Setup extends Component {
     const { container, top } = styles;
     return (
       <WoWsInfo style={container} title={lang.setup_done_button} 
-        noBack onPress={() => this.finishSetup()}>
+        noRight noLeft onPress={() => this.finishSetup()}>
         <ScrollView>
           <Headline>{lang.setup_title}</Headline>
           <List.Section title='Game Server'>

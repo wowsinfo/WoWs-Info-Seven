@@ -8,36 +8,45 @@
 import React, { Component } from 'react';
 import { Text, ScrollView, StyleSheet } from 'react-native';
 import { Surface, Title, Paragraph, Caption } from 'react-native-paper';
-import { FloatingButton, WikiIcon, SafeView } from '../../component';
+import { FloatingButton, WikiIcon, WoWsInfo, PriceLabel } from '../../component';
+import { TintColour } from '../../value/colour';
 
 class BasicDetail extends Component {
   render() {
+    const { item } = this.props;
+    console.log(item);
+
+    let ID = '';
+    if (item.consumable_id) ID = item.consumable_id;
+    else if (item.achievement_id) ID = item.achievement_id;
+    else if (item.collection_id) ID = item.card_id;
+
     return (
-      <SafeView>
+      <WoWsInfo title={ID}>
         { this.renderDetail() }
-        <FloatingButton />
-      </SafeView>
+      </WoWsInfo>
     )
   };
 
   renderDetail() {
     const { item } = this.props;
-    const { container, label } = styles;    
-    console.log(item);
+    const { container, label } = styles;
+    // Make title colour tint colour
+    let title = [label, {color: TintColour()[500]}];
+
     if (item.profile) {
       // Consumables
-      const { name, description, price_credit, price_gold, profile } = item;
-      let price = price_gold == 0 ? price_credit : price_gold;
+      const { name, description, profile } = item;
       let bonus = Object.entries(profile).reduce((total, curr) => {
-        return total + curr[1].description + "\n"
+        return total + curr[1].description + '\n';
       }, "");
 
       return (
         <ScrollView contentContainerStyle={container}>
-          <WikiIcon item={item}/>
-          <Title style={label}>{name}</Title>
-          <Text style={label}>{price + "\n"}</Text>
-          <Paragraph style={label}>{description + "\n"}</Paragraph>
+          <WikiIcon scale={1.6} item={item}/>
+          <Title style={title}>{name}</Title>
+          <PriceLabel item={item}/>
+          <Paragraph style={label}>{description}</Paragraph>
           <Caption style={label}>{bonus}</Caption>
         </ScrollView>
       )
@@ -45,13 +54,13 @@ class BasicDetail extends Component {
       // This is commander skill
       const { name, perks } = item;
       let bonus = Object.entries(perks).reduce((total, curr) => {
-        return total + curr[1].description + "\n"
+        return total + curr[1].description + '\n';
       }, "");
 
       return (
         <ScrollView contentContainerStyle={container}>
-          <WikiIcon item={item}/>
-          <Title style={label}>{name}</Title>
+          <WikiIcon scale={1.6} item={item}/>
+          <Title style={title}>{name}</Title>
           <Paragraph style={label}>{bonus}</Paragraph>
         </ScrollView>
       )
@@ -61,8 +70,8 @@ class BasicDetail extends Component {
 
       return (
         <ScrollView contentContainerStyle={container}>
-          <WikiIcon item={item}/>
-          <Title style={label}>{name}</Title>
+          <WikiIcon scale={1.6} item={item}/>
+          <Title style={title}>{name}</Title>
           <Paragraph style={label}>{description}</Paragraph>
         </ScrollView>
       )
@@ -78,8 +87,9 @@ const styles = StyleSheet.create({
   },
   label: {
     textAlign: 'center',
-    margin: 8
-  },
+    margin: 8,
+    marginTop: 8
+  }
 });
 
 export { BasicDetail };
