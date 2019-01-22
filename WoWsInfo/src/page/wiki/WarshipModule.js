@@ -81,7 +81,7 @@ class WarshipModule extends Component {
     }
 
     return (
-      <List.Item style={selected ? ThemeBackColour() : null} title={name} description={price_credit} onPress={() => this.updateModule(tree, ID)}
+      <List.Item key={ID} style={selected ? ThemeBackColour() : null} title={name} description={price_credit} onPress={() => this.updateModule(tree, ID)}
         right={() => price_xp > 0 ? <Caption style={xp}>{`${price_xp} xp`}</Caption> : null}/>
     );
   }
