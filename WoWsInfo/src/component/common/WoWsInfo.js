@@ -5,44 +5,71 @@
  */
 
 import React, { Component } from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
+import { SafeAreaView, StyleSheet, StatusBar } from 'react-native';
 import { Button, Surface } from 'react-native-paper';
 import { isAndroid } from 'react-native-device-detection';
 import lang from '../../value/lang';
 import { Actions } from 'react-native-router-flux';
-import { BackButton } from './BackButton';
+import { FooterButton } from './FooterButton';
 import { SafeAction } from '../../core';
+import { GREY } from 'react-native-material-color';
+import { ThemeBackColour, ThemeColour } from '../../value/colour';
 
 class WoWsInfo extends Component {
   constructor(props) {
     super(props);
 
-    const name = [lang.wowsinfo, lang.wowsinfo_black, lang.wowsinfo_go, lang.wowsinfo_new, 
+    const name = [lang.wowsinfo_black, lang.wowsinfo_go, lang.wowsinfo_new, 
                  lang.wowsinfo_pro, lang.wowsinfo_ultimate, lang.wowsinfo_ultra, lang.wowsinfo_white, 
                  lang.wowsinfo_x, lang.wowsinfo_y, lang.wowsinfo_z, '>_<', '#', 
-                 '0_0', '^_^', '★', 'α', 'θ', 'Ω', 'Ф', '∞', '░', '( ͡° ͜ʖ ͡°)', '¯\_(ツ)_/¯',
-                 '2018', '?', '!', '2017', '2016'];
+                 '0_0', '', '^_^', '★', 'α', 'θ', 'Ω', 'Ф', '∞', '░', '( ͡° ͜ʖ ͡°)', '¯\_(ツ)_/¯',
+                 '2018', '?!', '!!', '?!', '2017', '2016'];
     // Get a name from used names
     this.lucky = name[Math.floor(Math.random() * name.length)];
   }
 
   render() {
-    const { container, text } = styles;
-    const { children, title, noBack, style } = this.props;
+    const { container, safeView } = styles;
+    const { children, style } = this.props;
     return (
       <Surface style={[container, style]}>
-        <SafeAreaView style={container}>
+        <SafeAreaView style={[safeView, ThemeBackColour()]}>
+          <StatusBar barStyle={DARKMODE ? 'light-content' : 'dark-content'} 
+            backgroundColor={ThemeColour()}/>
           <Surface style={container}>
             { children }
           </Surface>
-          { noBack ? null : <BackButton /> }
-          <Button onPress={this.pressEvent} style={text}>
-            { title ? title : `WoWs Info ${this.lucky}`}
-          </Button>
+          { this.renderFooter() }
         </SafeAreaView>
       </Surface>
     )
   };
+
+  renderFooter() {
+    const { text, footer } = styles;
+    const { title, noRight, noLeft, home } = this.props;
+    if (home) {
+      return (
+        <Surface style={[footer, ThemeBackColour()]}>
+          { noLeft ? null : <FooterButton icon='settings' left/> }
+          <Button onPress={this.pressEvent} style={text}>
+            { title ? title : `WoWs Info ${this.lucky}`}
+          </Button>
+          { noRight ? null : <FooterButton icon={require('../../img/Warship.png')}/> }
+        </Surface>
+      )
+    } else {
+      return (
+        <Surface style={[footer, ThemeBackColour()]}>
+          { noLeft ? null : <FooterButton icon='home' left/> }
+          <Button onPress={this.pressEvent} style={text}>
+            { title ? title : `WoWs Info ${this.lucky}`}
+          </Button>
+          { noRight ? null : <FooterButton icon='arrow-back'/> }
+        </Surface>
+      )
+    }
+  }
 
   /**
    * Handle press event, dont always go to about page
@@ -51,7 +78,6 @@ class WoWsInfo extends Component {
     const { onPress, about } = this.props;
     if (onPress) return onPress();
     else if (about) return this.navigate();
-    else return null;
   }
 
   /**
@@ -70,7 +96,13 @@ const styles = StyleSheet.create({
     fontSize: 17, fontWeight: isAndroid ? 'bold' : '300',
     textAlign: 'center', alignSelf: 'center',
     width: '70%',
-    marginBottom: 4
+  },
+  safeView: {
+    flex: 1,
+  },
+  footer: {
+    height: 48, 
+    justifyContent: 'center',
   }
 });
 

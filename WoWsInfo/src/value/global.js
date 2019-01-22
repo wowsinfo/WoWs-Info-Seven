@@ -4,3 +4,4 @@ global.DATA = {};
 // Theme
 global.LIGHT = {};
 global.DARK = {};
+global.DARKMODE = false;

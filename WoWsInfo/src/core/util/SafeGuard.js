@@ -5,6 +5,8 @@
  * @param {*} dval 
  */
 export const Guard = (obj, path, dval) => {
+  // This is a just a simple check if obj is null or undefined
+  if (path === '' && obj) return obj;
   // check if object is valid and path does not start with or end with '.'
   if (!path.startsWith('.') && !path.endsWith('.')) {
     // get path as an array and it must have at least 2 elements
@@ -15,6 +17,6 @@ export const Guard = (obj, path, dval) => {
       // only asking for the object
       return p.reduce((o, n) => (o && o[n]) ? o[n] : dval, obj);
     }
-  }   
+  } 
   return dval;
 }

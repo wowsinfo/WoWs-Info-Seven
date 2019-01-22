@@ -44,9 +44,11 @@ class Downloader {
         DATA[SAVED.pr] = await this.getPR();
   
         console.log(DATA);
+
+        // Make sure it is also great than current version
+        // Update this value only if all data are saved correctly
+        SafeStorage.set(LOCAL.gameVersion, gameVersion);
       }
-      // Update this value only if all data are saved correctly
-      SafeStorage.set(LOCAL.gameVersion, gameVersion);
       return true;
     } catch (err) {
       return false;
@@ -99,6 +101,9 @@ class Downloader {
     let page = 0;
     let all = {};
 
+    // Download data from Github
+    let Henry = await SafeFetch.normal(WikiAPI.Github_Model);
+    
     while (page < pageTotal) {
       // page + 1 to get actually page not index
       let json = await SafeFetch.get(WikiAPI.Warship, this.server, `&page_no=${page+1}&${this.language}`);
@@ -120,6 +125,10 @@ class Downloader {
           if (this.new === true) {
             curr.new = DATA[SAVED.warship][id] ? false : true;
           }
+          // If it has some extra data
+          if (Henry[id]) {
+            curr.model = Henry[id].model;
+          }
         }
       }
 
@@ -138,7 +147,6 @@ class Downloader {
     if (this.new === true) {
       for (let id in data) {
         let curr = data[id];
-        console.log(DATA[SAVED.achievement][id]);
         curr.new = DATA[SAVED.achievement][id] ? false : true;
       }
     }
@@ -191,16 +199,24 @@ class Downloader {
     let page = 0;
     let all = {};
 
+    // Add slot info
+    let slot = await SafeFetch.normal(WikiAPI.Github_Slot);
+console.log(slot);
     while (page < pageTotal) {
       // page + 1 to get actually page not index
       let json = await SafeFetch.get(WikiAPI.Consumable, this.server, `&page_no=${page+1}&${this.language}`);
       pageTotal = Guard(json, 'meta.page_total', 1);
       let data = Guard(json, 'data', {});
 
-      if (this.new === true) {
-        for (let id in data) {
-          let curr = data[id];
+      for (let id in data) {
+        let curr = data[id];
+        if (this.new === true)
+        {
           curr.new = DATA[SAVED.consumable][id] ? false : true;
+        } 
+        if (slot[id]) {
+          // Add slot info
+          curr.slot = slot[id].slot;
         }
       }
 
@@ -208,7 +224,7 @@ class Downloader {
       Object.assign(all, data);
       page++;
     }
-
+    
     await SafeStorage.set(SAVED.consumable, all);
     return all;
   }
@@ -224,18 +240,13 @@ class Downloader {
   }
 
   async getPR() {
-    console.log(`Not SafeFetch\n${WikiAPI.PersonalRating}`);
-    let res = await fetch(WikiAPI.PersonalRating);
-
-    let json = {};
-    if (res.status === 200) {
-      json = Guard(await res.json(), 'data', {});
-      // Cleanup empty key
-      for (let key in json) {
-        let curr = json[key];
-        if (curr.length === 0) {
-          delete json[key];
-        }
+    let res = await SafeFetch.normal(WikiAPI.PersonalRating);
+    let json = Guard(res, 'data', {});;
+    // Cleanup empty key
+    for (let key in json) {
+      let curr = json[key];
+      if (curr.length === 0) {
+        delete json[key];
       }
     }
       

@@ -6,11 +6,12 @@
 
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import GridView from 'react-native-super-grid';
+import { FlatGrid } from 'react-native-super-grid';
 import { WoWsInfo, WikiIcon } from '../../component';
 import { SAVED } from '../../value/data';
 import { SafeAction } from '../../core';
 import { Title, Paragraph } from 'react-native-paper';
+import { TintColour } from '../../value/colour';
 
 class Collection extends Component {
   constructor(props) {
@@ -43,16 +44,21 @@ class Collection extends Component {
   render() {
     const { label } = styles;
     const { data, collection, header } = this.state;
+
+    let ID = '';
+    // This is to prevent setting ID inside the collection page
+    if (data.length > 0 && data[0].card_id) ID = data[0].collection_id;
+
     return (
-      <WoWsInfo>
-        <GridView inverted={!collection} itemDimension={64} items={data} renderItem={item => {
+      <WoWsInfo title={ID}>
+        <FlatGrid inverted={!collection} itemDimension={80} items={data} renderItem={({item}) => {
           return <WikiIcon item={item} onPress={() => this.itemOrCollection(item)}/>
         }} ListHeaderComponent={() => {
           if (collection) {
             return (
               <View style={{padding: 8}}>
-                <WikiIcon item={header}/>
-                <Title style={label}>{header.name}</Title>
+                <WikiIcon item={header} scale={1.6}/>
+                <Title style={[label, {color: TintColour()[500]}]}>{header.name}</Title>
                 <Paragraph style={label}>{header.description}</Paragraph>
               </View>
             )

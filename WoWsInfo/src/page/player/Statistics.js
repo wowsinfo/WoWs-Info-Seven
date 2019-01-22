@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
-import { View, ActivityIndicator, SafeAreaView, Text, StyleSheet } from 'react-native';
+import { View, SafeAreaView, Text, StyleSheet } from 'react-native';
 import { Surface, Button, IconButton } from 'react-native-paper';
 import { LOCAL } from '../../value/data';
 import { GREY } from 'react-native-material-color';
+import { LoadingIndicator } from '../../component';
 
 class Statistics extends PureComponent {
   constructor(props) {
@@ -49,7 +50,7 @@ class Statistics extends PureComponent {
     const { container, buttons } = styles;
     const { basic } = this.state;
 
-    if (!basic) return <ActivityIndicator />
+    if (!basic) return <LoadingIndicator />
     return (
       <View>
       </View>
@@ -60,7 +61,7 @@ class Statistics extends PureComponent {
     const { container, buttons } = styles;
     const { achievement } = this.state;
 
-    if (!achievement) return <ActivityIndicator />
+    if (!achievement) return <LoadingIndicator />
     return (
       <Button>Achievement</Button>
     )
@@ -70,7 +71,7 @@ class Statistics extends PureComponent {
     const { container, buttons } = styles;
     const { ship } = this.state;
 
-    if (!ship) return <ActivityIndicator />
+    if (!ship) return <LoadingIndicator />
     return <Button>ship</Button>    
   }
 
@@ -78,7 +79,7 @@ class Statistics extends PureComponent {
     const { container, buttons } = styles;
     const { rank } = this.state;
 
-    if (!rank) return <ActivityIndicator />
+    if (!rank) return <LoadingIndicator />
     return <Button>rank</Button>
   }
 
@@ -86,7 +87,7 @@ class Statistics extends PureComponent {
     const { container, buttons } = styles;
     const { graph } = this.state;
 
-    if (!graph) return <ActivityIndicator />
+    if (!graph) return <LoadingIndicator />
     return <Button>graph</Button>
   }
 }

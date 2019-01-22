@@ -9,10 +9,11 @@ import React, { Component } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, Linking } from 'react-native';
 import { isAndroid, isIphoneX } from 'react-native-device-detection';
 import { List, Colors, Surface, Searchbar } from 'react-native-paper';
-import { BackButton, WoWsInfo } from '../component';
-import lang from '../value/lang';
+import { FooterButton, WoWsInfo } from '../../component';
+import lang from '../../value/lang';
 import { Actions } from 'react-native-router-flux';
-import { SafeAction } from '../core';
+import { SafeAction } from '../../core';
+import { ThemeBackColour, TintColour } from '../../value/colour';
 
 class Menu extends Component {
 
@@ -25,13 +26,13 @@ class Menu extends Component {
     }
 
     // Data for the list
-    this.wiki = [{t: lang.wiki_achievement, i: require('../img/Achievement.png'), p: () => SafeAction('Achievement')},
-    {t: lang.wiki_warships, i: require('../img/Warship.png'), p: () => Actions.Consumable()},
-    {t: lang.wiki_upgrades, i: require('../img/Upgrade.png'), p: () => SafeAction('Consumable', {upgrade: true})},
-    {t: lang.wiki_flags, i: require('../img/Camouflage.png'), p: () => SafeAction('Consumable')},
-    {t: lang.wiki_skills, i: require('../img/CommanderSkill.png'), p: () => SafeAction('CommanderSkill')},
+    this.wiki = [{t: lang.wiki_achievement, i: require('../../img/Achievement.png'), p: () => SafeAction('Achievement')},
+    {t: lang.wiki_warships, i: require('../../img/Warship.png'), p: () => SafeAction('Warship')},
+    {t: lang.wiki_upgrades, i: require('../../img/Upgrade.png'), p: () => SafeAction('Consumable', {upgrade: true})},
+    {t: lang.wiki_flags, i: require('../../img/Camouflage.png'), p: () => SafeAction('Consumable')},
+    {t: lang.wiki_skills, i: require('../../img/CommanderSkill.png'), p: () => SafeAction('CommanderSkill')},
     {t: lang.wiki_maps, i: 'map', p: () => SafeAction('Map')},
-    {t: lang.wiki_collections, i: require('../img/Collection.png'), p: () => SafeAction('Collection')}];
+    {t: lang.wiki_collections, i: require('../../img/Collection.png'), p: () => SafeAction('Collection')}];
 
     // TODO: change links base on player server
     this.websites = [{t: lang.website_official_site, d: 'https://worldofwarships.com/'},
@@ -44,6 +45,7 @@ class Menu extends Component {
     {t: lang.website_today, d: 'https://warships.today/'},
     {t: lang.website_ranking, d: 'http://maplesyrup.sweet.coocan.jp/wows/ranking/'},
     {t: lang.website_models, d: 'https://sketchfab.com/tags/world-of-warships'}];
+    
     this.youtubers = [{t: lang.youtuber_official, d: 'https://www.youtube.com/user/worldofwarshipsCOM'},
     {t: lang.youtuber_flambass, d: 'https://www.youtube.com/user/Flambass'},
     {t: lang.youtuber_notser, d: 'https://www.youtube.com/user/MrNotser'},
@@ -56,11 +58,11 @@ class Menu extends Component {
   }
 
   render() {
-    const { container, searchBar } = styles;
-    const { search, server } = this.state;
+    const { searchBar } = styles;
+    const { search } = this.state;
 
     return (
-      <WoWsInfo title={lang.menu_footer} onPress={() => this.refs['search'].focus()}>
+      <WoWsInfo noLeft title={lang.menu_footer} onPress={() => this.refs['search'].focus()}>
         <Searchbar ref='search' value={search} style={searchBar} placeholder={lang.search_placeholder}
           onChangeText={text => this.setState({search: text})} autoCorrect={false} autoCapitalize='none'/>
         { this.renderContent() }
@@ -80,7 +82,7 @@ class Menu extends Component {
           <List.Section title={lang.wiki_section_title}>
             { this.wiki.map(item => { return (
               <List.Item title={item.t} style={{padding: 0, paddingLeft: 8}} onPress={() => item.p()} key={item.t}
-              left={() => <List.Icon style={icon} color={Colors.blue300} icon={item.i}/>}
+              left={() => <List.Icon style={[icon, ThemeBackColour()]} color={TintColour()[300]} icon={item.i}/>}
               right={() => isAndroid ? null : <List.Icon color={Colors.grey500} icon='keyboard-arrow-right'/>} />
             )})}
           </List.Section>
@@ -109,7 +111,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   icon: {
-    backgroundColor: Colors.blueGrey50, 
     borderRadius: 100
   },
   searchBar: {

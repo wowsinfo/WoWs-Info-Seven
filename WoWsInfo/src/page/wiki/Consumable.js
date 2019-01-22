@@ -7,9 +7,9 @@
 
 import React, { Component } from 'react';
 import { View, SafeAreaView, Image, StyleSheet } from 'react-native';
-import GridView from 'react-native-super-grid';
+import { FlatGrid } from 'react-native-super-grid';
 import { Surface, Text } from 'react-native-paper';
-import { BackButton, LoadingModal, WikiIcon, WoWsInfo } from '../../component';
+import { FooterButton, LoadingModal, WikiIcon, WoWsInfo } from '../../component';
 import { SAVED, LOCAL } from '../../value/data';
 import { Actions } from 'react-native-router-flux';
 import { SafeAction } from '../../core';
@@ -70,7 +70,7 @@ class Consumable extends Component {
 
     return (
       <View style={{flex: 1}}>
-        <GridView itemDimension={64} items={data} renderItem={item => {
+        <FlatGrid itemDimension={80} items={data} renderItem={({item}) => {
           return <WikiIcon item={item} onPress={() => SafeAction('BasicDetail', {item: item})}/>
         }}/>
       </View>
