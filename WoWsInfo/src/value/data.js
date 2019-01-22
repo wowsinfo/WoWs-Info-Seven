@@ -1,3 +1,5 @@
+import { SafeStorage } from "../core";
+
 /**
  * App information
  */
@@ -5,16 +7,11 @@ export const APP = {
   Version: '1.0.6',
   IOSVersion: '1.6.6',
   GameVersion: '0.7.11.1',
-  Github: 'https://github.com/HenryQuan/WoWs-Info-Go',
+  Github: 'https://github.com/HenryQuan/WoWs-Info',
   AppStore: 'https://itunes.apple.com/app/id1202750166',
   GooglePlay: 'https://play.google.com/store/apps/details?id=com.yihengquan.wowsinfo',
   Developer: 'mailto:development.henryquan@gmail.com?subject=[WoWs Info 1.0.6] ',
 }
-
-/**
- * Convert index to server string
- */
-export const SERVER = ['ru', 'eu', 'com', 'asia'];
 
 /**
  * User perference
@@ -52,4 +49,19 @@ export const SAVED = {
   map: '@Data:gameMap',
   consumable: '@Data:consumable',
   pr: '@Data:personal_rating',
+}
+
+/**
+ * Convert index to server string
+ */
+export const SERVER = ['ru', 'eu', 'com', 'asia'];
+
+export const getCurrServer = () => {
+  return DATA[LOCAL.userServer];
+}
+
+export const setCurrServer = (index) => {
+  let str = LOCAL.userServer;
+  DATA[str] = index;
+  SafeStorage.set(str, index);
 }
