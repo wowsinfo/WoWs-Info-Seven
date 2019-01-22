@@ -105,6 +105,7 @@ export default lang = new LocalizedStrings({
     youtuber_iChaseGaming: 'iChaseGaming',
     youtuber_NoZoupForYou: 'NoZoupForYou',
     /// App name section
+    app_name: 'WoWs Info Origin',
     wowsinfo_x: 'X',
     wowsinfo_y: 'Y',
     wowsinfo_z: 'Z',

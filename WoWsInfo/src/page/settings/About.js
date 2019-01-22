@@ -3,6 +3,7 @@ import { Image, ScrollView, StyleSheet } from 'react-native';
 import { Surface, Text, Title } from 'react-native-paper';
 import { FooterButton, WoWsInfo } from '../../component';
 import { APP } from '../../value/data';
+import lang from '../../value/lang';
 
 class About extends Component {
   constructor(props) {
@@ -15,7 +16,7 @@ class About extends Component {
       <WoWsInfo style={container} noLeft>
         <ScrollView contentContainerStyle={scroll}>
           <Image style={logo} source={require('../../img/Logo.png')}/>
-          <Title>WoWs Info</Title>
+          <Title>{lang.app_name}</Title>
           <Text>{APP.Version}</Text>
         </ScrollView>
       </WoWsInfo>

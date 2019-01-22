@@ -11,7 +11,7 @@ import { isAndroid } from 'react-native-device-detection';
 import lang from '../../value/lang';
 import { Actions } from 'react-native-router-flux';
 import { FooterButton } from './FooterButton';
-import { SafeAction } from '../../core';
+import { SafeAction, random } from '../../core';
 import { GREY } from 'react-native-material-color';
 import { ThemeBackColour, ThemeColour } from '../../value/colour';
 
@@ -24,8 +24,11 @@ class WoWsInfo extends Component {
                  lang.wowsinfo_x, lang.wowsinfo_y, lang.wowsinfo_z, '>_<', '#', 
                  '0_0', '', '^_^', '★', 'α', 'θ', 'Ω', 'Ф', '∞', '░', '( ͡° ͜ʖ ͡°)', '¯\_(ツ)_/¯',
                  '2018', '?!', '!!', '?!', '2017', '2016'];
-    // Get a name from used names
-    this.lucky = name[Math.floor(Math.random() * name.length)];
+
+    // 50% of the time, it will be the app name
+    let r = random(10);
+    if (r < 5) this.lucky = lang.app_name;
+    else this.lucky = `WoWs Info ${name[random(name.length)]}`;
   }
 
   render() {
@@ -53,7 +56,7 @@ class WoWsInfo extends Component {
         <Surface style={[footer, ThemeBackColour()]}>
           { noLeft ? null : <FooterButton icon='settings' left/> }
           <Button onPress={this.pressEvent} style={text}>
-            { title ? title : `WoWs Info ${this.lucky}`}
+            { title ? title : this.lucky }
           </Button>
           { noRight ? null : <FooterButton icon={require('../../img/Warship.png')}/> }
         </Surface>
@@ -63,7 +66,7 @@ class WoWsInfo extends Component {
         <Surface style={[footer, ThemeBackColour()]}>
           { noLeft ? null : <FooterButton icon='home' left/> }
           <Button onPress={this.pressEvent} style={text}>
-            { title ? title : `WoWs Info ${this.lucky}`}
+            { title ? title : this.lucky }
           </Button>
           { noRight ? null : <FooterButton icon='arrow-back'/> }
         </Surface>
