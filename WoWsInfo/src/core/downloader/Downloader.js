@@ -1,6 +1,6 @@
 import { WoWsAPI, WikiAPI } from '../../value/api';
-import { SERVER, APP, LOCAL, SAVED } from '../../value/data';
-import { SafeFetch, Guard, SafeStorage, langStr } from '../';
+import { SERVER, APP, LOCAL, SAVED, langStr } from '../../value/data';
+import { SafeFetch, Guard, SafeStorage } from '../';
 
 class Downloader {
   constructor(server) {
