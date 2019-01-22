@@ -131,13 +131,13 @@ class WarshipDetail extends PureComponent {
 
     return (
       <View style={container}>
+        <Title style={[shipTitle, {marginTop: 8}]}>{name}</Title>
         { currShip ? 
-          <View style={horizontal}>
+          <View style={[horizontal, {marginBottom: 16}]}>
             <InfoLabel title={lang.warship_avg_damage} info={Number(avgDamage).toFixed(0)}/>
             <InfoLabel title={lang.warship_avg_winrate} info={`${Number(avgWinrate).toFixed(1)}%`}/>
             <InfoLabel title={lang.warship_avg_frag} info={Number(avgFrag).toFixed(2)}/>
           </View> : null }
-        <Title style={[shipTitle, {marginTop: 8}]}>{name}</Title>
         <Text>{nation.toUpperCase()}</Text>
         <Text>{type}</Text>
         <PriceLabel item={data}/>
@@ -619,7 +619,6 @@ const styles = StyleSheet.create({
   },
   shipTitle: {
     fontSize: 24,
-    paddingBottom: 16
   },
   modelBtn: {
     marginTop: 8
