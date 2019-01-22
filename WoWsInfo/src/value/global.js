@@ -5,3 +5,7 @@ global.DATA = {};
 global.LIGHT = {};
 global.DARK = {};
 global.DARKMODE = false;
+
+// App Settings
+global.SWAPBUTTON = false;
+global.CLEANMODE = false;

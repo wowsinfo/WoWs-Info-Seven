@@ -62,7 +62,13 @@ export default lang = new LocalizedStrings({
     warship_next_ship: 'Next ship(s)',
     /// Menu section
     /// Settings section
-    server_name:['RUSSIA','EUROPE','NORTH AMERICA','ASIA'],
+    server_name: ['Russia', 'Europe', 'North Ameria', 'Asia'],
+    settings_api_settings: 'API Settings',
+    settings_app_settings: 'App Settings',
+    settings_app_dark_mode: 'Dark Mode',
+    settings_app_theme_colour: 'Theme Colour',
+    settings_app_swap_buttons: 'Swap bottom buttons',
+    settings_app_clean_mode: 'Clean Mode',
     // Footer
     menu_footer: 'Search',
     // Search bar
