@@ -4,7 +4,7 @@
  * 
  */
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import { WoWsInfo, WarshipCell } from '../../component';
 import { FlatGrid } from 'react-native-super-grid';
@@ -14,7 +14,7 @@ import lang from '../../value/lang';
 import { SafeAction, getKeyByValue, getTierList } from '../../core';
 import { ThemeColour } from '../../value/colour';
 
-class Warship extends Component {
+class Warship extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -39,7 +39,6 @@ class Warship extends Component {
 
   componentDidUpdate() {
     const { filter } = this.props;
-    console.log(this.props);
     if (filter) {
       // Prevent repetitive update
       if (filter === this.state.filter) return;

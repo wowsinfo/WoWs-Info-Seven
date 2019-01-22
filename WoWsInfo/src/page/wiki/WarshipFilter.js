@@ -22,7 +22,6 @@ const MODE = {
 class WarshipFilter extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
     
     this.state = {
       premium: false,
