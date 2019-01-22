@@ -7,10 +7,10 @@
 import React, { Component } from 'react';
 import { View, FlatList, StyleSheet } from 'react-native';
 import { WoWsInfo, PriceLabel, Space } from '../../component';
-import { SafeFetch, langStr, getCurrServer } from '../../core';
+import { SafeFetch } from '../../core';
 import { WoWsAPI } from '../../value/api';
 import { Actions } from 'react-native-router-flux';
-import { SAVED } from '../../value/data';
+import { SAVED, getCurrDomain } from '../../value/data';
 import { SectionGrid } from 'react-native-super-grid';
 import { ThemeBackColour, TintColour } from '../../value/colour';
 import { List, Caption, Title } from 'react-native-paper';
@@ -21,7 +21,7 @@ class WarshipModule extends Component {
     super(props);
 
     const { ship_id, modules_tree } = props.data;
-    this.server = getCurrServer();
+    this.server = getCurrDomain();
 
     this.state = {
       ship_id: ship_id,

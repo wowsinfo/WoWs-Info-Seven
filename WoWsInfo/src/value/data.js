@@ -52,16 +52,41 @@ export const SAVED = {
 }
 
 /**
- * Convert index to server string
+ * Server 
  */
 export const SERVER = ['ru', 'eu', 'com', 'asia'];
 
+export const getCurrDomain = () => {
+  return SERVER[getCurrServer()];
+};
+
 export const getCurrServer = () => {
   return DATA[LOCAL.userServer];
-}
+};
 
 export const setCurrServer = (index) => {
   let str = LOCAL.userServer;
   DATA[str] = index;
   SafeStorage.set(str, index);
-}
+};
+
+/**
+ * API Language
+ */
+export const getAPILanguage = () => {
+  return DATA[LOCAL.apiLanguage];
+};
+
+export const langStr = () => {
+  return `&language=${getAPILanguage()}`;
+};
+
+export const getAPIList = () => {
+  return DATA[SAVED.language];
+};
+
+export const setAPILanguage = (lang) => {
+  let str = LOCAL.apiLanguage;
+  DATA[str] = lang;
+  SafeStorage.set(str, lang);
+};

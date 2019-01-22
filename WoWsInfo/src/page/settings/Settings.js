@@ -4,7 +4,7 @@ import { isAndroid } from 'react-native-device-detection';
 import { Surface, List, Button, Checkbox, Colors, withTheme, Portal, Dialog, Text } from 'react-native-paper';
 import { Actions } from 'react-native-router-flux';
 import { WoWsInfo, DividerPlus, Touchable } from '../../component';
-import { APP, LOCAL, SAVED } from '../../value/data';
+import { APP, LOCAL, SAVED, getCurrServer } from '../../value/data';
 import { TintColour, UpdateTintColour, UpdateDarkMode } from '../../value/colour';
 import { SafeStorage } from '../../core';
 import { BLUE, RED, GREEN, PINK, PURPLE, DEEPPRUPLE, INDIGO, LIGHTBLUE, CYAN, TEAL, LIGHTGREEN, LIME, YELLOW, AMBER, ORANGE, DEEPORANGE, BROWN, GREY, BLUEGREY } from 'react-native-material-color';
@@ -17,6 +17,8 @@ class Settings extends Component {
       darkMode: DARKMODE,
       tintColour: TintColour(),
       showColour: false,
+      server: getCurrServer(),
+      APILanguage: '',
     };
     
     this.colourList = [RED, PINK, PURPLE, DEEPPRUPLE, INDIGO, BLUE, LIGHTBLUE, CYAN, TEAL, GREEN, LIGHTGREEN, LIME, 

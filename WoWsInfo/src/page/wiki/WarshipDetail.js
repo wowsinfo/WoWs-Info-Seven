@@ -8,9 +8,9 @@ import React, { PureComponent } from 'react';
 import { View, FlatList,Linking, ScrollView, StyleSheet, Alert } from 'react-native';
 import { Text, Title, Subheading, Headline, Button, Surface, Paragraph, List } from 'react-native-paper';
 import { WoWsInfo, WikiIcon, WarshipCell, LoadingModal, PriceLabel, LoadingIndicator, WarshipStat, InfoLabel, DividerPlus, FooterPlus } from '../../component';
-import { SAVED, SERVER, LOCAL } from '../../value/data';
+import { SAVED, SERVER, LOCAL, langStr, getCurrDomain } from '../../value/data';
 import lang from '../../value/lang';
-import { SafeFetch, langStr, Guard, getColourWithRange, SafeAction, getCurrServer, copy } from '../../core';
+import { SafeFetch, Guard, getColourWithRange, SafeAction, copy } from '../../core';
 import { WoWsAPI } from '../../value/api';
 import { Actions } from 'react-native-router-flux';
 import { GREY } from 'react-native-material-color';
@@ -20,7 +20,7 @@ class WarshipDetail extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.server = getCurrServer();
+    this.server = getCurrDomain();
 
     let curr = props.item;
     console.log(curr);
