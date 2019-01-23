@@ -23,7 +23,8 @@ class SectionTitle extends Component {
 
 const styles = StyleSheet.create({
   text: {
-    paddingLeft: 16
+    paddingLeft: 16,
+    paddingTop: 8
   }
 });
 
