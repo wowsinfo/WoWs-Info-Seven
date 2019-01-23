@@ -48,6 +48,7 @@ class App extends Component {
         colors: {
           ...DefaultTheme.colors,
           surface: 'white',
+          text: GREY[900],
           primary: tint[500],
           accent: tint[300],
         }
