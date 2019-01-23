@@ -33,8 +33,7 @@ class Settings extends Component {
   }
 
   render() {
-    const { container, tint } = styles;
-    const { darkMode, showColour, tintColour, server, APILanguage } = this.state;
+    const { showColour } = this.state;
     return (
       <WoWsInfo about noLeft>
         <ScrollView>

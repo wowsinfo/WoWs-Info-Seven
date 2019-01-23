@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, StatusBar } from 'react-native';
 import { Router, Stack, Scene, Actions } from 'react-native-router-flux';
-import { isTablet } from 'react-native-device-detection';
 import { withTheme, DarkTheme, DefaultTheme } from 'react-native-paper';
 import { Home, Menu, Settings, About, Setup, Consumable, CommanderSkill, 
   BasicDetail, Achievement, Map as GameMap, Collection, Warship, WarshipDetail, 
@@ -108,9 +107,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   scene: {
-    flex: 1,
-    paddingLeft: isTablet ? '20%' : null,
-    paddingRight: isTablet ? '20%': null,
+    flex: 1
   },
 });
 

@@ -7,7 +7,7 @@
 import React, { Component } from 'react';
 import { SafeAreaView, StyleSheet, StatusBar } from 'react-native';
 import { Button, Surface } from 'react-native-paper';
-import { isAndroid } from 'react-native-device-detection';
+import { isAndroid, isTablet } from 'react-native-device-detection';
 import lang from '../../value/lang';
 import { Actions } from 'react-native-router-flux';
 import { FooterButton } from './FooterButton';
@@ -32,14 +32,14 @@ class WoWsInfo extends Component {
   }
 
   render() {
-    const { container, safeView } = styles;
+    const { container, safeView, child } = styles;
     const { children, style } = this.props;
     return (
       <Surface style={[container, style]}>
         <SafeAreaView style={[safeView, ThemeBackColour()]}>
           <StatusBar barStyle={DARKMODE ? 'light-content' : 'dark-content'} 
             backgroundColor={ThemeColour()}/>
-          <Surface style={container}>
+          <Surface style={child}>
             { children }
           </Surface>
           { this.renderFooter() }
@@ -94,15 +94,20 @@ class WoWsInfo extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
   },
   text: {
     fontSize: 17, fontWeight: isAndroid ? 'bold' : '300',
     textAlign: 'center', alignSelf: 'center',
     width: '70%',
   },
-  safeView: {
+  child: {
     flex: 1,
+    paddingLeft: isTablet ? '20%' : null,
+    paddingRight: isTablet ? '20%' : null,
+  },
+  safeView: {
+    flex: 1
   },
   footer: {
     height: 48, 
