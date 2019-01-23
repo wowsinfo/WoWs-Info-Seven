@@ -6,13 +6,13 @@
 
 import React, { Component } from 'react';
 import { View, FlatList, StyleSheet } from 'react-native';
-import { WoWsInfo, PriceLabel, Space } from '../../component';
+import { WoWsInfo, PriceLabel, Space, SectionTitle } from '../../component';
 import { SafeFetch } from '../../core';
 import { WoWsAPI } from '../../value/api';
 import { Actions } from 'react-native-router-flux';
 import { SAVED, getCurrDomain } from '../../value/data';
 import { SectionGrid } from 'react-native-super-grid';
-import { ThemeBackColour, TintColour } from '../../value/colour';
+import { ThemeBackColour, TintColour, TintTextColour } from '../../value/colour';
 import { List, Caption, Title } from 'react-native-paper';
 import lang from '../../value/lang';
 
@@ -49,7 +49,7 @@ class WarshipModule extends Component {
         <FlatList data={section} renderItem={({item}) => {
           return (
             <View key={item.title}>
-              <Title style={{paddingLeft: 16, color: TintColour()[500]}}>{item.title}</Title>
+              <SectionTitle title={item.title}/>
               { item.data.map(d => {
                 return this.renderModule(d);
               }) }
