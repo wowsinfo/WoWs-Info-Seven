@@ -107,16 +107,19 @@ class Settings extends Component {
   }
 
   renderWoWsInfo() {
+    let issueLink = `${APP.Github}/issues`;
     return (
       <Surface>
         <SectionTitle title={lang.app_name}/>
-        <List.Item title={lang.settings_app_send_feedback}
+        <List.Item title={lang.settings_app_send_feedback} 
+          description={lang.settings_app_send_feedback_subtitle}
           onPress={() => Linking.openURL(APP.Developer)}/>
-        <List.Item title={lang.settings_app_report_issues}
-          onPress={() => Linking.openURL(`${APP.Github}/issues`)}/>
+        <List.Item title={lang.settings_app_report_issues} description={issueLink}
+          onPress={() => Linking.openURL(issueLink)}/>
         <List.Item title={lang.settings_app_write_review}
-          onPress={() => Linking.openURL(this.store)}/>
-        <List.Item title={lang.settings_app_share} onPress={this.shareApp}/>
+          onPress={() => Linking.openURL(this.store)} description={this.store}/>
+        <List.Item title={lang.settings_app_share} onPress={this.shareApp}
+          description={lang.settings_app_share_subtitle}/>
       </Surface>
     )
   }
@@ -126,8 +129,9 @@ class Settings extends Component {
       <Surface>
         <SectionTitle title={lang.settings_open_source}/>
         <List.Item title={lang.settings_open_source_github}
-          onPress={() => Linking.openURL(APP.Github)}/>
-        <List.Item title={lang.settings_open_source_licence}/>
+          description={APP.Github} onPress={() => Linking.openURL(APP.Github)}/>
+        <List.Item title={lang.settings_open_source_licence}
+          description={lang.settings_open_source_licence_subtitle}/>
       </Surface>
     )
   }

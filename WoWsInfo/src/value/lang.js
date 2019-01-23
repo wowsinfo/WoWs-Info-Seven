@@ -69,13 +69,16 @@ export default lang = new LocalizedStrings({
     settings_app_theme_colour: 'Theme colour',
     settings_app_swap_buttons: 'Swap bottom buttons',
     settings_app_clean_mode: 'Clean mode',
-    settings_app_send_feedback: 'Send feedback',
+    settings_app_send_feedback: 'Feedback',
+    settings_app_send_feedback_subtitle: 'Send an email to developer',
     settings_app_report_issues: 'Report an issue',
     settings_app_write_review: 'Write a review',
     settings_app_share: 'Share with friends',
+    settings_app_share_subtitle: 'Share WoWs Info if you enjoy using it!',
     settings_open_source: 'Open Source',
     settings_open_source_github: 'Github',
     settings_open_source_licence: 'Licences',
+    settings_open_source_licence_subtitle: 'Great modules that are used by WoWs Info',
     // Footer
     menu_footer: 'Search',
     // Search bar
