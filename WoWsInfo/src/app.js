@@ -39,7 +39,7 @@ class App extends Component {
           surface: 'black',
           text: GREY[50],
           primary: tint[500],
-          accent: tint[500],
+          accent: tint[300],
         }
       };
 
@@ -47,12 +47,13 @@ class App extends Component {
       global.LIGHT = {
         colors: {
           ...DefaultTheme.colors,
+          surface: 'white',
           primary: tint[500],
-          accent: tint[500],
+          accent: tint[300],
         }
       };
 
-      props.theme.roundness = 99;
+      props.theme.roundness = 32;
       props.theme.dark = DARKMODE;
       props.theme.colors = DARKMODE ? DARK.colors : LIGHT.colors;
       console.log(props.theme);
@@ -72,11 +73,10 @@ class App extends Component {
   }
 
   render() {
-    const { container, scene } = styles;
     const { loading, updating, dark } = this.state;
     if (loading) return <LoadingModal />
     return (
-        <Router sceneStyle={[scene, {backgroundColor: dark ? 'black' : 'white'}]}>
+        <Router sceneStyle={{backgroundColor: dark ? 'black' : 'white', flex: 1}}>
           <Stack key='root' hideNavBar>
             <Scene key='Home' component={Home}/>
             <Scene key='Setup' component={Setup} initial={DATA[LOCAL.firstLaunch]}/>
@@ -104,9 +104,6 @@ class App extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
-  },
-  scene: {
     flex: 1
   },
 });
