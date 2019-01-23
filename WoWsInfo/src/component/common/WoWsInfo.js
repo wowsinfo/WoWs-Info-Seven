@@ -50,19 +50,29 @@ class WoWsInfo extends Component {
 
   renderFooter() {
     const { text, footer } = styles;
-    const { title, noRight, noLeft, home, onPress, about } = this.props;
+    const { title, onPress, about } = this.props;
 
     let shouldDisable = (!onPress && !about)
 
     return (
       <Surface style={[footer, ThemeBackColour()]}>
-        { noLeft ? null : <FooterButton icon={home ? 'settings' : 'home'} left/> }
+        { SWAPBUTTON ? this.renderRight() : this.renderLeft() }
         <Button disabled={shouldDisable} onPress={this.pressEvent} style={text}>
           { title ? title : this.lucky }
         </Button>
-        { noRight ? null : <FooterButton icon={home ? require('../../img/Warship.png') : 'arrow-back'}/> }
+        { SWAPBUTTON ? this.renderLeft() : this.renderRight() }
       </Surface>
     )
+  }
+
+  renderLeft() {
+    const { noLeft, home } = this.props;
+    return noLeft ? null : <FooterButton icon={home ? 'settings' : 'home'} left={!SWAPBUTTON}/>;
+  }
+
+  renderRight() {
+    const { noRight, home } = this.props;
+    return noRight ? null : <FooterButton icon={home ? require('../../img/Warship.png') : 'arrow-back'} left={SWAPBUTTON}/>;
   }
 
   /**

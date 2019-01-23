@@ -90,8 +90,7 @@ class Settings extends Component {
         <List.Item title={lang.settings_app_dark_mode} onPress={() => this.updateTheme()} />
         <List.Item title={lang.settings_app_theme_colour} onPress={() => this.setState({showColour: true})}
           right={() => <View style={[tint, {backgroundColor: tintColour[500]}]}/>}/>              
-        <List.Item title={lang.settings_app_swap_buttons}/>
-        <List.Item title={lang.settings_app_clean_mode}/>
+        <List.Item title={lang.settings_app_swap_buttons} onPress={() => global.SWAPBUTTON = !SWAPBUTTON}/>
       </Surface>
     )
   }
