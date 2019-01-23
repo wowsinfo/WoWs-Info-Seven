@@ -68,7 +68,6 @@ export default lang = new LocalizedStrings({
     settings_app_dark_mode: 'Dark mode',
     settings_app_theme_colour: 'Theme colour',
     settings_app_swap_buttons: 'Swap bottom buttons',
-    settings_app_clean_mode: 'Clean mode',
     settings_app_send_feedback: 'Feedback',
     settings_app_send_feedback_subtitle: 'Send an email to developer',
     settings_app_report_issues: 'Report an issue',
