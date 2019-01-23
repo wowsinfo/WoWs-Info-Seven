@@ -57,78 +57,74 @@ class Settings extends Component {
   };
 
   renderAPISettings() {
-    const { darkMode, showColour, tintColour, server, APILanguage } = this.state;
+    const { server, APILanguage } = this.state;
     return (
       <List.Section title={lang.settings_api_settings}>
-            <List.Accordion title={`Game server: ${lang.server_name[server]}`}>
-              <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
-                {lang.server_name.map((object, index) => 
-                  <Button 
-                    key = {object}
-                    onPress={() => this.updateServer(index)}
-                  >
-                    {lang.server_name[index]}
-                  </Button>
-                )}
-              </View>
-            </List.Accordion>
-            <List.Accordion title={`API language: ${APILanguage}`}>
-              <ScrollView horizontal
-                contentContainerStyle={{flexDirection: 'row'}}>
-                {Object.keys(DATA[SAVED.language]).map((language) => 
-                  <Button 
-                  key = {language}
-                  onPress={() => this.updateApiLanguage(language)}
-                  >
-                    {language}
-                  </Button>
-                )}
-              </ScrollView>
-            </List.Accordion>
-          </List.Section>
+        <List.Accordion title={`Game server: ${lang.server_name[server]}`}>
+          <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
+            {lang.server_name.map((object, index) => 
+              <Button 
+                key = {object}
+                onPress={() => this.updateServer(index)}
+              >
+                {lang.server_name[index]}
+              </Button>
+            )}
+          </View>
+        </List.Accordion>
+        <List.Accordion title={`API language: ${APILanguage}`}>
+          <ScrollView horizontal
+            contentContainerStyle={{flexDirection: 'row'}}>
+            {Object.keys(DATA[SAVED.language]).map((language) => 
+              <Button 
+              key = {language}
+              onPress={() => this.updateApiLanguage(language)}
+              >
+                {language}
+              </Button>
+            )}
+          </ScrollView>
+        </List.Accordion>
+      </List.Section>
     )
   }
 
   renderAppSettings() {
-    const { darkMode, showColour, tintColour, server, APILanguage } = this.state;
-    const { container, tint } = styles;
+    const { tintColour } = this.state;
+    const { tint } = styles;
 
     return (
       <List.Section title={lang.settings_app_settings}>
-            <List.Item title={lang.settings_app_dark_mode} onPress={() => this.updateTheme()} />
-            <List.Item title={lang.settings_app_theme_colour} onPress={() => this.setState({showColour: true})}
-              right={() => <View style={[tint, {backgroundColor: tintColour[500]}]}/>}/>              
-            <List.Item title={lang.settings_app_swap_buttons}/>
-            <List.Item title={lang.settings_app_clean_mode}/>
-          </List.Section>
+        <List.Item title={lang.settings_app_dark_mode} onPress={() => this.updateTheme()} />
+        <List.Item title={lang.settings_app_theme_colour} onPress={() => this.setState({showColour: true})}
+          right={() => <View style={[tint, {backgroundColor: tintColour[500]}]}/>}/>              
+        <List.Item title={lang.settings_app_swap_buttons}/>
+        <List.Item title={lang.settings_app_clean_mode}/>
+      </List.Section>
     )
   }
 
   renderWoWsInfo() {
-    const { darkMode, showColour, tintColour, server, APILanguage } = this.state;
-
     return (
       <List.Section title={lang.app_name} style={{color: TintColour()[500]}}>
-            <List.Item title={lang.settings_app_send_feedback}
-              onPress={() => Linking.openURL(APP.Developer)}/>
-            <List.Item title={lang.settings_app_report_issues}
-              onPress={() => Linking.openURL(`${APP.Github}/issues`)}/>
-            <List.Item title={lang.settings_app_write_review}
-              onPress={() => Linking.openURL(this.store)}/>
-            <List.Item title={lang.settings_app_share} onPress={this.shareApp}/>
-          </List.Section>
+        <List.Item title={lang.settings_app_send_feedback}
+          onPress={() => Linking.openURL(APP.Developer)}/>
+        <List.Item title={lang.settings_app_report_issues}
+          onPress={() => Linking.openURL(`${APP.Github}/issues`)}/>
+        <List.Item title={lang.settings_app_write_review}
+          onPress={() => Linking.openURL(this.store)}/>
+        <List.Item title={lang.settings_app_share} onPress={this.shareApp}/>
+      </List.Section>
     )
   }
 
   renderOpenSource() {
-    const { darkMode, showColour, tintColour, server, APILanguage } = this.state;
-
     return (
       <List.Section title={lang.settings_open_source}>
-            <List.Item title={lang.settings_open_source_github}
-              onPress={() => Linking.openURL(APP.Github)}/>
-            <List.Item title={lang.settings_open_source_licence} />
-          </List.Section>
+        <List.Item title={lang.settings_open_source_github}
+          onPress={() => Linking.openURL(APP.Github)}/>
+        <List.Item title={lang.settings_open_source_licence} />
+      </List.Section>
     )
   }
 
