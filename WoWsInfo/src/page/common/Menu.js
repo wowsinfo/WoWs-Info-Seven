@@ -9,7 +9,7 @@ import React, { Component } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, Linking } from 'react-native';
 import { isAndroid, isIphoneX } from 'react-native-device-detection';
 import { List, Colors, Surface, Searchbar } from 'react-native-paper';
-import { FooterButton, WoWsInfo } from '../../component';
+import { FooterButton, WoWsInfo, SectionTitle } from '../../component';
 import lang from '../../value/lang';
 import { Actions } from 'react-native-router-flux';
 import { SafeAction } from '../../core';
@@ -79,27 +79,25 @@ class Menu extends Component {
       return (
         <ScrollView showsVerticalScrollIndicator={false}
           contentContainerStyle={scroll}>
-          <List.Section title={lang.wiki_section_title}>
-            { this.wiki.map(item => { return (
-              <List.Item title={item.t} style={{padding: 0, paddingLeft: 8}} onPress={() => item.p()} key={item.t}
-              left={() => <List.Icon style={[icon, ThemeBackColour()]} color={TintColour()[300]} icon={item.i}/>}
-              right={() => isAndroid ? null : <List.Icon color={Colors.grey500} icon='keyboard-arrow-right'/>} />
-            )})}
-          </List.Section>
-          <List.Section title={lang.extra_section_title}>
-            <List.Accordion title={lang.website_title} >
+          <SectionTitle title={lang.wiki_section_title}/>
+          { this.wiki.map(item => { return (
+            <List.Item title={item.t} style={{padding: 0, paddingLeft: 8}} onPress={() => item.p()} key={item.t}
+            left={() => <List.Icon style={[icon, ThemeBackColour()]} color={TintColour()[300]} icon={item.i}/>}
+            right={() => isAndroid ? null : <List.Icon color={Colors.grey500} icon='keyboard-arrow-right'/>} />
+          )})}
+          <SectionTitle title={lang.extra_section_title}/>
+            <List.Section title={lang.website_title} >
               { this.websites.map(item => { return (
                 <List.Item title={item.t} description={item.d} key={item.t}
-                onPress={() => Linking.openURL(item.d)}/>
+                  onPress={() => Linking.openURL(item.d)}/>
               )})}
-            </List.Accordion>
-            <List.Accordion title={lang.youtuber_title}>
+            </List.Section>
+            <List.Section title={lang.youtuber_title}>
               { this.youtubers.map(item => { return (
                 <List.Item title={item.t} description={item.d} key={item.t}
-                onPress={() => Linking.openURL(item.d)}/>
+                  onPress={() => Linking.openURL(item.d)}/>
               )})}
-            </List.Accordion>
-          </List.Section>
+            </List.Section>
         </ScrollView>
       )
     }
