@@ -4,7 +4,7 @@ import { isAndroid, isIos } from 'react-native-device-detection';
 import { Surface, List, Button, Checkbox, Colors, withTheme, Portal, Dialog, Text } from 'react-native-paper';
 import { Actions } from 'react-native-router-flux';
 import { WoWsInfo, DividerPlus, Touchable, SectionTitle } from '../../component';
-import { APP, LOCAL, SAVED, getCurrServer, getAPILanguage, getAPILangName, SERVER, getAPIList } from '../../value/data';
+import { APP, LOCAL, SAVED, getCurrServer, getAPILanguage, getAPILangName, SERVER, getAPIList, setCurrServer, setAPILanguage } from '../../value/data';
 import { TintColour, UpdateTintColour, UpdateDarkMode } from '../../value/colour';
 import { SafeStorage } from '../../core';
 import { BLUE, RED, GREEN, PINK, PURPLE, DEEPPRUPLE, INDIGO, LIGHTBLUE, CYAN, TEAL, LIGHTGREEN, LIME, YELLOW, AMBER, ORANGE, DEEPORANGE, BROWN, GREY, BLUEGREY } from 'react-native-material-color';
@@ -61,18 +61,19 @@ class Settings extends Component {
     const langList = getAPIList();
     const langData = [];
     for (let key in langList) langData.push(key);
+    langData.sort();
 
     return (
       <Surface>
         <SectionTitle title={lang.settings_api_settings}/>
         <List.Section title={`Game server: ${lang.server_name[server]}`}>
           <FlatList data={SERVER} renderItem={({index}) => {
-            return <Button>{lang.server_name[index]}</Button>
+            return <Button onPress={() => this.updateServer(index)}>{lang.server_name[index]}</Button>
           }} keyExtractor={i => i} numColumns={2}/>
         </List.Section>
-        <List.Section title={`API language: ${getAPILangName()}`}>
+        <List.Section title={`API language: ${langList[APILanguage]}`}>
           <FlatList data={langData} renderItem={({item}) => {
-            return <Button>{langList[item]}</Button>
+            return <Button onPress={() => this.updateApiLanguage(item)}>{langList[item]}</Button>
           }} keyExtractor={i => i} numColumns={2}/>
         </List.Section>
       </Surface>
@@ -166,16 +167,16 @@ class Settings extends Component {
    * Update server that's being used
    */
   updateServer(index) {
-    DATA[LOCAL.userServer] = index;
-    this.setState({server_name: lang.server_name[DATA[LOCAL.userServer]]});    
+    setCurrServer(index);
+    this.setState({server: index});    
   }
 
   /**
    * Update apiLanguage that's being used
    */
   updateApiLanguage(language) {
-    DATA[LOCAL.apiLanguage] = language;
-    this.setState({apiLanguage: DATA[LOCAL.apiLanguage].toUpperCase()});
+    setAPILanguage(language);
+    this.setState({APILanguage: language});
   }
 }
 
