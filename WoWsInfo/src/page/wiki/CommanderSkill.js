@@ -8,12 +8,12 @@ import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 import { Surface, Title, List } from 'react-native-paper';
 import { SAVED } from '../../value/data';
-import { WoWsInfo, WikiIcon } from '../../component';
+import { WoWsInfo, WikiIcon, SectionTitle } from '../../component';
 import { SectionGrid } from 'react-native-super-grid';
 import { Actions } from 'react-native-router-flux';
 import { SafeAction, copy } from '../../core';
 import lang from '../../value/lang';
-import { ThemeBackColour } from '../../value/colour';
+import { ThemeBackColour, TintColour, TintTextColour } from '../../value/colour';
 
 class CommanderSkill extends Component {
   constructor(props) {
@@ -45,9 +45,7 @@ class CommanderSkill extends Component {
         <SectionGrid itemDimension={80} sections={data} renderItem={({item}) => {
           return <WikiIcon item={item} selected={item.selected} onPress={() => this.skillSelected(item)} 
           onLongPress={() => SafeAction('BasicDetail', {item: item})}/>
-        }} renderSectionHeader={({section}) => (
-          <List.Item title={section.title} style={ThemeBackColour()}/>
-        )}/>
+        }} renderSectionHeader={({section}) => <SectionTitle title={section.title}/>}/>
       </WoWsInfo>
     )
   };

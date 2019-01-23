@@ -71,7 +71,7 @@ class Settings extends Component {
             <List.Item title={lang.settings_app_swap_buttons}/>
             <List.Item title={lang.settings_app_clean_mode}/>
           </List.Section>
-          <List.Section title={lang.app_name}>
+          <List.Section title={lang.app_name} style={{color: TintColour()[500]}}>
             <List.Item title={lang.settings_app_send_feedback}
               onPress={() => Linking.openURL(APP.Developer)}/>
             <List.Item title={lang.settings_app_report_issues}
@@ -99,6 +99,22 @@ class Settings extends Component {
       </WoWsInfo>
     )
   };
+
+  renderAPISettings() {
+
+  }
+
+  renderAppSettings() {
+
+  }
+
+  renderWoWsInfo() {
+
+  }
+
+  renderOpenSource() {
+
+  }
 
   shareApp = () => {
     if (isIos) {

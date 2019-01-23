@@ -19,6 +19,10 @@ export const TintColour = () => {
   return DATA[LOCAL.theme];
 }
 
+export const TintTextColour = () => {
+  return {color: TintColour()[500]};
+}
+
 export const UpdateTintColour = (tint) => {
   DATA[LOCAL.theme] = tint;
   SafeStorage.set(LOCAL.theme, tint);

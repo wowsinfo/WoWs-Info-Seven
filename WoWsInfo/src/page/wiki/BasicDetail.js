@@ -9,7 +9,7 @@ import React, { Component } from 'react';
 import { Text, ScrollView, StyleSheet } from 'react-native';
 import { Surface, Title, Paragraph, Caption } from 'react-native-paper';
 import { FloatingButton, WikiIcon, WoWsInfo, PriceLabel } from '../../component';
-import { TintColour } from '../../value/colour';
+import { TintColour, TintTextColour } from '../../value/colour';
 
 class BasicDetail extends Component {
   render() {
@@ -32,7 +32,7 @@ class BasicDetail extends Component {
     const { item } = this.props;
     const { container, label } = styles;
     // Make title colour tint colour
-    let title = [label, {color: TintColour()[500]}];
+    let title = [label, TintTextColour()];
 
     if (item.profile) {
       // Consumables

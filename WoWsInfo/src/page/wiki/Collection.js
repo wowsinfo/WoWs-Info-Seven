@@ -11,7 +11,7 @@ import { WoWsInfo, WikiIcon } from '../../component';
 import { SAVED } from '../../value/data';
 import { SafeAction } from '../../core';
 import { Title, Paragraph } from 'react-native-paper';
-import { TintColour } from '../../value/colour';
+import { TintColour, TintTextColour } from '../../value/colour';
 
 class Collection extends Component {
   constructor(props) {
@@ -58,7 +58,7 @@ class Collection extends Component {
             return (
               <View style={{padding: 8}}>
                 <WikiIcon item={header} scale={1.6}/>
-                <Title style={[label, {color: TintColour()[500]}]}>{header.name}</Title>
+                <Title style={[label, TintTextColour()]}>{header.name}</Title>
                 <Paragraph style={label}>{header.description}</Paragraph>
               </View>
             )

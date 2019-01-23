@@ -14,7 +14,7 @@ import { SafeFetch, Guard, getColourWithRange, SafeAction, copy } from '../../co
 import { WoWsAPI } from '../../value/api';
 import { Actions } from 'react-native-router-flux';
 import { GREY } from 'react-native-material-color';
-import { ThemeBackColour, TintColour } from '../../value/colour';
+import { ThemeBackColour, TintColour, TintTextColour } from '../../value/colour';
 
 class WarshipDetail extends PureComponent {
   constructor(props) {
@@ -43,7 +43,7 @@ class WarshipDetail extends PureComponent {
     };
 
     this.delayedRequest = null;
-    this.sectionTitle = [styles.centerText, {color: TintColour()[500]}];
+    this.sectionTitle = [styles.centerText, TintTextColour()];
     this.efficientDataRequest(curr.ship_id);
   }
 
