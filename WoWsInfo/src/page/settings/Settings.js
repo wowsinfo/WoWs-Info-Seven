@@ -37,7 +37,29 @@ class Settings extends Component {
     return (
       <WoWsInfo about noLeft>
         <ScrollView>
-          <List.Section title={lang.settings_api_settings}>
+          { this.renderAPISettings() }
+          { this.renderAppSettings() }
+          { this.renderWoWsInfo() }
+          { this.renderOpenSource() }
+        </ScrollView>
+        <Portal>
+          <Dialog visible={showColour} dismissable={true} theme={{roundness: 16}}
+            style={{maxHeight: '61.8%'}} onDismiss={() => this.setState({showColour: false})}>
+            <FlatList bounces={false} data={this.colourList} keyExtractor={(item, index) => String(index)}
+              showsVerticalScrollIndicator={false} renderItem={({item}) => {
+                return <Touchable style={{backgroundColor: item[500], height: 64}}
+                  onPress={() => this.updateTint(item)} />
+              }} />
+          </Dialog>
+        </Portal>
+      </WoWsInfo>
+    )
+  };
+
+  renderAPISettings() {
+    const { darkMode, showColour, tintColour, server, APILanguage } = this.state;
+    return (
+      <List.Section title={lang.settings_api_settings}>
             <List.Accordion title={`Game server: ${lang.server_name[server]}`}>
               <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
                 {lang.server_name.map((object, index) => 
@@ -64,14 +86,29 @@ class Settings extends Component {
               </ScrollView>
             </List.Accordion>
           </List.Section>
-          <List.Section title={lang.settings_app_settings}>
+    )
+  }
+
+  renderAppSettings() {
+    const { darkMode, showColour, tintColour, server, APILanguage } = this.state;
+    const { container, tint } = styles;
+
+    return (
+      <List.Section title={lang.settings_app_settings}>
             <List.Item title={lang.settings_app_dark_mode} onPress={() => this.updateTheme()} />
             <List.Item title={lang.settings_app_theme_colour} onPress={() => this.setState({showColour: true})}
               right={() => <View style={[tint, {backgroundColor: tintColour[500]}]}/>}/>              
             <List.Item title={lang.settings_app_swap_buttons}/>
             <List.Item title={lang.settings_app_clean_mode}/>
           </List.Section>
-          <List.Section title={lang.app_name} style={{color: TintColour()[500]}}>
+    )
+  }
+
+  renderWoWsInfo() {
+    const { darkMode, showColour, tintColour, server, APILanguage } = this.state;
+
+    return (
+      <List.Section title={lang.app_name} style={{color: TintColour()[500]}}>
             <List.Item title={lang.settings_app_send_feedback}
               onPress={() => Linking.openURL(APP.Developer)}/>
             <List.Item title={lang.settings_app_report_issues}
@@ -80,40 +117,19 @@ class Settings extends Component {
               onPress={() => Linking.openURL(this.store)}/>
             <List.Item title={lang.settings_app_share} onPress={this.shareApp}/>
           </List.Section>
-          <List.Section title={lang.settings_open_source}>
+    )
+  }
+
+  renderOpenSource() {
+    const { darkMode, showColour, tintColour, server, APILanguage } = this.state;
+
+    return (
+      <List.Section title={lang.settings_open_source}>
             <List.Item title={lang.settings_open_source_github}
               onPress={() => Linking.openURL(APP.Github)}/>
             <List.Item title={lang.settings_open_source_licence} />
           </List.Section>
-        </ScrollView>
-        <Portal>
-          <Dialog visible={showColour} dismissable={true} theme={{roundness: 16}}
-            style={{maxHeight: '61.8%'}} onDismiss={() => this.setState({showColour: false})}>
-            <FlatList bounces={false} data={this.colourList} keyExtractor={(item, index) => String(index)}
-              showsVerticalScrollIndicator={false} renderItem={({item}) => {
-                return <Touchable style={{backgroundColor: item[500], height: 64}}
-                  onPress={() => this.updateTint(item)} />
-              }} />
-          </Dialog>
-        </Portal>
-      </WoWsInfo>
     )
-  };
-
-  renderAPISettings() {
-
-  }
-
-  renderAppSettings() {
-
-  }
-
-  renderWoWsInfo() {
-
-  }
-
-  renderOpenSource() {
-
   }
 
   shareApp = () => {
