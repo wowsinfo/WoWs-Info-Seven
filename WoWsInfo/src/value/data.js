@@ -77,6 +77,10 @@ export const getAPILanguage = () => {
   return DATA[LOCAL.apiLanguage];
 };
 
+export const getAPILangName = () => {
+  return getAPIList()[getAPILanguage()];
+}
+
 export const langStr = () => {
   return `&language=${getAPILanguage()}`;
 };

@@ -4,7 +4,7 @@ import { isAndroid, isIos } from 'react-native-device-detection';
 import { Surface, List, Button, Checkbox, Colors, withTheme, Portal, Dialog, Text } from 'react-native-paper';
 import { Actions } from 'react-native-router-flux';
 import { WoWsInfo, DividerPlus, Touchable, SectionTitle } from '../../component';
-import { APP, LOCAL, SAVED, getCurrServer, getAPILanguage } from '../../value/data';
+import { APP, LOCAL, SAVED, getCurrServer, getAPILanguage, getAPILangName, SERVER, getAPIList } from '../../value/data';
 import { TintColour, UpdateTintColour, UpdateDarkMode } from '../../value/colour';
 import { SafeStorage } from '../../core';
 import { BLUE, RED, GREEN, PINK, PURPLE, DEEPPRUPLE, INDIGO, LIGHTBLUE, CYAN, TEAL, LIGHTGREEN, LIME, YELLOW, AMBER, ORANGE, DEEPORANGE, BROWN, GREY, BLUEGREY } from 'react-native-material-color';
@@ -58,34 +58,23 @@ class Settings extends Component {
 
   renderAPISettings() {
     const { server, APILanguage } = this.state;
+    const langList = getAPIList();
+    const langData = [];
+    for (let key in langList) langData.push(key);
+
     return (
       <Surface>
         <SectionTitle title={lang.settings_api_settings}/>
-        <List.Accordion title={`Game server: ${lang.server_name[server]}`}>
-          <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
-            {lang.server_name.map((object, index) => 
-              <Button 
-                key = {object}
-                onPress={() => this.updateServer(index)}
-              >
-                {lang.server_name[index]}
-              </Button>
-            )}
-          </View>
-        </List.Accordion>
-        <List.Accordion title={`API language: ${APILanguage}`}>
-          <ScrollView horizontal
-            contentContainerStyle={{flexDirection: 'row'}}>
-            {Object.keys(DATA[SAVED.language]).map((language) => 
-              <Button 
-              key = {language}
-              onPress={() => this.updateApiLanguage(language)}
-              >
-                {language}
-              </Button>
-            )}
-          </ScrollView>
-        </List.Accordion>
+        <List.Section title={`Game server: ${lang.server_name[server]}`}>
+          <FlatList data={SERVER} renderItem={({index}) => {
+            return <Button>{lang.server_name[index]}</Button>
+          }} keyExtractor={i => i} numColumns={2}/>
+        </List.Section>
+        <List.Section title={`API language: ${getAPILangName()}`}>
+          <FlatList data={langData} renderItem={({item}) => {
+            return <Button>{langList[item]}</Button>
+          }} keyExtractor={i => i} numColumns={2}/>
+        </List.Section>
       </Surface>
     )
   }
@@ -108,6 +97,7 @@ class Settings extends Component {
 
   renderWoWsInfo() {
     let issueLink = `${APP.Github}/issues`;
+
     return (
       <Surface>
         <SectionTitle title={lang.app_name}/>
