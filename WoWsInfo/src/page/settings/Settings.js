@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, ScrollView, FlatList, StyleSheet, Linking, Share } from 'react-native';
 import { isAndroid, isIos } from 'react-native-device-detection';
-import { Surface, List, Button, Checkbox, Colors, withTheme, Portal, Dialog, Text } from 'react-native-paper';
+import { Surface, List, Button, Checkbox, Colors, withTheme, Portal, Dialog, Text, DarkTheme, DefaultTheme } from 'react-native-paper';
 import { Actions } from 'react-native-router-flux';
 import { WoWsInfo, DividerPlus, Touchable, SectionTitle } from '../../component';
 import { APP, LOCAL, SAVED, getCurrServer, getAPILanguage, getAPILangName, SERVER, getAPIList, setCurrServer, setAPILanguage, setSwapButton, getSwapButton } from '../../value/data';
@@ -58,6 +58,7 @@ class Settings extends Component {
 
   renderAPISettings() {
     const { server, APILanguage } = this.state;
+
     const langList = getAPIList();
     const langData = [];
     for (let key in langList) langData.push(key);
@@ -148,11 +149,36 @@ class Settings extends Component {
    * Update app theme real time
    */
   updateTheme() {
+    const { tintColour } = this.state;
     // Switch mode
     UpdateDarkMode();
     this.setState({darkMode: DARKMODE});
     this.props.theme.dark = DARKMODE;
-    this.props.theme.colors = DARKMODE ? DARK.colors : LIGHT.colors;
+    if (DARKMODE) {
+      global.DARK = {
+        colors: {
+          ...DarkTheme.colors,
+          surface: 'black',
+          text: GREY[50],
+          primary: tintColour[500],
+          accent: tintColour[300],
+        }
+      };
+      this.props.theme.colors = DARK.colors;
+    } else {
+      // Setup global light theme
+      global.LIGHT = {
+        colors: {
+          ...DefaultTheme.colors,
+          surface: 'white',
+          text: GREY[900],
+          primary: tintColour[500],
+          accent: tintColour[300],
+        }
+      };
+      this.props.theme.colors = LIGHT.colors;
+    }
+    console.log(this.props.theme);
   }
 
   /**
@@ -162,12 +188,8 @@ class Settings extends Component {
   updateTint(tint) {
     UpdateTintColour(tint);
     
-    DARK.colors.primary = tint[500];
-    DARK.colors.accent = tint[500];
-    LIGHT.colors.accent = tint[500];
-    LIGHT.colors.primary = tint[500];
-    
-    this.props.theme.colors = DARK.colors;
+    this.props.theme.colors.primary = tint[500];
+    this.props.theme.colors.accent = tint[300];
 
     this.setState({showColour: false, tintColour: tint});
   }
