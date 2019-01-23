@@ -27,6 +27,7 @@ class App extends Component {
       console.log(data);
 
       global.DATA = data;
+      SWAPBUTTON = DATA[LOCAL.swapButton];
       DARKMODE = DATA[LOCAL.darkMode];
 
       let tint = TintColour();

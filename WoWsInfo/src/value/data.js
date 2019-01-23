@@ -30,6 +30,7 @@ export const LOCAL = {
   // data_saver: '@WoWs_Info:dataSaver',
   theme: '@WoWs_Info:themeColour',
   darkMode: '@WoWs_Info:darkMode',
+  swapButton: '@WoWs_Info:swapButton',
   firstLaunch: '@WoWs_Info:firstLaunch',
   apiLanguage: '@WoWs_Info:apiLanguage',
 }
@@ -94,3 +95,17 @@ export const setAPILanguage = (lang) => {
   DATA[str] = lang;
   SafeStorage.set(str, lang);
 };
+
+/**
+ * Swap Button
+ */
+export const getSwapButton = () => {
+  return DATA[LOCAL.swapButton];
+}
+
+export const setSwapButton = (swap) => {
+  SWAPBUTTON = swap;
+  let str = LOCAL.swapButton;
+  DATA[str] = swap;
+  SafeStorage.set(str, swap);
+}

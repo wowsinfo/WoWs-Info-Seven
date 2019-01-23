@@ -4,7 +4,7 @@ import { isAndroid, isIos } from 'react-native-device-detection';
 import { Surface, List, Button, Checkbox, Colors, withTheme, Portal, Dialog, Text } from 'react-native-paper';
 import { Actions } from 'react-native-router-flux';
 import { WoWsInfo, DividerPlus, Touchable, SectionTitle } from '../../component';
-import { APP, LOCAL, SAVED, getCurrServer, getAPILanguage, getAPILangName, SERVER, getAPIList, setCurrServer, setAPILanguage } from '../../value/data';
+import { APP, LOCAL, SAVED, getCurrServer, getAPILanguage, getAPILangName, SERVER, getAPIList, setCurrServer, setAPILanguage, setSwapButton, getSwapButton } from '../../value/data';
 import { TintColour, UpdateTintColour, UpdateDarkMode } from '../../value/colour';
 import { SafeStorage } from '../../core';
 import { BLUE, RED, GREEN, PINK, PURPLE, DEEPPRUPLE, INDIGO, LIGHTBLUE, CYAN, TEAL, LIGHTGREEN, LIME, YELLOW, AMBER, ORANGE, DEEPORANGE, BROWN, GREY, BLUEGREY } from 'react-native-material-color';
@@ -20,6 +20,7 @@ class Settings extends Component {
       showColour: false,
       server: getCurrServer(),
       APILanguage: getAPILanguage(),
+      swapButton: getSwapButton(),
     };
     
     this.colourList = [RED, PINK, PURPLE, DEEPPRUPLE, INDIGO, BLUE, LIGHTBLUE, CYAN, TEAL, GREEN, LIGHTGREEN, LIME, 
@@ -81,16 +82,18 @@ class Settings extends Component {
   }
 
   renderAppSettings() {
-    const { tintColour } = this.state;
+    const { tintColour, swapButton, darkMode } = this.state;
     const { tint } = styles;
 
     return (
       <Surface>
         <SectionTitle title={lang.settings_app_settings}/>
-        <List.Item title={lang.settings_app_dark_mode} onPress={() => this.updateTheme()} />
+        <List.Item title={lang.settings_app_dark_mode} onPress={() => this.updateTheme()} 
+          right={() => <Checkbox status={darkMode ? 'checked' : 'unchecked'}/>}/>
         <List.Item title={lang.settings_app_theme_colour} onPress={() => this.setState({showColour: true})}
           right={() => <View style={[tint, {backgroundColor: tintColour[500]}]}/>}/>              
-        <List.Item title={lang.settings_app_swap_buttons} onPress={() => global.SWAPBUTTON = !SWAPBUTTON}/>
+        <List.Item title={lang.settings_app_swap_buttons} onPress={() => this.swapButton(!swapButton)}
+          right={() => <Checkbox status={swapButton ? 'checked' : 'unchecked'}/>}/>
       </Surface>
     )
   }
@@ -132,6 +135,14 @@ class Settings extends Component {
     } else {
       Share.share({message: `${lang.app_name}\n${this.store}`});
     }
+  }
+
+  /**
+   * Swap bottom buttons
+   */
+  swapButton(curr) {
+    setSwapButton(curr);
+    this.setState({swapButton: getSwapButton()});
   }
 
   /**
