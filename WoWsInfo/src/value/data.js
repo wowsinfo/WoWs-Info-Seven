@@ -59,6 +59,11 @@ export const getFirstLaunch = () => {
   return DATA[LOCAL.firstLaunch];
 }
 
+export const setFirstLaunch = (mode) => {
+  DATA[LOCAL.firstLaunch] = mode;
+  SafeStorage.set(LOCAL.firstLaunch, mode);
+}
+
 /**
  * Server 
  */

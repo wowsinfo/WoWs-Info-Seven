@@ -1,6 +1,6 @@
 import { GREY, BLUE } from 'react-native-material-color';
 import { LOCAL } from './data';
-import { SafeStorage } from '../core';
+import { SafeStorage, Guard } from '../core';
 
 export const ThemeBackColour = () => {
   return {backgroundColor: DARKMODE ? GREY[900] : GREY[100]};
@@ -20,7 +20,9 @@ export const TintColour = () => {
 }
 
 export const TintTextColour = () => {
-  return {color: TintColour()[500]};
+  let colour = TintColour();
+  if (!colour) colour = BLUE;
+  return {color: colour[500]};
 }
 
 export const UpdateTintColour = (tint) => {
