@@ -9,7 +9,7 @@ import { FlatList, ScrollView, StyleSheet } from 'react-native';
 import { Text, Button, Surface, Headline, List, RadioButton } from 'react-native-paper';
 import { Actions } from 'react-native-router-flux';
 import lang from '../../value/lang';
-import { LOCAL, SERVER, getCurrServer } from '../../value/data';
+import { LOCAL, SERVER, getCurrServer, setFirstLaunch } from '../../value/data';
 import { SafeStorage, Downloader } from '../../core';
 import { WoWsInfo, SectionTitle } from '../../component';
 
@@ -67,11 +67,7 @@ class Setup extends Component {
 
   // Get selection and download data from api
   finishSetup() {
-    
-    // Download data
-    
-    DATA[LOCAL.firstLaunch] = false;
-    SafeStorage.set(LOCAL.firstLaunch, false);
+    setFirstLaunch(false);
     Actions.reset('Home');
   }
 }

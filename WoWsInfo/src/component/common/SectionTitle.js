@@ -13,6 +13,7 @@ class SectionTitle extends Component {
   render() {
     const { title, back } = this.props;
     const { text } = styles;
+
     return (
       <Title style={[back ? ThemeBackColour() : null, TintTextColour(), text]}>
         {title}

@@ -17,7 +17,7 @@ class App extends Component {
       <Router sceneStyle={{flex: 1}}>
         <Stack key='root' hideNavBar>
           <Scene key='Home' component={Home}/>
-          <Scene key='Setup' component={Setup} initial={getFirstLaunch()}/>
+          <Scene key='Setup' component={Setup} initial={!getFirstLaunch()}/>
           
           <Scene key='Menu' component={Menu}/>
 
