@@ -74,7 +74,9 @@ export const getCurrDomain = () => {
 };
 
 export const getCurrServer = () => {
-  return DATA[LOCAL.userServer];
+  let index = DATA[LOCAL.userServer];
+  if (!index) index = 3;
+  return index;
 };
 
 export const setCurrServer = (index) => {

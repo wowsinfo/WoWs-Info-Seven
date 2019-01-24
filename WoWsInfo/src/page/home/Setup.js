@@ -9,7 +9,7 @@ import { FlatList, ScrollView, StyleSheet } from 'react-native';
 import { Text, Button, Surface, Headline, List, RadioButton } from 'react-native-paper';
 import { Actions } from 'react-native-router-flux';
 import lang from '../../value/lang';
-import { LOCAL, SERVER, getCurrServer, setFirstLaunch } from '../../value/data';
+import { LOCAL, SERVER, getCurrServer, setFirstLaunch, setCurrServer, setAPILanguage } from '../../value/data';
 import { SafeStorage, Downloader } from '../../core';
 import { WoWsInfo, SectionTitle } from '../../component';
 
@@ -64,6 +64,16 @@ class Setup extends Component {
       </WoWsInfo>
     )
   };
+
+  updateServer(index) {
+    setCurrServer(index);
+    this.setState({selected_server: index});
+  }
+
+  updateApiLanguage(lang) {
+    setAPILanguage(lang);
+    this.setState({selected_lang: lang});
+  }
 
   // Get selection and download data from api
   finishSetup() {
