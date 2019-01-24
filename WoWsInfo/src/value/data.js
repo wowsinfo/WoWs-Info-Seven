@@ -53,6 +53,13 @@ export const SAVED = {
 }
 
 /**
+ * First launch
+ */
+export const getFirstLaunch = () => {
+  return DATA[LOCAL.firstLaunch];
+}
+
+/**
  * Server 
  */
 export const SERVER = ['ru', 'eu', 'com', 'asia'];

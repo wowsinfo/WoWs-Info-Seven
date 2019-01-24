@@ -201,7 +201,7 @@ class Downloader {
 
     // Add slot info
     let slot = await SafeFetch.normal(WikiAPI.Github_Slot);
-console.log(slot);
+
     while (page < pageTotal) {
       // page + 1 to get actually page not index
       let json = await SafeFetch.get(WikiAPI.Consumable, this.server, `&page_no=${page+1}&${this.language}`);
