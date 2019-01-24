@@ -2,7 +2,9 @@
 export * from './common/Menu';
 export * from './common/Filter';
 
-export * from './home/Home';
+import Home from './home/Home';
+export { Home };
+
 // Go to this page when app is first launched
 export * from './home/Setup';
 export * from './home/Friend';
