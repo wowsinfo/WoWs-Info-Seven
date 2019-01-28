@@ -14,10 +14,21 @@ class DataLoader {
     // For debugging only
     // SafeStorage.clear();
 
-    let data = {};
+    let local = await this.loadLocal();
+    let saved = await this.loadSaved();
+    console.log(local, saved);
+    return Object.assign(local, saved);
+  }
+
+  /**
+   * Load all local data, no Internet is required
+   * @param {*} data 
+   */
+  static async loadLocal() {
     const { apiLanguage, appVersion, gameVersion, firstLaunch, friendList, userData, 
       userInfo, userServer, lastUpdate, theme, darkMode, date, swapButton } = LOCAL;
-    
+
+    let data = {};
     // Manully setting up SAVED section (they are all different)
     this.loadEntry(data, apiLanguage, 'en');
     this.loadEntry(data, swapButton, false);
@@ -32,6 +43,16 @@ class DataLoader {
     this.loadEntry(data, theme, BLUE);
     this.loadEntry(data, darkMode, false);
     this.loadEntry(data, date, new Date().toDateString());
+
+    return data;
+  }
+
+  /**
+   * Load all saved data, Internet connection is required
+   * @param {*} data 
+   */
+  static async loadSaved() {
+    let data = {};
 
     // SAVED section is about the same
     for (let key in SAVED) {
