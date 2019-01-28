@@ -33,7 +33,7 @@ class DataLoader {
     this.loadEntry(data, apiLanguage, 'en');
     this.loadEntry(data, swapButton, false);
     this.loadEntry(data, appVersion, APP.Version);
-    this.loadEntry(data, gameVersion, '0.7.10.2');
+    this.loadEntry(data, gameVersion, '0.7.12.0');
     this.loadEntry(data, firstLaunch, true);
     this.loadEntry(data, friendList, [{name: 'HenryQuan', id: '', server: 3}]);
     this.loadEntry(data, userData, {});
@@ -43,7 +43,6 @@ class DataLoader {
     this.loadEntry(data, theme, BLUE);
     this.loadEntry(data, darkMode, false);
     this.loadEntry(data, date, new Date().toDateString());
-
     return data;
   }
 
@@ -53,14 +52,12 @@ class DataLoader {
    */
   static async loadSaved() {
     let data = {};
-
     // SAVED section is about the same
     for (let key in SAVED) {
       const curr = SAVED[key];
       // Get it from storage
       data[curr] = await SafeStorage.get(curr, {});
     }
-
     return data;
   }
 
