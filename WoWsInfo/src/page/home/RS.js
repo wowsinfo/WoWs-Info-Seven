@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { View, ScrollView, TextInput, StyleSheet, KeyboardAvoidingView, Alert } from 'react-native';
+import { View, ScrollView, StyleSheet, KeyboardAvoidingView, Alert } from 'react-native';
 import { isAndroid } from 'react-native-device-detection';
-import { Text, Portal, Surface, Button, Dialog, Title, Caption } from 'react-native-paper';
+import { Text, Portal, TextInput, Button, Dialog, Title, Caption } from 'react-native-paper';
 import lang from '../../value/lang';
 
 class RS extends Component {
@@ -21,7 +21,7 @@ class RS extends Component {
     const { tip, ip, rs } = this.state;
     return (
       <KeyboardAvoidingView style={container} behavior='padding' enabled>
-        <TextInput style={input} value={ip} placeholder='192.168.1.x' 
+        <TextInput style={input} theme={{roundness: 0}} value={ip} placeholder='192.168.1.x' 
           keyboardType={isAndroid ? 'decimal-pad' : 'numbers-and-punctuation'}
           onChangeText={t => this.setState({ip: t})}
           onEndEditing={() => this.validIP(ip)}/>
@@ -37,7 +37,7 @@ class RS extends Component {
    */
   validIP(ip) {
     let url = ip.split('/').join('') + ':8605';
-    Alert.alert('RS Beta', `${url}`);
+    // Alert.alert('RS Beta', `${url}`);
   }
 
   /**
