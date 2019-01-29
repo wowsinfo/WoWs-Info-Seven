@@ -5,15 +5,18 @@ import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
 import { FloatingButton, SafeView, WoWsInfo, LoadingModal } from '../../component';
 import { Actions } from 'react-native-router-flux';
 import { GREY } from 'react-native-material-color';
-import { LOCAL, getFirstLaunch } from '../../value/data';
+import { LOCAL, getFirstLaunch, getCurrServer } from '../../value/data';
 import { Friend, RS, Statistics } from '../';
 import { SafeAction, DataLoader, Downloader } from '../../core';
 import { TintColour } from '../../value/colour';
+import lang from '../../value/lang';
+import { Loading } from '../common/Loading';
 
 class Home extends Component {
   constructor(props) {
     super(props);
 
+    let first = getFirstLaunch();
     this.state = {
       index: 0,
       // there are three tabs (statistics, friends and rs)
@@ -22,18 +25,32 @@ class Home extends Component {
         { key: 'friend', title: 'Friends' },
         { key: 'rs', title: 'RS Beta' },
       ],
-      loading: getFirstLaunch(),
+      loading: first,
       updating: true,
     };
 
+    if (first) {
+      // Update data here if it is not first launch
+      let dn = new Downloader(getCurrServer());
+      dn.updateAll(true).then(success => {
+        // Make sure it finishes downloading
+        if (success) {
+          this.setState({loading: false});
+        } else {
+          // Reset to a special page
+          // For now, just an error message
+          alert(lang.error_download_issue);
+        }
+      });
+    }
   }
 
   render() {
     const { loading, updating } = this.state;
     const { container, playerLabel, header } = styles;
-    if (loading) return null;
+    if (loading) return <Loading />;
 
-    const appTheme = DATA[LOCAL.theme];
+    const appTheme = TintColour();
     return (
       <WoWsInfo style={container} home about>
         <TabView renderTabBar={props =>
