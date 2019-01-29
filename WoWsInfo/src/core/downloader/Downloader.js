@@ -1,6 +1,7 @@
 import { WoWsAPI, WikiAPI } from '../../value/api';
 import { SERVER, APP, LOCAL, SAVED, langStr } from '../../value/data';
 import { SafeFetch, Guard, SafeStorage } from '../';
+import lang from '../../value/lang';
 
 class Downloader {
   constructor(server) {
@@ -48,6 +49,11 @@ class Downloader {
         // Make sure it is also great than current version
         // Update this value only if all data are saved correctly
         SafeStorage.set(LOCAL.gameVersion, gameVersion);
+
+        // Show a message to tell user that data has been downloaded
+        const format = require('string-format');
+        let msg = format(lang.game_update_message, gameVersion);
+        alert(msg);
       }
       return true;
     } catch (err) {
