@@ -77,7 +77,6 @@ class Setup extends Component {
 
   // Get selection and download data from api
   finishSetup() {
-    setFirstLaunch(false);
     Actions.reset('Home');
   }
 }

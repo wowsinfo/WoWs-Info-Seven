@@ -5,7 +5,7 @@ import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
 import { FloatingButton, SafeView, WoWsInfo, LoadingModal } from '../../component';
 import { Actions } from 'react-native-router-flux';
 import { GREY } from 'react-native-material-color';
-import { LOCAL, getFirstLaunch, getCurrServer } from '../../value/data';
+import { LOCAL, getFirstLaunch, getCurrServer, setFirstLaunch } from '../../value/data';
 import { Friend, RS, Statistics } from '../';
 import { SafeAction, DataLoader, Downloader } from '../../core';
 import { TintColour } from '../../value/colour';
@@ -36,6 +36,7 @@ class Home extends Component {
         // Make sure it finishes downloading
         if (success) {
           this.setState({loading: false});
+          setFirstLaunch(false);
         } else {
           // Reset to a special page
           // For now, just an error message
