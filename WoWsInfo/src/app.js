@@ -4,7 +4,7 @@ import { Router, Stack, Scene, Actions } from 'react-native-router-flux';
 import { withTheme, DarkTheme, DefaultTheme } from 'react-native-paper';
 import { Home, Menu, Settings, About, Setup, Consumable, CommanderSkill, 
   BasicDetail, Achievement, Map as GameMap, Collection, Warship, WarshipDetail, 
-  WarshipFilter, WarshipModule, Loading } from './page';
+  WarshipFilter, WarshipModule, Loading, Statistics } from './page';
 import { LOCAL, getFirstLaunch, getCurrServer } from './value/data';
 import { DataLoader, Downloader, SafeStorage } from './core';
 import { GREY, BLUE } from 'react-native-material-color';
@@ -91,6 +91,7 @@ class App extends Component {
           <Scene key='Setup' component={Setup} initial={getFirstLaunch()}/>
           
           <Scene key='Menu' component={Menu}/>
+          <Scene key='Statistics' component={Statistics} />
 
           <Scene key='Consumable' component={Consumable}/>
           <Scene key='CommanderSkill' component={CommanderSkill}/>

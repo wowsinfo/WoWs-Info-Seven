@@ -62,7 +62,7 @@ class Home extends Component {
             />
           } navigationState={this.state}
           renderScene={SceneMap({
-            stat: () => <Statistics info={DATA[LOCAL.userInfo]}/>,
+            stat: () => <Statistics info={DATA[LOCAL.userInfo]} home/>,
             friend: () => <Friend />,
             rs: () => <RS />
           })} onIndexChange={index => this.setState({index})}

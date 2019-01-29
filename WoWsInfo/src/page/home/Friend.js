@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
 import { List, Text, Colors, IconButton } from 'react-native-paper';
 import { LOCAL } from '../../value/data';
+import { SafeAction } from '../../core';
 
 class Friend extends PureComponent {
   render() {
@@ -21,7 +22,7 @@ class Friend extends PureComponent {
    * @param {any} info 
    */
   navigate(info) {
-
+    SafeAction('Statistics', {info: info})
   }
 }
 

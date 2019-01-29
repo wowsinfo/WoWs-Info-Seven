@@ -3,7 +3,7 @@ import { View, SafeAreaView, Text, StyleSheet } from 'react-native';
 import { Surface, Button, IconButton } from 'react-native-paper';
 import { LOCAL } from '../../value/data';
 import { GREY } from 'react-native-material-color';
-import { LoadingIndicator } from '../../component';
+import { LoadingIndicator, WoWsInfo } from '../../component';
 
 class Statistics extends PureComponent {
   constructor(props) {
@@ -24,8 +24,11 @@ class Statistics extends PureComponent {
 
   render() {
     const { container, buttons } = styles;
+    const { home } = this.props;
+
+    let RootView = home ? Surface : WoWsInfo;
     return (
-      <Surface style={container}>
+      <RootView style={container}>
         <SafeAreaView>
           <Text>{this.state.name}</Text>
           { this.renderBasic() }
@@ -37,7 +40,7 @@ class Statistics extends PureComponent {
           </View>
 
         </SafeAreaView>
-      </Surface>
+      </RootView>
     )
   };
 
