@@ -73,9 +73,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   input: {
-    fontSize: 17,
-    width: '90%',
-    textAlign: 'center',
+    width: '100%',
     marginBottom: 8
   }
 });
