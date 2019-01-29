@@ -48,7 +48,7 @@ class Home extends Component {
 
   render() {
     const { loading, updating } = this.state;
-    const { container, playerLabel, header } = styles;
+    const { container } = styles;
     if (loading) return <Loading />;
 
     const appTheme = TintColour();
@@ -76,19 +76,6 @@ class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  header: {
-    width: '100%', 
-    flexDirection: 'row', 
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 8
-  },
-  playerLabel: {
-    fontSize: 32,
-    padding: 8,
-    width: '80%',
-    fontWeight: 'bold'
   }
 });
 
