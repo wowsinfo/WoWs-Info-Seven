@@ -24,11 +24,11 @@ class Statistics extends PureComponent {
 
   render() {
     const { container, buttons } = styles;
-    const { home } = this.props;
+    const { home, friend } = this.props;
 
     let RootView = home ? Surface : WoWsInfo;
     return (
-      <RootView style={container}>
+      <RootView style={container} noLeft={friend}>
         <SafeAreaView>
           <Text>{this.state.name}</Text>
           { this.renderBasic() }
@@ -98,7 +98,6 @@ class Statistics extends PureComponent {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16
   },
   buttons: {
     flexDirection: 'row',
