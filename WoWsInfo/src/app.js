@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, StatusBar } from 'react-native';
+import { StyleSheet, Alert } from 'react-native';
 import { Router, Stack, Scene, Actions } from 'react-native-router-flux';
 import { withTheme, DarkTheme, DefaultTheme } from 'react-native-paper';
 import { Home, Menu, Settings, About, Setup, Consumable, CommanderSkill, 
@@ -72,7 +72,7 @@ class App extends Component {
           } else {
             // Reset to a special page
             // For now, just an error message
-            alert(lang.error_download_issue);
+            Alert.alert(lang.error_title, lang.error_download_issue);
           }
         });
       } else {

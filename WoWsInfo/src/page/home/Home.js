@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, SafeAreaView, ScrollView, Dimensions } from 'react-native';
+import { StyleSheet, View, SafeAreaView, Alert, Dimensions } from 'react-native';
 import { IconButton, Text, Colors, Surface, DarkTheme, DefaultTheme, withTheme } from 'react-native-paper';
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
 import { FloatingButton, SafeView, WoWsInfo, LoadingModal } from '../../component';
@@ -40,7 +40,7 @@ class Home extends Component {
         } else {
           // Reset to a special page
           // For now, just an error message
-          alert(lang.error_download_issue);
+          Alert.alert(lang.error_title, lang.error_download_issue);
         }
       });
     }
@@ -63,8 +63,8 @@ class Home extends Component {
           } navigationState={this.state}
           renderScene={SceneMap({
             stat: () => <Statistics info={DATA[LOCAL.userInfo]}/>,
-            friend: Friend,
-            rs: RS
+            friend: () => <Friend />,
+            rs: () => <RS />
           })} onIndexChange={index => this.setState({index})}
           initialLayout={Dimensions.get('window')}
         />
