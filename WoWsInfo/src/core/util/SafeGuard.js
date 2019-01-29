@@ -19,4 +19,14 @@ export const Guard = (obj, path, dval) => {
     }
   } 
   return dval;
-}
+};
+
+/**
+ * Return a default value if obj is not valid
+ * @param {*} obj 
+ * @param {*} dval 
+ */
+export const SafeValue = (obj, dval) => {
+  if (obj == null) return dval;
+  return obj;
+};

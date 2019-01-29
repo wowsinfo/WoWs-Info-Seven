@@ -141,6 +141,10 @@ export default lang = new LocalizedStrings({
     rs_tip_two: "Copy and paste the path of your game folder into this program and you have to run it with admin or it will not work. It won't do anything harmful to your computer.\n",
     rs_tip_enjoy: '3. Enjoy',
     rs_tip_three: 'Enter the IP address you see on the screen and WoWs Info will start giving you real-time statistics for both teams.\n',
+    /// Error section
+    // General erros
+    error_title: 'Error',
+    error_download_issue: 'Failed to update data. \nPlease try again later.'
   },
   zh: {
 
