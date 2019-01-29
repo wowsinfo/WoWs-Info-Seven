@@ -5,6 +5,7 @@ export default lang = new LocalizedStrings({
     /// Setup section
     setup_title: 'Setup WoWs Info',
     setup_done_button: 'Done',
+    setup_loading: 'Loading...',
     /// Home section
     // Button section
     button_settings_label: 'Settings',

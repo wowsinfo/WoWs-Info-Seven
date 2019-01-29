@@ -6,7 +6,7 @@ import { Home, Menu, Settings, About, Setup, Consumable, CommanderSkill,
   BasicDetail, Achievement, Map as GameMap, Collection, Warship, WarshipDetail, 
   WarshipFilter, WarshipModule, Loading } from './page';
 import { LOCAL, getFirstLaunch, getCurrServer } from './value/data';
-import { DataLoader, Downloader, SafeStorage, DLOG } from './core';
+import { DataLoader, Downloader, SafeStorage } from './core';
 import { GREY, BLUE } from 'react-native-material-color';
 import { LoadingModal } from './component';
 import { TintColour, UpdateTintColour } from './value/colour';
@@ -15,21 +15,21 @@ import lang from './value/lang';
 class App extends Component {
   constructor(props) {
     super(props);
-
     // Load all data from AsyncStorage
     DataLoader.loadAll().then(data => {
       console.log(data);
-
+      
       global.DATA = data;
       SWAPBUTTON = DATA[LOCAL.swapButton];
       DARKMODE = DATA[LOCAL.darkMode];
-
+      
       // update state
       this.state = {
         dark: DARKMODE,
         loading: true,
       };
-      DLOG('state set');
+
+      console.log('state has been set');
 
       let tint = TintColour();
       if (!tint[50]) tint = BLUE;
@@ -82,10 +82,8 @@ class App extends Component {
   }
 
   render() {
-    if (this.state == null) return null;
-
-    const { loading, dark } = this.state;
-    if (loading) return <Loading />
+    if (this.state == null) return <Loading />;
+    const { dark } = this.state;
     return (
       <Router sceneStyle={{flex: 1, backgroundColor: dark ? 'black' : 'white'}}>
         <Stack key='root' hideNavBar>
