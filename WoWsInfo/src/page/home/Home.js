@@ -5,7 +5,7 @@ import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
 import { FloatingButton, SafeView, WoWsInfo, LoadingModal } from '../../component';
 import { Actions } from 'react-native-router-flux';
 import { GREY } from 'react-native-material-color';
-import { LOCAL, getFirstLaunch, getCurrServer } from '../../value/data';
+import { LOCAL, getFirstLaunch } from '../../value/data';
 import { Friend, RS, Statistics } from '../';
 import { SafeAction, DataLoader, Downloader } from '../../core';
 import { TintColour } from '../../value/colour';
@@ -22,9 +22,8 @@ class Home extends Component {
         { key: 'friend', title: 'Friends' },
         { key: 'rs', title: 'RS Beta' },
       ],
-      loading: true,
+      loading: getFirstLaunch(),
       updating: true,
-      dark: false
     };
 
   }
@@ -75,4 +74,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default withTheme(Home);
+export { Home };

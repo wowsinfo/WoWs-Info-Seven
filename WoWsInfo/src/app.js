@@ -4,9 +4,9 @@ import { Router, Stack, Scene, Actions } from 'react-native-router-flux';
 import { withTheme, DarkTheme, DefaultTheme } from 'react-native-paper';
 import { Home, Menu, Settings, About, Setup, Consumable, CommanderSkill, 
   BasicDetail, Achievement, Map as GameMap, Collection, Warship, WarshipDetail, 
-  WarshipFilter, WarshipModule } from './page';
-import { LOCAL, getFirstLaunch } from './value/data';
-import { DataLoader, Downloader, SafeStorage } from './core';
+  WarshipFilter, WarshipModule, Loading } from './page';
+import { LOCAL, getFirstLaunch, getCurrServer } from './value/data';
+import { DataLoader, Downloader, SafeStorage, DLOG } from './core';
 import { GREY, BLUE } from 'react-native-material-color';
 import { LoadingModal } from './component';
 import { TintColour, UpdateTintColour } from './value/colour';
@@ -23,6 +23,13 @@ class App extends Component {
       global.DATA = data;
       SWAPBUTTON = DATA[LOCAL.swapButton];
       DARKMODE = DATA[LOCAL.darkMode];
+
+      // update state
+      this.state = {
+        dark: DARKMODE,
+        loading: true,
+      };
+      DLOG('state set');
 
       let tint = TintColour();
       if (!tint[50]) tint = BLUE;
@@ -61,23 +68,29 @@ class App extends Component {
         dn.updateAll(false).then(success => {
           // Make sure it finishes downloading
           if (success) {
-            this.setState({loading: false, dark: DARKMODE});
+            this.setState({loading: false});
           } else {
             // Reset to a special page
             // For now, just an error message
             alert(lang.error_download_issue);
           }
         });
+      } else {
+        this.setState({loading: false});
       }
     });
   }
 
   render() {
+    if (this.state == null) return null;
+
+    const { loading, dark } = this.state;
+    if (loading) return <Loading />
     return (
-      <Router sceneStyle={{flex: 1, backgroundColor: DARKMODE ? 'black' : 'white'}}>
+      <Router sceneStyle={{flex: 1, backgroundColor: dark ? 'black' : 'white'}}>
         <Stack key='root' hideNavBar>
           <Scene key='Home' component={Home}/>
-          <Scene key='Setup' component={Setup} initial={!getFirstLaunch()}/>
+          <Scene key='Setup' component={Setup} initial={getFirstLaunch()}/>
           
           <Scene key='Menu' component={Menu}/>
 
@@ -106,4 +119,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default withTheme(App);

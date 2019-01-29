@@ -16,7 +16,6 @@ class DataLoader {
 
     let local = await this.loadLocal();
     let saved = await this.loadSaved();
-    console.log(local, saved);
     return Object.assign(local, saved);
   }
 
