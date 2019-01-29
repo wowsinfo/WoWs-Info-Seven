@@ -15,6 +15,12 @@ import lang from './value/lang';
 class App extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      loading: true,
+      dark: false,
+    };
+
     // Load all data from AsyncStorage
     DataLoader.loadAll().then(data => {
       console.log(data);
@@ -22,12 +28,6 @@ class App extends Component {
       global.DATA = data;
       SWAPBUTTON = DATA[LOCAL.swapButton];
       DARKMODE = DATA[LOCAL.darkMode];
-      
-      // update state
-      this.state = {
-        dark: DARKMODE,
-        loading: true,
-      };
 
       console.log('state has been set');
 
@@ -68,7 +68,7 @@ class App extends Component {
         dn.updateAll(false).then(success => {
           // Make sure it finishes downloading
           if (success) {
-            this.setState({loading: false});
+            this.setState({loading: false, dark: DARKMODE});
           } else {
             // Reset to a special page
             // For now, just an error message
@@ -76,14 +76,14 @@ class App extends Component {
           }
         });
       } else {
-        this.setState({loading: false});
+        this.setState({loading: false, dark: DARKMODE});
       }
     });
   }
 
   render() {
-    if (this.state == null) return <Loading />;
-    const { dark } = this.state;
+    const { loading, dark } = this.state;
+    if (loading) return <Loading />;
     return (
       <Router sceneStyle={{flex: 1, backgroundColor: dark ? 'black' : 'white'}}>
         <Stack key='root' hideNavBar>

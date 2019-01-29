@@ -22,7 +22,7 @@ class Friend extends PureComponent {
    * @param {any} info 
    */
   navigate(info) {
-    SafeAction('Statistics', {info: info})
+    SafeAction('Statistics', {info: info, friend: true})
   }
 }
 
