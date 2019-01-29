@@ -1,4 +1,12 @@
 /**
+ * Only print when it is debuging mode
+ * @param {*} msg 
+ */
+export const DLOG = (msg) => {
+  if (__DEV__) console.log(msg);
+}
+
+/**
  * Deep clone an object
  * @param {*} value 
  */

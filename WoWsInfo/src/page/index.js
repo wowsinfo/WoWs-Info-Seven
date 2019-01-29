@@ -1,9 +1,9 @@
 // This is the menu that we could access from anywhere
 export * from './common/Menu';
 export * from './common/Filter';
+export * from './common/Loading';
 
-import Home from './home/Home';
-export { Home };
+export * from './home/Home';
 
 // Go to this page when app is first launched
 export * from './home/Setup';
