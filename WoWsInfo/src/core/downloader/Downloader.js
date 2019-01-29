@@ -1,19 +1,20 @@
 import { WoWsAPI, WikiAPI } from '../../value/api';
-import { SERVER, APP, LOCAL, SAVED, langStr } from '../../value/data';
+import { Alert } from 'react-native';
+import { SERVER, APP, LOCAL, SAVED, langStr, getCurrDomain } from '../../value/data';
 import { SafeFetch, Guard, SafeStorage } from '../';
 import lang from '../../value/lang';
 
 class Downloader {
   constructor(server) {
     // Convert server index to string
-    this.server = SERVER[server];
+    this.domain = getCurrDomain();
     this.language = langStr();
 
     // To prevent when first launch, everything is new and too many dots
     this.new = !DATA[LOCAL.firstLaunch];
     console.log(this.new);
 
-    console.log(`Downloader\nYou server is '${this.server}'`);
+    console.log(`Downloader\nYou server is '${this.domain}'`);
   }
 
   /**
@@ -53,7 +54,7 @@ class Downloader {
         // Show a message to tell user that data has been downloaded
         const format = require('string-format');
         let msg = format(lang.game_update_message, gameVersion);
-        alert(msg);
+        Alert.alert(lang.game_update_title, msg);
       }
       return true;
     } catch (err) {
@@ -65,7 +66,7 @@ class Downloader {
    * Get game server version of WoWs
    */
   async getVersion() {
-    let json = await SafeFetch.get(WoWsAPI.GameVersion, this.server);
+    let json = await SafeFetch.get(WoWsAPI.GameVersion, this.domain);
     // Guard ensures that there is always a value returned
     return Guard(json, 'data.game_version', APP.GameVersion);
   }
@@ -74,7 +75,7 @@ class Downloader {
    * Get all supported languages locally
    */
   async getLanguage() {
-    let json = await SafeFetch.get(WikiAPI.Language, this.server);
+    let json = await SafeFetch.get(WikiAPI.Language, this.domain);
     let data = Guard(json, 'data.languages', {});
     // Save data
     await SafeStorage.set(SAVED.language, data);
@@ -86,7 +87,7 @@ class Downloader {
    */
 
   async getEncyclopedia() {
-    let json = await SafeFetch.get(WikiAPI.Encyclopedia, this.server, this.language);
+    let json = await SafeFetch.get(WikiAPI.Encyclopedia, this.domain, this.language);
     let data = Guard(json, 'data', {});
     await SafeStorage.set(SAVED.encyclopedia, data);
     return data;
@@ -112,7 +113,7 @@ class Downloader {
     
     while (page < pageTotal) {
       // page + 1 to get actually page not index
-      let json = await SafeFetch.get(WikiAPI.Warship, this.server, `&page_no=${page+1}&${this.language}`);
+      let json = await SafeFetch.get(WikiAPI.Warship, this.domain, `&page_no=${page+1}&${this.language}`);
       pageTotal = Guard(json, 'meta.page_total', 1);
       let data = Guard(json, 'data', {});
 
@@ -148,7 +149,7 @@ class Downloader {
   }
 
   async getAchievement() {
-    let json = await SafeFetch.get(WikiAPI.Achievement, this.server, `${this.language}`);
+    let json = await SafeFetch.get(WikiAPI.Achievement, this.domain, `${this.language}`);
     let data = Guard(json, 'data.battle', {});
     if (this.new === true) {
       for (let id in data) {
@@ -163,8 +164,8 @@ class Downloader {
   async getCollectionAndItem() {
     let all = {};
 
-    let collection = await SafeFetch.get(WikiAPI.Collection, this.server, `${this.language}`);
-    let item = await SafeFetch.get(WikiAPI.CollectionItem, this.server, `${this.language}`);
+    let collection = await SafeFetch.get(WikiAPI.Collection, this.domain, `${this.language}`);
+    let item = await SafeFetch.get(WikiAPI.CollectionItem, this.domain, `${this.language}`);
 
     collection = Guard(collection, 'data', {});
     item = Guard(item, 'data', {});
@@ -190,7 +191,7 @@ class Downloader {
   }
 
   async getCommanderSkill() {
-    let json = await SafeFetch.get(WikiAPI.CommanderSkill, this.server, `${this.language}`);
+    let json = await SafeFetch.get(WikiAPI.CommanderSkill, this.domain, `${this.language}`);
 
     let skill = Guard(json, 'data', []);
     let data = Object.keys(skill).map(k => skill[k]);
@@ -210,7 +211,7 @@ class Downloader {
 
     while (page < pageTotal) {
       // page + 1 to get actually page not index
-      let json = await SafeFetch.get(WikiAPI.Consumable, this.server, `&page_no=${page+1}&${this.language}`);
+      let json = await SafeFetch.get(WikiAPI.Consumable, this.domain, `&page_no=${page+1}&${this.language}`);
       pageTotal = Guard(json, 'meta.page_total', 1);
       let data = Guard(json, 'data', {});
 
@@ -236,7 +237,7 @@ class Downloader {
   }
 
   async getMap() {
-    let json = await SafeFetch.get(WikiAPI.GameMap, this.server, `${this.language}`);
+    let json = await SafeFetch.get(WikiAPI.GameMap, this.domain, `${this.language}`);
 
     let map = Guard(json, 'data', []);
     let data = Object.keys(map).map(k => map[k]);
