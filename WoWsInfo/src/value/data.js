@@ -1,4 +1,4 @@
-import { SafeStorage } from "../core";
+import { SafeStorage, SafeValue } from "../core";
 
 /**
  * App information
@@ -74,9 +74,7 @@ export const getCurrDomain = () => {
 };
 
 export const getCurrServer = () => {
-  let index = DATA[LOCAL.userServer];
-  if (!index) index = 3;
-  return index;
+  return SafeValue(DATA[LOCAL.userServer], 3);
 };
 
 export const setCurrServer = (index) => {
@@ -89,7 +87,7 @@ export const setCurrServer = (index) => {
  * API Language
  */
 export const getAPILanguage = () => {
-  return DATA[LOCAL.apiLanguage];
+  return SafeValue(DATA[LOCAL.apiLanguage], 'en');
 };
 
 export const getAPILangName = () => {
