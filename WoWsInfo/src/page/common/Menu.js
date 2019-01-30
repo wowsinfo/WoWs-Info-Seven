@@ -14,6 +14,7 @@ import lang from '../../value/lang';
 import { Actions } from 'react-native-router-flux';
 import { SafeAction } from '../../core';
 import { ThemeBackColour, TintColour } from '../../value/colour';
+import { getCurrDomain } from '../../value/data';
 
 class Menu extends Component {
 
@@ -23,7 +24,9 @@ class Menu extends Component {
     this.state = {
       search: '',
       server: ''
-    }
+    };
+
+    let domain = getCurrDomain();
 
     // Data for the list
     this.wiki = [{t: lang.wiki_achievement, i: require('../../img/Achievement.png'), p: () => SafeAction('Achievement')},
@@ -35,16 +38,16 @@ class Menu extends Component {
     {t: lang.wiki_collections, i: require('../../img/Collection.png'), p: () => SafeAction('Collection')}];
 
     // TODO: change links base on player server
-    this.websites = [{t: lang.website_official_site, d: 'https://worldofwarships.com/'},
-    {t: lang.website_premium, d: 'https://asia.wargaming.net/shop/wows/'},
-    {t: lang.website_global_wiki, d: 'http://wiki.wargaming.net/en/World_of_Warships/'},
-    {t: lang.website_dev_blog, d: 'https://www.facebook.com/wowsdevblog/'},
-    {t: lang.website_sea_group, d: 'https://sea-group.org/'},
-    {t: lang.website_daily_bounce, d: 'https://thedailybounce.net/category/world-of-warships/'},
-    {t: lang.website_numbers, d: 'https://wows-numbers.com/'},
-    {t: lang.website_today, d: 'https://warships.today/'},
-    {t: lang.website_ranking, d: 'http://maplesyrup.sweet.coocan.jp/wows/ranking/'},
-    {t: lang.website_models, d: 'https://sketchfab.com/tags/world-of-warships'}];
+    this.websites = [{t: lang.website_official_site, d: `https://worldofwarships.com/`},
+    {t: lang.website_premium, d: `https://asia.wargaming.net/shop/wows/`},
+    {t: lang.website_global_wiki, d: `http://wiki.wargaming.net/en/World_of_Warships/`},
+    {t: lang.website_dev_blog, d: `https://www.facebook.com/wowsdevblog/`},
+    {t: lang.website_sea_group, d: `https://sea-group.org/`},
+    {t: lang.website_daily_bounce, d: `https://thedailybounce.net/category/world-of-warships/`},
+    {t: lang.website_numbers, d: `https://wows-numbers.com/`},
+    {t: lang.website_today, d: `https://warships.today/`},
+    {t: lang.website_ranking, d: `http://maplesyrup.sweet.coocan.jp/wows/ranking/`},
+    {t: lang.website_models, d: `https://sketchfab.com/tags/world-of-warships`}];
     
     this.youtubers = [{t: lang.youtuber_official, d: 'https://www.youtube.com/user/worldofwarshipsCOM'},
     {t: lang.youtuber_flambass, d: 'https://www.youtube.com/user/Flambass'},
