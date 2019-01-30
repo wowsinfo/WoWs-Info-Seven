@@ -27,6 +27,9 @@ class Menu extends Component {
     };
 
     let domain = getCurrDomain();
+    // com -> na
+    let prefix = domain;
+    if (prefix === 'com') prefix = 'na';
 
     // Data for the list
     this.wiki = [{t: lang.wiki_achievement, i: require('../../img/Achievement.png'), p: () => SafeAction('Achievement')},
@@ -38,14 +41,14 @@ class Menu extends Component {
     {t: lang.wiki_collections, i: require('../../img/Collection.png'), p: () => SafeAction('Collection')}];
 
     // TODO: change links base on player server
-    this.websites = [{t: lang.website_official_site, d: `https://worldofwarships.com/`},
-    {t: lang.website_premium, d: `https://asia.wargaming.net/shop/wows/`},
+    this.websites = [{t: lang.website_official_site, d: `https://worldofwarships.${domain}/`},
+    {t: lang.website_premium, d: `https://${prefix}.wargaming.net/shop/wows/`},
     {t: lang.website_global_wiki, d: `http://wiki.wargaming.net/en/World_of_Warships/`},
     {t: lang.website_dev_blog, d: `https://www.facebook.com/wowsdevblog/`},
     {t: lang.website_sea_group, d: `https://sea-group.org/`},
     {t: lang.website_daily_bounce, d: `https://thedailybounce.net/category/world-of-warships/`},
-    {t: lang.website_numbers, d: `https://wows-numbers.com/`},
-    {t: lang.website_today, d: `https://warships.today/`},
+    {t: lang.website_numbers, d: `https://${prefix}.wows-numbers.com/`},
+    {t: lang.website_today, d: `https://${prefix}.warships.today/`},
     {t: lang.website_ranking, d: `http://maplesyrup.sweet.coocan.jp/wows/ranking/`},
     {t: lang.website_models, d: `https://sketchfab.com/tags/world-of-warships`}];
     
