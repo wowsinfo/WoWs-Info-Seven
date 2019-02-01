@@ -52,12 +52,11 @@ class Downloader {
         SafeStorage.set(LOCAL.gameVersion, gameVersion);
 
         // Show a message to tell user that data has been downloaded
-        const format = require('string-format');
-        let msg = format(lang.game_update_message, gameVersion);
-        Alert.alert(lang.game_update_title, msg);
+        Alert.alert(lang.game_update_title, gameVersion);
       }
       return true;
     } catch (err) {
+      console.error(err);
       return false;
     }
   }
