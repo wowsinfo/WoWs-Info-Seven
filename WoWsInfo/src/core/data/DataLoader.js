@@ -12,7 +12,7 @@ class DataLoader {
    */
   static async loadAll() {
     // For debugging only
-     SafeStorage.clear();
+    // SafeStorage.clear();
 
     let local = await this.loadLocal();
     let saved = await this.loadSaved();
