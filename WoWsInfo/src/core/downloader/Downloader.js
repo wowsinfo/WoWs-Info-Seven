@@ -56,7 +56,7 @@ class Downloader {
       }
       return true;
     } catch (err) {
-      console.error(err);
+      // Note: it might fail even if data are loaded correctly
       return false;
     }
   }
