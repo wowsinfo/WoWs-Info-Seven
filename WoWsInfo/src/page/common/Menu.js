@@ -112,13 +112,14 @@ class Menu extends Component {
 
   searchAll = (text) => {
     this.setState({search: text});
+
+    // Clear timeout everytime for efficient data request
     clearTimeout(this.delayedRequest);
     this.delayedRequest = setTimeout(() => {
       let domain = getCurrDomain();
-      let length = text.length;
-
       // Save all clans and players
       let all = [{clan: []}, {player: []}];
+      let length = text.length;
       if (length > 2) {
         // For player, 3+
         SafeFetch.get(WoWsAPI.PlayerSearch, domain, text).then(result => {
