@@ -32,7 +32,7 @@ class DataLoader {
     this.loadEntry(data, apiLanguage, 'en');
     this.loadEntry(data, swapButton, false);
     this.loadEntry(data, appVersion, APP.Version);
-    this.loadEntry(data, gameVersion, '0.7.12.0');
+    this.loadEntry(data, gameVersion, APP.GameVersion);
     this.loadEntry(data, firstLaunch, true);
     this.loadEntry(data, friendList, [{nickname: 'HenryQuan', account_id: '2011774448', server: 3}]);
     this.loadEntry(data, userData, {});

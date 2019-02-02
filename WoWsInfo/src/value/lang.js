@@ -8,7 +8,9 @@ export default lang = new LocalizedStrings({
     setup_loading: 'Loading...',
     /// Home section
     // Update section
-    game_update_title: 'Game Version',
+    update_version_title: 'Version',
+    update_app_version: 'App ->',
+    update_game_version: 'Game ->',
     // Button section
     button_settings_label: 'Settings',
     button_menu_label: 'Menu',
