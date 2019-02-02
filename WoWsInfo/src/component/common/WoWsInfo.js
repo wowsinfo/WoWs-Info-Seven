@@ -35,8 +35,8 @@ class WoWsInfo extends Component {
     const { container, safeView, child } = styles;
     const { children, style } = this.props;
     return (
-      <Surface style={[container, style]}>
-        <SafeAreaView style={[safeView, ThemeBackColour()]}>
+      <Surface style={[container, style, ThemeBackColour()]}>
+        <SafeAreaView style={safeView}>
           <StatusBar barStyle={DARKMODE ? 'light-content' : 'dark-content'} 
             backgroundColor={ThemeColour()}/>
           <Surface style={child}>
