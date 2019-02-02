@@ -34,9 +34,9 @@ class DataLoader {
     this.loadEntry(data, appVersion, APP.Version);
     this.loadEntry(data, gameVersion, '0.7.12.0');
     this.loadEntry(data, firstLaunch, true);
-    this.loadEntry(data, friendList, [{name: 'HenryQuan', id: '', server: 3}]);
+    this.loadEntry(data, friendList, [{nickname: 'HenryQuan', account_id: '2011774448', server: 3}]);
     this.loadEntry(data, userData, {});
-    this.loadEntry(data, userInfo, {name: '', id: '', server: ''});
+    this.loadEntry(data, userInfo, {nickname: '', account_id: '', server: ''});
     this.loadEntry(data, userServer, 3);
     this.loadEntry(data, lastUpdate, new Date().toDateString());
     this.loadEntry(data, theme, BLUE);
