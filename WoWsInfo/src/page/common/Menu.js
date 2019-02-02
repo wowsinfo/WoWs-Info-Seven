@@ -12,9 +12,10 @@ import { List, Colors, Surface, Searchbar } from 'react-native-paper';
 import { FooterButton, WoWsInfo, SectionTitle } from '../../component';
 import lang from '../../value/lang';
 import { Actions } from 'react-native-router-flux';
-import { SafeAction } from '../../core';
+import { SafeAction, SafeFetch } from '../../core';
 import { ThemeBackColour, TintColour } from '../../value/colour';
 import { getCurrDomain } from '../../value/data';
+import { WoWsAPI } from '../../value/api';
 
 class Menu extends Component {
 
@@ -70,7 +71,7 @@ class Menu extends Component {
     return (
       <WoWsInfo noLeft title={lang.menu_footer} onPress={() => this.refs['search'].focus()}>
         <Searchbar ref='search' value={search} style={searchBar} placeholder={lang.search_placeholder}
-          onChangeText={text => this.setState({search: text})} autoCorrect={false} autoCapitalize='none'/>
+          onChangeText={this.searchAll} autoCorrect={false} autoCapitalize='none'/>
         { this.renderContent() }
       </WoWsInfo>
     );
@@ -107,6 +108,17 @@ class Menu extends Component {
         </ScrollView>
       )
     }
+  }
+
+  searchAll = (text) => {
+    this.setState({search: text});
+    clearTimeout(this.delayedRequest);
+    this.delayedRequest = setTimeout(() => {
+      let domain = getCurrDomain();
+      SafeFetch.get(WoWsAPI.PlayerSearch, domain, text).then(result => {
+        console.log(result);
+      });
+    }, 200);
   }
 }
 
