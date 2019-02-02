@@ -22,6 +22,8 @@ class Warship extends PureComponent {
     let warship = DATA[SAVED.warship];
     let sorted = Object.entries(warship).sort((a, b) => {
       // Sort by tier, then by type
+      if (a[1].new) return -1;
+      if (b[1].new) return 1;
       if (a[1].tier === b[1].tier) return a[1].type.localeCompare(b[1].type);
       else return b[1].tier - a[1].tier;
     });
