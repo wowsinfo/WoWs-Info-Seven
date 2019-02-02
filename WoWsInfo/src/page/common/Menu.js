@@ -115,10 +115,24 @@ class Menu extends Component {
     clearTimeout(this.delayedRequest);
     this.delayedRequest = setTimeout(() => {
       let domain = getCurrDomain();
-      SafeFetch.get(WoWsAPI.PlayerSearch, domain, text).then(result => {
-        console.log(result);
-      });
-    }, 200);
+      let length = text.length;
+
+      // Save all clans and players
+      let all = [{clan: []}, {player: []}];
+      if (length > 2) {
+        // For player, 3+
+        SafeFetch.get(WoWsAPI.PlayerSearch, domain, text).then(result => {
+          console.log(result);
+        });
+      }
+
+      if (length > 1 && length < 6) {
+        // For clan, only 2 - 5
+        SafeFetch.get(WoWsAPI.ClanSearch, domain, text).then(result => {
+          console.log(result);
+        });
+      }
+    }, 500);
   }
 }
 
