@@ -28,7 +28,10 @@ class Downloader {
       let gameVersion = await this.getVersion();
       let currVersion = DATA[LOCAL.gameVersion];
       console.log(`Current: ${currVersion}\nAPI: ${gameVersion}`);
-      if (gameVersion > currVersion || force) {
+      let appVersion = await SafeStorage.get(LOCAL.appVersion, '1.0.4.2');
+      console.log(`Current app version: ${appVersion}\nLatest: ${APP.Version}`);
+      // Check for game update, force mode or app update
+      if (gameVersion > currVersion || force || appVersion != APP.Version) {
         // Update all data
         console.log('Downloader\nUpdating all data from API');
         // Download language
@@ -50,9 +53,10 @@ class Downloader {
         // Make sure it is also great than current version
         // Update this value only if all data are saved correctly
         SafeStorage.set(LOCAL.gameVersion, gameVersion);
+        SafeStorage.set(LOCAL.appVersion, APP.Version);
 
         // Show a message to tell user that data has been downloaded
-        Alert.alert(lang.game_update_title, gameVersion);
+        Alert.alert(lang.update_version_title, `${lang.update_game_version} ${gameVersion}\n${lang.update_app_version} ${APP.Version}`);
       }
       return true;
     } catch (err) {
