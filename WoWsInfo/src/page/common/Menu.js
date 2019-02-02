@@ -8,7 +8,7 @@
 import React, { Component } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, Linking } from 'react-native';
 import { isAndroid, isIphoneX } from 'react-native-device-detection';
-import { List, Colors, Surface, Searchbar } from 'react-native-paper';
+import { List, Colors, Text, Searchbar } from 'react-native-paper';
 import { FooterButton, WoWsInfo, SectionTitle } from '../../component';
 import lang from '../../value/lang';
 import { Actions } from 'react-native-router-flux';
@@ -24,7 +24,8 @@ class Menu extends Component {
 
     this.state = {
       search: '',
-      server: ''
+      server: '',
+      result: {player: [], clan: []}
     };
 
     let domain = getCurrDomain();
@@ -79,9 +80,11 @@ class Menu extends Component {
 
   renderContent() {
     const { icon, scroll } = styles;
-    const { search } = this.state;
+    const { search, result } = this.state;
     if (search.length > 0) {
-      return null;
+      return (
+        <Text>{JSON.stringify(result)}</Text>
+      )
     } else {
       return (
         <ScrollView showsVerticalScrollIndicator={false}
@@ -128,6 +131,7 @@ class Menu extends Component {
             // Error here
           } else {
             all.player = data;
+            this.setState({result: all});
           }
         });
       }
@@ -140,6 +144,7 @@ class Menu extends Component {
             // Error here
           } else {
             all.clan = data;
+            this.setState({result: all});
           }
         });
       }
