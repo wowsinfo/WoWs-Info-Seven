@@ -12,7 +12,7 @@ import { List, Colors, Surface, Searchbar } from 'react-native-paper';
 import { FooterButton, WoWsInfo, SectionTitle } from '../../component';
 import lang from '../../value/lang';
 import { Actions } from 'react-native-router-flux';
-import { SafeAction, SafeFetch } from '../../core';
+import { SafeAction, SafeFetch, Guard } from '../../core';
 import { ThemeBackColour, TintColour } from '../../value/colour';
 import { getCurrDomain } from '../../value/data';
 import { WoWsAPI } from '../../value/api';
@@ -118,19 +118,29 @@ class Menu extends Component {
     this.delayedRequest = setTimeout(() => {
       let domain = getCurrDomain();
       // Save all clans and players
-      let all = [{clan: []}, {player: []}];
+      let all = {player: [], clan: []};
       let length = text.length;
       if (length > 2) {
         // For player, 3+
         SafeFetch.get(WoWsAPI.PlayerSearch, domain, text).then(result => {
-          console.log(result);
+          let data = Guard(result, 'data', null);
+          if (data == null) {
+            // Error here
+          } else {
+            all.player = data;
+          }
         });
       }
 
       if (length > 1 && length < 6) {
         // For clan, only 2 - 5
         SafeFetch.get(WoWsAPI.ClanSearch, domain, text).then(result => {
-          console.log(result);
+          let data = Guard(result, 'data', null);
+          if (data == null) {
+            // Error here
+          } else {
+            all.clan = data;
+          }
         });
       }
     }, 500);
