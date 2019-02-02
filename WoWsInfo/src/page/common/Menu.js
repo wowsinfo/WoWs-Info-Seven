@@ -6,7 +6,7 @@
  */
 
 import React, { Component } from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, Linking } from 'react-native';
+import { FlatList, ScrollView, StyleSheet, Linking } from 'react-native';
 import { isAndroid, isIphoneX } from 'react-native-device-detection';
 import { List, Colors, Text, Searchbar } from 'react-native-paper';
 import { FooterButton, WoWsInfo, SectionTitle } from '../../component';
@@ -88,12 +88,16 @@ class Menu extends Component {
       return (
         <ScrollView showsVerticalScrollIndicator={false}
           contentContainerStyle={scroll}>
+          <SectionTitle title={`${lang.menu_search_clan} - ${clanLen}`}/>
           { clanLen > 0 ?
-              <SectionTitle title={`${lang.menu_search_clan} - ${clanLen}`}/>
-            : null }
+            <FlatList data={result.player} renderItem={({item}) => {
+              return <Text>{JSON.stringify(item)}</Text>
+            }} keyExtractor={p => p.account_id}/> : null }
+          <SectionTitle title={`${lang.menu_search_player} - ${playerLen}`}/>
           { playerLen > 0 ?
-              <SectionTitle title={`${lang.menu_search_player} - ${playerLen}`}/>
-            : null }
+            <FlatList data={result.player} renderItem={({item}) => {
+              return <Text>{JSON.stringify(item)}</Text>
+            }} keyExtractor={c => c.clan_id}/> : null }
         </ScrollView>
       )
     } else {
