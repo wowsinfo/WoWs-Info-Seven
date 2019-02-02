@@ -11,6 +11,7 @@ export * from './common/LoadingModal';
 export * from './common/LoadingIndicator';
 export * from './common/InfoLabel';
 export * from './common/SectionTitle';
+export * from './common/PlayerCell';
 
 // Wiki
 export * from './wiki/WikiIcon';
