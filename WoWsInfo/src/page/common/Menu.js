@@ -82,8 +82,19 @@ class Menu extends Component {
     const { icon, scroll } = styles;
     const { search, result } = this.state;
     if (search.length > 0) {
+      console.log(result);
+      let playerLen  = result.player.length;
+      let clanLen  = result.clan.length;
       return (
-        <Text>{JSON.stringify(result)}</Text>
+        <ScrollView showsVerticalScrollIndicator={false}
+          contentContainerStyle={scroll}>
+          { clanLen > 0 ?
+              <SectionTitle title={`${lang.menu_search_clan} - ${clanLen}`}/>
+            : null }
+          { playerLen > 0 ?
+              <SectionTitle title={`${lang.menu_search_player} - ${playerLen}`}/>
+            : null }
+        </ScrollView>
       )
     } else {
       return (
@@ -123,19 +134,7 @@ class Menu extends Component {
       // Save all clans and players
       let all = {player: [], clan: []};
       let length = text.length;
-      if (length > 2) {
-        // For player, 3+
-        SafeFetch.get(WoWsAPI.PlayerSearch, domain, text).then(result => {
-          let data = Guard(result, 'data', null);
-          if (data == null) {
-            // Error here
-          } else {
-            all.player = data;
-            this.setState({result: all});
-          }
-        });
-      }
-
+      
       if (length > 1 && length < 6) {
         // For clan, only 2 - 5
         SafeFetch.get(WoWsAPI.ClanSearch, domain, text).then(result => {
@@ -144,6 +143,19 @@ class Menu extends Component {
             // Error here
           } else {
             all.clan = data;
+            this.setState({result: all});
+          }
+        });
+      }
+      
+      if (length > 2) {
+        // For player, 3+
+        SafeFetch.get(WoWsAPI.PlayerSearch, domain, text).then(result => {
+          let data = Guard(result, 'data', null);
+          if (data == null) {
+            // Error here
+          } else {
+            all.player = data;
             this.setState({result: all});
           }
         });

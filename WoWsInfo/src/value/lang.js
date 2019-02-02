@@ -83,6 +83,8 @@ export default lang = new LocalizedStrings({
     settings_open_source_licence_subtitle: 'Great modules that are used by WoWs Info',
     // Footer
     menu_footer: 'Search',
+    menu_search_player: 'Player',
+    menu_search_clan: 'Clan',
     // Search bar
     search_placeholder: 'Server: ',
     // Wiki
