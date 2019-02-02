@@ -82,7 +82,7 @@ class Menu extends Component {
     const { icon, scroll } = styles;
     const { search, result } = this.state;
     if (search.length > 0) {
-      console.log(result);
+      console.log(search, result);
       let playerLen  = result.player.length;
       let clanLen  = result.clan.length;
       return (
@@ -124,7 +124,12 @@ class Menu extends Component {
     }
   }
 
+  /**
+   * Search player and clan
+   */
   searchAll = (text) => {
+    // Reset search
+    if (text.length < 2) this.setState({result: {player: [], clan: []}});
     this.setState({search: text});
 
     // Clear timeout everytime for efficient data request
@@ -147,7 +152,7 @@ class Menu extends Component {
           }
         });
       }
-      
+
       if (length > 2) {
         // For player, 3+
         SafeFetch.get(WoWsAPI.PlayerSearch, domain, text).then(result => {
