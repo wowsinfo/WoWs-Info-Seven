@@ -91,12 +91,12 @@ class Menu extends Component {
           <SectionTitle title={`${lang.menu_search_clan} - ${clanLen}`}/>
           { clanLen > 0 ?
             <FlatList data={result.clan} renderItem={({item}) => {
-              return <PlayerCell item={item} clan/>
+              return <PlayerCell key={item.account_id} item={item} clan/>
             }} keyExtractor={p => p.account_id}/> : null }
           <SectionTitle title={`${lang.menu_search_player} - ${playerLen}`}/>
           { playerLen > 0 ?
             <FlatList data={result.player} renderItem={({item}) => {
-              return <PlayerCell item={item} player/>
+              return <PlayerCell key={item.clan_id} item={item} player/>
             }} keyExtractor={c => c.clan_id}/> : null }
         </ScrollView>
       )
