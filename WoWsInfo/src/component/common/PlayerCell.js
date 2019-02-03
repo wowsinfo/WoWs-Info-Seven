@@ -5,8 +5,8 @@
  */
 
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { List, Caption } from 'react-native-paper';
+import { StyleSheet } from 'react-native';
+import { List, Caption, Text } from 'react-native-paper';
 import { SafeAction } from '../../core';
 
 class PlayerCell extends Component {
@@ -23,7 +23,7 @@ class PlayerCell extends Component {
         right={() => <Caption style={ID}>{item.clan_id}</Caption>}
         onPress={() => null}/>
     } else {
-      return null;
+      return <Text>???</Text>;
     }
   };
 

@@ -88,7 +88,6 @@ class Menu extends Component {
     const { icon, scroll } = styles;
     const { search, result } = this.state;
     if (search.length > 0) {
-      console.log(search, result);
       let playerLen  = result.player.length;
       let clanLen  = result.clan.length;
       return (
