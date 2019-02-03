@@ -88,7 +88,7 @@ export default lang = new LocalizedStrings({
     menu_search_player: 'Player',
     menu_search_clan: 'Clan',
     // Search bar
-    search_placeholder: 'Server: ',
+    search_player_online: 'online',
     // Wiki
     wiki_section_title: 'Encyclopedia',
     wiki_achievement: 'Achievement',
