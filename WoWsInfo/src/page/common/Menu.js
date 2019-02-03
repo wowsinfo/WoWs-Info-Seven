@@ -35,7 +35,7 @@ class Menu extends Component {
     if (this.prefix === 'com') this.prefix = 'na';
 
     SafeFetch.get(WoWsAPI.PlayerOnline, domain).then(num => {
-      let online = Guard(num, 'data.wows.0.players_online', 0);
+      let online = Guard(num, 'data.wows.0.players_online', '???');
       this.setState({online: online});
     });
 
@@ -97,12 +97,12 @@ class Menu extends Component {
           <SectionTitle title={`${lang.menu_search_clan} - ${clanLen}`}/>
           { clanLen > 0 ?
             <FlatList data={result.clan} renderItem={({item}) => {
-              return <PlayerCell key={item.account_id} item={item} clan/>
+              return <PlayerCell key={item.clan_id} item={item} clan/>
             }} keyExtractor={p => p.account_id}/> : null }
           <SectionTitle title={`${lang.menu_search_player} - ${playerLen}`}/>
           { playerLen > 0 ?
             <FlatList data={result.player} renderItem={({item}) => {
-              return <PlayerCell key={item.clan_id} item={item} player/>
+              return <PlayerCell key={item.account_id} item={item} player/>
             }} keyExtractor={c => c.clan_id}/> : null }
         </ScrollView>
       )
