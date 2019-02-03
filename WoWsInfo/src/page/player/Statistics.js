@@ -9,12 +9,17 @@ class Statistics extends PureComponent {
   constructor(props) {
     super(props);
     // name, id and server
+    console.log(props.info);
+    const { account_id, nickname, server } = props.info;
+    if (account_id == "") {
+      
+    }
     // this.state = props.info;
     this.state = {
       name: 'HenryQuan',
-      server: 3,
+      server: server,
       // To check if certain data have been loaded correctly
-      achievement: true,
+      achievement: false,
       rank: false,
       ship: false,
       basic: false,

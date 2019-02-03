@@ -34,15 +34,42 @@ class DataLoader {
     this.loadEntry(data, appVersion, APP.Version);
     this.loadEntry(data, gameVersion, APP.GameVersion);
     this.loadEntry(data, firstLaunch, true);
-    this.loadEntry(data, friendList, [{nickname: 'HenryQuan', account_id: '2011774448', server: 3}]);
+    this.loadEntry(data, friendList, [{nickname: 'HenryQuan', account_id: '2011774448', server: 3}]).then(() => {
+      // Update format
+      let info = data[friendList];
+      info.forEach((v, i) => info[i] = this.formatConverter(v));
+      data[friendList] = info;
+    });
     this.loadEntry(data, userData, {});
-    this.loadEntry(data, userInfo, {nickname: '', account_id: '', server: ''});
+    this.loadEntry(data, userInfo, {nickname: '', account_id: '', server: 3}).then(() => {
+      // Update format
+      let info = data[userInfo];
+      data[userInfo] = this.formatConverter(info);
+    });
     this.loadEntry(data, userServer, 3);
     this.loadEntry(data, lastUpdate, new Date().toDateString());
     this.loadEntry(data, theme, BLUE);
     this.loadEntry(data, darkMode, false);
     this.loadEntry(data, date, new Date().toDateString());
     return data;
+  }
+
+  /**
+   * Convert old format to new format
+   * @param {*} obj 
+   */
+  static formatConverter(obj) {
+    if (obj.name) {
+      obj.nickname = obj.name;
+      delete obj.name;
+    }
+
+    if (obj.id) {
+      obj.account_id = obj.id;
+      delete obj.id;
+    }
+
+    return obj;
   }
 
   /**
