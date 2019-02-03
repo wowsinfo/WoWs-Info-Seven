@@ -28,11 +28,11 @@ class PlayerCell extends Component {
   };
 
   pushPlayer(item) {
-    SafeAction('Statistics');
+    SafeAction('Statistics', {info: item});
   }
 
   pushClan(item) {
-    SafeAction('ClanInfo');
+    SafeAction('ClanInfo', {info: item});
   }
 }
 
