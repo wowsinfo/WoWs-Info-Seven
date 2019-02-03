@@ -21,7 +21,7 @@ class PlayerCell extends Component {
     } else if (clan) {
       return <List.Item title={item.tag} 
         right={() => <Caption style={ID}>{item.clan_id}</Caption>}
-        onPress={() => null}/>
+        onPress={() => this.pushClan(item)}/>
     } else {
       return <Text>???</Text>;
     }
@@ -29,6 +29,10 @@ class PlayerCell extends Component {
 
   pushPlayer(item) {
     SafeAction('Statistics');
+  }
+
+  pushClan(item) {
+    SafeAction('ClanInfo');
   }
 }
 

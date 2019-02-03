@@ -23,6 +23,8 @@ export * from './wiki/WarshipModule';
 
 export * from './player/Statistics';
 
+export * from './clan/ClanInfo';
+
 export * from './settings/About';
 import Settings from './settings/Settings';
 export { Settings };
