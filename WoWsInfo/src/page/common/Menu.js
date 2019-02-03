@@ -25,13 +25,19 @@ class Menu extends Component {
     this.state = {
       search: '',
       server: '',
-      result: {player: [], clan: []}
+      result: {player: [], clan: []},
+      online: '???'
     };
 
     let domain = getCurrDomain();
     // com -> na
-    let prefix = domain;
-    if (prefix === 'com') prefix = 'na';
+    this.prefix = domain;
+    if (this.prefix === 'com') this.prefix = 'na';
+
+    SafeFetch.get(WoWsAPI.PlayerOnline, domain).then(num => {
+      let online = Guard(num, 'data.wows.0.players_online', 0);
+      this.setState({online: online});
+    });
 
     // Data for the list
     this.wiki = [{t: lang.wiki_achievement, i: require('../../img/Achievement.png'), p: () => SafeAction('Achievement')},
@@ -44,13 +50,13 @@ class Menu extends Component {
 
     // TODO: change links base on player server
     this.websites = [{t: lang.website_official_site, d: `https://worldofwarships.${domain}/`},
-    {t: lang.website_premium, d: `https://${prefix}.wargaming.net/shop/wows/`},
+    {t: lang.website_premium, d: `https://${this.prefix}.wargaming.net/shop/wows/`},
     {t: lang.website_global_wiki, d: `http://wiki.wargaming.net/en/World_of_Warships/`},
     {t: lang.website_dev_blog, d: `https://www.facebook.com/wowsdevblog/`},
     {t: lang.website_sea_group, d: `https://sea-group.org/`},
     {t: lang.website_daily_bounce, d: `https://thedailybounce.net/category/world-of-warships/`},
-    {t: lang.website_numbers, d: `https://${prefix}.wows-numbers.com/`},
-    {t: lang.website_today, d: `https://${prefix}.warships.today/`},
+    {t: lang.website_numbers, d: `https://${this.prefix}.wows-numbers.com/`},
+    {t: lang.website_today, d: `https://${this.prefix}.warships.today/`},
     {t: lang.website_ranking, d: `http://maplesyrup.sweet.coocan.jp/wows/ranking/`},
     {t: lang.website_models, d: `https://sketchfab.com/tags/world-of-warships`}];
     
@@ -67,11 +73,11 @@ class Menu extends Component {
 
   render() {
     const { searchBar } = styles;
-    const { search } = this.state;
+    const { search, online } = this.state;
 
     return (
       <WoWsInfo noLeft title={lang.menu_footer} onPress={() => this.refs['search'].focus()}>
-        <Searchbar ref='search' value={search} style={searchBar} placeholder={lang.search_placeholder}
+        <Searchbar ref='search' value={search} style={searchBar} placeholder={`${this.prefix.toUpperCase()} - ${online} ${lang.search_player_online}`}
           onChangeText={this.searchAll} autoCorrect={false} autoCapitalize='none'/>
         { this.renderContent() }
       </WoWsInfo>
