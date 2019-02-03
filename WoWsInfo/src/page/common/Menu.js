@@ -14,7 +14,7 @@ import lang from '../../value/lang';
 import { Actions } from 'react-native-router-flux';
 import { SafeAction, SafeFetch, Guard } from '../../core';
 import { ThemeBackColour, TintColour } from '../../value/colour';
-import { getCurrDomain } from '../../value/data';
+import { getCurrDomain, getCurrServer } from '../../value/data';
 import { WoWsAPI } from '../../value/api';
 
 class Menu extends Component {
@@ -97,12 +97,12 @@ class Menu extends Component {
           { clanLen > 0 ?
             <FlatList data={result.clan} renderItem={({item}) => {
               return <PlayerCell key={item.clan_id} item={item} clan/>
-            }} keyExtractor={p => p.account_id}/> : null }
+            }} keyExtractor={c => c.tag}/> : null }
           <SectionTitle title={`${lang.menu_search_player} - ${playerLen}`}/>
           { playerLen > 0 ?
             <FlatList data={result.player} renderItem={({item}) => {
               return <PlayerCell key={item.account_id} item={item} player/>
-            }} keyExtractor={c => c.clan_id}/> : null }
+            }} keyExtractor={p => p.nickname}/> : null }
         </ScrollView>
       )
     } else {
@@ -158,6 +158,7 @@ class Menu extends Component {
           if (data == null) {
             // Error here
           } else {
+            data.forEach(v => v.server = getCurrServer());
             all.clan = data;
             this.setState({result: all});
           }
@@ -171,6 +172,7 @@ class Menu extends Component {
           if (data == null) {
             // Error here
           } else {
+            data.forEach(v => v.server = getCurrServer());
             all.player = data;
             this.setState({result: all});
           }
