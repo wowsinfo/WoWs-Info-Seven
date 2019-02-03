@@ -126,6 +126,8 @@ export default lang = new LocalizedStrings({
     youtuber_yuro: 'Yuro',
     youtuber_iChaseGaming: 'iChaseGaming',
     youtuber_NoZoupForYou: 'NoZoupForYou',
+    // Tools
+    tool_title: 'Tools',
     /// App name section
     app_name: 'WoWs Info Origin',
     wowsinfo_x: 'X',
