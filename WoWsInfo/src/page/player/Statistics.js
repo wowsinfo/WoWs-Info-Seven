@@ -33,9 +33,11 @@ class Statistics extends PureComponent {
       SafeFetch.get(WoWsAPI.PlayerInfo, getDomain(server), account_id).then(data => {
         // Check if account is hidden
         console.log(data);
-        let hidden = Guard(data, 'meta.hidden', true);
-        if (hidden || hidden != null) {
+        let hidden = Guard(data, 'meta.hidden', null);
+        let hiddenAccount = false;
+        if (hidden != null) {
           // If hidden is not null, it is hidden
+          hiddenAccount = true;
           this.setState({hidden: true});
         }
 
@@ -46,8 +48,8 @@ class Statistics extends PureComponent {
           this.setState({valid: false});
         } else {
           let battle = Guard(player, 'statistics.pvp.battles', 0);
-          // Treat zero battle account as hidden
-          if (battle == 0) this.setState({hidden: true});
+          // Treat zero battle account as hidden not for hidden accounts
+          if (!hiddenAccount && battle == 0) this.setState({hidden: true});
           else this.setState({data: player});
         }
       });
