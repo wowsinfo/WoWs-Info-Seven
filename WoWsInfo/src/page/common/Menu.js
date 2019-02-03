@@ -123,6 +123,8 @@ class Menu extends Component {
                   onPress={() => Linking.openURL(item.d)}/>
               )})}
             </List.Section>
+            <List.Section title={lang.tool_title}>
+            </List.Section>
         </ScrollView>
       )
     }
