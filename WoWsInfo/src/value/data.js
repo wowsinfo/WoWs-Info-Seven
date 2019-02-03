@@ -73,6 +73,10 @@ export const getCurrDomain = () => {
   return SERVER[getCurrServer()];
 };
 
+export const getDomain = (index) => {
+  return SERVER[index];
+}
+
 export const getCurrServer = () => {
   return SafeValue(DATA[LOCAL.userServer], 3);
 };

@@ -1,52 +1,110 @@
 import React, { PureComponent } from 'react';
 import { View, SafeAreaView, Text, StyleSheet } from 'react-native';
-import { Surface, Button, IconButton } from 'react-native-paper';
-import { LOCAL } from '../../value/data';
-import { GREY } from 'react-native-material-color';
-import { LoadingIndicator, WoWsInfo } from '../../component';
+import { Surface, Button } from 'react-native-paper';
+import { LoadingIndicator, WoWsInfo, LoadingModal } from '../../component';
+import { SafeFetch, Guard } from '../../core';
+import { WoWsAPI } from '../../value/api';
+import { getDomain, langStr } from '../../value/data';
 
 class Statistics extends PureComponent {
   constructor(props) {
     super(props);
-    // name, id and server
-    console.log(props.info);
     const { account_id, nickname, server } = props.info;
-    if (account_id == "") {
-      
-    }
-    // this.state = props.info;
+
     this.state = {
-      name: 'HenryQuan',
+      name: nickname,
+      id: account_id,
       server: server,
+      data: {},
+      // Valid data or hidden account
+      valid: true,
+      hidden: false,
       // To check if certain data have been loaded correctly
       achievement: false,
       rank: false,
       ship: false,
       basic: false,
       graph: false
+    };
+
+    let domain = getDomain(server);
+    console.log(domain);
+    if (domain != null) {
+      SafeFetch.get(WoWsAPI.PlayerInfo, getDomain(server), account_id).then(data => {
+        // Check if account is hidden
+        console.log(data);
+        let hidden = Guard(data, 'meta.hidden', true);
+        if (hidden || hidden != null) {
+          // If hidden is not null, it is hidden
+          this.setState({hidden: true});
+        }
+
+        // Get player data here
+        let player = Guard(data, `data.${account_id}`, null);
+        if (player == null) {
+          // Invalid data
+          this.setState({valid: false});
+        } else {
+          let battle = Guard(player, 'statistics.pvp.battles', 0);
+          // Treat zero battle account as hidden
+          if (battle == 0) this.setState({hidden: true});
+          else this.setState({data: player});
+        }
+      });
+    } else {
+      // Invalid domain
+      this.setState({valid: false});
     }
   }
 
   render() {
-    const { container, buttons } = styles;
+    const { error, container, buttons } = styles;
     const { home, friend } = this.props;
+    const { name, id, data, valid, hidden } = this.state;
 
     let RootView = home ? Surface : WoWsInfo;
-    return (
-      <RootView style={container} noLeft={friend}>
-        <SafeAreaView>
-          <Text>{this.state.name}</Text>
-          { this.renderBasic() }
-          <View style={buttons}>
-            { this.renderAchievement() }
-            { this.renderShip() }
-            { this.renderGraph() }
-            { this.renderRank() }
-          </View>
+    if (id == null || id == "") {
+      // Show an error page or if it is from home, ask user to add an account first
+      return (
+        <RootView style={error}>
+          {
+            home ? <Text>Add yourself first</Text>
+            : <Text>BUG</Text>
+          }
+        </RootView>
+      );
+    } else if (!valid) {
+      // Not valid (API or Internet error)
+      return (
+        <RootView style={container}>
+          <Text>{'Data is not valid\nPlease try again later'}</Text>
+        </RootView>
+      );
+    } else if (hidden) {
+      // Hidden account
+      return (
+        <RootView style={container}>
+          <Text>{`${name} is Hidden`}</Text>
+        </RootView>
+      );
+    } else {
+      // Display player data
+      return (
+        <RootView style={container} noLeft={friend}>
+          <SafeAreaView>
+            <Text>{name}</Text>
+            { this.renderBasic() }
+            <View style={buttons}>
+              { this.renderAchievement() }
+              { this.renderShip() }
+              { this.renderGraph() }
+              { this.renderRank() }
+            </View>
+          </SafeAreaView>
+        </RootView>
+      );
+    }
 
-        </SafeAreaView>
-      </RootView>
-    )
   };
 
   ///
@@ -101,6 +159,11 @@ class Statistics extends PureComponent {
 }
 
 const styles = StyleSheet.create({
+  error: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   container: {
     flex: 1,
   },
