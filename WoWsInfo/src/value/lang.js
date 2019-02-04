@@ -130,9 +130,6 @@ export default lang = new LocalizedStrings({
     tool_title: 'Tools',
     /// App name section
     app_name: 'WoWs Info Origin',
-    wowsinfo_x: 'X',
-    wowsinfo_y: 'Y',
-    wowsinfo_z: 'Z',
     wowsinfo_black: 'Black',
     wowsinfo_white: 'White',
     wowsinfo_ultra: 'Ultra',
