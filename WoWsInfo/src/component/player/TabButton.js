@@ -12,10 +12,10 @@ import { Touchable } from '../common/Touchable';
 class TabButton extends Component {
   render() {
     const { container, text } = styles;
-    const { icon, color, label, onPress } = this.props;
+    const { label, onPress, disabled, ...props } = this.props;
     return (
-      <Touchable style={container} onPress={() => null}>
-        <IconButton icon={icon} color={color} size={24}/>
+      <Touchable fill style={container} onPress={disabled ? null : onPress}>
+        <IconButton size={24} disabled={disabled} {...props}/>
         <Caption style={text}>{label}</Caption>
       </Touchable>
     )
@@ -25,7 +25,7 @@ class TabButton extends Component {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   text: {
     marginTop: -14,

@@ -6,6 +6,7 @@ import { SafeFetch, Guard } from '../../core';
 import { WoWsAPI } from '../../value/api';
 import { getDomain, langStr } from '../../value/data';
 import { TintColour } from '../../value/colour';
+import lang from '../../value/lang';
 
 class Statistics extends PureComponent {
   constructor(props) {
@@ -154,8 +155,8 @@ class Statistics extends PureComponent {
           </SafeAreaView>
           <FooterPlus style={footer}>
             { this.renderAchievement(achievement) }
-            { this.renderShip(ship) }
             { this.renderGraph(graph) }
+            { this.renderShip(ship) }
             { this.renderRank(rank) }
           </FooterPlus>
         </RootView>
@@ -180,32 +181,32 @@ class Statistics extends PureComponent {
   }
 
   renderAchievement(achievement) {
-    const { container } = styles;
+    let loading = true;
+    if (achievement) loading = false;
 
-    if (!achievement) return <LoadingIndicator />
-    return <TabButton icon={require('../../img/AchievementTab.png')} color={this.theme}/>
+    return <TabButton icon={require('../../img/AchievementTab.png')} color={this.theme}
+      disabled={loading} label={lang.tab_achievement_title}/>
   }
 
   renderShip(ship) {
-    const { container } = styles;
+    let loading = true;
+    if (ship) loading = false;
 
-    if (!ship) return <LoadingIndicator />
-    return <TabButton icon={require('../../img/Ship.png')} color={this.theme}/>  
+    return <TabButton icon={require('../../img/Ship.png')} color={this.theme}
+      disabled={loading} label={lang.tab_ship_title}/>  
   }
 
   renderRank(rank) {
-    const { container } = styles;
+    let loading = true;
+    if (rank) loading = false;
 
-    if (!rank) return <LoadingIndicator />
     return <TabButton icon={require('../../img/Rank.png')} color={this.theme}
-      label={'Testing'}/>
+      disabled={loading} label={lang.tab_rank_title}/>
   }
 
   renderGraph(graph) {
-    const { container } = styles;
-    const { id } = this.state;
-
-    return <TabButton icon={require('../../img/Graph.png')} color={this.theme}/>
+    return <TabButton icon={require('../../img/Graph.png')} color={this.theme}
+      label={lang.tab_graph_title}/>
   }
 }
 
