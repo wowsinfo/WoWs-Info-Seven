@@ -24,9 +24,9 @@ class WoWsInfo extends Component {
                  'X', 'Y', 'Z', '>_<', '#', '0_0', '', '^_^', '★', 'α', 'θ', 'Ω', 'Ф', '∞', '░', 
                  '( ͡° ͜ʖ ͡°)', '¯\_(ツ)_/¯', '2018', '?!', '!!', '?!', '2017', '2016', '2019', 'Auris'];
 
-    // 50% of the time, it will be the app name
+    // 80% of the time, it will be the app name
     let r = random(10);
-    if (r < 9) this.lucky = lang.app_name;
+    if (r < 8) this.lucky = lang.app_name;
     else this.lucky = `WoWs Info ${name[random(name.length)]}`;
   }
 
