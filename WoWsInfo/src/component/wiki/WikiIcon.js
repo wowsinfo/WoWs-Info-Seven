@@ -31,7 +31,7 @@ class WikiIcon extends Component {
       return (
         <View style={container}>
           { item.new ? <View style={[newLabel, {backgroundColor: theme[500]}]}/> : null }
-          <Image source={{uri: item.image ? item.image : item.icon, cache: 'default'}} resizeMode='contain'
+          <Image source={{uri: item.image ? item.image : item.icon}} resizeMode='contain'
             onLoadEnd={() => this.setState({loading: false})} 
             style={{width: width, height: width / 1.7}} />
           { loading ? <LoadingIndicator style={indicator}/> : null }
@@ -41,7 +41,7 @@ class WikiIcon extends Component {
       return (
         <Touchable style={[container, selected ? {borderColor: theme[500]} : null]} {...props}>
           { item.new ? <View style={[newLabel, {backgroundColor: DATA[LOCAL.theme][500]}]}/> : null }
-          <Image source={{uri: item.image ? item.image : item.icon, cache: 'default'}} resizeMode='contain'
+          <Image source={{uri: item.image ? item.image : item.icon}} resizeMode='contain'
             onLoadEnd={() => this.setState({loading: false})} 
             style={{height: width, width: width}} />
           { loading ? <LoadingIndicator style={indicator}/> : null }

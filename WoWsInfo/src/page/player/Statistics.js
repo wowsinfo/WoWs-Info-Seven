@@ -1,10 +1,11 @@
 import React, { PureComponent } from 'react';
-import { View, SafeAreaView, Image, Text, StyleSheet } from 'react-native';
-import { Surface, Button } from 'react-native-paper';
-import { LoadingIndicator, WoWsInfo, LoadingModal } from '../../component';
+import { View, SafeAreaView, Text, StyleSheet } from 'react-native';
+import { Surface, Button, IconButton } from 'react-native-paper';
+import { LoadingIndicator, WoWsInfo, LoadingModal, FooterPlus } from '../../component';
 import { SafeFetch, Guard } from '../../core';
 import { WoWsAPI } from '../../value/api';
 import { getDomain, langStr } from '../../value/data';
+import { TintColour } from '../../value/colour';
 
 class Statistics extends PureComponent {
   constructor(props) {
@@ -29,6 +30,8 @@ class Statistics extends PureComponent {
     // Save domain
     this.domain = getDomain(server);
     console.log(this.domain);
+    // Save theme colour
+    this.theme = TintColour()[500];
 
     if (this.domain != null) {
       this.getBasic();
@@ -111,9 +114,9 @@ class Statistics extends PureComponent {
   }
 
   render() {
-    const { error, container, buttons } = styles;
+    const { error, container, footer } = styles;
     const { home, friend } = this.props;
-    const { name, id, data, valid, hidden, 
+    const { name, id, valid, hidden, 
             achievement, rank, basic, ship, graph } = this.state;
 
     let RootView = home ? Surface : WoWsInfo;
@@ -144,17 +147,17 @@ class Statistics extends PureComponent {
     } else {
       // Display player data
       return (
-        <RootView style={container} noLeft={friend}>
-          <SafeAreaView>
+        <RootView noLeft={friend}>
+          <SafeAreaView style={container}>
             <Text>{name}</Text>
             { this.renderBasic(basic) }
-            <View style={buttons}>
-              { this.renderAchievement(achievement) }
-              { this.renderShip(ship) }
-              { this.renderGraph(graph) }
-              { this.renderRank(rank) }
-            </View>
           </SafeAreaView>
+          <FooterPlus style={footer}>
+            { this.renderAchievement(achievement) }
+            { this.renderShip(ship) }
+            { this.renderGraph(graph) }
+            { this.renderRank(rank) }
+          </FooterPlus>
         </RootView>
       );
     }
@@ -167,7 +170,7 @@ class Statistics extends PureComponent {
   ///
 
   renderBasic(basic) {
-    const { container, buttons } = styles;
+    const { container } = styles;
 
     if (!basic) return <LoadingIndicator />
     return (
@@ -177,34 +180,35 @@ class Statistics extends PureComponent {
   }
 
   renderAchievement(achievement) {
-    const { container, buttons } = styles;
+    const { container } = styles;
 
     if (!achievement) return <LoadingIndicator />
-    return (
-      <Button>Achievement</Button>
-    )
+    return <IconButton icon={require('../../img/AchievementTab.png')} 
+      size={24} color={this.theme}/>
   }
 
   renderShip(ship) {
-    const { container, buttons } = styles;
+    const { container } = styles;
 
     if (!ship) return <LoadingIndicator />
-    return <Button>ship</Button>    
+    return <IconButton icon={require('../../img/Ship.png')}
+      size={24} color={this.theme}/>  
   }
 
   renderRank(rank) {
-    const { container, buttons } = styles;
+    const { container } = styles;
 
     if (!rank) return <LoadingIndicator />
-    return <Button>rank</Button>
+    return <IconButton icon={require('../../img/Rank.png')} 
+      size={24} color={this.theme}/>
   }
 
   renderGraph(graph) {
-    const { container, buttons } = styles;
+    const { container } = styles;
     const { id } = this.state;
 
-    if (id) return <Image />;
-    else return null;
+    return <IconButton icon={require('../../img/Graph.png')} 
+      size={24} color={this.theme}/>
   }
 }
 
@@ -217,10 +221,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  buttons: {
+  footer: {
     flexDirection: 'row',
-    justifyContent: 'space-around'
-  }
+    justifyContent: 'space-around',
+  },
 });
 
 export { Statistics };
