@@ -62,7 +62,8 @@ class Statistics extends PureComponent {
   render() {
     const { error, container, buttons } = styles;
     const { home, friend } = this.props;
-    const { name, id, data, valid, hidden } = this.state;
+    const { name, id, data, valid, hidden, 
+            achievement, rank, basic, ship, graph } = this.state;
 
     let RootView = home ? Surface : WoWsInfo;
     if (id == null || id == "") {
@@ -95,12 +96,12 @@ class Statistics extends PureComponent {
         <RootView style={container} noLeft={friend}>
           <SafeAreaView>
             <Text>{name}</Text>
-            { this.renderBasic() }
+            { this.renderBasic(basic) }
             <View style={buttons}>
-              { this.renderAchievement() }
-              { this.renderShip() }
-              { this.renderGraph() }
-              { this.renderRank() }
+              { this.renderAchievement(achievement) }
+              { this.renderShip(ship) }
+              { this.renderGraph(graph) }
+              { this.renderRank(rank) }
             </View>
           </SafeAreaView>
         </RootView>
@@ -114,9 +115,8 @@ class Statistics extends PureComponent {
   // their own state to check if the button could be rendered
   ///
 
-  renderBasic() {
+  renderBasic(basic) {
     const { container, buttons } = styles;
-    const { basic } = this.state;
 
     if (!basic) return <LoadingIndicator />
     return (
@@ -125,9 +125,8 @@ class Statistics extends PureComponent {
     )
   }
 
-  renderAchievement() {
+  renderAchievement(achievement) {
     const { container, buttons } = styles;
-    const { achievement } = this.state;
 
     if (!achievement) return <LoadingIndicator />
     return (
@@ -135,25 +134,22 @@ class Statistics extends PureComponent {
     )
   }
 
-  renderShip() {
+  renderShip(ship) {
     const { container, buttons } = styles;
-    const { ship } = this.state;
 
     if (!ship) return <LoadingIndicator />
     return <Button>ship</Button>    
   }
 
-  renderRank() {
+  renderRank(rank) {
     const { container, buttons } = styles;
-    const { rank } = this.state;
 
     if (!rank) return <LoadingIndicator />
     return <Button>rank</Button>
   }
 
-  renderGraph() {
+  renderGraph(graph) {
     const { container, buttons } = styles;
-    const { graph } = this.state;
 
     if (!graph) return <LoadingIndicator />
     return <Button>graph</Button>
