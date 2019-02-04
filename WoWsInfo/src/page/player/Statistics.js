@@ -15,7 +15,6 @@ class Statistics extends PureComponent {
       name: nickname,
       id: account_id,
       server: server,
-      data: {},
       // Valid data or hidden account
       valid: true,
       hidden: false,
@@ -27,36 +26,68 @@ class Statistics extends PureComponent {
       graph: false
     };
 
-    let domain = getDomain(server);
-    console.log(domain);
-    if (domain != null) {
-      SafeFetch.get(WoWsAPI.PlayerInfo, getDomain(server), account_id).then(data => {
-        // Check if account is hidden
-        console.log(data);
-        let hidden = Guard(data, 'meta.hidden', null);
-        let hiddenAccount = false;
-        if (hidden != null) {
-          // If hidden is not null, it is hidden
-          hiddenAccount = true;
-          this.setState({hidden: true});
-        }
+    this.domain = getDomain(server);
+    console.log(this.domain);
 
-        // Get player data here
-        let player = Guard(data, `data.${account_id}`, null);
-        if (player == null) {
-          // Invalid data
-          this.setState({valid: false});
-        } else {
-          let battle = Guard(player, 'statistics.pvp.battles', 0);
-          // Treat zero battle account as hidden not for hidden accounts
-          if (!hiddenAccount && battle == 0) this.setState({hidden: true});
-          else this.setState({data: player});
-        }
-      });
+    if (this.domain != null) {
+      getBasic();
+      getAchievement();
+      getShip();
+      getRank();
     } else {
       // Invalid domain
       this.setState({valid: false});
     }
+  }
+
+  /**
+   * Get basic player info
+   */
+  getBasic() {
+    SafeFetch.get(WoWsAPI.PlayerInfo, getDomain(server), account_id).then(data => {
+      // Check if account is hidden
+      console.log(data);
+      let hidden = Guard(data, 'meta.hidden', null);
+      let hiddenAccount = false;
+      if (hidden != null) {
+        // If hidden is not null, it is hidden
+        hiddenAccount = true;
+        this.setState({hidden: true});
+      }
+
+      // Get player data here
+      let player = Guard(data, `data.${account_id}`, null);
+      if (player == null) {
+        // Invalid data
+        this.setState({valid: false});
+      } else {
+        let battle = Guard(player, 'statistics.pvp.battles', 0);
+        // Treat zero battle account as hidden not for hidden accounts
+        if (!hiddenAccount && battle == 0) this.setState({hidden: true});
+        else this.setState({basic: player});
+      }
+    });
+  }
+
+  /**
+   * Get player achievement
+   */
+  getAchievement() {
+
+  }
+
+  /**
+   * Get player past rank info
+   */
+  getRank() {
+
+  }
+
+  /**
+   * Get all player ship info
+   */
+  getShip() {
+
   }
 
   render() {
@@ -150,9 +181,10 @@ class Statistics extends PureComponent {
 
   renderGraph(graph) {
     const { container, buttons } = styles;
-
-    if (!graph) return <LoadingIndicator />
-    return <Button>graph</Button>
+    const { id } = this.state;
+    
+    if (id) return <Image />;
+    else return null;
   }
 }
 
