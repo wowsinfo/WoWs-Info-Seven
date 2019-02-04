@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { View, SafeAreaView, Text, StyleSheet } from 'react-native';
 import { Surface, Button, IconButton } from 'react-native-paper';
-import { LoadingIndicator, WoWsInfo, LoadingModal, FooterPlus } from '../../component';
+import { LoadingIndicator, WoWsInfo, LoadingModal, FooterPlus, TabButton } from '../../component';
 import { SafeFetch, Guard } from '../../core';
 import { WoWsAPI } from '../../value/api';
 import { getDomain, langStr } from '../../value/data';
@@ -147,7 +147,7 @@ class Statistics extends PureComponent {
     } else {
       // Display player data
       return (
-        <RootView noLeft={friend}>
+        <RootView noLeft={friend} title={`${id}`}>
           <SafeAreaView style={container}>
             <Text>{name}</Text>
             { this.renderBasic(basic) }
@@ -183,32 +183,29 @@ class Statistics extends PureComponent {
     const { container } = styles;
 
     if (!achievement) return <LoadingIndicator />
-    return <IconButton icon={require('../../img/AchievementTab.png')} 
-      size={24} color={this.theme}/>
+    return <TabButton icon={require('../../img/AchievementTab.png')} color={this.theme}/>
   }
 
   renderShip(ship) {
     const { container } = styles;
 
     if (!ship) return <LoadingIndicator />
-    return <IconButton icon={require('../../img/Ship.png')}
-      size={24} color={this.theme}/>  
+    return <TabButton icon={require('../../img/Ship.png')} color={this.theme}/>  
   }
 
   renderRank(rank) {
     const { container } = styles;
 
     if (!rank) return <LoadingIndicator />
-    return <IconButton icon={require('../../img/Rank.png')} 
-      size={24} color={this.theme}/>
+    return <TabButton icon={require('../../img/Rank.png')} color={this.theme}
+      label={'Testing'}/>
   }
 
   renderGraph(graph) {
     const { container } = styles;
     const { id } = this.state;
 
-    return <IconButton icon={require('../../img/Graph.png')} 
-      size={24} color={this.theme}/>
+    return <TabButton icon={require('../../img/Graph.png')} color={this.theme}/>
   }
 }
 
