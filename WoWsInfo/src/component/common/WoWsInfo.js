@@ -21,9 +21,8 @@ class WoWsInfo extends Component {
 
     const name = [lang.wowsinfo_black, lang.wowsinfo_go, lang.wowsinfo_new, 
                  lang.wowsinfo_pro, lang.wowsinfo_ultimate, lang.wowsinfo_ultra, lang.wowsinfo_white, 
-                 lang.wowsinfo_x, lang.wowsinfo_y, lang.wowsinfo_z, '>_<', '#', 
-                 '0_0', '', '^_^', '★', 'α', 'θ', 'Ω', 'Ф', '∞', '░', '( ͡° ͜ʖ ͡°)', '¯\_(ツ)_/¯',
-                 '2018', '?!', '!!', '?!', '2017', '2016', 'Auris'];
+                 'X', 'Y', 'Z', '>_<', '#', '0_0', '', '^_^', '★', 'α', 'θ', 'Ω', 'Ф', '∞', '░', 
+                 '( ͡° ͜ʖ ͡°)', '¯\_(ツ)_/¯', '2018', '?!', '!!', '?!', '2017', '2016', '2019', 'Auris'];
 
     // 50% of the time, it will be the app name
     let r = random(10);
