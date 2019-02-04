@@ -128,6 +128,12 @@ export default lang = new LocalizedStrings({
     youtuber_NoZoupForYou: 'NoZoupForYou',
     // Tools
     tool_title: 'Tools',
+    /// Player section
+    // Tabs
+    tab_achievement_title: 'Achievement',
+    tab_graph_title: 'Graph',
+    tab_ship_title: 'Ship',
+    tab_rank_title: 'Rank',
     /// App name section
     app_name: 'WoWs Info Origin',
     wowsinfo_black: 'Black',
