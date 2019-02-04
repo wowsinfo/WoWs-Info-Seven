@@ -19,3 +19,6 @@ export * from './wiki/WarshipCell';
 export * from './wiki/WarshipLabel';
 export * from './wiki/PriceLabel';
 export * from './wiki/WarshipStat';
+
+// Player
+export * from './player/TabButton';
