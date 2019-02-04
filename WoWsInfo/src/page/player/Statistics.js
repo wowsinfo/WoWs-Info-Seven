@@ -75,21 +75,39 @@ class Statistics extends PureComponent {
    * Get player achievement
    */
   getAchievement() {
-
+    const { id } = this.state;
+    SafeFetch.get(WoWsAPI.PlayerAchievement, this.domain, id).then(data => {
+      let achievement = Guard(data, `data.${id}.battle`, null);
+      if (achievement != null) {
+        this.setState({achievement: achievement});
+      }
+    });
   }
 
   /**
    * Get player past rank info
    */
   getRank() {
-
+    const { id } = this.state;
+    SafeFetch.get(WoWsAPI.RankInfo, this.domain, id).then(data => {
+      let rank = Guard(data, `data.${id}.seasons`, null);
+      if (rank != null) {
+        this.setState({rank: rank});
+      }
+    });
   }
 
   /**
    * Get all player ship info
    */
   getShip() {
-
+    const { id } = this.state;
+    SafeFetch.get(WoWsAPI.ShipInfo, this.domain, id).then(data => {
+      let ship = Guard(data, `data.${id}`, null);
+      if (ship != null) {
+        this.setState({ship: ship});
+      }
+    });
   }
 
   render() {
