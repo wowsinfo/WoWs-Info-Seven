@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, SafeAreaView, Text, StyleSheet } from 'react-native';
+import { View, SafeAreaView, Image, Text, StyleSheet } from 'react-native';
 import { Surface, Button } from 'react-native-paper';
 import { LoadingIndicator, WoWsInfo, LoadingModal } from '../../component';
 import { SafeFetch, Guard } from '../../core';
@@ -26,14 +26,15 @@ class Statistics extends PureComponent {
       graph: false
     };
 
+    // Save domain
     this.domain = getDomain(server);
     console.log(this.domain);
 
     if (this.domain != null) {
-      getBasic();
-      getAchievement();
-      getShip();
-      getRank();
+      this.getBasic();
+      this.getAchievement();
+      this.getShip();
+      this.getRank();
     } else {
       // Invalid domain
       this.setState({valid: false});
@@ -44,7 +45,8 @@ class Statistics extends PureComponent {
    * Get basic player info
    */
   getBasic() {
-    SafeFetch.get(WoWsAPI.PlayerInfo, getDomain(server), account_id).then(data => {
+    const { server, id } = this.state;
+    SafeFetch.get(WoWsAPI.PlayerInfo, getDomain(server), id).then(data => {
       // Check if account is hidden
       console.log(data);
       let hidden = Guard(data, 'meta.hidden', null);
@@ -56,7 +58,7 @@ class Statistics extends PureComponent {
       }
 
       // Get player data here
-      let player = Guard(data, `data.${account_id}`, null);
+      let player = Guard(data, `data.${id}`, null);
       if (player == null) {
         // Invalid data
         this.setState({valid: false});
@@ -182,7 +184,7 @@ class Statistics extends PureComponent {
   renderGraph(graph) {
     const { container, buttons } = styles;
     const { id } = this.state;
-    
+
     if (id) return <Image />;
     else return null;
   }

@@ -12,16 +12,15 @@ import lang from '../../value/lang';
 import { Actions } from 'react-native-router-flux';
 import { FooterButton } from './FooterButton';
 import { SafeAction, random } from '../../core';
-import { GREY } from 'react-native-material-color';
 import { ThemeBackColour, ThemeColour } from '../../value/colour';
 
 class WoWsInfo extends Component {
   constructor(props) {
     super(props);
 
-    const name = [lang.wowsinfo_black, lang.wowsinfo_go, lang.wowsinfo_new, 
-                 lang.wowsinfo_pro, lang.wowsinfo_ultimate, lang.wowsinfo_ultra, lang.wowsinfo_white, 
-                 'X', 'Y', 'Z', '>_<', '#', '0_0', '', '^_^', '★', 'α', 'θ', 'Ω', 'Ф', '∞', '░', 
+    const name = [lang.wowsinfo_black, lang.wowsinfo_go, lang.wowsinfo_new,
+                 lang.wowsinfo_pro, lang.wowsinfo_ultimate, lang.wowsinfo_ultra, lang.wowsinfo_white,
+                 'X', 'Y', 'Z', '>_<', '#', '0_0', '', '^_^', '★', 'α', 'θ', 'Ω', 'Ф', '∞', '░',
                  '( ͡° ͜ʖ ͡°)', '¯\_(ツ)_/¯', '2018', '?!', '!!', '?!', '2017', '2016', '2019', 'Auris'];
 
     // 80% of the time, it will be the app name
