@@ -14,11 +14,11 @@ export const WoWsAPI = {
   ClanInfo: `https://api.worldofwarships.{0}/wows/clans/info/?application_id=${AppKey}&extra=members&fields=-members_ids&clan_id=`,
   ClanSearch: `https://api.worldofwarships.{0}/wows/clans/list/?application_id=${AppKey}&fields=clan_id%2Ctag&search=`,
   // Rank
-  RankInfo: `https://api.worldofwarships.{0}/wows/seasons/accountinfo/?application_id=${AppKey}&fields=seasons.rank_solo.damage_dealt%2Cseasons.rank_solo.wins%2Cseasons.rank_solo.battles%2Cseasons.rank_info&account_id=`,
+  RankInfo: `https://api.worldofwarships.{0}/wows/seasons/accountinfo/?application_id=${AppKey}&account_id=`,
   CurrRankInfo: `https://api.worldofwarships.{0}/wows/seasons/accountinfo/?application_id=${AppKey}&fields=seasons.rank_info.rank&account_id=`,
-  RankShipInfo: `https://api.worldofwarships.{0}/wows/seasons/shipstats/?application_id=${AppKey}&fields=ship_id%2Cseasons.rank_solo&account_id=`,
+  RankShipInfo: `https://api.worldofwarships.{0}/wows/seasons/shipstats/?application_id=${AppKey}&account_id=`,
   // Ships
-  ShipInfo: `https://api.worldofwarships.{0}/wows/ships/stats/?application_id=${AppKey}&fields=pvp.max_planes_killed%2Cpvp.damage_dealt%2Cpvp.wins%2Cpvp.max_damage_dealt%2Cpvp.ramming%2Cpvp.torpedoes%2Cpvp.aircraft%2Cpvp.frags%2Cpvp.battles%2Cpvp.max_xp%2Cpvp.survived_battles%2Cship_id%2Cpvp.max_frags_battle%2Cpvp.main_battery%2Cpvp.second_battery%2Cpvp.xp&account_id=`,
+  ShipInfo: `https://api.worldofwarships.{0}/wows/ships/stats/?application_id=${AppKey}&account_id=`,
   ShipWiki: `https://api.worldofwarships.{0}/wows/encyclopedia/ships/?application_id=${AppKey}&ship_id={1}`,
   ShipModule: `https://api.worldofwarships.{0}/wows/encyclopedia/shipprofile/?application_id=${AppKey}&ship_id={1}&artillery_id={2}&dive_bomber_id={3}&engine_id={4}&fighter_id={5}&fire_control_id={6}&flight_control_id={7}&hull_id={8}&torpedo_bomber_id={9}&torpedoes_id={10}`,
 }
