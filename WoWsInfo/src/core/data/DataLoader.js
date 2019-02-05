@@ -59,12 +59,12 @@ class DataLoader {
    * @param {*} obj 
    */
   static formatConverter(obj) {
-    if (obj.name) {
+    if (obj.name != null) {
       obj.nickname = obj.name;
       delete obj.name;
     }
 
-    if (obj.id) {
+    if (obj.id != null) {
       obj.account_id = obj.id;
       delete obj.id;
     }
