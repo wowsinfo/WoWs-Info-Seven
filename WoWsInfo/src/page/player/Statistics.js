@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { View, ScrollView, Text, StyleSheet, Linking } from 'react-native';
 import { Surface, Button, IconButton, Title } from 'react-native-paper';
-import { LoadingIndicator, WoWsInfo, LoadingModal, FooterPlus, TabButton, InfoLabel, SectionTitle } from '../../component';
+import { LoadingIndicator, WoWsInfo, LoadingModal, FooterPlus, TabButton, InfoLabel, SectionTitle, ShipStat } from '../../component';
 import { SafeFetch, Guard, dayDifference, humanTimeString } from '../../core';
 import { WoWsAPI } from '../../value/api';
 import { getDomain, langStr, getPrefix } from '../../value/data';
@@ -201,10 +201,16 @@ class Statistics extends PureComponent {
               <InfoLabel title={lang.basic_register_date} info={register}/>
               <InfoLabel title={lang.basic_last_battle} info={lastBattle}/>
             </View>
+            { this.renderStatistics(basic.statistics) }
           </View>
         )
       }
     }
+  }
+
+  renderStatistics(statistics) {
+    if (!statistics) return null;
+    return <ShipStat data={statistics}/>;
   }
 
   renderAchievement(achievement) {
