@@ -23,4 +23,3 @@ export * from './wiki/WarshipStat';
 // Player
 export * from './player/TabButton';
 export * from './player/ShipStat';
-export * from './player/IconLabel';
