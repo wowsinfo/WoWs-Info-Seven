@@ -171,7 +171,7 @@ class Statistics extends PureComponent {
       const { name } = this.state;
       return (
         <View style={container}>
-          <SectionTitle title={name}/>
+          <SectionTitle center title={name}/>
           <LoadingIndicator />
         </View>
       )
@@ -187,7 +187,7 @@ class Statistics extends PureComponent {
               <IconButton icon='https' size={24} />
             </View>
             <View style={hidden}>
-              <InfoLabel left title={lang.basic_register_time} info={register}/>
+              <InfoLabel left title={lang.basic_register_date} info={register}/>
               <InfoLabel left title={lang.basic_last_battle} info={lastBattle}/>
               <InfoLabel left title={lang.basic_level_tier} info={lang.basic_data_unknown}/>
             </View>
@@ -196,11 +196,11 @@ class Statistics extends PureComponent {
       } else {
         return (
           <View style={container}>
-            <SectionTitle title={`${nickname} Lv${leveling_tier}`}/>
+            <SectionTitle center title={`${nickname} Lv${leveling_tier}`}/>
             <View style={horizontal}>
-              <InfoLabel info={register}/>
+              <InfoLabel title={lang.basic_register_date} info={register}/>
+              <InfoLabel title={lang.basic_last_battle} info={lastBattle}/>
             </View>
-            <InfoLabel info={lastBattle}/>
           </View>
         )
       }
