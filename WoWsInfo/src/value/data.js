@@ -75,6 +75,18 @@ export const getCurrDomain = () => {
 
 export const getDomain = (index) => {
   return SERVER[index];
+};
+
+export const getCurrPrefix = () => {
+  let prefix = getCurrDomain();
+  if (prefix === 'com') prefix = 'na';
+  return prefix;
+};
+
+export const getPrefix = (index) => {
+  let prefix = getDomain(index);
+  if (prefix === 'com') prefix = 'na';
+  return prefix;
 }
 
 export const getCurrServer = () => {
