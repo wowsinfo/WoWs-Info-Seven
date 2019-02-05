@@ -14,7 +14,7 @@ import lang from '../../value/lang';
 import { Actions } from 'react-native-router-flux';
 import { SafeAction, SafeFetch, Guard } from '../../core';
 import { ThemeBackColour, TintColour } from '../../value/colour';
-import { getCurrDomain, getCurrServer } from '../../value/data';
+import { getCurrDomain, getCurrServer, getCurrPrefix } from '../../value/data';
 import { WoWsAPI } from '../../value/api';
 
 class Menu extends Component {
@@ -31,8 +31,7 @@ class Menu extends Component {
 
     let domain = getCurrDomain();
     // com -> na
-    this.prefix = domain;
-    if (this.prefix === 'com') this.prefix = 'na';
+    this.prefix = getCurrPrefix();
 
     SafeFetch.get(WoWsAPI.PlayerOnline, domain).then(num => {
       let online = Guard(num, 'data.wows.0.players_online', '???');

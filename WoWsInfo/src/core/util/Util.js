@@ -14,3 +14,10 @@ export const copy = (value) => {
 export const random = (range) => {
   return Math.floor(Math.random() * range);
 }
+
+export const dayDifference = (time) => {
+  let given = new Date(time);
+  let now = new Date();
+  let timeDiff = Math.abs(now.getTime() - given.getTime());
+  return Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+}

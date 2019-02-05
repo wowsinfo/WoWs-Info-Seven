@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
-import { View, SafeAreaView, Text, StyleSheet } from 'react-native';
+import { View, SafeAreaView, Text, StyleSheet, Linking } from 'react-native';
 import { Surface, Button, IconButton, Title } from 'react-native-paper';
-import { LoadingIndicator, WoWsInfo, LoadingModal, FooterPlus, TabButton } from '../../component';
-import { SafeFetch, Guard } from '../../core';
+import { LoadingIndicator, WoWsInfo, LoadingModal, FooterPlus, TabButton, InfoLabel } from '../../component';
+import { SafeFetch, Guard, dayDifference } from '../../core';
 import { WoWsAPI } from '../../value/api';
-import { getDomain, langStr } from '../../value/data';
+import { getDomain, langStr, getPrefix } from '../../value/data';
 import { TintColour } from '../../value/colour';
 import lang from '../../value/lang';
 
@@ -30,6 +30,7 @@ class Statistics extends PureComponent {
 
     // Save domain
     this.domain = getDomain(server);
+    this.prefix = getPrefix(server);
     console.log(this.domain);
     // Save theme colour
     this.theme = TintColour()[500];
@@ -148,7 +149,8 @@ class Statistics extends PureComponent {
     } else {
       // Display player data
       return (
-        <RootView noLeft={friend} title={`${id}`}>
+        <RootView noLeft={friend} title={`${id} powered by wows-numbers.com`} 
+          onPress={() => Linking.openURL(`https://${this.prefix}.wows-numbers.com/player/${id},${name}/`)}>
           <Title style={playerName}>{name}</Title>
           { this.renderBasic(basic) }
           <FooterPlus style={footer}>
@@ -169,16 +171,31 @@ class Statistics extends PureComponent {
   ///
 
   renderBasic(basic) {
-    const { container } = styles;
-
-    return (
-      <View style={container}>
-      { 
-        !basic ? <LoadingIndicator /> :
-        null
-      }
-      </View>
-    )
+    const { container, horizontal } = styles;
+    if (!basic) {
+      return (
+        <View style={container}>
+          <LoadingIndicator />
+        </View>
+      )
+    } else {
+      const { created_at, leveling_tier, last_battle_time, hidden_profile } = basic;
+      console.log(dayDifference(created_at));
+      return (
+        <View style={container}>
+          <View style={horizontal}>
+            <InfoLabel info={leveling_tier}/>
+            <InfoLabel info={leveling_tier}/>
+            <InfoLabel info={leveling_tier}/>
+            <InfoLabel info={leveling_tier}/>
+            <InfoLabel info={leveling_tier}/>
+            <InfoLabel info={leveling_tier}/>
+            <InfoLabel info={leveling_tier}/>
+            <InfoLabel info={leveling_tier}/>
+          </View>
+        </View>
+      )
+    }
   }
 
   renderAchievement(achievement) {
@@ -220,10 +237,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  horizontal: {
+    flexDirection: 'row'
+  },
   playerName: {
     alignSelf: 'center',
     fontSize: 24,
-    padding: 8
+    paddingTop: 8
   },
   footer: {
     flexDirection: 'row',
