@@ -29,39 +29,59 @@ class PlayerRecord extends Component {
     } = data;
 
     // Max records
-    let max = [{num: max_damage_dealt, id: max_damage_dealt_ship_id},
-               {num: max_frags_battle, id: max_frags_ship_id},
-               {num: max_planes_killed, id: max_planes_killed_ship_id},
-               {num: max_xp, id: max_xp_ship_id},
-               {num: max_ships_spotted, id: max_ships_spotted_ship_id},
-               {num: max_total_agro, id: max_total_agro_ship_id},
-               {num: max_damage_scouting, id: max_scouting_damage_ship_id}];
+    let max = [{name: '', num: max_damage_dealt, id: max_damage_dealt_ship_id},
+               {name: '', num: max_frags_battle, id: max_frags_ship_id},
+               {name: '', num: max_planes_killed, id: max_planes_killed_ship_id},
+               {name: '', num: max_xp, id: max_xp_ship_id},
+               {name: '', num: max_ships_spotted, id: max_ships_spotted_ship_id},
+               {name: '', num: max_total_agro, id: max_total_agro_ship_id},
+               {name: '', num: max_damage_scouting, id: max_scouting_damage_ship_id}];
 
     // Best ships
-    let records = [main_battery, second_battery, torpedoes, aircraft, ramming];
+    let records = [{name: '', data: main_battery}, {name: '', data: second_battery}, 
+                   {name: '', data: torpedoes}, {name: '', data: aircraft}, {name: '', data: ramming}];
 
     return (
       <View style={container}>
+        { max.map(data => this.renderMax(data)) }
         { records.map(data => this.renderRecord(data)) }
       </View>
     )
   };
 
-  renderRecord(data) {
-    const { horizontal, container } = styles;
+  renderMax(data) {
+    const { record, container } = styles;
+    const { num, id } = data;
+    if (!id) return null;
+    let ship = DATA[SAVED.warship][id];
+    return (
+      <View style={record}>
+        <View style={container}>
+          <WarshipCell item={ship} scale={1.6}/>
+        </View>
+        <View style={container}>
+          <InfoLabel info={num}/>
+        </View>
+      </View>
+    );
+  }
+
+  renderRecord(item) {
+    const { record, container } = styles;
+    const { name, data } = item;
     const { frags, max_frags_battle, max_frags_ship_id, hits, shots } = data;
     if (!max_frags_ship_id) return null;
     let bestShip = DATA[SAVED.warship][max_frags_ship_id];
     return (
-      <View style={horizontal}>
-        <View>
+      <View style={record}>
+        <View style={container}>
           <WarshipCell item={bestShip} scale={1.6}/>
         </View>
-        <View>
+        <View style={container}>
           <InfoLabel info={frags}/>
         </View>
       </View>
-    )
+    );
   }
 }
 
@@ -71,8 +91,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
-  horizontal: {
-    flexDirection: 'row'
+  record: {
+    flexDirection: 'row',
+    justifyContent: 'space-around'
   }
 });
 
