@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { View, SafeAreaView, Text, StyleSheet } from 'react-native';
-import { Surface, Button, IconButton } from 'react-native-paper';
+import { Surface, Button, IconButton, Title } from 'react-native-paper';
 import { LoadingIndicator, WoWsInfo, LoadingModal, FooterPlus, TabButton } from '../../component';
 import { SafeFetch, Guard } from '../../core';
 import { WoWsAPI } from '../../value/api';
@@ -115,7 +115,7 @@ class Statistics extends PureComponent {
   }
 
   render() {
-    const { error, container, footer } = styles;
+    const { error, container, footer, playerName } = styles;
     const { home, friend } = this.props;
     const { name, id, valid, hidden, 
             achievement, rank, basic, ship, graph } = this.state;
@@ -149,10 +149,8 @@ class Statistics extends PureComponent {
       // Display player data
       return (
         <RootView noLeft={friend} title={`${id}`}>
-          <SafeAreaView style={container}>
-            <Text>{name}</Text>
-            { this.renderBasic(basic) }
-          </SafeAreaView>
+          <Title style={playerName}>{name}</Title>
+          { this.renderBasic(basic) }
           <FooterPlus style={footer}>
             { this.renderAchievement(achievement) }
             { this.renderGraph(graph) }
@@ -173,9 +171,12 @@ class Statistics extends PureComponent {
   renderBasic(basic) {
     const { container } = styles;
 
-    if (!basic) return <LoadingIndicator />
     return (
-      <View>
+      <View style={container}>
+      { 
+        !basic ? <LoadingIndicator /> :
+        null
+      }
       </View>
     )
   }
@@ -218,6 +219,11 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+  },
+  playerName: {
+    alignSelf: 'center',
+    fontSize: 24,
+    padding: 8
   },
   footer: {
     flexDirection: 'row',
