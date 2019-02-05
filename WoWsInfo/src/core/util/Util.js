@@ -15,6 +15,10 @@ export const random = (range) => {
   return Math.floor(Math.random() * range);
 }
 
+export const roundTo = (num, digit = 0) => {
+  return Number(num).toFixed(digit);
+}
+
 /**
  * Get date difference in days
  * @param {*} time 
