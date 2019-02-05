@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
-import { View, SafeAreaView, Text, StyleSheet, Linking } from 'react-native';
+import { View, ScrollView, Text, StyleSheet, Linking } from 'react-native';
 import { Surface, Button, IconButton, Title } from 'react-native-paper';
-import { LoadingIndicator, WoWsInfo, LoadingModal, FooterPlus, TabButton, InfoLabel } from '../../component';
+import { LoadingIndicator, WoWsInfo, LoadingModal, FooterPlus, TabButton, InfoLabel, SectionTitle } from '../../component';
 import { SafeFetch, Guard, dayDifference } from '../../core';
 import { WoWsAPI } from '../../value/api';
 import { getDomain, langStr, getPrefix } from '../../value/data';
@@ -149,10 +149,11 @@ class Statistics extends PureComponent {
     } else {
       // Display player data
       return (
-        <RootView noLeft={friend} title={`${id} powered by wows-numbers.com`} 
+        <RootView noLeft={friend} title={`- ${id} -`} 
           onPress={() => Linking.openURL(`https://${this.prefix}.wows-numbers.com/player/${id},${name}/`)}>
-          <Title style={playerName}>{name}</Title>
-          { this.renderBasic(basic) }
+          <ScrollView>
+            { this.renderBasic(basic) }
+          </ScrollView>
           <FooterPlus style={footer}>
             { this.renderAchievement(achievement) }
             { this.renderGraph(graph) }
@@ -173,26 +174,27 @@ class Statistics extends PureComponent {
   renderBasic(basic) {
     const { container, horizontal } = styles;
     if (!basic) {
+      const { name } = this.state;
       return (
         <View style={container}>
+          <SectionTitle title={name}/>
           <LoadingIndicator />
         </View>
       )
     } else {
-      const { created_at, leveling_tier, last_battle_time, hidden_profile } = basic;
-      console.log(dayDifference(created_at));
+      const { created_at, leveling_tier, last_battle_time, hidden_profile, nickname } = basic;
+      let age = dayDifference(created_at);
+      let lastBattle = new Date(last_battle_time * 1000).toLocaleString();
       return (
         <View style={container}>
           <View style={horizontal}>
-            <InfoLabel info={leveling_tier}/>
-            <InfoLabel info={leveling_tier}/>
-            <InfoLabel info={leveling_tier}/>
-            <InfoLabel info={leveling_tier}/>
-            <InfoLabel info={leveling_tier}/>
-            <InfoLabel info={leveling_tier}/>
-            <InfoLabel info={leveling_tier}/>
-            <InfoLabel info={leveling_tier}/>
+            <SectionTitle title={`${nickname} Lv${leveling_tier}`}/>
+            { !hidden_profile ? <IconButton icon='https' size={24} /> : null }
           </View>
+          <View style={horizontal}>
+            <InfoLabel info={age}/>
+          </View>
+          <InfoLabel info={lastBattle}/>
         </View>
       )
     }
