@@ -139,13 +139,6 @@ class Statistics extends PureComponent {
           <Text>{'Data is not valid\nPlease try again later'}</Text>
         </RootView>
       );
-    } else if (hidden) {
-      // Hidden account
-      return (
-        <RootView style={container}>
-          <Text>{`${name} is Hidden`}</Text>
-        </RootView>
-      );
     } else {
       // Display player data
       return (
@@ -225,8 +218,9 @@ class Statistics extends PureComponent {
   }
 
   renderGraph(graph) {
+    const { hidden } = this.state;
     return <TabButton icon={require('../../img/Graph.png')} color={this.theme}
-      label={lang.tab_graph_title}/>
+      disabled={hidden} label={lang.tab_graph_title}/>
   }
 }
 
