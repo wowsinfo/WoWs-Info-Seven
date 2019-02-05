@@ -18,7 +18,7 @@ class LoadingIndicator extends Component {
     if (!appTheme) appTheme = Blue;
     
     return <ActivityIndicator size={isIos ? 'small' : 'large'} 
-      color={!isIos ? appTheme[500] : Grey} style={style} />;
+      color={!isIos ? appTheme[500] : Grey} style={[style, {marginTop: 8}]} />;
   };
 }
 

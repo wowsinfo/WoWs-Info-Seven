@@ -117,9 +117,9 @@ class Statistics extends PureComponent {
   }
 
   render() {
-    const { error, container, footer, playerName } = styles;
+    const { error, container, footer } = styles;
     const { home, friend } = this.props;
-    const { name, id, valid, hidden, 
+    const { name, id, valid, 
             achievement, rank, basic, ship, graph } = this.state;
 
     let RootView = home ? Surface : WoWsInfo;
@@ -166,12 +166,12 @@ class Statistics extends PureComponent {
   ///
 
   renderBasic(basic) {
-    const { container, horizontal, hidden } = styles;
+    const { container, horizontal, hidden, playerName, level } = styles;
     if (!basic) {
       const { name } = this.state;
       return (
         <View style={container}>
-          <SectionTitle center title={name}/>
+          <SectionTitle center title={name} style={playerName}/>
           <LoadingIndicator />
         </View>
       )
@@ -183,7 +183,7 @@ class Statistics extends PureComponent {
         return (
           <View style={container}>
             <View style={horizontal}>
-              <SectionTitle title={nickname}/>
+              <SectionTitle title={nickname} style={playerName}/>
               <IconButton icon='https' size={24} />
             </View>
             <View style={hidden}>
@@ -196,7 +196,8 @@ class Statistics extends PureComponent {
       } else {
         return (
           <View style={container}>
-            <SectionTitle center title={`${nickname} Lv${leveling_tier}`}/>
+            <SectionTitle center title={`${nickname}\n`} style={playerName}/>
+            <Text style={level}>{`Lv ${leveling_tier}`}</Text>
             <View style={horizontal}>
               <InfoLabel title={lang.basic_register_date} info={register}/>
               <InfoLabel title={lang.basic_last_battle} info={lastBattle}/>
@@ -258,8 +259,12 @@ const styles = StyleSheet.create({
   },
   playerName: {
     alignSelf: 'center',
-    fontSize: 24,
-    paddingTop: 8
+    fontSize: 28,
+    paddingTop: 16
+  },
+  level: {
+    alignSelf: 'center',
+    marginTop: -28
   },
   hidden: {
     paddingLeft: 16,

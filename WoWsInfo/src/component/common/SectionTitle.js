@@ -11,11 +11,11 @@ import { Title } from 'react-native-paper';
 
 class SectionTitle extends Component {
   render() {
-    const { title, back, center } = this.props;
+    const { title, back, center, style } = this.props;
     const { text } = styles;
 
     return (
-      <Title style={[back ? ThemeBackColour() : null, TintTextColour(), text, center ? {alignSelf: 'center'} : null]}>
+      <Title style={[back ? ThemeBackColour() : null, TintTextColour(), text, style, center ? {alignSelf: 'center'} : null]}>
         {title}
       </Title>
     )
