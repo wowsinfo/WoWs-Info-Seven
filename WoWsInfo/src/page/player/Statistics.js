@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
-import { View, ScrollView, Text, StyleSheet, Linking } from 'react-native';
-import { Surface, Button, IconButton, Title } from 'react-native-paper';
+import { View, ScrollView, StyleSheet, Linking } from 'react-native';
+import { Surface, Text, IconButton, Title } from 'react-native-paper';
 import { LoadingIndicator, WoWsInfo, LoadingModal, FooterPlus, TabButton, InfoLabel, SectionTitle, ShipStat } from '../../component';
 import { SafeFetch, Guard, dayDifference, humanTimeString } from '../../core';
 import { WoWsAPI } from '../../value/api';
@@ -27,6 +27,8 @@ class Statistics extends PureComponent {
       ship: false,
       basic: false,
       graph: false,
+      // Whether show everything
+      showMore: false
     };
 
     // Save domain
