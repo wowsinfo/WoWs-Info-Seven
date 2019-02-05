@@ -38,9 +38,9 @@ class Statistics extends PureComponent {
 
     if (this.domain != null) {
       this.getBasic();
-      this.getAchievement();
-      this.getShip();
-      this.getRank();
+      // this.getAchievement();
+      // this.getShip();
+      // this.getRank();
     } else {
       // Invalid domain
       this.setState({valid: false});
