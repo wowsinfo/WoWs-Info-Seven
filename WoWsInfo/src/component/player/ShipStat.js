@@ -7,7 +7,8 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { InfoLabel } from '../common/InfoLabel';
-import { roundTo } from '../../core';
+import { roundTo, humanTimeString } from '../../core';
+import lang from '../../value/lang';
 
 class ShipStat extends Component {
   render() {
@@ -26,9 +27,12 @@ class ShipStat extends Component {
       xp, max_xp,
     } = pvp;
 
-    let avgDamageDealt = damage_dealt / battles;
+    let warshipMode = false;
+    if (last_battle_time) warshipMode = true;
+
     return (
       <View style={container}>
+        { warshipMode ? <InfoLabel title={lang.basic_last_battle} info={humanTimeString(last_battle_time)}/> : null }
         <View style={horizontal}>
           <InfoLabel title={'battle'} info={battles}/>
           <InfoLabel title={'battle'} info={survived_battles}/>
