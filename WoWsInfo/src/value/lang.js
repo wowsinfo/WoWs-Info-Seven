@@ -134,6 +134,11 @@ export default lang = new LocalizedStrings({
     tab_graph_title: 'Graph',
     tab_ship_title: 'Ship',
     tab_rank_title: 'Rank',
+    // Basic
+    basic_data_unknown: 'Unknown',
+    basic_level_tier: 'Level',
+    basic_register_time: 'Age',
+    basic_last_battle: 'Last Battle',
     /// App name section
     app_name: 'WoWs Info Origin',
     wowsinfo_black: 'Black',
