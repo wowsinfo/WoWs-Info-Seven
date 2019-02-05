@@ -161,7 +161,13 @@ export default lang = new LocalizedStrings({
   zh: {
 
   },
+  'zh-hant': {
+
+  },
   ja: {
+
+  },
+  id: {
 
   }
 });
