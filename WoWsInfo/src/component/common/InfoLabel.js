@@ -11,10 +11,10 @@ import { Caption, Text } from 'react-native-paper';
 class InfoLabel extends Component {
   render() {
     const { container } = styles;
-    const { title, info } = this.props;
+    const { title, info, left, right } = this.props;
     return (
-      <View style={container}>
-        { CLEANMODE ? null : <Caption style={{textAlign: 'center', marginBottom: -2}}>{title}</Caption> }
+      <View style={[container, {alignItems: left ? 'flex-start' : right ? 'flex-end' : null}]}>
+        <Caption style={{textAlign: 'center', marginBottom: -2}}>{title}</Caption>
         <Text style={{textAlign: 'center', marginBottom: 2}}>{info}</Text>
       </View>
     )

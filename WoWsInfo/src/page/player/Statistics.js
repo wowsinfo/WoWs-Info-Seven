@@ -165,7 +165,7 @@ class Statistics extends PureComponent {
   ///
 
   renderBasic(basic) {
-    const { container, horizontal } = styles;
+    const { container, horizontal, hidden } = styles;
     if (!basic) {
       const { name } = this.state;
       return (
@@ -178,18 +178,31 @@ class Statistics extends PureComponent {
       const { created_at, leveling_tier, last_battle_time, hidden_profile, nickname } = basic;
       let age = dayDifference(created_at);
       let lastBattle = new Date(last_battle_time * 1000).toLocaleString();
-      return (
-        <View style={container}>
-          <View style={horizontal}>
+      if (hidden_profile) {
+        return (
+          <View style={container}>
+            <View style={horizontal}>
+              <SectionTitle title={nickname}/>
+              <IconButton icon='https' size={24} />
+            </View>
+            <View style={hidden}>
+              <InfoLabel left title={lang.basic_register_time} info={`${age}d`}/>
+              <InfoLabel left title={lang.basic_last_battle} info={lastBattle}/>
+              <InfoLabel left title={lang.basic_level_tier} info={lang.basic_data_unknown}/>
+            </View>
+          </View>
+        )
+      } else {
+        return (
+          <View style={container}>
             <SectionTitle title={`${nickname} Lv${leveling_tier}`}/>
-            { !hidden_profile ? <IconButton icon='https' size={24} /> : null }
+            <View style={horizontal}>
+              <InfoLabel info={age}/>
+            </View>
+            <InfoLabel info={lastBattle}/>
           </View>
-          <View style={horizontal}>
-            <InfoLabel info={age}/>
-          </View>
-          <InfoLabel info={lastBattle}/>
-        </View>
-      )
+        )
+      }
     }
   }
 
@@ -240,6 +253,10 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     fontSize: 24,
     paddingTop: 8
+  },
+  hidden: {
+    paddingLeft: 16,
+    alignItems: 'flex-start'
   },
   footer: {
     flexDirection: 'row',
