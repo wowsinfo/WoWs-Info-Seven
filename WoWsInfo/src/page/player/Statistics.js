@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { View, ScrollView, Text, StyleSheet, Linking } from 'react-native';
 import { Surface, Button, IconButton, Title } from 'react-native-paper';
 import { LoadingIndicator, WoWsInfo, LoadingModal, FooterPlus, TabButton, InfoLabel, SectionTitle } from '../../component';
-import { SafeFetch, Guard, dayDifference } from '../../core';
+import { SafeFetch, Guard, dayDifference, humanTimeString } from '../../core';
 import { WoWsAPI } from '../../value/api';
 import { getDomain, langStr, getPrefix } from '../../value/data';
 import { TintColour } from '../../value/colour';
@@ -20,12 +20,13 @@ class Statistics extends PureComponent {
       // Valid data or hidden account
       valid: true,
       hidden: false,
+      clan: false,
       // To check if certain data have been loaded correctly
       achievement: false,
       rank: false,
       ship: false,
       basic: false,
-      graph: false
+      graph: false,
     };
 
     // Save domain
@@ -176,8 +177,8 @@ class Statistics extends PureComponent {
       )
     } else {
       const { created_at, leveling_tier, last_battle_time, hidden_profile, nickname } = basic;
-      let age = dayDifference(created_at);
-      let lastBattle = new Date(last_battle_time * 1000).toLocaleString();
+      let register = humanTimeString(created_at);
+      let lastBattle = humanTimeString(last_battle_time)
       if (hidden_profile) {
         return (
           <View style={container}>
@@ -186,7 +187,7 @@ class Statistics extends PureComponent {
               <IconButton icon='https' size={24} />
             </View>
             <View style={hidden}>
-              <InfoLabel left title={lang.basic_register_time} info={`${age}d`}/>
+              <InfoLabel left title={lang.basic_register_time} info={register}/>
               <InfoLabel left title={lang.basic_last_battle} info={lastBattle}/>
               <InfoLabel left title={lang.basic_level_tier} info={lang.basic_data_unknown}/>
             </View>
@@ -197,7 +198,7 @@ class Statistics extends PureComponent {
           <View style={container}>
             <SectionTitle title={`${nickname} Lv${leveling_tier}`}/>
             <View style={horizontal}>
-              <InfoLabel info={age}/>
+              <InfoLabel info={register}/>
             </View>
             <InfoLabel info={lastBattle}/>
           </View>

@@ -15,7 +15,19 @@ export const random = (range) => {
   return Math.floor(Math.random() * range);
 }
 
+/**
+ * Get date difference in days
+ * @param {*} time 
+ */
 export const dayDifference = (time) => {
   let timeDiff = Math.abs(Date.now() / 1000 - time);
   return Math.ceil(timeDiff / (3600 * 24)); 
+}
+
+/**
+ * Get a readable date string
+ * @param {*} time 
+ */
+export const humanTimeString = (time) => {
+  return new Date(time * 1000).toLocaleString();
 }

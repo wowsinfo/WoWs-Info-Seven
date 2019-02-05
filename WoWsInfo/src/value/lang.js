@@ -137,7 +137,7 @@ export default lang = new LocalizedStrings({
     // Basic
     basic_data_unknown: 'Unknown',
     basic_level_tier: 'Level',
-    basic_register_time: 'Age',
+    basic_register_time: 'Register Time',
     basic_last_battle: 'Last Battle',
     /// App name section
     app_name: 'WoWs Info Origin',
