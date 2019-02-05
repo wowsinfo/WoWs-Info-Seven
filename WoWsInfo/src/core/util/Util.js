@@ -16,8 +16,6 @@ export const random = (range) => {
 }
 
 export const dayDifference = (time) => {
-  let given = new Date(time);
-  let now = new Date();
-  let timeDiff = Math.abs(now.getTime() - given.getTime());
-  return Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+  let timeDiff = Math.abs(Date.now() / 1000 - time);
+  return Math.ceil(timeDiff / (3600 * 24)); 
 }
