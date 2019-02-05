@@ -9,6 +9,8 @@ import { View, Text, StyleSheet } from 'react-native';
 import { InfoLabel } from '../common/InfoLabel';
 import { roundTo, humanTimeString } from '../../core';
 import lang from '../../value/lang';
+import { IconLabel } from './IconLabel';
+import { Info6Icon } from './Info6Icon';
 
 class ShipStat extends Component {
   render() {
@@ -33,6 +35,7 @@ class ShipStat extends Component {
     return (
       <View style={container}>
         { warshipMode ? <InfoLabel title={lang.basic_last_battle} info={humanTimeString(last_battle_time)}/> : null }
+        <Info6Icon data={pvp}/>
         <View style={horizontal}>
           <InfoLabel title={'battle'} info={battles}/>
           <InfoLabel title={'battle'} info={survived_battles}/>

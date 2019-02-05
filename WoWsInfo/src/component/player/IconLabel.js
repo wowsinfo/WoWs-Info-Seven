@@ -5,17 +5,18 @@
  */
 
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { IconButton } from 'react-native-paper';
+import { View, StyleSheet } from 'react-native';
+import { IconButton, Text } from 'react-native-paper';
+import { TintColour } from '../../value/colour';
 
 class IconLabel extends Component {
   render() {
-    const { container } = styles;
-    const { title, ...props } = this.props;
+    const { container, label } = styles;
+    const { info, ...props } = this.props;
     return (
       <View style={container}>
-        <IconButton size={24} {...props}/>
-        <Text>{title}</Text>
+        <IconButton size={36} color={TintColour()[500]} {...props}/>
+        <Text style={label}>{info}</Text>
       </View>
     )
   };
@@ -25,7 +26,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+  },
+  label: {
+    fontSize: 14,
+    marginTop: - 2
   }
 });
 
