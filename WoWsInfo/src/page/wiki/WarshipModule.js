@@ -46,7 +46,7 @@ class WarshipModule extends Component {
     const { section } = this.state;
     return (
       <WoWsInfo title={lang.warship_apply_module} onPress={() => this.apply()}>
-        <FlatList data={section} renderItem={({item}) => {
+        <FlatList data={section} showsVerticalScrollIndicator={false} renderItem={({item}) => {
           return (
             <View key={item.title}>
               <SectionTitle title={item.title}/>

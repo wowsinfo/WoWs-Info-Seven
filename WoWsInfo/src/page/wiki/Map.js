@@ -40,7 +40,7 @@ class Map extends Component {
         <FlatList data={data} keyExtractor={(item) => item.name} renderItem={({item}) => {
           return <List.Item title={item.name} description={item.description}
             onPress={() => this.setState({shown: true, map: item.icon})}/>
-        }}/>
+        }} showsVerticalScrollIndicator={false}/>
         <Portal>
           <Dialog visible={shown} onDismiss={() => this.setState({shown: false, loading: true})} 
             dismissable theme={{roundness: 16}} style={{height: imageWidth, width: imageWidth, alignSelf: 'center'}}>
