@@ -176,6 +176,7 @@ class Menu extends Component {
             data.forEach(v => v.server = getCurrServer());
             all.player = data;
             this.setState({result: all});
+            this.refs['search'].blur();
           }
         });
       }
