@@ -103,6 +103,7 @@ export default lang = new LocalizedStrings({
     wiki_collections: 'Collections',
     // Extra
     extra_section_title: 'Extra',
+    extra_support_wowsinfo: 'Support WoWs Info',
     // Websites
     website_title: 'Websites',
     website_official_site: 'World of Warships',

@@ -14,7 +14,7 @@ import lang from '../../value/lang';
 import { Actions } from 'react-native-router-flux';
 import { SafeAction, SafeFetch, Guard } from '../../core';
 import { ThemeBackColour, TintColour } from '../../value/colour';
-import { getCurrDomain, getCurrServer, getCurrPrefix } from '../../value/data';
+import { getCurrDomain, getCurrServer, getCurrPrefix, APP } from '../../value/data';
 import { WoWsAPI } from '../../value/api';
 
 class Menu extends Component {
@@ -115,6 +115,8 @@ class Menu extends Component {
             right={() => isAndroid ? null : <List.Icon color={Colors.grey500} icon='keyboard-arrow-right'/>} />
           )})}
           <SectionTitle title={lang.extra_section_title}/>
+            <List.Item title={lang.extra_support_wowsinfo} description={APP.Patreon}
+              onPress={() => Linking.openURL(APP.Patreon)}/>
             <List.Section title={lang.website_title} >
               { this.websites.map(item => { return (
                 <List.Item title={item.t} description={item.d} key={item.t}
