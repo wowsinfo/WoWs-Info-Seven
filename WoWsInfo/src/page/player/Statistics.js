@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { View, ScrollView, StyleSheet, Linking } from 'react-native';
 import { Surface, Text, IconButton, Title, Button } from 'react-native-paper';
 import { LoadingIndicator, WoWsInfo, LoadingModal, FooterPlus, TabButton, InfoLabel, SectionTitle, ShipStat, PlayerRecord } from '../../component';
-import { SafeFetch, Guard, dayDifference, humanTimeString } from '../../core';
+import { SafeFetch, Guard, dayDifference, humanTimeString, SafeAction } from '../../core';
 import { WoWsAPI } from '../../value/api';
 import { getDomain, langStr, getPrefix } from '../../value/data';
 import { TintColour } from '../../value/colour';
@@ -20,7 +20,8 @@ class Statistics extends PureComponent {
       // Valid data or hidden account
       valid: true,
       hidden: false,
-      clan: false,
+      clan: '',
+      currRank: 0,
       // To check if certain data have been loaded correctly
       achievement: false,
       rank: false,
@@ -40,6 +41,8 @@ class Statistics extends PureComponent {
 
     if (this.domain != null) {
       this.getBasic();
+      this.getClan();
+      this.getCurrRank();
       // this.getAchievement();
       // this.getShip();
       // this.getRank();
@@ -75,6 +78,31 @@ class Statistics extends PureComponent {
         // Treat zero battle account as hidden not for hidden accounts
         if (!hiddenAccount && battle == 0) this.setState({hidden: true});
         this.setState({basic: player});
+      }
+    });
+  }
+
+  getClan() {
+    const { id } = this.state;
+    SafeFetch.get(WoWsAPI.PlayerClan, this.domain, id).then(data => {
+      let tag = Guard(data, `data.${id}.clan.tag`, '');
+      if (tag !== '') {
+        this.setState({clan: tag});
+      }
+    });
+  }
+
+  getCurrRank() {
+    const { id } = this.state;
+    SafeFetch.get(WoWsAPI.CurrRankInfo, this.domain, id).then(data => {
+      let seasons = Guard(data, `data.${id}.seasons`, null);
+      if (seasons != null) {
+        let keys = Object.keys(seasons);
+        if (keys.length > 0) {
+          let last = keys.slice(-1)[0];
+          let currRank = Guard(seasons[last], 'rank_info.rank', 0);
+          if (currRank > 0) this.setState({currRank: currRank});
+        }
       }
     });
   }
@@ -180,7 +208,7 @@ class Statistics extends PureComponent {
       )
     } else {
       const { created_at, leveling_tier, last_battle_time, nickname } = basic;
-      const { hidden } = this.state;
+      const { hidden, clan, currRank } = this.state;
       let register = humanTimeString(created_at);
       let lastBattle = humanTimeString(last_battle_time)
       if (hidden) {
@@ -198,10 +226,14 @@ class Statistics extends PureComponent {
           </View>
         )
       } else {
+        let name = nickname;
+        if (clan !== '') name = `[${clan}]\n${nickname}`;
+        let extraInfo = `Lv ${leveling_tier}`;
+        if (currRank > 0) extraInfo += ` | ⭐${currRank}`;
         return (
           <View style={container}>
-            <SectionTitle center title={`${nickname}\n`} style={playerName}/>
-            <Text style={level}>{`Lv ${leveling_tier}`}</Text>
+            <Title style={playerName}>{name}</Title>
+            <Text style={level}>{extraInfo}</Text>
             <View style={horizontal}>
               <InfoLabel title={lang.basic_register_date} info={register}/>
               <InfoLabel title={lang.basic_last_battle} info={lastBattle}/>
@@ -271,11 +303,12 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     fontSize: 32,
     fontWeight: '500',
-    paddingTop: 16
+    paddingTop: 16,
+    textAlign: 'center'
   },
   level: {
     alignSelf: 'center',
-    marginTop: -30
+    textAlign: 'center'
   },
   hidden: {
     paddingLeft: 16,

@@ -27,10 +27,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    padding: 4
   },
   label: {
     fontSize: 14,
-    marginTop: - 2
   }
 });
 
