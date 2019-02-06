@@ -6,7 +6,7 @@
 
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Text, Title } from 'react-native-paper';
+import { Paragraph } from 'react-native-paper';
 import { SAVED } from '../../value/data';
 import { WarshipCell } from '../wiki/WarshipCell';
 import { InfoLabel } from '../common/InfoLabel';
@@ -41,8 +41,8 @@ class PlayerRecord extends Component {
                {name: lang.record_max_damage_scouting, num: max_damage_scouting, id: max_scouting_damage_ship_id}];
 
     // Best ships
-    let records = [{name: '', data: main_battery}, {name: '', data: second_battery}, 
-                   {name: '', data: torpedoes}, {name: '', data: aircraft}, {name: '', data: ramming}];
+    let records = [{name: lang.warship_artillery_main, data: main_battery}, {name: lang.warship_artillery_secondary, data: second_battery}, 
+                   {name: lang.warship_torpedoes, data: torpedoes}, {name: lang.warship_aircraft, data: aircraft}, {name: lang.warship_ramming, data: ramming}];
 
     return (
       <View style={container}>
@@ -56,12 +56,12 @@ class PlayerRecord extends Component {
   renderMax(data) {
     const { record, container } = styles;
     const { num, id, name } = data;
+    if (!id) return null;
     let ship = DATA[SAVED.warship][id];
-    if (!ship) return null;
     return (
-      <View style={record} key={id}>
+      <View style={record} key={name}>
         <View style={container}>
-          <WarshipCell item={ship} scale={1.6} onPress={() => SafeAction('WarshipDetail', {item: ship})}/>
+          <WarshipCell item={ship} scale={2} onPress={() => SafeAction('WarshipDetail', {item: ship})}/>
         </View>
         <View style={container}>
           <InfoLabel title={name} info={num}/>
@@ -74,14 +74,15 @@ class PlayerRecord extends Component {
     const { record, container } = styles;
     const { name, data } = item;
     const { frags, max_frags_battle, max_frags_ship_id, hits, shots } = data;
+    if (!max_frags_ship_id) return null;
     let bestShip = DATA[SAVED.warship][max_frags_ship_id];
-    if (!bestShip) return null;
     return (
-      <View style={container}>
-        <SectionTitle title={'Testing'}/>
-        <View style={record} key={name}>
+      <View style={container} key={name}>
+        <SectionTitle title={name}/>
+        <View style={record}>
           <View style={container}>
-            <WarshipCell item={bestShip} scale={1.6} onPress={() => SafeAction('WarshipDetail', {item: bestShip})}/>
+            <Paragraph>{lang.record_best_ship}</Paragraph>
+            <WarshipCell item={bestShip} scale={2} onPress={() => SafeAction('WarshipDetail', {item: bestShip})}/>
           </View>
           <View style={container}>
             <InfoLabel title={lang.weapon_total_frags} info={frags}/>

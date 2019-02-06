@@ -26,6 +26,7 @@ export default lang = new LocalizedStrings({
     wiki_warship_filter_type: 'Type',
     wiki_warship_filter_premium: 'Premium ship',
     // Warship Detail
+    warship_unkown: 'C Unknown',
     warship_model: '3D Model',
     warship_update_module: 'Update ship modules',
     warship_default_module: 'Default',
@@ -51,6 +52,7 @@ export default lang = new LocalizedStrings({
     warship_weapon_ap_overmatch: 'Overmatch',
     warship_weapon_he_penetration: 'Penetration',
     warship_weapon_speed: 'Speed',
+    warship_ramming: 'Ramming',
     warship_artillery_secondary: 'Secondary',
     warship_torpedoes: 'Torpedoes',
     warship_torpedoes_visible_distance: 'Detection',
@@ -142,6 +144,7 @@ export default lang = new LocalizedStrings({
     basic_last_battle: 'Last Battle',
     // Record
     record_title: 'Records',
+    record_best_ship: 'Best Ship',
     record_max_damage_dealt: 'Max Damage Dealt',
     record_max_frags_battle: 'Max Frags',
     record_max_planes_killed: 'Max Planes Destroyed',
