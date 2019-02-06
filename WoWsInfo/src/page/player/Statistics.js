@@ -227,7 +227,7 @@ class Statistics extends PureComponent {
     if (achievement) loading = false;
 
     return <TabButton icon={require('../../img/AchievementTab.png')} color={this.theme}
-      disabled={loading} label={lang.tab_achievement_title}/>
+      disabled={loading} />
   }
 
   renderShip(ship) {
@@ -235,7 +235,7 @@ class Statistics extends PureComponent {
     if (ship) loading = false;
 
     return <TabButton icon={require('../../img/Ship.png')} color={this.theme}
-      disabled={loading} label={lang.tab_ship_title}/>  
+      disabled={loading} />  
   }
 
   renderRank(rank) {
@@ -243,13 +243,13 @@ class Statistics extends PureComponent {
     if (rank) loading = false;
 
     return <TabButton icon={require('../../img/Rank.png')} color={this.theme}
-      disabled={loading} label={lang.tab_rank_title}/>
+      disabled={loading} />
   }
 
   renderGraph(graph) {
     const { hidden } = this.state;
     return <TabButton icon={require('../../img/Graph.png')} color={this.theme}
-      disabled={hidden} label={lang.tab_graph_title}/>
+      disabled={hidden} />
   }
 }
 
@@ -267,7 +267,7 @@ const styles = StyleSheet.create({
   },
   playerName: {
     alignSelf: 'center',
-    fontSize: 28,
+    fontSize: 36,
     paddingTop: 16
   },
   level: {
