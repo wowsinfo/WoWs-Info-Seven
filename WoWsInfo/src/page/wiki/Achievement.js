@@ -41,7 +41,7 @@ class Achievement extends Component {
       <WoWsInfo>
         <FlatGrid itemDimension={80} items={data} renderItem={({item}) => {
           return <WikiIcon item={item} onPress={() => SafeAction('BasicDetail', {item: item})}/>
-        }}/>
+        }} showsVerticalScrollIndicator={false}/>
       </WoWsInfo>
     )
   };

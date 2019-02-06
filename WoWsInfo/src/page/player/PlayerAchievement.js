@@ -40,7 +40,7 @@ class PlayerAchievement extends Component {
               <Paragraph style={number}>{item.num}</Paragraph>
             </Touchable>
           )
-        }}/>
+        }} showsVerticalScrollIndicator={false}/>
       </WoWsInfo>
     )
   };

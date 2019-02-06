@@ -12,7 +12,7 @@ class Friend extends PureComponent {
         <FlatList data={DATA[LOCAL.friendList]} renderItem={({item}) => 
           <List.Item key={item.nickname} title={item.nickname} onPress={() => this.navigate(item)}
             right={() => <IconButton color={Colors.grey500} icon='close' onPress={() => null}/> }/>}
-          keyExtractor={i => i.account_id}/>
+          keyExtractor={i => i.account_id} showsVerticalScrollIndicator={false}/>
       </View>
     )
   };

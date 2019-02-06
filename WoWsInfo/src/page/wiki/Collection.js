@@ -63,7 +63,7 @@ class Collection extends Component {
               </View>
             )
           } else return null;
-        }}/>
+        }} showsVerticalScrollIndicator={false}/>
       </WoWsInfo>
     )
   };
