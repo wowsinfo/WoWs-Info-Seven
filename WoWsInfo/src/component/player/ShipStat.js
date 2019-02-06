@@ -11,8 +11,16 @@ import { roundTo, humanTimeString } from '../../core';
 import lang from '../../value/lang';
 import { IconLabel } from './IconLabel';
 import { Info6Icon } from './Info6Icon';
+import { Button } from 'react-native-paper';
 
 class ShipStat extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      more: props.more
+    };
+  }
+
   render() {
     const { container, horizontal } = styles;
     const { data } = this.props;
@@ -31,48 +39,53 @@ class ShipStat extends Component {
 
     let warshipMode = false;
     if (last_battle_time) warshipMode = true;
-
+    const { more } = this.state;
     return (
       <View style={container}>
         { warshipMode ? <InfoLabel title={lang.basic_last_battle} info={humanTimeString(last_battle_time)}/> : null }
         <Info6Icon data={pvp}/>
-        <View style={horizontal}>
-          <InfoLabel title={'battle'} info={battles}/>
-          <InfoLabel title={'battle'} info={survived_battles}/>
-        </View>
-        <View style={horizontal}>
-          <InfoLabel title={'win'} info={wins}/>
-          <InfoLabel title={'battle'} info={survived_wins}/>
-        </View>
-        <View style={horizontal}>
-          <InfoLabel title={'damage'} info={roundTo(damage_dealt / battles)}/>
-          <InfoLabel title={'battle'} info={max_damage_dealt}/>
-        </View>
-        <View style={horizontal}>
-          <InfoLabel title={'scounting'} info={roundTo(damage_scouting / battles)}/>
-          <InfoLabel title={'battle'} info={max_damage_scouting}/>
-        </View>
-        <View style={horizontal}>
-          <InfoLabel title={'potential'} info={roundTo(art_agro / battles)}/>
-          <InfoLabel title={'battle'} info={max_total_agro}/>
-          <InfoLabel title={'battle'} info={roundTo(torpedo_agro / battles)}/>
-        </View>
-        <View style={horizontal}>
-          <InfoLabel title={'frag'} info={roundTo(frags / battles, 2)}/>
-          <InfoLabel title={'battle'} info={max_frags_battle}/>
-        </View>
-        <View style={horizontal}>
-          <InfoLabel title={'plane'} info={roundTo(planes_killed / battles, 2)}/>
-          <InfoLabel title={'battle'} info={max_planes_killed}/>
-        </View>
-        <View style={horizontal}>
-          <InfoLabel title={'spotting'} info={roundTo(ships_spotted / battles, 2)}/>
-          <InfoLabel title={'battle'} info={max_ships_spotted}/>
-        </View>
-        <View style={horizontal}>
-          <InfoLabel title={'xp'} info={roundTo(xp / battles)}/>
-          <InfoLabel title={'battle'} info={max_xp}/>
-        </View>
+        { more ? 
+          <View style={container}>
+            <View style={horizontal}>
+              <InfoLabel title={'battle'} info={battles}/>
+              <InfoLabel title={'battle'} info={survived_battles}/>
+            </View>
+            <View style={horizontal}>
+              <InfoLabel title={'win'} info={wins}/>
+              <InfoLabel title={'battle'} info={survived_wins}/>
+            </View>
+            <View style={horizontal}>
+              <InfoLabel title={'damage'} info={roundTo(damage_dealt / battles)}/>
+              <InfoLabel title={'battle'} info={max_damage_dealt}/>
+            </View>
+            <View style={horizontal}>
+              <InfoLabel title={'scounting'} info={roundTo(damage_scouting / battles)}/>
+              <InfoLabel title={'battle'} info={max_damage_scouting}/>
+            </View>
+            <View style={horizontal}>
+              <InfoLabel title={'potential'} info={roundTo(art_agro / battles)}/>
+              <InfoLabel title={'battle'} info={max_total_agro}/>
+              <InfoLabel title={'battle'} info={roundTo(torpedo_agro / battles)}/>
+            </View>
+            <View style={horizontal}>
+              <InfoLabel title={'frag'} info={roundTo(frags / battles, 2)}/>
+              <InfoLabel title={'battle'} info={max_frags_battle}/>
+            </View>
+            <View style={horizontal}>
+              <InfoLabel title={'plane'} info={roundTo(planes_killed / battles, 2)}/>
+              <InfoLabel title={'battle'} info={max_planes_killed}/>
+            </View>
+            <View style={horizontal}>
+              <InfoLabel title={'spotting'} info={roundTo(ships_spotted / battles, 2)}/>
+              <InfoLabel title={'battle'} info={max_ships_spotted}/>
+            </View>
+            <View style={horizontal}>
+              <InfoLabel title={'xp'} info={roundTo(xp / battles)}/>
+              <InfoLabel title={'battle'} info={max_xp}/>
+            </View> 
+          </View>
+          : <Button onPress={() => this.setState({more: true})}>{lang.basic_more_stat}</Button>
+        }
       </View>
     )
   };
