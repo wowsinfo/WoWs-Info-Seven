@@ -6,10 +6,12 @@
 
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Text } from 'react-native-paper';
+import { Text, Title } from 'react-native-paper';
 import { SAVED } from '../../value/data';
 import { WarshipCell } from '../wiki/WarshipCell';
 import { InfoLabel } from '../common/InfoLabel';
+import { roundTo, SafeAction } from '../../core';
+import lang from '../../value/lang';
 
 class PlayerRecord extends Component {
   render() {
@@ -29,13 +31,13 @@ class PlayerRecord extends Component {
     } = data;
 
     // Max records
-    let max = [{name: '', num: max_damage_dealt, id: max_damage_dealt_ship_id},
-               {name: '', num: max_frags_battle, id: max_frags_ship_id},
-               {name: '', num: max_planes_killed, id: max_planes_killed_ship_id},
-               {name: '', num: max_xp, id: max_xp_ship_id},
-               {name: '', num: max_ships_spotted, id: max_ships_spotted_ship_id},
-               {name: '', num: max_total_agro, id: max_total_agro_ship_id},
-               {name: '', num: max_damage_scouting, id: max_scouting_damage_ship_id}];
+    let max = [{name: lang.record_max_damage_dealt, num: max_damage_dealt, id: max_damage_dealt_ship_id},
+               {name: lang.record_max_frags_battle, num: max_frags_battle, id: max_frags_ship_id},
+               {name: lang.record_max_planes_killed, num: max_planes_killed, id: max_planes_killed_ship_id},
+               {name: lang.record_max_xp, num: max_xp, id: max_xp_ship_id},
+               {name: lang.record_max_ships_spotted, num: max_ships_spotted, id: max_ships_spotted_ship_id},
+               {name: lang.record_max_total_agro, num: max_total_agro, id: max_total_agro_ship_id},
+               {name: lang.record_max_damage_scouting, num: max_damage_scouting, id: max_scouting_damage_ship_id}];
 
     // Best ships
     let records = [{name: '', data: main_battery}, {name: '', data: second_battery}, 
@@ -43,7 +45,9 @@ class PlayerRecord extends Component {
 
     return (
       <View style={container}>
+        <Title style={{marginBottom: -16}}>Records</Title>
         { max.map(data => this.renderMax(data)) }
+        <Title>Weapons</Title>
         { records.map(data => this.renderRecord(data)) }
       </View>
     )
@@ -51,16 +55,16 @@ class PlayerRecord extends Component {
 
   renderMax(data) {
     const { record, container } = styles;
-    const { num, id } = data;
+    const { num, id, name } = data;
     if (!id) return null;
     let ship = DATA[SAVED.warship][id];
     return (
-      <View style={record}>
+      <View style={record} key={id}>
         <View style={container}>
-          <WarshipCell item={ship} scale={1.6}/>
+          <WarshipCell item={ship} scale={1.6} onPress={() => SafeAction('WarshipDetail', {item: ship})}/>
         </View>
         <View style={container}>
-          <InfoLabel info={num}/>
+          <InfoLabel title={name} info={num}/>
         </View>
       </View>
     );
@@ -73,12 +77,14 @@ class PlayerRecord extends Component {
     if (!max_frags_ship_id) return null;
     let bestShip = DATA[SAVED.warship][max_frags_ship_id];
     return (
-      <View style={record}>
+      <View style={record} key={name}>
         <View style={container}>
-          <WarshipCell item={bestShip} scale={1.6}/>
+          <WarshipCell item={bestShip} scale={1.6} onPress={() => SafeAction('WarshipDetail', {item: bestShip})}/>
         </View>
         <View style={container}>
           <InfoLabel info={frags}/>
+          <InfoLabel info={max_frags_battle}/>
+          { hits ? <InfoLabel info={`${roundTo(hits / shots * 100, 2)}%`}/> : null }
         </View>
       </View>
     );

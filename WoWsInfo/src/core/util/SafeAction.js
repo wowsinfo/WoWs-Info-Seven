@@ -9,4 +9,4 @@ export const SafeAction = (screen, obj, max = 0) => {
     Actions.push(screen, obj);
     console.log(`${screen} pushed`);
   }
-}
+};
