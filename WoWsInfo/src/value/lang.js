@@ -139,6 +139,14 @@ export default lang = new LocalizedStrings({
     basic_level_tier: 'Level',
     basic_register_date: 'Register Date',
     basic_last_battle: 'Last Battle',
+    // Record
+    record_max_damage_dealt: 'Max Damage Dealt',
+    record_max_frags_battle: 'Max Frags',
+    record_max_planes_killed: 'Max Planes Destroyed',
+    record_max_xp: 'Max XP',
+    record_max_ships_spotted: 'Max Ships Spotted',
+    record_max_total_agro: 'Max Potential Damage Dealt',
+    record_max_damage_scouting: 'Max Scouting Damage',
     /// App name section
     app_name: 'WoWs Info Origin',
     wowsinfo_black: 'Black',
