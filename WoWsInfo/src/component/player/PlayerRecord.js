@@ -56,8 +56,8 @@ class PlayerRecord extends Component {
   renderMax(data) {
     const { record, container } = styles;
     const { num, id, name } = data;
-    if (!id) return null;
     let ship = DATA[SAVED.warship][id];
+    if (!ship) return null;
     return (
       <View style={record} key={id}>
         <View style={container}>
@@ -74,8 +74,8 @@ class PlayerRecord extends Component {
     const { record, container } = styles;
     const { name, data } = item;
     const { frags, max_frags_battle, max_frags_ship_id, hits, shots } = data;
-    if (!max_frags_ship_id) return null;
     let bestShip = DATA[SAVED.warship][max_frags_ship_id];
+    if (!bestShip) return null;
     return (
       <View style={container}>
         <SectionTitle title={'Testing'}/>
