@@ -14,7 +14,7 @@ class WarshipCell extends Component {
     const { container } = styles;
     const { item, scale, onPress } = this.props;
     return (
-      <Touchable style={container} onPress={onPress}>
+      <Touchable style={container} onPress={item ? onPress : null}>
         { item ? <WikiIcon warship item={item} scale={scale}/> : null }
         <WarshipLabel item={item}/>
       </Touchable>
