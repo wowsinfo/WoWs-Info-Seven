@@ -43,7 +43,7 @@ class Statistics extends PureComponent {
       this.getBasic();
       this.getClan();
       this.getCurrRank();
-      // this.getAchievement();
+      this.getAchievement();
       // this.getShip();
       // this.getRank();
     } else {
@@ -261,7 +261,7 @@ class Statistics extends PureComponent {
     if (achievement) loading = false;
 
     return <TabButton icon={require('../../img/AchievementTab.png')} color={this.theme}
-      disabled={loading} />
+      disabled={loading} onPress={() => SafeAction('PlayerAchievement', {data: achievement})}/>
   }
 
   renderShip(ship) {
