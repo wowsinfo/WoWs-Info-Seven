@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { View, ScrollView, StyleSheet, Linking } from 'react-native';
-import { Surface, Text, IconButton, Title } from 'react-native-paper';
+import { Surface, Text, IconButton, Title, Button } from 'react-native-paper';
 import { LoadingIndicator, WoWsInfo, LoadingModal, FooterPlus, TabButton, InfoLabel, SectionTitle, ShipStat, PlayerRecord } from '../../component';
 import { SafeFetch, Guard, dayDifference, humanTimeString } from '../../core';
 import { WoWsAPI } from '../../value/api';
@@ -215,10 +215,10 @@ class Statistics extends PureComponent {
 
   renderStatistics(statistics) {
     if (!statistics) return null;
-    const { container } = styles;
+    const { showMore } = this.state;
     return (
       <View>
-        <ShipStat data={statistics}/>
+        <ShipStat data={statistics} more={showMore}/>
         <PlayerRecord data={statistics.pvp}/>
       </View>
     )
@@ -269,12 +269,13 @@ const styles = StyleSheet.create({
   },
   playerName: {
     alignSelf: 'center',
-    fontSize: 36,
+    fontSize: 32,
+    fontWeight: '500',
     paddingTop: 16
   },
   level: {
     alignSelf: 'center',
-    marginTop: -28
+    marginTop: -30
   },
   hidden: {
     paddingLeft: 16,

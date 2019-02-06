@@ -142,6 +142,7 @@ export default lang = new LocalizedStrings({
     basic_level_tier: 'Level',
     basic_register_date: 'Register Date',
     basic_last_battle: 'Last Battle',
+    basic_more_stat: '- Show More -',
     // Record
     record_title: 'Records',
     record_best_ship: 'Best Ship',
