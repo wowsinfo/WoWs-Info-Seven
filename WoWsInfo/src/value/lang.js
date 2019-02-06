@@ -140,6 +140,7 @@ export default lang = new LocalizedStrings({
     basic_register_date: 'Register Date',
     basic_last_battle: 'Last Battle',
     // Record
+    record_title: 'Records',
     record_max_damage_dealt: 'Max Damage Dealt',
     record_max_frags_battle: 'Max Frags',
     record_max_planes_killed: 'Max Planes Destroyed',
@@ -147,6 +148,10 @@ export default lang = new LocalizedStrings({
     record_max_ships_spotted: 'Max Ships Spotted',
     record_max_total_agro: 'Max Potential Damage Dealt',
     record_max_damage_scouting: 'Max Scouting Damage',
+    // Weapon record
+    weapon_max_frags: 'Max Frags',
+    weapon_total_frags: 'Total Frags',
+    weapon_hit_ratio: 'Hit Ratio',
     /// App name section
     app_name: 'WoWs Info Origin',
     wowsinfo_black: 'Black',

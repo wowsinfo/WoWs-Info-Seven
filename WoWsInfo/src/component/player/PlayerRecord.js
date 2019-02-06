@@ -12,6 +12,7 @@ import { WarshipCell } from '../wiki/WarshipCell';
 import { InfoLabel } from '../common/InfoLabel';
 import { roundTo, SafeAction } from '../../core';
 import lang from '../../value/lang';
+import { SectionTitle } from '../common/SectionTitle';
 
 class PlayerRecord extends Component {
   render() {
@@ -45,9 +46,8 @@ class PlayerRecord extends Component {
 
     return (
       <View style={container}>
-        <Title style={{marginBottom: -16}}>Records</Title>
+        <SectionTitle title={lang.record_title}/>
         { max.map(data => this.renderMax(data)) }
-        <Title>Weapons</Title>
         { records.map(data => this.renderRecord(data)) }
       </View>
     )
@@ -77,14 +77,17 @@ class PlayerRecord extends Component {
     if (!max_frags_ship_id) return null;
     let bestShip = DATA[SAVED.warship][max_frags_ship_id];
     return (
-      <View style={record} key={name}>
-        <View style={container}>
-          <WarshipCell item={bestShip} scale={1.6} onPress={() => SafeAction('WarshipDetail', {item: bestShip})}/>
-        </View>
-        <View style={container}>
-          <InfoLabel info={frags}/>
-          <InfoLabel info={max_frags_battle}/>
-          { hits ? <InfoLabel info={`${roundTo(hits / shots * 100, 2)}%`}/> : null }
+      <View style={container}>
+        <SectionTitle title={'Testing'}/>
+        <View style={record} key={name}>
+          <View style={container}>
+            <WarshipCell item={bestShip} scale={1.6} onPress={() => SafeAction('WarshipDetail', {item: bestShip})}/>
+          </View>
+          <View style={container}>
+            <InfoLabel title={lang.weapon_total_frags} info={frags}/>
+            <InfoLabel title={lang.weapon_max_frags} info={max_frags_battle}/>
+            { hits ? <InfoLabel title={lang.weapon_hit_ratio} info={`${roundTo(hits / shots * 100, 2)}%`}/> : null }
+          </View>
         </View>
       </View>
     );

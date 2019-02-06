@@ -216,7 +216,7 @@ class Statistics extends PureComponent {
     const { container } = styles;
     return (
       <View>
-        {/* <ShipStat data={statistics}/> */}
+        <ShipStat data={statistics}/>
         <PlayerRecord data={statistics.pvp}/>
       </View>
     )
