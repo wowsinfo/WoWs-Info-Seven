@@ -74,7 +74,7 @@ class Statistics extends PureComponent {
         let battle = Guard(player, 'statistics.pvp.battles', 0);
         // Treat zero battle account as hidden not for hidden accounts
         if (!hiddenAccount && battle == 0) this.setState({hidden: true});
-        else this.setState({basic: player});
+        this.setState({basic: player});
       }
     });
   }
@@ -124,6 +124,7 @@ class Statistics extends PureComponent {
     const { name, id, valid, 
             achievement, rank, basic, ship, graph } = this.state;
 
+    console.log(this.state);
     let RootView = home ? Surface : WoWsInfo;
     if (id == null || id == "") {
       // Show an error page or if it is from home, ask user to add an account first
@@ -168,7 +169,7 @@ class Statistics extends PureComponent {
   ///
 
   renderBasic(basic) {
-    const { container, horizontal, hidden, playerName, level } = styles;
+    const { container, horizontal, playerName, level } = styles;
     if (!basic) {
       const { name } = this.state;
       return (
@@ -178,17 +179,18 @@ class Statistics extends PureComponent {
         </View>
       )
     } else {
-      const { created_at, leveling_tier, last_battle_time, hidden_profile, nickname } = basic;
+      const { created_at, leveling_tier, last_battle_time, nickname } = basic;
+      const { hidden } = this.state;
       let register = humanTimeString(created_at);
       let lastBattle = humanTimeString(last_battle_time)
-      if (hidden_profile) {
+      if (hidden) {
         return (
           <View style={container}>
             <View style={horizontal}>
               <SectionTitle title={nickname} style={playerName}/>
               <IconButton icon='https' size={24} />
             </View>
-            <View style={hidden}>
+            <View style={styles.hidden}>
               <InfoLabel left title={lang.basic_register_date} info={register}/>
               <InfoLabel left title={lang.basic_last_battle} info={lastBattle}/>
               <InfoLabel left title={lang.basic_level_tier} info={lang.basic_data_unknown}/>
