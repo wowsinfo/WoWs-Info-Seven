@@ -210,7 +210,7 @@ class Statistics extends PureComponent {
       const { name } = this.state;
       return (
         <View style={container}>
-          <SectionTitle center title={name} style={playerName}/>
+          <Title style={playerName}>{name}</Title>
           <LoadingIndicator />
         </View>
       )
@@ -238,6 +238,7 @@ class Statistics extends PureComponent {
         if (clan !== '') name = `[${clan}]\n${nickname}`;
         let extraInfo = `Lv ${leveling_tier}`;
         if (currRank > 0) extraInfo += ` | ⭐${currRank}`;
+        const { canBeFriend, canBeMaster } = this.state;
         return (
           <View style={container}>
             <Title style={playerName}>{name}</Title>
