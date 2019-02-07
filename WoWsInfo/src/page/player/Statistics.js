@@ -247,9 +247,9 @@ class Statistics extends PureComponent {
               <InfoLabel title={lang.basic_register_date} info={register}/>
               <InfoLabel title={lang.basic_last_battle} info={lastBattle}/>
             </View>
-            <View style={[horizontal, {justifyContent: 'space-around'}]}>
-              { canBeMaster ? <Button compact icon='favorite' onPress={this.setMainAccount}>Set as Main</Button> : null }
-              { canBeFriend ? <Button compact icon='contacts' onPress={this.addFriend}>Add as friend</Button> : null }
+            <View style={{padding: 4}}>
+              { canBeFriend ? <Button icon='contacts' onPress={this.addFriend}>Add as friend</Button> : null }
+              { canBeMaster ? <Button icon='favorite' onPress={this.setMainAccount}>Set as Main</Button> : null }
             </View>
             { this.renderStatistics(basic.statistics) }
           </View>
