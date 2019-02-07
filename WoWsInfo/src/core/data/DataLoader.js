@@ -44,19 +44,25 @@ class DataLoader {
     };
 
     this.loadEntry(data, friendList, list).then(() => {
-      // Update format
       let info = data[friendList];
-      // Previously, it was all players
-      let saved = {clan: {}, player: {}};
-      info.forEach(v => saved.player[v.id] = this.formatConverter(v));
-      data[friendList] = saved;
+      if (info.player == null) {
+        // Previously, it was all players
+        let saved = {clan: {}, player: {}};
+        info.forEach(v => saved.player[v.id] = this.formatConverter(v));
+        data[friendList] = saved;
+        SafeStorage.set(friendList, saved);
+      }
     });
 
     this.loadEntry(data, userData, {});
     this.loadEntry(data, userInfo, {nickname: '', account_id: '', server: 3}).then(() => {
       // Update format
       let info = data[userInfo];
-      data[userInfo] = this.formatConverter(info);
+      if (info.nickname == null) {
+        let formatted = this.formatConverter(info);
+        data[userInfo] = formatted;
+        SafeStorage.set(userInfo, formatted);
+      }
     });
     this.loadEntry(data, userServer, 3);
     this.loadEntry(data, lastUpdate, new Date().toDateString());
