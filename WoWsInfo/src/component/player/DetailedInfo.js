@@ -1,5 +1,5 @@
 /**
- * ShipStat.js
+ * DetailedInfo.js
  * 
  * 
  */
@@ -13,7 +13,7 @@ import { IconLabel } from './IconLabel';
 import { Info6Icon } from './Info6Icon';
 import { Button } from 'react-native-paper';
 
-class ShipStat extends Component {
+class DetailedInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -119,4 +119,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export { ShipStat };
+export { DetailedInfo };

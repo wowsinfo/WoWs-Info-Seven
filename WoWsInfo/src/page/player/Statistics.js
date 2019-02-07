@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { View, ScrollView, StyleSheet, Linking } from 'react-native';
 import { Surface, Text, IconButton, Title, Button } from 'react-native-paper';
-import { LoadingIndicator, WoWsInfo, LoadingModal, FooterPlus, TabButton, InfoLabel, SectionTitle, ShipStat, PlayerRecord } from '../../component';
+import { LoadingIndicator, WoWsInfo, LoadingModal, FooterPlus, TabButton, InfoLabel, SectionTitle, PlayerRecord, DetailedInfo } from '../../component';
 import { SafeFetch, Guard, dayDifference, humanTimeString, SafeAction, SafeStorage } from '../../core';
 import { WoWsAPI } from '../../value/api';
 import { getDomain, langStr, getPrefix, LOCAL } from '../../value/data';
@@ -287,7 +287,7 @@ class Statistics extends PureComponent {
     const { showMore } = this.state;
     return (
       <View>
-        <ShipStat data={statistics} more={showMore}/>
+        <DetailedInfo data={statistics} more={showMore}/>
         <PlayerRecord data={statistics.pvp}/>
       </View>
     )
