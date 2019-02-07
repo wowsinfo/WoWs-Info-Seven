@@ -47,7 +47,7 @@ class ClanInfo extends Component {
     if (valid) {
       return (
         <WoWsInfo title={`- ${id} -`} onPress={() => Linking.openURL(`https://${this.prefix}.wows-numbers.com/clan/${id}, ${tag}/`)}>
-          <ScrollView>
+          <ScrollView showsVerticalScrollIndicator={false}>
             <Title style={clanTag}>{tag}</Title>
             { this.renderClanInfo(info) }
           </ScrollView>
