@@ -4,7 +4,7 @@ import { Surface, Text, IconButton, Title, Button } from 'react-native-paper';
 import { LoadingIndicator, WoWsInfo, LoadingModal, FooterPlus, TabButton, InfoLabel, SectionTitle, ShipStat, PlayerRecord } from '../../component';
 import { SafeFetch, Guard, dayDifference, humanTimeString, SafeAction } from '../../core';
 import { WoWsAPI } from '../../value/api';
-import { getDomain, langStr, getPrefix } from '../../value/data';
+import { getDomain, langStr, getPrefix, LOCAL } from '../../value/data';
 import { TintColour } from '../../value/colour';
 import lang from '../../value/lang';
 
@@ -13,6 +13,10 @@ class Statistics extends PureComponent {
     super(props);
     const { account_id, nickname, server } = props.info;
 
+    // Check if this player is inside friend list
+    let friend = DATA[LOCAL.friendList];
+    let master = DATA[LOCAL.userInfo];
+
     this.state = {
       name: nickname,
       id: account_id,
@@ -20,6 +24,10 @@ class Statistics extends PureComponent {
       // Valid data or hidden account
       valid: true,
       hidden: false,
+      // Master account
+      canBeMaster: master.id !== account_id,
+      // Add to friend
+      canBeFriend: friend.findIndex(f => f.account_id === account_id) === -1,
       clan: '',
       currRank: 0,
       // To check if certain data have been loaded correctly
