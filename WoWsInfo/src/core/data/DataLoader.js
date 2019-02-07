@@ -34,11 +34,22 @@ class DataLoader {
     this.loadEntry(data, appVersion, APP.Version);
     this.loadEntry(data, gameVersion, APP.GameVersion);
     this.loadEntry(data, firstLaunch, true);
-    this.loadEntry(data, friendList, [{nickname: 'HenryQuan', account_id: '2011774448', server: 3}]).then(() => {
+
+    // Add support to save clans as well
+    let list = {
+      clan: {},
+      player: {
+        2011774448: {nickname: 'HenryQuan', account_id: '2011774448', server: 3}
+      }
+    };
+
+    this.loadEntry(data, friendList, list).then(() => {
       // Update format
       let info = data[friendList];
-      info.forEach((v, i) => info[i] = this.formatConverter(v));
-      data[friendList] = info;
+      // Previously, it was all players
+      let saved = {clan: {}, player: {}};
+      info.forEach(v => saved.player[v.id] = this.formatConverter(v));
+      data[friendList] = saved;
     });
     this.loadEntry(data, userData, {});
     this.loadEntry(data, userInfo, {nickname: '', account_id: '', server: 3}).then(() => {
