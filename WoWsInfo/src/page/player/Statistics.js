@@ -11,52 +11,60 @@ import lang from '../../value/lang';
 class Statistics extends PureComponent {
   constructor(props) {
     super(props);
-    const { account_id, nickname, server } = props.info;
-
-    // Check if this player is inside friend list
-    let friend = DATA[LOCAL.friendList];
-    let master = DATA[LOCAL.userInfo];
-
-    this.state = {
-      name: nickname,
-      id: account_id,
-      server: server,
-      // Valid data or hidden account
-      valid: true,
-      hidden: false,
-      // Master account
-      canBeMaster: master.account_id !== account_id,
-      // Add to friend
-      canBeFriend: friend.findIndex(f => f.account_id === account_id) === -1,
-      clan: '',
-      currRank: 0,
-      // To check if certain data have been loaded correctly
-      achievement: false,
-      rank: false,
-      ship: false,
-      basic: false,
-      graph: false,
-      // Whether show everything
-      showMore: false
-    };
-
-    // Save domain
-    this.domain = getDomain(server);
-    this.prefix = getPrefix(server);
-    console.log(this.domain);
-    // Save theme colour
-    this.theme = TintColour()[500];
-
-    if (this.domain != null) {
-      this.getBasic();
-      this.getClan();
-      this.getCurrRank();
-      this.getAchievement();
-      // this.getShip();
-      // this.getRank();
+    let ID = Guard(props, 'info.account_id', null);
+    // ID must be valid
+    if (ID != null && ID !== '') {
+      const { account_id, nickname, server } = props.info;
+      // Check if this player is inside friend list
+      let friend = DATA[LOCAL.friendList];
+      let master = DATA[LOCAL.userInfo];
+  
+      this.state = {
+        name: nickname,
+        id: account_id,
+        server: server,
+        // Valid data or hidden account
+        valid: true,
+        hidden: false,
+        // Master account
+        canBeMaster: master.account_id !== account_id,
+        // Add to friend
+        canBeFriend: friend.player[account_id] == null,
+        clan: '',
+        currRank: 0,
+        // To check if certain data have been loaded correctly
+        achievement: false,
+        rank: false,
+        ship: false,
+        basic: false,
+        graph: false,
+        // Whether show everything
+        showMore: false
+      };
+  
+      // Save domain
+      this.domain = getDomain(server);
+      this.prefix = getPrefix(server);
+      console.log(this.domain);
+      // Save theme colour
+      this.theme = TintColour()[500];
+  
+      if (this.domain != null) {
+        this.getBasic();
+        this.getClan();
+        this.getCurrRank();
+        this.getAchievement();
+        // this.getShip();
+        // this.getRank();
+      } else {
+        // Invalid domain
+        this.setState({valid: false});
+      }
     } else {
-      // Invalid domain
-      this.setState({valid: false});
+      this.state = {
+        id: null,
+        valid: false
+      };
     }
   }
 
@@ -162,7 +170,7 @@ class Statistics extends PureComponent {
 
     console.log(this.state);
     let RootView = home ? Surface : WoWsInfo;
-    if (id == null || id == "") {
+    if (id == null || id === "") {
       // Show an error page or if it is from home, ask user to add an account first
       return (
         <RootView style={error}>
@@ -273,12 +281,11 @@ class Statistics extends PureComponent {
   addFriend = () => {
     let info = this.getPlayerInfo();
     
+    // Update object
     let str = LOCAL.friendList;
-    let friend = DATA[str];
-    friend.push(info);
+    DATA[str].player[info.account_id] = info;
 
-    DATA[str] = friend;
-    SafeStorage.set(LOCAL.friendList, friend);
+    SafeStorage.set(str, DATA[str]);
     this.setState({canBeFriend: false});
   }
 
