@@ -209,9 +209,6 @@ class Downloader {
     let page = 0;
     let all = {};
 
-    // Add slot info
-    let slot = await SafeFetch.normal(WikiAPI.Github_Slot);
-
     while (page < pageTotal) {
       // page + 1 to get actually page not index
       let json = await SafeFetch.get(WikiAPI.Consumable, this.domain, `&page_no=${page+1}&${this.language}`);
@@ -224,9 +221,19 @@ class Downloader {
         {
           curr.new = DATA[SAVED.consumable][id] ? false : true;
         } 
-        if (slot[id]) {
-          // Add slot info
-          curr.slot = slot[id].slot;
+        
+        if (curr.type === 'Modernization') {
+          // Calculate their slots
+          let price = curr.price_credit;
+          let slot = 1;
+          while (price > 125000) {
+            price /= 2;
+            slot += 1;
+          }
+          
+          // Legendary upgrades
+          if (slot > 6) continue;
+          curr.slot = slot;
         }
       }
 
