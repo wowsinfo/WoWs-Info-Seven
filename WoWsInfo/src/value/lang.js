@@ -143,6 +143,11 @@ export default lang = new LocalizedStrings({
     basic_register_date: 'Register Date',
     basic_last_battle: 'Last Battle',
     basic_more_stat: '- Show More -',
+    // Clan
+    clan_created_date: 'Created At',
+    clan_creator_name: 'Creator',
+    clan_leader_name: 'Leader',
+    clan_member_title: 'Member',
     // Record
     record_title: 'Records',
     record_best_ship: 'Best Ship',

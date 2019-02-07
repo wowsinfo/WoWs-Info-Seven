@@ -5,12 +5,14 @@
  */
 
 import React, { Component } from 'react';
-import { View, Text, ScrollView, Linking, StyleSheet } from 'react-native';
-import { WoWsInfo, LoadingIndicator } from '../../component';
-import { SafeFetch, Guard } from '../../core';
+import { View, Text, ScrollView, FlatList, Linking, StyleSheet } from 'react-native';
+import { WoWsInfo, LoadingIndicator, InfoLabel, SectionTitle } from '../../component';
+import { SafeFetch, Guard, humanTimeString } from '../../core';
 import { WoWsAPI } from '../../value/api';
 import { getDomain, getPrefix } from '../../value/data';
-import { Title } from 'react-native-paper';
+import { Title, Subheading, Paragraph, List, Caption } from 'react-native-paper';
+import { TintColour } from '../../value/colour';
+import lang from '../../value/lang';
 
 class ClanInfo extends Component {
   constructor(props) {
@@ -39,16 +41,14 @@ class ClanInfo extends Component {
   }
 
   render() {
-    const { clanTag, container } = styles;
+    const { clanTag, container, infoView } = styles;
     const { info, tag, id, valid } = this.state;
     if (valid) {
       return (
         <WoWsInfo title={`- ${id} -`} onPress={() => Linking.openURL(`https://${this.prefix}.wows-numbers.com/clan/${id}, ${tag}/`)}>
           <ScrollView>
-            <Title style={clanTag}>{`[${tag}]`}</Title>
-            { info ? <View>
-    
-            </View> : <LoadingIndicator /> }
+            <Title style={clanTag}>{tag}</Title>
+            { this.renderClanInfo(info) }
           </ScrollView>
         </WoWsInfo>
       )
@@ -60,6 +60,46 @@ class ClanInfo extends Component {
       )
     }
   };
+  
+  renderClanInfo(data) {
+    if (data) {
+      console.log(data);
+      const { horizontal } = styles;
+      const {
+        created_at, creator_name, leader_name,
+        description, name, members, members_count
+      } = data;
+
+      let memberInfo = [];
+      for (let ID in members) {
+        memberInfo.push(members[ID]);
+      }
+      memberInfo.sort((a, b) => a.joined_at - b.joined_at);
+      console.log(memberInfo);
+
+      return (
+        <View>
+          <Subheading style={{color: TintColour()[500], alignSelf: 'center'}}>{name}</Subheading>
+          <InfoLabel title={lang.clan_created_date} info={humanTimeString(created_at)}/>
+          <View style={horizontal}>
+            <InfoLabel title={lang.clan_creator_name} info={creator_name}/>
+            <InfoLabel title={lang.clan_leader_name} info={leader_name}/>
+          </View>
+          <Paragraph style={{padding: 16}}>{description}</Paragraph>
+          <SectionTitle style={{alignSelf: 'flex-start'}} title={`${lang.clan_member_title} - ${members_count}`}/>
+          <FlatList data={memberInfo} renderItem={({item}) => {
+            return (
+              <List.Item title={item.account_name} description={humanTimeString(item.joined_at)}
+                right={() => <Caption style={{paddingRight: 8, alignSelf: 'center'}}>{item.account_id}</Caption>}/>
+            )
+          }} showsVerticalScrollIndicator={false} keyExtractor={d => d.account_id}/>
+        </View>
+      )
+    } else {
+      return <LoadingIndicator />
+    }
+    
+  }
 }
 
 const styles = StyleSheet.create({
@@ -70,11 +110,13 @@ const styles = StyleSheet.create({
   },
   clanTag: {
     alignSelf: 'center',
-    fontSize: 32,
+    fontSize: 36,
     fontWeight: '500',
     paddingTop: 16,
-    paddingBottom: 8,
     textAlign: 'center'
+  },
+  horizontal: {
+    flexDirection: 'row'
   },
 });
 
