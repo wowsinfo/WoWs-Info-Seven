@@ -14,7 +14,7 @@ class InfoLabel extends Component {
     const { container } = styles;
     const { title, info, left, right, onPress } = this.props;
     return (
-      <Touchable style={[container, {alignItems: left ? 'flex-start' : right ? 'flex-end' : null}]} onPress={onPress}>
+      <Touchable fill style={[container, {alignItems: left ? 'flex-start' : right ? 'flex-end' : null}]} onPress={onPress}>
         <Caption style={{textAlign: 'center', marginBottom: -2}}>{title}</Caption>
         <Text style={{textAlign: 'center', marginBottom: 2}}>{info}</Text>
       </Touchable>
