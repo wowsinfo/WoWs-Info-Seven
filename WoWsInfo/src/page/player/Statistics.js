@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { View, ScrollView, StyleSheet, Linking } from 'react-native';
 import { Surface, Text, IconButton, Title, Button } from 'react-native-paper';
 import { LoadingIndicator, WoWsInfo, LoadingModal, FooterPlus, TabButton, InfoLabel, SectionTitle, ShipStat, PlayerRecord } from '../../component';
-import { SafeFetch, Guard, dayDifference, humanTimeString, SafeAction } from '../../core';
+import { SafeFetch, Guard, dayDifference, humanTimeString, SafeAction, SafeStorage } from '../../core';
 import { WoWsAPI } from '../../value/api';
 import { getDomain, langStr, getPrefix, LOCAL } from '../../value/data';
 import { TintColour } from '../../value/colour';
@@ -25,7 +25,7 @@ class Statistics extends PureComponent {
       valid: true,
       hidden: false,
       // Master account
-      canBeMaster: master.id !== account_id,
+      canBeMaster: master.account_id !== account_id,
       // Add to friend
       canBeFriend: friend.findIndex(f => f.account_id === account_id) === -1,
       clan: '',
@@ -247,11 +247,39 @@ class Statistics extends PureComponent {
               <InfoLabel title={lang.basic_register_date} info={register}/>
               <InfoLabel title={lang.basic_last_battle} info={lastBattle}/>
             </View>
+            <View style={[horizontal, {justifyContent: 'space-around'}]}>
+              { canBeMaster ? <Button compact icon='favorite' onPress={this.setMainAccount}>Set as Main</Button> : null }
+              { canBeFriend ? <Button compact icon='contacts' onPress={this.addFriend}>Add as friend</Button> : null }
+            </View>
             { this.renderStatistics(basic.statistics) }
           </View>
         )
       }
     }
+  }
+
+  getPlayerInfo() {
+    const { account_id, nickname, server } = this.props.info;
+    return {nickname: nickname, account_id: account_id, server: server};
+  }
+
+  setMainAccount = () => {
+    let info = this.getPlayerInfo();
+    DATA[LOCAL.userInfo] = info;
+    SafeStorage.set(LOCAL.userInfo, info);
+    this.setState({canBeMaster: false});
+  }
+
+  addFriend = () => {
+    let info = this.getPlayerInfo();
+    
+    let str = LOCAL.friendList;
+    let friend = DATA[str];
+    friend.push(info);
+
+    DATA[str] = friend;
+    SafeStorage.set(LOCAL.friendList, friend);
+    this.setState({canBeFriend: false});
   }
 
   renderStatistics(statistics) {
@@ -312,7 +340,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     fontSize: 32,
     fontWeight: '500',
-    paddingTop: 16,
+    marginTop: 32,
     textAlign: 'center'
   },
   level: {
