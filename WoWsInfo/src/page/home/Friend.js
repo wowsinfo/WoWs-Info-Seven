@@ -25,14 +25,14 @@ class Friend extends PureComponent {
     console.log(this.state);
     return (
       <ScrollView style={container}>
-        <FlatList data={clan} renderItem={({item, index}) => 
+        <FlatList data={clan} renderItem={({item}) => 
           <List.Item title={item.tag} onPress={() => this.pushToClan(item)}
             right={() => <IconButton color={Colors.grey500} icon='close' onPress={() => this.removeClan(item)}/> }/>}
-          keyExtractor={i => i.clan_id} showsVerticalScrollIndicator={false}/>
-        <FlatList data={player} renderItem={({item, index}) => 
+          keyExtractor={i => String(i.clan_id)} showsVerticalScrollIndicator={false}/>
+        <FlatList data={player} renderItem={({item}) => 
           <List.Item title={item.nickname} onPress={() => this.pushToPlayer(item)}
             right={() => <IconButton color={Colors.grey500} icon='close' onPress={() => this.removeFriend(item)}/> }/>}
-          keyExtractor={i => i.account_id} showsVerticalScrollIndicator={false}/>
+          keyExtractor={i => String(i.account_id)} showsVerticalScrollIndicator={false}/>
       </ScrollView>
     )
   };
