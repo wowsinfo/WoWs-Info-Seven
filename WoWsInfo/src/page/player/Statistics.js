@@ -182,7 +182,7 @@ class Statistics extends PureComponent {
     } else {
       // Display player data
       return (
-        <RootView noLeft={friend} title={`- ${id} -`} 
+        <RootView style={container} noLeft={friend} title={`- ${id} -`} 
           onPress={() => Linking.openURL(`https://${this.prefix}.wows-numbers.com/player/${id},${name}/`)}>
           <ScrollView>
             { this.renderBasic(basic) }
