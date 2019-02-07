@@ -340,7 +340,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     fontSize: 32,
     fontWeight: '500',
-    marginTop: 32,
+    paddingTop: 32,
+    paddingBottom: 8,
     textAlign: 'center'
   },
   level: {
