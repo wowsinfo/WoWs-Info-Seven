@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { StyleSheet, View, SafeAreaView, Alert, Dimensions } from 'react-native';
 import { IconButton, Text, Colors, Surface, DarkTheme, DefaultTheme, withTheme } from 'react-native-paper';
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
@@ -12,10 +12,13 @@ import { TintColour } from '../../value/colour';
 import lang from '../../value/lang';
 import { Loading } from '../common/Loading';
 
-class Home extends Component {
+// Do not update
+
+class Home extends PureComponent {
   constructor(props) {
     super(props);
-
+    
+    this.master = () => <Statistics info={DATA[LOCAL.userInfo]} home/>;
     let first = getFirstLaunch();
     this.state = {
       index: 0,
@@ -62,7 +65,7 @@ class Home extends Component {
             />
           } navigationState={this.state}
           renderScene={SceneMap({
-            stat: () => <Statistics info={DATA[LOCAL.userInfo]} home/>,
+            stat: this.master,
             friend: () => <Friend />,
             rs: () => <RS />
           })} onIndexChange={index => this.setState({index})}
