@@ -5,8 +5,8 @@
  */
 
 import React, { Component } from 'react';
-import { View, Text, Linking, StyleSheet } from 'react-native';
-import { WoWsInfo } from '../../component';
+import { View, Text, ScrollView, Linking, StyleSheet } from 'react-native';
+import { WoWsInfo, LoadingIndicator } from '../../component';
 import { SafeFetch, Guard } from '../../core';
 import { WoWsAPI } from '../../value/api';
 import { getDomain, getPrefix } from '../../value/data';
@@ -20,7 +20,9 @@ class ClanInfo extends Component {
     this.state = {
       id: clan_id,
       tag: tag,
-      info: false
+      info: false,
+      // Clan ID must be valid
+      valid: clan_id != null
     };
 
     this.domain = getDomain(server);
@@ -30,18 +32,33 @@ class ClanInfo extends Component {
       let clanInfo = Guard(data, `data.${clan_id}`, null);
       if (clanInfo != null) {
         this.setState({info: clanInfo});
+      } else {
+        this.setState({valid: false});
       }
     });
   }
 
   render() {
-    const { container } = styles;
-    const { info, tag, id } = this.state;
-    return (
-      <WoWsInfo title={`- ${id} -`} onPress={() => Linking.openURL(`https://${this.prefix}.wows-numbers.com/clan/${id}, ${tag}/`)}>
-        <Title>{tag}</Title>
-      </WoWsInfo>
-    )
+    const { clanTag, container } = styles;
+    const { info, tag, id, valid } = this.state;
+    if (valid) {
+      return (
+        <WoWsInfo title={`- ${id} -`} onPress={() => Linking.openURL(`https://${this.prefix}.wows-numbers.com/clan/${id}, ${tag}/`)}>
+          <ScrollView>
+            <Title style={clanTag}>{`[${tag}]`}</Title>
+            { info ? <View>
+    
+            </View> : <LoadingIndicator /> }
+          </ScrollView>
+        </WoWsInfo>
+      )
+    } else {
+      return (
+        <WoWsInfo title={`- ${id} -`} style={container}>
+          <Title style={clanTag}>{`[${tag}]`}</Title>
+        </WoWsInfo>
+      )
+    }
   };
 }
 
@@ -50,7 +67,15 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
-  }
+  },
+  clanTag: {
+    alignSelf: 'center',
+    fontSize: 32,
+    fontWeight: '500',
+    paddingTop: 16,
+    paddingBottom: 8,
+    textAlign: 'center'
+  },
 });
 
 export { ClanInfo };
