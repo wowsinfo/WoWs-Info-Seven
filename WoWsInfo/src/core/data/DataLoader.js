@@ -51,6 +51,7 @@ class DataLoader {
       info.forEach(v => saved.player[v.id] = this.formatConverter(v));
       data[friendList] = saved;
     });
+
     this.loadEntry(data, userData, {});
     this.loadEntry(data, userInfo, {nickname: '', account_id: '', server: 3}).then(() => {
       // Update format

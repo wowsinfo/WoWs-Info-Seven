@@ -1,48 +1,66 @@
 import React, { PureComponent } from 'react';
-import { View, StyleSheet, FlatList } from 'react-native';
+import { View, StyleSheet, FlatList, ScrollView } from 'react-native';
 import { List, Text, Colors, IconButton } from 'react-native-paper';
 import { LOCAL } from '../../value/data';
-import { SafeAction } from '../../core';
+import { SafeAction, SafeStorage } from '../../core';
 
 class Friend extends PureComponent {
   constructor(props) {
     super(props);
+    let all = DATA[LOCAL.friendList];
+
+    let clan = [];
+    for (let ID in all.clan) clan.push(all.clan[ID]);
+    let player = [];
+    for (let ID in all.player) player.push(all.player[ID]);
+
     this.state = {
-      list: DATA[LOCAL.friendList]
+      player, clan
     };
   }
 
   render() {
     const { container } = styles;
-    const { list } = this.state;
+    const { player, clan } = this.state;
+    console.log(this.state);
     return (
-      <View style={container}>
-        <FlatList data={list} renderItem={({item, index}) => 
-          <List.Item key={item.nickname} title={item.nickname} onPress={() => this.navigate(item)}
-            right={() => <IconButton color={Colors.grey500} icon='close' onPress={() => this.removeFriend(item, index)}/> }/>}
+      <ScrollView style={container}>
+        <FlatList data={clan} renderItem={({item, index}) => 
+          <List.Item title={item.tag} onPress={() => this.pushToClan(item)}
+            right={() => <IconButton color={Colors.grey500} icon='close' onPress={() => this.removeClan(item)}/> }/>}
+          keyExtractor={i => i.clan_id} showsVerticalScrollIndicator={false}/>
+        <FlatList data={player} renderItem={({item, index}) => 
+          <List.Item title={item.nickname} onPress={() => this.pushToPlayer(item)}
+            right={() => <IconButton color={Colors.grey500} icon='close' onPress={() => this.removeFriend(item)}/> }/>}
           keyExtractor={i => i.account_id} showsVerticalScrollIndicator={false}/>
-      </View>
+      </ScrollView>
     )
   };
 
-  removeFriend(item, index) {
+  removeFriend(info) {
     let str = LOCAL.friendList;
-    let friend = DATA[str];
+    delete DATA[str].player[info.account_id];
+    SafeStorage.set(str, DATA[str]);
   }
 
-  /**
-   * Navigate to player page with necessary information
-   * @param {any} info 
-   */
-  navigate(info) {
+  removeClan(info) {
+    let str = LOCAL.friendList;
+    delete DATA[str].clan[info.clan_id];
+    SafeStorage.set(str, DATA[str]);
+  }
+
+  pushToPlayer(info) {
     SafeAction('Statistics', {info: info, friend: true})
+  }
+
+  pushToClan(info) {
+    SafeAction('ClanInfo', {info: info, friend: true})
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    paddingBottom: 32
+    height: '100%'
   }
 });
 
