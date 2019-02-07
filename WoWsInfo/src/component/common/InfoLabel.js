@@ -5,18 +5,19 @@
  */
 
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Caption, Text } from 'react-native-paper';
+import { Touchable } from './Touchable';
 
 class InfoLabel extends Component {
   render() {
     const { container } = styles;
-    const { title, info, left, right } = this.props;
+    const { title, info, left, right, onPress } = this.props;
     return (
-      <View style={[container, {alignItems: left ? 'flex-start' : right ? 'flex-end' : null}]}>
+      <Touchable style={[container, {alignItems: left ? 'flex-start' : right ? 'flex-end' : null}]} onPress={onPress}>
         <Caption style={{textAlign: 'center', marginBottom: -2}}>{title}</Caption>
         <Text style={{textAlign: 'center', marginBottom: 2}}>{info}</Text>
-      </View>
+      </Touchable>
     )
   };
 }
