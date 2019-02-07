@@ -283,7 +283,7 @@ class Statistics extends PureComponent {
   renderGraph(graph) {
     const { hidden } = this.state;
     return <TabButton icon={require('../../img/Graph.png')} color={this.theme}
-      disabled={hidden} />
+      disabled={true} />
   }
 }
 
