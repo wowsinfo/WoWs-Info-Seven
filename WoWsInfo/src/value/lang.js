@@ -7,6 +7,9 @@ export default lang = new LocalizedStrings({
     setup_done_button: 'Done',
     setup_loading: 'Loading...',
     /// Home section
+    // Friend section
+    friend_clan_title: 'Clan',
+    friend_player_title: 'Player',
     // Update section
     update_version_title: 'Version',
     update_app_version: 'App ->',

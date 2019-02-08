@@ -7,10 +7,10 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, FlatList, Linking, StyleSheet } from 'react-native';
 import { WoWsInfo, LoadingIndicator, InfoLabel, SectionTitle, Touchable } from '../../component';
-import { SafeFetch, Guard, humanTimeString, SafeAction } from '../../core';
+import { SafeFetch, Guard, humanTimeString, SafeAction, SafeStorage } from '../../core';
 import { WoWsAPI } from '../../value/api';
-import { getDomain, getPrefix, getCurrServer } from '../../value/data';
-import { Title, Subheading, Paragraph, List, Caption } from 'react-native-paper';
+import { getDomain, getPrefix, getCurrServer, LOCAL } from '../../value/data';
+import { Title, Subheading, Paragraph, List, Caption, Button } from 'react-native-paper';
 import { TintColour } from '../../value/colour';
 import lang from '../../value/lang';
 
@@ -19,12 +19,14 @@ class ClanInfo extends Component {
     super(props);
 
     const { clan_id, tag, server } = props.info;
+    let friend = DATA[LOCAL.friendList];
     this.state = {
       id: clan_id,
       tag: tag,
       info: false,
       // Clan ID must be valid
-      valid: clan_id != null
+      valid: clan_id != null,
+      canBeFriend: friend.clan[clan_id] == null
     };
 
     this.server = server;
@@ -42,7 +44,7 @@ class ClanInfo extends Component {
   }
 
   render() {
-    const { clanTag, container, infoView } = styles;
+    const { clanTag, container } = styles;
     const { info, tag, id, valid } = this.state;
     if (valid) {
       return (
@@ -70,6 +72,7 @@ class ClanInfo extends Component {
         created_at, creator_name, creator_id, leader_name, leader_id,
         description, name, members, members_count
       } = data;
+      const { canBeFriend } = this.state;
 
       let memberInfo = [];
       for (let ID in members) {
@@ -88,6 +91,7 @@ class ClanInfo extends Component {
             <InfoLabel title={lang.clan_leader_name} info={leader_name}
               onPress={() => this.pushToMaster(leader_name, leader_id)}/>
           </View>
+          { canBeFriend ? <Button icon='contacts' onPress={this.addFriend} style={{padding: 4}}>Add as friend</Button> : null }
           <Paragraph style={{padding: 16}}>{description}</Paragraph>
           <SectionTitle style={{alignSelf: 'flex-start'}} title={`${lang.clan_member_title} - ${members_count}`}/>
           <FlatList data={memberInfo} renderItem={({item}) => {
@@ -96,12 +100,20 @@ class ClanInfo extends Component {
                 onPress={() => this.pushToPlayer(item)}
                 right={() => <Caption style={{paddingRight: 8, alignSelf: 'center'}}>{item.account_id}</Caption>}/>
             )
-          }} showsVerticalScrollIndicator={false} keyExtractor={d => d.account_id}/>
+          }} showsVerticalScrollIndicator={false} keyExtractor={d => String(d.account_id)}/>
         </View>
       )
     } else {
       return <LoadingIndicator />
     }
+  }
+
+  addFriend = () => {
+    const { clan_id, tag, server } = this.props.info;
+    let str = LOCAL.friendList;
+    DATA[str].clan[clan_id] = {clan_id, tag, server};
+    SafeStorage.set(str, DATA[str]);
+    this.setState({canBeFriend: false});
   }
 
   pushToMaster(name, id) {
