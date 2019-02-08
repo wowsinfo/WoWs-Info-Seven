@@ -3,6 +3,8 @@ import { View, StyleSheet, FlatList, ScrollView } from 'react-native';
 import { List, Text, Colors, IconButton } from 'react-native-paper';
 import { LOCAL } from '../../value/data';
 import { SafeAction, SafeStorage } from '../../core';
+import { SectionTitle } from '../../component';
+import lang from '../../value/lang';
 
 class Friend extends PureComponent {
   constructor(props) {
@@ -25,10 +27,12 @@ class Friend extends PureComponent {
     console.log(this.state);
     return (
       <ScrollView style={container}>
+        <SectionTitle title={`${lang.friend_clan_title} - ${clan.length}`}/>
         <FlatList data={clan} renderItem={({item}) => 
           <List.Item title={item.tag} onPress={() => this.pushToClan(item)}
             right={() => <IconButton color={Colors.grey500} icon='close' onPress={() => this.removeClan(item)}/> }/>}
           keyExtractor={i => String(i.clan_id)} showsVerticalScrollIndicator={false}/>
+        <SectionTitle title={`${lang.friend_player_title} - ${player.length}`}/>
         <FlatList data={player} renderItem={({item}) => 
           <List.Item title={item.nickname} onPress={() => this.pushToPlayer(item)}
             right={() => <IconButton color={Colors.grey500} icon='close' onPress={() => this.removeFriend(item)}/> }/>}
