@@ -54,11 +54,11 @@ class Friend extends PureComponent {
   }
 
   pushToPlayer(info) {
-    SafeAction('Statistics', {info: info, friend: true})
+    SafeAction('Statistics', {info: info})
   }
 
   pushToClan(info) {
-    SafeAction('ClanInfo', {info: info, friend: true})
+    SafeAction('ClanInfo', {info: info})
   }
 }
 
