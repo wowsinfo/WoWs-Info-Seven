@@ -164,7 +164,7 @@ class Statistics extends PureComponent {
 
   render() {
     const { error, container, footer } = styles;
-    const { home, friend } = this.props;
+    const { home } = this.props;
     const { name, id, valid, 
             achievement, rank, basic, ship, graph } = this.state;
 
@@ -190,7 +190,7 @@ class Statistics extends PureComponent {
     } else {
       // Display player data
       return (
-        <RootView style={container} noLeft={friend} title={`- ${id} -`} 
+        <RootView style={container} title={`- ${id} -`} 
           onPress={() => Linking.openURL(`https://${this.prefix}.wows-numbers.com/player/${id},${name}/`)}>
           <ScrollView>
             { this.renderBasic(basic) }
