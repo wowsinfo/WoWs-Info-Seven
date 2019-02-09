@@ -109,12 +109,6 @@ class DetailedInfo extends Component {
           <InfoLabel title={lang.detailed_total_plane_killed} info={planes_killed}/>
           <InfoLabel title={lang.detailed_avg_plane_killed} info={roundTo(planes_killed / battles, 2)}/>
         </View>
-        <View style={horizontal}>
-        </View>
-        <View style={horizontal}>
-        </View>
-        <View style={horizontal}>
-        </View>
       </View>
     )
   }
