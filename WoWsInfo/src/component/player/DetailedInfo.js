@@ -76,7 +76,7 @@ class DetailedInfo extends Component {
         </View>
         <View style={horizontal}>
           <InfoLabel title={lang.detailed_survival_rate} info={`${roundTo(survived_battles / battles * 100, 2)}%`}/>
-          <InfoLabel title={lang.detailed_survivied_win_rate} info={`${roundTo(survived_wins / battles * 100, 2)}%`}/>
+          <InfoLabel title={lang.detailed_survivied_win_rate} info={`${roundTo(survived_wins / survived_battles * 100, 2)}%`}/>
         </View>
         <Space height={16}/>
         <View style={horizontal}>
