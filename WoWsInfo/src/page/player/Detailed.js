@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
-import { WoWsInfo, WarshipCell } from '../../component';
+import { WoWsInfo, WarshipCell, InfoLabel, DetailedInfo, RatingButton } from '../../component';
 import { SAVED } from '../../value/data';
 import { Actions } from 'react-native-router-flux';
 import { SafeAction, roundTo } from '../../core';
 import { Text } from 'react-native-paper';
+import lang from '../../value/lang';
 
 class Detailed extends Component {
   constructor(props) {
@@ -23,14 +24,16 @@ class Detailed extends Component {
     }
     
     const { container } = styles;
-    const { pvp, ship_id } = data;
+    const { pvp, ship_id, rating } = data;
     const ship = DATA[SAVED.warship][ship_id];
     const overall = DATA[SAVED.pr][ship_id];
     return (
       <WoWsInfo onPress={() => SafeAction('WarshipDetail', {item: ship})}>
         <ScrollView>
           <WarshipCell item={ship} scale={3}/>
+          <RatingButton rating={rating}/>
           { this.renderNumberDiff(pvp, overall) }
+          <DetailedInfo data={data} more/>
         </ScrollView>
       </WoWsInfo>
     )
@@ -42,17 +45,28 @@ class Detailed extends Component {
     const { battles, wins, damage_dealt, frags } = data;
     const { average_damage_dealt, average_frags, win_rate } = overall;
 
-    let dmgDiff = roundTo(damage_dealt / battles - average_damage_dealt);
-    let winrateDiff = roundTo(wins / battles * 100 - win_rate, 2);
-    let fragDiff = roundTo(frags / battles - average_frags, 2);
+    let dmgDiff = this.normalise(damage_dealt / battles - average_damage_dealt, 0);
+    let winrateDiff = this.normalise(wins / battles * 100 - win_rate, 2);
+    let fragDiff = this.normalise(frags / battles - average_frags, 2);
 
     return (
       <View style={horizontal}>
-        <Text>{dmgDiff}</Text>
-        <Text>{winrateDiff}</Text>
-        <Text>{fragDiff}</Text>
+        <InfoLabel style={this.getColor(dmgDiff)} info={dmgDiff} title={lang.ship_detail_damage}/>
+        <InfoLabel style={this.getColor(winrateDiff)} info={`${winrateDiff}%`} title={lang.ship_detail_winrate}/>
+        <InfoLabel style={this.getColor(fragDiff)} info={fragDiff} title={lang.ship_detail_frag}/>
       </View>
     );
+  }
+
+  getColor = (diff) => {
+    if (diff === 0) return null;
+    return {color: diff > 0 ? 'green' : 'red'};
+  }
+
+  normalise = (diff, digit) => {
+    let rounded = roundTo(diff, digit);
+    if (rounded <= 0) return rounded;
+    else return `+${rounded}`;
   }
 }
 
