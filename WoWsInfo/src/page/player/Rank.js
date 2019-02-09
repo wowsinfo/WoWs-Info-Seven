@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { WoWsInfo } from '../../component';
 
 class Rank extends Component {
   render() {
     const { container } = styles;
+    const { data } = this.props;
+    console.log(data);
     return (
-      <View style={container}>
-        <Text>Rank</Text>
-      </View>
+      <WoWsInfo>
+
+      </WoWsInfo>
     )
   };
 }

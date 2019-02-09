@@ -15,7 +15,6 @@ export const WoWsAPI = {
   ClanSearch: `https://api.worldofwarships.{0}/wows/clans/list/?application_id=${AppKey}&fields=clan_id%2Ctag&search=`,
   // Rank
   RankInfo: `https://api.worldofwarships.{0}/wows/seasons/accountinfo/?application_id=${AppKey}&account_id=`,
-  CurrRankInfo: `https://api.worldofwarships.{0}/wows/seasons/accountinfo/?application_id=${AppKey}&fields=seasons.rank_info.rank&account_id=`,
   RankShipInfo: `https://api.worldofwarships.{0}/wows/seasons/shipstats/?application_id=${AppKey}&account_id=`,
   // Ships
   ShipInfo: `https://api.worldofwarships.{0}/wows/ships/stats/?application_id=${AppKey}&account_id=`,
