@@ -140,6 +140,15 @@ export default lang = new LocalizedStrings({
     tab_graph_title: 'Graph',
     tab_ship_title: 'Ship',
     tab_rank_title: 'Rank',
+    // Rating
+    rating_bad: 'Improvement Needed',
+    rating_below_average: 'Below Average',
+    rating_average: 'Average',
+    rating_good: 'Good',
+    rating_very_good: 'Very Good',
+    rating_great: 'Great',
+    rating_unicum: 'Unicum',
+    rating_super_unicum: 'SUPER Unicum',
     // Basic
     basic_data_unknown: 'Unknown',
     basic_level_tier: 'Level',
