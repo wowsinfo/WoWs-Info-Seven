@@ -12,6 +12,8 @@ import lang from '../../value/lang';
 import { IconLabel } from './IconLabel';
 import { Info6Icon } from './Info6Icon';
 import { Button } from 'react-native-paper';
+import { Space } from '../common/Space';
+import { Router } from 'react-native-router-flux';
 
 class DetailedInfo extends Component {
   constructor(props) {
@@ -51,54 +53,68 @@ class DetailedInfo extends Component {
 
   renderPlayerInfo(data) {
     const { container, horizontal } = styles;
+    console.log(data);
     const { 
-      art_agro, max_total_agro, torpedo_agro,
-      battles, wins, survived_battles, survived_wins,
-      damage_dealt, damage_scouting, max_damage_dealt, max_damage_scouting,
-      frags, max_frags_battle,
-      planes_killed, max_planes_killed,
-      ships_spotted, max_ships_spotted,
-      xp, max_xp,
+      art_agro, torpedo_agro,
+      battles, wins, losses, draws, survived_battles, survived_wins,
+      damage_dealt, damage_scouting,
+      planes_killed,
+      ships_spotted,
+      xp, frags
     } = data;
     return (
       <View style={container}>
         <View style={horizontal}>
-          <InfoLabel title={'battle'} info={battles}/>
-          <InfoLabel title={'battle'} info={survived_battles}/>
-        </View>
-        <View style={horizontal}>
           <InfoLabel title={'win'} info={wins}/>
-          <InfoLabel title={'battle'} info={survived_wins}/>
+          <InfoLabel title={'draw'} info={draws}/>
+          <InfoLabel title={'loss'} info={losses}/>
         </View>
         <View style={horizontal}>
-          <InfoLabel title={'damage'} info={roundTo(damage_dealt / battles)}/>
-          <InfoLabel title={'battle'} info={max_damage_dealt}/>
+          <InfoLabel title={'survived'} info={survived_battles}/>
+          <InfoLabel title={'total xp'} info={xp}/>
+          <InfoLabel title={'survived win'} info={survived_wins}/>
         </View>
         <View style={horizontal}>
-          <InfoLabel title={'scounting'} info={roundTo(damage_scouting / battles)}/>
-          <InfoLabel title={'battle'} info={max_damage_scouting}/>
+          <InfoLabel title={'survival rate'} info={`${roundTo(survived_battles / battles * 100, 2)}%`}/>
+          <InfoLabel title={'survival win rate'} info={`${roundTo(survived_wins / battles * 100, 2)}%`}/>
+        </View>
+        <Space height={16}/>
+        <View style={horizontal}>
+          <InfoLabel title={'total potential'} info={art_agro}/>
+          <InfoLabel title={'avg potential'} info={roundTo(art_agro / battles)}/>
         </View>
         <View style={horizontal}>
-          <InfoLabel title={'potential'} info={roundTo(art_agro / battles)}/>
-          <InfoLabel title={'battle'} info={max_total_agro}/>
-          <InfoLabel title={'battle'} info={roundTo(torpedo_agro / battles)}/>
+          <InfoLabel title={'scouting damage'} info={damage_scouting}/>
+          <InfoLabel title={'avg scouting damage'} info={roundTo(damage_scouting / battles)}/>
         </View>
         <View style={horizontal}>
-          <InfoLabel title={'frag'} info={roundTo(frags / battles, 2)}/>
-          <InfoLabel title={'battle'} info={max_frags_battle}/>
+          <InfoLabel title={'total torp potiential'} info={torpedo_agro}/>
+          <InfoLabel title={'avg torp potiential'} info={roundTo(torpedo_agro / battles)}/>
         </View>
         <View style={horizontal}>
-          <InfoLabel title={'plane'} info={roundTo(planes_killed / battles, 2)}/>
-          <InfoLabel title={'battle'} info={max_planes_killed}/>
+          <InfoLabel title={'total damage'} info={damage_dealt}/>
+          <InfoLabel title={'real / potential'} info={`${roundTo(damage_dealt / art_agro * 100, 2)}%`}/>
+        </View>
+        <Space height={16}/>
+        <View style={horizontal}>
+          <InfoLabel title={'total spotted'} info={ships_spotted}/>
+          <InfoLabel title={'avg spotted'} info={roundTo(ships_spotted / battles, 2)}/>
         </View>
         <View style={horizontal}>
-          <InfoLabel title={'spotting'} info={roundTo(ships_spotted / battles, 2)}/>
-          <InfoLabel title={'battle'} info={max_ships_spotted}/>
+          <InfoLabel title={'total frags'} info={frags}/>
+          <InfoLabel title={'frag/spot'} info={`${roundTo(frags / ships_spotted * 100, 2)}%`}/>
+        </View>
+        <Space height={16}/>
+        <View style={horizontal}>
+          <InfoLabel title={'total plane destroyed'} info={planes_killed}/>
+          <InfoLabel title={'avg plane destroyed'} info={roundTo(planes_killed / battles, 2)}/>
         </View>
         <View style={horizontal}>
-          <InfoLabel title={'xp'} info={roundTo(xp / battles)}/>
-          <InfoLabel title={'battle'} info={max_xp}/>
-        </View> 
+        </View>
+        <View style={horizontal}>
+        </View>
+        <View style={horizontal}>
+        </View>
       </View>
     )
   }
