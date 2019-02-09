@@ -14,7 +14,7 @@ class RatingButton extends Component {
     if (rating == null || rating === -1) return null;
     return (
       <Button color={getColour(rating)} onPress={() => SafeAction('Rating')}>
-        {`- ${getComment(rating)} -`}
+        {getComment(rating)}
       </Button>
     );
   };

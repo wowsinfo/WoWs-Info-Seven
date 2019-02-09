@@ -65,16 +65,13 @@ export const getAP = (rating, battle) => {
   else return roundTo(Math.log10(battle) * rating);
 }
 
+export const getRatingRange = () => [750, 1100, 1350, 1550, 1750, 2100, 2450, 9999, 0];
 export const getRatingIndex = (rating) => {
-  if (rating < 750) return 0;
-  if (rating < 1100) return 1;
-  if (rating < 1350) return 2;
-  if (rating < 1550) return 3;
-  if (rating < 1750) return 4;
-  if (rating < 2100) return 5;
-  if (rating < 2450) return 6;
-  if (rating < 9999) return 7;
-  return 8;
+  let index = 0;
+  for (let range of getRatingRange()) {
+    if (rating < range) return index;
+    index++;
+  }
 }
 
 export const getColourList = () => ['red', 'orange', '#F5C84C', '#67AF34', '#4A7D23', '#60C6B3', 'magenta', 'purple', 'black'];
@@ -89,5 +86,7 @@ export const getRatingList = () => [lang.rating_bad, lang.rating_below_average, 
 
 export const getComment = (rating) => {
   const comments = getRatingList();
-  return comments[getRatingIndex(rating)];
+  let index = getRatingIndex(rating);
+  let comment = comments[index];
+  return `${comment} (-${getRatingRange()[index] - rating})`;
 };
