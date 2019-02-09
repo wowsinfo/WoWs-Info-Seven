@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { View, ScrollView, StyleSheet, Linking } from 'react-native';
 import { Surface, Text, IconButton, Title, Button, Subheading } from 'react-native-paper';
-import { LoadingIndicator, WoWsInfo, LoadingModal, FooterPlus, TabButton, InfoLabel, SectionTitle, PlayerRecord, DetailedInfo, Touchable } from '../../component';
+import { LoadingIndicator, WoWsInfo, LoadingModal, FooterPlus, TabButton, InfoLabel, SectionTitle, PlayerRecord, DetailedInfo, Touchable, RatingButton } from '../../component';
 import { SafeFetch, Guard, dayDifference, humanTimeString, SafeAction, SafeStorage, getOverallRating, getComment, getColour } from '../../core';
 import { WoWsAPI } from '../../value/api';
 import { getDomain, langStr, getPrefix, LOCAL } from '../../value/data';
@@ -32,7 +32,7 @@ class Statistics extends PureComponent {
         canBeFriend: friend.player[account_id] == null,
         clan: '',
         currRank: 0,
-        rating: false,
+        rating: -1,
         // To check if certain data have been loaded correctly
         achievement: false,
         rank: false,
@@ -255,9 +255,7 @@ class Statistics extends PureComponent {
           <View style={container}>
             <Title style={playerName}>{name}</Title>
             <Text style={level}>{extraInfo}</Text>
-            { rating && rating != -1 ? 
-              <Button color={getColour(rating)}>{`- ${getComment(rating)} -`}</Button>
-              : null }
+            <RatingButton rating={rating}/>
             <View style={horizontal}>
               <InfoLabel title={lang.basic_register_date} info={register}/>
               <InfoLabel title={lang.basic_last_battle} info={lastBattle}/>
