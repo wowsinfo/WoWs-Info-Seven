@@ -5,6 +5,7 @@ import { getOverallRating, roundTo, getComment, getColourList, getColour, SafeAc
 import { FlatGrid } from 'react-native-super-grid';
 import { SAVED } from '../../value/data';
 import { Text, IconButton } from 'react-native-paper';
+import lang from '../../value/lang';
 
 class PlayerShip extends Component {
   constructor(props) {
@@ -21,7 +22,7 @@ class PlayerShip extends Component {
     const { centerText, horizontal, icon, centerView } = styles;
     const { data } = this.state;
     return (
-      <WoWsInfo>
+      <WoWsInfo title={`${lang.wiki_warships} - ${data.length}`}>
         <FlatGrid itemDimension={150} items={data} renderItem={({item}) => {
           let ship = DATA[SAVED.warship][item.ship_id];
           const { battles, wins, damage_dealt } = item.pvp;
