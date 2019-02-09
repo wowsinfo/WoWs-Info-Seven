@@ -185,6 +185,10 @@ export default lang = new LocalizedStrings({
     detailed_frag_spot_ratio: 'Frag / Spotted',
     detailed_total_plane_killed: 'Total Planed Destroyed',
     detailed_avg_plane_killed: 'Avg Planed Destroyed',
+    // Ship detail
+    ship_detail_damage: 'Damage',
+    ship_detail_winrate: 'Winrate',
+    ship_detail_frag: 'Frags',
     // Clan
     clan_created_date: 'Created At',
     clan_creator_name: 'Creator',

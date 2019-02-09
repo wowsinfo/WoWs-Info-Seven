@@ -21,7 +21,7 @@ class Rating extends Component {
 
     return (
       <WoWsInfo title={lang.rating_author} onPress={() => SafeAction('Statistics', 
-        {info: {nickname: 'Wiochi', account_id: 503367319, server: 1}})}>
+        {info: {nickname: 'Wiochi', account_id: 503367319, server: 1}}, 1)}>
         <ScrollView>
           <SectionTitle title='Personal Rating'/>
           <View style={container}>
