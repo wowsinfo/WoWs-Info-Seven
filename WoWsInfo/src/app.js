@@ -12,6 +12,7 @@ import { LoadingModal } from './component';
 import { TintColour, UpdateTintColour } from './value/colour';
 import lang from './value/lang';
 import { PlayerShip } from './page/player/PlayerShip';
+import { Detailed } from './page/player/Detailed';
 
 class App extends Component {
   constructor(props) {
@@ -95,6 +96,7 @@ class App extends Component {
           <Scene key='Statistics' component={Statistics} />
           <Scene key='PlayerAchievement' component={PlayerAchievement} />
           <Scene key='PlayerShip' component={PlayerShip} />
+          <Scene key='PlayerShipDetail' component={Detailed} />
           <Scene key='ClanInfo' component={ClanInfo} />
           <Scene key='Rating' component={Rating} />
 
