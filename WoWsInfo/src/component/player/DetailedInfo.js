@@ -65,49 +65,49 @@ class DetailedInfo extends Component {
     return (
       <View style={container}>
         <View style={horizontal}>
-          <InfoLabel title={'win'} info={wins}/>
-          <InfoLabel title={'draw'} info={draws}/>
-          <InfoLabel title={'loss'} info={losses}/>
+          <InfoLabel title={lang.detailed_win} info={wins}/>
+          <InfoLabel title={lang.detailed_draw} info={draws}/>
+          <InfoLabel title={lang.detailed_loss} info={losses}/>
         </View>
         <View style={horizontal}>
-          <InfoLabel title={'survived'} info={survived_battles}/>
-          <InfoLabel title={'total xp'} info={xp}/>
-          <InfoLabel title={'survived win'} info={survived_wins}/>
+          <InfoLabel title={lang.detailed_survived} info={survived_battles}/>
+          <InfoLabel title={lang.detailed_total_xp} info={xp}/>
+          <InfoLabel title={lang.detailed_survived_win} info={survived_wins}/>
         </View>
         <View style={horizontal}>
-          <InfoLabel title={'survival rate'} info={`${roundTo(survived_battles / battles * 100, 2)}%`}/>
-          <InfoLabel title={'survival win rate'} info={`${roundTo(survived_wins / battles * 100, 2)}%`}/>
-        </View>
-        <Space height={16}/>
-        <View style={horizontal}>
-          <InfoLabel title={'total potential'} info={art_agro}/>
-          <InfoLabel title={'avg potential'} info={roundTo(art_agro / battles)}/>
-        </View>
-        <View style={horizontal}>
-          <InfoLabel title={'scouting damage'} info={damage_scouting}/>
-          <InfoLabel title={'avg scouting damage'} info={roundTo(damage_scouting / battles)}/>
-        </View>
-        <View style={horizontal}>
-          <InfoLabel title={'total torp potiential'} info={torpedo_agro}/>
-          <InfoLabel title={'avg torp potiential'} info={roundTo(torpedo_agro / battles)}/>
-        </View>
-        <View style={horizontal}>
-          <InfoLabel title={'total damage'} info={damage_dealt}/>
-          <InfoLabel title={'real / potential'} info={`${roundTo(damage_dealt / art_agro * 100, 2)}%`}/>
+          <InfoLabel title={lang.detailed_survival_rate} info={`${roundTo(survived_battles / battles * 100, 2)}%`}/>
+          <InfoLabel title={lang.detailed_survivied_win_rate} info={`${roundTo(survived_wins / battles * 100, 2)}%`}/>
         </View>
         <Space height={16}/>
         <View style={horizontal}>
-          <InfoLabel title={'total spotted'} info={ships_spotted}/>
-          <InfoLabel title={'avg spotted'} info={roundTo(ships_spotted / battles, 2)}/>
+          <InfoLabel title={lang.detailed_total_potential_damage} info={art_agro}/>
+          <InfoLabel title={lang.detailed_avg_potential_damage} info={roundTo(art_agro / battles)}/>
         </View>
         <View style={horizontal}>
-          <InfoLabel title={'total frags'} info={frags}/>
-          <InfoLabel title={'frag/spot'} info={`${roundTo(frags / ships_spotted * 100, 2)}%`}/>
+          <InfoLabel title={lang.detailed_total_torp_potential_damage} info={torpedo_agro}/>
+          <InfoLabel title={lang.detailed_avg_torp_potential_damage} info={roundTo(torpedo_agro / battles)}/>
+        </View>
+        <View style={horizontal}>
+          <InfoLabel title={lang.detailed_total_scouting_damage} info={damage_scouting}/>
+          <InfoLabel title={lang.detailed_avg_scouting_damage} info={roundTo(damage_scouting / battles)}/>
+        </View>
+        <View style={horizontal}>
+          <InfoLabel title={lang.detailed_total_damage} info={damage_dealt}/>
+          <InfoLabel title={lang.detailed_damage_potential_ratio} info={`${roundTo(damage_dealt / art_agro * 100, 2)}%`}/>
         </View>
         <Space height={16}/>
         <View style={horizontal}>
-          <InfoLabel title={'total plane destroyed'} info={planes_killed}/>
-          <InfoLabel title={'avg plane destroyed'} info={roundTo(planes_killed / battles, 2)}/>
+          <InfoLabel title={lang.detailed_total_spotted} info={ships_spotted}/>
+          <InfoLabel title={lang.detailed_avg_spotted} info={roundTo(ships_spotted / battles, 2)}/>
+        </View>
+        <View style={horizontal}>
+          <InfoLabel title={lang.detailed_total_frag} info={frags}/>
+          <InfoLabel title={lang.detailed_frag_spot_ratio} info={`${roundTo(frags / ships_spotted * 100, 2)}%`}/>
+        </View>
+        <Space height={16}/>
+        <View style={horizontal}>
+          <InfoLabel title={lang.detailed_total_plane_killed} info={planes_killed}/>
+          <InfoLabel title={lang.detailed_avg_plane_killed} info={roundTo(planes_killed / battles, 2)}/>
         </View>
         <View style={horizontal}>
         </View>
