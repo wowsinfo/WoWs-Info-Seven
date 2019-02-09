@@ -32,7 +32,7 @@ class Statistics extends PureComponent {
         canBeFriend: friend.player[account_id] == null,
         clan: '',
         currRank: 0,
-        rating: -1,
+        rating: 0,
         // To check if certain data have been loaded correctly
         achievement: false,
         rank: false,

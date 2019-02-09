@@ -11,11 +11,8 @@ class PlayerShip extends Component {
     super(props);
 
     let ships = props.data;
-    console.log(ships);
-    ships.sort((a, b) => a.ap - b.ap);
-
     this.state = {
-      data: ships
+      data: ships.sort((a, b) => b.ap - a.ap)
     };
   }
 
@@ -27,11 +24,12 @@ class PlayerShip extends Component {
         <FlatGrid itemDimension={150} items={data} renderItem={({item}) => {
           let ship = DATA[SAVED.warship][item.ship_id];
           const { battles, wins, frags } = item.pvp;
-          let simpleStat = `${battles} - ${roundTo(wins / battles * 100, 2)}% - ${roundTo(frags / battles * 100, 2)}`;
+          let simpleStat = `${battles} - ${roundTo(wins / battles * 100, 2)}% - ${roundTo(frags / battles, 2)}`;
           if (battles === 0) simpleStat = '0 - 0 - 0';
           return (
             <Touchable>
               <WarshipCell item={ship} scale={1.8}/>
+              <Text>{item.ap}</Text>
               <Text>{simpleStat}</Text>
             </Touchable>
           )

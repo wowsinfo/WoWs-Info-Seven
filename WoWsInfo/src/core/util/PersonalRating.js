@@ -28,6 +28,9 @@ export const getOverallRating = (ships) => {
 
   let actualDmg = 0, expectedDmg = 0, actualWins = 0, expectedWins = 0, actualFrags = 0, expectedFrags = 0;
   for (let ship of ships) {
+    ship.rating = 0;
+    ship.ap = 0;
+    
     const pvp = SafeValue(ship.pvp, null);
     if (pvp) {
       const overall = getOverall(ship.ship_id);
@@ -61,7 +64,7 @@ export const getOverallRating = (ships) => {
 
 export const getAP = (rating, battle) => {
   if (rating == 0|| battle == 0) return 0;
-  else return Number(roundTo(Math.log10(battle) * rating));
+  else return Number(roundTo(Math.log10(Math.max(10, battle)) * rating));
 }
 
 export const getRatingRange = () => [750, 1100, 1350, 1550, 1750, 2100, 2450, 9999, 0];

@@ -13,9 +13,14 @@ class WarshipCell extends Component {
   render() {
     const { container } = styles;
     const { item, scale, onPress } = this.props;
+
+    let width = 80;
+    if (scale) width *= scale;
     return (
       <Touchable style={container} onPress={item ? onPress : null}>
-        { item ? <WikiIcon warship item={item} scale={scale}/> : null }
+        { item ? 
+          <WikiIcon warship item={item} scale={scale}/> : 
+          <View style={{height: width / 1.7, width: width}}/> }
         <WarshipLabel item={item}/>
       </Touchable>
     )
