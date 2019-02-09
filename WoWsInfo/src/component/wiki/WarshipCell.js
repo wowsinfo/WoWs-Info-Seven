@@ -5,9 +5,10 @@
  */
 
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet } from 'react-native';
 import { WikiIcon, WarshipLabel } from '../';
 import { Touchable } from '../common/Touchable';
+import { TintColour } from '../../value/colour';
 
 class WarshipCell extends Component {
   render() {
@@ -20,7 +21,8 @@ class WarshipCell extends Component {
       <Touchable style={container} onPress={item ? onPress : null}>
         { item ? 
           <WikiIcon warship item={item} scale={scale}/> : 
-          <View style={{height: width / 1.7, width: width}}/> }
+          <Image style={{height: width / 1.7, width: width, tintColor: TintColour()[500]}} 
+            source={require('../../img/Unknown.png')}/> }
         <WarshipLabel item={item}/>
       </Touchable>
     )

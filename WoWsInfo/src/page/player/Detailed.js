@@ -28,8 +28,8 @@ class Detailed extends Component {
     const ship = DATA[SAVED.warship][ship_id];
     const overall = DATA[SAVED.pr][ship_id];
     return (
-      <WoWsInfo onPress={() => SafeAction('WarshipDetail', {item: ship})}>
-        <ScrollView>
+      <WoWsInfo onPress={() => SafeAction('WarshipDetail', {item: ship})} title={lang.wiki_section_title}>
+        <ScrollView contentContainerStyle={{paddingBottom: 8}} showsVerticalScrollIndicator={false}>
           <WarshipCell item={ship} scale={3}/>
           <RatingButton rating={rating}/>
           { this.renderNumberDiff(pvp, overall) }
