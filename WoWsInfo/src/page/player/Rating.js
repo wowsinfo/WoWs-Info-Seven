@@ -5,11 +5,12 @@
  */
 
 import React, { Component } from 'react';
-import { View, ScrollView, StyleSheet } from 'react-native';
+import { View, ScrollView, Linking, StyleSheet } from 'react-native';
 import { WoWsInfo, SectionTitle } from '../../component';
-import { Text, Paragraph, Caption, DataTable } from 'react-native-paper';
+import { Text, Paragraph, Caption, DataTable, Button } from 'react-native-paper';
 import lang from '../../value/lang';
-import { getRatingList, getColourList } from '../../core';
+import { getRatingList, getColourList, SafeAction } from '../../core';
+import { APP } from '../../value/data';
 
 class Rating extends Component {
   render() {
@@ -19,12 +20,14 @@ class Rating extends Component {
     const ratingColours = getColourList();
 
     return (
-      <WoWsInfo title={lang.rating_author}>
+      <WoWsInfo title={lang.rating_author} onPress={() => SafeAction('Statistics', 
+        {info: {nickname: 'Wiochi', account_id: 503367319, server: 1}})}>
         <ScrollView>
           <SectionTitle title='Personal Rating'/>
           <View style={container}>
             <Paragraph>{lang.rating_description}</Paragraph>
             <Caption>{lang.rating_warning}</Caption>
+            <Button onPress={() => Linking.openURL(APP.PersonalRating)}>{lang.rating_read_more}</Button>
           </View>
           <SectionTitle title={lang.rating_scale}/>
           <DataTable>
