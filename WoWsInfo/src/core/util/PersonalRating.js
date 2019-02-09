@@ -77,7 +77,7 @@ export const getRatingIndex = (rating) => {
   return 8;
 }
 
-export const getColourList = () => ['red', 'orange', '#F5C84C', '#67AF34', '#4A7D23', 'cyan', 'magenta', 'purple', 'black'];
+export const getColourList = () => ['red', 'orange', '#F5C84C', '#67AF34', '#4A7D23', '#60C6B3', 'magenta', 'purple', 'black'];
 
 export const getColour = (rating) => {
   const colours = getColourList();
