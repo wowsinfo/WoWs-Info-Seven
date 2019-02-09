@@ -73,16 +73,17 @@ export const getRatingIndex = (rating) => {
   if (rating < 1750) return 4;
   if (rating < 2100) return 5;
   if (rating < 2450) return 6;
-  return 7;
+  if (rating < 9999) return 7;
+  return 8;
 }
 
 export const getColour = (rating) => {
-  const colours = ['red', 'orange', '#F5C84C', '#67AF34', '#4A7D23', 'cyan', 'magenta', 'purple'];
+  const colours = ['red', 'orange', '#F5C84C', '#67AF34', '#4A7D23', 'cyan', 'magenta', 'purple', 'black'];
   return colours[getRatingIndex(rating)];
 };
 
 export const getComment = (rating) => {
   const comments = [lang.rating_bad, lang.rating_below_average, lang.rating_average, lang.rating_good, 
-                    lang.rating_very_good, lang.rating_great, lang.rating_unicum, lang.rating_super_unicum];
+                    lang.rating_very_good, lang.rating_great, lang.rating_unicum, lang.rating_super_unicum, lang.rating_Unkwown];
   return comments[getRatingIndex(rating)];
 };
