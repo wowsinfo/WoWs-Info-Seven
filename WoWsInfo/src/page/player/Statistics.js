@@ -32,6 +32,7 @@ class Statistics extends PureComponent {
         canBeFriend: friend.player[account_id] == null,
         clan: '',
         currRank: 0,
+        rating: false,
         // To check if certain data have been loaded correctly
         achievement: false,
         rank: false,
@@ -157,6 +158,7 @@ class Statistics extends PureComponent {
     SafeFetch.get(WoWsAPI.ShipInfo, this.domain, id).then(data => {
       let ship = Guard(data, `data.${id}`, null);
       if (ship != null) {
+        // Calculate personal rating for each ship and get an overall rating for this player
         this.setState({ship: ship});
       }
     });
