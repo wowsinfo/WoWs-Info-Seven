@@ -77,13 +77,17 @@ export const getRatingIndex = (rating) => {
   return 8;
 }
 
+export const getColourList = () => ['red', 'orange', '#F5C84C', '#67AF34', '#4A7D23', 'cyan', 'magenta', 'purple', 'black'];
+
 export const getColour = (rating) => {
-  const colours = ['red', 'orange', '#F5C84C', '#67AF34', '#4A7D23', 'cyan', 'magenta', 'purple', 'black'];
+  const colours = getColourList();
   return colours[getRatingIndex(rating)];
 };
 
+export const getRatingList = () => [lang.rating_bad, lang.rating_below_average, lang.rating_average, lang.rating_good, 
+  lang.rating_very_good, lang.rating_great, lang.rating_unicum, lang.rating_super_unicum, lang.rating_Unkwown];
+
 export const getComment = (rating) => {
-  const comments = [lang.rating_bad, lang.rating_below_average, lang.rating_average, lang.rating_good, 
-                    lang.rating_very_good, lang.rating_great, lang.rating_unicum, lang.rating_super_unicum, lang.rating_Unkwown];
+  const comments = getRatingList();
   return comments[getRatingIndex(rating)];
 };

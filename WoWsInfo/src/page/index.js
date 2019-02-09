@@ -23,6 +23,7 @@ export * from './wiki/WarshipModule';
 
 export * from './player/Statistics';
 export * from './player/PlayerAchievement';
+export * from './player/Rating';
 
 export * from './clan/ClanInfo';
 
