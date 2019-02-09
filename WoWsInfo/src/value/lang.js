@@ -149,6 +149,7 @@ export default lang = new LocalizedStrings({
     rating_great: 'Great',
     rating_unicum: 'Unicum',
     rating_super_unicum: 'SUPER Unicum',
+    rating_Unkwown: 'Unknown',
     // Basic
     basic_data_unknown: 'Unknown',
     basic_level_tier: 'Level',
