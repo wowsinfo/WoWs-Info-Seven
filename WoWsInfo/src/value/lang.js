@@ -147,8 +147,6 @@ export default lang = new LocalizedStrings({
     rating_warning: 'Please do not judge other players simply by his/her rating',
     rating_author: 'Created by Wiochi',
     rating_scale: 'Colour Scale',
-    rating_title_skill: 'Skill',
-    rating_title_range: 'Range',
     rating_bad: 'Improvement Needed',
     rating_below_average: 'Below Average',
     rating_average: 'Average',
