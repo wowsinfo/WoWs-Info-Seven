@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import { View, ScrollView, StyleSheet, Linking } from 'react-native';
-import { Surface, Text, IconButton, Title, Button } from 'react-native-paper';
-import { LoadingIndicator, WoWsInfo, LoadingModal, FooterPlus, TabButton, InfoLabel, SectionTitle, PlayerRecord, DetailedInfo } from '../../component';
-import { SafeFetch, Guard, dayDifference, humanTimeString, SafeAction, SafeStorage, getOverallRating } from '../../core';
+import { Surface, Text, IconButton, Title, Button, Subheading } from 'react-native-paper';
+import { LoadingIndicator, WoWsInfo, LoadingModal, FooterPlus, TabButton, InfoLabel, SectionTitle, PlayerRecord, DetailedInfo, Touchable } from '../../component';
+import { SafeFetch, Guard, dayDifference, humanTimeString, SafeAction, SafeStorage, getOverallRating, getComment, getColour } from '../../core';
 import { WoWsAPI } from '../../value/api';
 import { getDomain, langStr, getPrefix, LOCAL } from '../../value/data';
 import { TintColour } from '../../value/colour';
@@ -255,7 +255,9 @@ class Statistics extends PureComponent {
           <View style={container}>
             <Title style={playerName}>{name}</Title>
             <Text style={level}>{extraInfo}</Text>
-            { rating && rating != -1 ? <Button>{rating}</Button> : null }
+            { rating && rating != -1 ? 
+              <Button color={getColour(rating)}>{`- ${getComment(rating)} -`}</Button>
+              : null }
             <View style={horizontal}>
               <InfoLabel title={lang.basic_register_date} info={register}/>
               <InfoLabel title={lang.basic_last_battle} info={lastBattle}/>
