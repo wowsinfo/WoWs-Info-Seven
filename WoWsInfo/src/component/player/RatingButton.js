@@ -5,25 +5,19 @@
  */
 
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { Button } from 'react-native-paper';
+import { getColour, getComment } from '../../core';
 
 class RatingButton extends Component {
   render() {
-    const { container } = styles;
+    const { rating } = this.props;
+    if (rating == null || rating === -1) return null;
     return (
-      <View style={container}>
-        <Text>RatingButton</Text>
-      </View>
-    )
+      <Button color={getColour(rating)} onPress={() =>}>
+        {`- ${getComment(rating)} -`}
+      </Button>
+    );
   };
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-});
 
 export { RatingButton };
