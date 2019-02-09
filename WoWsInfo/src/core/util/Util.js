@@ -16,6 +16,7 @@ export const random = (range) => {
 }
 
 export const roundTo = (num, digit = 0) => {
+  if (isNaN(num) || !isFinite(num)) return Number(-1);
   return Number(num).toFixed(digit);
 }
 
