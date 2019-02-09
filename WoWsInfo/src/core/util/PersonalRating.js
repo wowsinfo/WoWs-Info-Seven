@@ -17,7 +17,7 @@ const calRating = (actualDmg, expectedDmg, actualWins, expectedWins, actualFrags
 
   let rating = roundTo(700 * nDmg + 300 * nFrags + 150 * nWins);
   if (rating == 0) rating = -1;
-  return rating;
+  return Number(rating);
 };
 
 /**
@@ -62,7 +62,7 @@ export const getOverallRating = (ships) => {
 
 export const getAP = (rating, battle) => {
   if (rating == -1 || battle == 0) return -1;
-  else return roundTo(Math.log10(battle) * rating);
+  else return Number(roundTo(Math.log10(battle) * rating));
 }
 
 export const getRatingRange = () => [750, 1100, 1350, 1550, 1750, 2100, 2450, 9999, 0];
