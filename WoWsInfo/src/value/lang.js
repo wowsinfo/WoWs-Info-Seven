@@ -29,7 +29,7 @@ export default lang = new LocalizedStrings({
     wiki_warship_filter_type: 'Type',
     wiki_warship_filter_premium: 'Premium ship',
     // Warship Detail
-    warship_unkown: 'C Unknown',
+    warship_unkown: 'Unknown',
     warship_model: '3D Model',
     warship_update_module: 'Update ship modules',
     warship_default_module: 'Default',
