@@ -11,7 +11,8 @@ export const APP = {
   AppStore: 'https://itunes.apple.com/app/id1202750166',
   GooglePlay: 'https://play.google.com/store/apps/details?id=com.yihengquan.wowsinfo',
   Developer: 'mailto:development.henryquan@gmail.com?subject=[WoWs Info 1.0.6] ',
-  Patreon: 'https://www.patreon.com/henryquan'
+  Patreon: 'https://www.patreon.com/henryquan',
+  PersonalRating: 'https://wows-numbers.com/personal/rating'
 }
 
 /**
