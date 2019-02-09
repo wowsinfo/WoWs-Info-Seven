@@ -1,6 +1,7 @@
 import { roundTo } from "./Util";
 import { SafeValue } from "./SafeGuard";
 import { SAVED } from "../../value/data";
+import lang from "../../value/lang";
 
 const getOverall = (id) => DATA[SAVED.pr][id];
 
@@ -64,10 +65,24 @@ export const getAP = (rating, battle) => {
   else return roundTo(Math.log10(battle) * rating);
 }
 
-export const getColour = (rating) => {
+export const getRatingIndex = (rating) => {
+  if (rating < 750) return 0;
+  if (rating < 1100) return 1;
+  if (rating < 1350) return 2;
+  if (rating < 1550) return 3;
+  if (rating < 1750) return 4;
+  if (rating < 2100) return 5;
+  if (rating < 2450) return 6;
+  return 7;
+}
 
+export const getColour = (rating) => {
+  const colours = ['red', 'orange', '#F5C84C', '#67AF34', '#4A7D23', 'cyan', 'magenta', 'purple'];
+  return colours[getRatingIndex(rating)];
 };
 
 export const getComment = (rating) => {
-
+  const comments = [lang.rating_bad, lang.rating_below_average, lang.rating_average, lang.rating_good, 
+                    lang.rating_very_good, lang.rating_great, lang.rating_unicum, lang.rating_super_unicum];
+  return comments[getRatingIndex(rating)];
 };
