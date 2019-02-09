@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 import { WoWsInfo, WarshipCell, Touchable } from '../../component';
-import { getOverallRating, roundTo, getComment, getColourList, getColour } from '../../core';
+import { getOverallRating, roundTo, getComment, getColourList, getColour, SafeAction } from '../../core';
 import { FlatGrid } from 'react-native-super-grid';
 import { SAVED } from '../../value/data';
 import { Text, IconButton } from 'react-native-paper';
@@ -29,7 +29,7 @@ class PlayerShip extends Component {
           let nothing = false;
           if (battles === 0) nothing = true;
           return (
-            <Touchable>
+            <Touchable onPress={() => SafeAction('PlayerShipDetail', {data: item})}>
               <WarshipCell item={ship} scale={1.8}/>
               <View style={horizontal}>
                 <View style={centerView}>
