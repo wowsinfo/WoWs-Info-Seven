@@ -13,6 +13,7 @@ import { TintColour, UpdateTintColour } from './value/colour';
 import lang from './value/lang';
 import { PlayerShip } from './page/player/PlayerShip';
 import { Detailed } from './page/player/Detailed';
+import { Rank } from './page/player/Rank';
 
 class App extends Component {
   constructor(props) {
@@ -93,12 +94,13 @@ class App extends Component {
           <Scene key='Setup' component={Setup} initial={getFirstLaunch()}/>
           
           <Scene key='Menu' component={Menu}/>
+          <Scene key='Rating' component={Rating} />
           <Scene key='Statistics' component={Statistics} />
           <Scene key='PlayerAchievement' component={PlayerAchievement} />
           <Scene key='PlayerShip' component={PlayerShip} />
           <Scene key='PlayerShipDetail' component={Detailed} />
+          <Scene key='Rank' component={Rank} />
           <Scene key='ClanInfo' component={ClanInfo} />
-          <Scene key='Rating' component={Rating} />
 
           <Scene key='Consumable' component={Consumable}/>
           <Scene key='CommanderSkill' component={CommanderSkill}/>

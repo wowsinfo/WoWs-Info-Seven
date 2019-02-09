@@ -52,11 +52,10 @@ class Statistics extends PureComponent {
   
       if (this.domain != null) {
         this.getBasic();
+        this.getRank();
         this.getClan();
-        this.getCurrRank();
-        this.getAchievement();
         this.getShip();
-        // this.getRank();
+        this.getAchievement();
       } else {
         // Invalid domain
         this.setState({valid: false});
@@ -109,21 +108,6 @@ class Statistics extends PureComponent {
     });
   }
 
-  getCurrRank() {
-    const { id } = this.state;
-    SafeFetch.get(WoWsAPI.CurrRankInfo, this.domain, id).then(data => {
-      let seasons = Guard(data, `data.${id}.seasons`, null);
-      if (seasons != null) {
-        let keys = Object.keys(seasons);
-        if (keys.length > 0) {
-          let last = keys.slice(-1)[0];
-          let currRank = Guard(seasons[last], 'rank_info.rank', 0);
-          if (currRank > 0) this.setState({currRank: currRank});
-        }
-      }
-    });
-  }
-
   /**
    * Get player achievement
    */
@@ -145,6 +129,12 @@ class Statistics extends PureComponent {
     SafeFetch.get(WoWsAPI.RankInfo, this.domain, id).then(data => {
       let rank = Guard(data, `data.${id}.seasons`, null);
       if (rank != null) {
+        let keys = Object.keys(rank);
+        if (keys.length > 0) {
+          let last = keys.slice(-1)[0];
+          let currRank = Guard(rank[last], 'rank_info.rank', 0);
+          if (currRank > 0) this.setState({currRank: currRank});
+        }
         this.setState({rank: rank});
       }
     });
@@ -326,7 +316,7 @@ class Statistics extends PureComponent {
     if (rank) loading = false;
 
     return <TabButton icon={require('../../img/Rank.png')} color={this.theme}
-      disabled={loading} />
+      disabled={loading} onPress={() => SafeAction('Rank', {data: rank})}/>
   }
 
   renderGraph(graph) {
