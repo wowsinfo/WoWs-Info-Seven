@@ -161,7 +161,7 @@ class Statistics extends PureComponent {
         // Calculate personal rating for each ship and get an overall rating for this player
         let rating = getOverallRating(ship);
         console.log(rating);
-        this.setState({ship: ship});
+        this.setState({ship: ship, rating: rating});
       }
     });
   }
