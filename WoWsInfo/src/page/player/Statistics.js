@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { View, ScrollView, StyleSheet, Linking } from 'react-native';
 import { Surface, Text, IconButton, Title, Button } from 'react-native-paper';
 import { LoadingIndicator, WoWsInfo, LoadingModal, FooterPlus, TabButton, InfoLabel, SectionTitle, PlayerRecord, DetailedInfo } from '../../component';
-import { SafeFetch, Guard, dayDifference, humanTimeString, SafeAction, SafeStorage } from '../../core';
+import { SafeFetch, Guard, dayDifference, humanTimeString, SafeAction, SafeStorage, getOverallRating } from '../../core';
 import { WoWsAPI } from '../../value/api';
 import { getDomain, langStr, getPrefix, LOCAL } from '../../value/data';
 import { TintColour } from '../../value/colour';
@@ -159,6 +159,8 @@ class Statistics extends PureComponent {
       let ship = Guard(data, `data.${id}`, null);
       if (ship != null) {
         // Calculate personal rating for each ship and get an overall rating for this player
+        let rating = getOverallRating(ship);
+        console.log(rating);
         this.setState({ship: ship});
       }
     });
