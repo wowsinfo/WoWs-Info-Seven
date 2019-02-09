@@ -37,21 +37,17 @@ class DetailedInfo extends Component {
       <View style={container}>
         { warshipMode ? <InfoLabel title={lang.basic_last_battle} info={humanTimeString(last_battle_time)}/> : null }
         <Info6Icon data={pvp}/>
-        { more ? this.renderMore(warshipMode) : <Button onPress={() => this.setState({more: true})}>{lang.basic_more_stat}</Button> }
+        { more ? this.renderMore() : <Button onPress={() => this.setState({more: true})}>{lang.basic_more_stat}</Button> }
       </View>
     )
   };
 
-  renderMore(warshipMode) {
-    if (warshipMode) {
-      
-    } else {
-      const { pvp } = this.props.data;
-      return this.renderPlayerInfo(pvp);
-    }
+  renderMore() {
+    const { pvp } = this.props.data;
+    return this.renderInfo(pvp);
   }
 
-  renderPlayerInfo(data) {
+  renderInfo(data) {
     const { container, horizontal } = styles;
     console.log(data);
     const { 
