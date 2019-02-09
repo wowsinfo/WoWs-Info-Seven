@@ -11,6 +11,7 @@ import { GREY, BLUE } from 'react-native-material-color';
 import { LoadingModal } from './component';
 import { TintColour, UpdateTintColour } from './value/colour';
 import lang from './value/lang';
+import { PlayerShip } from './page/player/PlayerShip';
 
 class App extends Component {
   constructor(props) {
@@ -93,6 +94,7 @@ class App extends Component {
           <Scene key='Menu' component={Menu}/>
           <Scene key='Statistics' component={Statistics} />
           <Scene key='PlayerAchievement' component={PlayerAchievement} />
+          <Scene key='PlayerShip' component={PlayerShip} />
           <Scene key='ClanInfo' component={ClanInfo} />
 
           <Scene key='Consumable' component={Consumable}/>

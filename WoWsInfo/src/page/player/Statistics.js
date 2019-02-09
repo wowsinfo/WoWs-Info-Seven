@@ -54,7 +54,7 @@ class Statistics extends PureComponent {
         this.getClan();
         this.getCurrRank();
         this.getAchievement();
-        // this.getShip();
+        this.getShip();
         // this.getRank();
       } else {
         // Invalid domain
@@ -313,7 +313,7 @@ class Statistics extends PureComponent {
     if (ship) loading = false;
 
     return <TabButton icon={require('../../img/Ship.png')} color={this.theme}
-      disabled={loading} />  
+      disabled={loading} onPress={() => SafeAction('PlayerShip', {data: ship})}/>  
   }
 
   renderRank(rank) {

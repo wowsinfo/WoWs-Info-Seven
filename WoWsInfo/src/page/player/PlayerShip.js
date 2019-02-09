@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { WoWsInfo } from '../../component';
 
-class Ship extends Component {
+class PlayerShip extends Component {
+  constructor(props) {
+    super(props);
+
+    console.log(props.data);
+  }
+
   render() {
     const { container } = styles;
     return (
-      <View style={container}>
+      <WoWsInfo>
         <Text>Ship</Text>
-      </View>
+      </WoWsInfo>
     )
   };
 }
@@ -20,4 +27,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export { Ship };
+export { PlayerShip };
