@@ -16,7 +16,6 @@ const calRating = (actualDmg, expectedDmg, actualWins, expectedWins, actualFrags
   const nWins = Math.max(0, (rWins - 0.7) / (1 - 0.7));
 
   let rating = roundTo(700 * nDmg + 300 * nFrags + 150 * nWins);
-  if (rating == 0) rating = -1;
   return Number(rating);
 };
 
@@ -25,7 +24,7 @@ const calRating = (actualDmg, expectedDmg, actualWins, expectedWins, actualFrags
  * @param {*} ships 
  */
 export const getOverallRating = (ships) => {
-  if (ships == null) return -1;
+  if (ships == null) return 0;
 
   let actualDmg = 0, expectedDmg = 0, actualWins = 0, expectedWins = 0, actualFrags = 0, expectedFrags = 0;
   for (let ship of ships) {
@@ -61,7 +60,7 @@ export const getOverallRating = (ships) => {
 };
 
 export const getAP = (rating, battle) => {
-  if (rating == -1 || battle == 0) return -1;
+  if (rating == 0|| battle == 0) return 0;
   else return Number(roundTo(Math.log10(battle) * rating));
 }
 
