@@ -295,7 +295,7 @@ class Statistics extends PureComponent {
     if (!statistics) return null;
     const { showMore } = this.state;
     return (
-      <View>
+      <View style={{paddingBottom: 8}}>
         <DetailedInfo data={statistics} more={showMore}/>
         <PlayerRecord data={statistics.pvp}/>
       </View>
