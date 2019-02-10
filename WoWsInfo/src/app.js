@@ -32,7 +32,7 @@ class App extends Component {
       SWAPBUTTON = DATA[LOCAL.swapButton];
       DARKMODE = DATA[LOCAL.darkMode];
 
-      lang.setLanguage = DATA[LOCAL.userLanguage];
+      lang.setLanguage(DATA[LOCAL.userLanguage]);
 
       console.log('state has been set');
 
