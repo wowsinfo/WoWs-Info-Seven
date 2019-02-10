@@ -39,7 +39,7 @@ class PlayerShip extends Component {
                 </View>
                 <View style={centerView}>
                   <Image style={icon} source={require('../../img/WinRate.png')}/>
-                  <Text style={centerText}>{nothing ? '0.00%' : roundTo(wins / battles * 100, 2)}</Text>
+                  <Text style={centerText}>{nothing ? '0.00%' : `${roundTo(wins / battles * 100, 2)}%`}</Text>
                 </View>
                 <View style={centerView}>
                   <Image style={icon} source={require('../../img/Damage.png')}/>
