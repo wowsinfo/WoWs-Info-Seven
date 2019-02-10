@@ -34,7 +34,9 @@ export const LOCAL = {
   darkMode: '@WoWs_Info:darkMode',
   swapButton: '@WoWs_Info:swapButton',
   firstLaunch: '@WoWs_Info:firstLaunch',
+  // Language
   apiLanguage: '@WoWs_Info:apiLanguage',
+  userLanguage: '@WoWs_Info:userLanguage'
 }
 
 /**
