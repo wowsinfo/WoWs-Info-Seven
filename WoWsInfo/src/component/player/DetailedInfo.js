@@ -75,27 +75,29 @@ class DetailedInfo extends Component {
           <InfoLabel title={lang.detailed_survivied_win_rate} info={`${roundTo(survived_wins / survived_battles * 100, 2)}%`}/>
         </View>
         <Space height={16}/>
-        <View style={horizontal}>
-          <InfoLabel title={lang.detailed_total_potential_damage} info={art_agro}/>
-          <InfoLabel title={lang.detailed_avg_potential_damage} info={roundTo(art_agro / battles)}/>
-        </View>
-        <View style={horizontal}>
-          <InfoLabel title={lang.detailed_total_torp_potential_damage} info={torpedo_agro}/>
-          <InfoLabel title={lang.detailed_avg_torp_potential_damage} info={roundTo(torpedo_agro / battles)}/>
-        </View>
-        <View style={horizontal}>
-          <InfoLabel title={lang.detailed_total_scouting_damage} info={damage_scouting}/>
-          <InfoLabel title={lang.detailed_avg_scouting_damage} info={roundTo(damage_scouting / battles)}/>
-        </View>
-        <View style={horizontal}>
-          <InfoLabel title={lang.detailed_total_damage} info={damage_dealt}/>
-          <InfoLabel title={lang.detailed_damage_potential_ratio} info={`${roundTo(damage_dealt / art_agro * 100, 2)}%`}/>
-        </View>
-        <Space height={16}/>
-        <View style={horizontal}>
-          <InfoLabel title={lang.detailed_total_spotted} info={ships_spotted}/>
-          <InfoLabel title={lang.detailed_avg_spotted} info={roundTo(ships_spotted / battles, 2)}/>
-        </View>
+        { art_agro ? <View>
+          <View style={horizontal}>
+            <InfoLabel title={lang.detailed_total_potential_damage} info={art_agro}/>
+            <InfoLabel title={lang.detailed_avg_potential_damage} info={roundTo(art_agro / battles)}/>
+          </View>
+          <View style={horizontal}>
+            <InfoLabel title={lang.detailed_total_torp_potential_damage} info={torpedo_agro}/>
+            <InfoLabel title={lang.detailed_avg_torp_potential_damage} info={roundTo(torpedo_agro / battles)}/>
+          </View>
+          <View style={horizontal}>
+            <InfoLabel title={lang.detailed_total_scouting_damage} info={damage_scouting}/>
+            <InfoLabel title={lang.detailed_avg_scouting_damage} info={roundTo(damage_scouting / battles)}/>
+          </View>
+          <View style={horizontal}>
+            <InfoLabel title={lang.detailed_total_damage} info={damage_dealt}/>
+            <InfoLabel title={lang.detailed_damage_potential_ratio} info={`${roundTo(damage_dealt / art_agro * 100, 2)}%`}/>
+          </View>
+          <Space height={16}/>
+          <View style={horizontal}>
+            <InfoLabel title={lang.detailed_total_spotted} info={ships_spotted}/>
+            <InfoLabel title={lang.detailed_avg_spotted} info={roundTo(ships_spotted / battles, 2)}/>
+          </View>
+        </View> : null }
         <View style={horizontal}>
           <InfoLabel title={lang.detailed_total_frag} info={frags}/>
           <InfoLabel title={lang.detailed_frag_spot_ratio} info={`${roundTo(frags / ships_spotted * 100, 2)}%`}/>
