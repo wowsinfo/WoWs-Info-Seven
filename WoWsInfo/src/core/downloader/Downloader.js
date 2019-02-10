@@ -26,6 +26,8 @@ class Downloader {
     console.log('Downloader\nChecking for new version');
     try {
       let gameVersion = await this.getVersion();
+      // Do not continue if we cannot get current game version
+      if (gameVersion == null) return false; 
       let currVersion = DATA[LOCAL.gameVersion];
       console.log(`Current: ${currVersion}\nAPI: ${gameVersion}`);
       let appVersion = await SafeStorage.get(LOCAL.appVersion, '1.0.4.2');
