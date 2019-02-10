@@ -69,6 +69,10 @@ class Settings extends Component {
     let appLangList = [];
     for (let code in appLang) appLangList.push({code: code, lang: appLang[code]});
 
+    let display = appLang[userLanguage];
+    console.log(display);
+    if (display == null) display = '???';
+
     return (
       <Surface>
         <SectionTitle title={lang.settings_api_settings}/>
@@ -82,11 +86,9 @@ class Settings extends Component {
             return <Button onPress={() => this.updateApiLanguage(item)}>{langList[item]}</Button>
           }} keyExtractor={i => i} numColumns={2}/>
         </List.Section>
-        <List.Section title={`APP language: ${appLang[userLanguage]}`}>
+        <List.Section title={`APP language: ${display}`}>
           <FlatList data={appLangList} renderItem={({item}) => {
-            let display = item.lang;
-            if (display == null) display = '???';
-            return <Button onPress={() => this.updateUserLang(item.code)}>{display}</Button>
+            return <Button onPress={() => this.updateUserLang(item.code)}>{item.lang}</Button>
           }} keyExtractor={i => i} numColumns={3}/>
         </List.Section>
       </Surface>
