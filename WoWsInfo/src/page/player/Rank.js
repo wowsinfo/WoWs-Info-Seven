@@ -4,6 +4,7 @@ import { WoWsInfo, SectionTitle, Touchable, DetailedInfo, Info6Icon } from '../.
 import lang from '../../value/lang';
 import { FlatGrid } from 'react-native-super-grid';
 import { Headline } from 'react-native-paper';
+import { SafeAction } from '../../core';
 
 class Rank extends Component {
   constructor(props) {
@@ -32,14 +33,15 @@ class Rank extends Component {
         <FlatGrid itemDimension={300} items={data} renderItem={({item}) => {
           const { rank } = item.rank_info;
           return (
-            <Touchable style={container}>
-              <SectionTitle  style={{flex: 1}} back center title={`${lang.rank_season_title} ${item.season} (${rank})`}/>
+            <Touchable style={container} onPress={() => SafeAction('PlayerShip', {data: null})}>
+              <SectionTitle style={{width: '100%', textAlign: 'center'}} back center 
+                title={`- ${lang.rank_season_title} ${item.season} -\n${lang.tab_rank_title} ${rank}`}/>
               { rank > 0 ? <View>
                 { this.renderSeasonInfo(item.rank_solo) }
               </View> : null }
             </Touchable>
           )
-        }}/>
+        }} spacing={0}/>
       </WoWsInfo>
     )
   };
@@ -53,7 +55,7 @@ class Rank extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: '100%',
+    paddingBottom: 8,
     justifyContent: 'space-between',
   },
 });
