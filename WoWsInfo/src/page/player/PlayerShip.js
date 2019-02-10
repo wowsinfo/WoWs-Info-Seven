@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Image, StyleSheet } from 'react-native';
-import { WoWsInfo, WarshipCell, Touchable } from '../../component';
+import { WoWsInfo, WarshipCell, Touchable, RatingButton, FooterPlus } from '../../component';
 import { getOverallRating, roundTo, getComment, getColourList, getColour, SafeAction } from '../../core';
 import { FlatGrid } from 'react-native-super-grid';
 import { SAVED } from '../../value/data';
@@ -12,17 +12,24 @@ class PlayerShip extends Component {
     super(props);
 
     let ships = props.data;
+    let rating = props.rating;
+    if (rating == null) {
+      // Prevent unnessary
+      rating = getOverallRating(ships);
+    }
     console.log(ships);
+
     this.state = {
-      data: ships.sort((a, b) => b.ap - a.ap)
+      data: ships.sort((a, b) => b.ap - a.ap),
+      rating: rating
     };
   }
 
   render() {
     const { centerText, horizontal, icon, centerView } = styles;
-    const { data } = this.state;
+    const { data, rating } = this.state;
     return (
-      <WoWsInfo title={`${lang.wiki_warships} - ${data.length}`}>
+      <WoWsInfo title={`${lang.wiki_warship_footer} - ${data.length}`}>
         <FlatGrid itemDimension={150} items={data} renderItem={({item}) => {
           let ship = DATA[SAVED.warship][item.ship_id];
           const { battles, wins, damage_dealt } = item.pvp;
@@ -50,6 +57,9 @@ class PlayerShip extends Component {
             </Touchable>
           )
         }}/>
+        <FooterPlus style={{padding: 8}}>
+          <RatingButton rating={rating}/>
+        </FooterPlus>
       </WoWsInfo>
     )
   };

@@ -1,3 +1,4 @@
+import lang from "../../value/lang";
 
 /**
  * Deep clone an object
@@ -34,6 +35,7 @@ export const dayDifference = (time) => {
  * @param {*} time 
  */
 export const humanTimeString = (time) => {
+  if (time == null) return lang.warship_unkown;
   if (time === 0) return `---`;
   let obj = new Date(time * 1000);
   // first part to get date string and the second get locale time

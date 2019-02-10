@@ -14,6 +14,7 @@ import { Info6Icon } from './Info6Icon';
 import { Button } from 'react-native-paper';
 import { Space } from '../common/Space';
 import { Router } from 'react-native-router-flux';
+import { SectionTitle } from '../common/SectionTitle';
 
 class DetailedInfo extends Component {
   constructor(props) {
@@ -29,25 +30,25 @@ class DetailedInfo extends Component {
     if (!data) return null;
 
     const { last_battle_time, pvp } = data;
-    let warshipMode = false;
-    if (last_battle_time) warshipMode = true;
+    let playerMode = false;
+    if (pvp.max_damage_dealt_ship_id) playerMode = true;
     
     const { more } = this.state;
     return (
       <View style={container}>
-        { warshipMode ? <InfoLabel title={lang.basic_last_battle} info={humanTimeString(last_battle_time)}/> : null }
+        { !playerMode ? <InfoLabel title={lang.basic_last_battle} info={humanTimeString(last_battle_time)}/> : null }
         <Info6Icon data={pvp}/>
-        { more ? this.renderMore() : <Button onPress={() => this.setState({more: true})}>{lang.basic_more_stat}</Button> }
+        { more ? this.renderMore(playerMode) : <Button onPress={() => this.setState({more: true})}>{lang.basic_more_stat}</Button> }
       </View>
     )
   };
 
-  renderMore() {
+  renderMore(playerMode) {
     const { pvp } = this.props.data;
-    return this.renderInfo(pvp);
+    return this.renderInfo(pvp, playerMode);
   }
 
-  renderInfo(data) {
+  renderInfo(data, playerMode) {
     const { container, horizontal } = styles;
     console.log(data);
     const { 
@@ -56,8 +57,13 @@ class DetailedInfo extends Component {
       damage_dealt, damage_scouting,
       planes_killed,
       ships_spotted,
-      xp, frags
+      xp, frags,
+      aircraft, main_battery, ramming, second_battery, torpedoes
     } = data;
+
+    let weapons = [{name: lang.warship_artillery_main, data: main_battery}, {name: lang.warship_artillery_secondary, data: second_battery}, 
+      {name: lang.warship_torpedoes, data: torpedoes}, {name: lang.warship_aircraft, data: aircraft}, {name: lang.warship_ramming, data: ramming}];
+
     return (
       <View style={container}>
         <View style={horizontal}>
@@ -75,7 +81,7 @@ class DetailedInfo extends Component {
           <InfoLabel title={lang.detailed_survivied_win_rate} info={`${roundTo(survived_wins / survived_battles * 100, 2)}%`}/>
         </View>
         <Space height={16}/>
-        { art_agro ? <View>
+        { art_agro ? <View style={container}>
           <View style={horizontal}>
             <InfoLabel title={lang.detailed_total_potential_damage} info={art_agro}/>
             <InfoLabel title={lang.detailed_avg_potential_damage} info={roundTo(art_agro / battles)}/>
@@ -102,17 +108,31 @@ class DetailedInfo extends Component {
           <InfoLabel title={lang.detailed_total_frag} info={frags}/>
           <InfoLabel title={lang.detailed_frag_spot_ratio} info={`${roundTo(frags / ships_spotted * 100, 2)}%`}/>
         </View>
-        <Space height={16}/>
         <View style={horizontal}>
           <InfoLabel title={lang.detailed_total_plane_killed} info={planes_killed}/>
           <InfoLabel title={lang.detailed_avg_plane_killed} info={roundTo(planes_killed / battles, 2)}/>
         </View>
+        <Space height={16}/>
+        { !playerMode ? weapons.map(d => this.renderShipRecord(d)) : null }
       </View>
     )
   }
 
-  renderShipInfo() {
-
+  renderShipRecord(weapon) {
+    const { data, name } = weapon;
+    if (data == null) return null;
+    const { container, horizontal } = styles;
+    const { frags, max_frags_battle } = weapon.data;
+    if (frags == 0) return null;
+    return (
+      <View style={container} key={name}>
+        <SectionTitle title={name}/>
+        <View style={horizontal}>
+          <InfoLabel title={lang.weapon_total_frags} info={frags}/>
+          <InfoLabel title={lang.weapon_max_frags} info={max_frags_battle}/>
+        </View>
+      </View>
+    )
   }
 }
 

@@ -88,7 +88,14 @@ export const getRatingList = () => [lang.rating_bad, lang.rating_below_average, 
 
 export const getComment = (rating) => {
   const comments = getRatingList();
+
   let index = getRatingIndex(rating);
   let comment = comments[index];
-  return `${comment} (-${getRatingRange()[index] - rating})`;
+  let range = getRatingRange()[index];
+
+  let diff = range - rating;
+  // Prevent big numbers
+  if (range === 9999) diff = rating - 2450;
+
+  return `${comment} (+${diff})`;
 };
