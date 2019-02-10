@@ -5,7 +5,7 @@ import { SAVED } from '../../value/data';
 import { Actions } from 'react-native-router-flux';
 import { SafeAction, roundTo } from '../../core';
 import { Text } from 'react-native-paper';
-import lang from '../../value/lang';
+import { lang } from '../../value/lang';
 
 class Detailed extends Component {
   constructor(props) {

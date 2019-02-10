@@ -12,7 +12,7 @@ import { WoWsAPI } from '../../value/api';
 import { getDomain, getPrefix, getCurrServer, LOCAL } from '../../value/data';
 import { Title, Subheading, Paragraph, List, Caption, Button } from 'react-native-paper';
 import { TintColour } from '../../value/colour';
-import lang from '../../value/lang';
+import { lang } from '../../value/lang';
 
 class ClanInfo extends Component {
   constructor(props) {

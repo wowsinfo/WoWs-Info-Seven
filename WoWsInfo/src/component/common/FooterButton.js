@@ -4,7 +4,7 @@ import { isAndroid } from 'react-native-device-detection';
 import { IconButton, Colors } from 'react-native-paper';
 import { Actions } from 'react-native-router-flux';
 import { SafeAction } from '../../core';
-import lang from '../../value/lang';
+import { lang } from '../../value/lang';
 
 class FooterButton extends Component {
   render() {

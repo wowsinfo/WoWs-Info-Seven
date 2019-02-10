@@ -9,7 +9,7 @@ import { LOCAL, getFirstLaunch, getCurrServer, setFirstLaunch } from '../../valu
 import { Friend, RS, Statistics } from '../';
 import { SafeAction, DataLoader, Downloader } from '../../core';
 import { TintColour } from '../../value/colour';
-import lang from '../../value/lang';
+import { lang } from '../../value/lang';
 import { Loading } from '../common/Loading';
 
 // Do not update

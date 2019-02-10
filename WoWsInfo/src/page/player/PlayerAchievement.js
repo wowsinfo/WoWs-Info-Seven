@@ -5,7 +5,7 @@ import { WoWsInfo, WikiIcon, Touchable } from '../../component';
 import { FlatGrid } from 'react-native-super-grid';
 import { Paragraph } from 'react-native-paper';
 import { SafeAction } from '../../core';
-import lang from '../../value/lang';
+import { lang } from '../../value/lang';
 
 class PlayerAchievement extends Component {
   constructor(props) {

@@ -1,7 +1,7 @@
 import { roundTo } from "./Util";
 import { SafeValue } from "./SafeGuard";
 import { SAVED } from "../../value/data";
-import lang from "../../value/lang";
+import { lang } from "../../value/lang";
 
 const getOverall = (id) => DATA[SAVED.pr][id];
 

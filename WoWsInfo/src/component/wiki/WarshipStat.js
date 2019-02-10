@@ -7,7 +7,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { ProgressBar, Caption } from 'react-native-paper';
-import lang from '../../value/lang';
+import { lang } from '../../value/lang';
 
 class WarshipStat extends Component {
   render() {

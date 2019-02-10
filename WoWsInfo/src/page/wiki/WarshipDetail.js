@@ -9,7 +9,7 @@ import { View, FlatList,Linking, ScrollView, StyleSheet, Alert } from 'react-nat
 import { Text, Title, Subheading, Headline, Button, Surface, Paragraph, List } from 'react-native-paper';
 import { WoWsInfo, WikiIcon, WarshipCell, LoadingModal, PriceLabel, LoadingIndicator, WarshipStat, InfoLabel, DividerPlus, FooterPlus } from '../../component';
 import { SAVED, SERVER, LOCAL, langStr, getCurrDomain } from '../../value/data';
-import lang from '../../value/lang';
+import { lang } from '../../value/lang';
 import { SafeFetch, Guard, getColourWithRange, SafeAction, copy } from '../../core';
 import { WoWsAPI } from '../../value/api';
 import { Actions } from 'react-native-router-flux';

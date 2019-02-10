@@ -4,7 +4,7 @@ import { List, Text, Colors, IconButton } from 'react-native-paper';
 import { LOCAL } from '../../value/data';
 import { SafeAction, SafeStorage } from '../../core';
 import { SectionTitle } from '../../component';
-import lang from '../../value/lang';
+import { lang } from '../../value/lang';
 
 class Friend extends PureComponent {
   constructor(props) {

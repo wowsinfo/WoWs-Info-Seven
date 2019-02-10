@@ -11,7 +11,7 @@ import { SAVED } from '../../value/data';
 import { WarshipCell } from '../wiki/WarshipCell';
 import { InfoLabel } from '../common/InfoLabel';
 import { roundTo, SafeAction } from '../../core';
-import lang from '../../value/lang';
+import { lang } from '../../value/lang';
 import { SectionTitle } from '../common/SectionTitle';
 
 class PlayerRecord extends Component {

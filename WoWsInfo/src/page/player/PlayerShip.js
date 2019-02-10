@@ -5,7 +5,7 @@ import { getOverallRating, roundTo, getComment, getColourList, getColour, SafeAc
 import { FlatGrid } from 'react-native-super-grid';
 import { SAVED } from '../../value/data';
 import { Text, IconButton } from 'react-native-paper';
-import lang from '../../value/lang';
+import { lang } from '../../value/lang';
 
 class PlayerShip extends Component {
   constructor(props) {

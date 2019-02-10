@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 import { View, ScrollView, Linking, StyleSheet } from 'react-native';
 import { WoWsInfo, SectionTitle } from '../../component';
 import { Text, Paragraph, Caption, Button } from 'react-native-paper';
-import lang from '../../value/lang';
+import { lang } from '../../value/lang';
 import { getRatingList, getColourList, SafeAction } from '../../core';
 import { APP } from '../../value/data';
 

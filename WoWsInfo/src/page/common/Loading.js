@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 import { StatusBar, Image, Text, StyleSheet } from 'react-native';
 import { Surface } from 'react-native-paper';
 import { BLUE } from 'react-native-material-color';
-import lang from '../../value/lang';
+import { lang } from '../../value/lang';
 
 class Loading extends Component {
   constructor(props) {

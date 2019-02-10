@@ -14,7 +14,7 @@ import { SAVED, getCurrDomain } from '../../value/data';
 import { SectionGrid } from 'react-native-super-grid';
 import { ThemeBackColour, TintColour, TintTextColour } from '../../value/colour';
 import { List, Caption, Title } from 'react-native-paper';
-import lang from '../../value/lang';
+import { lang } from '../../value/lang';
 
 class WarshipModule extends Component {
   constructor(props) {
