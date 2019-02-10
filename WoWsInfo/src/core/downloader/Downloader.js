@@ -1,6 +1,6 @@
 import { WoWsAPI, WikiAPI } from '../../value/api';
 import { Alert } from 'react-native';
-import { SERVER, APP, LOCAL, SAVED, langStr, getCurrDomain } from '../../value/data';
+import { SERVER, APP, LOCAL, SAVED, langStr, getCurrDomain, getAPILanguage } from '../../value/data';
 import { SafeFetch, Guard, SafeStorage } from '../';
 import { lang } from '../../value/lang';
 
@@ -114,7 +114,11 @@ class Downloader {
     let all = {};
 
     // Download data from Github
-    let Henry = await SafeFetch.normal(WikiAPI.Github_Model);
+    const model3D = await SafeFetch.normal(WikiAPI.Github_Model);
+    let ChineseNames = null;
+    if (getAPILanguage().includes('zh')) {
+      ChineseNames = await SafeFetch.normal(WikiAPI.Github_Alias);
+    }
     
     while (page < pageTotal) {
       // page + 1 to get actually page not index
@@ -138,8 +142,15 @@ class Downloader {
             curr.new = DATA[SAVED.warship][id] ? false : true;
           }
           // If it has some extra data
-          if (Henry[id]) {
-            curr.model = Henry[id].model;
+          if (model3D[id] != null) {
+            curr.model = model3D[id].model;
+          }
+
+          if (ChineseNames != null) {
+            const entry = ChineseNames[id];
+            if (entry != null) {
+              curr.name = entry.alias;
+            }
           }
         }
       }

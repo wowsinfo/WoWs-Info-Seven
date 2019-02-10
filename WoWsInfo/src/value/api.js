@@ -43,4 +43,5 @@ export const WikiAPI = {
   // Additional data collected by me
   // Currently support model and version
   Github_Model: 'https://raw.githubusercontent.com/HenryQuan/WoWs-Info-Ultra/API/json/model.json',
+  Github_Alias: 'https://raw.githubusercontent.com/HenryQuan/WoWs-Info-Ultra/API/json/alias.json',
 }
