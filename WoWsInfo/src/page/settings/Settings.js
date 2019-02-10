@@ -84,7 +84,9 @@ class Settings extends Component {
         </List.Section>
         <List.Section title={`APP language: ${appLang[userLanguage]}`}>
           <FlatList data={appLangList} renderItem={({item}) => {
-            return <Button onPress={() => this.updateUserLang(item.code)}>{item.lang}</Button>
+            let display = item.lang;
+            if (display == null) display = '???';
+            return <Button onPress={() => this.updateUserLang(item.code)}>{display}</Button>
           }} keyExtractor={i => i} numColumns={3}/>
         </List.Section>
       </Surface>
