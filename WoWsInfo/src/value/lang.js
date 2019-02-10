@@ -189,6 +189,8 @@ export default lang = new LocalizedStrings({
     ship_detail_damage: 'Damage',
     ship_detail_winrate: 'Winrate',
     ship_detail_frag: 'Frags',
+    // Rank
+    rank_season_title: 'Season',
     // Clan
     clan_created_date: 'Created At',
     clan_creator_name: 'Creator',
