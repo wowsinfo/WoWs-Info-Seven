@@ -12,14 +12,14 @@ import { roundTo } from '../../core';
 class Info6Icon extends Component {
   render() {
     const { container, horizontal } = styles;
-    const { data } = this.props;
+    const { data, compact } = this.props;
     if (!data) return null;
 
     const { battles, wins, damage_dealt, frags, xp, survived_battles, main_battery } = data;
     const { hits, shots } = main_battery;
     const death = battles - survived_battles; 
     return (
-      <View style={container}>
+      <View style={[container, compact ? {marginTop: 0, marginBottom: 0} : {marginTop: 16, marginBottom: 16}]}>
         <View style={horizontal}>
           <IconLabel icon={require('../../img/Battle.png')} info={battles}/>
           <IconLabel icon={require('../../img/WinRate.png')} info={`${roundTo(wins / battles * 100, 2)}%`}/>
@@ -40,8 +40,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 16,
-    marginBottom: 16
   },
   horizontal: {
     flexDirection: 'row'
