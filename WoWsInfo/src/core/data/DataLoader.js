@@ -25,11 +25,12 @@ class DataLoader {
    */
   static async loadLocal() {
     const { apiLanguage, appVersion, gameVersion, firstLaunch, friendList, userData, 
-      userInfo, userServer, lastUpdate, theme, darkMode, date, swapButton } = LOCAL;
+      userInfo, userServer, lastUpdate, theme, darkMode, date, swapButton, userLanguage } = LOCAL;
 
     let data = {};
     // Manully setting up SAVED section (they are all different)
     this.loadEntry(data, apiLanguage, 'en');
+    this.loadEntry(data, userLanguage, 'en');
     this.loadEntry(data, swapButton, false);
     this.loadEntry(data, appVersion, APP.Version);
     this.loadEntry(data, gameVersion, APP.GameVersion);
