@@ -160,7 +160,7 @@ class Statistics extends PureComponent {
             formatted[season].push(curr);
           }
         }
-        console.log(formatted);
+
         this.setState({rankShip: formatted});
       }
     });

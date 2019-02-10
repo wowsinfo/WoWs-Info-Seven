@@ -23,7 +23,6 @@ class Detailed extends Component {
       return null;
     }
     
-    const { container } = styles;
     const { pvp, ship_id, rating } = data;
     const ship = DATA[SAVED.warship][ship_id];
     const overall = DATA[SAVED.pr][ship_id];
