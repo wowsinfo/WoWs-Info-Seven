@@ -4,7 +4,8 @@ import { WoWsInfo, SectionTitle, Touchable, DetailedInfo, Info6Icon, Space } fro
 import lang from '../../value/lang';
 import { FlatGrid } from 'react-native-super-grid';
 import { Headline, Title } from 'react-native-paper';
-import { SafeAction } from '../../core';
+import { SafeAction, SafeFetch } from '../../core';
+import { WoWsAPI } from '../../value/api';
 
 class Rank extends Component {
   constructor(props) {
@@ -20,8 +21,12 @@ class Rank extends Component {
 
     this.state = {
       data: rank,
-      ship: {}
+      ship: props.ship
     };
+
+    // Request ship info
+    // this.domain = 
+    // SafeFetch.get(WoWsAPI.RankShipInfo, )
   }
 
   render() {
@@ -37,16 +42,14 @@ class Rank extends Component {
           const { rank } = rank_info;
           const shipData = ship[season];
           return (
-            <View>
+            <Touchable onPress={shipData == null ? null : () => SafeAction('PlayerShip', {data: shipData})}>
               <Headline style={centerText}>{`- ${lang.rank_season_title} ${season} -`}</Headline>
               <Title style={centerText}>{`${lang.tab_rank_title} ${rank}`}</Title>
-              <Touchable onPress={shipData == null ? null : () => SafeAction('PlayerShip', {data: shipData})}>
                 { rank > 0 ? <View>
                   { this.renderSeasonInfo(rank_solo) }
                 </View> : null }
-              </Touchable>
               <Space height={16}/>
-            </View>
+            </Touchable>
           )
         }} spacing={0}/>
       </WoWsInfo>

@@ -36,6 +36,7 @@ class Statistics extends PureComponent {
         // To check if certain data have been loaded correctly
         achievement: false,
         rank: false,
+        rankShip: false,
         ship: false,
         basic: false,
         graph: false,
@@ -125,7 +126,8 @@ class Statistics extends PureComponent {
    * Get player past rank info
    */
   getRank() {
-    const { id } = this.state;
+    const { id } = this.state
+    // Get current rank info
     SafeFetch.get(WoWsAPI.RankInfo, this.domain, id).then(data => {
       let rank = Guard(data, `data.${id}.seasons`, null);
       if (rank != null) {
@@ -138,6 +140,30 @@ class Statistics extends PureComponent {
         this.setState({rank: rank});
       }
     });
+
+    // Get rank ship info
+    SafeFetch.get(WoWsAPI.RankShipInfo, this.domain, id).then(data => {
+      console.log(data);
+      let ships = Guard(data, `data.${id}`, null);
+      if (ships != null) {
+        let formatted = {};
+        for (let ship of ships) {
+          const { seasons, ship_id } = ship;
+          for (let season in seasons) {
+            // Init if not already
+            if (formatted[season] == null) formatted[season] = [];
+            // Put this ship inside
+            let curr = seasons[season];
+            curr.pvp = curr.rank_solo;
+            curr.ship_id = ship_id;
+            delete curr.rank_solo;
+            formatted[season].push(curr);
+          }
+        }
+        console.log(formatted);
+        this.setState({rankShip: formatted});
+      }
+    });
   }
 
   /**
@@ -147,10 +173,10 @@ class Statistics extends PureComponent {
     const { id } = this.state;
     SafeFetch.get(WoWsAPI.ShipInfo, this.domain, id).then(data => {
       let ship = Guard(data, `data.${id}`, null);
+      console.log(ship);
       if (ship != null) {
         // Calculate personal rating for each ship and get an overall rating for this player
         let rating = getOverallRating(ship);
-        console.log(rating);
         this.setState({ship: ship, rating: rating});
       }
     });
@@ -160,7 +186,7 @@ class Statistics extends PureComponent {
     const { error, container, footer } = styles;
     const { home } = this.props;
     const { name, id, valid,
-            achievement, rank, basic, ship, graph } = this.state;
+            achievement, rank, rankShip, basic, ship, graph } = this.state;
 
     console.log(this.state);
     let RootView = home ? Surface : WoWsInfo;
@@ -193,7 +219,7 @@ class Statistics extends PureComponent {
             { this.renderAchievement(achievement) }
             { this.renderGraph(graph) }
             { this.renderShip(ship) }
-            { this.renderRank(rank) }
+            { this.renderRank(rank, rankShip) }
           </FooterPlus>
         </RootView>
       );
@@ -311,12 +337,12 @@ class Statistics extends PureComponent {
       disabled={loading} onPress={() => SafeAction('PlayerShip', {data: ship})}/>  
   }
 
-  renderRank(rank) {
+  renderRank(rank, rankShip) {
     let loading = true;
-    if (rank) loading = false;
+    if (rank && rankShip) loading = false;
 
     return <TabButton icon={require('../../img/Rank.png')} color={this.theme}
-      disabled={loading} onPress={() => SafeAction('Rank', {data: rank})}/>
+      disabled={loading} onPress={() => SafeAction('Rank', {data: rank, ship: rankShip})}/>
   }
 
   renderGraph(graph) {
