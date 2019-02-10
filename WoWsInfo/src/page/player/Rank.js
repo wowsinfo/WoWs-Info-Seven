@@ -12,6 +12,7 @@ class Rank extends Component {
     let rank = [];
     for (let key in props.data) {
       let curr = props.data[key];
+      if (curr.rank_info.rank === 0) continue;
       curr.season = Number(key);
       rank.push(curr);
     }
@@ -33,13 +34,15 @@ class Rank extends Component {
         <FlatGrid itemDimension={300} items={data} renderItem={({item}) => {
           const { rank } = item.rank_info;
           return (
-            <Touchable style={container} onPress={() => SafeAction('PlayerShip', {data: null})}>
+            <View>
               <SectionTitle style={{width: '100%', textAlign: 'center'}} back center 
                 title={`- ${lang.rank_season_title} ${item.season} -\n${lang.tab_rank_title} ${rank}`}/>
-              { rank > 0 ? <View>
-                { this.renderSeasonInfo(item.rank_solo) }
-              </View> : null }
-            </Touchable>
+              <Touchable style={container} onPress={() => SafeAction('PlayerShip', {data: null})}>
+                { rank > 0 ? <View>
+                  { this.renderSeasonInfo(item.rank_solo) }
+                </View> : null }
+              </Touchable>
+            </View>
           )
         }} spacing={0}/>
       </WoWsInfo>
