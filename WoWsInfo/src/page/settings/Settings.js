@@ -4,11 +4,11 @@ import { isAndroid, isIos } from 'react-native-device-detection';
 import { Surface, List, Button, Checkbox, Colors, withTheme, Portal, Dialog, Text, DarkTheme, DefaultTheme } from 'react-native-paper';
 import { Actions } from 'react-native-router-flux';
 import { WoWsInfo, DividerPlus, Touchable, SectionTitle } from '../../component';
-import { APP, LOCAL, SAVED, getCurrServer, getAPILanguage, getAPILangName, SERVER, getAPIList, setCurrServer, setAPILanguage, setSwapButton, getSwapButton } from '../../value/data';
+import { APP, LOCAL, SAVED, getCurrServer, getAPILanguage, getAPILangName, SERVER, getAPIList, setCurrServer, setAPILanguage, setSwapButton, getSwapButton, getUserLang, setUserLang } from '../../value/data';
 import { TintColour, UpdateTintColour, UpdateDarkMode } from '../../value/colour';
 import { SafeStorage } from '../../core';
 import { BLUE, RED, GREEN, PINK, PURPLE, DEEPPRUPLE, INDIGO, LIGHTBLUE, CYAN, TEAL, LIGHTGREEN, LIME, YELLOW, AMBER, ORANGE, DEEPORANGE, BROWN, GREY, BLUEGREY } from 'react-native-material-color';
-import lang from '../../value/lang';
+import { lang } from '../../value/lang';
 
 class Settings extends Component {
   constructor(props) {
@@ -20,6 +20,7 @@ class Settings extends Component {
       showColour: false,
       server: getCurrServer(),
       APILanguage: getAPILanguage(),
+      userLanguage: getUserLang(),
       swapButton: getSwapButton(),
     };
     
@@ -57,12 +58,16 @@ class Settings extends Component {
   };
 
   renderAPISettings() {
-    const { server, APILanguage } = this.state;
+    const { server, APILanguage, userLanguage } = this.state;
 
     const langList = getAPIList();
     const langData = [];
     for (let key in langList) langData.push(key);
     langData.sort();
+
+    const appLang = {en: 'English', id: 'Bahasa', zh: '中文', 'zh-hant': '繁体中文', ja: '日本語'};
+    let appLangList = [];
+    for (let code in appLang) appLangList.push({code: code, lang: appLang[code]});
 
     return (
       <Surface>
@@ -76,6 +81,11 @@ class Settings extends Component {
           <FlatList data={langData} renderItem={({item}) => {
             return <Button onPress={() => this.updateApiLanguage(item)}>{langList[item]}</Button>
           }} keyExtractor={i => i} numColumns={2}/>
+        </List.Section>
+        <List.Section title={`APP language: ${appLang[userLanguage]}`}>
+          <FlatList data={appLangList} renderItem={({item}) => {
+            return <Button onPress={() => this.updateUserLang(item.code)}>{item.lang}</Button>
+          }} keyExtractor={i => i} numColumns={3}/>
         </List.Section>
       </Surface>
     )
@@ -208,6 +218,12 @@ class Settings extends Component {
   updateApiLanguage(language) {
     setAPILanguage(language);
     this.setState({APILanguage: language});
+  }
+
+  updateUserLang(code) {
+    setUserLang(code);
+    lang.setLanguage(code);
+    this.setState({userLanguage: code});
   }
 }
 

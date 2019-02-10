@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, ScrollView, StyleSheet, KeyboardAvoidingView, Alert } from 'react-native';
 import { isAndroid } from 'react-native-device-detection';
 import { Text, Portal, TextInput, Button, Dialog, Title, Caption } from 'react-native-paper';
-import lang from '../../value/lang';
+import { lang } from '../../value/lang';
 
 class RS extends Component {
   constructor(props) {

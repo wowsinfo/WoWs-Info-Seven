@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { WoWsInfo, SectionTitle, Touchable, DetailedInfo, Info6Icon, Space } from '../../component';
-import lang from '../../value/lang';
+import { lang } from '../../value/lang';
 import { FlatGrid } from 'react-native-super-grid';
 import { Headline, Title } from 'react-native-paper';
 import { SafeAction, SafeFetch } from '../../core';

@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 import { SafeAreaView, StyleSheet, StatusBar } from 'react-native';
 import { Button, Surface } from 'react-native-paper';
 import { isAndroid, isTablet } from 'react-native-device-detection';
-import lang from '../../value/lang';
+import { lang } from '../../value/lang';
 import { Actions } from 'react-native-router-flux';
 import { FooterButton } from './FooterButton';
 import { SafeAction, random } from '../../core';

@@ -10,7 +10,7 @@ import { FlatList, ScrollView, StyleSheet, Linking } from 'react-native';
 import { isAndroid, isIphoneX } from 'react-native-device-detection';
 import { List, Colors, Text, Searchbar } from 'react-native-paper';
 import { FooterButton, WoWsInfo, SectionTitle, PlayerCell } from '../../component';
-import lang from '../../value/lang';
+import { lang } from '../../value/lang';
 import { Actions } from 'react-native-router-flux';
 import { SafeAction, SafeFetch, Guard } from '../../core';
 import { ThemeBackColour, TintColour } from '../../value/colour';

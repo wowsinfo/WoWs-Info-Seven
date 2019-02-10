@@ -2,7 +2,7 @@ import { WoWsAPI, WikiAPI } from '../../value/api';
 import { Alert } from 'react-native';
 import { SERVER, APP, LOCAL, SAVED, langStr, getCurrDomain } from '../../value/data';
 import { SafeFetch, Guard, SafeStorage } from '../';
-import lang from '../../value/lang';
+import { lang } from '../../value/lang';
 
 class Downloader {
   constructor(server) {

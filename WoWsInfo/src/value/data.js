@@ -104,6 +104,19 @@ export const setCurrServer = (index) => {
 };
 
 /**
+ * User Language
+ */
+export const getUserLang = () => {
+  return SafeValue(DATA[LOCAL.userLanguage], 'en');
+}
+
+export const setUserLang = (lang) => {
+  let str = LOCAL.userLanguage;
+  DATA[str] = lang;
+  SafeStorage.set(str, lang);
+}
+
+/**
  * API Language
  */
 export const getAPILanguage = () => {

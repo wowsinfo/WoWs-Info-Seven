@@ -10,7 +10,7 @@ import { DataLoader, Downloader, SafeStorage } from './core';
 import { GREY, BLUE } from 'react-native-material-color';
 import { LoadingModal } from './component';
 import { TintColour, UpdateTintColour } from './value/colour';
-import lang from './value/lang';
+import { lang } from './value/lang';
 import { PlayerShip } from './page/player/PlayerShip';
 import { Detailed } from './page/player/Detailed';
 import { Rank } from './page/player/Rank';
@@ -31,6 +31,8 @@ class App extends Component {
       global.DATA = data;
       SWAPBUTTON = DATA[LOCAL.swapButton];
       DARKMODE = DATA[LOCAL.darkMode];
+
+      lang.setLanguage = DATA[LOCAL.userLanguage];
 
       console.log('state has been set');
 

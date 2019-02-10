@@ -3,7 +3,7 @@ import { Image, ScrollView, StyleSheet } from 'react-native';
 import { Surface, Text, Title } from 'react-native-paper';
 import { FooterButton, WoWsInfo } from '../../component';
 import { APP } from '../../value/data';
-import lang from '../../value/lang';
+import { lang } from '../../value/lang';
 
 class About extends Component {
   constructor(props) {

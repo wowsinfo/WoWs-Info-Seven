@@ -6,7 +6,7 @@ import { SafeFetch, Guard, dayDifference, humanTimeString, SafeAction, SafeStora
 import { WoWsAPI } from '../../value/api';
 import { getDomain, langStr, getPrefix, LOCAL } from '../../value/data';
 import { TintColour } from '../../value/colour';
-import lang from '../../value/lang';
+import { lang } from '../../value/lang';
 
 class Statistics extends PureComponent {
   constructor(props) {

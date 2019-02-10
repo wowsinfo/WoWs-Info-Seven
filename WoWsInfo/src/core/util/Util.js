@@ -1,4 +1,4 @@
-import lang from "../../value/lang";
+import { lang } from "../../value/lang";
 
 /**
  * Deep clone an object

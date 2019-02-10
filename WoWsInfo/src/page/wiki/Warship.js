@@ -10,7 +10,7 @@ import { WoWsInfo, WarshipCell } from '../../component';
 import { FlatGrid } from 'react-native-super-grid';
 import { SAVED, LOCAL } from '../../value/data';
 import { Portal, TextInput, Button, Divider, List, Modal, Checkbox, Colors, Surface } from 'react-native-paper';
-import lang from '../../value/lang';
+import { lang } from '../../value/lang';
 import { SafeAction, getKeyByValue, getTierList } from '../../core';
 import { ThemeColour } from '../../value/colour';
 
