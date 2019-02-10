@@ -30,7 +30,7 @@ class DataLoader {
     let data = {};
     // Manully setting up SAVED section (they are all different)
     this.loadEntry(data, apiLanguage, 'en');
-    this.loadEntry(data, userLanguage, 'en');
+    this.loadEntry(data, userLanguage, '');
     this.loadEntry(data, swapButton, false);
     this.loadEntry(data, appVersion, APP.Version);
     this.loadEntry(data, gameVersion, APP.GameVersion);
