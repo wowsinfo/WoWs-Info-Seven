@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { WoWsInfo, SectionTitle, Touchable, DetailedInfo, Info6Icon } from '../../component';
+import { WoWsInfo, SectionTitle, Touchable, DetailedInfo, Info6Icon, Space } from '../../component';
 import lang from '../../value/lang';
 import { FlatGrid } from 'react-native-super-grid';
-import { Headline } from 'react-native-paper';
+import { Headline, Title } from 'react-native-paper';
 import { SafeAction } from '../../core';
 
 class Rank extends Component {
@@ -19,29 +19,33 @@ class Rank extends Component {
     rank.reverse();
 
     this.state = {
-      data: rank
+      data: rank,
+      ship: {}
     };
   }
 
   render() {
-    const { container } = styles;
-    const { data } = this.state;
+    const { centerText } = styles;
+    const { data, ship } = this.state;
     if (data == null || data.length == 0) return null;
 
     console.log(data);
     return (
       <WoWsInfo title={`${lang.tab_rank_title} - ${data.length}`}>
         <FlatGrid itemDimension={300} items={data} renderItem={({item}) => {
-          const { rank } = item.rank_info;
+          const { season, rank_info, rank_solo } = item;
+          const { rank } = rank_info;
+          const shipData = ship[season];
           return (
             <View>
-              <SectionTitle style={{width: '100%', textAlign: 'center'}} back center 
-                title={`- ${lang.rank_season_title} ${item.season} -\n${lang.tab_rank_title} ${rank}`}/>
-              <Touchable style={container} onPress={() => SafeAction('PlayerShip', {data: null})}>
+              <Headline style={centerText}>{`- ${lang.rank_season_title} ${season} -`}</Headline>
+              <Title style={centerText}>{`${lang.tab_rank_title} ${rank}`}</Title>
+              <Touchable onPress={shipData == null ? null : () => SafeAction('PlayerShip', {data: shipData})}>
                 { rank > 0 ? <View>
-                  { this.renderSeasonInfo(item.rank_solo) }
+                  { this.renderSeasonInfo(rank_solo) }
                 </View> : null }
               </Touchable>
+              <Space height={16}/>
             </View>
           )
         }} spacing={0}/>
@@ -61,6 +65,10 @@ const styles = StyleSheet.create({
     paddingBottom: 8,
     justifyContent: 'space-between',
   },
+  centerText: {
+    alignSelf: 'center',
+    textAlign: 'center'
+  }
 });
 
 export { Rank };
