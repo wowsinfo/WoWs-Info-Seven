@@ -44,7 +44,7 @@ class Rank extends Component {
           return (
             <Touchable onPress={shipData == null ? null : () => SafeAction('PlayerShip', {data: shipData})}>
               <Headline style={centerText}>{`- ${lang.rank_season_title} ${season} -`}</Headline>
-              <Title style={centerText}>{`${lang.tab_rank_title} ${rank}`}</Title>
+              <Title style={centerText}>{rank}</Title>
                 { rank > 0 ? <View>
                   { this.renderSeasonInfo(rank_solo) }
                 </View> : null }
