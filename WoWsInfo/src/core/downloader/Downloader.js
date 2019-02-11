@@ -115,9 +115,12 @@ class Downloader {
 
     // Download data from Github
     const model3D = await SafeFetch.normal(WikiAPI.Github_Model);
-    let ChineseNames = null;
-    if (getAPILanguage().includes('zh')) {
-      ChineseNames = await SafeFetch.normal(WikiAPI.Github_Alias);
+
+    // For Chinese and Japanese users only
+    let JapaneseShips = null;
+    let currLang = getAPILanguage();
+    if (currLang.includes('zh') || currLang.includes('ja')) {
+      JapaneseShips = await SafeFetch.normal(WikiAPI.Github_Alias);
     }
     
     while (page < pageTotal) {
@@ -146,8 +149,8 @@ class Downloader {
             curr.model = model3D[id].model;
           }
 
-          if (ChineseNames != null) {
-            const entry = ChineseNames[id];
+          if (JapaneseShips != null) {
+            const entry = JapaneseShips[id];
             if (entry != null) {
               curr.name = entry.alias;
             }
