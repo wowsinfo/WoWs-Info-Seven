@@ -65,7 +65,7 @@ class Settings extends Component {
     for (let key in langList) langData.push(key);
     langData.sort();
 
-    const appLang = {en: 'English', id: 'Bahasa', zh: '中文', 'zh-hant': '繁体中文', ja: '日本語'};
+    const appLang = {en: 'English', id: 'Bahasa Indonesia', zh: '中文', 'zh-hant': '繁体中文', ja: '日本語'};
     let appLangList = [];
     for (let code in appLang) appLangList.push({code: code, lang: appLang[code]});
 
