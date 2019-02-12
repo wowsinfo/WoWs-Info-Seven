@@ -63,6 +63,7 @@ class Downloader {
       return true;
     } catch (err) {
       // Note: it might fail even if data are loaded correctly
+      console.error(err);
       return false;
     }
   }
@@ -198,7 +199,8 @@ class Downloader {
     if (this.new === true) {
       for (let id in collection) {
         let curr = collection[id];
-        curr.new = DATA[SAVED.collection]['collection'][id] ? false : true;
+        let isOld = Guard(DATA[SAVED.collection], `collection.${id}`, true);
+        curr.new = isOld ? false : true;
       }
     }
 
