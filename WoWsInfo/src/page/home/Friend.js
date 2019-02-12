@@ -35,8 +35,8 @@ class Friend extends PureComponent {
         <SectionTitle title={`${lang.friend_player_title} - ${player.length}`}/>
         <FlatList data={player} renderItem={({item}) => 
           <List.Item title={item.nickname} onPress={() => this.pushToPlayer(item)}
-            right={() => <IconButton color={Colors.grey500} icon='close' onPress={() => this.removeFriend(item)}/> }/>}
-          keyExtractor={i => String(i.account_id)} keyboardShouldPersistTaps='always'/>
+            right={() => <IconButton color={Colors.grey500} size={16} icon='close' onPress={() => this.removeFriend(item)}/> }/>}
+          keyExtractor={i => String(i.account_id)} keyboardShouldPersistTapshenryq='always'/>
       </View>
     )
   };
