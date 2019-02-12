@@ -26,18 +26,18 @@ class Friend extends PureComponent {
     const { player, clan } = this.state;
     console.log(this.state);
     return (
-      <ScrollView style={container}>
+      <View showsVerticalScrollIndicator={false} >
         <SectionTitle title={`${lang.friend_clan_title} - ${clan.length}`}/>
         <FlatList data={clan} renderItem={({item}) => 
           <List.Item title={item.tag} onPress={() => this.pushToClan(item)}
             right={() => <IconButton color={Colors.grey500} icon='close' onPress={() => this.removeClan(item)}/> }/>}
-          keyExtractor={i => String(i.clan_id)} showsVerticalScrollIndicator={false}/>
+          keyExtractor={i => String(i.clan_id)} keyboardShouldPersistTaps='always'/>
         <SectionTitle title={`${lang.friend_player_title} - ${player.length}`}/>
         <FlatList data={player} renderItem={({item}) => 
           <List.Item title={item.nickname} onPress={() => this.pushToPlayer(item)}
             right={() => <IconButton color={Colors.grey500} icon='close' onPress={() => this.removeFriend(item)}/> }/>}
-          keyExtractor={i => String(i.account_id)} showsVerticalScrollIndicator={false}/>
-      </ScrollView>
+          keyExtractor={i => String(i.account_id)} keyboardShouldPersistTaps='always'/>
+      </View>
     )
   };
 

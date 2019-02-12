@@ -81,8 +81,7 @@ class Menu extends Component {
         <Searchbar ref='search' value={search} style={searchBar} placeholder={`${this.prefix.toUpperCase()} - ${online} ${lang.search_player_online}`}
           onChangeText={this.searchAll} autoCorrect={false} autoCapitalize='none' 
           onFocus={() => this.setState({showFriend: true})} onBlur={() => this.setState({showFriend: false})}/>
-        <ScrollView keyboardShouldPersistTaps='always' 
-          showsVerticalScrollIndicator={false} contentContainerStyle={scroll}>
+        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={scroll} keyboardShouldPersistTaps='always'>
           { this.renderContent() }
         </ScrollView>
       </WoWsInfo>
@@ -103,12 +102,12 @@ class Menu extends Component {
           { clanLen > 0 ?
             <FlatList data={result.clan} renderItem={({item}) => {
               return <PlayerCell key={item.clan_id} item={item} clan/>
-            }} keyExtractor={c => c.tag}/> : null }
+            }} keyExtractor={c => c.tag} keyboardShouldPersistTaps='always'/> : null }
           <SectionTitle title={`${lang.menu_search_player} - ${playerLen}`}/>
           { playerLen > 0 ?
             <FlatList data={result.player} renderItem={({item}) => {
               return <PlayerCell key={item.account_id} item={item} player/>
-            }} keyExtractor={p => p.nickname}/> : null }
+            }} keyExtractor={p => p.nickname} keyboardShouldPersistTaps='always'/> : null }
         </View>
       );
     } else {
@@ -182,7 +181,6 @@ class Menu extends Component {
             data.forEach(v => v.server = getCurrServer());
             all.player = data;
             this.setState({result: all});
-            setTimeout(() => this.refs['search'].blur(), 1000);
           }
         });
       }
