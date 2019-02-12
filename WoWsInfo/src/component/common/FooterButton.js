@@ -35,7 +35,7 @@ class FooterButton extends Component {
       } else {
         Actions.pop();
       }
-    } else SafeAction('Menu');
+    } else SafeAction('About');
   }
 }
 
