@@ -14,7 +14,7 @@ import { lang } from '../../value/lang';
 import { Actions } from 'react-native-router-flux';
 import { SafeAction, SafeFetch, Guard } from '../../core';
 import { ThemeBackColour, TintColour } from '../../value/colour';
-import { getCurrDomain, getCurrServer, getCurrPrefix, APP } from '../../value/data';
+import { getCurrDomain, getCurrServer, getCurrPrefix, APP, LOCAL } from '../../value/data';
 import { WoWsAPI } from '../../value/api';
 import { Friend } from '../home/Friend';
 
@@ -76,8 +76,14 @@ class Menu extends Component {
     const { searchBar, scroll } = styles;
     const { search, online } = this.state;
 
+    // For main account
+    let main = DATA[LOCAL.userInfo];
+    let enabled = main.account_id !== '';
+    let title = main.nickname;
+    if (title === '') title = '- ??? -';
+
     return (
-      <WoWsInfo title={lang.menu_footer} onPress={() => this.refs['search'].focus()} home>
+      <WoWsInfo title={title} onPress={enabled ? SafeAction('Statistics', {info: main}) : null} home>
         <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={scroll} keyboardShouldPersistTaps='always'>
           { this.renderContent() }
         </ScrollView>
