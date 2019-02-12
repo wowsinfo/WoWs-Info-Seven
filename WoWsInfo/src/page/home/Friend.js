@@ -64,8 +64,7 @@ class Friend extends PureComponent {
 
 const styles = StyleSheet.create({
   container: {
-    height: '100%',
-    marginTop: 64
+    height: '100%'
   }
 });
 

@@ -6,7 +6,7 @@
  */
 
 import React, { Component } from 'react';
-import { FlatList, ScrollView, StyleSheet, Linking } from 'react-native';
+import { FlatList, ScrollView, StyleSheet, Linking, View } from 'react-native';
 import { isAndroid, isIphoneX } from 'react-native-device-detection';
 import { List, Colors, Text, Searchbar } from 'react-native-paper';
 import { FooterButton, WoWsInfo, SectionTitle, PlayerCell } from '../../component';
@@ -73,7 +73,7 @@ class Menu extends Component {
   }
 
   render() {
-    const { searchBar } = styles;
+    const { searchBar, scroll } = styles;
     const { search, online } = this.state;
 
     return (
@@ -81,22 +81,24 @@ class Menu extends Component {
         <Searchbar ref='search' value={search} style={searchBar} placeholder={`${this.prefix.toUpperCase()} - ${online} ${lang.search_player_online}`}
           onChangeText={this.searchAll} autoCorrect={false} autoCapitalize='none' 
           onFocus={() => this.setState({showFriend: true})} onBlur={() => this.setState({showFriend: false})}/>
-        { this.renderContent() }
+        <ScrollView keyboardShouldPersistTaps='always' 
+          showsVerticalScrollIndicator={false} contentContainerStyle={scroll}>
+          { this.renderContent() }
+        </ScrollView>
       </WoWsInfo>
     );
   }
 
   renderContent() {
-    const { icon, scroll } = styles;
+    const { icon } = styles;
     const { search, result, showFriend } = this.state;
     if (showFriend && search.length === 0) {
-      return <Friend />
+      return <Friend />;
     } else if (search.length > 0) {
       let playerLen  = result.player.length;
       let clanLen  = result.clan.length;
       return (
-        <ScrollView showsVerticalScrollIndicator={false}
-          contentContainerStyle={scroll}>
+        <View>
           <SectionTitle title={`${lang.menu_search_clan} - ${clanLen}`}/>
           { clanLen > 0 ?
             <FlatList data={result.clan} renderItem={({item}) => {
@@ -107,12 +109,11 @@ class Menu extends Component {
             <FlatList data={result.player} renderItem={({item}) => {
               return <PlayerCell key={item.account_id} item={item} player/>
             }} keyExtractor={p => p.nickname}/> : null }
-        </ScrollView>
-      )
+        </View>
+      );
     } else {
       return (
-        <ScrollView showsVerticalScrollIndicator={false}
-          contentContainerStyle={scroll}>
+        <View>
           <SectionTitle title={lang.wiki_section_title}/>
           { this.wiki.map(item => { return (
             <List.Item title={item.t} style={{padding: 0, paddingLeft: 8}} onPress={() => item.p()} key={item.t}
@@ -127,17 +128,17 @@ class Menu extends Component {
                 <List.Item title={item.t} description={item.d} key={item.t}
                   onPress={() => Linking.openURL(item.d)}/>
               )})}
-            </List.Section>
-            <List.Section title={lang.youtuber_title}>
-              { this.youtubers.map(item => { return (
-                <List.Item title={item.t} description={item.d} key={item.t}
-                  onPress={() => Linking.openURL(item.d)}/>
-              )})}
-            </List.Section>
-            <List.Section title={lang.tool_title}>
-            </List.Section>
-        </ScrollView>
-      )
+          </List.Section>
+          <List.Section title={lang.youtuber_title}>
+            { this.youtubers.map(item => { return (
+              <List.Item title={item.t} description={item.d} key={item.t}
+                onPress={() => Linking.openURL(item.d)}/>
+            )})}
+          </List.Section>
+          <List.Section title={lang.tool_title}>
+          </List.Section>
+        </View>
+      );
     }
   }
 
