@@ -28,14 +28,8 @@ class FooterButton extends Component {
     const { icon } = this.props;
     if (icon === 'settings') SafeAction('Settings');
     else if (icon === 'arrow-back') Actions.pop();
-    else if (icon === 'home') {
-      // Go back when home is not found
-      if (Actions.state.routes.findIndex(r => r.routeName === 'Menu') > -1) {
-        Actions.popTo('Menu');
-      } else {
-        Actions.pop();
-      }
-    } else SafeAction('Search');
+    else if (icon === 'home') Actions.popTo('Menu', {refresh: {}});
+    else SafeAction('Search');
   }
 }
 
