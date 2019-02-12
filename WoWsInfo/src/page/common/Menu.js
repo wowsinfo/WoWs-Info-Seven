@@ -8,8 +8,8 @@
 import React, { Component } from 'react';
 import { FlatList, ScrollView, StyleSheet, Linking, View } from 'react-native';
 import { isAndroid, isIphoneX } from 'react-native-device-detection';
-import { List, Colors, Text, Searchbar } from 'react-native-paper';
-import { FooterButton, WoWsInfo, SectionTitle, PlayerCell } from '../../component';
+import { List, Colors, Text, Searchbar, Title } from 'react-native-paper';
+import { FooterButton, WoWsInfo, SectionTitle, PlayerCell, AppName } from '../../component';
 import { lang } from '../../value/lang';
 import { Actions } from 'react-native-router-flux';
 import { SafeAction, SafeFetch, Guard } from '../../core';
@@ -84,7 +84,8 @@ class Menu extends Component {
 
     return (
       <WoWsInfo title={title} onPress={enabled ? SafeAction('Statistics', {info: main}) : null} home>
-        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={scroll} keyboardShouldPersistTaps='always'>
+        <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='always'>
+          <AppName />
           { this.renderContent() }
         </ScrollView>
       </WoWsInfo>
@@ -204,9 +205,6 @@ const styles = StyleSheet.create({
     top: 16,
     left: 16, right: 16,
     borderRadius: 100
-  },
-  scroll: {
-    paddingTop: 64,
   }
 });
 

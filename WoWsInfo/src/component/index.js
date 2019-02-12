@@ -12,6 +12,7 @@ export * from './common/LoadingIndicator';
 export * from './common/InfoLabel';
 export * from './common/SectionTitle';
 export * from './common/PlayerCell';
+export * from './common/AppName';
 
 // Wiki
 export * from './wiki/WikiIcon';
