@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Alert } from 'react-native';
+import { StyleSheet, Alert, BackAndroid } from 'react-native';
 import { Router, Stack, Scene, Actions } from 'react-native-router-flux';
 import { withTheme, DarkTheme, DefaultTheme } from 'react-native-paper';
 import { Home, Menu, Settings, About, Setup, Consumable, CommanderSkill, 
@@ -92,7 +92,7 @@ class App extends Component {
     const { loading, dark } = this.state;
     if (loading) return <Loading />;
     return (
-      <Router sceneStyle={{flex: 1, backgroundColor: dark ? 'black' : 'white'}}>
+      <Router sceneStyle={{flex: 1, backgroundColor: dark ? 'black' : 'white'}} backAndroidHandler={this.handleBack}>
         <Stack key='root' hideNavBar>
           <Scene key='Menu' component={Menu}/>
           <Scene key='Setup' component={Setup} initial={getFirstLaunch()}/>
@@ -122,6 +122,12 @@ class App extends Component {
         </Stack>
       </Router>
     );
+  }
+
+  handleBack = () => {
+    if (Actions.state.routes.length == 1) {
+      BackAndroid.exitApp();
+    }
   }
 }
 
