@@ -22,7 +22,6 @@ class Friend extends PureComponent {
   }
 
   render() {
-    const { container } = styles;
     const { player, clan } = this.state;
     console.log(this.state);
     return (
