@@ -16,6 +16,7 @@ import { SafeAction, SafeFetch, Guard } from '../../core';
 import { ThemeBackColour, TintColour } from '../../value/colour';
 import { getCurrDomain, getCurrServer, getCurrPrefix, APP } from '../../value/data';
 import { WoWsAPI } from '../../value/api';
+import { Friend } from '../home/Friend';
 
 class Menu extends Component {
 
@@ -26,7 +27,8 @@ class Menu extends Component {
       search: '',
       server: '',
       result: {player: [], clan: []},
-      online: '???'
+      online: '???',
+      showFriend: false
     };
 
     let domain = getCurrDomain();
@@ -75,9 +77,10 @@ class Menu extends Component {
     const { search, online } = this.state;
 
     return (
-      <WoWsInfo noLeft title={lang.menu_footer} onPress={() => this.refs['search'].focus()}>
+      <WoWsInfo title={lang.menu_footer} onPress={() => this.refs['search'].focus()} home>
         <Searchbar ref='search' value={search} style={searchBar} placeholder={`${this.prefix.toUpperCase()} - ${online} ${lang.search_player_online}`}
-          onChangeText={this.searchAll} autoCorrect={false} autoCapitalize='none'/>
+          onChangeText={this.searchAll} autoCorrect={false} autoCapitalize='none' 
+          onFocus={() => this.setState({showFriend: true})} onBlur={() => this.setState({showFriend: false})}/>
         { this.renderContent() }
       </WoWsInfo>
     );
@@ -85,8 +88,10 @@ class Menu extends Component {
 
   renderContent() {
     const { icon, scroll } = styles;
-    const { search, result } = this.state;
-    if (search.length > 0) {
+    const { search, result, showFriend } = this.state;
+    if (showFriend && search.length === 0) {
+      return <Friend />
+    } else if (search.length > 0) {
       let playerLen  = result.player.length;
       let clanLen  = result.clan.length;
       return (

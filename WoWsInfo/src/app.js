@@ -93,10 +93,9 @@ class App extends Component {
     return (
       <Router sceneStyle={{flex: 1, backgroundColor: dark ? 'black' : 'white'}}>
         <Stack key='root' hideNavBar>
-          <Scene key='Home' component={Home}/>
+          <Scene key='Menu' component={Menu}/>
           <Scene key='Setup' component={Setup} initial={getFirstLaunch()}/>
           
-          <Scene key='Menu' component={Menu}/>
           <Scene key='Rating' component={Rating} />
           <Scene key='Statistics' component={Statistics} />
           <Scene key='PlayerAchievement' component={PlayerAchievement} />
