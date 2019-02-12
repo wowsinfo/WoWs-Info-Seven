@@ -9,6 +9,7 @@ export * from './home/Home';
 export * from './home/Setup';
 export * from './home/Friend';
 export * from './home/RS';
+export * from './home/Search';
 
 export * from './wiki/Consumable';
 export * from './wiki/BasicDetail';
