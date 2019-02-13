@@ -1026,8 +1026,8 @@ export const lang = new LocalizedStrings({
     /// Settings section
     server_name: ['Russia', 'Europe', 'North Ameria', 'Asia'],
     setting_game_server: 'Game Server',
-    setting_api_language: 'API Language',
-    setting_app_language: 'WoWs Info Language',
+    setting_api_language: 'Pengaturan bahasa API',
+    setting_app_language: 'Pengaturan bahasa Aplikasi',
     settings_api_settings: 'Pengaturan API',
     settings_app_settings: 'Pengaturan Aplikasi',
     settings_app_dark_mode: 'Dark mode',
@@ -1117,8 +1117,8 @@ export const lang = new LocalizedStrings({
     basic_register_date: 'Register Date',
     basic_last_battle: 'Last Battle',
     basic_more_stat: '- Show More -',
-    basic_add_friend: 'Add to list',
-    basic_set_main: 'Set as Main Account',
+    basic_add_friend: 'Tambahkan ke lis',
+    basic_set_main: 'Set Sebagai Akun Utama',
     // Detailed
     detailed_win: 'Wins',
     detailed_draw: 'Draws',
@@ -1189,6 +1189,6 @@ export const lang = new LocalizedStrings({
     /// Error section
     // General erros
     error_title: 'Error',
-    error_download_issue: 'Gagal untuk melakukan update data. \nSilakan coba kembali.'
+    error_download_issue: 'Gagal untuk mengupdate data. \nSilakan coba kembali.'
   }
 });
