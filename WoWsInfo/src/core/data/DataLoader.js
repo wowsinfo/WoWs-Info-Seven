@@ -38,7 +38,9 @@ class DataLoader {
 
     // Add support to save clans as well
     let list = {
-      clan: {},
+      clan: {
+        2000008934: {tag: 'FFD', clan_id: '2000008934', server: 3}
+      },
       player: {
         2011774448: {nickname: 'HenryQuan', account_id: '2011774448', server: 3}
       }
