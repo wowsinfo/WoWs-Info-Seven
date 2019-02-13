@@ -26,43 +26,46 @@ class PlayerShip extends PureComponent {
   }
 
   render() {
-    const { centerText, horizontal, centerView } = styles;
     const { data, rating } = this.state;
     return (
       <WoWsInfo title={`${lang.wiki_warship_footer} - ${data.length}`}>
-        <FlatGrid itemDimension={150} items={data} renderItem={({item}) => {
-          let ship = DATA[SAVED.warship][item.ship_id];
-          const { battles, wins, damage_dealt } = item.pvp;
-
-          let nothing = false;
-          if (battles === 0) nothing = true;
-          return (
-            <Touchable onPress={() => SafeAction('PlayerShipDetail', {data: item})}>
-              <WarshipCell item={ship} scale={1.8}/>
-              <View style={horizontal}>
-                <View style={centerView}>
-                  <IconButton size={24} icon={require('../../img/Battle.png')}/>
-                  <Text style={centerText}>{nothing ? '0' : battles}</Text>
-                </View>
-                <View style={centerView}>
-                  <IconButton size={24} icon={require('../../img/WinRate.png')}/>
-                  <Text style={centerText}>{nothing ? '0.00%' : `${roundTo(wins / battles * 100, 2)}%`}</Text>
-                </View>
-                <View style={centerView}>
-                  <IconButton size={24} icon={require('../../img/Damage.png')}/>
-                  <Text style={centerText}>{nothing ? '0' : roundTo(damage_dealt / battles)}</Text>
-                </View>
-              </View>
-              <View style={{backgroundColor: getColour(item.rating), height: 12, borderRadius: 99}}/>
-            </Touchable>
-          )
-        }}/>
+        <FlatGrid itemDimension={150} items={data} renderItem={({item}) => this.renderShip(item)} />
         <FooterPlus>
           <RatingButton rating={rating}/>
         </FooterPlus>
       </WoWsInfo>
     )
   };
+
+  renderShip(item) {
+    const { centerText, horizontal, centerView } = styles;
+
+    let ship = DATA[SAVED.warship][item.ship_id];
+    const { battles, wins, damage_dealt } = item.pvp;
+
+    let nothing = false;
+    if (battles === 0) nothing = true;
+    return (
+      <Touchable key={item.ship_id} onPress={() => SafeAction('PlayerShipDetail', {data: item})}>
+        <WarshipCell item={ship} scale={1.8}/>
+        <View style={horizontal}>
+          <View style={centerView}>
+            <IconButton size={24} icon={require('../../img/Battle.png')}/>
+            <Text style={centerText}>{nothing ? '0' : battles}</Text>
+          </View>
+          <View style={centerView}>
+            <IconButton size={24} icon={require('../../img/WinRate.png')}/>
+            <Text style={centerText}>{nothing ? '0.00%' : `${roundTo(wins / battles * 100, 2)}%`}</Text>
+          </View>
+          <View style={centerView}>
+            <IconButton size={24} icon={require('../../img/Damage.png')}/>
+            <Text style={centerText}>{nothing ? '0' : roundTo(damage_dealt / battles)}</Text>
+          </View>
+        </View>
+        <View style={{backgroundColor: getColour(item.rating), height: 12, borderRadius: 99}}/>
+      </Touchable>
+    )
+  }
 }
 
 const styles = StyleSheet.create({

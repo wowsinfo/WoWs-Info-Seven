@@ -56,8 +56,8 @@ class Warship extends PureComponent {
       <WoWsInfo title={`${lang.wiki_warship_footer} - ${data.length}`} 
         onPress={() => SafeAction('WarshipFilter', {applyFunc: this.filterShip})}>
         <FlatGrid itemDimension={100} items={data} renderItem={({item}) => {
-          return <WarshipCell scale={1.4} item={item} onPress={() => SafeAction('WarshipDetail', {item: item})}/>
-        }} showsVerticalScrollIndicator={false}/>
+          return <WarshipCell scale={1.4} key={item.ship_id} item={item} onPress={() => SafeAction('WarshipDetail', {item: item})}/>
+        }} showsVerticalScrollIndicator={false} />
       </WoWsInfo>
     )
   };
