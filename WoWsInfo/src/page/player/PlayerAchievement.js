@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { SAVED } from '../../value/data';
 import { WoWsInfo, WikiIcon, Touchable } from '../../component';
@@ -7,7 +7,7 @@ import { Paragraph } from 'react-native-paper';
 import { SafeAction } from '../../core';
 import { lang } from '../../value/lang';
 
-class PlayerAchievement extends Component {
+class PlayerAchievement extends PureComponent {
   constructor(props) {
     super(props);
 
