@@ -10,17 +10,18 @@ import { WoWsAPI } from '../../value/api';
 class Rank extends Component {
   constructor(props) {
     super(props);
-    let rank = [];
+    let list = [];
     for (let key in props.data) {
       let curr = props.data[key];
-      if (curr.rank_info.rank === 0) continue;
+      const { rank, start_rank } = curr.rank_info;
+      if (rank === 0 || rank === start_rank) continue;
       curr.season = Number(key);
-      rank.push(curr);
+      list.push(curr);
     }
-    rank.reverse();
+    list.reverse();
 
     this.state = {
-      data: rank,
+      data: list,
       ship: props.ship
     };
 
@@ -38,17 +39,19 @@ class Rank extends Component {
     return (
       <WoWsInfo title={`${lang.tab_rank_title} - ${data.length}`}>
         <FlatGrid itemDimension={300} items={data} renderItem={({item}) => {
-          const { season, rank_info, rank_solo } = item;
-          const { rank } = rank_info;
+          const { season, rank_info } = item;
+          const { rank, start_rank } = rank_info;
           const shipData = ship[season];
+
+          let emoji = '⭐';
+
           return (
-            <Touchable onPress={shipData == null ? null : () => SafeAction('PlayerShip', {data: shipData})}>
+            <Touchable onPress={shipData == null ? null : () => SafeAction('PlayerShip', {data: shipData})} style={{margin: 8}}>
               <Headline style={centerText}>{`- ${lang.rank_season_title} ${season} -`}</Headline>
-              <Title style={centerText}>{rank}</Title>
-                { rank > 0 ? <View>
-                  { this.renderSeasonInfo(rank_solo) }
+              <Title style={centerText}>{`${emoji} ${rank} ${emoji}`}</Title>
+                { rank > 0 && rank !== start_rank ? <View>
+                  { this.renderSeasonInfo(item) }
                 </View> : null }
-              <Space height={16}/>
             </Touchable>
           )
         }} spacing={0}/>
@@ -58,7 +61,12 @@ class Rank extends Component {
 
   renderSeasonInfo(data) {
     if (data == null) return null;
-    return <Info6Icon data={data} compact/>
+    const { rank_solo, rank_div2, rank_div3 } = data;
+    let info = rank_solo;
+    if (info == null) info = rank_div2;
+    if (info == null) info = rank_div3;
+    if (info == null) return null;
+    return <Info6Icon data={info} compact topOnly/>
   }
 }
 

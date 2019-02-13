@@ -12,7 +12,7 @@ import { roundTo } from '../../core';
 class Info6Icon extends Component {
   render() {
     const { container, horizontal } = styles;
-    const { data, compact } = this.props;
+    const { data, compact, topOnly } = this.props;
     if (!data) return null;
 
     const { battles, wins, damage_dealt, frags, xp, survived_battles, main_battery } = data;
@@ -25,11 +25,11 @@ class Info6Icon extends Component {
           <IconLabel icon={require('../../img/WinRate.png')} info={`${roundTo(wins / battles * 100, 2)}%`}/>
           <IconLabel icon={require('../../img/Damage.png')} info={roundTo(damage_dealt / battles)}/>
         </View>
-        <View style={horizontal}>
+        { topOnly ? null : <View style={horizontal}>
           <IconLabel icon={require('../../img/EXP.png')} info={roundTo(xp / battles)}/>
           <IconLabel icon={require('../../img/KillDeathRatio.png')} info={roundTo(frags / death, 2)}/>
           <IconLabel icon={require('../../img/HitRatio.png')} info={`${roundTo(hits / shots * 100, 2)}%`}/>
-        </View>
+        </View> }
       </View>
     )
   };
