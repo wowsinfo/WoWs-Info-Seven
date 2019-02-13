@@ -70,23 +70,22 @@ class Settings extends Component {
     for (let code in appLang) appLangList.push({code: code, lang: appLang[code]});
 
     let display = appLang[userLanguage];
-    console.log(display);
     if (display == null) display = '???';
 
     return (
       <Surface>
         <SectionTitle title={lang.settings_api_settings}/>
-        <List.Section title={`Game server: ${lang.server_name[server]}`}>
+        <List.Section title={`${lang.setting_game_server} - ${lang.server_name[server]}`}>
           <FlatList data={SERVER} renderItem={({index}) => {
             return <Button onPress={() => this.updateServer(index)}>{lang.server_name[index]}</Button>
           }} keyExtractor={i => i} numColumns={2}/>
         </List.Section>
-        <List.Section title={`API language: ${langList[APILanguage]}`}>
+        <List.Section title={`${lang.setting_api_language} - ${langList[APILanguage]}`}>
           <FlatList data={langData} renderItem={({item}) => {
             return <Button onPress={() => this.updateApiLanguage(item)}>{langList[item]}</Button>
           }} keyExtractor={i => i} numColumns={2}/>
         </List.Section>
-        <List.Section title={`APP language: ${display}`}>
+        <List.Section title={`${lang.setting_app_language} - ${display}`}>
           <FlatList data={appLangList} renderItem={({item}) => {
             return <Button onPress={() => this.updateUserLang(item.code)}>{item.lang}</Button>
           }} keyExtractor={i => i} numColumns={2}/>
