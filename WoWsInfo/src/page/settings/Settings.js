@@ -36,7 +36,7 @@ class Settings extends Component {
   render() {
     const { showColour } = this.state;
     return (
-      <WoWsInfo about noLeft>
+      <WoWsInfo about>
         <ScrollView showsVerticalScrollIndicator={false}>
           { this.renderAPISettings() }
           { this.renderAppSettings() }
@@ -88,7 +88,7 @@ class Settings extends Component {
         <List.Section title={`${lang.setting_app_language} - ${display}`}>
           <FlatList data={appLangList} renderItem={({item}) => {
             return <Button onPress={() => this.updateUserLang(item.code)}>{item.lang}</Button>
-          }} keyExtractor={i => i} numColumns={2}/>
+          }} keyExtractor={i => i.code} numColumns={2}/>
         </List.Section>
       </Surface>
     )

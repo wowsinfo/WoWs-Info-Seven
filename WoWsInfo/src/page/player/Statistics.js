@@ -154,9 +154,20 @@ class Statistics extends PureComponent {
             if (formatted[season] == null) formatted[season] = [];
             // Put this ship inside
             let curr = seasons[season];
-            curr.pvp = curr.rank_solo;
+            // TO make there is data there
+            const { rank_solo, rank_div2, rank_div3 } = curr;
+            if (rank_solo) {
+              curr.pvp = curr.rank_solo;
+              delete curr.rank_solo;
+            } else if (rank_div2) {
+              curr.pvp = curr.rank_div2;
+              delete curr.rank_div2;
+            } else if (rank_div3) {
+              curr.pvp = curr.rank_div3;
+              delete curr.rank_div3;
+            } else continue;
+
             curr.ship_id = ship_id;
-            delete curr.rank_solo;
             formatted[season].push(curr);
           }
         }
