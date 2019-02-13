@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Image, ScrollView, StyleSheet } from 'react-native';
-import { Surface, Text, Title } from 'react-native-paper';
+import { View, ScrollView, StyleSheet } from 'react-native';
+import { Surface, Text, Title, List, Paragraph } from 'react-native-paper';
 import { FooterButton, WoWsInfo } from '../../component';
 import { APP } from '../../value/data';
 import { lang } from '../../value/lang';
@@ -13,11 +13,17 @@ class About extends Component {
   render() {
     const { container, scroll, logo } = styles;
     return (
-      <WoWsInfo style={container}>
-        <ScrollView contentContainerStyle={scroll}>
-          <Image style={logo} source={require('../../img/Logo.png')}/>
-          <Title>{lang.app_name}</Title>
-          <Text>{APP.Version}</Text>
+      <WoWsInfo>
+        <ScrollView>
+          <View>
+            <Title>{lang.app_name}</Title>
+            <Paragraph>WoWs Info is ...</Paragraph>
+            <List.Section title='Special Thanks'>
+              <List.Item title='Auris2010k'/>
+              <List.Item title='Zetesian'/>
+            </List.Section>
+            <Title>Coming soon...</Title>
+          </View>
         </ScrollView>
       </WoWsInfo>
     )
@@ -27,15 +33,6 @@ class About extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  scroll: {
-    flex: 1,
-    padding: 16,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  logo: {
-    height: 128, width: 128
   }
 });
 
