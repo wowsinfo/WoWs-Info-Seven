@@ -165,7 +165,7 @@ export const lang = new LocalizedStrings({
     basic_register_date: 'Register Date',
     basic_last_battle: 'Last Battle',
     basic_more_stat: '- Show More -',
-    basic_add_friend: 'Add to player list',
+    basic_add_friend: 'Add to list',
     basic_set_main: 'Set as Main Account',
     // Detailed
     detailed_win: 'Wins',
@@ -403,6 +403,8 @@ export const lang = new LocalizedStrings({
     basic_register_date: '注册日期',
     basic_last_battle: '最后的战斗',
     basic_more_stat: '- 显示更多数据 -',
+    basic_add_friend: '增加到列表',
+    basic_set_main: '设为主账号',
     // Detailed
     detailed_win: '胜利',
     detailed_draw: '平局',
@@ -639,6 +641,8 @@ export const lang = new LocalizedStrings({
     basic_register_date: '註冊日期',
     basic_last_battle: '最後的戰鬥',
     basic_more_stat: '- 顯示更多數據 -',
+    basic_add_friend: '增加到列表',
+    basic_set_main: '設為主賬號',
     // Detailed
     detailed_win: '勝利',
     detailed_draw: '平局',
@@ -875,6 +879,8 @@ export const lang = new LocalizedStrings({
     basic_register_date: 'Register Date',
     basic_last_battle: 'Last Battle',
     basic_more_stat: '- Show More -',
+    basic_add_friend: 'Add to list',
+    basic_set_main: 'Set as Main Account',
     // Detailed
     detailed_win: 'Wins',
     detailed_draw: 'Draws',
@@ -1111,6 +1117,8 @@ export const lang = new LocalizedStrings({
     basic_register_date: 'Register Date',
     basic_last_battle: 'Last Battle',
     basic_more_stat: '- Show More -',
+    basic_add_friend: 'Add to list',
+    basic_set_main: 'Set as Main Account',
     // Detailed
     detailed_win: 'Wins',
     detailed_draw: 'Draws',

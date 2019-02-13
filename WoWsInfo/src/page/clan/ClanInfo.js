@@ -91,7 +91,7 @@ class ClanInfo extends Component {
             <InfoLabel title={lang.clan_leader_name} info={leader_name}
               onPress={() => this.pushToMaster(leader_name, leader_id)}/>
           </View>
-          { canBeFriend ? <Button icon='contacts' onPress={this.addFriend} style={{padding: 4}}>Add as friend</Button> : null }
+          { canBeFriend ? <Button icon='contacts' onPress={this.addFriend} style={{padding: 4}}>{lang.basic_add_friend}</Button> : null }
           <Paragraph style={{padding: 16}}>{description}</Paragraph>
           <SectionTitle style={{alignSelf: 'flex-start'}} title={`${lang.clan_member_title} - ${members_count}`}/>
           <FlatList data={memberInfo} renderItem={({item}) => {
