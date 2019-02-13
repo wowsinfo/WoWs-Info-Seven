@@ -13,7 +13,7 @@ class About extends Component {
   render() {
     const { container, scroll, logo } = styles;
     return (
-      <WoWsInfo style={container} noLeft>
+      <WoWsInfo style={container}>
         <ScrollView contentContainerStyle={scroll}>
           <Image style={logo} source={require('../../img/Logo.png')}/>
           <Title>{lang.app_name}</Title>

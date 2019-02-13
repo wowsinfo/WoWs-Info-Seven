@@ -4,7 +4,7 @@
  * 
  */
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
 import { SafeView, WikiIcon, WoWsInfo } from '../../component';
@@ -12,7 +12,7 @@ import { SAVED } from '../../value/data';
 import { Actions } from 'react-native-router-flux';
 import { SafeAction } from '../../core';
 
-class Achievement extends Component {
+class Achievement extends PureComponent {
   constructor(props) {
     super(props);
 

@@ -5,7 +5,7 @@
  * There are two modes for this page
  */
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { View, SafeAreaView, Image, StyleSheet } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
 import { Surface, Text } from 'react-native-paper';
@@ -14,7 +14,7 @@ import { SAVED, LOCAL } from '../../value/data';
 import { Actions } from 'react-native-router-flux';
 import { SafeAction } from '../../core';
 
-class Consumable extends Component {
+class Consumable extends PureComponent {
   constructor(props) {
     super(props);
     const { upgrade } = props;

@@ -24,6 +24,31 @@ class Menu extends PureComponent {
   constructor(props) {
     super(props);
 
+    let first = getFirstLaunch();
+    this.state = {
+      loading: first,
+      main: DATA[LOCAL.userInfo]
+    };
+
+    if (first) {
+      // Update data here if it is not first launch
+      let dn = new Downloader(getCurrServer());
+      dn.updateAll(true).then(success => {
+        // Make sure it finishes downloading
+        if (success) {
+          this.setState({loading: false});
+          setFirstLaunch(false);
+        } else {
+          // Reset to a special page
+          // For now, just an error message
+          Alert.alert(lang.error_title, lang.error_download_issue);
+        }
+      });
+    }
+  }
+
+  componentWillUpdate() {
+    
     // Data for the list
     this.wiki = [{t: lang.wiki_achievement, i: require('../../img/Achievement.png'), p: () => SafeAction('Achievement')},
     {t: lang.wiki_warships, i: require('../../img/Warship.png'), p: () => SafeAction('Warship')},
@@ -56,30 +81,6 @@ class Menu extends PureComponent {
     {t: lang.youtuber_iChaseGaming, d: 'https://www.youtube.com/user/ichasegaming'},
     {t: lang.youtuber_NoZoupForYou, d: 'https://www.youtube.com/user/ZoupGaming'}];
 
-    let first = getFirstLaunch();
-    this.state = {
-      loading: first,
-      main: DATA[LOCAL.userInfo]
-    };
-
-    if (first) {
-      // Update data here if it is not first launch
-      let dn = new Downloader(getCurrServer());
-      dn.updateAll(true).then(success => {
-        // Make sure it finishes downloading
-        if (success) {
-          this.setState({loading: false});
-          setFirstLaunch(false);
-        } else {
-          // Reset to a special page
-          // For now, just an error message
-          Alert.alert(lang.error_title, lang.error_download_issue);
-        }
-      });
-    }
-  }
-
-  componentWillUpdate() {
     const { main } = this.state;
     let curr = DATA[LOCAL.userInfo];
     if (curr.account_id !== main.account_id) {

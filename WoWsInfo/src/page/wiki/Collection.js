@@ -4,7 +4,7 @@
  * 
  */
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
 import { WoWsInfo, WikiIcon } from '../../component';
@@ -13,7 +13,7 @@ import { SafeAction } from '../../core';
 import { Title, Paragraph } from 'react-native-paper';
 import { TintColour, TintTextColour } from '../../value/colour';
 
-class Collection extends Component {
+class Collection extends PureComponent {
   constructor(props) {
     super(props);
 
