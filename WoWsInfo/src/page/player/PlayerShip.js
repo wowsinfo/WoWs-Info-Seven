@@ -26,7 +26,7 @@ class PlayerShip extends Component {
   }
 
   render() {
-    const { centerText, horizontal, icon, centerView } = styles;
+    const { centerText, horizontal, centerView } = styles;
     const { data, rating } = this.state;
     return (
       <WoWsInfo title={`${lang.wiki_warship_footer} - ${data.length}`}>
@@ -41,15 +41,15 @@ class PlayerShip extends Component {
               <WarshipCell item={ship} scale={1.8}/>
               <View style={horizontal}>
                 <View style={centerView}>
-                  <Image style={icon} source={require('../../img/Battle.png')}/>
+                  <IconButton size={24} icon={require('../../img/Battle.png')}/>
                   <Text style={centerText}>{nothing ? '0' : battles}</Text>
                 </View>
                 <View style={centerView}>
-                  <Image style={icon} source={require('../../img/WinRate.png')}/>
+                  <IconButton size={24} icon={require('../../img/WinRate.png')}/>
                   <Text style={centerText}>{nothing ? '0.00%' : `${roundTo(wins / battles * 100, 2)}%`}</Text>
                 </View>
                 <View style={centerView}>
-                  <Image style={icon} source={require('../../img/Damage.png')}/>
+                  <IconButton size={24} icon={require('../../img/Damage.png')}/>
                   <Text style={centerText}>{nothing ? '0' : roundTo(damage_dealt / battles)}</Text>
                 </View>
               </View>
@@ -68,18 +68,16 @@ class PlayerShip extends Component {
 const styles = StyleSheet.create({
   horizontal: {
     flexDirection: 'row',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    marginTop: -8
   },
   centerText: {
-    alignSelf: 'center'
+    alignSelf: 'center',
+    marginTop: -8
   },
   centerView: {
     alignItems: 'center',
-    justifyContent: 'center'
-  },
-  icon: {
-    height: 24,
-    width: 24
+    justifyContent: 'center',
   }
 });
 

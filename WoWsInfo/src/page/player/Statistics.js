@@ -271,11 +271,11 @@ class Statistics extends PureComponent {
           <View style={container}>
             <Title style={playerName}>{name}</Title>
             <Text style={level}>{extraInfo}</Text>
-            <RatingButton rating={rating}/>
             <View style={horizontal}>
               <InfoLabel title={lang.basic_register_date} info={register}/>
               <InfoLabel title={lang.basic_last_battle} info={lastBattle}/>
             </View>
+            <RatingButton rating={rating}/>
             <View style={{padding: 4}}>
               { canBeFriend ? <Button icon='contacts' onPress={this.addFriend}>Add as friend</Button> : null }
               { canBeMaster ? <Button icon='favorite' onPress={this.setMainAccount}>Set as Main</Button> : null }
