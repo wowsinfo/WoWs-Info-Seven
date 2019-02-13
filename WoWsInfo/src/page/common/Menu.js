@@ -23,23 +23,6 @@ class Menu extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      search: '',
-      server: '',
-      result: {player: [], clan: []},
-      online: '???',
-      showFriend: false
-    };
-
-    let domain = getCurrDomain();
-    // com -> na
-    this.prefix = getCurrPrefix();
-
-    SafeFetch.get(WoWsAPI.PlayerOnline, domain).then(num => {
-      let online = Guard(num, 'data.wows.0.players_online', '???');
-      this.setState({online: online});
-    });
-
     // Data for the list
     this.wiki = [{t: lang.wiki_achievement, i: require('../../img/Achievement.png'), p: () => SafeAction('Achievement')},
     {t: lang.wiki_warships, i: require('../../img/Warship.png'), p: () => SafeAction('Warship')},
@@ -49,6 +32,7 @@ class Menu extends Component {
     {t: lang.wiki_maps, i: 'map', p: () => SafeAction('Map')},
     {t: lang.wiki_collections, i: require('../../img/Collection.png'), p: () => SafeAction('Collection')}];
 
+    const domain = getCurrDomain();
     // TODO: change links base on player server
     this.websites = [{t: lang.website_official_site, d: `https://worldofwarships.${domain}/`},
     {t: lang.website_premium, d: `https://${this.prefix}.wargaming.net/shop/wows/`},
@@ -73,17 +57,14 @@ class Menu extends Component {
   }
 
   render() {
-    const { searchBar, scroll } = styles;
-    const { search, online } = this.state;
-
     // For main account
     let main = DATA[LOCAL.userInfo];
     let enabled = main.account_id !== '';
-    let title = main.nickname;
+    let title = `- ${main.nickname} -`;
     if (title === '') title = '- ??? -';
 
     return (
-      <WoWsInfo title={title} onPress={enabled ? SafeAction('Statistics', {info: main}) : null} home>
+      <WoWsInfo title={title} onPress={enabled ? () => SafeAction('Statistics', {info: main}) : null} home upper={false}>
         <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='always'>
           <AppName />
           { this.renderContent() }
@@ -94,101 +75,33 @@ class Menu extends Component {
 
   renderContent() {
     const { icon } = styles;
-    const { search, result, showFriend } = this.state;
-    if (showFriend && search.length === 0) {
-      return <Friend />;
-    } else if (search.length > 0) {
-      let playerLen  = result.player.length;
-      let clanLen  = result.clan.length;
-      return (
-        <View>
-          <SectionTitle title={`${lang.menu_search_clan} - ${clanLen}`}/>
-          { clanLen > 0 ?
-            <FlatList data={result.clan} renderItem={({item}) => {
-              return <PlayerCell key={item.clan_id} item={item} clan/>
-            }} keyExtractor={c => c.tag} keyboardShouldPersistTaps='always'/> : null }
-          <SectionTitle title={`${lang.menu_search_player} - ${playerLen}`}/>
-          { playerLen > 0 ?
-            <FlatList data={result.player} renderItem={({item}) => {
-              return <PlayerCell key={item.account_id} item={item} player/>
-            }} keyExtractor={p => p.nickname} keyboardShouldPersistTaps='always'/> : null }
-        </View>
-      );
-    } else {
-      return (
-        <View>
-          <SectionTitle title={lang.wiki_section_title}/>
-          { this.wiki.map(item => { return (
-            <List.Item title={item.t} style={{padding: 0, paddingLeft: 8}} onPress={() => item.p()} key={item.t}
-            left={() => <List.Icon style={[icon, ThemeBackColour()]} color={TintColour()[300]} icon={item.i}/>}
-            right={() => isAndroid ? null : <List.Icon color={Colors.grey500} icon='keyboard-arrow-right'/>} />
-          )})}
-          <SectionTitle title={lang.extra_section_title}/>
-            <List.Item title={lang.extra_support_wowsinfo} description={APP.Patreon}
-              onPress={() => Linking.openURL(APP.Patreon)}/>
-            <List.Section title={lang.website_title} >
-              { this.websites.map(item => { return (
-                <List.Item title={item.t} description={item.d} key={item.t}
-                  onPress={() => Linking.openURL(item.d)}/>
-              )})}
-          </List.Section>
-          <List.Section title={lang.youtuber_title}>
-            { this.youtubers.map(item => { return (
+    return (
+      <View>
+        <SectionTitle title={lang.wiki_section_title}/>
+        { this.wiki.map(item => { return (
+          <List.Item title={item.t} style={{padding: 0, paddingLeft: 8}} onPress={() => item.p()} key={item.t}
+          left={() => <List.Icon style={[icon, ThemeBackColour()]} color={TintColour()[300]} icon={item.i}/>}
+          right={() => isAndroid ? null : <List.Icon color={Colors.grey500} icon='keyboard-arrow-right'/>} />
+        )})}
+        <SectionTitle title={lang.extra_section_title}/>
+          <List.Item title={lang.extra_support_wowsinfo} description={APP.Patreon}
+            onPress={() => Linking.openURL(APP.Patreon)}/>
+          <List.Section title={lang.website_title} >
+            { this.websites.map(item => { return (
               <List.Item title={item.t} description={item.d} key={item.t}
                 onPress={() => Linking.openURL(item.d)}/>
             )})}
-          </List.Section>
-          <List.Section title={lang.tool_title}>
-          </List.Section>
-        </View>
-      );
-    }
-  }
-
-  /**
-   * Search player and clan
-   */
-  searchAll = (text) => {
-    // Reset search
-    if (text.length < 2) this.setState({result: {player: [], clan: []}});
-    this.setState({search: text});
-
-    // Clear timeout everytime for efficient data request
-    clearTimeout(this.delayedRequest);
-    this.delayedRequest = setTimeout(() => {
-      let domain = getCurrDomain();
-      // Save all clans and players
-      let all = {player: [], clan: []};
-      let length = text.length;
-      
-      if (length > 1 && length < 6) {
-        // For clan, only 2 - 5
-        SafeFetch.get(WoWsAPI.ClanSearch, domain, text).then(result => {
-          let data = Guard(result, 'data', null);
-          if (data == null) {
-            // Error here
-          } else {
-            data.forEach(v => v.server = getCurrServer());
-            all.clan = data;
-            this.setState({result: all});
-          }
-        });
-      }
-
-      if (length > 2) {
-        // For player, 3+
-        SafeFetch.get(WoWsAPI.PlayerSearch, domain, text).then(result => {
-          let data = Guard(result, 'data', null);
-          if (data == null) {
-            // Error here
-          } else {
-            data.forEach(v => v.server = getCurrServer());
-            all.player = data;
-            this.setState({result: all});
-          }
-        });
-      }
-    }, 500);
+        </List.Section>
+        <List.Section title={lang.youtuber_title}>
+          { this.youtubers.map(item => { return (
+            <List.Item title={item.t} description={item.d} key={item.t}
+              onPress={() => Linking.openURL(item.d)}/>
+          )})}
+        </List.Section>
+        <List.Section title={lang.tool_title}>
+        </List.Section>
+      </View>
+    );
   }
 }
 
@@ -197,13 +110,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   icon: {
-    borderRadius: 100
-  },
-  searchBar: {
-    position: 'absolute',
-    zIndex: 2,
-    top: 16,
-    left: 16, right: 16,
     borderRadius: 100
   }
 });

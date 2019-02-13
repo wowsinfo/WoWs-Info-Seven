@@ -48,14 +48,14 @@ class WoWsInfo extends Component {
 
   renderFooter() {
     const { text, footer } = styles;
-    const { title, onPress, about } = this.props;
+    const { title, onPress, about, upper } = this.props;
 
     let shouldDisable = (!onPress && !about)
 
     return (
       <Surface style={[footer, ThemeBackColour()]}>
         { SWAPBUTTON ? this.renderRight() : this.renderLeft() }
-        <Button disabled={shouldDisable} onPress={this.pressEvent} style={text}>
+        <Button disabled={shouldDisable} onPress={this.pressEvent} style={text} uppercase={upper}>
           { title ? title : this.lucky }
         </Button>
         { SWAPBUTTON ? this.renderLeft() : this.renderRight() }
