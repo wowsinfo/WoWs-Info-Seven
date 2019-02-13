@@ -5,7 +5,7 @@
  * It also has the ability to search players and clans
  */
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { FlatList, Alert, ScrollView, StyleSheet, Linking, View } from 'react-native';
 import { isAndroid, isIphoneX } from 'react-native-device-detection';
 import { List, Colors, Text, Searchbar, Title } from 'react-native-paper';
@@ -19,7 +19,7 @@ import { WoWsAPI } from '../../value/api';
 import { Friend } from '../home/Friend';
 import { Loading } from './Loading';
 
-class Menu extends Component {
+class Menu extends PureComponent {
 
   constructor(props) {
     super(props);
@@ -58,7 +58,8 @@ class Menu extends Component {
 
     let first = getFirstLaunch();
     this.state = {
-      loading: first
+      loading: first,
+      main: DATA[LOCAL.userInfo]
     };
 
     if (first) {
@@ -79,20 +80,22 @@ class Menu extends Component {
   }
 
   componentWillUpdate() {
-    console.log('New');
+    const { main } = this.state;
+    let curr = DATA[LOCAL.userInfo];
+    if (curr.account_id !== main.account_id) {
+      this.setState({main: curr});
+    }
   }
 
   render() {
+    const { loading, main } = this.state;
+    if (loading) return <Loading />
+    
     // For main account
-    let main = DATA[LOCAL.userInfo];
-    console.log(main);
     let enabled = main.account_id !== '';
     let title = `- ${main.nickname} -`;
     if (title === '-  -') title = '- ??? -';
-
-    const { loading } = this.state;
-    if (loading) return <Loading />
-
+    
     return (
       <WoWsInfo title={title} onPress={enabled ? () => SafeAction('Statistics', {info: main}) : null} home upper={false}>
         <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='always'>

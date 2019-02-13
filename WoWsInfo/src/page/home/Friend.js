@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { View, StyleSheet, FlatList, ScrollView } from 'react-native';
 import { List, Text, Colors, IconButton } from 'react-native-paper';
 import { LOCAL } from '../../value/data';
-import { SafeAction, SafeStorage } from '../../core';
+import { SafeAction, SafeStorage, SafeValue } from '../../core';
 import { SectionTitle } from '../../component';
 import { lang } from '../../value/lang';
 
@@ -26,12 +26,12 @@ class Friend extends PureComponent {
     console.log(this.state);
     return (
       <View>
-        <SectionTitle title={`${lang.friend_clan_title} - ${clan.length}`}/>
+        <SectionTitle title={`${lang.friend_clan_title} - ${SafeValue(clan.length, 0)}`}/>
         <FlatList data={clan} renderItem={({item}) => 
           <List.Item title={item.tag} onPress={() => this.pushToClan(item)} description={item.clan_id}
             right={() => <IconButton color={Colors.grey500} icon='close' onPress={() => this.removeClan(item)}/> }/>}
         keyExtractor={i => String(i.clan_id)} keyboardShouldPersistTaps='always'/>
-        <SectionTitle title={`${lang.friend_player_title} - ${player.length}`}/>
+        <SectionTitle title={`${lang.friend_player_title} - ${SafeValue(player.length, 0)}`}/>
         <FlatList data={player} renderItem={({item}) => 
           <List.Item title={item.nickname} onPress={() => this.pushToPlayer(item)} description={item.account_id}
             right={() => <IconButton color={Colors.grey500} size={16} icon='close' onPress={() => this.removeFriend(item)}/> }/>}
@@ -44,12 +44,14 @@ class Friend extends PureComponent {
     let str = LOCAL.friendList;
     delete DATA[str].player[info.account_id];
     SafeStorage.set(str, DATA[str]);
+    this.setState({player: DATA[str].player});
   }
 
   removeClan(info) {
     let str = LOCAL.friendList;
     delete DATA[str].clan[info.clan_id];
     SafeStorage.set(str, DATA[str]);
+    this.setState({clan: DATA[str].clan});
   }
 
   pushToPlayer(info) {
