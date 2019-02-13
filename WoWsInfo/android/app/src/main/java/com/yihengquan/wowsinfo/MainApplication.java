@@ -1,4 +1,4 @@
-package com.wowsinfo;
+package com.yihengquan.wowsinfo;
 
 import android.app.Application;
 
