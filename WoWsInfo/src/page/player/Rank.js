@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { WoWsInfo, SectionTitle, Touchable, DetailedInfo, Info6Icon, Space } from '../../component';
 import { lang } from '../../value/lang';
@@ -7,7 +7,7 @@ import { Headline, Title } from 'react-native-paper';
 import { SafeAction, SafeFetch } from '../../core';
 import { WoWsAPI } from '../../value/api';
 
-class Rank extends Component {
+class Rank extends PureComponent {
   constructor(props) {
     super(props);
     let list = [];
