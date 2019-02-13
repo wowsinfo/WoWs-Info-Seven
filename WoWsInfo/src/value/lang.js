@@ -165,6 +165,8 @@ export const lang = new LocalizedStrings({
     basic_register_date: 'Register Date',
     basic_last_battle: 'Last Battle',
     basic_more_stat: '- Show More -',
+    basic_add_friend: 'Add to player list',
+    basic_set_main: 'Set as Main Account',
     // Detailed
     detailed_win: 'Wins',
     detailed_draw: 'Draws',
