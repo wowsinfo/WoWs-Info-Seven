@@ -6,17 +6,18 @@
  */
 
 import React, { Component } from 'react';
-import { FlatList, ScrollView, StyleSheet, Linking, View } from 'react-native';
+import { FlatList, Alert, ScrollView, StyleSheet, Linking, View } from 'react-native';
 import { isAndroid, isIphoneX } from 'react-native-device-detection';
 import { List, Colors, Text, Searchbar, Title } from 'react-native-paper';
 import { FooterButton, WoWsInfo, SectionTitle, PlayerCell, AppName } from '../../component';
 import { lang } from '../../value/lang';
 import { Actions } from 'react-native-router-flux';
-import { SafeAction, SafeFetch, Guard } from '../../core';
+import { SafeAction, SafeFetch, Guard, Downloader } from '../../core';
 import { ThemeBackColour, TintColour } from '../../value/colour';
-import { getCurrDomain, getCurrServer, getCurrPrefix, APP, LOCAL } from '../../value/data';
+import { getCurrDomain, getCurrServer, getCurrPrefix, APP, LOCAL, getFirstLaunch, setFirstLaunch } from '../../value/data';
 import { WoWsAPI } from '../../value/api';
 import { Friend } from '../home/Friend';
+import { Loading } from './Loading';
 
 class Menu extends Component {
 
@@ -54,6 +55,27 @@ class Menu extends Component {
     {t: lang.youtuber_yuro, d: 'https://www.youtube.com/user/spzjess'},
     {t: lang.youtuber_iChaseGaming, d: 'https://www.youtube.com/user/ichasegaming'},
     {t: lang.youtuber_NoZoupForYou, d: 'https://www.youtube.com/user/ZoupGaming'}];
+
+    let first = getFirstLaunch();
+    this.state = {
+      loading: first
+    };
+
+    if (first) {
+      // Update data here if it is not first launch
+      let dn = new Downloader(getCurrServer());
+      dn.updateAll(true).then(success => {
+        // Make sure it finishes downloading
+        if (success) {
+          this.setState({loading: false});
+          setFirstLaunch(false);
+        } else {
+          // Reset to a special page
+          // For now, just an error message
+          Alert.alert(lang.error_title, lang.error_download_issue);
+        }
+      });
+    }
   }
 
   render() {
@@ -63,6 +85,9 @@ class Menu extends Component {
     let enabled = main.account_id !== '';
     let title = `- ${main.nickname} -`;
     if (title === '-  -') title = '- ??? -';
+
+    const { loading } = this.state;
+    if (loading) return <Loading />
 
     return (
       <WoWsInfo title={title} onPress={enabled ? () => SafeAction('Statistics', {info: main}) : null} home upper={false}>

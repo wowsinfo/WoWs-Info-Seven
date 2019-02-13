@@ -46,16 +46,16 @@ class Setup extends Component {
     const { loading, server, selected_server, langList, langData, selected_lang } = this.state;
     return (
       <WoWsInfo title={lang.setup_done_button} 
-        noRight noLeft onPress={() => this.finishSetup()}>
+        noRight noLeft onPress={loading ? null : () => this.finishSetup()}>
         <ScrollView>
           <SectionTitle title={lang.settings_api_settings}/>
-          <List.Section title={`Game server: ${lang.server_name[selected_server]}`}>
+          <List.Section title={`${lang.setting_game_server}: ${lang.server_name[selected_server]}`}>
             <FlatList data={server} renderItem={({index}) => {
               return <Button onPress={() => this.updateServer(index)}>{lang.server_name[index]}</Button>
             }} keyExtractor={i => i} numColumns={2}/>
           </List.Section>
           { loading ? null : 
-          <List.Section title={`API language: ${langList[selected_lang]}`}>
+          <List.Section title={`${lang.setting_api_language}: ${langList[selected_lang]}`}>
             <FlatList data={langData} renderItem={({item}) => {
               return <Button onPress={() => this.updateApiLanguage(item)}>{langList[item]}</Button>
             }} keyExtractor={i => i} numColumns={2}/>
@@ -77,7 +77,7 @@ class Setup extends Component {
 
   // Get selection and download data from api
   finishSetup() {
-    Actions.reset('Home');
+    Actions.reset('Menu');
   }
 }
 

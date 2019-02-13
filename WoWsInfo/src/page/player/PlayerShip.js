@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 import { WoWsInfo, WarshipCell, Touchable, RatingButton, FooterPlus } from '../../component';
 import { getOverallRating, roundTo, getComment, getColourList, getColour, SafeAction } from '../../core';
@@ -7,7 +7,7 @@ import { SAVED } from '../../value/data';
 import { Text, IconButton } from 'react-native-paper';
 import { lang } from '../../value/lang';
 
-class PlayerShip extends Component {
+class PlayerShip extends PureComponent {
   constructor(props) {
     super(props);
 
