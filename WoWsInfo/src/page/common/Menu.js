@@ -62,7 +62,7 @@ class Menu extends Component {
     console.log(main);
     let enabled = main.account_id !== '';
     let title = `- ${main.nickname} -`;
-    if (title === '') title = '- ??? -';
+    if (title === '-  -') title = '- ??? -';
 
     return (
       <WoWsInfo title={title} onPress={enabled ? () => SafeAction('Statistics', {info: main}) : null} home upper={false}>
