@@ -78,6 +78,10 @@ class Menu extends Component {
     }
   }
 
+  componentWillUpdate() {
+    console.log('New');
+  }
+
   render() {
     // For main account
     let main = DATA[LOCAL.userInfo];
