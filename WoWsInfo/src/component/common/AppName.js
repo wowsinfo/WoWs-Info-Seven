@@ -10,18 +10,20 @@ import { Title, Caption } from 'react-native-paper';
 import { lang } from '../../value/lang';
 import { LOCAL, APP } from '../../value/data';
 import { TintColour } from '../../value/colour';
+import { Touchable } from './Touchable';
+import { SafeAction } from '../../core';
 
 class AppName extends Component {
   render() {
     const { container, game, appName, horizontal } = styles;
     return (
-      <View style={horizontal}>
+      <Touchable style={horizontal} onPress={() => SafeAction('About')}>
         <View style={container}>
           <Title style={appName}>{lang.app_name}</Title>
           <Caption style={game}>{this.getVersion()}</Caption>
         </View>
         <Image source={require('../../img/Logo.png')} style={{height: 64, width: 64, tintColor: TintColour()[500]}}/>
-      </View>
+      </Touchable>
     )
   };
 
