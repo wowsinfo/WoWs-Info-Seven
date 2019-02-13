@@ -57,7 +57,7 @@ class PlayerShip extends PureComponent {
             </Touchable>
           )
         }}/>
-        <FooterPlus style={{padding: 8}}>
+        <FooterPlus>
           <RatingButton rating={rating}/>
         </FooterPlus>
       </WoWsInfo>
