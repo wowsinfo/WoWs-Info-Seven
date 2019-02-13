@@ -311,9 +311,9 @@ export const lang = new LocalizedStrings({
     /// Menu section
     /// Settings section
     server_name: ['俄服', '欧服', '美服', '亚服'],
-    setting_game_server: 'Game Server',
-    setting_api_language: 'API Language',
-    setting_app_language: 'WoWs Info Language',
+    setting_game_server: '游戏服务器',
+    setting_api_language: 'API语言',
+    setting_app_language: 'WoWs Info语言',
     settings_api_settings: 'API接口设置',
     settings_app_settings: '软件设置',
     settings_app_dark_mode: '夜间模式',
@@ -549,9 +549,9 @@ export const lang = new LocalizedStrings({
     /// Menu section
     /// Settings section
     server_name: ['俄服', '歐服', '美服', '亞服'],
-    setting_game_server: 'Game Server',
-    setting_api_language: 'API Language',
-    setting_app_language: 'WoWs Info Language',
+    setting_game_server: '遊戲服務器',
+    setting_api_language: 'API語言',
+    setting_app_language: 'WoWs Info語言',
     settings_api_settings: 'API接口設置',
     settings_app_settings: '軟件設置',
     settings_app_dark_mode: '夜間模式',
