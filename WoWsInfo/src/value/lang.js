@@ -73,6 +73,9 @@ export const lang = new LocalizedStrings({
     /// Menu section
     /// Settings section
     server_name: ['Russia', 'Europe', 'North Ameria', 'Asia'],
+    setting_game_server: 'Game Server',
+    setting_api_language: 'API Language',
+    setting_app_language: 'WoWs Info Language',
     settings_api_settings: 'API Settings',
     settings_app_settings: 'App Settings',
     settings_app_dark_mode: 'Dark mode',
@@ -306,6 +309,9 @@ export const lang = new LocalizedStrings({
     /// Menu section
     /// Settings section
     server_name: ['俄服', '欧服', '美服', '亚服'],
+    setting_game_server: 'Game Server',
+    setting_api_language: 'API Language',
+    setting_app_language: 'WoWs Info Language',
     settings_api_settings: 'API接口设置',
     settings_app_settings: '软件设置',
     settings_app_dark_mode: '夜间模式',
@@ -539,6 +545,9 @@ export const lang = new LocalizedStrings({
     /// Menu section
     /// Settings section
     server_name: ['俄服', '歐服', '美服', '亞服'],
+    setting_game_server: 'Game Server',
+    setting_api_language: 'API Language',
+    setting_app_language: 'WoWs Info Language',
     settings_api_settings: 'API接口設置',
     settings_app_settings: '軟件設置',
     settings_app_dark_mode: '夜間模式',
@@ -772,6 +781,9 @@ export const lang = new LocalizedStrings({
     /// Menu section
     /// Settings section
     server_name: ['Russia', 'Europe', 'North Ameria', 'Asia'],
+    setting_game_server: 'Game Server',
+    setting_api_language: 'API Language',
+    setting_app_language: 'WoWs Info Language',
     settings_api_settings: 'API Settings',
     settings_app_settings: 'App Settings',
     settings_app_dark_mode: 'Dark mode',
@@ -1005,6 +1017,9 @@ export const lang = new LocalizedStrings({
     /// Menu section
     /// Settings section
     server_name: ['Russia', 'Europe', 'North Ameria', 'Asia'],
+    setting_game_server: 'Game Server',
+    setting_api_language: 'API Language',
+    setting_app_language: 'WoWs Info Language',
     settings_api_settings: 'Pengaturan API',
     settings_app_settings: 'Pengaturan Aplikasi',
     settings_app_dark_mode: 'Dark mode',
