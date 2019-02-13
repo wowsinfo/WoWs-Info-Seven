@@ -16,8 +16,8 @@ import { SafeAction, SafeFetch, Guard, Downloader } from '../../core';
 import { ThemeBackColour, TintColour } from '../../value/colour';
 import { getCurrDomain, getCurrServer, getCurrPrefix, APP, LOCAL, getFirstLaunch, setFirstLaunch } from '../../value/data';
 import { WoWsAPI } from '../../value/api';
-import { Friend } from '../home/Friend';
-import { Loading } from './Loading';
+import { Friend } from './Friend';
+import { Loading } from '../common/Loading';
 
 class Menu extends PureComponent {
 
