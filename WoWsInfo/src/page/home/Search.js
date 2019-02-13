@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList, ScrollView } from 'react-native';
 import { Searchbar } from 'react-native-paper';
 import { WoWsInfo, SectionTitle, PlayerCell } from '../../component';
-import { getCurrDomain, getCurrPrefix } from '../../value/data';
+import { getCurrDomain, getCurrPrefix, getCurrServer } from '../../value/data';
 import { Guard, SafeFetch } from '../../core';
 import { WoWsAPI } from '../../value/api';
 import { Friend } from './Friend';

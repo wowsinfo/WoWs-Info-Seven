@@ -32,7 +32,7 @@ class Detailed extends Component {
           <WarshipCell item={ship} scale={3}/>
           <RatingButton rating={rating}/>
           { this.renderNumberDiff(pvp, overall) }
-          <DetailedInfo data={data} more/>
+          <DetailedInfo data={data}/>
         </ScrollView>
       </WoWsInfo>
     )
