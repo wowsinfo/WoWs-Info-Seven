@@ -30,8 +30,8 @@ class Detailed extends Component {
       <WoWsInfo onPress={ship == null ? null : () => SafeAction('WarshipDetail', {item: ship})} title={lang.wiki_section_title}>
         <ScrollView contentContainerStyle={{paddingBottom: 8}} showsVerticalScrollIndicator={false}>
           <WarshipCell item={ship} scale={3}/>
-          <RatingButton rating={rating}/>
           { this.renderNumberDiff(pvp, overall) }
+          <RatingButton rating={rating}/>
           <DetailedInfo data={data}/>
         </ScrollView>
       </WoWsInfo>
