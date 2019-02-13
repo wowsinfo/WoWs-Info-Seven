@@ -27,15 +27,16 @@ class FooterButton extends Component {
   pressEvent() {
     const { icon } = this.props;
     if (icon === 'settings') SafeAction('Settings');
-    else if (icon === 'arrow-back') Actions.pop();
-    else if (icon === 'home') Actions.popTo('Menu', {refresh: {}});
-    else SafeAction('Search');
+    else if (icon === 'arrow-back') {
+      Actions.pop();
+      if (Actions.state.routes.length === 2) {
+        setTimeout(() => Actions.refresh(), 1000);
+      }
+    } else if (icon === 'home') {
+      Actions.popTo('Menu');
+      setTimeout(() => Actions.refresh(), 1000);
+    } else SafeAction('Search');
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-  },
-})
 
 export { FooterButton };
