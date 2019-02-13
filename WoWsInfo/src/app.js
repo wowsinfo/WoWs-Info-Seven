@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Alert, BackAndroid } from 'react-native';
+import { StyleSheet, Alert, BackHandler } from 'react-native';
 import { Router, Stack, Scene, Actions } from 'react-native-router-flux';
 import { withTheme, DarkTheme, DefaultTheme } from 'react-native-paper';
 import { Home, Menu, Settings, About, Setup, Consumable, CommanderSkill, 
@@ -126,7 +126,7 @@ class App extends Component {
 
   handleBack = () => {
     if (Actions.state.routes.length == 1) {
-      BackAndroid.exitApp();
+      BackHandler.exitApp();
     }
   }
 }
