@@ -540,7 +540,7 @@ class WarshipDetail extends PureComponent {
     return (
       <View style={{margin: 8}}>
         <Headline style={this.sectionTitle}>{lang.warship_upgrades}</Headline>
-        <ScrollView>
+        <ScrollView horizontal>
           { count.map(num => {
             let all = clone.filter(u => u.slot == num + 1);
             return (
@@ -631,7 +631,6 @@ const styles = StyleSheet.create({
     margin: -16
   },
   upgradeView: {
-    flexDirection: 'row', 
     alignItems: 'center'
   },
   horizontal: {
