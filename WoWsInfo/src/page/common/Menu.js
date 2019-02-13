@@ -30,6 +30,8 @@ class Menu extends PureComponent {
       main: DATA[LOCAL.userInfo]
     };
 
+    this.getData();
+
     if (first) {
       // Update data here if it is not first launch
       let dn = new Downloader(getCurrServer());
@@ -48,7 +50,16 @@ class Menu extends PureComponent {
   }
 
   componentWillUpdate() {
-    
+    this.getData();
+    const { main } = this.state;
+    let curr = DATA[LOCAL.userInfo];
+    if (curr.account_id !== main.account_id) {
+      this.setState({main: curr});
+    }
+  }
+
+  getData() {
+        
     // Data for the list
     this.wiki = [{t: lang.wiki_achievement, i: require('../../img/Achievement.png'), p: () => SafeAction('Achievement')},
     {t: lang.wiki_warships, i: require('../../img/Warship.png'), p: () => SafeAction('Warship')},
@@ -80,12 +91,6 @@ class Menu extends PureComponent {
     {t: lang.youtuber_yuro, d: 'https://www.youtube.com/user/spzjess'},
     {t: lang.youtuber_iChaseGaming, d: 'https://www.youtube.com/user/ichasegaming'},
     {t: lang.youtuber_NoZoupForYou, d: 'https://www.youtube.com/user/ZoupGaming'}];
-
-    const { main } = this.state;
-    let curr = DATA[LOCAL.userInfo];
-    if (curr.account_id !== main.account_id) {
-      this.setState({main: curr});
-    }
   }
 
   render() {

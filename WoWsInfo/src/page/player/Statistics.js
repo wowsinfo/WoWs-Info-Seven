@@ -195,33 +195,28 @@ class Statistics extends PureComponent {
 
   render() {
     const { error, container, footer } = styles;
-    const { home } = this.props;
     const { name, id, valid,
             achievement, rank, rankShip, basic, ship, graph } = this.state;
 
     console.log(this.state);
-    let RootView = home ? Surface : WoWsInfo;
     if (id == null || id === "") {
       // Show an error page or if it is from home, ask user to add an account first
       return (
-        <RootView style={error}>
-          {
-            home ? <Text>Add yourself first</Text>
-            : <Text>BUG</Text>
-          }
-        </RootView>
+        <WoWsInfo style={error}>
+          <Text>BUG</Text>
+        </WoWsInfo>
       );
     } else if (!valid) {
       // Not valid (API or Internet error)
       return (
-        <RootView style={container}>
+        <WoWsInfo style={container}>
           <Text>{'Data is not valid\nPlease try again later'}</Text>
-        </RootView>
+        </WoWsInfo>
       );
     } else {
       // Display player data
       return (
-        <RootView style={container} title={`- ${id} -`} 
+        <WoWsInfo style={container} title={`- ${id} -`} 
           onPress={() => Linking.openURL(`https://${this.prefix}.wows-numbers.com/player/${id},${name}/`)}>
           <ScrollView>
             { this.renderBasic(basic) }
@@ -232,7 +227,7 @@ class Statistics extends PureComponent {
             { this.renderShip(ship) }
             { this.renderRank(rank, rankShip) }
           </FooterPlus>
-        </RootView>
+        </WoWsInfo>
       );
     }
 
@@ -288,8 +283,8 @@ class Statistics extends PureComponent {
             </View>
             <RatingButton rating={rating}/>
             <View style={{padding: 4}}>
-              { canBeFriend ? <Button icon='contacts' onPress={this.addFriend}>Add as friend</Button> : null }
-              { canBeMaster ? <Button icon='favorite' onPress={this.setMainAccount}>Set as Main</Button> : null }
+              { canBeFriend ? <Button icon='contacts' onPress={this.addFriend}>{lang.basic_add_friend}</Button> : null }
+              { canBeMaster ? <Button icon='favorite' onPress={this.setMainAccount}>{lang.basic_set_main}</Button> : null }
             </View>
             { this.renderStatistics(basic.statistics) }
           </View>
