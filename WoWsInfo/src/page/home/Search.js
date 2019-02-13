@@ -40,11 +40,10 @@ class Search extends Component {
     const { search, online } = this.state;
     const { searchBar, scroll } = styles;
     return (
-      <WoWsInfo>
+      <WoWsInfo title={lang.menu_footer} onPress={() => this.refs['search'].focus()}>
         <Searchbar ref='search' value={search} style={searchBar} placeholder={`${this.prefix.toUpperCase()} - ${online} ${lang.search_player_online}`}
-          onChangeText={this.searchAll} autoCorrect={false} autoCapitalize='none' 
-          onFocus={() => this.setState({showFriend: true})} onBlur={() => this.setState({showFriend: false})}/>
-        <ScrollView style={scroll}>
+          onChangeText={this.searchAll} autoCorrect={false} autoCapitalize='none' />
+        <ScrollView style={scroll} keyboardShouldPersistTaps='always' keyboardDismissMode='on-drag'>
           { this.renderContent() }
         </ScrollView>
       </WoWsInfo>

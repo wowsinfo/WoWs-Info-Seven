@@ -25,17 +25,17 @@ class Friend extends PureComponent {
     const { player, clan } = this.state;
     console.log(this.state);
     return (
-      <View showsVerticalScrollIndicator={false} >
+      <View>
         <SectionTitle title={`${lang.friend_clan_title} - ${clan.length}`}/>
         <FlatList data={clan} renderItem={({item}) => 
-          <List.Item title={item.tag} onPress={() => this.pushToClan(item)}
+          <List.Item title={item.tag} onPress={() => this.pushToClan(item)} description={item.clan_id}
             right={() => <IconButton color={Colors.grey500} icon='close' onPress={() => this.removeClan(item)}/> }/>}
-          keyExtractor={i => String(i.clan_id)} keyboardShouldPersistTaps='always'/>
+        keyExtractor={i => String(i.clan_id)} keyboardShouldPersistTaps='always'/>
         <SectionTitle title={`${lang.friend_player_title} - ${player.length}`}/>
         <FlatList data={player} renderItem={({item}) => 
-          <List.Item title={item.nickname} onPress={() => this.pushToPlayer(item)}
+          <List.Item title={item.nickname} onPress={() => this.pushToPlayer(item)} description={item.account_id}
             right={() => <IconButton color={Colors.grey500} size={16} icon='close' onPress={() => this.removeFriend(item)}/> }/>}
-          keyExtractor={i => String(i.account_id)} keyboardShouldPersistTapshenryq='always'/>
+        keyExtractor={i => String(i.account_id)} keyboardShouldPersistTapshenryq='always'/>
       </View>
     )
   };
