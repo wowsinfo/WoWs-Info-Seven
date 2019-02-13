@@ -59,6 +59,7 @@ class Menu extends Component {
   render() {
     // For main account
     let main = DATA[LOCAL.userInfo];
+    console.log(main);
     let enabled = main.account_id !== '';
     let title = `- ${main.nickname} -`;
     if (title === '') title = '- ??? -';
