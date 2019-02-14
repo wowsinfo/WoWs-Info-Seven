@@ -329,15 +329,14 @@ class Statistics extends PureComponent {
 
   renderAchievement(achievement) {
     let loading = true;
-    if (achievement) loading = false;
-
+    if (achievement && achievement.length > 0) loading = false;
     return <TabButton icon={require('../../img/AchievementTab.png')} color={this.theme}
       disabled={loading} onPress={() => SafeAction('PlayerAchievement', {data: achievement})}/>
   }
 
   renderShip(ship) {
     let loading = true;
-    if (ship) loading = false;
+    if (ship && ship.length > 0) loading = false;
 
     return <TabButton icon={require('../../img/Ship.png')} color={this.theme}
       disabled={loading} onPress={() => SafeAction('PlayerShip', {data: ship})}/>  

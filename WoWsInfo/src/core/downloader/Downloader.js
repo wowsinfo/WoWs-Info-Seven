@@ -132,7 +132,7 @@ class Downloader {
 
       for (let id in data) {
         let curr = data[id];
-        if (curr.name.startsWith('[')) {
+        if (curr.name.includes('[')) {
           delete data[id];
         } else {
           curr.icon = curr.images.small;
