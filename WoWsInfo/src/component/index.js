@@ -27,3 +27,4 @@ export * from './player/DetailedInfo';
 export * from './player/Info6Icon';
 export * from './player/PlayerRecord';
 export * from './player/RatingButton';
+export * from './player/SimpleRating';
