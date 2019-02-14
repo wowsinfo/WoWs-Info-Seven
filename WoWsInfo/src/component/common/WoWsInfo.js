@@ -101,8 +101,8 @@ const styles = StyleSheet.create({
   },
   child: {
     flex: 1,
-    paddingLeft: isTablet ? '20%' : null,
-    paddingRight: isTablet ? '20%' : null,
+    paddingLeft: isTablet ? '16%' : null,
+    paddingRight: isTablet ? '16%' : null,
   },
   safeView: {
     flex: 1
