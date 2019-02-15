@@ -70,6 +70,7 @@ class Menu extends PureComponent {
     {t: lang.wiki_collections, i: require('../../img/Collection.png'), p: () => SafeAction('Collection')}];
 
     const domain = getCurrDomain();
+    this.prefix = getCurrPrefix();
     // TODO: change links base on player server
     this.websites = [{t: lang.website_official_site, d: `https://worldofwarships.${domain}/`},
     {t: lang.website_premium, d: `https://${this.prefix}.wargaming.net/shop/wows/`},
