@@ -32,6 +32,7 @@ class App extends Component {
       global.DATA = data;
       SWAPBUTTON = DATA[LOCAL.swapButton];
       DARKMODE = DATA[LOCAL.darkMode];
+      NOIMAGEMODE = DATA[LOCAL.noImageMode];
 
       let userLang = DATA[LOCAL.userLanguage];
       if (userLang !== '') lang.setLanguage(userLang);

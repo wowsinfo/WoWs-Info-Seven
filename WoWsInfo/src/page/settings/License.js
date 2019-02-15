@@ -20,8 +20,8 @@ const libraries = [{name: 'react', link: 'https://github.com/facebook/react'},
     {name: 'react-native-super-grid', link: 'https://github.com/saleel/react-native-super-grid'},
     {name: 'react-native-svg', link: 'https://github.com/react-native-community/react-native-svg'},
     {name: 'react-native-vector-icons', link: 'https://github.com/oblador/react-native-vector-icons'},
-    {name: 'victory-native', link: 'https://github.com/FormidableLabs/victory-native'},
     {name: 'string-format', link: 'https://github.com/davidchambers/string-format'},
+    {name: 'victory-native', link: 'https://github.com/FormidableLabs/victory-native'},
     {name: lang.app_name, link: 'https://github.com/HenryQuan/WoWs-Info'}];
 
 class License extends Component {

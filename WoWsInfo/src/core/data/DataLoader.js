@@ -24,7 +24,7 @@ class DataLoader {
    * @param {*} data 
    */
   static async loadLocal() {
-    const { apiLanguage, appVersion, gameVersion, firstLaunch, friendList, userData, 
+    const { apiLanguage, appVersion, gameVersion, firstLaunch, friendList, userData, noImageMode, 
       userInfo, userServer, lastUpdate, theme, darkMode, date, swapButton, userLanguage } = LOCAL;
 
     let data = {};
@@ -71,6 +71,7 @@ class DataLoader {
     this.loadEntry(data, lastUpdate, new Date().toDateString());
     this.loadEntry(data, theme, BLUE);
     this.loadEntry(data, darkMode, false);
+    this.loadEntry(data, noImageMode, false);
     this.loadEntry(data, date, new Date().toDateString());
     return data;
   }
