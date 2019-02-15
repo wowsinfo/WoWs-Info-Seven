@@ -28,7 +28,7 @@ class PlayerShip extends PureComponent {
     const { data, rating } = this.state;
     return (
       <WoWsInfo title={`${lang.wiki_warship_footer} - ${data.length}`}>
-        <FlatGrid itemDimension={180} items={data} renderItem={({item}) => this.renderShip(item)} 
+        <FlatGrid itemDimension={150} items={data} renderItem={({item}) => this.renderShip(item)} 
           showsVerticalScrollIndicator={false} fixed/>
         <FooterPlus>
           <RatingButton rating={rating}/>

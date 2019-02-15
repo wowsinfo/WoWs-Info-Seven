@@ -15,7 +15,9 @@
     "react-native-paper": "^2.11.0",
     "react-native-router-flux": "^4.0.6",
     "react-native-super-grid": "^3.0.1",
-    "react-native-vector-icons": "^6.2.0"
+    "react-native-svg": "^9.2.4",
+    "react-native-vector-icons": "^6.2.0",
+    "victory-native": "^31.0.0"
   },
   "devDependencies": {
     "babel-jest": "24.0.0",
