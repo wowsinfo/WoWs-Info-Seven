@@ -8,4 +8,5 @@ global.DARKMODE = false;
 
 // App Settings
 global.SWAPBUTTON = false;
+global.NOIMAGEMODE = false;
 global.CLEANMODE = false;

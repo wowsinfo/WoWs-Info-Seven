@@ -33,6 +33,7 @@ export const LOCAL = {
   theme: '@WoWs_Info:themeColour',
   darkMode: '@WoWs_Info:darkMode',
   swapButton: '@WoWs_Info:swapButton',
+  noImageMode: '@WoWs_Info:noImageMode',
   firstLaunch: '@WoWs_Info:firstLaunch',
   // Language
   apiLanguage: '@WoWs_Info:apiLanguage',
@@ -153,4 +154,18 @@ export const setSwapButton = (swap) => {
   let str = LOCAL.swapButton;
   DATA[str] = swap;
   SafeStorage.set(str, swap);
+}
+
+/**
+ * No Image Mode
+ */
+export const getImageMode = () => {
+  return DATA[LOCAL.noImageMode];
+}
+
+export const setImageMode = (image) => {
+  NOIMAGEMODE = image;
+  let str = LOCAL.noImageMode;
+  DATA[str] = image;
+  SafeStorage.set(str, image);
 }

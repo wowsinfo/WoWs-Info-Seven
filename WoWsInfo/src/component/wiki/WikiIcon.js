@@ -9,6 +9,7 @@ import { View, Image, StyleSheet } from 'react-native';
 import { LOCAL } from '../../value/data';
 import { Touchable } from '../common/Touchable';
 import { LoadingIndicator } from '../common/LoadingIndicator';
+import { random } from '../../core';
 
 class WikiIcon extends Component {  
   render() {
@@ -18,12 +19,16 @@ class WikiIcon extends Component {
     if (scale) width *= scale;
     let theme = DATA[LOCAL.theme];
 
+    let imageSrc = {uri: item.image ? item.image : item.icon};
+    let defaultSrc = require('../../img/Unknown.png');
+    if (NOIMAGEMODE) imageSrc = null; defaultSrc = null;
+
     if (warship) {
       return (
         <View style={container}>
           { item ? item.new ? <View style={[newLabel, {backgroundColor: theme[500]}]}/> : null : null }
-          <Image source={{uri: item.image ? item.image : item.icon}} resizeMode='contain'
-            defaultSource={require('../../img/Unknown.png')}
+          <Image source={imageSrc} resizeMode='contain'
+            defaultSource={defaultSrc}
             style={{width: width, height: width / 1.7}} />
         </View>
       );
@@ -31,8 +36,8 @@ class WikiIcon extends Component {
       return (
         <Touchable style={[container, selected ? {borderColor: theme[500]} : null]} {...props}>
           { item.new ? <View style={[newLabel, {backgroundColor: DATA[LOCAL.theme][500]}]}/> : null }
-          <Image source={{uri: item.image ? item.image : item.icon}} resizeMode='contain'
-            defaultSource={require('../../img/Unknown.png')}
+          <Image source={imageSrc} resizeMode='contain'
+            defaultSource={defaultSrc}
             style={{height: width, width: width}} />
         </Touchable>
       )
