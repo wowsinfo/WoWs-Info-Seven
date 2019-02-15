@@ -329,7 +329,7 @@ class Statistics extends PureComponent {
 
   renderAchievement(achievement) {
     let loading = true;
-    if (achievement && achievement.length > 0) loading = false;
+    if (achievement && Object.keys(achievement).length > 0) loading = false;
     return <TabButton icon={require('../../img/AchievementTab.png')} color={this.theme}
       disabled={loading} onPress={() => SafeAction('PlayerAchievement', {data: achievement})}/>
   }
