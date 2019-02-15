@@ -75,7 +75,7 @@ class Graph extends PureComponent {
     const themeColour = TintColour()[500];
     return (
       <WoWsInfo>
-        <ScrollView>
+        <ScrollView pointerEvents='none'>
           <Title>{`Average Tier - ${avgTier}`}</Title>
           <VictoryChart domainPadding={10}>
             <VictoryAxis/>
