@@ -64,3 +64,4 @@ android/app/release/
 *.lock
 *lock.json
 WoWsInfo/ios/assets/src/img/
+android/app/bin/
