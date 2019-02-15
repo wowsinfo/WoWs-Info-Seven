@@ -10,11 +10,12 @@ import { Text, Title, Subheading, Headline, Button, Surface, Paragraph, List } f
 import { WoWsInfo, WikiIcon, WarshipCell, LoadingModal, PriceLabel, LoadingIndicator, WarshipStat, InfoLabel, DividerPlus, FooterPlus } from '../../component';
 import { SAVED, SERVER, LOCAL, langStr, getCurrDomain } from '../../value/data';
 import { lang } from '../../value/lang';
-import { SafeFetch, Guard, getColourWithRange, SafeAction, copy } from '../../core';
+import { SafeFetch, Guard, getColourWithRange, SafeAction, copy, roundTo } from '../../core';
 import { WoWsAPI } from '../../value/api';
 import { Actions } from 'react-native-router-flux';
 import { GREY } from 'react-native-material-color';
 import { ThemeBackColour, TintColour, TintTextColour } from '../../value/colour';
+import { VictoryChart, VictoryAxis, VictoryBar } from 'victory-native';
 
 class WarshipDetail extends PureComponent {
   constructor(props) {
@@ -40,11 +41,18 @@ class WarshipDetail extends PureComponent {
       similar: similar,
       loading: true,
       data: {},
+      compare: false
     };
 
     this.delayedRequest = null;
     this.sectionTitle = [styles.centerText, TintTextColour()];
     this.efficientDataRequest(curr.ship_id);
+  }
+
+  componentDidMount() {
+    // Render charts here
+    const { similar } = this.state;
+    this.buildCharts(similar);
   }
 
   componentDidUpdate() {
@@ -585,6 +593,7 @@ class WarshipDetail extends PureComponent {
    */
   renderSimilar(similar) {
     if (Object.keys(similar).length > 0) {
+      const { compare } = this.state;
       return (
         <FooterPlus>
           <FlatList keyExtractor={item => item.name} horizontal data={similar} renderItem={({item}) => {
@@ -593,10 +602,46 @@ class WarshipDetail extends PureComponent {
                 () => this.efficientDataRequest(item.ship_id));
               }}/>
             }} showsHorizontalScrollIndicator={false}/>
-          <Button onPress={() => SafeAction('SimilarGraph', {info: similar})}>Compare them</Button>
+          { compare != null ? <Button onPress={() => SafeAction('SimilarGraph', {info: compare})}>Compare them</Button> : null }
         </FooterPlus>
       )
     } else return null;
+  }
+
+  buildCharts(similar) {
+    // Build charts
+    let damageChart = [];
+    let winrateChart = [];
+    let fragChart = [];
+    for (let ship of similar) {
+      let overall = DATA[SAVED.pr][ship.ship_id];
+      if (overall == null) continue;
+
+      const { average_damage_dealt, average_frags, win_rate } = overall;
+      let name = ship.name;
+      damageChart.push({x: name, y: roundTo(average_damage_dealt)});
+      winrateChart.push({x: name, y: roundTo(win_rate, 1)});
+      fragChart.push({x: name, y: roundTo(average_frags, 2)});
+    }
+
+    // Render charts once for all
+    const themeColour = TintColour()[500];
+    let data = [{n: lang.warship_avg_damage, d: damageChart},
+      {n: lang.warship_avg_winrate, d: winrateChart},
+      {n: lang.warship_avg_frag, d: fragChart}];
+    let charts = data.map(c => {
+      return (
+        <View pointerEvents='none' key={c.n}>
+          <Title style={styles.graphTitle}>{c.n}</Title>
+          <VictoryChart height={winrateChart.length * 30} padding={{left: 100, top: 20, bottom: 20, right: 60}}>
+            <VictoryAxis dependentAxis style={{tickLabels: {fill: themeColour}}}/>
+            <VictoryBar style={{data: {fill: themeColour}, labels: {fontSize: 12, fill: themeColour}}}
+              horizontal data={c.d} labels={d => d.y}/>
+          </VictoryChart>
+        </View>
+      )
+    });
+    this.setState({compare: charts});
   }
 
   efficientDataRequest(id) {
@@ -638,6 +683,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flex: 1,
     justifyContent: 'space-around'
+  },
+  graphTitle: {
+    alignSelf: 'center',
+    padding: 8,
+    paddingBottom: 0
   }
 });
 
