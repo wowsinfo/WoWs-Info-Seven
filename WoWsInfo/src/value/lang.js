@@ -70,6 +70,7 @@ export const lang = new LocalizedStrings({
     warship_concealment_detect_by_plane: 'Detection by Plane',
     warship_upgrades: 'Upgrades',
     warship_next_ship: 'Next ship(s)',
+    warship_compare_similar: 'Compare similar ships',
     /// Menu section
     /// Settings section
     server_name: ['Russia', 'Europe', 'North Ameria', 'Asia'],
@@ -308,6 +309,7 @@ export const lang = new LocalizedStrings({
     warship_concealment_detect_by_plane: '被飞机发现距离',
     warship_upgrades: '升级品',
     warship_next_ship: '可升级为',
+    warship_compare_similar: '比较类似的战舰',
     /// Menu section
     /// Settings section
     server_name: ['俄服', '欧服', '美服', '亚服'],
@@ -546,6 +548,7 @@ export const lang = new LocalizedStrings({
     warship_concealment_detect_by_plane: '被飛機發現距離',
     warship_upgrades: '升級品',
     warship_next_ship: '可升級為',
+    warship_compare_similar: '比較類似的戰艦',
     /// Menu section
     /// Settings section
     server_name: ['俄服', '歐服', '美服', '亞服'],
@@ -784,6 +787,7 @@ export const lang = new LocalizedStrings({
     warship_concealment_detect_by_plane: 'Detection by Plane',
     warship_upgrades: 'Upgrades',
     warship_next_ship: 'Next ship(s)',
+    warship_compare_similar: 'Compare similar ships',
     /// Menu section
     /// Settings section
     server_name: ['Russia', 'Europe', 'North Ameria', 'Asia'],
@@ -1022,6 +1026,7 @@ export const lang = new LocalizedStrings({
     warship_concealment_detect_by_plane: 'Detection by Plane',
     warship_upgrades: 'Upgrades',
     warship_next_ship: 'Next ship(s)',
+    warship_compare_similar: 'Compare similar ships',
     /// Menu section
     /// Settings section
     server_name: ['Russia', 'Europe', 'North Ameria', 'Asia'],

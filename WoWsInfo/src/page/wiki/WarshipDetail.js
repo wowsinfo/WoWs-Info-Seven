@@ -602,7 +602,7 @@ class WarshipDetail extends PureComponent {
                 () => this.efficientDataRequest(item.ship_id));
               }}/>
             }} showsHorizontalScrollIndicator={false}/>
-          { compare != null ? <Button onPress={() => SafeAction('SimilarGraph', {info: compare})}>Compare them</Button> : null }
+          { compare != null ? <Button onPress={() => SafeAction('SimilarGraph', {info: compare})}>{lang.warship_compare_similar}</Button> : null }
         </FooterPlus>
       )
     } else return null;

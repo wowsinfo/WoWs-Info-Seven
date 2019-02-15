@@ -6,7 +6,7 @@ import { Actions } from 'react-native-router-flux';
 import { WoWsInfo, DividerPlus, Touchable, SectionTitle } from '../../component';
 import { APP, LOCAL, SAVED, getCurrServer, getAPILanguage, getAPILangName, SERVER, getAPIList, setCurrServer, setAPILanguage, setSwapButton, getSwapButton, getUserLang, setUserLang } from '../../value/data';
 import { TintColour, UpdateTintColour, UpdateDarkMode } from '../../value/colour';
-import { SafeStorage } from '../../core';
+import { SafeStorage, SafeAction } from '../../core';
 import { BLUE, RED, GREEN, PINK, PURPLE, DEEPPRUPLE, INDIGO, LIGHTBLUE, CYAN, TEAL, LIGHTGREEN, LIME, YELLOW, AMBER, ORANGE, DEEPORANGE, BROWN, GREY, BLUEGREY } from 'react-native-material-color';
 import { lang } from '../../value/lang';
 
@@ -137,7 +137,8 @@ class Settings extends Component {
         <List.Item title={lang.settings_open_source_github}
           description={APP.Github} onPress={() => Linking.openURL(APP.Github)}/>
         <List.Item title={lang.settings_open_source_licence}
-          description={lang.settings_open_source_licence_subtitle}/>
+          description={lang.settings_open_source_licence_subtitle}
+          onPress={() => SafeAction('License')} />
       </Surface>
     )
   }
