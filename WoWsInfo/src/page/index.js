@@ -19,6 +19,7 @@ export * from './wiki/Warship';
 export * from './wiki/WarshipDetail';
 export * from './wiki/WarshipFilter';
 export * from './wiki/WarshipModule';
+export * from './wiki/SimilarGraph';
 
 export * from './player/Statistics';
 export * from './player/PlayerAchievement';

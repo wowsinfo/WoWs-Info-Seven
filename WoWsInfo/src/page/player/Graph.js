@@ -71,20 +71,21 @@ class Graph extends PureComponent {
   render() {
     const { container } = styles;
     const { tier, avgTier, nation, type } = this.state;
-    const animation = {duration: 2000, onLoad: {duration: 1000}};
     const themeColour = TintColour()[500];
     return (
       <WoWsInfo>
-        <ScrollView pointerEvents='none'>
-          <Title>{`Average Tier - ${avgTier}`}</Title>
-          <VictoryChart domainPadding={10}>
-            <VictoryAxis/>
-            <VictoryBar theme={VictoryTheme.material} animate={animation}
-              style={{data: {fill: themeColour}, labels: {fontSize: 12, fill: themeColour}}} data={tier} labels={d => d.y}/>
-          </VictoryChart>
-          <VictoryPie style={{labels: {fontSize: 12, fill: themeColour}}} animate={animation} data={nation} padAngle={3}
-           colorScale={["tomato", "orange", "gold", "cyan", "navy" ]}/>
-          <VictoryPie theme={VictoryTheme.material} animate={animation} data={type} />
+        <ScrollView>
+          <View pointerEvents='none'>
+            <Title>{`Average Tier - ${avgTier}`}</Title>
+            <VictoryChart domainPadding={10}>
+              <VictoryAxis/>
+              <VictoryBar theme={VictoryTheme.material}
+                style={{data: {fill: themeColour}, labels: {fontSize: 12, fill: themeColour}}} data={tier} labels={d => d.y}/>
+            </VictoryChart>
+            <VictoryPie style={{labels: {fontSize: 12, fill: themeColour}}} data={nation} padAngle={3}
+            colorScale={["tomato", "orange", "gold", "cyan", "navy" ]}/>
+            <VictoryPie theme={VictoryTheme.material} data={type} />
+          </View>
         </ScrollView>
       </WoWsInfo>
     )
