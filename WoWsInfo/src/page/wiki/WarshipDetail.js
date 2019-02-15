@@ -591,8 +591,9 @@ class WarshipDetail extends PureComponent {
             return <WarshipCell item={item} scale={1.4} onPress={() => {
               this.setState({curr: item, loading: true}, 
                 () => this.efficientDataRequest(item.ship_id));
-            }}/>
-          }} showsHorizontalScrollIndicator={false}/>
+              }}/>
+            }} showsHorizontalScrollIndicator={false}/>
+          <Button onPress={() => SafeAction('SimilarGraph', {info: similar})}>Compare them</Button>
         </FooterPlus>
       )
     } else return null;
