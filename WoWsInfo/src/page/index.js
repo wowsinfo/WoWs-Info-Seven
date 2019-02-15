@@ -29,5 +29,6 @@ export * from './player/Graph';
 export * from './clan/ClanInfo';
 
 export * from './settings/About';
+export * from './settings/License';
 import Settings from './settings/Settings';
 export { Settings };
