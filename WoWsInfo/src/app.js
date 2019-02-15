@@ -5,7 +5,7 @@ import { withTheme, DarkTheme, DefaultTheme } from 'react-native-paper';
 import { Home, Menu, Settings, About, Setup, Consumable, CommanderSkill, 
   BasicDetail, Achievement, Map as GameMap, Collection, Warship, WarshipDetail, 
   WarshipFilter, WarshipModule, Loading, Statistics, ClanInfo, PlayerAchievement, 
-  Rating, Search } from './page';
+  Rating, Search, Graph } from './page';
 import { LOCAL, getFirstLaunch, getCurrServer } from './value/data';
 import { DataLoader, Downloader, SafeStorage } from './core';
 import { GREY, BLUE } from 'react-native-material-color';
@@ -100,6 +100,7 @@ class App extends Component {
           
           <Scene key='Rating' component={Rating} />
           <Scene key='Statistics' component={Statistics} />
+          <Scene key='Graph' component={Graph} />
           <Scene key='PlayerAchievement' component={PlayerAchievement} />
           <Scene key='PlayerShip' component={PlayerShip} />
           <Scene key='PlayerShipDetail' component={Detailed} />

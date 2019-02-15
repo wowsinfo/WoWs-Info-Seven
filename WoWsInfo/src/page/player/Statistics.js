@@ -188,7 +188,7 @@ class Statistics extends PureComponent {
       if (ship != null) {
         // Calculate personal rating for each ship and get an overall rating for this player
         let rating = getOverallRating(ship);
-        this.setState({ship: ship, rating: rating});
+        this.setState({ship: ship, rating: rating, graph: ship});
       }
     });
   }
@@ -351,9 +351,12 @@ class Statistics extends PureComponent {
   }
 
   renderGraph(graph) {
+    let loading = true;
+    if (graph && graph.length > 0) loading = false;
     const { hidden } = this.state;
+
     return <TabButton icon={require('../../img/Graph.png')} color={this.theme}
-      disabled={true} />
+      disabled={loading || hidden} onPress={() => SafeAction('Graph', {data: graph})}/>
   }
 }
 
