@@ -60,7 +60,8 @@ class PlayerShip extends PureComponent {
     const { data, sortStr } = this.state;
     console.log(sortStr, v);
     if (v === sortStr) {
-      this.setState({data: data.sort((a, b) => Guard(a, v, 0) - Guard(b, v, 0)), sortStr: ''});
+      // Simply reverse it
+      this.setState({data: data.reverse(), sortStr: ''});
     } else {
       this.setState({data: data.sort((a, b) => Guard(b, v, 0) - Guard(a, v, 0)), sortStr: v});
     }
