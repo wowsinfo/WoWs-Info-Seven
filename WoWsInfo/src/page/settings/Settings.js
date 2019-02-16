@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import { View, ScrollView, FlatList, StyleSheet, Linking, Share } from 'react-native';
+import { View, ScrollView, FlatList, StyleSheet, Linking, Share, Alert } from 'react-native';
 import { isAndroid, isIos } from 'react-native-device-detection';
 import { Surface, List, Button, Checkbox, Colors, withTheme, Portal, Dialog, Text, DarkTheme, DefaultTheme } from 'react-native-paper';
 import { Actions } from 'react-native-router-flux';
 import { WoWsInfo, DividerPlus, Touchable, SectionTitle } from '../../component';
 import { APP, LOCAL, SAVED, getCurrServer, getAPILanguage, getAPILangName, SERVER, getAPIList, setCurrServer, setAPILanguage, setSwapButton, getSwapButton, getUserLang, setUserLang, setImageMode } from '../../value/data';
 import { TintColour, UpdateTintColour, UpdateDarkMode } from '../../value/colour';
-import { SafeStorage, SafeAction } from '../../core';
+import { SafeStorage, SafeAction, SafeFetch, Guard } from '../../core';
 import { BLUE, RED, GREEN, PINK, PURPLE, DEEPPRUPLE, INDIGO, LIGHTBLUE, CYAN, TEAL, LIGHTGREEN, LIME, YELLOW, AMBER, ORANGE, DEEPORANGE, BROWN, GREY, BLUEGREY } from 'react-native-material-color';
 import { lang } from '../../value/lang';
+import { WoWsAPI, WikiAPI } from '../../value/api';
 
 class Settings extends Component {
   constructor(props) {
@@ -129,6 +130,8 @@ class Settings extends Component {
           onPress={() => Linking.openURL(this.store)} description={this.store}/>
         <List.Item title={lang.settings_app_share} onPress={this.shareApp}
           description={lang.settings_app_share_subtitle}/>
+        { isAndroid ? <List.Item title={lang.settings_app_check_for_update} onPress={this.checkAppUpdate}
+          description={`v${APP.Version}`}/> : null }
       </Surface>
     )
   }
@@ -144,6 +147,37 @@ class Settings extends Component {
           onPress={() => SafeAction('License')} />
       </Surface>
     )
+  }
+
+  checkAppUpdate = () => {
+    if (CANCHECKFORUPDATE) {
+      CANCHECKFORUPDATE = false;
+      SafeFetch.normal(WikiAPI.Github_AppVersion).then(v => {
+        let version = Guard(v, 'version', null);
+        if (version != null) {
+          if (version > APP.Version) {
+            this.displayUpdate(true, version);
+          } else {
+            this.displayUpdate(false);
+          }
+        };
+      })
+    } else {
+      this.displayUpdate(false);
+    }
+  }
+
+  displayUpdate(result, version = null) {
+    if (result) {
+      const format = require('string-format');
+      Alert.alert(lang.app_name, format(lang.settings_app_has_update, version),
+      [
+        {text: 'Google Play', onPress: () => Linking.openURL(APP.GooglePlay)},
+        {text: 'Github', onPress: () => Linking.openURL(APP.LatestRelease)}
+      ]);
+    } else {
+      Alert.alert(lang.app_name, lang.settings_app_no_update);
+    }
   }
 
   shareApp = () => {

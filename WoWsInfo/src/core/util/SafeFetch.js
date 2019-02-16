@@ -1,4 +1,4 @@
-import { Guard } from './SafeGuard';
+import { Guard, SafeValue } from './SafeGuard';
 
 class SafeFetch {
   /**
@@ -32,7 +32,7 @@ class SafeFetch {
       // To make sure request is valid
       if (res.status === 200) return res.json();
     }).then(json => {
-      return Guard(json, '', {});
+      return SafeValue(json, {});
     });
   }
 }
