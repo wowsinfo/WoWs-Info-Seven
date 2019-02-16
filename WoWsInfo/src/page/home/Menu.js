@@ -147,8 +147,8 @@ class Menu extends PureComponent {
               onPress={() => Linking.openURL(item.d)}/>
           )})}
         </List.Section>
-        <List.Section title={lang.tool_title}>
-        </List.Section>
+        {/* <List.Section title={lang.tool_title}>
+        </List.Section> */}
       </View>
     );
   }
