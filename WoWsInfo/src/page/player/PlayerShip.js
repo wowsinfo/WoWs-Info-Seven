@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 import { WoWsInfo, WarshipCell, Touchable, RatingButton, FooterPlus, SimpleRating } from '../../component';
-import { getOverallRating, roundTo, getComment, getColourList, getColour, SafeAction } from '../../core';
+import { getOverallRating, roundTo, getComment, getColourList, getColour, SafeAction, filterShip } from '../../core';
 import { FlatGrid } from 'react-native-super-grid';
 import { SAVED } from '../../value/data';
 import { lang } from '../../value/lang';
@@ -18,18 +18,27 @@ class PlayerShip extends PureComponent {
     }
     console.log(ships);
 
+    this.original = ships.sort((a, b) => b.ap - a.ap);
     this.state = {
-      data: ships.sort((a, b) => b.ap - a.ap),
-      rating: rating
+      data: this.original,
+      rating: rating,
+      filter: {}
     };
   }
 
-  componentWillUpdate() {
-    console.log(this.props.filter);
+  componentDidUpdate() {
+    const { filter } = this.props;
+    if (filter) {
+      // Prevent repetitive update
+      if (filter === this.state.filter) return;
+      this.setState({filter: filter});
+      this.updateShip(filter);
+    }
   }
 
   render() {
-    const { data, rating, filter } = this.state;
+    const { data, rating } = this.state;
+    console.log(data);
     return (
       <WoWsInfo title={`${lang.wiki_warship_footer} - ${data.length}`} onPress={() => SafeAction('WarshipFilter')}>
         <FlatGrid itemDimension={150} items={data} renderItem={({item}) => this.renderShip(item)} 
@@ -49,6 +58,12 @@ class PlayerShip extends PureComponent {
         <SimpleRating info={item}/>
       </Touchable>
     )
+  }
+
+  updateShip(data) {
+    let sorted = filterShip(data);
+    if (sorted == null) this.setState({data: this.original});
+    else this.setState({data: sorted});
   }
 }
 

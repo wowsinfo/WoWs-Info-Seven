@@ -39,7 +39,7 @@ export const getTierList = () => {
   return ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
 }
 
-export const filterShip = (data) => {
+export const filterShip = (data, shipData = null) => {
   const { premium, name, nation, type, tier } = data;
   
   if (premium === false && name == '' && nation === [] && type === [] && tier === []) {
@@ -49,61 +49,76 @@ export const filterShip = (data) => {
   // nation, type and tier need to be normalised
   let fname = name.toLowerCase();
   let fdata = normalise(nation, type, tier);
+
+  console.log(fdata);
+  let warship = DATA[SAVED.warship];
+  let filtered = [];
+  if (shipData != null) {
+    for (let ship of shipData) {
+      let curr = warship[ship.ship_id];
+      if (validShip(curr, fname, fdata, premium)) {
+        filterShip.push(curr);
+      }
+    }
+  } else {
+    for (let ID in warship) {
+      let curr = warship[ID];
+      if (validShip(curr, fname, fdata, premium)) {
+        filtered.push(curr);
+      }
+    }
+  }
+
+  let sorted = filtered;
+  if (shipData == null) {
+    sorted = filtered.sort((a, b) => {
+      // Sort by tier, then by type
+      if (a.tier === b.tier) return a.type.localeCompare(b.type);
+      else return b.tier - a.tier;
+    });
+  }
+
+  return sorted;
+}
+
+const validShip = (curr, fname, fdata, premium) => {
+  let filterTier = false;
+  let filterName = false;
+  let filterNation = false;
+  let filterType = false;
+  let filterPremium = false;
+
   let ftier = fdata.tier;
   let fnation = fdata.nation;
   let ftype = fdata.type;
 
-  console.log(fdata);
-
-  let warship = DATA[SAVED.warship];
-  let filtered = [];
-  for (let ID in warship) {
-    let curr = warship[ID];
-
-    let filterTier = false;
-    let filterName = false;
-    let filterNation = false;
-    let filterType = false;
-    let filterPremium = false;
-
-    // It includes this name or name is empty
-    if (curr.name.toLowerCase().includes(fname) || fname.trim() === "") {
-      filterName = true;
-    }
-
-    // ANote that if premium is not selected, all ships are valid
-    if (curr.premium === premium || premium === false) {
-      filterPremium = true;
-    }
-
-    // SAme tier or ftier is 0 (no value)
-    if (ftier[curr.tier] || isEmpty(ftier)) {
-      filterTier = true;
-    }
-
-    // Match or no value
-    if (fnation[curr.nation] || isEmpty(fnation)) {
-      filterNation = true;
-    }
-
-    // Match or no value
-    if (ftype[curr.type] || isEmpty(ftype)) {
-      filterType = true;
-    }
-
-    // Add this ship if all condition matches
-    if (filterName && filterNation && filterPremium && filterTier && filterType) {
-      filtered.push(curr);
-    }
+  // It includes this name or name is empty
+  if (curr.name.toLowerCase().includes(fname) || fname.trim() === "") {
+    filterName = true;
   }
 
-  let sorted = filtered.sort((a, b) => {
-    // Sort by tier, then by type
-    if (a.tier === b.tier) return a.type.localeCompare(b.type);
-    else return b.tier - a.tier;
-  });
+  // ANote that if premium is not selected, all ships are valid
+  if (curr.premium === premium || premium === false) {
+    filterPremium = true;
+  }
 
-  return sorted;
+  // SAme tier or ftier is 0 (no value)
+  if (ftier[curr.tier] || isEmpty(ftier)) {
+    filterTier = true;
+  }
+
+  // Match or no value
+  if (fnation[curr.nation] || isEmpty(fnation)) {
+    filterNation = true;
+  }
+
+  // Match or no value
+  if (ftype[curr.type] || isEmpty(ftype)) {
+    filterType = true;
+  }
+
+  if (filterName && filterNation && filterPremium && filterTier && filterType) return true;
+  return false;
 }
 
 const isEmpty = (obj) => {
