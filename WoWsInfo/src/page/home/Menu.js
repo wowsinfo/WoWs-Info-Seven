@@ -71,6 +71,11 @@ class Menu extends PureComponent {
 
     const domain = getCurrDomain();
     this.prefix = getCurrPrefix();
+
+    this.support = [{t: 'Patreon', d: APP.Patreon},
+    {t: 'PayPal', d: APP.PayPal},
+    {t: 'WeChat', d: APP.Wechat}];
+
     // TODO: change links base on player server
     this.websites = [{t: lang.website_official_site, d: `https://worldofwarships.${domain}/`},
     {t: lang.website_premium, d: `https://${this.prefix}.wargaming.net/shop/wows/`},
@@ -124,13 +129,17 @@ class Menu extends PureComponent {
           right={() => isAndroid ? null : <List.Icon color={Colors.grey500} icon='keyboard-arrow-right'/>} />
         )})}
         <SectionTitle title={lang.extra_section_title}/>
-          <List.Item title={lang.extra_support_wowsinfo} description={APP.Patreon}
-            onPress={() => Linking.openURL(APP.Patreon)}/>
-          <List.Section title={lang.website_title} >
-            { this.websites.map(item => { return (
-              <List.Item title={item.t} description={item.d} key={item.t}
-                onPress={() => Linking.openURL(item.d)}/>
-            )})}
+        <List.Section title={lang.extra_support_wowsinfo}>
+          { this.support.map(item => { return (
+            <List.Item title={item.t} description={item.d} key={item.t}
+              onPress={() => Linking.openURL(item.d)}/>
+          )})}
+        </List.Section>
+        <List.Section title={lang.website_title} >
+          { this.websites.map(item => { return (
+            <List.Item title={item.t} description={item.d} key={item.t}
+              onPress={() => Linking.openURL(item.d)}/>
+          )})}
         </List.Section>
         <List.Section title={lang.youtuber_title}>
           { this.youtubers.map(item => { return (
