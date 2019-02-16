@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
-import { Surface, Text, Title, List, Paragraph } from 'react-native-paper';
-import { FooterButton, WoWsInfo } from '../../component';
-import { APP } from '../../value/data';
+import { Title, List, Paragraph } from 'react-native-paper';
+import { WoWsInfo } from '../../component';
 import { lang } from '../../value/lang';
 
 class About extends Component {

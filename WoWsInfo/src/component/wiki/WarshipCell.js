@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 import { WikiIcon, WarshipLabel } from '../';
 import { Touchable } from '../common/Touchable';
 import { TintColour } from '../../value/colour';

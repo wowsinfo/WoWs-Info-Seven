@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { View, ScrollView, FlatList, StyleSheet, Linking, Share, Alert } from 'react-native';
 import { isAndroid, isIos } from 'react-native-device-detection';
-import { Surface, List, Button, Checkbox, Colors, withTheme, Portal, Dialog, Text, DarkTheme, DefaultTheme } from 'react-native-paper';
+import { Surface, List, Button, Checkbox, withTheme, Portal, Dialog, DarkTheme, DefaultTheme } from 'react-native-paper';
 import { Actions } from 'react-native-router-flux';
-import { WoWsInfo, DividerPlus, Touchable, SectionTitle } from '../../component';
-import { APP, LOCAL, SAVED, getCurrServer, getAPILanguage, getAPILangName, SERVER, getAPIList, setCurrServer, setAPILanguage, setSwapButton, getSwapButton, getUserLang, setUserLang, setImageMode, setFirstLaunch } from '../../value/data';
+import { WoWsInfo, Touchable, SectionTitle } from '../../component';
+import { APP, getCurrServer, getAPILanguage, SERVER, getAPIList, setCurrServer, setAPILanguage, setSwapButton, getSwapButton, getUserLang, setUserLang, setImageMode, setFirstLaunch } from '../../value/data';
 import { TintColour, UpdateTintColour, UpdateDarkMode } from '../../value/colour';
-import { SafeStorage, SafeAction, SafeFetch, Guard } from '../../core';
+import { SafeAction, SafeFetch, Guard } from '../../core';
 import { BLUE, RED, GREEN, PINK, PURPLE, DEEPPRUPLE, INDIGO, LIGHTBLUE, CYAN, TEAL, LIGHTGREEN, LIME, YELLOW, AMBER, ORANGE, DEEPORANGE, BROWN, GREY, BLUEGREY } from 'react-native-material-color';
 import { lang } from '../../value/lang';
-import { WoWsAPI, WikiAPI } from '../../value/api';
+import { WikiAPI } from '../../value/api';
 
 class Settings extends Component {
   constructor(props) {
@@ -263,7 +263,7 @@ class Settings extends Component {
    */
   updateApiLanguage(language) {
     if (language === this.state.APILanguage) return;
-    
+
     setAPILanguage(language);
     this.setState({APILanguage: language});
 

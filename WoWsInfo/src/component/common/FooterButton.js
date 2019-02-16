@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
-import { isAndroid } from 'react-native-device-detection';
+import { SafeAreaView } from 'react-native';
 import { IconButton, Colors } from 'react-native-paper';
 import { Actions } from 'react-native-router-flux';
 import { SafeAction } from '../../core';

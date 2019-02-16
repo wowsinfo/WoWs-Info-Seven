@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { SafeAreaView, Text, StyleSheet } from 'react-native';
-import { Button, Divider } from 'react-native-paper';
-import { isAndroid } from 'react-native-device-detection';
-import { lang } from '../../value/lang';
+import { StyleSheet } from 'react-native';
+import { Divider } from 'react-native-paper';
 
 class DividerPlus extends Component {
   render() {

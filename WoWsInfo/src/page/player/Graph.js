@@ -1,11 +1,10 @@
 import React, { PureComponent } from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
 import { VictoryBar, VictoryTheme, VictoryChart, VictoryPie, VictoryAxis } from "victory-native";
-import { WoWsInfo, SectionTitle } from '../../component';
+import { WoWsInfo } from '../../component';
 import { SAVED } from '../../value/data';
 import { SafeValue, roundTo } from '../../core';
 import { TintColour } from '../../value/colour';
-import { Text, Title } from 'react-native-paper';
 import { VictoryLabel } from 'victory-core/es';
 
 class Graph extends PureComponent {

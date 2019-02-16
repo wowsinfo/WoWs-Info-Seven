@@ -2,15 +2,14 @@ import React, { Component } from 'react';
 import { StyleSheet, Alert, BackHandler } from 'react-native';
 import { Router, Stack, Scene, Actions } from 'react-native-router-flux';
 import { withTheme, DarkTheme, DefaultTheme } from 'react-native-paper';
-import { Home, Menu, Settings, About, Setup, Consumable, CommanderSkill, 
+import { Menu, Settings, About, Setup, Consumable, CommanderSkill, 
   BasicDetail, Achievement, Map as GameMap, Collection, Warship, WarshipDetail, 
   WarshipFilter, WarshipModule, Loading, Statistics, ClanInfo, PlayerAchievement, 
   Rating, Search, Graph, SimilarGraph, License } from './page';
 import { LOCAL, getFirstLaunch, getCurrServer } from './value/data';
-import { DataLoader, Downloader, SafeStorage } from './core';
+import { DataLoader, Downloader } from './core';
 import { GREY, BLUE } from 'react-native-material-color';
-import { LoadingModal } from './component';
-import { TintColour, UpdateTintColour } from './value/colour';
+import { TintColour } from './value/colour';
 import { lang } from './value/lang';
 import { PlayerShip } from './page/player/PlayerShip';
 import { Detailed } from './page/player/Detailed';

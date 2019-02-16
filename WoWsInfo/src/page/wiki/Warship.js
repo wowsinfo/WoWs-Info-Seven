@@ -5,14 +5,12 @@
  */
 
 import React, { PureComponent } from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { WoWsInfo, WarshipCell } from '../../component';
 import { FlatGrid } from 'react-native-super-grid';
-import { SAVED, LOCAL } from '../../value/data';
-import { Portal, TextInput, Button, Divider, List, Modal, Checkbox, Colors, Surface } from 'react-native-paper';
+import { SAVED } from '../../value/data';
 import { lang } from '../../value/lang';
-import { SafeAction, getKeyByValue, getTierList, filterShip } from '../../core';
-import { ThemeColour } from '../../value/colour';
+import { SafeAction, filterShip } from '../../core';
 
 class Warship extends PureComponent {
   constructor(props) {

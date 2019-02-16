@@ -1,6 +1,6 @@
 import { GREY, BLUE } from 'react-native-material-color';
 import { LOCAL } from './data';
-import { SafeStorage, Guard } from '../core';
+import { SafeStorage } from '../core';
 
 export const ThemeBackColour = () => {
   return {backgroundColor: DARKMODE ? GREY[900] : GREY[100]};

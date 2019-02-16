@@ -6,17 +6,14 @@
  */
 
 import React, { PureComponent } from 'react';
-import { FlatList, Alert, ScrollView, StyleSheet, Linking, View } from 'react-native';
-import { isAndroid, isIphoneX } from 'react-native-device-detection';
-import { List, Colors, Text, Searchbar, Title } from 'react-native-paper';
-import { FooterButton, WoWsInfo, SectionTitle, PlayerCell, AppName } from '../../component';
+import { Alert, ScrollView, StyleSheet, Linking, View } from 'react-native';
+import { isAndroid } from 'react-native-device-detection';
+import { List, Colors } from 'react-native-paper';
+import { WoWsInfo, SectionTitle, AppName } from '../../component';
 import { lang } from '../../value/lang';
-import { Actions } from 'react-native-router-flux';
-import { SafeAction, SafeFetch, Guard, Downloader } from '../../core';
+import { SafeAction, Downloader } from '../../core';
 import { ThemeBackColour, TintColour } from '../../value/colour';
 import { getCurrDomain, getCurrServer, getCurrPrefix, APP, LOCAL, getFirstLaunch, setFirstLaunch } from '../../value/data';
-import { WoWsAPI } from '../../value/api';
-import { Friend } from './Friend';
 import { Loading } from '../common/Loading';
 
 class Menu extends PureComponent {

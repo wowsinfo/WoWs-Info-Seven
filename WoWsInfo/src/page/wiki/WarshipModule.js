@@ -6,14 +6,11 @@
 
 import React, { Component } from 'react';
 import { View, FlatList, StyleSheet } from 'react-native';
-import { WoWsInfo, PriceLabel, Space, SectionTitle } from '../../component';
-import { SafeFetch } from '../../core';
-import { WoWsAPI } from '../../value/api';
+import { WoWsInfo, Space, SectionTitle } from '../../component';
 import { Actions } from 'react-native-router-flux';
 import { SAVED, getCurrDomain } from '../../value/data';
-import { SectionGrid } from 'react-native-super-grid';
-import { ThemeBackColour, TintColour, TintTextColour } from '../../value/colour';
-import { List, Caption, Title } from 'react-native-paper';
+import { ThemeBackColour } from '../../value/colour';
+import { List, Caption } from 'react-native-paper';
 import { lang } from '../../value/lang';
 
 class WarshipModule extends Component {

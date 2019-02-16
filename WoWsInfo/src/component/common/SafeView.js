@@ -6,7 +6,7 @@
 
 import React, { Component } from 'react';
 import { SafeAreaView ,StyleSheet } from 'react-native';
-import { TouchableRipple, Surface } from 'react-native-paper';
+import { Surface } from 'react-native-paper';
 
 class SafeView extends Component {
   render() {

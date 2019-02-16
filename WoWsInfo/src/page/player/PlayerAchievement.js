@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { SAVED } from '../../value/data';
 import { WoWsInfo, WikiIcon, Touchable } from '../../component';
 import { FlatGrid } from 'react-native-super-grid';

@@ -6,8 +6,8 @@
 
 import React, { Component } from 'react';
 import { View, FlatList, ScrollView, StyleSheet } from 'react-native';
-import { Surface, Text, TextInput, List, Checkbox, Button, Divider } from 'react-native-paper';
-import { WoWsInfo, Touchable, DividerPlus, FooterPlus, Space } from '../../component';
+import { Text, TextInput, List, Checkbox, Button } from 'react-native-paper';
+import { WoWsInfo, FooterPlus, Space } from '../../component';
 import { lang } from '../../value/lang';
 import { SAVED } from '../../value/data';
 import { getTierList } from '../../core';
