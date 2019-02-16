@@ -13,3 +13,5 @@ global.CLEANMODE = false;
 
 // You can only check one time
 global.CANCHECKFORUPDATE = true;
+// Only update api once as well
+global.CANUPDATEAPI = true;

@@ -56,9 +56,6 @@ class Downloader {
         // Update this value only if all data are saved correctly
         SafeStorage.set(LOCAL.gameVersion, gameVersion);
         SafeStorage.set(LOCAL.appVersion, APP.Version);
-
-        // Show a message to tell user that data has been downloaded
-        Alert.alert(lang.update_version_title, `${lang.update_game_version} ${gameVersion}\n${lang.update_app_version} ${APP.Version}`);
       }
       return true;
     } catch (err) {

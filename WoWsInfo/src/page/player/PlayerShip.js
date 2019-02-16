@@ -48,12 +48,12 @@ class PlayerShip extends PureComponent {
 
     return (
       <WoWsInfo title={`${lang.wiki_warship_footer} - ${data.length}`} onPress={() => SafeAction('WarshipFilter', {applyFunc: this.updateShip})}>
+        <RatingButton rating={rating}/>        
         <FlatGrid itemDimension={150} items={data} renderItem={({item}) => this.renderShip(item)} 
           showsVerticalScrollIndicator={false} fixed/>
         <FooterPlus>
           <FlatList data={sortingMethod} renderItem={({item}) => <Button style={{margin: 8}} mode='contained' onPress={() => this.sortData(item.v)}>{item.n}</Button>} 
             horizontal showsHorizontalScrollIndicator={false} keyExtractor={d => d.n}/>
-          <RatingButton rating={rating}/>
         </FooterPlus>
       </WoWsInfo>
     )

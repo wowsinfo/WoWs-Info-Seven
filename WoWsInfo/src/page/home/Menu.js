@@ -72,9 +72,9 @@ class Menu extends PureComponent {
     const domain = getCurrDomain();
     this.prefix = getCurrPrefix();
 
-    this.support = [{t: 'Patreon', d: APP.Patreon},
-    {t: 'PayPal', d: APP.PayPal},
-    {t: 'WeChat', d: APP.WeChat}];
+    this.support = [{t: lang.support_patreon, d: APP.Patreon},
+    {t: lang.support_paypal, d: APP.PayPal},
+    {t: lang.support_wechat, d: APP.WeChat}];
 
     // TODO: change links base on player server
     this.websites = [{t: lang.website_official_site, d: `https://worldofwarships.${domain}/`},
