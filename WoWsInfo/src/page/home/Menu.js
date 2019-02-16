@@ -35,15 +35,15 @@ class Menu extends PureComponent {
     if (first) {
       // Update data here if it is not first launch
       let dn = new Downloader(getCurrServer());
-      dn.updateAll(true).then(success => {
+      dn.updateAll(true).then(obj => {
         // Make sure it finishes downloading
-        if (success) {
+        if (obj.status) {
           this.setState({loading: false});
           setFirstLaunch(false);
         } else {
           // Reset to a special page
           // For now, just an error message
-          Alert.alert(lang.error_title, lang.error_download_issue);
+          Alert.alert(lang.error_title, lang.error_download_issue + '\n\n' + obj.log);
         }
       });
     }

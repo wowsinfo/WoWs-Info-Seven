@@ -24,31 +24,50 @@ class Downloader {
   async updateAll(force=false) {
     // Get server version
     console.log('Downloader\nChecking for new version');
+    let log = 'Getting gameVersion\n';
     try {
       let gameVersion = await this.getVersion();
+      log += `gameVersion - ${gameVersion}\n`;
       // Do not continue if we cannot get current game version
-      if (gameVersion == null) return false; 
+      if (gameVersion == null) return this.makeObj(false, log); 
       let currVersion = DATA[LOCAL.gameVersion];
       console.log(`Current: ${currVersion}\nAPI: ${gameVersion}`);
       let appVersion = await SafeStorage.get(LOCAL.appVersion, '1.0.4.2');
+      log += `appVersion - ${appVersion}\n`;
       console.log(`Current app version: ${appVersion}\nLatest: ${APP.Version}`);
       // Check for game update, force mode or app update
       if (gameVersion > currVersion || force || appVersion != APP.Version) {
         // Update all data
+        log += 'Updating Data\n';
         console.log('Downloader\nUpdating all data from API');
         // Download language
         DATA[SAVED.language] = await this.getLanguage();
+        log += 'language\n';
         // Download ship type, nation and module names for Wiki
         DATA[SAVED.encyclopedia] = await this.getEncyclopedia();
+        log += 'encyclopedia\n';
   
         // Wiki
         DATA[SAVED.warship] = await this.getWarship();
+        log += 'warship\n';
+
         DATA[SAVED.achievement] = await this.getAchievement();
+        log += 'achievement\n';
+
         DATA[SAVED.collection] = await this.getCollectionAndItem();
+        log += 'collection\n';
+
         DATA[SAVED.commanderSkill] = await this.getCommanderSkill();
+        log += 'commanderSkill\n';
+
         DATA[SAVED.consumable] = await this.getConsumable();
+        log += 'consumable\n';
+
         DATA[SAVED.map] = await this.getMap();
+        log += 'map\n';
+
         DATA[SAVED.pr] = await this.getPR();
+        log += 'pr\n';
   
         console.log(DATA);
 
@@ -57,12 +76,16 @@ class Downloader {
         SafeStorage.set(LOCAL.gameVersion, gameVersion);
         SafeStorage.set(LOCAL.appVersion, APP.Version);
       }
-      return true;
+      return this.makeObj(true, log);
     } catch (err) {
       // Note: it might fail even if data are loaded correctly
-      console.error(err);
-      return false;
+      log += err;
+      return this.makeObj(false, log);
     }
+  }
+
+  makeObj(status, log) {
+    return {status, log};
   }
 
   /**
