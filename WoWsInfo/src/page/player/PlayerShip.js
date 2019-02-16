@@ -49,8 +49,8 @@ class PlayerShip extends PureComponent {
           showsVerticalScrollIndicator={false} fixed/>
         <FooterPlus>
           <RatingButton rating={rating}/>
-          <FlatList data={sortingMethod} renderItem={({item}) => <Button onPress={() => this.sortData(item.v)}>{item.n}</Button>} 
-            style={{padding: 8}} horizontal showsHorizontalScrollIndicator={false}/>
+          <FlatList data={sortingMethod} renderItem={({item}) => <Button style={{margin: 8}} mode='outlined' onPress={() => this.sortData(item.v)}>{item.n}</Button>} 
+            horizontal showsHorizontalScrollIndicator={false}/>
         </FooterPlus>
       </WoWsInfo>
     )
