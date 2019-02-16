@@ -41,8 +41,8 @@ export const getTierList = () => {
 
 export const filterShip = (data, shipData = null) => {
   const { premium, name, nation, type, tier } = data;
-  
-  if (premium === false && name == '' && nation === [] && type === [] && tier === []) {
+  console.log(data);
+  if (premium === false && name == '' && nation.length === 0 && type.length === 0 && tier.length === 0) {
     return null;
   }
 
