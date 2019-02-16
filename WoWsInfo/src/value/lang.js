@@ -199,6 +199,8 @@ export const lang = new LocalizedStrings({
     ship_detail_damage: 'Damage',
     ship_detail_winrate: 'Winrate',
     ship_detail_frag: 'Frags',
+    ship_sort_battle: 'Battle',
+    ship_sort_colour: 'Colour',
     // Rank
     rank_season_title: 'Season',
     // Clan
@@ -442,6 +444,8 @@ export const lang = new LocalizedStrings({
     ship_detail_damage: '伤害',
     ship_detail_winrate: '胜率',
     ship_detail_frag: '击杀',
+    ship_sort_battle: '场数',
+    ship_sort_colour: '颜色',
     // Rank
     rank_season_title: '赛季',
     // Clan
@@ -685,6 +689,8 @@ export const lang = new LocalizedStrings({
     ship_detail_damage: '傷害',
     ship_detail_winrate: '勝率',
     ship_detail_frag: '擊殺',
+    ship_sort_battle: '场数',
+    ship_sort_colour: '颜色',
     // Rank
     rank_season_title: '賽季',
     // Clan
@@ -928,6 +934,8 @@ export const lang = new LocalizedStrings({
     ship_detail_damage: '与ダメージ',
     ship_detail_winrate: '勝率',
     ship_detail_frag: '艦船撃沈',
+    ship_sort_battle: 'Battle',
+    ship_sort_colour: 'Colour',
     // Rank
     rank_season_title: 'シーズン',
     // Clan
@@ -1171,6 +1179,8 @@ export const lang = new LocalizedStrings({
     ship_detail_damage: 'Damage',
     ship_detail_winrate: 'Winrate',
     ship_detail_frag: 'Frags',
+    ship_sort_battle: 'Battle',
+    ship_sort_colour: 'Colour',
     // Rank
     rank_season_title: 'Season',
     // Clan
