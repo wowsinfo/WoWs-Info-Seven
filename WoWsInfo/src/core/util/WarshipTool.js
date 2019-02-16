@@ -56,8 +56,10 @@ export const filterShip = (data, shipData = null) => {
   if (shipData != null) {
     for (let ship of shipData) {
       let curr = warship[ship.ship_id];
+      // Ignore removed ships
+      if (curr == null) continue;
       if (validShip(curr, fname, fdata, premium)) {
-        filterShip.push(curr);
+        filtered.push(ship);
       }
     }
   } else {
@@ -70,6 +72,7 @@ export const filterShip = (data, shipData = null) => {
   }
 
   let sorted = filtered;
+  // shipData is sorted
   if (shipData == null) {
     sorted = filtered.sort((a, b) => {
       // Sort by tier, then by type

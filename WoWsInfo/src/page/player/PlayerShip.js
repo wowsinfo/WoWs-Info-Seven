@@ -40,7 +40,7 @@ class PlayerShip extends PureComponent {
     const { data, rating } = this.state;
     console.log(data);
     return (
-      <WoWsInfo title={`${lang.wiki_warship_footer} - ${data.length}`} onPress={() => SafeAction('WarshipFilter')}>
+      <WoWsInfo title={`${lang.wiki_warship_footer} - ${data.length}`} onPress={() => SafeAction('WarshipFilter', {applyFunc: this.updateShip})}>
         <FlatGrid itemDimension={150} items={data} renderItem={({item}) => this.renderShip(item)} 
           showsVerticalScrollIndicator={false} fixed/>
         <FooterPlus>
@@ -61,7 +61,8 @@ class PlayerShip extends PureComponent {
   }
 
   updateShip(data) {
-    let sorted = filterShip(data);
+    let sorted = filterShip(data, this.original);
+    console.log(sorted);
     if (sorted == null) this.setState({data: this.original});
     else this.setState({data: sorted});
   }
