@@ -1,10 +1,11 @@
 import React, { PureComponent } from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import { FlatList } from 'react-native';
 import { WoWsInfo, WarshipCell, Touchable, RatingButton, FooterPlus, SimpleRating } from '../../component';
-import { getOverallRating, roundTo, getComment, getColourList, getColour, SafeAction, filterShip } from '../../core';
+import { getOverallRating, roundTo, getComment, getColourList, getColour, SafeAction, filterShip, Guard } from '../../core';
 import { FlatGrid } from 'react-native-super-grid';
 import { SAVED } from '../../value/data';
 import { lang } from '../../value/lang';
+import { Button } from 'react-native-paper';
 
 class PlayerShip extends PureComponent {
   constructor(props) {
@@ -22,7 +23,8 @@ class PlayerShip extends PureComponent {
     this.state = {
       data: this.original,
       rating: rating,
-      filter: {}
+      filter: {},
+      sortStr: ''
     };
   }
 
@@ -38,17 +40,31 @@ class PlayerShip extends PureComponent {
 
   render() {
     const { data, rating } = this.state;
-    console.log(data);
+    const sortingMethod = [{n: 'Battle', v: 'pvp.battles'}, {n: 'Last Battle', v: 'last_battle_time'},
+      {n: 'Rating', v: 'rating'},{n: 'Max XP', v: 'pvp.max_xp'},{n: 'Max Damage', v: 'pvp.max_damage_dealt'},{n: '', v: ''},{n: '', v: ''}];
+
     return (
       <WoWsInfo title={`${lang.wiki_warship_footer} - ${data.length}`} onPress={() => SafeAction('WarshipFilter', {applyFunc: this.updateShip})}>
         <FlatGrid itemDimension={150} items={data} renderItem={({item}) => this.renderShip(item)} 
           showsVerticalScrollIndicator={false} fixed/>
         <FooterPlus>
           <RatingButton rating={rating}/>
+          <FlatList data={sortingMethod} renderItem={({item}) => <Button onPress={() => this.sortData(item.v)}>{item.n}</Button>} 
+            style={{padding: 8}} horizontal showsHorizontalScrollIndicator={false}/>
         </FooterPlus>
       </WoWsInfo>
     )
   };
+
+  sortData(v) {
+    const { data, sortStr } = this.state;
+    console.log(sortStr, v);
+    if (v === sortStr) {
+      this.setState({data: data.sort((a, b) => Guard(a, v, 0) - Guard(b, v, 0)), sortStr: ''});
+    } else {
+      this.setState({data: data.sort((a, b) => Guard(b, v, 0) - Guard(a, v, 0)), sortStr: v});
+    }
+  }
 
   renderShip(item) {
     let ship = DATA[SAVED.warship][item.ship_id];
