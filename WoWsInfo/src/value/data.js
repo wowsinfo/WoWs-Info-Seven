@@ -13,7 +13,7 @@ export const APP = {
   Developer: 'mailto:development.henryquan@gmail.com?subject=[WoWs Info 1.0.6] ',
   Patreon: 'https://www.patreon.com/henryquan',
   PayPal: 'https://www.paypal.me/YihengQuan',
-  Wechat: 'https://www.patreon.com/henryquan',
+  WeChat: 'https://github.com/HenryQuan/WoWs-Info-Origin/blob/master/Support/WeChat.png',
   PersonalRating: 'https://wows-numbers.com/personal/rating',
   LatestRelease: 'https://github.com/HenryQuan/WoWs-Info-Origin/releases/latest'
 }
