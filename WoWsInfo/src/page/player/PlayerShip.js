@@ -24,10 +24,14 @@ class PlayerShip extends PureComponent {
     };
   }
 
+  componentWillUpdate() {
+    console.log(this.props.filter);
+  }
+
   render() {
-    const { data, rating } = this.state;
+    const { data, rating, filter } = this.state;
     return (
-      <WoWsInfo title={`${lang.wiki_warship_footer} - ${data.length}`}>
+      <WoWsInfo title={`${lang.wiki_warship_footer} - ${data.length}`} onPress={() => SafeAction('WarshipFilter')}>
         <FlatGrid itemDimension={150} items={data} renderItem={({item}) => this.renderShip(item)} 
           showsVerticalScrollIndicator={false} fixed/>
         <FooterPlus>
