@@ -117,6 +117,9 @@ export const lang = new LocalizedStrings({
     // Extra
     extra_section_title: 'Extra',
     extra_support_wowsinfo: 'Support WoWs Info',
+    support_paypal: 'PayPal',
+    support_patreon: 'Patreon',
+    support_wechat: 'WeChat',
     // Websites
     website_title: 'Websites',
     website_official_site: 'World of Warships',
@@ -362,6 +365,9 @@ export const lang = new LocalizedStrings({
     // Extra
     extra_section_title: '其他',
     extra_support_wowsinfo: '支持WoWs Info',
+    support_paypal: '贝宝',
+    support_patreon: 'Patreon',
+    support_wechat: '微信',
     // Websites
     website_title: '网站',
     website_official_site: '战舰世界官网',
@@ -607,6 +613,9 @@ export const lang = new LocalizedStrings({
     // Extra
     extra_section_title: '其他',
     extra_support_wowsinfo: '支持WoWs Info',
+    support_paypal: 'PayPal',
+    support_patreon: 'Patreon',
+    support_wechat: '微信',
     // Websites
     website_title: '網站',
     website_official_site: '戰艦世界官網',
@@ -852,6 +861,9 @@ export const lang = new LocalizedStrings({
     // Extra
     extra_section_title: 'Extra',
     extra_support_wowsinfo: 'Support WoWs Info',
+    support_paypal: 'PayPal',
+    support_patreon: 'Patreon',
+    support_wechat: 'WeChat',
     // Websites
     website_title: 'Websites',
     website_official_site: 'World of Warships',
@@ -1097,6 +1109,9 @@ export const lang = new LocalizedStrings({
     // Extra
     extra_section_title: 'Extra',
     extra_support_wowsinfo: 'Support WoWs Info',
+    support_paypal: 'PayPal',
+    support_patreon: 'Patreon',
+    support_wechat: 'WeChat',
     // Websites
     website_title: 'Websites',
     website_official_site: 'World of Warships',
