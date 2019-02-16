@@ -10,3 +10,6 @@ global.DARKMODE = false;
 global.SWAPBUTTON = false;
 global.NOIMAGEMODE = false;
 global.CLEANMODE = false;
+
+// You can only check one time
+global.CANCHECKFORUPDATE = true;
