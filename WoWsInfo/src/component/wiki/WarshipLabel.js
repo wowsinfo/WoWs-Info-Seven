@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Caption } from 'react-native-paper';
 import { getTierLabel } from '../../core';
 import { lang } from '../../value/lang';

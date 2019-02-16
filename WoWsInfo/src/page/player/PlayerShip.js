@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { FlatList } from 'react-native';
 import { WoWsInfo, WarshipCell, Touchable, RatingButton, FooterPlus, SimpleRating } from '../../component';
-import { getOverallRating, roundTo, getComment, getColourList, getColour, SafeAction, filterShip, Guard } from '../../core';
+import { getOverallRating, SafeAction, filterShip, Guard } from '../../core';
 import { FlatGrid } from 'react-native-super-grid';
 import { SAVED } from '../../value/data';
 import { lang } from '../../value/lang';

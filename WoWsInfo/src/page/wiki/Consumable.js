@@ -6,12 +6,10 @@
  */
 
 import React, { PureComponent } from 'react';
-import { View, SafeAreaView, Image, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
-import { Surface, Text } from 'react-native-paper';
-import { FooterButton, LoadingModal, WikiIcon, WoWsInfo } from '../../component';
-import { SAVED, LOCAL } from '../../value/data';
-import { Actions } from 'react-native-router-flux';
+import { LoadingModal, WikiIcon, WoWsInfo } from '../../component';
+import { SAVED } from '../../value/data';
 import { SafeAction } from '../../core';
 
 class Consumable extends PureComponent {

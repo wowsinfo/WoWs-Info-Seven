@@ -5,15 +5,13 @@
  */
 
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { InfoLabel } from '../common/InfoLabel';
 import { roundTo, humanTimeString } from '../../core';
 import { lang } from '../../value/lang';
-import { IconLabel } from './IconLabel';
 import { Info6Icon } from './Info6Icon';
 import { Button } from 'react-native-paper';
 import { Space } from '../common/Space';
-import { Router } from 'react-native-router-flux';
 import { SectionTitle } from '../common/SectionTitle';
 
 class DetailedInfo extends Component {

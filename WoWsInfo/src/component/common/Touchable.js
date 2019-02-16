@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import { TouchableRipple } from 'react-native-paper';
 
 class Touchable extends Component {

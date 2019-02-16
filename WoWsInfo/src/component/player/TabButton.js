@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import { Touchable } from '../common/Touchable';
 
