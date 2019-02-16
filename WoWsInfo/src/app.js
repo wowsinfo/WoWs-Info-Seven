@@ -73,9 +73,13 @@ class App extends Component {
       if (!first) {
         // Update data here if it is not first launch
         let dn = new Downloader(getCurrServer());
-        dn.updateAll(false).then(success => {
+        dn.updateAll(false).then(obj => {
           // Since data are loaded even if user is offline, it should be fine
           this.setState({loading: false, dark: DARKMODE});
+          // Display message if it is not success
+          if (!obj.status) {
+            Alert.alert(lang.error_title, lang.error_download_issue + '\n\n' + obj.log);
+          }
         });
       } else {
         this.setState({loading: false, dark: DARKMODE});
