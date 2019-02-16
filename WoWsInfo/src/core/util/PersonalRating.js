@@ -52,6 +52,8 @@ export const getOverallRating = (ships) => {
       expectedWins += win_rate;
       expectedFrags += average_frags;
 
+      // Do not calculate again
+      if (ship.rating != null) continue;
       // Calculate rating and ap
       let rating = calRating(currAvgDmg, average_damage_dealt, currWinrate, win_rate, currFrags, average_frags);
       ship.rating = rating;
