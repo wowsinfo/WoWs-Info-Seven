@@ -43,6 +43,9 @@ export const getOverallRating = (ships) => {
       let currAvgDmg = damage_dealt / battles;
       let currWinrate = wins / battles * 100;
       let currFrags = frags / battles;
+      ship.avgDmg = currAvgDmg;
+      ship.avgWinrate = currWinrate;
+      ship.avgFrags = currFrags;
 
       // Accumulate data
       actualDmg += currAvgDmg;

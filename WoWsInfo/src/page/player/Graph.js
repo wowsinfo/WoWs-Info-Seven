@@ -76,7 +76,7 @@ class Graph extends PureComponent {
       <WoWsInfo>
         <ScrollView>
           <View pointerEvents='none'>
-            <Title>{`Average Tier - ${avgTier}`}</Title>
+            {/* <Title>{`Average Tier - ${avgTier}`}</Title> */}
             <VictoryChart domainPadding={10}>
               <VictoryAxis/>
               <VictoryBar theme={VictoryTheme.material}
