@@ -40,9 +40,11 @@ class PlayerShip extends PureComponent {
 
   render() {
     const { data, rating } = this.state;
-    const sortingMethod = [{n: lang.ship_sort_battle, v: 'pvp.battles'}, {n: lang.record_max_damage_dealt, v: 'pvp.max_damage_dealt'}, 
-      {n: lang.basic_last_battle, v: 'last_battle_time'}, {n: lang.ship_sort_colour, v: 'rating'},
-      {n: lang.record_max_xp, v: 'pvp.max_xp'}, {n: lang.record_max_frags_battle, v: 'pvp.max_frags_battle'}];
+    const sortingMethod = [{n: lang.ship_sort_battle, v: 'pvp.battles'}, {n: lang.warship_avg_damage, v: 'avgDmg'}, 
+      {n: lang.warship_avg_winrate, v: 'avgWinrate'}, {n: lang.warship_avg_frag, v: 'avgFrags'}, 
+      {n: lang.ship_sort_colour, v: 'rating'}, {n: lang.basic_last_battle, v: 'last_battle_time'}, 
+      {n: lang.record_max_damage_dealt, v: 'pvp.max_damage_dealt'}, {n: lang.record_max_xp, v: 'pvp.max_xp'}, 
+      {n: lang.record_max_frags_battle, v: 'pvp.max_frags_battle'}];
 
     return (
       <WoWsInfo title={`${lang.wiki_warship_footer} - ${data.length}`} onPress={() => SafeAction('WarshipFilter', {applyFunc: this.updateShip})}>
