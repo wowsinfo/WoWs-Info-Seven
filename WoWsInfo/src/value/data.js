@@ -12,6 +12,8 @@ export const APP = {
   GooglePlay: 'https://play.google.com/store/apps/details?id=com.yihengquan.wowsinfo',
   Developer: 'mailto:development.henryquan@gmail.com?subject=[WoWs Info 1.0.6] ',
   Patreon: 'https://www.patreon.com/henryquan',
+  PayPal: 'https://www.paypal.me/YihengQuan',
+  Wechat: 'https://www.patreon.com/henryquan',
   PersonalRating: 'https://wows-numbers.com/personal/rating',
   LatestRelease: 'https://github.com/HenryQuan/WoWs-Info-Origin/releases/latest'
 }

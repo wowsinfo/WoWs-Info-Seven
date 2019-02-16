@@ -20,5 +20,7 @@ export const AppKey = 'PUT YOUR KEY HERE';
 - Star this repository
 - Share with your friends
 - [Patreon](https://www.patreon.com/henryquan) 
+- [PayPal](https://www.paypal.me/YihengQuan) 
+- [WeChat](https://www.patreon.com/henryquan) 
 - [(IOS) App Store](https://itunes.apple.com/app/id1202750166)
 - [(Android) Google Play](https://play.google.com/store/apps/details?id=com.yihengquan.wowsinfo)
