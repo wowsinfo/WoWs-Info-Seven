@@ -40,17 +40,17 @@ class PlayerShip extends PureComponent {
 
   render() {
     const { data, rating } = this.state;
-    const sortingMethod = [{n: 'Battle', v: 'pvp.battles'}, {n: 'Last Battle', v: 'last_battle_time'},
-      {n: 'Rating', v: 'rating'},{n: 'Max XP', v: 'pvp.max_xp'},{n: 'Max Damage', v: 'pvp.max_damage_dealt'},{n: '', v: ''},{n: '', v: ''}];
+    const sortingMethod = [{n: 'Battle', v: 'pvp.battles'}, {n: 'Max Damage', v: 'pvp.max_damage_dealt'}, {n: 'Last Battle', v: 'last_battle_time'},
+      {n: 'Rating', v: 'rating'},{n: 'Max XP', v: 'pvp.max_xp'}, {n: 'Max Frags', v: 'pvp.max_frags_battle'}];
 
     return (
       <WoWsInfo title={`${lang.wiki_warship_footer} - ${data.length}`} onPress={() => SafeAction('WarshipFilter', {applyFunc: this.updateShip})}>
         <FlatGrid itemDimension={150} items={data} renderItem={({item}) => this.renderShip(item)} 
           showsVerticalScrollIndicator={false} fixed/>
         <FooterPlus>
-          <RatingButton rating={rating}/>
-          <FlatList data={sortingMethod} renderItem={({item}) => <Button style={{margin: 8}} mode='outlined' onPress={() => this.sortData(item.v)}>{item.n}</Button>} 
+          <FlatList data={sortingMethod} renderItem={({item}) => <Button style={{margin: 8}} mode='contained' onPress={() => this.sortData(item.v)}>{item.n}</Button>} 
             horizontal showsHorizontalScrollIndicator={false}/>
+          <RatingButton rating={rating}/>
         </FooterPlus>
       </WoWsInfo>
     )
