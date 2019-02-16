@@ -74,7 +74,7 @@ class Menu extends PureComponent {
 
     this.support = [{t: 'Patreon', d: APP.Patreon},
     {t: 'PayPal', d: APP.PayPal},
-    {t: 'WeChat', d: APP.Wechat}];
+    {t: 'WeChat', d: APP.WeChat}];
 
     // TODO: change links base on player server
     this.websites = [{t: lang.website_official_site, d: `https://worldofwarships.${domain}/`},
