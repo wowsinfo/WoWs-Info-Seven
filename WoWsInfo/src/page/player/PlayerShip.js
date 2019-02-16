@@ -64,6 +64,7 @@ class PlayerShip extends PureComponent {
     let sorted = filterShip(data, this.original);
     if (sorted == null) this.setState({data: this.original});
     else {
+      // Get rating again
       let rating = getOverallRating(sorted);
       this.setState({data: sorted, rating: rating});
     }
