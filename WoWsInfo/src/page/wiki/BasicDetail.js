@@ -6,10 +6,10 @@
  */
 
 import React, { Component } from 'react';
-import { Text, ScrollView, StyleSheet } from 'react-native';
-import { Surface, Title, Paragraph, Caption } from 'react-native-paper';
-import { FloatingButton, WikiIcon, WoWsInfo, PriceLabel } from '../../component';
-import { TintColour, TintTextColour } from '../../value/colour';
+import { ScrollView, StyleSheet } from 'react-native';
+import { Title, Paragraph, Caption } from 'react-native-paper';
+import { WikiIcon, WoWsInfo, PriceLabel } from '../../component';
+import { TintTextColour } from '../../value/colour';
 
 class BasicDetail extends Component {
   render() {

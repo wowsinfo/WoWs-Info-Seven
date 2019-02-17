@@ -6,17 +6,14 @@
  */
 
 import React, { PureComponent } from 'react';
-import { FlatList, Alert, ScrollView, StyleSheet, Linking, View } from 'react-native';
-import { isAndroid, isIphoneX } from 'react-native-device-detection';
-import { List, Colors, Text, Searchbar, Title } from 'react-native-paper';
-import { FooterButton, WoWsInfo, SectionTitle, PlayerCell, AppName } from '../../component';
+import { Alert, ScrollView, StyleSheet, Linking, View } from 'react-native';
+import { isAndroid } from 'react-native-device-detection';
+import { List, Colors } from 'react-native-paper';
+import { WoWsInfo, SectionTitle, AppName } from '../../component';
 import { lang } from '../../value/lang';
-import { Actions } from 'react-native-router-flux';
-import { SafeAction, SafeFetch, Guard, Downloader } from '../../core';
+import { SafeAction, Downloader } from '../../core';
 import { ThemeBackColour, TintColour } from '../../value/colour';
 import { getCurrDomain, getCurrServer, getCurrPrefix, APP, LOCAL, getFirstLaunch, setFirstLaunch } from '../../value/data';
-import { WoWsAPI } from '../../value/api';
-import { Friend } from './Friend';
 import { Loading } from '../common/Loading';
 
 class Menu extends PureComponent {
@@ -35,15 +32,15 @@ class Menu extends PureComponent {
     if (first) {
       // Update data here if it is not first launch
       let dn = new Downloader(getCurrServer());
-      dn.updateAll(true).then(success => {
+      dn.updateAll(true).then(obj => {
         // Make sure it finishes downloading
-        if (success) {
+        if (obj.status) {
           this.setState({loading: false});
           setFirstLaunch(false);
         } else {
           // Reset to a special page
           // For now, just an error message
-          Alert.alert(lang.error_title, lang.error_download_issue);
+          Alert.alert(lang.error_title, lang.error_download_issue + '\n\n' + obj.log);
         }
       });
     }
@@ -72,9 +69,9 @@ class Menu extends PureComponent {
     const domain = getCurrDomain();
     this.prefix = getCurrPrefix();
 
-    this.support = [{t: 'Patreon', d: APP.Patreon},
-    {t: 'PayPal', d: APP.PayPal},
-    {t: 'WeChat', d: APP.WeChat}];
+    this.support = [{t: lang.support_patreon, d: APP.Patreon},
+    {t: lang.support_paypal, d: APP.PayPal},
+    {t: lang.support_wechat, d: APP.WeChat}];
 
     // TODO: change links base on player server
     this.websites = [{t: lang.website_official_site, d: `https://worldofwarships.${domain}/`},

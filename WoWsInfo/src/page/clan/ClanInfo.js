@@ -5,11 +5,11 @@
  */
 
 import React, { Component } from 'react';
-import { View, Text, ScrollView, FlatList, Linking, StyleSheet } from 'react-native';
-import { WoWsInfo, LoadingIndicator, InfoLabel, SectionTitle, Touchable } from '../../component';
+import { View, ScrollView, FlatList, Linking, StyleSheet } from 'react-native';
+import { WoWsInfo, LoadingIndicator, InfoLabel, SectionTitle } from '../../component';
 import { SafeFetch, Guard, humanTimeString, SafeAction, SafeStorage } from '../../core';
 import { WoWsAPI } from '../../value/api';
-import { getDomain, getPrefix, getCurrServer, LOCAL } from '../../value/data';
+import { getDomain, getPrefix, LOCAL } from '../../value/data';
 import { Title, Subheading, Paragraph, List, Caption, Button } from 'react-native-paper';
 import { TintColour } from '../../value/colour';
 import { lang } from '../../value/lang';

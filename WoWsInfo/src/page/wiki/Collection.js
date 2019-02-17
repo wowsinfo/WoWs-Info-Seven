@@ -11,7 +11,7 @@ import { WoWsInfo, WikiIcon } from '../../component';
 import { SAVED } from '../../value/data';
 import { SafeAction } from '../../core';
 import { Title, Paragraph } from 'react-native-paper';
-import { TintColour, TintTextColour } from '../../value/colour';
+import { TintTextColour } from '../../value/colour';
 
 class Collection extends PureComponent {
   constructor(props) {

@@ -2,15 +2,14 @@ import React, { Component } from 'react';
 import { StyleSheet, Alert, BackHandler } from 'react-native';
 import { Router, Stack, Scene, Actions } from 'react-native-router-flux';
 import { withTheme, DarkTheme, DefaultTheme } from 'react-native-paper';
-import { Home, Menu, Settings, About, Setup, Consumable, CommanderSkill, 
+import { Menu, Settings, About, Setup, Consumable, CommanderSkill, 
   BasicDetail, Achievement, Map as GameMap, Collection, Warship, WarshipDetail, 
   WarshipFilter, WarshipModule, Loading, Statistics, ClanInfo, PlayerAchievement, 
   Rating, Search, Graph, SimilarGraph, License } from './page';
 import { LOCAL, getFirstLaunch, getCurrServer } from './value/data';
-import { DataLoader, Downloader, SafeStorage } from './core';
+import { DataLoader, Downloader } from './core';
 import { GREY, BLUE } from 'react-native-material-color';
-import { LoadingModal } from './component';
-import { TintColour, UpdateTintColour } from './value/colour';
+import { TintColour } from './value/colour';
 import { lang } from './value/lang';
 import { PlayerShip } from './page/player/PlayerShip';
 import { Detailed } from './page/player/Detailed';
@@ -73,14 +72,12 @@ class App extends Component {
       if (!first) {
         // Update data here if it is not first launch
         let dn = new Downloader(getCurrServer());
-        dn.updateAll(false).then(success => {
-          // Make sure it finishes downloading
-          if (success) {
-            this.setState({loading: false, dark: DARKMODE});
-          } else {
-            // Reset to a special page
-            // For now, just an error message
-            Alert.alert(lang.error_title, lang.error_download_issue);
+        dn.updateAll(false).then(obj => {
+          // Since data are loaded even if user is offline, it should be fine
+          this.setState({loading: false, dark: DARKMODE});
+          // Display message if it is not success
+          if (!obj.status) {
+            Alert.alert(lang.error_title, lang.error_download_issue + '\n\n' + obj.log);
           }
         });
       } else {

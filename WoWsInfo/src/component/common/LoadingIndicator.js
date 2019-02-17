@@ -7,7 +7,6 @@
 import React, { Component } from 'react';
 import { ActivityIndicator, StyleSheet } from 'react-native';
 import { isIos } from 'react-native-device-detection';
-import { LOCAL } from '../../value/data';
 import { Blue, Grey} from 'react-native-material-color';
 import { TintColour } from '../../value/colour';
 

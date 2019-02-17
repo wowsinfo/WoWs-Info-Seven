@@ -6,11 +6,11 @@
 
 import React, { Component } from 'react';
 import { FlatList, ScrollView, StyleSheet } from 'react-native';
-import { Text, Button, Surface, Headline, List, RadioButton } from 'react-native-paper';
+import { Button, List } from 'react-native-paper';
 import { Actions } from 'react-native-router-flux';
 import { lang } from '../../value/lang';
-import { LOCAL, SERVER, getCurrServer, setFirstLaunch, setCurrServer, setAPILanguage } from '../../value/data';
-import { SafeStorage, Downloader } from '../../core';
+import { SERVER, getCurrServer, setCurrServer, setAPILanguage } from '../../value/data';
+import { Downloader } from '../../core';
 import { WoWsInfo, SectionTitle } from '../../component';
 
 class Setup extends Component {

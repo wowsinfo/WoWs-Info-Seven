@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
-import { View, StyleSheet, FlatList, ScrollView } from 'react-native';
-import { List, Text, Colors, IconButton } from 'react-native-paper';
+import { View, StyleSheet, FlatList } from 'react-native';
+import { List, Colors, IconButton } from 'react-native-paper';
 import { LOCAL } from '../../value/data';
 import { SafeAction, SafeStorage, SafeValue } from '../../core';
 import { SectionTitle } from '../../component';

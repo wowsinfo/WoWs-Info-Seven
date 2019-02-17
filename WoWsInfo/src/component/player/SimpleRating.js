@@ -6,7 +6,7 @@
 
 import React, { PureComponent } from 'react';
 import { View, StyleSheet, Image } from 'react-native';
-import { IconButton, Text } from 'react-native-paper';
+import { Text } from 'react-native-paper';
 import { getColour, roundTo } from '../../core';
 import { TintColour } from '../../value/colour';
 
