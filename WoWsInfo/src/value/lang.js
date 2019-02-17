@@ -966,8 +966,8 @@ export const lang = new LocalizedStrings({
     record_max_total_agro: '最大潜在ダメージ',
     record_max_damage_scouting: '最大発見によるダメージ',
     // Weapon record
-    weapon_max_frags: '最大Frags',
-    weapon_total_frags: '総Frags',
+    weapon_max_frags: '最大艦艇撃沈数',
+    weapon_total_frags: '総艦艇撃沈数',
     weapon_hit_ratio: '命中率',
     /// App name section
     app_name: 'WoWs Info オリジン',
