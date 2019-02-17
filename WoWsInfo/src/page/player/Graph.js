@@ -83,7 +83,7 @@ class Graph extends PureComponent {
             </VictoryChart>
             <VictoryPie style={{labels: {fontSize: 12, fill: themeColour}}} data={nation} padAngle={3}
             colorScale={["tomato", "orange", "gold", "cyan", "navy" ]}/>
-            <VictoryPie theme={VictoryTheme.material} data={type} />
+            <VictoryPie theme={VictoryTheme.material} data={type}/>
           </View>
         </ScrollView>
       </WoWsInfo>

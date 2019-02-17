@@ -7,7 +7,7 @@
 import React, { Component } from 'react';
 import { SafeAreaView, StyleSheet, StatusBar } from 'react-native';
 import { Button, Surface } from 'react-native-paper';
-import { isAndroid, isTablet } from 'react-native-device-detection';
+import { isAndroid } from 'react-native-device-detection';
 import { lang } from '../../value/lang';
 import { FooterButton } from './FooterButton';
 import { SafeAction, random } from '../../core';
@@ -100,8 +100,6 @@ const styles = StyleSheet.create({
   },
   child: {
     flex: 1,
-    paddingLeft: isTablet ? '16%' : null,
-    paddingRight: isTablet ? '16%' : null,
   },
   safeView: {
     flex: 1
