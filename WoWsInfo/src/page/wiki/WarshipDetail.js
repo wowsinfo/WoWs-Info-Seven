@@ -5,16 +5,15 @@
  */
 
 import React, { PureComponent } from 'react';
-import { View, FlatList,Linking, ScrollView, StyleSheet, Alert } from 'react-native';
-import { Text, Title, Subheading, Headline, Button, Surface, Paragraph, List } from 'react-native-paper';
-import { WoWsInfo, WikiIcon, WarshipCell, LoadingModal, PriceLabel, LoadingIndicator, WarshipStat, InfoLabel, DividerPlus, FooterPlus } from '../../component';
-import { SAVED, SERVER, LOCAL, langStr, getCurrDomain } from '../../value/data';
+import { View, FlatList,Linking, ScrollView, StyleSheet } from 'react-native';
+import { Text, Title, Headline, Button, Paragraph } from 'react-native-paper';
+import { WoWsInfo, WikiIcon, WarshipCell, PriceLabel, LoadingIndicator, WarshipStat, InfoLabel, FooterPlus } from '../../component';
+import { SAVED, langStr, getCurrDomain } from '../../value/data';
 import { lang } from '../../value/lang';
-import { SafeFetch, Guard, getColourWithRange, SafeAction, copy, roundTo } from '../../core';
+import { SafeFetch, Guard, SafeAction, copy, roundTo } from '../../core';
 import { WoWsAPI } from '../../value/api';
 import { Actions } from 'react-native-router-flux';
-import { GREY } from 'react-native-material-color';
-import { ThemeBackColour, TintColour, TintTextColour } from '../../value/colour';
+import { TintColour, TintTextColour } from '../../value/colour';
 import { VictoryChart, VictoryAxis, VictoryBar } from 'victory-native';
 
 class WarshipDetail extends PureComponent {

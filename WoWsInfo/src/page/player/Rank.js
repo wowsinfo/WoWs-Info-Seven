@@ -1,11 +1,10 @@
 import React, { PureComponent } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { WoWsInfo, SectionTitle, Touchable, DetailedInfo, Info6Icon, Space } from '../../component';
+import { View, StyleSheet } from 'react-native';
+import { WoWsInfo, Touchable, Info6Icon } from '../../component';
 import { lang } from '../../value/lang';
 import { FlatGrid } from 'react-native-super-grid';
 import { Headline, Title } from 'react-native-paper';
-import { SafeAction, SafeFetch } from '../../core';
-import { WoWsAPI } from '../../value/api';
+import { SafeAction } from '../../core';
 
 class Rank extends PureComponent {
   constructor(props) {

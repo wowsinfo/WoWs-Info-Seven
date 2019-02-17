@@ -6,14 +6,11 @@
 
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
-import { Surface, Title, List } from 'react-native-paper';
 import { SAVED } from '../../value/data';
 import { WoWsInfo, WikiIcon, SectionTitle } from '../../component';
 import { SectionGrid } from 'react-native-super-grid';
-import { Actions } from 'react-native-router-flux';
 import { SafeAction, copy } from '../../core';
 import { lang } from '../../value/lang';
-import { ThemeBackColour, TintColour, TintTextColour } from '../../value/colour';
 
 class CommanderSkill extends Component {
   constructor(props) {

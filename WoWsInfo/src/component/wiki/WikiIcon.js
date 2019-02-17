@@ -8,8 +8,6 @@ import React, { Component } from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 import { LOCAL } from '../../value/data';
 import { Touchable } from '../common/Touchable';
-import { LoadingIndicator } from '../common/LoadingIndicator';
-import { random } from '../../core';
 
 class WikiIcon extends Component {  
   render() {

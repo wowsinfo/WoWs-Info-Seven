@@ -1,4 +1,4 @@
-import { Guard, SafeValue } from './SafeGuard';
+import { SafeValue } from './SafeGuard';
 
 class SafeFetch {
   /**

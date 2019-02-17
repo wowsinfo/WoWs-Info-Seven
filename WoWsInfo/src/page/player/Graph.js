@@ -1,11 +1,10 @@
 import React, { PureComponent } from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
 import { VictoryBar, VictoryTheme, VictoryChart, VictoryPie, VictoryAxis } from "victory-native";
-import { WoWsInfo, SectionTitle } from '../../component';
+import { WoWsInfo } from '../../component';
 import { SAVED } from '../../value/data';
 import { SafeValue, roundTo } from '../../core';
 import { TintColour } from '../../value/colour';
-import { Text, Title } from 'react-native-paper';
 import { VictoryLabel } from 'victory-core/es';
 
 class Graph extends PureComponent {
@@ -76,7 +75,7 @@ class Graph extends PureComponent {
       <WoWsInfo>
         <ScrollView>
           <View pointerEvents='none'>
-            <Title>{`Average Tier - ${avgTier}`}</Title>
+            {/* <Title>{`Average Tier - ${avgTier}`}</Title> */}
             <VictoryChart domainPadding={10}>
               <VictoryAxis/>
               <VictoryBar theme={VictoryTheme.material}
@@ -84,7 +83,7 @@ class Graph extends PureComponent {
             </VictoryChart>
             <VictoryPie style={{labels: {fontSize: 12, fill: themeColour}}} data={nation} padAngle={3}
             colorScale={["tomato", "orange", "gold", "cyan", "navy" ]}/>
-            <VictoryPie theme={VictoryTheme.material} data={type} />
+            <VictoryPie theme={VictoryTheme.material} data={type}/>
           </View>
         </ScrollView>
       </WoWsInfo>
