@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { WoWsInfo, Touchable } from '../../component';
+import { WoWsInfo, Touchable, Info6Icon } from '../../component';
 import { lang } from '../../value/lang';
 import { FlatGrid } from 'react-native-super-grid';
 import { Headline, Title } from 'react-native-paper';
