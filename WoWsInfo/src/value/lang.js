@@ -857,7 +857,7 @@ export const lang = new LocalizedStrings({
     wiki_skills_reset: 'リセット',
     wiki_skills_point: '点',
     wiki_maps: '地図',
-    wiki_collections: '',
+    wiki_collections: 'コレクション',
     // Extra
     extra_section_title: '他',
     extra_support_wowsinfo: 'WoWs Infoの支援',
@@ -877,8 +877,8 @@ export const lang = new LocalizedStrings({
     website_ranking: 'プレーヤーランキング',
     website_models: 'Warships Models',
     // YouTubers
-    youtuber_title: 'YouTubers',
-    youtuber_official: 'WoWs Official',
+    youtuber_title: 'ユーチューバー',
+    youtuber_official: 'WoWsの公式チャンネル',
     youtuber_flambass: 'Flambass',
     youtuber_notser: 'Notser',
     youtuber_jingles: 'The Mighty Jingles',
