@@ -73,7 +73,7 @@ export const lang = new LocalizedStrings({
     warship_compare_similar: 'Compare similar ships',
     /// Menu section
     /// Settings section
-    server_name: ['Russia', 'Europe', 'North Ameria', 'Asia'],
+    server_name: ['Russia', 'Europe', 'North America', 'Asia'],
     setting_game_server: 'Game Server',
     setting_api_language: 'API Language',
     setting_app_language: 'WoWs Info Language',
@@ -1065,7 +1065,7 @@ export const lang = new LocalizedStrings({
     warship_compare_similar: 'Compare similar ships',
     /// Menu section
     /// Settings section
-    server_name: ['Russia', 'Europe', 'North Ameria', 'Asia'],
+    server_name: ['Russia', 'Europe', 'North America', 'Asia'],
     setting_game_server: 'Game Server',
     setting_api_language: 'Pengaturan bahasa API',
     setting_app_language: 'Pengaturan bahasa Aplikasi',
