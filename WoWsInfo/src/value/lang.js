@@ -1,4 +1,4 @@
-import LocalizedStrings from 'react-native-localization';
+﻿import LocalizedStrings from 'react-native-localization';
 
 export const lang = new LocalizedStrings({
   en: {
@@ -828,13 +828,13 @@ export const lang = new LocalizedStrings({
     settings_app_no_image_mode: '省データモード',
     settings_app_swap_buttons: '底部ボタンスワップ',
     settings_app_send_feedback: 'フィードバック',
-    settings_app_send_feedback_subtitle: '開発者にメールを送る',
+    settings_app_send_feedback_subtitle: '開発者にメール',
     settings_app_report_issues: 'バグの報告',
     settings_app_write_review: 'レビューを書く',
-    settings_app_share: 'シェアする',
+    settings_app_share: 'シェア',
     settings_app_share_subtitle: '良かったらシェアしてね＞＿＜',
-    settings_app_check_for_update: 'アップデートをチェックする',
-    settings_app_no_update: '最新バージョンを使っている',
+    settings_app_check_for_update: 'アップデートをチェック',
+    settings_app_no_update: '最新バージョンです',
     settings_app_has_update: 'アップデート有り {0}',
     settings_open_source: 'オープンソース',
     settings_open_source_github: 'Github',
@@ -860,7 +860,7 @@ export const lang = new LocalizedStrings({
     wiki_collections: 'コレクション',
     // Extra
     extra_section_title: 'その他',
-    extra_support_wowsinfo: 'WoWs Infoの支援',
+    extra_support_wowsinfo: 'WoWs Infoへの支援',
     support_paypal: 'ペイパル　PayPal',
     support_patreon: 'パトレオン　Patreon',
     support_wechat: '微信　WeChat',
@@ -897,9 +897,9 @@ export const lang = new LocalizedStrings({
     tab_rank_title: 'ランク',
     // Rating
     rating_title: '操艦技術',
-    rating_description: 'It is a measure of skill.',
-    rating_read_more: '- もっと読む -',
-    rating_warning: 'Please do not judge other players simply by his/her rating',
+    rating_description: 'レベルの評判方法である',
+    rating_read_more: '- 詳しい情報 -',
+    rating_warning: 'レートによって、人を評価するのはやめなさい',
     rating_author: 'By Wiochi',
     rating_scale: '色スケール',
     rating_bad: 'きっと未來がある',
@@ -907,7 +907,7 @@ export const lang = new LocalizedStrings({
     rating_average: '普通',
     rating_good: '良い',
     rating_very_good: 'とても良い',
-    rating_great: '凄く良い',
+    rating_great: 'グレート',
     rating_unicum: 'ユニカム',
     rating_super_unicum: 'スーパーユニカム',
     rating_Unkwown: '不明',
@@ -916,9 +916,9 @@ export const lang = new LocalizedStrings({
     basic_level_tier: 'レベル',
     basic_register_date: '登録した日',
     basic_last_battle: '最後の戦い',
-    basic_more_stat: '- もっと見せる -',
-    basic_add_friend: 'リストに付ける',
-    basic_set_main: 'メールにセット',
+    basic_more_stat: '- もっと見る -',
+    basic_add_friend: 'フレンドに追加',
+    basic_set_main: 'メインプレヤーにセット',
     // Detailed
     detailed_win: '勝利',
     detailed_draw: '引き分け',
@@ -991,7 +991,7 @@ export const lang = new LocalizedStrings({
     /// Error section
     // General erros
     error_title: 'エラー',
-    error_download_issue: 'Failed to update data. \nPlease try again later.'
+    error_download_issue: 'アップデート失敗 \nやり直してください'
   },
   id: {
     /// Setup section
