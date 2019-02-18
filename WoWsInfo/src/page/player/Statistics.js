@@ -340,7 +340,7 @@ class Statistics extends PureComponent {
     if (ship && ship.length > 0) loading = false;
 
     return <TabButton icon={require('../../img/Ship.png')} color={this.theme}
-      disabled={loading} onPress={() => SafeAction('PlayerShip', {data: ship})}/>  
+      disabled={loading} onPress={() => SafeAction('PlayerShip', {data: ship}, 1)}/>  
   }
 
   renderRank(rank, rankShip) {

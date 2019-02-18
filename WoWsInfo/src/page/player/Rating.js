@@ -27,7 +27,6 @@ class Rating extends Component {
           <View style={container}>
             <Paragraph>{lang.rating_description}</Paragraph>
             <Caption>{lang.rating_warning}</Caption>
-            <Button onPress={() => Linking.openURL(APP.PersonalRating)}>{lang.rating_read_more}</Button>
           </View>
           <SectionTitle title={lang.rating_scale}/>
           { ratingRange.map((v, i) => {
@@ -39,6 +38,7 @@ class Rating extends Component {
               </View>
             )
           }) }
+          <Button onPress={() => Linking.openURL(APP.PersonalRating)}>{lang.rating_read_more}</Button>
         </ScrollView>
       </WoWsInfo>
     )
