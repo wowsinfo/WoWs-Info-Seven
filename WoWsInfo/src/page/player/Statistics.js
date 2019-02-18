@@ -250,7 +250,8 @@ class Statistics extends PureComponent {
       )
     } else {
       const { created_at, leveling_tier, last_battle_time, nickname } = basic;
-      const { hidden, clan, currRank } = this.state;
+      const { hidden, clan, currRank, canBeFriend, canBeMaster, rating } = this.state;
+
       let register = humanTimeString(created_at);
       let lastBattle = humanTimeString(last_battle_time)
       if (hidden) {
@@ -258,9 +259,10 @@ class Statistics extends PureComponent {
           <View style={container}>
             <View style={horizontal}>
               <SectionTitle title={nickname} style={playerName}/>
-              <IconButton icon='https' size={24} />
+              <IconButton icon='https' size={24} style={{alignSelf: 'center'}}/>
             </View>
             <View style={styles.hidden}>
+              { canBeFriend ? <Button icon='contacts' onPress={this.addFriend}>{lang.basic_add_friend}</Button> : null }
               <InfoLabel left title={lang.basic_register_date} info={register}/>
               <InfoLabel left title={lang.basic_last_battle} info={lastBattle}/>
               <InfoLabel left title={lang.basic_level_tier} info={lang.basic_data_unknown}/>
@@ -272,7 +274,6 @@ class Statistics extends PureComponent {
         if (clan !== '') name = `[${clan}]\n${nickname}`;
         let extraInfo = `Lv ${leveling_tier}`;
         if (currRank > 0) extraInfo += ` | ⭐${currRank}`;
-        const { canBeFriend, canBeMaster, rating } = this.state;
         return (
           <View style={container}>
             <Title style={playerName}>{name}</Title>
