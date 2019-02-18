@@ -11,15 +11,25 @@ class Friend extends PureComponent {
     super(props);
     let all = DATA[LOCAL.friendList];
 
-    let clan = [];
-    for (let ID in all.clan) clan.push(all.clan[ID]);
-    let player = [];
-    for (let ID in all.player) player.push(all.player[ID]);
+    let player = this.getPlayer(all);
+    let clan = this.getClan(all);
 
     this.state = {
       player, clan
     };
   }
+
+  getPlayer = (all) => {
+    let player = [];
+    for (let ID in all.player) player.push(all.player[ID]);
+    return player;
+  };
+  
+  getClan = (all) => {
+    let clan = [];
+    for (let ID in all.clan) clan.push(all.clan[ID]);
+    return clan;
+  };
 
   render() {
     const { player, clan } = this.state;
@@ -44,14 +54,14 @@ class Friend extends PureComponent {
     let str = LOCAL.friendList;
     delete DATA[str].player[info.account_id];
     SafeStorage.set(str, DATA[str]);
-    this.setState({player: DATA[str].player});
+    this.setState({player: this.getPlayer(DATA[str])});
   }
 
   removeClan(info) {
     let str = LOCAL.friendList;
     delete DATA[str].clan[info.clan_id];
     SafeStorage.set(str, DATA[str]);
-    this.setState({clan: DATA[str].clan});
+    this.setState({clan: this.getClan(DATA[str])});
   }
 
   pushToPlayer(info) {
