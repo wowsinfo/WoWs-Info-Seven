@@ -56,6 +56,12 @@ class DetailedInfo extends Component {
       planes_killed,
       ships_spotted,
       xp, frags,
+      max_damage_dealt,
+      max_damage_scouting,
+      max_frags_battle,
+      max_planes_killed,
+      max_ships_spotted,
+      max_xp,
       aircraft, main_battery, ramming, second_battery, torpedoes
     } = data;
 
@@ -110,7 +116,21 @@ class DetailedInfo extends Component {
           <InfoLabel title={lang.detailed_total_plane_killed} info={planes_killed}/>
           <InfoLabel title={lang.detailed_avg_plane_killed} info={roundTo(planes_killed / battles, 2)}/>
         </View>
-        <Space height={16}/>
+        { !playerMode ? <View style={container}>
+          <SectionTitle title={lang.record_title}/>
+          <View style={horizontal}>
+            <InfoLabel title={lang.record_max_damage_dealt} info={max_damage_dealt}/>
+            <InfoLabel title={lang.record_max_damage_scouting} info={max_damage_scouting}/>
+          </View>
+          <View style={horizontal}>
+            <InfoLabel title={lang.record_max_xp} info={max_xp}/>
+            <InfoLabel title={lang.record_max_frags_battle} info={max_frags_battle}/>
+          </View>
+          <View style={horizontal}>
+            <InfoLabel title={lang.record_max_ships_spotted} info={max_ships_spotted}/>
+            <InfoLabel title={lang.record_max_planes_killed} info={max_planes_killed}/>
+          </View> 
+        </View>: null }
         { !playerMode ? weapons.map(d => this.renderShipRecord(d)) : null }
       </View>
     )
@@ -120,7 +140,8 @@ class DetailedInfo extends Component {
     const { data, name } = weapon;
     if (data == null) return null;
     const { container, horizontal } = styles;
-    const { frags, max_frags_battle } = weapon.data;
+    const { frags, max_frags_battle, hits, shots } = weapon.data;
+    console.log(weapon);
     if (frags == 0) return null;
     return (
       <View style={container} key={name}>
@@ -128,6 +149,7 @@ class DetailedInfo extends Component {
         <View style={horizontal}>
           <InfoLabel title={lang.weapon_total_frags} info={frags}/>
           <InfoLabel title={lang.weapon_max_frags} info={max_frags_battle}/>
+          { hits ? <InfoLabel title={lang.weapon_hit_ratio} info={`${roundTo(hits / shots * 100, 1)}%`}/> : null }
         </View>
       </View>
     )
