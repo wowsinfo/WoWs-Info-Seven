@@ -8,8 +8,8 @@
 import React, { PureComponent } from 'react';
 import { Alert, ScrollView, StyleSheet, Linking, View } from 'react-native';
 import { isAndroid } from 'react-native-device-detection';
-import { List, Colors } from 'react-native-paper';
-import { WoWsInfo, SectionTitle, AppName } from '../../component';
+import { List, Colors, Button } from 'react-native-paper';
+import { WoWsInfo, SectionTitle, AppName, FooterPlus } from '../../component';
 import { lang } from '../../value/lang';
 import { SafeAction, Downloader } from '../../core';
 import { ThemeBackColour, TintColour } from '../../value/colour';
@@ -126,6 +126,7 @@ class Menu extends PureComponent {
           right={() => isAndroid ? null : <List.Icon color={Colors.grey500} icon='keyboard-arrow-right'/>} />
         )})}
         <SectionTitle title={lang.extra_section_title}/>
+        <List.Item title='RS Beta' description='Realtime Statistics Beta' onPress={() => SafeAction('RS')}/>
         <List.Section title={lang.extra_support_wowsinfo}>
           { this.support.map(item => { return (
             <List.Item title={item.t} description={item.d} key={item.t}
