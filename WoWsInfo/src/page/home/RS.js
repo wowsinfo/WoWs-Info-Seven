@@ -3,6 +3,7 @@ import { View, ScrollView, StyleSheet, KeyboardAvoidingView, Alert } from 'react
 import { isAndroid } from 'react-native-device-detection';
 import { Text, Portal, TextInput, Button, Dialog, Title, Caption } from 'react-native-paper';
 import { lang } from '../../value/lang';
+import { WoWsInfo } from '../../component';
 
 class RS extends Component {
   constructor(props) {
@@ -20,14 +21,16 @@ class RS extends Component {
     const { container, input } = styles;
     const { tip, ip, rs } = this.state;
     return (
-      <KeyboardAvoidingView style={container} behavior='padding' enabled>
-        <TextInput style={input} theme={{roundness: 0}} value={ip} placeholder='192.168.1.x' 
-          keyboardType={isAndroid ? 'decimal-pad' : 'numbers-and-punctuation'}
-          onChangeText={t => this.setState({ip: t})}
-          onEndEditing={() => this.validIP(ip)}/>
-        <Button onPress={() => this.setState({tip: true})}>How to use?</Button>
-        { this.renderDialog(tip) }
-      </KeyboardAvoidingView>
+      <WoWsInfo>
+        <KeyboardAvoidingView style={container} behavior='padding' enabled>
+          <TextInput style={input} theme={{roundness: 0}} value={ip} placeholder='192.168.1.x' 
+            keyboardType={isAndroid ? 'decimal-pad' : 'numbers-and-punctuation'}
+            onChangeText={t => this.setState({ip: t})}
+            onEndEditing={() => this.validIP(ip)}/>
+          <Button onPress={() => this.setState({tip: true})}>How to use?</Button>
+          { this.renderDialog(tip) }
+        </KeyboardAvoidingView>
+      </WoWsInfo>
     )
   };
 
