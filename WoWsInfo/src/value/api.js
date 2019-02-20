@@ -18,6 +18,7 @@ export const WoWsAPI = {
   RankShipInfo: `https://api.worldofwarships.{0}/wows/seasons/shipstats/?application_id=${AppKey}&account_id=`,
   // Ships
   ShipInfo: `https://api.worldofwarships.{0}/wows/ships/stats/?application_id=${AppKey}&account_id=`,
+  OneShipInfo: `https://api.worldofwarships.{0}/wows/ships/stats/?application_id=${AppKey}&ship_id={1}&account_id=`,
   ShipWiki: `https://api.worldofwarships.{0}/wows/encyclopedia/ships/?application_id=${AppKey}&ship_id={1}`,
   ShipModule: `https://api.worldofwarships.{0}/wows/encyclopedia/shipprofile/?application_id=${AppKey}&ship_id={1}&artillery_id={2}&dive_bomber_id={3}&engine_id={4}&fighter_id={5}&fire_control_id={6}&flight_control_id={7}&hull_id={8}&torpedo_bomber_id={9}&torpedoes_id={10}`,
 }
