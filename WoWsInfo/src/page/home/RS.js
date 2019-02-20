@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, StyleSheet, KeyboardAvoidingView, Linking } from 'react-native';
+import { ScrollView, StyleSheet, KeyboardAvoidingView, Linking, Alert } from 'react-native';
 import { isAndroid } from 'react-native-device-detection';
 import { Portal, TextInput, Button, Dialog, List, Text } from 'react-native-paper';
 import { WoWsInfo, LoadingIndicator } from '../../component';
@@ -20,7 +20,6 @@ class RS extends Component {
       info: false,
       // Whether we are loading player info
       loading: true,
-      battleCount: 0,
       battleTime: '',
       // array is player list and Info is for each team (winrate, damage and so on)
       allay: [],
@@ -30,13 +29,14 @@ class RS extends Component {
     };
 
     this.domain = getCurrDomain();
+    this.battle = 0;
   }
 
   render() {
     const { container, input } = styles;
-    const { ip, rs } = this.state;
+    const { ip, rs, valid } = this.state;
     return (
-      <WoWsInfo onPress={() => this.setState({info: true})} title='Map Information'>
+      <WoWsInfo onPress={rs ? () => this.setState({info: true}) : null} title='Map Information'>
         { !valid ? <KeyboardAvoidingView style={container} behavior='padding' enabled>
           <TextInput style={input} theme={{roundness: 0}} value={ip} placeholder='192.168.1.x' 
             keyboardType={isAndroid ? 'decimal-pad' : 'numbers-and-punctuation'}
@@ -57,24 +57,6 @@ class RS extends Component {
     return (
       <Text>{JSON.stringify(allay)}</Text>
     );
-  }
-
-  async appendExtraInfo(player) {
-    const { name, shipId } = player;
-    if (name.startsWith(':')) return;
-    let idInfo = await SafeFetch.get(WoWsAPI.PlayerSearch, this.domain, name);
-    let playerID = Guard(idInfo, 'data.0', null);
-    if (playerID != null) {
-      player.account_id = playerID.account_id;
-      player.nickname = playerID.nickname;
-
-      // Get player ship info
-      let shipInfo = await SafeFetch.get(WoWsAPI.OneShipInfo, this.domain, shipId, player.account_id);
-      let pvp = Guard(shipInfo, `data.${player.account_id}.0.pvp`, null);
-      if (pvp != null) {
-        player.pvp = pvp;
-      }
-    }
   }
 
   renderMapInfo(rs) {
@@ -114,7 +96,22 @@ class RS extends Component {
     let url = 'http://' + ip.split('/').join('') + ':8605';
     fetch(url).then(html => html.text()).then(text => {
       if (text === '[]') return;
-      const data = JSON.parse(text);
+      this.setState({valid: true});
+      this.interval = setInterval(() => this.getArenaInfo(url), 22222);
+    }).catch(() => Alert.alert('Error', `${url} is not valid`));
+  }
+
+  getArenaInfo(url) {
+    fetch(url).then(html => html.text()).then(text => {
+      if (text === '[]') return;
+      this.setState({valid: true});
+      setInterval(() => this.getArenaInfo(url), 22222);
+    }).catch(() => {
+      // Some error so no longer valid
+      clearTimeout(this.interval);
+      this.setState({valid: false, ip: '', rs: null});
+    });
+    const data = JSON.parse(text);
       const vehicles = data.vehicles;
       // Get allay and enemy
       let allayList = [];
@@ -139,7 +136,24 @@ class RS extends Component {
           }
         }), 300);
       });
-    });
+  }
+
+  async appendExtraInfo(player) {
+    const { name, shipId } = player;
+    if (name.startsWith(':')) return;
+    let idInfo = await SafeFetch.get(WoWsAPI.PlayerSearch, this.domain, name);
+    let playerID = Guard(idInfo, 'data.0', null);
+    if (playerID != null) {
+      player.account_id = playerID.account_id;
+      player.nickname = playerID.nickname;
+
+      // Get player ship info
+      let shipInfo = await SafeFetch.get(WoWsAPI.OneShipInfo, this.domain, shipId, player.account_id);
+      let pvp = Guard(shipInfo, `data.${player.account_id}.0.pvp`, null);
+      if (pvp != null) {
+        player.pvp = pvp;
+      }
+    }
   }
 }
 
