@@ -14,10 +14,10 @@ class SimpleRating extends PureComponent {
   render() {
     const { centerText, horizontal, centerView } = styles;
     const { pvp, rating } = this.props.info;
-    const { battles, wins, damage_dealt } = pvp;
-
+    
     let nothing = false;
-    if (battles === 0) nothing = true;
+    if (pvp == null) nothing = true;
+    else if (pvp.battles === 0) nothing = true;
     
     let iconStyle = {height: 24, width: 24, tintColor: TintColour()[500]};
     return (
@@ -25,15 +25,15 @@ class SimpleRating extends PureComponent {
         <View style={horizontal}>
           <View style={centerView}>
             <Image style={iconStyle} source={require('../../img/Battle.png')}/>
-            <Text style={centerText}>{nothing ? '0' : battles}</Text>
+            <Text style={centerText}>{nothing ? '0' : pvp.battles}</Text>
           </View>
           <View style={centerView}>
             <Image style={iconStyle} source={require('../../img/WinRate.png')}/>
-            <Text style={centerText}>{nothing ? '0.0%' : `${roundTo(wins / battles * 100, 2)}%`}</Text>
+            <Text style={centerText}>{nothing ? '0.0%' : `${roundTo(pvp.wins / pvp.battles * 100, 2)}%`}</Text>
           </View>
           <View style={centerView}>
             <Image style={iconStyle} source={require('../../img/Damage.png')}/>
-            <Text style={centerText}>{nothing ? '0' : roundTo(damage_dealt / battles)}</Text>
+            <Text style={centerText}>{nothing ? '0' : roundTo(pvp.damage_dealt / pvp.battles)}</Text>
           </View>
         </View>
         <View style={{backgroundColor: getColour(rating), height: 12, borderRadius: 99}}/>

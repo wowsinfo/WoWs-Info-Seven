@@ -83,7 +83,7 @@ export const getColourList = () => ['red', 'orange', '#F5C84C', '#67AF34', '#4A7
 
 export const getColour = (rating) => {
   const colours = getColourList();
-  return colours[getRatingIndex(rating)];
+  return SafeValue(colours[getRatingIndex(rating)], 'red');
 };
 
 export const getRatingList = () => [lang.rating_bad, lang.rating_below_average, lang.rating_average, lang.rating_good, 

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { ScrollView, StyleSheet, KeyboardAvoidingView, Linking, Alert } from 'react-native';
+import { View, ScrollView, StyleSheet, KeyboardAvoidingView, Linking, Alert, FlatList } from 'react-native';
 import { isAndroid } from 'react-native-device-detection';
-import { Portal, TextInput, Button, Dialog, List, Text } from 'react-native-paper';
-import { WoWsInfo, LoadingIndicator } from '../../component';
-import { SafeFetch, roundTo, Guard, getOverallRating } from '../../core';
+import { Portal, TextInput, Button, Dialog, List, Text, Title } from 'react-native-paper';
+import { WoWsInfo, LoadingIndicator, Touchable, WarshipCell, SimpleRating, RatingButton } from '../../component';
+import { SafeFetch, roundTo, Guard, getOverallRating, SafeAction, SafeValue } from '../../core';
 import { WoWsAPI } from '../../value/api';
-import { getCurrDomain } from '../../value/data';
+import { getCurrDomain, SAVED } from '../../value/data';
 
 class RS extends Component {
   constructor(props) {
@@ -53,8 +53,40 @@ class RS extends Component {
   renderPlayer() {
     const { loading, allay, enemy } = this.state; 
     if (loading) return <LoadingIndicator />;
+    
+    const { horizontal } = styles;
+    let allayRating = getOverallRating(allay);
+    let enemyRating = getOverallRating(enemy);
+    allay.sort((a, b) => b.ap - a.ap);
+    enemy.sort((a, b) => b.ap - a.ap);
+    
     return (
-      <Text>{JSON.stringify(allay)}</Text>
+      <ScrollView>
+        <View style={[horizontal, {justifyContent: 'space-between'}]}>
+          <RatingButton rating={allayRating} number/>
+          <Title>RS Beta</Title>
+          <RatingButton rating={enemyRating} number/>
+        </View>
+        <View style={horizontal}>
+          <FlatList data={allay} renderItem={({item}) => this.renderPlayerCell(item)}
+            keyExtractor={p => String(p.account_id)} style={{margin: 8}}/>
+          <FlatList data={enemy} renderItem={({item}) => this.renderPlayerCell(item)}
+            keyExtractor={p => String(p.account_id)} style={{margin: 8}}/>
+        </View>
+      </ScrollView>
+    );
+  }
+
+  renderPlayerCell(info) {
+    const { playerName, cell } = styles;
+    const { nickname, name } = info;
+    let pName = SafeValue(nickname, name);
+    return (
+      <Touchable style={cell} onPress={info.pvp ? () => SafeAction('PlayerShipDetail', {data: info}) : null}>
+        <WarshipCell item={DATA[SAVED.warship][info.ship_id]} scale={1.4}/>
+        <Text style={playerName} numberOfLines={1}>{pName}</Text>
+        <SimpleRating info={info}/>
+      </Touchable>
     );
   }
 
@@ -108,8 +140,7 @@ class RS extends Component {
       const data = JSON.parse(text);
       this.setState({rs: data});
       const { battleTime } = this.state;
-      // Make sure it is new
-      console.log(battleTime, data);
+      // Make sure it is a new date
       if (data.dateTime !== battleTime) {
         this.setState({loading: true, battleTime: data.dateTime});
         const vehicles = data.vehicles;
@@ -117,25 +148,19 @@ class RS extends Component {
         let allayList = [];
         let enemyList = [];
         vehicles.forEach((v, i) => {
-          setTimeout(() => this.appendExtraInfo(v).then(() => {
-            const team = v.relation;
-            console.log(v);
+          setTimeout(() => this.appendExtraInfo(v).then(player => {
+            const team = player.relation;
             // 0 and 1 are friends
-            if (team < 2) allayList.push(v);
-            else enemyList.push(v);
+            if (team < 2) allayList.push(player);
+            else enemyList.push(player);
   
             // Update data here
             if (i === vehicles.length - 1) {
-              let allayRating = getOverallRating(allayList);
-              let enemyRating = getOverallRating(enemyList);
               this.setState({
                 allay: allayList,
-                allayInfo: {rating: allayRating},
                 enemy: enemyList,
-                enemyInfo: {rating: enemyRating},
                 loading: false
               });
-              console.log(this.state);
             }
           }), 300);
         });
@@ -149,10 +174,12 @@ class RS extends Component {
 
   async appendExtraInfo(player) {
     const { name, shipId } = player;
-    if (name.startsWith(':')) return;
+    if (name.startsWith(':')) return player;
     let idInfo = await SafeFetch.get(WoWsAPI.PlayerSearch, this.domain, name);
     let playerID = Guard(idInfo, 'data.0', null);
     if (playerID != null) {
+      player.ship_id = player.shipId;
+      delete player.shipId; delete player.id; delete player.name;
       player.account_id = playerID.account_id;
       player.nickname = playerID.nickname;
 
@@ -163,6 +190,7 @@ class RS extends Component {
         player.pvp = pvp;
       }
     }
+    return player;
   }
 }
 
@@ -175,6 +203,19 @@ const styles = StyleSheet.create({
   input: {
     width: '100%',
     marginBottom: 8
+  },
+  horizontal: {
+    flexDirection: 'row',
+    padding: 8
+  },
+  playerName: {
+    fontWeight: '300',
+    fontSize: 17,
+    marginBottom: 8,
+    textAlign: 'center'
+  },
+  cell: {
+    margin: 4
   }
 });
 
