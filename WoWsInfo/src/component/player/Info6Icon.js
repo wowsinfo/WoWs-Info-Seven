@@ -1,7 +1,7 @@
 /**
  * Info6Icon.js
  * 
- * 
+ * The classic 6 icons
  */
 
 import React, { Component } from 'react';

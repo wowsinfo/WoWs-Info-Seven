@@ -1,7 +1,7 @@
 /**
  * SimpleRating.js
  * 
- * 
+ * Rating and class 3 icons
  */
 
 import React, { PureComponent } from 'react';

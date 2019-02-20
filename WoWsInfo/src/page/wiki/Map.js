@@ -1,7 +1,7 @@
 /**
  * Map.js
  * 
- * 
+ * This is the wiki map
  */
 
 import React, { Component } from 'react';

@@ -1,7 +1,7 @@
 /**
  * Collection.js
  * 
- * 
+ * This is the wiki collection and it is reused for collection items as well
  */
 
 import React, { PureComponent } from 'react';

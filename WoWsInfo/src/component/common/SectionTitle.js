@@ -1,7 +1,7 @@
 /**
  * SectionTitle.js
  * 
- * 
+ * A themed title
  */
 
 import React, { Component } from 'react';

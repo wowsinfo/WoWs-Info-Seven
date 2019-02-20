@@ -1,7 +1,7 @@
 /**
  * WarshipModule.js
  * 
- * 
+ * Update warship module
  */
 
 import React, { Component } from 'react';

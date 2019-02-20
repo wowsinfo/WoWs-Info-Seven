@@ -1,7 +1,7 @@
 /**
  * PriceLabel.js
  * 
- * 
+ * Display consumable and warship price (silver for credit and gold for doubloon)
  */
 
 import React, { Component } from 'react';

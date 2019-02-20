@@ -1,7 +1,7 @@
 /**
  * Achievement.js
  * 
- * 
+ * This is the wiki achievements
  */
 
 import React, { PureComponent } from 'react';

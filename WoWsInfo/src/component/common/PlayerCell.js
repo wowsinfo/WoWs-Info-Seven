@@ -1,7 +1,7 @@
 /**
  * PlayerCell.js
  * 
- * 
+ * Dsiplay player and clan with her ID at the right
  */
 
 import React, { Component } from 'react';

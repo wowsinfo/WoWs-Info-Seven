@@ -1,7 +1,7 @@
 /**
  * AppName.js
  * 
- * 
+ * Display app name, app and game version and app logo horizontally
  */
 
 import React, { Component } from 'react';

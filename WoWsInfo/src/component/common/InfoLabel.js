@@ -1,7 +1,7 @@
 /**
  * InfoLabel.js
  * 
- * 
+ * A normal label with a caption on top
  */
 
 import React, { Component } from 'react';

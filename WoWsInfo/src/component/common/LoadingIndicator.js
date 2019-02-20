@@ -1,7 +1,7 @@
 /**
  * LoadingIndicator.js
  * 
- * 
+ * A simple loading indicator following current theme
  */
 
 import React, { Component } from 'react';

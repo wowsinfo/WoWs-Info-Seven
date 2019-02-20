@@ -1,7 +1,7 @@
 /**
  * WarshipFilter.js
  * 
- * 
+ * Filter warship for wiki and player ship
  */
 
 import React, { Component } from 'react';

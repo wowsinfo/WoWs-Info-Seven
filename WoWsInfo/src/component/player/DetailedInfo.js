@@ -1,7 +1,7 @@
 /**
  * DetailedInfo.js
  * 
- * 
+ * Render detailed information for player and player ships
  */
 
 import React, { Component } from 'react';
