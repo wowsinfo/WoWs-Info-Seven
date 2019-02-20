@@ -12,11 +12,15 @@ class RS extends Component {
     super(props);
 
     this.state = {
-      ip: '192.168.1.105',
+      // Controls whether ip if valid
+      ip: '',
       rs: null,
+      valid: false,
+      // Whether show map info
       info: false,
-
+      // Whether we are loading player info
       loading: true,
+      // array is player list and Info is for each team (winrate, damage and so on)
       allay: [],
       allayInfo: {},
       enemy: [],
@@ -31,7 +35,7 @@ class RS extends Component {
     const { ip, rs } = this.state;
     return (
       <WoWsInfo onPress={() => this.setState({info: true})} title='Map Information'>
-        { rs === null ? <KeyboardAvoidingView style={container} behavior='padding' enabled>
+        { !valid ? <KeyboardAvoidingView style={container} behavior='padding' enabled>
           <TextInput style={input} theme={{roundness: 0}} value={ip} placeholder='192.168.1.x' 
             keyboardType={isAndroid ? 'decimal-pad' : 'numbers-and-punctuation'}
             onChangeText={t => this.setState({ip: t})}
@@ -105,37 +109,35 @@ class RS extends Component {
    * @param {string} ip 
    */
   validIP(ip) {
-    let url = ip.split('/').join('') + ':8605';
-    const data = require('../../coop.json');
-    const vehicles = data.vehicles;
-    // Get allay and enemy
-    let allayList = [];
-    let enemyList = [];
-    vehicles.forEach((v, i) => {
-      setTimeout(() => this.appendExtraInfo(v).then(() => {
-        const team = v.relation;
-        console.log(v);
-        // 0 and 1 are friends
-        if (team < 2) allayList.push(v);
-        else enemyList.push(v);
+    let url = 'http://' + ip.split('/').join('') + ':8605';
+    fetch(url).then(html => html.text()).then(text => {
+      if (text === '[]') return;
+      const data = JSON.parse(text);
+      const vehicles = data.vehicles;
+      // Get allay and enemy
+      let allayList = [];
+      let enemyList = [];
+      vehicles.forEach((v, i) => {
+        setTimeout(() => this.appendExtraInfo(v).then(() => {
+          const team = v.relation;
+          console.log(v);
+          // 0 and 1 are friends
+          if (team < 2) allayList.push(v);
+          else enemyList.push(v);
 
-        // Update data here
-        if (i === vehicles.length - 1) {
-          let allayRating = getOverallRating(allayList);
-          let enemyRating = getOverallRating(enemyList);
-          this.setState({
-            allay: allayList,
-            enemy: enemyList,
-            loading: false
-          });
-        }
-      }), 300);
+          // Update data here
+          if (i === vehicles.length - 1) {
+            let allayRating = getOverallRating(allayList);
+            let enemyRating = getOverallRating(enemyList);
+            this.setState({
+              allay: allayList,
+              enemy: enemyList,
+              loading: false
+            });
+          }
+        }), 300);
+      });
     });
-    // SafeFetch.normal(url).then(data => {
-    //   if (data.length !== 0) {
-    //     this.setState({rs: data});
-    //   } 
-    // });
   }
 }
 
