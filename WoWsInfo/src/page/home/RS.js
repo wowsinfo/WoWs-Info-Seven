@@ -20,6 +20,8 @@ class RS extends Component {
       info: false,
       // Whether we are loading player info
       loading: true,
+      battleCount: 0,
+      battleTime: '',
       // array is player list and Info is for each team (winrate, damage and so on)
       allay: [],
       allayInfo: {},
