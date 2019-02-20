@@ -49,6 +49,8 @@ const styles = StyleSheet.create({
   },
   centerText: {
     alignSelf: 'center',
+    fontSize: 13,
+    fontWeight: '300'
   },
   centerView: {
     alignItems: 'center',

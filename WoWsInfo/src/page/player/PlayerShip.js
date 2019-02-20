@@ -19,7 +19,7 @@ class PlayerShip extends PureComponent {
     }
     console.log(ships);
 
-    this.original = ships.sort((a, b) => b.ap - a.ap);
+    this.original = ships.sort((a, b) => b.last_battle_time - a.last_battle_time);
     this.state = {
       data: this.original,
       rating: rating,
@@ -50,7 +50,7 @@ class PlayerShip extends PureComponent {
       <WoWsInfo title={`${lang.wiki_warship_footer} - ${data.length}`} onPress={() => SafeAction('WarshipFilter', {applyFunc: this.updateShip})}>
         <RatingButton rating={rating}/>        
         <FlatGrid itemDimension={150} items={data} renderItem={({item}) => this.renderShip(item)} 
-          showsVerticalScrollIndicator={false} fixed/>
+          showsVerticalScrollIndicator={false}/>
         <FooterPlus>
           <FlatList data={sortingMethod} renderItem={({item}) => <Button style={{margin: 8}} mode='contained' onPress={() => this.sortData(item.v)}>{item.n}</Button>} 
             horizontal showsHorizontalScrollIndicator={false} keyExtractor={d => d.n}/>
