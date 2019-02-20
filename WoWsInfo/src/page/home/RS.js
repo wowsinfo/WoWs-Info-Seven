@@ -29,7 +29,6 @@ class RS extends Component {
     };
 
     this.domain = getCurrDomain();
-    this.battle = 0;
   }
 
   render() {
@@ -95,47 +94,57 @@ class RS extends Component {
   validIP(ip) {
     let url = 'http://' + ip.split('/').join('') + ':8605';
     fetch(url).then(html => html.text()).then(text => {
-      if (text === '[]') return;
+      if (text === '[]') throw 'Unkown error';
       this.setState({valid: true});
+      this.getArenaInfo(url);
       this.interval = setInterval(() => this.getArenaInfo(url), 22222);
     }).catch(() => Alert.alert('Error', `${url} is not valid`));
   }
 
   getArenaInfo(url) {
     fetch(url).then(html => html.text()).then(text => {
-      if (text === '[]') return;
-      this.setState({valid: true});
-      setInterval(() => this.getArenaInfo(url), 22222);
+      if (text === '[]') throw 'Data is not valid';
+
+      const data = JSON.parse(text);
+      this.setState({rs: data});
+      const { battleTime } = this.state;
+      // Make sure it is new
+      console.log(battleTime, data);
+      if (data.dateTime !== battleTime) {
+        this.setState({loading: true, battleTime: data.dateTime});
+        const vehicles = data.vehicles;
+        // Get allay and enemy
+        let allayList = [];
+        let enemyList = [];
+        vehicles.forEach((v, i) => {
+          setTimeout(() => this.appendExtraInfo(v).then(() => {
+            const team = v.relation;
+            console.log(v);
+            // 0 and 1 are friends
+            if (team < 2) allayList.push(v);
+            else enemyList.push(v);
+  
+            // Update data here
+            if (i === vehicles.length - 1) {
+              let allayRating = getOverallRating(allayList);
+              let enemyRating = getOverallRating(enemyList);
+              this.setState({
+                allay: allayList,
+                allayInfo: {rating: allayRating},
+                enemy: enemyList,
+                enemyInfo: {rating: enemyRating},
+                loading: false
+              });
+              console.log(this.state);
+            }
+          }), 300);
+        });
+      }
     }).catch(() => {
       // Some error so no longer valid
       clearTimeout(this.interval);
       this.setState({valid: false, ip: '', rs: null});
     });
-    const data = JSON.parse(text);
-      const vehicles = data.vehicles;
-      // Get allay and enemy
-      let allayList = [];
-      let enemyList = [];
-      vehicles.forEach((v, i) => {
-        setTimeout(() => this.appendExtraInfo(v).then(() => {
-          const team = v.relation;
-          console.log(v);
-          // 0 and 1 are friends
-          if (team < 2) allayList.push(v);
-          else enemyList.push(v);
-
-          // Update data here
-          if (i === vehicles.length - 1) {
-            let allayRating = getOverallRating(allayList);
-            let enemyRating = getOverallRating(enemyList);
-            this.setState({
-              allay: allayList,
-              enemy: enemyList,
-              loading: false
-            });
-          }
-        }), 300);
-      });
   }
 
   async appendExtraInfo(player) {
