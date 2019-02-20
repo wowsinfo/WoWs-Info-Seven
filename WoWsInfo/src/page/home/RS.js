@@ -59,7 +59,7 @@ class RS extends Component {
     let enemyRating = getOverallRating(enemy);
     allay.sort((a, b) => b.ap - a.ap);
     enemy.sort((a, b) => b.ap - a.ap);
-    
+
     return (
       <ScrollView>
         <View style={[horizontal, {justifyContent: 'space-between'}]}>
@@ -123,20 +123,24 @@ class RS extends Component {
    * Check the IP format and try to send a request to it
    * @param {string} ip 
    */
-  validIP(ip) {
+  async validIP(ip) {
     let url = 'http://' + ip.split('/').join('') + ':8605';
-    fetch(url).then(html => html.text()).then(text => {
+    try {
+      let text = await fetch(url).then(html => html.text())
       if (text === '[]') throw 'Unkown error';
       this.setState({valid: true});
       this.getArenaInfo(url);
       this.interval = setInterval(() => this.getArenaInfo(url), 22222);
-    }).catch(() => Alert.alert('Error', `${url} is not valid`));
+    } catch {
+      Alert.alert('Error', `${url} is not valid`)
+    }
   }
 
-  getArenaInfo(url) {
-    fetch(url).then(html => html.text()).then(text => {
+  async getArenaInfo(url) {
+    try {
+      let text = await fetch(url).then(html => html.text());
       if (text === '[]') throw 'Data is not valid';
-
+  
       const data = JSON.parse(text);
       this.setState({rs: data});
       const { battleTime } = this.state;
@@ -147,29 +151,28 @@ class RS extends Component {
         // Get allay and enemy
         let allayList = [];
         let enemyList = [];
-        vehicles.forEach((v, i) => {
-          setTimeout(() => this.appendExtraInfo(v).then(player => {
-            const team = player.relation;
-            // 0 and 1 are friends
-            if (team < 2) allayList.push(player);
-            else enemyList.push(player);
-  
-            // Update data here
-            if (i === vehicles.length - 1) {
+        for (let v of vehicles) {
+          setTimeout(() => {
+            this.appendExtraInfo(v).then(player => {
+              const team = player.relation;
+              // 0 and 1 are friends
+              if (team < 2) allayList.push(player);
+              else enemyList.push(player);
+
               this.setState({
                 allay: allayList,
                 enemy: enemyList,
                 loading: false
               });
-            }
-          }), 300);
-        });
+            });
+          }, 300);
+        }
       }
-    }).catch(() => {
+    } catch {
       // Some error so no longer valid
       clearTimeout(this.interval);
       this.setState({valid: false, ip: '', rs: null});
-    });
+    }
   }
 
   async appendExtraInfo(player) {
