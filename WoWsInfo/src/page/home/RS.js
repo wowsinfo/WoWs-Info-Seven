@@ -13,7 +13,7 @@ class RS extends Component {
 
     this.state = {
       ip: '192.168.1.105',
-      rs: require('../../coop.json'),
+      rs: null,
       info: false,
 
       loading: true,
@@ -31,7 +31,7 @@ class RS extends Component {
     const { ip, rs } = this.state;
     return (
       <WoWsInfo onPress={() => this.setState({info: true})} title='Map Information'>
-        { ip === '' ? <KeyboardAvoidingView style={container} behavior='padding' enabled>
+        { rs === null ? <KeyboardAvoidingView style={container} behavior='padding' enabled>
           <TextInput style={input} theme={{roundness: 0}} value={ip} placeholder='192.168.1.x' 
             keyboardType={isAndroid ? 'decimal-pad' : 'numbers-and-punctuation'}
             onChangeText={t => this.setState({ip: t})}
@@ -39,39 +39,13 @@ class RS extends Component {
           <Button uppercase={false} onPress={() => Linking.openURL('https://github.com/HenryQuan/WoWs-RS/releases/latest')}>
             Download RS on your computer
           </Button>
-        </KeyboardAvoidingView> : this.renderPlayer(rs) }
+        </KeyboardAvoidingView> : this.renderPlayer() }
         { this.renderMapInfo(rs) }
       </WoWsInfo>
     )
   };
 
-  renderPlayer(rs) {
-    const { vehicles } = rs;
-
-    // Get allay and enemy
-    let allayList = [];
-    let enemyList = [];
-    vehicles.forEach((v, i) => {
-      setTimeout(() => this.appendExtraInfo(v).then(() => {
-        const team = v.relation;
-        console.log(v);
-        // 0 and 1 are friends
-        if (team < 2) allayList.push(v);
-        else enemyList.push(v);
-
-        // Update data here
-        if (i === vehicles.length - 1) {
-          let allayRating = getOverallRating(allayList);
-          let enemyRating = getOverallRating(enemyList);
-          this.setState({
-            allay: allayList,
-            enemy: enemyList,
-            loading: false
-          });
-        }
-      }), 300);
-    });
-
+  renderPlayer() {
     const { loading, allay, enemy } = this.state; 
     if (loading) return <LoadingIndicator />;
     return (
@@ -98,6 +72,7 @@ class RS extends Component {
   }
 
   renderMapInfo(rs) {
+    if (rs === null) return null;
     const { info } = this.state;
 
     const { clientVersionFromExe, dateTime, duration, gameLogic,
@@ -131,11 +106,36 @@ class RS extends Component {
    */
   validIP(ip) {
     let url = ip.split('/').join('') + ':8605';
-    SafeFetch.normal(url).then(data => {
-      if (data.length !== 0) {
-        this.setState({rs: data});
-      } 
+    const data = require('../../coop.json');
+    const vehicles = data.vehicles;
+    // Get allay and enemy
+    let allayList = [];
+    let enemyList = [];
+    vehicles.forEach((v, i) => {
+      setTimeout(() => this.appendExtraInfo(v).then(() => {
+        const team = v.relation;
+        console.log(v);
+        // 0 and 1 are friends
+        if (team < 2) allayList.push(v);
+        else enemyList.push(v);
+
+        // Update data here
+        if (i === vehicles.length - 1) {
+          let allayRating = getOverallRating(allayList);
+          let enemyRating = getOverallRating(enemyList);
+          this.setState({
+            allay: allayList,
+            enemy: enemyList,
+            loading: false
+          });
+        }
+      }), 300);
     });
+    // SafeFetch.normal(url).then(data => {
+    //   if (data.length !== 0) {
+    //     this.setState({rs: data});
+    //   } 
+    // });
   }
 }
 
