@@ -1,7 +1,7 @@
 /**
  * Warship.js
  * 
- * 
+ * This is wiki warship
  */
 
 import React, { PureComponent } from 'react';

@@ -1,7 +1,7 @@
 /**
  * RatingButton.js
  * 
- * 
+ * A button displaying rating
  */
 
 import React, { Component } from 'react';

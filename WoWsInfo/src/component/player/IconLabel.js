@@ -1,7 +1,7 @@
 /**
  * IconLabel.js
  * 
- * 
+ * A label with an icon on top
  */
 
 import React, { Component } from 'react';

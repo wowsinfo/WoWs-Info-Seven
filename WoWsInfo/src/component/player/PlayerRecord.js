@@ -1,7 +1,7 @@
 /**
  * PlayerRecord.js
  * 
- * 
+ * Records for all weapons
  */
 
 import React, { Component } from 'react';

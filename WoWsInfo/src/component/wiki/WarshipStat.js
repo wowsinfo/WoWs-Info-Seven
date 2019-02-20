@@ -1,7 +1,7 @@
 /**
  * WarshipStat.js
  * 
- * 
+ * It renders a horizontal bar with a label and number on top
  */
 
 import React, { Component } from 'react';

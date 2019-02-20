@@ -1,7 +1,7 @@
 /**
  * License.js
  * 
- * 
+ * Showing all libraries used in WoWs Info
  */
 
 import React, { Component } from 'react';

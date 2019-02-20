@@ -1,7 +1,7 @@
 /**
  * TabButton.js
  * 
- * 
+ * It is a styled button tab button
  */
 
 import React, { Component } from 'react';

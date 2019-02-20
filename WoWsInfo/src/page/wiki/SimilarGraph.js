@@ -1,7 +1,7 @@
 /**
  * SimilarGraph.js
  * 
- * 
+ * Displaying all similar ships' average stats
  */
 
 import React, { PureComponent } from 'react';

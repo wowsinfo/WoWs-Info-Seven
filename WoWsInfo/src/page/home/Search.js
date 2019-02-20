@@ -1,7 +1,7 @@
 /**
  * Search.js
  * 
- * 
+ * This is the search screen to find players and clans
  */
 
 import React, { Component } from 'react';

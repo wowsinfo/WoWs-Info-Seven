@@ -1,7 +1,7 @@
 /**
  * Loading.js
  * 
- * 
+ * The loading screen with loading animation
  */
 
 import React, { Component } from 'react';

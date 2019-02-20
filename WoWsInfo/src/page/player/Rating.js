@@ -1,7 +1,7 @@
 /**
  * Rating.js
  * 
- * 
+ * This is a page explaining what is Personal Rating
  */
 
 import React, { Component } from 'react';
