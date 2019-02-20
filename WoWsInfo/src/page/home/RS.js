@@ -126,8 +126,8 @@ class RS extends Component {
   async validIP(ip) {
     let url = 'http://' + ip.split('/').join('') + ':8605';
     try {
-      let text = await fetch(url).then(html => html.text())
-      if (text === '[]') throw 'Unkown error';
+      // Only want to know if we can access it
+      await fetch(url);
       this.setState({valid: true});
       this.getArenaInfo(url);
       this.interval = setInterval(() => this.getArenaInfo(url), 22222);
@@ -139,39 +139,39 @@ class RS extends Component {
   async getArenaInfo(url) {
     try {
       let text = await fetch(url).then(html => html.text());
-      if (text === '[]') throw 'Data is not valid';
+      if (text !== '[]') {
+        const data = JSON.parse(text);
+        this.setState({rs: data});
+        const { battleTime } = this.state;
+        // Make sure it is a new date
+        if (data.dateTime !== battleTime) {
+          this.setState({loading: true, battleTime: data.dateTime});
+          const vehicles = data.vehicles;
+          // Get allay and enemy
+          let allayList = [];
+          let enemyList = [];
+          for (let v of vehicles) {
+            setTimeout(() => {
+              this.appendExtraInfo(v).then(player => {
+                const team = player.relation;
+                // 0 and 1 are friends
+                if (team < 2) allayList.push(player);
+                else enemyList.push(player);
   
-      const data = JSON.parse(text);
-      this.setState({rs: data});
-      const { battleTime } = this.state;
-      // Make sure it is a new date
-      if (data.dateTime !== battleTime) {
-        this.setState({loading: true, battleTime: data.dateTime});
-        const vehicles = data.vehicles;
-        // Get allay and enemy
-        let allayList = [];
-        let enemyList = [];
-        for (let v of vehicles) {
-          setTimeout(() => {
-            this.appendExtraInfo(v).then(player => {
-              const team = player.relation;
-              // 0 and 1 are friends
-              if (team < 2) allayList.push(player);
-              else enemyList.push(player);
-
-              this.setState({
-                allay: allayList,
-                enemy: enemyList,
-                loading: false
+                this.setState({
+                  allay: allayList,
+                  enemy: enemyList,
+                  loading: false
+                });
               });
-            });
-          }, 300);
+            }, 300);
+          }
         }
       }
     } catch {
       // Some error so no longer valid
       clearTimeout(this.interval);
-      this.setState({valid: false, ip: '', rs: null});
+      this.setState({valid: false, rs: null});
     }
   }
 
