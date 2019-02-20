@@ -1,13 +1,13 @@
 /**
  * ClanInfo.js
  * 
- * 
+ * Display Clan information and can access each member's data
  */
 
 import React, { Component } from 'react';
 import { View, ScrollView, FlatList, Linking, StyleSheet } from 'react-native';
 import { WoWsInfo, LoadingIndicator, InfoLabel, SectionTitle } from '../../component';
-import { SafeFetch, Guard, humanTimeString, SafeAction, SafeStorage } from '../../core';
+import { SafeFetch, Guard, humanTimeString, SafeAction, SafeStorage, SafeValue } from '../../core';
 import { WoWsAPI } from '../../value/api';
 import { getDomain, getPrefix, LOCAL } from '../../value/data';
 import { Title, Subheading, Paragraph, List, Caption, Button } from 'react-native-paper';
@@ -19,28 +19,37 @@ class ClanInfo extends Component {
     super(props);
 
     const { clan_id, tag, server } = props.info;
-    let friend = DATA[LOCAL.friendList];
-    this.state = {
-      id: clan_id,
-      tag: tag,
-      info: false,
-      // Clan ID must be valid
-      valid: clan_id != null,
-      canBeFriend: friend.clan[clan_id] == null
-    };
-
-    this.server = server;
-    this.domain = getDomain(server);
-    this.prefix = getPrefix(server);
-
-    SafeFetch.get(WoWsAPI.ClanInfo, this.domain, clan_id).then(data => {
-      let clanInfo = Guard(data, `data.${clan_id}`, null);
-      if (clanInfo != null) {
-        this.setState({info: clanInfo});
-      } else {
-        this.setState({valid: false});
+    if (clan_id == null) {
+      // This should never happen but just in case
+      this.state = {
+        id: '???',
+        tag: SafeValue(tag, '???')
       }
-    });
+    } else {
+      // When everything is Valid
+      let friend = DATA[LOCAL.friendList];
+      this.state = {
+        id: clan_id,
+        tag: tag,
+        info: false,
+        // Clan ID must be valid
+        valid: true,
+        canBeFriend: friend.clan[clan_id] == null
+      };
+
+      this.server = server;
+      this.domain = getDomain(server);
+      this.prefix = getPrefix(server);
+
+      SafeFetch.get(WoWsAPI.ClanInfo, this.domain, clan_id).then(data => {
+        let clanInfo = Guard(data, `data.${clan_id}`, null);
+        if (clanInfo != null) {
+          this.setState({info: clanInfo});
+        } else {
+          this.setState({valid: false});
+        }
+      });
+    }
   }
 
   render() {
@@ -58,7 +67,7 @@ class ClanInfo extends Component {
     } else {
       return (
         <WoWsInfo title={`- ${id} -`} style={container}>
-          <Title style={clanTag}>{`[${tag}]`}</Title>
+          <Title style={clanTag}>{tag}</Title>
         </WoWsInfo>
       )
     }
