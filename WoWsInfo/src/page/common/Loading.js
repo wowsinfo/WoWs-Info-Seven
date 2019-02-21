@@ -41,7 +41,7 @@ class Loading extends Component {
     return (
       <Surface style={container}>
         <StatusBar backgroundColor={BLUE[700]}/>
-        <Anime.View animation={getRandomAnimation()} iterationCount='infinite' easing='ease'>
+        <Anime.View animation={getRandomAnimation()} iterationCount='infinite' easing='ease' useNativeDriver>
           <Image style={logo} source={require('../../img/Logo.png')}/>
         </Anime.View>
         <Text style={label}>{lang.setup_loading}</Text>
