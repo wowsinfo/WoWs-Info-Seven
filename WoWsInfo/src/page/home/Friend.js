@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
 import { List, Colors, IconButton } from 'react-native-paper';
+import * as Anime from 'react-native-animatable';
 import { LOCAL } from '../../value/data';
-import { SafeAction, SafeStorage, SafeValue } from '../../core';
+import { SafeAction, SafeStorage, SafeValue, random } from '../../core';
 import { SectionTitle } from '../../component';
 import { lang } from '../../value/lang';
 
@@ -33,19 +34,27 @@ class Friend extends PureComponent {
 
   render() {
     const { player, clan } = this.state;
-    console.log(this.state);
+
+    const list = ['fadeInLeft', 'fadeInRight'];
+    let clanSide = list[random(list.length)];
+    let playerSide = list[random(list.length)];
+
     return (
       <View>
-        <SectionTitle title={`${lang.friend_clan_title} - ${SafeValue(clan.length, 0)}`}/>
-        <FlatList data={clan} renderItem={({item}) => 
-          <List.Item title={item.tag} onPress={() => this.pushToClan(item)} description={item.clan_id}
-            right={() => <IconButton color={Colors.grey500} icon='close' onPress={() => this.removeClan(item)}/> }/>}
-        keyExtractor={i => String(i.clan_id)} keyboardShouldPersistTaps='always'/>
-        <SectionTitle title={`${lang.friend_player_title} - ${SafeValue(player.length, 0)}`}/>
-        <FlatList data={player} renderItem={({item}) => 
-          <List.Item title={item.nickname} onPress={() => this.pushToPlayer(item)} description={item.account_id}
-            right={() => <IconButton color={Colors.grey500} icon='close' onPress={() => this.removeFriend(item)}/> }/>}
-        keyExtractor={i => String(i.account_id)} keyboardShouldPersistTapshenryq='always'/>
+        <Anime.View animation={clanSide} useNativeDriver>
+          <SectionTitle title={`${lang.friend_clan_title} - ${SafeValue(clan.length, 0)}`}/>
+          <FlatList data={clan} renderItem={({item}) => 
+            <List.Item title={item.tag} onPress={() => this.pushToClan(item)} description={item.clan_id}
+              right={() => <IconButton color={Colors.grey500} icon='close' onPress={() => this.removeClan(item)}/> }/>}
+          keyExtractor={i => String(i.clan_id)} keyboardShouldPersistTaps='always'/>
+        </Anime.View>
+        <Anime.View animation={playerSide} useNativeDriver>  
+          <SectionTitle title={`${lang.friend_player_title} - ${SafeValue(player.length, 0)}`}/>
+          <FlatList data={player} renderItem={({item}) => 
+            <List.Item title={item.nickname} onPress={() => this.pushToPlayer(item)} description={item.account_id}
+              right={() => <IconButton color={Colors.grey500} icon='close' onPress={() => this.removeFriend(item)}/> }/>}
+          keyExtractor={i => String(i.account_id)} keyboardShouldPersistTapshenryq='always'/>
+        </Anime.View>
       </View>
     )
   };
