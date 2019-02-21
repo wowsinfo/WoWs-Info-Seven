@@ -41,3 +41,8 @@ export const humanTimeString = (time) => {
   // first part to get date string and the second get locale time
   return `${obj.toISOString().slice(0, 10).split('-').join('.')} ${obj.toLocaleTimeString()}`;
 }
+
+export const getRandomAnimation = () => {
+  const list = ['bounce', 'flash', 'jello', 'pulse', 'rotate', 'rubberBand', 'shake', 'swing', 'tada', 'wobble'];
+  return list[random(list.length)];
+}
