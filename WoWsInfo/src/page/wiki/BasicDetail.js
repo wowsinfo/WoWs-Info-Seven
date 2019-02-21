@@ -7,6 +7,7 @@
 
 import React, { Component } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
+import * as Anime from 'react-native-animatable';
 import { Title, Paragraph, Caption } from 'react-native-paper';
 import { WikiIcon, WoWsInfo, PriceLabel } from '../../component';
 import { TintTextColour } from '../../value/colour';
@@ -43,7 +44,9 @@ class BasicDetail extends Component {
 
       return (
         <ScrollView contentContainerStyle={container}>
-          <WikiIcon scale={1.6} item={item}/>
+          <Anime.View animation='pulse' iterationCount='infinite' easing='ease' useNativeDriver>
+            <WikiIcon scale={1.6} item={item}/>
+          </Anime.View>
           <Title style={title}>{name}</Title>
           <PriceLabel item={item}/>
           <Paragraph style={label}>{description}</Paragraph>
@@ -59,7 +62,9 @@ class BasicDetail extends Component {
 
       return (
         <ScrollView contentContainerStyle={container}>
-          <WikiIcon scale={1.6} item={item}/>
+          <Anime.View animation='pulse' iterationCount='infinite' easing='ease' useNativeDriver>
+            <WikiIcon scale={1.6} item={item}/>
+          </Anime.View>
           <Title style={title}>{name}</Title>
           <Paragraph style={label}>{bonus}</Paragraph>
         </ScrollView>
@@ -70,7 +75,9 @@ class BasicDetail extends Component {
 
       return (
         <ScrollView contentContainerStyle={container}>
-          <WikiIcon scale={1.6} item={item}/>
+          <Anime.View animation='rotate' iterationCount='infinite' easing='ease' useNativeDriver>
+            <WikiIcon scale={1.6} item={item}/>
+          </Anime.View>
           <Title style={title}>{name}</Title>
           <Paragraph style={label}>{description}</Paragraph>
         </ScrollView>
