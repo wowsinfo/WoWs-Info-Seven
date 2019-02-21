@@ -102,7 +102,7 @@ class WarshipDetail extends PureComponent {
       return (
         <WoWsInfo title={`${curr.ship_id_str} ${curr.ship_id}`}>
           <ScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
-            <Anime.View animation={getRandomAnimation()} iterationCount='infinite' iterationDelay={1000} useNativeDriver>
+            <Anime.View animation='flash' iterationCount='infinite' iterationDelay={1000} useNativeDriver>
               <WikiIcon warship item={curr} scale={3}/>
             </Anime.View>
             { this.renderContent() }
