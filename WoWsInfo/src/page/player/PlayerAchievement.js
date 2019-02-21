@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { StyleSheet } from 'react-native';
+import * as Anime from 'react-native-animatable';
 import { SAVED } from '../../value/data';
 import { WoWsInfo, WikiIcon, Touchable } from '../../component';
 import { FlatGrid } from 'react-native-super-grid';
@@ -33,14 +34,16 @@ class PlayerAchievement extends PureComponent {
     const { data } = this.state;
     return (
       <WoWsInfo title={`${lang.tab_achievement_title} - ${data.length}`}>
-        <FlatGrid itemDimension={80} items={data} renderItem={({item}) => {
-          return (
-            <Touchable onPress={() => SafeAction('BasicDetail', {item: item.data})}>
-              <WikiIcon item={item.data} />
-              <Paragraph style={number}>{item.num}</Paragraph>
-            </Touchable>
-          )
-        }} showsVerticalScrollIndicator={false}/>
+        <Anime.View useNativeDriver animation='fadeIn'>
+          <FlatGrid itemDimension={80} items={data} renderItem={({item}) => {
+            return (
+              <Touchable onPress={() => SafeAction('BasicDetail', {item: item.data})}>
+                <WikiIcon item={item.data} />
+                <Paragraph style={number}>{item.num}</Paragraph>
+              </Touchable>
+            )
+          }} showsVerticalScrollIndicator={false}/>
+        </Anime.View>
       </WoWsInfo>
     )
   };
