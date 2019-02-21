@@ -6,12 +6,14 @@
 
 import React, { Component } from 'react';
 import { SafeAreaView, StyleSheet, StatusBar } from 'react-native';
+import * as Animatable from 'react-native-animatable';
 import { Button, Surface } from 'react-native-paper';
 import { isAndroid } from 'react-native-device-detection';
 import { lang } from '../../value/lang';
 import { FooterButton } from './FooterButton';
 import { SafeAction, random } from '../../core';
 import { ThemeBackColour, ThemeColour } from '../../value/colour';
+import { View } from 'react-native-animatable';
 
 class WoWsInfo extends Component {
   constructor(props) {
@@ -36,9 +38,9 @@ class WoWsInfo extends Component {
         <SafeAreaView style={safeView}>
           <StatusBar barStyle={DARKMODE ? 'light-content' : 'dark-content'} 
             backgroundColor={ThemeColour()}/>
-          <Surface style={child}>
-            { children }
-          </Surface>
+            <Surface style={child}>
+              { children }
+            </Surface>
           { this.renderFooter() }
         </SafeAreaView>
       </Surface>
@@ -52,13 +54,13 @@ class WoWsInfo extends Component {
     let shouldDisable = (!onPress && !about)
 
     return (
-      <Surface style={[footer, ThemeBackColour()]}>
+      <View style={[footer, ThemeBackColour()]}>
         { SWAPBUTTON ? this.renderRight() : this.renderLeft() }
         <Button disabled={shouldDisable} onPress={this.pressEvent} style={text} uppercase={upper}>
           { title ? title : this.lucky }
         </Button>
         { SWAPBUTTON ? this.renderLeft() : this.renderRight() }
-      </Surface>
+      </View>
     )
   }
 
