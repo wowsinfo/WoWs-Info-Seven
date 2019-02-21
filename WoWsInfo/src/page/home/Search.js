@@ -5,8 +5,9 @@
  */
 
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, FlatList, ScrollView } from 'react-native';
+import { View, StyleSheet, FlatList, ScrollView } from 'react-native';
 import { Searchbar } from 'react-native-paper';
+import * as Anime from 'react-native-animatable';
 import { WoWsInfo, SectionTitle, PlayerCell } from '../../component';
 import { getCurrDomain, getCurrPrefix, getCurrServer } from '../../value/data';
 import { Guard, SafeFetch } from '../../core';
@@ -41,8 +42,10 @@ class Search extends Component {
     const { searchBar, scroll } = styles;
     return (
       <WoWsInfo title={lang.menu_footer} onPress={() => this.refs['search'].focus()}>
-        <Searchbar ref='search' value={search} style={searchBar} placeholder={`${this.prefix.toUpperCase()} - ${online} ${lang.search_player_online}`}
-          onChangeText={this.searchAll} autoCorrect={false} autoCapitalize='none' />
+        <Anime.View animation='fadeInDown' useNativeDriver>
+          <Searchbar ref='search' value={search} style={searchBar} placeholder={`${this.prefix.toUpperCase()} - ${online} ${lang.search_player_online}`}
+            onChangeText={this.searchAll} autoCorrect={false} autoCapitalize='none' />
+        </Anime.View>
         <ScrollView style={scroll} keyboardShouldPersistTaps='always' keyboardDismissMode='on-drag'>
           { this.renderContent() }
         </ScrollView>
