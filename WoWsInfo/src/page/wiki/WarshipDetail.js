@@ -7,10 +7,11 @@
 import React, { PureComponent } from 'react';
 import { View, FlatList,Linking, ScrollView, StyleSheet } from 'react-native';
 import { Text, Title, Headline, Button, Paragraph } from 'react-native-paper';
+import * as Anime from 'react-native-animatable';
 import { WoWsInfo, WikiIcon, WarshipCell, PriceLabel, LoadingIndicator, WarshipStat, InfoLabel, FooterPlus } from '../../component';
 import { SAVED, langStr, getCurrDomain } from '../../value/data';
 import { lang } from '../../value/lang';
-import { SafeFetch, Guard, SafeAction, copy, roundTo } from '../../core';
+import { SafeFetch, Guard, SafeAction, copy, roundTo, getRandomAnimation } from '../../core';
 import { WoWsAPI } from '../../value/api';
 import { Actions } from 'react-native-router-flux';
 import { TintColour, TintTextColour } from '../../value/colour';
@@ -101,7 +102,9 @@ class WarshipDetail extends PureComponent {
       return (
         <WoWsInfo title={`${curr.ship_id_str} ${curr.ship_id}`}>
           <ScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
-            <WikiIcon warship item={curr} scale={3}/>
+            <Anime.View animation={getRandomAnimation()} iterationCount='infinite' iterationDelay={1000} useNativeDriver>
+              <WikiIcon warship item={curr} scale={3}/>
+            </Anime.View>
             { this.renderContent() }
           </ScrollView> 
           { this.renderSimilar(similar) }

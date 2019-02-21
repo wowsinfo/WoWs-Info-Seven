@@ -43,6 +43,6 @@ export const humanTimeString = (time) => {
 }
 
 export const getRandomAnimation = () => {
-  const list = ['bounce', 'flash', 'jello', 'pulse', 'rotate', 'rubberBand', 'shake', 'swing', 'tada', 'wobble'];
+  const list = ['bounce', 'flash', 'pulse', 'rotate', 'rubberBand', 'shake', 'swing', 'tada', 'wobble'];
   return list[random(list.length)];
 }
