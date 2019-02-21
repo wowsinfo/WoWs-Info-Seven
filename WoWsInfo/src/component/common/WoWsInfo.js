@@ -6,7 +6,6 @@
 
 import React, { Component } from 'react';
 import { SafeAreaView, StyleSheet, StatusBar } from 'react-native';
-import * as Animatable from 'react-native-animatable';
 import { Button, Surface } from 'react-native-paper';
 import { isAndroid } from 'react-native-device-detection';
 import { lang } from '../../value/lang';
