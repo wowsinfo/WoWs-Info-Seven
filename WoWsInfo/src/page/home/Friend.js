@@ -41,14 +41,14 @@ class Friend extends PureComponent {
 
     return (
       <View>
-        <Anime.View animation={clanSide} useNativeDriver>
+        <Anime.View animation={clanSide} useNativeDriver duration={500}>
           <SectionTitle title={`${lang.friend_clan_title} - ${SafeValue(clan.length, 0)}`}/>
           <FlatList data={clan} renderItem={({item}) => 
             <List.Item title={item.tag} onPress={() => this.pushToClan(item)} description={item.clan_id}
               right={() => <IconButton color={Colors.grey500} icon='close' onPress={() => this.removeClan(item)}/> }/>}
           keyExtractor={i => String(i.clan_id)} keyboardShouldPersistTaps='always'/>
         </Anime.View>
-        <Anime.View animation={playerSide} useNativeDriver>  
+        <Anime.View animation={playerSide} useNativeDriver duration={500}>  
           <SectionTitle title={`${lang.friend_player_title} - ${SafeValue(player.length, 0)}`}/>
           <FlatList data={player} renderItem={({item}) => 
             <List.Item title={item.nickname} onPress={() => this.pushToPlayer(item)} description={item.account_id}
