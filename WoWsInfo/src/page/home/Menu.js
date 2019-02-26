@@ -112,7 +112,7 @@ class Menu extends PureComponent {
           <Animatable.View animation='fadeInDown' easing='ease'>
             <AppName />
           </Animatable.View>
-          <Animatable.View animation='fadeInUp' delay={500} easing='ease'>
+          <Animatable.View animation='fadeInUp' delay={200} easing='ease'>
             { this.renderContent() }
           </Animatable.View>
         </ScrollView>

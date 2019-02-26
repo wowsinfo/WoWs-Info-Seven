@@ -75,7 +75,7 @@ class BasicDetail extends Component {
 
       return (
         <ScrollView contentContainerStyle={container}>
-          <Anime.View animation='rotate' iterationCount='infinite' easing='ease' useNativeDriver>
+          <Anime.View animation='pulse' iterationCount='infinite' easing='ease' useNativeDriver>
             <WikiIcon scale={1.6} item={item}/>
           </Anime.View>
           <Title style={title}>{name}</Title>
