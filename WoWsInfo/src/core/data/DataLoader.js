@@ -25,7 +25,7 @@ class DataLoader {
    */
   static async loadLocal() {
     const { apiLanguage, appVersion, gameVersion, firstLaunch, friendList, userData, noImageMode, 
-      userInfo, userServer, lastUpdate, theme, darkMode, date, swapButton, userLanguage } = LOCAL;
+      userInfo, userServer, lastUpdate, theme, darkMode, date, swapButton, userLanguage, rsIP } = LOCAL;
 
     let data = {};
     // Manully setting up SAVED section (they are all different)
@@ -35,6 +35,7 @@ class DataLoader {
     this.loadEntry(data, appVersion, APP.Version);
     this.loadEntry(data, gameVersion, APP.GameVersion);
     this.loadEntry(data, firstLaunch, true);
+    this.loadEntry(data, rsIP, '');
 
     // Add support to save clans as well
     let list = {
