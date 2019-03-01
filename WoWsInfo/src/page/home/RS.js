@@ -3,7 +3,7 @@ import { View, ScrollView, StyleSheet, KeyboardAvoidingView, Linking, Alert, Fla
 import { isAndroid } from 'react-native-device-detection';
 import { Portal, TextInput, Button, Dialog, List, Text, Title } from 'react-native-paper';
 import { WoWsInfo, LoadingIndicator, Touchable, WarshipCell, SimpleRating, RatingButton } from '../../component';
-import { SafeFetch, roundTo, Guard, getOverallRating, SafeAction, SafeValue, SafeStorage } from '../../core';
+import { SafeFetch, roundTo, Guard, getOverallRating, SafeAction, SafeValue, SafeStorage, random } from '../../core';
 import { WoWsAPI } from '../../value/api';
 import { getCurrDomain, SAVED, LOCAL } from '../../value/data';
 
@@ -34,6 +34,10 @@ class RS extends Component {
   render() {
     const { container, input } = styles;
     const { ip, rs, valid } = this.state;
+
+    // Enter rs mode when there is a valid ip
+    if (ip !== '') this.validIP(ip);
+
     return (
       <WoWsInfo onPress={rs ? () => this.setState({info: true}) : null} title='Map Information'>
         { !valid ? <KeyboardAvoidingView style={container} behavior='padding' enabled>
@@ -69,9 +73,9 @@ class RS extends Component {
         </View>
         <View style={horizontal}>
           <FlatList data={allay} renderItem={({item}) => this.renderPlayerCell(item)}
-            keyExtractor={p => String(p.account_id)} style={{margin: 8}}/>
+            keyExtractor={p => String(p.account_id)} style={{margin: 8, flex: 1}}/>
           <FlatList data={enemy} renderItem={({item}) => this.renderPlayerCell(item)}
-            keyExtractor={p => String(p.account_id)} style={{margin: 8}}/>
+            keyExtractor={p => String(p.account_id)} style={{margin: 8, flex: 1}}/>
         </View>
       </ScrollView>
     );
@@ -160,6 +164,9 @@ class RS extends Component {
                 // 0 and 1 are friends
                 if (team < 2) allayList.push(player);
                 else enemyList.push(player);
+
+                // Set a random id (1 in 88888888 is really small but it can happens)
+                if (player.account_id == null) player.account_id = random(88888888);
   
                 this.setState({
                   allay: allayList,
