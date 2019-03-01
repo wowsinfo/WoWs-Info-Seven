@@ -40,7 +40,9 @@ export const LOCAL = {
   firstLaunch: '@WoWs_Info:firstLaunch',
   // Language
   apiLanguage: '@WoWs_Info:apiLanguage',
-  userLanguage: '@WoWs_Info:userLanguage'
+  userLanguage: '@WoWs_Info:userLanguage',
+  // RS
+  rsIP: '@WoWs_Info:rsIP'
 }
 
 /**

@@ -3,9 +3,9 @@ import { View, ScrollView, StyleSheet, KeyboardAvoidingView, Linking, Alert, Fla
 import { isAndroid } from 'react-native-device-detection';
 import { Portal, TextInput, Button, Dialog, List, Text, Title } from 'react-native-paper';
 import { WoWsInfo, LoadingIndicator, Touchable, WarshipCell, SimpleRating, RatingButton } from '../../component';
-import { SafeFetch, roundTo, Guard, getOverallRating, SafeAction, SafeValue } from '../../core';
+import { SafeFetch, roundTo, Guard, getOverallRating, SafeAction, SafeValue, SafeStorage } from '../../core';
 import { WoWsAPI } from '../../value/api';
-import { getCurrDomain, SAVED } from '../../value/data';
+import { getCurrDomain, SAVED, LOCAL } from '../../value/data';
 
 class RS extends Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class RS extends Component {
 
     this.state = {
       // Controls whether ip if valid
-      ip: '',
+      ip: DATA[LOCAL.rsIP], // load saved ip
       rs: null,
       valid: false,
       // Whether show map info
@@ -128,7 +128,10 @@ class RS extends Component {
     try {
       // Only want to know if we can access it
       await fetch(url);
-      this.setState({valid: true});
+      this.setState({valid: true}, () => {
+        // Update IP when it is valid
+        SafeStorage.set(LOCAL.rsIP, ip);
+      });
       this.getArenaInfo(url);
       this.interval = setInterval(() => this.getArenaInfo(url), 22222);
     } catch {
