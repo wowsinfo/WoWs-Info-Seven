@@ -5,7 +5,7 @@ import { Portal, TextInput, Button, Dialog, List, Text, Title } from 'react-nati
 import { WoWsInfo, LoadingIndicator, Touchable, WarshipCell, SimpleRating, RatingButton } from '../../component';
 import { SafeFetch, roundTo, Guard, getOverallRating, SafeAction, SafeValue, SafeStorage, random } from '../../core';
 import { WoWsAPI } from '../../value/api';
-import { getCurrDomain, SAVED, LOCAL } from '../../value/data';
+import { getCurrDomain, SAVED, LOCAL, getCurrServer } from '../../value/data';
 
 class RS extends Component {
   constructor(props) {
@@ -31,12 +31,16 @@ class RS extends Component {
     this.domain = getCurrDomain();
   }
 
+  componentDidMount() {
+    const { ip } = this.state;
+    
+    // Enter rs mode when there is a valid ip
+    if (ip !== '') this.validIP(ip);
+  }
+
   render() {
     const { container, input } = styles;
     const { ip, rs, valid } = this.state;
-
-    // Enter rs mode when there is a valid ip
-    if (ip !== '') this.validIP(ip);
 
     return (
       <WoWsInfo onPress={rs ? () => this.setState({info: true}) : null} title='Map Information'>
@@ -73,9 +77,9 @@ class RS extends Component {
         </View>
         <View style={horizontal}>
           <FlatList data={allay} renderItem={({item}) => this.renderPlayerCell(item)}
-            keyExtractor={p => String(p.account_id)} style={{margin: 8, flex: 1}}/>
+            keyExtractor={p => String(p.account_id)} style={{margin: 8, width: '50%'}}/>
           <FlatList data={enemy} renderItem={({item}) => this.renderPlayerCell(item)}
-            keyExtractor={p => String(p.account_id)} style={{margin: 8, flex: 1}}/>
+            keyExtractor={p => String(p.account_id)} style={{margin: 8, width: '50%'}}/>
         </View>
       </ScrollView>
     );
@@ -85,8 +89,11 @@ class RS extends Component {
     const { playerName, cell } = styles;
     const { nickname, name } = info;
     let pName = SafeValue(nickname, name);
+    // For pushing to player
+    info.server = getCurrServer();
     return (
-      <Touchable style={cell} onPress={info.pvp ? () => SafeAction('PlayerShipDetail', {data: info}) : null}>
+      <Touchable style={cell} onPress={info.pvp ? () => SafeAction('PlayerShipDetail', {data: info}) : null}
+        onLongPress={info.account_id ? () => SafeAction('Statistics', {info: info}) : null}>
         <WarshipCell item={DATA[SAVED.warship][info.ship_id]} scale={1.4}/>
         <Text style={playerName} numberOfLines={1}>{pName}</Text>
         <SimpleRating info={info}/>
