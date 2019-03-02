@@ -78,9 +78,9 @@ class RS extends Component {
         </View>
         <View style={horizontal}>
           <FlatGrid items={allay} itemDimension={120} renderItem={({item}) => this.renderPlayerCell(item)}
-            keyExtractor={p => String(p.account_id)} style={{margin: 8, flex: 1}}/>
+            keyExtractor={p => String(p.account_id)} style={{margin: 8, width: '50%'}}/>
           <FlatGrid items={enemy} itemDimension={120} renderItem={({item}) => this.renderPlayerCell(item)}
-            keyExtractor={p => String(p.account_id)} style={{margin: 8, flex: 1}}/>
+            keyExtractor={p => String(p.account_id)} style={{margin: 8, width: '50%'}}/>
         </View>
       </ScrollView>
     );
@@ -236,8 +236,7 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   cell: {
-    margin: 4,
-    flex: 1
+    margin: 4
   }
 });
 
