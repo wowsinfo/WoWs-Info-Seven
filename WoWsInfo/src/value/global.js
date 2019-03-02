@@ -15,3 +15,6 @@ global.CLEANMODE = false;
 global.CANCHECKFORUPDATE = true;
 // Only update api once as well
 global.CANUPDATEAPI = true;
+
+// Trace how many battles
+global.RSBATTLE = 0;
