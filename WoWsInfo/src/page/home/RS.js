@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { View, ScrollView, StyleSheet, KeyboardAvoidingView, Linking, Alert, FlatList } from 'react-native';
-import { isAndroid } from 'react-native-device-detection';
+import { isAndroid, isTablet } from 'react-native-device-detection';
 import { Portal, TextInput, Button, Dialog, List, Text, Title } from 'react-native-paper';
 import { WoWsInfo, LoadingIndicator, Touchable, WarshipCell, SimpleRating, RatingButton } from '../../component';
 import { SafeFetch, roundTo, Guard, getOverallRating, SafeAction, SafeValue, SafeStorage, random } from '../../core';
 import { WoWsAPI } from '../../value/api';
 import { getCurrDomain, SAVED, LOCAL, getCurrServer } from '../../value/data';
+import { FlatGrid } from 'react-native-super-grid';
 
 class RS extends Component {
   constructor(props) {
@@ -76,10 +77,10 @@ class RS extends Component {
           <RatingButton rating={enemyRating} number/>
         </View>
         <View style={horizontal}>
-          <FlatList data={allay} renderItem={({item}) => this.renderPlayerCell(item)}
-            keyExtractor={p => String(p.account_id)} style={{margin: 8, width: '50%'}}/>
-          <FlatList data={enemy} renderItem={({item}) => this.renderPlayerCell(item)}
-            keyExtractor={p => String(p.account_id)} style={{margin: 8, width: '50%'}}/>
+          <FlatGrid items={allay} itemDimension={120} renderItem={({item}) => this.renderPlayerCell(item)}
+            keyExtractor={p => String(p.account_id)} style={{margin: 8, flex: 1}}/>
+          <FlatGrid items={enemy} itemDimension={120} renderItem={({item}) => this.renderPlayerCell(item)}
+            keyExtractor={p => String(p.account_id)} style={{margin: 8, flex: 1}}/>
         </View>
       </ScrollView>
     );
@@ -235,7 +236,8 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   cell: {
-    margin: 4
+    margin: 4,
+    flex: 1
   }
 });
 
