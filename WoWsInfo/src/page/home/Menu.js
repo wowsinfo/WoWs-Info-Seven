@@ -16,6 +16,7 @@ import { SafeAction, Downloader } from '../../core';
 import { ThemeBackColour, TintColour } from '../../value/colour';
 import { getCurrDomain, getCurrServer, getCurrPrefix, APP, LOCAL, getFirstLaunch, setFirstLaunch, setLastLocation } from '../../value/data';
 import { Loading } from '../common/Loading';
+import { FlatGrid } from 'react-native-super-grid';
 
 class Menu extends PureComponent {
 
@@ -138,11 +139,11 @@ class Menu extends PureComponent {
     return (
       <View>
         <SectionTitle title={lang.wiki_section_title}/>
-        { this.wiki.map(item => { return (
-          <List.Item title={item.t} style={{padding: 0, paddingLeft: 8}} onPress={() => item.p()} key={item.t}
+        <FlatGrid items={this.wiki} itemDimension={300} renderItem={({item}) => {
+          return <List.Item title={item.t} style={{padding: 0, paddingLeft: 8}} onPress={() => item.p()} key={item.t}
           left={() => <List.Icon style={[icon, ThemeBackColour()]} color={TintColour()[300]} icon={item.i}/>}
           right={() => isAndroid ? null : <List.Icon color={Colors.grey500} icon='keyboard-arrow-right'/>} />
-        )})}
+        }} spacing={0}/>
         <SectionTitle title={lang.extra_section_title}/>
         <List.Item title='RS Beta' description='Realtime Statistics Beta' onPress={() => SafeAction('RS')}/>
         <List.Section title={lang.extra_support_wowsinfo}>
@@ -152,16 +153,16 @@ class Menu extends PureComponent {
           )})}
         </List.Section>
         <List.Section title={lang.website_title} >
-          { this.websites.map(item => { return (
-            <List.Item title={item.t} description={item.d} key={item.t}
-              onPress={() => Linking.openURL(item.d)}/>
-          )})}
+          <FlatGrid items={this.websites} itemDimension={300} renderItem={({item}) => {
+            return <List.Item title={item.t} description={item.d} key={item.t}
+            onPress={() => Linking.openURL(item.d)}/>
+          }} spacing={0}/>
         </List.Section>
         <List.Section title={lang.youtuber_title}>
-          { this.youtubers.map(item => { return (
-            <List.Item title={item.t} description={item.d} key={item.t}
-              onPress={() => Linking.openURL(item.d)}/>
-          )})}
+          <FlatGrid items={this.youtubers} itemDimension={300} renderItem={({item}) => {
+            return <List.Item title={item.t} description={item.d} key={item.t}
+            onPress={() => Linking.openURL(item.d)}/>
+          }} spacing={0}/>
         </List.Section>
         {/* <List.Section title={lang.tool_title}>
         </List.Section> */}
