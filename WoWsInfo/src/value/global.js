@@ -18,3 +18,5 @@ global.CANUPDATEAPI = true;
 
 // Trace how many battles
 global.RSBATTLE = 0;
+// Trace last known location
+global.LASTLOCATION = '';

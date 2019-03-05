@@ -18,7 +18,7 @@ class Statistics extends PureComponent {
       // Check if this player is inside friend list
       let friend = DATA[LOCAL.friendList];
       let master = DATA[LOCAL.userInfo];
-  
+      console.log(master, account_id);
       this.state = {
         name: nickname,
         id: account_id,
@@ -27,7 +27,7 @@ class Statistics extends PureComponent {
         valid: true,
         hidden: false,
         // Master account
-        canBeMaster: master.account_id !== account_id,
+        canBeMaster: master.account_id != account_id,
         // Add to friend
         canBeFriend: friend.player[account_id] == null,
         clan: '',
