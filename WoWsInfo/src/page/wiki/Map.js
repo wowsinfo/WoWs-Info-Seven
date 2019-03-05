@@ -7,13 +7,13 @@
 import React, { Component } from 'react';
 import { Image, StyleSheet, FlatList, Dimensions } from 'react-native';
 import { WoWsInfo, LoadingIndicator } from '../../component';
-import { SAVED } from '../../value/data';
+import { SAVED, setLastLocation } from '../../value/data';
 import { List, Portal, Dialog } from 'react-native-paper';
 
 class Map extends Component {
   constructor(props) {
     super(props);
-
+    setLastLocation('Map');
     console.log('WIKI - Map');
 
     let map = DATA[SAVED.map];

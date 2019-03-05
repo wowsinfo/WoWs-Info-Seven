@@ -6,7 +6,7 @@
 
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
-import { SAVED } from '../../value/data';
+import { SAVED, setLastLocation } from '../../value/data';
 import { WoWsInfo, WikiIcon, SectionTitle } from '../../component';
 import { SectionGrid } from 'react-native-super-grid';
 import { SafeAction, copy } from '../../core';
@@ -15,7 +15,7 @@ import { lang } from '../../value/lang';
 class CommanderSkill extends Component {
   constructor(props) {
     super(props);
-
+    setLastLocation('CommanderSkill');
     console.log("WIKI - Commander Skill");
     let skill = DATA[SAVED.commanderSkill];
     let cloned = copy(skill);

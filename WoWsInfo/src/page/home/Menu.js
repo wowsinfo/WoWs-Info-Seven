@@ -14,8 +14,9 @@ import { WoWsInfo, SectionTitle, AppName } from '../../component';
 import { lang } from '../../value/lang';
 import { SafeAction, Downloader } from '../../core';
 import { ThemeBackColour, TintColour } from '../../value/colour';
-import { getCurrDomain, getCurrServer, getCurrPrefix, APP, LOCAL, getFirstLaunch, setFirstLaunch } from '../../value/data';
+import { getCurrDomain, getCurrServer, getCurrPrefix, APP, LOCAL, getFirstLaunch, setFirstLaunch, setLastLocation } from '../../value/data';
 import { Loading } from '../common/Loading';
+import { Actions } from 'react-native-router-flux';
 
 class Menu extends PureComponent {
 
@@ -51,8 +52,17 @@ class Menu extends PureComponent {
     this.getData();
     const { main } = this.state;
     let curr = DATA[LOCAL.userInfo];
+    setLastLocation('');
     if (curr.account_id !== main.account_id) {
       this.setState({main: curr});
+    }
+  }
+
+  componentDidMount() {
+    if (LASTLOCATION !== '') {
+      let extra = {};
+      if (LASTLOCATION === 'Statistics') extra = {info: this.state.main};
+      setTimeout(() => SafeAction(LASTLOCATION, extra));
     }
   }
 

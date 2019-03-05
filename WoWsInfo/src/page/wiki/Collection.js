@@ -8,7 +8,7 @@ import React, { PureComponent } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
 import { WoWsInfo, WikiIcon } from '../../component';
-import { SAVED } from '../../value/data';
+import { SAVED, setLastLocation } from '../../value/data';
 import { SafeAction } from '../../core';
 import { Title, Paragraph } from 'react-native-paper';
 import { TintTextColour } from '../../value/colour';
@@ -16,7 +16,7 @@ import { TintTextColour } from '../../value/colour';
 class Collection extends PureComponent {
   constructor(props) {
     super(props);
-
+    setLastLocation('Collection');
     console.log('WIKI - Collection');
 
     let collection = [];

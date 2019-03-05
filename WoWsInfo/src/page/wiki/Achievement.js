@@ -8,13 +8,13 @@ import React, { PureComponent } from 'react';
 import { StyleSheet } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
 import { WikiIcon, WoWsInfo } from '../../component';
-import { SAVED } from '../../value/data';
+import { SAVED, setLastLocation } from '../../value/data';
 import { SafeAction } from '../../core';
 
 class Achievement extends PureComponent {
   constructor(props) {
     super(props);
-
+    setLastLocation('Achievement');
     console.log('WIKI - Achievement');
     let achievement = DATA[SAVED.achievement];
     let sorted = Object.entries(achievement).sort((a, b) => {
