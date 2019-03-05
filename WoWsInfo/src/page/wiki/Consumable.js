@@ -9,13 +9,16 @@ import React, { PureComponent } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
 import { LoadingModal, WikiIcon, WoWsInfo } from '../../component';
-import { SAVED } from '../../value/data';
+import { SAVED, setLastLocation } from '../../value/data';
 import { SafeAction } from '../../core';
 
 class Consumable extends PureComponent {
   constructor(props) {
     super(props);
     const { upgrade } = props;
+    let loc = 'Consumable';
+    if (upgrade === true) loc = 'Upgrade';
+    setLastLocation(loc);
 
     // Load data depending on 'upgrade' prop
     let data = [];

@@ -16,7 +16,6 @@ import { SafeAction, Downloader } from '../../core';
 import { ThemeBackColour, TintColour } from '../../value/colour';
 import { getCurrDomain, getCurrServer, getCurrPrefix, APP, LOCAL, getFirstLaunch, setFirstLaunch, setLastLocation } from '../../value/data';
 import { Loading } from '../common/Loading';
-import { Actions } from 'react-native-router-flux';
 
 class Menu extends PureComponent {
 
@@ -62,6 +61,10 @@ class Menu extends PureComponent {
     if (LASTLOCATION !== '') {
       let extra = {};
       if (LASTLOCATION === 'Statistics') extra = {info: this.state.main};
+      else if (LASTLOCATION === 'Upgrade') {
+        LASTLOCATION = 'Consumable';
+        extra = {upgrade: true};
+      }
       setTimeout(() => SafeAction(LASTLOCATION, extra));
     }
   }
