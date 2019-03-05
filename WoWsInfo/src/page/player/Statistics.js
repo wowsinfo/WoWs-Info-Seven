@@ -4,13 +4,14 @@ import { Text, IconButton, Title, Button } from 'react-native-paper';
 import { LoadingIndicator, WoWsInfo, FooterPlus, TabButton, InfoLabel, SectionTitle, PlayerRecord, DetailedInfo, RatingButton } from '../../component';
 import { SafeFetch, Guard, humanTimeString, SafeAction, SafeStorage, getOverallRating } from '../../core';
 import { WoWsAPI } from '../../value/api';
-import { getDomain, getPrefix, LOCAL } from '../../value/data';
+import { getDomain, getPrefix, LOCAL, setLastLocation } from '../../value/data';
 import { TintColour } from '../../value/colour';
 import { lang } from '../../value/lang';
 
 class Statistics extends PureComponent {
   constructor(props) {
     super(props);
+    setLastLocation('Statistics');
     let ID = Guard(props, 'info.account_id', null);
     // ID must be valid
     if (ID != null && ID !== '') {

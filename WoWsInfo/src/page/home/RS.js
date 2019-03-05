@@ -5,13 +5,13 @@ import { Portal, TextInput, Button, Dialog, List, Text, Title } from 'react-nati
 import { WoWsInfo, LoadingIndicator, Touchable, WarshipCell, SimpleRating, RatingButton } from '../../component';
 import { SafeFetch, roundTo, Guard, getOverallRating, SafeAction, SafeValue, SafeStorage, random } from '../../core';
 import { WoWsAPI } from '../../value/api';
-import { getCurrDomain, SAVED, LOCAL, getCurrServer } from '../../value/data';
+import { getCurrDomain, SAVED, LOCAL, getCurrServer, setLastLocation } from '../../value/data';
 import { FlatGrid } from 'react-native-super-grid';
 
 class RS extends Component {
   constructor(props) {
     super(props);
-
+    setLastLocation('RS');
     this.state = {
       // Controls whether ip if valid
       ip: DATA[LOCAL.rsIP], // load saved ip

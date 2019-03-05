@@ -9,7 +9,7 @@ import { View, StyleSheet, FlatList, ScrollView } from 'react-native';
 import { Searchbar } from 'react-native-paper';
 import * as Anime from 'react-native-animatable';
 import { WoWsInfo, SectionTitle, PlayerCell } from '../../component';
-import { getCurrDomain, getCurrPrefix, getCurrServer } from '../../value/data';
+import { getCurrDomain, getCurrPrefix, getCurrServer, setLastLocation } from '../../value/data';
 import { Guard, SafeFetch } from '../../core';
 import { WoWsAPI } from '../../value/api';
 import { Friend } from './Friend';
@@ -18,7 +18,7 @@ import { lang } from '../../value/lang';
 class Search extends Component {
   constructor(props) {
     super(props);
-
+    setLastLocation('Search');
     this.state = {
       search: '',
       server: '',

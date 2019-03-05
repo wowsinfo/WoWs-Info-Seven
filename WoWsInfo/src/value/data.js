@@ -176,3 +176,12 @@ export const setImageMode = (image) => {
   DATA[str] = image;
   SafeStorage.set(str, image);
 }
+
+/**
+ * Last Location
+ */
+export const setLastLocation = (str) => {
+  let loc = LOCAL.lastLocation;
+  DATA[loc] = str;
+  SafeStorage.set(loc, str);
+}

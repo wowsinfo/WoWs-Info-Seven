@@ -8,14 +8,14 @@ import React, { PureComponent } from 'react';
 import { StyleSheet } from 'react-native';
 import { WoWsInfo, WarshipCell } from '../../component';
 import { FlatGrid } from 'react-native-super-grid';
-import { SAVED } from '../../value/data';
+import { SAVED, setLastLocation } from '../../value/data';
 import { lang } from '../../value/lang';
 import { SafeAction, filterShip } from '../../core';
 
 class Warship extends PureComponent {
   constructor(props) {
     super(props);
-
+    setLastLocation('Warship');
     console.log('WIKI - Warship');
     let warship = DATA[SAVED.warship];
     let sorted = Object.entries(warship).sort((a, b) => {

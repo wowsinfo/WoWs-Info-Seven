@@ -4,6 +4,7 @@ import { IconButton, Colors } from 'react-native-paper';
 import { Actions } from 'react-native-router-flux';
 import { SafeAction } from '../../core';
 import { lang } from '../../value/lang';
+import { setLastLocation } from '../../value/data';
 
 class FooterButton extends Component {
   render() {
@@ -33,6 +34,8 @@ class FooterButton extends Component {
       }
     } else if (icon === 'home') {
       Actions.popTo('Menu');
+      // Clear last location
+      setLastLocation('');
       setTimeout(() => Actions.refresh(), 1000);
     } else SafeAction('Search');
   }
