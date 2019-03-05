@@ -41,6 +41,8 @@ export const LOCAL = {
   // Language
   apiLanguage: '@WoWs_Info:apiLanguage',
   userLanguage: '@WoWs_Info:userLanguage',
+  // Save last visited location as a string
+  lastLocation: '@WoWs_Info:lastLocation',
   // RS
   rsIP: '@WoWs_Info:rsIP'
 }
