@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { View, ScrollView, FlatList, Linking, StyleSheet } from 'react-native';
+import { View, ScrollView, Linking, StyleSheet } from 'react-native';
 import { WoWsInfo, LoadingIndicator, InfoLabel, SectionTitle } from '../../component';
 import { SafeFetch, Guard, humanTimeString, SafeAction, SafeStorage, SafeValue } from '../../core';
 import { WoWsAPI } from '../../value/api';
@@ -13,6 +13,7 @@ import { getDomain, getPrefix, LOCAL } from '../../value/data';
 import { Title, Subheading, Paragraph, List, Caption, Button } from 'react-native-paper';
 import { TintColour } from '../../value/colour';
 import { lang } from '../../value/lang';
+import { FlatGrid } from 'react-native-super-grid';
 
 class ClanInfo extends Component {
   constructor(props) {
@@ -103,13 +104,13 @@ class ClanInfo extends Component {
           { canBeFriend ? <Button icon='contacts' onPress={this.addFriend} style={{padding: 4}}>{lang.basic_add_friend}</Button> : null }
           <Paragraph style={{padding: 16}}>{description}</Paragraph>
           <SectionTitle style={{alignSelf: 'flex-start'}} title={`${lang.clan_member_title} - ${members_count}`}/>
-          <FlatList data={memberInfo} renderItem={({item}) => {
+          <FlatGrid items={memberInfo} itemDimension={300} renderItem={({item}) => {
             return (
               <List.Item title={item.account_name} description={humanTimeString(item.joined_at)}
-                onPress={() => this.pushToPlayer(item)}
+                onPress={() => this.pushToPlayer(item)} key={String(item.account_id)}
                 right={() => <Caption style={{paddingRight: 8, alignSelf: 'center'}}>{item.account_id}</Caption>}/>
             )
-          }} showsVerticalScrollIndicator={false} keyExtractor={d => String(d.account_id)}/>
+          }} showsVerticalScrollIndicator={false} spacing={0}/>
         </View>
       )
     } else {

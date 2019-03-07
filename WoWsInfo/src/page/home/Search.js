@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { View, StyleSheet, FlatList, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import { Searchbar } from 'react-native-paper';
 import * as Anime from 'react-native-animatable';
 import { WoWsInfo, SectionTitle, PlayerCell } from '../../component';
@@ -14,6 +14,7 @@ import { Guard, SafeFetch } from '../../core';
 import { WoWsAPI } from '../../value/api';
 import { Friend } from './Friend';
 import { lang } from '../../value/lang';
+import { FlatGrid } from 'react-native-super-grid';
 
 class Search extends Component {
   constructor(props) {
@@ -64,14 +65,14 @@ class Search extends Component {
         <View>
           <SectionTitle title={`${lang.menu_search_clan} - ${clanLen}`}/>
           { clanLen > 0 ?
-            <FlatList data={result.clan} renderItem={({item}) => {
+            <FlatGrid items={result.clan} itemDimension={300} renderItem={({item}) => {
               return <PlayerCell key={item.clan_id} item={item} clan/>
-            }} keyExtractor={c => c.tag} keyboardShouldPersistTaps='always'/> : null }
+            }} spacing={0} keyboardShouldPersistTaps='always'/> : null }
           <SectionTitle title={`${lang.menu_search_player} - ${playerLen}`}/>
           { playerLen > 0 ?
-            <FlatList data={result.player} renderItem={({item}) => {
+            <FlatGrid items={result.player} itemDimension={300} renderItem={({item}) => {
               return <PlayerCell key={item.account_id} item={item} player/>
-            }} keyExtractor={p => p.nickname} keyboardShouldPersistTaps='always'/> : null }
+            }} spacing={0} keyboardShouldPersistTaps='always'/> : null }
         </View>
       );
     }

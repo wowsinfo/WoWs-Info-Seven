@@ -1,11 +1,12 @@
 import React, { PureComponent } from 'react';
-import { View, StyleSheet, FlatList } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { List, Colors, IconButton } from 'react-native-paper';
 import * as Anime from 'react-native-animatable';
 import { LOCAL } from '../../value/data';
 import { SafeAction, SafeStorage, SafeValue, random } from '../../core';
 import { SectionTitle } from '../../component';
 import { lang } from '../../value/lang';
+import { FlatGrid } from 'react-native-super-grid';
 
 class Friend extends PureComponent {
   constructor(props) {
@@ -43,17 +44,17 @@ class Friend extends PureComponent {
       <View>
         <Anime.View animation={clanSide} useNativeDriver duration={500}>
           <SectionTitle title={`${lang.friend_clan_title} - ${SafeValue(clan.length, 0)}`}/>
-          <FlatList data={clan} renderItem={({item}) => 
-            <List.Item title={item.tag} onPress={() => this.pushToClan(item)} description={item.clan_id}
+          <FlatGrid items={clan} itemDimension={300} spacing={0} renderItem={({item}) => 
+            <List.Item title={item.tag} onPress={() => this.pushToClan(item)} description={item.clan_id} key={String(item.clan_id)}
               right={() => <IconButton color={Colors.grey500} icon='close' onPress={() => this.removeClan(item)}/> }/>}
-          keyExtractor={i => String(i.clan_id)} keyboardShouldPersistTaps='always'/>
+          keyboardShouldPersistTaps='always'/>
         </Anime.View>
         <Anime.View animation={playerSide} useNativeDriver duration={500}>  
           <SectionTitle title={`${lang.friend_player_title} - ${SafeValue(player.length, 0)}`}/>
-          <FlatList data={player} renderItem={({item}) => 
-            <List.Item title={item.nickname} onPress={() => this.pushToPlayer(item)} description={item.account_id}
+          <FlatGrid items={player} itemDimension={300} spacing={0} renderItem={({item}) => 
+            <List.Item title={item.nickname} onPress={() => this.pushToPlayer(item)} description={item.account_id} key={String(item.account_id)}
               right={() => <IconButton color={Colors.grey500} icon='close' onPress={() => this.removeFriend(item)}/> }/>}
-          keyExtractor={i => String(i.account_id)} keyboardShouldPersistTapshenryq='always'/>
+          keyboardShouldPersistTapshenryq='always'/>
         </Anime.View>
       </View>
     )
