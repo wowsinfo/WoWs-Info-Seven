@@ -67,7 +67,7 @@ class Settings extends Component {
     for (let key in langList) langData.push(key);
     langData.sort();
 
-    const appLang = {en: 'English', id: 'Bahasa Indonesia', zh: '中文', 'zh-hant': '繁体中文', ja: '日本語'};
+    const appLang = {zh: '中文', 'zh-hant': '繁体中文', ja: '日本語', en: 'English', id: 'Bahasa Indonesia'};
     let appLangList = [];
     for (let code in appLang) appLangList.push({code: code, lang: appLang[code]});
 
@@ -85,12 +85,12 @@ class Settings extends Component {
         <List.Section title={`${lang.setting_api_language} - ${langList[APILanguage]}`}>
         { CANUPDATEAPI ? <FlatList data={langData} renderItem={({item}) => {
             return <Button onPress={() => this.updateApiLanguage(item)}>{langList[item]}</Button>
-          }} keyExtractor={i => i} numColumns={2}/> : null }
+          }} keyExtractor={i => i} horizontal/> : null }
         </List.Section>
         <List.Section title={`${lang.setting_app_language} - ${display}`}>
           <FlatList data={appLangList} renderItem={({item}) => {
             return <Button onPress={() => this.updateUserLang(item.code)}>{item.lang}</Button>
-          }} keyExtractor={i => i.code} numColumns={2}/>
+          }} keyExtractor={i => i.code} numColumns={3}/>
         </List.Section>
       </Surface>
     )
