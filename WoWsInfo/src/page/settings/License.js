@@ -5,8 +5,9 @@
  */
 
 import React, { Component } from 'react';
-import { Linking, FlatList, StyleSheet } from 'react-native';
+import { Linking, StyleSheet } from 'react-native';
 import { WoWsInfo } from '../../component';
+import { FlatGrid } from 'react-native-super-grid';
 import { List } from 'react-native-paper';
 import { lang } from '../../value/lang';
 
@@ -26,13 +27,12 @@ const libraries = [{name: 'react', link: 'https://github.com/facebook/react'},
 
 class License extends Component {
   render() {
-    const { container } = styles;
     return (
       <WoWsInfo>
-        <FlatList data={libraries} renderItem={({item}) => {
+        <FlatGrid items={libraries} renderItem={({item}) => {
           return <List.Item title={item.name} description={item.link}
             onPress={() => Linking.openURL(item.link)}/>
-        }} keyExtractor={d => d.name}/>
+        }} keyExtractor={d => d.name} itemDimension={300} spacing={0}/>
       </WoWsInfo>
     )
   };
