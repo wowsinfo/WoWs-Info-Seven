@@ -18,7 +18,7 @@ class AppName extends Component {
   render() {
     const { container, game, appName, horizontal } = styles;
     return (
-      <Touchable style={horizontal} onPress={true ? null : () => SafeAction('About')}>
+      <Touchable style={horizontal} onPress={() => SafeAction('About')}>
         <View style={container}>
           <Title style={appName}>{lang.app_name}</Title>
           <Caption style={game}>{this.getVersion()}</Caption>
