@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { View, ScrollView, StyleSheet } from 'react-native';
-import { Title, List, Paragraph } from 'react-native-paper';
-import { WoWsInfo } from '../../component';
+import { Image, StyleSheet, Dimensions, Linking } from 'react-native';
+import { WoWsInfo, Touchable } from '../../component';
+import { TintColour } from '../../value/colour';
 import { lang } from '../../value/lang';
 
 class About extends Component {
@@ -10,28 +10,26 @@ class About extends Component {
   }
 
   render() {
-    const { container, scroll, logo } = styles;
+    const { touch } = styles;
+    const { width, height } = Dimensions.get('window');
+    let imageWidth = width > height ? height * 0.5 : width * 0.5;
+
     return (
       <WoWsInfo>
-        <ScrollView>
-          <View>
-            <Title>{lang.app_name}</Title>
-            <Paragraph>WoWs Info is ...</Paragraph>
-            <List.Section title='Special Thanks'>
-              <List.Item title='Auris2010k'/>
-              <List.Item title='Zetesian'/>
-            </List.Section>
-            <Title>Coming soon...</Title>
-          </View>
-        </ScrollView>
+        <Touchable style={touch} onPress={() => Linking.openURL(lang.abour_github_link)}>
+          <Image style={{tintColor: TintColour()[500], height: imageWidth, width: imageWidth }}
+            source={require('../../img/Logo.png')} />
+        </Touchable>
       </WoWsInfo>
     )
   };
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  touch: {
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 });
 

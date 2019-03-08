@@ -245,9 +245,12 @@ export const lang = new LocalizedStrings({
     rs_tip_enjoy: '3. Enjoy',
     rs_tip_three: 'Enter the IP address you see on the screen and WoWs Info will start giving you real-time statistics for both teams.\n',
     /// Error section
-    // General erros
+    // General errors
     error_title: 'Error',
-    error_download_issue: 'Failed to update data. \nPlease try again later.'
+    error_download_issue: 'Failed to update data. \nPlease try again later.',
+    /// About WoWs Info section
+    // Github link
+    abour_github_link: 'https://github.com/HenryQuan/WoWs-Info-Origin/blob/master/README.md'
   },
   zh: {
     /// Setup section
@@ -493,9 +496,12 @@ export const lang = new LocalizedStrings({
     rs_tip_enjoy: '3. 使用RS',
     rs_tip_three: 'Enter the IP address you see on the screen and WoWs Info will start giving you real-time statistics for both teams.\n',
     /// Error section
-    // General erros
+    // General errors
     error_title: '错误',
-    error_download_issue: '无法更新数据。\n请稍后重试。'
+    error_download_issue: '无法更新数据。\n请稍后重试。',
+    /// About WoWs Info section
+    // Github link
+    abour_github_link: 'https://github.com/HenryQuan/WoWs-Info-Origin/blob/master/README.md'
   },
   'zh-hant': {
     /// Setup section
@@ -741,9 +747,12 @@ export const lang = new LocalizedStrings({
     rs_tip_enjoy: '3. 使用RS',
     rs_tip_three: 'Enter the IP address you see on the screen and WoWs Info will start giving you real-time statistics for both teams.\n',
     /// Error section
-    // General erros
+    // General errors
     error_title: '錯誤',
-    error_download_issue: '無法更新數據。\n請稍後重試。'
+    error_download_issue: '無法更新數據。\n請稍後重試。',
+    /// About WoWs Info section
+    // Github link
+    abour_github_link: 'https://github.com/HenryQuan/WoWs-Info-Origin/blob/master/README.md'
   },
   ja: {
     /// Setup section
@@ -989,9 +998,12 @@ export const lang = new LocalizedStrings({
     rs_tip_enjoy: '3. Enjoy',
     rs_tip_three: 'Enter the IP address you see on the screen and WoWs Info will start giving you real-time statistics for both teams.\n',
     /// Error section
-    // General erros
+    // General errors
     error_title: 'エラー',
-    error_download_issue: 'アップデート失敗 \nやり直してください'
+    error_download_issue: 'アップデート失敗 \nやり直してください',
+    /// About WoWs Info section
+    // Github link
+    abour_github_link: 'https://github.com/HenryQuan/WoWs-Info-Origin/blob/master/README.md'
   },
   id: {
     /// Setup section
@@ -1237,8 +1249,11 @@ export const lang = new LocalizedStrings({
     rs_tip_enjoy: '3. Enjoy',
     rs_tip_three: 'Enter the IP address you see on the screen and WoWs Info will start giving you real-time statistics for both teams.\n',
     /// Error section
-    // General erros
+    // General errors
     error_title: 'Error',
-    error_download_issue: 'Gagal untuk mengupdate data. \nSilakan coba kembali.'
+    error_download_issue: 'Gagal untuk mengupdate data. \nSilakan coba kembali.',
+    /// About WoWs Info section
+    // Github link
+    abour_github_link: 'https://github.com/HenryQuan/WoWs-Info-Origin/blob/master/README.md'
   }
 });
