@@ -5,10 +5,11 @@
  */
 
 import React, { Component } from 'react';
-import { Image, StyleSheet, FlatList, Dimensions } from 'react-native';
+import { Image, StyleSheet, Dimensions } from 'react-native';
 import { WoWsInfo, LoadingIndicator } from '../../component';
 import { SAVED, setLastLocation } from '../../value/data';
 import { List, Portal, Dialog } from 'react-native-paper';
+import { FlatGrid } from 'react-native-super-grid';
 
 class Map extends Component {
   constructor(props) {
@@ -37,8 +38,8 @@ class Map extends Component {
 
     return (
       <WoWsInfo>
-        <FlatList data={data} keyExtractor={(item) => item.name} renderItem={({item}) => {
-          return <List.Item title={item.name} description={item.description}
+        <FlatGrid items={data} itemDimension={300} spacing={0} renderItem={({item}) => {
+          return <List.Item title={item.name} description={item.description} key={item.name}
             onPress={() => this.setState({shown: true, map: item.icon})}/>
         }} showsVerticalScrollIndicator={false}/>
         <Portal>
