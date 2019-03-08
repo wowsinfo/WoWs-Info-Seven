@@ -16,10 +16,25 @@ const itemSkus = Platform.select({
 });
 
 class Donation extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      products: null
+    }
+  }
+
+  async componentDidMount() {
+    try {
+      const products = await RNIap.getProducts(itemSkus);
+      this.setState({products});
+    } catch(err) {
+      console.warn(err); // standardized err.code and err.message available
+    }
+  }
+
   render() {
     const { container } = styles;
-
-
+    console.log(this.state);
     return (
       <View style={container}>
         <Text>Donation</Text>
