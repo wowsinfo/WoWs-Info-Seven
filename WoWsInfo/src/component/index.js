@@ -13,6 +13,7 @@ export * from './common/InfoLabel';
 export * from './common/SectionTitle';
 export * from './common/PlayerCell';
 export * from './common/AppName';
+export * from './common/Donation';
 
 // Wiki
 export * from './wiki/WikiIcon';

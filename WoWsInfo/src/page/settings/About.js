@@ -1,37 +1,47 @@
 import React, { Component } from 'react';
-import { View, ScrollView, StyleSheet } from 'react-native';
-import { Title, List, Paragraph } from 'react-native-paper';
-import { WoWsInfo } from '../../component';
+import { Image, StyleSheet, Dimensions, Linking } from 'react-native';
+import * as Anime from 'react-native-animatable';
+import { WoWsInfo, Touchable } from '../../component';
+import { TintColour } from '../../value/colour';
 import { lang } from '../../value/lang';
+import { getRandomAnimation } from '../../core';
 
 class About extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      animation: 'pulse'
+    };
+
+    setInterval(() => {
+      this.setState({animation: getRandomAnimation()});
+    }, 2000);
   }
 
   render() {
-    const { container, scroll, logo } = styles;
+    const { touch } = styles;
+    const { animation } = this.state;
+    const { width, height } = Dimensions.get('window');
+    let imageWidth = width > height ? height * 0.5 : width * 0.5;
+
     return (
       <WoWsInfo>
-        <ScrollView>
-          <View>
-            <Title>{lang.app_name}</Title>
-            <Paragraph>WoWs Info is ...</Paragraph>
-            <List.Section title='Special Thanks'>
-              <List.Item title='Auris2010k'/>
-              <List.Item title='Zetesian'/>
-            </List.Section>
-            <Title>Coming soon...</Title>
-          </View>
-        </ScrollView>
+        <Touchable style={touch} onPress={() => Linking.openURL(lang.abour_github_link)}>
+          <Anime.View animation={animation} iterationCount='infinite' easing='ease' useNativeDriver>
+            <Image style={{tintColor: TintColour()[500], height: imageWidth, width: imageWidth }}
+              source={require('../../img/Logo.png')} />
+          </Anime.View>
+        </Touchable>
       </WoWsInfo>
     )
   };
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  touch: {
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 });
 
