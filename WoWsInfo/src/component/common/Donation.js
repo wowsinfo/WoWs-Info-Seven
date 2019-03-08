@@ -26,6 +26,7 @@ class Donation extends Component {
   async componentDidMount() {
     try {
       const products = await RNIap.getProducts(itemSkus);
+      products.sort((a, b) => a.price.localeCompare(b.price));
       this.setState({products});
     } catch(err) {
       console.warn(err); // standardized err.code and err.message available
