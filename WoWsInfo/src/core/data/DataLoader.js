@@ -4,6 +4,7 @@
 import { SafeStorage } from '../util/SafeStorage';
 import { LOCAL, SAVED, APP } from '../../value/data';
 import { BLUE } from 'react-native-material-color';
+import { lang } from '../../value/lang';
 
 class DataLoader {
   /**
@@ -30,7 +31,7 @@ class DataLoader {
     let data = {};
     // Manully setting up SAVED section (they are all different)
     this.loadEntry(data, apiLanguage, 'en');
-    this.loadEntry(data, userLanguage, '');
+    this.loadEntry(data, userLanguage, lang.getLanguage());
     this.loadEntry(data, swapButton, false);
     this.loadEntry(data, appVersion, APP.Version);
     this.loadEntry(data, gameVersion, APP.GameVersion);

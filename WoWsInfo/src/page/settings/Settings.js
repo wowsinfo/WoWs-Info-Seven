@@ -38,7 +38,7 @@ class Settings extends Component {
   render() {
     const { showColour } = this.state;
     return (
-      <WoWsInfo>
+      <WoWsInfo about>
         <ScrollView showsVerticalScrollIndicator={false}>
           { this.renderAPISettings() }
           { this.renderAppSettings() }
