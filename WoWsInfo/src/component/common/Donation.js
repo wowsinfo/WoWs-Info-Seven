@@ -1,24 +1,16 @@
 import React, { Component } from 'react';
 import * as RNIap from 'react-native-iap';
-import { View, Platform, FlatList, StyleSheet } from 'react-native';
+import { View, FlatList, StyleSheet } from 'react-native';
 import { LoadingIndicator } from './LoadingIndicator';
 import { Button } from 'react-native-paper';
 
 // Now, we have 4 tiers ($1, $3, $5 and $10) for donations
-const itemSkus = Platform.select({
-  ios: [
+const itemSkus = [
     'com.yihengquan.wowsinfo.support1',
     'com.yihengquan.wowsinfo.support3',
     'com.yihengquan.wowsinfo.support5',
     'com.yihengquan.wowsinfo.support10'
-  ],
-  android: [
-    'com.yihengquan.wowsinfo.support1',
-    'com.yihengquan.wowsinfo.support3',
-    'com.yihengquan.wowsinfo.support5',
-    'com.yihengquan.wowsinfo.support10'
-  ],
-});
+];
 
 class Donation extends Component {
   constructor(props) {
