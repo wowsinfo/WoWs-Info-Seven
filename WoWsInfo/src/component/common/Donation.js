@@ -38,7 +38,8 @@ class Donation extends Component {
     return (
       <View style={container}>
         <FlatList horizontal data={products} renderItem={({item}) => 
-          <Button onPress={() => this.supportWoWsInfo(item)}>{item.localizedPrice}</Button>}/>
+          <Button onPress={() => this.supportWoWsInfo(item)}>{item.localizedPrice}</Button>}
+        keyExtractor={p => p.price}/>
       </View>
     )
   };
