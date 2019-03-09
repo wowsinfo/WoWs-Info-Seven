@@ -7,13 +7,16 @@ import { Button } from 'react-native-paper';
 // Now, we have 4 tiers ($1, $3, $5 and $10) for donations
 const itemSkus = Platform.select({
   ios: [
-    'point_1000',
+    'com.yihengquan.wowsinfo.support1',
+    'com.yihengquan.wowsinfo.support3',
+    'com.yihengquan.wowsinfo.support5',
+    'com.yihengquan.wowsinfo.support10'
   ],
   android: [
     'com.yihengquan.wowsinfo.support1',
     'com.yihengquan.wowsinfo.support3',
     'com.yihengquan.wowsinfo.support5',
-    'com.yihengquan.wowsinfo.support10',
+    'com.yihengquan.wowsinfo.support10'
   ],
 });
 
