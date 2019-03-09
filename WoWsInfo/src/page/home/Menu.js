@@ -146,8 +146,8 @@ class Menu extends PureComponent {
         }} spacing={0}/>
         <SectionTitle title={lang.extra_section_title}/>
         <List.Item title='RS Beta' description='Realtime Statistics Beta' onPress={() => SafeAction('RS')}/>
-        <Donation />
         <List.Section title={lang.extra_support_wowsinfo}>
+        <Donation />
           { this.support.map(item => { return (
             <List.Item title={item.t} description={item.d} key={item.t}
               onPress={() => Linking.openURL(item.d)}/>
