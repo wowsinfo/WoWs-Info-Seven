@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as RNIap from 'react-native-iap';
-import { View, Text, Platform, FlatList, StyleSheet } from 'react-native';
+import { View, Platform, FlatList, StyleSheet } from 'react-native';
 import { LoadingIndicator } from './LoadingIndicator';
 import { Button } from 'react-native-paper';
 
@@ -52,6 +52,8 @@ class Donation extends Component {
     try {
       // Will return a purchase object with a receipt which can be used to validate on your server.
       const purchase = await RNIap.buyProduct(item.productId);
+      // Consume it right away to buy multiple times
+      await RNIap.consumePurchase(purchase.purchaseToken);
       this.setState({
         receipt: purchase.transactionReceipt, // save the receipt if you need it, whether locally, or to your server.
       });
