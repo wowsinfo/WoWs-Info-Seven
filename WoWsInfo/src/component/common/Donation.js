@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import * as RNIap from 'react-native-iap';
-import { View, Text, Platform, StyleSheet } from 'react-native';
+import { View, Text, Platform, FlatList, StyleSheet } from 'react-native';
+import { LoadingIndicator } from './LoadingIndicator';
+import { Button } from 'react-native-paper';
 
 // Now, we have 4 tiers ($1, $3, $5 and $10) for donations
 const itemSkus = Platform.select({
@@ -35,13 +37,33 @@ class Donation extends Component {
 
   render() {
     const { container } = styles;
+    const { products } = this.state;
+    if (products == null) return <LoadingIndicator />;
     console.log(this.state);
     return (
       <View style={container}>
-        <Text>Donation</Text>
+        <FlatList horizontal data={products} renderItem={({item}) => 
+          <Button onPress={() => this.supportWoWsInfo(item)}>{item.localizedPrice}</Button>}/>
       </View>
     )
   };
+
+  async supportWoWsInfo(item) {
+    try {
+      // Will return a purchase object with a receipt which can be used to validate on your server.
+      const purchase = await RNIap.buyProduct(item.productId);
+      this.setState({
+        receipt: purchase.transactionReceipt, // save the receipt if you need it, whether locally, or to your server.
+      });
+    } catch(err) {
+      // standardized err.code and err.message available
+      console.error(err.code, err.message);
+      const subscription = RNIap.addAdditionalSuccessPurchaseListenerIOS(async (purchase) => {
+        this.setState({ receipt: purchase.transactionReceipt }, () => this.goToNext());
+        subscription.remove();
+      });
+    }
+  }
 }
 
 const styles = StyleSheet.create({
