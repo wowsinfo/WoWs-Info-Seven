@@ -50,6 +50,8 @@ class Donation extends Component {
 
   async supportWoWsInfo(item) {
     try {
+      // Do this just to ensure that all IAPs are available
+      await RNIap.consumeAllItems();
       // Will return a purchase object with a receipt which can be used to validate on your server.
       const purchase = await RNIap.buyProduct(item.productId);
       // Consume it right away to buy multiple times
