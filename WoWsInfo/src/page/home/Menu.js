@@ -85,8 +85,11 @@ class Menu extends PureComponent {
     this.prefix = getCurrPrefix();
 
     this.support = [{t: lang.support_patreon, d: APP.Patreon}];
-    // {t: lang.support_paypal, d: APP.PayPal},
-    // {t: lang.support_wechat, d: APP.WeChat}];
+    if (GITHUB_VERSION) {
+      this.support = [{t: lang.support_patreon, d: APP.Patreon},
+        {t: lang.support_paypal, d: APP.PayPal},
+        {t: lang.support_wechat, d: APP.WeChat}];
+    }
 
     // TODO: change links base on player server
     this.websites = [{t: lang.website_official_site, d: `https://worldofwarships.${domain}/`},
