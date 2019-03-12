@@ -1,7 +1,7 @@
 /**
  * Get and set storage keys safely
  */
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 class SafeStorage {
   /**
@@ -32,6 +32,9 @@ class SafeStorage {
     AsyncStorage.setItem(key, JSON.stringify(value));
   }
 
+  /**
+   * Clear everything (debug only)
+   */
   static clear() {
     AsyncStorage.clear();
   }

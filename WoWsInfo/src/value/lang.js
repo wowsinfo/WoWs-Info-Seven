@@ -498,7 +498,7 @@ export const lang = new LocalizedStrings({
     /// Error section
     // General errors
     error_title: '错误',
-    error_download_issue: '无法更新数据。\n请稍后重试。',
+    error_download_issue: '无法更新数据。\n请稍后重试。\n\n如果问题依然存在',
     /// About WoWs Info section
     // Github link
     abour_github_link: 'https://github.com/HenryQuan/WoWs-Info-Origin/blob/master/README.md'
