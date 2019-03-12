@@ -3,3 +3,6 @@ react-native bundle --entry-file index.js --bundle-output ios/main.jsbundle --de
 
 Android:
 react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/
+
+REMEMBER:
+REMEMBER TO CHANGE GITHUB_VERSIOn when making bundle for Google Play and IOS.
