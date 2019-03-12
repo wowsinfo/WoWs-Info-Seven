@@ -105,8 +105,8 @@ android {
         applicationId "com.yihengquan.wowsinfo"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 10606
-        versionName "1.0.6"
+        versionCode 10610
+        versionName "1.0.6.1"
     }
     splits {
         abi {
