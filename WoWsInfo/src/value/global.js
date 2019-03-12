@@ -20,3 +20,5 @@ global.CANUPDATEAPI = true;
 global.RSBATTLE = 0;
 // Trace last known location
 global.LASTLOCATION = '';
+
+global.GITHUB_VERSION = true;

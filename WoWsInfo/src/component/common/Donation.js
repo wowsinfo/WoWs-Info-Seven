@@ -21,20 +21,23 @@ class Donation extends Component {
   }
 
   async componentDidMount() {
-    try {
-      const products = await RNIap.getProducts(itemSkus);
-      // Do this just to ensure that all IAPs are available
-      await RNIap.consumeAllItems();
-      products.sort((a, b) => a.price.localeCompare(b.price));
-      this.setState({products});
-    } catch(err) {
-      console.warn(err); // standardized err.code and err.message available
+    if (!GITHUB_VERSION) {
+      try {
+        const products = await RNIap.getProducts(itemSkus);
+        // Do this just to ensure that all IAPs are available
+        await RNIap.consumeAllItems();
+        products.sort((a, b) => a.price.localeCompare(b.price));
+        this.setState({products});
+      } catch(err) {
+        console.warn(err); // standardized err.code and err.message available
+      }
     }
   }
 
   render() {
     const { container } = styles;
     const { products } = this.state;
+    if (GITHUB_VERSION) return null;
     if (products == null) return <LoadingIndicator />;
     console.log(this.state);
     return (
