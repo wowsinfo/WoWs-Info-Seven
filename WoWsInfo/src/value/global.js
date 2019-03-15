@@ -21,4 +21,5 @@ global.RSBATTLE = 0;
 // Trace last known location
 global.LASTLOCATION = '';
 
-global.GITHUB_VERSION = false;
+// Github or Windows version
+global.GITHUB_VERSION = true;
