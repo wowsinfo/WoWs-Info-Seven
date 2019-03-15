@@ -6,7 +6,6 @@
 
 import React, { Component } from 'react';
 import { StatusBar, Image, StyleSheet, Text } from 'react-native';
-import * as Anime from 'react-native-animatable';
 import { Surface } from 'react-native-paper';
 import { BLUE } from 'react-native-material-color';
 import { getRandomAnimation } from '../../core';
@@ -32,7 +31,7 @@ class Loading extends Component {
   }
 
   componentWillUnmount() {
-    clearInterval();
+    // clearInterval();
   }
 
   render() {
@@ -40,10 +39,8 @@ class Loading extends Component {
 
     return (
       <Surface style={container}>
-        <StatusBar backgroundColor={BLUE[700]}/>
-        <Anime.View animation={getRandomAnimation()} iterationCount='infinite' easing='ease' useNativeDriver>
-          <Image style={logo} source={require('../../img/Logo.png')}/>
-        </Anime.View>
+        {/* <StatusBar backgroundColor={BLUE[700]}/> */}
+        <Image style={logo} source={require('../../img/Logo.png')}/>
         <Text style={label}>{lang.setup_loading}</Text>
       </Surface>
     )

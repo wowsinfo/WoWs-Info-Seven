@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Image, StyleSheet, Dimensions, Linking } from 'react-native';
-import * as Anime from 'react-native-animatable';
 import { WoWsInfo, Touchable } from '../../component';
 import { TintColour } from '../../value/colour';
 import { lang } from '../../value/lang';
@@ -27,10 +26,8 @@ class About extends Component {
     return (
       <WoWsInfo>
         <Touchable style={touch} onPress={() => Linking.openURL(lang.abour_github_link)}>
-          <Anime.View animation={animation} iterationCount='infinite' easing='ease' useNativeDriver>
-            <Image style={{tintColor: TintColour()[500], height: imageWidth, width: imageWidth }}
-              source={require('../../img/Logo.png')} />
-          </Anime.View>
+          <Image style={{tintColor: TintColour()[500], height: imageWidth, width: imageWidth }}
+            source={require('../../img/Logo.png')} />
         </Touchable>
       </WoWsInfo>
     )

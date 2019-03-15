@@ -52,13 +52,13 @@ class Setup extends Component {
           <List.Section title={`${lang.setting_game_server}: ${lang.server_name[selected_server]}`}>
             <FlatList data={server} renderItem={({index}) => {
               return <Button onPress={() => this.updateServer(index)}>{lang.server_name[index]}</Button>
-            }} keyExtractor={i => i} numColumns={2}/>
+            }} numColumns={2}/>
           </List.Section>
           { loading ? null : 
           <List.Section title={`${lang.setting_api_language}: ${langList[selected_lang]}`}>
             <FlatList data={langData} renderItem={({item}) => {
               return <Button onPress={() => this.updateApiLanguage(item)}>{langList[item]}</Button>
-            }} keyExtractor={i => i} numColumns={2}/>
+            }} numColumns={2}/>
           </List.Section> }
         </ScrollView>
       </WoWsInfo>

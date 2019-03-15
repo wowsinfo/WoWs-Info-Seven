@@ -6,7 +6,6 @@
 
 import React, { Component } from 'react';
 import { View, Image, Platform, StyleSheet } from 'react-native';
-import * as Anime from 'react-native-animatable';
 import { Title, Caption } from 'react-native-paper';
 import { lang } from '../../value/lang';
 import { LOCAL, APP } from '../../value/data';
@@ -23,9 +22,7 @@ class AppName extends Component {
           <Title style={appName}>{lang.app_name}</Title>
           <Caption style={game}>{this.getVersion()}</Caption>
         </View>
-        <Anime.View animation='pulse' iterationCount='infinite' easing='ease' useNativeDriver>
-          <Image source={require('../../img/Logo.png')} style={{height: 64, width: 64, tintColor: TintColour()[500]}}/>
-        </Anime.View>
+        <Image source={require('../../img/Logo.png')} style={{height: 64, width: 64, tintColor: TintColour()[500]}}/>
       </Touchable>
     )
   };

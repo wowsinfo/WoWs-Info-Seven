@@ -7,7 +7,6 @@
 import React, { PureComponent } from 'react';
 import { View, FlatList,Linking, ScrollView, StyleSheet } from 'react-native';
 import { Text, Title, Headline, Button, Paragraph } from 'react-native-paper';
-import * as Anime from 'react-native-animatable';
 import { WoWsInfo, WikiIcon, WarshipCell, PriceLabel, LoadingIndicator, WarshipStat, InfoLabel, FooterPlus } from '../../component';
 import { SAVED, langStr, getCurrDomain } from '../../value/data';
 import { lang } from '../../value/lang';
@@ -102,9 +101,7 @@ class WarshipDetail extends PureComponent {
       return (
         <WoWsInfo title={`${curr.ship_id_str} ${curr.ship_id}`}>
           <ScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
-            <Anime.View animation='pulse' iterationCount='infinite' useNativeDriver>
-              <WikiIcon warship item={curr} scale={3}/>
-            </Anime.View>
+            <WikiIcon warship item={curr} scale={3}/>
             { this.renderContent() }
           </ScrollView> 
           { this.renderSimilar(similar) }

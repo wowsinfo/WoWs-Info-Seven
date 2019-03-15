@@ -9,7 +9,6 @@ import React, { PureComponent } from 'react';
 import { Alert, ScrollView, StyleSheet, Linking, View } from 'react-native';
 import { isAndroid } from 'react-native-device-detection';
 import { List, Colors } from 'react-native-paper';
-import * as Animatable from 'react-native-animatable';
 import { WoWsInfo, SectionTitle, AppName, Donation } from '../../component';
 import { lang } from '../../value/lang';
 import { SafeAction, Downloader } from '../../core';
@@ -126,12 +125,8 @@ class Menu extends PureComponent {
     return (
       <WoWsInfo title={title} onPress={enabled ? () => SafeAction('Statistics', {info: main}) : null} home upper={false}>
         <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='always'>
-          <Animatable.View animation='fadeInDown' easing='ease'>
-            <AppName />
-          </Animatable.View>
-          <Animatable.View animation='fadeInUp' delay={200} easing='ease'>
-            { this.renderContent() }
-          </Animatable.View>
+          <AppName />
+          { this.renderContent() }
         </ScrollView>
       </WoWsInfo>
     );
