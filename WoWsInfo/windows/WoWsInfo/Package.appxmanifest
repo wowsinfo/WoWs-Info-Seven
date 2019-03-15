@@ -7,11 +7,11 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="83efae8b-b90b-4db7-8ca7-31cabf6ac66b"
+    Name="fa447814-e348-4da9-94a3-fbec6cc3bcb0"
     Publisher="CN=nateq"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="83efae8b-b90b-4db7-8ca7-31cabf6ac66b" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="fa447814-e348-4da9-94a3-fbec6cc3bcb0" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>WoWsInfo</DisplayName>
