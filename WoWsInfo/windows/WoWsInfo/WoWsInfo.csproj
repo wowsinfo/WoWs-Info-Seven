@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{4ee21188-81f2-41bd-89e4-202ae6868e44}</ProjectGuid>
+    <ProjectGuid>{9AC46257-DBB2-469B-8A46-AC25BA734837}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WoWsInfo</RootNamespace>
