@@ -21,7 +21,7 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
     <DependencyConfiguration>Debug</DependencyConfiguration>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
-    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
     <AppInstallerUpdateFrequency>1</AppInstallerUpdateFrequency>
