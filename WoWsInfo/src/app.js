@@ -61,7 +61,7 @@ class App extends Component {
         }
       };
 
-      props.theme.roundness = 32;
+      props.theme.roundness = 24;
       props.theme.dark = DARKMODE;
       props.theme.colors = DARKMODE ? DARK.colors : LIGHT.colors;
       console.log(props.theme);

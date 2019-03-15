@@ -36,7 +36,7 @@ class SimpleRating extends PureComponent {
             <Text style={centerText}>{nothing ? '0' : roundTo(pvp.damage_dealt / pvp.battles)}</Text>
           </View>
         </View>
-        <View style={{backgroundColor: getColour(rating), height: 12, borderRadius: 99}}/>
+        <View style={{backgroundColor: getColour(rating), height: 12, borderRadius: 6}}/>
       </View>
     );
   };

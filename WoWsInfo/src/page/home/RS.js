@@ -139,7 +139,8 @@ class RS extends Component {
     let url = 'http://' + ip.split('/').join('') + ':8605';
     try {
       // Only want to know if we can access it
-      await fetch(url);
+      let res = await fetch(url);
+      console.log(res);
       this.setState({valid: true}, () => {
         // Update IP when it is valid
         SafeStorage.set(LOCAL.rsIP, ip);
