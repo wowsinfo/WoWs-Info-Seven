@@ -14,7 +14,7 @@ import {
 
 const instructions =
   'Press Ctrl+R to reload,\n' +
-  'Shift+F10 or shake for dev menu';
+  'Ctrl+D or Ctrl+M for dev menu';
 
 export default class App extends Component<{}> {
   render() {
