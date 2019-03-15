@@ -5,10 +5,9 @@
  */
 
 import React, { Component } from 'react';
-import { StatusBar, Image, StyleSheet, Text } from 'react-native';
+import { StatusBar, Image, StyleSheet, ActivityIndicator } from 'react-native';
 import { Surface } from 'react-native-paper';
 import { BLUE } from 'react-native-material-color';
-import { getRandomAnimation } from '../../core';
 import { lang } from '../../value/lang';
 
 class Loading extends Component {
@@ -41,7 +40,7 @@ class Loading extends Component {
       <Surface style={container}>
         {/* <StatusBar backgroundColor={BLUE[700]}/> */}
         <Image style={logo} source={require('../../img/Logo.png')}/>
-        <Text style={label}>{lang.setup_loading}</Text>
+        <ActivityIndicator size='large' color='white'/>
       </Surface>
     )
   };

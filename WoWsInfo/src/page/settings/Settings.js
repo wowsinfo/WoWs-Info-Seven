@@ -87,11 +87,11 @@ class Settings extends Component {
             return <Button onPress={() => this.updateApiLanguage(item)}>{langList[item]}</Button>
           }} keyExtractor={i => i} horizontal/> : null }
         </List.Section>
-        <List.Section title={`${lang.setting_app_language} - ${display}`}>
+        {/* <List.Section title={`${lang.setting_app_language} - ${display}`}>
           <FlatList data={appLangList} renderItem={({item}) => {
             return <Button onPress={() => this.updateUserLang(item.code)}>{item.lang}</Button>
           }} keyExtractor={i => i.code} numColumns={3}/>
-        </List.Section>
+        </List.Section> */}
       </Surface>
     )
   }
@@ -130,8 +130,8 @@ class Settings extends Component {
           onPress={() => Linking.openURL(this.store)} description={this.store}/>
         <List.Item title={lang.settings_app_share} onPress={this.shareApp}
           description={lang.settings_app_share_subtitle}/>
-        { isAndroid ? <List.Item title={lang.settings_app_check_for_update} onPress={this.checkAppUpdate}
-          description={`v${APP.Version}`}/> : null }
+        {/* <List.Item title={lang.settings_app_check_for_update} onPress={this.checkAppUpdate}
+          description={`v${APP.Version}`}/> */}
       </Surface>
     )
   }
