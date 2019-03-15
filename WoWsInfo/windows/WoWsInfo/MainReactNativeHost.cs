@@ -1,5 +1,7 @@
 ﻿using ReactNative;
 using ReactNative.Modules.Core;
+using ReactNative;
+using ReactNativeLocalization;
 using ReactNative.Shell;
 using System.Collections.Generic;
 
@@ -24,6 +26,8 @@ namespace WoWsInfo
         protected override List<IReactPackage> Packages => new List<IReactPackage>
         {
             new MainReactPackage(),
+            new MainReactPackage(),
+            new RNLocalizationPackage(),
         };
     }
 }

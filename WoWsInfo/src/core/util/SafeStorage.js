@@ -1,7 +1,7 @@
 /**
  * Get and set storage keys safely
  */
-import AsyncStorage from '@react-native-community/async-storage';
+import { AsyncStorage } from 'react-native';
 
 class SafeStorage {
   /**
