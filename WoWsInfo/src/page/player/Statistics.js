@@ -353,12 +353,8 @@ class Statistics extends PureComponent {
   }
 
   renderGraph(graph) {
-    let loading = true;
-    if (graph && graph.length > 0) loading = false;
-    const { hidden } = this.state;
-
     return <TabButton icon={require('../../img/Graph.png')} color={this.theme}
-      disabled={loading || hidden} onPress={() => SafeAction('Graph', {data: graph})}/>
+      disabled onPress={() => SafeAction('Graph', {data: graph})}/>
   }
 }
 
