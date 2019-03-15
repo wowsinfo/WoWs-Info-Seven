@@ -124,7 +124,7 @@ class Menu extends PureComponent {
     
     return (
       <WoWsInfo title={title} onPress={enabled ? () => SafeAction('Statistics', {info: main}) : null} home upper={false}>
-        <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='always'>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <AppName />
           { this.renderContent() }
         </ScrollView>
@@ -141,7 +141,7 @@ class Menu extends PureComponent {
           return <List.Item title={item.t} style={{padding: 0, paddingLeft: 8}} onPress={() => item.p()} key={item.t}
           left={() => <List.Icon style={[icon, ThemeBackColour()]} color={TintColour()[300]} icon={item.i}/>}
           right={() => isAndroid ? null : <List.Icon color={Colors.grey500} icon='keyboard-arrow-right'/>} />
-        }} spacing={0}/>
+        }} spacing={0} keyboardShouldPersistTaps='always'/>
         <SectionTitle title={lang.extra_section_title}/>
         <List.Item title='RS Beta' description='Realtime Statistics Beta' onPress={() => SafeAction('RS')}/>
         <List.Section title={lang.extra_support_wowsinfo}>
@@ -155,13 +155,13 @@ class Menu extends PureComponent {
           <FlatGrid items={this.websites} itemDimension={300} renderItem={({item}) => {
             return <List.Item title={item.t} description={item.d} key={item.t}
             onPress={() => Linking.openURL(item.d)}/>
-          }} spacing={0}/>
+          }} spacing={0} keyboardShouldPersistTaps='always'/>
         </List.Section>
         <List.Section title={lang.youtuber_title}>
           <FlatGrid items={this.youtubers} itemDimension={300} renderItem={({item}) => {
             return <List.Item title={item.t} description={item.d} key={item.t}
             onPress={() => Linking.openURL(item.d)}/>
-          }} spacing={0}/>
+          }} spacing={0} keyboardShouldPersistTaps='always'/>
         </List.Section>
         {/* <List.Section title={lang.tool_title}>
         </List.Section> */}

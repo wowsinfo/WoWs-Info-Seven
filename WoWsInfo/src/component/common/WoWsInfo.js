@@ -33,16 +33,14 @@ class WoWsInfo extends Component {
   }
 
   render() {
-    const { container, safeView, child } = styles;
+    const { container, child } = styles;
     const { children, style } = this.props;
     return (
       <Surface style={[container, style, ThemeBackColour()]}>
-        <SafeAreaView style={safeView}>
-          <Surface style={child}>
-            { children }
-          </Surface>
-          { this.renderFooter() }
-        </SafeAreaView>
+        <Surface style={child}>
+          { children }
+        </Surface>
+        { this.renderFooter() }
       </Surface>
     )
   };
@@ -103,11 +101,8 @@ const styles = StyleSheet.create({
   child: {
     flex: 1,
   },
-  safeView: {
-    flex: 1
-  },
   footer: {
-    height: 48, 
+    height: 48,
     justifyContent: 'center',
   }
 });
