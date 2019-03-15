@@ -53,7 +53,7 @@ class PlayerShip extends PureComponent {
           showsVerticalScrollIndicator={false}/>
         <FooterPlus>
           <FlatList data={sortingMethod} renderItem={({item}) => <Button style={{margin: 8}} mode='contained' onPress={() => this.sortData(item.v)}>{item.n}</Button>} 
-            horizontal showsHorizontalScrollIndicator={false} keyExtractor={d => d.n}/>
+            horizontal keyExtractor={d => d.n}/>
         </FooterPlus>
       </WoWsInfo>
     )
