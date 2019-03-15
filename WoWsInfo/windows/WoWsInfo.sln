@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoWsInfo", "WoWsInfo\WoWsInfo.csproj", "{9AC46257-DBB2-469B-8A46-AC25BA734837}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoWsInfo", "WoWsInfo\WoWsInfo.csproj", "{BED467E4-06E1-4336-8092-775CEA068852}"
 	ProjectSection(ProjectDependencies) = postProject
 		{2EACF721-73B5-46AE-9775-4A8674D05A9C} = {2EACF721-73B5-46AE-9775-4A8674D05A9C}
 	EndProjectSection
@@ -42,42 +42,42 @@ Global
 		ReleaseBundle|x86 = ReleaseBundle|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9AC46257-DBB2-469B-8A46-AC25BA734837}.Debug|ARM.ActiveCfg = Debug|ARM
-		{9AC46257-DBB2-469B-8A46-AC25BA734837}.Debug|ARM.Build.0 = Debug|ARM
-		{9AC46257-DBB2-469B-8A46-AC25BA734837}.Debug|ARM.Deploy.0 = Debug|ARM
-		{9AC46257-DBB2-469B-8A46-AC25BA734837}.Debug|x64.ActiveCfg = Debug|x64
-		{9AC46257-DBB2-469B-8A46-AC25BA734837}.Debug|x64.Build.0 = Debug|x64
-		{9AC46257-DBB2-469B-8A46-AC25BA734837}.Debug|x64.Deploy.0 = Debug|x64
-		{9AC46257-DBB2-469B-8A46-AC25BA734837}.Debug|x86.ActiveCfg = Debug|x86
-		{9AC46257-DBB2-469B-8A46-AC25BA734837}.Debug|x86.Build.0 = Debug|x86
-		{9AC46257-DBB2-469B-8A46-AC25BA734837}.Debug|x86.Deploy.0 = Debug|x86
-		{9AC46257-DBB2-469B-8A46-AC25BA734837}.DebugBundle|ARM.ActiveCfg = DebugBundle|ARM
-		{9AC46257-DBB2-469B-8A46-AC25BA734837}.DebugBundle|ARM.Build.0 = DebugBundle|ARM
-		{9AC46257-DBB2-469B-8A46-AC25BA734837}.DebugBundle|ARM.Deploy.0 = DebugBundle|ARM
-		{9AC46257-DBB2-469B-8A46-AC25BA734837}.DebugBundle|x64.ActiveCfg = DebugBundle|x64
-		{9AC46257-DBB2-469B-8A46-AC25BA734837}.DebugBundle|x64.Build.0 = DebugBundle|x64
-		{9AC46257-DBB2-469B-8A46-AC25BA734837}.DebugBundle|x64.Deploy.0 = DebugBundle|x64
-		{9AC46257-DBB2-469B-8A46-AC25BA734837}.DebugBundle|x86.ActiveCfg = DebugBundle|x86
-		{9AC46257-DBB2-469B-8A46-AC25BA734837}.DebugBundle|x86.Build.0 = DebugBundle|x86
-		{9AC46257-DBB2-469B-8A46-AC25BA734837}.DebugBundle|x86.Deploy.0 = DebugBundle|x86
-		{9AC46257-DBB2-469B-8A46-AC25BA734837}.Release|ARM.ActiveCfg = Release|ARM
-		{9AC46257-DBB2-469B-8A46-AC25BA734837}.Release|ARM.Build.0 = Release|ARM
-		{9AC46257-DBB2-469B-8A46-AC25BA734837}.Release|ARM.Deploy.0 = Release|ARM
-		{9AC46257-DBB2-469B-8A46-AC25BA734837}.Release|x64.ActiveCfg = Release|x64
-		{9AC46257-DBB2-469B-8A46-AC25BA734837}.Release|x64.Build.0 = Release|x64
-		{9AC46257-DBB2-469B-8A46-AC25BA734837}.Release|x64.Deploy.0 = Release|x64
-		{9AC46257-DBB2-469B-8A46-AC25BA734837}.Release|x86.ActiveCfg = Release|x86
-		{9AC46257-DBB2-469B-8A46-AC25BA734837}.Release|x86.Build.0 = Release|x86
-		{9AC46257-DBB2-469B-8A46-AC25BA734837}.Release|x86.Deploy.0 = Release|x86
-		{9AC46257-DBB2-469B-8A46-AC25BA734837}.ReleaseBundle|ARM.ActiveCfg = ReleaseBundle|ARM
-		{9AC46257-DBB2-469B-8A46-AC25BA734837}.ReleaseBundle|ARM.Build.0 = ReleaseBundle|ARM
-		{9AC46257-DBB2-469B-8A46-AC25BA734837}.ReleaseBundle|ARM.Deploy.0 = ReleaseBundle|ARM
-		{9AC46257-DBB2-469B-8A46-AC25BA734837}.ReleaseBundle|x64.ActiveCfg = ReleaseBundle|x64
-		{9AC46257-DBB2-469B-8A46-AC25BA734837}.ReleaseBundle|x64.Build.0 = ReleaseBundle|x64
-		{9AC46257-DBB2-469B-8A46-AC25BA734837}.ReleaseBundle|x64.Deploy.0 = ReleaseBundle|x64
-		{9AC46257-DBB2-469B-8A46-AC25BA734837}.ReleaseBundle|x86.ActiveCfg = ReleaseBundle|x86
-		{9AC46257-DBB2-469B-8A46-AC25BA734837}.ReleaseBundle|x86.Build.0 = ReleaseBundle|x86
-		{9AC46257-DBB2-469B-8A46-AC25BA734837}.ReleaseBundle|x86.Deploy.0 = ReleaseBundle|x86
+		{BED467E4-06E1-4336-8092-775CEA068852}.Debug|ARM.ActiveCfg = Debug|ARM
+		{BED467E4-06E1-4336-8092-775CEA068852}.Debug|ARM.Build.0 = Debug|ARM
+		{BED467E4-06E1-4336-8092-775CEA068852}.Debug|ARM.Deploy.0 = Debug|ARM
+		{BED467E4-06E1-4336-8092-775CEA068852}.Debug|x64.ActiveCfg = Debug|x64
+		{BED467E4-06E1-4336-8092-775CEA068852}.Debug|x64.Build.0 = Debug|x64
+		{BED467E4-06E1-4336-8092-775CEA068852}.Debug|x64.Deploy.0 = Debug|x64
+		{BED467E4-06E1-4336-8092-775CEA068852}.Debug|x86.ActiveCfg = Debug|x86
+		{BED467E4-06E1-4336-8092-775CEA068852}.Debug|x86.Build.0 = Debug|x86
+		{BED467E4-06E1-4336-8092-775CEA068852}.Debug|x86.Deploy.0 = Debug|x86
+		{BED467E4-06E1-4336-8092-775CEA068852}.DebugBundle|ARM.ActiveCfg = DebugBundle|ARM
+		{BED467E4-06E1-4336-8092-775CEA068852}.DebugBundle|ARM.Build.0 = DebugBundle|ARM
+		{BED467E4-06E1-4336-8092-775CEA068852}.DebugBundle|ARM.Deploy.0 = DebugBundle|ARM
+		{BED467E4-06E1-4336-8092-775CEA068852}.DebugBundle|x64.ActiveCfg = DebugBundle|x64
+		{BED467E4-06E1-4336-8092-775CEA068852}.DebugBundle|x64.Build.0 = DebugBundle|x64
+		{BED467E4-06E1-4336-8092-775CEA068852}.DebugBundle|x64.Deploy.0 = DebugBundle|x64
+		{BED467E4-06E1-4336-8092-775CEA068852}.DebugBundle|x86.ActiveCfg = DebugBundle|x86
+		{BED467E4-06E1-4336-8092-775CEA068852}.DebugBundle|x86.Build.0 = DebugBundle|x86
+		{BED467E4-06E1-4336-8092-775CEA068852}.DebugBundle|x86.Deploy.0 = DebugBundle|x86
+		{BED467E4-06E1-4336-8092-775CEA068852}.Release|ARM.ActiveCfg = Release|ARM
+		{BED467E4-06E1-4336-8092-775CEA068852}.Release|ARM.Build.0 = Release|ARM
+		{BED467E4-06E1-4336-8092-775CEA068852}.Release|ARM.Deploy.0 = Release|ARM
+		{BED467E4-06E1-4336-8092-775CEA068852}.Release|x64.ActiveCfg = Release|x64
+		{BED467E4-06E1-4336-8092-775CEA068852}.Release|x64.Build.0 = Release|x64
+		{BED467E4-06E1-4336-8092-775CEA068852}.Release|x64.Deploy.0 = Release|x64
+		{BED467E4-06E1-4336-8092-775CEA068852}.Release|x86.ActiveCfg = Release|x86
+		{BED467E4-06E1-4336-8092-775CEA068852}.Release|x86.Build.0 = Release|x86
+		{BED467E4-06E1-4336-8092-775CEA068852}.Release|x86.Deploy.0 = Release|x86
+		{BED467E4-06E1-4336-8092-775CEA068852}.ReleaseBundle|ARM.ActiveCfg = ReleaseBundle|ARM
+		{BED467E4-06E1-4336-8092-775CEA068852}.ReleaseBundle|ARM.Build.0 = ReleaseBundle|ARM
+		{BED467E4-06E1-4336-8092-775CEA068852}.ReleaseBundle|ARM.Deploy.0 = ReleaseBundle|ARM
+		{BED467E4-06E1-4336-8092-775CEA068852}.ReleaseBundle|x64.ActiveCfg = ReleaseBundle|x64
+		{BED467E4-06E1-4336-8092-775CEA068852}.ReleaseBundle|x64.Build.0 = ReleaseBundle|x64
+		{BED467E4-06E1-4336-8092-775CEA068852}.ReleaseBundle|x64.Deploy.0 = ReleaseBundle|x64
+		{BED467E4-06E1-4336-8092-775CEA068852}.ReleaseBundle|x86.ActiveCfg = ReleaseBundle|x86
+		{BED467E4-06E1-4336-8092-775CEA068852}.ReleaseBundle|x86.Build.0 = ReleaseBundle|x86
+		{BED467E4-06E1-4336-8092-775CEA068852}.ReleaseBundle|x86.Deploy.0 = ReleaseBundle|x86
 		{C7673AD5-E3AA-468C-A5FD-FA38154E205C}.Debug|ARM.ActiveCfg = Debug|ARM
 		{C7673AD5-E3AA-468C-A5FD-FA38154E205C}.Debug|ARM.Build.0 = Debug|ARM
 		{C7673AD5-E3AA-468C-A5FD-FA38154E205C}.Debug|x64.ActiveCfg = Debug|x64
@@ -179,6 +179,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {83BCE7CD-1F92-4D73-9D4D-17DCE2FC91F4}
+		SolutionGuid = {3CE4693A-E766-481E-A152-D7840CD428AC}
 	EndGlobalSection
 EndGlobal
