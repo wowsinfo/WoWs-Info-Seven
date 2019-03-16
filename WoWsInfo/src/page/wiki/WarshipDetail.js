@@ -585,15 +585,14 @@ class WarshipDetail extends PureComponent {
    */
   renderSimilar(similar) {
     if (Object.keys(similar).length > 0) {
-      const { compare } = this.state;
       return (
         <FooterPlus>
           <FlatList keyExtractor={item => item.name} horizontal data={similar} renderItem={({item}) => {
             return <WarshipCell item={item} scale={1.4} onPress={() => {
               this.setState({curr: item, loading: true}, 
                 () => this.efficientDataRequest(item.ship_id));
-              }}/>
-            }} showsHorizontalScrollIndicator={false}/>
+              }} />
+            }} />
         </FooterPlus>
       )
     } else return null;
