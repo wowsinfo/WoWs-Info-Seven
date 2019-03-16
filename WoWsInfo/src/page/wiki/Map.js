@@ -44,7 +44,7 @@ class Map extends Component {
         }} showsVerticalScrollIndicator={false}/>
         <Portal>
           <Dialog visible={shown} onDismiss={() => this.setState({shown: false, loading: true})} 
-            dismissable theme={{roundness: 16}} style={{height: imageWidth, width: imageWidth, alignSelf: 'center'}}>
+            dismissable style={{height: imageWidth, width: imageWidth, alignSelf: 'center'}}>
               <Image source={{uri: map}} onLoadEnd={() => this.setState({loading: false})}
                 style={{flex: 1, height: null, width: null, borderRadius: 16}}/>
               { loading ? <LoadingIndicator style={indicator}/> : null }

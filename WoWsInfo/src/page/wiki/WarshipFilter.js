@@ -54,7 +54,7 @@ class WarshipFilter extends Component {
     return (
       <WoWsInfo title={lang.wiki_warship_filter_placeholder} onPress={() => this.refs['search'].focus()}>
         <TextInput label={lang.wiki_warship_filter_placeholder} ref='search' autoCorrect={false}
-          theme={{roundness: 0}} onChangeText={t => this.setState({name: t})} onEndEditing={() => {
+          onChangeText={t => this.setState({name: t})} onEndEditing={() => {
             // Do not go back if it is still empty
             if (name.trim(' ').length > 0) this.applyAll();
           }} clearButtonMode='while-editing' autoCapitalize='none'/>

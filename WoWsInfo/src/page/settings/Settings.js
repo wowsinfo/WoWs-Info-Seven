@@ -46,7 +46,7 @@ class Settings extends Component {
           { this.renderOpenSource() }
         </ScrollView>
         <Portal>
-          <Dialog visible={showColour} dismissable={true} theme={{roundness: 16}}
+          <Dialog visible={showColour} dismissable={true}
             style={{maxHeight: '61.8%'}} onDismiss={() => this.setState({showColour: false})}>
             <FlatList bounces={false} data={this.colourList} keyExtractor={(item, index) => String(index)}
               showsVerticalScrollIndicator={false} renderItem={({item}) => {

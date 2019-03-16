@@ -46,7 +46,7 @@ class RS extends Component {
     return (
       <WoWsInfo onPress={rs ? () => this.setState({info: true}) : null} title='Map Information'>
         { !valid ? <KeyboardAvoidingView style={container} behavior='padding' enabled>
-          <TextInput style={input} theme={{roundness: 0}} value={ip} placeholder='192.168.1.x' 
+          <TextInput style={input} value={ip} placeholder='192.168.1.x' 
             keyboardType={isAndroid ? 'decimal-pad' : 'numbers-and-punctuation'}
             onChangeText={t => this.setState({ip: t})}
             onEndEditing={() => this.validIP(ip)}/>
@@ -116,7 +116,7 @@ class RS extends Component {
 
     return (
       <Portal>
-        <Dialog visible={info} dismissable={true} theme={{roundness: 16}}
+        <Dialog visible={info} dismissable={true}
           style={{maxHeight: '61.8%'}} onDismiss={() => this.setState({info: false})}>
           <ScrollView showsVerticalScrollIndicator={false}>
             <List.Item title='Client Version' description={clientVersionFromExe} />

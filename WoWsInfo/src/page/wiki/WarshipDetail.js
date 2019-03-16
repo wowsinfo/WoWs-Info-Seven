@@ -165,7 +165,7 @@ class WarshipDetail extends PureComponent {
     return (
       <View>
         { this.renderStatus(Guard(curr, 'default_profile', null)) }
-        { hasModule ? <Button theme={{roundness: 0}} mode='contained' 
+        { hasModule ? <Button mode='contained' 
           onPress={() => SafeAction('WarshipModule', {data: curr})}>
             {lang.warship_update_module}
           </Button> : null }
