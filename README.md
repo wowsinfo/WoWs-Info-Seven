@@ -1,5 +1,5 @@
 # WoWs Info Origin
-This is not the official app for [World of Warships](https://worldofwarships.com/). It is my own project and it is powered by [React Native](https://facebook.github.io/react-native/). Data are from [Wargaming API](https://developers.wargaming.net), [Kongzhong (空中网)](http://wows.kongzhong.com/), [WoWs Numbers](http://wows-numbers.com) and [Global Wiki](https://wiki.wargaming.net/en/World_of_Warships).
+This is not the official app for [World of Warships](https://worldofwarships.com/). It is my own project and it is powered by [React Native](https://facebook.github.io/react-native/). It supports IOS, Android and [UWP](https://github.com/HenryQuan/WoWs-Info-Origin/tree/win10). Data are from [Wargaming API](https://developers.wargaming.net), [WoWs Numbers](http://wows-numbers.com) and [Global Wiki](https://wiki.wargaming.net/en/World_of_Warships). 
 
 ### Run this project
 ~~~~
