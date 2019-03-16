@@ -1,0 +1,26 @@
+{
+  "name": "WoWsInfoMac",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native-macos/local-cli/cli.js start",
+    "ios": "react-native run-ios",
+    "android": "react-native run-android",
+    "macos": "react-native-macos run-macos",
+    "test": "jest"
+  },
+  "dependencies": {
+    "react": "16.2.0",
+    "react-native-macos": "0.19.2"
+  },
+  "devDependencies": {
+    "babel-jest": "24.5.0",
+    "babel-plugin-module-resolver": "^3.2.0",
+    "babel-preset-react-native": "4.0.1",
+    "jest": "24.5.0",
+    "react-test-renderer": "16.2.0"
+  },
+  "jest": {
+    "preset": "react-native-macos"
+  }
+}
