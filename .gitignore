@@ -9,3 +9,5 @@ API/temp.json
 WoWsInfo/.vscode/
 WoWsInfo/windows/WoWsInfo/_pkginfo.txt
 .DS_Store
+*.jsbundle
+WoWsInfoMac/macos/main.jsbundle.meta
