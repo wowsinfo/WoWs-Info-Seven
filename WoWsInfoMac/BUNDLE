@@ -7,5 +7,8 @@ react-native bundle --platform android --dev false --entry-file index.js --bundl
 Windows:
 react-native bundle --platform windows --entry-file index.js --bundle-output windows\WoWsInfo\ReactAssets\index.windows.bundle --assets-dest windows\WoWsInfo\ReactAssets --dev false
 
+Mac:
+react-native-macos bundle --entry-file index.js --bundle-output macos/main.jsbundle --dev=false --platform macos --assets-dest macos/
+
 REMEMBER:
 REMEMBER TO CHANGE GITHUB_VERSIOn when making bundle for Google Play and IOS.
