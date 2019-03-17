@@ -11,14 +11,22 @@
   },
   "dependencies": {
     "react": "16.2.0",
-    "react-native-macos": "0.19.2"
+    "react-native-macos": "0.19.2",
+    "react-native-device-detection": "^0.2.0",
+    "react-native-localization": "^2.0.3",
+    "react-native-material-color": "^1.0.15",
+    "react-native-paper": "^2.13.0",
+    "react-native-router-flux": "^4.0.6",
+    "react-native-super-grid": "^3.0.1",
+    "react-native-vector-icons": "^6.4.1"
   },
   "devDependencies": {
     "babel-jest": "24.5.0",
     "babel-plugin-module-resolver": "^3.2.0",
     "babel-preset-react-native": "4.0.1",
     "jest": "24.5.0",
-    "react-test-renderer": "16.2.0"
+    "react-test-renderer": "16.2.0",
+    "string-format": "^2.0.0"
   },
   "jest": {
     "preset": "react-native-macos"

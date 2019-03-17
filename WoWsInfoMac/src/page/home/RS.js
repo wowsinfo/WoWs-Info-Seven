@@ -147,7 +147,7 @@ class RS extends Component {
       });
       this.getArenaInfo(url);
       this.interval = setInterval(() => this.getArenaInfo(url), 22222);
-    } catch {
+    } catch (err) {
       Alert.alert('Error', `${url} is not valid`)
     }
   }
@@ -187,7 +187,7 @@ class RS extends Component {
           }
         }
       }
-    } catch {
+    } catch (err) {
       // Some error so no longer valid
       clearTimeout(this.interval);
       this.setState({valid: false, rs: null});
