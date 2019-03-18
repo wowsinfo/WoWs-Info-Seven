@@ -1030,6 +1030,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.yihengquan.wowsinfo;
 				PRODUCT_NAME = WoWsInfoMac;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
@@ -1053,6 +1054,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.yihengquan.wowsinfo;
 				PRODUCT_NAME = WoWsInfoMac;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
