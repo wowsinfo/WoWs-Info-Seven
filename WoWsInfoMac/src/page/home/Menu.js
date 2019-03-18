@@ -60,16 +60,16 @@ class Menu extends PureComponent {
   }
 
   componentDidMount() {
-    if (LASTLOCATION !== '') {
-      let extra = {};
-      if (LASTLOCATION === 'Map') return;
-      if (LASTLOCATION === 'Statistics') extra = {info: this.state.main};
-      else if (LASTLOCATION === 'Upgrade') {
-        LASTLOCATION = 'Consumable';
-        extra = {upgrade: true};
-      }
-      setTimeout(() => SafeAction(LASTLOCATION, extra));
-    }
+    // if (LASTLOCATION !== '') {
+    //   let extra = {};
+    //   if (LASTLOCATION === 'Map') return;
+    //   if (LASTLOCATION === 'Statistics') extra = {info: this.state.main};
+    //   else if (LASTLOCATION === 'Upgrade') {
+    //     LASTLOCATION = 'Consumable';
+    //     extra = {upgrade: true};
+    //   }
+    //   setTimeout(() => SafeAction(LASTLOCATION, extra));
+    // }
   }
 
   getData() {
