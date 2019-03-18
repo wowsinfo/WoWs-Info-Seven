@@ -1,12 +1,12 @@
 # WoWs Info Origin
-Note that UWP version is experimental. Some features are removed in order to make it work. It might not even have any updates. The only advantage of it is that RS works locally. Please download from [Microsoft Store]().
+This branch is highly experimental (worse than UWP version). It works with [react-native-macos](https://github.com/ptmt/react-native-macos). Styling is a bit messy and sometimes, buttons are not clickable and they will disappear after being clicked (still visible while hovering). There will be a release later if anyone wants to try (it is barely usable).
 
 ### Run this project
 *Note that you need to manully link some libraries before running.*
 ~~~~
 cd WoWsInfo 
 npm install
-react-native run-windows
+react-native-macos run-macos
 ~~~~
 You will need to get a key from [here](https://developers.wargaming.net) and create a file called 'key.js' inside 'WoWsInfo/src/value' folder with this line of code.
 ~~~~
