@@ -1,0 +1,1 @@
+WoWs Info does not collect data from users.
