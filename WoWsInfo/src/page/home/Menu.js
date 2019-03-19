@@ -14,7 +14,7 @@ import { WoWsInfo, SectionTitle, AppName, Donation } from '../../component';
 import { lang } from '../../value/lang';
 import { SafeAction, Downloader } from '../../core';
 import { ThemeBackColour, TintColour } from '../../value/colour';
-import { getCurrDomain, getCurrServer, getCurrPrefix, APP, LOCAL, getFirstLaunch, setFirstLaunch, setLastLocation } from '../../value/data';
+import { getCurrDomain, getCurrServer, getCurrPrefix, APP, LOCAL, getFirstLaunch, setFirstLaunch, setLastLocation, SAVED } from '../../value/data';
 import { Loading } from '../common/Loading';
 import { FlatGrid } from 'react-native-super-grid';
 
@@ -61,7 +61,11 @@ class Menu extends PureComponent {
   componentDidMount() {
     if (LASTLOCATION !== '') {
       let extra = {};
-      if (LASTLOCATION === 'Statistics') extra = {info: this.state.main};
+      if (LASTLOCATION === 'Statistics') {
+        // No main account (it will trigger bug statistics screen)
+        if (DATA[LOCAL.userInfo].account_id !== '') LASTLOCATION = '';
+        else extra = {info: this.state.main};
+      }
       else if (LASTLOCATION === 'Upgrade') {
         LASTLOCATION = 'Consumable';
         extra = {upgrade: true};

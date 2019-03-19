@@ -7,7 +7,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "@react-native-community/async-storage": "^1.2.0",
     "react": "16.8.3",
     "react-native": "0.59.0",
     "react-native-animatable": "^1.3.1",
@@ -23,6 +22,7 @@
     "victory-native": "^31.0.0"
   },
   "devDependencies": {
+    "@react-native-community/async-storage": "^1.2.0",
     "@babel/core": "^7.3.4",
     "@babel/runtime": "^7.3.4",
     "babel-jest": "^24.4.0",
