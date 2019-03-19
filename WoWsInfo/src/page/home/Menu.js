@@ -63,7 +63,7 @@ class Menu extends PureComponent {
       let extra = {};
       if (LASTLOCATION === 'Statistics') {
         // No main account (it will trigger bug statistics screen)
-        if (DATA[LOCAL.userInfo].account_id !== '') LASTLOCATION = '';
+        if (DATA[LOCAL.userInfo].account_id == '') LASTLOCATION = '';
         else extra = {info: this.state.main};
       }
       else if (LASTLOCATION === 'Upgrade') {
