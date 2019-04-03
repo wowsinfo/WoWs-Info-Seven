@@ -6,7 +6,7 @@
 
 import React, { Component } from 'react';
 import { FlatList, ScrollView, StyleSheet } from 'react-native';
-import { Button, List } from 'react-native-paper';
+import { Button, List, Paragraph } from 'react-native-paper';
 import { Actions } from 'react-native-router-flux';
 import { lang } from '../../value/lang';
 import { SERVER, getCurrServer, setCurrServer, setAPILanguage } from '../../value/data';
@@ -54,12 +54,12 @@ class Setup extends Component {
               return <Button onPress={() => this.updateServer(index)}>{lang.server_name[index]}</Button>
             }} keyExtractor={i => i} numColumns={2}/>
           </List.Section>
-          { loading ? null : 
           <List.Section title={`${lang.setting_api_language}: ${langList[selected_lang]}`}>
-            <FlatList data={langData} renderItem={({item}) => {
-              return <Button onPress={() => this.updateApiLanguage(item)}>{langList[item]}</Button>
-            }} keyExtractor={i => i} numColumns={2}/>
-          </List.Section> }
+            { loading ? <Paragraph style={{margin: 16}}>{lang.error_download_issue}</Paragraph> : 
+              <FlatList data={langData} renderItem={({item}) => {
+                return <Button onPress={() => this.updateApiLanguage(item)}>{langList[item]}</Button>
+            }} keyExtractor={i => i} numColumns={2}/> }
+          </List.Section>
         </ScrollView>
       </WoWsInfo>
     )
