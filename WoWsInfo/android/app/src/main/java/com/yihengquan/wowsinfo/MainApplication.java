@@ -3,6 +3,7 @@ package com.yihengquan.wowsinfo;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.sbugert.rnadmob.RNAdMobPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.dooboolab.RNIap.RNIapPackage;
 import com.horcrux.svg.SvgPackage;
@@ -28,6 +29,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNAdMobPackage(),
             new AsyncStoragePackage(),
             new RNIapPackage(),
             new SvgPackage(),
