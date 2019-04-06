@@ -26,8 +26,7 @@ class WikiIcon extends Component {
         <View style={container}>
           { item ? item.new ? <View style={[newLabel, {backgroundColor: theme[500]}]}/> : null : null }
           <Image source={imageSrc} resizeMode='contain'
-            defaultSource={defaultSrc}
-            style={{width: width, height: width / 1.7}} />
+            defaultSource={defaultSrc} style={{width: width, height: width / 1.7}} />
         </View>
       );
     } else {
@@ -35,8 +34,7 @@ class WikiIcon extends Component {
         <Touchable style={[container, selected ? {borderColor: theme[500]} : null]} {...props}>
           { item.new ? <View style={[newLabel, {backgroundColor: DATA[LOCAL.theme][500]}]}/> : null }
           <Image source={imageSrc} resizeMode='contain'
-            defaultSource={defaultSrc}
-            style={{height: width, width: width}} />
+            defaultSource={defaultSrc} style={{height: width, width: width}} />
         </Touchable>
       )
     }
