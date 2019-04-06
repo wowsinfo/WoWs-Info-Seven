@@ -21,8 +21,8 @@ class AdmodBanber extends Component {
     if (Platform.OS == 'ios') unitID = 'ca-app-pub-5048098651344514/4703363983';
 
     return (
-      <Anime.View style={{height: 36, backgroundColor: TintColour()[500]}} ref='admob'>
-        <AdMobBanner adSize='smartBannerPortrait' onAdFailedToLoad={() => this.refs['admob'].bounceOut(600).then(() => this.setState({success: false}))}
+      <Anime.View>
+        <AdMobBanner adSize='smartBannerPortrait' onAdFailedToLoad={() => this.setState({success: false})}
           adUnitID={unitID} testDevices={[AdMobBanner.simulatorId, 'd04604ce-ac57-4655-90c5-4a420f30b3dd']} />
       </Anime.View>
     )
