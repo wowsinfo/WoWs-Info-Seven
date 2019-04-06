@@ -25,7 +25,7 @@
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
       <meta-data
         android:name="com.google.android.gms.ads.APPLICATION_ID"
-        android:value="ca-app-pub-5048098651344514~3226630788" />
+        android:value="ca-app-pub-5048098651344514~9845206175" />
     </application>
 
 </manifest>
