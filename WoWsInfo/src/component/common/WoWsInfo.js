@@ -13,7 +13,7 @@ import { FooterButton } from './FooterButton';
 import { SafeAction, random } from '../../core';
 import { ThemeBackColour, ThemeColour } from '../../value/colour';
 import { View } from 'react-native-animatable';
-import { AdMobBanner } from 'react-native-admob';
+import { AdmodBanber } from './AdmodBanber';
 
 class WoWsInfo extends Component {
   constructor(props) {
@@ -42,10 +42,7 @@ class WoWsInfo extends Component {
         <SafeAreaView style={safeView}>
           <StatusBar barStyle={DARKMODE ? 'light-content' : 'dark-content'} 
             backgroundColor={ThemeColour()}/>
-            <View>
-              <AdMobBanner adSize='smartBannerLandscape'
-                adUnitID='ca-app-pub-5048098651344514/4703363983' testDevices={[AdMobBanner.simulatorId]} />
-            </View>
+            <AdmodBanber />
             <Surface style={child}>
               { children }
             </Surface>
