@@ -13,7 +13,7 @@ import { FooterButton } from './FooterButton';
 import { SafeAction, random } from '../../core';
 import { ThemeBackColour, ThemeColour } from '../../value/colour';
 import { View } from 'react-native-animatable';
-import { AdmodBanber } from './AdmodBanber';
+import { AdmobBanner } from './AdmobBanner';
 
 class WoWsInfo extends Component {
   constructor(props) {
@@ -42,8 +42,8 @@ class WoWsInfo extends Component {
         <SafeAreaView style={safeView}>
           <StatusBar barStyle={DARKMODE ? 'light-content' : 'dark-content'} 
             backgroundColor={ThemeColour()}/>
-            <AdmodBanber />
             <Surface style={child}>
+              <AdmobBanner />
               { children }
             </Surface>
           { this.renderFooter() }
