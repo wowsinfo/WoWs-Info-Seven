@@ -35,13 +35,12 @@ class Donation extends Component {
   }
 
   render() {
-    const { container } = styles;
     const { products } = this.state;
     if (GITHUB_VERSION) return null;
     if (products == null) return <LoadingIndicator />;
     console.log(this.state);
     return (
-      <View style={container}>
+      <View>
         <FlatList horizontal data={products} renderItem={({item}) => 
           <Button onPress={() => this.supportWoWsInfo(item)}>{item.localizedPrice}</Button>}
         keyExtractor={p => p.price}/>
@@ -68,11 +67,5 @@ class Donation extends Component {
     }
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  }
-});
 
 export { Donation };

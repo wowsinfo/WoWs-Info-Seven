@@ -117,6 +117,7 @@ export const lang = new LocalizedStrings({
     // Extra
     extra_section_title: 'Extra',
     extra_support_wowsinfo: 'Support WoWs Info',
+    extra_support_wowsinfo_subtitle: 'Donations and Ads',
     support_paypal: 'PayPal',
     support_patreon: 'Patreon',
     support_wechat: 'WeChat',
@@ -368,6 +369,7 @@ export const lang = new LocalizedStrings({
     // Extra
     extra_section_title: '其他',
     extra_support_wowsinfo: '支持WoWs Info',
+    extra_support_wowsinfo_subtitle: '捐助以及广告',
     support_paypal: '贝宝',
     support_patreon: 'Patreon',
     support_wechat: '微信',
@@ -619,6 +621,7 @@ export const lang = new LocalizedStrings({
     // Extra
     extra_section_title: '其他',
     extra_support_wowsinfo: '支持WoWs Info',
+    extra_support_wowsinfo_subtitle: '捐助以及廣告',
     support_paypal: 'PayPal',
     support_patreon: 'Patreon',
     support_wechat: '微信',
@@ -870,6 +873,7 @@ export const lang = new LocalizedStrings({
     // Extra
     extra_section_title: 'その他',
     extra_support_wowsinfo: 'WoWs Infoへの支援',
+    extra_support_wowsinfo_subtitle: 'ドネーションと広告',
     support_paypal: 'ペイパル　PayPal',
     support_patreon: 'パトレオン　Patreon',
     support_wechat: '微信　WeChat',
@@ -1121,6 +1125,7 @@ export const lang = new LocalizedStrings({
     // Extra
     extra_section_title: 'Extra',
     extra_support_wowsinfo: 'Support WoWs Info',
+    extra_support_wowsinfo_subtitle: 'Donations and Ads',
     support_paypal: 'PayPal',
     support_patreon: 'Patreon',
     support_wechat: 'WeChat',
