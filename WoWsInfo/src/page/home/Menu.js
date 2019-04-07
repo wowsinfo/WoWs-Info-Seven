@@ -10,11 +10,11 @@ import { Alert, ScrollView, StyleSheet, Linking, View } from 'react-native';
 import { isAndroid } from 'react-native-device-detection';
 import { List, Colors } from 'react-native-paper';
 import * as Animatable from 'react-native-animatable';
-import { WoWsInfo, SectionTitle, AppName, Donation } from '../../component';
+import { WoWsInfo, SectionTitle, AppName } from '../../component';
 import { lang } from '../../value/lang';
 import { SafeAction, Downloader } from '../../core';
 import { ThemeBackColour, TintColour } from '../../value/colour';
-import { getCurrDomain, getCurrServer, getCurrPrefix, APP, LOCAL, getFirstLaunch, setFirstLaunch, setLastLocation, SAVED } from '../../value/data';
+import { getCurrDomain, getCurrServer, getCurrPrefix, LOCAL, getFirstLaunch, setFirstLaunch, setLastLocation, SAVED } from '../../value/data';
 import { Loading } from '../common/Loading';
 import { FlatGrid } from 'react-native-super-grid';
 import {AdMobInterstitial} from 'react-native-admob';
@@ -94,13 +94,6 @@ class Menu extends PureComponent {
     const domain = getCurrDomain();
     this.prefix = getCurrPrefix();
 
-    this.support = [{t: lang.support_patreon, d: APP.Patreon}];
-    if (GITHUB_VERSION) {
-      this.support = [{t: lang.support_patreon, d: APP.Patreon},
-        {t: lang.support_paypal, d: APP.PayPal},
-        {t: lang.support_wechat, d: APP.WeChat}];
-    }
-
     // TODO: change links base on player server
     this.websites = [{t: lang.website_official_site, d: `https://worldofwarships.${domain}/`},
     {t: lang.website_premium, d: `https://${this.prefix}.wargaming.net/shop/wows/`},
@@ -158,14 +151,8 @@ class Menu extends PureComponent {
           right={() => isAndroid ? null : <List.Icon color={Colors.grey500} icon='keyboard-arrow-right'/>} />
         }} spacing={0}/>
         <SectionTitle title={lang.extra_section_title}/>
+        <List.Item title={lang.extra_support_wowsinfo} description={lang.extra_support_wowsinfo_subtitle} onPress={() => SafeAction('SupportMe')}/>
         <List.Item title='RS Beta' description='Realtime Statistics Beta' onPress={() => SafeAction('RS')}/>
-        <List.Section title={lang.extra_support_wowsinfo}>
-        <Donation />
-          { this.support.map(item => { return (
-            <List.Item title={item.t} description={item.d} key={item.t}
-              onPress={() => Linking.openURL(item.d)}/>
-          )})}
-        </List.Section>
         <List.Section title={lang.website_title} >
           <FlatGrid items={this.websites} itemDimension={300} renderItem={({item}) => {
             return <List.Item title={item.t} description={item.d} key={item.t}
