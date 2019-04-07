@@ -77,7 +77,9 @@ class Menu extends PureComponent {
       setTimeout(() => SafeAction(LASTLOCATION, extra));
     }
 
-    AdMobInterstitial.requestAd().then(() => AdMobInterstitial.showAd());
+    if (DATA[LOCAL.showFullscreen]) {
+      AdMobInterstitial.requestAd().then(() => AdMobInterstitial.showAd());
+    }
   }
 
   getData() {

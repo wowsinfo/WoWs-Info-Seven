@@ -9,6 +9,7 @@ import { SafeAreaView, StyleSheet, StatusBar } from 'react-native';
 import { Button, Surface } from 'react-native-paper';
 import { isAndroid } from 'react-native-device-detection';
 import { lang } from '../../value/lang';
+import { LOCAL } from '../../value/data';
 import { FooterButton } from './FooterButton';
 import { SafeAction, random } from '../../core';
 import { ThemeBackColour, ThemeColour } from '../../value/colour';
@@ -37,13 +38,15 @@ class WoWsInfo extends Component {
   render() {
     const { container, safeView, child } = styles;
     const { children, style } = this.props;
+
+    let show = DATA[LOCAL.showBanner];
     return (
       <Surface style={[container, style, ThemeBackColour()]}>
         <SafeAreaView style={safeView}>
           <StatusBar barStyle={DARKMODE ? 'light-content' : 'dark-content'} 
             backgroundColor={ThemeColour()}/>
             <Surface style={child}>
-              <AdmobBanner />
+              { show ? <AdmobBanner /> : null }
               { children }
             </Surface>
           { this.renderFooter() }
