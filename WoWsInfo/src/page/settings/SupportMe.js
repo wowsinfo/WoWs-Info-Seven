@@ -18,7 +18,6 @@ class SupportMe extends Component {
   }
 
   render() {
-    const { container } = styles;
     return (
       <WoWsInfo>
         <List.Section title={lang.extra_support_wowsinfo}>
