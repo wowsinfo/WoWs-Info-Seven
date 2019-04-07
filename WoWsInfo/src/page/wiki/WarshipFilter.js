@@ -52,7 +52,7 @@ class WarshipFilter extends Component {
     Object.keys(types).forEach(k => typeList.push(types[k]));
 
     return (
-      <WoWsInfo title={lang.wiki_warship_filter_placeholder} onPress={() => this.refs['search'].focus()}>
+      <WoWsInfo hideAds title={lang.wiki_warship_filter_placeholder} onPress={() => this.refs['search'].focus()}>
         <TextInput label={lang.wiki_warship_filter_placeholder} ref='search' autoCorrect={false}
           theme={{roundness: 0}} onChangeText={t => this.setState({name: t})} onEndEditing={() => {
             // Do not go back if it is still empty

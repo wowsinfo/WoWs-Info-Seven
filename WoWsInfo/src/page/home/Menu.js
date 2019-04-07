@@ -24,7 +24,9 @@ class Menu extends PureComponent {
   constructor(props) {
     super(props);
     
-    AdMobInterstitial.setAdUnitID('ca-app-pub-5048098651344514/3013393881');
+    let unitID = 'ca-app-pub-5048098651344514/1247820419';
+    if (isAndroid) unitID = 'ca-app-pub-5048098651344514/3013393881';
+    AdMobInterstitial.setAdUnitID(unitID);
     AdMobInterstitial.setTestDevices([AdMobInterstitial.simulatorId]);
 
     let first = getFirstLaunch();
@@ -154,7 +156,7 @@ class Menu extends PureComponent {
         }} spacing={0}/>
         <SectionTitle title={lang.extra_section_title}/>
         <List.Item title={lang.extra_support_wowsinfo} description={lang.extra_support_wowsinfo_subtitle} onPress={() => SafeAction('SupportMe')}/>
-        <List.Item title='RS Beta' description='Realtime Statistics Beta' onPress={() => SafeAction('RS')}/>
+        <List.Item title='RS Beta' description={lang.extra_rs_beta} onPress={() => SafeAction('RS')}/>
         <List.Section title={lang.website_title} >
           <FlatGrid items={this.websites} itemDimension={300} renderItem={({item}) => {
             return <List.Item title={item.t} description={item.d} key={item.t}

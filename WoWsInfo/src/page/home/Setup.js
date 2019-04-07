@@ -45,7 +45,7 @@ class Setup extends Component {
   render() {
     const { loading, server, selected_server, langList, langData, selected_lang } = this.state;
     return (
-      <WoWsInfo title={lang.setup_done_button} 
+      <WoWsInfo title={lang.setup_done_button} hideAds
         noRight noLeft onPress={loading ? null : () => this.finishSetup()}>
         <ScrollView>
           <SectionTitle title={lang.settings_api_settings}/>
