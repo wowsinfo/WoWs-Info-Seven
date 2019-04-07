@@ -7,6 +7,7 @@ import { SafeFetch, roundTo, Guard, getOverallRating, SafeAction, SafeValue, Saf
 import { WoWsAPI } from '../../value/api';
 import { getCurrDomain, SAVED, LOCAL, getCurrServer, setLastLocation } from '../../value/data';
 import { FlatGrid } from 'react-native-super-grid';
+import { lang } from '../../value/lang';
 
 class RS extends Component {
   constructor(props) {
@@ -51,7 +52,7 @@ class RS extends Component {
             onChangeText={t => this.setState({ip: t})}
             onEndEditing={() => this.validIP(ip)}/>
           <Button uppercase={false} onPress={() => Linking.openURL('https://github.com/HenryQuan/WoWs-RS/releases/latest')}>
-            Download RS on your computer
+            { lang.extra_rs_beta_download }
           </Button>
         </KeyboardAvoidingView> : this.renderPlayer() }
         { this.renderMapInfo(rs) }

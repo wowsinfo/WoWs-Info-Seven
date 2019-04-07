@@ -37,7 +37,7 @@ class WoWsInfo extends Component {
 
   render() {
     const { container, safeView, child } = styles;
-    const { children, style } = this.props;
+    const { children, hideAds, style } = this.props;
 
     let show = DATA[LOCAL.showBanner];
     return (
@@ -45,8 +45,8 @@ class WoWsInfo extends Component {
         <SafeAreaView style={safeView}>
           <StatusBar barStyle={DARKMODE ? 'light-content' : 'dark-content'} 
             backgroundColor={ThemeColour()}/>
+            { show && hideAds != true ? <AdmobBanner /> : null }
             <Surface style={child}>
-              { show ? <AdmobBanner /> : null }
               { children }
             </Surface>
           { this.renderFooter() }

@@ -30,7 +30,7 @@ const libraries = [{name: 'react', link: 'https://github.com/facebook/react'},
 class License extends Component {
   render() {
     return (
-      <WoWsInfo>
+      <WoWsInfo hideAds>
         <FlatGrid items={libraries} renderItem={({item}) => {
           return <List.Item key={item.name} title={item.name} description={item.link}
             onPress={() => Linking.openURL(item.link)}/>

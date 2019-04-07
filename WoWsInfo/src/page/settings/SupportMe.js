@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Linking } from 'react-native';
 import { List, Checkbox } from 'react-native-paper';
 import { Donation, WoWsInfo } from '../../component';
 import { lang } from '../../value/lang';
@@ -26,7 +26,7 @@ class SupportMe extends Component {
   render() {
     const { banner, fullscreen } = this.state;
     return (
-      <WoWsInfo>
+      <WoWsInfo hideAds>
         <List.Section title={lang.extra_support_wowsinfo}>
           <Donation />
           { this.support.map(item => { return (
@@ -34,10 +34,10 @@ class SupportMe extends Component {
               onPress={() => Linking.openURL(item.d)}/>
           )})}
         </List.Section>
-        <List.Section title='Ads Settings'>
-          <List.Item title={'Show Ads'} onPress={() => this.updateBanner(!banner)} 
+        <List.Section title={lang.support_ads}>
+          <List.Item title={lang.support_ads_banner} onPress={() => this.updateBanner(!banner)} 
             right={() => <Checkbox status={banner ? 'checked' : 'unchecked'}/>}/>
-          <List.Item title={'Show Ads on launch'} onPress={() => this.updateFullscreen(!fullscreen)} 
+          <List.Item title={lang.support_ads_fullscreen} onPress={() => this.updateFullscreen(!fullscreen)} 
             right={() => <Checkbox status={fullscreen ? 'checked' : 'unchecked'}/>}/>
         </List.Section>
       </WoWsInfo>

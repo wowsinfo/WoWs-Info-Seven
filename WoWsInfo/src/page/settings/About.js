@@ -25,7 +25,7 @@ class About extends Component {
     let imageWidth = width > height ? height * 0.5 : width * 0.5;
 
     return (
-      <WoWsInfo>
+      <WoWsInfo hideAds>
         <Touchable style={touch} onPress={() => Linking.openURL(lang.abour_github_link)}>
           <Anime.View animation={animation} iterationCount='infinite' easing='ease' useNativeDriver>
             <Image style={{tintColor: TintColour()[500], height: imageWidth, width: imageWidth }}
