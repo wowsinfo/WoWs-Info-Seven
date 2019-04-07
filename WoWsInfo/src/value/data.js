@@ -44,7 +44,10 @@ export const LOCAL = {
   // Save last visited location as a string
   lastLocation: '@WoWs_Info:lastLocation',
   // RS
-  rsIP: '@WoWs_Info:rsIP'
+  rsIP: '@WoWs_Info:rsIP',
+  // Suport me
+  showBanner: '@WoWs_Info:banner_ads',
+  showFullscreen: '@WoWs_Info:fullscreen_ads',
 }
 
 /**

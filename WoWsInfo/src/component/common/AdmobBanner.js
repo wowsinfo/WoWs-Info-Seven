@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { Platform } from 'react-native';
 import { AdMobBanner } from 'react-native-admob';
 import * as Anime from 'react-native-animatable';
-import { TintColour } from '../../value/colour';
 
-class AdmodBanber extends Component {
+class AdmobBanner extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,4 +29,4 @@ class AdmodBanber extends Component {
 }
 
 
-export { AdmodBanber };
+export { AdmobBanner };
