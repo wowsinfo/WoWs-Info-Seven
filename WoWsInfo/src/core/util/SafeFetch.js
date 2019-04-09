@@ -33,7 +33,7 @@ class SafeFetch {
       if (res.status === 200) return res.json();
     }).then(json => {
       return SafeValue(json, {});
-    });
+    }).catch(err => console.error(err));
   }
 }
 
