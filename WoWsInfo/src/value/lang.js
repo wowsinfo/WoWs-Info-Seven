@@ -117,9 +117,15 @@ export const lang = new LocalizedStrings({
     // Extra
     extra_section_title: 'Extra',
     extra_support_wowsinfo: 'Support WoWs Info',
+    extra_rs_beta: 'Realtime Statistics Beta',
+    extra_rs_beta_download: 'Download RS on your computer',
+    extra_support_wowsinfo_subtitle: 'Donations and Ads',
     support_paypal: 'PayPal',
     support_patreon: 'Patreon',
     support_wechat: 'WeChat',
+    support_ads: 'Ads Settings',
+    support_ads_banner: 'Show Ads',
+    support_ads_fullscreen: 'Show Ads on launch',
     // Websites
     website_title: 'Websites',
     website_official_site: 'World of Warships',
@@ -226,7 +232,7 @@ export const lang = new LocalizedStrings({
     weapon_total_frags: 'Total Frags',
     weapon_hit_ratio: 'Hit Ratio',
     /// App name section
-    app_name: 'WoWs Info Origin',
+    app_name: 'WoWs Info Origin+',
     wowsinfo_black: 'Black',
     wowsinfo_white: 'White',
     wowsinfo_ultra: 'Ultra',
@@ -368,9 +374,15 @@ export const lang = new LocalizedStrings({
     // Extra
     extra_section_title: '其他',
     extra_support_wowsinfo: '支持WoWs Info',
+    extra_rs_beta: '实时数据 Beta',
+    extra_rs_beta_download: '在电脑上下载RS',
+    extra_support_wowsinfo_subtitle: '捐助以及广告',
     support_paypal: '贝宝',
     support_patreon: 'Patreon',
     support_wechat: '微信',
+    support_ads: '广告设置',
+    support_ads_banner: '显示广告',
+    support_ads_fullscreen: '启动APP时显示广告',
     // Websites
     website_title: '网站',
     website_official_site: '战舰世界官网',
@@ -477,7 +489,7 @@ export const lang = new LocalizedStrings({
     weapon_total_frags: '总击杀',
     weapon_hit_ratio: '命中率',
     /// App name section
-    app_name: 'WoWs Info 起源',
+    app_name: 'WoWs Info 起源+',
     wowsinfo_black: '黑',
     wowsinfo_white: '白',
     wowsinfo_ultra: '超级版',
@@ -619,9 +631,15 @@ export const lang = new LocalizedStrings({
     // Extra
     extra_section_title: '其他',
     extra_support_wowsinfo: '支持WoWs Info',
+    extra_rs_beta: '實時數據 Beta',
+    extra_rs_beta_download: 'Download RS on your computer',
+    extra_support_wowsinfo_subtitle: '在電腦上下載RS',
     support_paypal: 'PayPal',
     support_patreon: 'Patreon',
     support_wechat: '微信',
+    support_ads: '廣告設置',
+    support_ads_banner: '顯示廣告',
+    support_ads_fullscreen: '啟動APP時顯示廣告',
     // Websites
     website_title: '網站',
     website_official_site: '戰艦世界官網',
@@ -728,7 +746,7 @@ export const lang = new LocalizedStrings({
     weapon_total_frags: '總擊殺',
     weapon_hit_ratio: '命中率',
     /// App name section
-    app_name: 'WoWs Info 起源',
+    app_name: 'WoWs Info 起源+',
     wowsinfo_black: '黑',
     wowsinfo_white: '白',
     wowsinfo_ultra: '超級版',
@@ -870,9 +888,15 @@ export const lang = new LocalizedStrings({
     // Extra
     extra_section_title: 'その他',
     extra_support_wowsinfo: 'WoWs Infoへの支援',
+    extra_rs_beta: 'リアルタイム統計 Beta',
+    extra_rs_beta_download: 'パソコンでダウンロード',
+    extra_support_wowsinfo_subtitle: 'ドネーションと広告',
     support_paypal: 'ペイパル　PayPal',
     support_patreon: 'パトレオン　Patreon',
     support_wechat: '微信　WeChat',
+    support_ads: '広告の設定',
+    support_ads_banner: '広告を見せる',
+    support_ads_fullscreen: 'アプリを開く時に広告を見せる',
     // Websites
     website_title: 'ウェブサイト',
     website_official_site: 'World of Warships',
@@ -979,7 +1003,7 @@ export const lang = new LocalizedStrings({
     weapon_total_frags: '総艦艇撃沈数',
     weapon_hit_ratio: '命中率',
     /// App name section
-    app_name: 'WoWs Info オリジン',
+    app_name: 'WoWs Info オリジン+',
     wowsinfo_black: '黒',
     wowsinfo_white: '白',
     wowsinfo_ultra: 'ウルトラ',
@@ -1121,9 +1145,15 @@ export const lang = new LocalizedStrings({
     // Extra
     extra_section_title: 'Extra',
     extra_support_wowsinfo: 'Support WoWs Info',
+    extra_rs_beta: 'Realtime Statistics Beta',
+    extra_rs_beta_download: 'Download RS on your computer',
+    extra_support_wowsinfo_subtitle: 'Donations and Ads',
     support_paypal: 'PayPal',
     support_patreon: 'Patreon',
     support_wechat: 'WeChat',
+    support_ads: 'Ads Settings',
+    support_ads_banner: 'Show Ads',
+    support_ads_fullscreen: 'Show Ads on launch',
     // Websites
     website_title: 'Websites',
     website_official_site: 'World of Warships',
@@ -1230,7 +1260,7 @@ export const lang = new LocalizedStrings({
     weapon_total_frags: 'Total Frags',
     weapon_hit_ratio: 'Hit Ratio',
     /// App name section
-    app_name: 'WoWs Info Origin',
+    app_name: 'WoWs Info Origin+',
     wowsinfo_black: 'Black',
     wowsinfo_white: 'White',
     wowsinfo_ultra: 'Ultra',

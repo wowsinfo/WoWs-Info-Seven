@@ -42,7 +42,7 @@ class Search extends Component {
     const { search, online } = this.state;
     const { searchBar, scroll } = styles;
     return (
-      <WoWsInfo title={lang.menu_footer} onPress={() => this.refs['search'].focus()}>
+      <WoWsInfo hideAds title={lang.menu_footer} onPress={() => this.refs['search'].focus()}>
         <Anime.View animation='fadeInDown' useNativeDriver duration={500}>
           <Searchbar ref='search' value={search} style={searchBar} placeholder={`${this.prefix.toUpperCase()} - ${online} ${lang.search_player_online}`}
             onChangeText={this.searchAll} autoCorrect={false} autoCapitalize='none' />

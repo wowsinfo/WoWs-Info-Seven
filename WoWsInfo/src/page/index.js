@@ -30,5 +30,6 @@ export * from './clan/ClanInfo';
 
 export * from './settings/About';
 export * from './settings/License';
+export * from './settings/SupportMe';
 import Settings from './settings/Settings';
 export { Settings };

@@ -105,8 +105,8 @@ android {
         applicationId "com.yihengquan.wowsinfo"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 10610
-        versionName "1.0.6.1"
+        versionCode 10620
+        versionName "1.0.6.2"
     }
     splits {
         abi {
@@ -138,6 +138,7 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-admob')
     implementation project(':@react-native-community_async-storage')
     implementation project(':react-native-iap')
     implementation project(':react-native-svg')
