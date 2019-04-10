@@ -47,7 +47,7 @@ class PlayerShip extends PureComponent {
       {n: lang.record_max_xp, v: 'pvp.max_xp'}, {n: lang.record_max_frags_battle, v: 'pvp.max_frags_battle'}];
 
     return (
-      <WoWsInfo title={`${lang.wiki_warship_footer} - ${data.length}`} onPress={() => SafeAction('WarshipFilter', {applyFunc: this.updateShip})}>
+      <WoWsInfo hideAds title={`${lang.wiki_warship_footer} - ${data.length}`} onPress={() => SafeAction('WarshipFilter', {applyFunc: this.updateShip})}>
         <RatingButton rating={rating}/>        
         <FlatGrid itemDimension={150} items={data} renderItem={({item}) => this.renderShip(item)} 
           showsVerticalScrollIndicator={false}/>

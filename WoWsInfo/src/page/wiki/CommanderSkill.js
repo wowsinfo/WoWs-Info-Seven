@@ -41,7 +41,7 @@ class CommanderSkill extends Component {
       <WoWsInfo title={`${point} ${lang.wiki_skills_point}`} onPress={() => this.reset()}>
         <SectionGrid itemDimension={80} sections={data} renderItem={({item}) => {
           return <WikiIcon item={item} selected={item.selected} onPress={() => this.skillSelected(item)} 
-          onLongPress={() => SafeAction('BasicDetail', {item: item})}/>
+            onLongPress={() => SafeAction('BasicDetail', {item: item})}/>
         }} renderSectionHeader={({section}) => <SectionTitle title={section.title}/>}/>
       </WoWsInfo>
     )

@@ -1,6 +1,7 @@
 export * from './common/FloatingButton';
 export * from './common/FooterButton';
 export * from './common/Touchable';
+export * from './common/AdmobBanner';
 
 export * from './common/WoWsInfo';
 export * from './common/FooterPlus';

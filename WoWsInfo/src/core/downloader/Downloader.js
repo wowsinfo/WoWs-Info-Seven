@@ -44,7 +44,7 @@ class Downloader {
         // Download ship type, nation and module names for Wiki
         DATA[SAVED.encyclopedia] = await this.getEncyclopedia();
         log += 'encyclopedia\n';
-  
+        
         // Wiki
         DATA[SAVED.warship] = await this.getWarship();
         log += 'warship\n';
@@ -60,13 +60,13 @@ class Downloader {
 
         DATA[SAVED.consumable] = await this.getConsumable();
         log += 'consumable\n';
-
+        
         DATA[SAVED.map] = await this.getMap();
         log += 'map\n';
-
+        
         DATA[SAVED.pr] = await this.getPR();
         log += 'pr\n';
-  
+        
         console.log(DATA);
 
         // Make sure it is also great than current version
