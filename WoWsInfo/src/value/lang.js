@@ -232,7 +232,7 @@ export const lang = new LocalizedStrings({
     weapon_total_frags: 'Total Frags',
     weapon_hit_ratio: 'Hit Ratio',
     /// App name section
-    app_name: 'WoWs Info Origin',
+    app_name: 'WoWs Info Origin+',
     wowsinfo_black: 'Black',
     wowsinfo_white: 'White',
     wowsinfo_ultra: 'Ultra',
@@ -489,7 +489,7 @@ export const lang = new LocalizedStrings({
     weapon_total_frags: '总击杀',
     weapon_hit_ratio: '命中率',
     /// App name section
-    app_name: 'WoWs Info 起源',
+    app_name: 'WoWs Info 起源+',
     wowsinfo_black: '黑',
     wowsinfo_white: '白',
     wowsinfo_ultra: '超级版',
@@ -746,7 +746,7 @@ export const lang = new LocalizedStrings({
     weapon_total_frags: '總擊殺',
     weapon_hit_ratio: '命中率',
     /// App name section
-    app_name: 'WoWs Info 起源',
+    app_name: 'WoWs Info 起源+',
     wowsinfo_black: '黑',
     wowsinfo_white: '白',
     wowsinfo_ultra: '超級版',
@@ -1003,7 +1003,7 @@ export const lang = new LocalizedStrings({
     weapon_total_frags: '総艦艇撃沈数',
     weapon_hit_ratio: '命中率',
     /// App name section
-    app_name: 'WoWs Info オリジン',
+    app_name: 'WoWs Info オリジン+',
     wowsinfo_black: '黒',
     wowsinfo_white: '白',
     wowsinfo_ultra: 'ウルトラ',
@@ -1260,7 +1260,7 @@ export const lang = new LocalizedStrings({
     weapon_total_frags: 'Total Frags',
     weapon_hit_ratio: 'Hit Ratio',
     /// App name section
-    app_name: 'WoWs Info Origin',
+    app_name: 'WoWs Info Origin+',
     wowsinfo_black: 'Black',
     wowsinfo_white: 'White',
     wowsinfo_ultra: 'Ultra',
