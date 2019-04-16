@@ -3,6 +3,7 @@ package com.yihengquan.wowsinfo;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.thebylito.navigationbarcolor.NavigationBarColorPackage;
 import com.sbugert.rnadmob.RNAdMobPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.dooboolab.RNIap.RNIapPackage;
@@ -29,6 +30,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new NavigationBarColorPackage(),
             new RNAdMobPackage(),
             new AsyncStoragePackage(),
             new RNIapPackage(),
@@ -52,6 +54,7 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public void onCreate() {
     super.onCreate();
+
     SoLoader.init(this, /* native exopackage */ false);
   }
 }

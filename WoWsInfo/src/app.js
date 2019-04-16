@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Alert, BackHandler } from 'react-native';
+import { StyleSheet, Alert, BackHandler, Platform } from 'react-native';
 import { Router, Stack, Scene, Actions } from 'react-native-router-flux';
 import { withTheme, DarkTheme, DefaultTheme } from 'react-native-paper';
 import { Menu, Settings, About, Setup, Consumable, CommanderSkill, 
@@ -7,6 +7,7 @@ import { Menu, Settings, About, Setup, Consumable, CommanderSkill,
   WarshipFilter, WarshipModule, Loading, Statistics, ClanInfo, PlayerAchievement, 
   Rating, Search, Graph, SimilarGraph, License, RS, SupportMe } from './page';
 import { LOCAL, getFirstLaunch, getCurrServer } from './value/data';
+import { HideNavigationBar } from 'react-native-navigation-bar-color';
 import { DataLoader, Downloader } from './core';
 import { GREY, BLUE } from 'react-native-material-color';
 import { TintColour } from './value/colour';
@@ -18,6 +19,11 @@ import { Rank } from './page/player/Rank';
 class App extends Component {
   constructor(props) {
     super(props);
+
+    if (Platform.OS == 'android') {
+      // Hide nav bar
+      HideNavigationBar();
+    }
 
     this.state = {
       loading: true,

@@ -15,6 +15,7 @@
     "react-native-iap": "^2.4.7",
     "react-native-localization": "^2.1.1",
     "react-native-material-color": "^1.0.15",
+    "react-native-navigation-bar-color": "0.0.9",
     "react-native-paper": "^2.15.1",
     "react-native-router-flux": "^4.0.6",
     "react-native-super-grid": "^3.0.1",
