@@ -40,8 +40,9 @@ class WoWsInfo extends Component {
     const { children, hideAds, style } = this.props;
 
     let show = DATA[LOCAL.showBanner];
+    // Add a margin for android devices (full screen so add a margin)
     return (
-      <Surface style={[container, style, ThemeBackColour()]}>
+      <Surface style={[container, style, isAndroid ? {marginTop: 20} : null, ThemeBackColour()]}>
         <SafeAreaView style={safeView}>
           <StatusBar barStyle={DARKMODE ? 'light-content' : 'dark-content'} 
             backgroundColor={ThemeColour()}/>
