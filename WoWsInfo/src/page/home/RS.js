@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, StyleSheet, KeyboardAvoidingView, Linking, Alert, FlatList } from 'react-native';
+import { View, ScrollView, StyleSheet, KeyboardAvoidingView, Linking, Alert, Vibration } from 'react-native';
 import { isAndroid, isTablet } from 'react-native-device-detection';
 import { Portal, TextInput, Button, Dialog, List, Text, Title } from 'react-native-paper';
 import { WoWsInfo, LoadingIndicator, Touchable, WarshipCell, SimpleRating, RatingButton } from '../../component';
@@ -166,6 +166,9 @@ class RS extends Component {
         const { battleTime } = this.state;
         // Make sure it is a new date
         if (data.dateTime !== battleTime) {
+          // Vibrate devices to tell users new data is ready
+          Vibration.vibrate();
+          
           this.setState({loading: true, battleTime: data.dateTime});
           const vehicles = data.vehicles;
           // Get allay and enemy
