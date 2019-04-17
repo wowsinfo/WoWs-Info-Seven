@@ -8,6 +8,7 @@ import { WoWsAPI } from '../../value/api';
 import { getCurrDomain, SAVED, LOCAL, getCurrServer, setLastLocation } from '../../value/data';
 import { FlatGrid } from 'react-native-super-grid';
 import { lang } from '../../value/lang';
+import KeepAwake from 'react-native-keep-awake';
 
 class RS extends Component {
   constructor(props) {
@@ -35,9 +36,13 @@ class RS extends Component {
 
   componentDidMount() {
     const { ip } = this.state;
-    
+    KeepAwake.activate();
     // Enter rs mode when there is a valid ip
     if (ip !== '') this.validIP(ip);
+  }
+
+  componentWillUnmount() {
+    KeepAwake.deactivate();
   }
 
   render() {
