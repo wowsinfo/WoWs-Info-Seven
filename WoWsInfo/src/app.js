@@ -42,7 +42,7 @@ class App extends Component {
 
       // From 19 - 6, use dark mode
       let hour = (new Date()).getHours();
-      if (hour >= 19 || hour <= 6) {
+      if (hour >= 19 || hour < 7) {
         DARKMODE = true;
       }
 
