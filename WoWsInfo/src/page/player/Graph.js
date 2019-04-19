@@ -72,7 +72,7 @@ class Graph extends PureComponent {
     const { tier, avgTier, nation, type } = this.state;
     const themeColour = TintColour()[500];
     return (
-      <WoWsInfo>
+      <WoWsInfo hideAds>
         <ScrollView>
           <View pointerEvents='none'>
             {/* <Title>{`Average Tier - ${avgTier}`}</Title> */}

@@ -6,7 +6,7 @@
 
 import React, { Component } from 'react';
 import { FlatList, ScrollView, StyleSheet } from 'react-native';
-import { Button, List, Paragraph } from 'react-native-paper';
+import { Button, List, Paragraph, FAB } from 'react-native-paper';
 import { Actions } from 'react-native-router-flux';
 import { lang } from '../../value/lang';
 import { SERVER, getCurrServer, setCurrServer, setAPILanguage } from '../../value/data';
@@ -44,9 +44,9 @@ class Setup extends Component {
 
   render() {
     const { loading, server, selected_server, langList, langData, selected_lang } = this.state;
+    const { fab } = styles;
     return (
-      <WoWsInfo title={lang.setup_done_button} hideAds
-        noRight noLeft onPress={loading ? null : () => this.finishSetup()}>
+      <WoWsInfo hideAds empty>
         <ScrollView>
           <SectionTitle title={lang.settings_api_settings}/>
           <List.Section title={`${lang.setting_game_server}: ${lang.server_name[selected_server]}`}>
@@ -61,6 +61,7 @@ class Setup extends Component {
             }} keyExtractor={i => i} numColumns={2}/> }
           </List.Section>
         </ScrollView>
+        <FAB icon='done' style={fab} onPress={loading ? null : () => this.finishSetup()}/>
       </WoWsInfo>
     )
   };
@@ -87,6 +88,12 @@ const styles = StyleSheet.create({
   },
   top: {
     flex: 1
+  },
+  fab: {
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    margin: 16
   }
 });
 
