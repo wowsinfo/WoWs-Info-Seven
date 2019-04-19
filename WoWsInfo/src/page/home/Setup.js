@@ -61,7 +61,7 @@ class Setup extends Component {
             }} keyExtractor={i => i} numColumns={2}/> }
           </List.Section>
         </ScrollView>
-        <FAB icon='done' style={fab} onPress={loading ? null : () => this.finishSetup()}/>
+        <FAB visible={!loading} icon='done' style={fab} onPress={loading ? null : () => this.finishSetup()}/>
       </WoWsInfo>
     )
   };
