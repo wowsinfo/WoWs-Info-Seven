@@ -39,9 +39,8 @@ class Settings extends Component {
   render() {
     const { showColour } = this.state;
     return (
-      <WoWsInfo about hideAds>
+      <WoWsInfo about>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <AdMobBanner />
           { this.renderAPISettings() }
           { this.renderAppSettings() }
           { this.renderWoWsInfo() }

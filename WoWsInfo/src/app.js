@@ -36,9 +36,15 @@ class App extends Component {
       
       global.DATA = data;
       SWAPBUTTON = DATA[LOCAL.swapButton];
-      DARKMODE = DATA[LOCAL.darkMode];
       NOIMAGEMODE = DATA[LOCAL.noImageMode];
       LASTLOCATION = DATA[LOCAL.lastLocation];
+      DARKMODE = DATA[LOCAL.darkMode];
+
+      // From 19 - 6, use dark mode
+      let hour = (new Date()).getHours();
+      if (hour >= 19 || hour <= 6) {
+        DARKMODE = true;
+      }
 
       let userLang = DATA[LOCAL.userLanguage];
       if (userLang !== '') lang.setLanguage(userLang);
