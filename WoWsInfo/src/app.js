@@ -99,8 +99,8 @@ class App extends Component {
     return (
       <Router sceneStyle={{flex: 1, backgroundColor: dark ? 'black' : 'white'}} backAndroidHandler={this.handleBack}>
         <Stack key='root' hideNavBar>
-          <Scene key='Setup' component={Setup} initial={getFirstLaunch()}/>
           <Scene key='Menu' component={Menu}/>
+          <Scene key='Setup' component={Setup} initial={getFirstLaunch()}/>
           <Scene key='Search' component={Search}/>
           <Scene key='RS' component={RS}/>
           

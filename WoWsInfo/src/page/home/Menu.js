@@ -32,6 +32,7 @@ class Menu extends PureComponent {
     let first = getFirstLaunch();
     this.state = {
       loading: first,
+      animeDone: false,
       main: DATA[LOCAL.userInfo]
     };
 
@@ -65,6 +66,12 @@ class Menu extends PureComponent {
   }
 
   componentDidMount() {
+
+    // Show animation for AppName
+    this.refs['AppName'].fadeInDown().then(() => {
+      this.setState({animeDone: true});
+    });
+
     if (LASTLOCATION !== '') {
       let extra = {};
       if (LASTLOCATION === 'Statistics') {
@@ -85,7 +92,6 @@ class Menu extends PureComponent {
   }
 
   getData() {
-        
     // Data for the list
     this.wiki = [{t: lang.wiki_achievement, i: require('../../img/Achievement.png'), p: () => SafeAction('Achievement')},
     {t: lang.wiki_warships, i: require('../../img/Warship.png'), p: () => SafeAction('Warship')},
@@ -122,7 +128,7 @@ class Menu extends PureComponent {
   }
 
   render() {
-    const { loading, main } = this.state;
+    const { loading, main, animeDone } = this.state;
     if (loading) return <Loading />
     
     // For main account
@@ -134,14 +140,14 @@ class Menu extends PureComponent {
       <WoWsInfo hideAds noRight title={title} onPress={enabled ? () => SafeAction('Statistics', {info: main}) : null} home upper={false}>
         <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='always'>
           <AdmobBanner />
-          <Animatable.View animation='fadeInDown' easing='ease'>
+          <Animatable.View ref='AppName' easing='ease'>
             <AppName />
           </Animatable.View>
           <Animatable.View animation='fadeInUp' delay={200} easing='ease'>
             { this.renderContent() }
           </Animatable.View>
         </ScrollView>
-        <FAB icon='search' style={styles.fab} onPress={() => SafeAction('Search')}/>
+        <FAB visible={animeDone} icon='search' style={styles.fab} onPress={() => SafeAction('Search')}/>
       </WoWsInfo>
     );
   }
