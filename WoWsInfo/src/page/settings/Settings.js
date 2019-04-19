@@ -10,6 +10,7 @@ import { SafeAction, SafeFetch, Guard } from '../../core';
 import { BLUE, RED, GREEN, PINK, PURPLE, DEEPPRUPLE, INDIGO, LIGHTBLUE, CYAN, TEAL, LIGHTGREEN, LIME, YELLOW, AMBER, ORANGE, DEEPORANGE, BROWN, GREY, BLUEGREY } from 'react-native-material-color';
 import { lang } from '../../value/lang';
 import { WikiAPI } from '../../value/api';
+import AdMobBanner from 'react-native-admob/RNAdMobBanner';
 
 class Settings extends Component {
   constructor(props) {
@@ -38,8 +39,9 @@ class Settings extends Component {
   render() {
     const { showColour } = this.state;
     return (
-      <WoWsInfo about>
+      <WoWsInfo about hideAds>
         <ScrollView showsVerticalScrollIndicator={false}>
+          <AdMobBanner />
           { this.renderAPISettings() }
           { this.renderAppSettings() }
           { this.renderWoWsInfo() }
