@@ -8,9 +8,9 @@
 import React, { PureComponent } from 'react';
 import { Alert, ScrollView, StyleSheet, Linking, View } from 'react-native';
 import { isAndroid } from 'react-native-device-detection';
-import { List, Colors } from 'react-native-paper';
+import { List, Colors, FAB } from 'react-native-paper';
 import * as Animatable from 'react-native-animatable';
-import { WoWsInfo, SectionTitle, AppName } from '../../component';
+import { WoWsInfo, SectionTitle, AppName, AdmobBanner } from '../../component';
 import { lang } from '../../value/lang';
 import { SafeAction, Downloader } from '../../core';
 import { ThemeBackColour, TintColour } from '../../value/colour';
@@ -131,8 +131,9 @@ class Menu extends PureComponent {
     if (title === '-  -') title = '- ??? -';
     
     return (
-      <WoWsInfo title={title} onPress={enabled ? () => SafeAction('Statistics', {info: main}) : null} home upper={false}>
+      <WoWsInfo hideAds noRight title={title} onPress={enabled ? () => SafeAction('Statistics', {info: main}) : null} home upper={false}>
         <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='always'>
+          <AdmobBanner />
           <Animatable.View animation='fadeInDown' easing='ease'>
             <AppName />
           </Animatable.View>
@@ -140,6 +141,7 @@ class Menu extends PureComponent {
             { this.renderContent() }
           </Animatable.View>
         </ScrollView>
+        <FAB icon='search' style={styles.fab} onPress={() => SafeAction('Search')}/>
       </WoWsInfo>
     );
   }
@@ -182,6 +184,12 @@ const styles = StyleSheet.create({
   },
   icon: {
     borderRadius: 100
+  },
+  fab: {
+    position: 'absolute',
+    margin: 16,
+    right: 0,
+    bottom: 0,
   }
 });
 
