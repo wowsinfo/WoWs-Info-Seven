@@ -37,7 +37,7 @@ class WoWsInfo extends Component {
 
   render() {
     const { container, safeView, child } = styles;
-    const { children, hideAds, style } = this.props;
+    const { children, hideAds, empty, style } = this.props;
 
     let show = DATA[LOCAL.showBanner];
     // Add a margin for android devices (full screen so add a margin)
@@ -50,7 +50,7 @@ class WoWsInfo extends Component {
             <Surface style={child}>
               { children }
             </Surface>
-          { this.renderFooter() }
+          { empty ? null : this.renderFooter() }
         </SafeAreaView>
       </Surface>
     )
