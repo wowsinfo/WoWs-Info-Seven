@@ -10,7 +10,6 @@ import { SafeAction, SafeFetch, Guard } from '../../core';
 import { BLUE, RED, GREEN, PINK, PURPLE, DEEPPRUPLE, INDIGO, LIGHTBLUE, CYAN, TEAL, LIGHTGREEN, LIME, YELLOW, AMBER, ORANGE, DEEPORANGE, BROWN, GREY, BLUEGREY } from 'react-native-material-color';
 import { lang } from '../../value/lang';
 import { WikiAPI } from '../../value/api';
-import AdMobBanner from 'react-native-admob/RNAdMobBanner';
 
 class Settings extends Component {
   constructor(props) {
