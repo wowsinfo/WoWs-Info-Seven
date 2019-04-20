@@ -12,8 +12,6 @@
       android:icon="@mipmap/ic_launcher"
       android:allowBackup="false"
       android:usesCleartextTraffic="true"
-      android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-      android:windowSoftInputMode="adjustResize"
       android:theme="@style/AppTheme">
       <activity
         android:name=".MainActivity"
