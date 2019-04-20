@@ -10,7 +10,7 @@ import { Alert, ScrollView, StyleSheet, Linking, View } from 'react-native';
 import { isAndroid } from 'react-native-device-detection';
 import { List, Colors, FAB } from 'react-native-paper';
 import * as Animatable from 'react-native-animatable';
-import { WoWsInfo, SectionTitle, AppName, AdmobBanner } from '../../component';
+import { WoWsInfo, SectionTitle, AppName } from '../../component';
 import { lang } from '../../value/lang';
 import { SafeAction, Downloader } from '../../core';
 import { ThemeBackColour, TintColour } from '../../value/colour';
@@ -32,7 +32,6 @@ class Menu extends PureComponent {
     let first = getFirstLaunch();
     this.state = {
       loading: first,
-      animeDone: false,
       main: DATA[LOCAL.userInfo]
     };
 
@@ -66,12 +65,6 @@ class Menu extends PureComponent {
   }
 
   componentDidMount() {
-
-    // Show animation for AppName
-    this.refs['AppName'].fadeInDown().then(() => {
-      this.setState({animeDone: true});
-    });
-
     if (LASTLOCATION !== '') {
       let extra = {};
       if (LASTLOCATION === 'Statistics') {
@@ -128,7 +121,7 @@ class Menu extends PureComponent {
   }
 
   render() {
-    const { loading, main, animeDone } = this.state;
+    const { loading, main } = this.state;
     if (loading) return <Loading />
     
     // For main account
@@ -139,14 +132,14 @@ class Menu extends PureComponent {
     return (
       <WoWsInfo noRight title={title} onPress={enabled ? () => SafeAction('Statistics', {info: main}) : null} home upper={false}>
         <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='always'>
-          <Animatable.View ref='AppName' easing='ease'>
+          <Animatable.View ref='AppName' animation='fadeInDown' easing='ease'>
             <AppName />
           </Animatable.View>
           <Animatable.View animation='fadeInUp' delay={200} easing='ease'>
             { this.renderContent() }
           </Animatable.View>
         </ScrollView>
-        <FAB visible={animeDone} icon='search' style={styles.fab} onPress={() => SafeAction('Search')}/>
+        <FAB icon='search' style={styles.fab} onPress={() => SafeAction('Search')}/>
       </WoWsInfo>
     );
   }
