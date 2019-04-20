@@ -137,9 +137,8 @@ class Menu extends PureComponent {
     if (title === '-  -') title = '- ??? -';
     
     return (
-      <WoWsInfo hideAds noRight title={title} onPress={enabled ? () => SafeAction('Statistics', {info: main}) : null} home upper={false}>
+      <WoWsInfo noRight title={title} onPress={enabled ? () => SafeAction('Statistics', {info: main}) : null} home upper={false}>
         <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='always'>
-          <AdmobBanner />
           <Animatable.View ref='AppName' easing='ease'>
             <AppName />
           </Animatable.View>
