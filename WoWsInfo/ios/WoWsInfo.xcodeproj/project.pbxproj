@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -50,6 +51,7 @@
 		859B76301466414AB6E098E9 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 595FC707BFBC4F4483EBE464 /* Entypo.ttf */; };
 		8CA2C31C1EE3438D9ADBAA8B /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DC369FA8D45E4EB5B4F6DD36 /* SimpleLineIcons.ttf */; };
 		9E566EC473A64CA1ADB94234 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BF258CFD3DF149558479B964 /* FontAwesome5_Regular.ttf */; };
+		AB530A67DE5E446690E5D1A7 /* libKCKeepAwake.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C90F133815D147DB90CEAF7C /* libKCKeepAwake.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		BA3BD4E522334754000B0289 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA3BD4E422334754000B0289 /* StoreKit.framework */; };
 		BA8E8F3D225DFFC800CFE041 /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA8E8F0C225DFFC700CFE041 /* GoogleAppMeasurement.framework */; };
@@ -67,7 +69,6 @@
 		ED2971652150620600B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2971642150620600B7C4FE /* JavaScriptCore.framework */; };
 		F4A4F78A07C449CA8D3F87E3 /* libRNAdMobManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A4E8B714D0A4205ABE756EB /* libRNAdMobManager.a */; };
 		F9DD8DA44EB84ED98D1DF137 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1827BE04AB1949F78328411F /* Octicons.ttf */; };
-		AB530A67DE5E446690E5D1A7 /* libKCKeepAwake.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C90F133815D147DB90CEAF7C /* libKCKeepAwake.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -344,13 +345,6 @@
 			remoteGlobalIDString = 94DDAC5C1F3D024300EED511;
 			remoteInfo = "RNSVG-tvOS";
 		};
-		BA9706422240BD98003C8168 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F3204FCA33144212AF4C2616 /* RNCAsyncStorage.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 134814201AA4EA6300B7C361;
-			remoteInfo = RNCAsyncStorage;
-		};
 		BAAA9585220675DD00565F43 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 31AF56C4543B45D19EFCBCAC /* ReactNativeLocalization.xcodeproj */;
@@ -407,6 +401,13 @@
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = RNIap;
 		};
+		BAE8D529228D401200457238 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3748087D627142BA9FCBA218 /* KCKeepAwake.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = KCKeepAwake;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -439,6 +440,7 @@
 		319694B3132149D5B5E349C1 /* RNAdMobManager.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNAdMobManager.xcodeproj; path = "../node_modules/react-native-admob/ios/RNAdMobManager.xcodeproj"; sourceTree = "<group>"; };
 		31AF56C4543B45D19EFCBCAC /* ReactNativeLocalization.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeLocalization.xcodeproj; path = "../node_modules/react-native-localization/ReactNativeLocalization.xcodeproj"; sourceTree = "<group>"; };
 		32775243F0B34018B8F84324 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
+		3748087D627142BA9FCBA218 /* KCKeepAwake.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = KCKeepAwake.xcodeproj; path = "../node_modules/react-native-keep-awake/ios/KCKeepAwake.xcodeproj"; sourceTree = "<group>"; };
 		3A5DA890115748B19BC3E0E2 /* RNSVG.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSVG.xcodeproj; path = "../node_modules/react-native-svg/ios/RNSVG.xcodeproj"; sourceTree = "<group>"; };
 		41893E201C8B42C1959367AB /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		4502E7A4174A44AAA2024F6A /* RNIap.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNIap.xcodeproj; path = "../node_modules/react-native-iap/ios/RNIap.xcodeproj"; sourceTree = "<group>"; };
@@ -461,6 +463,7 @@
 		BA8E8F3C225DFFC800CFE041 /* nanopb.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = nanopb.framework; sourceTree = "<group>"; };
 		BA8E8F41225DFFE600CFE041 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = "../../../../../Downloads/GoogleMobileAdsSdkiOS-7.42.2/GoogleMobileAds.framework"; sourceTree = "<group>"; };
 		BF258CFD3DF149558479B964 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
+		C90F133815D147DB90CEAF7C /* libKCKeepAwake.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libKCKeepAwake.a; sourceTree = "<group>"; };
 		CD061FD35E3E4F63AC8AA30E /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		D2E01E3921BE45F991BC649C /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		D89D884756A84C588555CAC9 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
@@ -472,8 +475,6 @@
 		F3EEE7C116504A49BEEC0458 /* libRNVectorIcons-tvOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libRNVectorIcons-tvOS.a"; sourceTree = "<group>"; };
 		FB1AFDC27FC34144BA78E93B /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		FB60BEDA1E084CC48C99907A /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
-		3748087D627142BA9FCBA218 /* KCKeepAwake.xcodeproj */ = {isa = PBXFileReference; name = "KCKeepAwake.xcodeproj"; path = "../node_modules/react-native-keep-awake/ios/KCKeepAwake.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		C90F133815D147DB90CEAF7C /* libKCKeepAwake.a */ = {isa = PBXFileReference; name = "libKCKeepAwake.a"; path = "libKCKeepAwake.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -813,14 +814,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		BA9706192240BD97003C8168 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				BA9706432240BD98003C8168 /* libRNCAsyncStorage.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		BAAA955D220675DD00565F43 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -840,6 +833,7 @@
 				9952FDD5E31C4E728450A4D6 /* libRNIap.a */,
 				5D9DF2EC4E8945858BBAF509 /* libRNCAsyncStorage.a */,
 				1A4E8B714D0A4205ABE756EB /* libRNAdMobManager.a */,
+				C90F133815D147DB90CEAF7C /* libKCKeepAwake.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -857,6 +851,14 @@
 			isa = PBXGroup;
 			children = (
 				BAB024C52232793C00C65FB2 /* libRNIap.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BAE8D526228D401200457238 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BAE8D52A228D401200457238 /* libKCKeepAwake.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -980,6 +982,10 @@
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = BAE8D526228D401200457238 /* Products */;
+					ProjectRef = 3748087D627142BA9FCBA218 /* KCKeepAwake.xcodeproj */;
+				},
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
@@ -1323,13 +1329,6 @@
 			remoteRef = BA69271D22166D1B00265CC5 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		BA9706432240BD98003C8168 /* libRNCAsyncStorage.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRNCAsyncStorage.a;
-			remoteRef = BA9706422240BD98003C8168 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		BAAA9586220675DD00565F43 /* libReactNativeLocalization.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1384,6 +1383,13 @@
 			fileType = archive.ar;
 			path = libRNIap.a;
 			remoteRef = BAB024C42232793C00C65FB2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BAE8D52A228D401200457238 /* libKCKeepAwake.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libKCKeepAwake.a;
+			remoteRef = BAE8D529228D401200457238 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1547,7 +1553,7 @@
 					"$(SRCROOT)/../node_modules/react-native-iap/ios",
 					"$(SRCROOT)..\node_modules@react-native-community\async-storageios",
 					"$(SRCROOT)..\node_modules\neact-native-admobios",
-					"$(SRCROOT)\..\node_modules\react-native-keep-awake\ios",
+					"$(SRCROOT)..\node_modules\neact-native-keep-awakeios",
 				);
 				INFOPLIST_FILE = WoWsInfoTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1587,7 +1593,7 @@
 					"$(SRCROOT)/../node_modules/react-native-iap/ios",
 					"$(SRCROOT)..\node_modules@react-native-community\async-storageios",
 					"$(SRCROOT)..\node_modules\neact-native-admobios",
-					"$(SRCROOT)\..\node_modules\react-native-keep-awake\ios",
+					"$(SRCROOT)..\node_modules\neact-native-keep-awakeios",
 				);
 				INFOPLIST_FILE = WoWsInfoTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1633,7 +1639,7 @@
 					"$(SRCROOT)/../node_modules/react-native-iap/ios",
 					"$(SRCROOT)..\node_modules@react-native-community\async-storageios",
 					"$(SRCROOT)..\node_modules\neact-native-admobios",
-					"$(SRCROOT)\..\node_modules\react-native-keep-awake\ios",
+					"$(SRCROOT)..\node_modules\neact-native-keep-awakeios",
 				);
 				INFOPLIST_FILE = WoWsInfo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1668,7 +1674,7 @@
 					"$(SRCROOT)/../node_modules/react-native-iap/ios",
 					"$(SRCROOT)..\node_modules@react-native-community\async-storageios",
 					"$(SRCROOT)..\node_modules\neact-native-admobios",
-					"$(SRCROOT)\..\node_modules\react-native-keep-awake\ios",
+					"$(SRCROOT)..\node_modules\neact-native-keep-awakeios",
 				);
 				INFOPLIST_FILE = WoWsInfo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1705,7 +1711,7 @@
 					"$(SRCROOT)/../node_modules/react-native-iap/ios",
 					"$(SRCROOT)..\node_modules@react-native-community\async-storageios",
 					"$(SRCROOT)..\node_modules\neact-native-admobios",
-					"$(SRCROOT)\..\node_modules\react-native-keep-awake\ios",
+					"$(SRCROOT)..\node_modules\neact-native-keep-awakeios",
 				);
 				INFOPLIST_FILE = "WoWsInfo-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1753,7 +1759,7 @@
 					"$(SRCROOT)/../node_modules/react-native-iap/ios",
 					"$(SRCROOT)..\node_modules@react-native-community\async-storageios",
 					"$(SRCROOT)..\node_modules\neact-native-admobios",
-					"$(SRCROOT)\..\node_modules\react-native-keep-awake\ios",
+					"$(SRCROOT)..\node_modules\neact-native-keep-awakeios",
 				);
 				INFOPLIST_FILE = "WoWsInfo-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1800,7 +1806,7 @@
 					"$(SRCROOT)/../node_modules/react-native-iap/ios",
 					"$(SRCROOT)..\node_modules@react-native-community\async-storageios",
 					"$(SRCROOT)..\node_modules\neact-native-admobios",
-					"$(SRCROOT)\..\node_modules\react-native-keep-awake\ios",
+					"$(SRCROOT)..\node_modules\neact-native-keep-awakeios",
 				);
 				INFOPLIST_FILE = "WoWsInfo-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1847,7 +1853,7 @@
 					"$(SRCROOT)/../node_modules/react-native-iap/ios",
 					"$(SRCROOT)..\node_modules@react-native-community\async-storageios",
 					"$(SRCROOT)..\node_modules\neact-native-admobios",
-					"$(SRCROOT)\..\node_modules\react-native-keep-awake\ios",
+					"$(SRCROOT)..\node_modules\neact-native-keep-awakeios",
 				);
 				INFOPLIST_FILE = "WoWsInfo-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
