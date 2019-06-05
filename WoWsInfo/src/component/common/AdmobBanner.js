@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Platform } from 'react-native';
 import { AdMobBanner } from 'react-native-admob';
 import * as Anime from 'react-native-animatable';
+import { List } from 'react-native-paper';
+import { lang } from '../../value/lang';
+import { SafeAction } from '../../core';
 
 class AdmobBanner extends Component {
   constructor(props) {
@@ -13,7 +16,9 @@ class AdmobBanner extends Component {
 
   render() {
     const { success } = this.state;
-    if (!success) return null;
+    if (!success) return (
+      <List.Item title={lang.extra_support_wowsinfo} description={lang.extra_support_wowsinfo_subtitle} onPress={() => SafeAction('SupportMe')}/>
+    );
 
     // Because of this??
     let unitID = 'ca-app-pub-5048098651344514/9965938758';
