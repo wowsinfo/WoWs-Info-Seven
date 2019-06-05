@@ -21,15 +21,16 @@ class AdmobBanner extends Component {
       <List.Item title={lang.extra_support_wowsinfo} description={lang.extra_support_wowsinfo_subtitle} onPress={() => SafeAction('SupportMe')}/>
     );
 
-    let unitID = 'ca-app-pub-3940256099942544/6300978111';
-    // let unitID = 'ca-app-pub-5048098651344514/9965938758';
-    // if (Platform.OS == 'ios') unitID = 'ca-app-pub-5048098651344514/4703363983';
+    // Test ads
+    // let unitID = 'ca-app-pub-3940256099942544/6300978111';
+
+    let unitID = 'ca-app-pub-5048098651344514/9965938758';
+    if (Platform.OS == 'ios') unitID = 'ca-app-pub-5048098651344514/4703363983';
 
     return (
       <Anime.View>
         <AdMobBanner adSize='smartBannerPortrait' onAdFailedToLoad={this.hideAds}
-          onAdClosed={this.hideAds}
-          adUnitID={unitID} testDevices={[AdMobBanner.simulatorId]} />
+          onAdClosed={this.hideAds} adUnitID={unitID} testDevices={[AdMobBanner.simulatorId]} />
       </Anime.View>
     )
   };
