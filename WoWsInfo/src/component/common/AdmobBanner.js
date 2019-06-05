@@ -22,10 +22,16 @@ class AdmobBanner extends Component {
     return (
       <Anime.View>
         <AdMobBanner adSize='smartBannerPortrait' onAdFailedToLoad={() => this.setState({success: false})}
+          onAdOpened={this.hideAds} onAdLeftApplication={this.hideAds} onAdClosed={this.hideAds}
           adUnitID={unitID} testDevices={[AdMobBanner.simulatorId, 'd04604ce-ac57-4655-90c5-4a420f30b3dd']} />
       </Anime.View>
     )
   };
+
+  hideAds = () => {
+    this.setState({success: false});
+    global.BANNER = null;
+  }
 }
 
 

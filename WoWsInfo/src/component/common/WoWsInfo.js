@@ -14,7 +14,6 @@ import { FooterButton } from './FooterButton';
 import { SafeAction, random } from '../../core';
 import { ThemeBackColour, ThemeColour } from '../../value/colour';
 import { View } from 'react-native-animatable';
-import { AdmobBanner } from './AdmobBanner';
 
 class WoWsInfo extends Component {
   constructor(props) {
@@ -46,7 +45,7 @@ class WoWsInfo extends Component {
         <SafeAreaView style={safeView}>
           <StatusBar barStyle={DARKMODE ? 'light-content' : 'dark-content'} 
             backgroundColor={ThemeColour()}/>
-            { show && hideAds != true ? <AdmobBanner /> : null }
+            { show && hideAds != true ? global.BANNER : null }
             <Surface style={child}>
               { children }
             </Surface>
