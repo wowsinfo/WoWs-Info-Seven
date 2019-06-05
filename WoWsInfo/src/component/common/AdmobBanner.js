@@ -34,5 +34,4 @@ class AdmobBanner extends Component {
   }
 }
 
-
 export { AdmobBanner };
