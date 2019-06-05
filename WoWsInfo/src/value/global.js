@@ -1,3 +1,5 @@
+import { AdmobBanner } from "../component";
+
 // We store saved and local data as a single object
 global.DATA = {};
 
@@ -20,5 +22,8 @@ global.CANUPDATEAPI = true;
 global.RSBATTLE = 0;
 // Trace last known location
 global.LASTLOCATION = '';
+
+// Only use one banner
+global.BANNER = <AdmobBanner />
 
 global.GITHUB_VERSION = false;
