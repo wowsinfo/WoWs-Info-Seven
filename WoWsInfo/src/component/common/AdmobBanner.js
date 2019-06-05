@@ -35,7 +35,6 @@ class AdmobBanner extends Component {
 
   hideAds = () => {
     this.setState({success: false});
-    global.BANNER = null;
   }
 }
 
