@@ -56,10 +56,6 @@
 		AB530A67DE5E446690E5D1A7 /* libKCKeepAwake.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C90F133815D147DB90CEAF7C /* libKCKeepAwake.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		BA3BD4E522334754000B0289 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA3BD4E422334754000B0289 /* StoreKit.framework */; };
-		BA8E8F3D225DFFC800CFE041 /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA8E8F0C225DFFC700CFE041 /* GoogleAppMeasurement.framework */; };
-		BA8E8F3E225DFFC800CFE041 /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA8E8F3A225DFFC800CFE041 /* GoogleUtilities.framework */; };
-		BA8E8F40225DFFC800CFE041 /* nanopb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA8E8F3C225DFFC800CFE041 /* nanopb.framework */; };
-		BA8E8F42225DFFE600CFE041 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA8E8F41225DFFE600CFE041 /* GoogleMobileAds.framework */; };
 		BAE1EB85392F4D19A735DFD9 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FB60BEDA1E084CC48C99907A /* EvilIcons.ttf */; };
 		C540F34B8CEC414BBBF8A0BB /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 32775243F0B34018B8F84324 /* MaterialCommunityIcons.ttf */; };
 		D8CD7F51DC044DC797EB7579 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E3DE6A9C87E14AE7A70501DC /* Foundation.ttf */; };
@@ -467,10 +463,6 @@
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		AF69C9BDCCA540B0E88E2481 /* Pods_WoWsInfo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WoWsInfo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA3BD4E422334754000B0289 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		BA8E8F0C225DFFC700CFE041 /* GoogleAppMeasurement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleAppMeasurement.framework; sourceTree = "<group>"; };
-		BA8E8F3A225DFFC800CFE041 /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleUtilities.framework; sourceTree = "<group>"; };
-		BA8E8F3C225DFFC800CFE041 /* nanopb.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = nanopb.framework; sourceTree = "<group>"; };
-		BA8E8F41225DFFE600CFE041 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = "../../../../../Downloads/GoogleMobileAdsSdkiOS-7.42.2/GoogleMobileAds.framework"; sourceTree = "<group>"; };
 		BF258CFD3DF149558479B964 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		C90F133815D147DB90CEAF7C /* libKCKeepAwake.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libKCKeepAwake.a; sourceTree = "<group>"; };
 		CD061FD35E3E4F63AC8AA30E /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
@@ -503,8 +495,6 @@
 			files = (
 				ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
-				BA8E8F3D225DFFC800CFE041 /* GoogleAppMeasurement.framework in Frameworks */,
-				BA8E8F3E225DFFC800CFE041 /* GoogleUtilities.framework in Frameworks */,
 				11D1A2F320CAFA9E000508D9 /* libRCTAnimation.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
@@ -519,10 +509,8 @@
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				5090FCDDAD154F0F81E95569 /* libReactNativeLocalization.a in Frameworks */,
 				051D56242C75484492386BF3 /* libRNVectorIcons.a in Frameworks */,
-				BA8E8F42225DFFE600CFE041 /* GoogleMobileAds.framework in Frameworks */,
 				E1EAB2B5E87847A59683A0FC /* libRNSVG.a in Frameworks */,
 				12C5B653D7FC4AD3864F0E94 /* libRNIap.a in Frameworks */,
-				BA8E8F40225DFFC800CFE041 /* nanopb.framework in Frameworks */,
 				E4C6BFF1BEEE4E129A81C082 /* libRNCAsyncStorage.a in Frameworks */,
 				AB530A67DE5E446690E5D1A7 /* libKCKeepAwake.a in Frameworks */,
 				734317AB0EFA4834978E5275 /* libReactNativeAdsFacebook.a in Frameworks */,
@@ -765,10 +753,6 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				BA8E8F41225DFFE600CFE041 /* GoogleMobileAds.framework */,
-				BA8E8F0C225DFFC700CFE041 /* GoogleAppMeasurement.framework */,
-				BA8E8F3A225DFFC800CFE041 /* GoogleUtilities.framework */,
-				BA8E8F3C225DFFC800CFE041 /* nanopb.framework */,
 				13B07FAE1A68108700A75B9A /* WoWsInfo */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* WoWsInfoTests */,
