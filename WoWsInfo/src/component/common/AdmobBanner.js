@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform } from 'react-native';
+import { View, Platform } from 'react-native';
 import { BannerView } from 'react-native-fbads';
 import { List } from 'react-native-paper';
 import { lang } from '../../value/lang';
@@ -26,7 +26,7 @@ class AdmobBanner extends Component {
       if (Platform.OS == 'android') ID = '1143462312527881_1143859659154813';
       return (
         <View>
-          <BannerView placementId='YOUR_PLACEMENT_ID'
+          <BannerView placementId={ID}
             type='standard' onPress={this.hideAds} onError={this.hideAds} />
         </View>
       )
