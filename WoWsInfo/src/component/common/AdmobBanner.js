@@ -35,7 +35,7 @@ class AdmobBanner extends Component {
 
   hideAds = () => this.setState({success: false});
   logError = err => {
-    console.log('error', err);
+    console.log('err', err);
     this.setState({success: false});
   }
 }
