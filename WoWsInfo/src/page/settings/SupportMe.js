@@ -10,12 +10,9 @@ class SupportMe extends Component {
   constructor(props) {
     super(props);
 
-    this.support = [{t: lang.support_patreon, d: APP.Patreon}];
-    if (GITHUB_VERSION) {
-      this.support = [{t: lang.support_patreon, d: APP.Patreon},
-        {t: lang.support_paypal, d: APP.PayPal},
-        {t: lang.support_wechat, d: APP.WeChat}];
-    }
+    this.support = [{t: lang.support_patreon, d: APP.Patreon},
+      {t: lang.support_paypal, d: APP.PayPal},
+      {t: lang.support_wechat, d: APP.WeChat}];
 
     this.state = {
       banner: DATA[LOCAL.showBanner],
@@ -30,15 +27,15 @@ class SupportMe extends Component {
         <List.Section title={lang.extra_support_wowsinfo}>
           <Donation />
           { this.support.map(item => { return (
-            <List.Item title={item.t} description={item.d} key={item.t}
+            <List.Item title={item.t} key={item.t}
               onPress={() => Linking.openURL(item.d)}/>
           )})}
         </List.Section>
         <List.Section title={lang.support_ads}>
           <List.Item title={lang.support_ads_banner} onPress={() => this.updateBanner(!banner)} 
             right={() => <Checkbox status={banner ? 'checked' : 'unchecked'}/>}/>
-          <List.Item title={lang.support_ads_fullscreen} onPress={() => this.updateFullscreen(!fullscreen)} 
-            right={() => <Checkbox status={fullscreen ? 'checked' : 'unchecked'}/>}/>
+          <List.Item title={lang.support_ads_fullscreen} disabled onPress={() => this.updateFullscreen(!fullscreen)} 
+            right={() => <Checkbox disabled status={fullscreen ? 'checked' : 'unchecked'}/>}/>
         </List.Section>
       </WoWsInfo>
     )
