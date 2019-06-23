@@ -66,6 +66,12 @@ class Downloader {
         
         DATA[SAVED.pr] = await this.getPR();
         log += 'pr\n';
+
+        let PR = DATA[SAVED.pr];
+        if (PR == null || Object.keys(PR).length < 10) {
+          log += 'pr is corrupted, try again later\n';
+          return this.makeObj(false, log);
+        }
         
         console.log(DATA);
 

@@ -253,7 +253,7 @@ export const lang = new LocalizedStrings({
     /// Error section
     // General errors
     error_title: 'Error',
-    error_download_issue: 'Failed to update data. \nPlease try again later.\n\nIf it still persists, please try using a VPN or changing your DNS.',
+    error_download_issue: 'Failed to update data. \nPlease try again later.\n\nIf it persists, please try using a VPN or changing your DNS.\nIf it still persists, it means that the server is OFFLINE',
     /// About WoWs Info section
     // Github link
     abour_github_link: 'https://github.com/HenryQuan/WoWs-Info-Origin/blob/master/README.md'
@@ -510,7 +510,7 @@ export const lang = new LocalizedStrings({
     /// Error section
     // General errors
     error_title: '错误',
-    error_download_issue: '无法更新数据，\n请稍后重试。\n\n如果问题依然存在，请尝试修改DNS或者使用VPN。',
+    error_download_issue: '无法更新数据，\n请稍后重试。\n\n如果问题依然存在，请尝试修改DNS或者使用VPN。\n如果还是不可以的话，说明服务器正在维护中。',
     /// About WoWs Info section
     // Github link
     abour_github_link: 'https://github.com/HenryQuan/WoWs-Info-Origin/blob/master/README.md'
@@ -767,7 +767,7 @@ export const lang = new LocalizedStrings({
     /// Error section
     // General errors
     error_title: '錯誤',
-    error_download_issue: '無法更新數據，\n請稍後重試。\n\n如果問題依然存在，請嘗試修改DNS或者使用VPN。',
+    error_download_issue: '無法更新數據，\n請稍後重試。\n\n如果問題依然存在，請嘗試修改DNS或者使用VPN。\n如果還是不可以的話，說明服務器正在維護中。',
     /// About WoWs Info section
     // Github link
     abour_github_link: 'https://github.com/HenryQuan/WoWs-Info-Origin/blob/master/README.md'
@@ -1024,7 +1024,7 @@ export const lang = new LocalizedStrings({
     /// Error section
     // General errors
     error_title: 'エラー',
-    error_download_issue: 'アップデート失敗\nやり直してください\n\nいつも失敗の場合はVPNを使ったりDNSを変えたりしてみてください',
+    error_download_issue: 'アップデート失敗\nやり直してください\n\nいつも失敗の場合はVPNを使ったりDNSを変えたりしてみてください\nメンテナンスを行う可能性もある',
     /// About WoWs Info section
     // Github link
     abour_github_link: 'https://github.com/HenryQuan/WoWs-Info-Origin/blob/master/README.md'
