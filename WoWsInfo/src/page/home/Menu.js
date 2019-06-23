@@ -17,17 +17,16 @@ import { ThemeBackColour, TintColour } from '../../value/colour';
 import { getCurrDomain, getCurrServer, getCurrPrefix, LOCAL, getFirstLaunch, setFirstLaunch, setLastLocation, SAVED } from '../../value/data';
 import { Loading } from '../common/Loading';
 import { FlatGrid } from 'react-native-super-grid';
-import {AdMobInterstitial} from 'react-native-admob';
 
 class Menu extends PureComponent {
 
   constructor(props) {
     super(props);
     
-    let unitID = 'ca-app-pub-5048098651344514/1247820419';
-    if (isAndroid) unitID = 'ca-app-pub-5048098651344514/3013393881';
-    AdMobInterstitial.setAdUnitID(unitID);
-    AdMobInterstitial.setTestDevices([AdMobInterstitial.simulatorId]);
+    // let unitID = 'ca-app-pub-5048098651344514/1247820419';
+    // if (isAndroid) unitID = 'ca-app-pub-5048098651344514/3013393881';
+    // AdMobInterstitial.setAdUnitID(unitID);
+    // AdMobInterstitial.setTestDevices([AdMobInterstitial.simulatorId]);
 
     let first = getFirstLaunch();
     this.state = {
