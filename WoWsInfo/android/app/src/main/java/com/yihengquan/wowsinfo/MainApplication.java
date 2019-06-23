@@ -4,8 +4,7 @@ import android.app.Application;
 
 import com.facebook.react.ReactApplication;
 import com.corbt.keepawake.KCKeepAwakePackage;
-import com.thebylito.navigationbarcolor.NavigationBarColorPackage;
-import com.sbugert.rnadmob.RNAdMobPackage;
+import com.thebylito.navigationbarcolor.NavigationBarColorPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.dooboolab.RNIap.RNIapPackage;
 import com.horcrux.svg.SvgPackage;
