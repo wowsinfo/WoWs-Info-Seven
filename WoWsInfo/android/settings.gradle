@@ -1,4 +1,6 @@
 rootProject.name = 'WoWsInfo'
+include ':react-native-fbads'
+project(':react-native-fbads').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-fbads/android/app')
 include ':react-native-keep-awake'
 project(':react-native-keep-awake').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-keep-awake/android')
 include ':react-native-navigation-bar-color'
