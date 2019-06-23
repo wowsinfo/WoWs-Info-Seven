@@ -24,15 +24,9 @@
     "victory-native": "^31.0.0"
   },
   "devDependencies": {
-<<<<<<< HEAD
     "@babel/core": "^7.4.5",
     "@babel/runtime": "^7.4.5",
     "@react-native-community/async-storage": "^1.5.0",
-=======
-    "@babel/core": "^7.4.4",
-    "@babel/runtime": "^7.4.4",
-    "@react-native-community/async-storage": "^1.3.3",
->>>>>>> cdd0d98b2154f844a180150f652e9fd6011c5bc7
     "babel-jest": "^24.8.0",
     "babel-plugin-transform-remove-console": "^6.9.4",
     "jest": "^24.8.0",
