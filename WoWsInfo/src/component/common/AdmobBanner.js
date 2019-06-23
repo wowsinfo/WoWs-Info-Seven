@@ -25,9 +25,10 @@ class AdmobBanner extends Component {
       var ID = '1143462312527881_1143866242487488';
       if (Platform.OS == 'android') ID = '1143462312527881_1143859659154813';
       return (
-        <BannerView placementId={ID}
-          type='standard' onPress={this.hideAds} onError={this.hideAds}
-        />
+        <View>
+          <BannerView placementId='YOUR_PLACEMENT_ID'
+            type='standard' onPress={this.hideAds} onError={this.hideAds} />
+        </View>
       )
     }
   };
