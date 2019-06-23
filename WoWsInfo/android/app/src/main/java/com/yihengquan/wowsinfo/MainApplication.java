@@ -4,7 +4,8 @@ import android.app.Application;
 
 import com.facebook.react.ReactApplication;
 import suraj.tiwari.reactnativefbads.FBAdsPackage;
-import com.corbt.keepawake.KCKeepAwakePackage;
+import com.corbt.keepawake.KCKeepAwakePackage;
+
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.dooboolab.RNIap.RNIapPackage;
 import com.horcrux.svg.SvgPackage;
@@ -32,7 +33,6 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
             new FBAdsPackage(),
             new KCKeepAwakePackage(),
-            new RNAdMobPackage(),
             new AsyncStoragePackage(),
             new RNIapPackage(),
             new SvgPackage(),
