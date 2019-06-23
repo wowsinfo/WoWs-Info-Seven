@@ -7,5 +7,6 @@ API/node_modules/
 API/package-lock.json
 API/temp.json
 WoWsInfo/.vscode/
+WoWsInfo/ios/Pods
 
 WoWsInfo/index\.android\.js
