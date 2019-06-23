@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import * as RNIap from 'react-native-iap';
-import { View, FlatList, StyleSheet } from 'react-native';
-import { LoadingIndicator } from './LoadingIndicator';
-import { Button } from 'react-native-paper';
+import { View, FlatList, Linking } from 'react-native';
+import { Button, List } from 'react-native-paper';
+import { lang } from '../../value/lang';
+import { APP } from '../../value/data';
 
 // Now, we have 4 tiers ($1, $3, $5 and $10) for donations
 const itemSkus = [
@@ -36,14 +37,23 @@ class Donation extends Component {
 
   render() {
     const { products } = this.state;
-    if (GITHUB_VERSION) return null;
-    if (products == null) return <LoadingIndicator />;
     console.log(this.state);
+
+    this.support = [{t: lang.support_patreon, d: APP.Patreon, c: 'orange'},
+      {t: lang.support_paypal, d: APP.PayPal, c: 'blue'},
+      {t: lang.support_wechat, d: APP.WeChat, c: 'green'}];
+
     return (
       <View>
-        <FlatList horizontal data={products} renderItem={({item}) => 
-          <Button onPress={() => this.supportWoWsInfo(item)}>{item.localizedPrice}</Button>}
-        keyExtractor={p => p.price}/>
+        { GITHUB_VERSION || products == null ? null : 
+          <FlatList horizontal data={products} renderItem={({item}) => 
+            <Button style={{marginLeft: 4}} icon='favorite' color='red' compact
+              onPress={() => this.supportWoWsInfo(item)}>{item.localizedPrice}</Button>}
+          keyExtractor={p => p.price}/> 
+        }
+        <FlatList style={{marginTop: 16}} data={this.support} renderItem={({item}) => 
+            <List.Item title={item.t} rippleColor={item.c} onPress={() => Linking.openURL(item.d)}/>}
+        keyExtractor={p => p.t}/>
       </View>
     )
   };
