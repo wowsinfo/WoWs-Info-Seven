@@ -57,7 +57,7 @@ class Donation extends Component {
           keyExtractor={p => p.price}/> 
         }
         { this.support.map(item => { return (
-            <List.Item title={item.t} key={item.t} rippleColor={item.c}
+            <List.Item title={item.t} key={item.t} description={item.d}
               onPress={() => Linking.openURL(item.d)}/>
           )}) 
         }
