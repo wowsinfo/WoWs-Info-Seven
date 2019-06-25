@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { StyleSheet, Alert, BackHandler, Platform } from 'react-native';
+import { StyleSheet, Alert, BackHandler, Linking } from 'react-native';
 import { Router, Stack, Scene, Actions } from 'react-native-router-flux';
 import { withTheme, DarkTheme, DefaultTheme } from 'react-native-paper';
 import { Menu, Settings, About, Setup, Consumable, CommanderSkill, 
   BasicDetail, Achievement, Map as GameMap, Collection, Warship, WarshipDetail, 
   WarshipFilter, WarshipModule, Loading, Statistics, ClanInfo, PlayerAchievement, 
   Rating, Search, Graph, SimilarGraph, License, RS, SupportMe } from './page';
-import { LOCAL, getFirstLaunch, getCurrServer } from './value/data';
+import { LOCAL, getFirstLaunch, getCurrServer, APP } from './value/data';
 import { DataLoader, Downloader } from './core';
 import { GREY, BLUE } from 'react-native-material-color';
 import { TintColour } from './value/colour';
@@ -14,6 +14,36 @@ import { lang } from './value/lang';
 import { PlayerShip } from './page/player/PlayerShip';
 import { Detailed } from './page/player/Detailed';
 import { Rank } from './page/player/Rank';
+import { setJSExceptionHandler, setNativeExceptionHandler } from 'react-native-exception-handler';
+
+setJSExceptionHandler((e, fatal) => {
+  if (fatal) {
+    showAlert(`${e.name}\n${e.message}`, 'JS');
+  } else {
+    console.log(`JSException\n${e}`);
+  }
+}, true);
+
+setNativeExceptionHandler((e) => {
+  showAlert(e, 'NATIVE');
+  console.log(`NativeException\n${e}`);
+});
+
+// Ask user to email me the log
+function showAlert(msg, mode) {
+  Alert.alert(`FATAL ${mode} ERROR`, `${msg}\n\nPlease contact developer`,
+    [{
+      text: 'OK',
+      style: 'cancel',
+      onPress: () => null
+    },
+    {
+      text: 'E-mail',
+      onPress: () => Linking.openURL(`mailto:development.henryquan@gmail.com?subject=[WoWs Info ${APP.Version}] &body=${msg}`),
+    }],
+    {cancelable: false}
+  );
+}
 
 class App extends Component {
   constructor(props) {
