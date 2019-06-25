@@ -27,13 +27,17 @@ class AdmobBanner extends Component {
       return (
         <View>
           <BannerView placementId={ID}
-            type='standard' onPress={this.hideAds} onError={this.hideAds} />
+            type='standard' onPress={this.hideAds} onError={this.logError} />
         </View>
       )
     }
   };
 
   hideAds = () => this.setState({success: false});
+  logError = err => {
+    console.log('err', err);
+    this.setState({success: false});
+  }
 }
 
 export { AdmobBanner };
