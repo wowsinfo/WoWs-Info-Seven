@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as RNIap from 'react-native-iap';
-import { View, FlatList, Linking } from 'react-native';
+import { View, FlatList, Linking, Platform } from 'react-native';
 import { Button, List } from 'react-native-paper';
 import { lang } from '../../value/lang';
 import { APP } from '../../value/data';
@@ -43,6 +43,11 @@ class Donation extends Component {
       {t: lang.support_paypal, d: APP.PayPal, c: 'blue'},
       {t: lang.support_wechat, d: APP.WeChat, c: 'green'}];
 
+    // IOS does not allow wechat and paypal
+    if (Platform.OS == 'ios') {
+      this.support = [{t: lang.support_patreon, d: APP.Patreon, c: 'orange'}];
+    }
+
     return (
       <View>
         { GITHUB_VERSION || products == null ? null : 
@@ -51,9 +56,11 @@ class Donation extends Component {
               onPress={() => this.supportWoWsInfo(item)}>{item.localizedPrice}</Button>}
           keyExtractor={p => p.price}/> 
         }
-        <FlatList style={{marginTop: 16}} data={this.support} renderItem={({item}) => 
-            <List.Item title={item.t} rippleColor={item.c} onPress={() => Linking.openURL(item.d)}/>}
-        keyExtractor={p => p.t}/>
+        { this.support.map(item => { return (
+            <List.Item title={item.t} key={item.t} description={item.d}
+              onPress={() => Linking.openURL(item.d)}/>
+          )}) 
+        }
       </View>
     )
   };
