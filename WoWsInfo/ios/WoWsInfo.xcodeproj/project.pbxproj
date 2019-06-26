@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -47,6 +48,7 @@
 		734317AB0EFA4834978E5275 /* libReactNativeAdsFacebook.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 36B3EDAF2A5D4B0696B8E4A6 /* libReactNativeAdsFacebook.a */; };
 		75B197FACC23434698E612F1 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E5152BDAD3347AA92B82795 /* FontAwesome.ttf */; };
 		7A9D9452AC774E1E92F230FC /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4725F2A6A83A4739A4C8BEFA /* Ionicons.ttf */; };
+		7FBA699FAB434FC9AB34B7AF /* libReactNativeExceptionHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EC76A9F27344D22977AE0A0 /* libReactNativeExceptionHandler.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8528687ADEB54F3695E00822 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2E01E3921BE45F991BC649C /* MaterialIcons.ttf */; };
 		859B76301466414AB6E098E9 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 595FC707BFBC4F4483EBE464 /* Entypo.ttf */; };
@@ -65,7 +67,6 @@
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		ED2971652150620600B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2971642150620600B7C4FE /* JavaScriptCore.framework */; };
 		F9DD8DA44EB84ED98D1DF137 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1827BE04AB1949F78328411F /* Octicons.ttf */; };
-		7FBA699FAB434FC9AB34B7AF /* libReactNativeExceptionHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EC76A9F27344D22977AE0A0 /* libReactNativeExceptionHandler.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -349,6 +350,13 @@
 			remoteGlobalIDString = 94DDAC5C1F3D024300EED511;
 			remoteInfo = "RNSVG-tvOS";
 		};
+		BA9F00C622C35E4600118B09 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2ED5CEF1D27B4CCDA6EDE022 /* ReactNativeExceptionHandler.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = ReactNativeExceptionHandler;
+		};
 		BAAA9585220675DD00565F43 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 31AF56C4543B45D19EFCBCAC /* ReactNativeLocalization.xcodeproj */;
@@ -437,14 +445,16 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		1827BE04AB1949F78328411F /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		1E5152BDAD3347AA92B82795 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
-		241F0B9D97CE4D73BF74F96E /* ReactNativeAdsFacebook.xcodeproj */ = {isa = PBXFileReference; name = "ReactNativeAdsFacebook.xcodeproj"; path = "../node_modules/react-native-fbads/ios/ReactNativeAdsFacebook.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		1EC76A9F27344D22977AE0A0 /* libReactNativeExceptionHandler.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeExceptionHandler.a; sourceTree = "<group>"; };
+		241F0B9D97CE4D73BF74F96E /* ReactNativeAdsFacebook.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeAdsFacebook.xcodeproj; path = "../node_modules/react-native-fbads/ios/ReactNativeAdsFacebook.xcodeproj"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* WoWsInfo-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WoWsInfo-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* WoWsInfo-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WoWsInfo-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2ED5CEF1D27B4CCDA6EDE022 /* ReactNativeExceptionHandler.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeExceptionHandler.xcodeproj; path = "../node_modules/react-native-exception-handler/ios/ReactNativeExceptionHandler.xcodeproj"; sourceTree = "<group>"; };
 		31AF56C4543B45D19EFCBCAC /* ReactNativeLocalization.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeLocalization.xcodeproj; path = "../node_modules/react-native-localization/ReactNativeLocalization.xcodeproj"; sourceTree = "<group>"; };
 		32775243F0B34018B8F84324 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
-		36B3EDAF2A5D4B0696B8E4A6 /* libReactNativeAdsFacebook.a */ = {isa = PBXFileReference; name = "libReactNativeAdsFacebook.a"; path = "libReactNativeAdsFacebook.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
-		3748087D627142BA9FCBA218 /* KCKeepAwake.xcodeproj */ = {isa = PBXFileReference; name = "KCKeepAwake.xcodeproj"; path = "../node_modules/react-native-keep-awake/ios/KCKeepAwake.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		36B3EDAF2A5D4B0696B8E4A6 /* libReactNativeAdsFacebook.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeAdsFacebook.a; sourceTree = "<group>"; };
+		3748087D627142BA9FCBA218 /* KCKeepAwake.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = KCKeepAwake.xcodeproj; path = "../node_modules/react-native-keep-awake/ios/KCKeepAwake.xcodeproj"; sourceTree = "<group>"; };
 		3A5DA890115748B19BC3E0E2 /* RNSVG.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSVG.xcodeproj; path = "../node_modules/react-native-svg/ios/RNSVG.xcodeproj"; sourceTree = "<group>"; };
 		41893E201C8B42C1959367AB /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		4502E7A4174A44AAA2024F6A /* RNIap.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNIap.xcodeproj; path = "../node_modules/react-native-iap/ios/RNIap.xcodeproj"; sourceTree = "<group>"; };
@@ -464,7 +474,7 @@
 		AF69C9BDCCA540B0E88E2481 /* Pods_WoWsInfo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WoWsInfo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA3BD4E422334754000B0289 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		BF258CFD3DF149558479B964 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
-		C90F133815D147DB90CEAF7C /* libKCKeepAwake.a */ = {isa = PBXFileReference; name = "libKCKeepAwake.a"; path = "libKCKeepAwake.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		C90F133815D147DB90CEAF7C /* libKCKeepAwake.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libKCKeepAwake.a; sourceTree = "<group>"; };
 		CD061FD35E3E4F63AC8AA30E /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		D2E01E3921BE45F991BC649C /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		D4F3F34ABA34F45FFEFAAC14 /* Pods-WoWsInfo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WoWsInfo.release.xcconfig"; path = "Target Support Files/Pods-WoWsInfo/Pods-WoWsInfo.release.xcconfig"; sourceTree = "<group>"; };
@@ -478,8 +488,6 @@
 		F3EEE7C116504A49BEEC0458 /* libRNVectorIcons-tvOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libRNVectorIcons-tvOS.a"; sourceTree = "<group>"; };
 		FB1AFDC27FC34144BA78E93B /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		FB60BEDA1E084CC48C99907A /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
-		2ED5CEF1D27B4CCDA6EDE022 /* ReactNativeExceptionHandler.xcodeproj */ = {isa = PBXFileReference; name = "ReactNativeExceptionHandler.xcodeproj"; path = "../node_modules/react-native-exception-handler/ios/ReactNativeExceptionHandler.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		1EC76A9F27344D22977AE0A0 /* libReactNativeExceptionHandler.a */ = {isa = PBXFileReference; name = "libReactNativeExceptionHandler.a"; path = "libReactNativeExceptionHandler.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -816,6 +824,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		BA9F00C322C35E4600118B09 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BA9F00C722C35E4600118B09 /* libReactNativeExceptionHandler.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		BAAA955D220675DD00565F43 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -836,6 +852,7 @@
 				5D9DF2EC4E8945858BBAF509 /* libRNCAsyncStorage.a */,
 				C90F133815D147DB90CEAF7C /* libKCKeepAwake.a */,
 				36B3EDAF2A5D4B0696B8E4A6 /* libReactNativeAdsFacebook.a */,
+				1EC76A9F27344D22977AE0A0 /* libReactNativeExceptionHandler.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -1051,6 +1068,10 @@
 				{
 					ProductGroup = BA26BD7822BF8615008708BA /* Products */;
 					ProjectRef = 241F0B9D97CE4D73BF74F96E /* ReactNativeAdsFacebook.xcodeproj */;
+				},
+				{
+					ProductGroup = BA9F00C322C35E4600118B09 /* Products */;
+					ProjectRef = 2ED5CEF1D27B4CCDA6EDE022 /* ReactNativeExceptionHandler.xcodeproj */;
 				},
 				{
 					ProductGroup = BAAA955D220675DD00565F43 /* Products */;
@@ -1350,6 +1371,13 @@
 			remoteRef = BA69271D22166D1B00265CC5 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		BA9F00C722C35E4600118B09 /* libReactNativeExceptionHandler.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libReactNativeExceptionHandler.a;
+			remoteRef = BA9F00C622C35E4600118B09 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		BAAA9586220675DD00565F43 /* libReactNativeLocalization.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1596,9 +1624,9 @@
 					"$(SRCROOT)/../node_modules/react-native-iap/ios",
 					"$(SRCROOT)..\node_modules@react-native-community\async-storageios",
 					"$(SRCROOT)..\node_modules\neact-native-admobios",
-					"$(SRCROOT)\..\node_modules\react-native-keep-awake\ios",
-					"$(SRCROOT)\..\node_modules\react-native-fbads\ios\ReactNativeAdsFacebook",
-					"$(SRCROOT)\..\node_modules\react-native-exception-handler\ios",
+					"$(SRCROOT)..\node_modules\neact-native-keep-awakeios",
+					"$(SRCROOT)..\node_modules\neact-native-fbadsiosReactNativeAdsFacebook",
+					"$(SRCROOT)..\node_modules\neact-native-exception-handlerios",
 				);
 				INFOPLIST_FILE = WoWsInfoTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1631,9 +1659,9 @@
 					"$(SRCROOT)/../node_modules/react-native-iap/ios",
 					"$(SRCROOT)..\node_modules@react-native-community\async-storageios",
 					"$(SRCROOT)..\node_modules\neact-native-admobios",
-					"$(SRCROOT)\..\node_modules\react-native-keep-awake\ios",
-					"$(SRCROOT)\..\node_modules\react-native-fbads\ios\ReactNativeAdsFacebook",
-					"$(SRCROOT)\..\node_modules\react-native-exception-handler\ios",
+					"$(SRCROOT)..\node_modules\neact-native-keep-awakeios",
+					"$(SRCROOT)..\node_modules\neact-native-fbadsiosReactNativeAdsFacebook",
+					"$(SRCROOT)..\node_modules\neact-native-exception-handlerios",
 				);
 				INFOPLIST_FILE = WoWsInfoTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1673,9 +1701,9 @@
 					"$(SRCROOT)/../node_modules/react-native-iap/ios",
 					"$(SRCROOT)..\node_modules@react-native-community\async-storageios",
 					"$(SRCROOT)..\node_modules\neact-native-admobios",
-					"$(SRCROOT)\..\node_modules\react-native-keep-awake\ios",
-					"$(SRCROOT)\..\node_modules\react-native-fbads\ios\ReactNativeAdsFacebook",
-					"$(SRCROOT)\..\node_modules\react-native-exception-handler\ios",
+					"$(SRCROOT)..\node_modules\neact-native-keep-awakeios",
+					"$(SRCROOT)..\node_modules\neact-native-fbadsiosReactNativeAdsFacebook",
+					"$(SRCROOT)..\node_modules\neact-native-exception-handlerios",
 				);
 				INFOPLIST_FILE = WoWsInfo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1711,9 +1739,9 @@
 					"$(SRCROOT)/../node_modules/react-native-iap/ios",
 					"$(SRCROOT)..\node_modules@react-native-community\async-storageios",
 					"$(SRCROOT)..\node_modules\neact-native-admobios",
-					"$(SRCROOT)\..\node_modules\react-native-keep-awake\ios",
-					"$(SRCROOT)\..\node_modules\react-native-fbads\ios\ReactNativeAdsFacebook",
-					"$(SRCROOT)\..\node_modules\react-native-exception-handler\ios",
+					"$(SRCROOT)..\node_modules\neact-native-keep-awakeios",
+					"$(SRCROOT)..\node_modules\neact-native-fbadsiosReactNativeAdsFacebook",
+					"$(SRCROOT)..\node_modules\neact-native-exception-handlerios",
 				);
 				INFOPLIST_FILE = WoWsInfo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1750,9 +1778,9 @@
 					"$(SRCROOT)/../node_modules/react-native-iap/ios",
 					"$(SRCROOT)..\node_modules@react-native-community\async-storageios",
 					"$(SRCROOT)..\node_modules\neact-native-admobios",
-					"$(SRCROOT)\..\node_modules\react-native-keep-awake\ios",
-					"$(SRCROOT)\..\node_modules\react-native-fbads\ios\ReactNativeAdsFacebook",
-					"$(SRCROOT)\..\node_modules\react-native-exception-handler\ios",
+					"$(SRCROOT)..\node_modules\neact-native-keep-awakeios",
+					"$(SRCROOT)..\node_modules\neact-native-fbadsiosReactNativeAdsFacebook",
+					"$(SRCROOT)..\node_modules\neact-native-exception-handlerios",
 				);
 				INFOPLIST_FILE = "WoWsInfo-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1793,9 +1821,9 @@
 					"$(SRCROOT)/../node_modules/react-native-iap/ios",
 					"$(SRCROOT)..\node_modules@react-native-community\async-storageios",
 					"$(SRCROOT)..\node_modules\neact-native-admobios",
-					"$(SRCROOT)\..\node_modules\react-native-keep-awake\ios",
-					"$(SRCROOT)\..\node_modules\react-native-fbads\ios\ReactNativeAdsFacebook",
-					"$(SRCROOT)\..\node_modules\react-native-exception-handler\ios",
+					"$(SRCROOT)..\node_modules\neact-native-keep-awakeios",
+					"$(SRCROOT)..\node_modules\neact-native-fbadsiosReactNativeAdsFacebook",
+					"$(SRCROOT)..\node_modules\neact-native-exception-handlerios",
 				);
 				INFOPLIST_FILE = "WoWsInfo-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1835,9 +1863,9 @@
 					"$(SRCROOT)/../node_modules/react-native-iap/ios",
 					"$(SRCROOT)..\node_modules@react-native-community\async-storageios",
 					"$(SRCROOT)..\node_modules\neact-native-admobios",
-					"$(SRCROOT)\..\node_modules\react-native-keep-awake\ios",
-					"$(SRCROOT)\..\node_modules\react-native-fbads\ios\ReactNativeAdsFacebook",
-					"$(SRCROOT)\..\node_modules\react-native-exception-handler\ios",
+					"$(SRCROOT)..\node_modules\neact-native-keep-awakeios",
+					"$(SRCROOT)..\node_modules\neact-native-fbadsiosReactNativeAdsFacebook",
+					"$(SRCROOT)..\node_modules\neact-native-exception-handlerios",
 				);
 				INFOPLIST_FILE = "WoWsInfo-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1877,9 +1905,9 @@
 					"$(SRCROOT)/../node_modules/react-native-iap/ios",
 					"$(SRCROOT)..\node_modules@react-native-community\async-storageios",
 					"$(SRCROOT)..\node_modules\neact-native-admobios",
-					"$(SRCROOT)\..\node_modules\react-native-keep-awake\ios",
-					"$(SRCROOT)\..\node_modules\react-native-fbads\ios\ReactNativeAdsFacebook",
-					"$(SRCROOT)\..\node_modules\react-native-exception-handler\ios",
+					"$(SRCROOT)..\node_modules\neact-native-keep-awakeios",
+					"$(SRCROOT)..\node_modules\neact-native-fbadsiosReactNativeAdsFacebook",
+					"$(SRCROOT)..\node_modules\neact-native-exception-handlerios",
 				);
 				INFOPLIST_FILE = "WoWsInfo-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
