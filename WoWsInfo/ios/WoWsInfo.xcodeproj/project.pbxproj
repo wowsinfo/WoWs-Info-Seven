@@ -48,6 +48,7 @@
 		734317AB0EFA4834978E5275 /* libReactNativeAdsFacebook.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 36B3EDAF2A5D4B0696B8E4A6 /* libReactNativeAdsFacebook.a */; };
 		75B197FACC23434698E612F1 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E5152BDAD3347AA92B82795 /* FontAwesome.ttf */; };
 		7A9D9452AC774E1E92F230FC /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4725F2A6A83A4739A4C8BEFA /* Ionicons.ttf */; };
+		7FBA699FAB434FC9AB34B7AF /* libReactNativeExceptionHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EC76A9F27344D22977AE0A0 /* libReactNativeExceptionHandler.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8528687ADEB54F3695E00822 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2E01E3921BE45F991BC649C /* MaterialIcons.ttf */; };
 		859B76301466414AB6E098E9 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 595FC707BFBC4F4483EBE464 /* Entypo.ttf */; };
@@ -349,6 +350,13 @@
 			remoteGlobalIDString = 94DDAC5C1F3D024300EED511;
 			remoteInfo = "RNSVG-tvOS";
 		};
+		BA9F00C622C35E4600118B09 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2ED5CEF1D27B4CCDA6EDE022 /* ReactNativeExceptionHandler.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = ReactNativeExceptionHandler;
+		};
 		BAAA9585220675DD00565F43 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 31AF56C4543B45D19EFCBCAC /* ReactNativeLocalization.xcodeproj */;
@@ -437,10 +445,12 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		1827BE04AB1949F78328411F /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		1E5152BDAD3347AA92B82795 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
+		1EC76A9F27344D22977AE0A0 /* libReactNativeExceptionHandler.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeExceptionHandler.a; sourceTree = "<group>"; };
 		241F0B9D97CE4D73BF74F96E /* ReactNativeAdsFacebook.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeAdsFacebook.xcodeproj; path = "../node_modules/react-native-fbads/ios/ReactNativeAdsFacebook.xcodeproj"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* WoWsInfo-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WoWsInfo-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* WoWsInfo-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WoWsInfo-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2ED5CEF1D27B4CCDA6EDE022 /* ReactNativeExceptionHandler.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeExceptionHandler.xcodeproj; path = "../node_modules/react-native-exception-handler/ios/ReactNativeExceptionHandler.xcodeproj"; sourceTree = "<group>"; };
 		31AF56C4543B45D19EFCBCAC /* ReactNativeLocalization.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeLocalization.xcodeproj; path = "../node_modules/react-native-localization/ReactNativeLocalization.xcodeproj"; sourceTree = "<group>"; };
 		32775243F0B34018B8F84324 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		36B3EDAF2A5D4B0696B8E4A6 /* libReactNativeAdsFacebook.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeAdsFacebook.a; sourceTree = "<group>"; };
@@ -514,6 +524,7 @@
 				E4C6BFF1BEEE4E129A81C082 /* libRNCAsyncStorage.a in Frameworks */,
 				AB530A67DE5E446690E5D1A7 /* libKCKeepAwake.a in Frameworks */,
 				734317AB0EFA4834978E5275 /* libReactNativeAdsFacebook.a in Frameworks */,
+				7FBA699FAB434FC9AB34B7AF /* libReactNativeExceptionHandler.a in Frameworks */,
 				051653EBD5EAE21B4FC60F20 /* Pods_WoWsInfo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -737,6 +748,7 @@
 				F3204FCA33144212AF4C2616 /* RNCAsyncStorage.xcodeproj */,
 				3748087D627142BA9FCBA218 /* KCKeepAwake.xcodeproj */,
 				241F0B9D97CE4D73BF74F96E /* ReactNativeAdsFacebook.xcodeproj */,
+				2ED5CEF1D27B4CCDA6EDE022 /* ReactNativeExceptionHandler.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -812,6 +824,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		BA9F00C322C35E4600118B09 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BA9F00C722C35E4600118B09 /* libReactNativeExceptionHandler.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		BAAA955D220675DD00565F43 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -832,6 +852,7 @@
 				5D9DF2EC4E8945858BBAF509 /* libRNCAsyncStorage.a */,
 				C90F133815D147DB90CEAF7C /* libKCKeepAwake.a */,
 				36B3EDAF2A5D4B0696B8E4A6 /* libReactNativeAdsFacebook.a */,
+				1EC76A9F27344D22977AE0A0 /* libReactNativeExceptionHandler.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -1047,6 +1068,10 @@
 				{
 					ProductGroup = BA26BD7822BF8615008708BA /* Products */;
 					ProjectRef = 241F0B9D97CE4D73BF74F96E /* ReactNativeAdsFacebook.xcodeproj */;
+				},
+				{
+					ProductGroup = BA9F00C322C35E4600118B09 /* Products */;
+					ProjectRef = 2ED5CEF1D27B4CCDA6EDE022 /* ReactNativeExceptionHandler.xcodeproj */;
 				},
 				{
 					ProductGroup = BAAA955D220675DD00565F43 /* Products */;
@@ -1346,6 +1371,13 @@
 			remoteRef = BA69271D22166D1B00265CC5 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		BA9F00C722C35E4600118B09 /* libReactNativeExceptionHandler.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libReactNativeExceptionHandler.a;
+			remoteRef = BA9F00C622C35E4600118B09 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		BAAA9586220675DD00565F43 /* libReactNativeLocalization.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1594,12 +1626,14 @@
 					"$(SRCROOT)..\node_modules\neact-native-admobios",
 					"$(SRCROOT)..\node_modules\neact-native-keep-awakeios",
 					"$(SRCROOT)..\node_modules\neact-native-fbadsiosReactNativeAdsFacebook",
+					"$(SRCROOT)..\node_modules\neact-native-exception-handlerios",
 				);
 				INFOPLIST_FILE = WoWsInfoTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
@@ -1627,12 +1661,14 @@
 					"$(SRCROOT)..\node_modules\neact-native-admobios",
 					"$(SRCROOT)..\node_modules\neact-native-keep-awakeios",
 					"$(SRCROOT)..\node_modules\neact-native-fbadsiosReactNativeAdsFacebook",
+					"$(SRCROOT)..\node_modules\neact-native-exception-handlerios",
 				);
 				INFOPLIST_FILE = WoWsInfoTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
@@ -1667,6 +1703,7 @@
 					"$(SRCROOT)..\node_modules\neact-native-admobios",
 					"$(SRCROOT)..\node_modules\neact-native-keep-awakeios",
 					"$(SRCROOT)..\node_modules\neact-native-fbadsiosReactNativeAdsFacebook",
+					"$(SRCROOT)..\node_modules\neact-native-exception-handlerios",
 				);
 				INFOPLIST_FILE = WoWsInfo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1704,6 +1741,7 @@
 					"$(SRCROOT)..\node_modules\neact-native-admobios",
 					"$(SRCROOT)..\node_modules\neact-native-keep-awakeios",
 					"$(SRCROOT)..\node_modules\neact-native-fbadsiosReactNativeAdsFacebook",
+					"$(SRCROOT)..\node_modules\neact-native-exception-handlerios",
 				);
 				INFOPLIST_FILE = WoWsInfo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1742,11 +1780,13 @@
 					"$(SRCROOT)..\node_modules\neact-native-admobios",
 					"$(SRCROOT)..\node_modules\neact-native-keep-awakeios",
 					"$(SRCROOT)..\node_modules\neact-native-fbadsiosReactNativeAdsFacebook",
+					"$(SRCROOT)..\node_modules\neact-native-exception-handlerios",
 				);
 				INFOPLIST_FILE = "WoWsInfo-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
@@ -1783,11 +1823,13 @@
 					"$(SRCROOT)..\node_modules\neact-native-admobios",
 					"$(SRCROOT)..\node_modules\neact-native-keep-awakeios",
 					"$(SRCROOT)..\node_modules\neact-native-fbadsiosReactNativeAdsFacebook",
+					"$(SRCROOT)..\node_modules\neact-native-exception-handlerios",
 				);
 				INFOPLIST_FILE = "WoWsInfo-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
@@ -1823,11 +1865,13 @@
 					"$(SRCROOT)..\node_modules\neact-native-admobios",
 					"$(SRCROOT)..\node_modules\neact-native-keep-awakeios",
 					"$(SRCROOT)..\node_modules\neact-native-fbadsiosReactNativeAdsFacebook",
+					"$(SRCROOT)..\node_modules\neact-native-exception-handlerios",
 				);
 				INFOPLIST_FILE = "WoWsInfo-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
@@ -1863,11 +1907,13 @@
 					"$(SRCROOT)..\node_modules\neact-native-admobios",
 					"$(SRCROOT)..\node_modules\neact-native-keep-awakeios",
 					"$(SRCROOT)..\node_modules\neact-native-fbadsiosReactNativeAdsFacebook",
+					"$(SRCROOT)..\node_modules\neact-native-exception-handlerios",
 				);
 				INFOPLIST_FILE = "WoWsInfo-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (

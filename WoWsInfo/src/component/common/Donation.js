@@ -43,9 +43,9 @@ class Donation extends Component {
       {t: lang.support_paypal, d: APP.PayPal, c: 'blue'},
       {t: lang.support_wechat, d: APP.WeChat, c: 'green'}];
 
-    // IOS does not allow wechat and paypal
-    if (Platform.OS == 'ios') {
-      this.support = [{t: lang.support_patreon, d: APP.Patreon, c: 'orange'}];
+    // They won't allow wechat and paypal
+    if (!GITHUB_VERSION) {
+      this.support = [{t: 'GitHub', d: 'https://github.com/HenryQuan/WoWs-Info-Origin', c: 'black'}];
     }
 
     return (

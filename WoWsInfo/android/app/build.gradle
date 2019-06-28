@@ -105,8 +105,8 @@ android {
         applicationId "com.yihengquan.wowsinfo"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 10640
-        versionName "1.0.6.4"
+        versionCode 10660
+        versionName "1.0.6.6"
     }
     splits {
         abi {
@@ -138,6 +138,7 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-exception-handler')
     implementation project(':react-native-fbads')
     implementation project(':react-native-keep-awake')
     implementation project(':@react-native-community_async-storage')
