@@ -45,16 +45,16 @@ class Friend extends PureComponent {
         <Anime.View animation={clanSide} useNativeDriver duration={500}>
           <SectionTitle title={`${lang.friend_clan_title} - ${SafeValue(clan.length, 0)}`}/>
           <FlatGrid items={clan} itemDimension={300} spacing={0} renderItem={({item}) => 
-            <List.Item title={item.tag} onPress={() => this.pushToClan(item)} description={item.clan_id} key={String(item.clan_id)}
+            <List.Item title={item.tag} onPress={() => this.pushToClan(item)} description={`${item.clan_id}`} key={String(item.clan_id)}
               right={() => <IconButton color={Colors.grey500} icon='close' onPress={() => this.removeClan(item)}/> }/>}
           keyboardShouldPersistTaps='always'/>
         </Anime.View>
         <Anime.View animation={playerSide} useNativeDriver duration={500}>  
           <SectionTitle title={`${lang.friend_player_title} - ${SafeValue(player.length, 0)}`}/>
-          <FlatGrid items={player} itemDimension={300} spacing={0} renderItem={({item}) => 
-            <List.Item title={item.nickname} onPress={() => this.pushToPlayer(item)} description={item.account_id} key={String(item.account_id)}
+          <FlatGrid items={player} itemDimension={300} spacing={0} renderItem={({item}) =>
+            <List.Item title={item.nickname} onPress={() => this.pushToPlayer(item)} description={`${item.account_id}`} key={String(item.account_id)}
               right={() => <IconButton color={Colors.grey500} icon='close' onPress={() => this.removeFriend(item)}/> }/>}
-          keyboardShouldPersistTapshenryq='always'/>
+            keyboardShouldPersistTaps='always'/>
         </Anime.View>
       </View>
     )
