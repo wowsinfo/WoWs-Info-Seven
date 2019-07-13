@@ -8,4 +8,8 @@ target 'WoWsInfo' do
   # Pods for WoWsInfo
   pod 'FBAudienceNetwork', '~> 5.1.0'
 
+  pod 'RNIap', :path => '../node_modules/react-native-iap'
+
+  pod 'ReactNativeExceptionHandler', :path => '../node_modules/react-native-exception-handler'
+
 end
