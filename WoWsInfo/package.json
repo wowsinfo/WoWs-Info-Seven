@@ -26,6 +26,7 @@
     "victory-native": "^31.0.0"
   },
   "devDependencies": {
+    "jest-haste-map": "^24.8.1",
     "@babel/core": "^7.5.4",
     "@babel/runtime": "^7.5.4",
     "@react-native-community/async-storage": "^1.5.1",
