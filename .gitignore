@@ -10,3 +10,4 @@ WoWsInfo/.vscode/
 WoWsInfo/ios/Pods
 
 WoWsInfo/index\.android\.js
+*.zip
