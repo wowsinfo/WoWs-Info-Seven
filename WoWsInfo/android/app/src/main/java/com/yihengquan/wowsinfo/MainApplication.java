@@ -2,16 +2,8 @@ package com.yihengquan.wowsinfo;
 
 import android.app.Application;
 
-import com.facebook.react.ReactApplication;
-import com.masteratul.exceptionhandler.ReactNativeExceptionHandlerPackage;
-import suraj.tiwari.reactnativefbads.FBAdsPackage;
-import com.corbt.keepawake.KCKeepAwakePackage;
-
-import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
-import com.dooboolab.RNIap.RNIapPackage;
-import com.horcrux.svg.SvgPackage;
-import com.oblador.vectoricons.VectorIconsPackage;
-import com.babisoft.ReactNativeLocalization.ReactNativeLocalizationPackage;
+import com.facebook.react.ReactApplication;
+
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.ads.AudienceNetworkAds;
