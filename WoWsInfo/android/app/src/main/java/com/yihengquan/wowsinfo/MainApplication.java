@@ -19,8 +19,7 @@ import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 
 import java.util.Arrays;
 import java.util.List;
-
-import suraj.tiwari.reactnativefbads.FBAdsPackage;
+
 
 public class MainApplication extends Application implements ReactApplication {
 
