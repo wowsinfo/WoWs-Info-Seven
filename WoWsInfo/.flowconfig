@@ -88,7 +88,6 @@ signature-verification-failure=warn
 deprecated-utility=error
 
 [strict]
-deprecated-type
 nonstrict-import
 sketchy-null
 unclear-type
