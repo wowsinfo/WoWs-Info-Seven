@@ -72,21 +72,9 @@ import com.android.build.OutputFile
  * ]
  */
 
- /**
-  * Fix hermes crashing issue
-  */
- def enableHermes = project.ext.react.get("enableHermes", false)
-
-if (enableHermes) {
- def hermesPath = "../../node_modules/hermesvm/android/"
- debugImplementation files(hermesPath + "hermes-debug.aar")
- releaseImplementation files(hermesPath + "hermes-release.aar")
-} else {
- implementation jscFlavor
-}
-
 project.ext.react = [
-    entryFile: "index.js"
+    entryFile: "index.js",
+    enableHermes: false,
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
