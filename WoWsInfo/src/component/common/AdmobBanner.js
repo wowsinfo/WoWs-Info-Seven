@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { View, Platform } from 'react-native';
-import { BannerView } from 'react-native-fbads';
 import { List } from 'react-native-paper';
 import { lang } from '../../value/lang';
 import { SafeAction } from '../../core';

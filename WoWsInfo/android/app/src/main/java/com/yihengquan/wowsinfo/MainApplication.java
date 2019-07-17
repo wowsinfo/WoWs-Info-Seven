@@ -9,7 +9,6 @@ import com.facebook.react.ReactApplication;
 
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
-import com.facebook.ads.AudienceNetworkAds;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.horcrux.svg.SvgPackage;
@@ -19,7 +18,6 @@ import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 
 import java.util.Arrays;
 import java.util.List;
-
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -34,7 +32,6 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
             new ReactNativeExceptionHandlerPackage(),
-            new FBAdsPackage(),
             new KCKeepAwakePackage(),
             new AsyncStoragePackage(),
             new RNIapPackage(),
@@ -58,7 +55,6 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public void onCreate() {
     super.onCreate();
-    AudienceNetworkAds.initialize(this);
     SoLoader.init(this, /* native exopackage */ false);
   }
 }
