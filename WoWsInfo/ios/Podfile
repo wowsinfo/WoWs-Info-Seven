@@ -6,7 +6,6 @@ target 'WoWsInfo' do
   use_frameworks!
 
   # Pods for WoWsInfo
-  pod 'FBAudienceNetwork', '~> 5.1.0'
 
   pod 'RNIap', :path => '../node_modules/react-native-iap'
 
