@@ -2,9 +2,9 @@ package com.yihengquan.wowsinfo;
 
 import android.app.Application;
 
-import com.babisoft.ReactNativeLocalization.ReactNativeLocalizationPackage;
 import com.corbt.keepawake.KCKeepAwakePackage;
 import com.facebook.react.ReactApplication;
+import com.babisoft.ReactNativeLocalization.ReactNativeLocalizationPackage;
 import com.dooboolab.RNIap.RNIapPackage;
 import com.masteratul.exceptionhandler.ReactNativeExceptionHandlerPackage;
 
@@ -31,13 +31,13 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ReactNativeLocalizationPackage(),
             new RNIapPackage(),
             new ReactNativeExceptionHandlerPackage(),
             new KCKeepAwakePackage(),
             new AsyncStoragePackage(),
             new SvgPackage(),
-            new VectorIconsPackage(),
-            new ReactNativeLocalizationPackage()
+            new VectorIconsPackage()
       );
     }
 
