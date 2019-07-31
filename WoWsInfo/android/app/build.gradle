@@ -169,10 +169,8 @@ android {
 }
 
 dependencies {
-    implementation project(':react-native-exception-handler')
     implementation project(':react-native-keep-awake')
     implementation project(':@react-native-community_async-storage')
-    implementation project(':react-native-iap')
     implementation project(':react-native-svg')
     implementation project(':react-native-vector-icons')
     implementation project(':react-native-localization')
