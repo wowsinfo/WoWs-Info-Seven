@@ -7,6 +7,4 @@ target 'WoWsInfo' do
 
   # Pods for WoWsInfo
 
-
-
 end
