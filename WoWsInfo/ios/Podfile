@@ -7,4 +7,16 @@ target 'WoWsInfo' do
 
   # Pods for WoWsInfo
 
+  pod 'ReactNativeExceptionHandler', :path => '../node_modules/react-native-exception-handler'
+
+  pod 'RNIap', :path => '../node_modules/react-native-iap'
+
+  pod 'react-native-keep-awake', :path => '../node_modules/react-native-keep-awake'
+
+  pod 'ReactNativeLocalization', :path => '../node_modules/react-native-localization'
+
+  pod 'RNSVG', :path => '../node_modules/react-native-svg'
+
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
 end
