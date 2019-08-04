@@ -50,12 +50,12 @@ class Donation extends Component {
 
     return (
       <View>
-        { GITHUB_VERSION || products == null ? null : 
+        {/* { GITHUB_VERSION || products == null ? null : 
           <FlatList horizontal data={products} renderItem={({item}) => 
             <Button style={{marginLeft: 4}} icon='favorite' color='red' compact
               onPress={() => this.supportWoWsInfo(item)}>{item.localizedPrice}</Button>}
           keyExtractor={p => p.price}/> 
-        }
+        } */}
         { this.support.map(item => { return (
             <List.Item title={item.t} key={item.t} description={item.d}
               onPress={() => Linking.openURL(item.d)}/>
