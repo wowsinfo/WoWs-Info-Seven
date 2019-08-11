@@ -23,12 +23,12 @@ class SupportMe extends Component {
         <List.Section title={lang.extra_support_wowsinfo}>
           <Donation />
         </List.Section>
-        <List.Section title={lang.support_ads}>
+        {/* <List.Section title={lang.support_ads}>
           <List.Item title={lang.support_ads_banner} onPress={() => this.updateBanner(!banner)} 
             right={() => <Checkbox status={banner ? 'checked' : 'unchecked'}/>}/>
           <List.Item title={lang.support_ads_fullscreen} disabled onPress={() => this.updateFullscreen(!fullscreen)} 
             right={() => <Checkbox disabled status={fullscreen ? 'checked' : 'unchecked'}/>}/>
-        </List.Section>
+        </List.Section> */}
       </WoWsInfo>
     )
   };

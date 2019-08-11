@@ -3,18 +3,15 @@ package com.yihengquan.wowsinfo;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.masteratul.exceptionhandler.ReactNativeExceptionHandlerPackage;
-import suraj.tiwari.reactnativefbads.FBAdsPackage;
-import com.corbt.keepawake.KCKeepAwakePackage;
-
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
-import com.dooboolab.RNIap.RNIapPackage;
-import com.horcrux.svg.SvgPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
+import com.horcrux.svg.SvgPackage;
 import com.babisoft.ReactNativeLocalization.ReactNativeLocalizationPackage;
+import com.corbt.keepawake.KCKeepAwakePackage;
+import com.dooboolab.RNIap.RNIapPackage;
+import com.masteratul.exceptionhandler.ReactNativeExceptionHandlerPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
-import com.facebook.ads.AudienceNetworkAds;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 
@@ -33,14 +30,13 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new ReactNativeExceptionHandlerPackage(),
-            new FBAdsPackage(),
-            new KCKeepAwakePackage(),
             new AsyncStoragePackage(),
-            new RNIapPackage(),
-            new SvgPackage(),
             new VectorIconsPackage(),
-            new ReactNativeLocalizationPackage()
+            new SvgPackage(),
+            new ReactNativeLocalizationPackage(),
+            new KCKeepAwakePackage(),
+            new RNIapPackage(),
+            new ReactNativeExceptionHandlerPackage()
       );
     }
 
@@ -58,7 +54,6 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public void onCreate() {
     super.onCreate();
-    AudienceNetworkAds.initialize(this);
     SoLoader.init(this, /* native exopackage */ false);
   }
 }

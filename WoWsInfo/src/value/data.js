@@ -4,8 +4,8 @@ import { SafeStorage, SafeValue } from "../core";
  * App information
  */
 export const APP = {
-  Version: '1.0.6.6',
-  IOSVersion: '1.6.4',
+  Version: '1.0.6.7',
+  IOSVersion: '1.6.5',
   GameVersion: '0.8.5',
   Github: 'https://github.com/HenryQuan/WoWs-Info',
   AppStore: 'https://itunes.apple.com/app/id1202750166',
