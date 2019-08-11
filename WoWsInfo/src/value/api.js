@@ -26,7 +26,7 @@ export const WoWsAPI = {
 // This part is mainly for Wiki
 export const WikiAPI = {
   // Personal rating and ship model
-  PersonalRating: 'https://wows-numbers.com/personal/rating/expected/json/',
+  PersonalRating: 'https://raw.githubusercontent.com/HenryQuan/WoWs-Info-Origin/API/json/personal_rating.json',
   // TODO: update this link when I remove this branch
   ShipModel: 'https://raw.githubusercontent.com/HenryQuan/WoWs-Info-Ultra/API/json/model.json',
   // Wiki
