@@ -45,9 +45,8 @@ export const LOCAL = {
   lastLocation: '@WoWs_Info:lastLocation',
   // RS
   rsIP: '@WoWs_Info:rsIP',
-  // Suport me
-  showBanner: '@WoWs_Info:banner_ads',
-  showFullscreen: '@WoWs_Info:fullscreen_ads',
+  // PRO version
+  proVersion: '@WoWs_Info:pro'
 }
 
 /**
@@ -65,6 +64,18 @@ export const SAVED = {
   map: '@Data:gameMap',
   consumable: '@Data:consumable',
   pr: '@Data:personal_rating',
+}
+
+/**
+ * Pro version
+ */
+export const getPro = () => {
+  return DATA[LOCAL.proVersion];
+}
+
+export const setPro = (mode) => {
+  DATA[LOCAL.proVersion] = mode;
+  SafeStorage.set(LOCAL.proVersion, mode);
 }
 
 /**
