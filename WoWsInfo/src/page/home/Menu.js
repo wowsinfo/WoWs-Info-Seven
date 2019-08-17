@@ -7,8 +7,8 @@
 
 import React, { PureComponent } from 'react';
 import { Alert, ScrollView, StyleSheet, Linking, View } from 'react-native';
-import { isAndroid } from 'react-native-device-detection';
-import { List, Colors, FAB } from 'react-native-paper';
+import { isAndroid, isTablet } from 'react-native-device-detection';
+import { List, Colors, FAB, Surface } from 'react-native-paper';
 import * as Animatable from 'react-native-animatable';
 import { WoWsInfo, SectionTitle, AppName } from '../../component';
 import { lang } from '../../value/lang';
@@ -17,6 +17,7 @@ import { ThemeBackColour, TintColour } from '../../value/colour';
 import { getCurrDomain, getCurrServer, getCurrPrefix, LOCAL, getFirstLaunch, setFirstLaunch, setLastLocation, SAVED } from '../../value/data';
 import { Loading } from '../common/Loading';
 import { FlatGrid } from 'react-native-super-grid';
+import { Search } from './Search';
 
 class Menu extends PureComponent {
 
@@ -31,7 +32,8 @@ class Menu extends PureComponent {
     let first = getFirstLaunch();
     this.state = {
       loading: first,
-      main: DATA[LOCAL.userInfo]
+      main: DATA[LOCAL.userInfo],
+      component: <Search />
     };
 
     this.getData();
@@ -130,6 +132,27 @@ class Menu extends PureComponent {
     
     return (
       <WoWsInfo noRight title={title} onPress={enabled ? () => SafeAction('Statistics', {info: main}) : null} home upper={false}>
+        { isTablet ? this.renderTablet() : this.renderMobile() }
+      </WoWsInfo>
+    );
+  }
+
+  renderTablet() {
+    return (
+      <Surface style={{flexDirection: 'row'}}>
+        <Surface style={{flex: 1}}>
+          {this.renderMobile()}
+        </Surface>
+        <Surface style={{flex: 2}}>
+          <Search />
+        </Surface>
+      </Surface>
+    );
+  }
+
+  renderMobile() {
+    return (
+      <Surface>
         <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='always'>
           <Animatable.View ref='AppName' animation='fadeInDown' easing='ease'>
             <AppName />
@@ -139,7 +162,7 @@ class Menu extends PureComponent {
           </Animatable.View>
         </ScrollView>
         <FAB icon='search' style={styles.fab} onPress={() => SafeAction('Search')}/>
-      </WoWsInfo>
+      </Surface>
     );
   }
 
