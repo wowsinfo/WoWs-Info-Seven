@@ -8,6 +8,6 @@ export const pushToProVersion = () => {
     let pro = getPro();
     if (pro) return false;
     
-    Actions.push('Pro');
+    Actions.push('ProVersion');
     return true;
 }

@@ -46,7 +46,7 @@ class WoWsInfo extends Component {
         <SafeAreaView style={safeView}>
           <StatusBar barStyle={DARKMODE ? 'light-content' : 'dark-content'} 
             backgroundColor={ThemeColour()}/>
-            { !showPro ? <AdmobBanner /> : null }
+            { !showPro && hideAds != true ? <AdmobBanner /> : null }
             <Surface style={child}>
               { children }
             </Surface>
