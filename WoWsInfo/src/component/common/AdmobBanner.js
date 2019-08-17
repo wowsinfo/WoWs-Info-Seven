@@ -12,7 +12,7 @@ class AdmobBanner extends Component {
   render() {
     // Pro version
     return (
-      <Button mode='contained' icon='lock-open'>Unlock pro features</Button>
+      <Button mode='contained' icon='lock-open' theme={{roundness: 0}}>{lang.unlock_pro_features}</Button>
     );
   };
 }
