@@ -1,6 +1,6 @@
 {
-  "name": "new_wowsinfo",
-  "version": "0.0.1",
+  "name": "wowsinfo",
+  "version": "1.0.7",
   "private": true,
   "scripts": {
     "start": "react-native start",
