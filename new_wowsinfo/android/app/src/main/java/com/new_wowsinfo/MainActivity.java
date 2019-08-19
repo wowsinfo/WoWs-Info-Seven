@@ -1,4 +1,4 @@
-package com.wowsinfo_new;
+package com.new_wowsinfo;
 
 import com.facebook.react.ReactActivity;
 
@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected String getMainComponentName() {
-        return "wowsinfo_new";
+        return "new_wowsinfo";
     }
 }

@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "wowsinfo_new.app"
-               BlueprintName = "wowsinfo_new"
-               ReferencedContainer = "container:wowsinfo_new.xcodeproj">
+               BuildableName = "new_wowsinfo.app"
+               BlueprintName = "new_wowsinfo"
+               ReferencedContainer = "container:new_wowsinfo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "wowsinfo_newTests.xctest"
-               BlueprintName = "wowsinfo_newTests"
-               ReferencedContainer = "container:wowsinfo_new.xcodeproj">
+               BuildableName = "new_wowsinfoTests.xctest"
+               BlueprintName = "new_wowsinfoTests"
+               ReferencedContainer = "container:new_wowsinfo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -61,9 +61,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "wowsinfo_newTests.xctest"
-               BlueprintName = "wowsinfo_newTests"
-               ReferencedContainer = "container:wowsinfo_new.xcodeproj">
+               BuildableName = "new_wowsinfoTests.xctest"
+               BlueprintName = "new_wowsinfoTests"
+               ReferencedContainer = "container:new_wowsinfo.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -71,9 +71,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "wowsinfo_new.app"
-            BlueprintName = "wowsinfo_new"
-            ReferencedContainer = "container:wowsinfo_new.xcodeproj">
+            BuildableName = "new_wowsinfo.app"
+            BlueprintName = "new_wowsinfo"
+            ReferencedContainer = "container:new_wowsinfo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -94,9 +94,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "wowsinfo_new.app"
-            BlueprintName = "wowsinfo_new"
-            ReferencedContainer = "container:wowsinfo_new.xcodeproj">
+            BuildableName = "new_wowsinfo.app"
+            BlueprintName = "new_wowsinfo"
+            ReferencedContainer = "container:new_wowsinfo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -113,9 +113,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "wowsinfo_new.app"
-            BlueprintName = "wowsinfo_new"
-            ReferencedContainer = "container:wowsinfo_new.xcodeproj">
+            BuildableName = "new_wowsinfo.app"
+            BlueprintName = "new_wowsinfo"
+            ReferencedContainer = "container:new_wowsinfo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

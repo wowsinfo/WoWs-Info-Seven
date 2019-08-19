@@ -1,8 +1,8 @@
 platform :ios, '9.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-target 'wowsinfo_new' do
-  # Pods for wowsinfo_new
+target 'new_wowsinfo' do
+  # Pods for new_wowsinfo
   pod 'React', :path => '../node_modules/react-native/'
   pod 'React-Core', :path => '../node_modules/react-native/React'
   pod 'React-DevSupport', :path => '../node_modules/react-native/React'
@@ -27,7 +27,7 @@ target 'wowsinfo_new' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-  target 'wowsinfo_newTests' do
+  target 'new_wowsinfoTests' do
     inherit! :search_paths
     # Pods for testing
   end
@@ -35,10 +35,10 @@ target 'wowsinfo_new' do
   use_native_modules!
 end
 
-target 'wowsinfo_new-tvOS' do
-  # Pods for wowsinfo_new-tvOS
+target 'new_wowsinfo-tvOS' do
+  # Pods for new_wowsinfo-tvOS
 
-  target 'wowsinfo_new-tvOSTests' do
+  target 'new_wowsinfo-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end

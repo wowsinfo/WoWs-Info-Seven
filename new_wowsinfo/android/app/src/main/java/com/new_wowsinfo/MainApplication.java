@@ -1,4 +1,4 @@
-package com.wowsinfo_new;
+package com.new_wowsinfo;
 
 import android.app.Application;
 import android.util.Log;
