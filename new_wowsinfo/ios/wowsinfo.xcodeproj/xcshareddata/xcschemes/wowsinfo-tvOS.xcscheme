@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-               BuildableName = "new_wowsinfo-tvOS.app"
-               BlueprintName = "new_wowsinfo-tvOS"
-               ReferencedContainer = "container:new_wowsinfo.xcodeproj">
+               BuildableName = "wowsinfo-tvOS.app"
+               BlueprintName = "wowsinfo-tvOS"
+               ReferencedContainer = "container:wowsinfo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "new_wowsinfo-tvOSTests.xctest"
-               BlueprintName = "new_wowsinfo-tvOSTests"
-               ReferencedContainer = "container:new_wowsinfo.xcodeproj">
+               BuildableName = "wowsinfo-tvOSTests.xctest"
+               BlueprintName = "wowsinfo-tvOSTests"
+               ReferencedContainer = "container:wowsinfo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -61,9 +61,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "new_wowsinfo-tvOSTests.xctest"
-               BlueprintName = "new_wowsinfo-tvOSTests"
-               ReferencedContainer = "container:new_wowsinfo.xcodeproj">
+               BuildableName = "wowsinfo-tvOSTests.xctest"
+               BlueprintName = "wowsinfo-tvOSTests"
+               ReferencedContainer = "container:wowsinfo.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -71,9 +71,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "new_wowsinfo-tvOS.app"
-            BlueprintName = "new_wowsinfo-tvOS"
-            ReferencedContainer = "container:new_wowsinfo.xcodeproj">
+            BuildableName = "wowsinfo-tvOS.app"
+            BlueprintName = "wowsinfo-tvOS"
+            ReferencedContainer = "container:wowsinfo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -94,9 +94,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "new_wowsinfo-tvOS.app"
-            BlueprintName = "new_wowsinfo-tvOS"
-            ReferencedContainer = "container:new_wowsinfo.xcodeproj">
+            BuildableName = "wowsinfo-tvOS.app"
+            BlueprintName = "wowsinfo-tvOS"
+            ReferencedContainer = "container:wowsinfo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -113,9 +113,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "new_wowsinfo-tvOS.app"
-            BlueprintName = "new_wowsinfo-tvOS"
-            ReferencedContainer = "container:new_wowsinfo.xcodeproj">
+            BuildableName = "wowsinfo-tvOS.app"
+            BlueprintName = "wowsinfo-tvOS"
+            ReferencedContainer = "container:wowsinfo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

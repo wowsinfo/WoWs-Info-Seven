@@ -128,7 +128,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.new_wowsinfo"
+        applicationId "com.wowsinfo"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
