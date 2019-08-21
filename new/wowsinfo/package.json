@@ -11,6 +11,7 @@
     "react-native": "0.60.5"
   },
   "devDependencies": {
+    "@react-native-community/async-storage": "^1.6.1",
     "@babel/core": "^7.5.0",
     "@babel/runtime": "^7.5.0",
     "@react-native-community/eslint-config": "^0.0.3",
