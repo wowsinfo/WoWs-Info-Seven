@@ -10,7 +10,7 @@ import { LocalData } from "./LocalData";
  */
 export class WoWsInfoData {
 
-    private infoData: WoWsInfoData | undefined;
+    private static infoData: WoWsInfoData;
     private wowsData: WoWsData;
     private localData: LocalData;
 
@@ -23,7 +23,7 @@ export class WoWsInfoData {
     /**
      * Get data from WoWsInfoData
      */
-    public get instance() {
+    public static get shared() {
         if (this.infoData == null) {
             this.infoData = new WoWsInfoData();
         }

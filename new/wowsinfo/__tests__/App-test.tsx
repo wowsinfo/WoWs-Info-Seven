@@ -19,5 +19,5 @@ import { WoWsInfoData } from '../src/core/data/WoWsInfoData';
  */
 it('WoWsInfoData singleton - same instance', () => {
   // Make sure WoWsInfoData only has one instance
-  expect(WoWsInfoData.instance === WoWsInfoData.instance).toBeTruthy();
+  expect(WoWsInfoData.shared === WoWsInfoData.shared).toBeTruthy();
 });
