@@ -8,6 +8,23 @@ export class LocalData {
 
 }
 
+/**
+ * App information
+ */
+export const AppInfo = {
+    Version: '1.0.7',
+    IOSVersion: '1.7',
+    GameVersion: '0.8.7',
+    Github: 'https://github.com/HenryQuan/WoWs-Info-Re',
+    AppStore: 'https://itunes.apple.com/app/id1202750166',
+    GooglePlay: 'https://play.google.com/store/apps/details?id=com.yihengquan.wowsinfo',
+    Developer: `mailto:development.henryquan@gmail.com?subject=[WoWs Info 1.0.7] `,
+    LatestRelease: 'https://github.com/HenryQuan/WoWs-Info-Origin/releases/latest'
+}
+
+/**
+ * Keys for local data
+ */
 export const LocalDataKeys = {
     /**
      * A list of friends
