@@ -1,11 +1,25 @@
+import { DataManager } from "./DataManager";
+
 /**
  * This class loads local data into memory and also updates and saves key-value
  */
-export class LocalData {
-    public constructor() {
-
+export class LocalData implements DataManager {
+    
+    load(): void {
+        throw new Error("Method not implemented.");
+    }    
+    
+    save(): void {
+        throw new Error("Method not implemented.");
     }
-
+    
+    update(): void {
+        throw new Error("Method not implemented.");
+    }
+    
+    getValue(key: String): Object {
+        return {};
+    }
 }
 
 /**

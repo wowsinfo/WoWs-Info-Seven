@@ -31,15 +31,28 @@ export class WoWsInfoData {
     }
 
     /**
-     * Load or setup local data, check for update and download data from WarGaming server
+     * Load and setup local data, check for update and download data from WarGaming server
      */
     public init(): boolean {
         try {
+            this.localData.load();
             return true;
         } catch (error) {
             console.error(error);
             return false;
         }
+    }
+
+    /**
+     * Make sure you poss a value from LocaDataKeys
+     * @param key 
+     */
+    public getLocalValue(key: String): Object {
+        return this.localData.getValue(key);
+    }
+
+    public getWoWsValue(key: String): Object {
+        return {};
     }
 
 }
