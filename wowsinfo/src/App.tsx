@@ -23,6 +23,7 @@ export default class App extends WoWsComponent {
       error: DataStorage.OK
     };
 
+    // Setup the entire app
     this.dataStorage.init().then(msg => {
       this.setState({
         loading: false,

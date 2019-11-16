@@ -15,7 +15,8 @@
     "react-native-localization": "^2.1.6",
     "react-native-paper": "^3.2.1",
     "react-native-router-flux": "^4.0.6",
-    "react-native-super-grid": "^3.1.1"
+    "react-native-super-grid": "^3.1.1",
+    "react-native-vector-icons": "^6.6.0"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
