@@ -17,6 +17,9 @@ export interface WoWsState {
   error: boolean
 }
 
+/**
+ * The parent of all components
+ */
 export default abstract class WoWsComponent extends PureComponent<WoWsProps, WoWsState> {
   /**
    * if this is a pro feature

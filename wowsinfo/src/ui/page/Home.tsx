@@ -1,4 +1,4 @@
-class Home {
+export default class Home {
     constructor() {
         
     }
