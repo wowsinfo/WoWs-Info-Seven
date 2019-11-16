@@ -1,5 +1,5 @@
 import { equal } from 'assert';
-import DataStorage from '../../src/core/DataStorage';
+import DataStorage from '../../src/core/util/DataStorage';
 
 it('Singleton - same instance', () => {
     const a = DataStorage.Instance;

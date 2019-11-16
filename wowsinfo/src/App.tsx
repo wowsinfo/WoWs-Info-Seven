@@ -10,15 +10,32 @@
 
 import React from 'react';
 import { View, Text } from 'react-native';
+import { WoWsComponent, WoWsProps } from './ui/component/WoWsComponent';
+import DataStorage from './core/util/DataStorage';
 
-const App = () => {
-  // Put the entire router here
-  return (
-    <View>
-      <Text>Hello World</Text>
-      <Text>WoWs Info will be back</Text>
-    </View>
-  );
-};
+export default class App extends WoWsComponent {
+  dataStorage = DataStorage.Instance;
 
-export default App;
+  constructor(props: WoWsProps) {
+    super(props);
+    this.state = {
+      loading: true,
+      error: DataStorage.OK
+    };
+
+    this.dataStorage.init().then(msg => {
+      this.setState({
+        loading: false,
+        error: msg
+      });
+    })
+  }
+
+  render() {
+    return (
+      <View>
+        <Text>Hello World</Text>
+      </View>
+    );
+  }
+}
