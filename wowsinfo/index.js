@@ -2,29 +2,18 @@
  * The entry point of this app
  */
 
-import React, { Component } from 'react';
-import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import * as React from 'react';
 import { AppRegistry } from 'react-native';
 import { name as WoWsInfo } from './app.json';
 import App from './src/App';
+import ThemeProvider from './src/ui/component/ThemeProvider';
 
-const theme = {
-  ...DefaultTheme,
-  colors: {
-    ...DefaultTheme.colors,
-    primary: 'tomato',
-    accent: 'yellow',
-  },
+export default function Main() {
+  return (
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
+  );
 };
-
-class Main extends Component {
-  render() {
-    return (
-      <PaperProvider theme={theme}>
-        <App />
-      </PaperProvider>
-    );
-  }
-}
 
 AppRegistry.registerComponent(WoWsInfo, () => Main);
