@@ -34,7 +34,7 @@ export const AppInfo = {
   Version: '1.0.6.7',
   IOSVersion: '1.6.5',
   GameVersion: '0.8.5',
-  Github: 'https://github.com/HenryQuan/WoWs-Info',
+  GitHub: 'https://github.com/HenryQuan/WoWs-Info',
   AppStore: 'https://itunes.apple.com/app/id1202750166',
   GooglePlay: 'https://play.google.com/store/apps/details?id=com.yihengquan.wowsinfo',
   Developer: `mailto:development.henryquan@gmail.com?subject=[WoWs Info 1.1.0] `,
@@ -49,32 +49,28 @@ export const AppInfo = {
  * User perference
  */
 export const UserPerference = {
-  // ads: '@WoWs_Info:hasAds',
-  friendList: '@WoWs_Info:playerList',
-  userInfo: '@WoWs_Info:userInfo',
-  userData: '@WoWs_Info:userData',
-  userServer: '@WoWs_Info:currServer',
-  appVersion: '@WoWs_Info:currVersion',
-  gameVersion: '@WoWs_Info:gameVersion',
-  date: '@WoWs_Info:currDate',
+  contact_list: '@WoWs_Info:playerList',
+  user_account: '@WoWs_Info:userInfo',
+  user_ship_data: '@WoWs_Info:userData',
+  user_server: '@WoWs_Info:currServer',
+  app_version: '@WoWs_Info:currVersion',
+  game_version: '@WoWs_Info:gameVersion',
   // To do recent data for saved user only
-  lastUpdate: '@WoWs_Info:lastUpdate',
+  last_update: '@WoWs_Info:lastUpdate',
   // data_saver: '@WoWs_Info:dataSaver',
-  theme: '@WoWs_Info:themeColour',
-  darkMode: '@WoWs_Info:darkMode',
-  swapButton: '@WoWs_Info:swapButton',
-  noImageMode: '@WoWs_Info:noImageMode',
-  firstLaunch: '@WoWs_Info:firstLaunch',
+  theme_colour: '@WoWs_Info:themeColour',
+  dark_mode: '@WoWs_Info:darkMode',
+  swap_button: '@WoWs_Info:swapButton',
+  // noImageMode: '@WoWs_Info:noImageMode',
+  first_aunch: '@WoWs_Info:firstLaunch',
   // Language
-  apiLanguage: '@WoWs_Info:apiLanguage',
-  userLanguage: '@WoWs_Info:userLanguage',
+  api_language: '@WoWs_Info:apiLanguage',
+  user_perferred_language: '@WoWs_Info:userLanguage',
   // Save last visited location as a string
-  lastLocation: '@WoWs_Info:lastLocation',
+  last_location: '@WoWs_Info:lastLocation',
   // RS
-  rsIP: '@WoWs_Info:rsIP',
-  // Suport me
-  showBanner: '@WoWs_Info:banner_ads',
-  showFullscreen: '@WoWs_Info:fullscreen_ads',
+  wowsrs_IP: '@WoWs_Info:rsIP',
+  // No more ads
 }
 
 /**
@@ -82,14 +78,14 @@ export const UserPerference = {
  */
 export const Cached = {
   language: '@Data:language',
-  encyclopedia: '@Data:encyclopedia',
+  encyclopedia_info: '@Data:encyclopedia',
   // shipType: '@Data:ship_type',
   achievement: '@Data:achievement',
-  commanderSkill: '@Data:commander_skill',
+  commander_skill: '@Data:commander_skill',
   collection: '@Data:collection',
   // collectionItem: '@Data:collection_item',
   warship: '@Data:warship',
-  map: '@Data:gameMap',
+  game_map: '@Data:gameMap',
   consumable: '@Data:consumable',
-  pr: '@Data:personal_rating',
+  personal_rating: '@Data:personal_rating',
 }

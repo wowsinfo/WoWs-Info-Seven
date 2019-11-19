@@ -1,4 +1,4 @@
-export class BasicDownloader {
+export abstract class BasicDownloader {
   constructor() {
 
   }
