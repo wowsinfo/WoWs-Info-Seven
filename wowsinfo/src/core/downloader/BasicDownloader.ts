@@ -25,7 +25,7 @@ export abstract class BasicDownloader {
   abstract parseData(): object
 
   /**
-   * Save data to local storage
+   * Get data name (from constants)
    */
-  abstract saveData(): void
+  abstract getName(): string
 }
