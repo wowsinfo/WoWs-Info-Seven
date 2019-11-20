@@ -25,7 +25,7 @@ npm install
 react-native link
 react-native run-android
 ~~~~
-- You will need to get a key from [here](https://developers.wargaming.net) and create a file called 'key.js' inside 'WoWsInfo/src/value' folder with this line of code. Then, you can run WoWs Info on your devices.
+- You will need to get a key from [here](https://developers.wargaming.net) and create a file called `key.ts` inside 'WoWsInfo/src/value' folder with this line of code. Then, you can run WoWs Info on your devices.
 ~~~~
 export const AppKey = 'PUT YOUR KEY HERE';
 ~~~~
