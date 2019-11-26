@@ -14,6 +14,8 @@ import DataStorage from './core/util/DataStorage';
 import { Router, Stack, Scene } from 'react-native-router-flux';
 import { Welcome } from './ui/page/Welcome';
 import { Home } from './ui/page';
+import { StatusBar } from 'react-native';
+import { Surface } from 'react-native-paper';
 
 export interface AppState extends WoWsState {
 }
@@ -40,12 +42,15 @@ export default class App extends Component<{}, AppState> implements WoWsComponen
 
   render() {
     return (
-      <Router>
-        <Stack key='root'>
-          <Scene key='Welcome' component={Welcome} />
-          <Scene key='Home' component={Home} />
-        </Stack>
-      </Router>
+      <Surface style={{flex: 1}}>
+        <StatusBar barStyle={'dark-content'} backgroundColor={'black'}/>
+        <Router>
+          <Stack key='root' hideNavBar>
+            <Scene key='Welcome' component={Welcome} />
+            <Scene key='Home' component={Home} />
+          </Stack>
+        </Router>
+      </Surface>
     );
   }
 }

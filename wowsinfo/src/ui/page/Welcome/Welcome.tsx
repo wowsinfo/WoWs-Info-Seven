@@ -1,6 +1,6 @@
 import { WoWsComponent, WoWsState } from '../../component/WoWsComponent';
-import { Component } from 'react';
-import { Surface, Text } from 'react-native-paper';
+import React, { Component } from 'react';
+import { Surface, Text, Appbar } from 'react-native-paper';
 
 interface WelcomeState extends WoWsState {
 
@@ -21,6 +21,9 @@ class Welcome extends Component<{}, WelcomeState> implements WoWsComponent {
     if (!this.state.loading) {
       return (
         <Surface>
+          <Appbar.Header>
+            <Appbar.Content title="Title" subtitle="Subtitle" />
+          </Appbar.Header>
           <Text>Welcome to WoWs Info</Text>
         </Surface>
       )

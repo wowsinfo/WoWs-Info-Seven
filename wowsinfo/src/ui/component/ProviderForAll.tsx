@@ -4,7 +4,7 @@
  */
 
 import React, { Component, ReactNode } from 'react';
-import { Theme, DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import { Theme, DefaultTheme, Provider as PaperProvider, DarkTheme } from 'react-native-paper';
 
 interface AllProps {
   children: ReactNode
@@ -24,7 +24,7 @@ class ProviderForAll extends Component<AllProps, AllState> {
 
     this.state = {
       // Theme and updateTheme from anywhere
-      theme: DefaultTheme,
+      theme: DarkTheme,
       updateTheme: (newTheme) => {
         this.setState({
           theme: newTheme
