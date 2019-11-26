@@ -3,5 +3,5 @@
 *.class
 *.zip
 .DS_Store
-wowsinfo/src/value/key.ts
+wowsinfo/src/core/downloader/key.ts
 wowsinfo/.vscode/
