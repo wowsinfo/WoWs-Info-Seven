@@ -15,6 +15,17 @@ export default class DataStorage {
   public static readonly OK = 'OK';
 
   /**
+   * Initialise some basic but crutial preferences
+   * - Load app theme
+   * - Load app language
+   * - Check if first launch
+   * @returns if true, everything works and it's not first launch
+   */
+  async initSome(): Promise<boolean> {
+    return true;
+  }
+
+  /**
    * Initialise the entire app
    * - Check for app update once a week
    * - Check for game update
@@ -23,7 +34,7 @@ export default class DataStorage {
    * - Load data locally
    * @returns error message or 'nothing'
    */
-  async init(): Promise<string> {
+  async initAll(): Promise<string> {
     return DataStorage.OK;
   }
 }

@@ -3,8 +3,8 @@
  * This is a provider for everything (including theme, language and anything that needs to rerender the entire app)
  */
 
-import React, { Component, ReactNode } from "react";
-import { Theme, DefaultTheme, Provider as PaperProvider } from "react-native-paper";
+import React, { Component, ReactNode } from 'react';
+import { Theme, DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 
 interface AllProps {
   children: ReactNode

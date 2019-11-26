@@ -25,7 +25,7 @@ abstract class WoWsComponent {
   /**
    * if this is a pro feature
    */
-  isProFeature: boolean = false;
+  abstract isProFeature: boolean;
 }
 
 export { WoWsComponent };

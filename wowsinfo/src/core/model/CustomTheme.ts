@@ -1,4 +1,4 @@
-import { Theme, DarkTheme, DefaultTheme } from "react-native-paper";
+import { Theme, DarkTheme, DefaultTheme } from 'react-native-paper';
 
 /**
  * Custom theme (a wrapper around Theme from react native paper)
