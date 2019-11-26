@@ -9,12 +9,17 @@
  */
 
 import React, { Component } from 'react';
- import { WoWsComponent } from './ui/component/WoWsComponent';
+ import { WoWsComponent, WoWsState } from './ui/component/WoWsComponent';
 import DataStorage from './core/util/DataStorage';
-import { Button, Text, Surface, DarkTheme } from 'react-native-paper';
-import { ThemeConsumer } from './ui/component/ThemeProvider';
+import { Button, Text, Surface, DarkTheme, Theme, DefaultTheme } from 'react-native-paper';
+import { ConsumerForAll } from './ui/component/ProviderForAll';
+import CustomTheme from './core/model/CustomTheme';
 
-export default class App extends Component implements WoWsComponent {
+export interface AppState extends WoWsState {
+  theme: Theme
+}
+
+export default class App extends Component<{}, AppState> implements WoWsComponent {
   isProFeature: boolean = false;
   dataStorage = DataStorage.Instance;
 
@@ -23,7 +28,8 @@ export default class App extends Component implements WoWsComponent {
 
     this.state = {
       loading: true,
-      error: DataStorage.OK
+      error: DataStorage.OK,
+      theme: DefaultTheme
     };
     
     // Setup the entire app
@@ -36,12 +42,21 @@ export default class App extends Component implements WoWsComponent {
   }
 
   renderButton() {
+    let randomColour = '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6);
+    let darkTheme = Math.random() * 10 < 5 ? true : false;
+    let myTheme = new CustomTheme(darkTheme, randomColour);
+
     return (
-      <ThemeConsumer>
+      <ConsumerForAll>
         { context => (
-          <Button onPress={() => context!.updateTheme(DarkTheme)}>Theme</Button>
+          <Button onPress={() => {
+            context!.updateTheme(myTheme.getTheme())
+            this.setState({
+              theme: myTheme.getTheme()
+            })
+          }}>Theme</Button>
         )}
-      </ThemeConsumer>
+      </ConsumerForAll>
     )
   }
   

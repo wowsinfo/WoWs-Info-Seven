@@ -6,13 +6,13 @@ import * as React from 'react';
 import { AppRegistry } from 'react-native';
 import { name as WoWsInfo } from './app.json';
 import App from './src/App';
-import ThemeProvider from './src/ui/component/ThemeProvider';
+import { ProviderForAll } from './src/ui/component/ProviderForAll';
 
 export default function Main() {
   return (
-    <ThemeProvider>
+    <ProviderForAll>
       <App />
-    </ThemeProvider>
+    </ProviderForAll>
   );
 };
 
