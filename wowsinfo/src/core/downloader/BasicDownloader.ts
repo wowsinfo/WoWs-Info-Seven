@@ -15,7 +15,8 @@ export abstract class BasicDownloader {
   async fetchData() {
     let response = await fetch(this.link);
     if (response.status === 200) {
-
+      // Only read it if it has a valid response
+      this.json = await response.json();
     }
   }
 

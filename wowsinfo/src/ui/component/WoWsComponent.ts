@@ -1,11 +1,7 @@
-import { PureComponent, ReactNode } from 'react';
-
 /**
- * Props shared by all components
+ * WoWsComponent.ts
+ * All components should implement WoWsComponent but it is not actually a component
  */
-export interface WoWsProps {
-
-}
 
 /**
  * States shared by all components
@@ -22,15 +18,14 @@ export interface WoWsState {
 }
 
 /**
- * The parent of all components
+ * The parent of all components.
+ * It takes a prop, a state and anything else
  */
-abstract class WoWsComponent extends PureComponent<WoWsProps, WoWsState> {
+abstract class WoWsComponent {
   /**
    * if this is a pro feature
    */
   isProFeature: boolean = false;
-
-  abstract render(): ReactNode
 }
 
 export { WoWsComponent };

@@ -8,16 +8,18 @@
  * @format
  */
 
-import React from 'react';
- import { WoWsComponent, WoWsProps } from './ui/component/WoWsComponent';
+import React, { Component } from 'react';
+ import { WoWsComponent } from './ui/component/WoWsComponent';
 import DataStorage from './core/util/DataStorage';
 import { Button, Text, Surface, DarkTheme } from 'react-native-paper';
 import { ThemeConsumer } from './ui/component/ThemeProvider';
-export default class App extends WoWsComponent {
+
+export default class App extends Component implements WoWsComponent {
+  isProFeature: boolean = false;
   dataStorage = DataStorage.Instance;
 
-  constructor(props: WoWsProps) {
-    super(props);
+  constructor({}) {
+    super({});
 
     this.state = {
       loading: true,
