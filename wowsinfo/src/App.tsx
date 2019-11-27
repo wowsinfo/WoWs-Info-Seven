@@ -22,6 +22,11 @@ interface AppState extends WoWsState {
 
 }
 
+/**
+ * The root of WoWs Info
+ * - Setup data
+ * - Setup router
+ */
 export default class App extends Component<{}, AppState> implements WoWsComponent {
   isProFeature: boolean = false;
   dataStorage = DataStorage.Instance;

@@ -1,9 +1,13 @@
-import React, { Component } from "react";
-import { WoWsComponent } from "./WoWsComponent";
-import { Surface, ActivityIndicator } from "react-native-paper";
-import { StyleSheet } from "react-native";
 
-class LoadingIndicator extends Component implements WoWsComponent {
+ import React, { Component } from "react";
+ import { WoWsComponent } from "./WoWsComponent";
+ import { Surface, ActivityIndicator } from "react-native-paper";
+ import { StyleSheet } from "react-native";
+ 
+ /**
+  * It is a big circular indictor with the current theme
+  */
+ class LoadingIndicator extends Component implements WoWsComponent {
   isProFeature: boolean = false;
 
   render() {

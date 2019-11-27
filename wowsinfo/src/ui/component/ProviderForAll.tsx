@@ -1,7 +1,3 @@
-/**
- * ProviderForAll.tsx
- * This is a provider for everything (including theme, language and anything that needs to rerender the entire app)
- */
 
 import React, { Component, ReactNode } from 'react';
 import { Provider as PaperProvider, Colors } from 'react-native-paper';
@@ -19,6 +15,9 @@ interface AllState {
 /// Export for other components
 const ContextForAll =  React.createContext<AllState|null>(null);
 
+/**
+ * This is a provider for everything (including theme, language and anything that needs to rerender the entire app)
+ */
 class ProviderForAll extends Component<AllProps, AllState> {
   constructor(props: AllProps) {
     super(props);

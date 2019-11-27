@@ -6,6 +6,9 @@ export interface ErrorProps {
   message: string
 }
 
+/**
+ * It displays a message and show what's going on
+ */
 class ErrorComponent extends Component<ErrorProps, {}> implements WoWsComponent {
   isProFeature: boolean = false;
   

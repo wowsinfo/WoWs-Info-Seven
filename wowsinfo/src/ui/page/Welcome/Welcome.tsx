@@ -6,6 +6,9 @@ interface WelcomeState extends WoWsState {
 
 }
 
+/**
+ * The first welcome page and it has some basic greetings from me
+ */
 class Welcome extends Component<{}, WelcomeState> implements WoWsComponent {
   isProFeature: boolean = false;
 
