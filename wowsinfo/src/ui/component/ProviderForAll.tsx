@@ -4,7 +4,7 @@
  */
 
 import React, { Component, ReactNode } from 'react';
-import { Provider as PaperProvider } from 'react-native-paper';
+import { Provider as PaperProvider, Colors } from 'react-native-paper';
 import CustomTheme from '../../core/model/CustomTheme';
 
 interface AllProps {
@@ -25,7 +25,7 @@ class ProviderForAll extends Component<AllProps, AllState> {
 
     this.state = {
       // Theme and updateTheme from anywhere
-      theme: new CustomTheme(true, '#123456'),
+      theme: new CustomTheme(false, Colors.blue800),
       updateTheme: (newTheme) => {
         this.setState({
           theme: newTheme

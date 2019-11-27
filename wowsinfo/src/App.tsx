@@ -16,7 +16,7 @@ import { Welcome } from './ui/page/Welcome';
 import { Home } from './ui/page';
 import { StatusBar } from 'react-native';
 import { Surface } from 'react-native-paper';
-import { ConsumerForAll } from './ui/component/ProviderForAll';
+import { ConsumerForAll, LoadingIndicator } from './ui/component';
 
 interface AppState extends WoWsState {
 
@@ -35,11 +35,11 @@ export default class App extends Component<{}, AppState> implements WoWsComponen
     };
 
     // only get essential data from local storage
-    this.dataStorage.initSome().then(() => {
-      this.setState({
-        loading: false,
-      });
-    })
+    // this.dataStorage.initSome().then(() => {
+    //   this.setState({
+    //     loading: false,
+    //   });
+    // })
   }
 
   /**
@@ -64,16 +64,22 @@ export default class App extends Component<{}, AppState> implements WoWsComponen
   }
 
   render() {
-    return (
-      <Surface style={{ flex: 1 }}>
-        {this.renderStatusBar()}
-        <Router>
-          <Stack key='root' hideNavBar>
-            <Scene key='Welcome' component={Welcome} />
-            <Scene key='Home' component={Home} />
-          </Stack>
-        </Router>
-      </Surface>
-    );
+    const { loading, error } = this.state;
+
+    if (loading) {
+      return <LoadingIndicator />;
+    } else {
+      return (
+        <Surface style={{ flex: 1 }}>
+          {this.renderStatusBar()}
+          <Router>
+            <Stack key='root' hideNavBar>
+              <Scene key='Welcome' component={Welcome} />
+              <Scene key='Home' component={Home} />
+            </Stack>
+          </Router>
+        </Surface>
+      );
+    }
   }
 }
