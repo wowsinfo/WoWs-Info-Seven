@@ -16,8 +16,10 @@ import { Welcome } from './ui/page/Welcome';
 import { Home } from './ui/page';
 import { StatusBar } from 'react-native';
 import { Surface } from 'react-native-paper';
+import { ConsumerForAll } from './ui/component/ProviderForAll';
 
-export interface AppState extends WoWsState {
+interface AppState extends WoWsState {
+
 }
 
 export default class App extends Component<{}, AppState> implements WoWsComponent {
@@ -32,7 +34,7 @@ export default class App extends Component<{}, AppState> implements WoWsComponen
       error: DataStorage.OK,
     };
 
-    // Setup the entire app
+    // only get essential data from local storage
     this.dataStorage.initSome().then(() => {
       this.setState({
         loading: false,
@@ -40,10 +42,31 @@ export default class App extends Component<{}, AppState> implements WoWsComponen
     })
   }
 
+  /**
+   * render the status bar according to theme
+   */
+  renderStatusBar() {
+    return (
+      <ConsumerForAll>
+        {c => {
+          if (c) {
+            const isDark = c.theme.dark;
+            const bar = isDark ? 'light-content' : 'dark-content';
+            const background = isDark ? 'black' : c.theme.colors.text;
+            return <StatusBar barStyle={bar} backgroundColor={background} />;
+          } else {
+            // Just put a status bar if somehow c is not defined (it should never happen though)
+            return <StatusBar />
+          }
+        }}
+      </ConsumerForAll>
+    )
+  }
+
   render() {
     return (
-      <Surface style={{flex: 1}}>
-        <StatusBar barStyle={'dark-content'} backgroundColor={'black'}/>
+      <Surface style={{ flex: 1 }}>
+        {this.renderStatusBar()}
         <Router>
           <Stack key='root' hideNavBar>
             <Scene key='Welcome' component={Welcome} />

@@ -20,11 +20,8 @@ class Welcome extends Component<{}, WelcomeState> implements WoWsComponent {
   render() {
     if (!this.state.loading) {
       return (
-        <Surface>
-          <Appbar.Header>
-            <Appbar.Content title="Title" subtitle="Subtitle" />
-          </Appbar.Header>
-          <Text>Welcome to WoWs Info</Text>
+        <Surface style={{flex: 1}}>
+          <Text>Hello World</Text>
         </Surface>
       )
     }
