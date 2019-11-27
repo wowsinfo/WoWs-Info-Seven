@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { WoWsComponent } from './WoWsComponent';
 import { Surface, Text } from 'react-native-paper';
 

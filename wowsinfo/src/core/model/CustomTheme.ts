@@ -5,7 +5,7 @@ import { Theme, DarkTheme, DefaultTheme } from 'react-native-paper';
  * - Dark or light mode
  * - Primary colour
  */
-export default class CustomTheme {
+class CustomTheme {
   private dark!: boolean;
   private primary!: string;
 
@@ -65,3 +65,5 @@ export default class CustomTheme {
     };
   }
 }
+
+export { CustomTheme };

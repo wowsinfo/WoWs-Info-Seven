@@ -8,15 +8,16 @@
  * @format
  */
 
-import React, { Component } from 'react';
+import React, { Component, useContext } from 'react';
 import { WoWsComponent, WoWsState } from './ui/component/WoWsComponent';
 import DataStorage from './core/util/DataStorage';
 import { Router, Stack, Scene } from 'react-native-router-flux';
 import { Welcome } from './ui/page/Welcome';
 import { Home } from './ui/page';
-import { StatusBar } from 'react-native';
-import { Surface } from 'react-native-paper';
-import { ConsumerForAll, LoadingIndicator } from './ui/component';
+import { StatusBar, StyleSheet } from 'react-native';
+import { Surface, Colors } from 'react-native-paper';
+import { ConsumerForAll, ContextForAll } from './ui/component';
+import { CustomTheme } from './core/model';
 
 interface AppState extends WoWsState {
 
@@ -30,6 +31,7 @@ interface AppState extends WoWsState {
 export default class App extends Component<{}, AppState> implements WoWsComponent {
   isProFeature: boolean = false;
   dataStorage = DataStorage.Instance;
+  shouldUpdateTheme: boolean = true;
 
   constructor(props: {}) {
     super(props);
@@ -40,11 +42,12 @@ export default class App extends Component<{}, AppState> implements WoWsComponen
     };
 
     // only get essential data from local storage
-    // this.dataStorage.initSome().then(() => {
-    //   this.setState({
-    //     loading: false,
-    //   });
-    // })
+    this.dataStorage.initSome().then(() => {
+      this.setState({
+        loading: false,
+      });
+    })
+
   }
 
   /**
@@ -71,11 +74,19 @@ export default class App extends Component<{}, AppState> implements WoWsComponen
   render() {
     const { loading, error } = this.state;
 
-    if (loading) {
-      return <LoadingIndicator />;
+    if (error !== DataStorage.OK) {
+      // render nothing for now
+      // TODO: update to error component
+      return null;
+    } else if (loading) {
+      return (
+        <Surface style={styles.view}>
+          {this.renderStatusBar()}
+        </Surface>
+      )
     } else {
       return (
-        <Surface style={{ flex: 1 }}>
+        <Surface style={styles.view}>
           {this.renderStatusBar()}
           <Router>
             <Stack key='root' hideNavBar>
@@ -88,3 +99,9 @@ export default class App extends Component<{}, AppState> implements WoWsComponen
     }
   }
 }
+
+const styles = StyleSheet.create({
+  view: {
+    flex: 1,
+  }
+});
