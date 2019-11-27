@@ -4,15 +4,16 @@
  */
 
 import React, { Component, ReactNode } from 'react';
-import { Theme, DefaultTheme, Provider as PaperProvider, DarkTheme } from 'react-native-paper';
+import { Provider as PaperProvider } from 'react-native-paper';
+import CustomTheme from '../../core/model/CustomTheme';
 
 interface AllProps {
   children: ReactNode
 }
 
 interface AllState {
-  theme: Theme,
-  updateTheme(theme: Theme): void,
+  theme: CustomTheme,
+  updateTheme(theme: CustomTheme): void,
 };
 
 /// Export for other components
@@ -24,7 +25,7 @@ class ProviderForAll extends Component<AllProps, AllState> {
 
     this.state = {
       // Theme and updateTheme from anywhere
-      theme: DefaultTheme,
+      theme: new CustomTheme(true, '#123456'),
       updateTheme: (newTheme) => {
         this.setState({
           theme: newTheme
@@ -35,11 +36,12 @@ class ProviderForAll extends Component<AllProps, AllState> {
 
   render() {
     const { children } = this.props;
+    const { theme } = this.state;
 
     // Wrap around paper provider
     return (
       <ContextForAll.Provider value={this.state}>
-        <PaperProvider theme={this.state.theme}>
+        <PaperProvider theme={theme.getTheme()}>
           { children }
         </PaperProvider>
       </ContextForAll.Provider>

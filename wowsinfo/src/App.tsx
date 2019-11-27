@@ -50,9 +50,9 @@ export default class App extends Component<{}, AppState> implements WoWsComponen
       <ConsumerForAll>
         {c => {
           if (c) {
-            const isDark = c.theme.dark;
-            const bar = isDark ? 'light-content' : 'dark-content';
-            const background = isDark ? 'black' : c.theme.colors.text;
+            const theme = c.theme;
+            const bar = theme.isLight() ? 'dark-content' : 'light-content' ;
+            const background = theme.isDarkTheme() ? 'black' : theme.getPrimary();
             return <StatusBar barStyle={bar} backgroundColor={background} />;
           } else {
             // Just put a status bar if somehow c is not defined (it should never happen though)
