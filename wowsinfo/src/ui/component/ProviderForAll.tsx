@@ -24,7 +24,7 @@ class ProviderForAll extends Component<AllProps, AllState> {
 
     this.state = {
       // Theme and updateTheme from anywhere
-      theme: new CustomTheme(false, Colors.white),
+      theme: new CustomTheme(false, Colors.blue500),
       updateTheme: (newTheme) => {
         this.setState({
           theme: newTheme

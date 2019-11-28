@@ -1,6 +1,6 @@
 # Scenario
-## Power users
+## 小明 (Novice)
 
-## Intermediate users
+## 龍介 (Intermediate)
 
-## Novice users
+## Henry (Advanced)
