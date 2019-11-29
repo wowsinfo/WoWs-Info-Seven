@@ -22,8 +22,6 @@ class Welcome extends Component<{}, WelcomeState> implements WoWsComponent {
       loading: false,
       error: ''
     }
-
-    langs.setLanguage(languageAvailable.ja);
   }
 
   render() {

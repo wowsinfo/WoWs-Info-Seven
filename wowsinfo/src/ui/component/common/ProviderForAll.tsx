@@ -2,6 +2,7 @@
 import React, { Component, ReactNode } from 'react';
 import { Provider as PaperProvider, Colors } from 'react-native-paper';
 import { CustomTheme } from '../../../core/model';
+import { languageAvailable, langs } from '../../../core/value/Language';
 
 interface AllProps {
   children: ReactNode
@@ -10,6 +11,8 @@ interface AllProps {
 interface AllState {
   theme: CustomTheme,
   updateTheme(theme: CustomTheme): void,
+  language: string,
+  updateLanguage(lang: string): void,
 };
 
 /// Export for other components
@@ -29,8 +32,16 @@ class ProviderForAll extends Component<AllProps, AllState> {
         this.setState({
           theme: newTheme
         });
+      },
+      // update app language
+      language: languageAvailable.ja,
+      updateLanguage: (newLang) => {
+        langs.setLanguage(newLang);
       }
     }
+
+    // set the default language
+    langs.setLanguage(this.state.language);
   }
 
   render() {

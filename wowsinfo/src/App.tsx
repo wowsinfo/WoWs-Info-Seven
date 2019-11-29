@@ -17,7 +17,6 @@ import { Home } from './ui/page';
 import { StatusBar, StyleSheet } from 'react-native';
 import { Surface, Colors } from 'react-native-paper';
 import { ConsumerForAll, ContextForAll } from './ui/component';
-import { CustomTheme } from './core/model';
 
 interface AppState extends WoWsState {
 
@@ -47,7 +46,6 @@ export default class App extends Component<{}, AppState> implements WoWsComponen
         loading: false,
       });
     })
-
   }
 
   /**

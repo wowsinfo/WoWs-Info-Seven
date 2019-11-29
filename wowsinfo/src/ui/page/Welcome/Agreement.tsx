@@ -1,13 +1,28 @@
 import React, { Component } from "react";
 import { WoWsComponent } from "src/ui/component/WoWsComponent";
-import { Surface, Button, Colors } from "react-native-paper";
+import { Surface, Button, Colors, Portal, Dialog, Paragraph } from "react-native-paper";
 import { Actions } from "react-native-router-flux";
 import { langs } from "../../../core/value/Language";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Alert } from "react-native";
 import { BottomButton } from "../../component";
 
-class Agreement extends Component implements WoWsComponent {
+interface AgreementState {
+  visible: boolean
+}
+
+class Agreement extends Component<{}, AgreementState> implements WoWsComponent {
   isProFeature: boolean = false;
+
+  constructor(props: {}) {
+    super(props);
+    
+    this.state = {
+      visible: false
+    };
+  }
+
+  showAlert = () => this.setState({visible: true});
+  closeAlert = () => this.setState({visible: false});
 
   render() {
     const { rootView, bottomView, bottomButton } = styles;
@@ -15,12 +30,23 @@ class Agreement extends Component implements WoWsComponent {
       <Surface style={rootView}>
         <Surface style={bottomView}>
           <Button color={Colors.blue500} style={bottomButton} onPress={() => null}>
-            Hello
+            {langs.agreement_agree}
           </Button>
-          <Button color={Colors.red500} style={bottomButton} onPress={() => null}>
-            World
+          <Button color={Colors.red500} style={bottomButton} onPress={this.showAlert}>
+            {langs.agreement_disagree}
           </Button>
         </Surface>
+        <Portal>
+          <Dialog visible={this.state.visible} onDismiss={this.closeAlert}>
+            <Dialog.Title>WoWs Info</Dialog.Title>
+            <Dialog.Content>
+              <Paragraph>{langs.agreement_you_have_to_agree}</Paragraph>
+            </Dialog.Content>
+            <Dialog.Actions>
+              <Button onPress={() => Actions.replace('Welcome')}>{langs.agreement_retry}</Button>
+            </Dialog.Actions>
+          </Dialog>
+        </Portal>
       </Surface>
     )
   }
