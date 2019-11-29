@@ -4,7 +4,7 @@ import { Surface, Text, Headline, Paragraph, Button, Title } from 'react-native-
 import { AppLogo, BottomButton } from '../../component';
 import { StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { langs, languageAvailable } from '../../../core/value/Language';
+import { langs } from '../../../core/value/Language';
 
 interface WelcomeState extends WoWsState {
 
