@@ -1,7 +1,7 @@
 
 import React, { Component, ReactNode } from 'react';
 import { Provider as PaperProvider, Colors } from 'react-native-paper';
-import { CustomTheme } from '../../core/model';
+import { CustomTheme } from '../../../core/model';
 
 interface AllProps {
   children: ReactNode

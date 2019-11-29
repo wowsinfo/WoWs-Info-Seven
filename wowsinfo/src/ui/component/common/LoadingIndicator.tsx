@@ -1,6 +1,6 @@
 
  import React, { Component } from "react";
- import { WoWsComponent } from "./WoWsComponent";
+ import { WoWsComponent } from "../WoWsComponent";
  import { Surface, ActivityIndicator } from "react-native-paper";
  import { StyleSheet } from "react-native";
 

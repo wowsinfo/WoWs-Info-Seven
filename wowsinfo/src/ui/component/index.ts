@@ -1,4 +1,6 @@
-export * from './ErrorComponent';
-export * from './ProviderForAll';
-export * from './LoadingIndicator';
-export * from './AppLogo';
+/// Common components
+export * from './common/ErrorComponent';
+export * from './common/ProviderForAll';
+export * from './common/LoadingIndicator';
+export * from './common/AppLogo';
+export * from './common/BottomButton';

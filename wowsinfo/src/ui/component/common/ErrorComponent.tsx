@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { WoWsComponent } from './WoWsComponent';
+import { WoWsComponent } from '../WoWsComponent';
 import { Surface, Text } from 'react-native-paper';
 
 export interface ErrorProps {

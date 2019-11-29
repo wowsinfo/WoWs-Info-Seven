@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { WoWsComponent } from "./WoWsComponent";
+import { WoWsComponent } from "../WoWsComponent";
 import { View, StyleSheet } from "react-native";
 import { Colors } from "react-native-paper";
 

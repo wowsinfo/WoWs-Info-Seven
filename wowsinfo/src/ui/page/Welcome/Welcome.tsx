@@ -1,9 +1,10 @@
 import { WoWsComponent, WoWsState } from '../../component/WoWsComponent';
 import React, { Component } from 'react';
-import { Surface, Text, Headline, Paragraph, Button } from 'react-native-paper';
-import { AppLogo } from '../../component';
+import { Surface, Text, Headline, Paragraph, Button, Title } from 'react-native-paper';
+import { AppLogo, BottomButton } from '../../component';
 import { StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { langs, languageAvailable } from '../../../core/value/Language';
 
 interface WelcomeState extends WoWsState {
 
@@ -21,23 +22,24 @@ class Welcome extends Component<{}, WelcomeState> implements WoWsComponent {
       loading: false,
       error: ''
     }
+
+    langs.setLanguage(languageAvailable.ja);
   }
 
   render() {
-    const { rootView, welcomeView, stepView, bottomBtn } = styles;
+    const { rootView, welcomeView, logoView } = styles;
     if (!this.state.loading) {
       return (
         <Surface style={rootView}>
-          <Surface style={welcomeView}>
+          <Surface style={logoView}>
             <AppLogo />
-            <Headline>Welcome to WoWs Info</Headline>
           </Surface>
-          <Surface style={stepView}>
-            <Paragraph>1......................</Paragraph>
-            <Paragraph>2......................</Paragraph>
-            <Paragraph>3......................</Paragraph>
+          <Surface style={welcomeView}>
+            <Headline>{langs.welcome_to_wows_info}</Headline>
           </Surface>
-          <Button style={bottomBtn} onPress={() => Actions.replace('Agreement')}>Next</Button>
+          <BottomButton onPress={() => Actions.replace('Agreement')}>
+            {langs.welcome_next_button}
+          </BottomButton>
         </Surface>
       )
     }
@@ -49,23 +51,16 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-around'
   },
-  welcomeView: {
+  logoView: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
   },
-  stepView: {
+  welcomeView: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-start'
   },
-  bottomBtn: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    margin: 16
-  }
 });
 
 export { Welcome };
