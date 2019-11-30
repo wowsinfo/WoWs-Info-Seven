@@ -154,7 +154,6 @@ class Menu extends PureComponent {
           right={() => isAndroid ? null : <List.Icon color={Colors.grey500} icon='keyboard-arrow-right'/>} />
         }} spacing={0}/>
         <SectionTitle title={lang.extra_section_title}/>
-        <List.Item title={lang.extra_support_wowsinfo} description={lang.extra_support_wowsinfo_subtitle} onPress={() => SafeAction('SupportMe')}/>
         <List.Item title='RS Beta' description={lang.extra_rs_beta} onPress={() => SafeAction('RS')}/>
         <List.Section title={lang.website_title} >
           <FlatGrid items={this.websites} itemDimension={300} renderItem={({item}) => {

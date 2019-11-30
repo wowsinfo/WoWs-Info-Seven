@@ -165,10 +165,7 @@ class RS extends Component {
         this.setState({rs: data});
         const { battleTime } = this.state;
         // Make sure it is a new date
-        if (data.dateTime !== battleTime) {
-          // Vibrate devices to tell users new data is ready
-          Vibration.vibrate();
-          
+        if (data.dateTime !== battleTime) {          
           this.setState({loading: true, battleTime: data.dateTime});
           const vehicles = data.vehicles;
           // Get allay and enemy

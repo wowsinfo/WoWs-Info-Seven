@@ -16,6 +16,26 @@ class Downloader {
   }
 
   /**
+   * check if there is an update
+   * @param {*} previous this is the version we have
+   * @param {*} current this is the version from API
+   */
+  checkVersionUpdate(previous, current) {
+    pList = previous.split('.');
+    cList = current.split('.');
+
+    for (i = 0; i < pList.length; i++) {
+      // If one digit is larger, we need to update here
+      if (Number(current[i]) > Number(previous[i])) {
+        console.log('Should update');
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  /**
    * Update all data if there is a new version except for force mode
    * @param {Boolean} force 
    */
@@ -34,7 +54,7 @@ class Downloader {
       log += `appVersion - ${appVersion}\n`;
       console.log(`Current app version: ${appVersion}\nLatest: ${APP.Version}`);
       // Check for game update, force mode or app update
-      if (gameVersion > currVersion || force || appVersion != APP.Version) {
+      if (this.checkVersionUpdate(currVersion, gameVersion) || force || appVersion != APP.Version) {
         // Update all data
         log += 'Updating Data\n';
         console.log('Downloader\nUpdating all data from API');
