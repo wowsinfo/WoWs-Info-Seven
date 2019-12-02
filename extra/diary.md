@@ -7,6 +7,12 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## 02/12/2019
+### What have I done?
+Updated to `1.0.7/1.6.6` to fix some bugs and tabs were added to log files.
+### What to do tomorrow?
+Same as below, `DataStorage`.
+
 ## 29/11/2019
 ### What have I done?
 Mac OS on Surface with the help of [this repo](https://github.com/hacker1024/Hackintosh-Clover-SurfacePro3). It works really well and I am quite happy with it. `BottomButton` was created but it is kinda limited now. Some components were moved to `common/` folder. `Welcome` is done I think and for `Agreement`, I have added two button at the bottom. If the user declines, he/she will either go back to home or simply dismiss the alert.
