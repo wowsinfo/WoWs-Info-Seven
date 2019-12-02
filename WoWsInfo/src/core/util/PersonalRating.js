@@ -16,7 +16,8 @@ const calRating = (actualDmg, expectedDmg, actualWins, expectedWins, actualFrags
   const nWins = Math.max(0, (rWins - 0.7) / (1 - 0.7));
 
   let rating = roundTo(700 * nDmg + 300 * nFrags + 150 * nWins);
-  return Number(rating);
+  // Cap it to 9999
+  return Math.min(Number(rating), 9999);
 };
 
 /**
