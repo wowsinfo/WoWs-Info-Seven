@@ -7,6 +7,12 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## 04/12/2019
+### What have I done?
+`BasicDownloader` and `APIResponse`. There will be lots of classes but this is the only to make sure it is safe. Therefore, I have to write lots of code for this... but it is good in the long run.
+### What to do tomorrow?
+Add more models.
+
 ## 02/12/2019
 ### What have I done?
 Updated to `1.0.7/1.6.6` to fix some bugs and tabs were added to log files.
