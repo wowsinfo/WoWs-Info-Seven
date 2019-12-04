@@ -1,6 +1,6 @@
 import { Meta } from "./Meta";
 
-class APIRepsonse {
+abstract class APIRepsonse {
     status?: string;
     meta?: Meta;
 
