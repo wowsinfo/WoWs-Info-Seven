@@ -2,11 +2,14 @@
  * The base of all downloaders
  */
 export abstract class BasicDownloader {
-  private link!: string;
+  private link: string = 'https://api.worldofwarships.';
+  private server?: string;
   private json?: any;
 
-  constructor(link: string) {
-    this.link = link;
+  constructor(server: string) {
+    this.server = server;
+    // https://api.worldofwarships.asia/
+    this.link += server + '/';
   }
 
   /**
