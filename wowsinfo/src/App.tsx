@@ -12,7 +12,7 @@ import React, { Component, useContext } from 'react';
 import { WoWsComponent, WoWsState } from './ui/component/WoWsComponent';
 import DataStorage from './core/util/DataStorage';
 import { Router, Stack, Scene } from 'react-native-router-flux';
-import { Welcome, Agreement } from './ui/page/Welcome';
+import { Welcome, Agreement, Setup } from './ui/page/Welcome';
 import { Home } from './ui/page';
 import { StatusBar, StyleSheet } from 'react-native';
 import { Surface, Colors } from 'react-native-paper';
@@ -88,8 +88,12 @@ export default class App extends Component<{}, AppState> implements WoWsComponen
           {this.renderStatusBar()}
           <Router>
             <Stack key='root' hideNavBar>
+              { /** Welcome */ }
               <Scene key='Welcome' component={Welcome} />
               <Scene key='Agreement' component={Agreement} />
+              <Scene key='Setup' component={Setup} />
+              
+              { /** WoWs Info */ }
               <Scene key='Home' component={Home} />
             </Stack>
           </Router>

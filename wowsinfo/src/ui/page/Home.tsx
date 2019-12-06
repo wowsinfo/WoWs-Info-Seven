@@ -1,5 +1,7 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { WoWsComponent, WoWsState } from '../component/WoWsComponent';
+import { Surface, Appbar } from 'react-native-paper';
+import { StyleSheet } from 'react-native';
 
 interface HomeState extends WoWsState {
 
@@ -16,6 +18,23 @@ class Home extends Component<{}, HomeState> implements WoWsComponent {
   constructor(props: {}) {
     super(props);
   }
+
+  render() {
+    const { rootView } = styles;
+    return (
+      <Surface style={rootView}>
+        <Appbar.Header>
+
+        </Appbar.Header>
+      </Surface>
+    )
+  }
 }
+
+const styles = StyleSheet.create({
+  rootView: {
+    flex: 1
+  }
+});
 
 export { Home };

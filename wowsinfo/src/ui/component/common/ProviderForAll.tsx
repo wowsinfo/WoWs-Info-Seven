@@ -34,7 +34,7 @@ class ProviderForAll extends Component<AllProps, AllState> {
         });
       },
       // update app language
-      language: languageAvailable.ja,
+      language: languageAvailable.en,
       updateLanguage: (newLang) => {
         langs.setLanguage(newLang);
       }
