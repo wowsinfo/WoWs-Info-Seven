@@ -2,10 +2,17 @@
 This will track what I have done today and what I will do tomorrow.
 ~~~
 Template
-## //
+## /12/2019
 ### What have I done?
 ### What to do tomorrow?
 ~~~
+
+## 06/12/2019
+### What have I done?
+`Setup` has been added but it only has 3 titles now without any functionalities. Privacy policy & term of use were added (template only) but three languages are too much... 
+I have to work harder maybe with my senpai! If I can deal with data correctly, the rest is just copy and paste my old code which shouldn't be really hard.
+### What to do tomorrow?
+More models, API and DataStorage.
 
 ## 04/12/2019
 ### What have I done?
