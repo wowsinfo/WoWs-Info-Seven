@@ -12,8 +12,8 @@ import React, { Component, useContext } from 'react';
 import { WoWsComponent, WoWsState } from './ui/component/WoWsComponent';
 import DataStorage from './core/util/DataStorage';
 import { Router, Stack, Scene } from 'react-native-router-flux';
-import { Welcome, Agreement, Setup } from './ui/page/Welcome';
-import { Home } from './ui/page';
+import { Welcome, Agreement } from './ui/page/Welcome';
+import { Home, Settings } from './ui/page';
 import { StatusBar, StyleSheet } from 'react-native';
 import { Surface, Colors } from 'react-native-paper';
 import { ConsumerForAll, ContextForAll } from './ui/component';
@@ -91,7 +91,7 @@ export default class App extends Component<{}, AppState> implements WoWsComponen
               { /** Welcome */ }
               <Scene key='Welcome' component={Welcome} />
               <Scene key='Agreement' component={Agreement} />
-              <Scene key='Setup' component={Setup} />
+              <Scene key='Settings' component={Settings} />
               
               { /** WoWs Info */ }
               <Scene key='Home' component={Home} />

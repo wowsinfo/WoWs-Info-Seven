@@ -29,7 +29,7 @@ class Agreement extends Component<{}, AgreementState> implements WoWsComponent {
     return (
       <Surface style={rootView}>
         <Surface style={bottomView}>
-          <Button color={Colors.blue500} style={bottomButton} onPress={() => Actions.replace('Setup')}>
+          <Button color={Colors.blue500} style={bottomButton} onPress={() => Actions.replace('Settings')}>
             {langs.agreement_agree}
           </Button>
           <Button color={Colors.red500} style={bottomButton} onPress={this.showAlert}>

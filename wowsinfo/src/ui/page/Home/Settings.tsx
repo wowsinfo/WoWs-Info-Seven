@@ -6,11 +6,11 @@ import { langs } from '../../../core/value/Language';
 import { BottomButton } from '../../component';
 import { Actions } from 'react-native-router-flux';
 
-interface SetupState extends WoWsState {
+interface SettingsState extends WoWsState {
 
 }
 
-class Setup extends Component<{}, SetupState> implements WoWsComponent {
+class Settings extends Component<{}, SettingsState> implements WoWsComponent {
   isProFeature: boolean = false;
 
   constructor(props: {}) {
@@ -41,4 +41,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export { Setup };
+export { Settings };

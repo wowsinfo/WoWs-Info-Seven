@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { WoWsComponent, WoWsState } from '../component/WoWsComponent';
+import { WoWsComponent, WoWsState } from '../../component/WoWsComponent';
 import { Surface, Appbar } from 'react-native-paper';
 import { StyleSheet } from 'react-native';
 
