@@ -13,7 +13,7 @@ import { WoWsComponent, WoWsState } from './ui/component/WoWsComponent';
 import DataStorage from './core/util/DataStorage';
 import { Router, Stack, Scene } from 'react-native-router-flux';
 import { Welcome, Agreement } from './ui/page/Welcome';
-import { Home, Settings } from './ui/page';
+import { Home, Settings, ProVersion } from './ui/page';
 import { StatusBar, StyleSheet } from 'react-native';
 import { Surface, Colors } from 'react-native-paper';
 import { ConsumerForAll, ContextForAll } from './ui/component';
@@ -92,6 +92,7 @@ export default class App extends Component<{}, AppState> implements WoWsComponen
               <Scene key='Welcome' component={Welcome} />
               <Scene key='Agreement' component={Agreement} />
               <Scene key='Settings' component={Settings} />
+              <Scene key='ProVersion' component={ProVersion} />
               
               { /** WoWs Info */ }
               <Scene key='Home' component={Home} />

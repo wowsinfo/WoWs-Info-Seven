@@ -26,7 +26,7 @@ class Settings extends Component<{}, SettingsState> implements WoWsComponent {
         <Title>{langs.setup_server_title}</Title>
         <Title>{langs.setup_wiki_language_title}</Title>
         <Caption>{langs.setup_wiki_language_caption}</Caption>
-        <BottomButton onPress={() => Actions.replace('Home')}>
+        <BottomButton onPress={() => Actions.replace('ProVersion')}>
           {langs.setup_next_button}
         </BottomButton>
       </Surface>
