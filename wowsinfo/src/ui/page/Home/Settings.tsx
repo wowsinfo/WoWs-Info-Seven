@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
-import { WoWsComponent, WoWsState } from '../../component/WoWsComponent';
+import { WoWsComponent, WoWsState, SetupProps } from '../../component/WoWsComponent';
 import { Surface, Title, Caption } from 'react-native-paper';
 import { StyleSheet } from 'react-native';
 import { langs } from '../../../core/value/Language';
 import { BottomButton } from '../../component';
 import { Actions } from 'react-native-router-flux';
 
+export interface SettingsProps extends SetupProps {
+
+}
+
 interface SettingsState extends WoWsState {
 
 }
 
-class Settings extends Component<{}, SettingsState> implements WoWsComponent {
+class Settings extends Component<SettingsProps, SettingsState> implements WoWsComponent {
   isProFeature: boolean = false;
 
-  constructor(props: {}) {
+  constructor(props: SettingsProps) {
     super(props);
-    
   }
   
   render() {

@@ -17,6 +17,10 @@ export interface WoWsState {
   error: string
 }
 
+export interface SetupProps {
+  isSetup: boolean
+}
+
 /**
  * The parent of all components.
  * It takes a prop, a state and anything else
