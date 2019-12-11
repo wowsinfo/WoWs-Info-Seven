@@ -23,13 +23,18 @@ class Settings extends Component<SettingsProps, SettingsState> implements WoWsCo
   
   render() {
     const { rootView } = styles;
+
+    const setup: SetupProps = {
+      isSetup: true
+    };
+    
     return (
       <Surface style={rootView}>
         <Title>{langs.setup_language_title}</Title>
         <Title>{langs.setup_server_title}</Title>
         <Title>{langs.setup_wiki_language_title}</Title>
         <Caption>{langs.setup_wiki_language_caption}</Caption>
-        <BottomButton onPress={() => Actions.replace('ProVersion')}>
+        <BottomButton onPress={() => Actions.replace('ProVersion', setup)}>
           {langs.setup_next_button}
         </BottomButton>
       </Surface>

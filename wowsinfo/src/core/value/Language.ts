@@ -29,6 +29,8 @@ const langs = new LocalizedStrings({
     setup_wiki_language_title: 'Wiki language',
     setup_wiki_language_caption: 'It includes all ship names and many more...',
     setup_next_button: 'Next',
+    // WoWs Info Pro Version
+    proversion_title: 'Get WoWs Info Pro :)',
   },
   id: {
     back_button: 'Back',
