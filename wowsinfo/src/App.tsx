@@ -57,9 +57,8 @@ export default class App extends Component<{}, AppState> implements WoWsComponen
         {c => {
           if (c) {
             const theme = c.theme;
-            const bar = theme.isLight() ? 'dark-content' : 'light-content' ;
             const background = theme.isDarkTheme() ? 'black' : theme.getPrimary();
-            return <StatusBar barStyle={bar} backgroundColor={background} />;
+            return <StatusBar backgroundColor={background} />;
           } else {
             // Just put a status bar if somehow c is not defined (it should never happen though)
             return <StatusBar />
@@ -81,6 +80,7 @@ export default class App extends Component<{}, AppState> implements WoWsComponen
     } else {
       return (
         <Surface style={styles.view}>
+          { this.renderStatusBar() }
           <Router>
             <Stack key='root' hideNavBar>
               { /** Welcome */ }
