@@ -21,11 +21,10 @@ class Home extends Component<{}, HomeState> implements WoWsComponent {
 
   render() {
     const { rootView } = styles;
+    // TODO: render a bottom navigation
     return (
       <Surface style={rootView}>
-        <Appbar.Header>
-
-        </Appbar.Header>
+        
       </Surface>
     )
   }

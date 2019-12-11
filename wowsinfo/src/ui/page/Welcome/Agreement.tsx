@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { WoWsComponent } from "src/ui/component/WoWsComponent";
-import { Surface, Button, Colors, Portal, Dialog, Paragraph } from "react-native-paper";
+import { WoWsComponent, SetupProps } from "src/ui/component/WoWsComponent";
+import { Surface, Button, Colors, Portal, Dialog, Paragraph, Appbar } from "react-native-paper";
 import { Actions } from "react-native-router-flux";
 import { langs } from "../../../core/value/Language";
 import { StyleSheet, Alert } from "react-native";
@@ -26,13 +26,21 @@ class Agreement extends Component<{}, AgreementState> implements WoWsComponent {
 
   render() {
     const { rootView, bottomView, bottomButton } = styles;
+
+    const setup: SetupProps = {
+      isSetup: true
+    };
+
     return (
       <Surface style={rootView}>
+        <Appbar.Header>
+          <Appbar.Content title='Agreements' />
+        </Appbar.Header>
         <Surface style={bottomView}>
-          <Button color={Colors.blue500} style={bottomButton} onPress={() => Actions.replace('Settings')}>
+          <Button mode='contained' color={Colors.blue500} style={bottomButton} onPress={() => Actions.replace('Settings', setup)}>
             {langs.agreement_agree}
           </Button>
-          <Button color={Colors.red500} style={bottomButton} onPress={this.showAlert}>
+          <Button mode='contained' color={Colors.red500} style={bottomButton} onPress={this.showAlert}>
             {langs.agreement_disagree}
           </Button>
         </Surface>
@@ -61,10 +69,10 @@ const styles = StyleSheet.create({
     padding: 16,
     flexDirection: 'row',
     alignItems: 'flex-end',
-    justifyContent: 'center'
+    justifyContent: 'space-around'
   },
   bottomButton: {
-    flex: 1
+    width: '49%'
   }
 });
 

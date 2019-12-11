@@ -1,6 +1,6 @@
 import { WoWsComponent, WoWsState } from '../../component/WoWsComponent';
 import React, { Component } from 'react';
-import { Surface, Text, Headline, Paragraph, Button, Title } from 'react-native-paper';
+import { Surface, Text, Headline, Paragraph, Button, Title, Appbar } from 'react-native-paper';
 import { AppLogo, BottomButton } from '../../component';
 import { StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
@@ -29,6 +29,9 @@ class Welcome extends Component<{}, WelcomeState> implements WoWsComponent {
     if (!this.state.loading) {
       return (
         <Surface style={rootView}>
+          <Appbar.Header>
+            <Appbar.Content title='Welcome' />
+          </Appbar.Header>
           <Surface style={logoView}>
             <AppLogo />
           </Surface>

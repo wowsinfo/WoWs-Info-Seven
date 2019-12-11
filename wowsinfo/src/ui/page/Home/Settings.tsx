@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { WoWsComponent, WoWsState, SetupProps } from '../../component/WoWsComponent';
-import { Surface, Title, Caption } from 'react-native-paper';
-import { StyleSheet } from 'react-native';
+import { Surface, Title, Caption, Appbar } from 'react-native-paper';
+import { StyleSheet, ScrollView } from 'react-native';
 import { langs } from '../../../core/value/Language';
 import { BottomButton } from '../../component';
 import { Actions } from 'react-native-router-flux';
@@ -27,25 +27,33 @@ class Settings extends Component<SettingsProps, SettingsState> implements WoWsCo
     const setup: SetupProps = {
       isSetup: true
     };
-    
+
     return (
       <Surface style={rootView}>
-        <Title>{langs.setup_language_title}</Title>
-        <Title>{langs.setup_server_title}</Title>
-        <Title>{langs.setup_wiki_language_title}</Title>
-        <Caption>{langs.setup_wiki_language_caption}</Caption>
+        <Appbar.Header>
+          <Appbar.Content title='Setup WoWs Info' />
+        </Appbar.Header>
+        <ScrollView>
+          <Title>{langs.setup_language_title}</Title>
+          <Title>{langs.setup_server_title}</Title>
+          <Title>{langs.setup_wiki_language_title}</Title>
+          <Caption>{langs.setup_wiki_language_caption}</Caption>
+        </ScrollView>
         <BottomButton onPress={() => Actions.replace('ProVersion', setup)}>
           {langs.setup_next_button}
         </BottomButton>
       </Surface>
     );
   }
+
 }
 
 const styles = StyleSheet.create({
   rootView: {
-    flex: 1,
-    padding: 16
+    flex: 1
+  },
+  bottomButton: {
+    margin: 8
   }
 });
 

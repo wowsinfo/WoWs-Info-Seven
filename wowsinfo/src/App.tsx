@@ -77,15 +77,10 @@ export default class App extends Component<{}, AppState> implements WoWsComponen
       // TODO: update to error component
       return null;
     } else if (loading) {
-      return (
-        <Surface style={styles.view}>
-          {this.renderStatusBar()}
-        </Surface>
-      )
+      return null;
     } else {
       return (
         <Surface style={styles.view}>
-          {this.renderStatusBar()}
           <Router>
             <Stack key='root' hideNavBar>
               { /** Welcome */ }
