@@ -3,4 +3,4 @@ export * from './common/ErrorComponent';
 export * from './common/ProviderForAll';
 export * from './common/LoadingIndicator';
 export * from './common/AppLogo';
-export * from './common/BottomButton';
+export * from './common/ContainedButton';

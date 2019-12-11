@@ -1,7 +1,7 @@
 import { WoWsComponent, WoWsState } from '../../component/WoWsComponent';
 import React, { Component } from 'react';
 import { Surface, Text, Headline, Paragraph, Button, Title, Appbar } from 'react-native-paper';
-import { AppLogo, BottomButton } from '../../component';
+import { AppLogo, ContainedButton } from '../../component';
 import { StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { langs } from '../../../core/value/Language';
@@ -38,9 +38,9 @@ class Welcome extends Component<{}, WelcomeState> implements WoWsComponent {
           <Surface style={welcomeView}>
             <Headline>{langs.welcome_to_wows_info}</Headline>
           </Surface>
-          <BottomButton onPress={() => Actions.replace('Agreement')}>
+          <ContainedButton onPress={() => Actions.replace('Agreement')}>
             {langs.welcome_next_button}
-          </BottomButton>
+          </ContainedButton>
         </Surface>
       )
     }

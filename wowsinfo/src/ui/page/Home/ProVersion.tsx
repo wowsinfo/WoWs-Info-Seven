@@ -4,6 +4,7 @@ import { Surface, Appbar, List, Button, Divider } from 'react-native-paper';
 import { StyleSheet, FlatList, ScrollView } from 'react-native';
 import { langs } from '../../../core/value/Language';
 import { Actions } from 'react-native-router-flux';
+import { ContainedButton } from '../../component';
 
 export interface ProVersionProps extends SetupProps {
 
@@ -17,7 +18,7 @@ class ProVersion extends Component<ProVersionProps> implements WoWsComponent {
   }
 
   render() {
-    const { rootView, bottomButton } = styles;
+    const { rootView } = styles;
     return (
       <Surface style={rootView}>
         <Appbar.Header>
@@ -57,10 +58,10 @@ class ProVersion extends Component<ProVersionProps> implements WoWsComponent {
           <List.Item title='test test test test test test test' description='test 12345678900765432'/>
         </ScrollView>
         <Divider />
-        <Button mode='contained' style={bottomButton}>
+        <ContainedButton>
           Try it now for free
-        </Button>
-        { this.renderBottomButton() }
+        </ContainedButton>
+        { this.renderContainedButton() }
       </Surface>
     );
   }
@@ -68,13 +69,12 @@ class ProVersion extends Component<ProVersionProps> implements WoWsComponent {
   /**
    * This is the 'NEXT' or 'MAYBE LATER...' button
    */
-  renderBottomButton() {
+  renderContainedButton() {
     if (this.props.isSetup) {
-      const { bottomButton } = styles;
       return (
-        <Button style={bottomButton} onPress={() => Actions.replace('Home')}>
+        <ContainedButton onPress={() => Actions.replace('Home')}>
           Maybe later
-        </Button>
+        </ContainedButton>
       )
     }
 
@@ -86,9 +86,6 @@ const styles = StyleSheet.create({
   rootView: {
     flex: 1
   },
-  bottomButton: {
-    margin: 8
-  }
 })
 
 export { ProVersion };

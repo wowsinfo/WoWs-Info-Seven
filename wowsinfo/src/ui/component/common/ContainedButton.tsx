@@ -3,7 +3,7 @@ import { WoWsComponent } from "../WoWsComponent";
 import { StyleSheet } from "react-native";
 import { Button } from "react-native-paper";
 
-export interface BottomButtonProps {
+export interface ContainedButtonProps {
   onPress?: (() => void),
   children: React.ReactNode,
 }
@@ -11,17 +11,17 @@ export interface BottomButtonProps {
 /**
  * A button at the bottom with 16px margin
  */
-class BottomButton extends Component<BottomButtonProps> implements WoWsComponent {
+class ContainedButton extends Component<ContainedButtonProps> implements WoWsComponent {
   isProFeature: boolean = false;
 
-  constructor(props: BottomButtonProps) {
+  constructor(props: ContainedButtonProps) {
     super(props);
   }
 
   render() {
     const { children, onPress } = this.props;
     return (
-      <Button style={styles.bottomBtn} onPress={onPress}>
+      <Button  mode='contained' style={styles.ContainedButton} onPress={onPress}>
         {children}
       </Button>
     );
@@ -29,13 +29,9 @@ class BottomButton extends Component<BottomButtonProps> implements WoWsComponent
 }
 
 const styles = StyleSheet.create({
-  bottomBtn: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    margin: 16
+  ContainedButton: {
+    margin: 8
   }
 });
 
-export { BottomButton };
+export { ContainedButton };
