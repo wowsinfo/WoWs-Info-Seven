@@ -22,6 +22,7 @@ class ProVersion extends Component<ProVersionProps> implements WoWsComponent {
     return (
       <Surface style={rootView}>
         <Appbar.Header>
+          { this.props.isSetup ? null : <Appbar.BackAction /> }
           <Appbar.Content title={langs.proversion_title} />
         </Appbar.Header>
         <ScrollView>

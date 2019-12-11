@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { WoWsComponent, WoWsState, SetupProps } from '../../component/WoWsComponent';
+import { WoWsComponent, WoWsState, SetupProps } from '../../../component/WoWsComponent';
 import { Surface, Title, Caption, Appbar } from 'react-native-paper';
 import { StyleSheet, ScrollView } from 'react-native';
-import { langs } from '../../../core/value/Language';
-import { ContainedButton } from '../../component';
+import { ContainedButton } from '../../../component';
 import { Actions } from 'react-native-router-flux';
+import { langs } from '../../../../core/value/Language';
 
 export interface SettingsProps extends SetupProps {
 
@@ -31,6 +31,7 @@ class Settings extends Component<SettingsProps, SettingsState> implements WoWsCo
     return (
       <Surface style={rootView}>
         <Appbar.Header>
+          { this.props.isSetup ? null : <Appbar.BackAction /> }
           <Appbar.Content title='Setup WoWs Info' />
         </Appbar.Header>
         <ScrollView>

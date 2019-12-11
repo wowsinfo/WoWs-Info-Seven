@@ -1,7 +1,9 @@
+/// Home
 export * from './Home';
+export * from './ProVersion'
 // All five tabs
 export * from './Tabs'
 
-// Others
+// Settings
 export * from './Settings';
-export * from './ProVersion'
+
