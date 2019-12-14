@@ -7,6 +7,13 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## 14/12/2019
+### What have I done?
+`Settings` has been updated to show a section list but is it really a good idea? 
+`AppLogo` now takes a `size` and version number is added as well. 
+### What to do tomorrow?
+First meeting with senpai and some dicussions on some topics.
+
 ## 06/12/2019
 ### What have I done?
 `Setup` has been added but it only has 3 titles now without any functionalities. Privacy policy & term of use were added (template only) but three languages are too much... 
