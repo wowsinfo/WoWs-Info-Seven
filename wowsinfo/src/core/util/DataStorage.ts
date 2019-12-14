@@ -2,6 +2,10 @@
  * It has all data related functions
  */
 export default class DataStorage {
+  
+  /// Some constants
+  public static readonly OK = 'OK';
+  
   /// Singleton pattern
   private static _instance: DataStorage;
   private constructor() {}
@@ -10,9 +14,6 @@ export default class DataStorage {
     if (this._instance == null) this._instance = new DataStorage();
     return this._instance;
   }
-
-  /// Some constants
-  public static readonly OK = 'OK';
 
   /**
    * Initialise some basic but crutial preferences
