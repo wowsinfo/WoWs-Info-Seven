@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Surface, Text, Headline, Paragraph, Button, Title, Appbar } from 'react-native-paper';
+import { Surface, Text, Headline, Paragraph, Button, Title, Appbar, Caption } from 'react-native-paper';
 import { AppLogo, ContainedButton } from '../../../component';
 import { StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { langs } from '../../../../core/value/Language';
 import { SetupProps, WoWsState, WoWsComponent } from '../../../component/WoWsComponent';
+import Utils from '../../../../core/util/Utils';
 
 export interface AboutProps extends SetupProps {
 
@@ -23,7 +24,7 @@ class About extends Component<AboutProps, AboutState> implements WoWsComponent {
 
   constructor(props: AboutProps) {
     super(props);
-    
+
     if (props.isSetup) {
       this.headerTitle = 'Welcome'
     }
@@ -41,16 +42,17 @@ class About extends Component<AboutProps, AboutState> implements WoWsComponent {
       return (
         <Surface style={rootView}>
           <Appbar.Header>
-            { this.props.isSetup ? null : <Appbar.BackAction /> }
+            {this.props.isSetup ? null : <Appbar.BackAction />}
             <Appbar.Content title={this.headerTitle} />
           </Appbar.Header>
           <Surface style={logoView}>
-            <AppLogo />
+            <AppLogo size={128} />
+            <Text>{Utils.getCurrentVersion()}</Text>
           </Surface>
           <Surface style={welcomeView}>
             <Headline>{langs.welcome_to_wows_info}</Headline>
           </Surface>
-          { this.renderNextButton() }
+          {this.renderNextButton()}
         </Surface>
       )
     }

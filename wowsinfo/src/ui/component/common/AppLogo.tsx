@@ -3,20 +3,30 @@ import { WoWsComponent } from "../WoWsComponent";
 import { View, StyleSheet } from "react-native";
 import { Colors } from "react-native-paper";
 
-class AppLogo extends Component implements WoWsComponent {
+export interface AppLogoProps {
+  size: number
+}
+
+class AppLogo extends Component<AppLogoProps> implements WoWsComponent {
   isProFeature: boolean = false;
   
+  constructor(props: AppLogoProps) {
+    super(props);
+  }
+
   render() {
-    return <View style={styles.placeholder}/>;
+    const placeholder = {
+      height: this.props.size,
+      width: this.props.size,
+      backgroundColor: Colors.blue500
+    };
+
+    return <View style={placeholder}/>;
   }
 }
 
 const styles = StyleSheet.create({
-  placeholder: {
-    height: 128,
-    width: 128,
-    backgroundColor: Colors.blue500
-  }
+  
 });
 
 export { AppLogo };
