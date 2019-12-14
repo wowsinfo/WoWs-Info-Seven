@@ -12,7 +12,8 @@ export interface WoWsState {
    */
   loading: boolean,
   /**
-   * error message (nothing means no error)
+   * error message
+   * - use DataStroage.OK as no error
    */
   error: string
 }
