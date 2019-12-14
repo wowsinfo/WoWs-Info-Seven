@@ -60,7 +60,7 @@ class CustomTheme {
       ...baseTheme,
       colors: {
         ...baseTheme.colors,
-        primary: this.primary
+        primary: this.primary,
       }
     };
   }
