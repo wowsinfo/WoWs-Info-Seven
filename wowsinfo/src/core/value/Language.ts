@@ -31,6 +31,12 @@ const langs = new LocalizedStrings({
     setup_next_button: 'Next',
     // WoWs Info Pro Version
     proversion_title: 'Get WoWs Info Pro :)',
+    // Home Tabs
+    home_tab_wiki: 'Wiki',
+    home_tab_website: 'Website',
+    home_tab_search: 'Search',
+    home_tab_rs: 'Realtime',
+    home_tab_main: 'My Account',
   },
   id: {
     back_button: 'Back',

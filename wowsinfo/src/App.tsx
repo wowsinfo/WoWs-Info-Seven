@@ -86,6 +86,7 @@ export default class App extends Component<{}, AppState> implements WoWsComponen
           {this.renderStatusBar()}
           <Router>
             <Stack key='root' hideNavBar>
+              <Scene key='Loading' component={Loading} />
               { /** Welcome */}
               <Scene key='About' component={aboutPage} />
               <Scene key='Agreement' component={Agreement} />
@@ -93,7 +94,6 @@ export default class App extends Component<{}, AppState> implements WoWsComponen
               <Scene key='ProVersion' component={ProVersion} />
 
               {/** Loading */}
-              <Scene key='Loading' component={Loading} />
 
               { /** Home */}
               <Scene key='Home' component={Home} />
