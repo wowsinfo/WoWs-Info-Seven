@@ -13,7 +13,7 @@ import { WoWsComponent, WoWsState } from './ui/component/WoWsComponent';
 import DataStorage from './core/util/DataStorage';
 import { Router, Stack, Scene } from 'react-native-router-flux';
 import { Agreement } from './ui/page/Welcome';
-import { Home, Settings, ProVersion, About } from './ui/page';
+import { Home, Settings, ProVersion, About, Loading } from './ui/page';
 import { StatusBar, StyleSheet } from 'react-native';
 import { Surface } from 'react-native-paper';
 import { ConsumerForAll } from './ui/component';
@@ -80,19 +80,22 @@ export default class App extends Component<{}, AppState> implements WoWsComponen
     } else {
       // About page in setup mode
       const aboutPage = () => <About isSetup />;
-      
+
       return (
         <Surface style={styles.view}>
-          { this.renderStatusBar() }
+          {this.renderStatusBar()}
           <Router>
             <Stack key='root' hideNavBar>
-              { /** Welcome */ }
+              { /** Welcome */}
               <Scene key='About' component={aboutPage} />
               <Scene key='Agreement' component={Agreement} />
               <Scene key='Settings' component={Settings} />
               <Scene key='ProVersion' component={ProVersion} />
-              
-              { /** Home */ }
+
+              {/** Loading */}
+              <Scene key='Loading' component={Loading} />
+
+              { /** Home */}
               <Scene key='Home' component={Home} />
             </Stack>
           </Router>
