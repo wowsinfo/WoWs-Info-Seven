@@ -20,7 +20,7 @@ class Settings extends Component<SettingsProps, SettingsState> implements WoWsCo
   constructor(props: SettingsProps) {
     super(props);
   }
-  
+
   render() {
     const { rootView } = styles;
 
@@ -31,7 +31,7 @@ class Settings extends Component<SettingsProps, SettingsState> implements WoWsCo
     return (
       <Surface style={rootView}>
         <Appbar.Header>
-          { this.props.isSetup ? null : <Appbar.BackAction /> }
+          {this.props.isSetup ? null : <Appbar.BackAction />}
           <Appbar.Content title='Setup WoWs Info' />
         </Appbar.Header>
         <ScrollView>

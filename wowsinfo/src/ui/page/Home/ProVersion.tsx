@@ -30,33 +30,6 @@ class ProVersion extends Component<ProVersionProps> implements WoWsComponent {
           <List.Item title='test test test test test test test' description='test 12345678900765432'/>
           <List.Item title='test test test test test test test' description='test 12345678900765432'/>
           <List.Item title='test test test test test test test' description='test 12345678900765432'/>
-          <List.Item title='test test test test test test test' description='test 12345678900765432'/>
-          <List.Item title='test test test test test test test' description='test 12345678900765432'/>
-          <List.Item title='test test test test test test test' description='test 12345678900765432'/>
-          <List.Item title='test test test test test test test' description='test 12345678900765432'/>
-          <List.Item title='test test test test test test test' description='test 12345678900765432'/>
-          <List.Item title='test test test test test test test' description='test 12345678900765432'/>
-          <List.Item title='test test test test test test test' description='test 12345678900765432'/>
-          <List.Item title='test test test test test test test' description='test 12345678900765432'/>
-          <List.Item title='test test test test test test test' description='test 12345678900765432'/>
-          <List.Item title='test test test test test test test' description='test 12345678900765432'/>
-          <List.Item title='test test test test test test test' description='test 12345678900765432'/>
-          <List.Item title='test test test test test test test' description='test 12345678900765432'/>
-          <List.Item title='test test test test test test test' description='test 12345678900765432'/>
-          <List.Item title='test test test test test test test' description='test 12345678900765432'/>
-          <List.Item title='test test test test test test test' description='test 12345678900765432'/>
-          <List.Item title='test test test test test test test' description='test 12345678900765432'/>
-          <List.Item title='test test test test test test test' description='test 12345678900765432'/>
-          <List.Item title='test test test test test test test' description='test 12345678900765432'/>
-          <List.Item title='test test test test test test test' description='test 12345678900765432'/>
-          <List.Item title='test test test test test test test' description='test 12345678900765432'/>
-          <List.Item title='test test test test test test test' description='test 12345678900765432'/>
-          <List.Item title='test test test test test test test' description='test 12345678900765432'/>
-          <List.Item title='test test test test test test test' description='test 12345678900765432'/>
-          <List.Item title='test test test test test test test' description='test 12345678900765432'/>
-          <List.Item title='test test test test test test test' description='test 12345678900765432'/>
-          <List.Item title='test test test test test test test' description='test 12345678900765432'/>
-          <List.Item title='test test test test test test test' description='test 12345678900765432'/>
         </ScrollView>
         <Divider />
         <ContainedButton>
