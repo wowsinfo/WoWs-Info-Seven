@@ -4,12 +4,13 @@ import { View, StyleSheet } from "react-native";
 import { Colors } from "react-native-paper";
 
 export interface AppLogoProps {
-  size: number
+  size: number,
+  white?: boolean,
 }
 
 class AppLogo extends Component<AppLogoProps> implements WoWsComponent {
   isProFeature: boolean = false;
-  
+
   constructor(props: AppLogoProps) {
     super(props);
   }
@@ -21,12 +22,17 @@ class AppLogo extends Component<AppLogoProps> implements WoWsComponent {
       backgroundColor: Colors.blue500
     };
 
-    return <View style={placeholder}/>;
+    // White logo
+    if (this.props.white) {
+      return <View style={[placeholder, { backgroundColor: 'white' }]} />
+    } else {
+      return <View style={placeholder} />;
+    }
   }
 }
 
 const styles = StyleSheet.create({
-  
+
 });
 
 export { AppLogo };

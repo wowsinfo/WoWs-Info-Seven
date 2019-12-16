@@ -7,6 +7,12 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## 15/12/2019
+### What have I done?
+Meeting with senpai and some decisions were made. `Home` is now updated and `Loading` is added.
+### What to do tomorrow?
+More loading and maybe test update theme.
+
 ## 14/12/2019
 ### What have I done?
 `Settings` has been updated to show a section list but is it really a good idea? 
