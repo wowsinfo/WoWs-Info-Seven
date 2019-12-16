@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { WoWsComponent } from "../component/WoWsComponent";
-import { Surface, withTheme, Theme, Colors, ActivityIndicator, Text, Paragraph } from "react-native-paper";
-import { ConsumerForAll, AppLogo } from "../component";
-import { StyleSheet } from "react-native";
+import { Surface, ActivityIndicator, Text } from "react-native-paper";
+import { AppLogo } from "../component";
+import { StyleSheet, Animated } from "react-native";
 
 interface LoadingState {
   message: string,
@@ -23,16 +23,14 @@ class Loading extends Component<{}, LoadingState> implements WoWsComponent {
   
   render() {
     const { rootView } = styles;
+    const { message } = this.state;
+
     return (
-      <ConsumerForAll>
-        { c => (
-          <Surface style={rootView}>
-            <AppLogo size={128} />
-        <Text style={{padding: 16}}>{this.state.message}</Text>
-            <ActivityIndicator />
-          </Surface>
-        )}
-      </ConsumerForAll>
+      <Surface style={rootView}>
+        <AppLogo size={128} zoom/>
+        <Text style={{padding: 16}}>{message}</Text>
+        <ActivityIndicator />
+      </Surface>
     );
   }
 }
