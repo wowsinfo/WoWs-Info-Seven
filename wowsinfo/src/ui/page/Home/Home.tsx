@@ -4,6 +4,7 @@ import { Surface, Appbar, BottomNavigation, Text } from 'react-native-paper';
 import { StyleSheet } from 'react-native';
 import { Wiki, Website, Search, Account, RS } from './Tabs';
 import { langs } from '../../../core/value/Language';
+import Utils from '../../../core/util/Utils';
 
 interface HomeState extends WoWsState {
   index: number,
@@ -56,7 +57,7 @@ class Home extends Component<{}, HomeState> implements WoWsComponent {
     // TODO: render a bottom navigation
     return (
       <Surface style={rootView}>
-        <BottomNavigation navigationState={this.state} shifting={false}
+        <BottomNavigation navigationState={this.state} shifting={!Utils.isIOS()}
           onIndexChange={this.handleIndexChange} renderScene={this.renderScene} />
       </Surface>
     )

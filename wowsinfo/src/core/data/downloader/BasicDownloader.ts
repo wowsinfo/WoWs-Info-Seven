@@ -1,8 +1,15 @@
+import { AppKey } from './key';
+
 /**
  * The base of all downloaders
  */
 export abstract class BasicDownloader {
   private link: string = 'https://api.worldofwarships.';
+  /**
+   * This is your developer key. 
+   * Please get one from https://developers.wargaming.net/ and never share it with people you don't trust
+   */
+  private readonly key: string = AppKey;
   private server?: string;
   private json?: any;
 

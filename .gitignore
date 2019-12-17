@@ -4,5 +4,5 @@
 *.zip
 *.ttf
 .DS_Store
-wowsinfo/src/core/downloader/key.ts
+key.ts
 wowsinfo/.vscode/
