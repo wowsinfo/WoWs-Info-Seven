@@ -1,9 +1,7 @@
 /**
- * The parent of all data models that can be cached locally
- * - Warship data
- * - Player info
- * - Many more
- * 
+ * This is necessary for all data that can be saved locally
+ * @pre Call `load()` before doing anything else
+ * @post All methods will work normally
  */
 interface Cacheable {
   /**
@@ -13,11 +11,11 @@ interface Cacheable {
   /**
    * Load data from AsyncStorage
    */
-  load(): any;
+  load(): Promise<void>;
   /**
    * This is the default value if load cannot get anything
    */
-  default(): any;
+  default(): void;
 }
 
 export enum DATA_KEY {

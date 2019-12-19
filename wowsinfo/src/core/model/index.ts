@@ -1,6 +1,6 @@
 export * from './cacheable/CustomTheme';
 
-export * from './cacheable/GameServer';
+export * from './GameServer';
 
 /// API related models
 export * from './api/APIRepsonse';

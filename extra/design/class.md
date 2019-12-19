@@ -1,15 +1,15 @@
 # Class design
 Code refacoring is necessary for maintenance purposes. Take your time while designing your app but make sure it will be done correctly.
 
-## DataStorage
+## DataManager
 Singleton pattern will be used to replace global and static functions. 
 It will take care of data loading and saving.
 
 ### Loader
-It will load all kinds of data back into DataStorage. There should be lots of classes just to load one or related data.
+It will load all kinds of data back into DataManager. There should be lots of classes just to load one or related data.
 
 ### Downloader
-Download data from the server and throw them into DataStorage to save them. There will also be many downloaders just to download data from one API.
+Download data from the server and throw them into DataManager to save them. There will also be many downloaders just to download data from one API.
 
 ## Util
 A class with static functions. Basically, a collection of individual functions. 

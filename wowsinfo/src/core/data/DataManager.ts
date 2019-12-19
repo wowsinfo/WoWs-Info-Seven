@@ -1,17 +1,22 @@
+import { LocalData } from "./LocalData";
+
 /**
  * It has all data related functions
  */
-export default class DataStorage {
+export default class DataManager {
   
   /// Some constants
   public static readonly OK = 'OK';
+
+  /// Data related
+  private data = new LocalData();
   
   /// Singleton pattern
-  private static _instance: DataStorage;
+  private static _instance: DataManager;
   private constructor() {}
   public static get Instance() {
     // This is only called once
-    if (this._instance == null) this._instance = new DataStorage();
+    if (this._instance == null) this._instance = new DataManager();
     return this._instance;
   }
 
@@ -20,10 +25,16 @@ export default class DataStorage {
    * - Load app theme
    * - Load app language
    * - Check if first launch
-   * @returns if true, everything works and it's not first launch
+   * @returns if true, everything works
    */
-  async initSome(): Promise<boolean> {
-    return true;
+  async initEssential(): Promise<boolean> {
+    const essential = this.data.essential().map(async c => {
+      await c.load();
+    })
+    
+    Promise.all(essential)
+    .then(() => true)
+    .catch(() => false);
   }
 
   /**
@@ -33,9 +44,10 @@ export default class DataStorage {
    * - Update data every 2 weeks even if there are no updates
    * - Download and save data locally
    * - Load data locally
-   * @returns error message or 'nothing'
+   * @returns if true, everything works
    */
-  async initAll(): Promise<string> {
-    return DataStorage.OK;
+  async initRest(): Promise<boolean> {
+    this.data.rest().forEach(c => c.load());
+    return true;
   }
 }

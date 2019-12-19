@@ -1,9 +1,10 @@
 import { AppKey } from './key';
+import { Downloader } from '../Downloader';
 
 /**
  * The base of all downloaders
  */
-export abstract class BasicDownloader {
+export abstract class APIDownloader implements Downloader {
   private link: string = 'https://api.worldofwarships.';
   /**
    * This is your developer key. 
@@ -15,14 +16,14 @@ export abstract class BasicDownloader {
 
   constructor(server: string) {
     this.server = server;
-    // https://api.worldofwarships.asia/
+    // e.g. https://api.worldofwarships.asia/
     this.link += server + '/';
   }
 
   /**
    * Fetch data from link
    */
-  async fetchData() {
+  async fetch() {
     let response = await fetch(this.link);
     if (response.status === 200) {
       // Only read it if it has a valid response
@@ -30,13 +31,6 @@ export abstract class BasicDownloader {
     }
   }
 
-  /**
-   * Parse data into objects
-   */
-  abstract parseData(): object
-
-  /**
-   * Get data name (from constants)
-   */
-  abstract getName(): string
+  abstract parse(): object
+  abstract name(): string
 }

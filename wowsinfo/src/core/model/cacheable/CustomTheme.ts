@@ -11,19 +11,11 @@ class CustomTheme implements Cacheable {
   private dark?: boolean;
   private primary?: string;
 
-  constructor();
-  constructor(json: string);
-  constructor(dark?: boolean | string, primary?: string) {
-    if (typeof dark === 'string') {
-      // json mode
-      let json = JSON.parse(dark);
-      this.dark = json.dark;
-      this.primary = json.primary;
-    } else {
-      // Normal mode
-      this.dark = dark;
-      this.primary = primary;
-    }
+  constructor()
+  constructor(dark?: boolean, primary?: string) {
+    // Normal mode
+    this.dark = dark;
+    this.primary = primary;
   }
 
   save() {
@@ -36,21 +28,27 @@ class CustomTheme implements Cacheable {
     }
   }
 
-  async load(): CustomTheme {
-    let json = await AsyncStorage.getItem(DATA_KEY.user_theme);
-    if (json) {
-      return new CustomTheme(json);
+  async load(): Promise<void> {
+    let jsonString = await AsyncStorage.getItem(DATA_KEY.user_theme);
+    if (jsonString) {
+      let json = JSON.parse(jsonString);
+      this.dark = json.dark;
+      this.primary = json.primary;
     } else {
-      // default value
-      return new CustomTheme(false, Colors.blue500);
+      this.default();
     }
+  }
+
+  default() {
+    this.dark = false;
+    this.primary = Colors.blue500;
   }
 
   /**
    * If this theme is a dark theme
    */
   isDarkTheme(): boolean {
-    return this.dark;
+    return this.dark!;
   }
 
   /**
@@ -62,7 +60,7 @@ class CustomTheme implements Cacheable {
     // Dark mode will always be dark
     if (this.dark) return false;
 
-    const c = this.primary.substring(1);
+    const c = this.primary!.substring(1);
     const rgb = parseInt(c, 16);
     const r = (rgb >> 16) & 0xff;
     const g = (rgb >>  8) & 0xff;
@@ -77,7 +75,7 @@ class CustomTheme implements Cacheable {
    * Get the primary colour
    */
   getPrimary(): string {
-    return this.primary;
+    return this.primary!;
   }
 
   /**
@@ -92,7 +90,7 @@ class CustomTheme implements Cacheable {
       ...baseTheme,
       colors: {
         ...baseTheme.colors,
-        primary: this.primary,
+        primary: this.primary!,
       }
     };
   }

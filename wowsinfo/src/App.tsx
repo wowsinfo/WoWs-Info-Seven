@@ -10,13 +10,13 @@
 
 import React, { Component } from 'react';
 import { WoWsComponent, WoWsState } from './ui/component/WoWsComponent';
-import DataStorage from './core/util/DataStorage';
 import { Router, Stack, Scene } from 'react-native-router-flux';
 import { Agreement } from './ui/page/Welcome';
 import { Home, Settings, ProVersion, About, Loading } from './ui/page';
 import { StatusBar, StyleSheet } from 'react-native';
 import { Surface } from 'react-native-paper';
 import { ConsumerForAll } from './ui/component';
+import DataManager from './core/data/DataManager';
 
 interface AppState extends WoWsState {
 
@@ -29,7 +29,7 @@ interface AppState extends WoWsState {
  */
 export default class App extends Component<{}, AppState> implements WoWsComponent {
   isProFeature: boolean = false;
-  dataStorage = DataStorage.Instance;
+  DataManager = DataManager.Instance;
   shouldUpdateTheme: boolean = true;
 
   constructor(props: {}) {
@@ -37,11 +37,11 @@ export default class App extends Component<{}, AppState> implements WoWsComponen
 
     this.state = {
       loading: true,
-      error: DataStorage.OK,
+      error: DataManager.OK,
     };
 
     // only get essential data from local storage
-    this.dataStorage.initSome().then(() => {
+    this.DataManager.initEssential().then(() => {
       this.setState({
         loading: false,
       });
@@ -71,7 +71,7 @@ export default class App extends Component<{}, AppState> implements WoWsComponen
   render() {
     const { loading, error } = this.state;
 
-    if (error !== DataStorage.OK) {
+    if (error !== DataManager.OK) {
       // render nothing for now
       // TODO: update to error component
       return null;
