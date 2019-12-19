@@ -1,17 +1,49 @@
-import { Theme, DarkTheme, DefaultTheme } from 'react-native-paper';
+import { Theme, DarkTheme, DefaultTheme, Colors } from 'react-native-paper';
+import { Cacheable, DATA_KEY } from './Cacheable';
+import AsyncStorage from '@react-native-community/async-storage';
 
 /**
  * Custom theme (a wrapper around Theme from react native paper)
  * - Dark or light mode
  * - Primary colour
  */
-class CustomTheme {
-  private dark!: boolean;
-  private primary!: string;
+class CustomTheme implements Cacheable {
+  private dark?: boolean;
+  private primary?: string;
 
-  constructor(dark: boolean, primary: string) {
-    this.dark = dark;
-    this.primary = primary;
+  constructor();
+  constructor(json: string);
+  constructor(dark?: boolean | string, primary?: string) {
+    if (typeof dark === 'string') {
+      // json mode
+      let json = JSON.parse(dark);
+      this.dark = json.dark;
+      this.primary = json.primary;
+    } else {
+      // Normal mode
+      this.dark = dark;
+      this.primary = primary;
+    }
+  }
+
+  save() {
+    if (this.dark != null) {
+      AsyncStorage.setItem(DATA_KEY.user_theme, JSON.stringify(this)).catch(err => {
+        console.error(err);
+      });
+    } else {
+      console.error('CustomTheme is not initialised');
+    }
+  }
+
+  async load(): CustomTheme {
+    let json = await AsyncStorage.getItem(DATA_KEY.user_theme);
+    if (json) {
+      return new CustomTheme(json);
+    } else {
+      // default value
+      return new CustomTheme(false, Colors.blue500);
+    }
   }
 
   /**

@@ -1,4 +1,3 @@
-import { AppKey } from './key';
 
 /**
  * This part is for getting player information (rank, ship, clan and achievement) and some wiki ship

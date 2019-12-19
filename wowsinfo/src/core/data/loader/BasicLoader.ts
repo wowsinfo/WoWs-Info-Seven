@@ -1,4 +1,4 @@
-import { Cacheable, DATA_KEY } from "../../Cacheable";
+import { Cacheable, DATA_KEY } from "../../model/cacheable/Cacheable";
 
 /**
  * Load a `Cacheable` from a key

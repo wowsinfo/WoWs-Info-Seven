@@ -5,19 +5,19 @@
  * - Many more
  * 
  */
-abstract class Cacheable {
-
+interface Cacheable {
   /**
-   * It is the key of this model
+   * Save data as a json string to AsyncStorage
    */
-  public abstract getName(): DATA_KEY
-
+  save(): void;
   /**
-   * Convert it into a JSON string
+   * Load data from AsyncStorage
    */
-  public json(): string {
-    return JSON.stringify(this);
-  }
+  load(): any;
+  /**
+   * This is the default value if load cannot get anything
+   */
+  default(): any;
 }
 
 export enum DATA_KEY {
