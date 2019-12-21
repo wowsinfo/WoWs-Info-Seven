@@ -7,6 +7,17 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## 21/12/2019
+### What have I done?
+`Cacheable` now has two children, `Preference` and `CachedWiki`. 
+### What to do tomorrow?
+
+## 20/12/2019
+### What have I done?
+Some more designs on OneNote
+### What to do tomorrow?
+Actually write some codes and see if it works.
+
 ## 19/12/2019
 ### What have I done?
 Updated folder structure and lots of refactoring have been done. 
