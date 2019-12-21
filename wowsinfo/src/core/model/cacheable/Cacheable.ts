@@ -3,7 +3,7 @@
  * @pre Call `load()` before doing anything else
  * @post All methods will work normally
  */
-interface Cacheable {
+export interface Cacheable {
   /**
    * Save data as a json string to AsyncStorage
    */
@@ -12,10 +12,6 @@ interface Cacheable {
    * Load data from AsyncStorage
    */
   load(): Promise<void>;
-  /**
-   * This is the default value if load cannot get anything
-   */
-  default(): void;
 }
 
 export enum DATA_KEY {
@@ -61,5 +57,3 @@ export enum DATA_KEY {
   /// Personal rating from wows-number.com
   personal_rating = '@Data:personal_rating',
 };
-
-export { Cacheable };

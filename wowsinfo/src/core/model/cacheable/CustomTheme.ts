@@ -11,7 +11,8 @@ class CustomTheme implements Cacheable {
   private dark?: boolean;
   private primary?: string;
 
-  constructor()
+  constructor();
+  constructor(dark: boolean, primary: string);
   constructor(dark?: boolean, primary?: string) {
     // Normal mode
     this.dark = dark;

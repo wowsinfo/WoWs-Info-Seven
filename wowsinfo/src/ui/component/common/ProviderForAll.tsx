@@ -1,8 +1,8 @@
 
 import React, { Component, ReactNode } from 'react';
 import { Provider as PaperProvider, Colors } from 'react-native-paper';
-import { CustomTheme } from '../../../core/model';
 import { languageAvailable, langs } from '../../../core/value/Language';
+import { CustomTheme } from '../../../core/model';
 
 export interface AllProps {
   children: ReactNode
