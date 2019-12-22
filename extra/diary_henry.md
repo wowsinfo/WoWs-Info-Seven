@@ -7,10 +7,15 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## 22/12/2019
+### What have I done?
+### What to do tomorrow?
+
 ## 21/12/2019
 ### What have I done?
 `Cacheable` now has two children, `Preference` and `CachedWiki`. 
 ### What to do tomorrow?
+More models.
 
 ## 20/12/2019
 ### What have I done?
