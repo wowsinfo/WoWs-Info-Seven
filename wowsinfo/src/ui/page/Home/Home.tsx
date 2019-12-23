@@ -4,7 +4,7 @@ import { Surface, Appbar, BottomNavigation, Text } from 'react-native-paper';
 import { StyleSheet } from 'react-native';
 import { Wiki, Website, Search, Account, RS } from './Tabs';
 import { langs } from '../../../core/value/Language';
-import Utils from '../../../core/util/Utils';
+import Utils from '../../../core/Utils';
 
 interface HomeState extends WoWsState {
   index: number,

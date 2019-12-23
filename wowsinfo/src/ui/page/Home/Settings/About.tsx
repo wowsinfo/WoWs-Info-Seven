@@ -5,7 +5,7 @@ import { StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { langs } from '../../../../core/value/Language';
 import { SetupProps, WoWsState, WoWsComponent } from '../../../component/WoWsComponent';
-import Utils from '../../../../core/util/Utils';
+import Utils from '../../../../core/Utils';
 
 export interface AboutProps extends SetupProps {
 
