@@ -1,13 +1,14 @@
 import { Theme, DarkTheme, DefaultTheme, Colors } from 'react-native-paper';
-import { Cacheable, DATA_KEY } from './Cacheable';
+import { DATA_KEY } from '../Cacheable';
 import AsyncStorage from '@react-native-community/async-storage';
+import { Preference } from './';
 
 /**
  * Custom theme (a wrapper around Theme from react native paper)
  * - Dark or light mode
  * - Primary colour
  */
-class CustomTheme implements Cacheable {
+class UserTheme implements Preference {
   private dark?: boolean;
   private primary?: string;
 
@@ -25,7 +26,7 @@ class CustomTheme implements Cacheable {
         console.error(err);
       });
     } else {
-      console.error('CustomTheme is not initialised');
+      console.error('UserTheme is not initialised');
     }
   }
 
@@ -43,6 +44,8 @@ class CustomTheme implements Cacheable {
   default() {
     this.dark = false;
     this.primary = Colors.blue500;
+
+    this.save();
   }
 
   /**
@@ -64,8 +67,8 @@ class CustomTheme implements Cacheable {
     const c = this.primary!.substring(1);
     const rgb = parseInt(c, 16);
     const r = (rgb >> 16) & 0xff;
-    const g = (rgb >>  8) & 0xff;
-    const b = (rgb >>  0) & 0xff;
+    const g = (rgb >> 8) & 0xff;
+    const b = (rgb >> 0) & 0xff;
 
     // luma is from 0 to 255, 0 is the darkest and 255 is the brightnes
     const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
@@ -97,4 +100,4 @@ class CustomTheme implements Cacheable {
   }
 }
 
-export { CustomTheme };
+export { UserTheme };

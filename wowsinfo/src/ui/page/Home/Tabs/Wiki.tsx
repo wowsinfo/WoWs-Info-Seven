@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Button, Colors } from 'react-native-paper';
 import { ConsumerForAll } from '../../../component';
-import { CustomTheme } from '../../../../core/model';
+import { UserTheme } from '../../../../core/model';
 
 export interface WikiProps {
 
@@ -26,7 +26,7 @@ class Wiki extends Component<WikiProps, WikiState> {
       <View style={container}>
         <ConsumerForAll>
           { c => (
-            <Button onPress={() => c?.updateTheme(new CustomTheme(true, Colors.red500))}>Hello</Button>
+            <Button onPress={() => c?.updateTheme(new UserTheme(true, Colors.red500))}>Hello</Button>
           )}
         </ConsumerForAll>
       </View>

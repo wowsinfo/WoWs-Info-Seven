@@ -5,4 +5,3 @@ export * from './api/APIRepsonse';
 export * from './cacheable';
 
 /// Miscellaneous
-export * from './miscellaneous/GameServer';

@@ -1,5 +1,4 @@
 export * from './Cacheable';
-export * from './CustomTheme';
-
+/// Sub folders
 export * from './preference';
 export * from './wiki';

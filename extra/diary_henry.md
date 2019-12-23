@@ -9,7 +9,9 @@ Template
 
 ## 22/12/2019
 ### What have I done?
+Cleaned up the repo with bfg (removed the framework and it should be smaller now). Added `PlayerAccount` and `GameServer`. 
 ### What to do tomorrow?
+I feel like there are still some issues with the current model. How to update local data? You don't need to update wiki data unless there is an update. All you need to do it to diff new data with old data and display it. However, how about preference? The user could update it anytime. How about putting it inside the provider? I still don't know...
 
 ## 21/12/2019
 ### What have I done?

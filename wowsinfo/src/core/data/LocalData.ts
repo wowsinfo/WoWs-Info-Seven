@@ -1,4 +1,4 @@
-import { Cacheable } from "../model/cacheable/Cacheable";
+import { Cacheable, UserTheme, GameServer } from "../model/cacheable";
 
 /**
  * Everything which are saved locally
@@ -23,6 +23,13 @@ class LocalData {
   static DeveloperEMail: string = `mailto:development.henryquan@gmail.com?subject=[WoWs Info ${LocalData.Version}] `;
   static PersonalRatingLink: string = 'https://wows-numbers.com/personal/rating';
   static LatestReleaseLink: string = `${LocalData.GitHubLink}/releases/latest`;
+
+  /// Preference
+  private userTheme: UserTheme = new UserTheme();
+  private userServer: GameServer = new GameServer();
+
+  /// CachedWiki
+
 
   constructor() { }
 

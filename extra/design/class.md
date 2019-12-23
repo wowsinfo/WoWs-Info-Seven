@@ -24,5 +24,5 @@ All components will implement `WoWsComponent`.
 Choose different behaviours when different objects are passed in. 
 This is mainly for Personal Rating. Data should not be mutated. 
 
-### CustomTheme
+### UserTheme
 This merely handles theme related functions and it is a wrapper around Theme from react native paper.
