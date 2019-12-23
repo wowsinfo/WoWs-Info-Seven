@@ -7,6 +7,12 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## 23/12/2019
+### What have I done?
+Nothing except meeting with senpai
+### What to do tomorrow?
+???
+
 ## 22/12/2019
 ### What have I done?
 Cleaned up the repo with bfg (removed the framework and it should be smaller now). Added `PlayerAccount` and `GameServer`. 
