@@ -23,16 +23,21 @@ class PlayerAccount implements Preference {
   save() {
     AsyncStorage.setItem(DATA_KEY.user_account, JSON.stringify(this));
   }
-  
+
   async load() {
     let jsonString = await AsyncStorage.getItem(DATA_KEY.user_account);
-    if (jsonString) {
-      let json = JSON.parse(jsonString);
-      const { playerID, playerName, playerServer } = json;
-      this.playerID = playerID;
-      this.playerName = playerName;
-      this.playerServer = playerServer;
-    }
+    this.fromJSON(jsonString);
   }
 
+  fromJSON(jsonString: string | null) {
+    if (jsonString) {
+      let json = JSON.parse(jsonString);
+      const { account_id, nickname, server } = json;
+      this.playerID = account_id;
+      this.playerName = nickname;
+      this.playerServer = new GameServer(server);
+      return true;
+    }
+    return false;
+  }
 }

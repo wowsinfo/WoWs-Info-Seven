@@ -12,6 +12,10 @@ export interface Cacheable {
    * Load data from AsyncStorage
    */
   load(): Promise<void>;
+  /**
+   * Parses json string and return the appropriate object
+   */
+  fromJSON(jsonString: string | null): boolean;
 }
 
 export enum DATA_KEY {
@@ -23,7 +27,7 @@ export enum DATA_KEY {
   user_contact = '@WoWs_Info:playerList',
   user_app_version = '@WoWs_Info:currVersion',
   user_last_update = '@WoWs_Info:lastUpdate',
-  user_first_aunch = '@WoWs_Info:firstLaunch',
+  user_first_launch = '@WoWs_Info:firstLaunch',
   user_server_language = '@WoWs_Info:apiLanguage',
   user_app_language = '@WoWs_Info:userLanguage',
   user_pro_version = '@WoWs_Info:proVersion',

@@ -34,11 +34,18 @@ class GameServer implements Preference {
 
   async load() {
     let jsonString = await AsyncStorage.getItem(DATA_KEY.user_server);
+    if (!this.fromJSON(jsonString)) {
+      this.default();
+    }
+  }
+
+  fromJSON(jsonString: string | null) {
     if (jsonString) {
       let json = JSON.parse(jsonString);
       this.server = json.server;
+      return true;
     } else {
-      this.default();
+      return false;
     }
   }
 }

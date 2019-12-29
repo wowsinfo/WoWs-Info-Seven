@@ -1,5 +1,5 @@
 /**
- * Aall downloaders need to implement this interface
+ * All downloaders need to implement this interface
  * - API
  * - Github
  * - Number
