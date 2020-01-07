@@ -2,10 +2,16 @@
 This will track what I have done today and what I will do tomorrow.
 ~~~
 Template
-## /12/2019
+## /01/2019
 ### What have I done?
 ### What to do tomorrow?
 ~~~
+
+## 07/01/2019
+### What have I done?
+Upgraded and fixed packages. I need to tell Maurice senpai...
+### What to do tomorrow?
+Probably nothing until my supp
 
 ## 23/12/2019
 ### What have I done?
