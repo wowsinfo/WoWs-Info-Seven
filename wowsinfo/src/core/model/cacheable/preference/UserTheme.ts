@@ -32,6 +32,10 @@ class UserTheme implements Preference {
 
   async load(): Promise<void> {
     let jsonString = await AsyncStorage.getItem(DATA_KEY.user_theme);
+    this.fromJSON(jsonString);
+  }
+
+  fromJSON(jsonString: string | null) {
     if (jsonString) {
       let json = JSON.parse(jsonString);
       this.dark = json.dark;

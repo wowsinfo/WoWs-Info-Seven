@@ -27,18 +27,17 @@ class ApiLanguage implements Preference {
 
   async load() {
     let jsonString = await AsyncStorage.getItem(DATA_KEY.user_app_language);
-    if (!this.fromJSON(jsonString)) {
-      this.default();
-    }
+    this.fromJSON(jsonString);
   }
 
   fromJSON(jsonString: string | null) {
     if (jsonString) {
       let json = JSON.parse(jsonString);
-      this.userLanguage = json.userLanguage;
-      return true;
-    } else {
-      return false;
+      if (json.userLanguage) {
+        this.userLanguage = json.userLanguage;
+      } else {
+        this.default();
+      };
     }
   }
 }

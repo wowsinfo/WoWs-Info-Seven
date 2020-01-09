@@ -36,8 +36,6 @@ class PlayerAccount implements Preference {
       this.playerID = account_id;
       this.playerName = nickname;
       this.playerServer = new GameServer(server);
-      return true;
     }
-    return false;
   }
 }

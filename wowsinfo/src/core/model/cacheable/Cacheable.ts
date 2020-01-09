@@ -15,7 +15,7 @@ export interface Cacheable {
   /**
    * Parses json string and return the appropriate object
    */
-  fromJSON(jsonString: string | null): boolean;
+  fromJSON(jsonString: string | null): void;
 }
 
 export enum DATA_KEY {
