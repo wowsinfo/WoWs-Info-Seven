@@ -6,6 +6,11 @@ Template
 ### What have I done?
 ### What to do tomorrow?
 ~~~
+## 09/01/2020
+### What have I done?
+Implemented apiLanguage and userLanguage model
+### What to do tomorrow?
+Making more model needed for preferences
 
 ## 29/12/2019
 ### What have I done?
