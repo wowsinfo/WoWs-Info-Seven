@@ -7,6 +7,12 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## 21/01/2019
+### What have I done?
+Added one feature to TODO list
+### What to do tomorrow?
+Probably, it is time to start working on this again
+
 ## 07/01/2019
 ### What have I done?
 Upgraded and fixed packages. I need to tell Maurice senpai...
