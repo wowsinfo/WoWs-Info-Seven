@@ -7,6 +7,12 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## 27/01/2019
+### What have I done?
+Fixed node packages. I was designing and considering the look and feel of this new update. It is good to have unique looks on different platforms but I won't do that. This update aims to provide better user experience and stability
+### What to do tomorrow?
+Adjust UI and focus on English version
+
 ## 21/01/2019
 ### What have I done?
 Added one feature to TODO list
