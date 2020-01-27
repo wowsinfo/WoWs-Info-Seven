@@ -16,7 +16,8 @@
     "react-native-paper": "^3.4.0",
     "react-native-router-flux": "^4.0.6",
     "react-native-super-grid": "^3.1.2",
-    "react-native-vector-icons": "^6.6.0"
+    "react-native-vector-icons": "^6.6.0",
+    "react-native-webview": "^8.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",
