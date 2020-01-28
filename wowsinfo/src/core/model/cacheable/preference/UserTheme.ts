@@ -1,4 +1,4 @@
-import { Theme, DarkTheme, DefaultTheme, Colors } from 'react-native-paper';
+import { Theme, DarkTheme, DefaultTheme, Colors, configureFonts } from 'react-native-paper';
 import { DATA_KEY } from '../Cacheable';
 import AsyncStorage from '@react-native-community/async-storage';
 import { Preference } from './';
@@ -11,6 +11,28 @@ import { Preference } from './';
 class UserTheme implements Preference {
   private dark?: boolean;
   private primary?: string;
+
+  // Maybe change the fonts?
+  // private fontConfig = {
+  //   default: {
+  //     regular: {
+  //       fontFamily: 'Helvetica Neue',
+  //       fontWeight: '400' as '400',
+  //     },
+  //     medium: {
+  //       fontFamily: 'Helvetica Neue',
+  //       fontWeight: '500' as '500',
+  //     },
+  //     light: {
+  //       fontFamily: 'Helvetica Neue',
+  //       fontWeight: '300' as '300',
+  //     },
+  //     thin: {
+  //       fontFamily: 'Helvetica Neue',
+  //       fontWeight: '100' as '100',
+  //     },
+  //   },
+  // };
 
   constructor();
   constructor(dark: boolean, primary: string);
@@ -99,7 +121,7 @@ class UserTheme implements Preference {
       colors: {
         ...baseTheme.colors,
         primary: this.primary!,
-      }
+      },
     };
   }
 }
