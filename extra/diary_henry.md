@@ -7,6 +7,11 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## 28/01/2019
+### What have I done?
+More UX design. I found a JSON to TS converter and I will probably use it for API models. 
+### What to do tomorrow?
+
 ## 27/01/2019
 ### What have I done?
 Fixed node packages. I was designing and considering the look and feel of this new update. It is good to have unique looks on different platforms but I won't do that. This update aims to provide better user experience and stability. 
