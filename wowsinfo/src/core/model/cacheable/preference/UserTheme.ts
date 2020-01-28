@@ -13,26 +13,26 @@ class UserTheme implements Preference {
   private primary?: string;
 
   // Maybe change the fonts?
-  // private fontConfig = {
-  //   default: {
-  //     regular: {
-  //       fontFamily: 'Helvetica Neue',
-  //       fontWeight: '400' as '400',
-  //     },
-  //     medium: {
-  //       fontFamily: 'Helvetica Neue',
-  //       fontWeight: '500' as '500',
-  //     },
-  //     light: {
-  //       fontFamily: 'Helvetica Neue',
-  //       fontWeight: '300' as '300',
-  //     },
-  //     thin: {
-  //       fontFamily: 'Helvetica Neue',
-  //       fontWeight: '100' as '100',
-  //     },
-  //   },
-  // };
+  private fontConfig = {
+    default: {
+      regular: {
+        fontFamily: 'Helvetica Neue',
+        fontWeight: '400' as '400',
+      },
+      medium: {
+        fontFamily: 'Helvetica Neue',
+        fontWeight: '500' as '500',
+      },
+      light: {
+        fontFamily: 'Helvetica Neue',
+        fontWeight: '300' as '300',
+      },
+      thin: {
+        fontFamily: 'Helvetica Neue',
+        fontWeight: '100' as '100',
+      },
+    },
+  };
 
   constructor();
   constructor(dark: boolean, primary: string);
@@ -122,6 +122,7 @@ class UserTheme implements Preference {
         ...baseTheme.colors,
         primary: this.primary!,
       },
+      // fonts: configureFonts(this.fontConfig)
     };
   }
 }
