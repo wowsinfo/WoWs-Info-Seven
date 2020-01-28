@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
-import { Text, Headline, Title, Button, Surface, IconButton, Colors } from 'react-native-paper';
+import { Text, Headline, Title, Button, Surface, IconButton, Colors, Caption } from 'react-native-paper';
 import { ConsumerForAll } from '../../../component';
 
 export interface AccountProps {
@@ -37,16 +37,19 @@ class Account extends Component<AccountProps, AccountState> {
   }
 
   renderHeader() {
-    const { titleView, iconBtn } = styles;
+    const { titleView, titleTextView } = styles;
     return (
       <ConsumerForAll>
         { c => 
           <Surface style={titleView}>
             <IconButton icon={require('../../../../assets/Logo.png')} 
-              size={64} color={c?.theme.getPrimary()} style={iconBtn}/>
-            <Text>WoWs Info RE</Text>
+              size={64} color={c?.theme.getPrimary()} style={{margin: -16}}/>
+            <Surface style={titleTextView}>
+              <Title>WoWs Info RE</Title>
+              <Caption>1.1.0 (0.9.0.0)</Caption>
+            </Surface>
             <IconButton icon='settings'
-              size={32} color={c?.theme.getPrimary()} style={iconBtn}/>
+              size={32} color={c?.theme.getPrimary()} style={{margin: -8}}/>
           </Surface>
         }
       </ConsumerForAll>
@@ -63,10 +66,14 @@ const styles = StyleSheet.create({
   },
   titleView: {
     width: '100%',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
-  iconBtn: {
-    margin: -16,
+  titleTextView: {
+    flex: 1,
+    marginLeft: -32,
+    zIndex: -1,
+    alignItems: 'center'
   },
   userView: {
     alignItems: 'center',
