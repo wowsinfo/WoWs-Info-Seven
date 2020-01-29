@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Text, Headline, Title, Button, IconButton, Colors, Caption } from 'react-native-paper';
+import { Text, Headline, Title, Button, IconButton, Colors, Caption, Divider } from 'react-native-paper';
 import { ConsumerForAll } from '../../../component';
 
 export interface UserProps {
@@ -20,17 +20,18 @@ class User extends Component<UserProps, UserState> {
   }
 
   render() {
-    const { container, buttonView, userView, greetingText, userText } = styles;
+    const { container, buttonView, userView, greetingText, divider, userText } = styles;
     return (
       <View style={container}>
         { this.renderHeader() }
         <View style={userView}>
           <Headline style={greetingText}>Welcome Back</Headline>
+          <Divider style={divider} />
           <Title style={userText}>HenryQuan</Title>
         </View>
         <View style={buttonView}>
-          <Button mode='contained'>Check my statistics</Button>
-          <Button>Check latest news</Button>
+          <Button onPress={() => null} mode='contained'>Check my statistics</Button>
+          <Button onPress={() => null}>Check latest news</Button>
         </View>
       </View>
     );
@@ -42,13 +43,13 @@ class User extends Component<UserProps, UserState> {
       <ConsumerForAll>
         { c => 
           <View style={titleView}>
-            <IconButton icon={require('../../../../assets/Logo.png')} 
+            <IconButton icon={require('../../../../assets/Logo.png')}
               size={64} color={c?.theme.getPrimary()} style={{margin: -16}}/>
             <View style={titleTextView}>
               <Title>WoWs Info RE</Title>
               <Caption>1.1.0 (0.9.0.0)</Caption>
             </View>
-            <IconButton icon='settings'
+            <IconButton icon='settings' onPress={() => null}
               size={32} color={c?.theme.getPrimary()} style={{margin: -8}}/>
           </View>
         }
@@ -60,7 +61,7 @@ class User extends Component<UserProps, UserState> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    padding: 24,
     justifyContent: 'space-between',
     alignItems: 'center',
   },
@@ -77,15 +78,18 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   userView: {
-    alignItems: 'center',
-    flex: 1,
-    justifyContent: 'center'
+    width: '100%',
+  },
+  divider: {
+    marginVertical: 8,
+    marginHorizontal: -32
   },
   greetingText: {
-    fontSize: 24
+    fontSize: 24,
+    textAlign: 'center',
   },
   userText: {
-    fontSize: 32,
+    fontSize: 30,
     textAlign: 'center',
   },
   buttonView: {
