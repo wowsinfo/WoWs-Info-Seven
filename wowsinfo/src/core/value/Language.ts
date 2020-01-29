@@ -36,7 +36,7 @@ const langs = new LocalizedStrings({
     home_tab_website: 'Website',
     home_tab_search: 'Search',
     home_tab_rs: 'Realtime',
-    home_tab_main: 'My Account',
+    home_tab_home: 'Home',
   },
   id: {
     back_button: 'Back',

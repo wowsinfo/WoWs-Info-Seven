@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { WoWsComponent, WoWsState } from '../../component/WoWsComponent';
 import { Surface, Appbar, BottomNavigation, Text } from 'react-native-paper';
 import { StyleSheet } from 'react-native';
-import { Wiki, Website, Search, Account, RS } from './Tabs';
+import { Wiki, Website, Search, User, RS } from './Tabs';
 import { langs } from '../../../core/value/Language';
 import Utils from '../../../core/Utils';
 
@@ -31,11 +31,11 @@ class Home extends Component<{}, HomeState> implements WoWsComponent {
     this.state = {
       index: 0,
       routes: [
-        { key: 'wiki', title: langs.home_tab_wiki!, icon: 'book' },
+        { key: 'user', title: langs.home_tab_home!, icon: 'home' },
         { key: 'website', title: langs.home_tab_website!, icon: 'web' },
-        { key: 'search', title: langs.home_tab_search!, icon: 'magnify' },
+        { key: 'wiki', title: langs.home_tab_wiki!, icon: 'book' },
         { key: 'rs', title: langs.home_tab_rs!, icon: 'poll' },
-        { key: 'main', title: langs.home_tab_main!, icon: 'account' },
+        { key: 'search', title: langs.home_tab_search!, icon: 'magnify' },
       ],
       loading: true,
       error: ''
@@ -43,11 +43,11 @@ class Home extends Component<{}, HomeState> implements WoWsComponent {
   }
 
   renderScene = BottomNavigation.SceneMap({
-    wiki: () => <Wiki />,
+    user: () => <User />,
     website: () => <Website />,
-    search: () => <Search />,
+    wiki: () => <Wiki />,
     rs: () => <RS />,
-    main: () => <Account />,
+    search: () => <Search />,
   });
 
   handleIndexChange = (index: number) => this.setState({ index });
@@ -61,7 +61,7 @@ class Home extends Component<{}, HomeState> implements WoWsComponent {
 }
 
 const styles = StyleSheet.create({
-  
+
 });
 
 export { Home };

@@ -82,9 +82,9 @@ export default class App extends Component<{}, AppState> implements WoWsComponen
       const aboutPage = () => <About isSetup />;
 
       return (
-        <View style={{flex: 1}}>
+        <View style={{flex: 1, backgroundColor: 'white'}}>
           {this.renderStatusBar()}
-          <Router sceneStyle={{flex: 1, backgroundColor: 'white'}} backAndroidHandler={this.handleBack}>
+          <Router backAndroidHandler={this.handleBack}>
             <Stack key='root' hideNavBar>
               <Scene key='Loading' component={Loading} />
               { /** Welcome */}

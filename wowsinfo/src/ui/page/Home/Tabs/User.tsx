@@ -3,19 +3,19 @@ import { View, StyleSheet } from 'react-native';
 import { Text, Headline, Title, Button, IconButton, Colors, Caption } from 'react-native-paper';
 import { ConsumerForAll } from '../../../component';
 
-export interface AccountProps {
+export interface UserProps {
 
 }
 
-interface AccountState {
+interface UserState {
 
 }
 
 /**
- * Account Class
+ * User Class
  */
-class Account extends Component<AccountProps, AccountState> {
-  constructor(props: AccountProps) {
+class User extends Component<UserProps, UserState> {
+  constructor(props: UserProps) {
     super(props);
   }
 
@@ -94,4 +94,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export { Account };
+export { User };
