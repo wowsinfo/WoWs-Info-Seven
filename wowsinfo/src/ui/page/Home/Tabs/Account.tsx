@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
-import { Text, Headline, Title, Button, Surface, IconButton, Colors, Caption } from 'react-native-paper';
+import { View, StyleSheet } from 'react-native';
+import { Text, Headline, Title, Button, IconButton, Colors, Caption } from 'react-native-paper';
 import { ConsumerForAll } from '../../../component';
 
 export interface AccountProps {
@@ -22,17 +22,17 @@ class Account extends Component<AccountProps, AccountState> {
   render() {
     const { container, buttonView, userView, greetingText, userText } = styles;
     return (
-      <Surface style={container}>
+      <View style={container}>
         { this.renderHeader() }
-        <Surface style={userView}>
+        <View style={userView}>
           <Headline style={greetingText}>Welcome Back</Headline>
           <Title style={userText}>HenryQuan</Title>
-        </Surface>
-        <Surface style={buttonView}>
+        </View>
+        <View style={buttonView}>
           <Button mode='contained'>Check my statistics</Button>
           <Button>Check latest news</Button>
-        </Surface>
-      </Surface>
+        </View>
+      </View>
     );
   }
 
@@ -41,16 +41,16 @@ class Account extends Component<AccountProps, AccountState> {
     return (
       <ConsumerForAll>
         { c => 
-          <Surface style={titleView}>
+          <View style={titleView}>
             <IconButton icon={require('../../../../assets/Logo.png')} 
               size={64} color={c?.theme.getPrimary()} style={{margin: -16}}/>
-            <Surface style={titleTextView}>
+            <View style={titleTextView}>
               <Title>WoWs Info RE</Title>
               <Caption>1.1.0 (0.9.0.0)</Caption>
-            </Surface>
+            </View>
             <IconButton icon='settings'
               size={32} color={c?.theme.getPrimary()} style={{margin: -8}}/>
-          </Surface>
+          </View>
         }
       </ConsumerForAll>
     );
@@ -67,7 +67,8 @@ const styles = StyleSheet.create({
   titleView: {
     width: '100%',
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
   titleTextView: {
     flex: 1,

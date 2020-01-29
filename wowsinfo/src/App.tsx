@@ -10,11 +10,11 @@
 
 import React, { Component } from 'react';
 import { WoWsComponent, WoWsState } from './ui/component/WoWsComponent';
-import { Router, Stack, Scene } from 'react-native-router-flux';
+import { Router, Stack, Scene, Actions } from 'react-native-router-flux';
 import { Agreement } from './ui/page/Welcome';
 import { Home, Settings, ProVersion, About, Loading } from './ui/page';
-import { StatusBar, StyleSheet } from 'react-native';
-import { Surface } from 'react-native-paper';
+import { View, StatusBar, StyleSheet, BackHandler } from 'react-native';
+import { Surface, Colors } from 'react-native-paper';
 import { ConsumerForAll } from './ui/component';
 import DataManager from './core/data/DataManager';
 
@@ -57,7 +57,7 @@ export default class App extends Component<{}, AppState> implements WoWsComponen
         {c => {
           if (c) {
             const theme = c.theme;
-            const background = theme.isDarkTheme() ? 'black' : theme.getPrimary();
+            const background = theme.isDarkTheme() ? Colors.grey900 : theme.getPrimary();
             return <StatusBar backgroundColor={background} />;
           } else {
             // Just put a status bar if somehow c is not defined (it should never happen though)
@@ -82,9 +82,9 @@ export default class App extends Component<{}, AppState> implements WoWsComponen
       const aboutPage = () => <About isSetup />;
 
       return (
-        <Surface style={styles.view}>
+        <View style={{flex: 1}}>
           {this.renderStatusBar()}
-          <Router>
+          <Router sceneStyle={{flex: 1, backgroundColor: 'white'}} backAndroidHandler={this.handleBack}>
             <Stack key='root' hideNavBar>
               <Scene key='Loading' component={Loading} />
               { /** Welcome */}
@@ -99,14 +99,18 @@ export default class App extends Component<{}, AppState> implements WoWsComponen
               <Scene key='Home' component={Home} />
             </Stack>
           </Router>
-        </Surface>
+        </View>
       );
     }
+  }
+
+  handleBack = () => {
+    // console.log(Actions.state.routes.length == 1);
+    // if (Actions.state.routes.length == 1) {
+    //   BackHandler.exitApp();
+    // }
   }
 }
 
 const styles = StyleSheet.create({
-  view: {
-    flex: 1,
-  }
 });

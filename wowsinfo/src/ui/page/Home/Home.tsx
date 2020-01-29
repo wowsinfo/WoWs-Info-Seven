@@ -53,21 +53,15 @@ class Home extends Component<{}, HomeState> implements WoWsComponent {
   handleIndexChange = (index: number) => this.setState({ index });
 
   render() {
-    const { rootView } = styles;
-    // TODO: render a bottom navigation
     return (
-      <Surface style={rootView}>
-        <BottomNavigation navigationState={this.state} shifting={!Utils.isIOS()}
-          onIndexChange={this.handleIndexChange} renderScene={this.renderScene} />
-      </Surface>
+      <BottomNavigation navigationState={this.state} shifting={!Utils.isIOS()}
+        onIndexChange={this.handleIndexChange} renderScene={this.renderScene} />
     )
   }
 }
 
 const styles = StyleSheet.create({
-  rootView: {
-    flex: 1
-  }
+  
 });
 
 export { Home };
