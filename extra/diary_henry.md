@@ -7,6 +7,19 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## 30/01/2019
+### What have I done?
+Nothing
+### What to do tomorrow?
+Track what we have discussed
+- Add pro button in HomePage
+- Try WebsitePage (Tab or List)
+- Add header to Wikipedia
+- Header or not?
+- Use 2 only in Realtime
+- How to choose - go to another page
+
+
 ## 28/01/2019
 ### What have I done?
 More UX design. I found a JSON to TS converter and I will probably use it for API models. Some more ideas for the `HomePage`. 
