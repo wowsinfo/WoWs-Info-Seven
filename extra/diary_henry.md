@@ -7,7 +7,7 @@ Template
 ### What to do tomorrow?
 ~~~
 
-## /01/2019
+## 31/01/2019
 ### What have I done?
 Changed to `yarn` (`npm` is a bit hard to use at time). 
 More UX design. Adding a header and using `Accordion` is indeed really good. 
