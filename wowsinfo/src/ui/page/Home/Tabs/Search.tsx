@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { Searchbar } from 'react-native-paper';
+import { Searchbar, Appbar } from 'react-native-paper';
 
 export interface SearchProps {
 
@@ -22,7 +22,9 @@ class Search extends Component<SearchProps, SearchState> {
     const { container } = styles;
     return (
       <View style={container}>
-        <Searchbar />
+        <Appbar.Header>
+          <Searchbar />
+        </Appbar.Header>
       </View>
     );
   }

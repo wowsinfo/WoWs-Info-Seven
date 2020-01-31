@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Text, Headline, Title, Button, IconButton, Colors, Caption, Divider } from 'react-native-paper';
+import { Text, Headline, Title, Button, IconButton, Colors, Caption, Divider, Appbar } from 'react-native-paper';
 import { ConsumerForAll } from '../../../component';
 
 export interface UserProps {
@@ -42,16 +42,18 @@ class User extends Component<UserProps, UserState> {
     return (
       <ConsumerForAll>
         { c => 
-          <View style={titleView}>
-            <IconButton icon={require('../../../../assets/Logo.png')}
-              size={64} color={c?.theme.getPrimary()} style={{margin: -16}}/>
-            <View style={titleTextView}>
-              <Title>WoWs Info RE</Title>
-              <Caption>1.1.0 (0.9.0.0)</Caption>
+          <Appbar.Header>
+            <View style={titleView}>
+              <IconButton icon={require('../../../../assets/Logo.png')}
+                size={48} color='white' style={{margin: -4}}/>
+              <View style={titleTextView}>
+                <Title>WoWs Info RE</Title>
+                <Caption>1.1.0 (0.9.0.0)</Caption>
+              </View>
+              <IconButton icon='settings' onPress={() => null}
+                size={24} color='white' />
             </View>
-            <IconButton icon='settings' onPress={() => null}
-              size={32} color={c?.theme.getPrimary()} style={{margin: -8}}/>
-          </View>
+          </Appbar.Header>
         }
       </ConsumerForAll>
     );
@@ -61,20 +63,16 @@ class User extends Component<UserProps, UserState> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 24,
     justifyContent: 'space-between',
     alignItems: 'center',
   },
   titleView: {
-    width: '100%',
+    alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center'
   },
   titleTextView: {
     flex: 1,
-    marginLeft: -32,
-    zIndex: -1,
     alignItems: 'center'
   },
   userView: {
@@ -95,6 +93,7 @@ const styles = StyleSheet.create({
   buttonView: {
     width: '61.8%',
     maxWidth: 300,
+    margin: 24
   }
 });
 
