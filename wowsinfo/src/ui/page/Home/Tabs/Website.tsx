@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { Appbar, List } from 'react-native-paper';
 
 export interface WebsiteProps {
 
@@ -21,7 +22,19 @@ class Website extends Component<WebsiteProps, WebsiteState> {
     const { container } = styles;
     return (
       <View style={container}>
-        <Text>Website</Text>
+        <Appbar.Header>
+          <Appbar.Content title='Websites' />
+        </Appbar.Header>
+        <List.Accordion title='Officials'>
+        </List.Accordion>
+        <List.Accordion title='Latest news'>
+        </List.Accordion>
+        <List.Accordion title='Statistics'>
+        </List.Accordion>
+        <List.Accordion title='YouTubers'>
+        </List.Accordion>
+        <List.Accordion title='Utilities'>
+        </List.Accordion>
       </View>
     );
   }

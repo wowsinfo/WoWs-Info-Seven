@@ -7,6 +7,18 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## /01/2019
+### What have I done?
+Changed to `yarn` (`npm` is a bit hard to use at time). 
+More UX design. Adding a header and using `Accordion` is indeed really good. 
+`SearchBar` is a bit shorter than the `Header` so it can be a bit weird.
+### What to do tomorrow?
+Considering of breaking pages into page components. 
+Therefore, a page is merely `Header` + `Content`. 
+In this way, it can support different layouts for tablets and many more. 
+More UX design is necessary and maybe try to add `react-native-shifting-text`. 
+It is still experienmental and I should allow passing in custom text components. 
+
 ## 30/01/2019
 ### What have I done?
 Nothing

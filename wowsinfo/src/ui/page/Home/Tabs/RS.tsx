@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { Appbar } from 'react-native-paper';
 
 export interface RSProps {
 
@@ -21,7 +22,9 @@ class RS extends Component<RSProps, RSState> {
     const { container } = styles;
     return (
       <View style={container}>
-        <Text>RS</Text>
+        <Appbar.Header>
+          <Appbar.Content title='Real-time statistics' />
+        </Appbar.Header>
       </View>
     );
   }

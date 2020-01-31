@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { Button, Colors } from 'react-native-paper';
+import { Button, Colors, Appbar } from 'react-native-paper';
 import { ConsumerForAll } from '../../../component';
 import { UserTheme } from '../../../../core/model';
 
@@ -24,6 +24,9 @@ class Wiki extends Component<WikiProps, WikiState> {
     const { container } = styles;
     return (
       <View style={container}>
+        <Appbar.Header>
+          <Appbar.Content title='Wikipedia' />
+        </Appbar.Header>
         <ConsumerForAll>
           { c => (
             <Button onPress={() => c?.updateTheme(new UserTheme(true, Colors.red500))}>Hello</Button>
