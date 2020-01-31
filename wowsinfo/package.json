@@ -33,6 +33,7 @@
     "metro-react-native-babel-preset": "^0.56.0",
     "react-native-gesture-handler": "^1.5.3",
     "react-native-reanimated": "^1.7.0",
+    "react-native-screens": "^2.0.0-alpha.32",
     "react-test-renderer": "16.9.0",
     "typescript": "^3.7.4"
   },
