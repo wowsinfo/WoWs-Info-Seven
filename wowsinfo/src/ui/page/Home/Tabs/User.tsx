@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Text, Headline, Title, Button, IconButton, Colors, Caption, Divider, Appbar } from 'react-native-paper';
-import { ConsumerForAll } from '../../../component';
+import { ConsumerForAll, AppTitle } from '../../../component';
 
 export interface UserProps {
 
@@ -46,7 +46,7 @@ class User extends Component<UserProps, UserState> {
             <IconButton icon={require('../../../../assets/Logo.png')}
               size={64} color={c?.theme.getPrimary()} style={{margin: -16}}/>
             <View style={titleTextView}>
-              <Title>WoWs Info RE</Title>
+              <AppTitle />
               <Caption>1.1.0 (0.9.0.0)</Caption>
               </View>
             <IconButton icon='settings' onPress={() => null}

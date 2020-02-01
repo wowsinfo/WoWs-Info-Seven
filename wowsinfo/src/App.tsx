@@ -81,7 +81,7 @@ export default class App extends Component<{}, AppState> implements WoWsComponen
       const aboutPage = () => <About isSetup />;
 
       return (
-        <View style={{flex: 1, backgroundColor: 'white'}}>
+        <View style={{flex: 1}}>
           {this.renderStatusBar()}
           <Router backAndroidHandler={this.handleBack}>
             <Stack key='root' hideNavBar>
@@ -104,10 +104,10 @@ export default class App extends Component<{}, AppState> implements WoWsComponen
   }
 
   handleBack = () => {
-    // console.log(Actions.state.routes.length == 1);
-    // if (Actions.state.routes.length == 1) {
-    //   BackHandler.exitApp();
-    // }
+    // @ts-ignore
+    if (Actions.state.routes.length == 1) {
+      BackHandler.exitApp();
+    }
   }
 }
 
