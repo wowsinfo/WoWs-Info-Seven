@@ -5,6 +5,7 @@ import { StyleSheet } from 'react-native';
 import { Wiki, Website, Search, User, RS } from './Tabs';
 import { langs } from '../../../core/value/Language';
 import Utils from '../../../core/Utils';
+import { ConsumerForAll } from '../../component';
 
 interface HomeState extends WoWsState {
   index: number,
@@ -14,7 +15,7 @@ interface HomeState extends WoWsState {
 interface Route {
   key: string,
   title: string,
-  icon: string
+  icon: string,
 }
 
 /**
@@ -33,7 +34,7 @@ class Home extends Component<{}, HomeState> implements WoWsComponent {
       routes: [
         { key: 'user', title: langs.home_tab_home!, icon: 'home' },
         { key: 'website', title: langs.home_tab_website!, icon: 'web' },
-        { key: 'wiki', title: langs.home_tab_wiki!, icon: 'book' },
+        { key: 'wiki', title: langs.home_tab_wiki!, icon: 'book'  },
         { key: 'rs', title: langs.home_tab_rs!, icon: 'poll' },
         { key: 'search', title: langs.home_tab_search!, icon: 'magnify' },
       ],
@@ -54,8 +55,22 @@ class Home extends Component<{}, HomeState> implements WoWsComponent {
 
   render() {
     return (
-      <BottomNavigation navigationState={this.state} shifting={!Utils.isIOS()}
-        onIndexChange={this.handleIndexChange} renderScene={this.renderScene} />
+      <ConsumerForAll>
+        { c => {
+          const theme = c!.theme;
+          let extraProps = {};
+          // Use light bottom navigation bar so that it fits in
+          if (theme.isLightTheme()) {
+            extraProps = {barStyle: {backgroundColor: 'white'}, activeColor: theme.getPrimary()};
+          }
+
+          return (
+            <BottomNavigation {...extraProps}
+              navigationState={this.state} shifting={!Utils.isIOS()} 
+              onIndexChange={this.handleIndexChange} renderScene={this.renderScene} />
+          )
+        }}
+      </ConsumerForAll>
     )
   }
 }

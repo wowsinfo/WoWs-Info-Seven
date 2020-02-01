@@ -83,11 +83,18 @@ class UserTheme implements Preference {
   }
 
   /**
+   * If this theme is a light theme
+   */
+  isLightTheme(): boolean {
+    return !this.isDarkTheme();
+  }
+
+  /**
    * If this theme is light
    * - Light -> dark text
    * - Not light -> white text
    */
-  isLight(): boolean {
+  isLightColour(): boolean {
     // Dark mode will always be dark
     if (this.dark) return false;
     return color(this.primary!).isLight();
@@ -109,7 +116,7 @@ class UserTheme implements Preference {
     // Light colour -> dark
     // Dark colour -> white
     if (this.isDarkTheme()) return 'white';
-    return this.isLight() ? 'black' : 'white';
+    return this.isLightColour() ? 'black' : 'white';
   }
 
   /**
