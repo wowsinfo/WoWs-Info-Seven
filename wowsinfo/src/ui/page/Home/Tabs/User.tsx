@@ -42,18 +42,16 @@ class User extends Component<UserProps, UserState> {
     return (
       <ConsumerForAll>
         { c => 
-          <Appbar.Header>
-            <View style={titleView}>
-              <IconButton icon={require('../../../../assets/Logo.png')}
-                size={48} color='white' style={{margin: -4}}/>
-              <View style={titleTextView}>
-                <Title>WoWs Info RE</Title>
-                <Caption>1.1.0 (0.9.0.0)</Caption>
+          <View style={titleView}>
+            <IconButton icon={require('../../../../assets/Logo.png')}
+              size={64} color={c?.theme.getPrimary()} style={{margin: -16}}/>
+            <View style={titleTextView}>
+              <Title>WoWs Info RE</Title>
+              <Caption>1.1.0 (0.9.0.0)</Caption>
               </View>
-              <IconButton icon='settings' onPress={() => null}
-                size={24} color='white' />
-            </View>
-          </Appbar.Header>
+            <IconButton icon='settings' onPress={() => null}
+              size={32} color={c?.theme.getPrimary()} style={{margin: -8}}/>
+          </View>
         }
       </ConsumerForAll>
     );
@@ -67,6 +65,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   titleView: {
+    margin: 8,
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',

@@ -97,8 +97,8 @@ class UserTheme implements Preference {
     const b = (rgb >> 0) & 0xff;
 
     // luma is from 0 to 255, 0 is the darkest and 255 is the brightnes
-    const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-    return luma > 128 ? true : false;
+    const luma = (299 * r + 587 * g + 114 * b) / 1000;
+    return luma > 125 ? true : false;
   }
 
   /**
@@ -106,6 +106,18 @@ class UserTheme implements Preference {
    */
   getPrimary(): string {
     return this.primary!;
+  }
+
+  /**
+   * - dark mode -> white text
+   * - light mode -> dark text
+   */
+  getTextColour(): string {
+    // Dark Mode -> white
+    // Light colour -> dark
+    // Dark colour -> white
+    if (this.isDarkTheme() || !this.isLight()) return 'white';
+    return 'black';
   }
 
   /**
