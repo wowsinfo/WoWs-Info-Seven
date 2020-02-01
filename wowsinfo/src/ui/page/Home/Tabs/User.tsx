@@ -50,7 +50,7 @@ class User extends Component<UserProps, UserState> {
               <Caption>1.1.0 (0.9.0.0)</Caption>
               </View>
             <IconButton icon='settings' onPress={() => null}
-              size={32} color={c?.theme.getPrimary()} style={{margin: -8}}/>
+              size={32} color={c?.theme.getPrimary()} style={{margin: 0}}/>
           </View>
         }
       </ConsumerForAll>

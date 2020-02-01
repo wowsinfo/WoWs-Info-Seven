@@ -12,6 +12,7 @@ import { Preference } from './';
 class UserTheme implements Preference {
   private dark?: boolean;
   private primary?: string;
+  private primaryDark?: string;
 
   // Maybe change the fonts?
   private fontConfig = {
@@ -41,6 +42,10 @@ class UserTheme implements Preference {
     // Normal mode
     this.dark = dark;
     this.primary = primary;
+    this.primaryDark = color(primary)
+      .darken(0.2)
+      .rgb()
+      .string();
   }
 
   save() {
@@ -105,6 +110,14 @@ class UserTheme implements Preference {
    */
   getPrimary(): string {
     return this.primary!;
+  }
+
+  /**
+   * Get the status bar colour
+   */
+  getStatusBarColour(): string {
+    if (this.isDarkTheme()) return Colors.grey900; 
+    return this.primaryDark!;
   }
 
   /**

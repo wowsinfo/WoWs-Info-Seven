@@ -56,11 +56,10 @@ export default class App extends Component<{}, AppState> implements WoWsComponen
       <ConsumerForAll>
         {c => {
           if (c) {
-            const theme = c.theme;
-            const background = theme.isDarkTheme() ? Colors.grey900 : theme.getPrimary();
-            return <StatusBar backgroundColor={background} />;
+            const theme = c!.theme;
+            return <StatusBar backgroundColor={theme.getStatusBarColour()} />;
           } else {
-            // Just put a status bar if somehow c is not defined (it should never happen though)
+            // Prevent crashing during hot reload
             return <StatusBar />
           }
         }}
