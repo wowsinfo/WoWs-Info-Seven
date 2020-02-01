@@ -29,7 +29,11 @@ class Wiki extends Component<WikiProps, WikiState> {
         </Appbar.Header>
         <ConsumerForAll>
           { c => (
-            <Button onPress={() => c?.updateTheme(new UserTheme(true, Colors.red500))}>Hello</Button>
+            <>
+            <Button onPress={() => c?.updateTheme(new UserTheme(true, Colors.red500))}>Dark Red</Button>
+            <Button onPress={() => c?.updateTheme(new UserTheme(false, Colors.yellow500))}>Light Yellow</Button>
+            <Button onPress={() => c?.updateTheme(new UserTheme(false, Colors.blue500))}>Light Blue</Button>
+            </>
           )}
         </ConsumerForAll>
       </View>
