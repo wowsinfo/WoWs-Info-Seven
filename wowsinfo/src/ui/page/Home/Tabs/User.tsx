@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Text, Headline, Title, Button, IconButton, Colors, Caption, Divider, Appbar } from 'react-native-paper';
 import { ConsumerForAll, AppTitle } from '../../../component';
+import Utils from '../../../../core/Utils';
 
 export interface UserProps {
 
@@ -66,6 +67,7 @@ const styles = StyleSheet.create({
   },
   titleView: {
     margin: 8,
+    marginTop: Utils.isIOS() ? 40 : 8,
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
