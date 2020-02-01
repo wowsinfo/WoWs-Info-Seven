@@ -2,10 +2,18 @@
 This will track what I have done today and what I will do tomorrow.
 ~~~
 Template
-## /01/2019
+## /02/2019
 ### What have I done?
 ### What to do tomorrow?
 ~~~
+
+## 01/02/2019
+### What have I done?
+Added `color` and it was really useful to tackle colour related problems. 
+Therefore, many theme related issues were solved and the colour is even better now. 
+`Bottom Navigation` is now white in light mode and `SearchPage` now has a better search bar. 
+### What to do tomorrow?
+Continue with `Website`, `Wiki` and `Real-time` maybe.
 
 ## 31/01/2019
 ### What have I done?
