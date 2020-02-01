@@ -1,5 +1,6 @@
 import { Theme, DarkTheme, DefaultTheme, Colors, configureFonts } from 'react-native-paper';
 import { DATA_KEY } from '../Cacheable';
+import color from 'color';
 import AsyncStorage from '@react-native-community/async-storage';
 import { Preference } from './';
 
@@ -89,16 +90,7 @@ class UserTheme implements Preference {
   isLight(): boolean {
     // Dark mode will always be dark
     if (this.dark) return false;
-
-    const c = this.primary!.substring(1);
-    const rgb = parseInt(c, 16);
-    const r = (rgb >> 16) & 0xff;
-    const g = (rgb >> 8) & 0xff;
-    const b = (rgb >> 0) & 0xff;
-
-    // luma is from 0 to 255, 0 is the darkest and 255 is the brightnes
-    const luma = (299 * r + 587 * g + 114 * b) / 1000;
-    return luma > 125 ? true : false;
+    return color(this.primary!).isLight();
   }
 
   /**
@@ -116,8 +108,18 @@ class UserTheme implements Preference {
     // Dark Mode -> white
     // Light colour -> dark
     // Dark colour -> white
-    if (this.isDarkTheme() || !this.isLight()) return 'white';
-    return 'black';
+    if (this.isDarkTheme()) return 'white';
+    return this.isLight() ? 'black' : 'white';
+  }
+
+  /**
+   * Place holder is a bit lighter than text colour
+   */
+  getPlaceholderColour(): string {
+    return color(this.getTextColour())
+    .alpha(0.7)
+    .rgb()
+    .string();
   }
 
   /**

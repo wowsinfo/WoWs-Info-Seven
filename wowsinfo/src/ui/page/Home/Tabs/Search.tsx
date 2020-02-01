@@ -35,10 +35,10 @@ class Search extends Component<SearchProps, SearchState> {
         { c => {
           const theme = c!.theme;
           const textColour = theme.getTextColour();
-          console.log(theme.getTheme());
+          const placeHolderColour = theme.getPlaceholderColour();
           return (
             <Appbar.Header>
-              <Searchbar style={search} iconColor={textColour}
+              <Searchbar style={search} iconColor={textColour} placeholderTextColor={placeHolderColour}
                 selectionColor={textColour} placeholder='Search players or clans'/>
             </Appbar.Header>
           );
