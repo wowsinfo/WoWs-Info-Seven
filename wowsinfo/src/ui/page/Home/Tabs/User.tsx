@@ -47,7 +47,8 @@ class User extends Component<UserProps, UserState> {
             <IconButton icon={require('../../../../assets/Logo.png')}
               size={64} color={c?.theme.getPrimary()} style={{margin: -16}}/>
             <View style={titleTextView}>
-              <AppTitle />
+              <AppTitle titles={['Ultimate', 'Ultra', 'Pro', 'X', 'Y', 'Z']}
+                prefix={<Title style={{marginLeft: -16}}>WoWs Info</Title>}/>
               <Caption>1.1.0 (0.9.0.0)</Caption>
               </View>
             <IconButton icon='settings' onPress={() => null}

@@ -65,7 +65,7 @@ class Home extends Component<{}, HomeState> implements WoWsComponent {
           }
 
           return (
-            <BottomNavigation {...extraProps}
+            <BottomNavigation {...extraProps} sceneAnimationEnabled={false}
               navigationState={this.state} shifting={!Utils.isIOS()} 
               onIndexChange={this.handleIndexChange} renderScene={this.renderScene} />
           )
