@@ -42,6 +42,7 @@ class AppTitle extends React.Component<AppTitleProps, AppTitleState> {
     '¯_(ツ)_/¯',
   ];
   length: number = this.words.length;
+  looper?: number;
 
   constructor(props: AppTitleProps) {
     super(props);
@@ -94,7 +95,7 @@ class AppTitle extends React.Component<AppTitleProps, AppTitleState> {
   }
 
   animate = () => {
-    let shift_animation = Animated.parallel([
+    const shift_animation = Animated.parallel([
       // Move label 1 up and fade out
       Animated.timing(this.state.fade1, {
         toValue: 0,
@@ -111,34 +112,30 @@ class AppTitle extends React.Component<AppTitleProps, AppTitleState> {
       }),
     ]);
 
-    let final_animation = Animated.sequence([
-      Animated.delay(2000),
-      shift_animation,
-    ]);
-
-    final_animation.start(() => {
-      // Reset and loop
-      const { fade1, fade2, top1, top2, text1, text2 } = this.state;
-      fade1.setValue(1);
-      fade2.setValue(0);
-      top1.setValue(0);
-      top2.setValue(20);
-
+    shift_animation.start(() => {      
       // Update index
-      if (this.index + 1 >= this.words.length) {
-        this.index = 0;
-        this.setState({
-          text1: text2,
-          text2: this.words[0],
-        });
-      } else {
-        this.setState({
-          text1: text2,
-          text2: this.words[++this.index],
-        });
-      }
-
-      console.log(text1, text2, this.index);
+      if (this.looper) clearTimeout(this.looper);
+      this.looper = setTimeout(() => {
+        // Reset and loop
+        const { fade1, fade2, top1, top2, text2 } = this.state;
+        fade1.setValue(1);
+        fade2.setValue(0);
+        top1.setValue(0);
+        
+        top2.setValue(20);
+        if (this.index + 1 >= this.words.length) {
+          this.index = 0;
+          this.setState({
+            text1: text2,
+            text2: this.words[0],
+          });
+        } else {
+          this.setState({
+            text1: text2,
+            text2: this.words[++this.index],
+          });
+        }
+      }, 2000);
     });
   };
 }
