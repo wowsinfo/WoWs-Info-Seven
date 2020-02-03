@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Headline, Title, Button, IconButton, Caption, Divider } from 'react-native-paper';
-import { ConsumerForAll } from 'src/ui/component';
+import { ConsumerForAll, ShiftingText } from 'src/ui/component';
 import Utils from 'src/core/Utils';
 
 export interface UserProps {
@@ -47,7 +47,7 @@ class User extends Component<UserProps, UserState> {
             <IconButton icon={require('../../../../assets/Logo.png')}
               size={64} color={c?.theme.getPrimary()} style={{margin: -16}}/>
             <View style={titleTextView}>
-              <AppTitle titles={['Ultimate', 'Ultra', 'Pro', 'X', 'Y', 'Z']}
+              <ShiftingText titles={['Ultimate', 'Ultra', 'Pro', 'X', 'Y', 'Z']}
                 prefix={<Title style={{marginLeft: -16}}>WoWs Info</Title>}/>
               <Caption>1.1.0 (0.9.0.0)</Caption>
               </View>

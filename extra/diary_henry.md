@@ -9,7 +9,8 @@ Template
 
 ## 04/02/2019
 ### What have I done?
-Added package.json inside src/ folder to use absolute path and prevent ../../ chaining.
+Added `package.json` inside `src` folder to use absolute path and prevent `../../` chaining. 
+Updated all imports. 
 ### What to do tomorrow?
 
 ## 01/02/2019
