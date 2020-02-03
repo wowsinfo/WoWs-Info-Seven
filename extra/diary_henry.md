@@ -10,7 +10,7 @@ Template
 ## 04/02/2019
 ### What have I done?
 Added `package.json` inside `src` folder to use absolute path and prevent `../../` chaining. 
-Updated all imports. 
+Fixed `StaturBar` issue on IOS. The animation looks ok and it is not that distracting.
 ### What to do tomorrow?
 
 ## 01/02/2019

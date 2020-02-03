@@ -19,7 +19,7 @@ class User extends Component<UserProps, UserState> {
   constructor(props: UserProps) {
     super(props);
   }
-
+  
   render() {
     const { container, buttonView, userView, greetingText, divider, userText } = styles;
     return (
@@ -42,19 +42,25 @@ class User extends Component<UserProps, UserState> {
     const { titleView, titleTextView } = styles;
     return (
       <ConsumerForAll>
-        { c => 
-          <View style={titleView}>
-            <IconButton icon={require('../../../../assets/Logo.png')}
-              size={64} color={c?.theme.getPrimary()} style={{margin: -16}}/>
-            <View style={titleTextView}>
-              <ShiftingText titles={['Ultimate', 'Ultra', 'Pro', 'X', 'Y', 'Z']}
-                prefix={<Title style={{marginLeft: -16}}>WoWs Info</Title>}/>
-              <Caption>1.1.0 (0.9.0.0)</Caption>
-              </View>
-            <IconButton icon='settings' onPress={() => null}
-              size={32} color={c?.theme.getPrimary()} style={{margin: 0}}/>
-          </View>
-        }
+        { c => {
+          const t = c!.theme;
+          const primary = t.getPrimary();
+
+          return (
+            <View style={titleView}>
+              <IconButton icon={require('../../../../assets/Logo.png')}
+                size={64} color={primary} style={{margin: -16}}/>
+              <View style={titleTextView}>
+                <ShiftingText titles={['Ultimate', 'Ultra', 'Pro', 'X', 'Y', 'Z']}
+                  prefix={<Headline style={{fontSize: 18, fontWeight: 'bold'}}>WoWs Info</Headline>} 
+                  titleStyle={{fontSize: 18, color: t.isDarkTheme() ? 'white' : 'black'}}/>
+                <Caption>1.1.0 (0.9.0.0)</Caption>
+                </View>
+              <IconButton icon='settings' onPress={() => null}
+                size={32} color={primary} style={{margin: 0}}/>
+            </View>
+          );
+        }}
       </ConsumerForAll>
     );
   }
