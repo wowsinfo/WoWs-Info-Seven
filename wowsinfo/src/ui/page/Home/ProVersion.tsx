@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { WoWsComponent, SetupProps } from '../../component/WoWsComponent';
 import { Surface, Appbar, List, Button, Divider } from 'react-native-paper';
 import { StyleSheet, FlatList, ScrollView } from 'react-native';
-import { langs } from '../../../core/value/Language';
 import { Actions } from 'react-native-router-flux';
-import { ContainedButton } from '../../component';
+import { SetupProps, WoWsComponent } from 'src/ui/component/WoWsComponent';
+import { langs } from 'src/core/value/Language';
+import { ContainedButton } from 'src/ui/component';
 
 export interface ProVersionProps extends SetupProps {
 

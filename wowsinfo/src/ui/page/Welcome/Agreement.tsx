@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import { WoWsComponent, SetupProps } from "src/ui/component/WoWsComponent";
 import { Surface, Button, Colors, Portal, Dialog, Paragraph, Appbar } from "react-native-paper";
 import { Actions } from "react-native-router-flux";
-import { langs } from "../../../core/value/Language";
 import { StyleSheet, Alert } from "react-native";
-import { ContainedButton } from "../../component";
+import { langs } from 'src/core/value/Language';
 
 interface AgreementState {
   visible: boolean

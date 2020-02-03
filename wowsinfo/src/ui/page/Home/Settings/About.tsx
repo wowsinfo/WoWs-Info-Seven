@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Surface, Text, Headline, Paragraph, Button, Title, Appbar, Caption } from 'react-native-paper';
-import { AppLogo, ContainedButton } from '../../../component';
 import { StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { langs } from '../../../../core/value/Language';
-import { SetupProps, WoWsState, WoWsComponent } from '../../../component/WoWsComponent';
-import Utils from '../../../../core/Utils';
+import { SetupProps, WoWsState, WoWsComponent } from 'src/ui/component/WoWsComponent';
+import { AppLogo, ContainedButton } from 'src/ui/component';
+import Utils from 'src/core/Utils';
+import { langs } from 'src/core/value/Language';
 
 export interface AboutProps extends SetupProps {
 

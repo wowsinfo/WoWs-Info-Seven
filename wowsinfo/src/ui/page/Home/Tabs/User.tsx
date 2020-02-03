@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Text, Headline, Title, Button, IconButton, Colors, Caption, Divider, Appbar } from 'react-native-paper';
-import { ConsumerForAll, AppTitle } from '../../../component';
-import Utils from '../../../../core/Utils';
+import { Headline, Title, Button, IconButton, Caption, Divider } from 'react-native-paper';
+import { ConsumerForAll } from 'src/ui/component';
+import Utils from 'src/core/Utils';
 
 export interface UserProps {
 

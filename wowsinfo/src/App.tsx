@@ -14,7 +14,6 @@ import { Router, Stack, Scene, Actions } from 'react-native-router-flux';
 import { Agreement } from './ui/page/Welcome';
 import { Home, Settings, ProVersion, About, Loading } from './ui/page';
 import { View, StatusBar, StyleSheet, BackHandler } from 'react-native';
-import { Surface, Colors } from 'react-native-paper';
 import { ConsumerForAll } from './ui/component';
 import DataManager from './core/data/DataManager';
 

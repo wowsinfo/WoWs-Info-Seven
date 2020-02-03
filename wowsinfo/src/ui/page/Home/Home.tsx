@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { WoWsComponent, WoWsState } from '../../component/WoWsComponent';
 import { Surface, Appbar, BottomNavigation, Text } from 'react-native-paper';
 import { StyleSheet } from 'react-native';
 import { Wiki, Website, Search, User, RS } from './Tabs';
-import { langs } from '../../../core/value/Language';
-import Utils from '../../../core/Utils';
-import { ConsumerForAll } from '../../component';
+import { WoWsState, WoWsComponent } from 'src/ui/component/WoWsComponent';
+import { langs } from 'src/core/value/Language';
+import { ConsumerForAll } from 'src/ui/component';
+import Utils from 'src/core/Utils';
 
 interface HomeState extends WoWsState {
   index: number,

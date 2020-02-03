@@ -7,6 +7,11 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## 04/02/2019
+### What have I done?
+Added package.json inside src/ folder to use absolute path and prevent ../../ chaining.
+### What to do tomorrow?
+
 ## 01/02/2019
 ### What have I done?
 Added `color` and it was really useful to tackle colour related problems. 

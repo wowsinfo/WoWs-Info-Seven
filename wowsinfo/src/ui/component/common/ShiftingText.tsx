@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, Animated, StyleProp } from 'react-native';
+import { StyleSheet, View, Animated, StyleProp } from 'react-native';
 
-interface AppTitleState {
+interface ShiftingTextState {
   // label 1
   fade1: Animated.Value;
   top1: Animated.Value;
@@ -12,7 +12,7 @@ interface AppTitleState {
   text2: string;
 }
 
-export interface AppTitleProps {
+export interface ShiftingTextProps {
   /**
    * A list of titles
    */
@@ -20,7 +20,7 @@ export interface AppTitleProps {
   /**
    * Style of the title
    */
-  titleStyle?: StyleProp<Text>,
+  titleStyle?: StyleProp<any>,
   /**
    * Render anything before the title
    */
@@ -36,14 +36,14 @@ export interface AppTitleProps {
   shuffle?: boolean,
 }
 
-class AppTitle extends React.Component<AppTitleProps, AppTitleState> {
+class ShiftingText extends React.Component<ShiftingTextProps, ShiftingTextState> {
   private index: number = 1;
   private words: string[];
   private length: number;
   private frequency: number = 2000;
   private looper?: number;
 
-  constructor(props: AppTitleProps) {
+  constructor(props: ShiftingTextProps) {
     super(props);
 
     this.words = props.titles;
@@ -79,27 +79,23 @@ class AppTitle extends React.Component<AppTitleProps, AppTitleState> {
     this.animate();
 
     const { prefix, titleStyle } = this.props;
-    const { center, shift, t, root } = styles;
+    const { root, shifting, t } = styles;
     const { fade1, top1, text1, fade2, top2, text2 } = this.state;
 
     // Create style of text1 and text2
-    const t1Style = StyleSheet.flatten([t, { top: top1, opacity: fade1 }, titleStyle]);
+    const t1Style = StyleSheet.flatten([t, { position: 'absolute', top: top1, opacity: fade1 }, titleStyle]);
     const t2Style = StyleSheet.flatten([t, { top: top2, opacity: fade2 }, titleStyle]);
 
     return (
       <View style={root}>
-        <View style={shift}>
-          { prefix }
-          <View style={center}>
-            <View>
-              <Animated.Text style={t1Style}>
-                {text1}
-              </Animated.Text>
-              <Animated.Text style={t2Style}>
-                {text2}
-              </Animated.Text>
-            </View>
-          </View>
+        { prefix }
+        <View style={shifting}>
+          <Animated.Text style={t1Style}>
+            {text1}
+          </Animated.Text>
+          <Animated.Text style={t2Style}>
+            {text2}
+          </Animated.Text>
         </View>
       </View>
     );
@@ -157,24 +153,17 @@ class AppTitle extends React.Component<AppTitleProps, AppTitleState> {
 
 const styles = StyleSheet.create({
   root: {
-    flex: 1,
+    flexDirection: 'row', 
+    alignContent: 'center', 
+  },
+  shifting: {
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  shift: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-
-  },
-  center: {
-    top: -10,
-    bottom: 10
   },
   t: {
-    position: 'absolute',
-    left: 4,
+    left: 4
   },
 });
 
-export { AppTitle };
+export { ShiftingText };

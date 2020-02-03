@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Button, Colors, Appbar, Surface } from 'react-native-paper';
-import { ConsumerForAll } from '../../../component';
-import { UserTheme } from '../../../../core/model';
+import { ConsumerForAll } from 'src/ui/component';
+import { UserTheme } from 'src/core/model';
 
 export interface WikiProps {
 

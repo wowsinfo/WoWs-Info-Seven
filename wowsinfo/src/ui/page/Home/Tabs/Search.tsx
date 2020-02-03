@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Searchbar, Appbar } from 'react-native-paper';
-import { ConsumerForAll, ContextForAll } from '../../../component';
+import { ConsumerForAll } from 'src/ui/component';
 
 export interface SearchProps {
 
