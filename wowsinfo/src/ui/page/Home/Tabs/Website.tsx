@@ -24,32 +24,32 @@ class Website extends Component<WebsiteProps, WebsiteState> {
 
   render() {
     const { container } = styles;
-    return (
-      <View style={container}>
-        <Appbar.Header>
-          <Appbar.Content title='Websites' />
-        </Appbar.Header>
-        { this.director.render() }
-      </View>
-    );
-    
     // return (
     //   <View style={container}>
     //     <Appbar.Header>
     //       <Appbar.Content title='Websites' />
     //     </Appbar.Header>
-    //     <List.Accordion title='Officials'>
-    //     </List.Accordion>
-    //     <List.Accordion title='Latest news'>
-    //     </List.Accordion>
-    //     <List.Accordion title='Statistics'>
-    //     </List.Accordion>
-    //     <List.Accordion title='YouTubers'>
-    //     </List.Accordion>
-    //     <List.Accordion title='Utilities' expanded>
-    //     </List.Accordion>
+    //     { this.director.render() }
     //   </View>
     // );
+
+    return (
+      <View style={container}>
+        <Appbar.Header>
+          <Appbar.Content title='Websites' />
+        </Appbar.Header>
+        <List.Accordion title='Officials'>
+        </List.Accordion>
+        <List.Accordion title='Latest news'>
+        </List.Accordion>
+        <List.Accordion title='Statistics'>
+        </List.Accordion>
+        <List.Accordion title='YouTubers'>
+        </List.Accordion>
+        <List.Accordion title='Utilities' expanded>
+        </List.Accordion>
+      </View>
+    );
   }
 }
 

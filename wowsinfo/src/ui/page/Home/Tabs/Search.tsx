@@ -39,7 +39,7 @@ class Search extends Component<SearchProps, SearchState> {
           return (
             <Appbar.Header>
               <Searchbar style={search} iconColor={textColour} placeholderTextColor={placeHolderColour}
-                selectionColor={textColour} placeholder='Search players or clans'/>
+                inputStyle={{color: textColour}} selectionColor={textColour} placeholder='Search players or clans'/>
             </Appbar.Header>
           );
         }}
