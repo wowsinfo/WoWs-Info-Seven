@@ -15,6 +15,7 @@ import { PlayerShip } from './page/player/PlayerShip';
 import { Detailed } from './page/player/Detailed';
 import { Rank } from './page/player/Rank';
 import { setJSExceptionHandler, setNativeExceptionHandler } from 'react-native-exception-handler';
+import AsyncStorage from '@react-native-community/async-storage';
 
 setJSExceptionHandler((e, fatal) => {
   if (fatal) {
@@ -48,6 +49,14 @@ function showAlert(msg, mode) {
 class App extends Component {
   constructor(props) {
     super(props);
+
+    const json = {};
+    AsyncStorage.getAllKeys().then(keys => {
+      AsyncStorage.multiGet(keys).then(value => {
+        value.map(v => json[v[0]] = JSON.parse(v[1]));
+        console.log(JSON.stringify(json));
+      })
+    })
 
     this.state = {
       loading: true,
