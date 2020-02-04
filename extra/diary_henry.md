@@ -12,6 +12,7 @@ Template
 Added `package.json` inside `src` folder to use absolute path and prevent `../../` chaining. 
 Fixed `StaturBar` issue on IOS. The animation looks ok and it is not that distracting.
 ### What to do tomorrow?
+More `json2ts`. It will be really handly if you want to convert json into typescipt interfaces.
 
 ## 01/02/2019
 ### What have I done?
