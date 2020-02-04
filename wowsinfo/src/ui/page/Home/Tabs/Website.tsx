@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Appbar, List } from 'react-native-paper';
+import { WebsiteDirector } from 'src/core/website';
 
 export interface WebsiteProps {
 
@@ -14,8 +15,11 @@ interface WebsiteState {
  * Website Class
  */
 class Website extends Component<WebsiteProps, WebsiteState> {
+  private director: WebsiteDirector;
+
   constructor(props: WebsiteProps) {
     super(props);
+    this.director = new WebsiteDirector();
   }
 
   render() {
@@ -25,18 +29,27 @@ class Website extends Component<WebsiteProps, WebsiteState> {
         <Appbar.Header>
           <Appbar.Content title='Websites' />
         </Appbar.Header>
-        <List.Accordion title='Officials'>
-        </List.Accordion>
-        <List.Accordion title='Latest news'>
-        </List.Accordion>
-        <List.Accordion title='Statistics'>
-        </List.Accordion>
-        <List.Accordion title='YouTubers'>
-        </List.Accordion>
-        <List.Accordion title='Utilities'>
-        </List.Accordion>
+        { this.director.render() }
       </View>
     );
+    
+    // return (
+    //   <View style={container}>
+    //     <Appbar.Header>
+    //       <Appbar.Content title='Websites' />
+    //     </Appbar.Header>
+    //     <List.Accordion title='Officials'>
+    //     </List.Accordion>
+    //     <List.Accordion title='Latest news'>
+    //     </List.Accordion>
+    //     <List.Accordion title='Statistics'>
+    //     </List.Accordion>
+    //     <List.Accordion title='YouTubers'>
+    //     </List.Accordion>
+    //     <List.Accordion title='Utilities' expanded>
+    //     </List.Accordion>
+    //   </View>
+    // );
   }
 }
 
