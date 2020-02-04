@@ -109,16 +109,20 @@ class ShiftingText extends React.Component<ShiftingTextProps, ShiftingTextState>
       // Move label 1 up and fade out
       Animated.timing(this.state.fade1, {
         toValue: 0,
+        duration: 300
       }),
       Animated.timing(this.state.top1, {
         toValue: -20,
+        duration: 500
       }),
       // Move label 2 up and fade in
       Animated.timing(this.state.fade2, {
         toValue: 1,
+        duration: 300
       }),
       Animated.timing(this.state.top2, {
         toValue: 0,
+        duration: 500
       }),
     ]);
 
