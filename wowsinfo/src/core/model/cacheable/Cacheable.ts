@@ -32,7 +32,7 @@ export enum DATA_KEY {
   user_app_language = '@WoWs_Info:userLanguage',
   user_pro_version = '@WoWs_Info:proVersion',
   // for home bottom navigation
-  user_tab_index = '@WoWs_Info:tabIndex',
+  // user_tab_index = '@WoWs_Info:tabIndex',
 
   /// Game version from server
   game_version = '@WoWs_Info:gameVersion',
