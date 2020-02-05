@@ -1,4 +1,4 @@
-import { Cacheable, UserTheme, GameServer } from "../model/cacheable";
+import { Cacheable, UserTheme, GameServer, ApiLanguage, AppVersion, PlayerAccount, UserLanguage, WoWsFirstLaunch, WoWsLastUpdate } from "../model/cacheable";
 
 /**
  * Everything which are saved locally
@@ -27,6 +27,12 @@ class LocalData {
   /// Preference
   private userTheme: UserTheme = new UserTheme();
   private userServer: GameServer = new GameServer();
+  private apiLanguage: ApiLanguage = new ApiLanguage();
+  private appVersion: AppVersion = new AppVersion();
+  private playerAccount: PlayerAccount = new PlayerAccount();
+  private userLanguage: UserLanguage = new UserLanguage();
+  private firstLaunch: WoWsFirstLaunch = new WoWsFirstLaunch();
+  private lastUpdate : WoWsLastUpdate = new WoWsLastUpdate();
 
   /// CachedWiki
 

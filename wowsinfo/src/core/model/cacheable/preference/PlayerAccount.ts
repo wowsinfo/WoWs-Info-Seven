@@ -39,3 +39,5 @@ class PlayerAccount implements Preference {
     }
   }
 }
+
+export { PlayerAccount };
