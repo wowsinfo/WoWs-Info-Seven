@@ -1,4 +1,17 @@
-import { Cacheable, UserTheme, GameServer, ApiLanguage, AppVersion, PlayerAccount, UserLanguage, WoWsFirstLaunch, WoWsLastUpdate } from "../model/cacheable";
+import {
+  Cacheable,
+  UserTheme,
+  GameServer,
+  ApiLanguage,
+  AppVersion,
+  PlayerAccount,
+  UserLanguage,
+  WoWsFirstLaunch,
+  WoWsLastUpdate,
+  WoWsRSIP,
+  GameVersion,
+  UserProVersion,
+} from '../model/cacheable';
 
 /**
  * Everything which are saved locally
@@ -10,7 +23,7 @@ import { Cacheable, UserTheme, GameServer, ApiLanguage, AppVersion, PlayerAccoun
  * - First launch
  * - Game server
  * - More...
- * 
+ *
  * It also some constants to be shared
  */
 class LocalData {
@@ -25,37 +38,52 @@ class LocalData {
   static LatestReleaseLink: string = `${LocalData.GitHubLink}/releases/latest`;
 
   /// Preference
-  private userTheme: UserTheme = new UserTheme();
-  private userServer: GameServer = new GameServer();
   private apiLanguage: ApiLanguage = new ApiLanguage();
   private appVersion: AppVersion = new AppVersion();
+  private userServer: GameServer = new GameServer();
+  private gameVersion: GameVersion = new GameVersion();
   private playerAccount: PlayerAccount = new PlayerAccount();
   private userLanguage: UserLanguage = new UserLanguage();
+  private proversion: UserProVersion = new UserProVersion();
+  private userTheme: UserTheme = new UserTheme();
   private firstLaunch: WoWsFirstLaunch = new WoWsFirstLaunch();
-  private lastUpdate : WoWsLastUpdate = new WoWsLastUpdate();
+  private lastUpdate: WoWsLastUpdate = new WoWsLastUpdate();
+  private rsIP: WoWsRSIP = new WoWsRSIP();
 
   /// CachedWiki
 
-
-  constructor() { }
+  constructor() {}
 
   /**
    * All essential data
    * - Theme
-   * - Language
+   * - User language
    * - First launch
    * - Pro version
    */
   essential(): Cacheable[] {
-    return [];
+    return [
+      this.userTheme,
+      this.firstLaunch,
+      this.userLanguage,
+      this.proversion
+    ];
   }
 
   /**
    * Everything that are not essential
    */
   rest(): Cacheable[] {
-    return [];
+    return [
+      this.apiLanguage,
+      this.appVersion,
+      this.userServer,
+      this.gameVersion,
+      this.playerAccount,
+      this.lastUpdate,
+      this.rsIP
+    ];
   }
 }
 
-export { LocalData };
+export {LocalData};
