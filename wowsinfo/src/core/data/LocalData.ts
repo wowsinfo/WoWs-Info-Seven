@@ -16,7 +16,7 @@ import { Cacheable, UserTheme, GameServer, ApiLanguage, AppVersion, PlayerAccoun
 class LocalData {
   static Version: string = '1.1.0';
   static IOSVersion: string = '1.7.0';
-  static GameVersion: string = '0.8.10.0';
+  static GameVersion: string = '0.9.0.0';
   static GitHubLink: string = 'https://github.com/HenryQuan/WoWs-Info';
   static AppStoreLink: string = 'https://itunes.apple.com/app/id1202750166';
   static GooglePlayLink: string = 'https://play.google.com/store/apps/details?id=com.yihengquan.wowsinfo';
