@@ -32,13 +32,13 @@ class UserLanguage implements Preference {
 
   fromJSON(jsonString: string | null) {
     if (jsonString) {
-      let json = JSON.parse(jsonString);
-      if (json.userLanguage) {
-        this.userLanguage = json.userLanguage;
-      } else {
-        this.default();
+      const userLanguage = JSON.parse(jsonString);
+      if (userLanguage) {
+        this.userLanguage = userLanguage;
       };
-    }
+    } else {
+      this.default();
+    };
   }
 }
 

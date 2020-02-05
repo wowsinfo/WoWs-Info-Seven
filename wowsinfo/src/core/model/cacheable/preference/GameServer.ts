@@ -42,10 +42,10 @@ class GameServer implements Preference {
       let json = JSON.parse(jsonString);
       if (json.server) {
         this.server = json.server;
-      } else {
-        this.default();
       };
-    }
+    } else {
+      this.default();
+    };
   }
 }
 
