@@ -35,10 +35,10 @@ class AppVersion implements Preference {
       let currVersion = JSON.parse(jsonString);
       if (currVersion) {
         this.appVersion = currVersion;
-      };
+      }
     } else {
       this.default();
-    };
+    }
   }
 }
 

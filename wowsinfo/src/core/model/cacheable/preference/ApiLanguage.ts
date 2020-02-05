@@ -31,13 +31,13 @@ class ApiLanguage implements Preference {
 
   fromJSON(jsonString: string | null) {
     if (jsonString) {
-      const apiLanguage = JSON.parse(jsonString);
+      let apiLanguage = JSON.parse(jsonString);
       if (apiLanguage) {
         this.apiLanguage = apiLanguage;
-      };
+      }
     } else {
       this.default();
-    };
+    }
   }
 }
 
