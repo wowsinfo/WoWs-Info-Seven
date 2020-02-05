@@ -3,7 +3,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 import { DATA_KEY } from "../Cacheable";
 import { langs } from "src/core/value/Language";
 
-class ApiLanguage implements Preference {
+class UserLanguage implements Preference {
   private userLanguage?: string;
   get UserLanguage(): string {
     return this.userLanguage!;
@@ -42,4 +42,4 @@ class ApiLanguage implements Preference {
   }
 }
 
-export { ApiLanguage };
+export { UserLanguage };
