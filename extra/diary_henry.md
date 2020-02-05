@@ -7,6 +7,12 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## 05/02/2019
+### What have I done?
+Completed `Preference` with senpai
+### What to do tomorrow?
+Wiki and all other backend if possible
+
 ## 04/02/2019
 ### What have I done?
 Added `package.json` inside `src` folder to use absolute path and prevent `../../` chaining. 
