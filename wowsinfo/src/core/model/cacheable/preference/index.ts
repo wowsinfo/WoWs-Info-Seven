@@ -4,6 +4,7 @@ export * from './GameServer';
 export * from './GameVersion';
 export * from './PlayerAccount';
 export * from './UserLanguage';
+export * from './UserProVersion';
 export * from './UserTheme';
 export * from './WoWsFirstLaunch';
 export * from './WoWsLastUpdate';
