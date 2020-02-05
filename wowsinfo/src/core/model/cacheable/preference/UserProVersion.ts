@@ -1,7 +1,6 @@
 import { Preference } from "./Preference";
 import AsyncStorage from "@react-native-community/async-storage";
 import { DATA_KEY } from "../Cacheable";
-import { LocalData } from "src/core/data/LocalData";
 
 class UserProVersion implements Preference {
   private userProVersion?: boolean;
