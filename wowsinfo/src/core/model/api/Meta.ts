@@ -4,6 +4,8 @@ class Meta {
     total?: number;
     limit?: number;
     page?: number;
+    // If it's not null it's hidden
+    hidden?: object[];
 
     constructor(json: any) {
         this.count = json.count;
@@ -11,6 +13,7 @@ class Meta {
         this.total = json.total;
         this.limit = json.limit;
         this.page = json.page;
+        this.hidden = json.hidden;
     }
 }
 
