@@ -5,7 +5,8 @@ abstract class APIRepsonse {
     meta?: Meta;
 
     constructor(json: any) {
-
+        this.status = json.status;
+        this.meta = new Meta(json);
     }
 }
 
