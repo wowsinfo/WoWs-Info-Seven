@@ -7,6 +7,12 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## 08/02/2020
+### What have I done?
+Implemented game version model for api response
+### What to do tomorrow?
+Continue making model for other api responses
+
 ## 05/02/2020
 ### What have I done?
 Implemented all of the other preferences model
