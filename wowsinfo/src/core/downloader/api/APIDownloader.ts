@@ -28,6 +28,7 @@ export abstract class APIDownloader implements Downloader {
     if (response.status === 200) {
       // Only read it if it has a valid response
       this.json = await response.json();
+      // Check if meta.status is ok as well
     }
   }
 

@@ -1,10 +1,11 @@
+/// Meta should never be null so you don't need to check
 class Meta {
     count?: number;
     page_total?: number;
     total?: number;
     limit?: number;
     page?: number;
-    // If it's not null it's hidden
+    // If it's not null, it's hidden
     hidden?: object[];
 
     constructor(json: any) {
