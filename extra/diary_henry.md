@@ -7,6 +7,20 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## 09/02/2019
+### What have I done?
+Added more functions in `APIDownloader` and some more header comments. 
+Is it too much codes just for so little? 
+I don't know but I think this is good for the long run. 
+### What to do tomorrow?
+Even more `API`?
+
+## 08/02/2019
+### What have I done?
+Meeting with senpai. Mainly focused on `API`
+### What to do tomorrow?
+More `API`?
+
 ## 05/02/2019
 ### What have I done?
 Completed `Preference` with senpai
