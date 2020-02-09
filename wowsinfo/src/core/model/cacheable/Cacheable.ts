@@ -11,7 +11,7 @@ export interface Cacheable {
   /**
    * Load data from AsyncStorage
    */
-  load(): Promise<void>;
+  load(): Promise<boolean>;
   /**
    * Parses json string and return the appropriate object
    */

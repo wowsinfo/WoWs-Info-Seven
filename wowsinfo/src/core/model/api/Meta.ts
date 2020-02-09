@@ -1,4 +1,6 @@
-/// Meta should never be null so you don't need to check
+/**
+ * Meta should never be null so you don't need to check
+ */
 class Meta {
     count?: number;
     page_total?: number;

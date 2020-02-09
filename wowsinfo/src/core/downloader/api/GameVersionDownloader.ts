@@ -1,6 +1,9 @@
 import { APIDownloader } from './APIDownloader';
 import { APIGameVersion } from 'src/core/model/api/APIGameVersion';
 
+/**
+ * Get current game version to check if WoWs Info needs to update data
+ */
 class GameVersionDownloader extends APIDownloader {
   constructor(server: string) {
     super(server);
