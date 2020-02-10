@@ -60,8 +60,8 @@ export abstract class APIDownloader implements Downloader {
       if (response.status === 200) {
         // Only read it if it has a valid response
         const jsonToSave = await response.json();
-        // Check if meta.status is ok as well
-        if (jsonToSave.meta.status === 'ok') {
+        // Check if status is ok as well
+        if (jsonToSave.status === 'ok') {
           this.json = jsonToSave;
         }
       }
