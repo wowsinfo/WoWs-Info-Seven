@@ -7,6 +7,14 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## 10/02/2019
+### What have I done?
+Converted AppDelegate to Swift and created a bridging header for Swift. 
+Objective-C is great but Swift is just more modern and easier for me. 
+This is also part of the preparation for native modules (e.g. Charts). 
+### What to do tomorrow?
+No idea...
+
 ## 09/02/2019
 ### What have I done?
 Added more functions in `APIDownloader` and some more header comments. 
