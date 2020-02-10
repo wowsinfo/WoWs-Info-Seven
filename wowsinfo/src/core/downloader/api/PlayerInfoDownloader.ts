@@ -1,10 +1,9 @@
 import { APIDownloader } from './APIDownloader';
-import { APIGameVersion } from 'src/core/model/api/APIGameVersion';
 
 /**
  * Get current game version to check if WoWs Info needs to update data
  */
-class GameVersionDownloader extends APIDownloader {
+class PlayerInfoDownloader extends APIDownloader {
   constructor(server: string) {
     super(server);
     this.appendLink(`wows/encyclopedia/info/?application_id=${this.getKey()}&fields=game_version`);
@@ -21,4 +20,4 @@ class GameVersionDownloader extends APIDownloader {
   }
 }
 
-export { GameVersionDownloader };
+export { PlayerInfoDownloader };

@@ -1,5 +1,6 @@
 import { AppKey } from './key';
 import { Downloader } from '../Downloader';
+import { langs } from 'src/core/value/Language';
 
 /**
  * The base of all downloaders
@@ -19,13 +20,20 @@ export abstract class APIDownloader implements Downloader {
   }
 
   /**
+   * Append language to API string
+   */
+  appendLang() {
+    
+  }
+
+  /**
    * Append to current link to make the complete url
    * - Do not start with a `-`
    */
   appendLink = (more: string) => this.link + more;
 
   /**
-   * Get the hidden for data request
+   * Get the hidden key for data request
    */
   getKey = () => this.key;
 
