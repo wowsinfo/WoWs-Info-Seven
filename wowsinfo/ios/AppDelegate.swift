@@ -11,18 +11,11 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, RCTBridgeDelegate {
   func sourceURL(for bridge: RCTBridge!) -> URL! {
-    let url: URL!
-    
     #if DEBUG
-        print("DEBUG")
-        url = RCTBundleURLProvider.sharedSettings().jsBundleURL(forBundleRoot: "index", fallbackResource: nil)
+        return RCTBundleURLProvider.sharedSettings().jsBundleURL(forBundleRoot: "index", fallbackResource: nil)
     #else
-        print("RELEASE")
-        url = Bundle.main.url(forResource: "main", withExtension: "jsbundle")
+        return Bundle.main.url(forResource: "main", withExtension: "jsbundle")
     #endif
-    
-    print(url!)
-    return url
   }
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
