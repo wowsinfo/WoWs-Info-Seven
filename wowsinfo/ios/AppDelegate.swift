@@ -10,6 +10,8 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, RCTBridgeDelegate {
+  var window: UIWindow?
+  
   func sourceURL(for bridge: RCTBridge!) -> URL! {
     #if DEBUG
         return RCTBundleURLProvider.sharedSettings().jsBundleURL(forBundleRoot: "index", fallbackResource: nil)
@@ -23,11 +25,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCTBridgeDelegate {
     let rootView = RCTRootView(bridge: bridge!, moduleName: "wowsinfo", initialProperties: nil)
     rootView.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1)
 
-    let window = UIWindow(frame: UIScreen.main.bounds)
+    window = UIWindow(frame: UIScreen.main.bounds)
     let rootViewController = UIViewController()
     rootViewController.view = rootView
-    window.rootViewController = rootViewController
-    window.makeKeyAndVisible()
+    window?.rootViewController = rootViewController
+    window?.makeKeyAndVisible()
 
     return true
   }
