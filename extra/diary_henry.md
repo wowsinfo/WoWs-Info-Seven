@@ -9,12 +9,13 @@ Template
 
 ## 10/02/2019
 ### What have I done?
-Converted AppDelegate to Swift and created a bridging header for Swift. 
+Converted AppDelegate to `Swift` and created a bridging header for Swift. 
 Objective-C is great but Swift is just more modern and easier for me. 
 This is also part of the preparation for native modules (e.g. Charts). 
-Android is now using Kotlin. Same reason as IOS. 
+Android is now using `Kotlin`. Same reason as IOS. 
+Added `WoWsAPI` to `PostMan` for easier development.
 ### What to do tomorrow?
-No idea...
+More API!!
 
 ## 09/02/2019
 ### What have I done?
