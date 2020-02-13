@@ -13,3 +13,4 @@ WoWsInfo/index\.android\.js
 *.zip
 .DS_Store
 **/._*
+**/*.ttf
