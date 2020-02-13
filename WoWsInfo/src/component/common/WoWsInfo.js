@@ -12,7 +12,7 @@ import { lang } from '../../value/lang';
 import { LOCAL } from '../../value/data';
 import { FooterButton } from './FooterButton';
 import { SafeAction, random } from '../../core';
-import { ThemeBackColour, ThemeColour } from '../../value/colour';
+import { ThemeBackColour, ThemeColour, ViewBackColour } from '../../value/colour';
 import { View } from 'react-native-animatable';
 
 class WoWsInfo extends Component {
@@ -44,9 +44,9 @@ class WoWsInfo extends Component {
         <SafeAreaView style={safeView}>
           <StatusBar barStyle={DARKMODE ? 'light-content' : 'dark-content'} 
             backgroundColor={ThemeColour()}/>
-            <Surface style={child}>
+            <View style={[child, ViewBackColour()]}>
               { children }
-            </Surface>
+            </View>
           { empty ? null : this.renderFooter() }
         </SafeAreaView>
       </Surface>

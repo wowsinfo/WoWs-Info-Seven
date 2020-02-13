@@ -73,11 +73,7 @@ class App extends Component {
       LASTLOCATION = DATA[LOCAL.lastLocation];
       DARKMODE = DATA[LOCAL.darkMode];
 
-      // From 19 - 6, use dark mode
-      let hour = (new Date()).getHours();
-      if (hour >= 19 || hour < 7) {
-        DARKMODE = true;
-      }
+      // No more auto dark mode
 
       let userLang = DATA[LOCAL.userLanguage];
       if (userLang !== '') lang.setLanguage(userLang);

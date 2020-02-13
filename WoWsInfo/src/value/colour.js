@@ -6,6 +6,10 @@ export const ThemeBackColour = () => {
   return {backgroundColor: DARKMODE ? GREY[900] : GREY[100]};
 }
 
+export const ViewBackColour = () => {
+  return {backgroundColor: DARKMODE ? 'black' : 'white'};
+}
+
 export const ThemeColour = () => {
   return DARKMODE ? GREY[900] : GREY[100];
 }
