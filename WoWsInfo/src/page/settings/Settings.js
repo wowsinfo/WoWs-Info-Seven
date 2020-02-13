@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, ScrollView, FlatList, StyleSheet, Linking, Share, Alert } from 'react-native';
 import { isAndroid, isIos } from 'react-native-device-detection';
-import { Surface, List, Button, Checkbox, withTheme, Portal, Dialog, DarkTheme, DefaultTheme } from 'react-native-paper';
+import { List, Button, Checkbox, withTheme, Portal, Dialog, DarkTheme, DefaultTheme } from 'react-native-paper';
 import { Actions } from 'react-native-router-flux';
 import { WoWsInfo, Touchable, SectionTitle } from '../../component';
 import { APP, getCurrServer, getAPILanguage, SERVER, getAPIList, setCurrServer, setAPILanguage, setSwapButton, getSwapButton, getUserLang, setUserLang, setImageMode, setFirstLaunch } from '../../value/data';
@@ -75,7 +75,7 @@ class Settings extends Component {
     if (display == null) display = '???';
 
     return (
-      <Surface>
+      <View>
         <SectionTitle title={lang.settings_api_settings}/>
         <List.Section title={`${lang.setting_game_server} - ${lang.server_name[server]}`}>
           <FlatList data={SERVER} renderItem={({index}) => {
@@ -92,7 +92,7 @@ class Settings extends Component {
             return <Button onPress={() => this.updateUserLang(item.code)}>{item.lang}</Button>
           }} keyExtractor={i => i.code} numColumns={3}/>
         </List.Section>
-      </Surface>
+      </View>
     )
   }
 
@@ -101,7 +101,7 @@ class Settings extends Component {
     const { tint } = styles;
 
     return (
-      <Surface>
+      <View>
         <SectionTitle title={lang.settings_app_settings}/>
         <List.Item title={lang.settings_app_dark_mode} onPress={() => this.updateTheme()} 
           right={() => <Checkbox status={darkMode ? 'checked' : 'unchecked'}/>}/>
@@ -111,7 +111,7 @@ class Settings extends Component {
           right={() => <Checkbox status={noImageMode ? 'checked' : 'unchecked'}/>}/>             
         <List.Item title={lang.settings_app_swap_buttons} onPress={() => this.swapButton(!swapButton)}
           right={() => <Checkbox status={swapButton ? 'checked' : 'unchecked'}/>}/>
-      </Surface>
+      </View>
     )
   }
 
@@ -119,7 +119,7 @@ class Settings extends Component {
     let issueLink = `${APP.Github}/issues`;
 
     return (
-      <Surface>
+      <View>
         <SectionTitle title={lang.app_name}/>
         <List.Item title={lang.settings_app_send_feedback} 
           description={lang.settings_app_send_feedback_subtitle}
@@ -132,20 +132,20 @@ class Settings extends Component {
           description={lang.settings_app_share_subtitle}/>
         { isAndroid ? <List.Item title={lang.settings_app_check_for_update} onPress={this.checkAppUpdate}
           description={`v${APP.Version}`}/> : null }
-      </Surface>
+      </View>
     )
   }
 
   renderOpenSource() {
     return (
-      <Surface>
+      <View>
         <SectionTitle title={lang.settings_open_source}/>
         <List.Item title={lang.settings_open_source_github}
           description={APP.Github} onPress={() => Linking.openURL(APP.Github)}/>
         <List.Item title={lang.settings_open_source_licence}
           description={lang.settings_open_source_licence_subtitle}
           onPress={() => SafeAction('License')} />
-      </Surface>
+      </View>
     )
   }
 
@@ -214,7 +214,7 @@ class Settings extends Component {
       global.DARK = {
         colors: {
           ...DarkTheme.colors,
-          surface: 'black',
+          View: 'black',
           text: GREY[50],
           primary: tintColour[500],
           accent: tintColour[300],
@@ -226,7 +226,7 @@ class Settings extends Component {
       global.LIGHT = {
         colors: {
           ...DefaultTheme.colors,
-          surface: 'white',
+          View: 'white',
           text: GREY[900],
           primary: tintColour[500],
           accent: tintColour[300],

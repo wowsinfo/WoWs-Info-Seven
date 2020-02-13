@@ -224,7 +224,7 @@ class Statistics extends PureComponent {
           </ScrollView>
           <FooterPlus style={footer}>
             { this.renderAchievement(achievement) }
-            { this.renderGraph(graph) }
+            {/* { this.renderGraph(graph) } */}
             { this.renderShip(ship) }
             { this.renderRank(rank, rankShip) }
           </FooterPlus>
