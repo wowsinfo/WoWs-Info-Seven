@@ -31,10 +31,6 @@ class Settings extends Component {
     this.store = isAndroid ? APP.GooglePlay : APP.AppStore;
   }
 
-  componentWillUnmount() {
-    Actions.refresh();
-  }
-
   render() {
     const { showColour } = this.state;
     return (
