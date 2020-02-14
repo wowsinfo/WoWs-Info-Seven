@@ -24,15 +24,11 @@ class ProVersion extends Component {
   async componentDidMount() {
     const allgood = await initConnection();
     console.log(allgood);
-    await consumeAllItemsAndroid();
     this.setState({
       error: !allgood,
     });
     
     if (allgood) {
-      const allPurchases = await getAvailablePurchases();
-      console.log(allPurchases);
-      // try to get products
       const items = await getSubscriptions([this.sku]);
       console.log(items);
       if (items.length === 1) {
@@ -84,7 +80,6 @@ class ProVersion extends Component {
   renderPurchaseView() {
     const { loading, error, price } = this.state;
     const { buttonView, restoreButton, discount, loader } = styles;
-    console.log(price);
     if (loading) {
       return (
         <View style={loader}>
