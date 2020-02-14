@@ -101,6 +101,8 @@ export const lang = new LocalizedStrings({
     menu_footer: 'Search',
     menu_search_player: 'Player',
     menu_search_clan: 'Clan',
+    // Pro version
+    pro_upgrade_button: 'Upgrade to Pro',
     // Search bar
     search_player_online: 'online',
     // Wiki
@@ -359,6 +361,8 @@ export const lang = new LocalizedStrings({
     menu_footer: '开始搜索',
     menu_search_player: '玩家',
     menu_search_clan: '工会',
+    // Pro version
+    pro_upgrade_button: 'Upgrade to Pro',
     // Search bar
     search_player_online: '在线',
     // Wiki
@@ -617,6 +621,8 @@ export const lang = new LocalizedStrings({
     menu_footer: '開始搜索',
     menu_search_player: '玩家',
     menu_search_clan: '工會',
+    // Pro version
+    pro_upgrade_button: 'Upgrade to Pro',
     // Search bar
     search_player_online: '在線',
     // Wiki
@@ -875,6 +881,8 @@ export const lang = new LocalizedStrings({
     menu_footer: 'サーチ',
     menu_search_player: 'プレーヤー',
     menu_search_clan: 'クラン',
+    // Pro version
+    pro_upgrade_button: 'Upgrade to Pro',
     // Search bar
     search_player_online: 'オンライン',
     // Wiki
@@ -1133,6 +1141,8 @@ export const lang = new LocalizedStrings({
     menu_footer: 'Pencarian',
     menu_search_player: 'Player',
     menu_search_clan: 'Clan',
+    // Pro version
+    pro_upgrade_button: 'Upgrade to Pro',
     // Search bar
     search_player_online: 'online',
     // Wiki

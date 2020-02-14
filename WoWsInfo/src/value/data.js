@@ -43,6 +43,8 @@ export const LOCAL = {
   userLanguage: '@WoWs_Info:userLanguage',
   // Save last visited location as a string
   lastLocation: '@WoWs_Info:lastLocation',
+  // If user has purchased pro version
+  proVersion: '@WoWs_Info:proVersion',
   // RS
   rsIP: '@WoWs_Info:rsIP',
   // Suport me

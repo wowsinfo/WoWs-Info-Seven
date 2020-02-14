@@ -6,7 +6,7 @@ import { lang } from '../../value/lang';
 import { LOCAL } from '../../value/data';
 import { SafeStorage } from '../../core';
 
-class SupportMe extends Component {
+class ProVersion extends Component {
   constructor(props) {
     super(props);
 
@@ -52,4 +52,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export { SupportMe };
+export { ProVersion };
