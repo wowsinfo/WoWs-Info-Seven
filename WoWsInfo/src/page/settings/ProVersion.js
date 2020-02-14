@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView, Alert } from 'react-native';
 import { WoWsInfo, LoadingIndicator } from '../../component';
 import { Title, List, Button, Caption, Text } from 'react-native-paper';
-import { initConnection, getSubscriptions, requestSubscription, purchaseUpdatedListener, requestPurchase, finishTransaction, consumeAllItemsAndroid } from 'react-native-iap';
+import { initConnection, getSubscriptions, requestSubscription, purchaseUpdatedListener, requestPurchase, finishTransaction, consumeAllItemsAndroid, purchaseErrorListener } from 'react-native-iap';
+
 
 let updateListener;
+let errorListener;
 
 class ProVersion extends Component {
   sku = 'wowsinfo.proversion';
@@ -44,14 +46,6 @@ class ProVersion extends Component {
       const receipt = purchase.transactionReceipt;
       if (receipt) {
         try {
-          // if (Platform.OS === 'ios') {
-          //   finishTransactionIOS(purchase.transactionId);
-          // } else if (Platform.OS === 'android') {
-          //   // If consumable (can be purchased again)
-          //   consumePurchaseAndroid(purchase.purchaseToken);
-          //   // If not consumable
-          //   acknowledgePurchaseAndroid(purchase.purchaseToken);
-          // }
           const ackResult = await finishTransaction(purchase);
           console.log(ackResult);
         } catch (ackErr) {
@@ -59,6 +53,11 @@ class ProVersion extends Component {
         }
       }}
     );
+
+    errorListener = purchaseErrorListener(error => {
+      console.log('purchaseErrorListener', error);
+      Alert.alert('purchase error', JSON.stringify(error));
+    });
   }
   
   render() {
@@ -102,7 +101,11 @@ class ProVersion extends Component {
   }
 
   buy = () => {
-    requestSubscription(this.sku, false);
+    try {
+      requestSubscription(this.sku, false);
+    } catch (err) {
+      Alert.alert(err.message);
+    }
   }
 
   restore = () => {
