@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet, ScrollView, Alert } from 'react-native';
 import { WoWsInfo, LoadingIndicator } from '../../component';
 import { Title, List, Button, Caption, Text } from 'react-native-paper';
-import { initConnection, getSubscriptions, requestSubscription, purchaseUpdatedListener, requestPurchase, finishTransaction, consumeAllItemsAndroid, purchaseErrorListener } from 'react-native-iap';
+import { initConnection, getSubscriptions, requestSubscription, purchaseUpdatedListener, finishTransaction, consumeAllItemsAndroid, purchaseErrorListener, getProducts, getAvailablePurchases } from 'react-native-iap';
 
 
 let updateListener;
@@ -23,12 +23,16 @@ class ProVersion extends Component {
 
   async componentDidMount() {
     const allgood = await initConnection();
+    console.log(allgood);
     await consumeAllItemsAndroid();
     this.setState({
       error: !allgood,
     });
     
     if (allgood) {
+      const allPurchases = await getAvailablePurchases();
+      console.log(allPurchases);
+      // try to get products
       const items = await getSubscriptions([this.sku]);
       console.log(items);
       if (items.length === 1) {
