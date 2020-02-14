@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet, ScrollView, Alert } from 'react-native';
 import { WoWsInfo, LoadingIndicator } from '../../component';
 import { Title, List, Button, Text } from 'react-native-paper';
-import { initConnection, getSubscriptions, requestSubscription, getAvailablePurchases } from 'react-native-iap';
+import { initConnection, getSubscriptions, requestSubscription, getAvailablePurchases, finishTransaction } from 'react-native-iap';
 
 
 class ProVersion extends Component {
@@ -85,7 +85,11 @@ class ProVersion extends Component {
    */
   buy = async () => {
     try {
-      await requestSubscription(this.sku, false);
+      const result = await requestSubscription(this.sku, false);
+      console.log(result);
+
+      // Complete purchase
+      await finishTransaction(result, false);
     } catch (err) {
       Alert.alert('Purchase Failed', err.message);
     }
@@ -99,9 +103,13 @@ class ProVersion extends Component {
       const history = await getAvailablePurchases();
       if (history.length > 0) {
         // Check if the status
+        console.log(history);
+        return;
       }
+
+      throw new Error('No payment history has been found');
     } catch (err) {
-      console.warn(err.message);
+      Alert.alert('Failed to restore', err.message);
     }
   }
 }
