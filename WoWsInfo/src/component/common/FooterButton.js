@@ -12,7 +12,7 @@ class FooterButton extends Component {
 
     let al = '';
     if (icon === 'settings') al = lang.button_settings_label;
-    else if (icon === 'arrow-back') al = lang.button_back_label;
+    else if (icon === 'arrow-left') al = lang.button_back_label;
     else if (icon === 'home') al = lang.button_home_label;
     else al = lang.button_menu_label;
 
@@ -27,7 +27,7 @@ class FooterButton extends Component {
   pressEvent() {
     const { icon } = this.props;
     if (icon === 'settings') SafeAction('Settings');
-    else if (icon === 'arrow-back') {
+    else if (icon === 'arrow-left') {
       Actions.pop();
       if (Actions.state.routes.length === 2) {
         setTimeout(() => Actions.refresh(), 1000);

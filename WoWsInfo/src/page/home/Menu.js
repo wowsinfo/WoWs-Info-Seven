@@ -138,7 +138,7 @@ class Menu extends PureComponent {
             { this.renderContent() }
           </Animatable.View>
         </ScrollView>
-        <FAB icon='search' style={styles.fab} onPress={() => SafeAction('Search')}/>
+        <FAB icon='magnify' style={styles.fab} onPress={() => SafeAction('Search')}/>
       </WoWsInfo>
     );
   }
@@ -151,7 +151,7 @@ class Menu extends PureComponent {
         <FlatGrid items={this.wiki} itemDimension={300} renderItem={({item}) => {
           return <List.Item title={item.t} style={{padding: 0, paddingLeft: 8}} onPress={() => item.p()}
           left={() => <List.Icon style={[icon, ThemeBackColour()]} color={TintColour()[300]} icon={item.i}/>}
-          right={() => isAndroid ? null : <List.Icon color={Colors.grey500} icon='keyboard-arrow-right'/>} />
+          right={() => isAndroid ? null : <List.Icon color={Colors.grey500} icon='chevron-right'/>} />
         }} spacing={0}/>
         <SectionTitle title={lang.extra_section_title}/>
         <List.Item title='RS Beta' description={lang.extra_rs_beta} onPress={() => SafeAction('RS')}/>

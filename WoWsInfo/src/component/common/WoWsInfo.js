@@ -77,7 +77,7 @@ class WoWsInfo extends Component {
 
   renderRight() {
     const { noRight, home } = this.props;
-    return noRight ? null : <FooterButton icon={home ? 'search' : 'arrow-back'} left={SWAPBUTTON}/>;
+    return noRight ? null : <FooterButton icon={home ? 'search' : 'arrow-left'} left={SWAPBUTTON}/>;
   }
 
   /**
