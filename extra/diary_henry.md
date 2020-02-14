@@ -7,6 +7,16 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## 14/02/2019
+### What have I done?
+Fixed many bugs and many improvements for the old version. 
+Started working on IAP and it will be available at a reduced price.
+### What to do tomorrow?
+
+## 11/02/2019 - 13/02/2019
+### What have I done?
+Did some research on Native UI module
+
 ## 10/02/2019
 ### What have I done?
 Converted AppDelegate to `Swift` and created a bridging header for Swift. 
