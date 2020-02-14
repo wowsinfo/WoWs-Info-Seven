@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, ScrollView, Alert } from 'react-native';
 import { WoWsInfo, LoadingIndicator } from '../../component';
-import { Title, List, Button, Caption, Text } from 'react-native-paper';
-import { initConnection, getSubscriptions, requestSubscription, purchaseUpdatedListener, finishTransaction, consumeAllItemsAndroid, purchaseErrorListener, getProducts, getAvailablePurchases } from 'react-native-iap';
+import { Title, List, Button, Text } from 'react-native-paper';
+import { initConnection, getSubscriptions, requestSubscription, getAvailablePurchases } from 'react-native-iap';
 
-
-let updateListener;
-let errorListener;
 
 class ProVersion extends Component {
   sku = 'wowsinfo.proversion';
@@ -29,6 +26,7 @@ class ProVersion extends Component {
     });
     
     if (allgood) {
+      console.info('This device can make purchases');
       const items = await getSubscriptions([this.sku]);
       console.log(items);
       if (items.length === 1) {
@@ -41,23 +39,6 @@ class ProVersion extends Component {
         });
       }
     }
-
-    updateListener = purchaseUpdatedListener(async (purchase) => {
-      const receipt = purchase.transactionReceipt;
-      if (receipt) {
-        try {
-          const ackResult = await finishTransaction(purchase);
-          console.log(ackResult);
-        } catch (ackErr) {
-          console.warn('ackErr', ackErr);
-        }
-      }}
-    );
-
-    errorListener = purchaseErrorListener(error => {
-      console.log('purchaseErrorListener', error);
-      Alert.alert('purchase error', JSON.stringify(error));
-    });
   }
   
   render() {
@@ -68,8 +49,8 @@ class ProVersion extends Component {
         <ScrollView style={viewStyle}>
           <List.Section title='Features' style={featureTitle}>
             <List.Item title='RS Beta' description='Get realtime statistics in your battles' />
-            <List.Item title='More Statisctis' description='Show even more statistics in your profile' />
-            <List.Item title='More coming soon' description='More features are under development and will be added' />
+            <List.Item title='More Statistics' description='Show even more statistics in your profile' />
+            <List.Item title='Support development' description='More features are currently under development' />
           </List.Section>
         </ScrollView>
         { this.renderPurchaseView() }
@@ -99,16 +80,29 @@ class ProVersion extends Component {
     }
   }
 
-  buy = () => {
+  /**
+   * Subscribe to pro version
+   */
+  buy = async () => {
     try {
-      requestSubscription(this.sku, false);
+      await requestSubscription(this.sku, false);
     } catch (err) {
-      Alert.alert(err.message);
+      Alert.alert('Purchase Failed', err.message);
     }
   }
 
-  restore = () => {
-
+  /**
+   * Get all purchases history and check for the last one
+   */
+  restore = async () => {
+    try {
+      const history = await getAvailablePurchases();
+      if (history.length > 0) {
+        // Check if the status
+      }
+    } catch (err) {
+      console.warn(err.message);
+    }
   }
 }
 

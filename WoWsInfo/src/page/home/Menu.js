@@ -54,7 +54,7 @@ class Menu extends PureComponent {
     }
   }
 
-  componentWillUpdate() {
+  componentDidUpdate() {
     this.getData();
     const { main } = this.state;
     let curr = DATA[LOCAL.userInfo];
