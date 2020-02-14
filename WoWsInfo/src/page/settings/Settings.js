@@ -32,7 +32,7 @@ class Settings extends Component {
   }
 
   componentWillUnmount() {
-    setTimeout(() => Actions.refresh(), 1000);
+    setTimeout(() => Actions.refresh(), 300);
   }
 
   render() {

@@ -1,55 +1,58 @@
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
-import { List, Checkbox } from 'react-native-paper';
-import { Donation, WoWsInfo } from '../../component';
-import { lang } from '../../value/lang';
-import { LOCAL } from '../../value/data';
-import { SafeStorage } from '../../core';
+import { View, StyleSheet, ScrollView } from 'react-native';
+import { WoWsInfo } from '../../component';
+import { Title, List, Button, Caption, Text } from 'react-native-paper';
 
 class ProVersion extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      banner: DATA[LOCAL.showBanner],
-      fullscreen: DATA[LOCAL.showFullscreen]
-    };
   }
 
   render() {
-    const { banner, fullscreen } = this.state;
+    const { featureTitle, titleStyle, viewStyle, buttonView, restoreButton, discount } = styles;
     return (
       <WoWsInfo hideAds>
-        <List.Section title={lang.extra_support_wowsinfo}>
-          <Donation />
-        </List.Section>
-        {/* <List.Section title={lang.support_ads}>
-          <List.Item title={lang.support_ads_banner} onPress={() => this.updateBanner(!banner)} 
-            right={() => <Checkbox status={banner ? 'checked' : 'unchecked'}/>}/>
-          <List.Item title={lang.support_ads_fullscreen} disabled onPress={() => this.updateFullscreen(!fullscreen)} 
-            right={() => <Checkbox disabled status={fullscreen ? 'checked' : 'unchecked'}/>}/>
-        </List.Section> */}
+        <Title style={titleStyle}>WoWs Info Pro</Title>
+        <ScrollView style={viewStyle}>
+          <List.Section title='Features' style={featureTitle}>
+            <List.Item title='RS Beta' description='Get realtime statistics in your battles' />
+            <List.Item title='More Statisctis' description='Show even more statistics in your profile' />
+            <List.Item title='More coming soon' description='More features are under development and will be added' />
+          </List.Section>
+        </ScrollView>
+        <View style={buttonView}>
+          <Text style={discount}>50% off for everyone until the next major update</Text>
+          <Button mode='contained' theme={{roundness: 0}}>$ / Year</Button>
+          <Button style={restoreButton}>Restore Pro Version</Button>
+        </View>
       </WoWsInfo>
     )
   };
-
-  updateBanner(val) {
-    DATA[LOCAL.showBanner] = val;
-    SafeStorage.set(LOCAL.showBanner, val);
-    this.setState({banner: val});
-  }
-
-  updateFullscreen(val) {
-    DATA[LOCAL.showFullscreen] = val;
-    SafeStorage.set(LOCAL.showFullscreen, val);
-    this.setState({fullscreen: val});
-  }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  viewStyle: {
     flex: 1
+  },
+  featureTitle: {
+    marginTop: -8
+  },
+  titleStyle: {
+    padding: 16,
+    fontSize: 28,
+    fontWeight: 'bold',
+  },
+  buttonView: {
+    padding: 16
+  },
+  restoreButton: {
+    marginTop: 16
+  },
+  discount: {
+    textAlign: 'center',
+    marginBottom: 4
   }
-});
+})
 
 export { ProVersion };
