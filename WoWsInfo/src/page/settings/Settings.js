@@ -63,10 +63,6 @@ class Settings extends Component {
     const { server, APILanguage, userLanguage } = this.state;
 
     const langList = getAPIList();
-    const langData = [];
-    for (let key in langList) langData.push(key);
-    langData.sort();
-
     const appLang = {zh: '中文', 'zh-hant': '繁体中文', ja: '日本語', en: 'English', id: 'Bahasa Indonesia'};
     let appLangList = [];
     for (let code in appLang) appLangList.push({code: code, lang: appLang[code]});
@@ -83,9 +79,7 @@ class Settings extends Component {
           }} keyExtractor={i => i} numColumns={2}/>
         </List.Section>
         <List.Section title={`${lang.setting_api_language} - ${langList[APILanguage]}`}>
-        { CANUPDATEAPI ? <FlatList data={langData} renderItem={({item}) => {
-            return <Button onPress={() => this.updateApiLanguage(item)}>{langList[item]}</Button>
-          }} keyExtractor={i => i} horizontal/> : null }
+        { CANUPDATEAPI ? this.renderAPiLanguage(langList) : null }
         </List.Section>
         <List.Section title={`${lang.setting_app_language} - ${display}`}>
           <FlatList data={appLangList} renderItem={({item}) => {
@@ -94,6 +88,23 @@ class Settings extends Component {
         </List.Section>
       </View>
     )
+  }
+
+  renderAPiLanguage(langList) {
+    const langData = [];
+    for (let key in langList) langData.push(key);
+    langData.sort();
+
+    return (
+      <View>
+        <FlatList data={langData} renderItem={({item}) => {
+            return <Button onPress={() => this.updateApiLanguage(item)}>{langList[item]}</Button>
+          }} keyExtractor={i => i} horizontal/>
+          <Button mode='contained' theme={{roundness: 0}} onPress={() => {
+            this.updateApiLanguage(this.state.APILanguage, true);
+          }}>{lang.setting_api_update_data}</Button>
+      </View>
+    );
   }
 
   renderAppSettings() {
@@ -260,9 +271,11 @@ class Settings extends Component {
 
   /**
    * Update apiLanguage that's being used
+   * @param {String} language 
+   * @param {Boolean} force foce update
    */
-  updateApiLanguage(language) {
-    if (language === this.state.APILanguage) return;
+  updateApiLanguage(language, force) {
+    if (!force && language === this.state.APILanguage) return;
 
     setAPILanguage(language);
     this.setState({APILanguage: language});

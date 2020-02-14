@@ -28,15 +28,15 @@ class Menu extends PureComponent {
     // AdMobInterstitial.setAdUnitID(unitID);
     // AdMobInterstitial.setTestDevices([AdMobInterstitial.simulatorId]);
 
-    let first = getFirstLaunch();
+    this.first = getFirstLaunch();
     this.state = {
-      loading: first,
+      loading: this.first,
       main: DATA[LOCAL.userInfo]
     };
 
     this.getData();
 
-    if (first) {
+    if (this.first) {
       // Update data here if it is not first launch
       let dn = new Downloader(getCurrServer());
       dn.updateAll(true).then(obj => {
@@ -64,18 +64,20 @@ class Menu extends PureComponent {
   }
 
   componentDidMount() {
-    if (LASTLOCATION !== '') {
-      let extra = {};
-      if (LASTLOCATION === 'Statistics') {
-        // No main account (it will trigger bug statistics screen)
-        if (DATA[LOCAL.userInfo].account_id == '') LASTLOCATION = '';
-        else extra = {info: this.state.main};
+    if (!this.first) {
+      if (LASTLOCATION !== '') {
+        let extra = {};
+        if (LASTLOCATION === 'Statistics') {
+          // No main account (it will trigger bug statistics screen)
+          if (DATA[LOCAL.userInfo].account_id == '') LASTLOCATION = '';
+          else extra = {info: this.state.main};
+        }
+        else if (LASTLOCATION === 'Upgrade') {
+          LASTLOCATION = 'Consumable';
+          extra = {upgrade: true};
+        }
+        setTimeout(() => SafeAction(LASTLOCATION, extra));
       }
-      else if (LASTLOCATION === 'Upgrade') {
-        LASTLOCATION = 'Consumable';
-        extra = {upgrade: true};
-      }
-      setTimeout(() => SafeAction(LASTLOCATION, extra));
     }
 
     if (DATA[LOCAL.showFullscreen]) {
