@@ -1,16 +1,68 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
-import { WoWsInfo } from '../../component';
+import { WoWsInfo, LoadingIndicator } from '../../component';
 import { Title, List, Button, Caption, Text } from 'react-native-paper';
+import { initConnection, getSubscriptions, requestSubscription, purchaseUpdatedListener, requestPurchase, finishTransaction, consumeAllItemsAndroid } from 'react-native-iap';
+
+let updateListener;
 
 class ProVersion extends Component {
+  sku = 'wowsinfo.proversion';
+
   constructor(props) {
     super(props);
-
+    this.state = {
+      loading: true,
+      error: false,
+      price: '',
+      discountPrice: ''
+    }
   }
 
+  async componentDidMount() {
+    const allgood = await initConnection();
+    await consumeAllItemsAndroid();
+    this.setState({
+      error: !allgood,
+    });
+    
+    if (allgood) {
+      const items = await getSubscriptions([this.sku]);
+      console.log(items);
+      if (items.length === 1) {
+        // There should only be one item which is wows info pro
+        const pro = items[0];
+        this.setState({
+          price: pro.localizedPrice,
+          discountPrice: pro.introductoryPrice,
+          loading: false,
+        });
+      }
+    }
+
+    updateListener = purchaseUpdatedListener(async (purchase) => {
+      const receipt = purchase.transactionReceipt;
+      if (receipt) {
+        try {
+          // if (Platform.OS === 'ios') {
+          //   finishTransactionIOS(purchase.transactionId);
+          // } else if (Platform.OS === 'android') {
+          //   // If consumable (can be purchased again)
+          //   consumePurchaseAndroid(purchase.purchaseToken);
+          //   // If not consumable
+          //   acknowledgePurchaseAndroid(purchase.purchaseToken);
+          // }
+          const ackResult = await finishTransaction(purchase);
+          console.log(ackResult);
+        } catch (ackErr) {
+          console.warn('ackErr', ackErr);
+        }
+      }}
+    );
+  }
+  
   render() {
-    const { featureTitle, titleStyle, viewStyle, buttonView, restoreButton, discount } = styles;
+    const { featureTitle, titleStyle, viewStyle } = styles;
     return (
       <WoWsInfo hideAds>
         <Title style={titleStyle}>WoWs Info Pro</Title>
@@ -21,14 +73,41 @@ class ProVersion extends Component {
             <List.Item title='More coming soon' description='More features are under development and will be added' />
           </List.Section>
         </ScrollView>
-        <View style={buttonView}>
-          <Text style={discount}>50% off for everyone until the next major update</Text>
-          <Button mode='contained' theme={{roundness: 0}}>$ / Year</Button>
-          <Button style={restoreButton}>Restore Pro Version</Button>
-        </View>
+        { this.renderPurchaseView() }
       </WoWsInfo>
     )
   };
+
+  renderPurchaseView() {
+    const { loading, error, price } = this.state;
+    const { buttonView, restoreButton, discount, loader } = styles;
+    console.log(price);
+    if (loading) {
+      return (
+        <View style={loader}>
+          <LoadingIndicator />
+        </View>
+      );
+    } else if (error) {
+      return null;
+    } else {
+      return (
+        <View style={buttonView}>
+          <Text style={discount}>50% off for everyone until the next major update</Text>
+          <Button mode='contained' theme={{roundness: 0}} onPress={this.buy}>{`${price} / Year`}</Button>
+          <Button style={restoreButton} theme={{roundness: 0}} onPress={this.restore}>Restore Pro Version</Button>
+        </View>
+      );
+    }
+  }
+
+  buy = () => {
+    requestSubscription(this.sku, false);
+  }
+
+  restore = () => {
+
+  }
 }
 
 const styles = StyleSheet.create({
@@ -47,11 +126,16 @@ const styles = StyleSheet.create({
     padding: 16
   },
   restoreButton: {
-    marginTop: 16
+    marginTop: 8
   },
   discount: {
     textAlign: 'center',
     marginBottom: 4
+  },
+  loader: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 16
   }
 })
 
