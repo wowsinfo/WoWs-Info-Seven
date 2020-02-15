@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, ScrollView, Alert } from 'react-native';
+import { View, StyleSheet, ScrollView, Alert, Platform } from 'react-native';
 import { WoWsInfo, LoadingIndicator } from '../../component';
 import { Title, List, Button, Text, Colors } from 'react-native-paper';
 import { initConnection, getSubscriptions, requestSubscription, getAvailablePurchases, finishTransaction } from 'react-native-iap';
+import { LOCAL, setProVersion } from '../../value/data';
 
 class ProVersion extends Component {
   sku = 'wowsinfo.proversion';
@@ -87,6 +88,8 @@ class ProVersion extends Component {
 
       // Complete purchase
       await finishTransaction(result, false);
+      setProVersion(true);
+      Alert.alert('WoWs Info Pro', 'Thank you for your support!');
     } catch (err) {
       Alert.alert('Purchase Failed', err.message);
     }
@@ -99,8 +102,19 @@ class ProVersion extends Component {
     try {
       const history = await getAvailablePurchases();
       if (history.length > 0) {
-        // Check if the status
-        console.log(history);
+        // Sort by date first
+        let latest = history.sort((a, b) => a.transactionDate - b.transactionDate)[history.length - 1];
+        console.log(latest);
+
+        if (Platform.OS === 'android') {
+          // Only for Android now
+          if (latest.autoRenewingAndroid === true) {
+            // Set it to true
+            setProVersion(true);
+            Alert.alert('WoWs Info Pro', 'Thank you for your support!');
+          }
+        }
+        
         return;
       }
 

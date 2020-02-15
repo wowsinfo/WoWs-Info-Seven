@@ -7,9 +7,9 @@
 import React, { Component } from 'react';
 import { View, Image, Platform, StyleSheet } from 'react-native';
 import * as Anime from 'react-native-animatable';
-import { Title, Caption } from 'react-native-paper';
+import { Title, Caption, Colors } from 'react-native-paper';
 import { lang } from '../../value/lang';
-import { LOCAL, APP } from '../../value/data';
+import { LOCAL, APP, isProVersion } from '../../value/data';
 import { TintColour } from '../../value/colour';
 import { Touchable } from './Touchable';
 import { SafeAction } from '../../core';
@@ -17,10 +17,11 @@ import { SafeAction } from '../../core';
 class AppName extends Component {
   render() {
     const { container, game, appName, horizontal } = styles;
+
     return (
       <Touchable style={horizontal} onPress={() => SafeAction('About')}>
         <View style={container}>
-          <Title style={appName}>{lang.app_name}</Title>
+          <Title style={[appName, isProVersion() ? {color: Colors.orange500} : {}]}>{lang.app_name}</Title>
           <Caption style={game}>{this.getVersion()}</Caption>
         </View>
         <Anime.View animation='pulse' iterationCount='infinite' easing='ease' useNativeDriver>

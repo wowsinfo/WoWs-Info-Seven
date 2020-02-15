@@ -190,3 +190,13 @@ export const setLastLocation = (str) => {
   DATA[loc] = str;
   SafeStorage.set(loc, str);
 }
+
+export const isProVersion = () => {
+  return DATA[LOCAL.proVersion] === true;
+}
+
+export const setProVersion = (pro) => {
+  let str = LOCAL.proVersion;
+  DATA[str] = pro;
+  SafeStorage.set(str, pro);
+}

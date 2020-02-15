@@ -14,7 +14,7 @@ import { WoWsInfo, SectionTitle, AppName } from '../../component';
 import { lang } from '../../value/lang';
 import { SafeAction, Downloader } from '../../core';
 import { ThemeBackColour, TintColour } from '../../value/colour';
-import { getCurrDomain, getCurrServer, getCurrPrefix, LOCAL, getFirstLaunch, setFirstLaunch, setLastLocation, SAVED } from '../../value/data';
+import { getCurrDomain, getCurrServer, getCurrPrefix, LOCAL, getFirstLaunch, setFirstLaunch, setLastLocation, SAVED, isProVersion } from '../../value/data';
 import { Loading } from '../common/Loading';
 import { FlatGrid } from 'react-native-super-grid';
 import { Actions } from 'react-native-router-flux';
@@ -137,15 +137,22 @@ class Menu extends PureComponent {
           <Animatable.View ref='AppName' animation='fadeInDown' easing='ease'>
             <AppName />
           </Animatable.View>
-          <Button mode='contained' theme={{roundness: 0}} style={{marginTop: 8}} onPress={() => Actions.ProVersion()}>
-              {lang.pro_upgrade_button}
-          </Button>
+          { this.renderProButton() }
           <Animatable.View animation='fadeInUp' delay={200} easing='ease'>
             { this.renderContent() }
           </Animatable.View>
         </ScrollView>
         <FAB icon='magnify' style={styles.fab} onPress={() => SafeAction('Search')}/>
       </WoWsInfo>
+    );
+  }
+
+  renderProButton() {
+    if (isProVersion()) return null;
+    return (
+      <Button mode='contained' theme={{roundness: 0}} style={{marginTop: 8}} onPress={() => Actions.ProVersion()}>
+        {lang.pro_upgrade_button}
+      </Button>
     );
   }
 
