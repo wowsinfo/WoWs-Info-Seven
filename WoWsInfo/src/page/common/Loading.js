@@ -31,9 +31,9 @@ class Loading extends Component {
     // }, 50);
   }
 
-  componentWillUnmount() {
-    clearInterval();
-  }
+  // componentWillUnmount() {
+  //   clearInterval();
+  // }
 
   render() {
     const { container, logo, label } = styles;

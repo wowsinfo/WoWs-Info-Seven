@@ -1,4 +1,7 @@
 import { SafeStorage, SafeValue } from "../core";
+import { Actions } from 'react-native-router-flux';
+import { getAvailablePurchases } from 'react-native-iap';
+import { Alert } from 'react-native';
 
 /**
  * App information
@@ -199,4 +202,44 @@ export const setProVersion = (pro) => {
   let str = LOCAL.proVersion;
   DATA[str] = pro;
   SafeStorage.set(str, pro);
+}
+
+/**
+ * Check if the user is using pro version, 
+ * push to ProVersion if necessary
+ * @returns whether pro version
+ */
+export const onlyProVersion = () => {
+  if (isProVersion()) return true;
+  // Only push if user is not using pro version
+  Actions.ProVersion();
+  return false;
+}
+
+export const validateProVersion = async () => {
+  try {
+    const history = await getAvailablePurchases();
+    if (history.length > 0) {
+      // Sort by date first
+      let latest = history.sort((a, b) => a.transactionDate - b.transactionDate)[history.length - 1];
+      console.log(latest);
+
+      if (Platform.OS === 'android') {
+        // Only for Android now
+        if (latest.autoRenewingAndroid === true) {
+          // Set it to true
+          setProVersion(true);
+          Alert.alert('WoWs Info Pro', 'Thank you for your support!');
+        } else {
+          setProVersion(false);
+        }
+      }
+
+      return;
+    }
+
+    throw new Error('No payment history has been found');
+  } catch (err) {
+    Alert.alert('Failed to restore', err.message);
+  }
 }

@@ -13,6 +13,7 @@ import { Info6Icon } from './Info6Icon';
 import { Button } from 'react-native-paper';
 import { Space } from '../common/Space';
 import { SectionTitle } from '../common/SectionTitle';
+import { onlyProVersion } from '../../value/data';
 
 class DetailedInfo extends Component {
   constructor(props) {
@@ -36,7 +37,7 @@ class DetailedInfo extends Component {
       <View style={container}>
         { !playerMode ? <InfoLabel title={lang.basic_last_battle} info={humanTimeString(last_battle_time)}/> : null }
         <Info6Icon data={pvp}/>
-        { more ? this.renderMore(playerMode) : <Button onPress={() => this.setState({more: true})}>{lang.basic_more_stat}</Button> }
+        { more ? this.renderMore(playerMode) : <Button onPress={() => onlyProVersion() ? this.setState({more: true}) : null}>{lang.basic_more_stat}</Button> }
       </View>
     )
   };

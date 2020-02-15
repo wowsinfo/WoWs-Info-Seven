@@ -286,7 +286,7 @@ class Statistics extends PureComponent {
             <RatingButton rating={rating}/>
             <View style={{padding: 4}}>
               { canBeFriend ? <Button icon='contacts' onPress={this.addFriend}>{lang.basic_add_friend}</Button> : null }
-              { canBeMaster ? <Button icon='favorite' onPress={this.setMainAccount}>{lang.basic_set_main}</Button> : null }
+              { canBeMaster ? <Button icon='heart' onPress={this.setMainAccount}>{lang.basic_set_main}</Button> : null }
             </View>
             { this.renderStatistics(basic.statistics) }
           </View>

@@ -3,7 +3,7 @@ import { View, StyleSheet, ScrollView, Alert, Platform } from 'react-native';
 import { WoWsInfo, LoadingIndicator } from '../../component';
 import { Title, List, Button, Text, Colors } from 'react-native-paper';
 import { initConnection, getSubscriptions, requestSubscription, getAvailablePurchases, finishTransaction } from 'react-native-iap';
-import { LOCAL, setProVersion } from '../../value/data';
+import { LOCAL, setProVersion, validateProVersion } from '../../value/data';
 
 class ProVersion extends Component {
   sku = 'wowsinfo.proversion';
@@ -99,29 +99,7 @@ class ProVersion extends Component {
    * Get all purchases history and check for the last one
    */
   restore = async () => {
-    try {
-      const history = await getAvailablePurchases();
-      if (history.length > 0) {
-        // Sort by date first
-        let latest = history.sort((a, b) => a.transactionDate - b.transactionDate)[history.length - 1];
-        console.log(latest);
-
-        if (Platform.OS === 'android') {
-          // Only for Android now
-          if (latest.autoRenewingAndroid === true) {
-            // Set it to true
-            setProVersion(true);
-            Alert.alert('WoWs Info Pro', 'Thank you for your support!');
-          }
-        }
-        
-        return;
-      }
-
-      throw new Error('No payment history has been found');
-    } catch (err) {
-      Alert.alert('Failed to restore', err.message);
-    }
+    await validateProVersion();
   }
 }
 

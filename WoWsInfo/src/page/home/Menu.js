@@ -14,7 +14,7 @@ import { WoWsInfo, SectionTitle, AppName } from '../../component';
 import { lang } from '../../value/lang';
 import { SafeAction, Downloader } from '../../core';
 import { ThemeBackColour, TintColour } from '../../value/colour';
-import { getCurrDomain, getCurrServer, getCurrPrefix, LOCAL, getFirstLaunch, setFirstLaunch, setLastLocation, SAVED, isProVersion } from '../../value/data';
+import { getCurrDomain, getCurrServer, getCurrPrefix, LOCAL, getFirstLaunch, setFirstLaunch, setLastLocation, SAVED, isProVersion, onlyProVersion, validateProVersion } from '../../value/data';
 import { Loading } from '../common/Loading';
 import { FlatGrid } from 'react-native-super-grid';
 import { Actions } from 'react-native-router-flux';
@@ -31,7 +31,7 @@ class Menu extends PureComponent {
 
     this.first = getFirstLaunch();
     this.state = {
-      loading: this.first,
+      loading: true,
       main: DATA[LOCAL.userInfo]
     };
 
@@ -51,6 +51,11 @@ class Menu extends PureComponent {
           Alert.alert(lang.error_title, lang.error_download_issue + '\n\n' + obj.log);
         }
       });
+    } else {
+      // Valid pro version
+      validateProVersion().then(() => {
+        this.setState({loading: false});
+      }).catch();
     }
   }
 
@@ -167,7 +172,8 @@ class Menu extends PureComponent {
           right={() => isAndroid ? null : <List.Icon color={Colors.grey500} icon='chevron-right'/>} />
         }} spacing={0}/>
         <SectionTitle title={lang.extra_section_title}/>
-        <List.Item title='RS Beta' description={lang.extra_rs_beta} onPress={() => SafeAction('RS')}/>
+        <List.Item title='RS Beta' description={lang.extra_rs_beta} 
+          onPress={() => onlyProVersion() ? SafeAction('RS') : null}/>
         <List.Section title={lang.website_title} >
           <FlatGrid items={this.websites} itemDimension={300} renderItem={({item}) => {
             return <List.Item title={item.t} description={item.d}
