@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, ScrollView, Alert } from 'react-native';
 import { WoWsInfo, LoadingIndicator } from '../../component';
-import { Title, List, Button, Text } from 'react-native-paper';
+import { Title, List, Button, Text, Colors } from 'react-native-paper';
 import { initConnection, getSubscriptions, requestSubscription, getAvailablePurchases, finishTransaction } from 'react-native-iap';
-
 
 class ProVersion extends Component {
   sku = 'wowsinfo.proversion';
@@ -42,16 +41,14 @@ class ProVersion extends Component {
   }
   
   render() {
-    const { featureTitle, titleStyle, viewStyle } = styles;
+    const { titleStyle, viewStyle } = styles;
     return (
       <WoWsInfo hideAds>
         <Title style={titleStyle}>WoWs Info Pro</Title>
         <ScrollView style={viewStyle}>
-          <List.Section title='Features' style={featureTitle}>
-            <List.Item title='RS Beta' description='Get realtime statistics in your battles' />
-            <List.Item title='More Statistics' description='Show even more statistics in your profile' />
-            <List.Item title='Support development' description='More features are currently under development' />
-          </List.Section>
+          <List.Item title='RS Beta' description='Get realtime statistics in your battles' />
+          <List.Item title='More Statistics' description='Show even more statistics in your profile' />
+          <List.Item title='Support development' description='More features are currently under development' />
         </ScrollView>
         { this.renderPurchaseView() }
       </WoWsInfo>
@@ -118,13 +115,12 @@ const styles = StyleSheet.create({
   viewStyle: {
     flex: 1
   },
-  featureTitle: {
-    marginTop: -8
-  },
   titleStyle: {
     padding: 16,
-    fontSize: 28,
+    paddingTop: 32,
+    fontSize: 32,
     fontWeight: 'bold',
+    color: Colors.orange500
   },
   buttonView: {
     padding: 16

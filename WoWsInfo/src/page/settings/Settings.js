@@ -27,7 +27,7 @@ class Settings extends Component {
     };
     
     this.colourList = [RED, PINK, PURPLE, DEEPPRUPLE, INDIGO, BLUE, LIGHTBLUE, CYAN, TEAL, GREEN, LIGHTGREEN, LIME, 
-      YELLOW, AMBER, ORANGE, DEEPORANGE, BROWN, GREY, BLUEGREY];
+      YELLOW, AMBER, DEEPORANGE, BROWN, GREY, BLUEGREY];
     this.store = isAndroid ? APP.GooglePlay : APP.AppStore;
   }
 

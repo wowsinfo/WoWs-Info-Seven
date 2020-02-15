@@ -137,7 +137,7 @@ class Menu extends PureComponent {
           <Animatable.View ref='AppName' animation='fadeInDown' easing='ease'>
             <AppName />
           </Animatable.View>
-          <Button mode='contained' theme={{roundness: 0}} onPress={() => Actions.ProVersion()}>
+          <Button mode='contained' theme={{roundness: 0}} style={{marginTop: 8}} onPress={() => Actions.ProVersion()}>
               {lang.pro_upgrade_button}
           </Button>
           <Animatable.View animation='fadeInUp' delay={200} easing='ease'>
