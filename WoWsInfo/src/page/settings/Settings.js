@@ -63,7 +63,7 @@ class Settings extends Component {
     const { server, APILanguage, userLanguage } = this.state;
 
     const langList = getAPIList();
-    const appLang = {zh: '中文', 'zh-hant': '繁体中文', ja: '日本語', en: 'English', id: 'Bahasa Indonesia'};
+    const appLang = {en: 'English', ja: '日本語', id: 'Bahasa Indonesia', zh: '简体中文', 'zh-hant': '繁体中文'};
     let appLangList = [];
     for (let code in appLang) appLangList.push({code: code, lang: appLang[code]});
 
@@ -74,35 +74,48 @@ class Settings extends Component {
       <View>
         <SectionTitle title={lang.settings_api_settings}/>
         <List.Section title={`${lang.setting_game_server} - ${lang.server_name[server]}`}>
-          <FlatList data={SERVER} renderItem={({index}) => {
+          <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
+            {SERVER.map((_, index) => <Button onPress={() => this.updateServer(index)}>{lang.server_name[index]}</Button>)}
+          </View>
+          {/* <FlatList data={SERVER} renderItem={({index}) => {
             return <Button onPress={() => this.updateServer(index)}>{lang.server_name[index]}</Button>
-          }} keyExtractor={i => i} numColumns={2}/>
+          }} keyExtractor={i => i} numColumns={2}/> */}
         </List.Section>
         <List.Section title={`${lang.setting_api_language} - ${langList[APILanguage]}`}>
-        { CANUPDATEAPI ? this.renderAPiLanguage(langList) : null }
+        { CANUPDATEAPI ? this.renderAPILanguage(langList) : null }
         </List.Section>
         <List.Section title={`${lang.setting_app_language} - ${display}`}>
-          <FlatList data={appLangList} renderItem={({item}) => {
+          <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
+            {appLangList.map(item => <Button onPress={() => this.updateUserLang(item.code)}>{item.lang}</Button>)}
+          </View>
+          {/* <FlatList data={appLangList} renderItem={({item}) => {
             return <Button onPress={() => this.updateUserLang(item.code)}>{item.lang}</Button>
-          }} keyExtractor={i => i.code} numColumns={3}/>
+          }} keyExtractor={i => i.code} numColumns={3} style={{flexWrap: 'wrap'}}/> */}
         </List.Section>
       </View>
     )
   }
 
-  renderAPiLanguage(langList) {
+  renderAPILanguage(langList) {
     const langData = [];
     for (let key in langList) langData.push(key);
     langData.sort();
 
     return (
       <View>
-        <FlatList data={langData} renderItem={({item}) => {
+        <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
+          {langData.map(item => <Button onPress={() => this.updateApiLanguage(item)}>{langList[item]}</Button>)}
+        </View>
+        {/* <FlatList data={langData} renderItem={({item}) => {
             return <Button onPress={() => this.updateApiLanguage(item)}>{langList[item]}</Button>
-          }} keyExtractor={i => i} horizontal/>
-          <Button mode='contained' theme={{roundness: 0}} onPress={() => {
-            this.updateApiLanguage(this.state.APILanguage, true);
-          }}>{lang.setting_api_update_data}</Button>
+          }} keyExtractor={i => i} horizontal/> */}
+        <Button mode='contained' theme={{roundness: 0}} onPress={() => {
+          Alert.alert('Warning', 'Please only this when data are missing',
+          [
+            {text: 'Update', onPress: () => this.updateApiLanguage(this.state.APILanguage, true), style: 'destructive'},
+            {text: 'Cancel', onPress: () => null}
+          ]);
+        }}>{lang.setting_api_update_data}</Button>
       </View>
     );
   }
