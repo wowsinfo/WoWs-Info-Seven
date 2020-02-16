@@ -4,6 +4,7 @@ import { WoWsInfo, LoadingIndicator } from '../../component';
 import { Title, List, Button, Text, Colors } from 'react-native-paper';
 import { initConnection, getSubscriptions, requestSubscription, getAvailablePurchases, finishTransaction } from 'react-native-iap';
 import { LOCAL, setProVersion, validateProVersion } from '../../value/data';
+import { Actions } from 'react-native-router-flux';
 
 class ProVersion extends Component {
   sku = 'wowsinfo.proversion';
@@ -91,6 +92,7 @@ class ProVersion extends Component {
       await finishTransaction(result, false);
       setProVersion(true);
       Alert.alert('WoWs Info Pro', 'Thank you for your support!');
+      Actions.pop();
     } catch (err) {
       Alert.alert('Purchase Failed', err.message);
     }

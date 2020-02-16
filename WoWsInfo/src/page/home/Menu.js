@@ -53,9 +53,9 @@ class Menu extends PureComponent {
       });
     } else {
       // Valid pro version
-      // validateProVersion().then(() => {
-      //   this.setState({loading: false});
-      // }).catch();
+      validateProVersion().then(() => {
+        this.setState({loading: false});
+      }).catch();
     }
   }
 

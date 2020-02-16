@@ -60,7 +60,6 @@ class WarshipFilter extends Component {
           }} clearButtonMode='while-editing' autoCapitalize='none'/>
         <ScrollView ref='scrollview'>
           <Space />
-          <Space />
           <List.Section title={lang.wiki_warship_filter_tier}>
             <Text style={selectionText}>{`${tier.join(' | ')} `}</Text>
             <View style={{flexWrap: 'wrap', flexDirection: 'row'}}>
