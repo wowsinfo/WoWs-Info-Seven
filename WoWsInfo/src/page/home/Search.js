@@ -10,7 +10,7 @@ import { Searchbar } from 'react-native-paper';
 import * as Anime from 'react-native-animatable';
 import { WoWsInfo, SectionTitle, PlayerCell } from '../../component';
 import { getCurrDomain, getCurrPrefix, getCurrServer, setLastLocation } from '../../value/data';
-import { Guard, SafeFetch } from '../../core';
+import { Guard, SafeFetch, bestWidth } from '../../core';
 import { WoWsAPI } from '../../value/api';
 import { Friend } from './Friend';
 import { lang } from '../../value/lang';
@@ -25,7 +25,8 @@ class Search extends Component {
       server: '',
       result: {player: [], clan: []},
       online: '???',
-      showFriend: true
+      showFriend: true,
+      goodWidth: bestWidth(400)
     };
 
     const domain = getCurrDomain();
@@ -38,6 +39,11 @@ class Search extends Component {
     });
   }
 
+  updateWidth = (event) => {
+    const newWidth = event.nativeEvent.layout.width;
+    this.setState({goodWidth: bestWidth(400, newWidth)})
+  }
+
   render() {
     const { search, online } = this.state;
     const { searchBar, scroll } = styles;
@@ -45,7 +51,7 @@ class Search extends Component {
       <WoWsInfo hideAds title={lang.menu_footer} onPress={() => this.refs['search'].focus()}>
         <Searchbar ref='search' value={search} style={searchBar} placeholder={`${this.prefix.toUpperCase()} - ${online} ${lang.search_player_online}`}
           onChangeText={this.searchAll} autoCorrect={false} autoCapitalize='none' />
-        <ScrollView style={scroll} keyboardShouldPersistTaps='always' keyboardDismissMode='on-drag'>
+        <ScrollView style={scroll} keyboardShouldPersistTaps='always' keyboardDismissMode='on-drag' onLayout={this.updateWidth}>
           { this.renderContent() }
         </ScrollView>
       </WoWsInfo>
@@ -57,23 +63,49 @@ class Search extends Component {
     if (showFriend && search.length < 2) {
       return <Friend />;
     } else {
-      let playerLen  = result.player.length;
-      let clanLen  = result.clan.length;
+      const playerLen  = result.player.length;
+      const clanLen  = result.clan.length;
       return (
         <View>
           <SectionTitle title={`${lang.menu_search_clan} - ${clanLen}`}/>
-          { clanLen > 0 ?
-            <FlatGrid items={result.clan} itemDimension={300} renderItem={({item}) => {
-              return <PlayerCell key={item.clan_id} item={item} clan/>
-            }} spacing={0} keyboardShouldPersistTaps='always'/> : null }
+          { this.renderClan(result.clan) }
           <SectionTitle title={`${lang.menu_search_player} - ${playerLen}`}/>
-          { playerLen > 0 ?
-            <FlatGrid items={result.player} itemDimension={300} renderItem={({item}) => {
-              return <PlayerCell key={item.account_id} item={item} player/>
-            }} spacing={0} keyboardShouldPersistTaps='always'/> : null }
+          { this.renderPlayer(result.player) }
         </View>
       );
     }
+  }
+
+  /**
+   * 
+   * @param {any[]} clan 
+   */
+  renderClan(clan) {
+    if (clan.length > 0) {
+      return (
+        <View style={styles.wrap}>
+          { clan.map(item => <PlayerCell key={item.clan_id} item={item} clan width={this.state.goodWidth}/>) }
+        </View>
+      );
+    }
+
+    return null;
+  }
+
+  /**
+   * 
+   * @param {any[]} player 
+   */
+  renderPlayer(player) {
+    if (player.length > 0) {
+      return (
+        <View style={styles.wrap}>
+          { player.map(item => <PlayerCell key={item.account_id} item={item} player width={this.state.goodWidth}/>) }
+        </View>
+      );
+    }
+
+    return null;
   }
 
   /**
@@ -138,6 +170,10 @@ const styles = StyleSheet.create({
   },
   scroll: {
     marginTop: 64
+  },
+  wrap: {
+    flexDirection: 'row',
+    flexWrap: 'wrap'
   }
 });
 

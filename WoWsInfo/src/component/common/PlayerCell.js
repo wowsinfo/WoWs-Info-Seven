@@ -11,15 +11,15 @@ import { SafeAction } from '../../core';
 
 class PlayerCell extends Component {
   render() {
-    const { item, player, clan } = this.props;
+    const { item, player, clan, width } = this.props;
     const { ID } = styles;
 
     if (player) {
-      return <List.Item title={item.nickname} 
+      return <List.Item title={item.nickname} style={{width: width}}
         right={() => <Caption style={ID}>{item.account_id}</Caption>}
         onPress={() => this.pushPlayer(item)}/>
     } else if (clan) {
-      return <List.Item title={item.tag} 
+      return <List.Item title={item.tag} style={{width: width}}
         right={() => <Caption style={ID}>{item.clan_id}</Caption>}
         onPress={() => this.pushClan(item)}/>
     } else {

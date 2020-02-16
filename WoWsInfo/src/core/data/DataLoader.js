@@ -5,6 +5,7 @@ import { SafeStorage } from '../util/SafeStorage';
 import { LOCAL, SAVED, APP } from '../../value/data';
 import { BLUE } from 'react-native-material-color';
 import { lang } from '../../value/lang';
+import { Platform } from 'react-native';
 
 class DataLoader {
   /**
@@ -41,6 +42,7 @@ class DataLoader {
     this.loadEntry(data, showBanner, true);
     this.loadEntry(data, showFullscreen, false);
     // Not a pro version by default
+    if (Platform.OS == 'macos') this.loadEntry(data, proVersion, true);
     this.loadEntry(data, proVersion, false);
 
 
