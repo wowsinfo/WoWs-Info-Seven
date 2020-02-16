@@ -5,21 +5,20 @@
  * It also has the ability to search players and clans
  */
 
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { Alert, ScrollView, StyleSheet, Linking, View } from 'react-native';
 import { isAndroid } from 'react-native-device-detection';
 import { List, Colors, FAB, Button } from 'react-native-paper';
 import * as Animatable from 'react-native-animatable';
 import { WoWsInfo, SectionTitle, AppName } from '../../component';
 import { lang } from '../../value/lang';
-import { SafeAction, Downloader } from '../../core';
+import { SafeAction, Downloader, bestWidth } from '../../core';
 import { ThemeBackColour, TintColour } from '../../value/colour';
 import { getCurrDomain, getCurrServer, getCurrPrefix, LOCAL, getFirstLaunch, setFirstLaunch, setLastLocation, SAVED, isProVersion, onlyProVersion, validateProVersion } from '../../value/data';
 import { Loading } from '../common/Loading';
-import { FlatGrid } from 'react-native-super-grid';
 import { Actions } from 'react-native-router-flux';
 
-class Menu extends PureComponent {
+class Menu extends Component {
 
   constructor(props) {
     super(props);
@@ -32,7 +31,8 @@ class Menu extends PureComponent {
     this.first = getFirstLaunch();
     this.state = {
       loading: this.first,
-      main: DATA[LOCAL.userInfo]
+      main: DATA[LOCAL.userInfo],
+      bestItemWidth: bestWidth(400)
     };
 
     this.getData();
@@ -53,9 +53,9 @@ class Menu extends PureComponent {
       });
     } else {
       // Valid pro version
-      validateProVersion().then(() => {
-        this.setState({loading: false});
-      }).catch();
+      // validateProVersion().then(() => {
+      //   this.setState({loading: false});
+      // }).catch();
     }
   }
 
@@ -146,6 +146,11 @@ class Menu extends PureComponent {
     ];
   }
 
+  updateBestWidth = (event) => {
+    const goodWidth = event.nativeEvent.layout.width;
+    this.setState({bestItemWidth: bestWidth(400, goodWidth)})
+  }
+
   render() {
     const { loading, main } = this.state;
     if (loading) return <Loading />
@@ -157,7 +162,7 @@ class Menu extends PureComponent {
     
     return (
       <WoWsInfo noRight title={title} onPress={enabled ? () => (onlyProVersion() ? SafeAction('Statistics', {info: main}) : null) : null} home upper={false}>
-        <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='always'>
+        <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='always' onLayout={this.updateBestWidth}>
           <Animatable.View ref='AppName' animation='fadeInDown' easing='ease'>
             <AppName />
           </Animatable.View>
@@ -181,48 +186,54 @@ class Menu extends PureComponent {
   }
 
   renderContent() {
-    const { icon } = styles;
+    const { icon, wrap } = styles;
+    const { bestItemWidth } = this.state;
     return (
       <View>
         <SectionTitle title={lang.wiki_section_title}/>
-        <FlatGrid items={this.wiki} itemDimension={300} renderItem={({item}) => {
-          return <List.Item title={item.t} style={{padding: 0, paddingLeft: 8}} onPress={() => item.p()}
+        <View style={wrap}>
+          { this.wiki.map(item => <List.Item title={item.t} style={{padding: 0, paddingLeft: 8, width: bestItemWidth}} onPress={() => item.p()}
           left={() => <List.Icon style={[icon, ThemeBackColour()]} color={TintColour()[300]} icon={item.i}/>}
-          right={() => isAndroid ? null : <List.Icon color={Colors.grey500} icon='chevron-right'/>} />
-        }} spacing={0}/>
+          right={() => isAndroid ? null : <List.Icon color={Colors.grey500} icon='chevron-right'/>} />) }
+        </View>
         <SectionTitle title={lang.extra_section_title}/>
         <List.Item title='RS Beta' description={lang.extra_rs_beta} 
           onPress={() => onlyProVersion() ? SafeAction('RS') : null}/>
         <SectionTitle title={lang.website_title}/>
-        <List.Accordion title={lang.website_official_title} >
-          <FlatGrid items={this.offical_websites} itemDimension={300} renderItem={({item}) => {
-            return <List.Item title={item.t} description={item.d}
-            onPress={() => Linking.openURL(item.d)}/>
-          }} spacing={0}/>
+        <List.Accordion title={lang.website_official_title}>
+          <View style={wrap}>
+            { this.offical_websites.map(item => 
+              <List.Item title={item.t} description={item.d} style={{width: bestItemWidth}}
+              onPress={() => Linking.openURL(item.d)}/>) }
+          </View>
         </List.Accordion>
         <List.Accordion title={lang.website_stats_news_title} >
-          <FlatGrid items={this.stats_info_website} itemDimension={300} renderItem={({item}) => {
-            return <List.Item title={item.t} description={item.d}
-            onPress={() => Linking.openURL(item.d)}/>
-          }} spacing={0}/>
+          <View style={wrap}>
+            { this.stats_info_website.map(item => 
+              <List.Item title={item.t} description={item.d} style={{width: bestItemWidth}}
+              onPress={() => Linking.openURL(item.d)}/>) }
+          </View>
         </List.Accordion>
         <List.Accordion title={lang.website_utility_title} >
-          <FlatGrid items={this.ultility_websites} itemDimension={300} renderItem={({item}) => {
-            return <List.Item title={item.t} description={item.d}
-            onPress={() => Linking.openURL(item.d)}/>
-          }} spacing={0}/>
+          <View style={wrap}>
+            { this.ultility_websites.map(item => 
+              <List.Item title={item.t} description={item.d} style={{width: bestItemWidth}}
+              onPress={() => Linking.openURL(item.d)}/>) }
+          </View>
         </List.Accordion>
         <List.Accordion title={lang.youtuber_title}>
-          <FlatGrid items={this.youtubers} itemDimension={300} renderItem={({item}) => {
-            return <List.Item title={item.t} description={item.d}
-            onPress={() => Linking.openURL(item.d)}/>
-          }} spacing={0}/>
+          <View style={wrap}>
+            { this.youtubers.map(item => 
+              <List.Item title={item.t} description={item.d} style={{width: bestItemWidth}}
+              onPress={() => Linking.openURL(item.d)}/>) }
+          </View>
         </List.Accordion>
         <List.Accordion title={lang.website_ingame_title} description={lang.website_wargming_login_subtitle}>
-          <FlatGrid items={this.ingame_websites} itemDimension={300} renderItem={({item}) => {
-            return <List.Item title={item.t} description={item.d}
-            onPress={() => Linking.openURL(item.d)}/>
-          }} spacing={0}/>
+          <View style={wrap}>
+            { this.ingame_websites.map(item => 
+              <List.Item title={item.t} description={item.d} style={{width: bestItemWidth}}
+              onPress={() => Linking.openURL(item.d)}/>) }
+          </View>
         </List.Accordion>
         {/* <List.Section title={lang.tool_title}>
         </List.Section> */}
@@ -243,6 +254,10 @@ const styles = StyleSheet.create({
     margin: 16,
     right: 0,
     bottom: 0,
+  },
+  wrap: {
+    flexWrap: 'wrap',
+    flexDirection: 'row'
   }
 });
 

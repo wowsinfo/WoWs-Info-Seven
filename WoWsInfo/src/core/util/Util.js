@@ -1,4 +1,5 @@
 import { lang } from "../../value/lang";
+import { Dimensions } from 'react-native';
 
 /**
  * Deep clone an object
@@ -45,4 +46,24 @@ export const humanTimeString = (time) => {
 export const getRandomAnimation = () => {
   const list = ['bounce', 'flash', 'pulse', 'rotate', 'rubberBand', 'shake', 'swing', 'tada', 'wobble'];
   return list[random(list.length)];
+}
+
+/**
+ * Get the best cell width so that there won't be more than 6 items per row
+ */
+export const bestCellWidth = (baseWidth) => {
+  const deviceWidth = Dimensions.get('window').width;
+  const usualCount = deviceWidth / baseWidth;
+  if (usualCount > 6) return deviceWidth / 6;
+  return baseWidth;
+}
+
+/**
+ * Make sure the item isn't longer than the device, 
+ * if 2 items cannot be place just do one
+ * @param {number} width 
+ */
+export const bestWidth = (width, deviceWidth = Dimensions.get('window').width) => {
+  console.log(width, deviceWidth);
+  return deviceWidth / Math.max(1, Number(deviceWidth / width).toFixed(0));
 }

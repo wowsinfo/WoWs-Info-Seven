@@ -5,17 +5,18 @@
  */
 
 import React, { Component } from 'react';
-import { SafeAreaView, StyleSheet, StatusBar } from 'react-native';
+import { SafeAreaView, StyleSheet, StatusBar, Dimensions } from 'react-native';
 import { Button, Surface } from 'react-native-paper';
 import { isAndroid } from 'react-native-device-detection';
 import { lang } from '../../value/lang';
 import { LOCAL } from '../../value/data';
 import { FooterButton } from './FooterButton';
 import { SafeAction, random } from '../../core';
-import { ThemeBackColour, ThemeColour, ViewBackColour } from '../../value/colour';
+import { ThemeBackColour, ThemeColour, ViewBackColour, TintColour } from '../../value/colour';
 import { View } from 'react-native-animatable';
 
 class WoWsInfo extends Component {
+
   constructor(props) {
     super(props);
 
@@ -26,7 +27,7 @@ class WoWsInfo extends Component {
                  'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 
                  'DD', 'BB', 'CV', 'CA', 'SUB',
                  // People and clans that really supports me during development (I will add more)
-                 'Auris2010k', 'HenryQuan', 'Zetesian', 'CJokerLukas', 'VladimirlS', 'CICN', 'FFD'];
+                 'Auris2010k', 'HenryQuan', 'Zetesian', 'CJokerLukas', 'VladimirlS', 'CICN', 'FFD', ];
 
     // 80% of the time, it will be the app name
     let r = random(10);
@@ -40,7 +41,7 @@ class WoWsInfo extends Component {
 
     // Add a margin for android devices (full screen so add a margin)
     return (
-      <Surface style={[container, style, ThemeBackColour()]}>
+      <Surface style={[container, style]}>
         <SafeAreaView style={safeView}>
           <StatusBar barStyle={DARKMODE ? 'light-content' : 'dark-content'} 
             backgroundColor={ThemeColour()}/>
@@ -57,7 +58,7 @@ class WoWsInfo extends Component {
     const { text, footer } = styles;
     const { title, onPress, about, upper } = this.props;
 
-    let shouldDisable = (!onPress && !about)
+    let shouldDisable = (!onPress && !about);
 
     return (
       <View style={[footer, ThemeBackColour()]}>
@@ -99,7 +100,7 @@ class WoWsInfo extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   text: {
     fontSize: 17, fontWeight: isAndroid ? 'bold' : '300',
