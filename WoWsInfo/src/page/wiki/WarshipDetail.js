@@ -406,7 +406,7 @@ class WarshipDetail extends PureComponent {
 
     // With Torpedo acceleration
     let shortDist = Number(distance * 0.8).toFixed(1);
-    let fastestSpeed = torpedo_speed + 5;
+    let fastestSpeed = Number((torpedo_speed + 5) * 1.05).toFixed(1);
     let reactionTimeP = Number(visibility_dist * 1000 / 2.6 / fastestSpeed).toFixed(1);
 
     // check for torpedo upgrade
