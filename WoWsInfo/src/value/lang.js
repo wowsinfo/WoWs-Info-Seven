@@ -152,6 +152,7 @@ export const lang = new LocalizedStrings({
     youtuber_yuro: 'Yuro',
     youtuber_iChaseGaming: 'iChaseGaming',
     youtuber_NoZoupForYou: 'NoZoupForYou',
+    youtuber_Toptier: 'Toptier',
     // Tools
     tool_title: 'Tools',
     /// Player section
@@ -412,6 +413,7 @@ export const lang = new LocalizedStrings({
     youtuber_yuro: '舰长 Yuro',
     youtuber_iChaseGaming: '舰长 iChaseGaming',
     youtuber_NoZoupForYou: '舰长 NoZoupForYou',
+    youtuber_Toptier: '舰长 Toptier',
     // Tools
     tool_title: '工具',
     /// Player section
@@ -672,6 +674,7 @@ export const lang = new LocalizedStrings({
     youtuber_yuro: '艦長 Yuro',
     youtuber_iChaseGaming: '艦長 iChaseGaming',
     youtuber_NoZoupForYou: '艦長 NoZoupForYou',
+    youtuber_Toptier: '舰长 Toptier',
     // Tools
     tool_title: '工具',
     /// Player section
@@ -932,6 +935,7 @@ export const lang = new LocalizedStrings({
     youtuber_yuro: 'Yuro',
     youtuber_iChaseGaming: 'iChaseGaming',
     youtuber_NoZoupForYou: 'NoZoupForYou',
+    youtuber_Toptier: 'Toptier',
     // Tools
     tool_title: 'ツール',
     /// Player section
@@ -1192,6 +1196,7 @@ export const lang = new LocalizedStrings({
     youtuber_yuro: 'Yuro',
     youtuber_iChaseGaming: 'iChaseGaming',
     youtuber_NoZoupForYou: 'NoZoupForYou',
+    youtuber_Toptier: 'Toptier',
     // Tools
     tool_title: 'Tools',
     /// Player section

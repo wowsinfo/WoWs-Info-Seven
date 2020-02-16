@@ -31,7 +31,7 @@ class Menu extends PureComponent {
 
     this.first = getFirstLaunch();
     this.state = {
-      loading: true,
+      loading: this.first,
       main: DATA[LOCAL.userInfo]
     };
 
@@ -53,9 +53,9 @@ class Menu extends PureComponent {
       });
     } else {
       // Valid pro version
-      validateProVersion().then(() => {
-        this.setState({loading: false});
-      }).catch();
+      // validateProVersion().then(() => {
+      //   this.setState({loading: false});
+      // }).catch();
     }
   }
 
@@ -104,27 +104,51 @@ class Menu extends PureComponent {
     const domain = getCurrDomain();
     this.prefix = getCurrPrefix();
 
-    // TODO: change links base on player server
-    this.websites = [{t: lang.website_official_site, d: `https://worldofwarships.${domain}/`},
-    {t: lang.website_premium, d: `https://${this.prefix}.wargaming.net/shop/wows/`},
-    {t: lang.website_global_wiki, d: `http://wiki.wargaming.net/en/World_of_Warships/`},
-    {t: lang.website_dev_blog, d: `https://www.facebook.com/wowsdevblog/`},
-    {t: lang.website_sea_group, d: `https://sea-group.org/`},
-    {t: lang.website_daily_bounce, d: `https://thedailybounce.net/category/world-of-warships/`},
-    {t: lang.website_numbers, d: `https://${this.prefix}.wows-numbers.com/`},
-    {t: lang.website_today, d: `https://${this.prefix}.warships.today/`},
-    {t: lang.website_ranking, d: `http://maplesyrup.sweet.coocan.jp/wows/ranking/`},
-    {t: lang.website_models, d: `https://sketchfab.com/tags/world-of-warships`}];
     
-    this.youtubers = [{t: lang.youtuber_official, d: 'https://www.youtube.com/user/worldofwarshipsCOM'},
-    {t: lang.youtuber_flambass, d: 'https://www.youtube.com/user/Flambass'},
-    {t: lang.youtuber_notser, d: 'https://www.youtube.com/user/MrNotser'},
-    {t: lang.youtuber_jingles, d: 'https://www.youtube.com/user/BohemianEagle'},
-    {t: lang.youtuber_panzerknacker, d: 'https://www.youtube.com/user/pzkpasch'},
-    {t: lang.youtuber_flamu, d: 'https://www.youtube.com/user/cheesec4t'},
-    {t: lang.youtuber_yuro, d: 'https://www.youtube.com/user/spzjess'},
-    {t: lang.youtuber_iChaseGaming, d: 'https://www.youtube.com/user/ichasegaming'},
-    {t: lang.youtuber_NoZoupForYou, d: 'https://www.youtube.com/user/ZoupGaming'}];
+    this.offical_websites = [
+      {t: lang.website_official_site, d: `https://worldofwarships.${domain}/`},
+      {t: lang.website_premium, d: `https://${this.prefix}.wargaming.net/shop/wows/`},
+      {t: lang.website_global_wiki, d: `http://wiki.wargaming.net/en/World_of_Warships/`},
+      {t: lang.website_dev_blog, d: `https://www.facebook.com/wowsdevblog/`},
+    ];
+    
+    // TODO: change links base on player server
+    this.stats_info_website = [
+      {t: lang.website_sea_group, d: `https://sea-group.org/`},
+      {t: lang.website_daily_bounce, d: `https://thedailybounce.net/category/world-of-warships/`},
+      {t: lang.website_numbers, d: `https://${this.prefix}.wows-numbers.com/`},
+      {t: lang.website_models, d: `https://sketchfab.com/tags/world-of-warships`},
+      {t: '', d: 'https://gamemodels3d.com/games/worldofwarships/'},
+    ];
+    
+    this.ultility_websites = [
+      {t: '', d: 'https://mustanghx.github.io/ship_ap_calculator/'},
+      {t: '', d: 'https://wowsft.com/'},
+    ]
+    
+    this.ingame_websites = [
+      {t: '', d: `https://${this.prefix}.wargaming.net/id/signin/`},
+      {t: '', d: `https://worldofwarships.${domain}/userbonus/`},
+      {t: '', d: `https://worldofwarships.${domain}/news_ingame/`},
+      {t: '', d: `https://armory.worldofwarships.${domain}/`},
+      {t: '', d: `https://shop.worldofwarships.${domain}/`},
+      {t: '', d: `https://clans.worldofwarships.${domain}/clans/gateway/wows/profile/`},
+      {t: '', d: `https://warehouse.worldofwarships.${domain}/`},
+      {t: '', d: `https://logbook.worldofwarships.${domain}/`},
+    ];
+      
+    this.youtubers = [
+      {t: lang.youtuber_official, d: 'https://www.youtube.com/user/worldofwarshipsCOM'},
+      {t: lang.youtuber_flambass, d: 'https://www.youtube.com/user/Flambass'},
+      {t: lang.youtuber_flamu, d: 'https://www.youtube.com/user/cheesec4t'},
+      {t: lang.youtuber_iChaseGaming, d: 'https://www.youtube.com/user/ichasegaming'},
+      {t: lang.youtuber_jingles, d: 'https://www.youtube.com/user/BohemianEagle'},
+      {t: lang.youtuber_notser, d: 'https://www.youtube.com/user/MrNotser'},
+      {t: lang.youtuber_NoZoupForYou, d: 'https://www.youtube.com/user/ZoupGaming'},
+      {t: lang.youtuber_panzerknacker, d: 'https://www.youtube.com/user/pzkpasch'},
+      {t: lang.youtuber_Toptier, d: 'https://www.youtube.com/channel/UCXOZ2gv_ZGomWNcQU8BBfdQ'},
+      {t: lang.youtuber_yuro, d: 'https://www.youtube.com/user/spzjess'},
+    ];
   }
 
   render() {
@@ -174,18 +198,37 @@ class Menu extends PureComponent {
         <SectionTitle title={lang.extra_section_title}/>
         <List.Item title='RS Beta' description={lang.extra_rs_beta} 
           onPress={() => onlyProVersion() ? SafeAction('RS') : null}/>
-        <List.Section title={lang.website_title} >
-          <FlatGrid items={this.websites} itemDimension={300} renderItem={({item}) => {
+        <SectionTitle title={lang.website_title}/>
+        <List.Accordion title={lang.website_title} >
+          <FlatGrid items={this.offical_websites} itemDimension={300} renderItem={({item}) => {
             return <List.Item title={item.t} description={item.d}
             onPress={() => Linking.openURL(item.d)}/>
           }} spacing={0}/>
-        </List.Section>
-        <List.Section title={lang.youtuber_title}>
+        </List.Accordion>
+        <List.Accordion title={lang.website_title} >
+          <FlatGrid items={this.stats_info_website} itemDimension={300} renderItem={({item}) => {
+            return <List.Item title={item.t} description={item.d}
+            onPress={() => Linking.openURL(item.d)}/>
+          }} spacing={0}/>
+        </List.Accordion>
+        <List.Accordion title={lang.website_title} >
+          <FlatGrid items={this.ultility_websites} itemDimension={300} renderItem={({item}) => {
+            return <List.Item title={item.t} description={item.d}
+            onPress={() => Linking.openURL(item.d)}/>
+          }} spacing={0}/>
+        </List.Accordion>
+        <List.Accordion title={lang.youtuber_title}>
           <FlatGrid items={this.youtubers} itemDimension={300} renderItem={({item}) => {
             return <List.Item title={item.t} description={item.d}
             onPress={() => Linking.openURL(item.d)}/>
           }} spacing={0}/>
-        </List.Section>
+        </List.Accordion>
+        <List.Accordion title={lang.youtuber_title} expanded>
+          <FlatGrid items={this.ingame_websites} itemDimension={300} renderItem={({item}) => {
+            return <List.Item title={item.t} description={item.d}
+            onPress={() => Linking.openURL(item.d)}/>
+          }} spacing={0}/>
+        </List.Accordion>
         {/* <List.Section title={lang.tool_title}>
         </List.Section> */}
       </View>
