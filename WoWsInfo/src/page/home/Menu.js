@@ -70,25 +70,23 @@ class Menu extends PureComponent {
   }
 
   componentDidMount() {
-    if (!this.first) {
-      if (LASTLOCATION !== '') {
-        let extra = {};
-        if (LASTLOCATION === 'Statistics') {
-          // No main account (it will trigger bug statistics screen)
-          if (DATA[LOCAL.userInfo].account_id == '') LASTLOCATION = '';
-          else extra = {info: this.state.main};
-        }
-        else if (LASTLOCATION === 'Upgrade') {
-          LASTLOCATION = 'Consumable';
-          extra = {upgrade: true};
-        }
-        setTimeout(() => SafeAction(LASTLOCATION, extra));
-      }
-    }
+    // THIS CAN BE QUITE ANNOYING 
 
-    if (DATA[LOCAL.showFullscreen]) {
-      AdMobInterstitial.requestAd().then(() => AdMobInterstitial.showAd());
-    }
+    // if (!this.first) {
+    //   if (LASTLOCATION !== '') {
+    //     let extra = {};
+    //     if (LASTLOCATION === 'Statistics') {
+    //       // No main account (it will trigger bug statistics screen)
+    //       if (DATA[LOCAL.userInfo].account_id == '') LASTLOCATION = '';
+    //       else extra = {info: this.state.main};
+    //     }
+    //     else if (LASTLOCATION === 'Upgrade') {
+    //       LASTLOCATION = 'Consumable';
+    //       extra = {upgrade: true};
+    //     }
+    //     setTimeout(() => SafeAction(LASTLOCATION, extra));
+    //   }
+    // }
   }
 
   getData() {
