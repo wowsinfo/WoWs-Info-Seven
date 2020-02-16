@@ -46,7 +46,8 @@ class WarshipStat extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    marginBottom: 16
   },
   header: {
     flex: 1,

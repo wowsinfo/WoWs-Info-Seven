@@ -45,8 +45,8 @@ class ProVersion extends Component {
     const { titleStyle, viewStyle } = styles;
     return (
       <WoWsInfo hideAds>
-        <Title style={titleStyle}>WoWs Info Pro</Title>
         <ScrollView style={viewStyle}>
+          <Title style={titleStyle}>WoWs Info Pro</Title>
           <List.Item title='RS Beta' description='Get realtime statistics in your battles' />
           <List.Item title='More detailed statistics' description='Show even more statistics in your profile' />
           <List.Item title='Quick access to main account' description='Check statistics for your main account just a tap' />
