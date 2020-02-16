@@ -368,6 +368,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
+  hiddenProfile: {
+
+  },
   container: {
     flex: 1,
   },

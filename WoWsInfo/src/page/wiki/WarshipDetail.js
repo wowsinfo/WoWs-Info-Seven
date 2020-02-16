@@ -550,7 +550,7 @@ class WarshipDetail extends PureComponent {
     return (
       <View style={{margin: 8}}>
         <Headline style={this.sectionTitle}>{lang.warship_upgrades}</Headline>
-        <ScrollView horizontal>
+        <ScrollView horizontal contentContainerStyle={{flexGrow: 1, justifyContent: 'center'}}>
           { count.map(num => {
             let all = clone.filter(u => u.slot == num + 1);
             return (
