@@ -158,7 +158,7 @@ class Menu extends PureComponent {
     if (title === '-  -') title = '- ??? -';
     
     return (
-      <WoWsInfo noRight title={title} onPress={enabled ? () => SafeAction('Statistics', {info: main}) : null} home upper={false}>
+      <WoWsInfo noRight title={title} onPress={enabled ? () => (onlyProVersion() ? SafeAction('Statistics', {info: main}) : null) : null} home upper={false}>
         <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='always'>
           <Animatable.View ref='AppName' animation='fadeInDown' easing='ease'>
             <AppName />

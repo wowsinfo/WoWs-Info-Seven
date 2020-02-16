@@ -48,7 +48,8 @@ class ProVersion extends Component {
         <Title style={titleStyle}>WoWs Info Pro</Title>
         <ScrollView style={viewStyle}>
           <List.Item title='RS Beta' description='Get realtime statistics in your battles' />
-          <List.Item title='More Statistics' description='Show even more statistics in your profile' />
+          <List.Item title='More detailed statistics' description='Show even more statistics in your profile' />
+          <List.Item title='Quick access to main account' description='Check statistics for your main account just a tap' />
           <List.Item title='Support development' description='More features are currently under development' />
         </ScrollView>
         { this.renderPurchaseView() }
