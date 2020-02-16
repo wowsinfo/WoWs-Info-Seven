@@ -60,22 +60,31 @@ class WarshipFilter extends Component {
           }} clearButtonMode='while-editing' autoCapitalize='none'/>
         <ScrollView ref='scrollview'>
           <Space />
+          <Space />
           <List.Section title={lang.wiki_warship_filter_tier}>
             <Text style={selectionText}>{`${tier.join(' | ')} `}</Text>
-            <FlatList data={tierList} numColumns={5} keyExtractor={item => item}
-              renderItem={({item}) => this.renderButton(item, () => this.addData(item, MODE.TIER))}/>
+            <View style={{flexWrap: 'wrap', flexDirection: 'row'}}>
+              {tierList.map(item => this.renderButton(item, () => this.addData(item, MODE.TIER)))}
+            </View>
+            {/* <FlatList data={tierList} numColumns={5} keyExtractor={item => item}
+              renderItem={({item}) => this.renderButton(item, () => this.addData(item, MODE.TIER))}/> */}
           </List.Section>
           <List.Section title={lang.wiki_warship_filter_nation}>
             <Text style={selectionText}>{`${nation.join(' | ')} `}</Text>
-            <FlatList data={nationList} numColumns={3} keyExtractor={item => item}
-              renderItem={({item}) => this.renderButton(item, () => this.addData(item, MODE.NATION))}/>
+            <View style={{flexWrap: 'wrap', flexDirection: 'row'}}>
+              {nationList.map(item => this.renderButton(item, () => this.addData(item, MODE.NATION)))}
+            </View>
+            {/* <FlatList data={nationList} numColumns={3} keyExtractor={item => item}
+              renderItem={({item}) => this.renderButton(item, () => this.addData(item, MODE.NATION))}/> */}
           </List.Section> 
           <List.Section title={lang.wiki_warship_filter_type}>
             <Text style={selectionText}>{`${type.join(' | ')} `}</Text>
-            <FlatList data={typeList} numColumns={2} keyExtractor={item => item}
-              renderItem={({item}) => this.renderButton(item, () => this.addData(item, MODE.TYPE))}/>
+            <View style={{flexWrap: 'wrap', flexDirection: 'row'}}>
+              {typeList.map(item => this.renderButton(item, () => this.addData(item, MODE.TYPE)))}
+            </View>
+            {/* <FlatList data={typeList} numColumns={2} keyExtractor={item => item}
+              renderItem={({item}) => this.renderButton(item, () => this.addData(item, MODE.TYPE))}/> */}
           </List.Section>
-          <Space />
         </ScrollView>
         <FooterPlus>
           <List.Item title={lang.wiki_warship_filter_premium} onPress={() => this.setState({premium: !premium})}
