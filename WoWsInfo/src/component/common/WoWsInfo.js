@@ -27,7 +27,7 @@ class WoWsInfo extends Component {
                  'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 
                  'DD', 'BB', 'CV', 'CA', 'SUB',
                  // People and clans that really supports me during development (I will add more)
-                 'Auris2010k', 'HenryQuan', 'Zetesian', 'CJokerLukas', 'VladimirlS', 'CICN', 'FFD', ];
+                 'Auris2010k', 'HenryQuan', 'Zetesian', 'CJokerLukas', 'VladimirlS', 'CICN', 'FFD' ];
 
     // 80% of the time, it will be the app name
     let r = random(10);
@@ -41,7 +41,7 @@ class WoWsInfo extends Component {
 
     // Add a margin for android devices (full screen so add a margin)
     return (
-      <Surface style={[container, style]}>
+      <Surface style={[container, style, ThemeBackColour()]}>
         <SafeAreaView style={safeView}>
           <StatusBar barStyle={DARKMODE ? 'light-content' : 'dark-content'} 
             backgroundColor={ThemeColour()}/>
