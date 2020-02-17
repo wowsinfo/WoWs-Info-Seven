@@ -1,5 +1,5 @@
 import { WoWsAPI, WikiAPI } from '../../value/api';
-import { APP, LOCAL, SAVED, langStr, getCurrDomain, getAPILanguage } from '../../value/data';
+import { APP, LOCAL, SAVED, langStr, getCurrDomain, getAPILanguage, updateCurrData, shouldUpdateWithCycle, getCurrDate } from '../../value/data';
 import { SafeFetch, Guard, SafeStorage } from '../';
 
 class Downloader {
@@ -21,18 +21,31 @@ class Downloader {
    * @param {*} current this is the version from API
    */
   checkVersionUpdate(previous, current) {
-    pList = previous.split('.');
-    cList = current.split('.');
+    // Simply check if they are different
+    return previous !== current;
+    // pList = previous.split('.');
+    // cList = current.split('.');
 
-    for (i = 0; i < pList.length; i++) {
-      // If one digit is larger, we need to update here
-      if (Number(current[i]) > Number(previous[i])) {
-        console.log('Should update');
-        return true;
-      }
-    }
+    // for (i = 0; i < pList.length; i++) {
+    //   // If one digit is larger, we need to update here
+    //   if (Number(current[i]) > Number(previous[i])) {
+    //     console.log('Should update');
+    //     return true;
+    //   }
+    // }
 
-    return false;
+    // return false;
+  }
+
+  /**
+   * Update current date and check if lastUpdate has been a week
+   */
+  checkUpdateCycle() {
+    // update curr data first
+    updateCurrData();
+    const shouldUpdate = shouldUpdateWithCycle();
+    console.log(shouldUpdate);
+    return shouldUpdate;
   }
 
   /**
@@ -53,8 +66,8 @@ class Downloader {
       let appVersion = await SafeStorage.get(LOCAL.appVersion, '1.0.4.2');
       log += `appVersion - ${appVersion}\n`;
       console.log(`Current app version: ${appVersion}\nLatest: ${APP.Version}`);
-      // Check for game update, force mode or app update
-      if (this.checkVersionUpdate(currVersion, gameVersion) || force || appVersion != APP.Version) {
+      // Check for update cycle, game update, force mode or app update
+      if (this.checkUpdateCycle() || this.checkVersionUpdate(currVersion, gameVersion) || force || appVersion !== APP.Version) {
         // Update all data
         log += 'Updating Data\n';
         console.log('Downloader\nUpdating all data from API');
@@ -99,6 +112,8 @@ class Downloader {
         // Update this value only if all data are saved correctly
         SafeStorage.set(LOCAL.gameVersion, gameVersion);
         SafeStorage.set(LOCAL.appVersion, APP.Version);
+        // Save last update as well
+        SafeStorage.set(LOCAL.lastUpdate, getCurrDate())
       }
       return this.makeObj(true, log);
     } catch (err) {

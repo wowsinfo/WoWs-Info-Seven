@@ -50,13 +50,13 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    const json = {};
-    AsyncStorage.getAllKeys().then(keys => {
-      AsyncStorage.multiGet(keys).then(value => {
-        value.map(v => json[v[0]] = JSON.parse(v[1]));
-        console.log(JSON.stringify(json));
-      })
-    })
+    // const json = {};
+    // AsyncStorage.getAllKeys().then(keys => {
+    //   AsyncStorage.multiGet(keys).then(value => {
+    //     value.map(v => json[v[0]] = JSON.parse(v[1]));
+    //     console.log(JSON.stringify(json));
+    //   })
+    // })
 
     this.state = {
       loading: true,

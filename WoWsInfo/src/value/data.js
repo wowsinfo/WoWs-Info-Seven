@@ -243,3 +243,35 @@ export const validateProVersion = async () => {
     Alert.alert('Failed to restore', err.message);
   }
 }
+
+export const getCurrDate = () => {
+  return DATA[LOCAL.date];  
+}
+
+/**
+ * get the date now and update saved date
+ */
+export const updateCurrData = () => {
+  const today = new Date().toDateString();
+  let str = LOCAL.date;
+  DATA[str] = today;
+  SafeStorage.set(str, today);
+}
+
+export const getLastUpdate = () => {
+  return DATA[LOCAL.lastUpdate];
+}
+
+/**
+ * Check if it has been 7 compared to curr date
+ */
+export const shouldUpdateWithCycle = () => {
+  const curr = new Date(getCurrDate());
+  const last = new Date(getLastUpdate());
+
+  const diff = Math.abs(curr - last);
+  // Convert ut to days
+  const diffDays = Math.ceil(diff / (1000 * 60 * 60 * 24));
+  console.log(`${diffDays} day(s)`);
+  return diffDays >= 7;
+}
