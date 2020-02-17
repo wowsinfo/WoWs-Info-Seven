@@ -1,6 +1,6 @@
 <div align="center">
 <img src="https://raw.githubusercontent.com/HenryQuan/WoWs-Info-Origin/master/WoWsInfo/ios/WoWsInfo/Images.xcassets/AppIcon.appiconset/_AppIcon_1024x1024.png" width="128px" height="128px" />
-<h1>WoWs Info Origin+</h1>
+<h1>WoWs Info Origin</h1>
 
 [中文]() | [English](https://github.com/HenryQuan/WoWs-Info-Re/blob/master/README.md) | [日本語]()
 
