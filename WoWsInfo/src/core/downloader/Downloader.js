@@ -38,6 +38,13 @@ class Downloader {
   }
 
   /**
+   * Show random review and share to users
+   */
+  reviewOrShareIfLucky() {
+    
+  }
+
+  /**
    * Update current date and check if lastUpdate has been a week
    */
   checkUpdateCycle() {
