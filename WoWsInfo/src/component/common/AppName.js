@@ -19,7 +19,7 @@ class AppName extends Component {
     const { container, game, appName, horizontal } = styles;
 
     return (
-      <Touchable style={horizontal} onPress={() => SafeAction('About')}>
+      <Touchable style={horizontal}>
         <View style={container}>
           <Title style={[appName, isProVersion() ? {color: Colors.orange500} : {}]}>{lang.app_name}</Title>
           <Caption style={game}>{this.getVersion()}</Caption>

@@ -12,9 +12,10 @@ import { TintColour } from '../../value/colour';
 class IconLabel extends Component {
   render() {
     const { container, label } = styles;
-    const { info, ...props } = this.props;
+    const { info, style, ...props } = this.props;
+    console.log(style);
     return (
-      <View style={container}>
+      <View style={[container, style]}>
         <IconButton size={36} color={TintColour()[500]} {...props}/>
         <Text style={label}>{info}</Text>
       </View>
@@ -24,7 +25,6 @@ class IconLabel extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     padding: 4

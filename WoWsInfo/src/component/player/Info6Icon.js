@@ -7,32 +7,47 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { IconLabel } from './IconLabel';
-import { roundTo } from '../../core';
+import { roundTo, bestWidth } from '../../core';
 
 class Info6Icon extends Component {
+  state = {
+    cellWidth: bestWidth(120),
+  }
+
+  updateBestWidth = (event) => {
+    const goodWidth = event.nativeEvent.layout.width;
+    this.setState({bestItemWidth: bestWidth(400, goodWidth)})
+  }
+
   render() {
-    const { container, horizontal } = styles;
+    const { container, wrap } = styles;
     const { data, compact, topOnly } = this.props;
     if (!data) return null;
-
+    
+    const { cellWidth } = this.state;
     const { battles, wins, damage_dealt, frags, xp, survived_battles, main_battery } = data;
     const { hits, shots } = main_battery;
-    const death = battles - survived_battles; 
+    const death = battles - survived_battles;
+
+    const labelStyle = {width: cellWidth};
     return (
       <View style={[container, compact ? {marginTop: 0, marginBottom: 0} : {marginTop: 16, marginBottom: 16}]}>
-        <View style={horizontal}>
-          <IconLabel icon={require('../../img/Battle.png')} info={battles}/>
-          <IconLabel icon={require('../../img/WinRate.png')} info={`${roundTo(wins / battles * 100, 2)}%`}/>
-          <IconLabel icon={require('../../img/Damage.png')} info={roundTo(damage_dealt / battles)}/>
+        <View style={wrap} onLayout={this.updateBestWidth}>
+          <IconLabel icon={require('../../img/Battle.png')} info={battles} style={labelStyle}/>
+          <IconLabel icon={require('../../img/WinRate.png')} info={`${roundTo(wins / battles * 100, 2)}%`} style={labelStyle}/>
+          <IconLabel icon={require('../../img/Damage.png')} info={roundTo(damage_dealt / battles)} style={labelStyle}/>
+          { topOnly ? null : 
+          <>
+            <IconLabel icon={require('../../img/EXP.png')} info={roundTo(xp / battles)} style={labelStyle}/>
+            <IconLabel icon={require('../../img/KillDeathRatio.png')} info={roundTo(frags / death, 2)} style={labelStyle}/>
+            <IconLabel icon={require('../../img/HitRatio.png')} info={`${roundTo(hits / shots * 100, 2)}%`} style={labelStyle}/>
+          </> }
         </View>
-        { topOnly ? null : <View style={horizontal}>
-          <IconLabel icon={require('../../img/EXP.png')} info={roundTo(xp / battles)}/>
-          <IconLabel icon={require('../../img/KillDeathRatio.png')} info={roundTo(frags / death, 2)}/>
-          <IconLabel icon={require('../../img/HitRatio.png')} info={`${roundTo(hits / shots * 100, 2)}%`}/>
-        </View> }
       </View>
     )
   };
+
+  renderBottom
 }
 
 const styles = StyleSheet.create({
@@ -41,8 +56,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  horizontal: {
-    flexDirection: 'row'
+  wrap: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center'
   }
 });
 
