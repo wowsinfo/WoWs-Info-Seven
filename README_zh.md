@@ -23,7 +23,7 @@ It will be **3USD** annually and it will be available in **update 1.0.7.1**. Sin
 ~~~~
 git clone https://github.com/HenryQuan/WoWs-Info-Origin.git
 ~~~~
-- Run the following commands to install package and run it on your Android devices (and it won't work)
+- Run the following commands to install package and run it on your IOS devices (but it won't work)
 ~~~~
 cd WoWsInfo 
 yarn
