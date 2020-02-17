@@ -29,7 +29,8 @@ class WarshipDetail extends PureComponent {
     // Get all other same tier and same type ships
     let warship = DATA[SAVED.warship];
     let similar = Object.entries(warship).filter(s => {
-      if (s[1].tier === curr.tier && s[1].type === curr.type) return true;
+      // Same tier, same type but not the same ship
+      if (s[1].tier === curr.tier && s[1].type === curr.type && s[1].ship_id != curr.ship_id) return true;
     });
 
     // Remove extra information (ship id)
