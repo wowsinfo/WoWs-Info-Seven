@@ -7,7 +7,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { InfoLabel } from '../common/InfoLabel';
-import { roundTo, humanTimeString } from '../../core';
+import { roundTo, humanTimeString, currDeviceWidth } from '../../core';
 import { lang } from '../../value/lang';
 import { Info6Icon } from './Info6Icon';
 import { Button } from 'react-native-paper';
@@ -19,8 +19,14 @@ class DetailedInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      more: props.more
+      more: props.more,
+      width: currDeviceWidth()
     };
+  }
+
+  updateBestWidth = (event) => {
+    const newWidth = event.nativeEvent.layout.width;
+    this.setState({width: newWidth});
   }
 
   render() {
@@ -34,7 +40,7 @@ class DetailedInfo extends Component {
     
     const { more } = this.state;
     return (
-      <View style={container}>
+      <View style={container} onLayout={this.updateBestWidth}>
         { !playerMode ? <InfoLabel title={lang.basic_last_battle} info={humanTimeString(last_battle_time)}/> : null }
         <Info6Icon data={pvp}/>
         { more ? this.renderMore(playerMode) : <Button onPress={() => onlyProVersion() ? this.setState({more: true}) : null}>{lang.basic_more_stat}</Button> }

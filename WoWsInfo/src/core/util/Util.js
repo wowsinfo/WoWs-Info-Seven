@@ -63,7 +63,11 @@ export const bestCellWidth = (baseWidth) => {
  * if 2 items cannot be place just do one
  * @param {number} width 
  */
-export const bestWidth = (width, deviceWidth = Dimensions.get('window').width) => {
+export const bestWidth = (width, deviceWidth = currDeviceWidth()) => {
   console.log(width, deviceWidth);
   return deviceWidth / Math.max(1, Number(deviceWidth / width).toFixed(0));
+}
+
+export const currDeviceWidth = () => {
+  return Dimensions.get('window').width;
 }

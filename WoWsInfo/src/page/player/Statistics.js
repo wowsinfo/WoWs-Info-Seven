@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { View, ScrollView, StyleSheet, Linking } from 'react-native';
 import { Text, IconButton, Title, Button } from 'react-native-paper';
 import { LoadingIndicator, WoWsInfo, FooterPlus, TabButton, InfoLabel, SectionTitle, PlayerRecord, DetailedInfo, RatingButton } from '../../component';
-import { SafeFetch, Guard, humanTimeString, SafeAction, SafeStorage, getOverallRating } from '../../core';
+import { SafeFetch, Guard, humanTimeString, SafeAction, SafeStorage, getOverallRating, currDeviceWidth } from '../../core';
 import { WoWsAPI } from '../../value/api';
 import { getDomain, getPrefix, LOCAL, setLastLocation } from '../../value/data';
 import { TintColour } from '../../value/colour';
@@ -42,7 +42,7 @@ class Statistics extends PureComponent {
         basic: false,
         graph: false,
         // Whether show everything
-        showMore: false
+        showMore: false,
       };
   
       // Save domain

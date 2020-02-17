@@ -31,18 +31,16 @@ class Info6Icon extends Component {
 
     const labelStyle = {width: cellWidth};
     return (
-      <View style={[container, compact ? {marginTop: 0, marginBottom: 0} : {marginTop: 16, marginBottom: 16}]}>
-        <View style={wrap} onLayout={this.updateBestWidth}>
-          <IconLabel icon={require('../../img/Battle.png')} info={battles} style={labelStyle}/>
-          <IconLabel icon={require('../../img/WinRate.png')} info={`${roundTo(wins / battles * 100, 2)}%`} style={labelStyle}/>
-          <IconLabel icon={require('../../img/Damage.png')} info={roundTo(damage_dealt / battles)} style={labelStyle}/>
-          { topOnly ? null : 
-          <>
-            <IconLabel icon={require('../../img/EXP.png')} info={roundTo(xp / battles)} style={labelStyle}/>
-            <IconLabel icon={require('../../img/KillDeathRatio.png')} info={roundTo(frags / death, 2)} style={labelStyle}/>
-            <IconLabel icon={require('../../img/HitRatio.png')} info={`${roundTo(hits / shots * 100, 2)}%`} style={labelStyle}/>
-          </> }
-        </View>
+      <View style={[wrap, compact ? {marginTop: 0, marginBottom: 0} : {marginTop: 16, marginBottom: 16}]} onLayout={this.updateBestWidth}>
+        <IconLabel icon={require('../../img/Battle.png')} info={battles} style={labelStyle}/>
+        <IconLabel icon={require('../../img/WinRate.png')} info={`${roundTo(wins / battles * 100, 2)}%`} style={labelStyle}/>
+        <IconLabel icon={require('../../img/Damage.png')} info={roundTo(damage_dealt / battles)} style={labelStyle}/>
+        { topOnly ? null : 
+        <>
+          <IconLabel icon={require('../../img/EXP.png')} info={roundTo(xp / battles)} style={labelStyle}/>
+          <IconLabel icon={require('../../img/KillDeathRatio.png')} info={roundTo(frags / death, 2)} style={labelStyle}/>
+          <IconLabel icon={require('../../img/HitRatio.png')} info={`${roundTo(hits / shots * 100, 2)}%`} style={labelStyle}/>
+        </> }
       </View>
     )
   };
@@ -51,12 +49,8 @@ class Info6Icon extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   wrap: {
+    flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center'

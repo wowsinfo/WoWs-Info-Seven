@@ -14,7 +14,7 @@ import { WoWsInfo, SectionTitle, AppName } from '../../component';
 import { lang } from '../../value/lang';
 import { SafeAction, Downloader, bestWidth } from '../../core';
 import { ThemeBackColour, TintColour } from '../../value/colour';
-import { getCurrDomain, getCurrServer, getCurrPrefix, LOCAL, getFirstLaunch, setFirstLaunch, setLastLocation, SAVED, isProVersion, onlyProVersion, validateProVersion } from '../../value/data';
+import { getCurrDomain, getCurrServer, getCurrPrefix, LOCAL, getFirstLaunch, setFirstLaunch, setLastLocation, SAVED, isProVersion, onlyProVersion, validateProVersion, setProVersion } from '../../value/data';
 import { Loading } from '../common/Loading';
 import { Actions } from 'react-native-router-flux';
 
