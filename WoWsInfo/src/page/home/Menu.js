@@ -189,7 +189,7 @@ class Menu extends Component {
     const { icon, wrap } = styles;
     const { bestItemWidth } = this.state;
     return (
-      <View>
+      <View style={{marginBottom: 80}}>
         <SectionTitle title={lang.wiki_section_title}/>
         <View style={wrap}>
           { this.wiki.map(item => <List.Item title={item.t} style={{padding: 0, paddingLeft: 8, width: bestItemWidth}} onPress={() => item.p()}
