@@ -1,29 +1,29 @@
 <div align="center">
 <img src="https://raw.githubusercontent.com/HenryQuan/WoWs-Info-Origin/master/WoWsInfo/ios/WoWsInfo/Images.xcassets/AppIcon.appiconset/_AppIcon_1024x1024.png" width="128px" height="128px" />
-<h1>WoWs Info Origin</h1>
+<h1>WoWs Info 起源</h1>
 
 [中文]() | [English](https://github.com/HenryQuan/WoWs-Info-Re/blob/master/README.md) | [日本語]()
 
-This is not the official app for [World of Warships](https://worldofwarships.com/). It is my own project and it is powered by [React Native](https://facebook.github.io/react-native/). It supports IOS, Android and [UWP](https://github.com/HenryQuan/WoWs-Info-Origin/tree/win10). Data are from [Wargaming API](https://developers.wargaming.net), [WoWs Numbers](http://wows-numbers.com) and [Global Wiki](https://wiki.wargaming.net/en/World_of_Warships).
+WoWs Info 并不是[战舰世界](https://worldofwarships.com/)的官方应用软件。她是我的个人项目，使用 [React Native](https://facebook.github.io/react-native/) 开发完成。目前支持 IOS、安卓、[UWP](https://github.com/HenryQuan/WoWs-Info-Origin/tree/win10)。数据来自 [Wargaming 服务器](https://developers.wargaming.net)、[WoWs Numbers](http://wows-numbers.com)、 [Global Wiki](https://wiki.wargaming.net/en/World_of_Warships).
 </div>
 
-# Technical insights
-JSON based database (NoSQL) is used to store data. WoWs Info will only update data when the game updates or every week to make sure data is always up to date. The way how I interact with data isn't ideal. I should have used Singeleton pattern to wrap global/static in a class. This way, I could prevent many code duplications. You should always plan ahead. I spent two years working this project but I would have spent 2 months designing it and save a year but I didn't.
+# 技术上的一些小见解
+数据是通过 JSON 来保存的。更新周期跟随游戏或者每周更新。目前数据的交互并不完美而且有很多重复的代码。我应该花两个月认真的设计 WoWs Info 来节省一年的时间而不是直接开始写代码。
 
-*All of this will be changed and improved in [WoWs Info RE](https://github.com/HenryQuan/WoWs-Info-Re/tree/WoWs-Info-Re), the next big update for WoWs Info.*
+*但是这些问题都会在 WoWs Info 的下一个大更新 [WoWs Info RE](https://github.com/HenryQuan/WoWs-Info-Re/tree/WoWs-Info-Re) 中修复/改进。*
 
-# About pro version
-My admob account has been terminated due to some unknown reasons for almost **2 years**. Therefore, pro version is necessary to maintain WoWs Info. Without your support, it is unlikely that I will add more features and even update WoWs Info regularly.
+# 关于专业版
+**两年前**、我的 Admob 账号不知什么原因被谷歌永久封禁。专业版是用来继续维持 WoWs Info 的开发和维护。没有大家的支持，新功能的开发甚至正常的更新都将会终止（真的没有办法）。
 
-It will be **3USD** annually and it will be available in **update 1.0.7.1**. Since the new version hasn't been completed, *it will be half price (1.49USD) for all users until WoWs Info RE update.*
+专业版的价格是每年3美元（大概20元），会在1.0.7.1更新中加入。因为新的版本还在开发中，*直到 WoWs Info RE 更新之前，所有用户都可以享受半价优惠。*
 
-# Run this project
-- Setup [React Native](https://facebook.github.io/react-native/docs/getting-started) on your computer. Make sure you follow `React Native CLI Quickstart`.
-- Clone WoWs Info to your computer
+# 如何运行 WoWs Info
+- 在电脑上设置 [React Native](https://facebook.github.io/react-native/docs/getting-started)，请务必查看 `React Native CLI Quickstart` 教程
+- 将 WoWs Info Clone 到电脑上
 ~~~~
 git clone https://github.com/HenryQuan/WoWs-Info-Origin.git
 ~~~~
-- Run the following commands to install package and run it on your IOS devices (but it won't work)
+- 使用下面的指令来安装 Module 并且在 IOS 设备上运行（但是运行不会成功）
 ~~~~
 cd WoWsInfo 
 yarn
@@ -32,16 +32,16 @@ pod install
 cd ..
 react-native run-ios
 ~~~~
-- You will need to get a key from [here](https://developers.wargaming.net) and create a file called 'key.js' inside 'WoWsInfo/src/value' folder with this line of code. Then, you can run WoWs Info on your devices.
+- 你需要从[这里](https://developers.wargaming.net)获得一个钥密然后在 'WoWsInfo/src/value' 文件夹下创建 'key.js' 文件并且需要把下面的代码写到文件里面。保存之后，即可正常运行。
 ~~~~
 export const AppKey = '<Your Key>';
 ~~~~
 
-If you don't want to pay for the pro version, you can change the source code and compile yourself. **However, it is prohibited to distribute your modified app elsewhere.**
+如果你不想购买专业版，你可以自己修改源代码并且编译。**但是，你不可以把修改过的软件分享给别人。**
 
 # Support WoWs Info
-- Star this repository
-- Share with your friends
-- [Patreon](https://www.patreon.com/henryquan) | [PayPal](https://www.paypal.me/YihengQuan) | [WeChat](https://github.com/HenryQuan/WoWs-Info-Origin/blob/master/Support/WeChat.png) 
-- [(IOS) App Store](https://itunes.apple.com/app/id1202750166) | [(Android) Google Play](https://play.google.com/store/apps/details?id=com.yihengquan.wowsinfo)
-- Upgrade pro version
+- 给这个 Repo 一颗星
+- 分享 WoWs Info 给朋友
+- [Patreon](https://www.patreon.com/henryquan) | [贝宝](https://www.paypal.me/YihengQuan) | [微信](https://github.com/HenryQuan/WoWs-Info-Origin/blob/master/Support/WeChat.png) 
+- [(IOS) 苹果应用商店](https://itunes.apple.com/app/id1202750166) | [(安卓) Google Play](https://play.google.com/store/apps/details?id=com.yihengquan.wowsinfo)
+- 升级到专业版
