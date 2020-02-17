@@ -10,13 +10,17 @@ import { Paragraph } from 'react-native-paper';
 import { SAVED } from '../../value/data';
 import { WarshipCell } from '../wiki/WarshipCell';
 import { InfoLabel } from '../common/InfoLabel';
-import { roundTo, SafeAction } from '../../core';
+import { roundTo, SafeAction, bestWidth } from '../../core';
 import { lang } from '../../value/lang';
 import { SectionTitle } from '../common/SectionTitle';
 
 class PlayerRecord extends Component {
+  state = {
+    goodWidth: bestWidth(400)
+  };
+
   render() {
-    const { container } = styles;
+    const { container, wrap } = styles;
     const { data } = this.props;
     if (!data) return null;
     
@@ -45,13 +49,22 @@ class PlayerRecord extends Component {
                    {name: lang.warship_torpedoes, data: torpedoes}, {name: lang.warship_aircraft, data: aircraft}, {name: lang.warship_ramming, data: ramming}];
 
     return (
-      <View style={container}>
+      <View style={container} onLayout={this.updateBestWidth}>
         <SectionTitle title={lang.record_title}/>
-        { max.map(data => this.renderMax(data)) }
-        { records.map(data => this.renderRecord(data)) }
+        <View style={wrap}>
+          { max.map(data => this.renderMax(data)) }
+        </View>
+        <View style={wrap}>
+          { records.map(data => this.renderRecord(data)) }
+        </View>
       </View>
     )
   };
+
+  updateBestWidth = (event) => {
+    const newWidth = event.nativeEvent.layout.width;
+    this.setState({goodWidth: bestWidth(400, newWidth)});
+  }
 
   renderMax(data) {
     const { record, container } = styles;
@@ -59,7 +72,7 @@ class PlayerRecord extends Component {
     if (!id) return null;
     let ship = DATA[SAVED.warship][id];
     return (
-      <View style={record} key={name}>
+      <View style={[record, {width: this.state.goodWidth}]} key={name}>
         <View style={container}>
           <WarshipCell item={ship} scale={2} onPress={() => SafeAction('WarshipDetail', {item: ship})}/>
         </View>
@@ -77,8 +90,8 @@ class PlayerRecord extends Component {
     if (!max_frags_ship_id) return null;
     let bestShip = DATA[SAVED.warship][max_frags_ship_id];
     return (
-      <View style={container} key={name}>
-        <SectionTitle title={name}/>
+      <View style={{width: this.state.goodWidth}} key={name}>
+        <SectionTitle title={name} center/>
         <View style={record}>
           <View style={container}>
             <Paragraph>{lang.record_best_ship}</Paragraph>
@@ -104,6 +117,11 @@ const styles = StyleSheet.create({
   record: {
     flexDirection: 'row',
     justifyContent: 'space-around'
+  },
+  wrap: {
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    justifyContent: 'center'
   }
 });
 

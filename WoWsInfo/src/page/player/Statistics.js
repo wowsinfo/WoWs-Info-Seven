@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { View, ScrollView, StyleSheet, Linking } from 'react-native';
 import { Text, IconButton, Title, Button } from 'react-native-paper';
 import { LoadingIndicator, WoWsInfo, FooterPlus, TabButton, InfoLabel, SectionTitle, PlayerRecord, DetailedInfo, RatingButton } from '../../component';
@@ -8,7 +8,7 @@ import { getDomain, getPrefix, LOCAL, setLastLocation } from '../../value/data';
 import { TintColour } from '../../value/colour';
 import { lang } from '../../value/lang';
 
-class Statistics extends PureComponent {
+class Statistics extends Component {
   constructor(props) {
     super(props);
     setLastLocation('Statistics');
