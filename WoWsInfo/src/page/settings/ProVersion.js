@@ -131,7 +131,7 @@ class ProVersion extends Component {
    * Get all purchases history and check for the last one
    */
   restore = async () => {
-    await validateProVersion();
+    await validateProVersion(true);
   }
 }
 

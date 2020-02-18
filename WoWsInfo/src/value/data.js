@@ -216,7 +216,7 @@ export const onlyProVersion = () => {
   return false;
 }
 
-export const validateProVersion = async () => {
+export const validateProVersion = async (showAlert) => {
   try {
     const history = await getAvailablePurchases();
     console.log(history);
@@ -252,7 +252,7 @@ export const validateProVersion = async () => {
 
     // Should not be pro version
     setProVersion(false);
-    throw new Error('No payment history has been found');
+    if (showAlert) throw new Error('No payment history has been found');
   } catch (err) {
     Alert.alert('Failed to restore', err.message);
   }
