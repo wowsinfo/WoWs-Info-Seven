@@ -1,6 +1,6 @@
 import { SafeStorage, SafeValue } from "../core";
 import { Actions } from 'react-native-router-flux';
-import { getAvailablePurchases } from 'react-native-iap';
+import { getAvailablePurchases, getPurchaseHistory } from 'react-native-iap';
 import { Alert } from 'react-native';
 
 /**
@@ -219,6 +219,7 @@ export const onlyProVersion = () => {
 export const validateProVersion = async () => {
   try {
     const history = await getAvailablePurchases();
+    console.log(history);
     if (history.length > 0) {
       // Sort by date first
       let latest = history.sort((a, b) => a.transactionDate - b.transactionDate)[history.length - 1];

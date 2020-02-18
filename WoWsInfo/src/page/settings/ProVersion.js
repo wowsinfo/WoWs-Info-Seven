@@ -87,7 +87,7 @@ class ProVersion extends Component {
     try {
       const result = await requestSubscription(this.sku, false);
       console.log(result);
-
+      
       // Complete purchase
       await finishTransaction(result, false);
       setProVersion(true);

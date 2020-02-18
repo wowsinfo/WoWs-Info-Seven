@@ -30,7 +30,7 @@ class Menu extends Component {
 
     this.first = getFirstLaunch();
     this.state = {
-      loading: this.first,
+      loading: false,
       main: DATA[LOCAL.userInfo],
       bestItemWidth: bestWidth(400)
     };
@@ -53,9 +53,9 @@ class Menu extends Component {
       });
     } else {
       // Valid pro version
-      // validateProVersion().then(() => {
-      //   this.setState({loading: false});
-      // }).catch();
+      validateProVersion().then(() => {
+        this.setState({loading: false});
+      }).catch();
     }
   }
 
