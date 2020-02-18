@@ -30,13 +30,25 @@ class Menu extends Component {
 
     this.first = getFirstLaunch();
     this.state = {
-      loading: false,
+      loading: true,
       main: DATA[LOCAL.userInfo],
       bestItemWidth: bestWidth(400)
     };
 
     this.getData();
+  }
 
+  componentDidUpdate() {
+    this.getData();
+    const { main } = this.state;
+    let curr = DATA[LOCAL.userInfo];
+    setLastLocation('');
+    if (curr.account_id !== main.account_id) {
+      this.setState({main: curr});
+    }
+  }
+
+  componentDidMount() {
     if (this.first) {
       // Update data here if it is not first launch
       let dn = new Downloader(getCurrServer());
@@ -61,36 +73,6 @@ class Menu extends Component {
         }).catch();
       }
     }
-  }
-
-  componentDidUpdate() {
-    this.getData();
-    const { main } = this.state;
-    let curr = DATA[LOCAL.userInfo];
-    setLastLocation('');
-    if (curr.account_id !== main.account_id) {
-      this.setState({main: curr});
-    }
-  }
-
-  componentDidMount() {
-    // THIS CAN BE QUITE ANNOYING 
-
-    // if (!this.first) {
-    //   if (LASTLOCATION !== '') {
-    //     let extra = {};
-    //     if (LASTLOCATION === 'Statistics') {
-    //       // No main account (it will trigger bug statistics screen)
-    //       if (DATA[LOCAL.userInfo].account_id == '') LASTLOCATION = '';
-    //       else extra = {info: this.state.main};
-    //     }
-    //     else if (LASTLOCATION === 'Upgrade') {
-    //       LASTLOCATION = 'Consumable';
-    //       extra = {upgrade: true};
-    //     }
-    //     setTimeout(() => SafeAction(LASTLOCATION, extra));
-    //   }
-    // }
   }
 
   getData() {
