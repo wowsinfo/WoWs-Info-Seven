@@ -21,7 +21,7 @@ class WoWsInfo extends Component {
     super(props);
 
     const name = [lang.wowsinfo_black, lang.wowsinfo_go, lang.wowsinfo_new,
-                 lang.wowsinfo_pro, lang.wowsinfo_ultimate, lang.wowsinfo_ultra, lang.wowsinfo_white,
+                  lang.wowsinfo_ultimate, lang.wowsinfo_ultra, lang.wowsinfo_white,
                  'X', 'Y', 'Z', '>_<', '#', '0_0', '', '^_^', '★', 'α', 'θ', 'Ω', 'Ф', '∞', '░',
                  '( ͡° ͜ʖ ͡°)', '¯\_(ツ)_/¯', '2018', '?!', '!!', '?!', '2017', '2016', '2019', '2020', '2021', '2022', 
                  'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 

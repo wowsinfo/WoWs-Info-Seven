@@ -5,6 +5,7 @@ import { Title, List, Button, Text, Colors } from 'react-native-paper';
 import { initConnection, getSubscriptions, requestSubscription, getAvailablePurchases, finishTransaction, purchaseUpdatedListener, purchaseErrorListener } from 'react-native-iap';
 import { LOCAL, setProVersion, validateProVersion } from '../../value/data';
 import { Actions } from 'react-native-router-flux';
+import { lang } from '../../value/lang';
 
 class ProVersion extends Component {
   purchaseUpdateSubscription = null
@@ -35,7 +36,7 @@ class ProVersion extends Component {
         // Go back automatically
         setTimeout(() => {
           Actions.pop();
-          Alert.alert('WoWs Info Pro', 'Thank you for your support!');
+          Alert.alert(lang.pro_title, lang.iap_thx_for_support);
         }, 1000);
       }
     });
@@ -83,11 +84,11 @@ class ProVersion extends Component {
     return (
       <WoWsInfo hideAds>
         <ScrollView style={viewStyle}>
-          <Title style={titleStyle}>WoWs Info Pro</Title>
-          <List.Item title='RS Beta' description='Get realtime statistics in your battles' />
-          <List.Item title='More detailed statistics' description='Show even more statistics in your profile' />
-          <List.Item title='Quick access to main account' description='Check statistics for your main account just a tap' />
-          <List.Item title='Support development' description='More features are currently under development' />
+          <Title style={titleStyle}>{lang.pro_title}</Title>
+          <List.Item title={lang.pro_rs} description={lang.pro_rs_subtite} />
+          <List.Item title={lang.pro_more_stats} description={lang.pro_more_stats_subtitle} />
+          <List.Item title={lang.pro_quick_access_main} description={lang.pro_quick_access_main_subtitle} />
+          <List.Item title={lang.pro_support_development} description={lang.pro_support_development_subtitle} />
         </ScrollView>
         { this.renderPurchaseView() }
       </WoWsInfo>
@@ -108,9 +109,9 @@ class ProVersion extends Component {
     } else {
       return (
         <View style={buttonView}>
-          <Text style={discount}>50% off for everyone until the next major update</Text>
-          <Button mode='contained' theme={{roundness: 0}} onPress={this.buy}>{`${price} / Year`}</Button>
-          <Button style={restoreButton} theme={{roundness: 0}} onPress={this.restore}>Restore Pro Version</Button>
+          <Text style={discount}>{lang.pro_50_off_until_re}</Text>
+          <Button mode='contained' theme={{roundness: 0}} onPress={this.buy}>{`${price} / ${lang.pro_per_year}`}</Button>
+          <Button style={restoreButton} theme={{roundness: 0}} onPress={this.restore}>{lang.pro_restore_pro}</Button>
         </View>
       );
     }

@@ -2,6 +2,7 @@ import { SafeStorage, SafeValue } from "../core";
 import { Actions } from 'react-native-router-flux';
 import { getAvailablePurchases, getPurchaseHistory } from 'react-native-iap';
 import { Alert, Platform } from 'react-native';
+import { lang } from './lang';
 
 /**
  * App information
@@ -234,6 +235,8 @@ export const validateProVersion = async (showAlert) => {
             // Set it to true
             setProVersion(true);
             return;
+          } else {
+            throw new Error(lang.iap_pro_expired);
           }
         } else if (Platform.OS === 'ios') {
           // Check if it expires
@@ -245,6 +248,8 @@ export const validateProVersion = async (showAlert) => {
             // Still valid
             setProVersion(true);
             return;
+          } else {
+            throw new Error(lang.iap_pro_expired);
           }
         }
       }
@@ -252,9 +257,9 @@ export const validateProVersion = async (showAlert) => {
 
     // Should not be pro version
     setProVersion(false);
-    if (showAlert) throw new Error('No payment history has been found');
+    if (showAlert) throw new Error(lang.iap_no_purchase_history);
   } catch (err) {
-    Alert.alert('Failed to restore', err.message);
+    Alert.alert(err.message);
   }
 }
 
