@@ -6,15 +6,15 @@
  */
 
 import React, { Component } from 'react';
-import { Alert, ScrollView, StyleSheet, Linking, View } from 'react-native';
-import { isAndroid } from 'react-native-device-detection';
+import { Alert, ScrollView, StyleSheet, Linking, View, Share } from 'react-native';
+import { isAndroid, isIos } from 'react-native-device-detection';
 import { List, Colors, FAB, Button } from 'react-native-paper';
 import * as Animatable from 'react-native-animatable';
 import { WoWsInfo, SectionTitle, AppName } from '../../component';
 import { lang } from '../../value/lang';
 import { SafeAction, Downloader, bestWidth } from '../../core';
 import { ThemeBackColour, TintColour } from '../../value/colour';
-import { getCurrDomain, getCurrServer, getCurrPrefix, LOCAL, getFirstLaunch, setFirstLaunch, setLastLocation, SAVED, isProVersion, onlyProVersion, validateProVersion, setProVersion, isSameDay } from '../../value/data';
+import { getCurrDomain, getCurrServer, getCurrPrefix, LOCAL, getFirstLaunch, setFirstLaunch, setLastLocation, SAVED, isProVersion, onlyProVersion, validateProVersion, setProVersion, isSameDay, APP } from '../../value/data';
 import { Loading } from '../common/Loading';
 import { Actions } from 'react-native-router-flux';
 
@@ -192,6 +192,7 @@ class Menu extends Component {
   renderContent() {
     const { icon, wrap } = styles;
     const { bestItemWidth } = this.state;
+    const store = isAndroid ? APP.GooglePlay : APP.AppStore;
     return (
       <View style={{marginBottom: 80}}>
         <SectionTitle title={lang.wiki_section_title}/>
@@ -201,8 +202,14 @@ class Menu extends Component {
           right={() => isAndroid ? null : <List.Icon color={Colors.grey500} icon='chevron-right'/>} />) }
         </View>
         <SectionTitle title={lang.extra_section_title}/>
-        <List.Item title='RS Beta' description={lang.extra_rs_beta} 
-          onPress={() => onlyProVersion() ? SafeAction('RS') : null}/>
+        <View style={wrap}>
+          <List.Item title='RS Beta' description={lang.extra_rs_beta} style={{width: bestItemWidth}} 
+            onPress={() => onlyProVersion() ? SafeAction('RS') : null}/>
+          <List.Item title={lang.settings_app_write_review} style={{width: bestItemWidth}}
+            onPress={() => Linking.openURL(store)} description={store}/>
+          <List.Item title={lang.settings_app_share} onPress={() => this.shareApp(store)} style={{width: bestItemWidth}}
+            description={lang.settings_app_share_subtitle}/>
+        </View>
         <SectionTitle title={lang.website_title}/>
         <List.Accordion title={lang.website_official_title}>
           <View style={wrap}>
@@ -244,6 +251,15 @@ class Menu extends Component {
       </View>
     );
   }
+
+  shareApp = (store) => {
+    if (isIos) {
+      Share.share({url: store});
+    } else {
+      Share.share({message: `${lang.app_name}\n${store}`});
+    }
+  }
+
 }
 
 const styles = StyleSheet.create({

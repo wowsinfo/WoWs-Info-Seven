@@ -28,7 +28,6 @@ class Settings extends Component {
     
     this.colourList = [RED, PINK, PURPLE, DEEPPRUPLE, INDIGO, BLUE, LIGHTBLUE, CYAN, TEAL, GREEN, LIGHTGREEN, LIME, 
       YELLOW, AMBER, DEEPORANGE, BROWN, GREY, BLUEGREY];
-    this.store = isAndroid ? APP.GooglePlay : APP.AppStore;
   }
 
   componentWillUnmount() {
@@ -140,7 +139,7 @@ class Settings extends Component {
   }
 
   renderWoWsInfo() {
-    let issueLink = `${APP.Github}/issues`;
+    let issueLink = `${APP.Github}/issues/new`;
 
     return (
       <View>
@@ -150,10 +149,6 @@ class Settings extends Component {
           onPress={() => Linking.openURL(APP.Developer)}/>
         <List.Item title={lang.settings_app_report_issues} description={issueLink}
           onPress={() => Linking.openURL(issueLink)}/>
-        <List.Item title={lang.settings_app_write_review}
-          onPress={() => Linking.openURL(this.store)} description={this.store}/>
-        <List.Item title={lang.settings_app_share} onPress={this.shareApp}
-          description={lang.settings_app_share_subtitle}/>
         { isAndroid ? <List.Item title={lang.settings_app_check_for_update} onPress={this.checkAppUpdate}
           description={`v${APP.Version}`}/> : null }
       </View>
@@ -201,14 +196,6 @@ class Settings extends Component {
       ]);
     } else {
       Alert.alert(lang.app_name, lang.settings_app_no_update);
-    }
-  }
-
-  shareApp = () => {
-    if (isIos) {
-      Share.share({url: this.store});
-    } else {
-      Share.share({message: `${lang.app_name}\n${this.store}`});
     }
   }
 
