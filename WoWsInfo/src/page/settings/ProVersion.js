@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import { View, StyleSheet, ScrollView, Alert, Platform } from 'react-native';
 import { WoWsInfo, LoadingIndicator } from '../../component';
 import { Title, List, Button, Text, Colors } from 'react-native-paper';
-import { initConnection, getSubscriptions, requestSubscription, getAvailablePurchases, finishTransaction } from 'react-native-iap';
+import { initConnection, getSubscriptions, requestSubscription, getAvailablePurchases, finishTransaction, purchaseUpdatedListener, purchaseErrorListener } from 'react-native-iap';
 import { LOCAL, setProVersion, validateProVersion } from '../../value/data';
 import { Actions } from 'react-native-router-flux';
 
 class ProVersion extends Component {
+  purchaseUpdateSubscription = null
+  purchaseErrorSubscription = null
+
   sku = 'wowsinfo.proversion';
 
   constructor(props) {
@@ -20,6 +23,28 @@ class ProVersion extends Component {
   }
 
   async componentDidMount() {
+    /// Setup listeners
+    this.purchaseUpdateSubscription = purchaseUpdatedListener(async (purchase) => {
+      console.log('purchaseUpdatedListener', purchase);
+      const receipt = purchase.transactionReceipt;
+      if (receipt) {
+        // It wes successful
+        await finishTransaction(purchase, false);
+        
+        setProVersion(true);
+        // Go back automatically
+        setTimeout(() => {
+          Actions.pop();
+          Alert.alert('WoWs Info Pro', 'Thank you for your support!');
+        }, 1000);
+      }
+    });
+
+    this.purchaseErrorSubscription = purchaseErrorListener((error) => {
+      console.warn('purchaseErrorListener', error);
+    });
+
+    // Init connection
     const allgood = await initConnection();
     console.log(allgood);
     this.setState({
@@ -39,6 +64,17 @@ class ProVersion extends Component {
           loading: false,
         });
       }
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.purchaseUpdateSubscription) {
+      this.purchaseUpdateSubscription.remove();
+      this.purchaseUpdateSubscription = null;
+    }
+    if (this.purchaseErrorSubscription) {
+      this.purchaseErrorSubscription.remove();
+      this.purchaseErrorSubscription = null;
     }
   }
   
@@ -85,16 +121,9 @@ class ProVersion extends Component {
    */
   buy = async () => {
     try {
-      const result = await requestSubscription(this.sku, false);
-      console.log(result);
-      
-      // Complete purchase
-      await finishTransaction(result, false);
-      setProVersion(true);
-      Alert.alert('WoWs Info Pro', 'Thank you for your support!');
-      Actions.pop();
+      await requestSubscription(this.sku, false);
     } catch (err) {
-      Alert.alert('Purchase Failed', err.message);
+      console.warn(err.code, err.message);
     }
   }
 

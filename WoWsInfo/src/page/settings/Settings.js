@@ -110,7 +110,7 @@ class Settings extends Component {
             return <Button onPress={() => this.updateApiLanguage(item)}>{langList[item]}</Button>
           }} keyExtractor={i => i} horizontal/> */}
         <Button mode='contained' theme={{roundness: 0}} onPress={() => {
-          Alert.alert('Warning', 'Please only this when data are missing',
+          Alert.alert('Warning', 'Please only use this when data are missing',
           [
             {text: 'Update', onPress: () => this.updateApiLanguage(this.state.APILanguage, true), style: 'destructive'},
             {text: 'Cancel', onPress: () => null}

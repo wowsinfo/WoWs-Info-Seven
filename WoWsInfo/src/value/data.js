@@ -1,7 +1,7 @@
 import { SafeStorage, SafeValue } from "../core";
 import { Actions } from 'react-native-router-flux';
 import { getAvailablePurchases, getPurchaseHistory } from 'react-native-iap';
-import { Alert } from 'react-native';
+import { Alert, Platform } from 'react-native';
 
 /**
  * App information
@@ -224,21 +224,34 @@ export const validateProVersion = async () => {
       // Sort by date first
       let latest = history.sort((a, b) => a.transactionDate - b.transactionDate)[history.length - 1];
       console.log(latest);
-
-      if (Platform.OS === 'android') {
-        // Only for Android now
-        if (latest.autoRenewingAndroid === true) {
-          // Set it to true
-          setProVersion(true);
-          Alert.alert('WoWs Info Pro', 'Thank you for your support!');
-        } else {
-          setProVersion(false);
+      const receipt = latest.transactionReceipt;
+      const date = latest.transactionDate;
+      if (receipt && date) {
+        console.log('Valid purchase');
+        if (Platform.OS === 'android') {
+          // Only need to check if renew is still on
+          if (latest.autoRenewingAndroid === true) {
+            // Set it to true
+            setProVersion(true);
+            return;
+          }
+        } else if (Platform.OS === 'ios') {
+          // Check if it expires
+          const purchaseDate = new Date(date);
+          purchaseDate.setFullYear(purchaseDate.getFullYear() + 1);
+          const todayDate = new Date();
+          console.log(`today: ${todayDate}\nexpire: ${purchaseDate}`);
+          if (todayDate < purchaseDate) {
+            // Still valid
+            setProVersion(true);
+            return;
+          }
         }
       }
-
-      return;
     }
 
+    // Should not be pro version
+    setProVersion(false);
     throw new Error('No payment history has been found');
   } catch (err) {
     Alert.alert('Failed to restore', err.message);
