@@ -8,6 +8,7 @@
 - Better UX experience for tablet users
 - More websites have been added
 - Added a fixed data update cycle
+- Removed charts temporary
 
 # 1.0.7 / 1.6.6
 - Fixed a critical bug that prevents data update
