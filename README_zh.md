@@ -2,7 +2,7 @@
 <img src="https://raw.githubusercontent.com/HenryQuan/WoWs-Info-Origin/master/WoWsInfo/ios/WoWsInfo/Images.xcassets/AppIcon.appiconset/_AppIcon_1024x1024.png" width="128px" height="128px" />
 <h1>WoWs Info 起源</h1>
 
-[中文]() | [English](https://github.com/HenryQuan/WoWs-Info-Re/blob/master/README.md) | [日本語]()
+[中文](https://github.com/HenryQuan/WoWs-Info-Re/blob/master/README_zh.md) | [English](https://github.com/HenryQuan/WoWs-Info-Re/blob/master/README.md) | [日本語](https://github.com/HenryQuan/WoWs-Info-Re/blob/master/README_ja.md)
 
 WoWs Info 并不是[战舰世界](https://worldofwarships.com/)的官方应用软件。她是我的个人项目，使用 [React Native](https://facebook.github.io/react-native/) 开发完成。目前支持 IOS、安卓、[UWP](https://github.com/HenryQuan/WoWs-Info-Origin/tree/win10)。数据来自 [Wargaming 服务器](https://developers.wargaming.net)、[WoWs Numbers](http://wows-numbers.com)、 [Global Wiki](https://wiki.wargaming.net/en/World_of_Warships).
 </div>

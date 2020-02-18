@@ -2,7 +2,7 @@
 <img src="https://raw.githubusercontent.com/HenryQuan/WoWs-Info-Origin/master/WoWsInfo/ios/WoWsInfo/Images.xcassets/AppIcon.appiconset/_AppIcon_1024x1024.png" width="128px" height="128px" />
 <h1>WoWs Info Origin</h1>
 
-[中文]() | [English](https://github.com/HenryQuan/WoWs-Info-Re/blob/master/README.md) | [日本語]()
+[中文](https://github.com/HenryQuan/WoWs-Info-Re/blob/master/README_zh.md) | [English](https://github.com/HenryQuan/WoWs-Info-Re/blob/master/README.md) | [日本語](https://github.com/HenryQuan/WoWs-Info-Re/blob/master/README_ja.md)
 
 This is not the official app for [World of Warships](https://worldofwarships.com/). It is my own project and it is powered by [React Native](https://facebook.github.io/react-native/). It supports IOS, Android and [UWP](https://github.com/HenryQuan/WoWs-Info-Origin/tree/win10). Data are from [Wargaming API](https://developers.wargaming.net), [WoWs Numbers](http://wows-numbers.com) and [Global Wiki](https://wiki.wargaming.net/en/World_of_Warships).
 </div>
