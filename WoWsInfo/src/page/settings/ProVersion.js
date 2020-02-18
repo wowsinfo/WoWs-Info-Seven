@@ -34,10 +34,11 @@ class ProVersion extends Component {
         
         setProVersion(true);
         // Go back automatically
+        Actions.pop();
+        Alert.alert(lang.pro_title, lang.iap_thx_for_support);
         setTimeout(() => {
-          Actions.pop();
-          Alert.alert(lang.pro_title, lang.iap_thx_for_support);
-        }, 1000);
+          Actions.refresh();
+        }, 500);
       }
     });
 

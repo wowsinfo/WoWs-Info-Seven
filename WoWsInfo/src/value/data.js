@@ -230,27 +230,16 @@ export const validateProVersion = async (showAlert) => {
       if (receipt && date) {
         console.log('Valid purchase');
         if (Platform.OS === 'android') {
-          // Only need to check if renew is still on
-          if (latest.autoRenewingAndroid === true) {
-            // Set it to true
-            setProVersion(true);
-            return;
-          } else {
-            throw new Error(lang.iap_pro_expired);
-          }
+          restorePurchase(latest.autoRenewingAndroid === true, showAlert);
+          return;
         } else if (Platform.OS === 'ios') {
           // Check if it expires
           const purchaseDate = new Date(date);
           purchaseDate.setFullYear(purchaseDate.getFullYear() + 1);
           const todayDate = new Date();
           console.log(`today: ${todayDate}\nexpire: ${purchaseDate}`);
-          if (todayDate < purchaseDate) {
-            // Still valid
-            setProVersion(true);
-            return;
-          } else {
-            throw new Error(lang.iap_pro_expired);
-          }
+          restorePurchase(todayDate < purchaseDate, showAlert);
+          return;
         }
       }
     }
@@ -260,6 +249,22 @@ export const validateProVersion = async (showAlert) => {
     if (showAlert) throw new Error(lang.iap_no_purchase_history);
   } catch (err) {
     Alert.alert(err.message);
+  }
+}
+
+const restorePurchase = (shouldRestore, showAlert) => {
+  console.log(`Restore purchase - ${shouldRestore}`);
+  if (shouldRestore === true) {
+    setProVersion(true);
+    if (showAlert) {
+      Actions.pop();
+      Alert.alert(lang.pro_title, lang.iap_thx_for_support);
+      setTimeout(() => {
+        Actions.refresh();
+      }, 500);
+    }
+  } else {
+    throw new Error(lang.iap_pro_expired);
   }
 }
 
@@ -275,6 +280,14 @@ export const updateCurrData = () => {
   let str = LOCAL.date;
   DATA[str] = today;
   SafeStorage.set(str, today);
+}
+
+export const isSameDay = () => {
+  const today = new Date();
+  const curr = new Date(getCurrDate());
+  const sameDay = today.getDay() === curr.getDay();
+  console.log('Same day - ' + sameDay);
+  return sameDay;
 }
 
 export const getLastUpdate = () => {
