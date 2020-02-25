@@ -7,6 +7,12 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## 25/02/2019
+### What have I done?
+Nothing. I was working the 1.0.7.1 update. Now, users are not really happy with me but whatever. I will keep making this app and make it better no matter what.
+### What to do tomorrow?
+I am taking a break from WoWs Info and working on my [HabitApp](https://github.com/HenryQuan/HabitApp).
+
 ## 14/02/2019
 ### What have I done?
 Fixed many bugs and many improvements for the old version. 
