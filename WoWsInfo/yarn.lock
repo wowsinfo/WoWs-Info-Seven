@@ -5140,6 +5140,11 @@ nanomatch@^1.2.9:
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
 
+native-chart-experiment@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/native-chart-experiment/-/native-chart-experiment-1.0.0.tgz#68ce591eb13efde27154e07db867275c979fc3b3"
+  integrity sha512-Ou6z5ce78YM1H4ABDfbuFRelI/rH2aCnsJOZrxwMoJvadMpT61TiLmKrQi8e7OCzK+fjPIq23L9monEYyNSUJg==
+
 natural-compare@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
