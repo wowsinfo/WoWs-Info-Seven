@@ -11,11 +11,11 @@ import * as Anime from 'react-native-animatable';
 import { WoWsInfo, WikiIcon, WarshipCell, PriceLabel, LoadingIndicator, WarshipStat, InfoLabel, FooterPlus } from '../../component';
 import { SAVED, langStr, getCurrDomain } from '../../value/data';
 import { lang } from '../../value/lang';
-import { SafeFetch, Guard, SafeAction, copy, roundTo, getRandomAnimation } from '../../core';
+import { SafeFetch, Guard, SafeAction, copy, roundTo } from '../../core';
 import { WoWsAPI } from '../../value/api';
 import { Actions } from 'react-native-router-flux';
-import { TintColour, TintTextColour } from '../../value/colour';
-import { VictoryChart, VictoryAxis, VictoryBar } from 'victory-native';
+import { TintColour, TintTextColour, ThemeColour } from '../../value/colour';
+import { HorizontalBarChart } from 'native-chart-experiment';
 
 class WarshipDetail extends PureComponent {
   constructor(props) {
@@ -605,7 +605,7 @@ class WarshipDetail extends PureComponent {
                 () => this.efficientDataRequest(item.ship_id));
               }}/>
             }} showsHorizontalScrollIndicator={false}/>
-          {/* { compare != null ? <Button onPress={() => SafeAction('SimilarGraph', {info: compare})}>{lang.warship_compare_similar}</Button> : null } */}
+          { compare != null ? <Button onPress={() => SafeAction('SimilarGraph', {info: compare})}>{lang.warship_compare_similar}</Button> : null }
         </FooterPlus>
       )
     } else return null;
@@ -633,15 +633,21 @@ class WarshipDetail extends PureComponent {
       {n: lang.warship_avg_winrate, d: winrateChart},
       {n: lang.warship_avg_frag, d: fragChart}];
     let charts = data.map(c => {
+      let names = c.d.map(v => v.x);
+      let values = c.d.map(v => v.y);
       return (
-        <View pointerEvents='none' key={c.n}>
-          <Title style={styles.graphTitle}>{c.n}</Title>
-          <VictoryChart height={winrateChart.length * 30} padding={{left: 100, top: 20, bottom: 20, right: 60}}>
-            <VictoryAxis dependentAxis style={{tickLabels: {fill: themeColour}}}/>
-            <VictoryBar style={{data: {fill: themeColour}, labels: {fontSize: 12, fill: themeColour}}}
-              horizontal data={c.d} labels={d => d.y}/>
-          </VictoryChart>
+        <View style={{height: c.d.length * 20}}>
+          <HorizontalBarChart chartData={values} xAxisLabels={names}
+            darkMode={DARKMODE} themeColour={themeColour} />
         </View>
+        // <View pointerEvents='none' key={c.n}>
+        //   <Title style={styles.graphTitle}>{c.n}</Title>
+        //   <VictoryChart height={winrateChart.length * 30} padding={{left: 100, top: 20, bottom: 20, right: 60}}>
+        //     <VictoryAxis dependentAxis style={{tickLabels: {fill: themeColour}}}/>
+        //     <VictoryBar style={{data: {fill: themeColour}, labels: {fontSize: 12, fill: themeColour}}}
+        //       horizontal data={c.d} labels={d => d.y}/>
+        //   </VictoryChart>
+        // </View>
       )
     });
     this.setState({compare: charts});
