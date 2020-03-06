@@ -8,7 +8,7 @@ import React, { PureComponent } from 'react';
 import { View, FlatList,Linking, ScrollView, StyleSheet } from 'react-native';
 import { Text, Title, Headline, Button, Paragraph } from 'react-native-paper';
 import * as Anime from 'react-native-animatable';
-import { WoWsInfo, WikiIcon, WarshipCell, PriceLabel, LoadingIndicator, WarshipStat, InfoLabel, FooterPlus } from '../../component';
+import { WoWsInfo, WikiIcon, WarshipCell, PriceLabel, LoadingIndicator, WarshipStat, InfoLabel, FooterPlus, SectionTitle } from '../../component';
 import { SAVED, langStr, getCurrDomain } from '../../value/data';
 import { lang } from '../../value/lang';
 import { SafeFetch, Guard, SafeAction, copy, roundTo } from '../../core';
@@ -635,9 +635,11 @@ class WarshipDetail extends PureComponent {
     let charts = data.map(c => {
       let names = c.d.map(v => v.x);
       let values = c.d.map(v => v.y);
+      console.log(names, values, c);
       return (
-        <View style={{height: c.d.length * 20}}>
-          <HorizontalBarChart chartData={values} xAxisLabels={names}
+        <View>
+          <SectionTitle center title={c.n}/>
+          <HorizontalBarChart style={{height: names.length * 20}} chartData={values} xAxisLabels={names}
             darkMode={DARKMODE} themeColour={themeColour} />
         </View>
         // <View pointerEvents='none' key={c.n}>
