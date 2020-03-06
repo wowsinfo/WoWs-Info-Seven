@@ -640,7 +640,7 @@ class WarshipDetail extends PureComponent {
       return (
         <View>
           <SectionTitle center title={c.n}/>
-          <HorizontalBarChart style={{height: names.length * 30}} chartData={values} xAxisLabels={names}
+          <HorizontalBarChart style={{height: names.length * 20}} chartData={values} xAxisLabels={names}
             darkMode={DARKMODE} themeColor={themeColour} />
         </View>
       )
