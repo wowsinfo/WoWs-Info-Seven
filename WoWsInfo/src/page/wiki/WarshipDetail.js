@@ -628,11 +628,10 @@ class WarshipDetail extends PureComponent {
       fragChart.push({x: name, y: roundTo(average_frags, 2)});
     }
 
-    // Render charts once for all
-    const themeColour = TintColour()[500];
-    let data = [{n: lang.warship_avg_damage, d: damageChart},
-      {n: lang.warship_avg_winrate, d: winrateChart},
-      {n: lang.warship_avg_frag, d: fragChart}];
+    // The original colour that I used
+    let data = [{n: lang.warship_avg_damage, d: damageChart, c: '#2387FF'},
+      {n: lang.warship_avg_winrate, d: winrateChart, c: '#4DA74D'},
+      {n: lang.warship_avg_frag, d: fragChart, c: '#C94A4D'}];
     let charts = data.map(c => {
       let names = c.d.map(v => v.x);
       let values = c.d.map(v => v.y);
@@ -641,7 +640,7 @@ class WarshipDetail extends PureComponent {
         <View>
           <SectionTitle center title={c.n}/>
           <HorizontalBarChart style={{height: names.length * 20}} chartData={values} xAxisLabels={names}
-            darkMode={DARKMODE} themeColor={themeColour} />
+            darkMode={DARKMODE} themeColor={c.c} />
         </View>
       )
     });
