@@ -571,6 +571,7 @@ class WarshipDetail extends PureComponent {
    */
   renderNextShip(next_ships) {
     if (!next_ships || Object.keys(next_ships).length == 0) return null;
+    console.log(next_ships);
     // Get all ships from next_ships
     var ships = []; for (key in next_ships) ships.push({key: key, exp: next_ships[key]});
     shipKey = (index) => String(index);
@@ -639,17 +640,9 @@ class WarshipDetail extends PureComponent {
       return (
         <View>
           <SectionTitle center title={c.n}/>
-          <HorizontalBarChart style={{height: names.length * 20}} chartData={values} xAxisLabels={names}
-            darkMode={DARKMODE} themeColour={themeColour} />
+          <HorizontalBarChart style={{height: names.length * 30}} chartData={values} xAxisLabels={names}
+            darkMode={DARKMODE} themeColor={themeColour} />
         </View>
-        // <View pointerEvents='none' key={c.n}>
-        //   <Title style={styles.graphTitle}>{c.n}</Title>
-        //   <VictoryChart height={winrateChart.length * 30} padding={{left: 100, top: 20, bottom: 20, right: 60}}>
-        //     <VictoryAxis dependentAxis style={{tickLabels: {fill: themeColour}}}/>
-        //     <VictoryBar style={{data: {fill: themeColour}, labels: {fontSize: 12, fill: themeColour}}}
-        //       horizontal data={c.d} labels={d => d.y}/>
-        //   </VictoryChart>
-        // </View>
       )
     });
     this.setState({compare: charts});
