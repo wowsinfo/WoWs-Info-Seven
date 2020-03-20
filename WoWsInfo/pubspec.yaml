@@ -11,7 +11,7 @@ description: A new Flutter project.
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+1
+version: 1.1.0+1
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -20,6 +20,20 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # API request
+  http: ^0.12.0+4
+  html: ^0.14.0+3
+  # Database
+  hive: ^1.4.1+1
+  hive_flutter: ^0.3.0+2
+  # Keep device awake
+  wakelock: ^0.1.4
+  # Charts
+  charts_flutter: ^0.9.0
+  # Vibraton
+  vibration: ^1.2.4
+  # IAP
+  in_app_purchase: ^0.3.1+2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
