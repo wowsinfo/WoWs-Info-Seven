@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
-import { VictoryBar, VictoryTheme, VictoryChart, VictoryPie, VictoryAxis } from "victory-native";
+import { Title } from 'react-native-paper';
+import { BarChart, PieChart } from 'native-chart-experiment';
 import { WoWsInfo } from '../../component';
 import { SAVED } from '../../value/data';
 import { SafeValue, roundTo } from '../../core';
 import { TintColour } from '../../value/colour';
-import { VictoryLabel } from 'victory-core/es';
 
 class Graph extends PureComponent {
   constructor(props) {
@@ -42,7 +42,7 @@ class Graph extends PureComponent {
 
   objToChart(obj, name, min = 0) {
     // Key will be x and Value will be y
-    let chart = [];
+    let chart = {x: [], y: []};
     for (let key in obj) {
       let val = obj[key];
       if (val === 0 || val < min) continue;
@@ -50,7 +50,8 @@ class Graph extends PureComponent {
       let label = key;
       if (name) label = name[key]
 
-      chart.push({x: label, y: val});
+      chart.x.push(label);
+      chart.y.push(val);
     }
     console.log(chart);
     return chart;
@@ -74,20 +75,16 @@ class Graph extends PureComponent {
     return (
       <WoWsInfo hideAds>
         <ScrollView>
-          <View pointerEvents='none'>
-            {/* <Title>{`Average Tier - ${avgTier}`}</Title> */}
-            <VictoryChart domainPadding={10}>
-              <VictoryAxis/>
-              <VictoryBar theme={VictoryTheme.material}
-                style={{data: {fill: themeColour}, labels: {fontSize: 12, fill: themeColour}}} data={tier} labels={d => d.y}/>
-            </VictoryChart>
-            <VictoryPie style={{labels: {fontSize: 12, fill: themeColour}}} data={nation} padAngle={3}
-            colorScale={["tomato", "orange", "gold", "cyan", "navy" ]}/>
-            <VictoryPie theme={VictoryTheme.material} data={type}/>
-          </View>
+          {/* <Title style={{textAlign: 'center'}}>{`Average Tier - ${avgTier}`}</Title> */}
+          <BarChart style={{height: 300}} darkMode={DARKMODE} themeColor={TintColour()[500]}
+            chartData={tier.y} xAxisLabels={tier.x} />
+          <PieChart style={{height: 300}} darkMode={DARKMODE}
+            chartData={nation.y} dataLabels={nation.x}/>
+          <PieChart style={{height: 300}} darkMode={DARKMODE}
+            chartData={type.y} dataLabels={type.x}/>
         </ScrollView>
       </WoWsInfo>
-    )
+    );
   };
 
   renderLabel = () => <VictoryLabel style={{color: TintColour()[500]}}/>
