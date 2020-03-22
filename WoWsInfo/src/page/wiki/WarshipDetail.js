@@ -242,10 +242,12 @@ class WarshipDetail extends PureComponent {
     if (HE) {
       var fireRate = calibar > 160 ? 4 : 3;
       var oneFourth = Number(calibar / 4).toFixed(1);
+      var oneFifth = Number(calibar / 5).toFixed(1);
       var oneSixth = Number(calibar / 6).toFixed(1);
       // Mark the penetration 1/6 and 1/4
-      var penetration = `1/6 | ${oneSixth} - ${Number(oneSixth * 1.3).toFixed(1)} mm\n` +
-        `1/4 | ${oneFourth} - ${Number(oneFourth * 1.3).toFixed(1)} mm`;
+      var penetration = `1/6 | ${oneSixth} - ${Number(oneSixth * 1.25).toFixed(1)} mm\n` +
+        `1/5 | ${oneFifth} - ${Number(oneFifth * 1.25).toFixed(1)} mm\n` +
+        `1/4 | ${oneFourth} - ${Number(oneFourth * 1.25).toFixed(1)} mm`;
       fireRate += HE.burn_probability;
     }
 
