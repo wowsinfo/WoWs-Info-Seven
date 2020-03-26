@@ -13,7 +13,7 @@ class OriginalHomePage extends StatelessWidget {
       ),
       body: Center(
         child: Image.asset(
-          'lib/assets/search_button',
+          'lib/assets/search_button.png',
           height: 128,
           width: 128,
         ),

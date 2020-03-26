@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wowsinfo/ui/pages/OriginalHomePage.dart';
 
 /// HomePage class
 class HomePage extends StatefulWidget {
@@ -10,13 +11,34 @@ class HomePage extends StatefulWidget {
 
 
 class _HomePageState extends State<HomePage> {
+  bool showOriginal = true;
+
   @override
   Widget build(BuildContext context) {
+    Future.delayed(Duration(milliseconds: 1500)).then((_) {
+      this.setState(() {
+        this.showOriginal = false;
+      });
+    });
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text('HomePage')
+      body: AnimatedSwitcher(
+        duration: Duration(milliseconds: 1500),
+        child: renderWidget(),
       ),
-      body: Container(),
     );
+  }
+
+  Widget renderWidget() {
+    if (showOriginal) {
+      return OriginalHomePage();
+    } else {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text('HomePage')
+        ),
+        body: Container(),
+      );
+    }
   }
 }
