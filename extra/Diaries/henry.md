@@ -9,7 +9,7 @@ Template
 
 ## 26/03/2019
 ### What have I done?
-Mimic the original `HomePage` back in early 2017 and fade in the new one. It has been three years. This will be last and final rewrite. Flutter is indeed better for me but I will still learn React Native and native. I am not gonna get any jobs now so I can focus on my apps now. This time, I will make it great so that I don't have to rewrite anymore. My habit app is almost done and I will publish it soon for public testing. SVG logo has been added to have a better icon for Android. I will just keep the old logo since all of users are used to that logo. 
+Mimic the original `HomePage` back in early 2017 and fade in the new one. It has been three years. This will be last and final rewrite. Flutter is indeed better for me but I will still learn React Native and native. I am not gonna get any jobs now so I can focus on my apps now. This time, I will make it great so that I don't have to rewrite anymore. My habit app is almost done and I will publish it soon for public testing. SVG logo has been added to have a better icon for Android. I will just keep the old logo since all of users are used to that logo. An alternative logo has been added for IOS. I still don't know how to change the logo for Android apps. 
 ### What to do tomorrow?
 I will start with backend this time and convert everything into models first with my converter. 
 
