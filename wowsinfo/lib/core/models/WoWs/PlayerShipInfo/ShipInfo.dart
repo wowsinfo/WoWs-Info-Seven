@@ -1,5 +1,5 @@
 
-import '../PvP/Pvp.dart';
+import '../PvP/PvP.dart';
 
 class ShipInfo {
   PvP _pvp;

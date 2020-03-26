@@ -1,4 +1,4 @@
-import '../PvP/Pvp.dart';
+import '../PvP/PvP.dart';
 
 class Statistics {
   int _distance;
