@@ -1,37 +1,30 @@
+import '../Meta.dart';
+
 /// This is the `PlayerAchievement` class
 class PlayerAchievement {
+  Meta meta;
   Data data;
 
   PlayerAchievement(json) {
-    this.data = json["data"];
-  }
-}
-
-/// This is the `Meta` class
-class Meta {
-  int count;
-  Null hidden;
-
-  Meta(json) {
-    this.count = json["count"];
-    this.hidden = json["hidden"];
+    this.meta = Meta(json["data"]);
+    this.data = Data(json["data"]);
   }
 }
 
 /// This is the `Data` class
 class Data {
-  K2011774448 k2011774448;
+  AchievementBattle battle;
 
   Data(json) {
-    this.k2011774448 = json["2011774448"];
+    this.battle = AchievementBattle(json["2011774448"]);
   }
 }
 
 /// This is the `K2011774448` class
-class K2011774448 {
+class AchievementBattle {
   Map<String, int> battle;
 
-  K2011774448(json) {
+  AchievementBattle(json) {
     this.battle = json["battle"];
   }
 }
