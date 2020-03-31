@@ -20,7 +20,7 @@ class Data {
   }
 }
 
-/// This is the `K2011774448` class
+/// This is the `AchievementBattle` class
 class AchievementBattle {
   Map<String, int> battle;
 

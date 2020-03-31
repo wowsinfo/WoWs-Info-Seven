@@ -14,15 +14,15 @@ class BasicPlayerInfo {
 
 /// This is the `Data` class, there should only be one player info here
 class Data {
-  K2011774448 k2011774448;
+  PlayerDetail k2011774448;
 
   Data(json) {
     this.k2011774448 = json["2011774448"];
   }
 }
 
-/// This is the `K2011774448` class
-class K2011774448 {
+/// This is the `PlayerDetail` class
+class PlayerDetail {
   int lastBattleTime;
   int accountId;
   int levelingTier;
@@ -37,7 +37,7 @@ class K2011774448 {
   String nickname;
   int statsUpdatedAt;
 
-  K2011774448(json) {
+  PlayerDetail(json) {
     this.lastBattleTime = json["last_battle_time"];
     this.accountId = json["account_id"];
     this.levelingTier = json["leveling_tier"];
