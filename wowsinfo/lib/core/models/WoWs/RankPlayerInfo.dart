@@ -22,6 +22,7 @@ class Data {
 
 /// This is the `K2011774448` class
 class K2011774448 {
+  // TODO: fix this bug
   Map<String, Season> season;
 
   K2011774448(json) {

@@ -1,4 +1,6 @@
 /// This is the `Meta` class, shared by all API responses from Wargaming API
+/// - It is usually used to determine if this account is hidden
+/// - Sometimes, it can be used to see if there are more data to be downloaded (ships, consumables and more)
 class Meta {
   int count;
   int pageTotal;
