@@ -11,7 +11,7 @@ Template
 ### What have I done?
 Back from `JSON: Become TS` and I was learning Kotlin and Swift. I am doing some UI today. `LoadingOverlay` is done with the help of `Theme` for theming, `Builder` for getting the theme and `PlatformWidget` to render IOS widgets on IOS. Of course, there are way more. I will try to keep the UI unchanged as much as possible so that my users won't be comfused that much. 
 ### What to do tomorrow?
-More UI. 
+More UI and maybe `Localization` as well. More on GitHub...
 
 ## 26/03/2019
 ### What have I done?
