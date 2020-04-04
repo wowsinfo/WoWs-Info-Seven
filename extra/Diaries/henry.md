@@ -2,10 +2,16 @@
 This will track what I have done today and what I will do tomorrow.
 ~~~
 Template
-## /03/2019
+## /04/2019
 ### What have I done?
 ### What to do tomorrow?
 ~~~
+
+## 04/04/2019
+### What have I done?
+Back from `JSON: Become TS` and I was learning Kotlin and Swift. I am doing some UI today. `LoadingOverlay` is done with the help of `Theme` for theming, `Builder` for getting the theme and `PlatformWidget` to render IOS widgets on IOS. Of course, there are way more. I will try to keep the UI unchanged as much as possible so that my users won't be comfused that much. 
+### What to do tomorrow?
+More UI. 
 
 ## 26/03/2019
 ### What have I done?

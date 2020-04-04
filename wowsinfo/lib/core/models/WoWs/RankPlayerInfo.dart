@@ -23,7 +23,7 @@ class Data {
 /// This is the `K2011774448` class
 class K2011774448 {
   // TODO: fix this bug
-  Map<String, Season> season;
+  Map<String, dynamic> season;
 
   K2011774448(json) {
     this.season = json["seasons"];

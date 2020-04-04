@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/ui/pages/OriginalHomePage.dart';
+import 'package:wowsinfo/ui/widgets/LoadingOverlay.dart';
 
 /// HomePage class
 class HomePage extends StatefulWidget {
@@ -23,13 +24,15 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       body: AnimatedSwitcher(
-        duration: Duration(milliseconds: 1500),
+        duration: Duration(milliseconds: 1000),
         child: renderWidget(),
       ),
     );
   }
 
   Widget renderWidget() {
+    return LoadingOverlay();
+
     if (showOriginal) {
       return OriginalHomePage();
     } else {
