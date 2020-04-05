@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:wowsinfo/ui/widgets/PlatformWidget.dart';
 
 /// LoadingOverlay class
@@ -22,7 +23,7 @@ class _LoadingOverlayState extends State<LoadingOverlay> {
         brightness: Brightness.dark,
         textTheme: TextTheme(
           subtitle1: TextStyle(color: Colors.white)
-        )
+        ),
       ),
       child: Builder(builder: (c) {
         return Container(
@@ -34,7 +35,7 @@ class _LoadingOverlayState extends State<LoadingOverlay> {
                 Image(image: AssetImage('lib/assets/logo_white.png')),
                 Padding(
                   padding: const EdgeInsets.all(16),
-                  child: Text('Hello', style: Theme.of(c).textTheme.subtitle1),
+                  child: Text('Hello World', style: Theme.of(c).textTheme.subtitle1),
                 ),
                 PlatformWidget(
                   android: CircularProgressIndicator(),
