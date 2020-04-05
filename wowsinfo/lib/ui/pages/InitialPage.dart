@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:wowsinfo/core/Utils.dart';
 import 'package:wowsinfo/ui/pages/HomePage.dart';
+import 'package:wowsinfo/ui/widgets/PlatformWidget.dart';
 
 /// InitialPage class
 /// - It shows a full screen overlay
@@ -19,9 +19,7 @@ class _InitialPageState extends State<InitialPage> {
   @override
   Widget build(BuildContext context) {
     Utils.delay(2000).then((_) {
-      Navigator.of(context).pushReplacement(
-        platformPageRoute(context: context, builder: (c) => HomePage())
-      );
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => HomePage()));
     });
 
     return Theme(
@@ -49,11 +47,12 @@ class _InitialPageState extends State<InitialPage> {
                       padding: const EdgeInsets.all(16),
                       child: Text('Hello World', style: Theme.of(c).textTheme.subtitle1),
                     ),
-                    PlatformCircularProgressIndicator(
-                      ios: (_) => CupertinoProgressIndicatorData(
-                        radius: 16
+                    PlatformWidget(
+                      android: CircularProgressIndicator(),
+                      ios: CupertinoActivityIndicator(
+                        radius: 16,
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
