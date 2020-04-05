@@ -7,6 +7,10 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## 05/04/2019
+### What have I done?
+### What to do tomorrow?
+
 ## 04/04/2019
 ### What have I done?
 Back from `JSON: Become TS` and I was learning Kotlin and Swift. I am doing some UI today. `LoadingOverlay` is done with the help of `Theme` for theming, `Builder` for getting the theme and `PlatformWidget` to render IOS widgets on IOS. Of course, there are way more. I will try to keep the UI unchanged as much as possible so that my users won't be comfused that much. 
