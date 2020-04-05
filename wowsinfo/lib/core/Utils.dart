@@ -1,3 +1,7 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
+
 class Utils {
   /// Takes an `object`, a `path` and a `default value`.
   /// Returns whether the valid value or the default value
@@ -24,5 +28,11 @@ class Utils {
 
   static Future<void> delay(int duration) {
     return Future.delayed(Duration(milliseconds: duration));
+  }
+
+  /// Check if this device is IOS
+  static bool isIOS() {
+    if (kIsWeb) return false;
+    return Platform.isIOS || Platform.isMacOS;
   }
 }

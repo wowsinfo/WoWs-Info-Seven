@@ -9,7 +9,9 @@ Template
 
 ## 05/04/2019
 ### What have I done?
+Played with platform widget but I decided to use it later. Now, theme and brightness can be changed dynamically. Locale will be supported when I have added `Localization`. `LoadingOverlay` is now `InitialPage` and it loads data from GitHub and WG server. It does more (like loading data to memory) but when it is done, it will push to the `HomePage`. Then, the user can start using the app. I am really worried about my users in China because some ISP blocked the API and I don't know how to bypass it right now.
 ### What to do tomorrow?
+Finalise `HomePage` and maybe `Localization`.
 
 ## 04/04/2019
 ### What have I done?
