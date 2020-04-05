@@ -1,8 +1,8 @@
-[English](https://github.com/HenryQuan/WoWs-Info-Re/blob/master/log/en.md) | [中文简体](https://github.com/HenryQuan/WoWs-Info-Re/blob/master/log/zh.md) | [中文繁體](https://github.com/HenryQuan/WoWs-Info-Re/blob/master/log/zh-hant.md) | [日本語](https://github.com/HenryQuan/WoWs-Info-Re/blob/master/log/ja.md)
+[English](https://github.com/HenryQuan/WoWs-Info-Re/blob/master/log/en.md) | [简体中文](https://github.com/HenryQuan/WoWs-Info-Re/blob/master/log/zh.md) | [繁體中文](https://github.com/HenryQuan/WoWs-Info-Re/blob/master/log/zh-hant.md) | [日本語](https://github.com/HenryQuan/WoWs-Info-Re/blob/master/log/ja.md)
 
-# 1.0.7.2 / 1.6.8
+# 1.0.7.2 / 1.6.8 WoWs Info Future
 
-# 1.0.7.1 / 1.6.7
+# 1.0.7.1 / 1.6.7 WoWs Info Origin
 - WoWs Info Pro is back
 - Improved performance and stability
 - Many bugs have been fixed
