@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
     return Stack(
       children: <Widget>[
         // Am I a genius, lol lol
-        AppBar(),
+        AppBar(brightness: Brightness.dark),
         LoadingOverlay(),
       ],
     );
