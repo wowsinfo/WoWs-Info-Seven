@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:wowsinfo/core/Utils.dart';
 import 'package:wowsinfo/ui/pages/HomePage.dart';
-import 'package:wowsinfo/ui/widgets/PlatformPageRoute.dart';
 
 /// InitialPage class
 /// - It shows a full screen overlay
