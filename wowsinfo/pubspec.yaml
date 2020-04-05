@@ -34,7 +34,7 @@ dependencies:
   vibration: ^1.2.4
   # IAP
   in_app_purchase: ^0.3.1+2
-  # Provider that changes app theme
+  # Change app theme, brightess, locale and more
   provider: ^4.0.4
 
   # The following adds the Cupertino Icons font to your application.
