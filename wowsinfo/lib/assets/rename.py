@@ -10,5 +10,5 @@ def replaceFileNameFromPath(path: str, findStr: str, replaceStr: str):
             os.rename(f, f.replace(findStr, replaceStr))
 
 # replace @2x and @3x from the folder
-replaceFileNameFromPath('2.0x/*', '@2x', '')
-replaceFileNameFromPath('3.0x/*', '@3x', '')
+replaceFileNameFromPath('images/2.0x/*', '@2x', '')
+replaceFileNameFromPath('images/3.0x/*', '@3x', '')

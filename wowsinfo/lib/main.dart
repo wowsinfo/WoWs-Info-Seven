@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:wowsinfo/core/AppProvider.dart';
 import 'package:wowsinfo/ui/pages/InitialPage.dart';
@@ -16,10 +17,26 @@ class MyApp extends StatelessWidget {
       child: Builder(builder: (c) {
         final app = Provider.of<AppProvider>(c);
         return MaterialApp(
-        title: 'WoWs Info Re',
-        theme: app.getTheme(),
-        home: InitialPage(),
-      );
+          localizationsDelegates: [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: [
+            // English
+            const Locale('en'),
+            // Japanese
+            const Locale('ja'),
+            // This is simplified
+            const Locale.fromSubtags(languageCode: 'zh'),
+            // Both traditional and simplified
+            const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'),
+            const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant'),
+          ],
+          title: 'WoWs Info Re',
+          theme: app.getTheme(),
+          home: InitialPage(),
+        );
       }),
     );
   }
