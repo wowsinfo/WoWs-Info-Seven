@@ -21,4 +21,8 @@ class Utils {
     }
     return dval;
   }
+
+  static Future<void> delay(int duration) {
+    return Future.delayed(Duration(milliseconds: duration));
+  }
 }

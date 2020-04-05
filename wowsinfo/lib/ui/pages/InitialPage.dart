@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:wowsinfo/ui/widgets/PlatformWidget.dart';
 
-/// LoadingOverlay class
+/// InitialPage class
 /// - It shows a full screen overlay
 /// - Maybe display some messages as well
-class LoadingOverlay extends StatefulWidget {
-  LoadingOverlay({Key key}) : super(key: key);
+class InitialPage extends StatefulWidget {
+  InitialPage({Key key}) : super(key: key);
 
   @override
-  _LoadingOverlayState createState() => _LoadingOverlayState();
+  _InitialPageState createState() => _InitialPageState();
 }
 
-class _LoadingOverlayState extends State<LoadingOverlay> {
+class _InitialPageState extends State<InitialPage> {
   @override
   Widget build(BuildContext context) {
     return Theme(
