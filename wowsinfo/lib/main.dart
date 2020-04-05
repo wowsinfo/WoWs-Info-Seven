@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:wowsinfo/core/AppProvider.dart';
-import 'package:wowsinfo/core/localization/AppLocalization.dart';
+import 'package:wowsinfo/core/AppLocalization.dart';
 import 'package:wowsinfo/ui/pages/InitialPage.dart';
 
 void main() {
@@ -14,15 +14,21 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => AppProvider(Colors.blue, Brightness.light),
+      create: (_) => AppProvider(
+        Colors.blue, 
+        Brightness.light, 
+        Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant')
+      ),
       child: Builder(builder: (c) {
-        final app = Provider.of<AppProvider>(c);
+        final wowsinfo = Provider.of<AppProvider>(c);
         return MaterialApp(
           localizationsDelegates: [
+            AppLocalization.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
+          locale: wowsinfo.locale,
           supportedLocales: AppLocalization.supportedLocales,
           localeResolutionCallback: (locale, supported) {
             switch (locale.languageCode) {
@@ -36,7 +42,7 @@ class MyApp extends StatelessWidget {
             }
           },
           title: 'WoWs Info Re',
-          theme: app.getTheme(),
+          theme: wowsinfo.theme,
           home: InitialPage(),
         );
       }),

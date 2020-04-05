@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:wowsinfo/core/Utils.dart';
+import 'package:wowsinfo/core/AppLocalization.dart';
 import 'package:wowsinfo/ui/pages/HomePage.dart';
 import 'package:wowsinfo/ui/widgets/PlatformWidget.dart';
 
@@ -45,7 +46,10 @@ class _InitialPageState extends State<InitialPage> {
                     Image(image: AssetImage('lib/assets/images/logo_white.png')),
                     Padding(
                       padding: const EdgeInsets.all(16),
-                      child: Text('Hello World', style: Theme.of(c).textTheme.subtitle1),
+                      child: Text(
+                        AppLocalization.of(context).localised('app_name'), 
+                        style: Theme.of(c).textTheme.subtitle1
+                      ),
                     ),
                     PlatformWidget(
                       android: CircularProgressIndicator(),

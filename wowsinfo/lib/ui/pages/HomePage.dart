@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:wowsinfo/core/AppLocalization.dart';
 import 'package:wowsinfo/core/AppProvider.dart';
 
 /// HomePage class
@@ -17,7 +20,7 @@ class _HomePageState extends State<HomePage> {
     final provider = Provider.of<AppProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('HomePage')
+        title: Text(AppLocalization.of(context).localised('app_name'))
       ),
       body: Center(
         child: Column(
@@ -36,6 +39,19 @@ class _HomePageState extends State<HomePage> {
               },
             ),
             RaisedButton(
+              child: Text('Random language'),
+              onPressed: () {
+                final randomIndex = Random().nextInt(5);
+                provider.setLocale(AppLocalization.supportedLocales[randomIndex]);
+              },
+            ),
+            RaisedButton(
+              child: Text('Not supported language'),
+              onPressed: () {
+                provider.setLocale(Locale('id'));
+              },
+            ),
+            RaisedButton(
               child: Text('Red'),
               onPressed: () {
                 provider.setColor(Colors.red);
@@ -46,7 +62,7 @@ class _HomePageState extends State<HomePage> {
               onPressed: () {
                 provider.setColor(Colors.green);
               },
-            )
+            ),
           ],
         ),
       ),
