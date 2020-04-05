@@ -14,6 +14,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<AppProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('HomePage')
@@ -25,25 +26,25 @@ class _HomePageState extends State<HomePage> {
             RaisedButton(
               child: Text('Dark'),
               onPressed: () {
-                Provider.of<AppProvider>(context).setBrightness(Brightness.dark);
+                provider.setBrightness(Brightness.dark);
               },
             ),
             RaisedButton(
               child: Text('Light'),
               onPressed: () {
-                Provider.of<AppProvider>(context).setBrightness(Brightness.light);
+                provider.setBrightness(Brightness.light);
               },
             ),
             RaisedButton(
               child: Text('Red'),
               onPressed: () {
-                Provider.of<AppProvider>(context).setColor(Colors.red);
+                provider.setColor(Colors.red);
               },
             ),
             RaisedButton(
               child: Text('Green'),
               onPressed: () {
-                Provider.of<AppProvider>(context).setColor(Colors.green);
+                provider.setColor(Colors.green);
               },
             )
           ],
