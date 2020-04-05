@@ -31,7 +31,13 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget renderWidget() {
-    return LoadingOverlay();
+    return Stack(
+      children: <Widget>[
+        // Am I a genius, lol lol
+        AppBar(),
+        LoadingOverlay(),
+      ],
+    );
 
     if (showOriginal) {
       return OriginalHomePage();
