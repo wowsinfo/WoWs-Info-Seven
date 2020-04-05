@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:wowsinfo/core/Utils.dart';
+import 'package:wowsinfo/ui/pages/HomePage.dart';
+import 'package:wowsinfo/ui/widgets/PlatformPageRoute.dart';
 import 'package:wowsinfo/ui/widgets/PlatformWidget.dart';
 
 /// InitialPage class
@@ -16,6 +19,15 @@ class InitialPage extends StatefulWidget {
 class _InitialPageState extends State<InitialPage> {
   @override
   Widget build(BuildContext context) {
+   Utils.delay(2000).then((_) {
+      Navigator.of(context).pushReplacement(
+        PlatformPageRoute(
+          material: MaterialPageRoute(builder: (c) => HomePage()),
+          cupertino: CupertinoPageRoute(builder: (c) => HomePage())
+        )
+      );
+    });
+
     return Theme(
       // Only here, the overlay is blue and white text should be used
       data: ThemeData(
@@ -26,26 +38,32 @@ class _InitialPageState extends State<InitialPage> {
         ),
       ),
       child: Builder(builder: (c) {
-        return Container(
-          color: Colors.blue,
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Image(image: AssetImage('lib/assets/logo_white.png')),
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Text('Hello World', style: Theme.of(c).textTheme.subtitle1),
+        return Stack(
+          children: <Widget>[
+            // This app bar will update the status bar color
+            AppBar(brightness: Brightness.dark),
+            Container(
+              color: Colors.blue,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Image(image: AssetImage('lib/assets/logo_white.png')),
+                    Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Text('Hello World', style: Theme.of(c).textTheme.subtitle1),
+                    ),
+                    PlatformWidget(
+                      android: CircularProgressIndicator(),
+                      ios: CupertinoActivityIndicator(
+                        radius: 16,
+                      ),
+                    )
+                  ],
                 ),
-                PlatformWidget(
-                  android: CircularProgressIndicator(),
-                  ios: CupertinoActivityIndicator(
-                    radius: 16,
-                  ),
-                )
-              ],
+              ),
             ),
-          ),
+          ],
         );
       }),
     );
