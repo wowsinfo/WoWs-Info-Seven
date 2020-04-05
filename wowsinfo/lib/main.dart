@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:wowsinfo/core/AppProvider.dart';
+import 'package:wowsinfo/core/localization/AppLocalization.dart';
 import 'package:wowsinfo/ui/pages/InitialPage.dart';
 
 void main() {
@@ -22,17 +23,18 @@ class MyApp extends StatelessWidget {
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          supportedLocales: [
-            // English
-            const Locale('en'),
-            // Japanese
-            const Locale('ja'),
-            // This is simplified
-            const Locale.fromSubtags(languageCode: 'zh'),
-            // Both traditional and simplified
-            const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'),
-            const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant'),
-          ],
+          supportedLocales: AppLocalization.supportedLocales,
+          localeResolutionCallback: (locale, supported) {
+            switch (locale.languageCode) {
+              case 'en':
+              case 'ja':
+              case 'zh':
+                return locale;
+              default:
+                // This should be english
+                return supported.first;
+            }
+          },
           title: 'WoWs Info Re',
           theme: app.getTheme(),
           home: InitialPage(),

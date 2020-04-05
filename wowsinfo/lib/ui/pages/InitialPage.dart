@@ -42,7 +42,7 @@ class _InitialPageState extends State<InitialPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Image(image: AssetImage('lib/assets/logo_white.png')),
+                    Image(image: AssetImage('lib/assets/images/logo_white.png')),
                     Padding(
                       padding: const EdgeInsets.all(16),
                       child: Text('Hello World', style: Theme.of(c).textTheme.subtitle1),
