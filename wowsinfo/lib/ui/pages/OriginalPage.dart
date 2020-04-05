@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// This mimics the original home page back in early 2017
 class OriginalPage extends StatelessWidget {
@@ -6,8 +7,8 @@ class OriginalPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
+    return PlatformScaffold(
+      appBar: PlatformAppBar(
         title: Text('WoWs Info'),
         backgroundColor: Color(0XFF5A9CFF),
       ),

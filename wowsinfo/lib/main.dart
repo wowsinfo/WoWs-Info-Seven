@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:wowsinfo/ui/pages/InitialPage.dart';
 
 void main() {
@@ -8,10 +9,15 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return PlatformApp(
       title: 'WoWs Info Re',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+      android: (_) => MaterialAppData(
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+      ),
+      ios: (_) => CupertinoAppData(
+        color: Colors.blue
       ),
       home: InitialPage(),
     );

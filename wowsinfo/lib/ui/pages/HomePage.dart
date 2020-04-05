@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:wowsinfo/core/Utils.dart';
 import 'package:wowsinfo/ui/pages/OriginalPage.dart';
 
@@ -26,7 +27,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return PlatformScaffold(
       body: AnimatedSwitcher(
         duration: Duration(milliseconds: 1000),
         child: renderWidget(),
@@ -39,8 +40,8 @@ class _HomePageState extends State<HomePage> {
     if (showOriginal) {
       return OriginalPage();
     } else {
-      return Scaffold(
-        appBar: AppBar(
+      return PlatformScaffold(
+        appBar: PlatformAppBar(
           title: Text('HomePage')
         ),
         body: Container(),

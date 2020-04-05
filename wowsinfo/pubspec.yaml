@@ -36,6 +36,8 @@ dependencies:
   in_app_purchase: ^0.3.1+2
   # Provider that changes app theme
   provider: ^4.0.4
+  # platform widget
+  flutter_platform_widgets: ^0.32.5
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
