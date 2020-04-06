@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class LocalData {
   /// Singleton pattern 
@@ -27,8 +28,9 @@ class LocalData {
   Future<bool> init() async {
     // Only init once
     if (_shouldInit) {
+      // Setup hive database
+      await Hive.initFlutter();
       final pref = await Hive.openBox(LocalData.perference_key);
-      pref.put('test', 123);
       print(pref.values);
       _shouldInit = false;
     }

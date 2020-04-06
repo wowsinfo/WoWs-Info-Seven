@@ -1,17 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:wowsinfo/core/LocalData.dart';
 import 'package:wowsinfo/core/others/AppProvider.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
 import 'package:wowsinfo/ui/pages/InitialPage.dart';
 
 void main() async {
+  /// Setup local data
+  await LocalData().init();
   runApp(MyApp());
-  /// Setup Hive database
-  await Hive.initFlutter();
 }
 
 class MyApp extends StatelessWidget {
@@ -47,6 +46,7 @@ class MyApp extends StatelessWidget {
           },
           title: 'WoWs Info Re',
           theme: wowsinfo.theme,
+          // This should depend on whether first_launch is true or not
           home: InitialPage(),
         );
       }),
