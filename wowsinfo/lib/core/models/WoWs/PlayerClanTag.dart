@@ -1,4 +1,4 @@
-import 'package:wowsinfo/core/Utils.dart';
+import 'package:wowsinfo/core/others/Utils.dart';
 
 /// This is the `PlayerClanTag` class
 class PlayerClanTag {

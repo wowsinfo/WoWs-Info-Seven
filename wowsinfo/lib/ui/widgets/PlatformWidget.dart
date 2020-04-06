@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:wowsinfo/core/Utils.dart';
+import 'package:wowsinfo/core/others/Utils.dart';
 
 /// PlatformWidget class
 /// - It renders base on the Platform

@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wowsinfo/core/AppLocalization.dart';
-import 'package:wowsinfo/core/AppProvider.dart';
+import 'package:wowsinfo/core/others/AppLocalization.dart';
+import 'package:wowsinfo/core/others/AppProvider.dart';
 
 /// HomePage class
 class HomePage extends StatefulWidget {

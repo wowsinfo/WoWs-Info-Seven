@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:wowsinfo/core/AppProvider.dart';
-import 'package:wowsinfo/core/AppLocalization.dart';
+import 'package:wowsinfo/core/others/AppProvider.dart';
+import 'package:wowsinfo/core/others/AppLocalization.dart';
 import 'package:wowsinfo/ui/pages/InitialPage.dart';
 
 void main() {

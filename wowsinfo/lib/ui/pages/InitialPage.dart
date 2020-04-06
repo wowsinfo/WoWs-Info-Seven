@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:wowsinfo/core/Utils.dart';
-import 'package:wowsinfo/core/AppLocalization.dart';
+import 'package:wowsinfo/core/others/Utils.dart';
+import 'package:wowsinfo/core/others/AppLocalization.dart';
 import 'package:wowsinfo/ui/pages/HomePage.dart';
 import 'package:wowsinfo/ui/widgets/PlatformWidget.dart';
 
