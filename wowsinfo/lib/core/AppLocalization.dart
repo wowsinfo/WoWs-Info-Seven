@@ -31,7 +31,7 @@ class AppLocalization {
 
   /// Load the correct JSON file from disk
   Future<bool> load() async {
-    final jsonPath = 'lib/assets/locales/localization_${getLocalFileName()}.json';
+    final jsonPath = 'assets/locales/localization_${getLocalFileName()}.json';
     final jsonString = await rootBundle.loadString(jsonPath);
     Map<String, dynamic> jsonMap = json.decode(jsonString);
     // Convert dynamic to String
