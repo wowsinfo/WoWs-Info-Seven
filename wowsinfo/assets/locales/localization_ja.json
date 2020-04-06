@@ -1,3 +1,8 @@
 {
-    "app_name": "WoWs Info 2016年末の夢"
+    "app_name": "WoWs Info 2016年末の夢",
+    "bottom_tab_home": "Home",
+    "bottom_tab_website": "Website",
+    "bottom_tab_wiki": "Game Wiki",
+    "bottom_tab_realtime": "Real-time",
+    "bottom_tab_search": "Search"
 }

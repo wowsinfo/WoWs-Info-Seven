@@ -15,9 +15,13 @@ class HomePage extends StatefulWidget {
 
 
 class _HomePageState extends State<HomePage> {
+  int selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<AppProvider>(context);
+    final localization = AppLocalization.of(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalization.of(context).localised('app_name'))
@@ -65,6 +69,36 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            title: Text(localization.localised('bottom_tab_home')),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.language),
+            title: Text(localization.localised('bottom_tab_website')),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.book),
+            title: Text(localization.localised('bottom_tab_wiki')),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.table_chart),
+            title: Text(localization.localised('bottom_tab_realtime')),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            title: Text(localization.localised('bottom_tab_search')),
+          ),
+        ],
+        currentIndex: selectedIndex,
+        onTap: (index) {
+          // Update iondex
+          setState(() => selectedIndex = index);
+        },
       ),
     );
   }

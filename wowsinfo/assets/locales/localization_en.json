@@ -1,3 +1,8 @@
 {
-    "app_name": "WoWs Info Re"
+    "app_name": "WoWs Info Re",
+    "bottom_tab_home": "Home",
+    "bottom_tab_website": "Website",
+    "bottom_tab_wiki": "Wiki",
+    "bottom_tab_realtime": "Real-time",
+    "bottom_tab_search": "Search"
 }

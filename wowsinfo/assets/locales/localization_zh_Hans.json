@@ -1,3 +1,8 @@
 {
-    "app_name": "WoWs Info 梦回2016"
+    "app_name": "WoWs Info 梦回2016",
+    "bottom_tab_home": "主页",
+    "bottom_tab_website": "网站列表",
+    "bottom_tab_wiki": "战舰百科",
+    "bottom_tab_realtime": "实时数据",
+    "bottom_tab_search": "搜索"
 }
