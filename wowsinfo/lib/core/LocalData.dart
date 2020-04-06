@@ -31,7 +31,7 @@ class LocalData {
       // Setup hive database
       await Hive.initFlutter();
       final pref = await Hive.openBox(LocalData.perference_key);
-      print(pref.values);
+      print(pref.values.first);
       _shouldInit = false;
     }
 
