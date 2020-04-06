@@ -7,6 +7,12 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## 06/04/2019
+### What have I done?
+I actually implemented `Localization` yesterday so today, I am focusing on models. There are two kinds of data that needs to be saved. `Preference` and `CachaedWiki`. Preference can be edited but CachedWiki cannot, except when data should be updated. My next goal is to implement the data saving and auto update part. With the backend ready, UI should be easy. However, I need to break down Pages into widgets or so called `Fragment`. 
+### What to do tomorrow?
+More models.
+
 ## 05/04/2019
 ### What have I done?
 Played with platform widget but I decided to use it later. Now, theme and brightness can be changed dynamically. Locale will be supported when I have added `Localization`. `LoadingOverlay` is now `InitialPage` and it loads data from GitHub and WG server. It does more (like loading data to memory) but when it is done, it will push to the `HomePage`. Then, the user can start using the app. I am really worried about my users in China because some ISP blocked the API and I don't know how to bypass it right now.
