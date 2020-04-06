@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:wowsinfo/core/others/Utils.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
-import 'package:wowsinfo/ui/pages/HomePage.dart';
+import 'package:wowsinfo/ui/pages/BottomNavigationPage.dart';
 import 'package:wowsinfo/ui/widgets/PlatformWidget.dart';
 
 /// InitialPage class
@@ -20,7 +20,7 @@ class _InitialPageState extends State<InitialPage> {
   @override
   Widget build(BuildContext context) {
     Utils.delay(2000).then((_) {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => HomePage()));
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => BottomNavigationPage()));
     });
 
     return Theme(

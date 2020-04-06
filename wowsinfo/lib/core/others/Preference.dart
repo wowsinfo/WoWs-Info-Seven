@@ -1,6 +1,4 @@
-/// It manages all user preferences
-/// - api language
-/// - game server
+/// It manages all user preferences including those that are used in app provider
 class Preference {
 
 }

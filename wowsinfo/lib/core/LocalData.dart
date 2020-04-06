@@ -18,6 +18,7 @@ class LocalData {
   /// Variables
   /// 
 
+  // Whether the app is initialsed
   bool _shouldInit = true;
   
   /// 
@@ -31,7 +32,7 @@ class LocalData {
       // Setup hive database
       await Hive.initFlutter();
       final pref = await Hive.openBox(LocalData.perference_key);
-      print(pref.values.first);
+      print(pref.values);
       _shouldInit = false;
     }
 

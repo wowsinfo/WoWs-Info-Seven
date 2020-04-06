@@ -5,12 +5,15 @@ class AppProvider with ChangeNotifier {
   ThemeData _theme;
   ThemeData get theme => _theme;
   
-  MaterialColor _color;
-  Brightness _brightness;
-  Locale _locale = Locale('en');
+  // By default, theme colour is blue, light mode and locale is just null (follow system)
+  MaterialColor _color = Colors.blue;
+  Brightness _brightness = Brightness.light;
+  Locale _locale;
   Locale get locale => _locale;
 
-  AppProvider(this._color, this._brightness, this._locale) {
+  AppProvider() {
+    // Load data from local storage
+    // TODO
     _makeTheme();
   }
 

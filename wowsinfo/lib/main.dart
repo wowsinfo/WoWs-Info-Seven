@@ -17,11 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => AppProvider(
-        Colors.blue, 
-        Brightness.light, 
-        Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant')
-      ),
+      create: (_) => AppProvider(),
       child: Builder(builder: (c) {
         final wowsinfo = Provider.of<AppProvider>(c);
         return MaterialApp(
