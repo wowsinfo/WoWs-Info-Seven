@@ -6,10 +6,13 @@ import 'package:wowsinfo/core/LocalData.dart';
 import 'package:wowsinfo/core/others/AppProvider.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
 import 'package:wowsinfo/ui/pages/InitialPage.dart';
+import 'package:wowsinfo/ui/pages/setup/IntroPage.dart';
+
+final local = LocalData();
 
 void main() async {
   /// Setup local data
-  await LocalData().init();
+  await local.init();
   runApp(MyApp());
 }
 
@@ -43,9 +46,15 @@ class MyApp extends StatelessWidget {
           title: 'WoWs Info Re',
           theme: wowsinfo.theme,
           // This should depend on whether first_launch is true or not
-          home: InitialPage(),
+          home: buildHome()
         );
       }),
     );
+  }
+
+  /// Setup should be the home
+  Widget buildHome() {
+    if (local.firstLaunch) return IntroPage();
+    return InitialPage();
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wowsinfo/ui/pages/InitialPage.dart';
 
 /// WelcomeWidget class
 class WelcomeWidget extends StatelessWidget {
@@ -10,7 +11,14 @@ class WelcomeWidget extends StatelessWidget {
       appBar: AppBar(
         title: Text('WelcomeWidget')
       ),
-      body: Container(),
+      body: Center(
+        child: FlatButton(
+          onPressed: () {
+            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (c) => InitialPage()));
+          }, 
+          child: Text('Initial')
+        ),
+      )
     );
   }
 }
