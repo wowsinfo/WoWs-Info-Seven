@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:wowsinfo/core/others/Utils.dart';
 
+/// `KEYS` are stored here so that I won't have any typo or changed the string accidentally
+const BOX_NAME = 'preference';
 const FIRST_LAUNCH = 'first_launch';
 const MAIN_ACCOUNT = 'main_account';
 // This saves all user ship data once for a while
@@ -25,10 +27,9 @@ const APP_VERSION = 'app_version';
 /// - It manages all const a preferences including those that are used in app provider
 /// - Mainly changable ones
 class Preference {
-  static const box_name = 'preference';
   /// Singleton pattern 
-  Preference._init();
-  static final Preference _instance = Preference._init();
+  Preference._empty();
+  static final Preference _instance = Preference._empty();
   // Use dart's factory constructor to implement this patternx
   factory Preference() => _instance;
 
@@ -43,6 +44,11 @@ class Preference {
   int get bottomTabIndex => this.box.get(BOTTOM_TAB_INDEX) ?? 0;
   setBottomTabIndex(int value) => this.box.put(BOTTOM_TAB_INDEX, value);
 
+  bool get proVersion => this.box.get(PRO_VERSION) ?? false;
+  setProVersion(bool value) => this.box.put(PRO_VERSION, value);
+
+  String get realtimeIP => this.box.get(REALTIME_IP) ?? '';
+  setRealtimeIP(String value) => this.box.put(REALTIME_IP, value);
 
   ///
   /// Functions
@@ -50,8 +56,8 @@ class Preference {
 
   /// This is necessary to be called before using anything else
   Future<bool> init() async {
-    this.box = await Hive.openBox(box_name);
-    Utils.debugPrint('$box_name box has been loaded');
+    this.box = await Hive.openBox(BOX_NAME);
+    Utils.debugPrint('$BOX_NAME box has been loaded');
     _debug();
     return true;
   }

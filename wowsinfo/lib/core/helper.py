@@ -1,3 +1,4 @@
+import pyperclip
 
 '''
 bool get firstLaunch => this.box.get(FIRST_LAUNCH) ?? true;
@@ -5,8 +6,10 @@ setFirstLaunch(bool value) => this.box.put(FIRST_LAUNCH, value);
 '''
 
 def write(constant_name, constant_type, default_value):
-    print('{} get {} => this.box.get({}) ?? {};'.format(constant_type, getter(constant_name), constant_name, default_value))
-    print('{}({} value) => this.box.put({}, value);'.format(setter(constant_name), constant_type, constant_name))
+    one = '  {} get {} => this.box.get({}) ?? {};\n'.format(constant_type, getter(constant_name), constant_name, default_value)
+    two = '  {}({} value) => this.box.put({}, value);'.format(setter(constant_name), constant_type, constant_name)
+    pyperclip.copy(one + two)
+    print('It has been copied :)')
 
 def setter(name: str):
     '''
@@ -26,4 +29,4 @@ def first_lower(s):
    else:
       return s[0].lower() + s[1:]
 
-write('BOTTOM_TAB_INDEX', 'int', '0')
+write('REALTIME_IP', 'String', "''")
