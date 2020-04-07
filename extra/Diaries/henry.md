@@ -9,9 +9,9 @@ Template
 
 ## 07/04/2019
 ### Summary
-What I am doing now is basically what I did in the react native version but I wrap everything inside a class. The main issue of the old one is that there are too many code inside ui. All calculations should be done inside the model and it should simply returns the value I need. The main improvement of this rework is to seperate ui and calculation. `Hive` is really fast but I think I will still use json with it because I don't want to write so many adapaters. For simple entries, `Hive` is amazing. Dart also has the filter method so I think filtering ships should be fine.
+What I am doing now is basically what I did in the react native version but I wrap everything inside a class. The main issue of the old one is that there are too many code inside ui. All calculations should be done inside the model and it should simply returns the value I need. The main improvement of this rework is to seperate ui and calculation. `Hive` is really fast but I think I will still use json with it because I don't want to write so many adapaters. For simple entries, `Hive` is amazing. Dart also has the filter method so I think filtering ships should be fine. `ShiftingText` has added and it should work on Localization. It is quite fancy but I don't think my users actually care but this is the detail that I care about. 
 ### What to do tomorrow?
-More models and data.
+Tomorrow, I will be working on data and more models. API request is also another thing that I need to work on. With all of them are good. I can start working on the UI and probably it should be faster.
 
 ## 06/04/2019
 ### Summary

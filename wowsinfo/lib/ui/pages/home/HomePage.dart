@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wowsinfo/core/others/AppLocalization.dart';
+import 'package:wowsinfo/ui/widgets/DebugProviderWidget.dart';
 import 'package:wowsinfo/ui/widgets/ShiftingText.dart';
 
 /// HomePage class
@@ -18,9 +18,11 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         // title: Text(AppLocalization.of(context).localised('app_name')),
         title: ShiftingText(),
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 16),
-          child: Image(image: AssetImage('assets/images/logo_white.png')),
+        leading: IconButton(
+          icon: ImageIcon(AssetImage('assets/images/logo_white.png')), 
+          onPressed: () {
+            
+          }
         ),
         actions: [
           IconButton(
@@ -29,7 +31,7 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      body: Container(),
+      body: DebugProviderWidget()
     );
   }
 }
