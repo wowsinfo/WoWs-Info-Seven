@@ -1,0 +1,29 @@
+
+'''
+bool get firstLaunch => this.box.get(FIRST_LAUNCH) ?? true;
+setFirstLaunch(bool value) => this.box.put(FIRST_LAUNCH, value);
+'''
+
+def write(constant_name, constant_type, default_value):
+    print('{} get {} => this.box.get({}) ?? {};'.format(constant_type, getter(constant_name), constant_name, default_value))
+    print('{}({} value) => this.box.put({}, value);'.format(setter(constant_name), constant_type, constant_name))
+
+def setter(name: str):
+    '''
+    from BOTTOM_TAB_INDEX to setBottomTabIndex
+    '''
+    return 'set' + ''.join(word.lower().title() for word in name.split('_'))
+
+def getter(name: str):
+    '''
+    from BOTTOM_TAB_INDEX to bottomTabIndex
+    '''
+    return first_lower(''.join(word.lower().title() for word in name.split('_')))
+
+def first_lower(s):
+   if len(s) == 0:
+      return s
+   else:
+      return s[0].lower() + s[1:]
+
+write('BOTTOM_TAB_INDEX', 'int', '0')
