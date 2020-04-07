@@ -11,21 +11,55 @@ class ShiftingText extends StatefulWidget {
 }
 
 
-class _ShiftingTextState extends State<ShiftingText> {
-  double oneOpacity = 1.0;
-  double onePadding = 24.0;
-  double twoOpacity = 0;
-  double twoPadding = 0;
+class _ShiftingTextState extends State<ShiftingText> with SingleTickerProviderStateMixin {
+  Animation<double> oneOpacity;
+  Animation<double> onePadding;
+  Animation<double> twoOpacity;
+  Animation<double> twoPadding;
   String oneText;
   String twoText;
-  final animationDuration = const Duration(milliseconds: 300);
+  AnimationController controller;
+  
+  final animationDuration = const Duration(milliseconds: 500);
   final list  = ['RE', 'Origin', 'Pro', 'Ultimate', 'Gold'];
+  int nameIndex = 0;
 
   @override
   void initState() {
     super.initState();
 
+    oneText = list[nameIndex];
+    twoText = list[nameIndex];
+    controller = AnimationController(vsync: this, duration: animationDuration);
+    oneOpacity = Tween<double>(begin: 1, end: 0).animate(controller);
+    onePadding = Tween<double>(begin: 24, end: 0).animate(controller);
+    twoOpacity = Tween<double>(begin: 0, end: 1).animate(controller);
+    twoPadding = Tween<double>(begin: 0, end: 24).animate(controller)
+      ..addListener(() => setState(() {}));
+    
     // We do this everything 2 seconds
+    Timer.periodic(Duration(milliseconds: 2000), (_) {
+      nameIndex++;
+      if (nameIndex >= list.length) nameIndex = 0;
+
+      setState(() {
+        twoText = list[nameIndex];
+      });
+      
+      controller.forward().whenComplete(() {
+        // Update label text
+        controller.reset();
+        setState(() {
+          oneText = list[nameIndex];
+        });
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -38,17 +72,17 @@ class _ShiftingTextState extends State<ShiftingText> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsets.only(top: onePadding),
+              padding: EdgeInsets.only(top: onePadding.value),
               child: Opacity(
-                opacity: oneOpacity,
-                child: Text('RE')
+                opacity: oneOpacity.value,
+                child: Text(oneText),
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(bottom: twoPadding),
+              padding: EdgeInsets.only(bottom: twoPadding.value),
               child: Opacity(
-                opacity: twoOpacity,
-                child: Text('Ultimate')
+                opacity: twoOpacity.value,
+                child: Text(twoText),
               ),
             ),
           ],
