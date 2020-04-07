@@ -3,30 +3,36 @@ This will track what I have done today and what I will do tomorrow.
 ~~~
 Template
 ## /04/2019
-### What have I done?
+### Summary
 ### What to do tomorrow?
 ~~~
 
+## 07/04/2019
+### Summary
+What I am doing now is basically what I did in the react native version but I wrap everything inside a class. The main issue of the old one is that there are too many code inside ui. All calculations should be done inside the model and it should simply returns the value I need. The main improvement of this rework is to seperate ui and calculation. `Hive` is really fast but I think I will still use json with it because I don't want to write so many adapaters. For simple entries, `Hive` is amazing. Dart also has the filter method so I think filtering ships should be fine.
+### What to do tomorrow?
+More models and data.
+
 ## 06/04/2019
-### What have I done?
+### Summary
 I actually implemented `Localization` yesterday so today, I am focusing on models. There are two kinds of data that needs to be saved. `Preference` and `CachaedWiki`. Preference can be edited but CachedWiki cannot, except when data should be updated. My next goal is to implement the data saving and auto update part. With the backend ready, UI should be easy. However, I need to break down Pages into widgets or so called `Fragment`. 
 ### What to do tomorrow?
 More models.
 
 ## 05/04/2019
-### What have I done?
+### Summary
 Played with platform widget but I decided to use it later. Now, theme and brightness can be changed dynamically. Locale will be supported when I have added `Localization`. `LoadingOverlay` is now `InitialPage` and it loads data from GitHub and WG server. It does more (like loading data to memory) but when it is done, it will push to the `HomePage`. Then, the user can start using the app. I am really worried about my users in China because some ISP blocked the API and I don't know how to bypass it right now.
 ### What to do tomorrow?
 Finalise `HomePage` and maybe `Localization`.
 
 ## 04/04/2019
-### What have I done?
+### Summary
 Back from `JSON: Become TS` and I was learning Kotlin and Swift. I am doing some UI today. `LoadingOverlay` is done with the help of `Theme` for theming, `Builder` for getting the theme and `PlatformWidget` to render IOS widgets on IOS. Of course, there are way more. I will try to keep the UI unchanged as much as possible so that my users won't be comfused that much. 
 ### What to do tomorrow?
 More UI and maybe `Localization` as well. More on GitHub...
 
 ## 26/03/2019
-### What have I done?
+### Summary
 Mimic the original `HomePage` back in early 2017 and fade in the new one. It has been three years. This will be last and final rewrite. Flutter is indeed better for me but I will still learn React Native and native. I am not gonna get any jobs now so I can focus on my apps now. This time, I will make it great so that I don't have to rewrite anymore. My habit app is almost done and I will publish it soon for public testing. SVG logo has been added to have a better icon for Android. I will just keep the old logo since all of users are used to that logo. An alternative logo has been added for IOS. I still don't know how to change the logo for Android apps. 
 
 Models for `WoWs (Player)` have been generated. Only `Wiki` and `GitHub` left now. Some models are shared which is great because it can reduce code duplications.
@@ -34,23 +40,23 @@ Models for `WoWs (Player)` have been generated. Only `Wiki` and `GitHub` left no
 The converter is so good. Maybe I should make it a bit better?
 
 ## 25/02/2019
-### What have I done?
+### Summary
 Nothing. I was working the 1.0.7.1 update. Now, users are not really happy with me but whatever. I will keep making this app and make it better no matter what.
 ### What to do tomorrow?
 I am taking a break from WoWs Info and working on my [HabitApp](https://github.com/HenryQuan/HabitApp).
 
 ## 14/02/2019
-### What have I done?
+### Summary
 Fixed many bugs and many improvements for the old version. 
 Started working on IAP and it will be available at a reduced price.
 ### What to do tomorrow?
 
 ## 11/02/2019 - 13/02/2019
-### What have I done?
+### Summary
 Did some research on Native UI module
 
 ## 10/02/2019
-### What have I done?
+### Summary
 Converted AppDelegate to `Swift` and created a bridging header for Swift. 
 Objective-C is great but Swift is just more modern and easier for me. 
 This is also part of the preparation for native modules (e.g. Charts). 
@@ -60,7 +66,7 @@ Added `WoWsAPI` to `PostMan` for easier development.
 More API!!
 
 ## 09/02/2019
-### What have I done?
+### Summary
 Added more functions in `APIDownloader` and some more header comments. 
 Is it too much codes just for so little? 
 I don't know but I think this is good for the long run. 
@@ -68,26 +74,26 @@ I don't know but I think this is good for the long run.
 Even more `API`?
 
 ## 08/02/2019
-### What have I done?
+### Summary
 Meeting with senpai. Mainly focused on `API`
 ### What to do tomorrow?
 More `API`?
 
 ## 05/02/2019
-### What have I done?
+### Summary
 Completed `Preference` with senpai
 ### What to do tomorrow?
 Wiki and all other backend if possible
 
 ## 04/02/2019
-### What have I done?
+### Summary
 Added `package.json` inside `src` folder to use absolute path and prevent `../../` chaining. 
 Fixed `StaturBar` issue on IOS. The animation looks ok and it is not that distracting.
 ### What to do tomorrow?
 More `json2ts`. It will be really handly if you want to convert json into typescipt interfaces.
 
 ## 01/02/2019
-### What have I done?
+### Summary
 Added `color` and it was really useful to tackle colour related problems. 
 Therefore, many theme related issues were solved and the colour is even better now. 
 `Bottom Navigation` is now white in light mode and `SearchPage` now has a better search bar. 
@@ -95,7 +101,7 @@ Therefore, many theme related issues were solved and the colour is even better n
 Continue with `Website`, `Wiki` and `Real-time` maybe.
 
 ## 31/01/2019
-### What have I done?
+### Summary
 Changed to `yarn` (`npm` is a bit hard to use at time). 
 More UX design. Adding a header and using `Accordion` is indeed really good. 
 `SearchBar` is a bit shorter than the `Header` so it can be a bit weird.
@@ -107,7 +113,7 @@ More UX design is necessary and maybe try to add `react-native-shifting-text`.
 It is still experienmental and I should allow passing in custom text components. 
 
 ## 30/01/2019
-### What have I done?
+### Summary
 Nothing
 ### What to do tomorrow?
 Track what we have discussed
@@ -119,7 +125,7 @@ Track what we have discussed
 - How to choose - go to another page
 
 ## 28/01/2019
-### What have I done?
+### Summary
 More UX design. I found a JSON to TS converter and I will probably use it for API models. Some more ideas for the `HomePage`. 
 Maybe just make it simpler and display a huge `Welcome Back, HenryQuan` with two button below it (`Check for latest news` and `Check my statistics`). 
 With `WoWs Info RE`, version and settings on top?
@@ -127,50 +133,50 @@ With `WoWs Info RE`, version and settings on top?
 More UX design and add more models for `preference`
 
 ## 27/01/2019
-### What have I done?
+### Summary
 Fixed node packages. I was designing and considering the look and feel of this new update. It is good to have unique looks on different platforms but I won't do that. This update aims to provide better user experience and stability. 
 `WebView` has been added to show news with some minimal changes
 ### What to do tomorrow?
 Adjust UI and focus on English version
 
 ## 21/01/2019
-### What have I done?
+### Summary
 Added one feature to TODO list
 ### What to do tomorrow?
 Probably, it is time to start working on this again
 
 ## 07/01/2019
-### What have I done?
+### Summary
 Upgraded and fixed packages. I need to tell Maurice senpai...
 ### What to do tomorrow?
 Probably nothing until my supp
 
 ## 23/12/2019
-### What have I done?
+### Summary
 Nothing except meeting with senpai
 ### What to do tomorrow?
 ???
 
 ## 22/12/2019
-### What have I done?
+### Summary
 Cleaned up the repo with bfg (removed the framework and it should be smaller now). Added `PlayerAccount` and `GameServer`. 
 ### What to do tomorrow?
 I feel like there are still some issues with the current model. How to update local data? You don't need to update wiki data unless there is an update. All you need to do it to diff new data with old data and display it. However, how about preference? The user could update it anytime. How about putting it inside the provider? I still don't know...
 
 ## 21/12/2019
-### What have I done?
+### Summary
 `Cacheable` now has two children, `Preference` and `CachedWiki`
 ### What to do tomorrow?
 More models
 
 ## 20/12/2019
-### What have I done?
+### Summary
 Some more designs on OneNote
 ### What to do tomorrow?
 Actually write some codes and see if it works
 
 ## 19/12/2019
-### What have I done?
+### Summary
 Updated folder structure and lots of refactoring have been done. 
 Many new issues have been discovered and I am starting to write more downloaders and models. 
 That's a lot of work to do but it is good this way. Do it slowly and don't rush.
@@ -178,40 +184,40 @@ That's a lot of work to do but it is good this way. Do it slowly and don't rush.
 Write some `APIDownloader` and maybe more updates on folder structure
 
 ## 15/12/2019
-### What have I done?
+### Summary
 Meeting with senpai and some decisions were made. `Home` is now updated and `Loading` is added
 ### What to do tomorrow?
 More loading and maybe test update theme
 
 ## 14/12/2019
-### What have I done?
+### Summary
 `Settings` has been updated to show a section list but is it really a good idea? 
 `AppLogo` now takes a `size` and version number is added as well
 ### What to do tomorrow?
 First meeting with senpai and some dicussions on some topics
 
 ## 06/12/2019
-### What have I done?
+### Summary
 `Setup` has been added but it only has 3 titles now without any functionalities. Privacy policy & term of use were added (template only) but three languages are too much... 
 I have to work harder maybe with my senpai! If I can deal with data correctly, the rest is just copy and paste my old code which shouldn't be really hard
 ### What to do tomorrow?
 More models, API and DataManager.
 
 ## 04/12/2019
-### What have I done?
+### Summary
 `BasicDownloader` and `APIResponse`. There will be lots of classes but this is the only to make sure it is safe. 
 Therefore, I have to write lots of code for this... but it is good in the long run
 ### What to do tomorrow?
 Add more models
 
 ## 02/12/2019
-### What have I done?
+### Summary
 Updated to `1.0.7/1.6.6` to fix some bugs and tabs were added to log files
 ### What to do tomorrow?
 Same as below, `DataManager`
 
 ## 29/11/2019
-### What have I done?
+### Summary
 Mac OS on Surface with the help of [this repo](https://github.com/hacker1024/Hackintosh-Clover-SurfacePro3). It works really well and I am quite happy with it. `BottomButton` was created but it is kinda limited now. Some components were moved to `common/` folder. `Welcome` is done I think and for `Agreement`, I have added two button at the bottom. If the user declines, he/she will either go back to home or simply dismiss the alert
 ### What to do tomorrow?
 My exams is next Monday so I think I will do some serious study. The issue now is that I am still not clear on what I need to do for `DataManager`. However, don't need to rush. I will reuse many codes from the old project (not really) so it should be fine
