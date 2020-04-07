@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 
@@ -21,15 +22,15 @@ class _ShiftingTextState extends State<ShiftingText> with SingleTickerProviderSt
   AnimationController controller;
   
   final animationDuration = const Duration(milliseconds: 500);
-  final list  = ['RE', 'Origin', 'Pro', 'Ultimate', 'Gold'];
-  int nameIndex = 0;
+  final list  = ['RE', 'Origin', 'Pro', 'Ultimate', 'Gold', 'Go', 'Future', '#'];
+  final randomIndex = Random();
 
   @override
   void initState() {
     super.initState();
 
-    oneText = list[nameIndex];
-    twoText = list[nameIndex];
+    oneText = list[0];
+    twoText = list[0];
     controller = AnimationController(vsync: this, duration: animationDuration);
     oneOpacity = Tween<double>(begin: 1, end: 0).animate(controller);
     onePadding = Tween<double>(begin: 24, end: 0).animate(controller);
@@ -38,19 +39,16 @@ class _ShiftingTextState extends State<ShiftingText> with SingleTickerProviderSt
       ..addListener(() => setState(() {}));
     
     // We do this everything 2 seconds
-    Timer.periodic(Duration(milliseconds: 2000), (_) {
-      nameIndex++;
-      if (nameIndex >= list.length) nameIndex = 0;
-
+    Timer.periodic(Duration(seconds: 4), (_) {
       setState(() {
-        twoText = list[nameIndex];
+        twoText = list[randomIndex.nextInt(list.length)];
       });
       
       controller.forward().whenComplete(() {
         // Update label text
         controller.reset();
         setState(() {
-          oneText = list[nameIndex];
+          oneText = twoText;
         });
       });
     });
@@ -65,7 +63,7 @@ class _ShiftingTextState extends State<ShiftingText> with SingleTickerProviderSt
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Text('WoWs Info '),
         Column(
