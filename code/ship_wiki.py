@@ -12,3 +12,7 @@ for key, value in ship_names.items():
   name = value['name']
   link = 'https://wiki.wargaming.net/en/Ship:' + name.replace(' ', '_')
   print(link)
+
+# collapsibleTable0 is recommended commander skill
+# b-standart-list[3] is recommended upgrade list, might have more than 1 per row
+# b-standart-list[4] is consumable list, this is optional and might have more than 1 per row
