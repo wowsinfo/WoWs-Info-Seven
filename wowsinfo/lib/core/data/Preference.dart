@@ -24,8 +24,8 @@ const GAME_VERSION = 'game_version';
 const APP_VERSION = 'app_version';
 
 /// This is the `Preference` class
-/// - It manages all const a preferences including those that are used in app provider
-/// - Mainly changable ones
+/// - it manages all const a preferences including those that are used in app provider
+/// - mainly changable ones
 class Preference {
   /// Singleton pattern 
   Preference._empty();

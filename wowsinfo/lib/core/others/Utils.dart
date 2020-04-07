@@ -38,6 +38,7 @@ class Utils {
 
   /// Check if this device is IOS
   static bool isIOS() {
+    // Web doesn't support platform so prevent calling it
     if (kIsWeb) return false;
     return Platform.isIOS || Platform.isMacOS;
   }

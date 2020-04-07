@@ -4,7 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:wowsinfo/core/Preference.dart';
+import 'package:wowsinfo/core/data/Preference.dart';
 import 'package:wowsinfo/core/others/AppProvider.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
 import 'package:wowsinfo/ui/pages/InitialPage.dart';
