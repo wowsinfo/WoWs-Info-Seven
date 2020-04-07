@@ -17,13 +17,19 @@ class BottomNavigationPage extends StatefulWidget {
 
 
 class _BottomNavigationPageState extends State<BottomNavigationPage> {
-  int selectedIndex = 0;
   final pref = Preference();
+  int selectedIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    if (pref.firstLaunch) pref.setFirstLaunch(false);
+    selectedIndex = pref.bottomTabIndex;
+  }
 
   @override
   Widget build(BuildContext context) {
     // Not first launch anymore
-    if (pref.firstLaunch) pref.setFirstLaunch(false);
     final localization = AppLocalization.of(context);
 
     return Scaffold(
@@ -63,8 +69,9 @@ class _BottomNavigationPageState extends State<BottomNavigationPage> {
         ],
         currentIndex: selectedIndex,
         onTap: (index) {
-          // Update iondex
+          // Update and save index
           setState(() => selectedIndex = index);
+          pref.setBottomTabIndex(index);
         },
       ),
     );
