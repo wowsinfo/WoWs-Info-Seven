@@ -1,18 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:wowsinfo/core/LocalData.dart';
+import 'package:wowsinfo/core/Preference.dart';
 import 'package:wowsinfo/core/others/AppProvider.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
 import 'package:wowsinfo/ui/pages/InitialPage.dart';
 import 'package:wowsinfo/ui/pages/setup/IntroPage.dart';
 
-final local = LocalData();
+final pref = Preference();
 
 void main() async {
   /// Setup local data
-  await local.init();
+  await Hive.initFlutter();
+  // Init preference box 
+  await pref.init();
+  // Cached data can be loaded later
   runApp(MyApp());
 }
 
@@ -54,7 +59,7 @@ class MyApp extends StatelessWidget {
 
   /// Setup should be the home
   Widget buildHome() {
-    if (local.firstLaunch) return IntroPage();
+    if (pref.firstLaunch) return IntroPage();
     return InitialPage();
   }
 }

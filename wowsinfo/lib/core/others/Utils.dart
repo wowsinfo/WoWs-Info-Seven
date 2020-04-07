@@ -26,6 +26,12 @@ class Utils {
     return dval;
   }
 
+  /// Print only in debug mode
+  static void debugPrint(Object object) {
+    if (kDebugMode) print(object);
+  }
+
+  /// A simple wrapper for Future.delayed
   static Future<void> delay(int duration) {
     return Future.delayed(Duration(milliseconds: duration));
   }

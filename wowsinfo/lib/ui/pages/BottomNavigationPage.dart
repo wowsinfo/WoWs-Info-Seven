@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wowsinfo/core/Preference.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
 import 'package:wowsinfo/ui/pages/home/HomePage.dart';
 import 'package:wowsinfo/ui/pages/home/RealtimePage.dart';
@@ -17,9 +18,12 @@ class BottomNavigationPage extends StatefulWidget {
 
 class _BottomNavigationPageState extends State<BottomNavigationPage> {
   int selectedIndex = 0;
+  final pref = Preference();
 
   @override
   Widget build(BuildContext context) {
+    // Not first launch anymore
+    if (pref.firstLaunch) pref.setFirstLaunch(false);
     final localization = AppLocalization.of(context);
 
     return Scaffold(
