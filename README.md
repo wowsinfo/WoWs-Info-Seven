@@ -1,5 +1,5 @@
 # WoWs Info API
-Some data collected from various websites for WoWs Info.
+Some data collected from various websites or from [the game](https://github.com/HenryQuan/WoWs-Game-Data) for WoWs Info. 
 
 # Websites
 - https://gamemodels3d.com/games/worldofwarships/ (3D models and more)
