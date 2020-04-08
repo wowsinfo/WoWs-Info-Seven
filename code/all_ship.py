@@ -8,7 +8,7 @@ more_data = True
 ship_name = {}
 
 while more_data:
-  link = "https://api.worldofwarships.asia/wows/encyclopedia/ships/?application_id={}&fields=name&language=en&page_no={}".format(api_key, page_no)
+  link = "https://api.worldofwarships.asia/wows/encyclopedia/ships/?application_id={}&fields=name%2Cship_id_str&language=en&page_no={}".format(api_key, page_no)
   res = requests.get(link)
   if res.status_code == 200:
     j = res.json()
@@ -22,7 +22,7 @@ while more_data:
       more_data = False
   
 # without correct encoding, it write weird things
-with open('ship_names.json', 'w+', encoding='utf-8') as f:
+with open('ship_all.json', 'w+', encoding='utf-8') as f:
   # encode as utf-8
   f.write(json.dumps(ship_name))
   f.close()
