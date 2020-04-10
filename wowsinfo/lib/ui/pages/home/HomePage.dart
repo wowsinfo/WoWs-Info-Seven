@@ -22,16 +22,8 @@ class _HomePageState extends State<HomePage> {
         title: ShiftingText(),
         leading: IconButton(
           icon: ImageIcon(AssetImage('assets/images/logo_white.png')), 
+          iconSize: 24 + (pressCount > 3 ? pressCount * 2.0 : 0.0),
           onPressed: () {
-            // Only show snackbar when there are three more to go, 3, 2, 1
-            if (pressCount > 2 && pressCount <= 5) {
-              final egg = SnackBar(
-                content: Text('${6 - pressCount}...'), 
-                duration: Duration(milliseconds: 500),
-              );
-              Scaffold.of(context).showSnackBar(egg);
-            }
-
             if (pressCount > 5) {
               Navigator.of(context).push(MaterialPageRoute(builder: (c) => OriginalPage()));
             } else {
