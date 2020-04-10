@@ -17,7 +17,7 @@ class BottomNavigationPage extends StatefulWidget {
 
 
 class _BottomNavigationPageState extends State<BottomNavigationPage> {
-  final pref = Preference();
+  final pref = Preference.shared;
   int selectedIndex;
 
   @override

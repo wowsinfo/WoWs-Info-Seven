@@ -33,10 +33,8 @@ const APP_VERSION = 'app_version';
 /// - mainly changable ones
 class Preference {
   /// Singleton pattern 
-  Preference._empty();
-  static final Preference _instance = Preference._empty();
-  // Use dart's factory constructor to implement this patternx
-  factory Preference() => _instance;
+  Preference._init();
+  static final Preference shared = Preference._init();
 
   ///
   /// Variables, default value will be provided as well

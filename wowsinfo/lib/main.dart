@@ -10,7 +10,7 @@ import 'package:wowsinfo/core/others/AppLocalization.dart';
 import 'package:wowsinfo/ui/pages/InitialPage.dart';
 import 'package:wowsinfo/ui/pages/setup/IntroPage.dart';
 
-final pref = Preference();
+final pref = Preference.shared;
 
 void main() async {
   /// Setup local data

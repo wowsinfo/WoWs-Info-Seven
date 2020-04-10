@@ -9,7 +9,7 @@ Template
 
 ## 10/04/2019
 ### Summary
-Back again. I was extracting data from the game and there will be more data available in wiki. I just remember some data are only saved in the memory so only wiki should be saved locally. 
+Back again. I was extracting data from the game and there will be more data available in wiki. I just remember some data are only saved in the memory so only wiki should be saved locally. `Preference` is now completed (kinda). However, theme colour, app brightness and app locale are still not saved. `Hive` can save value really quickly so I call just call preference and get the value. JSON is also used and I think I might actually just write to hive with keys. I think 
 ### What to do tomorrow?
 
 ## 07/04/2019
