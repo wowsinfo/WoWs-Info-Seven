@@ -4,19 +4,22 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:wowsinfo/core/data/AppSettings.dart';
 import 'package:wowsinfo/core/data/Preference.dart';
-import 'package:wowsinfo/core/others/AppProvider.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
 import 'package:wowsinfo/ui/pages/InitialPage.dart';
 import 'package:wowsinfo/ui/pages/setup/IntroPage.dart';
 
 final pref = Preference.shared;
+final settings = AppSettings.shared;
 
 void main() async {
   /// Setup local data
   await Hive.initFlutter();
   // Init preference box 
   await pref.init();
+  // Init app settins box
+  await settings.init();
   // Cached data can be loaded later
   runApp(MyApp());
 }
@@ -25,9 +28,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => AppProvider(),
+      create: (_) => settings,
       child: Builder(builder: (c) {
-        final wowsinfo = Provider.of<AppProvider>(c);
+        final wowsinfo = Provider.of<AppSettings>(c);
         return MaterialApp(
           localizationsDelegates: [
             AppLocalization.delegate,
@@ -50,6 +53,8 @@ class MyApp extends StatelessWidget {
           },
           title: 'WoWs Info Re',
           theme: wowsinfo.theme,
+          darkTheme: wowsinfo.darkTheme,
+          themeMode: wowsinfo.themeMode,
           // This should depend on whether first_launch is true or not
           home: buildHome()
         );

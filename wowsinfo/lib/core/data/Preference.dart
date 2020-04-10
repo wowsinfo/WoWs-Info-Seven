@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:wowsinfo/core/data/GameServer.dart';
+import 'package:wowsinfo/core/data/LocalData.dart';
 import 'package:wowsinfo/core/models/User/ContactList.dart';
 import 'package:wowsinfo/core/models/User/Player.dart';
 import 'package:wowsinfo/core/others/Utils.dart';
@@ -31,7 +31,7 @@ const APP_VERSION = 'app_version';
 /// This is the `Preference` class
 /// - it manages all const a preferences including those that are used in app provider
 /// - mainly changable ones
-class Preference {
+class Preference extends LocalData {
   /// Singleton pattern 
   Preference._init();
   static final Preference shared = Preference._init();
@@ -40,7 +40,6 @@ class Preference {
   /// Variables, default value will be provided as well
   ///
 
-  Box box;
   bool get firstLaunch => this.box.get(FIRST_LAUNCH) ?? true;
   setFirstLaunch(bool value) => this.box.put(FIRST_LAUNCH, value);
 
@@ -92,18 +91,14 @@ class Preference {
   /// 
 
   /// This is necessary to be called before using anything else
+  @override
   Future<bool> init() async {
     this.box = await Hive.openBox(BOX_NAME);
     Utils.debugPrint('$BOX_NAME box has been loaded');
-    _debug();
+    debug();
 
     // Test new entries here
     return true;
-  }
-
-  /// This is only used for debug by printing out everything in the box
-  void _debug() {
-    if (kDebugMode) this.box.keys.forEach((key) => print('$key - ${box.get(key)}'));
   }
 }
 

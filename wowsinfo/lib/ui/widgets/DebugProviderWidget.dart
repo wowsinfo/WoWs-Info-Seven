@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wowsinfo/core/others/AppProvider.dart';
+import 'package:wowsinfo/core/data/AppSettings.dart';
 
 /// DebugProviderWidget class
 class DebugProviderWidget extends StatelessWidget {
@@ -10,7 +10,7 @@ class DebugProviderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final app = Provider.of<AppProvider>(context);
+    final app = Provider.of<AppSettings>(context);
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -22,10 +22,10 @@ class DebugProviderWidget extends StatelessWidget {
             app.setLocale(Locale('ja'));
           }, child: Text('Japanese')),
           FlatButton(onPressed: () {
-            app.setBrightness(Brightness.dark);
+            app.setBrightness(ThemeMode.dark);
           }, child: Text('Dark')),
           FlatButton(onPressed: () {
-            app.setBrightness(Brightness.light);
+            app.setBrightness(ThemeMode.light);
           }, child: Text('Light')),
           FlatButton(onPressed: () {
             final list = [

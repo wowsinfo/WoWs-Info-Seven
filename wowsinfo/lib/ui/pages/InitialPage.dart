@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:wowsinfo/core/data/AppSettings.dart';
 import 'package:wowsinfo/core/others/Utils.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
 import 'package:wowsinfo/ui/pages/BottomNavigationPage.dart';
@@ -17,6 +18,8 @@ class InitialPage extends StatefulWidget {
 }
 
 class _InitialPageState extends State<InitialPage> {
+  final settings = AppSettings.shared;
+
   @override
   Widget build(BuildContext context) {
     Utils.delay(2000).then((_) {
@@ -38,7 +41,7 @@ class _InitialPageState extends State<InitialPage> {
             // This app bar will update the status bar color
             AppBar(brightness: Brightness.dark),
             Container(
-              color: Colors.blue,
+              color: settings.isDarkMode() ? Colors.grey[900] : Colors.blue,
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
