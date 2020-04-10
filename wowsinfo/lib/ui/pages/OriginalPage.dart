@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:wowsinfo/ui/widgets/PlatformAlertDialog.dart';
 
 /// This mimics the original home page back in early 2017, this is the start of everything
 class OriginalPage extends StatelessWidget {
@@ -19,7 +21,27 @@ class OriginalPage extends StatelessWidget {
             width: 128,
           ),
           onTap: () {
-            
+            showDialog(
+              context: context,
+              builder: (c) => PlatformAlertDialog(
+                title: Text('1'), 
+                content: Text('1'), 
+                androidActions: [
+                  FlatButton(
+                    child: Text('aaa'),
+                    onPressed: () {  }
+                  ),
+                ],
+                iosActions: [
+                  CupertinoDialogAction(
+                    child: Text("OK"),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              ),
+            );
           },
         )
       ),
