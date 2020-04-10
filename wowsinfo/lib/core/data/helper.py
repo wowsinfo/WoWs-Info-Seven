@@ -29,4 +29,4 @@ def first_lower(s):
    else:
       return s[0].lower() + s[1:]
 
-write('GAME_SERVER', 'String', "1.0.8")
+write('MAIN_ACCOUNT', 'String', "1.0.8")

@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:wowsinfo/core/data/GameServer.dart';
+import 'package:wowsinfo/core/models/User/ContactList.dart';
+import 'package:wowsinfo/core/models/User/Player.dart';
 import 'package:wowsinfo/core/others/Utils.dart';
 
 /// `KEYS` are stored here so that I won't have any typo or changed the string accidentally
@@ -42,8 +46,24 @@ class Preference {
   bool get firstLaunch => this.box.get(FIRST_LAUNCH) ?? true;
   setFirstLaunch(bool value) => this.box.put(FIRST_LAUNCH, value);
 
+  /// it is just a player and returns null if no account has been set
+  Player get mainAccount {
+    final jsonString = this.box.get(MAIN_ACCOUNT);
+    if (jsonString != null) return Player.fromJson(jsonDecode(jsonString));
+    return null;
+  }
+  setMainAccount(Player player) => this.box.put(MAIN_ACCOUNT, jsonEncode(player));
+
   int get gameServer => this.box.get(GAME_SERVER);
   setGameServer(Server value) => this.box.put(GAME_SERVER, value.index);
+
+  /// returns saved player contact or an empty one
+  ContactList get contactList {
+    final jsonString = this.box.get(CONTACT_LIST);
+    if (jsonString != null) return ContactList.fromJson(jsonDecode(jsonString));
+    return ContactList();
+  }
+  setContactList(ContactList contact) => this.box.put(CONTACT_LIST, jsonEncode(contact));
 
   String get lastUpdate => this.box.get(LAST_UPDATE);
   setLastUpdate(String value) => this.box.put(LAST_UPDATE, value);
@@ -77,19 +97,15 @@ class Preference {
   Future<bool> init() async {
     this.box = await Hive.openBox(BOX_NAME);
     Utils.debugPrint('$BOX_NAME box has been loaded');
-    final server = GameServer.fromIndex(gameServer);
-    print(server.toWoWsNumbers());
     _debug();
+
+    // Test new entries here
     return true;
   }
 
   /// This is only used for debug by printing out everything in the box
   void _debug() {
-    if (kDebugMode) {
-      this.box.keys.forEach((key) {
-        Utils.debugPrint('$key - ${box.get(key)}');
-      });
-    }
+    if (kDebugMode) this.box.keys.forEach((key) => print('$key - ${box.get(key)}'));
   }
 }
 
