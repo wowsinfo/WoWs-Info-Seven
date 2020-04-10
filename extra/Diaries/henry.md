@@ -9,8 +9,9 @@ Template
 
 ## 10/04/2019
 ### Summary
-Back again. I was extracting data from the game and there will be more data available in wiki. I just remember some data are only saved in the memory so only wiki should be saved locally. `Preference` is now completed (kinda). However, theme colour, app brightness and app locale are still not saved. `Hive` can save value really quickly so I call just call preference and get the value. JSON is also used and I think I might actually just write to hive with keys. I think it should work fine because wargaming uses key quite a lot. In this way, it is all about key but I need to test and see if the performance is great enough. If it is not good, I will just drop the box and read it from json. 
+Back again. I was extracting data from the game and there will be more data available in wiki. I just remember some data are only saved in the memory so only wiki should be saved locally. `Preference` is now completed (kinda). However, theme colour, app brightness and app locale are still not saved. `Hive` can save value really quickly so I call just call preference and get the value. JSON is also used and I think I might actually just write to hive with keys. I think it should work fine because wargaming uses key quite a lot. In this way, it is all about key but I need to test and see if the performance is great enough. If it is not good, I will just drop the box and read it from json. All `Preference` is done including saving app theme colour, app locale and app theme mode. It is like how I saved data with `global` but everything is wrapped with a singleton class. Hive reads everything into memory but for wiki, it is often not necessary to load everything. I just hope it won't eat all my memories.
 ### What to do tomorrow?
+Caching wiki data and data from GitHub. If this works, I am closer to a working backend. Most models in wows don't need to be saved so I don't really need to write those two methods. 
 
 ## 07/04/2019
 ### Summary

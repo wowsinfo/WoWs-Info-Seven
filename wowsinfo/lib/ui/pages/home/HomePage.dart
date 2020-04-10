@@ -18,7 +18,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // title: Text(AppLocalization.of(context).localised('app_name')),
         title: ShiftingText(),
         leading: IconButton(
           icon: ImageIcon(AssetImage('assets/images/logo_white.png')), 
