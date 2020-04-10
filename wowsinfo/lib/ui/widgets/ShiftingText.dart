@@ -39,7 +39,7 @@ class _ShiftingTextState extends State<ShiftingText> with SingleTickerProviderSt
 
 
     // We do this everything 2 seconds
-    Timer.periodic(Duration(seconds: 4), (_) {
+    Timer.periodic(Duration(seconds: 6), (_) {
       setState(() {
         twoText = list[randomIndex.nextInt(list.length)];
       });
@@ -71,7 +71,7 @@ class _ShiftingTextState extends State<ShiftingText> with SingleTickerProviderSt
       lang.localised('suffix_pro'),
       lang.localised('suffix_ultimate'),
       lang.localised('suffix_future'),
-      lang.localised('suffix_free'),
+      lang.localised('suffix_freedom'),
       lang.localised('suffix_new'),
       lang.localised('suffix_ultra'),
       // Symbols
