@@ -7,6 +7,11 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## 10/04/2019
+### Summary
+Back again. I was extracting data from the game and there will be more data available in wiki. I just remember some data are only saved in the memory so only wiki should be saved locally. 
+### What to do tomorrow?
+
 ## 07/04/2019
 ### Summary
 What I am doing now is basically what I did in the react native version but I wrap everything inside a class. The main issue of the old one is that there are too many code inside ui. All calculations should be done inside the model and it should simply returns the value I need. The main improvement of this rework is to seperate ui and calculation. `Hive` is really fast but I think I will still use json with it because I don't want to write so many adapaters. For simple entries, `Hive` is amazing. Dart also has the filter method so I think filtering ships should be fine. `ShiftingText` has added and it should work on Localization. It is quite fancy but I don't think my users actually care but this is the detail that I care about. 
