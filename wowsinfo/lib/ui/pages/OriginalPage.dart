@@ -12,11 +12,16 @@ class OriginalPage extends StatelessWidget {
         backgroundColor: Color(0XFF5A9CFF),
       ),
       body: Center(
-        child: Image.asset(
-          'assets/images/search_button.png',
-          height: 128,
-          width: 128,
-        ),
+        child: GestureDetector(
+          child: Image.asset(
+            'assets/images/search_button.png',
+            height: 128,
+            width: 128,
+          ),
+          onTap: () {
+            
+          },
+        )
       ),
     );
   }
