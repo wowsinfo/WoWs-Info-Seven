@@ -18,8 +18,9 @@ void main() {
     Map<String, dynamic> jsonMap = jsonDecode(jsonString);
     final output = jsonEncode(jsonMap['data']['battle']);
     
-    final encyclopedia = WikiAchievement.fromJson(jsonMap['data']['battle']);
-    final myOutput = jsonEncode(encyclopedia.toJson());
+    final a = WikiAchievement.fromJson(jsonMap['data']['battle']);
+    expect(a.achievement['TOP_LEAGUE_CLAN_SEASON_6'].achievementId == 'TOP_LEAGUE_CLAN_SEASON_6', isTrue);
+    final myOutput = jsonEncode(a.toJson());
 
     expect(myOutput == output, isTrue);
   });
@@ -30,8 +31,8 @@ void main() {
     Map<String, dynamic> jsonMap = jsonDecode(jsonString);
     final output = jsonEncode(jsonMap['data']);
     
-    final encyclopedia = WikiCollectionItem.fromJson(jsonMap['data']);
-    final myOutput = jsonEncode(encyclopedia.toJson());
+    final item = WikiCollectionItem.fromJson(jsonMap['data']);
+    final myOutput = jsonEncode(item.toJson());
 
     expect(myOutput == output, isTrue);
   });
@@ -42,8 +43,8 @@ void main() {
     Map<String, dynamic> jsonMap = jsonDecode(jsonString);
     final output = jsonEncode(jsonMap['data']);
     
-    final encyclopedia = WikiCollection.fromJson(jsonMap['data']);
-    final myOutput = jsonEncode(encyclopedia.toJson());
+    final collection = WikiCollection.fromJson(jsonMap['data']);
+    final myOutput = jsonEncode(collection.toJson());
 
     expect(myOutput == output, isTrue);
   });
@@ -54,8 +55,8 @@ void main() {
     Map<String, dynamic> jsonMap = jsonDecode(jsonString);
     final output = jsonEncode(jsonMap['data']);
     
-    final encyclopedia = WikiCommanderSkill.fromJson(jsonMap['data']);
-    final myOutput = jsonEncode(encyclopedia.toJson());
+    final skill = WikiCommanderSkill.fromJson(jsonMap['data']);
+    final myOutput = jsonEncode(skill.toJson());
 
     expect(myOutput == output, isTrue);
   });
@@ -66,8 +67,8 @@ void main() {
     Map<String, dynamic> jsonMap = jsonDecode(jsonString);
     final output = jsonEncode(jsonMap['data']);
     
-    final encyclopedia = WikiConsumable.fromJson(jsonMap['data']);
-    final myOutput = jsonEncode(encyclopedia.toJson());
+    final consumable = WikiConsumable.fromJson(jsonMap['data']);
+    final myOutput = jsonEncode(consumable.toJson());
 
     expect(myOutput == output, isTrue);
   });
@@ -90,8 +91,8 @@ void main() {
     Map<String, dynamic> jsonMap = jsonDecode(jsonString);
     final output = jsonEncode(jsonMap['data']);
     
-    final encyclopedia = WikiGameMap.fromJson(jsonMap['data']);
-    final myOutput = jsonEncode(encyclopedia.toJson());
+    final gameMap = WikiGameMap.fromJson(jsonMap['data']);
+    final myOutput = jsonEncode(gameMap.toJson());
 
     expect(myOutput == output, isTrue);
   });
@@ -102,8 +103,8 @@ void main() {
     Map<String, dynamic> jsonMap = jsonDecode(jsonString);
     final output = jsonEncode(jsonMap['data']);
     
-    final encyclopedia = WikiWarship.fromJson(jsonMap['data']);
-    final myOutput = jsonEncode(encyclopedia.toJson());
+    final warship = WikiWarship.fromJson(jsonMap['data']);
+    final myOutput = jsonEncode(warship.toJson());
 
     expect(myOutput == output, isTrue);
   });

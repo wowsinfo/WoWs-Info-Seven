@@ -3,7 +3,7 @@ class WikiWarship {
   Map<String, Warship> data;
 
   WikiWarship.fromJson(Map<String, dynamic> json) {
-    this.data = json.cast<String, Warship>();
+    this.data = json..map((a, b) => MapEntry(a, Warship.fromJson(b)));
   }
 
   Map<String, dynamic> toJson() => this.data.cast<String, dynamic>();

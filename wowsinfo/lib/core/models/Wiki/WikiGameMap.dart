@@ -3,7 +3,7 @@ class WikiGameMap {
   Map<String, GameMap> gameMap;
 
   WikiGameMap.fromJson(Map<String, dynamic> json) {
-    this.gameMap = json.cast<String, GameMap>();
+    this.gameMap = json.map((a, b) => MapEntry(a, GameMap.fromJson(b)));
   }
 
   Map<String, dynamic> toJson() => this.gameMap.cast<String, dynamic>();

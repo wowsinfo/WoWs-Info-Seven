@@ -3,7 +3,7 @@ class WikiCommanderSkill {
   Map<String, Skill> skill;
 
   WikiCommanderSkill.fromJson(Map<String, dynamic> json) {
-    this.skill = json.cast<String, Skill>();
+    this.skill = json..map((a, b) => MapEntry(a, Skill.fromJson(b)));
   }
 
   Map<String, dynamic> toJson() => this.skill.cast<String, dynamic>();

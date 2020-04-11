@@ -3,7 +3,7 @@ class WikiConsumable {
   Map<String, Consumable> consumable;
 
   WikiConsumable.fromJson(Map<String, dynamic> json) {
-    this.consumable = json.cast<String, Consumable>();
+    this.consumable = json..map((a, b) => MapEntry(a, Consumable.fromJson(b)));
   }
 
   Map<String, dynamic> toJson() => this.consumable.cast<String, dynamic>();
