@@ -8,10 +8,9 @@ class BasicPlayerInfo {
   int createdAt;
   int levelingPoint;
   int updatedAt;
-  dynamic private;
   bool hiddenProfile;
+  bool get publicProfile => !hiddenProfile;
   int logoutAt;
-  dynamic karma;
   Statistic statistic;
   String nickname;
   int statsUpdatedAt;
@@ -21,17 +20,19 @@ class BasicPlayerInfo {
     final json = data.values.first;
     this.lastBattleTime = json['last_battle_time'];
     this.accountId = json['account_id'];
-    this.levelingTier = json['leveling_tier'];
     this.createdAt = json['created_at'];
-    this.levelingPoint = json['leveling_points'];
+    // These are null if account is hidden so a default value is provided
+    this.levelingTier = json['leveling_tier'] ?? 0;
+    this.levelingPoint = json['leveling_points'] ?? 0;
     this.updatedAt = json['updated_at'];
-    this.private = json['private'];
     this.hiddenProfile = json['hidden_profile'];
     this.logoutAt = json['logout_at'];
-    this.karma = json['karma'];
-    this.statistic = Statistic(json['statistics']);
     this.nickname = json['nickname'];
     this.statsUpdatedAt = json['stats_updated_at'];
+    // statistic is only available if the account is public
+    if (publicProfile) {
+      this.statistic = Statistic(json['statistics']);
+    }
   }
 }
 
