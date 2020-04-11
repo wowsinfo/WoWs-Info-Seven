@@ -13,5 +13,7 @@ void main() {
     final info = BasicPlayerInfo(jsonMap['data']);
 
     expect(info != null, isTrue);
+    expect(info.statistic != null, isTrue);
+    expect(info.statistic.pvp.mainBattery.hit == 178284, isTrue);
   });
 }

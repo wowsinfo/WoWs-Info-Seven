@@ -37,43 +37,43 @@ class PvP {
   int teamDroppedCapturePoint;
   int battlesSince512;
 
-  PvP(json) {
-    this.maxXp = json["max_xp"];
-    this.damageToBuilding = json["damage_to_buildings"];
-    this.mainBattery = json["main_battery"];
-    this.suppressionsCount = json["suppressions_count"];
-    this.maxDamageScouting = json["max_damage_scouting"];
-    this.artAgro = json["art_agro"];
-    this.shipsSpotted = json["ships_spotted"];
-    this.secondBattery = json["second_battery"];
-    this.xp = json["xp"];
-    this.survivedBattle = json["survived_battles"];
-    this.droppedCapturePoint = json["dropped_capture_points"];
-    this.maxDamageDealtToBuilding = json["max_damage_dealt_to_buildings"];
-    this.torpedoAgro = json["torpedo_agro"];
-    this.draw = json["draws"];
-    this.battlesSince510 = json["battles_since_510"];
-    this.planesKilled = json["planes_killed"];
-    this.battle = json["battles"];
-    this.maxShipsSpotted = json["max_ships_spotted"];
-    this.teamCapturePoint = json["team_capture_points"];
-    this.frag = json["frags"];
-    this.damageScouting = json["damage_scouting"];
-    this.maxTotalAgro = json["max_total_agro"];
-    this.maxFragsBattle = json["max_frags_battle"];
-    this.capturePoint = json["capture_points"];
-    this.ramming = json["ramming"];
-    this.torpedoe = json["torpedoes"];
-    this.aircraft = json["aircraft"];
-    this.survivedWin = json["survived_wins"];
-    this.maxDamageDealt = json["max_damage_dealt"];
-    this.win = json["wins"];
-    this.losse = json["losses"];
-    this.damageDealt = json["damage_dealt"];
-    this.maxPlanesKilled = json["max_planes_killed"];
-    this.maxSuppressionsCount = json["max_suppressions_count"];
-    this.teamDroppedCapturePoint = json["team_dropped_capture_points"];
-    this.battlesSince512 = json["battles_since_512"];
+  PvP(Map<String, dynamic> json) {
+    this.maxXp = json['max_xp'];
+    this.damageToBuilding = json['damage_to_buildings'];
+    this.mainBattery = MainBattery(json['main_battery']);
+    this.suppressionsCount = json['suppressions_count'];
+    this.maxDamageScouting = json['max_damage_scouting'];
+    this.artAgro = json['art_agro'];
+    this.shipsSpotted = json['ships_spotted'];
+    this.secondBattery = SecondBattery(json['second_battery']);
+    this.xp = json['xp'];
+    this.survivedBattle = json['survived_battles'];
+    this.droppedCapturePoint = json['dropped_capture_points'];
+    this.maxDamageDealtToBuilding = json['max_damage_dealt_to_buildings'];
+    this.torpedoAgro = json['torpedo_agro'];
+    this.draw = json['draws'];
+    this.battlesSince510 = json['battles_since_510'];
+    this.planesKilled = json['planes_killed'];
+    this.battle = json['battles'];
+    this.maxShipsSpotted = json['max_ships_spotted'];
+    this.teamCapturePoint = json['team_capture_points'];
+    this.frag = json['frags'];
+    this.damageScouting = json['damage_scouting'];
+    this.maxTotalAgro = json['max_total_agro'];
+    this.maxFragsBattle = json['max_frags_battle'];
+    this.capturePoint = json['capture_points'];
+    this.ramming = Ramming(json['ramming']);
+    this.torpedoe = Torpedoe(json['torpedoes']);
+    this.aircraft = Aircraft(json['aircraft']);
+    this.survivedWin = json['survived_wins'];
+    this.maxDamageDealt = json['max_damage_dealt'];
+    this.win = json['wins'];
+    this.losse = json['losses'];
+    this.damageDealt = json['damage_dealt'];
+    this.maxPlanesKilled = json['max_planes_killed'];
+    this.maxSuppressionsCount = json['max_suppressions_count'];
+    this.teamDroppedCapturePoint = json['team_dropped_capture_points'];
+    this.battlesSince512 = json['battles_since_512'];
   }
 }
 
@@ -84,11 +84,11 @@ class MainBattery {
   int hit;
   int shot;
 
-  MainBattery(json) {
-    this.maxFragsBattle = json["max_frags_battle"];
-    this.frag = json["frags"];
-    this.hit = json["hits"];
-    this.shot = json["shots"];
+  MainBattery(Map<String, dynamic> json) {
+    this.maxFragsBattle = json['max_frags_battle'];
+    this.frag = json['frags'];
+    this.hit = json['hits'];
+    this.shot = json['shots'];
   }
 }
 
@@ -99,11 +99,11 @@ class SecondBattery {
   int hit;
   int shot;
 
-  SecondBattery(json) {
-    this.maxFragsBattle = json["max_frags_battle"];
-    this.frag = json["frags"];
-    this.hit = json["hits"];
-    this.shot = json["shots"];
+  SecondBattery(Map<String, dynamic> json) {
+    this.maxFragsBattle = json['max_frags_battle'];
+    this.frag = json['frags'];
+    this.hit = json['hits'];
+    this.shot = json['shots'];
   }
 }
 
@@ -112,9 +112,9 @@ class Ramming {
   int maxFragsBattle;
   int frag;
 
-  Ramming(json) {
-    this.maxFragsBattle = json["max_frags_battle"];
-    this.frag = json["frags"];
+  Ramming(Map<String, dynamic> json) {
+    this.maxFragsBattle = json['max_frags_battle'];
+    this.frag = json['frags'];
   }
 }
 
@@ -125,11 +125,11 @@ class Torpedoe {
   int hit;
   int shot;
 
-  Torpedoe(json) {
-    this.maxFragsBattle = json["max_frags_battle"];
-    this.frag = json["frags"];
-    this.hit = json["hits"];
-    this.shot = json["shots"];
+  Torpedoe(Map<String, dynamic> json) {
+    this.maxFragsBattle = json['max_frags_battle'];
+    this.frag = json['frags'];
+    this.hit = json['hits'];
+    this.shot = json['shots'];
   }
 }
 
@@ -138,8 +138,8 @@ class Aircraft {
   int maxFragsBattle;
   int frag;
 
-  Aircraft(json) {
-    this.maxFragsBattle = json["max_frags_battle"];
-    this.frag = json["frags"];
+  Aircraft(Map<String, dynamic> json) {
+    this.maxFragsBattle = json['max_frags_battle'];
+    this.frag = json['frags'];
   }
 }
