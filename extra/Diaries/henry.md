@@ -2,42 +2,47 @@
 This will track what I have done today and what I will do tomorrow.
 ~~~
 Template
-## /04/2019
+## /04/2020
 ### Summary
 ### What to do tomorrow?
 ~~~
 
-## 10/04/2019
+## 11/04/2020
+### Summary
+More models are added. I will try reading some local json files and see if they work as expected. `Parser` should do a bit work I think because I am not gonna save meta and status. If all models work, I can start working on the UI and keep adding things to the backend?. 
+### What to do tomorrow?
+
+## 10/04/2020
 ### Summary
 Back again. I was extracting data from the game and there will be more data available in wiki. I just remember some data are only saved in the memory so only wiki should be saved locally. `Preference` is now completed (kinda). However, theme colour, app brightness and app locale are still not saved. `Hive` can save value really quickly so I call just call preference and get the value. JSON is also used and I think I might actually just write to hive with keys. I think it should work fine because wargaming uses key quite a lot. In this way, it is all about key but I need to test and see if the performance is great enough. If it is not good, I will just drop the box and read it from json. All `Preference` is done including saving app theme colour, app locale and app theme mode. It is like how I saved data with `global` but everything is wrapped with a singleton class. Hive reads everything into memory but for wiki, it is often not necessary to load everything. I just hope it won't eat all my memories.
 ### What to do tomorrow?
 Caching wiki data and data from GitHub. If this works, I am closer to a working backend. Most models in wows don't need to be saved so I don't really need to write those two methods. 
 
-## 07/04/2019
+## 07/04/2020
 ### Summary
 What I am doing now is basically what I did in the react native version but I wrap everything inside a class. The main issue of the old one is that there are too many code inside ui. All calculations should be done inside the model and it should simply returns the value I need. The main improvement of this rework is to seperate ui and calculation. `Hive` is really fast but I think I will still use json with it because I don't want to write so many adapaters. For simple entries, `Hive` is amazing. Dart also has the filter method so I think filtering ships should be fine. `ShiftingText` has added and it should work on Localization. It is quite fancy but I don't think my users actually care but this is the detail that I care about. 
 ### What to do tomorrow?
 Tomorrow, I will be working on data and more models. API request is also another thing that I need to work on. With all of them are good. I can start working on the UI and probably it should be faster.
 
-## 06/04/2019
+## 06/04/2020
 ### Summary
 I actually implemented `Localization` yesterday so today, I am focusing on models. There are two kinds of data that needs to be saved. `Preference` and `CachaedWiki`. Preference can be edited but CachedWiki cannot, except when data should be updated. My next goal is to implement the data saving and auto update part. With the backend ready, UI should be easy. However, I need to break down Pages into widgets or so called `Fragment`. 
 ### What to do tomorrow?
 More models.
 
-## 05/04/2019
+## 05/04/2020
 ### Summary
 Played with platform widget but I decided to use it later. Now, theme and brightness can be changed dynamically. Locale will be supported when I have added `Localization`. `LoadingOverlay` is now `InitialPage` and it loads data from GitHub and WG server. It does more (like loading data to memory) but when it is done, it will push to the `HomePage`. Then, the user can start using the app. I am really worried about my users in China because some ISP blocked the API and I don't know how to bypass it right now.
 ### What to do tomorrow?
 Finalise `HomePage` and maybe `Localization`.
 
-## 04/04/2019
+## 04/04/2020
 ### Summary
 Back from `JSON: Become TS` and I was learning Kotlin and Swift. I am doing some UI today. `LoadingOverlay` is done with the help of `Theme` for theming, `Builder` for getting the theme and `PlatformWidget` to render IOS widgets on IOS. Of course, there are way more. I will try to keep the UI unchanged as much as possible so that my users won't be comfused that much. 
 ### What to do tomorrow?
 More UI and maybe `Localization` as well. More on GitHub...
 
-## 26/03/2019
+## 26/03/2020
 ### Summary
 Mimic the original `HomePage` back in early 2017 and fade in the new one. It has been three years. This will be last and final rewrite. Flutter is indeed better for me but I will still learn React Native and native. I am not gonna get any jobs now so I can focus on my apps now. This time, I will make it great so that I don't have to rewrite anymore. My habit app is almost done and I will publish it soon for public testing. SVG logo has been added to have a better icon for Android. I will just keep the old logo since all of users are used to that logo. An alternative logo has been added for IOS. I still don't know how to change the logo for Android apps. 
 
@@ -45,23 +50,23 @@ Models for `WoWs (Player)` have been generated. Only `Wiki` and `GitHub` left no
 ### What to do tomorrow?
 The converter is so good. Maybe I should make it a bit better?
 
-## 25/02/2019
+## 25/02/2020
 ### Summary
 Nothing. I was working the 1.0.7.1 update. Now, users are not really happy with me but whatever. I will keep making this app and make it better no matter what.
 ### What to do tomorrow?
 I am taking a break from WoWs Info and working on my [HabitApp](https://github.com/HenryQuan/HabitApp).
 
-## 14/02/2019
+## 14/02/2020
 ### Summary
 Fixed many bugs and many improvements for the old version. 
 Started working on IAP and it will be available at a reduced price.
 ### What to do tomorrow?
 
-## 11/02/2019 - 13/02/2019
+## 11/02/2020 - 13/02/2020
 ### Summary
 Did some research on Native UI module
 
-## 10/02/2019
+## 10/02/2020
 ### Summary
 Converted AppDelegate to `Swift` and created a bridging header for Swift. 
 Objective-C is great but Swift is just more modern and easier for me. 
@@ -71,7 +76,7 @@ Added `WoWsAPI` to `PostMan` for easier development.
 ### What to do tomorrow?
 More API!!
 
-## 09/02/2019
+## 09/02/2020
 ### Summary
 Added more functions in `APIDownloader` and some more header comments. 
 Is it too much codes just for so little? 
@@ -79,26 +84,26 @@ I don't know but I think this is good for the long run.
 ### What to do tomorrow?
 Even more `API`?
 
-## 08/02/2019
+## 08/02/2020
 ### Summary
 Meeting with senpai. Mainly focused on `API`
 ### What to do tomorrow?
 More `API`?
 
-## 05/02/2019
+## 05/02/2020
 ### Summary
 Completed `Preference` with senpai
 ### What to do tomorrow?
 Wiki and all other backend if possible
 
-## 04/02/2019
+## 04/02/2020
 ### Summary
 Added `package.json` inside `src` folder to use absolute path and prevent `../../` chaining. 
 Fixed `StaturBar` issue on IOS. The animation looks ok and it is not that distracting.
 ### What to do tomorrow?
 More `json2ts`. It will be really handly if you want to convert json into typescipt interfaces.
 
-## 01/02/2019
+## 01/02/2020
 ### Summary
 Added `color` and it was really useful to tackle colour related problems. 
 Therefore, many theme related issues were solved and the colour is even better now. 
@@ -106,7 +111,7 @@ Therefore, many theme related issues were solved and the colour is even better n
 ### What to do tomorrow?
 Continue with `Website`, `Wiki` and `Real-time` maybe.
 
-## 31/01/2019
+## 31/01/2020
 ### Summary
 Changed to `yarn` (`npm` is a bit hard to use at time). 
 More UX design. Adding a header and using `Accordion` is indeed really good. 
@@ -118,7 +123,7 @@ In this way, it can support different layouts for tablets and many more.
 More UX design is necessary and maybe try to add `react-native-shifting-text`. 
 It is still experienmental and I should allow passing in custom text components. 
 
-## 30/01/2019
+## 30/01/2020
 ### Summary
 Nothing
 ### What to do tomorrow?
@@ -130,7 +135,7 @@ Track what we have discussed
 - Use 2 only in Realtime
 - How to choose - go to another page
 
-## 28/01/2019
+## 28/01/2020
 ### Summary
 More UX design. I found a JSON to TS converter and I will probably use it for API models. Some more ideas for the `HomePage`. 
 Maybe just make it simpler and display a huge `Welcome Back, HenryQuan` with two button below it (`Check for latest news` and `Check my statistics`). 
@@ -138,20 +143,20 @@ With `WoWs Info RE`, version and settings on top?
 ### What to do tomorrow?
 More UX design and add more models for `preference`
 
-## 27/01/2019
+## 27/01/2020
 ### Summary
 Fixed node packages. I was designing and considering the look and feel of this new update. It is good to have unique looks on different platforms but I won't do that. This update aims to provide better user experience and stability. 
 `WebView` has been added to show news with some minimal changes
 ### What to do tomorrow?
 Adjust UI and focus on English version
 
-## 21/01/2019
+## 21/01/2020
 ### Summary
 Added one feature to TODO list
 ### What to do tomorrow?
 Probably, it is time to start working on this again
 
-## 07/01/2019
+## 07/01/2020
 ### Summary
 Upgraded and fixed packages. I need to tell Maurice senpai...
 ### What to do tomorrow?
