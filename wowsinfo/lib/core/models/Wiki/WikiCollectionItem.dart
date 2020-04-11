@@ -3,10 +3,10 @@ class WikiCollectionItem {
   Map<String, CollectionItem> item;
 
   WikiCollectionItem.fromJson(Map<String, dynamic> json) {
-    this.item = json;
+    this.item = json.cast<String, CollectionItem>();
   }
 
-  Map<String, dynamic> toJson() => this.item;
+  Map<String, dynamic> toJson() => this.item.cast<String, dynamic>();
 }
 
 /// This is the `CollectionItem` class

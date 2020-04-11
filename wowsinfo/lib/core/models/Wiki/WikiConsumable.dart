@@ -3,10 +3,10 @@ class WikiConsumable {
   Map<String, Consumable> consumable;
 
   WikiConsumable.fromJson(Map<String, dynamic> json) {
-    this.consumable = json['consumable'];
+    this.consumable = json['consumable'].cast<String, Consumable>();
   }
 
-  Map<String, dynamic> toJson() => this.consumable;
+  Map<String, dynamic> toJson() => this.consumable.cast<String, dynamic>();
 }
 
 /// This is the `Consumable` class
@@ -21,7 +21,7 @@ class Consumable {
   String description;
 
   Consumable.fromJson(Map<String, dynamic> json) {
-    this.profile = json['profile'];
+    this.profile = json['profile'].cast<String, Profile>();
     this.name = json['name'];
     this.priceGold = json['price_gold'];
     this.image = json['image'];
@@ -33,7 +33,7 @@ class Consumable {
 
   Map<String, dynamic> toJson() {
     return {
-      'profile': this.profile,
+      'profile': this.profile.cast<String, dynamic>(),
       'name': this.name,
       'price_gold': this.priceGold,
       'image': this.image,

@@ -3,10 +3,10 @@ class WikiAchievement {
   Map<String, Achievement> achievement;
 
   WikiAchievement.fromJson(Map<String, dynamic> json) {
-    this.achievement = json;
+    this.achievement = json.cast<String, Achievement>();
   }
 
-  Map<String, dynamic> toJson() => this.achievement;
+  Map<String, dynamic> toJson() => this.achievement.cast<String, dynamic>();
 }
 
 /// This is the `Achievement` class
