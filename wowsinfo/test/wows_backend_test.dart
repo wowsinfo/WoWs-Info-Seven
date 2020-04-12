@@ -7,6 +7,7 @@ import 'package:wowsinfo/core/models/WoWs/ClanInfo.dart';
 import 'package:wowsinfo/core/models/WoWs/PlayerAchievement.dart';
 import 'package:wowsinfo/core/models/WoWs/PlayerShipInfo.dart';
 import 'package:wowsinfo/core/models/WoWs/RankPlayerInfo.dart';
+import 'package:wowsinfo/core/models/WoWs/RankPlayerShipInfo.dart';
 
 void main() {
   test('Load basic_player_info into memory', () async {
@@ -76,5 +77,17 @@ void main() {
     expect(ship != null, isTrue);
     expect(ship.isSingleShip, isTrue);
     expect(ship.ships[0].pvp.battle == 128, isTrue);
+  });
+
+  test('Load rank_player_ship_info into memory', () async {
+    final file = File('test/json/rank_player_ship_info.json');
+    final jsonString = await file.readAsString();
+    Map<String, dynamic> jsonMap = jsonDecode(jsonString);
+    
+    final ship = RankPlayerShipInfo(jsonMap['data']);
+
+    expect(ship != null, isTrue);
+    expect(ship.ships.length > 0, isTrue);
+    expect(ship.ships[0].season['101'].rankSolo.secondBattery.hit == 0, isTrue);
   });
 }

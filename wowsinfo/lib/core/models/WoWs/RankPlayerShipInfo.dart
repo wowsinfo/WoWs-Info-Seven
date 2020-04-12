@@ -1,23 +1,12 @@
-import '../Meta.dart';
 import 'PvP.dart';
 
 /// This is the `RankPlayerShipInfo` class
 class RankPlayerShipInfo {
-  Meta meta;
-  Data data;
+  List<SeasonShipInfo> ships = [];
 
-  RankPlayerShipInfo(json) {
-    this.meta = Meta(json["meta"]);
-    this.data = Data(json["data"]);
-  }
-}
-
-/// This is the `Data` class
-class Data {
-  List<SeasonShipInfo> k2011774448;
-
-  Data(json) {
-    this.k2011774448 = json["2011774448"];
+  RankPlayerShipInfo(Map<String, dynamic> data) {
+    final json = data.values.first;
+    json.forEach((item) => ships.add(SeasonShipInfo(item)));
   }
 }
 
@@ -30,18 +19,22 @@ class SeasonShipInfo {
   int shipId;
 
   SeasonShipInfo(json) {
-    this.season = json["seasons"];
-    this.accountId = json["account_id"];
-    this.shipId = json["ship_id"];
+    this.season = (json['seasons'] as Map).map((a, b) => MapEntry(a, Season(b)));
+    this.accountId = json['account_id'];
+    this.shipId = json['ship_id'];
   }
 }
 
 /// This is the `Season` class
 class Season {
   RankSolo rankSolo;
+  dynamic rankDiv2;
+  dynamic rankDiv3;
 
   Season(json) {
-    this.rankSolo = RankSolo(json["rank_solo"]);
+    this.rankSolo = RankSolo(json['rank_solo']);
+    this.rankDiv2 = json['rank_div2'];
+    this.rankDiv3 = json['rank_div3'];
   }
 }
 
@@ -71,24 +64,24 @@ class RankSolo {
   int survivedBattle;
 
   RankSolo(json) {
-    this.maxFragsBattle = json["max_frags_battle"];
-    this.draw = json["draws"];
-    this.maxXp = json["max_xp"];
-    this.win = json["wins"];
-    this.planesKilled = json["planes_killed"];
-    this.losse = json["losses"];
-    this.torpedoe = json["torpedoes"];
-    this.battle = json["battles"];
-    this.maxDamageDealt = json["max_damage_dealt"];
-    this.damageDealt = json["damage_dealt"];
-    this.maxPlanesKilled = json["max_planes_killed"];
-    this.aircraft = json["aircraft"];
-    this.ramming = json["ramming"];
-    this.mainBattery = json["main_battery"];
-    this.secondBattery = json["second_battery"];
-    this.survivedWin = json["survived_wins"];
-    this.frag = json["frags"];
-    this.xp = json["xp"];
-    this.survivedBattle = json["survived_battles"];
+    this.maxFragsBattle = json['max_frags_battle'];
+    this.draw = json['draws'];
+    this.maxXp = json['max_xp'];
+    this.win = json['wins'];
+    this.planesKilled = json['planes_killed'];
+    this.losse = json['losses'];
+    this.torpedoe = Torpedoe(json['torpedoes']);
+    this.battle = json['battles'];
+    this.maxDamageDealt = json['max_damage_dealt'];
+    this.damageDealt = json['damage_dealt'];
+    this.maxPlanesKilled = json['max_planes_killed'];
+    this.aircraft = Aircraft(json['aircraft']);
+    this.ramming = Ramming(json['ramming']);
+    this.mainBattery = MainBattery(json['main_battery']);
+    this.secondBattery = SecondBattery(json['second_battery']);
+    this.survivedWin = json['survived_wins'];
+    this.frag = json['frags'];
+    this.xp = json['xp'];
+    this.survivedBattle = json['survived_battles'];
   }
 }
