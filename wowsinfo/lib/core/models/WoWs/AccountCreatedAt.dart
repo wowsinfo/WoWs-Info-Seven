@@ -3,7 +3,7 @@ class AccountCreatedAt {
   List<Data> data;
 
   AccountCreatedAt(json) {
-    this.data = json["data"];
+    this.data = json['data'];
   }
 }
 
@@ -12,6 +12,6 @@ class Data {
   int createdAt;
 
   Data(json) {
-    this.createdAt = json["created_at"];
+    this.createdAt = json['created_at'];
   }
 }

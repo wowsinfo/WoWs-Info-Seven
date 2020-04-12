@@ -34,7 +34,7 @@ class OriginalPage extends StatelessWidget {
                 ],
                 iosActions: [
                   CupertinoDialogAction(
-                    child: Text("OK"),
+                    child: Text('OK'),
                     onPressed: () {
                       Navigator.pop(context);
                     },
