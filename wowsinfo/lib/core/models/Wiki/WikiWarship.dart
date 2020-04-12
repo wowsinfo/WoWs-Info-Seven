@@ -3,7 +3,7 @@ class WikiWarship {
   Map<String, Warship> data;
 
   WikiWarship.fromJson(Map<String, dynamic> json) {
-    this.data = json..map((a, b) => MapEntry(a, Warship.fromJson(b)));
+    this.data = json.map((a, b) => MapEntry(a, Warship.fromJson(b)));
   }
 
   Map<String, dynamic> toJson() => this.data.cast<String, dynamic>();
@@ -32,8 +32,8 @@ class Warship {
     this.nation = json['nation'];
     this.isPremium = json['is_premium'];
     this.shipIdStr = json['ship_id_str'];
-    if (json['default_profile'] != null) this._defaultProfile = DefaultProfile.fromJson(json['default_profile']);
-    if (json['_images'] != null) this._image = Image.fromJson(json['_images']);
+    this._defaultProfile = DefaultProfile.fromJson(json['default_profile']);
+    this._image = Image.fromJson(json['images']);
     this.type = json['type'];
   }
 

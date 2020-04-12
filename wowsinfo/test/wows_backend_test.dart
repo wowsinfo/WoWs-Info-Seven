@@ -93,6 +93,7 @@ void main() {
     expect(ship.ships[0].season['101'].rankSolo.secondBattery.hit == 0, isTrue);
   });
 
+  /// This will fail because of `Hive`
   test('Load search_player into memory', () async {
     final file = File('test/json/search_player.json');
     final jsonString = await file.readAsString();

@@ -144,7 +144,7 @@ class DefaultProfile {
     if (json['anti_aircraft'] != null) this.antiAircraft = AntiAircraft(json['anti_aircraft']);
     if (json['mobility'] != null) this.mobility = Mobility(json['mobility']);
     if (json['hull'] != null) this.hull = Hull(json['hull']);
-    this.atba = Atba(json['atbas']);
+    if (json['atbas'] != null) this.atba = Atba(json['atbas']);
     if (json['artillery'] != null) this.artillery = Artillery(json['artillery']);
     if (json['torpedoes'] != null) this.torpedoe = Torpedoe(json['torpedoes']);
     if (json['fighters'] != null) this.fighter = Fighter(json['fighters']);
