@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:wowsinfo/core/models/WoWs/BasicPlayerInfo.dart';
 import 'package:wowsinfo/core/models/WoWs/ClanInfo.dart';
 import 'package:wowsinfo/core/models/WoWs/PlayerAchievement.dart';
+import 'package:wowsinfo/core/models/WoWs/PlayerShipInfo.dart';
 import 'package:wowsinfo/core/models/WoWs/RankPlayerInfo.dart';
 
 void main() {
@@ -63,5 +64,17 @@ void main() {
     expect(info != null, isTrue);
     expect(info.season['101'].rankInfo.maxRank == 0, isFalse);
     expect(info.season['110'].rankInfo.maxRank == 0, isTrue);
+  });
+
+  test('Load player_ship into memory', () async {
+    final file = File('test/json/player_ship.json');
+    final jsonString = await file.readAsString();
+    Map<String, dynamic> jsonMap = jsonDecode(jsonString);
+    
+    final ship = PlayerShipInfo(jsonMap['data']);
+
+    expect(ship != null, isTrue);
+    expect(ship.isSingleShip, isTrue);
+    expect(ship.ships[0].pvp.battle == 128, isTrue);
   });
 }
