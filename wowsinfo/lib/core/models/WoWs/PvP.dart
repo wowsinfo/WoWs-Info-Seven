@@ -38,6 +38,7 @@ class PvP {
   int battlesSince512;
 
   PvP(Map<String, dynamic> json) {
+    if (json == null) return;
     this.maxXp = json['max_xp'];
     this.damageToBuilding = json['damage_to_buildings'];
     this.mainBattery = MainBattery(json['main_battery']);

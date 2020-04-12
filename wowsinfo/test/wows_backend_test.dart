@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:wowsinfo/core/models/WoWs/BasicPlayerInfo.dart';
 import 'package:wowsinfo/core/models/WoWs/ClanInfo.dart';
 import 'package:wowsinfo/core/models/WoWs/PlayerAchievement.dart';
+import 'package:wowsinfo/core/models/WoWs/RankPlayerInfo.dart';
 
 void main() {
   test('Load basic_player_info into memory', () async {
@@ -50,5 +51,17 @@ void main() {
 
     expect(player != null, isTrue);
     expect(player.achievement['FOOLSDAY_TROOPER'] == 4, isTrue);
+  });
+
+  test('Load player_rank_info into memory', () async {
+    final file = File('test/json/player_rank_info.json');
+    final jsonString = await file.readAsString();
+    Map<String, dynamic> jsonMap = jsonDecode(jsonString);
+    
+    final info = RankPlayerInfo(jsonMap['data']);
+
+    expect(info != null, isTrue);
+    expect(info.season['101'].rankInfo.maxRank == 0, isFalse);
+    expect(info.season['110'].rankInfo.maxRank == 0, isTrue);
   });
 }

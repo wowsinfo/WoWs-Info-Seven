@@ -7,6 +7,11 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## 12/04/2020
+### Summary
+I will try to complete all models today. 
+### What to do tomorrow?
+
 ## 11/04/2020
 ### Summary
 More models are added. I will try reading some local json files and see if they work as expected. `Parser` should do a bit work I think because I am not gonna save meta and status. If all models work, I can start working on the UI and keep adding things to the backend? I am doing tests and it is about 50% done but I will use python and try drawing the ap penetration curve for every ships if possible. 

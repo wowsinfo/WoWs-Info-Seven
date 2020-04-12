@@ -1,31 +1,46 @@
-import '../Meta.dart';
+import 'package:wowsinfo/core/models/WoWs/PvP.dart';
 
 /// This is the `RankPlayerInfo` class
 class RankPlayerInfo {
-  Meta meta;
-  Data data;
+  Map<String, Season> season;
+  int accountId;
 
-  RankPlayerInfo(json) {
-    this.meta = Meta(json["meta"]);
-    this.data = json["data"];
+  RankPlayerInfo(Map<String, dynamic> data) {
+    final json = data.values.first;
+    this.season = (json['seasons'] as Map).map((a, b) => MapEntry(a, Season(b)));
+    this.accountId = json['account_id'];
   }
 }
 
-/// This is the `Data` class
-class Data {
-  K2011774448 k2011774448;
+/// This is the `Season` class
+class Season {
+  RankInfo rankInfo;
+  PvP rankSolo;
+  // Thses two should always be null
+  dynamic rankDiv2;
+  dynamic rankDiv3;
 
-  Data(json) {
-    this.k2011774448 = json["2011774448"];
+  Season(Map<String, dynamic> json) {
+    this.rankInfo = RankInfo(json['rank_info']);
+    this.rankSolo = PvP(json['rank_solo']);
+    this.rankDiv2 = json['rank_div2'];
+    this.rankDiv3 = json['rank_div3'];
   }
 }
 
-/// This is the `K2011774448` class
-class K2011774448 {
-  // TODO: fix this bug
-  Map<String, dynamic> season;
+/// This is the `RankInfo` class
+class RankInfo {
+  int maxRank;
+  int startRank;
+  int star;
+  int rank;
+  int stage;
 
-  K2011774448(json) {
-    this.season = json["seasons"];
+  RankInfo(Map<String, dynamic> json) {
+    this.maxRank = json['max_rank'];
+    this.startRank = json['start_rank'];
+    this.star = json['stars'];
+    this.rank = json['rank'];
+    this.stage = json['stage'];
   }
 }
