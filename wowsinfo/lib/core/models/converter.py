@@ -23,6 +23,9 @@ def convertAll(path):
             # save all lines
             lines = []
             for line in f.readlines():
+                # remove this line, because guards are added
+                if "if (json == null) return;" in line:
+                    continue
                 lines.append(convert(line))
             with open(d, 'w') as w:
                 w.writelines(lines)
