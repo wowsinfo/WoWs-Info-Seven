@@ -5,6 +5,6 @@ class SearchClanResult {
   List<Clan> data;
 
   SearchClanResult(json) {
-    this.data = json["data"];
+    json.forEach((item) => data.add(Clan.fromJson(item)));
   }
 }

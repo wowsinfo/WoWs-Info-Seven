@@ -1,3 +1,5 @@
+import 'package:wowsinfo/core/data/Preference.dart';
+
 class Clan {
   String tag;
   int clanId;
@@ -7,7 +9,7 @@ class Clan {
   Clan.fromJson(Map<String, dynamic> json) {
     this.tag = json['tag'];
     this.clanId = json['clan_id'];
-    this.server = json['server'];
+    this.server = Preference.shared.gameServer;
   }
 
   Map<String, dynamic> toJson() {

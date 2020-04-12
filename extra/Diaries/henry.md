@@ -9,8 +9,13 @@ Template
 
 ## 12/04/2020
 ### Summary
-I will try to complete all models today. It was smooth kinda. The most challenging ship wiki is done... I still have a few to do but I think I can finish all of them today hopefully. 
+I will try to complete all models today. It was smooth kinda. The most challenging ship wiki is done... 
+I still have a few to do but I think I can finish all of them today hopefully. 
+It is about done. Only data from GitHub left now but they are not that complicated. Test was really useful to spot my mistakes but I don't know how you can test widgets. 
+I am sharing some codes from other models because some of them overlap. This time, it is definitely better and I feel like I am way faster than before. Am I getting better? 
+The last rewrite was probably a year ago. Probably more than that. After this rewrite, I won't rewrite anymore and will focus on new features. 
 ### What to do tomorrow?
+`Parser` first and then `CachedData`.
 
 ## 11/04/2020
 ### Summary
