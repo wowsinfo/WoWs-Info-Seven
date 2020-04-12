@@ -139,23 +139,23 @@ class DefaultProfile {
   DiveBomber diveBomber;
 
   DefaultProfile(Map<String, dynamic> json) {
-    this.engine = json['engine'];
-    this.torpedoBomber = json['torpedo_bomber'];
-    this.antiAircraft = json['anti_aircraft'];
-    this.mobility = json['mobility'];
-    this.hull = json['hull'];
-    this.atba = json['atbas'];
-    this.artillery = json['artillery'];
-    this.torpedoe = json['torpedoes'];
-    this.fighter = json['fighters'];
-    this.fireControl = json['fire_control'];
-    this.weaponry = json['weaponry'];
+    this.engine = Engine(json['engine']);
+    this.torpedoBomber = TorpedoBomber(json['torpedo_bomber']);
+    this.antiAircraft = AntiAircraft(json['anti_aircraft']);
+    this.mobility = Mobility(json['mobility']);
+    this.hull = Hull(json['hull']);
+    this.atba = Atba(json['atbas']);
+    this.artillery = Artillery(json['artillery']);
+    this.torpedoe = Torpedoe(json['torpedoes']);
+    this.fighter = Fighter(json['fighters']);
+    this.fireControl = FireControl(json['fire_control']);
+    this.weaponry = Weaponry(json['weaponry']);
     this.battleLevelRangeMax = json['battle_level_range_max'];
     this.battleLevelRangeMin = json['battle_level_range_min'];
-    this.flightControl = json['flight_control'];
-    this.concealment = json['concealment'];
-    this.armour = json['armour'];
-    this.diveBomber = json['dive_bomber'];
+    this.flightControl = FlightControl(json['flight_control']);
+    this.concealment = Concealment(json['concealment']);
+    this.armour = Armour(json['armour']);
+    this.diveBomber = DiveBomber(json['dive_bomber']);
   }
 }
 
@@ -191,21 +191,21 @@ class TorpedoBomber {
   String torpedoName;
 
   TorpedoBomber(Map<String, dynamic> json) {
-    this.torpedoDistance = json["torpedo_distance"];
-    this.planeLevel = json["plane_level"];
-    this.squadron = json["squadrons"];
-    this.name = json["name"];
-    this.cruiseSpeed = json["cruise_speed"];
-    this.prepareTime = json["prepare_time"];
-    this.torpedoDamage = json["torpedo_damage"];
-    this.countInSquadron = json["count_in_squadron"];
-    this.torpedoMaxSpeed = json["torpedo_max_speed"];
-    this.torpedoBomberIdStr = json["torpedo_bomber_id_str"];
-    this.gunnerDamage = json["gunner_damage"];
-    this.maxDamage = json["max_damage"];
-    this.maxHealth = json["max_health"];
-    this.torpedoBomberId = json["torpedo_bomber_id"];
-    this.torpedoName = json["torpedo_name"];
+    this.torpedoDistance = json['torpedo_distance'];
+    this.planeLevel = json['plane_level'];
+    this.squadron = json['squadrons'];
+    this.name = json['name'];
+    this.cruiseSpeed = json['cruise_speed'];
+    this.prepareTime = json['prepare_time'];
+    this.torpedoDamage = json['torpedo_damage'];
+    this.countInSquadron = CountInSquadron(json['count_in_squadron']);
+    this.torpedoMaxSpeed = json['torpedo_max_speed'];
+    this.torpedoBomberIdStr = json['torpedo_bomber_id_str'];
+    this.gunnerDamage = json['gunner_damage'];
+    this.maxDamage = json['max_damage'];
+    this.maxHealth = json['max_health'];
+    this.torpedoBomberId = json['torpedo_bomber_id'];
+    this.torpedoName = json['torpedo_name'];
   }
 }
 
@@ -215,15 +215,8 @@ class CountInSquadron {
   int min;
 
   CountInSquadron(Map<String, dynamic> json) {
-    this.max = json["max"];
-    this.min = json["min"];
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      "max": this.max,
-      "min": this.min,
-    };
+    this.max = json['max'];
+    this.min = json['min'];
   }
 }
 
@@ -338,7 +331,7 @@ class Hull {
     this.hullIdStr = json['hull_id_str'];
     this.torpedoesBarrel = json['torpedoes_barrels'];
     this.antiAircraftBarrel = json['anti_aircraft_barrels'];
-    this.range = json['range'];
+    this.range = Range(json['range']);
     this.health = json['health'];
     this.planesAmount = json['planes_amount'];
     this.artilleryBarrel = json['artillery_barrels'];
@@ -364,14 +357,14 @@ class Atba {
 
   Atba(Map<String, dynamic> json) {
     this.distance = json['distance'];
-    this.slot = json['slots'];
+    this.slot = (json['slots'] as Map).map((key, value) => MapEntry(key, SecondarySlot(value)));
   }
 }
 
 /// This is the `Artillery` class
 class Artillery {
   int maxDispersion;
-  Shell shell;
+  Map<String, Shell> shell;
   double shotDelay;
   double rotationTime;
   double distance;
@@ -382,49 +375,19 @@ class Artillery {
 
   Artillery(Map<String, dynamic> json) {
     this.maxDispersion = json['max_dispersion'];
-    this.shell = json['shells'];
+    this.shell = (json['shells'] as Map).map((key, value) => MapEntry(key, Shell(value)));
     this.shotDelay = json['shot_delay'];
     this.rotationTime = json['rotation_time'];
     this.distance = json['distance'];
     this.artilleryId = json['artillery_id'];
     this.artilleryIdStr = json['artillery_id_str'];
-    this.slot = json['slots'];
+    this.slot = (json['slots'] as Map).map((key, value) => MapEntry(key, MainGunSlot(value)));
     this.gunRate = json['gun_rate'];
   }
 }
 
 /// This is the `Shell` class
 class Shell {
-  AP aP;
-  HE hE;
-
-  Shell(Map<String, dynamic> json) {
-    this.aP = json['AP'];
-    this.hE = json['HE'];
-  }
-}
-
-/// This is the `AP` class
-class AP {
-  dynamic burnProbability;
-  int bulletSpeed;
-  String name;
-  int damage;
-  int bulletMass;
-  String type;
-
-  AP(Map<String, dynamic> json) {
-    this.burnProbability = json['burn_probability'];
-    this.bulletSpeed = json['bullet_speed'];
-    this.name = json['name'];
-    this.damage = json['damage'];
-    this.bulletMass = json['bullet_mass'];
-    this.type = json['type'];
-  }
-}
-
-/// This is the `HE` class
-class HE {
   double burnProbability;
   int bulletSpeed;
   String name;
@@ -432,7 +395,7 @@ class HE {
   int bulletMass;
   String type;
 
-  HE(Map<String, dynamic> json) {
+  Shell(Map<String, dynamic> json) {
     this.burnProbability = json['burn_probability'];
     this.bulletSpeed = json['bullet_speed'];
     this.name = json['name'];
@@ -464,7 +427,7 @@ class Torpedoe {
     this.torpedoSpeed = json['torpedo_speed'];
     this.rotationTime = json['rotation_time'];
     this.torpedoesIdStr = json['torpedoes_id_str'];
-    this.slot = json['slots'];
+    this.slot = (json['slots'] as Map).map((key, value) => MapEntry(key, TorpedoeSlot(value)));
     this.maxDamage = json['max_damage'];
   }
 }
@@ -485,18 +448,18 @@ class Fighter {
   int maxHealth;
 
   Fighter(Map<String, dynamic> json) {
-    this.fightersId = json["fighters_id"];
-    this.squadron = json["squadrons"];
-    this.name = json["name"];
-    this.cruiseSpeed = json["cruise_speed"];
-    this.prepareTime = json["prepare_time"];
-    this.gunnerDamage = json["gunner_damage"];
-    this.fightersIdStr = json["fighters_id_str"];
-    this.countInSquadron = json["count_in_squadron"];
-    this.maxAmmo = json["max_ammo"];
-    this.planeLevel = json["plane_level"];
-    this.avgDamage = json["avg_damage"];
-    this.maxHealth = json["max_health"];
+    this.fightersId = json['fighters_id'];
+    this.squadron = json['squadrons'];
+    this.name = json['name'];
+    this.cruiseSpeed = json['cruise_speed'];
+    this.prepareTime = json['prepare_time'];
+    this.gunnerDamage = json['gunner_damage'];
+    this.fightersIdStr = json['fighters_id_str'];
+    this.countInSquadron = CountInSquadron(json['count_in_squadron']);
+    this.maxAmmo = json['max_ammo'];
+    this.planeLevel = json['plane_level'];
+    this.avgDamage = json['avg_damage'];
+    this.maxHealth = json['max_health'];
   }
 }
 
@@ -539,11 +502,11 @@ class FlightControl {
   int fighterSquadron;
 
   FlightControl(Map<String, dynamic> json) {
-    this.flightControlIdStr = json["flight_control_id_str"];
-    this.bomberSquadron = json["bomber_squadrons"];
-    this.torpedoSquadron = json["torpedo_squadrons"];
-    this.flightControlId = json["flight_control_id"];
-    this.fighterSquadron = json["fighter_squadrons"];
+    this.flightControlIdStr = json['flight_control_id_str'];
+    this.bomberSquadron = json['bomber_squadrons'];
+    this.torpedoSquadron = json['torpedo_squadrons'];
+    this.flightControlId = json['flight_control_id'];
+    this.fighterSquadron = json['fighter_squadrons'];
   }
 }
 
@@ -573,15 +536,15 @@ class Armour {
   Citadel citadel;
 
   Armour(Map<String, dynamic> json) {
-    this.casemate = json['casemate'];
+    this.casemate = Casemate(json['casemate']);
     this.floodProb = json['flood_prob'];
-    this.deck = json['deck'];
+    this.deck = Deck(json['deck']);
     this.floodDamage = json['flood_damage'];
-    this.range = json['range'];
+    this.range = Range(json['range']);
     this.health = json['health'];
-    this.extremitie = json['extremities'];
+    this.extremitie = Extremitie(json['extremities']);
     this.total = json['total'];
-    this.citadel = json['citadel'];
+    this.citadel = Citadel(json['citadel']);
   }
 }
 
@@ -649,22 +612,22 @@ class DiveBomber {
   Accuracy accuracy;
 
   DiveBomber(Map<String, dynamic> json) {
-    this.squadron = json["squadrons"];
-    this.name = json["name"];
-    this.cruiseSpeed = json["cruise_speed"];
-    this.diveBomberId = json["dive_bomber_id"];
-    this.prepareTime = json["prepare_time"];
-    this.gunnerDamage = json["gunner_damage"];
-    this.bombDamage = json["bomb_damage"];
-    this.countInSquadron = json["count_in_squadron"];
-    this.bombName = json["bomb_name"];
-    this.bombBulletMas = json["bomb_bullet_mass"];
-    this.planeLevel = json["plane_level"];
-    this.bombBurnProbability = json["bomb_burn_probability"];
-    this.maxDamage = json["max_damage"];
-    this.maxHealth = json["max_health"];
-    this.diveBomberIdStr = json["dive_bomber_id_str"];
-    this.accuracy = json["accuracy"];
+    this.squadron = json['squadrons'];
+    this.name = json['name'];
+    this.cruiseSpeed = json['cruise_speed'];
+    this.diveBomberId = json['dive_bomber_id'];
+    this.prepareTime = json['prepare_time'];
+    this.gunnerDamage = json['gunner_damage'];
+    this.bombDamage = json['bomb_damage'];
+    this.countInSquadron = CountInSquadron(json['count_in_squadron']);
+    this.bombName = json['bomb_name'];
+    this.bombBulletMas = json['bomb_bullet_mass'];
+    this.planeLevel = json['plane_level'];
+    this.bombBurnProbability = json['bomb_burn_probability'];
+    this.maxDamage = json['max_damage'];
+    this.maxHealth = json['max_health'];
+    this.diveBomberIdStr = json['dive_bomber_id_str'];
+    this.accuracy = Accuracy(json['accuracy']);
   }
 }
 
@@ -674,8 +637,8 @@ class Accuracy {
   double min;
 
   Accuracy(Map<String, dynamic> json) {
-    this.max = json["max"];
-    this.min = json["min"];
+    this.max = json['max'];
+    this.min = json['min'];
   }
 }
 
