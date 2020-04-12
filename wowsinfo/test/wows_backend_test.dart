@@ -114,6 +114,8 @@ void main() {
     final dd = WikiShipInfo(ddMap['data']);
 
     expect(dd != null, isTrue);
+    expect(dd.modulesTree.parts['3760598736'].moduleIdStr == 'PJUT509', isTrue);
+    expect(dd.defaultProfile.artillery.shell['HE'].damage == 2150, isTrue);
 
     print('Test aircraft carrior');
     final cvfile = File('test/json/ship_wiki_shokaku.json');
@@ -123,6 +125,8 @@ void main() {
     final cv = WikiShipInfo(cvMap['data']);
 
     expect(cv != null, isTrue);
+    expect(cv.defaultProfile.diveBomber.accuracy.max == 120.0, isTrue);
+    expect(cv.defaultProfile.torpedoe == null, isTrue);
 
     print('Test battleships');
     final bbfile = File('test/json/ship_wiki_gneisenau.json');
@@ -132,5 +136,8 @@ void main() {
     final bb = WikiShipInfo(bbMap['data']);
 
     expect(bb != null, isTrue);
+    expect(bb.upgrade.length == 12, isTrue);
+    expect(bb.defaultProfile.torpedoe.reloadTime == 68, isTrue);
+    expect(bb.defaultProfile.diveBomber == null, isTrue);
   });
 }
