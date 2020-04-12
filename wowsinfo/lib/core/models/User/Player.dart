@@ -1,3 +1,5 @@
+import 'package:wowsinfo/core/data/Preference.dart';
+
 /// player nickname, account id and server code
 class Player {
   String nickname;
@@ -9,7 +11,8 @@ class Player {
   Player.fromJson(Map<String, dynamic> json) {
     this.nickname = json['nickname'];
     this.playerId = json['account_id'];
-    this.server = json['server'];
+    // Use current server index, comment this line while testing
+    this.server = Preference.shared.gameServer;
   }
 
   Map<String, dynamic> toJson() {

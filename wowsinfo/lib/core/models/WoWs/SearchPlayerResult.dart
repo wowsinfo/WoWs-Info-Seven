@@ -2,9 +2,9 @@ import 'package:wowsinfo/core/models/User/Player.dart';
 
 /// This is the `SearchPlayerResult` class
 class SearchPlayerResult {
-  List<Player> data;
+  List<Player> players = [];
 
-  SearchPlayerResult(json) {
-    this.data = json["data"];
+  SearchPlayerResult(List json) {
+    json.forEach((item) => players.add(Player.fromJson(item)));
   }
 }

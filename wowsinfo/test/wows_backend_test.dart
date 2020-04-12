@@ -2,12 +2,16 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:wowsinfo/core/data/Preference.dart';
 import 'package:wowsinfo/core/models/WoWs/BasicPlayerInfo.dart';
 import 'package:wowsinfo/core/models/WoWs/ClanInfo.dart';
 import 'package:wowsinfo/core/models/WoWs/PlayerAchievement.dart';
 import 'package:wowsinfo/core/models/WoWs/PlayerShipInfo.dart';
 import 'package:wowsinfo/core/models/WoWs/RankPlayerInfo.dart';
 import 'package:wowsinfo/core/models/WoWs/RankPlayerShipInfo.dart';
+import 'package:wowsinfo/core/models/WoWs/SearchPlayerResult.dart';
 
 void main() {
   test('Load basic_player_info into memory', () async {
@@ -89,5 +93,17 @@ void main() {
     expect(ship != null, isTrue);
     expect(ship.ships.length > 0, isTrue);
     expect(ship.ships[0].season['101'].rankSolo.secondBattery.hit == 0, isTrue);
+  });
+
+  test('Load search_player into memory', () async {
+    final file = File('test/json/search_player.json');
+    final jsonString = await file.readAsString();
+    Map<String, dynamic> jsonMap = jsonDecode(jsonString);
+    
+    final player = SearchPlayerResult(jsonMap['data']);
+
+    expect(player != null, isTrue);
+    expect(player.players.length > 0, isTrue);
+    expect(player.players[0].nickname == 'henry000', isTrue);
   });
 }
