@@ -34,7 +34,7 @@ class WikiShipInfo {
     this.shipId = json['ship_id'];
     this.priceCredit = json['price_credit'];
     this.defaultProfile = DefaultProfile(json['default_profile']);
-    this.upgrade = json['upgrades'];
+    this.upgrade = (json['upgrades'] ?? []).cast<int>();
     this.tier = json['tier'];
     this.nextShip = NextShip(json['next_ships']);
     this.modSlot = json['mod_slots'];
@@ -61,26 +61,26 @@ class Image {
 
 /// This is the `Module` class
 class Module {
-  List<int> engine = [];
-  List<int> torpedoBomber = [];
-  List<int> fighter = [];
-  List<int> hull = [];
-  List<int> artillery = [];
-  List<int> torpedoe = [];
-  List<int> fireControl = [];
-  List<int> flightControl = [];
-  List<int> diveBomber = [];
+  List<int> engine;
+  List<int> torpedoBomber;
+  List<int> fighter;
+  List<int> hull;
+  List<int> artillery;
+  List<int> torpedoe;
+  List<int> fireControl;
+  List<int> flightControl;
+  List<int> diveBomber;
 
   Module(Map<String, dynamic> json) {
-    this.engine = json['engine'];
-    this.torpedoBomber = json['torpedo_bomber'];
-    this.fighter = json['fighter'];
-    this.hull = json['hull'];
-    this.artillery = json['artillery'];
-    this.torpedoe = json['torpedoes'];
-    this.fireControl = json['fire_control'];
-    this.flightControl = json['flight_control'];
-    this.diveBomber = json['dive_bomber'];
+    this.engine = (json['engine'] ?? []).cast<int>();
+    this.torpedoBomber = (json['torpedo_bomber'] ?? []).cast<int>();
+    this.fighter = (json['fighter'] ?? []).cast<int>();
+    this.hull = (json['hull'] ?? []).cast<int>();
+    this.artillery = (json['artillery'] ?? []).cast<int>();
+    this.torpedoe = (json['torpedoes'] ?? []).cast<int>();
+    this.fireControl = (json['fire_control'] ?? []).cast<int>();
+    this.flightControl = (json['flight_control'] ?? []).cast<int>();
+    this.diveBomber = (json['dive_bomber'] ?? []).cast<int>();
   }
 }
 
@@ -107,11 +107,11 @@ class Part {
 
   Part(Map<String, dynamic> json) {
     this.name = json['name'];
-    this.nextModule = json['next_modules'];
+    this.nextModule = (json['next_modules'] ?? []).cast<int>();
     this.isDefault = json['is_default'];
     this.priceXp = json['price_xp'];
     this.priceCredit = json['price_credit'];
-    this.nextShip = json['next_ships'];
+    this.nextShip = (json['next_ships'] ?? []).cast<int>();
     this.moduleId = json['module_id'];
     this.type = json['type'];
     this.moduleIdStr = json['module_id_str'];
@@ -166,6 +166,7 @@ class Engine {
   int engineId;
 
   Engine(Map<String, dynamic> json) {
+    if (json == null) return;
     this.engineIdStr = json['engine_id_str'];
     this.maxSpeed = json['max_speed'];
     this.engineId = json['engine_id'];
@@ -191,6 +192,7 @@ class TorpedoBomber {
   String torpedoName;
 
   TorpedoBomber(Map<String, dynamic> json) {
+    if (json == null) return;
     this.torpedoDistance = json['torpedo_distance'];
     this.planeLevel = json['plane_level'];
     this.squadron = json['squadrons'];
@@ -226,6 +228,7 @@ class AntiAircraft {
   int defense;
 
   AntiAircraft(Map<String, dynamic> json) {
+    if (json == null) return;
     this.slot = (json['slots'] as Map).map((key, value) => MapEntry(key, AASlot(value)));
     this.defense = json['defense'];
   }
@@ -307,6 +310,7 @@ class Mobility {
   double maxSpeed;
 
   Mobility(Map<String, dynamic> json) {
+    if (json == null) return;
     this.rudderTime = json['rudder_time'];
     this.total = json['total'];
     this.turningRadiu = json['turning_radius'];
@@ -327,6 +331,7 @@ class Hull {
   int atbaBarrel;
 
   Hull(Map<String, dynamic> json) {
+    if (json == null) return;
     this.hullId = json['hull_id'];
     this.hullIdStr = json['hull_id_str'];
     this.torpedoesBarrel = json['torpedoes_barrels'];
@@ -356,6 +361,7 @@ class Atba {
   Map<String, SecondarySlot> slot;
 
   Atba(Map<String, dynamic> json) {
+    if (json == null) return;
     this.distance = json['distance'];
     this.slot = (json['slots'] as Map).map((key, value) => MapEntry(key, SecondarySlot(value)));
   }
@@ -374,6 +380,7 @@ class Artillery {
   double gunRate;
 
   Artillery(Map<String, dynamic> json) {
+    if (json == null) return;
     this.maxDispersion = json['max_dispersion'];
     this.shell = (json['shells'] as Map).map((key, value) => MapEntry(key, Shell(value)));
     this.shotDelay = json['shot_delay'];
@@ -396,6 +403,7 @@ class Shell {
   String type;
 
   Shell(Map<String, dynamic> json) {
+    if (json == null) return;
     this.burnProbability = json['burn_probability'];
     this.bulletSpeed = json['bullet_speed'];
     this.name = json['name'];
@@ -419,6 +427,7 @@ class Torpedoe {
   int maxDamage;
 
   Torpedoe(Map<String, dynamic> json) {
+    if (json == null) return;
     this.visibilityDist = json['visibility_dist'];
     this.distance = json['distance'];
     this.torpedoesId = json['torpedoes_id'];
@@ -448,6 +457,7 @@ class Fighter {
   int maxHealth;
 
   Fighter(Map<String, dynamic> json) {
+    if (json == null) return;
     this.fightersId = json['fighters_id'];
     this.squadron = json['squadrons'];
     this.name = json['name'];
@@ -471,6 +481,7 @@ class FireControl {
   String fireControlIdStr;
 
   FireControl(Map<String, dynamic> json) {
+    if (json == null) return;
     this.fireControlId = json['fire_control_id'];
     this.distance = json['distance'];
     this.distanceIncrease = json['distance_increase'];
@@ -486,6 +497,7 @@ class Weaponry {
   int torpedoe;
 
   Weaponry(Map<String, dynamic> json) {
+    if (json == null) return;
     this.antiAircraft = json['anti_aircraft'];
     this.aircraft = json['aircraft'];
     this.artillery = json['artillery'];
@@ -502,6 +514,7 @@ class FlightControl {
   int fighterSquadron;
 
   FlightControl(Map<String, dynamic> json) {
+    if (json == null) return;
     this.flightControlIdStr = json['flight_control_id_str'];
     this.bomberSquadron = json['bomber_squadrons'];
     this.torpedoSquadron = json['torpedo_squadrons'];
@@ -517,6 +530,7 @@ class Concealment {
   double detectDistanceByShip;
 
   Concealment(Map<String, dynamic> json) {
+    if (json == null) return;
     this.total = json['total'];
     this.detectDistanceByPlane = json['detect_distance_by_plane'];
     this.detectDistanceByShip = json['detect_distance_by_ship'];
@@ -536,6 +550,7 @@ class Armour {
   Citadel citadel;
 
   Armour(Map<String, dynamic> json) {
+    if (json == null) return;
     this.casemate = Casemate(json['casemate']);
     this.floodProb = json['flood_prob'];
     this.deck = Deck(json['deck']);
@@ -612,6 +627,7 @@ class DiveBomber {
   Accuracy accuracy;
 
   DiveBomber(Map<String, dynamic> json) {
+    if (json == null) return;
     this.squadron = json['squadrons'];
     this.name = json['name'];
     this.cruiseSpeed = json['cruise_speed'];

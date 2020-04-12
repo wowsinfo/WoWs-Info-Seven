@@ -2,9 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:wowsinfo/core/data/Preference.dart';
 import 'package:wowsinfo/core/models/WoWs/BasicPlayerInfo.dart';
 import 'package:wowsinfo/core/models/WoWs/ClanInfo.dart';
 import 'package:wowsinfo/core/models/WoWs/PlayerAchievement.dart';
@@ -12,7 +9,6 @@ import 'package:wowsinfo/core/models/WoWs/PlayerShipInfo.dart';
 import 'package:wowsinfo/core/models/WoWs/RankPlayerInfo.dart';
 import 'package:wowsinfo/core/models/WoWs/RankPlayerShipInfo.dart';
 import 'package:wowsinfo/core/models/WoWs/SearchPlayerResult.dart';
-import 'package:wowsinfo/core/models/WoWs/ShipWiki.dart';
 import 'package:wowsinfo/core/models/WoWs/WikiShipInfo.dart';
 
 void main() {
@@ -110,12 +106,31 @@ void main() {
   });
 
   test('Load ship_wiki into memory', () async {
-    final file = File('test/json/ship_wiki.json');
-    final jsonString = await file.readAsString();
-    Map<String, dynamic> jsonMap = jsonDecode(jsonString);
+    print('Test destroyer');
+    final ddfile = File('test/json/ship_wiki_fubuki.json');
+    final ddjsonString = await ddfile.readAsString();
+    Map<String, dynamic> ddMap = jsonDecode(ddjsonString);
     
-    final info = WikiShipInfo(jsonMap['data']);
+    final dd = WikiShipInfo(ddMap['data']);
 
-    expect(info != null, isTrue);
+    expect(dd != null, isTrue);
+
+    print('Test aircraft carrior');
+    final cvfile = File('test/json/ship_wiki_shokaku.json');
+    final cvjsonString = await cvfile.readAsString();
+    Map<String, dynamic> cvMap = jsonDecode(cvjsonString);
+    
+    final cv = WikiShipInfo(cvMap['data']);
+
+    expect(cv != null, isTrue);
+
+    print('Test battleships');
+    final bbfile = File('test/json/ship_wiki_gneisenau.json');
+    final bbjsonString = await bbfile.readAsString();
+    Map<String, dynamic> bbMap = jsonDecode(bbjsonString);
+    
+    final bb = WikiShipInfo(bbMap['data']);
+
+    expect(bb != null, isTrue);
   });
 }
