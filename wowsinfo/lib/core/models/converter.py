@@ -6,7 +6,7 @@ import re
 from os import path as p
 
 def convert(line):
-    if ("!= null" in line or "as" in line or "cast" in line or "map" in line or "=>" in line or "{" in line or not "=" in line):
+    if ("Utils.guard" in line or "!= null" in line or "as" in line or "cast" in line or "map" in line or "=>" in line or "{" in line or not "=" in line):
         return line
     else:
         m = re.search(r'\((.*)\);$', line)

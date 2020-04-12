@@ -30,9 +30,7 @@ class BasicPlayerInfo {
     this.nickname = json['nickname'];
     this.statsUpdatedAt = json['stats_updated_at'];
     // statistic is only available if the account is public
-    if (publicProfile) {
-      this.statistic = Statistic(json['statistics']);
-    }
+    if (json['statistics'] != null) this.statistic = Statistic(json['statistics']);
   }
 }
 
@@ -45,6 +43,6 @@ class Statistic {
   Statistic(Map<String, dynamic> json) {
     this.distance = json['distance'];
     this.battle = json['battles'];
-    this.pvp = PvP(json['pvp']);
+    if (json['pvp'] != null) this.pvp = PvP(json['pvp']);
   }
 }
