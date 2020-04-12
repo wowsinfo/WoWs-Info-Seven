@@ -45,7 +45,7 @@ class PvP {
     this.maxDamageScouting = json['max_damage_scouting'];
     this.artAgro = json['art_agro'];
     this.shipsSpotted = json['ships_spotted'];
-    this.secondBattery = SecondBattery(json['second_battery']);
+    if (json['second_battery'] != null) this.secondBattery = SecondBattery(json['second_battery']);
     this.xp = json['xp'];
     this.survivedBattle = json['survived_battles'];
     this.droppedCapturePoint = json['dropped_capture_points'];
@@ -62,9 +62,9 @@ class PvP {
     this.maxTotalAgro = json['max_total_agro'];
     this.maxFragsBattle = json['max_frags_battle'];
     this.capturePoint = json['capture_points'];
-    this.ramming = Ramming(json['ramming']);
-    this.torpedoe = Torpedoe(json['torpedoes']);
-    this.aircraft = Aircraft(json['aircraft']);
+    if (json['ramming'] != null) this.ramming = Ramming(json['ramming']);
+    if (json['torpedoes'] != null) this.torpedoe = Torpedoe(json['torpedoes']);
+    if (json['aircraft'] != null) this.aircraft = Aircraft(json['aircraft']);
     this.survivedWin = json['survived_wins'];
     this.maxDamageDealt = json['max_damage_dealt'];
     this.win = json['wins'];

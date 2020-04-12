@@ -32,8 +32,8 @@ class Warship {
     this.nation = json['nation'];
     this.isPremium = json['is_premium'];
     this.shipIdStr = json['ship_id_str'];
-    this._defaultProfile = DefaultProfile.fromJson(json['default_profile']);
-    this._image = Image.fromJson(json['_images']);
+    if (json['default_profile'] != null) this._defaultProfile = DefaultProfile.fromJson(json['default_profile']);
+    if (json['_images'] != null) this._image = Image.fromJson(json['_images']);
     this.type = json['type'];
   }
 
@@ -59,7 +59,7 @@ class DefaultProfile {
   int get health => armour?.health;
 
   DefaultProfile.fromJson(Map<String, dynamic> json) {
-    this.armour = Armour.fromJson(json['armour']);
+    if (json['armour'] != null) this.armour = Armour.fromJson(json['armour']);
   }
 
   Map<String, dynamic> toJson() {

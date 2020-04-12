@@ -9,7 +9,7 @@ class WikiEncyclopedia {
 
   WikiEncyclopedia.fromJson(Map<String, dynamic> json) {
     this.language = (json['languages'] as Map).cast<String, String>();
-    this.shipModule = ShipModule.fromJson(json['ship_modules']);
+    if (json['ship_modules'] != null) this.shipModule = ShipModule.fromJson(json['ship_modules']);
     this.shipTypeImage = (json['ship_type_images'] as Map).map((a, b) => MapEntry(a, ShipTypeImage.fromJson(b)));
     this.shipNation = (json['ship_nations'] as Map).cast<String, String>();
     this.shipType = (json['ship_types'] as Map).cast<String, String>();

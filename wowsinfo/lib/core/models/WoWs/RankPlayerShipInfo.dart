@@ -32,7 +32,7 @@ class Season {
   dynamic rankDiv3;
 
   Season(json) {
-    this.rankSolo = RankSolo(json['rank_solo']);
+    if (json['rank_solo'] != null) this.rankSolo = RankSolo(json['rank_solo']);
     this.rankDiv2 = json['rank_div2'];
     this.rankDiv3 = json['rank_div3'];
   }
@@ -70,15 +70,15 @@ class RankSolo {
     this.win = json['wins'];
     this.planesKilled = json['planes_killed'];
     this.losse = json['losses'];
-    this.torpedoe = Torpedoe(json['torpedoes']);
+    if (json['torpedoes'] != null) this.torpedoe = Torpedoe(json['torpedoes']);
     this.battle = json['battles'];
     this.maxDamageDealt = json['max_damage_dealt'];
     this.damageDealt = json['damage_dealt'];
     this.maxPlanesKilled = json['max_planes_killed'];
-    this.aircraft = Aircraft(json['aircraft']);
-    this.ramming = Ramming(json['ramming']);
-    this.mainBattery = MainBattery(json['main_battery']);
-    this.secondBattery = SecondBattery(json['second_battery']);
+    if (json['aircraft'] != null) this.aircraft = Aircraft(json['aircraft']);
+    if (json['ramming'] != null) this.ramming = Ramming(json['ramming']);
+    if (json['main_battery'] != null) this.mainBattery = MainBattery(json['main_battery']);
+    if (json['second_battery'] != null) this.secondBattery = SecondBattery(json['second_battery']);
     this.survivedWin = json['survived_wins'];
     this.frag = json['frags'];
     this.xp = json['xp'];

@@ -23,7 +23,7 @@ class ShipInfo {
   dynamic private;
 
   ShipInfo(Map<String, dynamic> json) {
-    this.pvp = PvP(json['pvp']);
+    if (json['pvp'] != null) this.pvp = PvP(json['pvp']);
     this.lastBattleTime = json['last_battle_time'];
     this.accountId = json['account_id'];
     this.distance = json['distance'];

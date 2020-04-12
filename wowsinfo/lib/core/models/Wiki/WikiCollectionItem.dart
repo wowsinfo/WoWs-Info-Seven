@@ -18,7 +18,7 @@ class CollectionItem {
   int cardId;
 
   CollectionItem.fromJson(Map<String, dynamic> json) {
-    this.image = Image.fromJson(json['images']);
+    if (json['images'] != null) this.image = Image.fromJson(json['images']);
     this.collectionId = json['collection_id'];
     this.description = json['description'];
     this.name = json['name'];

@@ -26,17 +26,17 @@ class WikiShipInfo {
     this.priceGold = json['price_gold'];
     this.shipIdStr = json['ship_id_str'];
     this.hasDemoProfile = json['has_demo_profile'];
-    this.image = Image(json['images']);
-    this.module = Module(json['modules']);
-    this.modulesTree = ModulesTree(json['modules_tree']);
+    if (json['images'] != null) this.image = Image(json['images']);
+    if (json['modules'] != null) this.module = Module(json['modules']);
+    if (json['modules_tree'] != null) this.modulesTree = ModulesTree(json['modules_tree']);
     this.nation = json['nation'];
     this.isPremium = json['is_premium'];
     this.shipId = json['ship_id'];
     this.priceCredit = json['price_credit'];
-    this.defaultProfile = DefaultProfile(json['default_profile']);
+    if (json['default_profile'] != null) this.defaultProfile = DefaultProfile(json['default_profile']);
     this.upgrade = (json['upgrades'] ?? []).cast<int>();
     this.tier = json['tier'];
-    this.nextShip = NextShip(json['next_ships']);
+    if (json['next_ships'] != null) this.nextShip = NextShip(json['next_ships']);
     this.modSlot = json['mod_slots'];
     this.type = json['type'];
     this.isSpecial = json['is_special'];
@@ -139,23 +139,23 @@ class DefaultProfile {
   DiveBomber diveBomber;
 
   DefaultProfile(Map<String, dynamic> json) {
-    this.engine = Engine(json['engine']);
-    this.torpedoBomber = TorpedoBomber(json['torpedo_bomber']);
-    this.antiAircraft = AntiAircraft(json['anti_aircraft']);
-    this.mobility = Mobility(json['mobility']);
-    this.hull = Hull(json['hull']);
+    if (json['engine'] != null) this.engine = Engine(json['engine']);
+    if (json['torpedo_bomber'] != null) this.torpedoBomber = TorpedoBomber(json['torpedo_bomber']);
+    if (json['anti_aircraft'] != null) this.antiAircraft = AntiAircraft(json['anti_aircraft']);
+    if (json['mobility'] != null) this.mobility = Mobility(json['mobility']);
+    if (json['hull'] != null) this.hull = Hull(json['hull']);
     this.atba = Atba(json['atbas']);
-    this.artillery = Artillery(json['artillery']);
-    this.torpedoe = Torpedoe(json['torpedoes']);
-    this.fighter = Fighter(json['fighters']);
-    this.fireControl = FireControl(json['fire_control']);
-    this.weaponry = Weaponry(json['weaponry']);
+    if (json['artillery'] != null) this.artillery = Artillery(json['artillery']);
+    if (json['torpedoes'] != null) this.torpedoe = Torpedoe(json['torpedoes']);
+    if (json['fighters'] != null) this.fighter = Fighter(json['fighters']);
+    if (json['fire_control'] != null) this.fireControl = FireControl(json['fire_control']);
+    if (json['weaponry'] != null) this.weaponry = Weaponry(json['weaponry']);
     this.battleLevelRangeMax = json['battle_level_range_max'];
     this.battleLevelRangeMin = json['battle_level_range_min'];
-    this.flightControl = FlightControl(json['flight_control']);
-    this.concealment = Concealment(json['concealment']);
-    this.armour = Armour(json['armour']);
-    this.diveBomber = DiveBomber(json['dive_bomber']);
+    if (json['flight_control'] != null) this.flightControl = FlightControl(json['flight_control']);
+    if (json['concealment'] != null) this.concealment = Concealment(json['concealment']);
+    if (json['armour'] != null) this.armour = Armour(json['armour']);
+    if (json['dive_bomber'] != null) this.diveBomber = DiveBomber(json['dive_bomber']);
   }
 }
 
@@ -200,7 +200,7 @@ class TorpedoBomber {
     this.cruiseSpeed = json['cruise_speed'];
     this.prepareTime = json['prepare_time'];
     this.torpedoDamage = json['torpedo_damage'];
-    this.countInSquadron = CountInSquadron(json['count_in_squadron']);
+    if (json['count_in_squadron'] != null) this.countInSquadron = CountInSquadron(json['count_in_squadron']);
     this.torpedoMaxSpeed = json['torpedo_max_speed'];
     this.torpedoBomberIdStr = json['torpedo_bomber_id_str'];
     this.gunnerDamage = json['gunner_damage'];
@@ -336,7 +336,7 @@ class Hull {
     this.hullIdStr = json['hull_id_str'];
     this.torpedoesBarrel = json['torpedoes_barrels'];
     this.antiAircraftBarrel = json['anti_aircraft_barrels'];
-    this.range = Range(json['range']);
+    if (json['range'] != null) this.range = Range(json['range']);
     this.health = json['health'];
     this.planesAmount = json['planes_amount'];
     this.artilleryBarrel = json['artillery_barrels'];
@@ -465,7 +465,7 @@ class Fighter {
     this.prepareTime = json['prepare_time'];
     this.gunnerDamage = json['gunner_damage'];
     this.fightersIdStr = json['fighters_id_str'];
-    this.countInSquadron = CountInSquadron(json['count_in_squadron']);
+    if (json['count_in_squadron'] != null) this.countInSquadron = CountInSquadron(json['count_in_squadron']);
     this.maxAmmo = json['max_ammo'];
     this.planeLevel = json['plane_level'];
     this.avgDamage = json['avg_damage'];
@@ -553,13 +553,13 @@ class Armour {
     if (json == null) return;
     this.casemate = Casemate(json['casemate']);
     this.floodProb = json['flood_prob'];
-    this.deck = Deck(json['deck']);
+    if (json['deck'] != null) this.deck = Deck(json['deck']);
     this.floodDamage = json['flood_damage'];
-    this.range = Range(json['range']);
+    if (json['range'] != null) this.range = Range(json['range']);
     this.health = json['health'];
-    this.extremitie = Extremitie(json['extremities']);
+    if (json['extremities'] != null) this.extremitie = Extremitie(json['extremities']);
     this.total = json['total'];
-    this.citadel = Citadel(json['citadel']);
+    if (json['citadel'] != null) this.citadel = Citadel(json['citadel']);
   }
 }
 
@@ -635,7 +635,7 @@ class DiveBomber {
     this.prepareTime = json['prepare_time'];
     this.gunnerDamage = json['gunner_damage'];
     this.bombDamage = json['bomb_damage'];
-    this.countInSquadron = CountInSquadron(json['count_in_squadron']);
+    if (json['count_in_squadron'] != null) this.countInSquadron = CountInSquadron(json['count_in_squadron']);
     this.bombName = json['bomb_name'];
     this.bombBulletMas = json['bomb_bullet_mass'];
     this.planeLevel = json['plane_level'];
@@ -643,7 +643,7 @@ class DiveBomber {
     this.maxDamage = json['max_damage'];
     this.maxHealth = json['max_health'];
     this.diveBomberIdStr = json['dive_bomber_id_str'];
-    this.accuracy = Accuracy(json['accuracy']);
+    if (json['accuracy'] != null) this.accuracy = Accuracy(json['accuracy']);
   }
 }
 
