@@ -5,6 +5,7 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:wowsinfo/core/data/AppSettings.dart';
+import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/data/Preference.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
 import 'package:wowsinfo/ui/pages/InitialPage.dart';
@@ -20,6 +21,8 @@ void main() async {
   await pref.init();
   // Init app settins box
   await settings.init();
+  // Init cached data
+  await CachedData.shared.init();
   // Cached data can be loaded later
   runApp(MyApp());
 }
