@@ -9,7 +9,7 @@ Template
 
 ## 12/04/2020
 ### Summary
-I will try to complete all models today. 
+I will try to complete all models today. It was smooth kinda. The most challenging ship wiki is done... I still have a few to do but I think I can finish all of them today hopefully. 
 ### What to do tomorrow?
 
 ## 11/04/2020

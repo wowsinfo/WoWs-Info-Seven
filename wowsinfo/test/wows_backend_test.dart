@@ -13,6 +13,7 @@ import 'package:wowsinfo/core/models/WoWs/RankPlayerInfo.dart';
 import 'package:wowsinfo/core/models/WoWs/RankPlayerShipInfo.dart';
 import 'package:wowsinfo/core/models/WoWs/SearchPlayerResult.dart';
 import 'package:wowsinfo/core/models/WoWs/ShipWiki.dart';
+import 'package:wowsinfo/core/models/WoWs/WikiShipInfo.dart';
 
 void main() {
   test('Load basic_player_info into memory', () async {
@@ -113,10 +114,8 @@ void main() {
     final jsonString = await file.readAsString();
     Map<String, dynamic> jsonMap = jsonDecode(jsonString);
     
-    final player = ShipWiki(jsonMap['data']);
+    final info = WikiShipInfo(jsonMap['data']);
 
-    expect(player != null, isTrue);
-    expect(player.players.length > 0, isTrue);
-    expect(player.players[0].nickname == 'henry000', isTrue);
+    expect(info != null, isTrue);
   });
 }
