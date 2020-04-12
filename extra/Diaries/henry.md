@@ -14,8 +14,9 @@ I still have a few to do but I think I can finish all of them today hopefully.
 It is about done. Only data from GitHub left now but they are not that complicated. Test was really useful to spot my mistakes but I don't know how you can test widgets. 
 I am sharing some codes from other models because some of them overlap. This time, it is definitely better and I feel like I am way faster than before. Am I getting better? 
 The last rewrite was probably a year ago. Probably more than that. After this rewrite, I won't rewrite anymore and will focus on new features. 
+I think I will work on `CachedData` soon. Models are not perfect yet but at least, I know how to deal with it. 
 ### What to do tomorrow?
-`Parser` first and then `CachedData`.
+`CachedData` first and then `Parser/Downloader`.
 
 ## 11/04/2020
 ### Summary
