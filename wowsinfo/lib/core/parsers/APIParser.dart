@@ -58,7 +58,7 @@ abstract class APIParser {
   }
 
   /// Append api key in the end
-  void addAPIKey() => this.link += '?application_id=$API_KEY';
+  void addAPIKey() => this.link += '?application_id=$API_KEY/';
   /// Append api key in the end, `it keeps adding one to it`
   String addPageNumber(String link) => this.link + '&page_no=${++_pageNumber}';
   
