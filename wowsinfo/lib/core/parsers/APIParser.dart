@@ -44,8 +44,11 @@ abstract class APIParser {
           // Sometimes, the server is live but it doesn't return anything
           if (validResponse(json)) {
             data.add(json);
-            final meta = Meta(json['meta']);
-            if (!meta.hasMorePage) _hasMorePage = false;
+            // meta is not already there
+            if (json['meta'] != null) {
+              final meta = Meta(json['meta']);
+              if (!meta.hasMorePage) _hasMorePage = false;
+            } else _hasMorePage = false;
           } else _hasMorePage = false;
         } else _hasMorePage = false;
       } catch (e) {
