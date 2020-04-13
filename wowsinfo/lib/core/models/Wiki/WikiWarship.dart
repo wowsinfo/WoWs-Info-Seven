@@ -1,12 +1,12 @@
 /// This is the `WikiWarship` class
 class WikiWarship {
-  Map<String, Warship> data;
+  Map<String, Warship> ships;
 
   WikiWarship.fromJson(Map<String, dynamic> json) {
-    this.data = json.map((a, b) => MapEntry(a, Warship.fromJson(b)));
+    this.ships = json.map((a, b) => MapEntry(a, Warship.fromJson(b)));
   }
 
-  Map<String, dynamic> toJson() => this.data.cast<String, dynamic>();
+  Map<String, dynamic> toJson() => this.ships.cast<String, dynamic>();
 }
 
 /// This is the `Warship` class

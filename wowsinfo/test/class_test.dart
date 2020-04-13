@@ -30,5 +30,9 @@ void main() {
 
     a.updateServer(Server.RU);
     expect(a.server == Server.RU, isTrue);
+
+    final b = GameServer.fromIndex(3);
+    expect(b.toDomain() == 'asia', isTrue);
+    expect(b.toWoWsNumbers() == 'https://asia.wows-numbers.com', isTrue);
   });
 }
