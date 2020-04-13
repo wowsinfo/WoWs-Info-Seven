@@ -9,8 +9,9 @@ Template
 
 ## 13/04/2020
 ### Summary
-`APIParser` has been added but I don't know who should handle downloading more data. I think that parser should handle it. Just rewrite the download method or?? maybe the parser itself can handle it. I can just return a list of data and `parse` function should merge all of them into one? It shouldn't be that challenging. All parsers are done I think for now. I will handle data update now. `CachedData` should be closed after all data are read into memory. Only when it is updating data, it should be reopened again. 
+`APIParser` has been added but I don't know who should handle downloading more data. I think that parser should handle it. Just rewrite the download method or?? maybe the parser itself can handle it. I can just return a list of data and `parse` function should merge all of them into one? It shouldn't be that challenging. All parsers are done I think for now. I will handle data update now. `CachedData` should be closed after all data are read into memory. Only when it is updating data, it should be reopened again. Server language and game server can be set by the user now and some animations are also done. It can kinda distract users from the long waiting time I think. Next step, downloading all data. So far, enclopedia was fine and it is saved properly. I think my hardwork wasn't nothing. I will just do the UI slowly I guess. If I need anything, I will add it from the models. Let's see if this works.
 ### What to do tomorrow?
+Download all data and make sure they are saved locally. The read speed was quite good and it didn't enough take a second to load the app.
 
 ## 12/04/2020
 ### Summary

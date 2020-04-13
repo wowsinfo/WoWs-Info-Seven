@@ -19,7 +19,6 @@ void main() async {
   await Hive.initFlutter();
   // Init preference box 
   await pref.init();
-  pref.setFirstLaunch(true);
   // Init app settins box
   await settings.init();
   // Init cached data

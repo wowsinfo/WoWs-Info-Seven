@@ -29,7 +29,7 @@ class _InitialPageState extends State<InitialPage> {
       setState(() => showLogo = true);
     });
 
-    Future.delayed(Duration(milliseconds: 1500)).then((_) {
+    Future.delayed(Duration(milliseconds: 4000)).then((_) {
       setState(() => showLogo = false);
     });
   }
