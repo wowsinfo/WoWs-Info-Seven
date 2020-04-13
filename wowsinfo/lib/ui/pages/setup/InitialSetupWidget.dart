@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/data/GameServer.dart';
-import 'package:wowsinfo/core/models/Wiki/WikiEncyclopedia.dart';
 import 'package:wowsinfo/core/parsers/API/WikiEncyclopediaParser.dart';
 import 'package:wowsinfo/ui/pages/InitialPage.dart';
 import 'package:wowsinfo/ui/widgets/GameServerSelection.dart';
@@ -19,6 +18,7 @@ class InitialSetupWidget extends StatefulWidget {
 class _InitialSetupWidgetState extends State<InitialSetupWidget> {
   final cached = CachedData.shared;
   bool loading = true;
+  bool error = false;
   
   @override
   void initState() {
@@ -27,8 +27,12 @@ class _InitialSetupWidgetState extends State<InitialSetupWidget> {
     final parser = WikiEncyclopediaParser(GameServer.fromIndex(3));
     parser.download().then((value) {
       final e = parser.parse(value);
-      cached.saveEncyclopedia(e);
-      setState(() => loading = false);
+      if (e == null) {
+        // TODO: handle error here
+      } else {
+        cached.saveEncyclopedia(e);
+        setState(() => loading = false);
+      }
     });
   }
 
@@ -45,9 +49,12 @@ class _InitialSetupWidgetState extends State<InitialSetupWidget> {
               children: [
                 GameServerSelection(),
                 AnimatedSwitcher(
-                  duration: Duration(milliseconds: 300),
+                  duration: Duration(milliseconds: 1000),
+                  switchInCurve: Curves.easeIn,
                   child: buildLanguage(),
                 ),
+                // This box is to prevent overlapping
+                SizedBox(height: 64),
               ],
             ),
           ),
@@ -67,7 +74,7 @@ class _InitialSetupWidgetState extends State<InitialSetupWidget> {
   }
 
   Widget buildLanguage() {
-    if (loading) return PlatformLoadingIndiactor();
+    if (loading) return Center(child: PlatformLoadingIndiactor());
     return ServerLanguageSelection();
   }
 }

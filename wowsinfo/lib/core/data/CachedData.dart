@@ -120,7 +120,8 @@ class CachedData extends LocalData {
   Future<bool> init() async {
     this.box = await Hive.openBox(BOX_NAME);
     Utils.debugPrint('$BOX_NAME box has been loaded');
-
+    loadAll();
+    
     // Debug and close
     debug(keysOnly: true);
     return true;
@@ -144,8 +145,6 @@ class CachedData extends LocalData {
     loadPRData();
     loadWarship();
     loadCommanderSkill();
-
-    close();
   }
 
   /// Shorten decode process and extra check

@@ -20,6 +20,19 @@ class InitialPage extends StatefulWidget {
 
 class _InitialPageState extends State<InitialPage> {
   final settings = AppSettings.shared;
+  bool showLogo = false;
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration(milliseconds: 1000)).then((_) {
+      setState(() => showLogo = true);
+    });
+
+    Future.delayed(Duration(milliseconds: 1500)).then((_) {
+      setState(() => showLogo = false);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,13 +60,12 @@ class _InitialPageState extends State<InitialPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Image(image: AssetImage('assets/images/logo_white.png')),
-                    Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Text(
-                        AppLocalization.of(context).localised('app_name'), 
-                        style: Theme.of(c).textTheme.subtitle1
-                      ),
+                    AnimatedSwitcher(
+                      duration: Duration(milliseconds: 1000),
+                      switchInCurve: Curves.linearToEaseOut,
+                      switchOutCurve: Curves.linearToEaseOut,
+                      transitionBuilder: (w, a) => SizeTransition(sizeFactor: a, child: w),
+                      child: buildLogo(c),
                     ),
                     PlatformLoadingIndiactor(),
                   ],
@@ -64,5 +76,27 @@ class _InitialPageState extends State<InitialPage> {
         );
       }),
     );
+  }
+
+  Widget buildLogo(BuildContext c) {
+    if (showLogo) {
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image(image: AssetImage('assets/images/logo_white.png')),
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Text(
+                AppLocalization.of(c).localised('app_name'), 
+                style: Theme.of(c).textTheme.subtitle1
+              ),
+            )
+          ],
+        ),
+      );
+    }
+
+    return SizedBox.shrink();
   }
 }
