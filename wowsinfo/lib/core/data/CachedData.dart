@@ -42,72 +42,74 @@ class CachedData extends LocalData {
   
   PRData _prData;
   void loadPRData() => _prData = decode(PERSONAL_RATING, (j) => PRData.fromJson(j));
-  void savePRData(Map<String, dynamic> json) {
-    _prData = PRData.fromJson(json);
-    box.put(PERSONAL_RATING, jsonEncode(json));
+  void savePRData(PRData data) {
+    _prData = data;
+    box.put(PERSONAL_RATING, jsonEncode(data.toJson()));
   }
 
   ShipAlias _alias;
   void loadAlias() => _alias = decode(SHIP_ALIAS, (j) => ShipAlias.fromJson(j));
-  void saveAlias(Map<String, dynamic> json) {
-    _alias = ShipAlias.fromJson(json);
-    box.put(SHIP_ALIAS, jsonEncode(json));
+  void saveAlias(ShipAlias data) {
+    _alias = data;
+    box.put(SHIP_ALIAS, jsonEncode(data.toJson()));
   }
 
   WikiAchievement _achievement;
   void loadAchievement() => _achievement = decode(WIKI_ACHIEVEMENT, (j) => WikiAchievement.fromJson(j));
-  void saveAchievement(Map<String, dynamic> json) {
-    _achievement = WikiAchievement.fromJson(json);
-    box.put(WIKI_ACHIEVEMENT, jsonEncode(json));
+  void saveAchievement(WikiAchievement data) {
+    _achievement = data;
+    box.put(WIKI_ACHIEVEMENT, jsonEncode(data.toJson()));
   }
 
   WikiWarship _warship;
   void loadWarship() => _warship = decode(WIKI_WARSHIP, (j) => WikiWarship.fromJson(j));
-  void saveWarship(Map<String, dynamic> json) {
-    _warship = WikiWarship.fromJson(json);
-    box.put(WIKI_WARSHIP, jsonEncode(json));
+  void saveWarship(WikiWarship data) {
+    _warship = data;
+    box.put(WIKI_WARSHIP, jsonEncode(data.toJson()));
   }
 
   WikiCollection _collection;
   void loadCollection() => _collection = decode(WIKI_COLLECTION, (j) => WikiCollection.fromJson(j));
-  void saveCollection(Map<String, dynamic> json) {
-    _collection = WikiCollection.fromJson(json);
-    box.put(WIKI_COLLECTION, jsonEncode(json));
+  void saveCollection(WikiCollection data) {
+    _collection = data;
+    box.put(WIKI_COLLECTION, jsonEncode(data.toJson()));
   }
 
   WikiCollectionItem _collectionItem;
   void loadCollectionItem() => _collectionItem = decode(WIKI_COLLECTION_ITEM, (j) => WikiCollectionItem.fromJson(j));
-  void saveCollectionItem(Map<String, dynamic> json) {
-    _collectionItem = WikiCollectionItem.fromJson(json);
-    box.put(WIKI_COLLECTION_ITEM, jsonEncode(json));
+  void saveCollectionItem(WikiCollectionItem data) {
+    _collectionItem = data;
+    box.put(WIKI_COLLECTION_ITEM, jsonEncode(data.toJson()));
   }
 
   WikiCommanderSkill _commanderSkill;
   void loadCommanderSkill() => _commanderSkill = decode(WIKI_COMMANDER_SKILL, (j) => WikiCommanderSkill.fromJson(j));
-  void saveCommanderSkill(Map<String, dynamic> json) {
-    _commanderSkill = WikiCommanderSkill.fromJson(json);
-    box.put(WIKI_COMMANDER_SKILL, jsonEncode(json));
+  void saveCommanderSkill(WikiCommanderSkill data) {
+    _commanderSkill = data;
+    box.put(WIKI_COMMANDER_SKILL, jsonEncode(data.toJson()));
   }
 
   WikiGameMap _gameMap;
   void loadGameMap() => _gameMap = decode(WIKI_GAME_MAP, (j) => WikiGameMap.fromJson(j));
-  void loadAndSavePRData(Map<String, dynamic> json) {
-    _gameMap = WikiGameMap.fromJson(json);
-    box.put(WIKI_GAME_MAP, jsonEncode(json));
+  void loadAndSavePRData(WikiGameMap data) {
+    _gameMap = data;
+    box.put(WIKI_GAME_MAP, jsonEncode(data.toJson()));
   }
 
   WikiConsumable _consumable;
   void loadConsumable() => _consumable = decode(WIKI_CONSUMABLE, (j) => WikiConsumable.fromJson(j));
-  void saveConsumable(Map<String, dynamic> json) {
-    _consumable = WikiConsumable.fromJson(json);
-    box.put(WIKI_CONSUMABLE, jsonEncode(json));
+  void saveConsumable(WikiConsumable data) {
+    _consumable = data;
+    box.put(WIKI_CONSUMABLE, jsonEncode(data.toJson()));
   }
 
   WikiEncyclopedia _encyclopedia;
+  /// A map with language code and its value
+  Map<String, String> get serverLanguage => _encyclopedia.language;
   void loadEncyclopedia() => _encyclopedia = decode(WIKI_ENCYCLOPEDIA, (j) => WikiEncyclopedia.fromJson(j));
-  void saveEncyclopedia(Map<String, dynamic> json) {
-    _encyclopedia = WikiEncyclopedia.fromJson(json);
-    box.put(WIKI_ENCYCLOPEDIA, jsonEncode(json));
+  void saveEncyclopedia(WikiEncyclopedia data) {
+    _encyclopedia = data;
+    box.put(WIKI_ENCYCLOPEDIA, jsonEncode(data.toJson()));
   }
 
   ///
@@ -120,7 +122,7 @@ class CachedData extends LocalData {
     Utils.debugPrint('$BOX_NAME box has been loaded');
 
     // Debug and close
-    debug();
+    debug(keysOnly: true);
     return true;
   }
 
@@ -142,7 +144,7 @@ class CachedData extends LocalData {
     loadPRData();
     loadWarship();
     loadCommanderSkill();
-    
+
     close();
   }
 

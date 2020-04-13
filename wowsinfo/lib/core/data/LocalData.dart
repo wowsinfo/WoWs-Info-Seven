@@ -6,7 +6,7 @@ abstract class LocalData {
   Box box;
   Future init();
   Future close() => this.box.close();
-  debug() {
-    if (kDebugMode) this.box.keys.forEach((key) => print('$key - ${box.get(key)}'));
+  debug({bool keysOnly = false}) {
+    if (kDebugMode) this.box.keys.forEach((key) => print(keysOnly ? '$key' : '$key - ${box.get(key)}'));
   }
 }

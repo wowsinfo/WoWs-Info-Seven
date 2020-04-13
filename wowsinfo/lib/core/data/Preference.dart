@@ -65,7 +65,8 @@ class Preference extends LocalData {
   String get lastUpdate => this.box.get(LAST_UPDATE);
   setLastUpdate(String value) => this.box.put(LAST_UPDATE, value);
 
-  String get serverLanguage => this.box.get(SERVER_LANGUAGE);
+  /// Provide a default language
+  String get serverLanguage => this.box.get(SERVER_LANGUAGE) ?? 'en';
   setServerLanguage(String value) => this.box.put(SERVER_LANGUAGE, value);
 
   String get appLanguage => this.box.get(APP_LANGUAGE);

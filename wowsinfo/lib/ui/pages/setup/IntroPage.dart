@@ -12,7 +12,7 @@ class IntroPage extends StatefulWidget {
 }
 
 class _IntroPageState extends State<IntroPage> {
-  int selectedIndex = 0;
+  int selectedIndex = 2;
 
   @override
   Widget build(BuildContext context) {

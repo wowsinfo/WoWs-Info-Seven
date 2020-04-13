@@ -1,5 +1,11 @@
 {
     "app_name": "WoWs Info Re",
+    "game_server_selection_title": "Game Server",
+    "game_server_ru": "Russia",
+    "game_server_eu": "Europe",
+    "game_server_na": "North Amercia",
+    "game_server_asia": "Asia",
+    "server_language_selection_title": "Server Language",
     "suffix_re": "Re",
     "suffix_origin": "Origin",
     "suffix_origin+": "Origin+",

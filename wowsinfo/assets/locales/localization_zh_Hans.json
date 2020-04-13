@@ -1,5 +1,11 @@
 {
     "app_name": "WoWs Info 梦回2016",
+    "game_server_selection_title": "Game Server",
+    "game_server_ru": "RU",
+    "game_server_eu": "EU",
+    "game_server_na": "NA",
+    "game_server_asia": "ASIA",
+    "server_language_selection_title": "Server Language",
     "suffix_re": "Re",
     "suffix_origin": "Origin",
     "suffix_origin+": "Origin+",
