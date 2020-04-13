@@ -11,6 +11,7 @@ class WikiCommanderSkillParser extends APIParser {
 
   @override
   WikiCommanderSkill parse(List<Map<String, dynamic>> json) {
+    if (json.length == 0) return null;
     final first = WikiCommanderSkill.fromJson(json.removeAt(0)['data']);
     // Merge everything
     json.forEach((element) {

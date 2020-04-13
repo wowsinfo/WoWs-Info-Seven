@@ -10,10 +10,10 @@ import 'package:http/http.dart' as http;
 
 /// This is the base of all parsers, it fetches data and parse it to objects
 abstract class APIParser {
-  // final pref = Preference.shared;
+  final pref = Preference.shared;
   /// Append language in the end
-  // void addLanguage() => this.link += '&language=${pref.serverLanguage}';
-  void addLanguage() => this.link += '&language=en';
+  void addLanguage() => this.link += '&language=${pref.serverLanguage}';
+  // void addLanguage() => this.link += '&language=en';
 
   /// The link is incomplete, make sure all parsers will ask for necessary parametre and complete the string
   String link = 'https://api.worldofwarships.';
