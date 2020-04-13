@@ -5,9 +5,9 @@ import 'package:wowsinfo/core/others/Utils.dart';
 
 /// Like `APIParser`, however, this is simpler because the link is constant
 abstract class GitHubParser {
-  final String link;
+  String link;
 
-  GitHubParser(this.link);
+  GitHubParser();
   Future<Map<String, dynamic>> download() async {
     try {      
       final response = await http.get(
