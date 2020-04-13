@@ -10,7 +10,7 @@ class WikiCollectionItemParser extends APIParser {
   }
 
   @override
-  parse(List<Map<String, dynamic>> json) {
+  WikiCollectionItem parse(List<Map<String, dynamic>> json) {
     if (json.length == 0) return null;
     final first = WikiCollectionItem.fromJson(json.removeAt(0)['data']);
     // Merge everything
