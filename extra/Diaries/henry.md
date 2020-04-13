@@ -7,6 +7,11 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## 13/04/2020
+### Summary
+`APIParser` has been added but I don't know who should handle downloading more data. I think that parser should handle it. Just rewrite the download method or?? maybe the parser itself can handle it. I can just return a list of data and `parse` function should merge all of them into one? It shouldn't be that challenging. 
+### What to do tomorrow?
+
 ## 12/04/2020
 ### Summary
 I will try to complete all models today. It was smooth kinda. The most challenging ship wiki is done... 

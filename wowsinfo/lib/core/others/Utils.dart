@@ -6,6 +6,8 @@ class Utils {
   /// Takes an `object`, a `path` and a `default value`.
   /// Returns whether the valid value or the default value
   static guard(obj, String path, dval) {
+    // return default value if obj is null
+    if (obj == null) return dval;
     // check if obj is null
     if (path == '' && obj != null) return obj;
     // check if object is valid and path does not start with or end with '.'

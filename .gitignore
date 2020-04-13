@@ -14,3 +14,4 @@ WoWsInfo/index\.android\.js
 .DS_Store
 **/._*
 **/*.ttf
+**/key.dart
