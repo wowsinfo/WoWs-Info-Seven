@@ -37,13 +37,16 @@ class _GameServerSelectionState extends State<GameServerSelection> {
     return Center(
       child: Column(
         children: <Widget>[
-          Text(
-            lang.localised('game_server_selection_title'),
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.headline6,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              lang.localised('game_server_selection_title'),
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.headline6,
+            ),
           ),
           Wrap(
-            spacing: 4,
+            spacing: 2,
             alignment: WrapAlignment.center,
             children: servers.map((e) {
               final curr = servers.indexOf(e);

@@ -3,6 +3,7 @@ import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/data/GameServer.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiEncyclopedia.dart';
 import 'package:wowsinfo/core/parsers/API/WikiEncyclopediaParser.dart';
+import 'package:wowsinfo/ui/pages/InitialPage.dart';
 import 'package:wowsinfo/ui/widgets/GameServerSelection.dart';
 import 'package:wowsinfo/ui/widgets/PlatformLoadingIndiactor.dart';
 import 'package:wowsinfo/ui/widgets/ServerLanguageSelection.dart';
@@ -15,7 +16,7 @@ class InitialSetupWidget extends StatefulWidget {
   _InitialSetupWidgetState createState() => _InitialSetupWidgetState();
 }
 
-class _InitialSetupWidgetState extends State<InitialSetupWidget> with SingleTickerProviderStateMixin {
+class _InitialSetupWidgetState extends State<InitialSetupWidget> {
   final cached = CachedData.shared;
   bool loading = true;
   
@@ -37,20 +38,31 @@ class _InitialSetupWidgetState extends State<InitialSetupWidget> with SingleTick
       appBar: AppBar(
         title: Text('InitialSetupWidget')
       ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              GameServerSelection(),
-              AnimatedSize(
-                duration: Duration(milliseconds: 300),
-                vsync: this,
-                child: buildLanguage(),
-              ),
-            ],
+      body: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                GameServerSelection(),
+                AnimatedSwitcher(
+                  duration: Duration(milliseconds: 300),
+                  child: buildLanguage(),
+                ),
+              ],
+            ),
           ),
         ),
-      )
+      ),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 16),
+        child: FloatingActionButton(
+          onPressed: () {
+            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (c) => InitialPage()));
+          },
+          child: Icon(Icons.done),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 

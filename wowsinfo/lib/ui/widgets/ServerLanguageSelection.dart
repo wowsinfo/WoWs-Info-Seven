@@ -31,13 +31,16 @@ class _ServerLanguageSelectionState extends State<ServerLanguageSelection> {
     return Center(
       child: Column(
         children: [
-          Text(
-            lang.localised('server_language_selection_title'),
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.headline6,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              lang.localised('server_language_selection_title'),
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.headline6,
+            ),
           ),
           Wrap(
-            spacing: 4,
+            spacing: 2,
             alignment: WrapAlignment.center,
             children: cached.serverLanguage.entries.map((e) {
               return FlatFilterChip(

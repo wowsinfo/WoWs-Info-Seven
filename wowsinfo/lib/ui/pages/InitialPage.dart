@@ -23,9 +23,9 @@ class _InitialPageState extends State<InitialPage> {
 
   @override
   Widget build(BuildContext context) {
-    Utils.delay(2000).then((_) {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => BottomNavigationPage()));
-    });
+    // Utils.delay(2000).then((_) {
+    //   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => BottomNavigationPage()));
+    // });
 
     return Theme(
       // Only here, the overlay is blue and white text should be used
