@@ -1,6 +1,6 @@
 import 'package:wowsinfo/core/data/GameServer.dart';
 import 'package:wowsinfo/core/models/WoWs/SearchClanResult.dart';
-import 'package:wowsinfo/core/parsers/APIParser.dart';
+import 'APIParser.dart';
 
 class SearchClanResultParser extends APIParser {
   SearchClanResultParser(GameServer server, String tag) : super(server) {

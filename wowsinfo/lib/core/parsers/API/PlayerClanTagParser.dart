@@ -1,6 +1,6 @@
 import 'package:wowsinfo/core/data/GameServer.dart';
 import 'package:wowsinfo/core/models/WoWs/PlayerClanTag.dart';
-import 'package:wowsinfo/core/parsers/APIParser.dart';
+import 'APIParser.dart';
 
 class PlayerClanTagParser extends APIParser {
   PlayerClanTagParser(GameServer server, String accountId) : super(server) {

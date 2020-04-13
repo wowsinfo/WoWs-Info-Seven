@@ -1,6 +1,6 @@
 import 'package:wowsinfo/core/data/GameServer.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiGameMap.dart';
-import 'package:wowsinfo/core/parsers/APIParser.dart';
+import 'APIParser.dart';
 
 class WikiGameMapParser extends APIParser {
   WikiGameMapParser(GameServer server) : super(server) {

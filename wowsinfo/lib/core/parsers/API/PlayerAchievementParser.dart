@@ -1,6 +1,6 @@
 import 'package:wowsinfo/core/data/GameServer.dart';
 import 'package:wowsinfo/core/models/WoWs/PlayerAchievement.dart';
-import 'package:wowsinfo/core/parsers/APIParser.dart';
+import 'APIParser.dart';
 
 class PlayerAchievementParser extends APIParser {
   PlayerAchievementParser(GameServer server, String accountId) : super(server) {

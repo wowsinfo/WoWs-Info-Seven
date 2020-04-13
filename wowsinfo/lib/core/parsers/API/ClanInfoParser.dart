@@ -1,6 +1,6 @@
 import 'package:wowsinfo/core/data/GameServer.dart';
 import 'package:wowsinfo/core/models/WoWs/ClanInfo.dart';
-import 'package:wowsinfo/core/parsers/APIParser.dart';
+import 'APIParser.dart';
 
 class ClanInfoParser extends APIParser {
   ClanInfoParser(GameServer server, String clanId) : super(server) {

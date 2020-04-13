@@ -1,6 +1,6 @@
 import 'package:wowsinfo/core/data/GameServer.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiEncyclopedia.dart';
-import 'package:wowsinfo/core/parsers/APIParser.dart';
+import 'APIParser.dart';
 
 class WikiEncyclopediaParser extends APIParser {
   WikiEncyclopediaParser(GameServer server) : super(server) {

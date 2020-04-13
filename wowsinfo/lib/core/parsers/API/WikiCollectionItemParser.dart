@@ -1,6 +1,6 @@
 import 'package:wowsinfo/core/data/GameServer.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiCollectionItem.dart';
-import 'package:wowsinfo/core/parsers/APIParser.dart';
+import 'APIParser.dart';
 
 class WikiCollectionItemParser extends APIParser {
   WikiCollectionItemParser(GameServer server) : super(server) {

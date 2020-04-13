@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:wowsinfo/core/data/GameServer.dart';
-import 'package:wowsinfo/core/parsers/WikiCommanderSkillParser.dart';
-import 'package:wowsinfo/core/parsers/WikiWarshipParser.dart';
+import 'package:wowsinfo/core/parsers/API/WikiCommanderSkillParser.dart';
+import 'package:wowsinfo/core/parsers/API/WikiWarshipParser.dart';
 
 void main() {
   test('Parser, single page', () async {

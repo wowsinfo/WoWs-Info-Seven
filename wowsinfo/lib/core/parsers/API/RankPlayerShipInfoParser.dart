@@ -1,6 +1,6 @@
 import 'package:wowsinfo/core/data/GameServer.dart';
 import 'package:wowsinfo/core/models/WoWs/RankPlayerShipInfo.dart';
-import 'package:wowsinfo/core/parsers/APIParser.dart';
+import 'APIParser.dart';
 
 class RankPlayerShipInfoParser extends APIParser {
   RankPlayerShipInfoParser(GameServer server, String accountId) : super(server) {
