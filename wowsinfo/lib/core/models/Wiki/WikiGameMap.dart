@@ -1,5 +1,7 @@
+import '../APIModel.dart';
+
 /// This is the `WikiGameMap` class
-class WikiGameMap {
+class WikiGameMap extends APIModel {
   Map<String, GameMap> gameMap;
 
   WikiGameMap.fromJson(Map<String, dynamic> json) {

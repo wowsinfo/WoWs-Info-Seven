@@ -1,5 +1,7 @@
+import '../APIModel.dart';
+
 /// This is the `WikiEncyclopedia` class
-class WikiEncyclopedia {
+class WikiEncyclopedia extends APIModel {
   Map<String, String> language;
   ShipModule shipModule;
   Map<String, ShipTypeImage> shipTypeImage;

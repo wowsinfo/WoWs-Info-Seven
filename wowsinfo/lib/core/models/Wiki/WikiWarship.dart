@@ -1,5 +1,8 @@
+
+import '../APIModel.dart';
+
 /// This is the `WikiWarship` class
-class WikiWarship {
+class WikiWarship extends APIModel {
   Map<String, Warship> ships;
 
   WikiWarship.fromJson(Map<String, dynamic> json) {

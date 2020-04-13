@@ -1,5 +1,7 @@
+import '../APIModel.dart';
+
 /// This is the `WikiCollection` class
-class WikiCollection {
+class WikiCollection extends APIModel {
   Map<String, Collection> collection;
 
   WikiCollection.fromJson(Map<String, dynamic> json) {

@@ -1,5 +1,7 @@
+import '../APIModel.dart';
+
 /// This is the `WikiAchievement` class
-class WikiAchievement {
+class WikiAchievement extends APIModel {
   Map<String, Achievement> achievement;
 
   WikiAchievement.fromJson(Map<String, dynamic> json) {

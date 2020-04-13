@@ -1,5 +1,7 @@
+import '../APIModel.dart';
+
 /// This is the `WikiConsumable` class
-class WikiConsumable {
+class WikiConsumable extends APIModel {
   Map<String, Consumable> consumable;
 
   WikiConsumable.fromJson(Map<String, dynamic> json) {

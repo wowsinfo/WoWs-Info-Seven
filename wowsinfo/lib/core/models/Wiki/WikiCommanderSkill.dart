@@ -1,5 +1,7 @@
+import '../APIModel.dart';
+
 /// This is the `WikiCommanderSkill` class
-class WikiCommanderSkill {
+class WikiCommanderSkill extends APIModel {
   Map<String, Skill> skill;
 
   WikiCommanderSkill.fromJson(Map<String, dynamic> json) {
