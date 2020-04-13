@@ -60,18 +60,20 @@ class CachedData extends LocalData {
   Future<bool> init() async {
     this.box = await Hive.openBox(BOX_NAME);
     Utils.debugPrint('$BOX_NAME box has been loaded');
-    this._loadAll();
 
     // Debug and close
     debug();
-    close();
-    Utils.debugPrint('$BOX_NAME box has been closed');
     return true;
+  }
+
+  /// Check for update and only update when game updates, app updates or it has been a week
+  void update() {
+
   }
 
   /// Load all cached data into memory
   /// TODO: this can be optimised like when load when necessary
-  void _loadAll() {
+  void loadAll() {
     _prData = PRData.fromJson(decode(PERSONAL_RATING));
     _alias = ShipAlias.fromJson(decode(SHIP_ALIAS));
 
@@ -83,6 +85,7 @@ class CachedData extends LocalData {
     _encyclopedia = WikiEncyclopedia.fromJson(decode(WIKI_ENCYCLOPEDIA));
     _gameMap = WikiGameMap.fromJson(decode(WIKI_GAME_MAP));
     _warship = WikiWarship.fromJson(decode(WIKI_WARSHIP));
+    close();
   }
 
   /// Shorten decode process
