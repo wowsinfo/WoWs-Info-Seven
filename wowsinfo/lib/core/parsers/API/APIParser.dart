@@ -8,7 +8,7 @@ import 'package:wowsinfo/core/data/Preference.dart';
 import 'package:wowsinfo/core/others/Utils.dart';
 import 'package:http/http.dart' as http;
 
-/// This is the base of all parsers, it fetches data and parse it to objects
+/// This is the base of all API parsers, it fetches data and parse it to objects
 abstract class APIParser {
   final pref = Preference.shared;
   /// Append language in the end
