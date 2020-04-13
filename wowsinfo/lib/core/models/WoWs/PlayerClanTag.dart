@@ -5,7 +5,8 @@ class PlayerClanTag {
   String tag;
   bool get hasTag => tag != null;
 
-  PlayerClanTag(json, String id) {
-    this.tag = Utils.guard(json, 'data.$id.clan.tag', null);
+  PlayerClanTag(Map<String, dynamic> data) {
+    final json = data.values.first;
+    this.tag = Utils.guard(json, 'clan.tag', null);
   }
 }
