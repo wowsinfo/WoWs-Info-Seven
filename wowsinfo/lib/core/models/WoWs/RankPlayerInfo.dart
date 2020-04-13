@@ -7,8 +7,10 @@ class RankPlayerInfo {
 
   RankPlayerInfo(Map<String, dynamic> data) {
     final json = data.values.first;
-    this.season = (json['seasons'] as Map).map((a, b) => MapEntry(a, Season(b)));
-    this.accountId = json['account_id'];
+    if (json != null) {
+      this.season = (json['seasons'] as Map).map((a, b) => MapEntry(a, Season(b)));
+      this.accountId = json['account_id'];
+    }
   }
 }
 

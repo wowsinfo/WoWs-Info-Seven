@@ -7,7 +7,9 @@ class PlayerShipInfo {
 
   PlayerShipInfo(Map<String, dynamic> data) {
     final List json = data.values.first;
-    json.forEach((item) => ships.add(ShipInfo(item)));
+    if (json != null) {
+      json.forEach((item) => ships.add(ShipInfo(item)));
+    }
   }
 }
 

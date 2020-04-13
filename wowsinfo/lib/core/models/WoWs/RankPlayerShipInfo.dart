@@ -6,7 +6,9 @@ class RankPlayerShipInfo {
 
   RankPlayerShipInfo(Map<String, dynamic> data) {
     final json = data.values.first;
-    json.forEach((item) => ships.add(SeasonShipInfo(item)));
+    if (json != null) {
+      json.forEach((item) => ships.add(SeasonShipInfo(item)));
+    }
   }
 }
 

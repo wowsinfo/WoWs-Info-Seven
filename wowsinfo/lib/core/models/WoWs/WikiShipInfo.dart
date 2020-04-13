@@ -24,25 +24,27 @@ class WikiShipInfo {
 
   WikiShipInfo(Map<String, dynamic> data) {
     final json = data.values.first;
-    this.description = json['description'];
-    this.priceGold = json['price_gold'];
-    this.shipIdStr = json['ship_id_str'];
-    this.hasDemoProfile = json['has_demo_profile'];
-    if (json['images'] != null) this.image = Image(json['images']);
-    if (json['modules'] != null) this.module = Module(json['modules']);
-    if (json['modules_tree'] != null) this.modulesTree = ModulesTree(json['modules_tree']);
-    this.nation = json['nation'];
-    this.isPremium = json['is_premium'];
-    this.shipId = json['ship_id'];
-    this.priceCredit = json['price_credit'];
-    if (json['default_profile'] != null) this.defaultProfile = WikiShipModule(json['default_profile']);
-    this.upgrade = (json['upgrades'] ?? []).cast<int>();
-    this.tier = json['tier'];
-    if (json['next_ships'] != null) this.nextShip = NextShip(json['next_ships']);
-    this.modSlot = json['mod_slots'];
-    this.type = json['type'];
-    this.isSpecial = json['is_special'];
-    this.name = json['name'];
+    if (json != null) {
+      this.description = json['description'];
+      this.priceGold = json['price_gold'];
+      this.shipIdStr = json['ship_id_str'];
+      this.hasDemoProfile = json['has_demo_profile'];
+      if (json['images'] != null) this.image = Image(json['images']);
+      if (json['modules'] != null) this.module = Module(json['modules']);
+      if (json['modules_tree'] != null) this.modulesTree = ModulesTree(json['modules_tree']);
+      this.nation = json['nation'];
+      this.isPremium = json['is_premium'];
+      this.shipId = json['ship_id'];
+      this.priceCredit = json['price_credit'];
+      if (json['default_profile'] != null) this.defaultProfile = WikiShipModule(json['default_profile']);
+      this.upgrade = (json['upgrades'] ?? []).cast<int>();
+      this.tier = json['tier'];
+      if (json['next_ships'] != null) this.nextShip = NextShip(json['next_ships']);
+      this.modSlot = json['mod_slots'];
+      this.type = json['type'];
+      this.isSpecial = json['is_special'];
+      this.name = json['name'];
+    }
   }
 }
 

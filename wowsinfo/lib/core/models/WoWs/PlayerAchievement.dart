@@ -4,6 +4,8 @@ class PlayerAchievement {
 
   PlayerAchievement(Map<String, dynamic> data) {
     final json = data.values.first;
-    achievement = (json['battle'] as Map).cast<String, int>();
+    if (json != null) {
+      achievement = (json['battle'] as Map).cast<String, int>();
+    }
   }
 }

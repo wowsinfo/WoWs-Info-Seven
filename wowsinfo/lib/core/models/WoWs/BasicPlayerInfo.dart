@@ -18,19 +18,21 @@ class BasicPlayerInfo {
   BasicPlayerInfo(Map<String, dynamic> data) {
     // There should be only one key inside
     final json = data.values.first;
-    this.lastBattleTime = json['last_battle_time'];
-    this.accountId = json['account_id'];
-    this.createdAt = json['created_at'];
-    // These are null if account is hidden so a default value is provided
-    this.levelingTier = json['leveling_tier'] ?? 0;
-    this.levelingPoint = json['leveling_points'] ?? 0;
-    this.updatedAt = json['updated_at'];
-    this.hiddenProfile = json['hidden_profile'];
-    this.logoutAt = json['logout_at'];
-    this.nickname = json['nickname'];
-    this.statsUpdatedAt = json['stats_updated_at'];
-    // statistic is only available if the account is public
-    if (json['statistics'] != null) this.statistic = Statistic(json['statistics']);
+    if (json != null) {
+      this.lastBattleTime = json['last_battle_time'];
+      this.accountId = json['account_id'];
+      this.createdAt = json['created_at'];
+      // These are null if account is hidden so a default value is provided
+      this.levelingTier = json['leveling_tier'] ?? 0;
+      this.levelingPoint = json['leveling_points'] ?? 0;
+      this.updatedAt = json['updated_at'];
+      this.hiddenProfile = json['hidden_profile'];
+      this.logoutAt = json['logout_at'];
+      this.nickname = json['nickname'];
+      this.statsUpdatedAt = json['stats_updated_at'];
+      // statistic is only available if the account is public
+      if (json['statistics'] != null) this.statistic = Statistic(json['statistics']);
+    }
   }
 }
 

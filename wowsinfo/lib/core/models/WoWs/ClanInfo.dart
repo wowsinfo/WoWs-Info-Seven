@@ -19,22 +19,24 @@ class ClanInfo {
 
   ClanInfo(Map<String, dynamic> data) {
     final json = data.values.first;
-    this.membersCount = json['members_count'];
-    this.name = json['name'];
-    this.creatorName = json['creator_name'];
-    this.clanId = json['clan_id'];
-    this.createdAt = json['created_at'];
-    this.updatedAt = json['updated_at'];
-    this.leaderName = json['leader_name'];
-    this.creatorId = json['creator_id'];
-    this.tag = json['tag'];
-    this.member = (json['members'] as Map).map((a, b) => MapEntry(a, Member(b)));
-    this.oldName = json['old_name'];
-    this.isClanDisbanded = json['is_clan_disbanded'];
-    this.renamedAt = json['renamed_at'];
-    this.oldTag = json['old_tag'];
-    this.leaderId = json['leader_id'];
-    this.description = json['description'];
+    if (json != null) {
+      this.membersCount = json['members_count'];
+      this.name = json['name'];
+      this.creatorName = json['creator_name'];
+      this.clanId = json['clan_id'];
+      this.createdAt = json['created_at'];
+      this.updatedAt = json['updated_at'];
+      this.leaderName = json['leader_name'];
+      this.creatorId = json['creator_id'];
+      this.tag = json['tag'];
+      this.member = (json['members'] as Map).map((a, b) => MapEntry(a, Member(b)));
+      this.oldName = json['old_name'];
+      this.isClanDisbanded = json['is_clan_disbanded'];
+      this.renamedAt = json['renamed_at'];
+      this.oldTag = json['old_tag'];
+      this.leaderId = json['leader_id'];
+      this.description = json['description'];
+    }
   }
 }
 
