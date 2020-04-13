@@ -15,7 +15,7 @@ class GameServer {
 
   Server _server;
   Server get server => _server;
-  updateServer(Server server) => this._server = server;
+  void updateServer(Server server) => this._server = server;
 
   GameServer(this._server);
   GameServer.fromIndex(int index) {
@@ -25,7 +25,7 @@ class GameServer {
   }
   
   /// This only returns the domain
-  toDomain() => _domain[_server.index];
+  String toDomain() => _domain[_server.index];
   /// wows-numbers.com by default is eu
-  toWoWsNumbers() => 'https://${_numberDomain[_server.index]}wows-numbers.com';
+  String toWoWsNumbers() => 'https://${_numberDomain[_server.index]}wows-numbers.com';
 }

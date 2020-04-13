@@ -1,4 +1,7 @@
 import 'dart:convert';
+import 'package:wowsinfo/core/data/GameServer.dart';
+import 'package:wowsinfo/core/models/Meta.dart';
+
 import 'key.dart';
 
 import 'package:wowsinfo/core/data/Preference.dart';
@@ -10,45 +13,57 @@ abstract class APIParser {
   /// The link is incomplete, make sure all parsers will ask for necessary parametre and complete the string
   String link = 'https://api.worldofwarships.';
   final pref = Preference.shared;
+  int _pageNumber = 0;
+  bool _hasMorePage = true;
 
   /// In case, you save a player in another server (you can pass it here)
-  APIParser(String server) {
-    this.link += server;
+  APIParser(GameServer server) {
+    this.link += server.toDomain();
   }
 
-  /// Download API String and do some basic checks
-  Future<Map<String, dynamic>> download() async {
+  /// Download API String, `download all pages` and do some basic checks
+  Future<List<Map<String, dynamic>>> download() async {
     // Append language string first
     addLanguage();
+    List<Map<String, dynamic>> data = [];
 
-    try {      
-      final response = await http.get(
-        this.link,
-      ).timeout(Duration(seconds: 8));
+    while (_hasMorePage) {
+      // Start from page 1 and keep going
+      try {      
+        final response = await http.get(
+          addPageNumber(this.link),
+        ).timeout(Duration(seconds: 8));
 
-      // First, check it is 200 (the server is live)
-      if (response.statusCode == 200) {
-        final json = jsonDecode(response.body);
-        // Sometimes, the server is live but it doesn't return anything
-        if (validResponse(json)) return json;
-        return null;
+        // First, check it is 200 (the server is live)
+        if (response.statusCode == 200) {
+          final json = jsonDecode(response.body);
+          // Sometimes, the server is live but it doesn't return anything
+          if (validResponse(json)) {
+            data.add(json);
+            final meta = Meta(json['meta']);
+            if (!meta.hasMorePage) _hasMorePage = false;
+          } else _hasMorePage = false;
+        } else _hasMorePage = false;
+      } catch (e) {
+        Utils.debugPrint(e);
+        _hasMorePage = false;
       }
-
-      return null;
-    } catch (e) {
-      Utils.debugPrint(e);
-      return null;
     }
+
+    return data;
   }
 
   /// Append language in the end
   void addLanguage() => this.link += '&language=${pref.serverLanguage}';
-  void addAPIKey() => this.link += '?application_id=${API_KEY}';
+  /// Append api key in the end
+  void addAPIKey() => this.link += '?application_id=$API_KEY';
+  /// Append api key in the end, `it keeps adding one to it`
+  String addPageNumber(String link) => this.link + '&page_no=${++_pageNumber}';
   
   /// Check if this is a valid reponse
   bool validResponse(Map<String, dynamic> json) => Utils.guard(json, 'status', 'not ok') == 'ok';
 
   /// Parse json to object
   /// - status need to be checked first
-  dynamic parse(Map<String, dynamic> json);
+  dynamic parse(List<Map<String, dynamic>> json);
 }
