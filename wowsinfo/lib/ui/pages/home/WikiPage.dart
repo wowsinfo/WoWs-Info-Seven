@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
+import 'package:wowsinfo/ui/pages/wiki/WikiWarshipPage.dart';
 
 /// WikiPage class
 class WikiPage extends StatefulWidget {
@@ -23,7 +24,11 @@ class _WikiPageState extends State<WikiPage> {
       body: ListView(
         children: wiki.map((e) => ListTile(
           title: Text('WIKI'),
+          subtitle: Text('...'),
           leading: Icon(Icons.wallpaper),
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (c) => WikiWarshipPage()));
+          },
         )).toList(growable: false),
       ),
     );
