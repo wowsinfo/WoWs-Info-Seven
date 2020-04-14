@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:math';
 
 import 'package:hive/hive.dart';
 import 'package:wowsinfo/core/data/Constant.dart';
@@ -83,6 +82,7 @@ class CachedData extends LocalData {
   }
 
   WikiWarship _warship;
+  Map<String, Warship> get warship => _warship.ships;
   void loadWarship() => _warship = decode(WIKI_WARSHIP, (j) => WikiWarship.fromJson(j));
   void saveWarship(WikiWarship data) {
     _warship = data;

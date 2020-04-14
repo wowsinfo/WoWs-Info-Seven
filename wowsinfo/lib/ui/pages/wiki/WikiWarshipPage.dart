@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/data/CachedData.dart';
+import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart';
 import 'package:wowsinfo/ui/widgets/FlatFilterChip.dart';
 
 /// WikiWarshipPage class
@@ -13,6 +14,21 @@ class WikiWarshipPage extends StatefulWidget {
 
 class _WikiWarshipPageState extends State<WikiWarshipPage> {
   final cached = CachedData.shared;
+  /// Only one nation can be shown at a time
+  String nation;
+  /// Only one type can be shown if selected, when nation changed type is cleared, select again to cancel
+  String type;
+  // One is saved for quick ship type filter
+  Iterable<Warship> nationShips = [];
+  Iterable<Warship> displayedShips = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Select a random nation here
+    this.updateNation((cached.shipNation.keys.toList()..shuffle()).first);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +50,8 @@ class _WikiWarshipPageState extends State<WikiWarshipPage> {
                       child: ListView(
                         scrollDirection: Axis.horizontal,
                         children: cached.shipNation.entries.map((e) => FlatFilterChip(
-                          onSelected: (_) {}, 
+                          selected: e.key == this.nation,
+                          onSelected: (_) => this.updateNation(e.key), 
                           label: Text(e.value),
                         )).toList(growable: false),
                       ),
@@ -48,15 +65,17 @@ class _WikiWarshipPageState extends State<WikiWarshipPage> {
             Expanded(
               child: Column(
                 children: [
-                  Expanded(child: Container()),
+                  Expanded(child: ListView(
+                    children: this.displayedShips.map((e) => Text(e.name)).toList(growable: false),
+                  )),
                   Divider(height: 1),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: cached.shipType.entries.map((e) => FlatFilterChip(
-                        onSelected: (_) {}, 
-                        selected: e.key == 'Destroyer',
+                        onSelected: (_) => this.updateType(e.key), 
+                        selected: e.key == this.type,
                         label: Text(e.value),
                       )).toList(growable: false),
                     ),
@@ -70,5 +89,31 @@ class _WikiWarshipPageState extends State<WikiWarshipPage> {
         ),
       ),
     );
+  }
+
+  /// Get a list of ships with a certain nation
+  void updateNation(String nation) {
+    // Same nation, nothing needs to be done
+    if (nation == this.nation) return;
+    this.nationShips = cached.warship.values.where((e) => e.nation == nation);
+    setState(() {
+      this.nation = nation;
+      this.displayedShips = this.nationShips;
+    });
+  }
+
+  /// Update ship type
+  void updateType(String type) {
+    if (type == this.type) {
+      setState(() {
+        this.type = '';
+        this.displayedShips = this.nationShips;
+      });
+    } else {
+      setState(() {
+        this.type = type;
+        this.displayedShips = this.nationShips.where((e) => e.type == type);
+      });
+    }
   }
 }
