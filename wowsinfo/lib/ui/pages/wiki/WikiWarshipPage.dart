@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart';
 import 'package:wowsinfo/ui/widgets/FlatFilterChip.dart';
+import 'package:wowsinfo/ui/widgets/wiki/WikiWarshipCell.dart';
 
 /// WikiWarshipPage class
 class WikiWarshipPage extends StatefulWidget {
@@ -69,7 +72,7 @@ class _WikiWarshipPageState extends State<WikiWarshipPage> {
                 children: [
                   Expanded(child: AnimatedSwitcher(
                     duration: Duration(milliseconds: 300),
-                    child: WarshipList(displayedShips: displayedShips, key: Key('$nation$type')),
+                    child: WarshipList(ships: displayedShips.toList(growable: false), key: Key('$nation$type')),
                   )),
                   Divider(height: 1),
                   SingleChildScrollView(
@@ -123,17 +126,29 @@ class _WikiWarshipPageState extends State<WikiWarshipPage> {
 }
 
 class WarshipList extends StatelessWidget {
-  const WarshipList({
-    Key key,
-    @required this.displayedShips,
-  }) : super(key: key);
-
-  final Iterable<Warship> displayedShips;
+  final List<Warship> ships;
+  const WarshipList({Key key, @required this.ships}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: this.displayedShips.map((e) => Text(e.name)).toList(growable: false),
+    return OrientationBuilder(
+      builder: (context, _) {
+        final width = MediaQuery.of(context).size.width;
+        // 120 can place 3 on iPhone 11
+        final itemCount = min(5, max(width / 200, 2)).toInt();
+        return Scrollbar(
+          child: GridView.builder(
+            itemCount: ships.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: itemCount,
+              childAspectRatio: 1.3,
+            ), 
+            itemBuilder: (context, index) {
+              return WikiWarshipCell(ship: ships[index]);
+            }
+          ),
+        );
+      },
     );
   }
 }

@@ -18,11 +18,13 @@ class WikiWarship extends Cacheable {
 /// This is the `Warship` class
 class Warship {
   int tier;
+  String get tierString => ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'][tier - 1];
   String name;
   int shipId;
   bool isSpecial;
   String nation;
   bool isPremium;
+  bool get isSpecialOrPremium => isSpecial || isPremium;
   String shipIdStr;
   DefaultProfile _defaultProfile;
   int get health => _defaultProfile.health;
