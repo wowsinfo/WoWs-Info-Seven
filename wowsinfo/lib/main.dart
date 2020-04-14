@@ -20,13 +20,10 @@ void main() async {
   // runApp(Theme(
   //   data: ThemeData(
   //     brightness: Brightness.dark,
-  //     textTheme: TextTheme(
-  //       subtitle1: TextStyle(color: Colors.white)
-  //     ),
   //   ),
-  //   child: Center(
-  //     child: PlatformLoadingIndiactor(),
-  //   ),
+  //   child: Container(
+  //     color: Colors.blue,
+  //   )
   // ));
 
   /// Setup local data

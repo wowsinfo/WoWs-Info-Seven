@@ -16,7 +16,7 @@ class _RealtimePageState extends State<RealtimePage> {
     final lang = AppLocalization.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(lang.localised('Real-time Statistics'))
+        title: Text(lang.localised('realtime_page_title'))
       ),
       body: Container(),
     );
