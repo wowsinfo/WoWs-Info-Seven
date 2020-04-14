@@ -129,7 +129,7 @@ class CachedData extends LocalData {
 
   /// Check for update and only update when game updates, app updates or it has been a week
   void update() {
-
+    
   }
 
   /// Load all cached data into memory

@@ -18,7 +18,6 @@ class _GameServerSelectionState extends State<GameServerSelection> {
   
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     this.selectedIndex = pref.gameServer;
   }
@@ -33,7 +32,6 @@ class _GameServerSelectionState extends State<GameServerSelection> {
       lang.localised('game_server_asia')
     ];
 
-    // TODO: add a title later
     return Center(
       child: Column(
         children: <Widget>[
