@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart' as Wiki;
+import 'package:wowsinfo/ui/pages/wiki/WikiWarShipInfoPage.dart';
 
 /// WikiWarshipCell class
 class WikiWarshipCell extends StatelessWidget {
   final Wiki.Warship ship;
-  WikiWarshipCell({Key key, @required this.ship}) : super(key: key);
+  final bool showDetail;
+  WikiWarshipCell({Key key, @required this.ship, this.showDetail = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: InkWell(
-        onTap: () {},
+        onTap: showDetail ? () => Navigator.of(context).push(MaterialPageRoute(builder: (c) => WikiWarShipInfoPage(ship: ship))) : null,
         child: Column(
           children: [
             Expanded(
-              child: Image(
-                image: NetworkImage(ship.smallImage), 
+              child: Hero(
+                tag: ship.shipId,
+                child: Image(
+                  image: NetworkImage(ship.smallImage), 
+                ),
               ),
             ),
             buildText('${ship.tierString} ${ship.name}'),

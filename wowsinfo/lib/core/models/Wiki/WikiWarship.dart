@@ -21,11 +21,12 @@ class Warship {
   String get tierString => ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'][tier - 1];
   String name;
   int shipId;
+  String shipIdStr;
+  String get shipIdAndIdStr => '$shipIdStr $shipId';
   bool isSpecial;
   String nation;
   bool isPremium;
   bool get isSpecialOrPremium => isSpecial || isPremium;
-  String shipIdStr;
   DefaultProfile _defaultProfile;
   int get health => _defaultProfile.health;
   Image _image;
