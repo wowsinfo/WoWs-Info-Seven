@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:hive/hive.dart';
+import 'package:wowsinfo/core/data/Constant.dart';
 import 'package:wowsinfo/core/data/GameServer.dart';
 import 'package:wowsinfo/core/data/LocalData.dart';
 import 'package:wowsinfo/core/models/User/ContactList.dart';
@@ -84,7 +85,7 @@ class Preference extends LocalData {
   String get realtimeIP => this.box.get(REALTIME_IP);
   setRealtimeIP(String value) => this.box.put(REALTIME_IP, value);
 
-  String get gameVersion => this.box.get(GAME_VERSION) ?? '0.9.3.0';
+  String get gameVersion => this.box.get(GAME_VERSION) ?? Constant.app_version;
   setGameVersion(String value) => this.box.put(GAME_VERSION, value);
 
   String get appVersion => this.box.get(APP_VERSION) ?? '1.0.8';

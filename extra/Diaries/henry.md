@@ -9,6 +9,7 @@ Template
 
 ## 14/04/2020
 ### Summary
+Everything can be downloaded and saved properly. This means that `the backend` is fine now. It is time to do `the UI`. It has been so long and finally the first step is done. 
 ### What to do tomorrow?
 
 ## 13/04/2020

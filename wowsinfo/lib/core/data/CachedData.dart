@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:hive/hive.dart';
+import 'package:wowsinfo/core/data/Constant.dart';
 import 'package:wowsinfo/core/data/GameServer.dart';
 import 'package:wowsinfo/core/data/LocalData.dart';
 import 'package:wowsinfo/core/data/Preference.dart';
@@ -154,14 +156,14 @@ class CachedData extends LocalData {
     loadAll();
 
     final server = pref.gameServer;
-    final parser = WikiEncyclopediaParser(server);
-    final encyclopedia = parser.parse(await parser.download());
+    // final parser = WikiEncyclopediaParser(server);
+    // final encyclopedia = parser.parse(await parser.download());
+    final encyclopedia = null;
     if (encyclopedia != null) {
+      // Either game updates, app updates or the data is too old
       if (encyclopedia.gameVersion != this.gameVersion
-        || pref.lastUpdate.dayDifference(DateTime.now()) > 7) {
-        // Only save when it is different
-        encyclopedia.save();
-
+        || pref.appVersion != Constant.app_version
+        || pref.lastUpdate.dayDifference(DateTime.now()) > 10) {
         // Update data here
         List<APIParser> wows = [
           WikiAchievementParser(server),
@@ -191,6 +193,9 @@ class CachedData extends LocalData {
           Cacheable data = element.parse(await element.download());
           data?.save();
         }));
+
+        // Only save new version here
+        encyclopedia.save();
         return true;
       }
     }

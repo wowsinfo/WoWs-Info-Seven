@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:wowsinfo/core/data/AppSettings.dart';
 import 'package:wowsinfo/core/data/CachedData.dart';
+import 'package:wowsinfo/core/data/Constant.dart';
 import 'package:wowsinfo/core/data/Preference.dart';
 import 'package:wowsinfo/core/others/Utils.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
@@ -35,11 +36,14 @@ class _InitialPageState extends State<InitialPage> {
       setState(() => showLogo = true);
       cached.close();
       Future.delayed(Duration(milliseconds: 2000)).then((_) {
-        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => BottomNavigationPage()));
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) => BottomNavigationPage(), fullscreenDialog: true)
+        );
       });
 
       // Update last update time
       if (updated) {
+        pref.setAppVersion(Constant.app_version);
         pref.setLastUpdate(DateTime.now());
       }
     });
