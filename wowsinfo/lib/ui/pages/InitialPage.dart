@@ -27,6 +27,8 @@ class _InitialPageState extends State<InitialPage> {
   @override
   void initState() {
     super.initState();
+    cached.update();
+    
     Future.delayed(Duration(milliseconds: 1000)).then((_) {
       setState(() => showLogo = true);
     });

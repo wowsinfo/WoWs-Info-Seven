@@ -125,14 +125,15 @@ class CachedData extends LocalData {
   Future<bool> init() async {
     this.box = await Hive.openBox(BOX_NAME);
     Utils.debugPrint('$BOX_NAME box has been loaded');
-    
+    // TODO: remove this line, testing only
+    loadEncyclopedia();
     // Debug and close
     debug(keysOnly: true);
     return true;
   }
 
   /// Check for update and only update when game updates, app updates or it has been a week
-  void update() async {
+  Future<bool> update() async {
     // Open the box again if it is closed
     this.box = await Hive.openBox(BOX_NAME);
 
@@ -143,9 +144,10 @@ class CachedData extends LocalData {
     } else {
       loadAll();
     }
-    
+
     // Close the box after everything has been loadded
     close();
+    return true;
   }
 
   /// Load all cached data into memory
