@@ -180,13 +180,14 @@ class CachedData extends LocalData {
       await Future.wait(github.map((element) async {
         Cacheable data = element.parse(await element.download());
         data?.save();
-      }));  
+      }));
+      return true;
     } else {
       loadAll();
     }
 
     // Close the box after everything has been loadded
-    return true;
+    return false;
   }
 
   /// Load all cached data into memory

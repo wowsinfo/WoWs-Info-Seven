@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:wowsinfo/core/data/AppSettings.dart';
 import 'package:wowsinfo/core/data/CachedData.dart';
+import 'package:wowsinfo/core/data/Preference.dart';
 import 'package:wowsinfo/core/others/Utils.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
+import 'package:wowsinfo/main.dart';
 import 'package:wowsinfo/ui/pages/BottomNavigationPage.dart';
 import 'package:wowsinfo/ui/widgets/PlatformLoadingIndiactor.dart';
 import 'package:wowsinfo/ui/widgets/PlatformWidget.dart';
@@ -21,18 +23,26 @@ class InitialPage extends StatefulWidget {
 
 class _InitialPageState extends State<InitialPage> {
   final settings = AppSettings.shared;
+  final pref = Preference.shared;
   final cached = CachedData.shared;
   bool showLogo = false;
 
   @override
   void initState() {
     super.initState();
-    cached.update().then((_) {
+    pref.setLastUpdate(DateTime.now());
+    
+    cached.update().then((updated) {
       setState(() => showLogo = true);
       cached.close();
       Future.delayed(Duration(milliseconds: 1000)).then((_) {
         Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => BottomNavigationPage()));
       });
+
+      // Update last update time
+      if (updated) {
+        pref.setLastUpdate(DateTime.now());
+      }
     });
   }
 
