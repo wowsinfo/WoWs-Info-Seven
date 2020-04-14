@@ -125,6 +125,7 @@ class CachedData extends LocalData {
   WikiEncyclopedia _encyclopedia;
   /// A map with language code and its value
   Map<String, String> get serverLanguage => _encyclopedia.language;
+  String get gameVersion => _encyclopedia.gameVersion;
   void loadEncyclopedia() => _encyclopedia = decode(WIKI_ENCYCLOPEDIA, (j) => WikiEncyclopedia.fromJson(j));
   void saveEncyclopedia(WikiEncyclopedia data) {
     _encyclopedia = data;
@@ -139,8 +140,7 @@ class CachedData extends LocalData {
   Future<bool> init() async {
     this.box = await Hive.openBox(BOX_NAME);
     Utils.debugPrint('$BOX_NAME box has been loaded');
-    // TODO: remove this line, testing only
-    loadEncyclopedia();
+
     // Debug and close
     debug(keysOnly: true);
     return true;
@@ -150,41 +150,51 @@ class CachedData extends LocalData {
   Future<bool> update() async {
     // Open the box again if it is closed
     this.box = await Hive.openBox(BOX_NAME);
+    // Load everything from storage, it is fine because if there are new data, it will be replaced
+    loadAll();
 
-    // TODO: check for server update
+    final server = pref.gameServer;
+    final parser = WikiEncyclopediaParser(server);
+    final encyclopedia = parser.parse(await parser.download());
+    if (encyclopedia != null) {
+      if (encyclopedia.gameVersion != this.gameVersion
+        || pref.lastUpdate.dayDifference(DateTime.now()) > 7) {
+        // Only save when it is different
+        encyclopedia.save();
 
-    if (pref.lastUpdate.dayDifference(DateTime.now()) > 7) {
-      // Update data here
-      final server = pref.gameServer;
-      List<APIParser> wows = [
-        WikiAchievementParser(server),
-        WikiCollectionParser(server),
-        WikiCollectionItemParser(server),
-        WikiCommanderSkillParser(server),
-        WikiConsumableParser(server),
-        // Encyclopedia will also be updated
-        // WikiEncyclopediaParser(server),
-        WikiGameMapParser(server),
-        WikiWarshipParser(server),
-      ];
+        // Update data here
+        List<APIParser> wows = [
+          WikiAchievementParser(server),
+          WikiCollectionParser(server),
+          WikiCollectionItemParser(server),
+          WikiCommanderSkillParser(server),
+          WikiConsumableParser(server),
+          // Encyclopedia will also be updated
+          // WikiEncyclopediaParser(server),
+          WikiGameMapParser(server),
+          WikiWarshipParser(server),
+        ];
+        // Extra data from GitHub
+        List<GitHubParser> github = [
+          ShipAliasParser(),
+          PRDataParser(),
+        ];
 
-      List<GitHubParser> github = [
-        ShipAliasParser(),
-        PRDataParser(),
-      ];
+        // Download from WarGaming API
+        await Future.wait(wows.map((element) async {
+          Cacheable data = element.parse(await element.download());
+          data?.save();
+        }));
 
-      await Future.wait(wows.map((element) async {
-        Cacheable data = element.parse(await element.download());
-        data?.save();
-      }));
-      await Future.wait(github.map((element) async {
-        Cacheable data = element.parse(await element.download());
-        data?.save();
-      }));
-      return true;
-    } else {
-      loadAll();
+        // Download from GitHub
+        await Future.wait(github.map((element) async {
+          Cacheable data = element.parse(await element.download());
+          data?.save();
+        }));
+        return true;
+      }
     }
+
 
     // Close the box after everything has been loadded
     return false;

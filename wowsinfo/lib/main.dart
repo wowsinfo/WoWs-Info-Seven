@@ -10,24 +10,24 @@ import 'package:wowsinfo/core/data/Preference.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
 import 'package:wowsinfo/ui/pages/InitialPage.dart';
 import 'package:wowsinfo/ui/pages/setup/IntroPage.dart';
-import 'package:wowsinfo/ui/widgets/PlatformLoadingIndiactor.dart';
+// import 'package:wowsinfo/ui/widgets/PlatformLoadingIndiactor.dart';
 
 final pref = Preference.shared;
 final settings = AppSettings.shared;
 
 void main() async {
   // Run a loading screen here
-  runApp(Theme(
-    data: ThemeData(
-      brightness: Brightness.dark,
-      textTheme: TextTheme(
-        subtitle1: TextStyle(color: Colors.white)
-      ),
-    ),
-    child: Center(
-      child: PlatformLoadingIndiactor(),
-    ),
-  ));
+  // runApp(Theme(
+  //   data: ThemeData(
+  //     brightness: Brightness.dark,
+  //     textTheme: TextTheme(
+  //       subtitle1: TextStyle(color: Colors.white)
+  //     ),
+  //   ),
+  //   child: Center(
+  //     child: PlatformLoadingIndiactor(),
+  //   ),
+  // ));
 
   /// Setup local data
   await Hive.initFlutter();

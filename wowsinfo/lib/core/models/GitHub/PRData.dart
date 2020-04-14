@@ -7,7 +7,7 @@ class PRData extends Cacheable {
   PRData.fromJson(Map<String, dynamic> json) {
     ships = json.map((key, value) {
       // If it is a list it means that it is an empty entry
-      if (value is List) return MapEntry(key, null);
+      if (value == null || value is List) return MapEntry(key, null);
       return MapEntry(key, AverageStats.fromJson(value));
     });
   }

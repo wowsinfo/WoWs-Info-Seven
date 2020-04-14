@@ -30,12 +30,11 @@ class _InitialPageState extends State<InitialPage> {
   @override
   void initState() {
     super.initState();
-    pref.setLastUpdate(DateTime.now());
-    
+
     cached.update().then((updated) {
       setState(() => showLogo = true);
       cached.close();
-      Future.delayed(Duration(milliseconds: 1000)).then((_) {
+      Future.delayed(Duration(milliseconds: 2000)).then((_) {
         Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => BottomNavigationPage()));
       });
 
