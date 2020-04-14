@@ -1,7 +1,7 @@
-import '../APIModel.dart';
+import '../Cacheable.dart';
 
 /// This is the `WikiAchievement` class
-class WikiAchievement extends APIModel {
+class WikiAchievement extends Cacheable {
   Map<String, Achievement> achievement;
 
   WikiAchievement.fromJson(Map<String, dynamic> json) {

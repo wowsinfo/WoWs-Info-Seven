@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:hive/hive.dart';
 import 'package:wowsinfo/core/data/LocalData.dart';
+import 'package:wowsinfo/core/data/Preference.dart';
 import 'package:wowsinfo/core/models/GitHub/PRData.dart';
 import 'package:wowsinfo/core/models/GitHub/ShipAlias.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiAchievement.dart';
@@ -13,6 +14,8 @@ import 'package:wowsinfo/core/models/Wiki/WikiEncyclopedia.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiGameMap.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart';
 import 'package:wowsinfo/core/others/Utils.dart';
+import 'package:wowsinfo/core/extensions/DateTimeExtension.dart';
+
 
 const BOX_NAME = 'cached_data';
 
@@ -40,6 +43,8 @@ class CachedData extends LocalData {
   /// Variables
   ///
   
+  final pref = Preference.shared;
+
   PRData _prData;
   void loadPRData() => _prData = decode(PERSONAL_RATING, (j) => PRData.fromJson(j));
   void savePRData(PRData data) {
@@ -120,7 +125,6 @@ class CachedData extends LocalData {
   Future<bool> init() async {
     this.box = await Hive.openBox(BOX_NAME);
     Utils.debugPrint('$BOX_NAME box has been loaded');
-    loadAll();
     
     // Debug and close
     debug(keysOnly: true);
@@ -128,8 +132,20 @@ class CachedData extends LocalData {
   }
 
   /// Check for update and only update when game updates, app updates or it has been a week
-  void update() {
+  void update() async {
+    // Open the box again if it is closed
+    this.box = await Hive.openBox(BOX_NAME);
+
+    // TODO: check for server update
+
+    if (pref.lastUpdate.dayDifference(DateTime.now()) > 7) {
+      // Update data here
+    } else {
+      loadAll();
+    }
     
+    // Close the box after everything has been loadded
+    close();
   }
 
   /// Load all cached data into memory

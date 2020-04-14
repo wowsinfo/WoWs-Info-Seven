@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:wowsinfo/core/data/AppSettings.dart';
+import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/others/Utils.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
 import 'package:wowsinfo/ui/pages/BottomNavigationPage.dart';
@@ -20,6 +21,7 @@ class InitialPage extends StatefulWidget {
 
 class _InitialPageState extends State<InitialPage> {
   final settings = AppSettings.shared;
+  final cached = CachedData.shared;
   bool showLogo = false;
 
   @override

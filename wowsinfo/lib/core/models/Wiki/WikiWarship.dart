@@ -1,8 +1,8 @@
 
-import '../APIModel.dart';
+import '../Cacheable.dart';
 
 /// This is the `WikiWarship` class
-class WikiWarship extends APIModel {
+class WikiWarship extends Cacheable {
   Map<String, Warship> ships;
 
   WikiWarship.fromJson(Map<String, dynamic> json) {

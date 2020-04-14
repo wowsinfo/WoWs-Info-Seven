@@ -1,7 +1,7 @@
-import '../APIModel.dart';
+import '../Cacheable.dart';
 
 /// This is the `WikiGameMap` class
-class WikiGameMap extends APIModel {
+class WikiGameMap extends Cacheable {
   Map<String, GameMap> gameMap;
 
   WikiGameMap.fromJson(Map<String, dynamic> json) {

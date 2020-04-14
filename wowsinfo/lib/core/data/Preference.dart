@@ -6,6 +6,7 @@ import 'package:wowsinfo/core/data/LocalData.dart';
 import 'package:wowsinfo/core/models/User/ContactList.dart';
 import 'package:wowsinfo/core/models/User/Player.dart';
 import 'package:wowsinfo/core/others/Utils.dart';
+import 'package:wowsinfo/core/extensions/DateTimeExtension.dart';
 
 /// `KEYS` are stored here so that I won't have any typo or changed the string accidentally
 const BOX_NAME = 'preference';
@@ -62,8 +63,9 @@ class Preference extends LocalData {
   }
   setContactList(ContactList contact) => this.box.put(CONTACT_LIST, jsonEncode(contact));
 
-  String get lastUpdate => this.box.get(LAST_UPDATE);
-  setLastUpdate(String value) => this.box.put(LAST_UPDATE, value);
+  /// the default date is the date I first published this app
+  DateTime get lastUpdate => DateTime.parse(this.box.get(LAST_UPDATE) ?? '2017-02-06');
+  setLastUpdate(DateTime value) => this.box.put(LAST_UPDATE, value.toHumanString());
 
   /// Provide a default language
   String get serverLanguage => this.box.get(SERVER_LANGUAGE) ?? 'en';

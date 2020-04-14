@@ -1,7 +1,7 @@
-import '../APIModel.dart';
+import '../Cacheable.dart';
 
 /// This is the `WikiCommanderSkill` class
-class WikiCommanderSkill extends APIModel {
+class WikiCommanderSkill extends Cacheable {
   Map<String, Skill> skill;
 
   WikiCommanderSkill.fromJson(Map<String, dynamic> json) {

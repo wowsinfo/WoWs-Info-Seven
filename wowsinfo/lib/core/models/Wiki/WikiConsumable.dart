@@ -1,7 +1,7 @@
-import '../APIModel.dart';
+import '../Cacheable.dart';
 
 /// This is the `WikiConsumable` class
-class WikiConsumable extends APIModel {
+class WikiConsumable extends Cacheable {
   Map<String, Consumable> consumable;
 
   WikiConsumable.fromJson(Map<String, dynamic> json) {

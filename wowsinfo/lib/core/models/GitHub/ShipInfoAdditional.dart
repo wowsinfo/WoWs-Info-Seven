@@ -1,5 +1,7 @@
+import 'package:wowsinfo/core/models/Cacheable.dart';
+
 /// This is the `ShipInfoAdditional` class
-class ShipInfoAdditional {
+class ShipInfoAdditional extends Cacheable {
   double alphaPiercingHE;
   AP ap;
   double sigma;

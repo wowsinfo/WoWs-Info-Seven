@@ -1,5 +1,7 @@
+import 'package:wowsinfo/core/models/Cacheable.dart';
+
 /// This is the `ShipAlias` class
-class ShipAlias {
+class ShipAlias extends Cacheable {
   Map<String, Alias> alias;
 
   ShipAlias.fromJson(Map<String, dynamic> json) {

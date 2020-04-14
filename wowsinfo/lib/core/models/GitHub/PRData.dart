@@ -1,5 +1,7 @@
+import 'package:wowsinfo/core/models/Cacheable.dart';
+
 /// This is the `PRData` class, `Personal Rating Data`
-class PRData {
+class PRData extends Cacheable {
   Map<String, AverageStats> ships;
 
   PRData.fromJson(Map<String, dynamic> json) {

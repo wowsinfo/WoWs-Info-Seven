@@ -1,5 +1,7 @@
+import 'package:wowsinfo/core/models/Cacheable.dart';
+
 /// This is the `ShipConsumable` class
-class ShipConsumable {
+class ShipConsumable extends Cacheable {
   Map<String, BasicConsumable> profiles;
   bool canBuy;
   int costCR;
