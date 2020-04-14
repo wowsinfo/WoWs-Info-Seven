@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 class FlatFilterChip extends StatelessWidget {
   final Widget label;
   final bool selected;
-  final Function(bool) onSelected;
+  final void Function(bool) onSelected;
   
   const FlatFilterChip({
     Key key, 
     @required this.label, 
-    @required this.selected, 
+    this.selected, 
     @required this.onSelected
   }) : super(key: key);
 
@@ -20,7 +20,7 @@ class FlatFilterChip extends StatelessWidget {
       backgroundColor: Colors.transparent,
       // selectedColor: Colors.transparent,
       label: label,
-      selected: selected,
+      selected: selected ?? false,
       onSelected: onSelected
     );
   }
