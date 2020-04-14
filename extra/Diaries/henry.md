@@ -9,8 +9,9 @@ Template
 
 ## 14/04/2020
 ### Summary
-Everything can be downloaded and saved properly. This means that `the backend` is fine now. It is time to do `the UI`. It has been so long and finally the first step is done. 
+Everything can be downloaded and saved properly. This means that `the backend` is fine now. It is time to do `the UI`. It has been so long and finally the first step is done. `CachedData` is now cleaned. It has lots of data but not many keys so it was really quick. I will do more data mining for now. My ship additional is already 150KB. I will control it so that it is not over 1MB. 
 ### What to do tomorrow?
+Focus on UI and maybe Wiki?
 
 ## 13/04/2020
 ### Summary
