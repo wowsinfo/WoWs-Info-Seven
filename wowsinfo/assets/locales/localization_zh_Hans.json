@@ -20,5 +20,8 @@
     "bottom_tab_website": "网站列表",
     "bottom_tab_wiki": "战舰百科",
     "bottom_tab_realtime": "实时数据",
-    "bottom_tab_search": "搜索"
+    "bottom_tab_search": "搜索",
+    "website_page_title": "Useful Websites",
+    "wiki_page_title": "WoWs Encyclopedia",
+    "realtime_page_title": "Real-time Statistics"
 }
