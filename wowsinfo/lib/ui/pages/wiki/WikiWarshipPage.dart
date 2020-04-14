@@ -69,9 +69,7 @@ class _WikiWarshipPageState extends State<WikiWarshipPage> {
                 children: [
                   Expanded(child: AnimatedSwitcher(
                     duration: Duration(milliseconds: 300),
-                    child: ListView(
-                      children: this.displayedShips.map((e) => Text(e.name)).toList(growable: false),
-                    ),
+                    child: WarshipList(displayedShips: displayedShips, key: Key('$nation$type')),
                   )),
                   Divider(height: 1),
                   SingleChildScrollView(
@@ -121,5 +119,21 @@ class _WikiWarshipPageState extends State<WikiWarshipPage> {
         this.displayedShips = this.nationShips.where((e) => e.type == type);
       });
     }
+  }
+}
+
+class WarshipList extends StatelessWidget {
+  const WarshipList({
+    Key key,
+    @required this.displayedShips,
+  }) : super(key: key);
+
+  final Iterable<Warship> displayedShips;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: this.displayedShips.map((e) => Text(e.name)).toList(growable: false),
+    );
   }
 }
