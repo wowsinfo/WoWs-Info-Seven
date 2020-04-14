@@ -226,4 +226,12 @@ class CachedData extends LocalData {
     if (saved == null) return null;
     return f(jsonDecode(saved));
   }
+
+  @override
+  Future close() async {
+    // Clean up this box because it has quite a lot of data
+    await box.compact();
+    Utils.debugPrint('$BOX_NAME box has been cleaned');
+    return super.close();
+  }
 }
