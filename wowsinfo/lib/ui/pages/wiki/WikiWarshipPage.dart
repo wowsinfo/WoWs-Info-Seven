@@ -21,11 +21,13 @@ class _WikiWarshipPageState extends State<WikiWarshipPage> {
   // One is saved for quick ship type filter
   Iterable<Warship> nationShips = [];
   Iterable<Warship> displayedShips = [];
+  List<Warship> sortedList = [];
 
   @override
   void initState() {
     super.initState();
-
+    // Grab a sorted list
+    this.sortedList = cached.sortedWarshipList;
     // Select a random nation here
     this.updateNation((cached.shipNation.keys.toList()..shuffle()).first);
   }
@@ -65,8 +67,11 @@ class _WikiWarshipPageState extends State<WikiWarshipPage> {
             Expanded(
               child: Column(
                 children: [
-                  Expanded(child: ListView(
-                    children: this.displayedShips.map((e) => Text(e.name)).toList(growable: false),
+                  Expanded(child: AnimatedSwitcher(
+                    duration: Duration(milliseconds: 300),
+                    child: ListView(
+                      children: this.displayedShips.map((e) => Text(e.name)).toList(growable: false),
+                    ),
                   )),
                   Divider(height: 1),
                   SingleChildScrollView(
@@ -95,9 +100,10 @@ class _WikiWarshipPageState extends State<WikiWarshipPage> {
   void updateNation(String nation) {
     // Same nation, nothing needs to be done
     if (nation == this.nation) return;
-    this.nationShips = cached.warship.values.where((e) => e.nation == nation);
+    this.nationShips = this.sortedList.where((e) => e.nation == nation);
     setState(() {
       this.nation = nation;
+      this.type = '';
       this.displayedShips = this.nationShips;
     });
   }

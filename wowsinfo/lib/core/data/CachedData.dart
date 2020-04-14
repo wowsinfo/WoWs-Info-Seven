@@ -83,6 +83,15 @@ class CachedData extends LocalData {
 
   WikiWarship _warship;
   Map<String, Warship> get warship => _warship.ships;
+  /// Sort by tier, then by type
+  List<Warship> get sortedWarshipList {
+    return warship.values.toList(growable: false)..sort((b, a) {
+      // `a` first then 'd', smaller ones first
+      if (a.tier == b.tier) return b.type.compareTo(a.type);
+      // 10 first, larger ones first
+      return a.tier - b.tier;
+    });
+  }
   void loadWarship() => _warship = decode(WIKI_WARSHIP, (j) => WikiWarship.fromJson(j));
   void saveWarship(WikiWarship data) {
     _warship = data;
