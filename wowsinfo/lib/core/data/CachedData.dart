@@ -160,55 +160,54 @@ class CachedData extends LocalData {
   }
 
   /// Check for update and only update when game updates, app updates or it has been a week
-  Future<bool> update() async {
+  Future<bool> update({bool force = false}) async {
     // Open the box again if it is closed
     this.box = await Hive.openBox(BOX_NAME);
     // Load everything from storage, it is fine because if there are new data, it will be replaced
     loadAll();
 
     final server = pref.gameServer;
-    // final parser = WikiEncyclopediaParser(server);
-    // final encyclopedia = parser.parse(await parser.download());
-    final encyclopedia = null;
-    if (encyclopedia != null) {
-      // Either game updates, app updates or the data is too old
-      if (encyclopedia.gameVersion != this.gameVersion
-        || pref.appVersion != Constant.app_version
-        || pref.lastUpdate.dayDifference(DateTime.now()) > 10) {
-        // Update data here
-        List<APIParser> wows = [
-          WikiAchievementParser(server),
-          WikiCollectionParser(server),
-          WikiCollectionItemParser(server),
-          WikiCommanderSkillParser(server),
-          WikiConsumableParser(server),
-          // Encyclopedia will also be updated
-          // WikiEncyclopediaParser(server),
-          WikiGameMapParser(server),
-          WikiWarshipParser(server),
-        ];
-        // Extra data from GitHub
-        List<GitHubParser> github = [
-          ShipAliasParser(),
-          PRDataParser(),
-        ];
+    final parser = WikiEncyclopediaParser(server);
+    final encyclopedia = parser.parse(await parser.download());
 
-        // Download from WarGaming API
-        await Future.wait(wows.map((element) async {
-          Cacheable data = element.parse(await element.download());
-          data?.save();
-        }));
+    // Either game updates, app updates or the data is too old
+    if (force
+      || (encyclopedia != null && encyclopedia.gameVersion != this.gameVersion)
+      || pref.appVersion != Constant.app_version
+      || pref.lastUpdate.dayDifference(DateTime.now()) > 10) {
+      // Update data here
+      List<APIParser> wows = [
+        WikiAchievementParser(server),
+        WikiCollectionParser(server),
+        WikiCollectionItemParser(server),
+        WikiCommanderSkillParser(server),
+        WikiConsumableParser(server),
+        // Encyclopedia will also be updated
+        // WikiEncyclopediaParser(server),
+        WikiGameMapParser(server),
+        WikiWarshipParser(server),
+      ];
+      // Extra data from GitHub
+      List<GitHubParser> github = [
+        ShipAliasParser(),
+        PRDataParser(),
+      ];
 
-        // Download from GitHub
-        await Future.wait(github.map((element) async {
-          Cacheable data = element.parse(await element.download());
-          data?.save();
-        }));
+      // Download from WarGaming API
+      await Future.wait(wows.map((element) async {
+        Cacheable data = element.parse(await element.download());
+        data?.save();
+      }));
 
-        // Only save new version here
-        encyclopedia.save();
-        return true;
-      }
+      // Download from GitHub
+      await Future.wait(github.map((element) async {
+        Cacheable data = element.parse(await element.download());
+        data?.save();
+      }));
+
+      // Only save new version here
+      encyclopedia.save();
+      return true;
     }
 
 

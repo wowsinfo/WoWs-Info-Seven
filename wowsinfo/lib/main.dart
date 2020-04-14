@@ -55,6 +55,7 @@ class MyApp extends StatelessWidget {
           locale: wowsinfo.locale,
           supportedLocales: AppLocalization.supportedLocales,
           localeResolutionCallback: (locale, supported) {
+            if (locale == null) return supported.first;
             switch (locale.languageCode) {
               case 'en':
               case 'ja':

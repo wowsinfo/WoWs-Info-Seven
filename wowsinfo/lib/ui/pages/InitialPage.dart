@@ -31,7 +31,6 @@ class _InitialPageState extends State<InitialPage> {
   @override
   void initState() {
     super.initState();
-
     cached.update().then((updated) {
       setState(() => showLogo = true);
       cached.close();
