@@ -10,6 +10,9 @@ class WikiWarship extends Cacheable {
   }
 
   Map<String, dynamic> toJson() => this.ships.cast<String, dynamic>();
+  
+  @override
+  void save() => cached.saveWarship(this);
 }
 
 /// This is the `Warship` class

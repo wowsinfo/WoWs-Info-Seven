@@ -9,6 +9,9 @@ class WikiCommanderSkill extends Cacheable {
   }
 
   Map<String, dynamic> toJson() => this.skill.cast<String, dynamic>();
+  
+  @override
+  void save() => cached.saveCommanderSkill(this);
 }
 
 /// This is the `Skill` class

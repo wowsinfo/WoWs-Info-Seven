@@ -52,7 +52,8 @@ class Preference extends LocalData {
   }
   setMainAccount(Player player) => this.box.put(MAIN_ACCOUNT, jsonEncode(player));
 
-  int get gameServer => this.box.get(GAME_SERVER);
+  /// it returns a game server object and it is by default 3
+  GameServer get gameServer => GameServer.fromIndex(this.box.get(GAME_SERVER) ?? 3);
   setGameServer(Server value) => this.box.put(GAME_SERVER, value.index);
 
   /// returns saved player contact or an empty one

@@ -10,6 +10,6 @@ class PRDataParser extends GitHubParser {
   @override
   PRData parse(Map<String, dynamic> json) {
     if (json == null) return null;
-    return PRData.fromJson(json);
+    return PRData.fromJson(json['data']);
   }
 }

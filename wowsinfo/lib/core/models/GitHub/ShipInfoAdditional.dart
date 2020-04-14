@@ -25,6 +25,9 @@ class ShipInfoAdditional extends Cacheable {
       'permoflages': this.permoflage,
     };
   }
+  
+  @override
+  void save() => throw Error();
 }
 
 /// This is the `AP` class

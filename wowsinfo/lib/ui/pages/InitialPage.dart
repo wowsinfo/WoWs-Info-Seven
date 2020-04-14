@@ -27,23 +27,17 @@ class _InitialPageState extends State<InitialPage> {
   @override
   void initState() {
     super.initState();
-    cached.update();
-    
-    Future.delayed(Duration(milliseconds: 1000)).then((_) {
+    cached.update().then((_) {
       setState(() => showLogo = true);
-    });
-
-    Future.delayed(Duration(milliseconds: 4000)).then((_) {
-      setState(() => showLogo = false);
+      cached.close();
+      Future.delayed(Duration(milliseconds: 1000)).then((_) {
+        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => BottomNavigationPage()));
+      });
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    // Utils.delay(2000).then((_) {
-    //   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => BottomNavigationPage()));
-    // });
-
     return Theme(
       // Only here, the overlay is blue and white text should be used
       data: ThemeData(

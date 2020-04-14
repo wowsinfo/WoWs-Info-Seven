@@ -15,6 +15,7 @@ class GameServer {
 
   Server _server;
   Server get server => _server;
+  int get index => Server.values.indexOf(_server);
   void updateServer(Server server) => this._server = server;
 
   GameServer(this._server);

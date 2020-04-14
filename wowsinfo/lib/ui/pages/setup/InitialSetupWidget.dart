@@ -17,23 +17,23 @@ class InitialSetupWidget extends StatefulWidget {
 
 class _InitialSetupWidgetState extends State<InitialSetupWidget> {
   final cached = CachedData.shared;
-  bool loading = false;
+  bool loading = true;
   bool error = false;
   
   @override
   void initState() {
     super.initState();
     // Load some data here
-    // final parser = WikiEncyclopediaParser(GameServer.fromIndex(3));
-    // parser.download().then((value) {
-    //   final e = parser.parse(value);
-    //   if (e == null) {
-    //     // TODO: handle error here
-    //   } else {
-    //     cached.saveEncyclopedia(e);
-    //     setState(() => loading = false);
-    //   }
-    // });
+    final parser = WikiEncyclopediaParser(GameServer.fromIndex(3));
+    parser.download().then((value) {
+      final e = parser.parse(value);
+      if (e == null) {
+        // TODO: handle error here
+      } else {
+        cached.saveEncyclopedia(e);
+        setState(() => loading = false);
+      }
+    });
   }
 
   @override

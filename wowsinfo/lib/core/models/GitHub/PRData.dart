@@ -13,16 +13,19 @@ class PRData extends Cacheable {
   }
 
   Map<String, dynamic> toJson() => ships.cast<String, dynamic>();
+
+  @override
+  void save() => cached.savePRData(this);
 }
 
 /// This is the `AverageStats` class
 class AverageStats {
-  int averageDamageDealt;
+  double averageDamageDealt;
   double averageFrag;
   double winRate;
 
   AverageStats.fromJson(Map<String, dynamic> json) {
-    this.averageDamageDealt = json['average_damage_dealt'];
+    this.averageDamageDealt = json['average_damage_dealt'].toDouble();
     this.averageFrag = json['average_frags'];
     this.winRate = json['win_rate'];
   }

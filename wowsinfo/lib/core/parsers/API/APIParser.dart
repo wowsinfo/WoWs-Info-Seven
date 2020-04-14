@@ -12,8 +12,8 @@ import 'package:http/http.dart' as http;
 abstract class APIParser {
   final pref = Preference.shared;
   /// Append language in the end
-  void addLanguage() => this.link += '&language=${pref.serverLanguage}';
-  // void addLanguage() => this.link += '&language=en';
+  void _addLanguage() => this.link += '&language=${pref.serverLanguage}';
+  // void _addLanguage() => this.link += '&language=en';
 
   /// The link is incomplete, make sure all parsers will ask for necessary parametre and complete the string
   String link = 'https://api.worldofwarships.';
@@ -28,21 +28,21 @@ abstract class APIParser {
   /// Download API String, `download all pages` and do some basic checks
   Future<List<Map<String, dynamic>>> download() async {
     // Append language string first
-    addLanguage();
+    _addLanguage();
     List<Map<String, dynamic>> data = [];
 
     while (_hasMorePage) {
       // Start from page 1 and keep going
       try {      
         final response = await http.get(
-          addPageNumber(this.link),
+          _addPageNumber(this.link),
         ).timeout(Duration(seconds: 8));
 
         // First, check it is 200 (the server is live)
         if (response.statusCode == 200) {
           final json = jsonDecode(response.body);
           // Sometimes, the server is live but it doesn't return anything
-          if (validResponse(json)) {
+          if (_validResponse(json)) {
             data.add(json);
             // meta is not already there
             if (json['meta'] != null) {
@@ -63,10 +63,10 @@ abstract class APIParser {
   /// Append api key in the end
   void addAPIKey() => this.link += '?application_id=$API_KEY';
   /// Append api key in the end, `it keeps adding one to it`
-  String addPageNumber(String link) => this.link + '&page_no=${++_pageNumber}';
+  String _addPageNumber(String link) => this.link + '&page_no=${++_pageNumber}';
   
   /// Check if this is a valid reponse
-  bool validResponse(Map<String, dynamic> json) => Utils.guard(json, 'status', 'not ok') == 'ok';
+  bool _validResponse(Map<String, dynamic> json) => Utils.guard(json, 'status', 'not ok') == 'ok';
 
   /// Parse json to object
   /// - status need to be checked first

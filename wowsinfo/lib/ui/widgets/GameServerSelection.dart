@@ -19,7 +19,7 @@ class _GameServerSelectionState extends State<GameServerSelection> {
   @override
   void initState() {
     super.initState();
-    this.selectedIndex = pref.gameServer;
+    this.selectedIndex = pref.gameServer.index;
   }
 
   @override

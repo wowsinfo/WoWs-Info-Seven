@@ -9,6 +9,9 @@ class WikiAchievement extends Cacheable {
   }
 
   Map<String, dynamic> toJson() => this.achievement.cast<String, dynamic>();
+  
+  @override
+  void save() => cached.saveAchievement(this);
 }
 
 /// This is the `Achievement` class

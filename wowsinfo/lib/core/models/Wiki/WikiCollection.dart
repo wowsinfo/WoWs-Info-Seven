@@ -9,6 +9,9 @@ class WikiCollection extends Cacheable {
   }
 
   Map<String, dynamic> toJson() => this.collection.cast<String, dynamic>();
+  
+  @override
+  void save() => cached.saveCollection(this);
 }
 
 /// This is the `Collection` class

@@ -9,6 +9,9 @@ class WikiGameMap extends Cacheable {
   }
 
   Map<String, dynamic> toJson() => this.gameMap.cast<String, dynamic>();
+  
+  @override
+  void save() => cached.saveGameMap(this);
 }
 
 /// This is the `GameMap` class

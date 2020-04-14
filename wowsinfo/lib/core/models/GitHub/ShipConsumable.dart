@@ -34,6 +34,9 @@ class ShipConsumable extends Cacheable {
       'name': this.name,
     };
   }
+  
+  @override
+  void save() => throw Error();
 }
 
 /// This is the `BasicConsumable` class

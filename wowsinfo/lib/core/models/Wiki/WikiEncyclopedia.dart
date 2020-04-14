@@ -28,6 +28,9 @@ class WikiEncyclopedia extends Cacheable {
       'game_version': this.gameVersion,
     };
   }
+  
+  @override
+  void save() => cached.saveEncyclopedia(this);
 }
 
 /// This is the `ShipModule` class

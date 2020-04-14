@@ -48,6 +48,7 @@ class _ServerLanguageSelectionState extends State<ServerLanguageSelection> {
                 selected: e.key == langCode, 
                 onSelected: (_) {
                   setState(() => this.langCode = e.key);
+                  pref.setServerLanguage(e.key);
                 }
               );
             }).toList(growable: false),

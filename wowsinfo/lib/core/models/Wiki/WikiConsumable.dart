@@ -9,6 +9,9 @@ class WikiConsumable extends Cacheable {
   }
 
   Map<String, dynamic> toJson() => this.consumable.cast<String, dynamic>();
+  
+  @override
+  void save() => cached.saveConsumable(this);
 }
 
 /// This is the `Consumable` class

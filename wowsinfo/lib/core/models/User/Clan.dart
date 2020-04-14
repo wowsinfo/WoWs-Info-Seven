@@ -11,7 +11,7 @@ class Clan {
   Clan.fromJson(Map<String, dynamic> json) {
     this.tag = json['tag'];
     this.clanId = json['clan_id'];
-    this.server = Preference.shared.gameServer;
+    this.server = Preference.shared.gameServer.index;
   }
 
   Map<String, dynamic> toJson() {

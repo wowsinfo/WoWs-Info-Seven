@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:hive/hive.dart';
+import 'package:wowsinfo/core/data/GameServer.dart';
 import 'package:wowsinfo/core/data/LocalData.dart';
 import 'package:wowsinfo/core/data/Preference.dart';
+import 'package:wowsinfo/core/models/Cacheable.dart';
 import 'package:wowsinfo/core/models/GitHub/PRData.dart';
 import 'package:wowsinfo/core/models/GitHub/ShipAlias.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiAchievement.dart';
@@ -15,6 +17,18 @@ import 'package:wowsinfo/core/models/Wiki/WikiGameMap.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart';
 import 'package:wowsinfo/core/others/Utils.dart';
 import 'package:wowsinfo/core/extensions/DateTimeExtension.dart';
+import 'package:wowsinfo/core/parsers/API/APIParser.dart';
+import 'package:wowsinfo/core/parsers/API/WikiAchievementParser.dart';
+import 'package:wowsinfo/core/parsers/API/WikiCollectionItemParser.dart';
+import 'package:wowsinfo/core/parsers/API/WikiCollectionParser.dart';
+import 'package:wowsinfo/core/parsers/API/WikiCommanderSkillParser.dart';
+import 'package:wowsinfo/core/parsers/API/WikiConsumableParser.dart';
+import 'package:wowsinfo/core/parsers/API/WikiEncyclopediaParser.dart';
+import 'package:wowsinfo/core/parsers/API/WikiGameMapParser.dart';
+import 'package:wowsinfo/core/parsers/API/WikiWarshipParser.dart';
+import 'package:wowsinfo/core/parsers/GitHub/GitHubParser.dart';
+import 'package:wowsinfo/core/parsers/GitHub/PRDataParser.dart';
+import 'package:wowsinfo/core/parsers/GitHub/ShipAliasParser.dart';
 
 
 const BOX_NAME = 'cached_data';
@@ -96,7 +110,7 @@ class CachedData extends LocalData {
 
   WikiGameMap _gameMap;
   void loadGameMap() => _gameMap = decode(WIKI_GAME_MAP, (j) => WikiGameMap.fromJson(j));
-  void loadAndSavePRData(WikiGameMap data) {
+  void saveGameMap(WikiGameMap data) {
     _gameMap = data;
     box.put(WIKI_GAME_MAP, jsonEncode(data.toJson()));
   }
@@ -141,12 +155,37 @@ class CachedData extends LocalData {
 
     if (pref.lastUpdate.dayDifference(DateTime.now()) > 7) {
       // Update data here
+      final server = pref.gameServer;
+      List<APIParser> wows = [
+        WikiAchievementParser(server),
+        WikiCollectionParser(server),
+        WikiCollectionItemParser(server),
+        WikiCommanderSkillParser(server),
+        WikiConsumableParser(server),
+        // Encyclopedia will also be updated
+        // WikiEncyclopediaParser(server),
+        WikiGameMapParser(server),
+        WikiWarshipParser(server),
+      ];
+
+      List<GitHubParser> github = [
+        ShipAliasParser(),
+        PRDataParser(),
+      ];
+
+      await Future.wait(wows.map((element) async {
+        Cacheable data = element.parse(await element.download());
+        data?.save();
+      }));
+      await Future.wait(github.map((element) async {
+        Cacheable data = element.parse(await element.download());
+        data?.save();
+      }));  
     } else {
       loadAll();
     }
 
     // Close the box after everything has been loadded
-    close();
     return true;
   }
 

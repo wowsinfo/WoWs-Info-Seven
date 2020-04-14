@@ -12,7 +12,7 @@ class Player {
     this.nickname = json['nickname'];
     this.playerId = json['account_id'];
     // Use current server index, comment this line while testing
-    this.server = Preference.shared.gameServer;
+    this.server = Preference.shared.gameServer.index;
   }
 
   Map<String, dynamic> toJson() {
