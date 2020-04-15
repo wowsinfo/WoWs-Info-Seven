@@ -23,7 +23,7 @@ class WikiWarshipCell extends StatelessWidget {
                 ),
               ),
             ),
-            buildText('${ship.tierString} ${ship.name}'),
+            buildText(ship.tierName),
           ],
         ),
       ),

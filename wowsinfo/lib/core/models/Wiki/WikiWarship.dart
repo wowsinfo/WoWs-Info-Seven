@@ -1,4 +1,6 @@
 
+import 'package:wowsinfo/core/data/CachedData.dart';
+
 import '../Cacheable.dart';
 
 /// This is the `WikiWarship` class
@@ -18,20 +20,26 @@ class WikiWarship extends Cacheable {
 /// This is the `Warship` class
 class Warship {
   int tier;
-  String get tierString => ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'][tier - 1];
   String name;
   int shipId;
   String shipIdStr;
-  String get shipIdAndIdStr => '$shipIdStr $shipId';
   bool isSpecial;
   String nation;
   bool isPremium;
-  bool get isSpecialOrPremium => isSpecial || isPremium;
   DefaultProfile _defaultProfile;
-  int get health => _defaultProfile.health;
   Image _image;
-  String get smallImage => _image.small;
   String type;
+
+  int get health => _defaultProfile.health;
+  String get tierString => ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'][tier - 1];
+  String get tierName => '$tierString $name';
+  String get shipIdAndIdStr => '$shipIdStr $shipId';
+  bool get isSpecialOrPremium => isSpecial || isPremium;
+  String get smallImage => _image.small;
+  String get nationShipType {
+    final cached = CachedData.shared;
+    return '${cached.getNationString(nation)} - ${cached.getTypeString(type)}';
+  }
 
   Warship.fromJson(Map<String, dynamic> json) {
     this.tier = json['tier'];

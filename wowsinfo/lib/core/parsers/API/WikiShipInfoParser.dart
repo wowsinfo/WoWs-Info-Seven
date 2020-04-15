@@ -3,7 +3,7 @@ import 'package:wowsinfo/core/models/WoWs/WikiShipInfo.dart';
 import 'APIParser.dart';
 
 class WikiShipInfoParser extends APIParser {
-  WikiShipInfoParser(GameServer server, String shipId ) : super(server) {
+  WikiShipInfoParser(GameServer server, int shipId) : super(server) {
     this.link += '/wows/encyclopedia/ships/';
     addAPIKey();
     this.link += '&ship_id=$shipId';

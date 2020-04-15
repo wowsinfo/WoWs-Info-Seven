@@ -6,7 +6,6 @@ class WikiShipInfo {
   int priceGold;
   String shipIdStr;
   bool hasDemoProfile;
-  Image image;
   Module module;
   ModulesTree modulesTree;
   String nation;
@@ -29,7 +28,6 @@ class WikiShipInfo {
       this.priceGold = json['price_gold'];
       this.shipIdStr = json['ship_id_str'];
       this.hasDemoProfile = json['has_demo_profile'];
-      if (json['images'] != null) this.image = Image(json['images']);
       if (json['modules'] != null) this.module = Module(json['modules']);
       if (json['modules_tree'] != null) this.modulesTree = ModulesTree(json['modules_tree']);
       this.nation = json['nation'];
@@ -45,21 +43,6 @@ class WikiShipInfo {
       this.isSpecial = json['is_special'];
       this.name = json['name'];
     }
-  }
-}
-
-/// This is the `Image` class
-class Image {
-  String small;
-  String large;
-  String medium;
-  String contour;
-
-  Image(Map<String, dynamic> json) {
-    this.small = json['small'];
-    this.large = json['large'];
-    this.medium = json['medium'];
-    this.contour = json['contour'];
   }
 }
 

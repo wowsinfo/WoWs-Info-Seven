@@ -5,7 +5,7 @@ import 'PlatformWidget.dart';
 
 /// PlatformLoadingIndiactor class
 class PlatformLoadingIndiactor extends StatelessWidget {
-  PlatformLoadingIndiactor({Key key}) : super(key: key);
+  const PlatformLoadingIndiactor({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

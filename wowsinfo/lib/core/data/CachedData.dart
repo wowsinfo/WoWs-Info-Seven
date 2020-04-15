@@ -139,6 +139,8 @@ class CachedData extends LocalData {
   Map<String, String> get shipNation => _encyclopedia.shipNation;
   Map<String, String> get shipType => _encyclopedia.shipType;
   String get gameVersion => _encyclopedia.gameVersion;
+  String getNationString(String code) => shipNation[code];
+  String getTypeString(String code) => shipType[code];
   void loadEncyclopedia() => _encyclopedia = decode(WIKI_ENCYCLOPEDIA, (j) => WikiEncyclopedia.fromJson(j));
   void saveEncyclopedia(WikiEncyclopedia data) {
     _encyclopedia = data;
