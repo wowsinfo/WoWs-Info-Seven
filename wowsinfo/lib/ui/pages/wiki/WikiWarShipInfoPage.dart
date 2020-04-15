@@ -51,49 +51,47 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> {
 
   Widget buildBody() {
     if (error) return SizedBox.shrink();
-    if (loading) return buildLoading();
     return buildInfo();
   }
 
-  Center buildLoading() {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Hero(
-              tag: widget.ship.shipId,
-              child: Image(
-                image: NetworkImage(widget.ship.smallImage), 
-              ),
-            ),
-            const PlatformLoadingIndiactor(),
-          ],
-        ),
-      ),
-    );
-  }
-
-  /// Build ship info, everything
   Widget buildInfo() {
-    final textTheme = Theme.of(context).textTheme;
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Center(
           child: Column(
             children: [
-              Image(image: NetworkImage(widget.ship.smallImage)),
-              Text(widget.ship.tierName, style: textTheme.headline6),
-              Text(widget.ship.nationShipType),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(info.description, style: textTheme.bodyText1, textAlign: TextAlign.center),
+              Hero(
+                tag: widget.ship.shipId,
+                child: Image(image: NetworkImage(widget.ship.smallImage)),
+              ),
+              AnimatedSwitcher(
+                duration: Duration(milliseconds: 300),
+                switchInCurve: Curves.linearToEaseOut,
+                transitionBuilder: (w, a) => SizeTransition(sizeFactor: a, child: w),
+                child: buildContent()
               ),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  /// Build ship info, everything
+  Widget buildContent() {
+    if (loading) return Center(child: const PlatformLoadingIndiactor());
+
+    final textTheme = Theme.of(context).textTheme;
+    return Column(
+      children: [
+        Text(widget.ship.tierName, style: textTheme.headline6),
+        Text(widget.ship.nationShipType),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(info.description, style: textTheme.bodyText1, textAlign: TextAlign.center),
+        ),
+      ],
     );
   }
 
