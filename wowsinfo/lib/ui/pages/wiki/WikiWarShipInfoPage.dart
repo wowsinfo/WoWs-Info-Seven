@@ -91,7 +91,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
-              children: similarShips.map((e) => WikiWarshipCell(ship: e, showDetail: true)).toList(growable: false),
+              children: similarShips.map((e) => WikiWarshipCell(ship: e, showDetail: false)).toList(growable: false),
             ),
           ),
         ),
