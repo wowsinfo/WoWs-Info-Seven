@@ -45,6 +45,24 @@ class _WikiWarshipPageState extends State<WikiWarshipPage> {
         child: Row(
           children: <Widget>[
             VerticalDivider(width: 1),
+            SizedBox(
+              width: 96,
+              child: Column(
+                children: <Widget>[
+                  Expanded(
+                    child: ListView(
+                      children: cached.shipNation.entries.map((e) => FlatFilterChip(
+                        selected: e.key == this.nation,
+                        onSelected: (_) => this.updateNation(e.key), 
+                        label: Text(e.value, maxLines: 2),
+                      )).toList(growable: false),
+                    ),
+                  ),
+                  Divider(height: 0)
+                ],
+              ),
+            ),
+            VerticalDivider(width: 1),
             Expanded(
               child: Column(
                 children: [
@@ -67,27 +85,6 @@ class _WikiWarshipPageState extends State<WikiWarshipPage> {
                   Divider(height: 1),
                 ],
               )
-            ),
-            VerticalDivider(width: 1),
-            SizedBox(
-              width: 96,
-              child: Column(
-                children: <Widget>[
-                  Expanded(
-                    child: ListView(
-                      children: cached.shipNation.entries.map((e) => Transform.rotate(
-                        angle: -pi / 5,
-                        child: FlatFilterChip(
-                          selected: e.key == this.nation,
-                          onSelected: (_) => this.updateNation(e.key), 
-                          label: Text(e.value, maxLines: 2),
-                        ),
-                      )).toList(growable: false),
-                    ),
-                  ),
-                  Divider(height: 0)
-                ],
-              ),
             ),
             VerticalDivider(width: 1),
           ],
@@ -137,6 +134,7 @@ class WarshipList extends StatelessWidget {
         final itemCount = min(5, max(width / 200, 2)).toInt();
         return Scrollbar(
           child: GridView.builder(
+            padding: EdgeInsets.all(8),
             itemCount: ships.length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: itemCount,

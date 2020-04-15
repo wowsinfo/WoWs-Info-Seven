@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart' as Wiki;
+import 'package:wowsinfo/ui/widgets/TextWithCaption.dart';
 
 /// WikiWarShipInfoPage class
 class WikiWarShipInfoPage extends StatefulWidget {
@@ -11,6 +12,14 @@ class WikiWarShipInfoPage extends StatefulWidget {
 }
 
 class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> {
+  bool loading = true;
+  bool error = false;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
