@@ -42,51 +42,50 @@ class _WikiWarshipPageState extends State<WikiWarshipPage> {
         title: Text('WikiWarshipPage')
       ),
       body: SafeArea(
-        child: Row(
+        child: Column(
           children: <Widget>[
-            VerticalDivider(width: 1),
-            SizedBox(
-              width: 96,
-              child: Column(
+            Expanded(
+              child: Row(
                 children: <Widget>[
-                  Expanded(
-                    child: ListView(
-                      children: cached.shipNation.entries.map((e) => FlatFilterChip(
-                        selected: e.key == this.nation,
-                        onSelected: (_) => this.updateNation(e.key), 
-                        label: Text(e.value, maxLines: 2),
-                      )).toList(growable: false),
+                  SingleChildScrollView(
+                    padding: EdgeInsets.all(8),
+                    child: SizedBox(
+                      width: 96,
+                      child: Column(
+                        children: cached.shipNation.entries.map((e) => FlatFilterChip(
+                          selected: e.key == this.nation,
+                          onSelected: (_) => this.updateNation(e.key), 
+                          label: Text(e.value, style: Theme.of(context).textTheme.overline),
+                        )).toList(growable: false),
+                      ),
                     ),
                   ),
-                  Divider(height: 0)
+                  VerticalDivider(width: 1),
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Expanded(child: AnimatedSwitcher(
+                          duration: Duration(milliseconds: 300),
+                          child: WarshipList(ships: displayedShips.toList(growable: false), key: Key('$nation$type')),
+                        )),
+                      ],
+                    )
+                  ),
                 ],
               ),
             ),
-            VerticalDivider(width: 1),
-            Expanded(
-              child: Column(
-                children: [
-                  Expanded(child: AnimatedSwitcher(
-                    duration: Duration(milliseconds: 300),
-                    child: WarshipList(ships: displayedShips.toList(growable: false), key: Key('$nation$type')),
-                  )),
-                  Divider(height: 1),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: cached.shipType.entries.map((e) => FlatFilterChip(
-                        onSelected: (_) => this.updateType(e.key), 
-                        selected: e.key == this.type,
-                        label: Text(e.value),
-                      )).toList(growable: false),
-                    ),
-                  ),
-                  Divider(height: 1),
-                ],
-              )
+            Divider(height: 1),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: cached.shipType.entries.map((e) => FlatFilterChip(
+                  onSelected: (_) => this.updateType(e.key), 
+                  selected: e.key == this.type,
+                  label: Text(e.value),
+                )).toList(growable: false),
+              ),
             ),
-            VerticalDivider(width: 1),
           ],
         ),
       ),
