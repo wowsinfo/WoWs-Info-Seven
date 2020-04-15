@@ -7,7 +7,8 @@ class Meta {
   int total;
   int limit;
   int page;
-  bool get hasMorePage => page < pageTotal;
+  // Check if page total exists first
+  bool get hasMorePage => pageTotal != null ? page < pageTotal : false;
   /// If the account is not _hidden, it should be null
   dynamic _hidden;
   bool get isHidden => _hidden != null;

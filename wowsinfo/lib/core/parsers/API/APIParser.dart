@@ -51,7 +51,8 @@ abstract class APIParser {
             } else _hasMorePage = false;
           } else _hasMorePage = false;
         } else _hasMorePage = false;
-      } catch (e) {
+      } catch (e, s) {
+        Utils.debugPrint(s);
         Utils.debugPrint(e);
         _hasMorePage = false;
       }
