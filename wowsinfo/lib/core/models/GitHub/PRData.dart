@@ -21,8 +21,11 @@ class PRData extends Cacheable {
 /// This is the `AverageStats` class
 class AverageStats {
   double averageDamageDealt;
+  String get averageDamageString => averageDamageDealt.toStringAsFixed(0);
   double averageFrag;
+  String get averageFragString => averageFrag.toStringAsFixed(2);
   double winRate;
+  String get winRateString => winRate.toStringAsFixed(1) + '%';
 
   AverageStats.fromJson(Map<String, dynamic> json) {
     this.averageDamageDealt = json['average_damage_dealt'].toDouble();

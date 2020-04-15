@@ -3,9 +3,11 @@ import 'package:wowsinfo/core/data/Preference.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart' as Wiki;
 import 'package:wowsinfo/core/models/WoWs/WikiShipInfo.dart';
 import 'package:wowsinfo/core/models/WoWs/WikiShipModule.dart';
+import 'package:wowsinfo/core/others/AppLocalization.dart';
 import 'package:wowsinfo/core/parsers/API/WikiShipInfoParser.dart';
 import 'package:wowsinfo/ui/widgets/PlatformLoadingIndiactor.dart';
 import 'package:wowsinfo/ui/widgets/TextWithCaption.dart';
+import 'package:wowsinfo/ui/widgets/wiki/ShipAverageStats.dart';
 import 'package:wowsinfo/ui/widgets/wiki/ShipParameter.dart';
 
 /// WikiWarShipInfoPage class
@@ -19,6 +21,7 @@ class WikiWarShipInfoPage extends StatefulWidget {
 
 class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> {
   final pref = Preference.shared;
+  AppLocalization lang;
   bool loading = true;
   bool error = false;
   WikiShipInfo info;
@@ -28,6 +31,8 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> {
   @override
   void initState() {
     super.initState();
+
+    // Load data
     final parser = WikiShipInfoParser(pref.gameServer, widget.ship.shipId);
     parser.download().then((value) {
       this.info = parser.parse(value);
@@ -42,6 +47,8 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> {
 
   @override
   Widget build(BuildContext context) {
+    // Setup localization
+    lang = AppLocalization.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.ship.shipIdAndIdStr)
@@ -85,6 +92,11 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> {
       children: [
         Text(widget.ship.tierName, style: textTheme.headline6),
         Text(widget.ship.nationShipType),
+        buildShipPrice(),
+        Padding(
+          padding: const EdgeInsets.only(top: 8),
+          child: ShipAverageStats(shipId: info.shipId),
+        ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(info.description, style: textTheme.bodyText1, textAlign: TextAlign.center),
@@ -92,6 +104,12 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> {
         buildParameter(),
       ],
     );
+  }
+
+  /// A gold colour is used if it is priced by gold
+  Widget buildShipPrice() {
+    if (info.priceGold > 0) return Text(info.priceGold.toString(), style: TextStyle(color: Colors.orange));
+    return Text(info.priceCredit.toString(), style: TextStyle(color: Colors.blueGrey));
   }
 
   /// Build ship parameter

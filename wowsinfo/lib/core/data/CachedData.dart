@@ -61,6 +61,7 @@ class CachedData extends LocalData {
   final pref = Preference.shared;
 
   PRData _prData;
+  AverageStats getShipStats(String shipId) => _prData.ships[shipId];
   void loadPRData() => _prData = decode(PERSONAL_RATING, (j) => PRData.fromJson(j));
   void savePRData(PRData data) {
     _prData = data;
@@ -138,6 +139,7 @@ class CachedData extends LocalData {
   Map<String, String> get serverLanguage => _encyclopedia.language;
   Map<String, String> get shipNation => _encyclopedia.shipNation;
   Map<String, String> get shipType => _encyclopedia.shipType;
+  ShipModule get shipModule => _encyclopedia.shipModule;
   String get gameVersion => _encyclopedia.gameVersion;
   String getNationString(String code) => shipNation[code];
   String getTypeString(String code) => shipType[code];

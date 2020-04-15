@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
 
 /// This is the `WikiShipModule` class
@@ -24,10 +25,11 @@ class WikiShipModule {
   // Make sure the second value is DOUBLE
   List<List<Object>> getParameter(BuildContext context) {
     final lang = AppLocalization.of(context);
+    final cached = CachedData.shared;
     return [
       [lang.localised('warship_info_survivability'), armour?.total?.toDouble()],
-      [lang.localised('warship_info_artillery'), weaponry?.artillery?.toDouble()],
-      [lang.localised('warship_info_torpedoes'), weaponry?.torpedoe?.toDouble()],
+      [cached.shipModule.artillery, weaponry?.artillery?.toDouble()],
+      [cached.shipModule.torpedoe, weaponry?.torpedoe?.toDouble()],
       [lang.localised('warship_info_antiaircraft'), weaponry?.antiAircraft?.toDouble()],
       [lang.localised('warship_info_maneuverabilty'), mobility?.total?.toDouble()],
       [lang.localised('warship_info_aircraft'), weaponry?.aircraft?.toDouble()],
