@@ -7,6 +7,12 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## 15/04/2020
+### Summary
+`WikiWarshipInfo`. The top part is done, similar ships can be loaded and even the charts are done. Flutter is even faster than React Native in terms of development because it keeps the state. You can just request once and then start adding UI to it. It will keep the data and add whatever UI you added to it.
+### What to do tomorrow?
+The rest of `WikiWarshipInfo` and other Wiki page if possible.
+
 ## 14/04/2020
 ### Summary
 Everything can be downloaded and saved properly. This means that `the backend` is fine now. It is time to do `the UI`. It has been so long and finally the first step is done. `CachedData` is now cleaned. It has lots of data but not many keys so it was really quick. I will do more data mining for now. My ship additional is already 150KB. I will control it so that it is not over 1MB. `Website` and `Wiki` are added but they are not final. It was a great day of development. However, it lags on my device and simulator. Is it because it is not release? It works fine on web and macos so far. 
