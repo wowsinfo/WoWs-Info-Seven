@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/data/Preference.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart' as Wiki;
 import 'package:wowsinfo/core/models/WoWs/WikiShipInfo.dart';
@@ -9,6 +11,7 @@ import 'package:wowsinfo/ui/widgets/PlatformLoadingIndiactor.dart';
 import 'package:wowsinfo/ui/widgets/TextWithCaption.dart';
 import 'package:wowsinfo/ui/widgets/wiki/ShipAverageStats.dart';
 import 'package:wowsinfo/ui/widgets/wiki/ShipParameter.dart';
+import 'package:wowsinfo/ui/widgets/wiki/WikiWarshipCell.dart';
 
 /// WikiWarShipInfoPage class
 class WikiWarShipInfoPage extends StatefulWidget {
@@ -19,7 +22,7 @@ class WikiWarShipInfoPage extends StatefulWidget {
   _WikiWarShipInfoPageState createState() => _WikiWarShipInfoPageState();
 }
 
-class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> {
+class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTickerProviderStateMixin {
   final pref = Preference.shared;
   AppLocalization lang;
   bool loading = true;
@@ -28,9 +31,36 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> {
   /// Modules can be changed by users
   WikiShipModule modules;
 
+  ScrollController controller;
+  bool showBottomBar = true;
+  Iterable<Wiki.Warship> similarShips;
+
   @override
   void initState() {
     super.initState();
+    // Setup scroll controller to hide bottom app bar
+    this.controller = ScrollController();
+    controller.addListener(() {
+      final direction = controller.position.userScrollDirection;
+      if (direction == ScrollDirection.reverse) {
+        if (showBottomBar) {
+          setState(() {
+            showBottomBar = false;
+          });
+        }
+      } else if (direction == ScrollDirection.forward) {
+        if (!showBottomBar) {
+          setState(() {
+            showBottomBar = true;
+          });
+        }
+      }
+    });
+
+    // Find similar ships
+    this.similarShips = CachedData.shared.warship.values.where((s) {
+      return widget.ship.isSimilar(s);
+    });
 
     // Load data
     final parser = WikiShipInfoParser(pref.gameServer, widget.ship.shipId);
@@ -54,6 +84,18 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> {
         title: Text(widget.ship.shipIdAndIdStr)
       ),
       body: SafeArea(child: buildBody()),
+      bottomNavigationBar: AnimatedContainer(
+        height: showBottomBar ? 120 : 0,
+        duration: Duration(milliseconds: 300), 
+        child: BottomAppBar(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: similarShips.map((e) => WikiWarshipCell(ship: e, showDetail: true)).toList(growable: false),
+            ),
+          ),
+        ),
+      )
     );
   }
 
@@ -64,6 +106,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> {
 
   Widget buildInfo() {
     return SingleChildScrollView(
+      controller: controller,
       child: Center(
         child: Column(
           children: [

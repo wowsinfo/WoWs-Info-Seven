@@ -41,6 +41,12 @@ class Warship {
     return '${cached.getNationString(nation)} ${cached.getTypeString(type)}';
   }
 
+  /// Check if this ship is similar to me but not me
+  bool isSimilar(Warship s) {
+    if (s.shipId == shipId) return false;
+    return s.tier == tier && s.type == type;
+  }
+
   Warship.fromJson(Map<String, dynamic> json) {
     this.tier = json['tier'];
     this.name = json['name'];

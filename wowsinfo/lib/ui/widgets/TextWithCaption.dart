@@ -10,7 +10,6 @@ class TextWithCaption extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        
         Text(
           title, 
           textAlign: TextAlign.center,
