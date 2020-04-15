@@ -33,16 +33,23 @@ class Warship {
   int get health => _defaultProfile.health;
   String get tierString => ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'][tier - 1];
   String get tierName => '$tierString $name';
+  String get tierType => '$tierString $typeString';
+  String get nationShipType => '$nationString $typeString';
   String get shipIdAndIdStr => '$shipIdStr $shipId';
   bool get isSpecialOrPremium => isSpecial || isPremium;
   String get smallImage => _image.small;
-  String get nationShipType {
+  String get typeString {
     final cached = CachedData.shared;
-    return '${cached.getNationString(nation)} ${cached.getTypeString(type)}';
+    return cached.getTypeString(type);
+  }
+  String get nationString {
+    final cached = CachedData.shared;
+    return cached.getTypeString(type);
   }
 
   /// Check if this ship is similar to me but not me
   bool isSimilar(Warship s) {
+    if (s.name.startsWith('[')) return false;
     if (s.shipId == shipId) return false;
     return s.tier == tier && s.type == type;
   }

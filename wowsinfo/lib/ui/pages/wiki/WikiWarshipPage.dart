@@ -140,7 +140,7 @@ class WarshipList extends StatelessWidget {
               childAspectRatio: 1.3,
             ), 
             itemBuilder: (context, index) {
-              return WikiWarshipCell(ship: ships[index], showDetail: true);
+              return WikiWarshipCell(ship: ships[index], showDetail: true, hero: true);
             }
           ),
         );

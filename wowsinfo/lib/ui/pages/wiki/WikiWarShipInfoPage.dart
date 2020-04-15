@@ -7,6 +7,7 @@ import 'package:wowsinfo/core/models/WoWs/WikiShipInfo.dart';
 import 'package:wowsinfo/core/models/WoWs/WikiShipModule.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
 import 'package:wowsinfo/core/parsers/API/WikiShipInfoParser.dart';
+import 'package:wowsinfo/ui/pages/wiki/WikiWarshipSimilarPage.dart';
 import 'package:wowsinfo/ui/widgets/PlatformLoadingIndiactor.dart';
 import 'package:wowsinfo/ui/widgets/TextWithCaption.dart';
 import 'package:wowsinfo/ui/widgets/wiki/ShipAverageStats.dart';
@@ -84,15 +85,25 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
         title: Text(widget.ship.shipIdAndIdStr)
       ),
       body: SafeArea(child: buildBody()),
-      bottomNavigationBar: AnimatedContainer(
-        height: showBottomBar ? 120 : 0,
-        duration: Duration(milliseconds: 300), 
-        child: BottomAppBar(
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: similarShips.map((e) => WikiWarshipCell(ship: e, showDetail: false)).toList(growable: false),
-            ),
+      bottomNavigationBar: BottomAppBar(
+        child: AnimatedContainer(
+          height: showBottomBar ? 130 : 0,
+          duration: Duration(milliseconds: 300), 
+          child: Column(
+            children: <Widget>[
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.only(top: 4, left: 8, right: 8),
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: similarShips.map((e) => WikiWarshipCell(ship: e, showDetail: false)).toList(growable: false),
+                  ),
+                ),
+              ),
+              OutlineButton(onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (c) => WikiWarshipSimilarPage(ships: similarShips)));
+              }, child: Text('Text ship compare')),
+            ],
           ),
         ),
       )
@@ -144,6 +155,9 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
           padding: const EdgeInsets.all(8.0),
           child: Text(info.description, style: textTheme.bodyText1, textAlign: TextAlign.center),
         ),
+        buildParameter(),
+        buildParameter(),
+        buildParameter(),
         buildParameter(),
       ],
     );

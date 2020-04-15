@@ -6,7 +6,8 @@ import 'package:wowsinfo/ui/pages/wiki/WikiWarShipInfoPage.dart';
 class WikiWarshipCell extends StatelessWidget {
   final Wiki.Warship ship;
   final bool showDetail;
-  WikiWarshipCell({Key key, @required this.ship, this.showDetail = false}) : super(key: key);
+  final bool hero;
+  WikiWarshipCell({Key key, @required this.ship, this.showDetail = false, this.hero = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +17,13 @@ class WikiWarshipCell extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-              child: Hero(
+              child: hero ? Hero(
                 tag: ship.shipId,
                 child: Image(
                   image: NetworkImage(ship.smallImage), 
                 ),
+              ) : Image(
+                image: NetworkImage(ship.smallImage), 
               ),
             ),
             buildText(ship.tierName),
