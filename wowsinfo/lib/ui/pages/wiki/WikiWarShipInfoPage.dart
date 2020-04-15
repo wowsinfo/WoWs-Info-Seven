@@ -6,6 +6,7 @@ import 'package:wowsinfo/core/models/WoWs/WikiShipModule.dart';
 import 'package:wowsinfo/core/parsers/API/WikiShipInfoParser.dart';
 import 'package:wowsinfo/ui/widgets/PlatformLoadingIndiactor.dart';
 import 'package:wowsinfo/ui/widgets/TextWithCaption.dart';
+import 'package:wowsinfo/ui/widgets/wiki/ShipParameter.dart';
 
 /// WikiWarShipInfoPage class
 class WikiWarShipInfoPage extends StatefulWidget {
@@ -45,7 +46,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> {
       appBar: AppBar(
         title: Text(widget.ship.shipIdAndIdStr)
       ),
-      body: buildBody(),
+      body: SafeArea(child: buildBody()),
     );
   }
 
@@ -56,23 +57,20 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> {
 
   Widget buildInfo() {
     return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Center(
-          child: Column(
-            children: [
-              Hero(
-                tag: widget.ship.shipId,
-                child: Image(image: NetworkImage(widget.ship.smallImage)),
-              ),
-              AnimatedSwitcher(
-                duration: Duration(milliseconds: 300),
-                switchInCurve: Curves.linearToEaseOut,
-                transitionBuilder: (w, a) => SizeTransition(sizeFactor: a, child: w),
-                child: buildContent()
-              ),
-            ],
-          ),
+      child: Center(
+        child: Column(
+          children: [
+            Hero(
+              tag: widget.ship.shipId,
+              child: Image(image: NetworkImage(widget.ship.smallImage)),
+            ),
+            AnimatedSwitcher(
+              duration: Duration(milliseconds: 300),
+              switchInCurve: Curves.linearToEaseOut,
+              transitionBuilder: (w, a) => SizeTransition(sizeFactor: a, child: w),
+              child: buildContent()
+            ),
+          ],
         ),
       ),
     );
@@ -91,12 +89,16 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> {
           padding: const EdgeInsets.all(8.0),
           child: Text(info.description, style: textTheme.bodyText1, textAlign: TextAlign.center),
         ),
+        buildParameter(),
       ],
     );
   }
 
   /// Build ship parameter
   Widget buildParameter() {
-    
+    return Column(
+      children: modules.getParameter(context).map((e) => 
+        ShipParameter(paramater: e)).toList(growable: false),
+    );
   }
 }

@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:wowsinfo/core/others/AppLocalization.dart';
+
 /// This is the `WikiShipModule` class
 class WikiShipModule {
   Engine engine;
@@ -17,6 +20,20 @@ class WikiShipModule {
   Concealment concealment;
   Armour armour;
   DiveBomber diveBomber;
+
+  // Make sure the second value is DOUBLE
+  List<List<Object>> getParameter(BuildContext context) {
+    final lang = AppLocalization.of(context);
+    return [
+      [lang.localised('warship_info_survivability'), armour?.total?.toDouble()],
+      [lang.localised('warship_info_artillery'), weaponry?.artillery?.toDouble()],
+      [lang.localised('warship_info_torpedoes'), weaponry?.torpedoe?.toDouble()],
+      [lang.localised('warship_info_antiaircraft'), weaponry?.antiAircraft?.toDouble()],
+      [lang.localised('warship_info_maneuverabilty'), mobility?.total?.toDouble()],
+      [lang.localised('warship_info_aircraft'), weaponry?.aircraft?.toDouble()],
+      [lang.localised('warship_info_concealment'), concealment?.total?.toDouble()],
+    ];
+  }
 
   WikiShipModule(Map<String, dynamic> json) {
     if (json['engine'] != null) this.engine = Engine(json['engine']);

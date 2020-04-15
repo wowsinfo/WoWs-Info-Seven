@@ -38,7 +38,7 @@ class Warship {
   String get smallImage => _image.small;
   String get nationShipType {
     final cached = CachedData.shared;
-    return '${cached.getNationString(nation)} - ${cached.getTypeString(type)}';
+    return '${cached.getNationString(nation)} ${cached.getTypeString(type)}';
   }
 
   Warship.fromJson(Map<String, dynamic> json) {
