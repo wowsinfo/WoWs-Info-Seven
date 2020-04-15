@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:charts_flutter/flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:wowsinfo/core/data/AppSettings.dart';
 import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart';
 
@@ -7,6 +10,7 @@ import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart';
 class WikiWarshipSimilarPage extends StatelessWidget {
   final Iterable<Warship> ships;
   final cached = CachedData.shared;
+  final app = AppSettings.shared;
   WikiWarshipSimilarPage({Key key, @required this.ships}) : super(key: key);
 
   @override
@@ -50,21 +54,23 @@ class WikiWarshipSimilarPage extends StatelessWidget {
       ),
     ];
 
-    final height = 20.0 * ships.length;
+    final height = 20.0 * max(ships.length, 5).toDouble();
 
     return Scaffold(
       appBar: AppBar(
         title: Text(ships.first.tierType)
       ),
-      body: Center(
-        child: SingleChildScrollView(
-          padding: EdgeInsets.all(16),
-          child: Column(
-            children: [
-              buildChart(height, damageList),
-              buildChart(height, winrateList),
-              buildChart(height, fragList),
-            ],
+      body: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
+            padding: EdgeInsets.all(16),
+            child: Column(
+              children: [
+                buildChart(height, damageList),
+                buildChart(height, winrateList),
+                buildChart(height, fragList),
+              ],
+            ),
           ),
         ),
       ),
@@ -72,6 +78,22 @@ class WikiWarshipSimilarPage extends StatelessWidget {
   }
 
   Widget buildChart(double height, List<Series<ShipValue, String>> damageList) {
+    final axis = NumericAxisSpec(
+      renderSpec: SmallTickRendererSpec(
+        labelStyle: TextStyleSpec(
+          color: app.isDarkMode() ? Color.white : Color.black,
+        ),
+      )
+    );
+
+    final dAxis = AxisSpec<String>(
+      renderSpec: SmallTickRendererSpec(
+        labelStyle: TextStyleSpec(
+          color: app.isDarkMode() ? Color.white : Color.black,
+        ),
+      )
+    );
+
     return SizedBox(
       height: height,
       child: BarChart(
@@ -81,6 +103,8 @@ class WikiWarshipSimilarPage extends StatelessWidget {
         barRendererDecorator: BarLabelDecorator<String>(
           labelAnchor: BarLabelAnchor.end
         ),
+        domainAxis: dAxis,
+        primaryMeasureAxis: axis,
       ),
     );
   }
