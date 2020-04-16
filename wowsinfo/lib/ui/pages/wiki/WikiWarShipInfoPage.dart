@@ -143,7 +143,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
     return Padding(
       padding: const EdgeInsets.only(bottom: 8, top: 8),
       child: Text(title, style: theme.textTheme.headline5.copyWith(
-        color: theme.primaryColor
+        color: theme.accentColor
       )),
     );
   }
