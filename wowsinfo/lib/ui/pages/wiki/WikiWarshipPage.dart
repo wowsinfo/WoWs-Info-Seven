@@ -16,7 +16,7 @@ class WikiWarshipPage extends StatefulWidget {
 }
 
 
-class _WikiWarshipPageState extends State<WikiWarshipPage> {
+class _WikiWarshipPageState extends State<WikiWarshipPage> with SingleTickerProviderStateMixin {
   final cached = CachedData.shared;
   /// Only one nation can be shown at a time
   String nation;
@@ -53,9 +53,13 @@ class _WikiWarshipPageState extends State<WikiWarshipPage> {
                 children: <Widget>[
                   SingleChildScrollView(
                     padding: EdgeInsets.all(8),
-                    child: SizedBox(
-                      width: Utils.of(context).isTablet() ? 200 : 100,
-                      child: buildNationList(nation, context),
+                    child: AnimatedSize(
+                      duration: Duration(milliseconds: 300),
+                      vsync: this,
+                      child: SizedBox(
+                        width: Utils.of(context).isTablet() ? 200 : 100,
+                        child: buildNationList(nation, context),
+                      ),
                     )
                   ),
                   VerticalDivider(width: 1),

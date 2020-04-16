@@ -138,6 +138,8 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
     child: Text(title, style: Theme.of(context).textTheme.headline6),
   );
 
+  Text buildWeaponName(String name) => Text(name, textAlign: TextAlign.center, style: TextStyle(fontSize: 17));
+
   Widget buildBody() {
     if (error) return SizedBox.shrink();
     return buildInfo();
@@ -188,7 +190,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
         SizedBox(height: 8),
         buildSurvivability(),
         buildArtillery(),
-        buildSeconday(),
+        buildSecondary(),
       ],
     );
   }
@@ -271,34 +273,32 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
             ),
           ],
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: 8, bottom: 8),
-          child: SizedBox(
-            width: double.infinity,
-            child: Text(
-              main.shellName, textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 17),
+        Column(
+          children: main.shellReversed.map((e) => Padding(
+            padding: const EdgeInsets.all(8),
+            child: Wrap(
+              alignment: WrapAlignment.center,
+              children: [
+                buildWeaponName(e.shellNameWithType),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    TextWithCaption(
+                      title: 'a',
+                      value: e.fireChance.toString(),
+                    ),
+                    TextWithCaption(
+                      title: 'a',
+                      value: e.damageString,
+                    ),
+                    TextWithCaption(
+                      title: 'a',
+                      value: e.speed,
+                    ),
+                  ],
+                ),
+              ],
             ),
-          ),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: main.shells.map((e) => Column(
-            children: [
-              Text(e.type, style: TextStyle(fontWeight: FontWeight.w500, fontSize: 17)),
-              TextWithCaption(
-                title: 'a',
-                value: e.fireChance.toString(),
-              ),
-              TextWithCaption(
-                title: 'a',
-                value: e.damageString,
-              ),
-              TextWithCaption(
-                title: 'a',
-                value: e.speed,
-              ),
-            ],
           )).toList(growable: false),
         ),
         Divider(),
@@ -306,11 +306,45 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
     );
   }
 
-  Widget buildSeconday() {
+  Widget buildSecondary() {
     final seconday = modules.atba;
     if (seconday == null) return SizedBox.shrink();
     return Column(
-
+      children: [
+        buildTitle('Secondary'),
+        Column(
+          children: seconday.slots.map((e) => Padding(
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: Column(
+              children: [
+                buildWeaponName(e.nameWithShellType),
+                Wrap(
+                  alignment: WrapAlignment.center,
+                  children: <Widget>[
+                    TextWithCaption(
+                      title: 'a',
+                      value: e.reloadTime,
+                    ),
+                    TextWithCaption(
+                      title: 'a',
+                      value: e.speedString,
+                    ),
+                    TextWithCaption(
+                      title: 'a',
+                      value: e.fireChance,
+                    ),
+                    TextWithCaption(
+                      title: 'a',
+                      value: e.damageString,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          )).toList(growable: false),
+        ),
+        Divider(),
+      ],
     );
   }
 }

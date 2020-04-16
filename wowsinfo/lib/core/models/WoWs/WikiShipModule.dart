@@ -162,7 +162,7 @@ class MainGunSlot {
 
 /// This is the `SecondarySlot` class
 class SecondarySlot {
-  double burnProbability;
+  double burnProbability = -50;
   int bulletSpeed;
   String name;
   double shotDelay;
@@ -170,6 +170,12 @@ class SecondarySlot {
   int bulletMass;
   String type;
   double gunRate;
+
+  String get fireChance => '${burnProbability ?? -50} %';
+  String get damageString => '$damage';
+  String get speedString => '$bulletMass m/s';
+  String get reloadTime => '${(60 / gunRate).toStringAsFixed(1)} s';
+  String get nameWithShellType => '$type - $name';
 
   SecondarySlot(Map<String, dynamic> json) {
     this.name = json['name'];
@@ -256,6 +262,9 @@ class Atba {
   double distance;
   Map<String, SecondarySlot> slot;
 
+  String get rangeString => '${distance.toStringAsFixed(1)} km';
+  Iterable<SecondarySlot> get slots => slot.values;
+
   Atba(Map<String, dynamic> json) {
     this.distance = json['distance'];
     this.slot = (json['slots'] as Map).map((key, value) => MapEntry(key, SecondarySlot(value)));
@@ -280,7 +289,6 @@ class Artillery {
   double get reloadTime => 60 / gunRate;
   /// This is how many guns does she have, 2x3 1x2
   String get configurationString => slot.values.map((e) => '${e.barrels} x ${e.guns}').join(' | ');
-  String get shellName => shellReversed.map((e) => '${e.type} - ${e.name}').join('\n');
   /// HE, AP, CS -> reverse it to put HE first
   Iterable<Shell> get shellReversed => shell.values.toList(growable: false).reversed;
   Iterable<Shell> get shells => shellReversed;
@@ -311,6 +319,7 @@ class Shell {
   String get massString => '$bulletMass kg';
   String get damageString => '$damage (${(damage / 3).toStringAsFixed(0)})';
   String get speed => '$bulletSpeed m/s';
+  String get shellNameWithType => '$type - $name';
 
   Shell(Map<String, dynamic> json) {
     this.burnProbability = json['burn_probability'];
