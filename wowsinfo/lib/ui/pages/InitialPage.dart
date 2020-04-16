@@ -5,12 +5,9 @@ import 'package:wowsinfo/core/data/AppSettings.dart';
 import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/data/Constant.dart';
 import 'package:wowsinfo/core/data/Preference.dart';
-import 'package:wowsinfo/core/others/Utils.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
-import 'package:wowsinfo/main.dart';
 import 'package:wowsinfo/ui/pages/BottomNavigationPage.dart';
 import 'package:wowsinfo/ui/widgets/PlatformLoadingIndiactor.dart';
-import 'package:wowsinfo/ui/widgets/PlatformWidget.dart';
 
 /// InitialPage class
 /// - It shows a full screen overlay

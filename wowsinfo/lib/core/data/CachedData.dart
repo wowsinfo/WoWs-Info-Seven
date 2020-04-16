@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:hive/hive.dart';
 import 'package:wowsinfo/core/data/Constant.dart';
-import 'package:wowsinfo/core/data/GameServer.dart';
 import 'package:wowsinfo/core/data/LocalData.dart';
 import 'package:wowsinfo/core/data/Preference.dart';
 import 'package:wowsinfo/core/models/Cacheable.dart';
@@ -138,7 +137,9 @@ class CachedData extends LocalData {
   /// A map with language code and its value
   Map<String, String> get serverLanguage => _encyclopedia.language;
   Map<String, String> get shipNation => _encyclopedia.shipNation;
+  Iterable<String> get sortedNationKeys => shipNation.keys.toList(growable: false)..sort();
   Map<String, String> get shipType => _encyclopedia.shipType;
+  Iterable<String> get sortedTypeKeys => shipType.keys.toList(growable: false)..sort();
   ShipModule get shipModule => _encyclopedia.shipModule;
   String get gameVersion => _encyclopedia.gameVersion;
   String getNationString(String code) => shipNation[code];

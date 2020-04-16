@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart';
+import 'package:wowsinfo/core/others/Utils.dart';
 import 'package:wowsinfo/ui/widgets/FlatFilterChip.dart';
 import 'package:wowsinfo/ui/widgets/wiki/WikiWarshipCell.dart';
 
@@ -32,11 +33,14 @@ class _WikiWarshipPageState extends State<WikiWarshipPage> {
     // Grab a sorted list
     this.sortedList = cached.sortedWarshipList;
     // Select a random nation here
-    this.updateNation((cached.shipNation.keys.toList()..shuffle()).first);
+    this.updateNation((cached.shipNation.keys.toList(growable: false)..shuffle()).first);
   }
 
   @override
   Widget build(BuildContext context) {
+    final nation = cached.shipNation;
+    final type = cached.shipType;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('WikiWarshipPage')
@@ -50,15 +54,9 @@ class _WikiWarshipPageState extends State<WikiWarshipPage> {
                   SingleChildScrollView(
                     padding: EdgeInsets.all(8),
                     child: SizedBox(
-                      width: 96,
-                      child: Column(
-                        children: cached.shipNation.entries.map((e) => FlatFilterChip(
-                          selected: e.key == this.nation,
-                          onSelected: (_) => this.updateNation(e.key), 
-                          label: Text(e.value, style: Theme.of(context).textTheme.overline),
-                        )).toList(growable: false),
-                      ),
-                    ),
+                      width: Utils.of(context).isTablet() ? 200 : 100,
+                      child: buildNationList(nation, context),
+                    )
                   ),
                   VerticalDivider(width: 1),
                   Expanded(
@@ -77,18 +75,32 @@ class _WikiWarshipPageState extends State<WikiWarshipPage> {
             Divider(height: 1),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: cached.shipType.entries.map((e) => FlatFilterChip(
-                  onSelected: (_) => this.updateType(e.key), 
-                  selected: e.key == this.type,
-                  label: Text(e.value),
-                )).toList(growable: false),
-              ),
+              child: buildTypeList(type),
             ),
           ],
         ),
       ),
+    );
+  }
+
+  Row buildTypeList(Map<String, String> type) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: cached.sortedTypeKeys.map((e) => FlatFilterChip(
+        onSelected: (_) => this.updateType(e), 
+        selected: e == this.type,
+        label: Text(type[e]),
+      )).toList(growable: false),
+    );
+  }
+
+  Column buildNationList(Map<String, String> nation, BuildContext context) {
+    return Column(
+      children: cached.sortedNationKeys.map((e) => FlatFilterChip(
+        selected: e == this.nation,
+        onSelected: (_) => this.updateNation(e), 
+        label: Text(nation[e], style: Theme.of(context).textTheme.overline),
+      )).toList(growable: false),
     );
   }
 
