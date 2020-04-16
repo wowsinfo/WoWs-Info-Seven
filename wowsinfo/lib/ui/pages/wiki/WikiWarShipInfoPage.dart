@@ -130,6 +130,12 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
     );
   }
 
+  /// Build title with style, `headline6`
+  Widget buildTitle(String title) => Padding(
+    padding: const EdgeInsets.only(bottom: 4),
+    child: Text(title, style: Theme.of(context).textTheme.headline6),
+  );
+
   Widget buildBody() {
     if (error) return SizedBox.shrink();
     return buildInfo();
@@ -167,7 +173,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
     final textTheme = Theme.of(context).textTheme;
     return Column(
       children: [
-        Text(widget.ship.tierName, style: textTheme.headline6),
+        buildTitle(widget.ship.tierName),
         Text(widget.ship.nationShipType),
         buildShipPrice(),
         Padding(
@@ -179,9 +185,10 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
           child: Text(info.description, style: textTheme.bodyText1, textAlign: TextAlign.center),
         ),
         buildParameter(),
-        buildParameter(),
-        buildParameter(),
-        buildParameter(),
+        SizedBox(height: 8),
+        buildSurvivability(),
+        buildArtillery(),
+        buildSeconday(),
       ],
     );
   }
@@ -197,6 +204,113 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
     return Column(
       children: modules.getParameter(context).map((e) => 
         ShipParameter(paramater: e)).toList(growable: false),
+    );
+  }
+
+  Widget buildSurvivability() {
+    final armour = modules.armour;
+    if (armour == null) return SizedBox.shrink();
+    return Column(
+      children: <Widget>[
+        buildTitle('Sur'),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            TextWithCaption(
+              title: 'a',
+              value: armour.health.toString(),
+            ),
+            TextWithCaption(
+              title: 'a',
+              value: armour.armourString,
+            ),
+            TextWithCaption(
+              title: 'a',
+              value: armour.protectionString,
+            ),
+          ],
+        ),
+        Divider(),
+      ],
+    );
+  }
+
+  Widget buildArtillery() {
+    final main = modules.artillery;
+    if (main == null) return SizedBox.shrink();
+    return Column(
+      children: [
+        buildTitle('Main'),
+        Wrap(
+          alignment: WrapAlignment.center,
+          spacing: 8,
+          children: [
+            TextWithCaption(
+              title: 'a',
+              value: main.reloadTime.toStringAsFixed(1),
+            ),
+            TextWithCaption(
+              title: 'a',
+              value: main.rangeString,
+            ),
+            TextWithCaption(
+              title: 'a',
+              value: main.configurationString,
+            ),
+            TextWithCaption(
+              title: 'a',
+              value: main.dispersionString,
+            ),
+            TextWithCaption(
+              title: 'a',
+              value: main.rotationString,
+            ),
+            TextWithCaption(
+              title: 'sigma',
+              value: main.rotationString,
+            ),
+          ],
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 8, bottom: 8),
+          child: SizedBox(
+            width: double.infinity,
+            child: Text(
+              main.shellName, textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 17),
+            ),
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: main.shells.map((e) => Column(
+            children: [
+              Text(e.type, style: TextStyle(fontWeight: FontWeight.w500, fontSize: 17)),
+              TextWithCaption(
+                title: 'a',
+                value: e.fireChance.toString(),
+              ),
+              TextWithCaption(
+                title: 'a',
+                value: e.damageString,
+              ),
+              TextWithCaption(
+                title: 'a',
+                value: e.speed,
+              ),
+            ],
+          )).toList(growable: false),
+        ),
+        Divider(),
+      ],
+    );
+  }
+
+  Widget buildSeconday() {
+    final seconday = modules.atba;
+    if (seconday == null) return SizedBox.shrink();
+    return Column(
+
     );
   }
 }

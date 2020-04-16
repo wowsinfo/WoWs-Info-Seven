@@ -7,6 +7,11 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## 16/04/2020
+### Summary
+Ship compare section can be hidden if the user scrolls down and will popup again if scrolls up. Survivability and Main battery are added. 
+### What to do tomorrow?
+
 ## 15/04/2020
 ### Summary
 `WikiWarshipInfo`. The top part is done, similar ships can be loaded and even the charts are done. Flutter is even faster than React Native in terms of development because it keeps the state. You can just request once and then start adding UI to it. It will keep the data and add whatever UI you added to it.

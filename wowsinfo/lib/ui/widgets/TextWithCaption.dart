@@ -8,20 +8,26 @@ class TextWithCaption extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          title, 
-          textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.caption,
-          maxLines: 2,
+    return Padding(
+      padding: const EdgeInsets.only(top: 4),
+      child: SizedBox(
+        width: 100,
+        child: Column(
+          children: [
+            Text(
+              title, 
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.caption,
+              maxLines: 2,
+            ),
+            Text(
+              value,
+              textAlign: TextAlign.center,
+              maxLines: 2,
+            ),
+          ],
         ),
-        Text(
-          value,
-          textAlign: TextAlign.center,
-          maxLines: 2,
-        ),
-      ],
+      ),
     );
   }
 }

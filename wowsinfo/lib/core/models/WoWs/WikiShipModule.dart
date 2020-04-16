@@ -243,6 +243,8 @@ class Range {
   int max;
   int min;
 
+  String get armourString => '$min - $max mm';
+
   Range(Map<String, dynamic> json) {
     this.max = json['max'];
     this.min = json['min'];
@@ -272,6 +274,17 @@ class Artillery {
   Map<String, MainGunSlot> slot;
   double gunRate;
 
+  String get dispersionString => '$maxDispersion m';
+  String get rotationString => '$rotationTime s';
+  String get rangeString => '${distance.toStringAsFixed(1)} km';
+  double get reloadTime => 60 / gunRate;
+  /// This is how many guns does she have, 2x3 1x2
+  String get configurationString => slot.values.map((e) => '${e.barrels} x ${e.guns}').join(' | ');
+  String get shellName => shellReversed.map((e) => '${e.type} - ${e.name}').join('\n');
+  /// HE, AP, CS -> reverse it to put HE first
+  Iterable<Shell> get shellReversed => shell.values.toList(growable: false).reversed;
+  Iterable<Shell> get shells => shellReversed;
+
   Artillery(Map<String, dynamic> json) {
     this.maxDispersion = json['max_dispersion'];
     this.shell = (json['shells'] as Map).map((key, value) => MapEntry(key, Shell(value)));
@@ -293,6 +306,11 @@ class Shell {
   int damage;
   int bulletMass;
   String type;
+  
+  double get fireChance => burnProbability ?? -50;
+  String get massString => '$bulletMass kg';
+  String get damageString => '$damage (${(damage / 3).toStringAsFixed(0)})';
+  String get speed => '$bulletSpeed m/s';
 
   Shell(Map<String, dynamic> json) {
     this.burnProbability = json['burn_probability'];
@@ -433,6 +451,10 @@ class Armour {
   Extremitie extremitie;
   int total;
   Citadel citadel;
+
+  /// Reduce torpedo damage by ??%
+  String get protectionString => '$floodDamage%';
+  String get armourString => range?.armourString;
 
   Armour(Map<String, dynamic> json) {
     this.casemate = Casemate(json['casemate']);
