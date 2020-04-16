@@ -89,6 +89,15 @@ class TorpedoBomber {
   int torpedoBomberId;
   String torpedoName;
 
+  String get nameWithLevel => '$levelString $name';
+  String get damageString => '$torpedoDamage';
+  String get torpSpeed => '$torpedoMaxSpeed kt';
+  String get planeSpeed => '$cruiseSpeed kt';
+  String get squadronSize => '${countInSquadron.max} x';
+  String get torpRange => '${torpedoDistance.toStringAsFixed(1)} km';
+  String get levelString => 'Lv$planeLevel';
+  String get healthString => '$maxHealth';
+
   TorpedoBomber(Map<String, dynamic> json) {
     this.torpedoDistance = json['torpedo_distance'];
     this.planeLevel = json['plane_level'];
@@ -169,7 +178,7 @@ class MainGunSlot {
 
 /// This is the `SecondarySlot` class
 class SecondarySlot {
-  double burnProbability = -50;
+  double burnProbability;
   int bulletSpeed;
   String name;
   double shotDelay;
@@ -178,7 +187,7 @@ class SecondarySlot {
   String type;
   double gunRate;
 
-  String get fireChance => '${burnProbability ?? -50} %';
+  String get fireChance => '${burnProbability ?? 0} %';
   String get damageString => '$damage';
   String get speedString => '$bulletMass m/s';
   String get reloadTime => '${(60 / gunRate).toStringAsFixed(1)} s';
@@ -217,13 +226,17 @@ class TorpedoeSlot {
 class Mobility {
   double rudderTime;
   int total;
-  int turningRadiu;
+  int turningRadius;
   double maxSpeed;
+
+  String get rudderString => '${rudderTime.toStringAsFixed(1)} s';
+  String get speedString => '${maxSpeed.toStringAsFixed(1)} kt';
+  String get radiusString => '$turningRadius m';
 
   Mobility(Map<String, dynamic> json) {
     this.rudderTime = json['rudder_time'];
     this.total = json['total'];
-    this.turningRadiu = json['turning_radius'];
+    this.turningRadius = json['turning_radius'];
     this.maxSpeed = json['max_speed'];
   }
 }
@@ -324,7 +337,7 @@ class Shell {
   int bulletMass;
   String type;
   
-  double get fireChance => burnProbability ?? -50;
+  double get fireChance => burnProbability ?? 0;
   String get massString => '$bulletMass kg';
   String get damageString => '$damage (${(damage / 3).toStringAsFixed(0)})';
   String get speed => '$bulletSpeed m/s';
@@ -458,6 +471,9 @@ class Concealment {
   double detectDistanceByPlane;
   double detectDistanceByShip;
 
+  String get planeDetection => '${detectDistanceByPlane.toStringAsFixed(1)} km';
+  String get shipDetection => '${detectDistanceByShip.toStringAsFixed(1)} km';
+
   Concealment(Map<String, dynamic> json) {
     this.total = json['total'];
     this.detectDistanceByPlane = json['detect_distance_by_plane'];
@@ -556,6 +572,14 @@ class DiveBomber {
   int maxHealth;
   String diveBomberIdStr;
   Accuracy accuracy;
+
+  String get levelString => 'Lv$planeLevel';
+  String get nameWithLevel => '$levelString $name';
+  String get fireChance => '${bombBurnProbability.toStringAsFixed(0)}%';
+  String get damageString => '$maxDamage';
+  String get healthString => '$maxHealth';
+  String get planeSpeed => '$cruiseSpeed kt';
+  String get squadronSize => '${countInSquadron.max} x';
 
   DiveBomber(Map<String, dynamic> json) {
     this.squadron = json['squadrons'];

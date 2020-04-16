@@ -104,9 +104,13 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
               children: <Widget>[
                 SizedBox(
                   width: double.infinity,
-                  child: RaisedButton(onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (c) => WikiWarshipSimilarPage(ships: similarShips)));
-                  }, child: Text('Text ship compare')),
+                  child: RaisedButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (c) => WikiWarshipSimilarPage(ships: similarShips)));
+                    }, 
+                    child: Text('Text ship compare'),
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  ),
                 ),
                 Expanded(
                   child: Scrollbar(
@@ -134,10 +138,15 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
   }
 
   /// Build title with style, `headline6`
-  Widget buildTitle(String title) => Padding(
-    padding: const EdgeInsets.only(bottom: 4),
-    child: Text(title, style: Theme.of(context).textTheme.headline6),
-  );
+  Widget buildTitle(String title) {
+    final theme = Theme.of(context);
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8, top: 8),
+      child: Text(title, style: theme.textTheme.headline5.copyWith(
+        color: theme.primaryColor
+      )),
+    );
+  }
 
   Text buildWeaponName(String name) => Text(
     name, textAlign: TextAlign.center, 
@@ -189,8 +198,11 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
     final textTheme = Theme.of(context).textTheme;
     return Column(
       children: [
-        buildTitle(widget.ship.tierName),
-        Text(widget.ship.nationShipType),
+        Text(widget.ship.tierName, style: textTheme.headline6),
+        Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: Text(widget.ship.nationShipType),
+        ),
         buildShipPrice(),
         Padding(
           padding: const EdgeInsets.only(top: 8),
@@ -213,10 +225,14 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
     return Column(
       children: [
         buildSurvivability(),
+        buildTorpBomber(),
+        buildDiveBomber(),
         buildArtillery(),
         buildSecondary(),
         buildTorpedo(),
         buildAA(),
+        buildMeuverability(),
+        buildConcealment(),
       ],
     );
   }
@@ -230,7 +246,10 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
           child: Column(
             children: [
               buildSurvivability(),
+              buildTorpBomber(),
+              buildDiveBomber(),
               buildAA(),
+              buildMeuverability(),
             ],
           )
         ),
@@ -241,6 +260,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
               buildArtillery(),
               buildSecondary(),
               buildTorpedo(),
+              buildConcealment(),
             ],
           )
         ),
@@ -285,19 +305,100 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
             ),
           ],
         ),
-        Divider(),
+
       ],
     );
   }
 
   Widget buildDiveBomber() {
     final diveBomber = modules.diveBomber;
+    if (diveBomber == null) return SizedBox.shrink();
+    return Column(
+      children: [
+        buildTitle('Dive Bomber'),
+        buildWeaponName(diveBomber.nameWithLevel),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            TextWithCaption(
+              title:'a',
+              value: diveBomber.squadronSize,
+            ),
+            TextWithCaption(
+              title:'a',
+              value: diveBomber.planeSpeed,
+            ),
+            TextWithCaption(
+              title:'a',
+              value: diveBomber.healthString,
+            ),
+          ],
+        ),
+        buildWeaponName(diveBomber.bombName),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            TextWithCaption(
+              title:'a',
+              value: diveBomber.damageString,
+            ),
+            TextWithCaption(
+              title:'a',
+              value: diveBomber.fireChance,
+            ),
+          ],
+        ),
 
+      ],
+    );
   }
 
   Widget buildTorpBomber() {
     final torpBomber = modules.torpedoBomber;
+    if (torpBomber == null) return SizedBox.shrink();
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        buildTitle('Torpedo Bomber'),
+        buildWeaponName(torpBomber.nameWithLevel),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            TextWithCaption(
+              title:'a',
+              value: torpBomber.squadronSize,
+            ),
+            TextWithCaption(
+              title:'a',
+              value: torpBomber.planeSpeed,
+            ),
+            TextWithCaption(
+              title:'a',
+              value: torpBomber.healthString,
+            ),
+          ],
+        ),
+        buildWeaponName(torpBomber.torpedoName),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            TextWithCaption(
+              title:'a',
+              value: torpBomber.torpRange,
+            ),
+            TextWithCaption(
+              title:'a',
+              value: torpBomber.damageString,
+            ),
+            TextWithCaption(
+              title:'a',
+              value: torpBomber.torpSpeed,
+            ),
+          ],
+        ),
 
+      ],
+    );
   }
 
   Widget buildArtillery() {
@@ -359,7 +460,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
             ),
           )).toList(growable: false),
         ),
-        Divider(),
+
       ],
     );
   }
@@ -401,7 +502,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
             ),
           )).toList(growable: false),
         ),
-        Divider(),
+
       ],
     );
   }
@@ -446,7 +547,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
             ),
           ],
         ),
-        Divider(),
+
       ],
     );
   }
@@ -484,20 +585,66 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
             ),
           )).toList(growable: false),
         ),
-        Divider(),
+
       ],
     );
   }
 
   Widget buildMeuverability() {
-
+    final mobility = modules.mobility;
+    if (mobility == null) return SizedBox.shrink();
+    return Column(
+      children: [
+        buildTitle('Mae'),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            TextWithCaption(
+              title: 'a',
+              value: mobility.rudderString,
+            ),
+            TextWithCaption(
+              title: 'a',
+              value: mobility.speedString,
+            ),
+            TextWithCaption(
+              title: 'a',
+              value: mobility.radiusString,
+            ),
+          ],
+        ),
+      ],
+    );
   }
 
   Widget buildConcealment() {
-
+    final concealment = modules.concealment;
+    if (concealment == null) return SizedBox.shrink();
+    return Column(
+      children: [
+        buildTitle('Concealment'),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            TextWithCaption(
+              title: 'a',
+              value: concealment.planeDetection,
+            ),
+            TextWithCaption(
+              title: 'a',
+              value: concealment.shipDetection,
+            ),
+          ],
+        ),
+      ],
+    );
   }
 
   Widget buildUpgrades() {
+
+  }
+
+  Widget buildNextShip() {
 
   }
 }

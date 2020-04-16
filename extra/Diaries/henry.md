@@ -9,7 +9,7 @@ Template
 
 ## 16/04/2020
 ### Summary
-Ship compare section can be hidden if the user scrolls down and will popup again if scrolls up. Survivability and Main battery are added. Some minor changes are also added (sorted type and nation and `isTablet` function). 
+Ship compare section can be hidden if the user scrolls down and will popup again if scrolls up. Survivability and Main battery are added. Some minor changes are also added (sorted type and nation and `isTablet` function). ShipWiki is almost done but not yet. Most data can be loaded. 
 ### What to do tomorrow?
 More `WikiWarshipInfo`.
 
