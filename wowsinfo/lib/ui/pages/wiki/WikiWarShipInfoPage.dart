@@ -92,11 +92,19 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
           child: Column(
             children: <Widget>[
               Expanded(
-                child: SingleChildScrollView(
-                  padding: EdgeInsets.only(top: 4, left: 8, right: 8),
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: similarShips.map((e) => WikiWarshipCell(ship: e, showDetail: false)).toList(growable: false),
+                child: Scrollbar(
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.all(4),
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: similarShips.map((e) {
+                        if (e.shipId == widget.ship.shipId) return SizedBox.shrink();
+                        return Padding(
+                          padding: const EdgeInsets.only(left: 4, right: 4),
+                          child: WikiWarshipCell(ship: e, showDetail: true),
+                        );
+                      }).toList(growable: false),
+                    ),
                   ),
                 ),
               ),
@@ -116,22 +124,24 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
   }
 
   Widget buildInfo() {
-    return SingleChildScrollView(
-      controller: controller,
-      child: Center(
-        child: Column(
-          children: [
-            Hero(
-              tag: widget.ship.shipId,
-              child: Image(image: NetworkImage(widget.ship.smallImage)),
-            ),
-            AnimatedSwitcher(
-              duration: Duration(milliseconds: 300),
-              switchInCurve: Curves.linearToEaseOut,
-              transitionBuilder: (w, a) => SizeTransition(sizeFactor: a, child: w),
-              child: buildContent()
-            ),
-          ],
+    return Scrollbar(
+      child: SingleChildScrollView(
+        controller: controller,
+        child: Center(
+          child: Column(
+            children: [
+              Hero(
+                tag: widget.ship.shipId,
+                child: Image(image: NetworkImage(widget.ship.smallImage)),
+              ),
+              AnimatedSwitcher(
+                duration: Duration(milliseconds: 300),
+                switchInCurve: Curves.linearToEaseOut,
+                transitionBuilder: (w, a) => SizeTransition(sizeFactor: a, child: w),
+                child: buildContent()
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -155,9 +165,6 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
           padding: const EdgeInsets.all(8.0),
           child: Text(info.description, style: textTheme.bodyText1, textAlign: TextAlign.center),
         ),
-        buildParameter(),
-        buildParameter(),
-        buildParameter(),
         buildParameter(),
       ],
     );

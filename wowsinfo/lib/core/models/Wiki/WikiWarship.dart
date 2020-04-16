@@ -47,10 +47,9 @@ class Warship {
     return cached.getTypeString(type);
   }
 
-  /// Check if this ship is similar to me but not me
+  /// Check if this ship is similar to curr ship
   bool isSimilar(Warship s) {
     if (s.name.startsWith('[')) return false;
-    if (s.shipId == shipId) return false;
     return s.tier == tier && s.type == type;
   }
 

@@ -65,13 +65,15 @@ class WikiWarshipSimilarPage extends StatelessWidget {
       ),
       body: SafeArea(
         child: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                buildChart(context, damageList, lang.localised('warship_avg_damage')),
-                buildChart(context, winrateList, lang.localised('warship_avg_winrate')),
-                buildChart(context, fragList, lang.localised('warship_avg_frag')),
-              ],
+          child: Scrollbar(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  buildChart(context, damageList, lang.localised('warship_avg_damage')),
+                  buildChart(context, winrateList, lang.localised('warship_avg_winrate')),
+                  buildChart(context, fragList, lang.localised('warship_avg_frag')),
+                ],
+              ),
             ),
           ),
         ),
