@@ -215,6 +215,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
         buildSurvivability(),
         buildArtillery(),
         buildSecondary(),
+        buildTorpedo(),
         buildAA(),
       ],
     );
@@ -239,6 +240,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
             children: [
               buildArtillery(),
               buildSecondary(),
+              buildTorpedo(),
             ],
           )
         ),
@@ -388,6 +390,51 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
               ],
             ),
           )).toList(growable: false),
+        ),
+        Divider(),
+      ],
+    );
+  }
+
+  Widget buildTorpedo() {
+    final torp = modules.torpedoe;
+    if (torp == null) return SizedBox.shrink();
+    return Column(
+      children: [
+        buildTitle('Torp (${torp.range})'),
+        Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: buildWeaponName(torp.torpedoName),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            TextWithCaption(
+              title: 'a',
+              value: torp.reloadString,
+            ),
+            TextWithCaption(
+              title: 'a',
+              value: torp.damageString,
+            ),
+            TextWithCaption(
+              title: 'a',
+              value: torp.configuration,
+            ),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            TextWithCaption(
+              title: 'a',
+              value: torp.detection,
+            ),
+            TextWithCaption(
+              title: 'a',
+              value: torp.torpSpeed,
+            ),
+          ],
         ),
         Divider(),
       ],

@@ -203,6 +203,8 @@ class TorpedoeSlot {
   String name;
   int guns;
 
+  String get gunBarrel => '$guns x $barrels';
+
   TorpedoeSlot(Map<String, dynamic> json) {
     this.barrels = json['barrels'];
     this.caliber = json['caliber'];
@@ -350,6 +352,13 @@ class Torpedoe {
   String torpedoesIdStr;
   Map<String, TorpedoeSlot> slot;
   int maxDamage;
+
+  String get damageString => '$maxDamage';
+  String get torpSpeed => '$torpedoSpeed kt';
+  String get detection => '${visibilityDist.toStringAsFixed(1)} km';
+  String get range => '$distance km';
+  String get reloadString => '$reloadTime s';
+  String get configuration => slot.values.map((e) => e.gunBarrel).join(' | ');
 
   Torpedoe(Map<String, dynamic> json) {
     this.visibilityDist = json['visibility_dist'];
