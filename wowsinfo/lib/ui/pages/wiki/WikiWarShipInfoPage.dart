@@ -118,10 +118,12 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
                     ),
                   ),
                 ),
-                Divider(height: 1),
-                FlatButton(onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (c) => WikiWarshipSimilarPage(ships: similarShips)));
-                }, child: Text('Text ship compare')),
+                SizedBox(
+                  width: double.infinity,
+                  child: RaisedButton(onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (c) => WikiWarshipSimilarPage(ships: similarShips)));
+                  }, child: Text('Text ship compare')),
+                ),
               ],
             ),
           ),
