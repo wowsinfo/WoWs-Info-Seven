@@ -142,25 +142,23 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
   }
 
   Widget buildInfo() {
-    return Scrollbar(
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.only(bottom: 16),
-        controller: controller,
-        child: Center(
-          child: Column(
-            children: [
-              Hero(
-                tag: widget.ship.shipId,
-                child: Image(image: NetworkImage(widget.ship.smallImage)),
-              ),
-              AnimatedSwitcher(
-                duration: Duration(milliseconds: 300),
-                switchInCurve: Curves.linearToEaseOut,
-                transitionBuilder: (w, a) => SizeTransition(sizeFactor: a, child: w),
-                child: buildContent()
-              ),
-            ],
-          ),
+    return SingleChildScrollView(
+      padding: const EdgeInsets.only(bottom: 16),
+      controller: controller,
+      child: Center(
+        child: Column(
+          children: [
+            Hero(
+              tag: widget.ship.shipId,
+              child: Image(image: NetworkImage(widget.ship.smallImage)),
+            ),
+            AnimatedSwitcher(
+              duration: Duration(milliseconds: 300),
+              switchInCurve: Curves.linearToEaseOut,
+              transitionBuilder: (w, a) => SizeTransition(sizeFactor: a, child: w),
+              child: buildContent()
+            ),
+          ],
         ),
       ),
     );
