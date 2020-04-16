@@ -33,8 +33,10 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
   WikiShipModule modules;
 
   ScrollController controller;
-  bool showBottomBar = true;
+  AnimationController slideController;
+  Animation<Offset> offset;
   Iterable<Wiki.Warship> similarShips;
+  bool showSimilar = true;
 
   @override
   void initState() {
@@ -44,19 +46,25 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
     controller.addListener(() {
       final direction = controller.position.userScrollDirection;
       if (direction == ScrollDirection.reverse) {
-        if (showBottomBar) {
+        if (showSimilar) {
+          slideController.forward();
           setState(() {
-            showBottomBar = false;
+            showSimilar = false;
           });
         }
       } else if (direction == ScrollDirection.forward) {
-        if (!showBottomBar) {
+        if (!showSimilar) {
+          slideController.reverse();
           setState(() {
-            showBottomBar = true;
+            showSimilar = true;
           });
         }
       }
     });
+
+    // Setup slide controller
+    this.slideController = AnimationController(vsync: this, duration: Duration(milliseconds: 300));
+    this.offset = Tween<Offset>(begin: Offset.zero, end: Offset(0.0, 1.0)).animate(slideController);
 
     // Find similar ships
     this.similarShips = CachedData.shared.warship.values.where((s) {
@@ -85,36 +93,40 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
         title: Text(widget.ship.shipIdAndIdStr)
       ),
       body: SafeArea(child: buildBody()),
-      bottomNavigationBar: BottomAppBar(
-        child: AnimatedContainer(
-          height: showBottomBar ? 130 : 0,
-          duration: Duration(milliseconds: 300), 
-          child: Column(
-            children: <Widget>[
-              Expanded(
-                child: Scrollbar(
-                  child: SingleChildScrollView(
-                    padding: const EdgeInsets.all(4),
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: similarShips.map((e) {
-                        if (e.shipId == widget.ship.shipId) return SizedBox.shrink();
-                        return Padding(
-                          padding: const EdgeInsets.only(left: 4, right: 4),
-                          child: WikiWarshipCell(ship: e, showDetail: true),
-                        );
-                      }).toList(growable: false),
+      bottomNavigationBar: AnimatedSwitcher(
+        transitionBuilder: (w, a) => SizeTransition(sizeFactor: a, child: w),
+        duration: Duration(milliseconds: 300),
+        child: showSimilar ? BottomAppBar(
+          child: SizedBox(
+            height: 130,
+            child: Column(
+              children: <Widget>[
+                Expanded(
+                  child: Scrollbar(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.all(4),
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: similarShips.map((e) {
+                          if (e.shipId == widget.ship.shipId) return SizedBox.shrink();
+                          return Padding(
+                            padding: const EdgeInsets.only(left: 4, right: 4),
+                            child: WikiWarshipCell(ship: e, showDetail: true),
+                          );
+                        }).toList(growable: false),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              OutlineButton(onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (c) => WikiWarshipSimilarPage(ships: similarShips)));
-              }, child: Text('Text ship compare')),
-            ],
+                Divider(height: 1),
+                FlatButton(onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (c) => WikiWarshipSimilarPage(ships: similarShips)));
+                }, child: Text('Text ship compare')),
+              ],
+            ),
           ),
-        ),
-      )
+        ) : SizedBox.shrink(),
+      ),
     );
   }
 
@@ -126,6 +138,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
   Widget buildInfo() {
     return Scrollbar(
       child: SingleChildScrollView(
+        padding: const EdgeInsets.only(bottom: 16),
         controller: controller,
         child: Center(
           child: Column(
@@ -165,6 +178,9 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
           padding: const EdgeInsets.all(8.0),
           child: Text(info.description, style: textTheme.bodyText1, textAlign: TextAlign.center),
         ),
+        buildParameter(),
+        buildParameter(),
+        buildParameter(),
         buildParameter(),
       ],
     );

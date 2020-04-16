@@ -44,7 +44,7 @@ class Warship {
   }
   String get nationString {
     final cached = CachedData.shared;
-    return cached.getTypeString(type);
+    return cached.getNationString(nation);
   }
 
   /// Check if this ship is similar to curr ship
