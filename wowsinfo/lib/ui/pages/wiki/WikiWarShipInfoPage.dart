@@ -102,6 +102,12 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
             height: 130,
             child: Column(
               children: <Widget>[
+                SizedBox(
+                  width: double.infinity,
+                  child: RaisedButton(onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (c) => WikiWarshipSimilarPage(ships: similarShips)));
+                  }, child: Text('Text ship compare')),
+                ),
                 Expanded(
                   child: Scrollbar(
                     child: SingleChildScrollView(
@@ -118,12 +124,6 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
                       ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  child: RaisedButton(onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (c) => WikiWarshipSimilarPage(ships: similarShips)));
-                  }, child: Text('Text ship compare')),
                 ),
               ],
             ),
@@ -288,6 +288,16 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
         Divider(),
       ],
     );
+  }
+
+  Widget buildDiveBomber() {
+    final diveBomber = modules.diveBomber;
+
+  }
+
+  Widget buildTorpBomber() {
+    final torpBomber = modules.torpedoBomber;
+
   }
 
   Widget buildArtillery() {
@@ -477,5 +487,17 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
         Divider(),
       ],
     );
+  }
+
+  Widget buildMeuverability() {
+
+  }
+
+  Widget buildConcealment() {
+
+  }
+
+  Widget buildUpgrades() {
+
   }
 }
