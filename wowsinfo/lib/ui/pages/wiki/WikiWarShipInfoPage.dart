@@ -6,6 +6,7 @@ import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart' as Wiki;
 import 'package:wowsinfo/core/models/WoWs/WikiShipInfo.dart';
 import 'package:wowsinfo/core/models/WoWs/WikiShipModule.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
+import 'package:wowsinfo/core/others/Utils.dart';
 import 'package:wowsinfo/core/parsers/API/WikiShipInfoParser.dart';
 import 'package:wowsinfo/ui/pages/wiki/WikiWarshipSimilarPage.dart';
 import 'package:wowsinfo/ui/widgets/PlatformLoadingIndiactor.dart';
@@ -148,6 +149,16 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
     return buildInfo();
   }
 
+  Wrap wrapWidget(double width, List<Widget> widget) {
+    return Wrap(
+      alignment: WrapAlignment.center,
+      children: widget.map((e) => SizedBox(
+        width: width,
+        child: e,
+      )).toList(growable: false),
+    );
+  }
+
   Widget buildInfo() {
     return SingleChildScrollView(
       padding: const EdgeInsets.only(bottom: 16),
@@ -191,10 +202,46 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
         ),
         buildParameter(),
         SizedBox(height: 8),
+        Utils.of(context).isTablet() 
+        ? renderTablet()
+        : renderMobile(), 
+      ],
+    );
+  }
+
+  Widget renderMobile() {
+    return Column(
+      children: [
         buildSurvivability(),
         buildArtillery(),
         buildSecondary(),
         buildAA(),
+      ],
+    );
+  }
+
+  Widget renderTablet() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Flexible(
+          flex: 1,
+          child: Column(
+            children: [
+              buildSurvivability(),
+              buildAA(),
+            ],
+          )
+        ),
+        Flexible(
+          flex: 1,
+          child: Column(
+            children: [
+              buildArtillery(),
+              buildSecondary(),
+            ],
+          )
+        ),
       ],
     );
   }
