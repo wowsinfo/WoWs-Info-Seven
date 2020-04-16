@@ -124,6 +124,8 @@ class AntiAircraft {
   Map<String, AASlot> slot;
   int defense;
 
+  Iterable<AASlot> get slots => slot.values;
+
   AntiAircraft(Map<String, dynamic> json) {
     this.slot = (json['slots'] as Map).map((key, value) => MapEntry(key, AASlot(value)));
     this.defense = json['defense'];
@@ -138,6 +140,10 @@ class AASlot {
   String name;
   int guns;
 
+  String get configuration => '$guns x';
+  String get damageString => '$avgDamage';
+  String get rangeString => '${distance.toStringAsFixed(1)} km';
+
   AASlot(Map<String, dynamic> json) {
     this.distance = json['distance'];
     this.avgDamage = json['avg_damage'];
@@ -145,6 +151,7 @@ class AASlot {
     this.name = json['name'];
     this.guns = json['guns'];
   }
+
 }
 
 /// This is the `MainGunSlot` class

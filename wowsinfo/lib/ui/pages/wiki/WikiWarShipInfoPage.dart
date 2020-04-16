@@ -138,7 +138,10 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
     child: Text(title, style: Theme.of(context).textTheme.headline6),
   );
 
-  Text buildWeaponName(String name) => Text(name, textAlign: TextAlign.center, style: TextStyle(fontSize: 17));
+  Text buildWeaponName(String name) => Text(
+    name, textAlign: TextAlign.center, 
+    style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
+  );
 
   Widget buildBody() {
     if (error) return SizedBox.shrink();
@@ -191,6 +194,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
         buildSurvivability(),
         buildArtillery(),
         buildSecondary(),
+        buildAA(),
       ],
     );
   }
@@ -242,7 +246,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
     if (main == null) return SizedBox.shrink();
     return Column(
       children: [
-        buildTitle('Main'),
+        buildTitle('Main (${main.rangeString})'),
         Wrap(
           alignment: WrapAlignment.center,
           spacing: 8,
@@ -250,10 +254,6 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
             TextWithCaption(
               title: 'a',
               value: main.reloadTime.toStringAsFixed(1),
-            ),
-            TextWithCaption(
-              title: 'a',
-              value: main.rangeString,
             ),
             TextWithCaption(
               title: 'a',
@@ -276,8 +276,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
         Column(
           children: main.shellReversed.map((e) => Padding(
             padding: const EdgeInsets.all(8),
-            child: Wrap(
-              alignment: WrapAlignment.center,
+            child: Column(
               children: [
                 buildWeaponName(e.shellNameWithType),
                 Row(
@@ -307,13 +306,13 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
   }
 
   Widget buildSecondary() {
-    final seconday = modules.atba;
-    if (seconday == null) return SizedBox.shrink();
+    final secondary = modules.atba;
+    if (secondary == null) return SizedBox.shrink();
     return Column(
       children: [
-        buildTitle('Secondary'),
+        buildTitle('Secondary (${secondary.rangeString})'),
         Column(
-          children: seconday.slots.map((e) => Padding(
+          children: secondary.slots.map((e) => Padding(
             padding: const EdgeInsets.only(bottom: 8.0),
             child: Column(
               children: [
@@ -332,6 +331,44 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
                     TextWithCaption(
                       title: 'a',
                       value: e.fireChance,
+                    ),
+                    TextWithCaption(
+                      title: 'a',
+                      value: e.damageString,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          )).toList(growable: false),
+        ),
+        Divider(),
+      ],
+    );
+  }
+
+  Widget buildAA() {
+    final aa = modules.antiAircraft;
+    if (aa == null) return SizedBox.shrink();
+    return Column(
+      children: [
+        buildTitle('AA'),
+        Column(
+          children: aa.slots.map((e) => Padding(
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: Column(
+              children: [
+                buildWeaponName(e.name),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    TextWithCaption(
+                      title: 'a',
+                      value: e.configuration,
+                    ),
+                    TextWithCaption(
+                      title: 'a',
+                      value: e.rangeString,
                     ),
                     TextWithCaption(
                       title: 'a',
