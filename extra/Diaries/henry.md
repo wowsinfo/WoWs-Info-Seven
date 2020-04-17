@@ -7,6 +7,12 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## 17/04/2020
+### Summary
+Nothing much today because I was doing google's coding challenge but I didn't have enough time. 
+### What to do tomorrow?
+Consumables all in one, achievement with count support, map, collection and its items. Finally, commander skill. It is not as complicated like ship info so I think I could do them tomorrow... hopefully.
+
 ## 16/04/2020
 ### Summary
 Ship compare section can be hidden if the user scrolls down and will popup again if scrolls up. Survivability and Main battery are added. Some minor changes are also added (sorted type and nation and `isTablet` function). ShipWiki is almost done but not yet. Most data can be loaded. 

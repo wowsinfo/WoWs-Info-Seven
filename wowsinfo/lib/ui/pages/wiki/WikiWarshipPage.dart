@@ -154,7 +154,7 @@ class WarshipList extends StatelessWidget {
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: itemCount,
               childAspectRatio: 1.3,
-            ), 
+            ),
             itemBuilder: (context, index) {
               final ship = ships[index];
               return WikiWarshipCell(ship: ship, showDetail: true, hero: true);

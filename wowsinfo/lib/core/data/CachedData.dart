@@ -127,6 +127,7 @@ class CachedData extends LocalData {
   }
 
   WikiConsumable _consumable;
+  Iterable<Consumable> get wikiConsumables => _consumable.consumable.values;
   void loadConsumable() => _consumable = decode(WIKI_CONSUMABLE, (j) => WikiConsumable.fromJson(j));
   void saveConsumable(WikiConsumable data) {
     _consumable = data;
