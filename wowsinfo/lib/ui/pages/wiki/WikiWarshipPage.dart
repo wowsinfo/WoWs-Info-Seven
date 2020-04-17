@@ -146,7 +146,7 @@ class WarshipList extends StatelessWidget {
       builder: (context, _) {
         final width = MediaQuery.of(context).size.width;
         // 120 can place 3 on iPhone 11
-        final itemCount = min(5, max(width / 200, 1)).toInt();
+        final itemCount = min(6, max(width / 150, 1)).toInt();
         return Scrollbar(
           child: GridView.builder(
             padding: EdgeInsets.all(8),
@@ -156,7 +156,8 @@ class WarshipList extends StatelessWidget {
               childAspectRatio: 1.3,
             ), 
             itemBuilder: (context, index) {
-              return WikiWarshipCell(ship: ships[index], showDetail: true, hero: true);
+              final ship = ships[index];
+              return WikiWarshipCell(ship: ship, showDetail: true, hero: true);
             }
           ),
         );
