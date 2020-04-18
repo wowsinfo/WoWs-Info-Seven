@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
-import 'package:wowsinfo/ui/pages/wiki/WikiCommonPage.dart';
+import 'package:wowsinfo/ui/pages/wiki/WikiConsumablePage.dart';
 import 'package:wowsinfo/ui/pages/wiki/WikiWarshipPage.dart';
 
 /// WikiPage class
@@ -37,7 +37,7 @@ class _WikiPageState extends State<WikiPage> {
             subtitle: Text('...'),
             leading: Icon(Icons.wallpaper),
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (c) => WikiCommonPage()));
+              Navigator.of(context).push(MaterialPageRoute(builder: (c) => WikiConsumablePage()));
             },
           ),
         ],

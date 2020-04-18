@@ -7,6 +7,10 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## 18/04/2020
+### Summary
+### What to do tomorrow?
+
 ## 17/04/2020
 ### Summary
 Nothing much today because I was doing google's coding challenge but I didn't have enough time. 
