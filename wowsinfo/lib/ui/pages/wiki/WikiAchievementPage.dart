@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiAchievement.dart';
@@ -12,13 +14,17 @@ class WikiAchievementPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    // 100 can place 4 on iPhone 11
+    final itemCount = min(8, max(width / 100, 2)).toInt();
+
     return Scaffold(
       appBar: AppBar(
         title: Text('WikiAchievementPage')
       ),
       body: SafeArea(
         child: Scrollbar(
-          child: buildGridView(),
+          child: buildGridView(itemCount),
         ),
       ),
     );
@@ -28,30 +34,35 @@ class WikiAchievementPage extends StatelessWidget {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Row(
-          children: [
-            Image.network(
-              a.image,
-              width: 24, height: 24,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 4.0),
-              child: Text(a.name, maxLines: 1, overflow: TextOverflow.ellipsis),
-            )
-          ],
+        content: ListTile(
+          contentPadding: const EdgeInsets.all(2),
+          leading: Image.network(
+            a.image,
+          ),
+          title: Text(a.name, maxLines: 1, overflow: TextOverflow.ellipsis),
+          subtitle: Text(a.description)
         ),
-        content: Text(a.description),
       ),
     );
+    // showModalBottomSheet(
+    //   context: context, 
+    //   builder: (context) => BottomSheet(
+    //     onClosing: () => Navigator.pop(context), 
+    //     builder: (context) => ListTile(
+    //       title: Text(a.name),
+    //       subtitle: Text(a.description),
+    //     ),
+    //   ),
+    // );
   }
 
-  GridView buildGridView() {
+  GridView buildGridView(int itemCount) {
     if (player == null) {
       final achievment = cached.sortedAchievement.toList(growable: false);
       // Display everything
       return GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 4,
+          crossAxisCount: itemCount,
           childAspectRatio: 1.0,
         ),
         itemCount: achievment.length,
@@ -71,7 +82,7 @@ class WikiAchievementPage extends StatelessWidget {
       // Display whatever player has
       return GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 4,
+          crossAxisCount: itemCount,
           childAspectRatio: 0.9,
         ),
         itemCount: sorted.length,

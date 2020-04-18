@@ -16,7 +16,6 @@ class WikiWarshipPage extends StatefulWidget {
   _WikiWarshipPageState createState() => _WikiWarshipPageState();
 }
 
-
 class _WikiWarshipPageState extends State<WikiWarshipPage> with SingleTickerProviderStateMixin {
   final cached = CachedData.shared;
   /// Only one nation can be shown at a time
