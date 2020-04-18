@@ -77,10 +77,16 @@ class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
                         child: Image.network(curr.icon),
                       ),
                     ),
-                    selected ? Positioned(
+                    Positioned(
                       bottom: 4, right: 4,
-                      child: Icon(Icons.check)
-                    ) : SizedBox.shrink(),
+                      child: AnimatedSwitcher(
+                        duration: Duration(milliseconds: 200),
+                        transitionBuilder: (w, a) => ScaleTransition(scale: a, child: w),
+                        child: selected 
+                        ? Icon(Icons.check)
+                        : SizedBox.shrink(),
+                      ),
+                    ),
                   ],
                 ),
               );
@@ -99,29 +105,22 @@ class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
   /// Decide who to do when the skill icon is pressed
   void onTap(Skill curr, int index) {
     if (widget.simulation) {
-      // Update points
+      // Limit what can be chosen
       if (curr.tier > maxTier + 1) return;
-      final hasSelected = selectedSkills.contains(index);
-      if (hasSelected) {
-        setState(() {
-          points += curr.tier;
-          selectedSkills.remove(index);
-          // Need to check the current max tier
-          if (selectedSkills.length > 1) maxTier = selectedSkills.reduce(max);
-          else maxTier = 1;
-        });
-      } else {
-        final newPoints = points - curr.tier;
-        // Shouldn't go negative
-        if (newPoints < 0) return;
+      // Reset only (really troublesome if you can deselect)
+      if (selectedSkills.contains(index)) return;
 
-        setState(() {
-          points = newPoints;
-          selectedSkills.add(index);
-          // Update max tier
-          maxTier = max(maxTier, curr.tier);
-        });
-      }
+      final newPoints = points - curr.tier;
+      // Shouldn't go negative
+      if (newPoints < 0) return;
+
+      // Update points
+      setState(() {
+        points = newPoints;
+        selectedSkills.add(index);
+        // Update max tier
+        maxTier = max(maxTier, curr.tier);
+      });
     } else {
       // Show skill details
       showDialog(
@@ -155,6 +154,7 @@ class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
         setState(() {
           points = 19;
           selectedSkills = [];
+          maxTier = 1;
         });
       },
     );
