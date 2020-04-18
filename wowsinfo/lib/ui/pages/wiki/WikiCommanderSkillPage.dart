@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:wowsinfo/core/data/CachedData.dart';
@@ -19,11 +21,15 @@ class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
   bool horizontalLock = false;
   /// Maximum 19 points currently
   int points = 19;
-  List<String> skillNames = [];
+  List<int> selectedSkills = [];
+  // This tracks which tiers can be slected
+  int maxTier = 1;
+  List<Skill> skills = [];
 
   @override
   void initState() {
     super.initState();
+    this.skills = cached.sortedCommanderSkill.toList(growable: false);
     // Lock to horizontal
     if (widget.simulation) {
       // This delay is to show the transition animation
@@ -42,13 +48,11 @@ class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
 
   @override
   Widget build(BuildContext context) {
-    final skills = cached.sortedCommanderSkill.toList(growable: false);
-
     return Scaffold(
       appBar: AppBar(
         title: buildTitle(context),
         actions: [
-          widget.simulation ? SizedBox.shrink() : buildRotationLock(),
+          widget.simulation ? buildReset() : buildRotationLock(),
         ],
       ),
       bottomNavigationBar: widget.simulation ? null : buildBottomAppBar(context),
@@ -62,12 +66,12 @@ class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
             itemCount: skills.length,
             itemBuilder: (context, index) {
               final curr = skills[index];
-              final selected = skillNames.contains(curr.name);
+              final selected = selectedSkills.contains(index);
               return FittedBox(
                 child: Stack(
                   children: <Widget>[
                     InkWell(
-                      onTap: () => this.onTap(curr),
+                      onTap: () => this.onTap(curr, index),
                       child: Padding(
                         padding: const EdgeInsets.all(4),
                         child: Image.network(curr.icon),
@@ -93,22 +97,29 @@ class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
   }
 
   /// Decide who to do when the skill icon is pressed
-  void onTap(Skill curr) {
+  void onTap(Skill curr, int index) {
     if (widget.simulation) {
       // Update points
-      final hasSelected = skillNames.contains(curr.name);
+      if (curr.tier > maxTier + 1) return;
+      final hasSelected = selectedSkills.contains(index);
       if (hasSelected) {
         setState(() {
           points += curr.tier;
-          skillNames.remove(curr.name);
+          selectedSkills.remove(index);
+          // Need to check the current max tier
+          if (selectedSkills.length > 1) maxTier = selectedSkills.reduce(max);
+          else maxTier = 1;
         });
       } else {
         final newPoints = points - curr.tier;
+        // Shouldn't go negative
         if (newPoints < 0) return;
 
         setState(() {
           points = newPoints;
-          skillNames.add(curr.name);
+          selectedSkills.add(index);
+          // Update max tier
+          maxTier = max(maxTier, curr.tier);
         });
       }
     } else {
@@ -134,6 +145,18 @@ class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
         child: Text('Simulation'),
         onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (c) => WikiCommanderSkillPage(simulation: true))),
       ),
+    );
+  }
+
+  IconButton buildReset() {
+    return IconButton(
+      icon: Icon(Icons.refresh), 
+      onPressed: () {
+        setState(() {
+          points = 19;
+          selectedSkills = [];
+        });
+      },
     );
   }
 
