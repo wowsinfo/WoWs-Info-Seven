@@ -23,6 +23,8 @@ class Skill {
   int tier;
   String icon;
 
+  String get description => typeName + '\n' + perk.map((e) => e.description).join('\n');
+
   Skill.fromJson(Map<String, dynamic> json) {
     this.name = json['name'];
     this.typeId = json['type_id'];

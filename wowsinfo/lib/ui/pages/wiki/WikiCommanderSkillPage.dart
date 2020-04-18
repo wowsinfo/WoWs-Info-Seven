@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:wowsinfo/core/data/CachedData.dart';
+import 'package:wowsinfo/core/models/Wiki/WikiCommanderSkill.dart';
 
 /// WikiCommanderSkillPage class
 class WikiCommanderSkillPage extends StatefulWidget {
@@ -16,6 +17,9 @@ class WikiCommanderSkillPage extends StatefulWidget {
 class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
   final cached = CachedData.shared;
   bool horizontalLock = false;
+  /// Maximum 19 points currently
+  int points = 19;
+  List<String> skillNames = [];
 
   @override
   void initState() {
@@ -58,13 +62,22 @@ class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               final curr = skills[index];
-              return InkWell(
-                onTap: () {},
-                child: Padding(
-                  padding: const EdgeInsets.all(4),
-                  child: FittedBox(
-                    child: Image.network(curr.icon),
-                  ),
+              final selected = skillNames.contains(curr.name);
+              return FittedBox(
+                child: Stack(
+                  children: <Widget>[
+                    InkWell(
+                      onTap: () => this.onTap(curr),
+                      child: Padding(
+                        padding: const EdgeInsets.all(4),
+                        child: Image.network(curr.icon),
+                      ),
+                    ),
+                    selected ? Positioned(
+                      bottom: 4, right: 4,
+                      child: Icon(Icons.check)
+                    ) : SizedBox.shrink(),
+                  ],
                 ),
               );
             }
@@ -72,6 +85,28 @@ class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
         ),
       ),
     );
+  }
+
+  /// Decide who to do when the skill icon is pressed
+  void onTap(Skill curr) {
+    if (widget.simulation) {
+      setState(() {
+        points -= curr.tier;
+        skillNames.add(curr.name);
+      });
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          content: ListTile(
+            contentPadding: const EdgeInsets.all(2),
+            leading: Image.network(curr.icon),
+            title: Text(curr.name, maxLines: 1, overflow: TextOverflow.ellipsis),
+            subtitle: Text(curr.description),
+          ),
+        ),
+      );
+    }
   }
 
   BottomAppBar buildBottomAppBar(BuildContext context) {
