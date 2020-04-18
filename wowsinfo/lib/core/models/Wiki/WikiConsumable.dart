@@ -25,8 +25,10 @@ class Consumable {
   String type;
   String description;
 
+  String get profileString => profile.values.map((e) => e.description).join('\n');
+
   Consumable.fromJson(Map<String, dynamic> json) {
-    this.profile = json['profile'].cast<String, Profile>();
+    this.profile = (json['profile'] as Map).map((a, b) => MapEntry(a, Profile.fromJson(b)));
     this.name = json['name'];
     this.priceGold = json['price_gold'];
     this.image = json['image'];
@@ -53,7 +55,7 @@ class Consumable {
 /// This is the `Profile` class
 class Profile {
   String description;
-  int value;
+  double value;
 
   Profile.fromJson(Map<String, dynamic> json) {
     this.description = json['description'];

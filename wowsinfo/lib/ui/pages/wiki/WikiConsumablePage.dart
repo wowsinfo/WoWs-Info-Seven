@@ -28,7 +28,24 @@ class _WikiConsumablePageState extends State<WikiConsumablePage> {
             childAspectRatio: 1.0,
           ),
           itemCount: consumable.length,
-          itemBuilder: (c, i) => FittedBox(child: Image.network(consumable.elementAt(i).image)),
+          itemBuilder: (c, i) => InkWell(
+            onTap: () {
+              final curr = consumable.elementAt(i);
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: Text(curr.name),
+                  content: ListTile(
+                    title: Text(curr.description + '\n'),
+                    subtitle: Text(curr.profileString),
+                  ),
+                ),
+              );
+            },
+            child: FittedBox(
+              child: Image.network(consumable.elementAt(i).image)
+            ),
+          ),
         ),
       ),
     );
