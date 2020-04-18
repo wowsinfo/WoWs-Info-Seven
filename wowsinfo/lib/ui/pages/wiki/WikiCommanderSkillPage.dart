@@ -23,7 +23,7 @@ class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
   int points = 19;
   List<int> selectedSkills = [];
   // This tracks which tiers can be slected
-  int maxTier = 1;
+  int maxTier = 0;
   List<Skill> skills = [];
 
   @override
@@ -77,13 +77,12 @@ class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
                         child: Image.network(curr.icon),
                       ),
                     ),
-                    Positioned(
-                      bottom: 4, right: 4,
+                    Positioned.fill(
                       child: AnimatedSwitcher(
                         duration: Duration(milliseconds: 200),
                         transitionBuilder: (w, a) => ScaleTransition(scale: a, child: w),
                         child: selected 
-                        ? Icon(Icons.check)
+                        ? Icon(Icons.close, size: 72)
                         : SizedBox.shrink(),
                       ),
                     ),
@@ -154,7 +153,7 @@ class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
         setState(() {
           points = 19;
           selectedSkills = [];
-          maxTier = 1;
+          maxTier = 0;
         });
       },
     );

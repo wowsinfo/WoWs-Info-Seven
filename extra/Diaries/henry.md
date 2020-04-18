@@ -9,9 +9,9 @@ Template
 
 ## 18/04/2020
 ### Summary
-Basic consumable and game map are now added. They need to have better ui for sure.
+Basic consumable and game map are now added. They need to have better ui for sure. Commander skill and achievment are also added. The simulation is also working. They all need more ui polishment. However, wiki is almost done. I am still amazed at how rapid the development can be. It holds state so you can just add UI can see how it changes. I just hope the release version is not this laggy... based on Anime Go, it is actually quite smooth. I will soon work on clan and player search. Then, since clan info is not that challenging so I will do it first and followed by player info. Then, the app is basically done I think. More polishment after that, add in-app purchase, handle my plugin data (ship consumable, sigma and more) and finally Realtime Statistics. It will no longer be BETA. 
 ### What to do tomorrow?
-Collection and commander skill. Maybe copy website links back?? 
+Maybe copy website links back?? 
 
 ## 17/04/2020
 ### Summary
