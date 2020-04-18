@@ -9,7 +9,9 @@ Template
 
 ## 18/04/2020
 ### Summary
+Basic consumable and game map are now added. They need to have better ui for sure.
 ### What to do tomorrow?
+Collection and commander skill. Maybe copy website links back?? 
 
 ## 17/04/2020
 ### Summary
