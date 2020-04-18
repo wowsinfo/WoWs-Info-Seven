@@ -18,19 +18,20 @@ class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
   bool horizontalLock = false;
 
   @override
-  void dispose() {
-    // Reset Orientation
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-    ]);
-    // Allow everything
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
+  void initState() {
+    super.initState();
+    // Lock to horizontal
+    if (widget.simulation) {
+      // This delay is to show the transition animation
+      Future.delayed(Duration(milliseconds: 500), () {
+        setLandscape();
+      });
+    }
+  }
 
+  @override
+  void dispose() {
+    setAllRotation();
     super.dispose();
   }
 
@@ -42,54 +43,81 @@ class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
       appBar: AppBar(
         title: Text('Commander Skill'),
         actions: [
-          IconButton(
-            icon: Icon(Icons.screen_rotation), 
-            onPressed: () {
-              if (!horizontalLock) {
-                SystemChrome.setPreferredOrientations([
-                  DeviceOrientation.landscapeLeft,
-                  DeviceOrientation.landscapeRight,
-                ]);
-                this.horizontalLock = true;
-              } else {
-                SystemChrome.setPreferredOrientations([
-                  DeviceOrientation.portraitUp,
-                ]);
-                
-                SystemChrome.setPreferredOrientations([
-                  DeviceOrientation.portraitUp,
-                  DeviceOrientation.portraitDown,
-                  DeviceOrientation.landscapeLeft,
-                  DeviceOrientation.landscapeRight,
-                ]);
-                this.horizontalLock = false;
-              }
-            },
-          ),
+          widget.simulation ? SizedBox.shrink() : buildRotationLock(),
         ],
       ),
+      bottomNavigationBar: widget.simulation ? null : buildBottomAppBar(context),
       body: SafeArea(
-        child: GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 4,
-            childAspectRatio: 1.0,
-          ),
-          itemCount: skills.length,
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) {
-            final curr = skills[index];
-            return InkWell(
-              onTap: () {},
-              child: Padding(
-                padding: const EdgeInsets.all(4),
-                child: FittedBox(
-                  child: Image.network(curr.icon),
+        child: Center(
+          child: GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 4,
+              childAspectRatio: 1.0,
+            ),
+            itemCount: skills.length,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              final curr = skills[index];
+              return InkWell(
+                onTap: () {},
+                child: Padding(
+                  padding: const EdgeInsets.all(4),
+                  child: FittedBox(
+                    child: Image.network(curr.icon),
+                  ),
                 ),
-              ),
-            );
-          }
+              );
+            }
+          ),
         ),
       ),
     );
+  }
+
+  BottomAppBar buildBottomAppBar(BuildContext context) {
+    return BottomAppBar(
+      child: RaisedButton(
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        child: Text('Simulation'),
+        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (c) => WikiCommanderSkillPage(simulation: true))),
+      ),
+    );
+  }
+
+  IconButton buildRotationLock() {
+    return IconButton(
+      icon: Icon(Icons.screen_rotation), 
+      onPressed: () {
+        if (!horizontalLock) {
+          setLandscape();
+          this.horizontalLock = true;
+        } else {          
+          setAllRotation();
+          this.horizontalLock = false;
+        }
+      },
+    );
+  }
+
+  /// Set to land scape only
+  void setLandscape() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
+  }
+
+  /// First, reset to portrait. Then, allow all rotations
+  void setAllRotation() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
+
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
   }
 }
