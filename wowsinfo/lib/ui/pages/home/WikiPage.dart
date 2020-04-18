@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
 import 'package:wowsinfo/ui/pages/wiki/WikiConsumablePage.dart';
+import 'package:wowsinfo/ui/pages/wiki/WikiGameMapPage.dart';
 import 'package:wowsinfo/ui/pages/wiki/WikiWarshipPage.dart';
 
 /// WikiPage class
@@ -38,6 +39,14 @@ class _WikiPageState extends State<WikiPage> {
             leading: Icon(Icons.wallpaper),
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (c) => WikiConsumablePage()));
+            },
+          ),
+          ListTile(
+            title: Text('Map'),
+            subtitle: Text('...'),
+            leading: Icon(Icons.map),
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (c) => WikiGameMapPage()));
             },
           ),
         ],

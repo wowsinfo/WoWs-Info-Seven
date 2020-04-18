@@ -120,6 +120,7 @@ class CachedData extends LocalData {
   }
 
   WikiGameMap _gameMap;
+  Iterable<GameMap> get gameMap => _gameMap.gameMap.values;
   void loadGameMap() => _gameMap = decode(WIKI_GAME_MAP, (j) => WikiGameMap.fromJson(j));
   void saveGameMap(WikiGameMap data) {
     _gameMap = data;
