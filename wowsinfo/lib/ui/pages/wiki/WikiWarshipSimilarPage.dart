@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/data/AppSettings.dart';
 import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/models/GitHub/PRData.dart';
+import 'package:wowsinfo/core/models/UI/ChartValue.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
 
@@ -15,8 +16,8 @@ class WikiWarshipSimilarPage extends StatelessWidget {
   final app = AppSettings.shared;
   WikiWarshipSimilarPage({Key key, @required this.ships}) : super(key: key);
 
-  List<Series<ShipValue, String>> convert(String id, List<ShipValue> values, 
-    Color color, String Function(ShipValue, int) labelFormatter) {
+  List<Series<ChartValue, String>> convert(String id, List<ChartValue> values, 
+    Color color, String Function(ChartValue, int) labelFormatter) {
     return [
       Series(
         id: id, 
@@ -35,15 +36,15 @@ class WikiWarshipSimilarPage extends StatelessWidget {
     ships.forEach((e) => avg.add(cached.getShipStats(e.shipId.toString())));
     avg.average();
 
-    final damageList = convert('damage', ships.map((e) => ShipValue(
+    final damageList = convert('damage', ships.map((e) => ChartValue(
       e.name, 
       cached.getShipStats(e.shipId.toString())?.averageDamageDealt)
     ).toList(growable: false), Color.fromHex(code: '#D32F2F'), (v, _) => v.value.toStringAsFixed(0));
 
-    List<Series<ShipValue, String>> winrateList = [
+    List<Series<ChartValue, String>> winrateList = [
       Series(
         id: 'win_rate', 
-        data: ships.map((e) => ShipValue(
+        data: ships.map((e) => ChartValue(
           e.name, 
           cached.getShipStats(e.shipId.toString())?.winRate)
         ).toList(growable: false), 
@@ -54,10 +55,10 @@ class WikiWarshipSimilarPage extends StatelessWidget {
       ),
     ];
 
-    List<Series<ShipValue, String>> fragList = [
+    List<Series<ChartValue, String>> fragList = [
       Series(
         id: 'frag', 
-        data: ships.map((e) => ShipValue(
+        data: ships.map((e) => ChartValue(
           e.name, 
           cached.getShipStats(e.shipId.toString())?.averageFrag)
         ).toList(growable: false), 
@@ -91,7 +92,7 @@ class WikiWarshipSimilarPage extends StatelessWidget {
     );
   }
 
-  Widget buildChart(BuildContext context, List<Series<ShipValue, String>> list, String title, String subtitle) {
+  Widget buildChart(BuildContext context, List<Series<ChartValue, String>> list, String title, String subtitle) {
     final height = 20.0 * max(ships.length, 5).toDouble();
 
     final axis = NumericAxisSpec(
@@ -161,12 +162,4 @@ class Average {
     winrate /= count;
     frag /= count;
   }
-}
-
-/// This contains ship name and the value
-class ShipValue {
-  String name;
-  double value;
-
-  ShipValue(this.name, this.value);
 }

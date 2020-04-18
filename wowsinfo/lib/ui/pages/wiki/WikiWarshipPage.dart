@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart';
 import 'package:wowsinfo/core/others/Utils.dart';
+import 'package:wowsinfo/ui/pages/wiki/WikiWarshipOverviewPage.dart';
 import 'package:wowsinfo/ui/widgets/FlatFilterChip.dart';
 import 'package:wowsinfo/ui/widgets/wiki/WikiWarshipCell.dart';
 
@@ -48,7 +49,7 @@ class _WikiWarshipPageState extends State<WikiWarshipPage> with SingleTickerProv
           IconButton(
             icon: Icon(Icons.info_outline), 
             onPressed: () {
-
+              Navigator.push(context, MaterialPageRoute(builder: (c) => WikiWarshipOverviewPage()));
             },
           ),
         ],
