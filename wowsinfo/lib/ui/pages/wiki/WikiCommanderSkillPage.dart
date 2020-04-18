@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:wowsinfo/core/data/CachedData.dart';
 
 /// WikiCommanderSkillPage class
@@ -14,6 +15,24 @@ class WikiCommanderSkillPage extends StatefulWidget {
 
 class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
   final cached = CachedData.shared;
+  bool horizontalLock = false;
+
+  @override
+  void dispose() {
+    // Reset Orientation
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
+    // Allow everything
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,23 +40,55 @@ class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Commander Skill')
+        title: Text('Commander Skill'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.screen_rotation), 
+            onPressed: () {
+              if (!horizontalLock) {
+                SystemChrome.setPreferredOrientations([
+                  DeviceOrientation.landscapeLeft,
+                  DeviceOrientation.landscapeRight,
+                ]);
+                this.horizontalLock = true;
+              } else {
+                SystemChrome.setPreferredOrientations([
+                  DeviceOrientation.portraitUp,
+                ]);
+                
+                SystemChrome.setPreferredOrientations([
+                  DeviceOrientation.portraitUp,
+                  DeviceOrientation.portraitDown,
+                  DeviceOrientation.landscapeLeft,
+                  DeviceOrientation.landscapeRight,
+                ]);
+                this.horizontalLock = false;
+              }
+            },
+          ),
+        ],
       ),
-      body: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 4,
-          childAspectRatio: 1.0,
+      body: SafeArea(
+        child: GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 4,
+            childAspectRatio: 1.0,
+          ),
+          itemCount: skills.length,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            final curr = skills[index];
+            return InkWell(
+              onTap: () {},
+              child: Padding(
+                padding: const EdgeInsets.all(4),
+                child: FittedBox(
+                  child: Image.network(curr.icon),
+                ),
+              ),
+            );
+          }
         ),
-        itemCount: skills.length,
-        itemBuilder: (context, index) {
-          final curr = skills[index];
-          return InkWell(
-            onTap: () {},
-            child: FittedBox(
-              child: Image.network(curr.icon),
-            ),
-          );
-        }
       ),
     );
   }
