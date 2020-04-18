@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
 import 'package:wowsinfo/ui/pages/wiki/WikiAchievementPage.dart';
+import 'package:wowsinfo/ui/pages/wiki/WikiCommanderSkillPage.dart';
 import 'package:wowsinfo/ui/pages/wiki/WikiConsumablePage.dart';
 import 'package:wowsinfo/ui/pages/wiki/WikiGameMapPage.dart';
 import 'package:wowsinfo/ui/pages/wiki/WikiWarshipPage.dart';
@@ -56,6 +57,14 @@ class _WikiPageState extends State<WikiPage> {
             leading: Icon(Icons.map),
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (c) => WikiAchievementPage()));
+            },
+          ),
+          ListTile(
+            title: Text('Commander Skill'),
+            subtitle: Text('...'),
+            leading: Icon(Icons.map),
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (c) => WikiCommanderSkillPage()));
             },
           ),
         ],

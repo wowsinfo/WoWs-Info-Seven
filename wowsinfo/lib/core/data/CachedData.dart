@@ -120,6 +120,12 @@ class CachedData extends LocalData {
   }
 
   WikiCommanderSkill _commanderSkill;
+  Iterable<Skill> get commanderSkill => _commanderSkill.skill.values;
+  Iterable<Skill> get sortedCommanderSkill => commanderSkill
+    .toList(growable: false)..sort((a, b) {
+      if (a.tier == b.tier) return a.typeId - b.typeId;
+      return a.tier - b.tier;
+    });
   void loadCommanderSkill() => _commanderSkill = decode(WIKI_COMMANDER_SKILL, (j) => WikiCommanderSkill.fromJson(j));
   void saveCommanderSkill(WikiCommanderSkill data) {
     _commanderSkill = data;
