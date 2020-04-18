@@ -27,9 +27,10 @@ class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
     // Lock to horizontal
     if (widget.simulation) {
       // This delay is to show the transition animation
-      Future.delayed(Duration(milliseconds: 500), () {
-        setLandscape();
-      });
+      // TODO: fix the grid because it doesn't work in hotizontal mode
+      // Future.delayed(Duration(milliseconds: 500), () {
+      //   setLandscape();
+      // });
     }
   }
 
@@ -45,7 +46,7 @@ class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Commander Skill'),
+        title: buildTitle(context),
         actions: [
           widget.simulation ? SizedBox.shrink() : buildRotationLock(),
         ],
@@ -59,7 +60,6 @@ class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
               childAspectRatio: 1.0,
             ),
             itemCount: skills.length,
-            scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               final curr = skills[index];
               final selected = skillNames.contains(curr.name);
@@ -87,14 +87,32 @@ class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
     );
   }
 
+  Text buildTitle(BuildContext context) {
+    if (widget.simulation) return Text(points.toString());
+    else return Text('Commander Skill');
+  }
+
   /// Decide who to do when the skill icon is pressed
   void onTap(Skill curr) {
     if (widget.simulation) {
-      setState(() {
-        points -= curr.tier;
-        skillNames.add(curr.name);
-      });
+      // Update points
+      final hasSelected = skillNames.contains(curr.name);
+      if (hasSelected) {
+        setState(() {
+          points += curr.tier;
+          skillNames.remove(curr.name);
+        });
+      } else {
+        final newPoints = points - curr.tier;
+        if (newPoints < 0) return;
+
+        setState(() {
+          points = newPoints;
+          skillNames.add(curr.name);
+        });
+      }
     } else {
+      // Show skill details
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
