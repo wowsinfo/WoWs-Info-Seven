@@ -43,7 +43,15 @@ class _WikiWarshipPageState extends State<WikiWarshipPage> with SingleTickerProv
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('WikiWarshipPage')
+        title: Text('WikiWarshipPage'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.info_outline), 
+            onPressed: () {
+
+            },
+          ),
+        ],
       ),
       body: SafeArea(
         child: Column(
