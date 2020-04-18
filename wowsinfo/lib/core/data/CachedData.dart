@@ -75,6 +75,13 @@ class CachedData extends LocalData {
   }
 
   WikiAchievement _achievement;
+  Iterable<Achievement> get achievement => _achievement.achievement.values;
+  Iterable<Achievement> get sortedAchievement => achievement.toList(growable: false)
+    ..sort((a, b) {
+      if (a.hidden == b.hidden) return a.achievementId.compareTo(b.achievementId);
+      return a.hidden - b.hidden;
+    });
+  Achievement getAchievement(String key) => _achievement.achievement[key];
   void loadAchievement() => _achievement = decode(WIKI_ACHIEVEMENT, (j) => WikiAchievement.fromJson(j));
   void saveAchievement(WikiAchievement data) {
     _achievement = data;
