@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/data/Preference.dart';
 import 'package:wowsinfo/core/models/User/Clan.dart';
 import 'package:wowsinfo/core/models/User/Player.dart';
-import 'package:wowsinfo/core/models/WoWs/SearchClanResult.dart';
-import 'package:wowsinfo/core/models/WoWs/SearchPlayerResult.dart';
 import 'package:wowsinfo/core/parsers/API/SearchClanResultParser.dart';
 import 'package:wowsinfo/core/parsers/API/SearchPlayerResultParser.dart';
 import 'package:wowsinfo/ui/pages/player/ClanInfoPage.dart';
