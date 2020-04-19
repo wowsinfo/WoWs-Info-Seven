@@ -5,6 +5,7 @@ import 'package:wowsinfo/core/data/Constant.dart';
 import 'package:wowsinfo/core/data/LocalData.dart';
 import 'package:wowsinfo/core/data/Preference.dart';
 import 'package:wowsinfo/core/models/Cacheable.dart';
+import 'package:wowsinfo/core/models/Clan/ClanGlossary.dart';
 import 'package:wowsinfo/core/models/GitHub/PRData.dart';
 import 'package:wowsinfo/core/models/GitHub/ShipAlias.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiAchievement.dart';
@@ -18,6 +19,7 @@ import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart';
 import 'package:wowsinfo/core/others/Utils.dart';
 import 'package:wowsinfo/core/extensions/DateTimeExtension.dart';
 import 'package:wowsinfo/core/parsers/API/APIParser.dart';
+import 'package:wowsinfo/core/parsers/API/ClanGlossaryParser.dart';
 import 'package:wowsinfo/core/parsers/API/WikiAchievementParser.dart';
 import 'package:wowsinfo/core/parsers/API/WikiCollectionItemParser.dart';
 import 'package:wowsinfo/core/parsers/API/WikiCollectionParser.dart';
@@ -36,6 +38,7 @@ const BOX_NAME = 'cached_data';
 const PERSONAL_RATING = 'personal_rating';
 const SHIP_ALIAS = 'ship_alias';
 
+const CLAN_GLOSSARY = 'clan_glossary';
 const WIKI_ACHIEVEMENT = 'ship_achievement';
 const WIKI_COLLECTION = 'wiki_collection';
 const WIKI_COLLECTION_ITEM = 'wiki_collection_item';
@@ -65,6 +68,14 @@ class CachedData extends LocalData {
   void savePRData(PRData data) {
     _prData = data;
     box.put(PERSONAL_RATING, jsonEncode(data.toJson()));
+  }
+
+  ClanGlossary _clanGlossary;
+  String getClanRoleName(String role) => _clanGlossary.roles[role];
+  void loadClanGlossary() => _clanGlossary = decode(CLAN_GLOSSARY, (j) => ClanGlossary.fromJson(j));
+  void saveClanGlossary(ClanGlossary data) {
+    _clanGlossary = data;
+    box.put(CLAN_GLOSSARY, jsonEncode(data.toJson()));
   }
 
   ShipAlias _alias;
@@ -211,6 +222,7 @@ class CachedData extends LocalData {
         // WikiEncyclopediaParser(server),
         WikiGameMapParser(server),
         WikiWarshipParser(server),
+        ClanGlossaryParser(server),
       ];
       // Extra data from GitHub
       List<GitHubParser> github = [
@@ -235,7 +247,6 @@ class CachedData extends LocalData {
       return true;
     }
 
-
     // Close the box after everything has been loadded
     return false;
   }
@@ -245,6 +256,7 @@ class CachedData extends LocalData {
   void loadAll() {
     loadAchievement();
     loadAlias();
+    loadClanGlossary();
     loadCollection();
     loadCollectionItem();
     loadConsumable();

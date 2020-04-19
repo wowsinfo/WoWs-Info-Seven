@@ -1,3 +1,5 @@
+import 'package:wowsinfo/core/models/WoWs/ClanInfo.dart';
+
 /// All four servers
 enum Server {
   RU,
@@ -32,4 +34,5 @@ class GameServer {
   String get prefix => _prefix[_server.index];
   /// wows-numbers.com by default is eu
   String get numberWebsite => 'https://${_numberDomain[_server.index]}wows-numbers.com';
+  String getClanNumberWebsite(ClanInfo info) => '$numberWebsite/clan/${info.clanId},${info.tag}';
 }

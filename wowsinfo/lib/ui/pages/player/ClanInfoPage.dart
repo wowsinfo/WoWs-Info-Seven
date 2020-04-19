@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/data/Preference.dart';
 import 'package:wowsinfo/core/models/User/Clan.dart';
 import 'package:wowsinfo/core/models/WoWs/ClanInfo.dart';
@@ -16,6 +18,7 @@ class ClanInfoPage extends StatefulWidget {
 
 class _ClanInfoPageState extends State<ClanInfoPage> {
   final pref = Preference.shared;
+  final cached = CachedData.shared;
   ClanInfo info;
   
   @override
@@ -59,19 +62,40 @@ class _ClanInfoPageState extends State<ClanInfoPage> {
                     value: info.leaderName.toString(),
                   ),
                   Text(info.description),
-                  Text('Member - ${info.membersCount}'),
-                  Column(
-                    children: info.sortedMembers.map((e) => ListTile(
-                      title: Text(e.accountName),
-                      subtitle: Text(e.accountIdString),
-                    )).toList(growable: false),
-                  )
+                  FractionallySizedBox(
+                    widthFactor: 1,
+                    child: RaisedButton(
+                      child: Text('More information on WoWs Number'),
+                      onPressed: () => launch(pref.gameServer.getClanNumberWebsite(info))
+                    ),
+                  ),
+                  FractionallySizedBox(
+                    widthFactor: 1,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 16),
+                      child: Text(
+                        'Member - ${info.membersCount}',
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
+                    ),
+                  ),
+                  buildMemberList()
                 ],
               ),
             ),
           ),
         ),
       ),
+    );
+  }
+
+  Column buildMemberList() {
+    return Column(
+      children: info.sortedMembers.map((e) => ListTile(
+        title: Text(cached.getClanRoleName(e.role)),
+        subtitle: Text(e.accountName),
+        trailing: Text(e.role),
+      )).toList(growable: false),
     );
   }
 }
