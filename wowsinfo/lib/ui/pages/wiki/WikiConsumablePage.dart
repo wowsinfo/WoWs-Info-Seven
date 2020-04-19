@@ -34,10 +34,12 @@ class _WikiConsumablePageState extends State<WikiConsumablePage> {
               showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
-                  title: Text(curr.name),
                   content: ListTile(
-                    title: Text(curr.description + '\n'),
-                    subtitle: Text(curr.profileString),
+                    contentPadding: const EdgeInsets.all(2),
+                    isThreeLine: true,
+                    title: Text(curr.name),
+                    subtitle: Text(curr.description + '\n\n' + curr.profileString),
+                    leading: Image.network(curr.image),
                   ),
                 ),
               );
