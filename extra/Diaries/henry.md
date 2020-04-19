@@ -9,8 +9,9 @@ Template
 
 ## 19/04/2020
 ### Summary
-Let me copy and paste websites back. 
+Let me copy and paste websites back. Websites are fine and a web version has been added. Player search and clan search are also done. All my hardwork wasn't nothing. Another enjoyable day of development. 
 ### What to do tomorrow?
+Player info. This is just amazing. I didn't even do that much. 
 
 ## 18/04/2020
 ### Summary
