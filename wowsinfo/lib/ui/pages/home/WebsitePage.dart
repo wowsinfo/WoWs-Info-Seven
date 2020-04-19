@@ -3,6 +3,7 @@ import 'package:wowsinfo/core/data/Preference.dart';
 import 'package:wowsinfo/core/models/UI/WebsiteItem.dart';
 import 'package:wowsinfo/core/models/UI/WebsiteSection.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 /// WebsitePage class
 class WebsitePage extends StatelessWidget {
@@ -23,8 +24,8 @@ class WebsitePage extends StatelessWidget {
         [
           WebsiteItem('This is a string', 'https://worldofwarships.$domain/'),
           WebsiteItem('This is a string', 'https://$prefix.wargaming.net/shop/wows/'),
-          WebsiteItem('This is a string', 'http://wiki.wargaming.net/${pref.serverLanguage}/World_of_Warships/'),
-          WebsiteItem('This is a string', 'https://www.facebook.com/wowsdevblog/'),
+          WebsiteItem('This is a string', 'http://wiki.wargaming.net/'),
+          WebsiteItem('This is a string', 'https://www.facebook.com/wowsdevblog/posts/'),
         ],
       ),
       WebsiteSection(
@@ -55,8 +56,8 @@ class WebsitePage extends StatelessWidget {
         ],
       ),
       WebsiteSection(
-        'title', 
-        'subtitle', 
+        'In game', 
+        'subtitle',
         [
           WebsiteItem('This is a string', 'https://$prefix.wargaming.net/id/signin/'),
           WebsiteItem('This is a string', 'https://worldofwarships.$domain/userbonus/'),
@@ -65,7 +66,8 @@ class WebsitePage extends StatelessWidget {
           WebsiteItem('This is a string', 'https://clans.worldofwarships.$domain/clans/gateway/wows/profile/'),
           WebsiteItem('This is a string', 'https://warehouse.worldofwarships.$domain/'),
           WebsiteItem('This is a string', 'https://logbook.worldofwarships.$domain/'),
-        ],      
+        ],
+        expanded: true,  
       ),
     ];
 
@@ -75,11 +77,13 @@ class WebsitePage extends StatelessWidget {
       ),
       body: ListView(
         children: websites.map((e) => ExpansionTile(
+          initiallyExpanded: e.expanded,
           title: Text(e.title),
           subtitle: Text(e.subtitle),
           children: e.items.map((e) => ListTile(
             title: Text(e.title),
             subtitle: Text(e.link),
+            onTap: () => launch(e.link),
           )).toList(growable: false),
         )).toList(growable: false),
       ),

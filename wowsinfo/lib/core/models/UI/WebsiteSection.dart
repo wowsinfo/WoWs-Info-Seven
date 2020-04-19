@@ -1,9 +1,10 @@
 import 'package:wowsinfo/core/models/UI/WebsiteItem.dart';
 
 class WebsiteSection {
-  String title;
-  String subtitle;
-  List<WebsiteItem> items = [];
+  final String title;
+  final String subtitle;
+  final List<WebsiteItem> items;
+  final bool expanded;
 
-  WebsiteSection(this.title, this.subtitle, this.items);
+  WebsiteSection(this.title, this.subtitle, this.items, {this.expanded = false});
 }
