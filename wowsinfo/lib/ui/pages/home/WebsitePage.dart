@@ -25,7 +25,7 @@ class WebsitePage extends StatelessWidget {
           WebsiteItem('This is a string', 'https://worldofwarships.$domain/'),
           WebsiteItem('This is a string', 'https://$prefix.wargaming.net/shop/wows/'),
           WebsiteItem('This is a string', 'http://wiki.wargaming.net/'),
-          WebsiteItem('This is a string', 'https://www.facebook.com/wowsdevblog/posts/'),
+          WebsiteItem('This is a string', 'https://www.facebook.com/wowsdevblog/posts/', favourite: true),
         ],
       ),
       WebsiteSection(
@@ -33,10 +33,10 @@ class WebsitePage extends StatelessWidget {
         'websites about stats', 
         [
           WebsiteItem('This is a string', 'https://wowsinfo.firebaseapp.com/'),
-          WebsiteItem('This is a string', server.numberWebsite),
+          WebsiteItem('This is a string', server.numberWebsite, favourite: true),
           WebsiteItem('This is a string', 'https://sketchfab.com/tags/world-of-warships'),
           WebsiteItem('This is a string', 'https://gamemodels3d.com/games/worldofwarships/'),
-          WebsiteItem('This is a string', 'https://wowsft.com/'),
+          WebsiteItem('This is a string', 'https://wowsft.com/', favourite: true),
         ],
       ),
       WebsiteSection(
@@ -59,7 +59,7 @@ class WebsitePage extends StatelessWidget {
         'In game', 
         'subtitle',
         [
-          WebsiteItem('This is a string', 'https://$prefix.wargaming.net/id/signin/'),
+          WebsiteItem('This is a string', 'https://$prefix.wargaming.net/id/signin/', favourite: true),
           WebsiteItem('This is a string', 'https://worldofwarships.$domain/userbonus/'),
           WebsiteItem('This is a string', 'https://worldofwarships.$domain/news_ingame/'),
           WebsiteItem('This is a string', 'https://armory.worldofwarships.$domain/'),
@@ -67,7 +67,6 @@ class WebsitePage extends StatelessWidget {
           WebsiteItem('This is a string', 'https://warehouse.worldofwarships.$domain/'),
           WebsiteItem('This is a string', 'https://logbook.worldofwarships.$domain/'),
         ],
-        expanded: true,  
       ),
     ];
 
@@ -84,6 +83,7 @@ class WebsitePage extends StatelessWidget {
             title: Text(e.title),
             subtitle: Text(e.link),
             onTap: () => launch(e.link),
+            trailing: e.favourite ? Icon(Icons.star, color: Colors.orange) : SizedBox.shrink(),
           )).toList(growable: false),
         )).toList(growable: false),
       ),

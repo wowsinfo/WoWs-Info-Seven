@@ -2,6 +2,7 @@
 class WebsiteItem {
   String title;
   String link;
+  bool favourite;
 
-  WebsiteItem(this.title, this.link);
+  WebsiteItem(this.title, this.link, {this.favourite = false});
 }
