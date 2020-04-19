@@ -5,7 +5,7 @@ import 'APIParser.dart';
 class OnlinePlayerCountParser extends APIParser {
   /// It requests to world of tank
   OnlinePlayerCountParser(GameServer server, String name) : super(null) {
-    this.link = 'https://api.worldoftanks.${server.toDomain()}/wgn/servers/info/';
+    this.link = 'https://api.worldoftanks.${server.domain}/wgn/servers/info/';
     addAPIKey();
     this.link += '&fields=players_online&game=wows';
   }

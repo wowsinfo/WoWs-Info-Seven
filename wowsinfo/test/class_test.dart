@@ -21,18 +21,18 @@ void main() {
 
   test('Test GameServer', () {
     final a = GameServer(Server.ASIA);
-    expect(a.toDomain() == 'asia', isTrue);
-    expect(a.toWoWsNumbers() == 'https://asia.wows-numbers.com', isTrue);
+    expect(a.domain == 'asia', isTrue);
+    expect(a.numberWebsite == 'https://asia.wows-numbers.com', isTrue);
 
     a.updateServer(Server.EU);
     expect(a.server == Server.EU, isTrue);
-    expect(a.toWoWsNumbers() == 'https://wows-numbers.com', isTrue);
+    expect(a.numberWebsite == 'https://wows-numbers.com', isTrue);
 
     a.updateServer(Server.RU);
     expect(a.server == Server.RU, isTrue);
 
     final b = GameServer.fromIndex(3);
-    expect(b.toDomain() == 'asia', isTrue);
-    expect(b.toWoWsNumbers() == 'https://asia.wows-numbers.com', isTrue);
+    expect(b.domain == 'asia', isTrue);
+    expect(b.numberWebsite == 'https://asia.wows-numbers.com', isTrue);
   });
 }

@@ -1,56 +1,71 @@
 import 'package:flutter/material.dart';
+import 'package:wowsinfo/core/data/Preference.dart';
 import 'package:wowsinfo/core/models/UI/WebsiteItem.dart';
 import 'package:wowsinfo/core/models/UI/WebsiteSection.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
 
 /// WebsitePage class
 class WebsitePage extends StatelessWidget {
+  final pref = Preference.shared;
   WebsitePage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final lang = AppLocalization.of(context);
+    final server = pref.gameServer;
+    final domain = server.domain;
+    final prefix = server.prefix;
 
     final websites = [
       WebsiteSection(
-        'title', 
+        'official', 
+        'world of warships official website', 
+        [
+          WebsiteItem('This is a string', 'https://worldofwarships.$domain/'),
+          WebsiteItem('This is a string', 'https://$prefix.wargaming.net/shop/wows/'),
+          WebsiteItem('This is a string', 'http://wiki.wargaming.net/${pref.serverLanguage}/World_of_Warships/'),
+          WebsiteItem('This is a string', 'https://www.facebook.com/wowsdevblog/'),
+        ],
+      ),
+      WebsiteSection(
+        'stats & utilies', 
+        'websites about stats', 
+        [
+          WebsiteItem('This is a string', 'https://wowsinfo.firebaseapp.com/'),
+          WebsiteItem('This is a string', server.numberWebsite),
+          WebsiteItem('This is a string', 'https://sketchfab.com/tags/world-of-warships'),
+          WebsiteItem('This is a string', 'https://gamemodels3d.com/games/worldofwarships/'),
+          WebsiteItem('This is a string', 'https://wowsft.com/'),
+        ],
+      ),
+      WebsiteSection(
+        'YouTuber', 
         'subtitle', 
         [
-          WebsiteItem('This is a string', 'This is a string'),
-          WebsiteItem('This is a string', 'This is a string'),
-          WebsiteItem('This is a string', 'This is a string'),
-          WebsiteItem('This is a string', 'This is a string'),
+          WebsiteItem('This is a string', 'https://www.youtube.com/user/worldofwarshipsCOM'),
+          WebsiteItem('This is a string', 'https://www.youtube.com/user/Flambass'),
+          WebsiteItem('This is a string', 'https://www.youtube.com/user/cheesec4t'),
+          WebsiteItem('This is a string', 'https://www.youtube.com/user/ichasegaming'),
+          WebsiteItem('This is a string', 'https://www.youtube.com/user/BohemianEagle'),
+          WebsiteItem('This is a string', 'https://www.youtube.com/user/MrNotser'),
+          WebsiteItem('This is a string', 'https://www.youtube.com/user/ZoupGaming'),
+          WebsiteItem('This is a string', 'https://www.youtube.com/user/pzkpasch'),
+          WebsiteItem('This is a string', 'https://www.youtube.com/channel/UCXOZ2gv_ZGomWNcQU8BBfdQ'),
+          WebsiteItem('This is a string', 'https://www.youtube.com/user/spzjess'),
         ],
       ),
       WebsiteSection(
         'title', 
         'subtitle', 
         [
-          WebsiteItem('This is a string', 'This is a string'),
-          WebsiteItem('This is a string', 'This is a string'),
-          WebsiteItem('This is a string', 'This is a string'),
-          WebsiteItem('This is a string', 'This is a string'),
-        ],
-      ),
-      WebsiteSection(
-        'title', 
-        'subtitle', 
-        [
-          WebsiteItem('This is a string', 'This is a string'),
-          WebsiteItem('This is a string', 'This is a string'),
-          WebsiteItem('This is a string', 'This is a string'),
-          WebsiteItem('This is a string', 'This is a string'),
-        ],
-      ),
-      WebsiteSection(
-        'title', 
-        'subtitle', 
-        [
-          WebsiteItem('This is a string', 'This is a string'),
-          WebsiteItem('This is a string', 'This is a string'),
-          WebsiteItem('This is a string', 'This is a string'),
-          WebsiteItem('This is a string', 'This is a string'),
-        ],
+          WebsiteItem('This is a string', 'https://$prefix.wargaming.net/id/signin/'),
+          WebsiteItem('This is a string', 'https://worldofwarships.$domain/userbonus/'),
+          WebsiteItem('This is a string', 'https://worldofwarships.$domain/news_ingame/'),
+          WebsiteItem('This is a string', 'https://armory.worldofwarships.$domain/'),
+          WebsiteItem('This is a string', 'https://clans.worldofwarships.$domain/clans/gateway/wows/profile/'),
+          WebsiteItem('This is a string', 'https://warehouse.worldofwarships.$domain/'),
+          WebsiteItem('This is a string', 'https://logbook.worldofwarships.$domain/'),
+        ],      
       ),
     ];
 

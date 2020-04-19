@@ -10,6 +10,8 @@ enum Server {
 class GameServer {
   /// The domain wargaming uses
   final _domain = ['ru', 'eu', 'com', 'asia'];
+  /// Prefix that wargaming uses
+  final _prefix = ['ru', 'eu', 'na', 'asia'];
   /// The domain wows-numbers.com uses
   final _numberDomain = ['ru.', '', 'na.', 'asia.'];
 
@@ -26,7 +28,8 @@ class GameServer {
   }
   
   /// This only returns the domain
-  String toDomain() => _domain[_server.index];
+  String get domain => _domain[_server.index];
+  String get prefix => _prefix[_server.index];
   /// wows-numbers.com by default is eu
-  String toWoWsNumbers() => 'https://${_numberDomain[_server.index]}wows-numbers.com';
+  String get numberWebsite => 'https://${_numberDomain[_server.index]}wows-numbers.com';
 }

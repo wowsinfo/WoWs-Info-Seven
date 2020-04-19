@@ -22,7 +22,7 @@ abstract class APIParser {
 
   /// In case, you save a player in another server (you can pass it here)
   APIParser(GameServer server) {
-    this.link += server.toDomain();
+    this.link += server.domain;
   }
 
   /// Download API String, `download all pages` and do some basic checks
