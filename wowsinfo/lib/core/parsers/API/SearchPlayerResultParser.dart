@@ -6,7 +6,7 @@ class SearchPlayerResultParser extends APIParser {
   SearchPlayerResultParser(GameServer server, String name) : super(server) {
     this.link += '/wows/account/list/';
     addAPIKey();
-    this.link += '&search=$name';
+    this.link += '&search=$name&limit=50';
   }
 
   @override
