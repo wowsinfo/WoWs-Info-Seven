@@ -52,6 +52,9 @@ class Member {
   String accountName;
 
   String get accountIdString => '$accountId';
+  bool get hasRole => role != 'commissioned_officer';
+  bool get isCommander => role == 'commander';
+  bool get isExecutive => role == 'executive_officer';
 
   Member(Map<String, dynamic> json) {
     this.role = json['role'];

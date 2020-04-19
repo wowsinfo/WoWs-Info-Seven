@@ -72,10 +72,10 @@ class _ClanInfoPageState extends State<ClanInfoPage> {
                   FractionallySizedBox(
                     widthFactor: 1,
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 16),
+                      padding: const EdgeInsets.only(left: 16, top: 8.0),
                       child: Text(
                         'Member - ${info.membersCount}',
-                        style: Theme.of(context).textTheme.headline6,
+                        style: Theme.of(context).textTheme.headline5,
                       ),
                     ),
                   ),
@@ -91,11 +91,25 @@ class _ClanInfoPageState extends State<ClanInfoPage> {
 
   Column buildMemberList() {
     return Column(
-      children: info.sortedMembers.map((e) => ListTile(
-        title: Text(cached.getClanRoleName(e.role)),
-        subtitle: Text(e.accountName),
-        trailing: Text(e.role),
-      )).toList(growable: false),
+      children: info.sortedMembers.map((e) {
+        if (e.hasRole) {
+          final role = cached.getClanRoleName(e.role);
+          TextStyle style;
+          if (e.isCommander) style = TextStyle(color: Colors.orange);
+          else if (e.isExecutive) style = TextStyle(color: Colors.lightBlue);
+
+          return ListTile(
+            title: Text(e.accountName, style: style),
+            subtitle: Text(role, style: style),
+          );
+        } else {
+          // They don't have a role but don't display NONE
+          return ListTile(
+            title: Text(e.accountName),
+            subtitle: Text(e.accountIdString),
+          );
+        }
+      }).toList(growable: false),
     );
   }
 }
