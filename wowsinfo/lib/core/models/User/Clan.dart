@@ -6,6 +6,8 @@ class Clan {
   int clanId;
   int server;
 
+  String get clanIdString => '$clanId';
+
   Clan(this.tag, this.clanId, this.server);
 
   Clan.fromJson(Map<String, dynamic> json) {

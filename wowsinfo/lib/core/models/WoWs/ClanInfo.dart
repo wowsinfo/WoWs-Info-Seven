@@ -17,6 +17,10 @@ class ClanInfo {
   int leaderId;
   String description;
 
+  Iterable<Member> get members => member.values;
+  Iterable<Member> get sortedMembers => members.toList(growable: false)
+    ..sort((a, b) => a.joinedAt - b.joinedAt);
+
   ClanInfo(Map<String, dynamic> data) {
     final json = data.values.first;
     if (json != null) {
@@ -46,6 +50,8 @@ class Member {
   int joinedAt;
   int accountId;
   String accountName;
+
+  String get accountIdString => '$accountId';
 
   Member(Map<String, dynamic> json) {
     this.role = json['role'];

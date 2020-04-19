@@ -6,6 +6,7 @@ import 'package:wowsinfo/core/models/WoWs/SearchClanResult.dart';
 import 'package:wowsinfo/core/models/WoWs/SearchPlayerResult.dart';
 import 'package:wowsinfo/core/parsers/API/SearchClanResultParser.dart';
 import 'package:wowsinfo/core/parsers/API/SearchPlayerResultParser.dart';
+import 'package:wowsinfo/ui/pages/player/ClanInfoPage.dart';
 
 /// SearchPage class
 class SearchPage extends StatefulWidget {
@@ -142,7 +143,8 @@ class ClanList extends StatelessWidget {
     return Column(
       children: clans.map((e) => ListTile(
         title: Text(e.tag),
-        subtitle: Text(e.clanId.toString()),
+        subtitle: Text(e.clanIdString),
+        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (c) => ClanInfoPage(clan: e))),
       )).toList(growable: false),
     );
   }
