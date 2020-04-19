@@ -5,7 +5,9 @@ import 'package:wowsinfo/core/data/Preference.dart';
 import 'package:wowsinfo/core/models/User/Clan.dart';
 import 'package:wowsinfo/core/models/WoWs/ClanInfo.dart';
 import 'package:wowsinfo/core/parsers/API/ClanInfoParser.dart';
+import 'package:wowsinfo/ui/widgets/PlatformLoadingIndiactor.dart';
 import 'package:wowsinfo/ui/widgets/TextWithCaption.dart';
+import 'package:wowsinfo/ui/widgets/WrapBox.dart';
 
 /// ClanInfoPage class
 class ClanInfoPage extends StatefulWidget {
@@ -42,51 +44,88 @@ class _ClanInfoPageState extends State<ClanInfoPage> {
         title: Text(widget.clan.clanIdString)
       ),
       body: SafeArea(
-        child: Scrollbar(
-          child: SingleChildScrollView(
-            child: Center(
-              child: Column(
-                children: [
-                  Text(info.tag),
-                  Text(info.name),
-                  TextWithCaption(
-                    title: 'created',
-                    value: info.createdAt.toString(),
-                  ),
-                  TextWithCaption(
-                    title: 'creator',
-                    value: info.creatorName.toString(),
-                  ),
-                  TextWithCaption(
-                    title: 'leader',
-                    value: info.leaderName.toString(),
-                  ),
-                  Text(info.description),
-                  FractionallySizedBox(
-                    widthFactor: 1,
-                    child: RaisedButton(
-                      child: Text('More information on WoWs Number'),
-                      onPressed: () => launch(pref.gameServer.getClanNumberWebsite(info))
-                    ),
-                  ),
-                  FractionallySizedBox(
-                    widthFactor: 1,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 16, top: 8.0),
-                      child: Text(
-                        'Member - ${info.membersCount}',
-                        style: Theme.of(context).textTheme.headline5,
-                      ),
-                    ),
-                  ),
-                  buildMemberList()
-                ],
-              ),
-            ),
-          ),
+        child: AnimatedSwitcher(
+          duration: Duration(milliseconds: 500),
+          transitionBuilder: (w, a) => ScaleTransition(scale: a, child: w),
+          switchInCurve: Curves.linearToEaseOut,
+          child: buildContent(context),
         ),
       ),
     );
+  }
+
+  Widget buildContent(BuildContext context) {
+    if (info == null) {
+      return Center(
+        child: PlatformLoadingIndiactor(),
+      );
+    } else {
+      final theme = Theme.of(context).textTheme;
+      return Scrollbar(
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Text(info.tag, style: theme.headline2),
+                Text(info.name, style: theme.headline6),
+                WrapBox(
+                  padding: const EdgeInsets.only(top: 8),
+                  width: 200,
+                  children: [
+                    TextWithCaption(
+                      title: 'created',
+                      value: info.createdAt.toString(),
+                    ),
+                    TextWithCaption(
+                      title: 'creator',
+                      value: info.creatorName,
+                    ),
+                    TextWithCaption(
+                      title: 'leader',
+                      value: info.leaderName,
+                    ),
+                    TextWithCaption(
+                      title: 'Disbanded',
+                      value: info.isClanDisbanded ? 'YES' : 'NO',
+                    ),
+                    TextWithCaption(
+                      title: 'OLD TAG',
+                      value: info.oldTag ?? '...',
+                    ),
+                    TextWithCaption(
+                      title: 'OLD NAME',
+                      value: info.oldName ?? '...',
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(info.description, style: theme.bodyText1),
+                ),
+                FractionallySizedBox(
+                  widthFactor: 1,
+                  child: RaisedButton(
+                    child: Text('More information on WoWs Number'),
+                    onPressed: () => launch(pref.gameServer.getClanNumberWebsite(info))
+                  ),
+                ),
+                FractionallySizedBox(
+                  widthFactor: 1,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 16, top: 16),
+                    child: Text(
+                      'Member - ${info.membersCount}',
+                      style: Theme.of(context).textTheme.headline5,
+                    ),
+                  ),
+                ),
+                buildMemberList()
+              ],
+            ),
+          ),
+        ),
+      );
+    }
   }
 
   Column buildMemberList() {
@@ -101,12 +140,14 @@ class _ClanInfoPageState extends State<ClanInfoPage> {
           return ListTile(
             title: Text(e.accountName, style: style),
             subtitle: Text(role, style: style),
+            onTap: () {},
           );
         } else {
           // They don't have a role but don't display NONE
           return ListTile(
             title: Text(e.accountName),
             subtitle: Text(e.accountIdString),
+            onTap: () {},
           );
         }
       }).toList(growable: false),

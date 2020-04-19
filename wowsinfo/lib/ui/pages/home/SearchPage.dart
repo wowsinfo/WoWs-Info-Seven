@@ -101,8 +101,8 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   searchPlayer() async {
-    // At least 3 characters for players
-    if (input.length < 3) return;
+    // At least 3 characters for players, max 24 according to the API
+    if (input.length < 3 || input.length > 24) return;
     final parser = SearchPlayerResultParser(pref.gameServer, input.trim());
     final player = parser.parse(await parser.download());
     if (player != null) {
