@@ -46,9 +46,6 @@ class AppSettings extends LocalData with ChangeNotifier {
   /// Variables
   ///
 
-  bool isCrazy = false;
-  Timer crazyTimer;
-  
   ThemeData _theme;
   ThemeData _darkTheme;
   ThemeData get theme => _theme;
@@ -123,22 +120,6 @@ class AppSettings extends LocalData with ChangeNotifier {
 
     this._generateTheme();
     debug();
-  }
-
-  /// Updates colour, language and theme randomly at a really fast pace
-  crazyMode() {
-    if (!isCrazy) {
-      final luck = Random();
-      final colorLength = THEME_COLOUR_LIST.length;
-      crazyTimer = Timer.periodic(Duration(milliseconds: 200), (_) {
-        setColor(THEME_COLOUR_LIST[luck.nextInt(colorLength)]);
-        setBrightness(THEME_BRIGHTNESS_MODE[luck.nextInt(2)]);
-      });
-      isCrazy = true;
-    } else {
-      isCrazy = false;
-      crazyTimer.cancel();
-    }
   }
 
   /// Convert locale object to a string

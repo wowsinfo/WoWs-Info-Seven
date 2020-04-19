@@ -28,9 +28,6 @@ class DebugProviderWidget extends StatelessWidget {
               app.setBrightness(ThemeMode.light);
             }, child: Text('Light')),
             FlatButton(onPressed: () {
-              app.crazyMode();
-            }, child: Text('Crazy Mode')),
-            FlatButton(onPressed: () {
               final list = [
                 Colors.blue,
                 Colors.red,
