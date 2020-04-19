@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:wowsinfo/core/data/GameServer.dart';
+import 'package:wowsinfo/core/models/UI/GameServer.dart';
 import 'package:wowsinfo/core/models/Meta.dart';
 
 import 'key.dart';

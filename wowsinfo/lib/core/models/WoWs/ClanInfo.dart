@@ -1,10 +1,12 @@
+import 'package:wowsinfo/core/models/UI/WoWsDate.dart';
+
 /// This is the `ClanInfo` class
 class ClanInfo {
   int membersCount;
   String name;
   String creatorName;
   int clanId;
-  int createdAt;
+  WoWsDate createdAt;
   int updatedAt;
   String leaderName;
   int creatorId;
@@ -17,9 +19,10 @@ class ClanInfo {
   int leaderId;
   String description;
 
+  String get createdDate => createdAt.dateString;
   Iterable<Member> get members => member.values;
   Iterable<Member> get sortedMembers => members.toList(growable: false)
-    ..sort((a, b) => a.joinedAt - b.joinedAt);
+    ..sort((a, b) => a.joinedAt.time - b.joinedAt.time);
 
   ClanInfo(Map<String, dynamic> data) {
     final json = data.values.first;
@@ -28,7 +31,7 @@ class ClanInfo {
       this.name = json['name'];
       this.creatorName = json['creator_name'];
       this.clanId = json['clan_id'];
-      this.createdAt = json['created_at'];
+      this.createdAt = WoWsDate(json['created_at']);
       this.updatedAt = json['updated_at'];
       this.leaderName = json['leader_name'];
       this.creatorId = json['creator_id'];
@@ -47,18 +50,19 @@ class ClanInfo {
 /// This is the `Member` class
 class Member {
   String role;
-  int joinedAt;
+  WoWsDate joinedAt;
   int accountId;
   String accountName;
 
   String get accountIdString => '$accountId';
+  String get joinedDate => joinedAt.dateString;
   bool get hasRole => role != 'commissioned_officer';
   bool get isCommander => role == 'commander';
   bool get isExecutive => role == 'executive_officer';
 
   Member(Map<String, dynamic> json) {
     this.role = json['role'];
-    this.joinedAt = json['joined_at'];
+    this.joinedAt = WoWsDate(json['joined_at']);
     this.accountId = json['account_id'];
     this.accountName = json['account_name'];
   }

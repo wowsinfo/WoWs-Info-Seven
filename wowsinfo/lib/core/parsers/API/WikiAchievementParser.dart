@@ -1,4 +1,4 @@
-import 'package:wowsinfo/core/data/GameServer.dart';
+import 'package:wowsinfo/core/models/UI/GameServer.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiAchievement.dart';
 
 import 'APIParser.dart';

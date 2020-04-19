@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:wowsinfo/core/data/AppSettings.dart';
 import 'package:wowsinfo/core/data/CachedData.dart';
-import 'package:wowsinfo/core/data/GameServer.dart';
+import 'package:wowsinfo/core/models/UI/GameServer.dart';
 import 'package:wowsinfo/core/data/Preference.dart';
 
 void main() {

@@ -74,7 +74,7 @@ class _ClanInfoPageState extends State<ClanInfoPage> {
                   children: [
                     TextWithCaption(
                       title: 'created',
-                      value: info.createdAt.toString(),
+                      value: info.createdDate,
                     ),
                     TextWithCaption(
                       title: 'creator',
@@ -131,6 +131,7 @@ class _ClanInfoPageState extends State<ClanInfoPage> {
   Column buildMemberList() {
     return Column(
       children: info.sortedMembers.map((e) {
+        final joined = Text(e.joinedDate);
         if (e.hasRole) {
           final role = cached.getClanRoleName(e.role);
           TextStyle style;
@@ -140,6 +141,7 @@ class _ClanInfoPageState extends State<ClanInfoPage> {
           return ListTile(
             title: Text(e.accountName, style: style),
             subtitle: Text(role, style: style),
+            trailing: joined,
             onTap: () {},
           );
         } else {
@@ -147,6 +149,7 @@ class _ClanInfoPageState extends State<ClanInfoPage> {
           return ListTile(
             title: Text(e.accountName),
             subtitle: Text(e.accountIdString),
+            trailing: joined,
             onTap: () {},
           );
         }

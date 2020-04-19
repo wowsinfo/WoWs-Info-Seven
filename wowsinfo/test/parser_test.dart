@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:wowsinfo/core/data/GameServer.dart';
+import 'package:wowsinfo/core/models/UI/GameServer.dart';
 import 'package:wowsinfo/core/parsers/API/WikiCommanderSkillParser.dart';
 import 'package:wowsinfo/core/parsers/API/WikiWarshipParser.dart';
 

@@ -1,4 +1,4 @@
-import 'package:wowsinfo/core/data/GameServer.dart';
+import 'package:wowsinfo/core/models/UI/GameServer.dart';
 import 'package:wowsinfo/core/models/WoWs/PlayerShipInfo.dart';
 import 'APIParser.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wowsinfo/core/data/GameServer.dart';
+import 'package:wowsinfo/core/models/UI/GameServer.dart';
 import 'package:wowsinfo/core/data/Preference.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
 import 'package:wowsinfo/ui/widgets/FlatFilterChip.dart';
