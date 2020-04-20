@@ -82,7 +82,7 @@ class WikiAchievementPage extends StatelessWidget {
       return GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: itemCount,
-          childAspectRatio: 0.9,
+          childAspectRatio: 0.96,
         ),
         itemCount: sorted.length,
         itemBuilder: (context, index) {
@@ -91,23 +91,32 @@ class WikiAchievementPage extends StatelessWidget {
           final curr = cached.getAchievement(key);
           return InkWell(
             onTap: () => this.onTap(context, curr),
-            child: Column(
-              children: <Widget>[
-                Expanded(child: buildImage(curr, player: true)),
-                Text(count.toString()),
-              ],
-            ),
+            child: buildPlayer(curr, count),
           );
         },
       );
     }
   }
 
-  Padding buildImage(Achievement curr, {bool player = false}) {
+  Widget buildPlayer(Achievement curr, int count) {
+    return Column(
+      children: <Widget>[
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(4),
+            child: Image.network(curr.image),
+          )
+        ),
+        Text(count.toString()),
+      ],
+    );
+  }
+
+  Padding buildImage(Achievement curr) {
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: FittedBox(
-        child: Image.network(player ? curr.image : (curr.hidden > 0 ? curr.imageInactive : curr.image)),
+        child: Image.network(curr.hidden > 0 ? curr.imageInactive : curr.image),
       ),
     );
   }
