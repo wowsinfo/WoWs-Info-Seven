@@ -101,6 +101,7 @@ class CachedData extends LocalData {
 
   WikiWarship _warship;
   Map<String, Warship> get warship => _warship.ships;
+  Warship getShip(int key) => warship[key.toString()];
   /// Sort by tier, then by type, ignore ships starts with `[`
   List<Warship> get sortedWarshipList {
     return warship.values.where((e) => !e.name.startsWith('[')).toList(growable: false)..sort((b, a) {

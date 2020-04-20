@@ -7,6 +7,12 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## 20/04/2020
+### Summary
+Some page info.
+### What to do tomorrow?
+More page info.
+
 ## 19/04/2020
 ### Summary
 Let me copy and paste websites back. Websites are fine and a web version has been added. Player search and clan search are also done. All my hardwork wasn't nothing. Another enjoyable day of development. 

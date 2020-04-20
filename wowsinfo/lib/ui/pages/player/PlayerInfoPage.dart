@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/models/User/Player.dart';
 import 'package:wowsinfo/core/models/WoWs/BasicPlayerInfo.dart';
 import 'package:wowsinfo/core/models/WoWs/PlayerAchievement.dart';
@@ -18,6 +19,7 @@ import 'package:wowsinfo/ui/widgets/PlatformLoadingIndiactor.dart';
 import 'package:wowsinfo/ui/widgets/TextWithCaption.dart';
 import 'package:wowsinfo/ui/widgets/WrapBox.dart';
 import 'package:wowsinfo/ui/widgets/player/BasicPlayerTile.dart';
+import 'package:wowsinfo/ui/widgets/wiki/WikiWarshipCell.dart';
 
 /// PlayerInfoPage class
 class PlayerInfoPage extends StatefulWidget {
@@ -29,6 +31,7 @@ class PlayerInfoPage extends StatefulWidget {
 }
 
 class _PlayerInfoPageState extends State<PlayerInfoPage> {
+  final cached = CachedData.shared;
   BasicPlayerInfo basicInfo;
   PlayerAchievement achievement;
   PlayerShipInfo shipInfo;
@@ -145,34 +148,38 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
       child: Column(
         children: [
           buildNickname(context, textTheme),
-          WrapBox(
-            width: 100,
-            children: [
-              TextWithCaption(
-                title: 'Level',
-                value: basicInfo.level,
-              ),
-              TextWithCaption(
-                title: 'Created',
-                value: basicInfo.createdDate,
-              ),
-              TextWithCaption(
-                title: 'Last battle',
-                value: basicInfo.lastBattleDate,
-              ),
-              TextWithCaption(
-                title: 'Total battle',
-                value: basicInfo.totalBattleString,
-              ),
-              TextWithCaption(
-                title: 'Distance travlled',
-                value: basicInfo.distanceString,
-              ),
-            ],
-          ),
+          buildPlayerInfo(),
           buildStatistics(),
         ],
       ),
+    );
+  }
+
+  WrapBox buildPlayerInfo() {
+    return WrapBox(
+      width: 100,
+      children: [
+        TextWithCaption(
+          title: 'Level',
+          value: basicInfo.level,
+        ),
+        TextWithCaption(
+          title: 'Created',
+          value: basicInfo.createdDate,
+        ),
+        TextWithCaption(
+          title: 'Last battle',
+          value: basicInfo.lastBattleDate,
+        ),
+        TextWithCaption(
+          title: 'Total battle',
+          value: basicInfo.totalBattleString,
+        ),
+        TextWithCaption(
+          title: 'Distance travlled',
+          value: basicInfo.distanceString,
+        ),
+      ],
     );
   }
 
@@ -181,6 +188,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
     return Column(
       children: [
         BasicPlayerTile(stats: basicInfo.statistic.pvp),
+        buildRecord(),
       ],
     );
   }
@@ -201,6 +209,25 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
           style: textTheme.headline6.copyWith(fontSize: 24)
         ),
       )
+    );
+  }
+
+  Widget buildRecord() {
+    final pvp = basicInfo.statistic?.pvp;
+    if (pvp == null) return SizedBox.shrink();
+    return WrapBox(
+      width: 200,
+      children: [
+        Column(
+          children: [
+            TextWithCaption(
+              title: 'Max Damage',
+              value: pvp.maxDamage,
+            ),
+            WikiWarshipCell(ship: cached.getShip(pvp.maxDamageDealtShipId)),
+          ],
+        )
+      ],
     );
   }
 }

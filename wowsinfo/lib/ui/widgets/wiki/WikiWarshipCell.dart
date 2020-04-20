@@ -11,24 +11,24 @@ class WikiWarshipCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: InkWell(
-        onTap: showDetail ? () => Navigator.of(context).push(MaterialPageRoute(builder: (c) => WikiWarShipInfoPage(ship: ship))) : null,
-        child: Column(
-          children: [
-            Expanded(
-              child: hero ? Hero(
-                tag: ship.shipId,
-                child: Image(
-                  image: NetworkImage(ship.smallImage), 
-                ),
-              ) : Image(
+    return InkWell(
+      onTap: showDetail 
+      ? () => Navigator.of(context).push(MaterialPageRoute(builder: (c) => WikiWarShipInfoPage(ship: ship))) 
+      : null,
+      child: Column(
+        children: [
+          Expanded(
+            child: hero ? Hero(
+              tag: ship.shipId,
+              child: Image(
                 image: NetworkImage(ship.smallImage), 
               ),
+            ) : Image(
+              image: NetworkImage(ship.smallImage), 
             ),
-            buildText(ship.tierName),
-          ],
-        ),
+          ),
+          buildText(ship.tierName),
+        ],
       ),
     );
   }
