@@ -23,7 +23,6 @@ class WikiGameMapPage extends StatelessWidget {
             onTap: () {
               showDialog(
                 context: context,
-                useSafeArea: true,
                 barrierDismissible: true,
                 builder: (context) => Theme(
                   data: ThemeData.dark(), 

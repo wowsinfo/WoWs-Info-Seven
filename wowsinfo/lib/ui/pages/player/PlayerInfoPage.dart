@@ -194,38 +194,45 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
   Widget buildStatistics() {
     final stats = basicInfo.statistic;
     if (stats == null) return SizedBox.shrink();
-    return Column(
-      children: [
-        ExpansionTile(
-          title: Text('Random Battle'),
-          initiallyExpanded: true,
-          children: [
-            BasicPlayerTile(stats: basicInfo.statistic.pvp),
-            buildRecord(basicInfo.statistic.pvp),
-          ],
-        ),
-        ExpansionTile(
-          title: Text('Random Battle Solo'),
-          children: [
-            BasicPlayerTile(stats: basicInfo.statistic.solo),
-            buildRecord(basicInfo.statistic.solo),
-          ],
-        ),
-        ExpansionTile(
-          title: Text('Random Battle Div2'),
-          children: [
-            BasicPlayerTile(stats: basicInfo.statistic.div2),
-            buildRecord(basicInfo.statistic.div2),
-          ],
-        ),
-        ExpansionTile(
-          title: Text('Random Battle Div3'),
-          children: [
-            BasicPlayerTile(stats: basicInfo.statistic.div3),
-            buildRecord(basicInfo.statistic.div3),
-          ],
-        ),
-      ],
+
+    // Make the divider invisible
+    final theme = Theme.of(context).copyWith(dividerColor: Colors.transparent);
+    return Theme(
+      data: theme,
+      child: WrapBox(
+        width: 400,
+        children: [
+          ExpansionTile(
+            title: Text('Random Battle'),
+            initiallyExpanded: true,
+            children: [
+              BasicPlayerTile(stats: basicInfo.statistic.pvp),
+              buildRecord(basicInfo.statistic.pvp),
+            ],
+          ),
+          ExpansionTile(
+            title: Text('Random Battle Solo'),
+            children: [
+              BasicPlayerTile(stats: basicInfo.statistic.solo),
+              buildRecord(basicInfo.statistic.solo),
+            ],
+          ),
+          ExpansionTile(
+            title: Text('Random Battle Div2'),
+            children: [
+              BasicPlayerTile(stats: basicInfo.statistic.div2),
+              buildRecord(basicInfo.statistic.div2),
+            ],
+          ),
+          ExpansionTile(
+            title: Text('Random Battle Div3'),
+            children: [
+              BasicPlayerTile(stats: basicInfo.statistic.div3),
+              buildRecord(basicInfo.statistic.div3),
+            ],
+          ),
+        ],
+      ),
     );
   }
 
