@@ -3,7 +3,7 @@ import 'package:wowsinfo/core/models/WoWs/PlayerClanTag.dart';
 import 'APIParser.dart';
 
 class PlayerClanTagParser extends APIParser {
-  PlayerClanTagParser(GameServer server, String accountId) : super(server) {
+  PlayerClanTagParser(GameServer server, int accountId) : super(server) {
     this.link += '/wows/clans/accountinfo/';
     addAPIKey();
     this.link += '&extra=clan&fields=clan.tag&account_id=$accountId';

@@ -4,7 +4,7 @@ import 'APIParser.dart';
 
 class PlayerShipInfoParser extends APIParser {
   /// If `shipId` is `empty`, all ships will be returned
-  PlayerShipInfoParser(GameServer server, String accountId, {String shipId = ''}) : super(server) {
+  PlayerShipInfoParser(GameServer server, int accountId, {String shipId = ''}) : super(server) {
     this.link += '/wows/ships/stats/';
     addAPIKey();
     this.link += '&account_id=$accountId&ship_id=$shipId';

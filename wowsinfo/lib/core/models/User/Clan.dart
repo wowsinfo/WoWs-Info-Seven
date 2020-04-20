@@ -1,26 +1,29 @@
 import 'package:wowsinfo/core/data/Preference.dart';
+import 'package:wowsinfo/core/models/UI/GameServer.dart';
 
 /// clan tag, clan id and server code
 class Clan {
   String tag;
   int clanId;
-  int server;
+  GameServer server;
 
   String get clanIdString => '$clanId';
 
-  Clan(this.tag, this.clanId, this.server);
+  Clan(this.tag, this.clanId) {
+    server = Preference.shared.gameServer;
+  }
 
   Clan.fromJson(Map<String, dynamic> json) {
     this.tag = json['tag'];
     this.clanId = json['clan_id'];
-    this.server = Preference.shared.gameServer.index;
+    this.server = GameServer.fromIndex(json['server']);
   }
 
   Map<String, dynamic> toJson() {
     return {
       'tag': tag,
       'clan_id': clanId,
-      'server': server,
+      'server': server.index,
     };
   }
 }

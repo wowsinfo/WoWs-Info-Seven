@@ -3,7 +3,7 @@ import 'package:wowsinfo/core/models/WoWs/RankPlayerShipInfo.dart';
 import 'APIParser.dart';
 
 class RankPlayerShipInfoParser extends APIParser {
-  RankPlayerShipInfoParser(GameServer server, String accountId) : super(server) {
+  RankPlayerShipInfoParser(GameServer server, int accountId) : super(server) {
     this.link += '/wows/seasons/shipstats/';
     addAPIKey();
     this.link += '&account_id=$accountId';

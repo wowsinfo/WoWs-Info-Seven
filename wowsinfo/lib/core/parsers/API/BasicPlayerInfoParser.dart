@@ -3,7 +3,7 @@ import 'package:wowsinfo/core/models/WoWs/BasicPlayerInfo.dart';
 import 'APIParser.dart';
 
 class BasicPlayerInfoParser extends APIParser {
-  BasicPlayerInfoParser(GameServer server, String accountId) : super(server) {
+  BasicPlayerInfoParser(GameServer server, int accountId) : super(server) {
     this.link += '/wows/account/info/';
     addAPIKey();
     this.link += '&account_id=$accountId';
