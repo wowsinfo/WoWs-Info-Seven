@@ -7,6 +7,8 @@ class Player {
   int playerId;
   GameServer server;
 
+  String get playerIdString => '$playerId';
+
   Player(this.nickname, this.playerId) {
     // Server will be automatically set
     server = Preference.shared.gameServer;

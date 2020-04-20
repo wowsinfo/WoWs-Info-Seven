@@ -12,6 +12,7 @@ import 'package:wowsinfo/core/parsers/API/PlayerClanTagParser.dart';
 import 'package:wowsinfo/core/parsers/API/PlayerShipInfoParser.dart';
 import 'package:wowsinfo/core/parsers/API/RankPlayerInfoParser.dart';
 import 'package:wowsinfo/core/parsers/API/RankPlayerShipInfoParser.dart';
+import 'package:wowsinfo/ui/pages/player/ClanInfoPage.dart';
 
 /// PlayerInfoPage class
 class PlayerInfoPage extends StatefulWidget {
@@ -99,11 +100,26 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppBar(
-        title: Text('PlayerInfoPage')
+        title: Text(widget.player.playerIdString)
       ),
-      body: Container(),
+      body: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                clanTag.hasTag ? InkWell(
+                  onTap: () => Navigator.push(context, MaterialPageRoute(builder: (c) => ClanInfoPage(clan: clanTag.clan))),
+                  child: Text(clanTag.tag, style: textTheme.headline2)
+                ) : SizedBox.shrink(),
+                Text(basicInfo.nickname, style: textTheme.headline6),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
