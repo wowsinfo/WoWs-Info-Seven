@@ -5,6 +5,8 @@ import 'package:wowsinfo/core/others/Utils.dart';
 class PlayerClanTag {
   String tag;
   int clanId;
+
+  String get tagString => '[$tag]';
   bool get hasTag => tag != null;
   Clan get clan => Clan(tag, clanId);
 

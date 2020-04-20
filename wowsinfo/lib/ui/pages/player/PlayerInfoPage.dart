@@ -127,11 +127,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          clanTag.hasTag ? InkWell(
-            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (c) => ClanInfoPage(clan: clanTag.clan))),
-            child: Text(clanTag.tag, style: textTheme.headline2)
-          ) : SizedBox.shrink(),
-          Text(basicInfo.nickname, style: textTheme.headline6),
+          buildNickname(context, textTheme),
           WrapBox(
             width: 100,
             children: [
@@ -156,9 +152,43 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
                 value: basicInfo.distanceString,
               ),
             ],
-          )
+          ),
+          buildStatistics(),
         ],
       ),
+    );
+  }
+
+  Widget buildStatistics() {
+    if (basicInfo.hiddenProfile) return SizedBox.shrink();
+    return Column(
+      children: [
+        WrapBox(
+          width: 100,
+          children: [
+
+          ],
+        )
+      ],
+    );
+  }
+
+  /// Merge clan tag and player together
+  InkWell buildNickname(BuildContext context, TextTheme textTheme) {
+    return InkWell(
+      onTap: clanTag.hasTag 
+      ? () => Navigator.push(context, MaterialPageRoute(builder: (c) => ClanInfoPage(clan: clanTag.clan)))
+      : null,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          clanTag.hasTag 
+          ? clanTag.tagString + '\n${basicInfo.nickname}' 
+          : basicInfo.nickname, 
+          textAlign: TextAlign.center,
+          style: textTheme.headline6.copyWith(fontSize: 24)
+        ),
+      )
     );
   }
 }
