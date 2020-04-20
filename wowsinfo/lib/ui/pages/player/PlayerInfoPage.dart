@@ -164,7 +164,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
     if (basicInfo.hiddenProfile) return SizedBox.shrink();
     return Column(
       children: [
-        BasicPlayerTile(stats: basicInfo.statistic),
+        BasicPlayerTile(stats: basicInfo.statistic.pvp),
       ],
     );
   }

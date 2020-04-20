@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:wowsinfo/core/models/WoWs/BasicPlayerInfo.dart';
+import 'package:wowsinfo/core/models/WoWs/PvP.dart';
 import 'package:wowsinfo/ui/widgets/ImageTile.dart';
 import 'package:wowsinfo/ui/widgets/WrapBox.dart';
 
 /// BasicPlayerTile class, it shows the classic 6 cell
 class BasicPlayerTile extends StatelessWidget {
-  final Statistic stats;
+  final PvP stats;
   BasicPlayerTile({Key key, this.stats}) : super(key: key);
 
   @override
@@ -18,32 +18,32 @@ class BasicPlayerTile extends StatelessWidget {
         ImageTile(
           image: AssetImage('assets/images/battle.png'),
           title: 'Battle',
-          value: '123',
+          value: stats.battleString,
         ),
         ImageTile(
           image: AssetImage('assets/images/winrate.png'),
           title: 'Battle',
-          value: '123',
+          value: stats.winrateString,
         ),
         ImageTile(
           image: AssetImage('assets/images/damage.png'),
           title: 'Battle',
-          value: '123',
+          value: stats.avgDamageString,
         ),
         ImageTile(
           image: AssetImage('assets/images/exp.png'),
           title: 'Battle',
-          value: '123',
+          value: stats.avgExpString,
         ),
         ImageTile(
           image: AssetImage('assets/images/killdeathratio.png'),
           title: 'Battle',
-          value: '123',
+          value: stats.killDeathString,
         ),
         ImageTile(
           image: AssetImage('assets/images/hitratio.png'),
           title: 'Battle',
-          value: '123',
+          value: stats.mainHitRatioString,
         ),
       ],
     );

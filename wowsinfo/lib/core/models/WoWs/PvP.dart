@@ -37,6 +37,19 @@ class PvP {
   int teamDroppedCapturePoint;
   int battlesSince512;
 
+  String get battleString => '$battle';
+  double get winrate => (win * 10000 / battle) / 100.0;
+  String get winrateString => '${winrate.toStringAsFixed(1)}%';
+  double get avgDamage => damageDealt / battle;
+  String get avgDamageString => '${avgDamage.toStringAsFixed(0)}';
+  double get avgExp => xp / battle;
+  String get avgExpString => '${avgExp.toStringAsFixed(0)}';
+  int get deadBattle => battle - survivedBattle;
+  double get killDeath => frag / deadBattle;
+  String get killDeathString => '${killDeath.toStringAsFixed(2)}';
+  double get mainHitRatio => (mainBattery.hit * 10000 / mainBattery.shot) / 100.0;
+  String get mainHitRatioString => '${mainHitRatio.toStringAsFixed(2)}%';
+
   PvP(Map<String, dynamic> json) {
     this.maxXp = json['max_xp'];
     this.damageToBuilding = json['damage_to_buildings'];
