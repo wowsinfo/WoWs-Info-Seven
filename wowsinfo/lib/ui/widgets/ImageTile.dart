@@ -10,9 +10,14 @@ class ImageTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = 36.0;
     return Column(
       children: [
-        Image(image: image),
+        Image(
+          image: image,
+          width: size, height: size,
+          color: Theme.of(context).accentColor,
+        ),
         TextWithCaption(
           title: title,
           value: value,
