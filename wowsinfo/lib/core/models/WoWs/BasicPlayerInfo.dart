@@ -1,27 +1,36 @@
+import 'package:wowsinfo/core/models/UI/WoWsDate.dart';
+
 import 'PvP.dart';
 
 /// This is the `BasicPlayerInfo` class
 class BasicPlayerInfo {
-  int lastBattleTime;
+  WoWsDate lastBattleTime;
   int accountId;
   int levelingTier;
-  int createdAt;
+  WoWsDate createdAt;
   int levelingPoint;
   int updatedAt;
   bool hiddenProfile;
-  bool get publicProfile => !hiddenProfile;
   int logoutAt;
   Statistic statistic;
   String nickname;
   int statsUpdatedAt;
 
+  bool get publicProfile => !hiddenProfile;
+  String get level => 'Lv $levelingTier';
+  String get createdDate => createdAt.dateString;
+  String get lastBattleDate => lastBattleTime.dateString;
+  String get distanceString => statistic?.distanceString ?? '0 km';
+  String get totalBattleString => statistic?.totalBattleString ?? '0';
+
+
   BasicPlayerInfo(Map<String, dynamic> data) {
     // There should be only one key inside
     final json = data.values.first;
     if (json != null) {
-      this.lastBattleTime = json['last_battle_time'];
+      this.lastBattleTime = WoWsDate(json['last_battle_time']);
       this.accountId = json['account_id'];
-      this.createdAt = json['created_at'];
+      this.createdAt = WoWsDate(json['created_at']);
       // These are null if account is hidden so a default value is provided
       this.levelingTier = json['leveling_tier'] ?? 0;
       this.levelingPoint = json['leveling_points'] ?? 0;
@@ -41,6 +50,9 @@ class Statistic {
   int distance;
   int battle;
   PvP pvp;
+
+  String get distanceString => '$distance km';
+  String get totalBattleString => '$battle';
 
   Statistic(Map<String, dynamic> json) {
     this.distance = json['distance'];

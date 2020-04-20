@@ -13,6 +13,9 @@ import 'package:wowsinfo/core/parsers/API/PlayerShipInfoParser.dart';
 import 'package:wowsinfo/core/parsers/API/RankPlayerInfoParser.dart';
 import 'package:wowsinfo/core/parsers/API/RankPlayerShipInfoParser.dart';
 import 'package:wowsinfo/ui/pages/player/ClanInfoPage.dart';
+import 'package:wowsinfo/ui/widgets/PlatformLoadingIndiactor.dart';
+import 'package:wowsinfo/ui/widgets/TextWithCaption.dart';
+import 'package:wowsinfo/ui/widgets/WrapBox.dart';
 
 /// PlayerInfoPage class
 class PlayerInfoPage extends StatefulWidget {
@@ -100,25 +103,61 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.player.playerIdString)
       ),
       body: SafeArea(
         child: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                clanTag.hasTag ? InkWell(
-                  onTap: () => Navigator.push(context, MaterialPageRoute(builder: (c) => ClanInfoPage(clan: clanTag.clan))),
-                  child: Text(clanTag.tag, style: textTheme.headline2)
-                ) : SizedBox.shrink(),
-                Text(basicInfo.nickname, style: textTheme.headline6),
-              ],
-            ),
+          child: AnimatedSwitcher(
+            duration: Duration(milliseconds: 500),
+            transitionBuilder: (w, a) => ScaleTransition(scale: a, child: w),
+            switchInCurve: Curves.linearToEaseOut,
+            child: buildBasicInfo(context),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget buildBasicInfo(BuildContext context) {
+    if (basicInfo == null || clanTag == null) return PlatformLoadingIndiactor();
+
+    final textTheme = Theme.of(context).textTheme;
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          clanTag.hasTag ? InkWell(
+            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (c) => ClanInfoPage(clan: clanTag.clan))),
+            child: Text(clanTag.tag, style: textTheme.headline2)
+          ) : SizedBox.shrink(),
+          Text(basicInfo.nickname, style: textTheme.headline6),
+          WrapBox(
+            width: 100,
+            children: [
+              TextWithCaption(
+                title: 'Level',
+                value: basicInfo.level,
+              ),
+              TextWithCaption(
+                title: 'Created',
+                value: basicInfo.createdDate,
+              ),
+              TextWithCaption(
+                title: 'Last battle',
+                value: basicInfo.lastBattleDate,
+              ),
+              TextWithCaption(
+                title: 'Total battle',
+                value: basicInfo.totalBattleString,
+              ),
+              TextWithCaption(
+                title: 'Distance travlled',
+                value: basicInfo.distanceString,
+              ),
+            ],
+          )
+        ],
       ),
     );
   }
