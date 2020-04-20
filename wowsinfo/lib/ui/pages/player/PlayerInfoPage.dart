@@ -5,8 +5,10 @@ import 'package:wowsinfo/core/models/WoWs/BasicPlayerInfo.dart';
 import 'package:wowsinfo/core/models/WoWs/PlayerAchievement.dart';
 import 'package:wowsinfo/core/models/WoWs/PlayerClanTag.dart';
 import 'package:wowsinfo/core/models/WoWs/PlayerShipInfo.dart';
+import 'package:wowsinfo/core/models/WoWs/PvP.dart';
 import 'package:wowsinfo/core/models/WoWs/RankPlayerInfo.dart';
 import 'package:wowsinfo/core/models/WoWs/RankPlayerShipInfo.dart';
+import 'package:wowsinfo/core/others/Utils.dart';
 import 'package:wowsinfo/core/parsers/API/BasicPlayerInfoParser.dart';
 import 'package:wowsinfo/core/parsers/API/PlayerAchievementParser.dart';
 import 'package:wowsinfo/core/parsers/API/PlayerClanTagParser.dart';
@@ -43,6 +45,12 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
   void initState() {
     super.initState();
     this.loadAll();
+  }
+
+  @override
+  void setState(fn) {
+    if (mounted) super.setState(fn);
+    else Utils.debugPrint('Cancel set state');
   }
 
   void loadAll() async {
@@ -184,11 +192,39 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
   }
 
   Widget buildStatistics() {
-    if (basicInfo.hiddenProfile) return SizedBox.shrink();
+    final stats = basicInfo.statistic;
+    if (stats == null) return SizedBox.shrink();
     return Column(
       children: [
-        BasicPlayerTile(stats: basicInfo.statistic.pvp),
-        buildRecord(),
+        ExpansionTile(
+          title: Text('Random Battle'),
+          initiallyExpanded: true,
+          children: [
+            BasicPlayerTile(stats: basicInfo.statistic.pvp),
+            buildRecord(basicInfo.statistic.pvp),
+          ],
+        ),
+        ExpansionTile(
+          title: Text('Random Battle Solo'),
+          children: [
+            BasicPlayerTile(stats: basicInfo.statistic.solo),
+            buildRecord(basicInfo.statistic.solo),
+          ],
+        ),
+        ExpansionTile(
+          title: Text('Random Battle Div2'),
+          children: [
+            BasicPlayerTile(stats: basicInfo.statistic.div2),
+            buildRecord(basicInfo.statistic.div2),
+          ],
+        ),
+        ExpansionTile(
+          title: Text('Random Battle Div3'),
+          children: [
+            BasicPlayerTile(stats: basicInfo.statistic.div3),
+            buildRecord(basicInfo.statistic.div3),
+          ],
+        ),
       ],
     );
   }
@@ -212,22 +248,39 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
     );
   }
 
-  Widget buildRecord() {
-    final pvp = basicInfo.statistic?.pvp;
+  Widget buildRecord(PvP pvp) {
     if (pvp == null) return SizedBox.shrink();
     return WrapBox(
       width: 200,
+      height: 150,
+      itemPadding: const EdgeInsets.only(top: 8),
       children: [
-        Column(
-          children: [
-            TextWithCaption(
-              title: 'Max Damage',
-              value: pvp.maxDamage,
-            ),
-            WikiWarshipCell(ship: cached.getShip(pvp.maxDamageDealtShipId)),
-          ],
-        )
-      ],
+        RecordValue(pvp.maxDamageDealtShipId, 'damage', pvp.maxDamage),
+        RecordValue(pvp.maxXpShipId, 'max exp', pvp.maxExp),
+        RecordValue(pvp.maxFragsShipId, 'max frag', pvp.maxFrag),
+        RecordValue(pvp.maxTotalAgroShipId, 'max potential', pvp.maxPotential),
+        RecordValue(pvp.maxShipsSpottedShipId, 'max spotted', pvp.maxSpotted),
+        RecordValue(pvp.maxScoutingDamageShipId, 'max spotting', pvp.maxSpottingDamage),
+        RecordValue(pvp.maxPlanesKilledShipId, 'max plane destoryed', pvp.maxPlane),
+        RecordValue(pvp.maxDamageDealtToBuildingsShipId, 'damage to buildings', pvp.maxDamageToBuilding),
+        RecordValue(pvp.maxSuppressionsShipId, 'max supression', pvp.maxSupression),
+      ].where((e) => cached.getShip(e.shipId) != null).map((e) => WikiWarshipCell(
+        showDetail: true,
+        ship: cached.getShip(e.shipId),
+        bottom: TextWithCaption(
+          title: e.title,
+          value: e.value,
+        ),
+      )).toList(growable: false),
     );
   }
+}
+
+/// Stores all value relating to record (max something)
+class RecordValue {
+  int shipId;
+  String title;
+  String value;
+
+  RecordValue(this.shipId, this.title, this.value);
 }

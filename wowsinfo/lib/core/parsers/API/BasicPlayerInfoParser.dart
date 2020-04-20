@@ -6,7 +6,8 @@ class BasicPlayerInfoParser extends APIParser {
   BasicPlayerInfoParser(GameServer server, int accountId) : super(server) {
     this.link += '/wows/account/info/';
     addAPIKey();
-    this.link += '&account_id=$accountId';
+    // Add solo, div2 and div3
+    this.link += '&account_id=$accountId&extra=statistics.pvp_div2%2Cstatistics.pvp_div3%2Cstatistics.pvp_solo';
   }
 
   @override

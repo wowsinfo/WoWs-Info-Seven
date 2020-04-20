@@ -6,10 +6,11 @@ class WrapBox extends StatelessWidget {
   final EdgeInsets padding;
   final EdgeInsets itemPadding;
   final double width;
+  final double height;
   final double spacing;
-  WrapBox({
+  const WrapBox({
     Key key, 
-    this.children, this.width, 
+    this.children, this.width, this.height,
     this.padding = const EdgeInsets.all(0),
     this.itemPadding = const EdgeInsets.all(0),
     this.spacing = 0.0,
@@ -26,6 +27,7 @@ class WrapBox extends StatelessWidget {
           padding: itemPadding,
           child: SizedBox(
             width: width,
+            height: height,
             child: e,
           ),
         )).toList(growable: false),

@@ -7,7 +7,14 @@ class WikiWarshipCell extends StatelessWidget {
   final Wiki.Warship ship;
   final bool showDetail;
   final bool hero;
-  WikiWarshipCell({Key key, @required this.ship, this.showDetail = false, this.hero = false}) : super(key: key);
+  final Widget bottom;
+  WikiWarshipCell({
+    Key key, 
+    @required this.ship, 
+    this.showDetail = false, 
+    this.hero = false,
+    this.bottom = const SizedBox.shrink(),
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +35,7 @@ class WikiWarshipCell extends StatelessWidget {
             ),
           ),
           buildText(ship.tierName),
+          bottom,
         ],
       ),
     );

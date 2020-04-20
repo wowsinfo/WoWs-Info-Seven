@@ -50,6 +50,9 @@ class Statistic {
   int distance;
   int battle;
   PvP pvp;
+  PvP div2;
+  PvP div3;
+  PvP solo;
 
   String get distanceString => '$distance km';
   String get totalBattleString => '$battle';
@@ -58,5 +61,8 @@ class Statistic {
     this.distance = json['distance'];
     this.battle = json['battles'];
     if (json['pvp'] != null) this.pvp = PvP(json['pvp']);
+    if (json['pvp_solo'] != null) this.solo = PvP(json['pvp_solo']);
+    if (json['pvp_div2'] != null) this.div2 = PvP(json['pvp_div2']);
+    if (json['pvp_div3'] != null) this.div3 = PvP(json['pvp_div3']);
   }
 }
