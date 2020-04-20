@@ -13,6 +13,7 @@ import 'package:wowsinfo/core/parsers/API/PlayerShipInfoParser.dart';
 import 'package:wowsinfo/core/parsers/API/RankPlayerInfoParser.dart';
 import 'package:wowsinfo/core/parsers/API/RankPlayerShipInfoParser.dart';
 import 'package:wowsinfo/ui/pages/player/ClanInfoPage.dart';
+import 'package:wowsinfo/ui/pages/wiki/WikiAchievementPage.dart';
 import 'package:wowsinfo/ui/widgets/PlatformLoadingIndiactor.dart';
 import 'package:wowsinfo/ui/widgets/TextWithCaption.dart';
 import 'package:wowsinfo/ui/widgets/WrapBox.dart';
@@ -118,6 +119,21 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
           ),
         ),
       ),
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          children: [
+            buildAchievement(context),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildAchievement(BuildContext context) {
+    if (achievement == null) return SizedBox.shrink();
+    return FlatButton(
+      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (c) => WikiAchievementPage(player: achievement))), 
+      child: Text('Achievement')
     );
   }
 

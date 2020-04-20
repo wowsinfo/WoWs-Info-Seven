@@ -76,8 +76,7 @@ class WikiAchievementPage extends StatelessWidget {
       );
     } else {
       // Sort player achievment by count
-      final sorted = player.achievement.entries
-        .toList(growable: false)..sort((a, b) => a.value - b.value);
+      final sorted = player.sorted.toList(growable: false);
 
       // Display whatever player has
       return GridView.builder(
@@ -94,7 +93,7 @@ class WikiAchievementPage extends StatelessWidget {
             onTap: () => this.onTap(context, curr),
             child: Column(
               children: <Widget>[
-                buildImage(curr),
+                Expanded(child: buildImage(curr, player: true)),
                 Text(count.toString()),
               ],
             ),
@@ -104,11 +103,11 @@ class WikiAchievementPage extends StatelessWidget {
     }
   }
 
-  Padding buildImage(Achievement curr) {
+  Padding buildImage(Achievement curr, {bool player = false}) {
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: FittedBox(
-        child: Image.network(curr.hidden > 0 ? curr.imageInactive : curr.image),
+        child: Image.network(player ? curr.image : (curr.hidden > 0 ? curr.imageInactive : curr.image)),
       ),
     );
   }
