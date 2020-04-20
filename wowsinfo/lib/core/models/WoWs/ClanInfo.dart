@@ -1,4 +1,6 @@
+import 'package:wowsinfo/core/data/Preference.dart';
 import 'package:wowsinfo/core/models/UI/WoWsDate.dart';
+import 'package:wowsinfo/core/models/User/Player.dart';
 
 /// This is the `ClanInfo` class
 class ClanInfo {
@@ -59,6 +61,7 @@ class Member {
   bool get hasRole => role != 'commissioned_officer';
   bool get isCommander => role == 'commander';
   bool get isExecutive => role == 'executive_officer';
+  Player get player => Player(accountName, accountId);
 
   Member(Map<String, dynamic> json) {
     this.role = json['role'];

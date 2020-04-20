@@ -9,6 +9,8 @@ import 'package:wowsinfo/ui/widgets/PlatformLoadingIndiactor.dart';
 import 'package:wowsinfo/ui/widgets/TextWithCaption.dart';
 import 'package:wowsinfo/ui/widgets/WrapBox.dart';
 
+import 'PlayerInfoPage.dart';
+
 /// ClanInfoPage class
 class ClanInfoPage extends StatefulWidget {
   final Clan clan;
@@ -132,6 +134,7 @@ class _ClanInfoPageState extends State<ClanInfoPage> {
     return Column(
       children: info.sortedMembers.map((e) {
         final joined = Text(e.joinedDate);
+        final Function gotoPlayer = () => Navigator.push(context, MaterialPageRoute(builder: (c) => PlayerInfoPage(player: e.player)));
         if (e.hasRole) {
           final role = cached.getClanRoleName(e.role);
           TextStyle style;
@@ -142,7 +145,7 @@ class _ClanInfoPageState extends State<ClanInfoPage> {
             title: Text(e.accountName, style: style),
             subtitle: Text(role, style: style),
             trailing: joined,
-            onTap: () {},
+            onTap: gotoPlayer,
           );
         } else {
           // They don't have a role but don't display NONE
@@ -150,7 +153,7 @@ class _ClanInfoPageState extends State<ClanInfoPage> {
             title: Text(e.accountName),
             subtitle: Text(e.accountIdString),
             trailing: joined,
-            onTap: () {},
+            onTap: gotoPlayer,
           );
         }
       }).toList(growable: false),

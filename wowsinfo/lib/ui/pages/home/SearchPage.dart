@@ -5,6 +5,7 @@ import 'package:wowsinfo/core/models/User/Player.dart';
 import 'package:wowsinfo/core/parsers/API/SearchClanResultParser.dart';
 import 'package:wowsinfo/core/parsers/API/SearchPlayerResultParser.dart';
 import 'package:wowsinfo/ui/pages/player/ClanInfoPage.dart';
+import 'package:wowsinfo/ui/pages/player/PlayerInfoPage.dart';
 
 /// SearchPage class
 class SearchPage extends StatefulWidget {
@@ -123,6 +124,7 @@ class PlayerList extends StatelessWidget {
       children: players.map((e) => ListTile(
         title: Text(e.nickname),
         subtitle: Text(e.playerId.toString()),
+        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (c) => PlayerInfoPage(player: e))),
       )).toList(growable: false),
     );
   }
