@@ -16,6 +16,7 @@ import 'package:wowsinfo/ui/pages/player/ClanInfoPage.dart';
 import 'package:wowsinfo/ui/widgets/PlatformLoadingIndiactor.dart';
 import 'package:wowsinfo/ui/widgets/TextWithCaption.dart';
 import 'package:wowsinfo/ui/widgets/WrapBox.dart';
+import 'package:wowsinfo/ui/widgets/player/BasicPlayerTile.dart';
 
 /// PlayerInfoPage class
 class PlayerInfoPage extends StatefulWidget {
@@ -163,12 +164,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
     if (basicInfo.hiddenProfile) return SizedBox.shrink();
     return Column(
       children: [
-        WrapBox(
-          width: 100,
-          children: [
-
-          ],
-        )
+        BasicPlayerTile(stats: basicInfo.statistic),
       ],
     );
   }
