@@ -91,7 +91,7 @@ class WikiAchievementPage extends StatelessWidget {
           final curr = cached.getAchievement(key);
           return InkWell(
             onTap: () => this.onTap(context, curr),
-            child: buildPlayer(curr, count),
+            child: FittedBox(child: buildPlayer(curr, count)),
           );
         },
       );
@@ -101,11 +101,9 @@ class WikiAchievementPage extends StatelessWidget {
   Widget buildPlayer(Achievement curr, int count) {
     return Column(
       children: <Widget>[
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.all(4),
-            child: Image.network(curr.image),
-          )
+        Padding(
+          padding: const EdgeInsets.all(4),
+          child: Image.network(curr.image),
         ),
         Text(count.toString()),
       ],

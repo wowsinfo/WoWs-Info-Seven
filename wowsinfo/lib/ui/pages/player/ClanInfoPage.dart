@@ -69,7 +69,7 @@ class _ClanInfoPageState extends State<ClanInfoPage> {
             child: Column(
               children: [
                 Text(info.tag, style: theme.headline2),
-                Text(info.name, style: theme.headline6),
+                Text(info.name, style: theme.headline6, textAlign: TextAlign.center),
                 WrapBox(
                   padding: const EdgeInsets.only(top: 8),
                   width: 200,
