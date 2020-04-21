@@ -1,3 +1,8 @@
+import 'package:charts_flutter/flutter.dart';
+import 'package:wowsinfo/core/data/CachedData.dart';
+import 'package:wowsinfo/core/models/UI/ChartValue.dart';
+import 'package:wowsinfo/core/models/UI/WoWsDate.dart';
+
 import 'PvP.dart';
 
 /// This is the `PlayerShipInfo` class, one ship or all ships, the structure is the same
@@ -5,18 +10,60 @@ class PlayerShipInfo {
   List<ShipInfo> ships = [];
   bool get isSingleShip => ships.length == 1;
 
+  Map<String, int> type = {};
+  List<Series<ChartValue, String>> get typeData {
+    return [Series<ChartValue, String>(
+      data: type.entries.map((e) => ChartValue(e.key, e.value)).toList(growable: false),
+      id: 'type',
+      domainFn: (v, _) => v.name,
+      measureFn: (v, _) => v.value,
+      labelAccessorFn: (v, _) => v.value.toString(),
+    )];
+  }
+
+  Map<String, int> nation = {};
+  List<Series<ChartValue, String>> get nationData {
+    return [Series<ChartValue, String>(
+      data: nation.entries.map((e) => ChartValue(e.key, e.value)).toList(growable: false),
+      id: 'nation',
+      domainFn: (v, _) => v.name,
+      measureFn: (v, _) => v.value,
+      labelAccessorFn: (v, _) => v.value.toString(),
+    )];
+  }
+
   PlayerShipInfo(Map<String, dynamic> data) {
     final List json = data.values.first;
     if (json != null) {
-      json.forEach((item) => ships.add(ShipInfo(item)));
+      // Also collect some data here
+      final cached = CachedData.shared;
+      json.forEach((item) {
+        final curr = ShipInfo(item);
+        final ship = cached.getShip(curr.accountId);
+        // Ignore removed ships
+        if (ship != null) {
+          final nation = cached.getNationString(ship.nation);
+          _addToMap(this.nation, nation);
+          
+          final type = cached.getTypeString(ship.type);
+          _addToMap(this.type, type);
+
+          ships.add(curr);
+        }
+      });
     }
+  }
+
+  void _addToMap(Map<String, int> m, String key) {
+    if (m[key] == null) m[key] = 1;
+    else m[key]++;
   }
 }
 
 /// This is the `ShipInfo` class
 class ShipInfo {
   PvP pvp;
-  int lastBattleTime;
+  WoWsDate lastBattleTime;
   int accountId;
   int distance;
   int updatedAt;
@@ -26,7 +73,7 @@ class ShipInfo {
 
   ShipInfo(Map<String, dynamic> json) {
     if (json['pvp'] != null) this.pvp = PvP(json['pvp']);
-    this.lastBattleTime = json['last_battle_time'];
+    this.lastBattleTime = WoWsDate(json['last_battle_time']);
     this.accountId = json['account_id'];
     this.distance = json['distance'];
     this.updatedAt = json['updated_at'];

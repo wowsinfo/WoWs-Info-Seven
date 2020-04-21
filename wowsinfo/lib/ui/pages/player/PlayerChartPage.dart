@@ -1,5 +1,7 @@
+import 'package:charts_flutter/flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/models/WoWs/PlayerShipInfo.dart';
+import 'package:wowsinfo/ui/widgets/WrapBox.dart';
 
 /// PlayerChartPage class
 class PlayerChartPage extends StatelessWidget {
@@ -12,7 +14,23 @@ class PlayerChartPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('PlayerChartPage')
       ),
-      body: Container(),
+      body: SafeArea(
+        child: WrapBox(
+          width: 300,
+          height: 200,
+          children: <Widget>[
+            PieChart(
+              info.nationData,
+              animate: true,
+            ),
+            PieChart(
+              info.typeData,
+              animate: true,
+            ),
+          ],
+        )
+      ),
     );
   }
+
 }

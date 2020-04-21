@@ -48,15 +48,25 @@ class PvP {
   int teamDroppedCapturePoint;
   int battlesSince512;
 
-  String get battleString => '$battle';
   double get winrate => (win * 10000 / battle) / 100.0;
-  String get winrateString => '${winrate.toStringAsFixed(1)}%';
-  double get avgDamage => damageDealt / battle;
-  String get avgDamageString => '${avgDamage.toStringAsFixed(0)}';
-  double get avgExp => xp / battle;
-  String get avgExpString => '${avgExp.toStringAsFixed(0)}';
-  int get deadBattle => battle - survivedBattle;
+  double get survivedWinrate => (survivedWin * 10000 / battle) / 100.0;
+  double get survivedRate => (survivedBattle * 10000 / battle) / 100.0;
   double get killDeath => frag / deadBattle;
+
+  double get avgExp => xp / battle;
+  double get avgDamage => damageDealt / battle;
+  double get avgFrag => frag / battle;
+  double get avgPlaneDestroyed => planesKilled / battle;
+  double get avgSpottingDamage => damageScouting / battle;
+  double get avgSpottedShips => shipsSpotted / battle;
+  double get avgPotential => (artAgro + torpedoAgro) / battle;
+
+  int get deadBattle => battle - survivedBattle;
+
+  String get battleString => '$battle';
+  String get winrateString => '${winrate.toStringAsFixed(1)}%';
+  String get avgDamageString => '${avgDamage.toStringAsFixed(0)}';
+  String get avgExpString => '${avgExp.toStringAsFixed(0)}';
   String get killDeathString => '${killDeath.toStringAsFixed(2)}';
   String get mainHitRatioString => '${mainBattery.hitRatio.toStringAsFixed(2)}%';
 
