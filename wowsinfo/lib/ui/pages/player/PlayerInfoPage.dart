@@ -18,6 +18,9 @@ import 'package:wowsinfo/core/parsers/API/PlayerShipInfoParser.dart';
 import 'package:wowsinfo/core/parsers/API/RankPlayerInfoParser.dart';
 import 'package:wowsinfo/core/parsers/API/RankPlayerShipInfoParser.dart';
 import 'package:wowsinfo/ui/pages/player/ClanInfoPage.dart';
+import 'package:wowsinfo/ui/pages/player/PlayerChartPage.dart';
+import 'package:wowsinfo/ui/pages/player/PlayerRankInfoPage.dart';
+import 'package:wowsinfo/ui/pages/player/PlayerShipInfoPage.dart';
 import 'package:wowsinfo/ui/pages/wiki/WikiAchievementPage.dart';
 import 'package:wowsinfo/ui/widgets/PlatformLoadingIndiactor.dart';
 import 'package:wowsinfo/ui/widgets/TextWithCaption.dart';
@@ -136,6 +139,9 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
         child: Row(
           children: [
             buildAchievement(context),
+            buildChart(context),
+            buildShip(context),
+            buildRank(context),
           ],
         ),
       ),
@@ -147,6 +153,30 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
     return FlatButton(
       onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (c) => WikiAchievementPage(player: achievement))), 
       child: Text('Achievement')
+    );
+  }
+
+  Widget buildChart(BuildContext context) {
+    if (shipInfo == null) return SizedBox.shrink();
+    return FlatButton(
+      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (c) => PlayerChartPage(info: shipInfo))), 
+      child: Text('Charts')
+    );
+  }
+
+  Widget buildShip(BuildContext context) {
+    if (shipInfo == null) return SizedBox.shrink();
+    return FlatButton(
+      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (c) => PlayerShipInfoPage(info: shipInfo))), 
+      child: Text('Ships')
+    );
+  }
+
+  Widget buildRank(BuildContext context) {
+    if (rankInfo == null || rankShipInfo == null) return SizedBox.shrink();
+    return FlatButton(
+      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (c) => PlayerRankInfoPage(rank: rankInfo, rankShip: rankShipInfo))), 
+      child: Text('Rank')
     );
   }
 

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiAchievement.dart';
 import 'package:wowsinfo/core/models/WoWs/PlayerAchievement.dart';
+import 'package:wowsinfo/core/models/WoWs/RankPlayerInfo.dart';
+import 'package:wowsinfo/core/models/WoWs/RankPlayerShipInfo.dart';
 
 /// WikiAchievementPage class
 class WikiAchievementPage extends StatelessWidget {
