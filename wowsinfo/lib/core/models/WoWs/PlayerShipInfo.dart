@@ -1,5 +1,6 @@
 import 'package:charts_flutter/flutter.dart';
 import 'package:wowsinfo/core/data/CachedData.dart';
+import 'package:wowsinfo/core/data/ChartColour.dart';
 import 'package:wowsinfo/core/models/UI/ChartValue.dart';
 import 'package:wowsinfo/core/models/UI/WoWsDate.dart';
 
@@ -18,6 +19,7 @@ class PlayerShipInfo {
       domainFn: (v, _) => v.name,
       measureFn: (v, _) => v.value,
       labelAccessorFn: (v, _) => v.value.toString(),
+      colorFn: (_, index) => chartColours[index % chartColours.length],
     )];
   }
 
@@ -29,6 +31,7 @@ class PlayerShipInfo {
       domainFn: (v, _) => v.name,
       measureFn: (v, _) => v.value,
       labelAccessorFn: (v, _) => v.value.toString(),
+      colorFn: (_, index) => chartColours[index % chartColours.length],
     )];
   }
 
@@ -39,14 +42,14 @@ class PlayerShipInfo {
       final cached = CachedData.shared;
       json.forEach((item) {
         final curr = ShipInfo(item);
-        final ship = cached.getShip(curr.accountId);
+        final ship = cached.getShip(curr.shipId);
         // Ignore removed ships
         if (ship != null) {
           final nation = cached.getNationString(ship.nation);
-          _addToMap(this.nation, nation);
+          _addToMap(this.nation, nation, curr.battle);
           
           final type = cached.getTypeString(ship.type);
-          _addToMap(this.type, type);
+          _addToMap(this.type, type, curr.battle);
 
           ships.add(curr);
         }
@@ -54,9 +57,9 @@ class PlayerShipInfo {
     }
   }
 
-  void _addToMap(Map<String, int> m, String key) {
-    if (m[key] == null) m[key] = 1;
-    else m[key]++;
+  void _addToMap(Map<String, int> m, String key, int count) {
+    if (m[key] == null) m[key] = count;
+    else m[key] += count;
   }
 }
 

@@ -16,16 +16,31 @@ class PlayerChartPage extends StatelessWidget {
       ),
       body: SafeArea(
         child: WrapBox(
-          width: 300,
+          width: 400,
           height: 200,
           children: <Widget>[
             PieChart(
               info.nationData,
               animate: true,
+              behaviors: [DatumLegend(
+                desiredMaxRows: 9,
+                outsideJustification: OutsideJustification.middleDrawArea,
+                position: BehaviorPosition.end,
+                showMeasures: true,
+                entryTextStyle: TextStyleSpec(fontSize: 12),
+                cellPadding: new EdgeInsets.all(0),
+                legendDefaultMeasure: LegendDefaultMeasure.firstValue,
+              )],
             ),
             PieChart(
               info.typeData,
               animate: true,
+              behaviors: [DatumLegend(
+                position: BehaviorPosition.end,
+                cellPadding: new EdgeInsets.all(0),
+                showMeasures: true,
+                legendDefaultMeasure: LegendDefaultMeasure.firstValue,
+              )],
             ),
           ],
         )
