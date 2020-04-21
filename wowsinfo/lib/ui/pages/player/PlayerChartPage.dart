@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/data/AppSettings.dart';
 import 'package:wowsinfo/core/models/UI/ChartValue.dart';
 import 'package:wowsinfo/core/models/WoWs/PlayerShipInfo.dart';
+import 'package:wowsinfo/core/models/WoWs/RecentPlayerInfo.dart';
 import 'package:wowsinfo/ui/widgets/WrapBox.dart';
 
 /// PlayerChartPage class
 class PlayerChartPage extends StatelessWidget {
   final PlayerShipInfo info;
+  final RecentPlayerInfo recent;
   final app = AppSettings.shared;
-  PlayerChartPage({Key key, this.info}) : super(key: key);
+  PlayerChartPage({Key key, this.info, this.recent}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +27,9 @@ class PlayerChartPage extends StatelessWidget {
               height: 300,
               itemPadding: const EdgeInsets.all(8),
               children: <Widget>[
+                buildLineChart(context, recent.recentBattleData, 'Recent battles'),
+                buildLineChart(context, recent.recentWinrateData, 'Recent winrate'),
+                buildLineChart(context, recent.recentDamageData, 'Recent damage'),
                 buildPieChart(context, info.nationData, 'Battles by ship nation', subtitle: info.battleString),
                 buildPieChart(context, info.typeData, 'Battles by ship type', subtitle: info.battleString),
                 buildBarChart(context, info.tierData, 'Battles by ship tier', subtitle: 'Avg tier - ${info.avgBattleTierString}'),
@@ -36,6 +41,35 @@ class PlayerChartPage extends StatelessWidget {
           ),
         )
       ),
+    );
+  }
+
+  Widget buildLineChart(BuildContext context, List<Series<ChartValue, num>> data, String title, {String subtitle}) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    return Column(
+      children: <Widget>[
+        buildChartTitle(title, context),
+        buildChartSubtitle(subtitle),
+        Expanded(
+          child: LineChart(
+            data,
+            animate: false,
+            domainAxis: NumericAxisSpec(
+              showAxisLine: true, 
+              renderSpec: NoneRenderSpec()
+            ),
+            primaryMeasureAxis: NumericAxisSpec(
+              showAxisLine: true,
+              renderSpec: SmallTickRendererSpec(
+                labelStyle: TextStyleSpec(
+                  color: isDark ? Color.white : Color.black,
+                ),
+              )
+            ),
+          ),
+        ),
+      ],
     );
   }
 

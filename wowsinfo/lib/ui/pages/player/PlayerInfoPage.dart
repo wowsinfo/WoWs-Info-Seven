@@ -10,6 +10,7 @@ import 'package:wowsinfo/core/models/WoWs/PlayerShipInfo.dart';
 import 'package:wowsinfo/core/models/WoWs/PvP.dart';
 import 'package:wowsinfo/core/models/WoWs/RankPlayerInfo.dart';
 import 'package:wowsinfo/core/models/WoWs/RankPlayerShipInfo.dart';
+import 'package:wowsinfo/core/models/WoWs/RecentPlayerInfo.dart';
 import 'package:wowsinfo/core/others/Utils.dart';
 import 'package:wowsinfo/core/parsers/API/BasicPlayerInfoParser.dart';
 import 'package:wowsinfo/core/parsers/API/PlayerAchievementParser.dart';
@@ -17,6 +18,7 @@ import 'package:wowsinfo/core/parsers/API/PlayerClanTagParser.dart';
 import 'package:wowsinfo/core/parsers/API/PlayerShipInfoParser.dart';
 import 'package:wowsinfo/core/parsers/API/RankPlayerInfoParser.dart';
 import 'package:wowsinfo/core/parsers/API/RankPlayerShipInfoParser.dart';
+import 'package:wowsinfo/core/parsers/API/RecentPlayerInfoParser.dart';
 import 'package:wowsinfo/ui/pages/player/ClanInfoPage.dart';
 import 'package:wowsinfo/ui/pages/player/PlayerChartPage.dart';
 import 'package:wowsinfo/ui/pages/player/PlayerRankInfoPage.dart';
@@ -45,6 +47,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
   RankPlayerInfo rankInfo;
   RankPlayerShipInfo rankShipInfo;
   PlayerClanTag clanTag;
+  RecentPlayerInfo recentInfo;
 
   @override
   void initState() {
@@ -70,7 +73,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
       });
 
       // Check if this is a public profile
-      if (basicInfo.publicProfile) {
+      if (basicInfo.publicProfile && (basicInfo?.statistic?.battle ?? 0) > 5) {
         // Request for clan tag
         final tag = PlayerClanTagParser(server, accountId);
         final clanTag = tag.parse(await tag.download());
@@ -95,6 +98,15 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
         if (shipInfo != null) {
           setState(() {
             this.shipInfo = shipInfo;
+          });
+        }
+
+        // Request for recent player info
+        final recent = RecentPlayerInfoParser(server, accountId);
+        final recentInfo = recent.parse(await recent.download());
+        if (recentInfo != null) {
+          setState(() {
+            this.recentInfo = recentInfo;
           });
         }
 
@@ -157,9 +169,9 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
   }
 
   Widget buildChart(BuildContext context) {
-    if (shipInfo == null) return SizedBox.shrink();
+    if (shipInfo == null && recentInfo != null) return SizedBox.shrink();
     return FlatButton(
-      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (c) => PlayerChartPage(info: shipInfo))), 
+      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (c) => PlayerChartPage(info: shipInfo, recent: recentInfo))), 
       child: Text('Charts')
     );
   }
@@ -173,7 +185,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
   }
 
   Widget buildRank(BuildContext context) {
-    if (rankInfo == null || rankShipInfo == null) return SizedBox.shrink();
+    if (rankInfo == null && rankShipInfo == null) return SizedBox.shrink();
     return FlatButton(
       onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (c) => PlayerRankInfoPage(rank: rankInfo, rankShip: rankShipInfo))), 
       child: Text('Rank')

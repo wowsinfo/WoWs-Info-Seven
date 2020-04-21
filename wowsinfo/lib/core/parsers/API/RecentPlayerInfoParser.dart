@@ -6,7 +6,7 @@ class RecentPlayerInfoParser extends APIParser {
   RecentPlayerInfoParser(GameServer server, int accountId) : super(server) {
     this.link += '/wows/account/statsbydate/';
     addAPIKey();
-    this.link += '&account_id=$accountId&dates=20200420%2C20200419%2C20200418%2C20200417%2C20200416';
+    this.link += '&account_id=$accountId&dates=20200418%2C20200417%2C20200416%2C20200415%2C20200414%2C20200413%2C20200412%2C20200411%2C20200410%2C20200409';
   }
 
   @override
