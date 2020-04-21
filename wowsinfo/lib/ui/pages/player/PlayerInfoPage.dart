@@ -204,6 +204,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
       child: Column(
         children: [
           BasicPlayerTile(stats: stats.pvp),
+          buildMorePlayerInfo(stats.pvp),
           buildRecord(stats.pvp),
           buildWeaponry(stats.pvp),
           // ExpansionTile(
@@ -257,6 +258,87 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
     );
   }
 
+  Widget buildMorePlayerInfo(PvP pvp) {
+    if (pvp == null) return SizedBox.shrink();
+    return WrapBox(
+      width: 100,
+      children: [
+        TextWithCaption(
+          title: 'argo',
+          value: pvp.artAgro.toString(),
+        ),
+        TextWithCaption(
+          title: '510',
+          value: pvp.draw.toString(),
+        ),
+        TextWithCaption(
+          title: 'argo',
+          value: pvp.controlCapturedPoint.toString(),
+        ),
+        TextWithCaption(
+          title: 'argo',
+          value: pvp.controlDroppedPoint.toString(),
+        ),
+        TextWithCaption(
+          title: 'argo',
+          value: pvp.droppedCapturePoint.toString(),
+        ),
+        TextWithCaption(
+          title: 'argo',
+          value: pvp.artAgro.toString(),
+        ),
+        TextWithCaption(
+          title: '510',
+          value: pvp.draw.toString(),
+        ),
+        TextWithCaption(
+          title: 'argo',
+          value: pvp.droppedCapturePoint.toString(),
+        ),
+        TextWithCaption(
+          title: 'argo',
+          value: pvp.loss.toString(),
+        ),
+        TextWithCaption(
+          title: 'argo',
+          value: pvp.planesKilled.toString(),
+        ),
+        TextWithCaption(
+          title: 'argo',
+          value: pvp.shipsSpotted.toString(),
+        ),
+        TextWithCaption(
+          title: '510',
+          value: pvp.survivedBattle.toString(),
+        ),
+        TextWithCaption(
+          title: 'argo',
+          value: pvp.survivedWin.toString(),
+        ),
+        TextWithCaption(
+          title: 'argo',
+          value: pvp.teamCapturePoint.toString(),
+        ),
+        TextWithCaption(
+          title: 'argo',
+          value: pvp.teamDroppedCapturePoint.toString(),
+        ),
+        TextWithCaption(
+          title: 'argo',
+          value: pvp.torpedoAgro.toString(),
+        ),
+        TextWithCaption(
+          title: '510',
+          value: pvp.win.toString(),
+        ),
+        TextWithCaption(
+          title: 'argo',
+          value: pvp.xp.toString(),
+        ),
+      ],
+    );
+  }
+
   Widget buildWeaponry(PvP pvp) {
     if (pvp == null) return SizedBox.shrink();
     return WrapBox(
@@ -270,7 +352,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
         WeaponValue(pvp.torpedoe, 'Torpedos'),
         WeaponValue(pvp.aircraft, 'Aircraft'),
         WeaponValue(pvp.ramming, 'Ramming'),
-      ].where((e) => e.weapon != null).map((e) => Column(
+      ].where((e) => e.weapon != null && cached.getShip(e.shipId) != null).map((e) => Column(
         children: <Widget>[
           Text(e.title, style: Theme.of(context).textTheme.headline6),
           Expanded(

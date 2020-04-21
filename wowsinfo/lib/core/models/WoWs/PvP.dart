@@ -41,7 +41,7 @@ class PvP {
   int maxDamageDealtToBuildingsShipId;
   int maxDamageDealtShipId;
   int win;
-  int losse;
+  int loss;
   int damageDealt;
   int maxPlanesKilled;
   int maxScoutingDamageShipId;
@@ -112,7 +112,7 @@ class PvP {
     this.maxDamageDealtToBuildingsShipId = json["max_damage_dealt_to_buildings_ship_id"];
     this.maxDamageDealtShipId = json["max_damage_dealt_ship_id"];
     this.win = json["wins"];
-    this.losse = json["losses"];
+    this.loss = json["losss"];
     this.damageDealt = json["damage_dealt"];
     this.maxPlanesKilled = json["max_planes_killed"];
     this.maxScoutingDamageShipId = json["max_scouting_damage_ship_id"];
