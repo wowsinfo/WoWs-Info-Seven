@@ -121,16 +121,23 @@ class PvP {
   }
 }
 
-/// This is the `MainBattery` class
-class MainBattery {
+/// Ramming can be a weapon I guess
+abstract class Weapon {
   int maxFragsBattle;
   int frag;
   int hit;
   int maxFragsShipId;
   int shot;
 
-  double get hitRatio => hit * 10000 / shot / 100.0;
+  /// Hit ratio only applies for some weapon
+  bool get hasHitRatio => shot != null;
+  double get hitRatio => hasHitRatio ? hit * 10000 / shot / 100.0 : 0;
+  String get maxFrag => '$maxFragsBattle';
+  String get totalFrag => '$frag';
+}
 
+/// This is the `MainBattery` class
+class MainBattery extends Weapon {
   MainBattery(Map<String, dynamic> json) {
     this.maxFragsBattle = json['max_frags_battle'];
     this.frag = json['frags'];
@@ -141,15 +148,7 @@ class MainBattery {
 }
 
 /// This is the `SecondBattery` class
-class SecondBattery {
-  int maxFragsBattle;
-  int frag;
-  int hit;
-  int maxFragsShipId;
-  int shot;
-
-  double get hitRatio => hit * 10000 / shot / 100.0;
-
+class SecondBattery extends Weapon {
   SecondBattery(Map<String, dynamic> json) {
     this.maxFragsBattle = json['max_frags_battle'];
     this.frag = json['frags'];
@@ -160,11 +159,7 @@ class SecondBattery {
 }
 
 /// This is the `Ramming` class
-class Ramming {
-  int maxFragsBattle;
-  int frag;
-  int maxFragsShipId;
-
+class Ramming extends Weapon {
   Ramming(Map<String, dynamic> json) {
     this.maxFragsBattle = json['max_frags_battle'];
     this.frag = json['frags'];
@@ -173,15 +168,7 @@ class Ramming {
 }
 
 /// This is the `Torpedoe` class
-class Torpedoe {
-  int maxFragsBattle;
-  int frag;
-  int hit;
-  int maxFragsShipId;
-  int shot;
-
-  double get hitRatio => hit * 10000 / shot / 100.0;
-
+class Torpedoe extends Weapon {
   Torpedoe(Map<String, dynamic> json) {
     this.maxFragsBattle = json['max_frags_battle'];
     this.frag = json['frags'];
@@ -192,11 +179,7 @@ class Torpedoe {
 }
 
 /// This is the `Aircraft` class
-class Aircraft {
-  int maxFragsBattle;
-  int frag;
-  int maxFragsShipId;
-
+class Aircraft extends Weapon  {
   Aircraft(Map<String, dynamic> json) {
     this.maxFragsBattle = json['max_frags_battle'];
     this.frag = json['frags'];

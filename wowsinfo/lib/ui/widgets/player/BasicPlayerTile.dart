@@ -11,8 +11,8 @@ class BasicPlayerTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WrapBox(
-      width: 120,
-      padding: const EdgeInsets.all(8),
+      width: 100,
+      padding: const EdgeInsets.only(top: 16),
       itemPadding: const EdgeInsets.only(bottom: 8),
       children: [
         ImageTile(

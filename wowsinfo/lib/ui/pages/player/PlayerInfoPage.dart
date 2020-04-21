@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/data/CachedData.dart';
+import 'package:wowsinfo/core/models/UI/RecordValue.dart';
+import 'package:wowsinfo/core/models/UI/WeaponValue.dart';
 import 'package:wowsinfo/core/models/User/Player.dart';
 import 'package:wowsinfo/core/models/WoWs/BasicPlayerInfo.dart';
 import 'package:wowsinfo/core/models/WoWs/PlayerAchievement.dart';
@@ -199,38 +201,38 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
     final theme = Theme.of(context).copyWith(dividerColor: Colors.transparent);
     return Theme(
       data: theme,
-      child: WrapBox(
-        width: 400,
+      child: Column(
         children: [
-          ExpansionTile(
-            title: Text('Random Battle'),
-            initiallyExpanded: true,
-            children: [
-              BasicPlayerTile(stats: basicInfo.statistic.pvp),
-              buildRecord(basicInfo.statistic.pvp),
-            ],
-          ),
-          ExpansionTile(
-            title: Text('Random Battle Solo'),
-            children: [
-              BasicPlayerTile(stats: basicInfo.statistic.solo),
-              buildRecord(basicInfo.statistic.solo),
-            ],
-          ),
-          ExpansionTile(
-            title: Text('Random Battle Div2'),
-            children: [
-              BasicPlayerTile(stats: basicInfo.statistic.div2),
-              buildRecord(basicInfo.statistic.div2),
-            ],
-          ),
-          ExpansionTile(
-            title: Text('Random Battle Div3'),
-            children: [
-              BasicPlayerTile(stats: basicInfo.statistic.div3),
-              buildRecord(basicInfo.statistic.div3),
-            ],
-          ),
+          BasicPlayerTile(stats: stats.pvp),
+          buildRecord(stats.pvp),
+          buildWeaponry(stats.pvp),
+          // ExpansionTile(
+          //   title: Text('Random Battle'),
+          //   initiallyExpanded: true,
+          //   children: [
+          //   ],
+          // ),
+          // ExpansionTile(
+          //   title: Text('Random Battle Solo'),
+          //   children: [
+          //     BasicPlayerTile(stats: stats.solo),
+          //     buildRecord(stats.solo),
+          //   ],
+          // ),
+          // ExpansionTile(
+          //   title: Text('Random Battle Div2'),
+          //   children: [
+          //     BasicPlayerTile(stats: stats.div2),
+          //     buildRecord(stats.div2),
+          //   ],
+          // ),
+          // ExpansionTile(
+          //   title: Text('Random Battle Div3'),
+          //   children: [
+          //     BasicPlayerTile(stats: stats.div3),
+          //     buildRecord(stats.div3),
+          //   ],
+          // ),
         ],
       ),
     );
@@ -255,10 +257,60 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
     );
   }
 
+  Widget buildWeaponry(PvP pvp) {
+    if (pvp == null) return SizedBox.shrink();
+    return WrapBox(
+      width: 300,
+      height: 160,
+      padding: const EdgeInsets.all(8),
+      itemPadding: const EdgeInsets.all(8),
+      children: [
+        WeaponValue(pvp.mainBattery, 'Main'),
+        WeaponValue(pvp.secondBattery, 'Secondary'),
+        WeaponValue(pvp.torpedoe, 'Torpedos'),
+        WeaponValue(pvp.aircraft, 'Aircraft'),
+        WeaponValue(pvp.ramming, 'Ramming'),
+      ].where((e) => e.weapon != null).map((e) => Column(
+        children: <Widget>[
+          Text(e.title, style: Theme.of(context).textTheme.headline6),
+          Expanded(
+            child: Row(
+              children: <Widget>[
+                WikiWarshipCell(
+                  showDetail: true,
+                  ship: cached.getShip(e.shipId),
+                ),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      TextWithCaption(
+                        title: 'Max Frag',
+                        value: e.maxFrag,
+                      ),
+                      TextWithCaption(
+                        title: 'Total Frag',
+                        value: e.totalFrag,
+                      ),
+                      e.hasHitRatio ? TextWithCaption(
+                        title: 'Hit Ratio',
+                        value: e.hitRatio.toStringAsFixed(2) + '%',
+                      ) : SizedBox.shrink(),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
+      )).toList(growable: false),
+    );
+  }
+
   Widget buildRecord(PvP pvp) {
     if (pvp == null) return SizedBox.shrink();
     return WrapBox(
-      width: 200,
+      width: 150,
       height: 150,
       itemPadding: const EdgeInsets.only(top: 8),
       children: [
@@ -281,13 +333,4 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
       )).toList(growable: false),
     );
   }
-}
-
-/// Stores all value relating to record (max something)
-class RecordValue {
-  int shipId;
-  String title;
-  String value;
-
-  RecordValue(this.shipId, this.title, this.value);
 }
