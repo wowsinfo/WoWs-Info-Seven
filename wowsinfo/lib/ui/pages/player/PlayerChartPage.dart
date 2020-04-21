@@ -27,6 +27,9 @@ class PlayerChartPage extends StatelessWidget {
                 buildPieChart(context, info.nationData, 'Battles by ship nation', subtitle: info.battleString),
                 buildPieChart(context, info.typeData, 'Battles by ship type', subtitle: info.battleString),
                 buildBarChart(context, info.tierData, 'Battles by ship tier', subtitle: 'Avg tier - ${info.avgBattleTierString}'),
+                buildBarChart(context, info.topTenBattleData, 'Top ten ships by battles', vertical: false),
+                buildBarChart(context, info.topTenWinrateData, 'Top ten ships by winrate', vertical: false),
+                buildBarChart(context, info.topTenDamageData, 'Top ten ships by damage', vertical: false),
               ],
             ),
           ),
@@ -35,7 +38,7 @@ class PlayerChartPage extends StatelessWidget {
     );
   }
 
-  Widget buildBarChart(BuildContext context, List<Series<ChartValue, String>> data, String title, {String subtitle}) {
+  Widget buildBarChart(BuildContext context, List<Series<ChartValue, String>> data, String title, {String subtitle, bool vertical = true}) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final axis = NumericAxisSpec(
       renderSpec: SmallTickRendererSpec(
@@ -59,11 +62,14 @@ class PlayerChartPage extends StatelessWidget {
         buildChartSubtitle(subtitle),
         Expanded(
           child: BarChart(
-            info.tierData,
+            data,
             animate: false,
-            vertical: true,
+            vertical: vertical,
             domainAxis: dAxis,
             primaryMeasureAxis: axis,
+            barRendererDecorator: vertical == true ? null : BarLabelDecorator<String>(
+              labelAnchor : BarLabelAnchor.end
+            ),
           ),
         ),
       ],
