@@ -23,6 +23,7 @@ class PlayerChartPage extends StatelessWidget {
             child: WrapBox(
               width: 400,
               height: 300,
+              itemPadding: const EdgeInsets.all(8),
               children: <Widget>[
                 buildPieChart(context, info.nationData, 'Battles by ship nation', subtitle: info.battleString),
                 buildPieChart(context, info.typeData, 'Battles by ship type', subtitle: info.battleString),
