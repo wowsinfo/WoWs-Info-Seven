@@ -7,6 +7,10 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## 21/04/2020
+### Summary
+### What to do tomorrow?
+
 ## 20/04/2020
 ### Summary
 Some page info. Added some basic info like level, last battle time and added the classics basic 6 tiles. Records are also added with smart filter. 
