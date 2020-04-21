@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:charts_flutter/flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:wowsinfo/core/data/AppSettings.dart';
 import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/models/GitHub/PRData.dart';
 import 'package:wowsinfo/core/models/UI/ChartValue.dart';
@@ -13,7 +12,6 @@ import 'package:wowsinfo/core/others/AppLocalization.dart';
 class WikiWarshipSimilarPage extends StatelessWidget {
   final Iterable<Warship> ships;
   final cached = CachedData.shared;
-  final app = AppSettings.shared;
   WikiWarshipSimilarPage({Key key, @required this.ships}) : super(key: key);
 
   List<Series<ChartValue, String>> convert(String id, List<ChartValue> values, 
@@ -94,11 +92,12 @@ class WikiWarshipSimilarPage extends StatelessWidget {
 
   Widget buildChart(BuildContext context, List<Series<ChartValue, String>> list, String title, String subtitle) {
     final height = 20.0 * max(ships.length, 5).toDouble();
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     final axis = NumericAxisSpec(
       renderSpec: SmallTickRendererSpec(
         labelStyle: TextStyleSpec(
-          color: app.isDarkMode() ? Color.white : Color.black,
+          color: isDark ? Color.white : Color.black,
         ),
       )
     );
@@ -106,7 +105,7 @@ class WikiWarshipSimilarPage extends StatelessWidget {
     final dAxis = AxisSpec<String>(
       renderSpec: SmallTickRendererSpec(
         labelStyle: TextStyleSpec(
-          color: app.isDarkMode() ? Color.white : Color.black,
+          color: isDark ? Color.white : Color.black,
         ),
       )
     );

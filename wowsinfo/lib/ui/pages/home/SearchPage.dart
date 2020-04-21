@@ -42,7 +42,7 @@ class _SearchPageState extends State<SearchPage> {
                 ),
                 cursorColor: Colors.white70,
                 autocorrect: false,
-                autofocus: true,
+                autofocus: false,
                 onChanged: (t) => setState(() => this.input = t),
                 onEditingComplete: () => this.search()
               ),
