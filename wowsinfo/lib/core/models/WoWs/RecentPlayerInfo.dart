@@ -7,6 +7,14 @@ class RecentPlayerInfo {
   List<RecentPvP> _recent = [];
   bool _hasData = false;
   bool get hasRecentData => _hasData;
+
+  double avgDamage = 0;
+  String get avgDamageString => '${avgDamage.toStringAsFixed(0)}';
+  double totalBattles = 0;
+  String get battleString => '${totalBattles.toStringAsFixed(0)} (${(totalBattles / days).toStringAsFixed(0)})';
+  double avgWinrate = 0;
+  String get avgWinrateString => '${avgWinrate.toStringAsFixed(1)}%';
+  int get days => _recent.length;
   
   List<ChartValue> recentBattles = [];
   List<Series<ChartValue, num>> get recentBattleData => _convert('recent_battle', listData: recentBattles, 
@@ -40,14 +48,27 @@ class RecentPlayerInfo {
         this._recent = this._recent.reversed.toList(growable: false);
 
         // Make chart data
-        recentBattles = _recent.map((e) => ChartValue(e.date, e.battle)).toList(growable: false);
-        recentDamage = _recent.map((e) => ChartValue(e.date, e.avgDamage)).toList(growable: false);
-        recentWinrate = _recent.map((e) => ChartValue(e.date, e.winrate)).toList(growable: false);
+        recentBattles = _recent.map((e) {
+          totalBattles += e.battle;
+          return ChartValue(e.date, e.battle);
+        }).toList(growable: false);
+        recentDamage = _recent.map((e) {
+          avgDamage += e.avgDamage;
+          return ChartValue(e.date, e.avgDamage);
+        }).toList(growable: false);
+        recentWinrate = _recent.map((e) {
+          avgWinrate += e.winrate;
+          return ChartValue(e.date, e.winrate);
+        }).toList(growable: false);
+
+        // Get average value
+        avgDamage /= days;
+        avgWinrate /= days;
       }
     }
   }
 
-  List<Series<ChartValue, num>> _convert(String id, {Map mapData, List listData, Color color, String Function(ChartValue, int) labelFormatter}) {
+  List<Series<ChartValue, num>> _convert(String id, {Map mapData, List listData, Color color, String Function(ChartValue, num) labelFormatter}) {
     return [Series<ChartValue, num>(
       data: listData ?? mapData.entries.map((e) => ChartValue(e.key, e.value)).toList(growable: false),
       id: id,

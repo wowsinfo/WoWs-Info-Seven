@@ -25,11 +25,11 @@ class PlayerChartPage extends StatelessWidget {
             child: WrapBox(
               width: 400,
               height: 300,
-              itemPadding: const EdgeInsets.all(8),
+              itemPadding: const EdgeInsets.only(top: 8, bottom: 8),
               children: <Widget>[
-                buildLineChart(context, recent.recentBattleData, 'Recent battles'),
-                buildLineChart(context, recent.recentWinrateData, 'Recent winrate'),
-                buildLineChart(context, recent.recentDamageData, 'Recent damage'),
+                buildLineChart(context, recent.recentBattleData, 'Recent battles', subtitle: recent.battleString),
+                buildLineChart(context, recent.recentWinrateData, 'Recent average winrate', subtitle: recent.avgWinrateString),
+                buildLineChart(context, recent.recentDamageData, 'Recent average damage', subtitle: recent.avgDamageString),
                 buildPieChart(context, info.nationData, 'Battles by ship nation', subtitle: info.battleString),
                 buildPieChart(context, info.typeData, 'Battles by ship type', subtitle: info.battleString),
                 buildBarChart(context, info.tierData, 'Battles by ship tier', subtitle: 'Avg tier - ${info.avgBattleTierString}'),

@@ -169,7 +169,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
   }
 
   Widget buildChart(BuildContext context) {
-    if (shipInfo == null && recentInfo != null) return SizedBox.shrink();
+    if (shipInfo == null && recentInfo == null) return SizedBox.shrink();
     return FlatButton(
       onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (c) => PlayerChartPage(info: shipInfo, recent: recentInfo))), 
       child: Text('Charts')
