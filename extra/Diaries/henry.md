@@ -9,7 +9,9 @@ Template
 
 ## 21/04/2020
 ### Summary
+Basically, charts are done for player info. I might add more but I think that's about it for now. 
 ### What to do tomorrow?
+I am going to work on player ships. This is a hard one but I will reuse it with rank ship if possible and the app is done. It still needs lots of optimizations and polishments. 
 
 ## 20/04/2020
 ### Summary
