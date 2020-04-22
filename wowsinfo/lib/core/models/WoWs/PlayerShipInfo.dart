@@ -5,6 +5,7 @@ import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/data/ChartColour.dart';
 import 'package:wowsinfo/core/models/UI/ChartValue.dart';
 import 'package:wowsinfo/core/models/UI/WoWsDate.dart';
+import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart';
 
 import 'PvP.dart';
 
@@ -113,6 +114,8 @@ class ShipInfo {
   int battle;
   int shipId;
   dynamic private;
+
+  Warship get ship => CachedData.shared.getShip(shipId);
 
   ShipInfo(Map<String, dynamic> json) {
     if (json['pvp'] != null) this.pvp = PvP(json['pvp']);

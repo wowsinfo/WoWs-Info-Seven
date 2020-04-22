@@ -8,12 +8,14 @@ class WikiWarshipCell extends StatelessWidget {
   final bool showDetail;
   final bool hero;
   final Widget bottom;
+  final void Function() onTap;
   WikiWarshipCell({
     Key key, 
     @required this.ship, 
     this.showDetail = false, 
     this.hero = false,
     this.bottom = const SizedBox.shrink(),
+    this.onTap,
   }) : super(key: key);
 
   @override
@@ -21,7 +23,7 @@ class WikiWarshipCell extends StatelessWidget {
     return InkWell(
       onTap: showDetail 
       ? () => Navigator.of(context).push(MaterialPageRoute(builder: (c) => WikiWarShipInfoPage(ship: ship))) 
-      : null,
+      : this.onTap,
       child: Column(
         children: [
           Expanded(

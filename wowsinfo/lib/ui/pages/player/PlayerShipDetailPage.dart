@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:wowsinfo/core/models/WoWs/PlayerShipInfo.dart';
 
 /// PlayerShipDetailPage class
 class PlayerShipDetailPage extends StatelessWidget {
-  PlayerShipDetailPage({Key key}) : super(key: key);
+  final ShipInfo ship;
+  PlayerShipDetailPage({Key key, this.ship}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('PlayerShipDetailPage')
+        title: Text(ship.shipId.toString())
       ),
       body: Container(),
     );
