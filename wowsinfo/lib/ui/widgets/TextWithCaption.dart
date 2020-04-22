@@ -25,7 +25,7 @@ class TextWithCaption extends StatelessWidget {
     );
   }
 
-  Text buildValue() {
+  Widget buildValue() {
     if (valueWidget != null) return valueWidget;
     return Text(
       value,
@@ -34,7 +34,7 @@ class TextWithCaption extends StatelessWidget {
     );
   }
 
-  Text buildTitle(BuildContext context) {
+  Widget buildTitle(BuildContext context) {
     if (titleWidget != null) return titleWidget;
     return Text(
       title, 

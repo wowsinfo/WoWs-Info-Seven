@@ -11,7 +11,7 @@ import 'package:wowsinfo/core/parsers/API/WikiShipInfoParser.dart';
 import 'package:wowsinfo/ui/pages/wiki/WikiWarshipSimilarPage.dart';
 import 'package:wowsinfo/ui/widgets/PlatformLoadingIndiactor.dart';
 import 'package:wowsinfo/ui/widgets/TextWithCaption.dart';
-import 'package:wowsinfo/ui/widgets/wiki/ShipAverageStats.dart';
+import 'package:wowsinfo/ui/widgets/wiki/ShipAverageStatistics.dart';
 import 'package:wowsinfo/ui/widgets/wiki/ShipParameter.dart';
 import 'package:wowsinfo/ui/widgets/wiki/WikiWarshipCell.dart';
 
@@ -206,7 +206,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
         buildShipPrice(),
         Padding(
           padding: const EdgeInsets.only(top: 8),
-          child: ShipAverageStats(shipId: info.shipId),
+          child: ShipAverageStatistics(shipId: info.shipId),
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
