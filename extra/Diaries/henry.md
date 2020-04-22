@@ -7,6 +7,12 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## /04/2020
+### Summary
+Not much code have been written but player ship and player ship details are basically done. 
+### What to do tomorrow?
+Add ship filter and personal rating. Then, rank. After that, I will clean up my code and work on details and localization. Wiki section still needs some work. 
+
 ## 21/04/2020
 ### Summary
 Basically, charts are done for player info. I might add more but I think that's about it for now. 
