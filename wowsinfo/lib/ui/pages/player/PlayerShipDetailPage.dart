@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/models/WoWs/PlayerShipInfo.dart';
+import 'package:wowsinfo/ui/widgets/wiki/WikiWarshipCell.dart';
 
 /// PlayerShipDetailPage class
 class PlayerShipDetailPage extends StatelessWidget {
@@ -12,7 +13,9 @@ class PlayerShipDetailPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(ship.shipId.toString())
       ),
-      body: Container(),
+      body: Center(
+        child: WikiWarshipCell(ship: ship.ship, hero: true),
+      ),
     );
   }
 }
