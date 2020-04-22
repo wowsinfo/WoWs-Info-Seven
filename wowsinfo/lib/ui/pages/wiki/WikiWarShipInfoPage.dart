@@ -183,7 +183,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
               duration: Duration(milliseconds: 300),
               switchInCurve: Curves.linearToEaseOut,
               transitionBuilder: (w, a) => SizeTransition(sizeFactor: a, child: w),
-              child: buildContent()
+              child: buildContent(),
             ),
           ],
         ),

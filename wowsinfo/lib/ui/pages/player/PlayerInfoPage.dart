@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/models/UI/RecordValue.dart';
-import 'package:wowsinfo/core/models/UI/WeaponValue.dart';
 import 'package:wowsinfo/core/models/User/Player.dart';
 import 'package:wowsinfo/core/models/WoWs/BasicPlayerInfo.dart';
 import 'package:wowsinfo/core/models/WoWs/PlayerAchievement.dart';
@@ -28,6 +27,7 @@ import 'package:wowsinfo/ui/widgets/PlatformLoadingIndiactor.dart';
 import 'package:wowsinfo/ui/widgets/TextWithCaption.dart';
 import 'package:wowsinfo/ui/widgets/WrapBox.dart';
 import 'package:wowsinfo/ui/widgets/player/BasicPlayerTile.dart';
+import 'package:wowsinfo/ui/widgets/player/WeaponInfoTile.dart';
 import 'package:wowsinfo/ui/widgets/wiki/WikiWarshipCell.dart';
 
 /// PlayerInfoPage class
@@ -248,7 +248,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
           BasicPlayerTile(stats: stats.pvp),
           buildMorePlayerInfo(stats.pvp),
           buildRecord(stats.pvp),
-          buildWeaponry(stats.pvp),
+          WeaponInfoTile(pvp: stats.pvp),
           // ExpansionTile(
           //   title: Text('Random Battle'),
           //   initiallyExpanded: true,
@@ -378,56 +378,6 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
           value: pvp.xp.toString(),
         ),
       ],
-    );
-  }
-
-  Widget buildWeaponry(PvP pvp) {
-    if (pvp == null) return SizedBox.shrink();
-    return WrapBox(
-      width: 300,
-      height: 160,
-      padding: const EdgeInsets.all(8),
-      itemPadding: const EdgeInsets.all(8),
-      children: [
-        WeaponValue(pvp.mainBattery, 'Main'),
-        WeaponValue(pvp.secondBattery, 'Secondary'),
-        WeaponValue(pvp.torpedoe, 'Torpedos'),
-        WeaponValue(pvp.aircraft, 'Aircraft'),
-        WeaponValue(pvp.ramming, 'Ramming'),
-      ].where((e) => e.weapon != null && cached.getShip(e.shipId) != null).map((e) => Column(
-        children: <Widget>[
-          Text(e.title, style: Theme.of(context).textTheme.headline6),
-          Expanded(
-            child: Row(
-              children: <Widget>[
-                WikiWarshipCell(
-                  showDetail: true,
-                  ship: cached.getShip(e.shipId),
-                ),
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      TextWithCaption(
-                        title: 'Max Frag',
-                        value: e.maxFrag,
-                      ),
-                      TextWithCaption(
-                        title: 'Total Frag',
-                        value: e.totalFrag,
-                      ),
-                      e.hasHitRatio ? TextWithCaption(
-                        title: 'Hit Ratio',
-                        value: e.hitRatio.toStringAsFixed(2) + '%',
-                      ) : SizedBox.shrink(),
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-        ],
-      )).toList(growable: false),
     );
   }
 

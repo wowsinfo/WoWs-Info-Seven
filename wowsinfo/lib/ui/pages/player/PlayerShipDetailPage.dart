@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/models/WoWs/PlayerShipInfo.dart';
+import 'package:wowsinfo/ui/widgets/player/BasicPlayerTile.dart';
+import 'package:wowsinfo/ui/widgets/player/WeaponInfoTile.dart';
+import 'package:wowsinfo/ui/widgets/wiki/ShipAverageStats.dart';
 import 'package:wowsinfo/ui/widgets/wiki/WikiWarshipCell.dart';
 
 /// PlayerShipDetailPage class
@@ -13,8 +16,22 @@ class PlayerShipDetailPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(ship.shipId.toString())
       ),
-      body: Center(
-        child: WikiWarshipCell(ship: ship.ship, hero: true),
+      body: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 150,
+                  child: WikiWarshipCell(ship: ship.ship, hero: true, showDetail: true)
+                ),
+                ShipAverageStats(shipId: ship.shipId),
+                BasicPlayerTile(stats: ship.pvp),
+                WeaponInfoTile(pvp: ship.pvp, shipMode: true)
+              ],
+            )
+          ),
+        ),
       ),
     );
   }

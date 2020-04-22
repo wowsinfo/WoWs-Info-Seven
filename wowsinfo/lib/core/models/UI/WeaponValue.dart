@@ -10,6 +10,7 @@ class WeaponValue {
   double get hitRatio => weapon.hitRatio;
   String get maxFrag => weapon.maxFrag;
   String get totalFrag => weapon.totalFrag;
+  bool get hasFrag => weapon.frag > 0;
 
   WeaponValue(this.weapon, this.title);
 }

@@ -12,31 +12,45 @@ class BasicPlayerTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Wrap(
+      alignment: WrapAlignment.center,
       children: <Widget>[
         BasicShipInfoTile(stats: stats),
-        WrapBox(
-          width: 100,
-          padding: const EdgeInsets.only(top: 16),
-          itemPadding: const EdgeInsets.only(bottom: 8),
-          children: [
-            ImageTile(
-              image: AssetImage('assets/images/exp.png'),
-              title: 'Battle',
-              value: stats.avgExpString,
-            ),
-            ImageTile(
-              image: AssetImage('assets/images/killdeathratio.png'),
-              title: 'Battle',
-              value: stats.killDeathString,
-            ),
-            ImageTile(
-              image: AssetImage('assets/images/hitratio.png'),
-              title: 'Battle',
-              value: stats.mainHitRatioString,
-            ),
-          ],
-        ),
+        buildBottom(),
       ],
     );
+  }
+
+  WrapBox buildBottom() {
+    return WrapBox(
+      width: 100,
+      padding: const EdgeInsets.only(top: 16),
+      itemPadding: const EdgeInsets.only(bottom: 8),
+      children: this.buildChilren(),
+    );
+  }
+
+  List<Widget> buildChilren() {
+    final tiles = [
+      ImageTile(
+        image: AssetImage('assets/images/exp.png'),
+        title: 'Battle',
+        value: stats.avgExpString,
+      ),
+      ImageTile(
+        image: AssetImage('assets/images/killdeathratio.png'),
+        title: 'Battle',
+        value: stats.killDeathString,
+      ),
+    ];
+
+    // Hide this if it is cv
+    // TODO: consider what to add more cv
+    if (stats.canHit) tiles.add(ImageTile(
+      image: AssetImage('assets/images/hitratio.png'),
+      title: 'Battle',
+      value: stats.mainHitRatioString,
+    ));
+
+    return tiles;
   }
 }

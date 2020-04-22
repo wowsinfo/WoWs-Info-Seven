@@ -69,6 +69,7 @@ class PvP {
   String get avgExpString => '${avgExp.toStringAsFixed(0)}';
   String get killDeathString => '${killDeath.toStringAsFixed(2)}';
   String get mainHitRatioString => '${mainBattery.hitRatio.toStringAsFixed(2)}%';
+  bool get canHit => mainBattery.shot > 0;
 
   String get maxDamage => '$maxDamageDealt';
   String get maxExp => '$maxXp';
@@ -140,7 +141,7 @@ abstract class Weapon {
   int shot;
 
   /// Hit ratio only applies for some weapon
-  bool get hasHitRatio => shot != null;
+  bool get hasHitRatio => shot != null && hit > 0;
   double get hitRatio => hasHitRatio ? hit * 10000 / shot / 100.0 : 0;
   String get maxFrag => '$maxFragsBattle';
   String get totalFrag => '$frag';

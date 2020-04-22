@@ -7,6 +7,7 @@ class RecentPlayerInfo {
   List<RecentPvP> _recent = [];
   bool _hasData = false;
   bool get hasRecentData => _hasData;
+  bool get isActive => hasRecentData;
 
   double avgDamage = 0;
   String get avgDamageString => '${avgDamage.toStringAsFixed(0)}';
