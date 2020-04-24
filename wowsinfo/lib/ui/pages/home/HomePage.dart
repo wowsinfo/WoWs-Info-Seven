@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/ui/pages/OriginalPage.dart';
+import 'package:wowsinfo/ui/pages/Settings.dart';
 import 'package:wowsinfo/ui/widgets/DebugProviderWidget.dart';
 import 'package:wowsinfo/ui/widgets/ShiftingText.dart';
 
@@ -35,7 +36,9 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
             icon: Icon(Icons.settings), 
-            onPressed: () {}
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (c) => Settings()));
+            }
           )
         ],
       ),

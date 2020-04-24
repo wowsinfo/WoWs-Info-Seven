@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/data/CachedData.dart';
+import 'package:wowsinfo/core/models/UI/PlayerChartData.dart';
 import 'package:wowsinfo/core/models/UI/RecordValue.dart';
 import 'package:wowsinfo/core/models/User/Player.dart';
 import 'package:wowsinfo/core/models/WoWs/BasicPlayerInfo.dart';
@@ -171,7 +172,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
   Widget buildChart(BuildContext context) {
     if (shipInfo == null && recentInfo == null) return SizedBox.shrink();
     return FlatButton(
-      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (c) => PlayerChartPage(info: shipInfo, recent: recentInfo))), 
+      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (c) => PlayerChartPage(info: PlayerChartData(shipInfo), recent: recentInfo))), 
       child: Text('Charts')
     );
   }
