@@ -9,7 +9,9 @@ Template
 
 ## 24/04/2020
 ### Summary
+Added personal rating and some basic cleanups of my code. `PvP` is now extendsing `RankPvP (RankSolo)` and `PlayerChartDart` is extracted from `PlayerShipInfo`. I will do more of these and break down into more files. 
 ### What to do tomorrow?
+Rank and rank ship info. Also, add more info to player and ship stats.
 
 ## 22/04/2020
 ### Summary

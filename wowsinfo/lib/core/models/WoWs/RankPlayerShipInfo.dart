@@ -24,7 +24,7 @@ class SeasonShipInfo {
   int shipId;
 
   /// Get stats for a certain season
-  RankPvP getPvP(String key) => season[key].RankPvP;
+  RankPvP getPvP(String key) => season[key].rankSolo;
 
   SeasonShipInfo(json) {
     this.season = (json['seasons'] as Map).map((a, b) => MapEntry(a, Season(b)));
@@ -35,12 +35,12 @@ class SeasonShipInfo {
 
 /// This is the `Season` class
 class Season {
-  RankPvP RankPvP;
+  RankPvP rankSolo;
   dynamic rankDiv2;
   dynamic rankDiv3;
 
   Season(json) {
-    if (json['rank_solo'] != null) this.RankPvP = RankPvP(json['rank_solo']);
+    if (json['rank_solo'] != null) this.rankSolo = RankPvP(json['rank_solo']);
     this.rankDiv2 = json['rank_div2'];
     this.rankDiv3 = json['rank_div3'];
   }
