@@ -1,17 +1,15 @@
+import 'package:wowsinfo/core/models/WoWs/RankPlayerShipInfo.dart';
+
 /// This is the `PvP` class
-class PvP {
+class PvP extends RankPvP {
   int maxXp;
   int damageToBuilding;
-  MainBattery mainBattery;
   int maxShipsSpottedShipId;
   int maxDamageScouting;
   int artAgro;
   int maxXpShipId;
   int shipsSpotted;
-  SecondBattery secondBattery;
   int maxFragsShipId;
-  int xp;
-  int survivedBattle;
   int droppedCapturePoint;
   int maxDamageDealtToBuilding;
   int torpedoAgro;
@@ -29,12 +27,9 @@ class PvP {
   int maxTotalAgro;
   int maxFragsBattle;
   int capturePoint;
-  Ramming ramming;
   int suppressionsCount;
   int maxSuppressionsCount;
-  Torpedoe torpedoe;
   int maxPlanesKilledShipId;
-  Aircraft aircraft;
   int teamCapturePoint;
   int controlDroppedPoint;
   int maxDamageDealt;
@@ -81,12 +76,7 @@ class PvP {
   String get maxSupression => '$maxSuppressionsCount';
   String get maxPotential => '$maxTotalAgro';
 
-  PvP(Map<String, dynamic> json) {
-    if (json['main_battery'] != null) this.mainBattery =  MainBattery(json['main_battery']);
-    if (json['second_battery'] != null) this.secondBattery = SecondBattery(json['second_battery']);
-    if (json['ramming'] != null) this.ramming = Ramming(json['ramming']);
-    if (json['torpedoes'] != null) this.torpedoe = Torpedoe(json['torpedoes']);
-    if (json['aircraft'] != null) this.aircraft = Aircraft(json['aircraft']);
+  PvP(Map<String, dynamic> json) : super(json) {
     this.maxXp = json["max_xp"];
     this.damageToBuilding = json["damage_to_buildings"];
     this.maxShipsSpottedShipId = json["max_ships_spotted_ship_id"];

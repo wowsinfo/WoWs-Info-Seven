@@ -90,7 +90,7 @@ void main() {
 
     expect(ship != null, isTrue);
     expect(ship.ships.length > 0, isTrue);
-    expect(ship.ships[0].season['101'].rankSolo.secondBattery.hit == 0, isTrue);
+    expect(ship.ships[0].season['101'].RankPvP.secondBattery.hit == 0, isTrue);
   });
 
   /// This will fail because of `Hive`

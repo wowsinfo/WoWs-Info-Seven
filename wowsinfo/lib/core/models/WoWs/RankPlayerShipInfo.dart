@@ -3,6 +3,9 @@ import 'PvP.dart';
 /// This is the `RankPlayerShipInfo` class
 class RankPlayerShipInfo {
   List<SeasonShipInfo> ships = [];
+  List<SeasonShipInfo> getShipsFor({String season}) {
+    return ships.where((e) => e.season[season] != null);
+  }
 
   RankPlayerShipInfo(Map<String, dynamic> data) {
     final json = data.values.first;
@@ -20,6 +23,9 @@ class SeasonShipInfo {
   int accountId;
   int shipId;
 
+  /// Get stats for a certain season
+  RankPvP getPvP(String key) => season[key].RankPvP;
+
   SeasonShipInfo(json) {
     this.season = (json['seasons'] as Map).map((a, b) => MapEntry(a, Season(b)));
     this.accountId = json['account_id'];
@@ -29,19 +35,19 @@ class SeasonShipInfo {
 
 /// This is the `Season` class
 class Season {
-  RankSolo rankSolo;
+  RankPvP RankPvP;
   dynamic rankDiv2;
   dynamic rankDiv3;
 
   Season(json) {
-    if (json['rank_solo'] != null) this.rankSolo = RankSolo(json['rank_solo']);
+    if (json['rank_solo'] != null) this.RankPvP = RankPvP(json['rank_solo']);
     this.rankDiv2 = json['rank_div2'];
     this.rankDiv3 = json['rank_div3'];
   }
 }
 
-/// This is the `RankSolo` class
-class RankSolo {
+/// This is the `RankPvP` class
+class RankPvP {
   int maxFragsBattle;
   int draw;
   int maxXp;
@@ -65,7 +71,7 @@ class RankSolo {
   int xp;
   int survivedBattle;
 
-  RankSolo(json) {
+  RankPvP(json) {
     this.maxFragsBattle = json['max_frags_battle'];
     this.draw = json['draws'];
     this.maxXp = json['max_xp'];
