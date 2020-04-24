@@ -9,7 +9,7 @@ import 'PvP.dart';
 class PlayerShipInfo {
   List<ShipInfo> ships = [];
   bool get isSingleShip => ships.length == 1;
-  PersonalRating overallRating;
+  PersonalRating overallRating = PersonalRating();
 
   PlayerShipInfo(Map<String, dynamic> data) {
     final List json = data.values.first;
@@ -18,7 +18,13 @@ class PlayerShipInfo {
       json.forEach((element) {
         final curr = ShipInfo(element);
         // TODO: Ignore removed ships (can consider to support them in the future)
-        if (cached.getShip(curr.shipId) != null) ships.add(curr);
+        if (cached.getShip(curr.shipId) != null) {
+          ships.add(curr);
+          overallRating.add(curr.rating);
+        }
+        
+        // Calculate overall rating
+        overallRating.calculate();
       });
     }
   }
@@ -47,5 +53,6 @@ class ShipInfo {
     this.battle = json['battles'];
     this.shipId = json['ship_id'];
     this.private = json['private'];
+    this.rating = PersonalRating.fromShip(this);
   }
 }

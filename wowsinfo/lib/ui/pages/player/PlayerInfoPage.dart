@@ -28,6 +28,7 @@ import 'package:wowsinfo/ui/widgets/PlatformLoadingIndiactor.dart';
 import 'package:wowsinfo/ui/widgets/TextWithCaption.dart';
 import 'package:wowsinfo/ui/widgets/WrapBox.dart';
 import 'package:wowsinfo/ui/widgets/player/BasicPlayerTile.dart';
+import 'package:wowsinfo/ui/widgets/player/RatingBar.dart';
 import 'package:wowsinfo/ui/widgets/player/WeaponInfoTile.dart';
 import 'package:wowsinfo/ui/widgets/wiki/WikiWarshipCell.dart';
 
@@ -202,10 +203,20 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
         children: [
           buildNickname(context, textTheme),
           buildPlayerInfo(),
+          AnimatedSwitcher(
+            duration: Duration(milliseconds: 300),
+            transitionBuilder: (w, a) => SizeTransition(sizeFactor: a, child: w),
+            child: buildRating()
+          ),
           buildStatistics(),
         ],
       ),
     );
+  }
+
+  Widget buildRating() {
+    if (shipInfo == null) return SizedBox.shrink();
+    return RatingBar(rating: shipInfo.overallRating);
   }
 
   WrapBox buildPlayerInfo() {

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/models/WoWs/PlayerShipInfo.dart';
 import 'package:wowsinfo/ui/pages/player/PlayerShipDetailPage.dart';
 import 'package:wowsinfo/ui/widgets/player/BasicShipInfoTile.dart';
+import 'package:wowsinfo/ui/widgets/player/RatingBar.dart';
 import 'package:wowsinfo/ui/widgets/wiki/WikiWarshipCell.dart';
 
 /// PlayerShipInfoPage class
@@ -18,7 +19,9 @@ class PlayerShipInfoPage extends StatefulWidget {
 class _PlayerShipInfoPageState extends State<PlayerShipInfoPage> {
   @override
   Widget build(BuildContext context) {
-    final ships = widget.info.ships.where((e) => e.battle > 0).toList(growable: false);
+    final ships = widget.info.ships.where((e) => e.battle > 0)
+      .toList(growable: false)
+      ..sort((b, a) => a.lastBattleTime.compareTo(b.lastBattleTime));
     final width = MediaQuery.of(context).size.width;
     // 120 can place 3 on iPhone 11
     final itemCount = min(6, max(width / 200, 1)).toInt();
@@ -40,9 +43,14 @@ class _PlayerShipInfoPageState extends State<PlayerShipInfoPage> {
               return WikiWarshipCell(
                 ship: curr.ship,
                 hero: true,
-                bottom: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: BasicShipInfoTile(stats: curr.pvp, compact: true),
+                bottom: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: BasicShipInfoTile(stats: curr.pvp, compact: true),
+                    ),
+                    RatingBar(rating: curr.rating, compact: true)
+                  ],
                 ),
                 onTap: () => Navigator.push(context, MaterialPageRoute(builder: (c) => PlayerShipDetailPage(ship: curr))),
               );

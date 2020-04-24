@@ -13,4 +13,6 @@ class WoWsDate {
     this.dateTimeString = '${formatted[0]}.${formatted[1]}.${formatted[2]} ${formatted[3]}.${formatted[5]}.${formatted[6]}';
     this.dateString = dateTimeString.split(' ').first;
   }
+
+  int compareTo(WoWsDate date) => this.time - date.time;
 }
