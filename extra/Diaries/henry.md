@@ -7,7 +7,11 @@ Template
 ### What to do tomorrow?
 ~~~
 
-## /04/2020
+## 24/04/2020
+### Summary
+### What to do tomorrow?
+
+## 22/04/2020
 ### Summary
 Not much code have been written but player ship and player ship details are basically done. 
 ### What to do tomorrow?
