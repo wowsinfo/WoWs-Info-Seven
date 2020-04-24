@@ -53,7 +53,7 @@ class RankPvP {
   int maxXp;
   int win;
   int planesKilled;
-  int losse;
+  int loss;
   int battle;
   int maxDamageDealt;
   int damageDealt;
@@ -77,7 +77,7 @@ class RankPvP {
     this.maxXp = json['max_xp'];
     this.win = json['wins'];
     this.planesKilled = json['planes_killed'];
-    this.losse = json['losses'];
+    this.loss = json['losss'];
     if (json['torpedoes'] != null) this.torpedoe = Torpedoe(json['torpedoes']);
     this.battle = json['battles'];
     this.maxDamageDealt = json['max_damage_dealt'];
