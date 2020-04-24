@@ -6,6 +6,7 @@ import 'package:wowsinfo/core/data/ChartColour.dart';
 import 'package:wowsinfo/core/models/UI/ChartValue.dart';
 import 'package:wowsinfo/core/models/WoWs/PlayerShipInfo.dart';
 
+/// This handles chart data relating to player ships
 class PlayerChartData {
   final PlayerShipInfo info;
 

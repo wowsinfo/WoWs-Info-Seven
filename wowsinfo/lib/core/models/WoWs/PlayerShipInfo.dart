@@ -1,4 +1,5 @@
 import 'package:wowsinfo/core/data/CachedData.dart';
+import 'package:wowsinfo/core/models/UI/PersonalRating.dart';
 import 'package:wowsinfo/core/models/UI/WoWsDate.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart';
 
@@ -8,11 +9,17 @@ import 'PvP.dart';
 class PlayerShipInfo {
   List<ShipInfo> ships = [];
   bool get isSingleShip => ships.length == 1;
+  PersonalRating overallRating;
 
   PlayerShipInfo(Map<String, dynamic> data) {
     final List json = data.values.first;
     if (json != null) {
-      json.forEach((element) => ships.add(ShipInfo(element)));
+      final cached = CachedData.shared;
+      json.forEach((element) {
+        final curr = ShipInfo(element);
+        // TODO: Ignore removed ships (can consider to support them in the future)
+        if (cached.getShip(curr.shipId) != null) ships.add(curr);
+      });
     }
   }
 }
@@ -27,6 +34,7 @@ class ShipInfo {
   int battle;
   int shipId;
   dynamic private;
+  PersonalRating rating;
 
   Warship get ship => CachedData.shared.getShip(shipId);
 
