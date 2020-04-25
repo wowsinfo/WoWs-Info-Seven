@@ -2,14 +2,14 @@
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/models/UI/WeaponValue.dart';
-import 'package:wowsinfo/core/models/WoWs/PvP.dart';
+import 'package:wowsinfo/core/models/WoWs/RankPlayerShipInfo.dart';
 import 'package:wowsinfo/ui/widgets/TextWithCaption.dart';
 import 'package:wowsinfo/ui/widgets/WrapBox.dart';
 import 'package:wowsinfo/ui/widgets/wiki/WikiWarshipCell.dart';
 
 class WeaponInfoTile extends StatelessWidget {
   final cached = CachedData.shared;
-  final PvP pvp;
+  final RankPvP pvp;
   final bool shipMode;
   WeaponInfoTile({Key key, @required this.pvp, this.shipMode = false}) : super(key: key);
 

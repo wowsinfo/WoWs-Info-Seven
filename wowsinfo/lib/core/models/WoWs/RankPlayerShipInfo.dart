@@ -27,7 +27,7 @@ class SeasonShipInfo {
   RankPvP getPvP(String key) => season[key].rankSolo;
 
   SeasonShipInfo(json) {
-    this.season = (json['seasons'] as Map).map((a, b) => MapEntry(a, Season(b)));
+    this.season = (json['seasons'] as Map).map((a, b) => MapEntry(a, Season(b)..shipId = shipId));
     this.accountId = json['account_id'];
     this.shipId = json['ship_id'];
   }
@@ -38,6 +38,7 @@ class Season {
   RankPvP rankSolo;
   dynamic rankDiv2;
   dynamic rankDiv3;
+  int shipId;
 
   Season(json) {
     if (json['rank_solo'] != null) this.rankSolo = RankPvP(json['rank_solo']);
