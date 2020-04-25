@@ -140,7 +140,7 @@ class _SearchPageState extends State<SearchPage> {
   }
 }
 
-class PlayerList extends StatelessWidget {
+class PlayerList extends StatefulWidget {
   const PlayerList({
     Key key,
     @required this.players,
@@ -149,27 +149,38 @@ class PlayerList extends StatelessWidget {
   final List<Player> players;
 
   @override
+  _PlayerListState createState() => _PlayerListState();
+}
+
+class _PlayerListState extends State<PlayerList> {
+  @override
   Widget build(BuildContext context) {
     final list = pref.contactList;
     return Column(
-      children: players.map((e) => ListTile(
+      children: widget.players.map((e) => ListTile(
         title: Text(e.nickname),
         subtitle: Text(e.playerId.toString()),
         onTap: () => Navigator.push(context, MaterialPageRoute(builder: (c) => PlayerInfoPage(player: e))),
         trailing: list.containsPlayer(e) 
         ? IconButton(
           icon: Icon(Icons.remove), 
-          onPressed: () => list.updatePlayer(e, add: false),
+          onPressed: () {
+            list.updatePlayer(e, add: false);
+            setState(() {});
+          },
         ) : IconButton(
           icon: Icon(Icons.add), 
-          onPressed: () => list.updatePlayer(e),
+          onPressed: () {
+            list.updatePlayer(e);
+            setState(() {});
+          },
         ),
       )).toList(growable: false),
     );
   }
 }
 
-class ClanList extends StatelessWidget {
+class ClanList extends StatefulWidget {
   const ClanList({
     Key key,
     @required this.clans,
@@ -178,20 +189,31 @@ class ClanList extends StatelessWidget {
   final List<Clan> clans;
 
   @override
+  _ClanListState createState() => _ClanListState();
+}
+
+class _ClanListState extends State<ClanList> {
+  @override
   Widget build(BuildContext context) {
     final list = pref.contactList;
     return Column(
-      children: clans.map((e) => ListTile(
+      children: widget.clans.map((e) => ListTile(
         title: Text(e.tag),
         subtitle: Text(e.clanIdString),
         onTap: () => Navigator.push(context, MaterialPageRoute(builder: (c) => ClanInfoPage(clan: e))),
         trailing: list.containsClan(e) 
         ? IconButton(
           icon: Icon(Icons.remove), 
-          onPressed: () => list.updateClan(e, add: false),
+          onPressed: () {
+            list.updateClan(e, add: false);
+            setState(() {});
+          },
         ) : IconButton(
           icon: Icon(Icons.add), 
-          onPressed: () => list.updateClan(e),
+          onPressed: () {
+            list.updateClan(e);
+            setState(() {});
+          },
         ),
       )).toList(growable: false),
     );
