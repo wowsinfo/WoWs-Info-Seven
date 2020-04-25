@@ -63,4 +63,9 @@ class Utils {
     var isTablet = diagonal > 1100.0;
     return isTablet;
   }
+
+  int getItemCount(int maxItem, int minItem, int itemWidth) {
+    final width = MediaQuery.of(context).size.width;
+    return min(maxItem, max(width / itemWidth, minItem)).toInt();
+  }
 }

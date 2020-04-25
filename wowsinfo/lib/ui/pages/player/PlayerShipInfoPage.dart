@@ -1,7 +1,6 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/models/WoWs/PlayerShipInfo.dart';
+import 'package:wowsinfo/core/others/Utils.dart';
 import 'package:wowsinfo/ui/pages/player/PlayerShipDetailPage.dart';
 import 'package:wowsinfo/ui/widgets/player/BasicShipInfoTile.dart';
 import 'package:wowsinfo/ui/widgets/player/RatingBar.dart';
@@ -22,9 +21,8 @@ class _PlayerShipInfoPageState extends State<PlayerShipInfoPage> {
     final ships = widget.info.ships.where((e) => e.battle > 0)
       .toList(growable: false)
       ..sort((b, a) => a.lastBattleTime.compareTo(b.lastBattleTime));
-    final width = MediaQuery.of(context).size.width;
     // 120 can place 3 on iPhone 11
-    final itemCount = min(6, max(width / 200, 1)).toInt();
+    final itemCount = Utils.of(context).getItemCount(6, 1, 200);
     
     return Scaffold(
       appBar: AppBar(

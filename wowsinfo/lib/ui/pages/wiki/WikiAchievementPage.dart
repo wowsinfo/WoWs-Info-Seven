@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiAchievement.dart';
 import 'package:wowsinfo/core/models/WoWs/PlayerAchievement.dart';
-import 'package:wowsinfo/core/models/WoWs/RankPlayerInfo.dart';
-import 'package:wowsinfo/core/models/WoWs/RankPlayerShipInfo.dart';
+import 'package:wowsinfo/core/others/Utils.dart';
 
 /// WikiAchievementPage class
 class WikiAchievementPage extends StatelessWidget {
@@ -16,9 +15,8 @@ class WikiAchievementPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
     // 100 can place 4 on iPhone 11
-    final itemCount = min(8, max(width / 100, 2)).toInt();
+    final itemCount = Utils.of(context).getItemCount(8, 2, 100);
 
     return Scaffold(
       appBar: AppBar(
