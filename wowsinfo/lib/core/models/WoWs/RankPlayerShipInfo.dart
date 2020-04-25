@@ -71,6 +71,32 @@ class RankPvP {
   int xp;
   int survivedBattle;
 
+  int get deadBattle => battle - survivedBattle;
+
+  double get winrate => (win * 10000 / battle) / 100.0;
+  double get survivedWinrate => (survivedWin * 10000 / battle) / 100.0;
+  double get survivedRate => (survivedBattle * 10000 / battle) / 100.0;
+  double get killDeath => frag / deadBattle;
+
+  double get avgExp => xp / battle;
+  double get avgDamage => damageDealt / battle;
+  double get avgFrag => frag / battle;
+  double get avgPlaneDestroyed => planesKilled / battle;
+
+  String get battleString => '$battle';
+  String get winrateString => '${winrate.toStringAsFixed(1)}%';
+  String get avgDamageString => '${avgDamage.toStringAsFixed(0)}';
+  String get avgExpString => '${avgExp.toStringAsFixed(0)}';
+  String get killDeathString => '${killDeath.toStringAsFixed(2)}';
+  String get mainHitRatioString => '${mainBattery.hitRatio.toStringAsFixed(2)}%';
+  bool get canHit => mainBattery.shot > 0;
+
+  String get maxDamage => '$maxDamageDealt';
+  String get maxExp => '$maxXp';
+  String get maxFrag => '$maxFragsBattle';
+  String get maxPlane => '$maxPlanesKilled';
+
+  
   RankPvP(json) {
     this.maxFragsBattle = json['max_frags_battle'];
     this.draw = json['draws'];

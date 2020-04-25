@@ -31,35 +31,12 @@ class PvP extends RankPvP {
   int teamDroppedCapturePoint;
   int battlesSince512;
 
-  double get winrate => (win * 10000 / battle) / 100.0;
-  double get survivedWinrate => (survivedWin * 10000 / battle) / 100.0;
-  double get survivedRate => (survivedBattle * 10000 / battle) / 100.0;
-  double get killDeath => frag / deadBattle;
-
-  double get avgExp => xp / battle;
-  double get avgDamage => damageDealt / battle;
-  double get avgFrag => frag / battle;
-  double get avgPlaneDestroyed => planesKilled / battle;
   double get avgSpottingDamage => damageScouting / battle;
   double get avgSpottedShips => shipsSpotted / battle;
   double get avgPotential => (artAgro + torpedoAgro) / battle;
 
-  int get deadBattle => battle - survivedBattle;
-
-  String get battleString => '$battle';
-  String get winrateString => '${winrate.toStringAsFixed(1)}%';
-  String get avgDamageString => '${avgDamage.toStringAsFixed(0)}';
-  String get avgExpString => '${avgExp.toStringAsFixed(0)}';
-  String get killDeathString => '${killDeath.toStringAsFixed(2)}';
-  String get mainHitRatioString => '${mainBattery.hitRatio.toStringAsFixed(2)}%';
-  bool get canHit => mainBattery.shot > 0;
-
-  String get maxDamage => '$maxDamageDealt';
-  String get maxExp => '$maxXp';
   String get maxDamageToBuilding => '$maxDamageDealtToBuilding';
   String get maxSpottingDamage => '$maxDamageScouting';
-  String get maxFrag => '$maxFragsBattle';
-  String get maxPlane => '$maxPlanesKilled';
   String get maxSpotted => '$maxShipsSpotted';
   String get maxSupression => '$maxSuppressionsCount';
   String get maxPotential => '$maxTotalAgro';
