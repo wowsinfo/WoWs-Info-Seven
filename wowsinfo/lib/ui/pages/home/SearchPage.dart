@@ -153,29 +153,28 @@ class PlayerList extends StatefulWidget {
 }
 
 class _PlayerListState extends State<PlayerList> {
+  final list = pref.contactList;
+
   @override
   Widget build(BuildContext context) {
-    final list = pref.contactList;
     return Column(
       children: widget.players.map((e) => ListTile(
         title: Text(e.nickname),
         subtitle: Text(e.playerId.toString()),
         onTap: () => Navigator.push(context, MaterialPageRoute(builder: (c) => PlayerInfoPage(player: e))),
-        trailing: list.containsPlayer(e) 
-        ? IconButton(
-          icon: Icon(Icons.remove), 
-          onPressed: () {
-            list.updatePlayer(e, add: false);
-            setState(() {});
-          },
-        ) : IconButton(
-          icon: Icon(Icons.add), 
-          onPressed: () {
-            list.updatePlayer(e);
-            setState(() {});
-          },
-        ),
+        trailing: buildIconButton(e),
       )).toList(growable: false),
+    );
+  }
+
+  buildIconButton(Player e) {
+    final remove = list.containsPlayer(e);
+    return IconButton(
+      icon: remove ? Icon(Icons.remove) : Icon(Icons.add),
+      onPressed: () {
+        list.updatePlayer(e, add: !remove);
+        setState(() {});
+      },
     );
   }
 }
@@ -193,29 +192,28 @@ class ClanList extends StatefulWidget {
 }
 
 class _ClanListState extends State<ClanList> {
+  final list = pref.contactList;
+
   @override
   Widget build(BuildContext context) {
-    final list = pref.contactList;
     return Column(
       children: widget.clans.map((e) => ListTile(
         title: Text(e.tag),
         subtitle: Text(e.clanIdString),
         onTap: () => Navigator.push(context, MaterialPageRoute(builder: (c) => ClanInfoPage(clan: e))),
-        trailing: list.containsClan(e) 
-        ? IconButton(
-          icon: Icon(Icons.remove), 
-          onPressed: () {
-            list.updateClan(e, add: false);
-            setState(() {});
-          },
-        ) : IconButton(
-          icon: Icon(Icons.add), 
-          onPressed: () {
-            list.updateClan(e);
-            setState(() {});
-          },
-        ),
+        trailing: buildIconButton(e),
       )).toList(growable: false),
+    );
+  }
+
+  buildIconButton(Clan e) {
+    final remove = list.containsClan(e);
+    return IconButton(
+      icon: remove ? Icon(Icons.remove) : Icon(Icons.add),
+      onPressed: () {
+        list.updateClan(e, add: !remove);
+        setState(() {});
+      },
     );
   }
 }
