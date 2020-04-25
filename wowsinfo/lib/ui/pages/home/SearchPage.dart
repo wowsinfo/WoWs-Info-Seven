@@ -18,10 +18,35 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   final pref = Preference.shared; 
+  final controller = TextEditingController();
   String input;
   String previousInput;
   List<Clan> clans = [];
   List<Player> players = [];
+
+  @override
+  void initState() {
+    super.initState();
+    showContact();
+  }
+
+  void resetInput() {
+    this.controller.clear();
+    setState(() {
+      input = '';
+      previousInput = '';
+    });
+
+    showContact();
+  }
+
+  /// Show contact
+  void showContact() {
+    setState(() {
+      clans = pref.contactList.clans;
+      players = pref.contactList.players;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,12 +65,17 @@ class _SearchPageState extends State<SearchPage> {
                   hintText: 'Search players or clans',
                   hintStyle: TextStyle(color: Colors.white70, fontSize: 20),
                 ),
+                controller: this.controller,
                 cursorColor: Colors.white70,
                 autocorrect: false,
                 autofocus: false,
                 onChanged: (t) => setState(() => this.input = t),
                 onEditingComplete: () => this.search()
               ),
+            ),
+            IconButton(
+              icon: Icon(Icons.close), 
+              onPressed: () => this.resetInput(),
             ),
           ],
         )

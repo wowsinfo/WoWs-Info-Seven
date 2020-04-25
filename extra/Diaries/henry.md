@@ -9,6 +9,8 @@ Template
 
 ## 25/04/2020
 ### Summary
+Rank and rank ship info are working but there are issues I need to solve. For example, removed ships. 
+I might get a list of removed ships but not all of them are still in this game. `Unknown` images should still be used. Since rank is done, I guess I should start working on small details and clean up some codes and widgets. 
 ### What to do tomorrow?
 
 ## 24/04/2020
