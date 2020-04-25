@@ -30,7 +30,7 @@ class PlayerShipInfo {
   }
 }
 
-/// This is the `ShipInfo` class
+/// This is the `ShipInfo` class, at least `PvP` and `shipId` are needed
 class ShipInfo {
   PvP pvp;
   WoWsDate lastBattleTime;

@@ -1,10 +1,13 @@
+import 'package:wowsinfo/core/models/WoWs/PlayerShipInfo.dart';
+
 import 'PvP.dart';
 
 /// This is the `RankPlayerShipInfo` class
 class RankPlayerShipInfo {
   List<SeasonShipInfo> ships = [];
-  List<SeasonShipInfo> getShipsFor({String season}) {
-    return ships.where((e) => e.season[season] != null);
+  List<Season> getShipsFor({String season}) {
+    return ships.where((e) => e.season[season] != null)
+      .map((e) => e.season[season]);
   }
 
   RankPlayerShipInfo(Map<String, dynamic> data) {
@@ -39,11 +42,13 @@ class Season {
   dynamic rankDiv2;
   dynamic rankDiv3;
   int shipId;
+  ShipInfo shipInfo;
 
   Season(json) {
     if (json['rank_solo'] != null) this.rankSolo = RankPvP(json['rank_solo']);
     this.rankDiv2 = json['rank_div2'];
     this.rankDiv3 = json['rank_div3'];
+    this.shipInfo = ShipInfo(json);
   }
 }
 
