@@ -49,10 +49,6 @@ class PlayerRankInfoPage extends StatelessWidget {
                           value: pvp.maxFrag,
                         ),
                         TextWithCaption(
-                          title: 'Max Plane',
-                          value: pvp.maxPlane,
-                        ),
-                        TextWithCaption(
                           title: 'Max EXP',
                           value: pvp.maxExp,
                         ),

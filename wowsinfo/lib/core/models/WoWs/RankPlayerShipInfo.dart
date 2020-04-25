@@ -39,14 +39,14 @@ class SeasonShipInfo {
 
 /// This is the `Season` class
 class Season {
-  RankPvP rankSolo;
+  PvP rankSolo;
   dynamic rankDiv2;
   dynamic rankDiv3;
   int shipId;
   ShipInfo shipInfo;
 
   Season(json) {
-    if (json['rank_solo'] != null) this.rankSolo = RankPvP(json['rank_solo']);
+    if (json['rank_solo'] != null) this.rankSolo = PvP(json['rank_solo']);
     this.rankDiv2 = json['rank_div2'];
     this.rankDiv3 = json['rank_div3'];
     this.shipInfo = ShipInfo(json);

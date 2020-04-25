@@ -34,7 +34,7 @@ class PersonalRating {
   PersonalRating();
   PersonalRating.fromShip(ShipInfo ship) {
     final prData = CachedData.shared.getShipStats(ship.shipId.toString());
-    final pvp = ship.pvp ?? ship.rankPvP;
+    final pvp = ship.pvp;
     if (prData != null && pvp != null) {
       battle = pvp.battle;
       if (battle > 0) {

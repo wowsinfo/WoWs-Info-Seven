@@ -43,7 +43,6 @@ class PlayerShipInfo {
 /// This is the `ShipInfo` class, at least `PvP` and `shipId` are needed
 class ShipInfo {
   PvP pvp;
-  RankPvP rankPvP;
   WoWsDate lastBattleTime;
   int accountId;
   int distance;
@@ -69,7 +68,7 @@ class ShipInfo {
 
   /// Data is all stored in season
   ShipInfo.fromSeason(Season season) {
-    this.rankPvP = season.rankSolo;
+    pvp = season.rankSolo;
     shipId = season.shipId;
     rating = PersonalRating.fromShip(this);
     battle = season.rankSolo.battle;
