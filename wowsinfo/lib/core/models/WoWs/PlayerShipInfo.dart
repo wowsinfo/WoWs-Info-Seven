@@ -2,6 +2,7 @@ import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/models/UI/PersonalRating.dart';
 import 'package:wowsinfo/core/models/UI/WoWsDate.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart';
+import 'package:wowsinfo/core/models/WoWs/RankPlayerShipInfo.dart';
 
 import 'PvP.dart';
 
@@ -27,6 +28,11 @@ class PlayerShipInfo {
         overallRating.calculate();
       });
     }
+  }
+
+  /// Convert rank player ship info into a normal ship info
+  PlayerShipInfo.fromRank(RankPlayerShipInfo rank) {
+    
   }
 }
 
@@ -54,5 +60,10 @@ class ShipInfo {
     this.shipId = json['ship_id'];
     this.private = json['private'];
     this.rating = PersonalRating.fromShip(this);
+  }
+
+  /// Data is all stored in season
+  ShipInfo.fromRank(Season season) {
+
   }
 }
