@@ -1,8 +1,14 @@
-import 'package:wowsinfo/core/models/WoWs/PvP.dart';
+import 'package:wowsinfo/core/models/WoWs/RankPlayerShipInfo.dart';
 
 /// This is the `RankPlayerInfo` class
 class RankPlayerInfo {
   Map<String, Season> season;
+  /// Sort by season name and also ignore seasons that the player never played a single game
+  List<MapEntry<String, Season>> get sortedSeasons => season.entries
+    .where((e) => e.value.played)
+    .toList(growable: false)
+    // Parse it as number and sort it by it
+    ..sort((b, a) => int.parse(a.key) - int.parse(b.key));
   int accountId;
 
   RankPlayerInfo(Map<String, dynamic> data) {
@@ -17,14 +23,16 @@ class RankPlayerInfo {
 /// This is the `Season` class
 class Season {
   RankInfo rankInfo;
-  PvP RankPvP;
+  RankPvP rankSolo;
   // Thses two should always be null
   dynamic rankDiv2;
   dynamic rankDiv3;
 
+  bool get played => rankSolo != null;
+
   Season(Map<String, dynamic> json) {
     if (json['rank_info'] != null) this.rankInfo = RankInfo(json['rank_info']);
-    if (json['rank_solo'] != null) this.RankPvP = PvP(json['rank_solo']);
+    if (json['rank_solo'] != null) this.rankSolo = RankPvP(json['rank_solo']);
     this.rankDiv2 = json['rank_div2'];
     this.rankDiv3 = json['rank_div3'];
   }

@@ -10,11 +10,27 @@ class PlayerRankInfoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final rankEntries = rank.sortedSeasons;
     return Scaffold(
       appBar: AppBar(
         title: Text('PlayerRankInfoPage')
       ),
-      body: Container(),
+      body: SafeArea(
+        child: GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 1,
+          ),
+          itemCount: rankEntries.length,
+          itemBuilder: (context, index) {
+            final curr = rankEntries[index];
+            return Column(
+              children: [
+                Text('Season ${curr.key}')
+              ],
+            );
+          },
+        )
+      ),
     );
   }
 }

@@ -7,6 +7,10 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## 25/04/2020
+### Summary
+### What to do tomorrow?
+
 ## 24/04/2020
 ### Summary
 Added personal rating and some basic cleanups of my code. `PvP` is now extendsing `RankPvP (RankSolo)` and `PlayerChartDart` is extracted from `PlayerShipInfo`. I will do more of these and break down into more files. 
