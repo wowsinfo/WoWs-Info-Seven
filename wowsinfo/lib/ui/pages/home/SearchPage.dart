@@ -7,6 +7,8 @@ import 'package:wowsinfo/core/parsers/API/SearchPlayerResultParser.dart';
 import 'package:wowsinfo/ui/pages/player/ClanInfoPage.dart';
 import 'package:wowsinfo/ui/pages/player/PlayerInfoPage.dart';
 
+final pref = Preference.shared; 
+
 /// SearchPage class
 class SearchPage extends StatefulWidget {
   SearchPage({Key key}) : super(key: key);
@@ -15,9 +17,7 @@ class SearchPage extends StatefulWidget {
   _SearchPageState createState() => _SearchPageState();
 }
 
-
 class _SearchPageState extends State<SearchPage> {
-  final pref = Preference.shared; 
   final controller = TextEditingController();
   String input;
   String previousInput;
@@ -150,11 +150,20 @@ class PlayerList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final list = pref.contactList;
     return Column(
       children: players.map((e) => ListTile(
         title: Text(e.nickname),
         subtitle: Text(e.playerId.toString()),
         onTap: () => Navigator.push(context, MaterialPageRoute(builder: (c) => PlayerInfoPage(player: e))),
+        trailing: list.containsPlayer(e) 
+        ? IconButton(
+          icon: Icon(Icons.remove), 
+          onPressed: () => list.updatePlayer(e, add: false),
+        ) : IconButton(
+          icon: Icon(Icons.add), 
+          onPressed: () => list.updatePlayer(e),
+        ),
       )).toList(growable: false),
     );
   }
@@ -170,11 +179,20 @@ class ClanList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final list = pref.contactList;
     return Column(
       children: clans.map((e) => ListTile(
         title: Text(e.tag),
         subtitle: Text(e.clanIdString),
         onTap: () => Navigator.push(context, MaterialPageRoute(builder: (c) => ClanInfoPage(clan: e))),
+        trailing: list.containsClan(e) 
+        ? IconButton(
+          icon: Icon(Icons.remove), 
+          onPressed: () => list.updateClan(e, add: false),
+        ) : IconButton(
+          icon: Icon(Icons.add), 
+          onPressed: () => list.updateClan(e),
+        ),
       )).toList(growable: false),
     );
   }
