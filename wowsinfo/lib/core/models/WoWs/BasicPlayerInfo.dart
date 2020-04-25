@@ -19,7 +19,7 @@ class BasicPlayerInfo {
   bool get publicProfile => !hiddenProfile;
   String get level => 'Lv $levelingTier';
   String get createdDate => createdAt.dateString;
-  String get lastBattleDate => lastBattleTime.dateString;
+  String get lastBattleDate => lastBattleTime?.dateString;
   String get distanceString => statistic?.distanceString ?? '0 km';
   String get totalBattleString => statistic?.totalBattleString ?? '0';
 

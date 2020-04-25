@@ -11,6 +11,7 @@ class PlayerShipInfo {
   List<ShipInfo> ships = [];
   bool get isSingleShip => ships.length == 1;
   PersonalRating overallRating = PersonalRating();
+  bool canSort = true;
 
   PlayerShipInfo(Map<String, dynamic> data) {
     final List json = data.values.first;
@@ -31,14 +32,18 @@ class PlayerShipInfo {
   }
 
   /// Convert rank player ship info into a normal ship info
-  PlayerShipInfo.fromRank(RankPlayerShipInfo rank) {
-    
+  PlayerShipInfo.fromRank(RankPlayerShipInfo rank, String season) {
+    canSort = false;
+    rank.getShipsFor(season: season).forEach((element) {
+      ships.add(ShipInfo.fromSeason(element));
+    });
   }
 }
 
 /// This is the `ShipInfo` class, at least `PvP` and `shipId` are needed
 class ShipInfo {
   PvP pvp;
+  RankPvP rankPvP;
   WoWsDate lastBattleTime;
   int accountId;
   int distance;
@@ -52,7 +57,7 @@ class ShipInfo {
 
   ShipInfo(Map<String, dynamic> json) {
     if (json['pvp'] != null) this.pvp = PvP(json['pvp']);
-    this.lastBattleTime = WoWsDate(json['last_battle_time']);
+    if (json['last_battle_time'] != null) this.lastBattleTime = WoWsDate(json['last_battle_time']);
     this.accountId = json['account_id'];
     this.distance = json['distance'];
     this.updatedAt = json['updated_at'];
@@ -63,7 +68,10 @@ class ShipInfo {
   }
 
   /// Data is all stored in season
-  ShipInfo.fromRank(Season season) {
-
+  ShipInfo.fromSeason(Season season) {
+    this.rankPvP = season.rankSolo;
+    shipId = season.shipId;
+    rating = PersonalRating.fromShip(this);
+    battle = season.rankSolo.battle;
   }
 }

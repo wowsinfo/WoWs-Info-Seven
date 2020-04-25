@@ -18,9 +18,9 @@ class PlayerShipInfoPage extends StatefulWidget {
 class _PlayerShipInfoPageState extends State<PlayerShipInfoPage> {
   @override
   Widget build(BuildContext context) {
-    final ships = widget.info.ships.where((e) => e.battle > 0)
+    final ships = widget.info.canSort ? (widget.info.ships.where((e) => e.battle > 0)
       .toList(growable: false)
-      ..sort((b, a) => a.lastBattleTime.compareTo(b.lastBattleTime));
+      ..sort((b, a) => a.lastBattleTime.compareTo(b.lastBattleTime))) : widget.info.ships;
     // 120 can place 3 on iPhone 11
     final itemCount = Utils.of(context).getItemCount(6, 1, 200);
     

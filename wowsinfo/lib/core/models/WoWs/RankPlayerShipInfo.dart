@@ -7,7 +7,8 @@ class RankPlayerShipInfo {
   List<SeasonShipInfo> ships = [];
   List<Season> getShipsFor({String season}) {
     return ships.where((e) => e.season[season] != null)
-      .map((e) => e.season[season]);
+      .map((e) => e.season[season])
+      .toList(growable: false);
   }
 
   RankPlayerShipInfo(Map<String, dynamic> data) {
@@ -30,9 +31,9 @@ class SeasonShipInfo {
   RankPvP getPvP(String key) => season[key].rankSolo;
 
   SeasonShipInfo(json) {
+    this.shipId = json['ship_id'];
     this.season = (json['seasons'] as Map).map((a, b) => MapEntry(a, Season(b)..shipId = shipId));
     this.accountId = json['account_id'];
-    this.shipId = json['ship_id'];
   }
 }
 
@@ -102,7 +103,6 @@ class RankPvP {
   String get maxFrag => '$maxFragsBattle';
   String get maxPlane => '$maxPlanesKilled';
 
-  
   RankPvP(json) {
     this.maxFragsBattle = json['max_frags_battle'];
     this.draw = json['draws'];

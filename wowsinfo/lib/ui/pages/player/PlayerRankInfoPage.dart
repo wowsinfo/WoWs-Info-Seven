@@ -1,10 +1,12 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:wowsinfo/core/models/WoWs/PlayerShipInfo.dart';
 import 'package:wowsinfo/core/models/WoWs/RankPlayerInfo.dart';
 import 'package:wowsinfo/core/models/WoWs/RankPlayerShipInfo.dart';
 import 'package:wowsinfo/core/others/Utils.dart';
 import 'package:wowsinfo/ui/pages/player/PlayerShipDetailPage.dart';
+import 'package:wowsinfo/ui/pages/player/PlayerShipInfoPage.dart';
 import 'package:wowsinfo/ui/widgets/TextWithCaption.dart';
 import 'package:wowsinfo/ui/widgets/WrapBox.dart';
 import 'package:wowsinfo/ui/widgets/player/BasicShipInfoTile.dart';
@@ -31,7 +33,9 @@ class PlayerRankInfoPage extends StatelessWidget {
             children: rankEntries.map((curr) {
               final pvp = curr.value.rankSolo;
               return InkWell(
-                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (c) => PlayerShipDetailPage())),
+                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (c) => PlayerShipInfoPage(
+                  info: PlayerShipInfo.fromRank(rankShip, curr.key),
+                ))),
                 child: Column(
                   children: [
                     Text('Season ${curr.key}', style: Theme.of(context).textTheme.headline6),
