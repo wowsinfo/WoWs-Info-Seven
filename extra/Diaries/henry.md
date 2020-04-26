@@ -9,7 +9,11 @@ Template
 
 ## 26/04/2020
 ### Summary
+Some localization and there are way more but I can use my old js file to help me so it should be fine. 
+Added some util functions to calculate item width and it works quite well so far. 
+More tooltips are also added for accessibility purpose. Server can now be changed and saved players and clans are working properly. Website page is close to completion.
 ### What to do tomorrow?
+More localization and basically do whichever part I want to do. 
 
 ## 25/04/2020
 ### Summary
