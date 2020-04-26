@@ -11,6 +11,7 @@ import 'package:wowsinfo/core/parsers/API/WikiShipInfoParser.dart';
 import 'package:wowsinfo/ui/pages/wiki/WikiWarshipSimilarPage.dart';
 import 'package:wowsinfo/ui/widgets/PlatformLoadingIndiactor.dart';
 import 'package:wowsinfo/ui/widgets/TextWithCaption.dart';
+import 'package:wowsinfo/ui/widgets/WrapBox.dart';
 import 'package:wowsinfo/ui/widgets/wiki/ShipAverageStatistics.dart';
 import 'package:wowsinfo/ui/widgets/wiki/ShipParameter.dart';
 import 'package:wowsinfo/ui/widgets/wiki/WikiWarshipCell.dart';
@@ -158,16 +159,6 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
     return buildInfo();
   }
 
-  Wrap wrapWidget(double width, List<Widget> widget) {
-    return Wrap(
-      alignment: WrapAlignment.center,
-      children: widget.map((e) => SizedBox(
-        width: width,
-        child: e,
-      )).toList(growable: false),
-    );
-  }
-
   Widget buildInfo() {
     return SingleChildScrollView(
       padding: const EdgeInsets.only(bottom: 16),
@@ -213,7 +204,6 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
           child: Text(info.description, style: textTheme.bodyText1, textAlign: TextAlign.center),
         ),
         buildParameter(),
-        SizedBox(height: 8),
         Utils.of(context).isTablet() 
         ? renderTablet()
         : renderMobile(), 
@@ -404,12 +394,13 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
   Widget buildArtillery() {
     final main = modules.artillery;
     if (main == null) return SizedBox.shrink();
+    final width = Utils.of(context).getItemWidth(100);
     return Column(
       children: [
         buildTitle('Main (${main.rangeString})'),
-        Wrap(
-          alignment: WrapAlignment.center,
+        WrapBox(
           spacing: 8,
+          width: width,
           children: [
             TextWithCaption(
               title: 'a',
@@ -477,9 +468,9 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
             child: Column(
               children: [
                 buildWeaponName(e.nameWithShellType),
-                Wrap(
-                  alignment: WrapAlignment.center,
-                  children: <Widget>[
+                WrapBox(
+                  width: 100,
+                  children: [
                     TextWithCaption(
                       title: 'a',
                       value: e.reloadTime,

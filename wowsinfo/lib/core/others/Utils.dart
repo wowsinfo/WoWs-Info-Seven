@@ -69,11 +69,13 @@ class Utils {
     return min(maxItem, max(width / itemWidth, minItem)).toInt();
   }
 
-  double getItemWidth(int itemWidth, {int margin = 0}) {
+  double getItemWidth(int itemWidth, {int maxCount = 0, int margin = 0}) {
     final width = MediaQuery.of(context).size.width;
     // This is the max count so scale the width up
     final count = (width / itemWidth).floor();
-    // -50 for safe area
+
+    // Max count is to make sure it fills the entire width
+    if (maxCount != 0 && count > maxCount) return (width / maxCount) - margin;
     return (width / count) - margin;
   }
 }
