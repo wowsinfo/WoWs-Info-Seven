@@ -72,9 +72,12 @@ class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
                   children: <Widget>[
                     InkWell(
                       onTap: () => this.onTap(curr, index),
-                      child: Padding(
-                        padding: const EdgeInsets.all(4),
-                        child: Image.network(curr.icon),
+                      child: Tooltip(
+                        message: curr.name,
+                        child: Padding(
+                          padding: const EdgeInsets.all(4),
+                          child: Image.network(curr.icon),
+                        ),
                       ),
                     ),
                     Positioned.fill(

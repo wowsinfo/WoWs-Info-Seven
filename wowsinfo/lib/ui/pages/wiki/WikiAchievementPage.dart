@@ -68,7 +68,10 @@ class WikiAchievementPage extends StatelessWidget {
           final curr = achievment[index];
           return InkWell(
             onTap: () => this.onTap(context, curr),
-            child: buildImage(curr),
+            child: Tooltip(
+              message: curr.name,
+              child: buildImage(curr)
+            ),
           );
         }
       );
@@ -89,7 +92,10 @@ class WikiAchievementPage extends StatelessWidget {
           final curr = cached.getAchievement(key);
           return InkWell(
             onTap: () => this.onTap(context, curr),
-            child: FittedBox(child: buildPlayer(curr, count)),
+            child: Tooltip(
+              message: curr.name,
+              child: FittedBox(child: buildPlayer(curr, count))
+            ),
           );
         },
       );
