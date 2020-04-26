@@ -30,7 +30,11 @@ class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
   void initState() {
     super.initState();
     this.skills = cached.sortedCommanderSkill.toList(growable: false);
-    setLandscape();
+    if (widget.simulation) {
+      Future.delayed(Duration(milliseconds: 500)).then((value) {
+        setLandscape();
+      });
+    }
   }
 
   @override
@@ -42,7 +46,7 @@ class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final maxWidth = min(size.width / 8, (size.height - 100) / 4);
+    final maxWidth = min(size.width / 8, size.height / 4 - 30);
     return Scaffold(
       appBar: AppBar(
         title: buildTitle(context),
@@ -95,18 +99,6 @@ class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
       ),
     );
   }
-
-// GridView.builder(
-//             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-//               crossAxisCount: 8,
-//               childAspectRatio: 1.0,
-//             ),
-//             itemCount: skills.length,
-//             itemBuilder: (context, index) {
-//               final curr = skills[index];
-//             }
-//           ),
-//         ),
 
   Text buildTitle(BuildContext context) {
     if (widget.simulation) return Text(points.toString());
