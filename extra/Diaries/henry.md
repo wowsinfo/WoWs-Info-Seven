@@ -7,6 +7,10 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## 26/04/2020
+### Summary
+### What to do tomorrow?
+
 ## 25/04/2020
 ### Summary
 Rank and rank ship info are working but there are issues I need to solve. For example, removed ships. 
