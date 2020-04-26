@@ -187,27 +187,57 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
     if (loading) return Center(child: const PlatformLoadingIndiactor());
 
     final textTheme = Theme.of(context).textTheme;
+
+    var widgets = [
+      Text(widget.ship.tierName, style: textTheme.headline6),
+      Padding(
+        padding: const EdgeInsets.only(top: 8.0),
+        child: Text(widget.ship.nationShipType),
+      ),
+      buildShipPrice(),
+      Padding(
+        padding: const EdgeInsets.only(top: 8),
+        child: ShipAverageStatistics(shipId: info.shipId),
+      ),
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(info.description, style: textTheme.bodyText1, textAlign: TextAlign.center),
+      ),
+      buildParameter(),
+      renderMobile(),
+    ];
+
+    // if (Utils.of(context).isTablet()) {
+    //   widgets = [
+    //     Row(
+    //       children: [
+    //         Column(
+    //           children: [
+    //             Text(widget.ship.tierName, style: textTheme.headline6),
+    //             Padding(
+    //               padding: const EdgeInsets.only(top: 8.0),
+    //               child: Text(widget.ship.nationShipType),
+    //             ),
+    //             buildShipPrice(),
+    //           ],
+    //         ),
+    //         buildParameter(),
+    //       ],
+    //     ),
+    //     Padding(
+    //       padding: const EdgeInsets.only(top: 8),
+    //       child: ShipAverageStatistics(shipId: info.shipId),
+    //     ),
+    //     Padding(
+    //       padding: const EdgeInsets.all(8.0),
+    //       child: Text(info.description, style: textTheme.bodyText1, textAlign: TextAlign.center),
+    //     ),
+    //     renderTablet()
+    //   ];
+    // }
+
     return Column(
-      children: [
-        Text(widget.ship.tierName, style: textTheme.headline6),
-        Padding(
-          padding: const EdgeInsets.only(top: 8.0),
-          child: Text(widget.ship.nationShipType),
-        ),
-        buildShipPrice(),
-        Padding(
-          padding: const EdgeInsets.only(top: 8),
-          child: ShipAverageStatistics(shipId: info.shipId),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(info.description, style: textTheme.bodyText1, textAlign: TextAlign.center),
-        ),
-        buildParameter(),
-        Utils.of(context).isTablet() 
-        ? renderTablet()
-        : renderMobile(), 
-      ],
+      children: widgets,
     );
   }
 
