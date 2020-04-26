@@ -20,7 +20,10 @@ class DebugProviderWidget extends StatelessWidget {
             }, child: Text('English')),
             FlatButton(onPressed: () {
               app.setLocale(Locale('ja'));
-            }, child: Text('Japanese')),
+            }, child: Text('日本語')),
+            FlatButton(onPressed: () {
+              app.setLocale(Locale('zh'));
+            }, child: Text('简体中文')),
             FlatButton(onPressed: () {
               app.setBrightness(ThemeMode.dark);
             }, child: Text('Dark')),
