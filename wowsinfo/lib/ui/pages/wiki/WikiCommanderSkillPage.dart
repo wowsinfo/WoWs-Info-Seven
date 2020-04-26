@@ -21,7 +21,7 @@ class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
   bool horizontalLock = false;
   /// Maximum 19 points currently
   int points = 19;
-  List<int> selectedSkills = [];
+  List<String> selectedSkills = [];
   // This tracks which tiers can be slected
   int maxTier = 0;
   List<Skill> skills = [];
@@ -30,14 +30,7 @@ class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
   void initState() {
     super.initState();
     this.skills = cached.sortedCommanderSkill.toList(growable: false);
-    // Lock to horizontal
-    if (widget.simulation) {
-      // This delay is to show the transition animation
-      // TODO: fix the grid because it doesn't work in hotizontal mode
-      // Future.delayed(Duration(milliseconds: 500), () {
-      //   setLandscape();
-      // });
-    }
+    setLandscape();
   }
 
   @override
@@ -48,6 +41,8 @@ class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final maxWidth = min(size.width / 8, (size.height - 100) / 4);
     return Scaffold(
       appBar: AppBar(
         title: buildTitle(context),
@@ -58,46 +53,60 @@ class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
       bottomNavigationBar: widget.simulation ? null : buildBottomAppBar(context),
       body: SafeArea(
         child: Center(
-          child: GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 4,
-              childAspectRatio: 1.0,
-            ),
-            itemCount: skills.length,
-            itemBuilder: (context, index) {
-              final curr = skills[index];
-              final selected = selectedSkills.contains(index);
-              return FittedBox(
-                child: Stack(
-                  children: <Widget>[
-                    InkWell(
-                      onTap: () => this.onTap(curr, index),
-                      child: Tooltip(
-                        message: curr.name,
-                        child: Padding(
-                          padding: const EdgeInsets.all(4),
-                          child: Image.network(curr.icon),
+          child: Table(
+            defaultColumnWidth: FixedColumnWidth(maxWidth),
+            // There are only 4 levels now
+            children: [1,2,3,4].map((level) {
+              final tier = skills.where((e) => e.tier == level);
+              return TableRow(
+                children: tier.map((e) {
+                  final curr = e;
+                  final selected = selectedSkills.contains(e.name);
+                  return FittedBox(
+                    child: Stack(
+                      children: <Widget>[
+                        InkWell(
+                          onTap: () => this.onTap(curr, e.name),
+                          child: Tooltip(
+                            message: curr.name,
+                            child: Padding(
+                              padding: const EdgeInsets.all(4),
+                              child: Image.network(curr.icon),
+                            ),
+                          ),
                         ),
-                      ),
+                        Positioned.fill(
+                          child: AnimatedSwitcher(
+                            duration: Duration(milliseconds: 200),
+                            transitionBuilder: (w, a) => ScaleTransition(scale: a, child: w),
+                            child: selected 
+                            ? Icon(Icons.close, size: 72)
+                            : SizedBox.shrink(),
+                          ),
+                        ),
+                      ],
                     ),
-                    Positioned.fill(
-                      child: AnimatedSwitcher(
-                        duration: Duration(milliseconds: 200),
-                        transitionBuilder: (w, a) => ScaleTransition(scale: a, child: w),
-                        child: selected 
-                        ? Icon(Icons.close, size: 72)
-                        : SizedBox.shrink(),
-                      ),
-                    ),
-                  ],
-                ),
+                  );
+                }).toList(growable: false),
               );
-            }
+            }).toList(growable: false),
           ),
-        ),
+        )
       ),
     );
   }
+
+// GridView.builder(
+//             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+//               crossAxisCount: 8,
+//               childAspectRatio: 1.0,
+//             ),
+//             itemCount: skills.length,
+//             itemBuilder: (context, index) {
+//               final curr = skills[index];
+//             }
+//           ),
+//         ),
 
   Text buildTitle(BuildContext context) {
     if (widget.simulation) return Text(points.toString());
@@ -105,12 +114,12 @@ class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
   }
 
   /// Decide who to do when the skill icon is pressed
-  void onTap(Skill curr, int index) {
+  void onTap(Skill curr, String name) {
     if (widget.simulation) {
       // Limit what can be chosen
       if (curr.tier > maxTier + 1) return;
       // Reset only (really troublesome if you can deselect)
-      if (selectedSkills.contains(index)) return;
+      if (selectedSkills.contains(name)) return;
 
       final newPoints = points - curr.tier;
       // Shouldn't go negative
@@ -119,7 +128,7 @@ class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
       // Update points
       setState(() {
         points = newPoints;
-        selectedSkills.add(index);
+        selectedSkills.add(name);
         // Update max tier
         maxTier = max(maxTier, curr.tier);
       });
