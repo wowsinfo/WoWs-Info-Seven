@@ -3,6 +3,7 @@ import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/data/Preference.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
 import 'package:wowsinfo/ui/widgets/FlatFilterChip.dart';
+import 'package:wowsinfo/ui/widgets/WrapBox.dart';
 
 /// ServerLanguageSelection class
 class ServerLanguageSelection extends StatefulWidget {
@@ -39,9 +40,8 @@ class _ServerLanguageSelectionState extends State<ServerLanguageSelection> {
               style: Theme.of(context).textTheme.headline6,
             ),
           ),
-          Wrap(
+          WrapBox(
             spacing: 2,
-            alignment: WrapAlignment.center,
             children: cached.serverLanguage.entries.map((e) {
               return FlatFilterChip(
                 label: Text(e.value),

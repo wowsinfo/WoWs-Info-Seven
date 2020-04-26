@@ -8,23 +8,16 @@ class ContactList {
 
   List<Player> players = [];
   updatePlayer(Player player, {bool add = true}) {
-    if (add) {
-      players.add(player);
-    } else {
-      players.removeWhere((element) => element.playerId == player.playerId);
-    }
-    
+    if (add) players.add(player);
+    else players.removeWhere((element) => element.playerId == player.playerId);
     _save();
   }
   bool containsPlayer(Player player) => this.players.any((element) => element.playerId == player.playerId);
 
   List<Clan> clans = [];
   updateClan(Clan clan, {bool add = true}) {
-    if (add) {
-      clans.add(clan);
-    } else {
-      clans.removeWhere((element) => element.clanId == clan.clanId);
-    }
+    if (add) clans.add(clan);
+    else clans.removeWhere((element) => element.clanId == clan.clanId);
     _save();
   }
   bool containsClan(Clan clan) => this.clans.any((element) => element.clanId == clan.clanId);

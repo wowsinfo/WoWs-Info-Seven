@@ -124,7 +124,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
         // Request for rank ship
         final rs = RankPlayerShipInfoParser(server, accountId);
         final rankShipInfo = rs.parse(await rs.download());
-        if (rankShipInfo != null) {
+        if (rankShipInfo != null && rankShipInfo.ships.length > 0) {
           setState(() {
             this.rankShipInfo = rankShipInfo;
           });

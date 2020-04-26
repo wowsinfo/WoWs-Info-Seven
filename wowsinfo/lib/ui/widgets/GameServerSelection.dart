@@ -3,6 +3,7 @@ import 'package:wowsinfo/core/models/UI/GameServer.dart';
 import 'package:wowsinfo/core/data/Preference.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
 import 'package:wowsinfo/ui/widgets/FlatFilterChip.dart';
+import 'package:wowsinfo/ui/widgets/WrapBox.dart';
 
 /// GameServerSelection class
 class GameServerSelection extends StatefulWidget {
@@ -43,9 +44,8 @@ class _GameServerSelectionState extends State<GameServerSelection> {
               style: Theme.of(context).textTheme.headline6,
             ),
           ),
-          Wrap(
+          WrapBox(
             spacing: 2,
-            alignment: WrapAlignment.center,
             children: servers.map((e) {
               final curr = servers.indexOf(e);
               return FlatFilterChip(

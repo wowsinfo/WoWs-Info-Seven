@@ -4,7 +4,7 @@ import 'package:wowsinfo/core/models/User/Clan.dart';
 class SearchClanResult {
   List<Clan> data = [];
 
-  SearchClanResult(json) {
+  SearchClanResult(List json) {
     json.forEach((item) => data.add(Clan.fromJson(item)));
   }
 }

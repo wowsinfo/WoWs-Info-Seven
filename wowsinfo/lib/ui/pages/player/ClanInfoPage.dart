@@ -29,7 +29,8 @@ class _ClanInfoPageState extends State<ClanInfoPage> {
   @override
   void initState() {
     super.initState();
-    final parser = ClanInfoParser(pref.gameServer, widget.clan.clanId);
+    // Saved server should be used here
+    final parser = ClanInfoParser(widget.clan.server, widget.clan.clanId);
     parser.download().then((json) {
       final info = parser.parse(json);
       if (info != null) {
