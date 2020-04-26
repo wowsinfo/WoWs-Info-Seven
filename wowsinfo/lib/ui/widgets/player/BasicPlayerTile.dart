@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/models/WoWs/PvP.dart';
+import 'package:wowsinfo/core/others/Utils.dart';
 import 'package:wowsinfo/ui/widgets/ImageTile.dart';
 import 'package:wowsinfo/ui/widgets/WrapBox.dart';
 import 'package:wowsinfo/ui/widgets/player/BasicShipInfoTile.dart';
@@ -15,14 +16,15 @@ class BasicPlayerTile extends StatelessWidget {
       alignment: WrapAlignment.center,
       children: <Widget>[
         BasicShipInfoTile(stats: stats),
-        buildBottom(),
+        buildBottom(context),
       ],
     );
   }
 
-  WrapBox buildBottom() {
+  WrapBox buildBottom(BuildContext context) {
+    final width = Utils.of(context).getItemWidth(100);
     return WrapBox(
-      width: 100,
+      width: width,
       padding: const EdgeInsets.only(top: 16),
       itemPadding: const EdgeInsets.only(bottom: 8),
       children: this.buildChilren(),

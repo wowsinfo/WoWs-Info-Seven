@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/models/WoWs/RankPlayerShipInfo.dart';
+import 'package:wowsinfo/core/others/Utils.dart';
 import 'package:wowsinfo/ui/widgets/ImageTile.dart';
 import 'package:wowsinfo/ui/widgets/WrapBox.dart';
 
@@ -17,8 +18,9 @@ class BasicShipInfoTile extends StatelessWidget {
         children: buildChildren(),
       );
     } else {
+      final width = Utils.of(context).getItemWidth(100);
       return WrapBox(
-        width: 100,
+        width: width,
         padding: const EdgeInsets.only(top: 16),
         itemPadding: const EdgeInsets.only(bottom: 8),
         children: buildChildren(),

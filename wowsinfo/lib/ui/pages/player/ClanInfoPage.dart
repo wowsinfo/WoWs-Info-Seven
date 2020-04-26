@@ -4,6 +4,7 @@ import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/data/Preference.dart';
 import 'package:wowsinfo/core/models/User/Clan.dart';
 import 'package:wowsinfo/core/models/WoWs/ClanInfo.dart';
+import 'package:wowsinfo/core/others/Utils.dart';
 import 'package:wowsinfo/core/parsers/API/ClanInfoParser.dart';
 import 'package:wowsinfo/ui/widgets/PlatformLoadingIndiactor.dart';
 import 'package:wowsinfo/ui/widgets/TextWithCaption.dart';
@@ -63,6 +64,7 @@ class _ClanInfoPageState extends State<ClanInfoPage> {
       );
     } else {
       final theme = Theme.of(context).textTheme;
+      final width = Utils.of(context).getItemWidth(200);
       return Scrollbar(
         child: Center(
           child: SingleChildScrollView(
@@ -72,7 +74,7 @@ class _ClanInfoPageState extends State<ClanInfoPage> {
                 Text(info.name, style: theme.headline6, textAlign: TextAlign.center),
                 WrapBox(
                   padding: const EdgeInsets.only(top: 8),
-                  width: 200,
+                  width: width,
                   children: [
                     TextWithCaption(
                       title: 'created',
@@ -88,7 +90,9 @@ class _ClanInfoPageState extends State<ClanInfoPage> {
                     ),
                     TextWithCaption(
                       title: 'Disbanded',
-                      value: info.isClanDisbanded ? 'YES' : 'NO',
+                      valueWidget: info.isClanDisbanded
+                      ? Icon(Icons.check, color: Colors.green)
+                      : Icon(Icons.close, color: Colors.red),
                     ),
                     TextWithCaption(
                       title: 'OLD TAG',

@@ -4,6 +4,7 @@ import 'package:wowsinfo/core/data/AppSettings.dart';
 import 'package:wowsinfo/core/models/UI/ChartValue.dart';
 import 'package:wowsinfo/core/models/UI/PlayerChartData.dart';
 import 'package:wowsinfo/core/models/WoWs/RecentPlayerInfo.dart';
+import 'package:wowsinfo/core/others/Utils.dart';
 import 'package:wowsinfo/ui/widgets/WrapBox.dart';
 
 /// PlayerChartPage class
@@ -15,6 +16,8 @@ class PlayerChartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = Utils.of(context).getItemWidth(400);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('PlayerChartPage')
@@ -23,7 +26,7 @@ class PlayerChartPage extends StatelessWidget {
         child: Center(
           child: SingleChildScrollView(
             child: WrapBox(
-              width: 400,
+              width: width,
               height: 300,
               itemPadding: const EdgeInsets.only(top: 8, bottom: 8),
               children: <Widget>[

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/models/UI/WeaponValue.dart';
 import 'package:wowsinfo/core/models/WoWs/RankPlayerShipInfo.dart';
+import 'package:wowsinfo/core/others/Utils.dart';
 import 'package:wowsinfo/ui/widgets/TextWithCaption.dart';
 import 'package:wowsinfo/ui/widgets/WrapBox.dart';
 import 'package:wowsinfo/ui/widgets/wiki/WikiWarshipCell.dart';
@@ -16,8 +17,9 @@ class WeaponInfoTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (pvp == null) return SizedBox.shrink();
+    final width = Utils.of(context).getItemWidth(300, margin: 70);
     return WrapBox(
-      width: 300,
+      width: width,
       height: !shipMode ? 160 : 70,
       padding: const EdgeInsets.all(8),
       itemPadding: const EdgeInsets.all(8),

@@ -395,8 +395,9 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
 
   Widget buildRecord(PvP pvp) {
     if (pvp == null) return SizedBox.shrink();
+    final width = Utils.of(context).getItemWidth(150);
     return WrapBox(
-      width: 150,
+      width: width,
       height: 150,
       itemPadding: const EdgeInsets.only(top: 8),
       children: [
