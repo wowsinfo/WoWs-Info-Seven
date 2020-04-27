@@ -9,9 +9,9 @@ Template
 
 ## 27/04/2020
 ### Summary
-Focused on small details and improved player info page quite a lot.
+Focused on small details and improved player info page quite a lot. Some bold experiments on theme. Now, theme will change based on player rating. Rank is not working anymore.
 ### What to do tomorrow?
-Same thing. Any parts I want to do. 
+Same thing. Any parts I want to do. Fix rank.
 
 ## 26/04/2020
 ### Summary

@@ -194,12 +194,12 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
         children: [
           buildNickname(context, textTheme),
           buildPlayerInfo(),
+          buildButtons(),
           AnimatedSwitcher(
             duration: Duration(milliseconds: 300),
             transitionBuilder: (w, a) => SizeTransition(sizeFactor: a, child: w),
             child: buildRating()
           ),
-          buildButtons(),
           buildPvPModeSelection(),
           buildStatistics(),
         ],
@@ -319,7 +319,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
         child: Theme(
           data: Theme.of(context).copyWith(
             buttonTheme: ButtonThemeData(
-
+              textTheme: ButtonTextTheme.normal,
             )
           ),
           child: WrapBox(

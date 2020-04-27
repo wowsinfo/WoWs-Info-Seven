@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:wowsinfo/core/data/AppSettings.dart';
 
 /// RatingTheme class
 class RatingTheme extends StatelessWidget {
   final Widget child;
   final MaterialColor color;
-  const RatingTheme({Key key, this.color, @required this.child}) : super(key: key);
+  /// Whether original should be used
+  final bool original;
+  const RatingTheme({Key key, this.color, @required this.child, this.original = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Theme(
-      data: this.color == null 
+      data: this.color == null || original
       ? theme
       : buildBasedOnBrightness(context),
       child: child,
