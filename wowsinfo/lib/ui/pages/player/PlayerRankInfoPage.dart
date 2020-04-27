@@ -28,46 +28,52 @@ class PlayerRankInfoPage extends StatelessWidget {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          child: WrapBox(
-            width: 400,
-            children: rankEntries.map((curr) {
-              final pvp = curr.value.rankSolo;
-              return InkWell(
-                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (c) => PlayerShipInfoPage(
-                  info: PlayerShipInfo.fromRank(rankShip, curr.key),
-                ))),
-                child: Column(
-                  children: [
-                    Text('Season ${curr.key}', style: Theme.of(context).textTheme.headline6),
-                    SizedBox(height: 10),
-                    BasicShipInfoTile(stats: pvp, compact: true),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        TextWithCaption(
-                          title: 'Max Frags',
-                          value: pvp.maxFrag,
-                        ),
-                        TextWithCaption(
-                          title: 'Max EXP',
-                          value: pvp.maxExp,
-                        ),
-                        TextWithCaption(
-                          title: 'Max Damage',
-                          value: pvp.maxDamage,
-                        )
-                      ],
-                    ),
-                    ExpansionTile(
-                      title: Text('More details'),
-                      children: [
-                        WeaponInfoTile(pvp: pvp, shipMode: true)
-                      ],
-                    )
-                  ],
-                ),
-              );
-            }).toList(growable: false),
+          child: Theme(
+            // If you don't copy, it will go back to the default theme
+            data: Theme.of(context).copyWith(
+              dividerColor: Colors.transparent
+            ),
+            child: WrapBox(
+              width: 400,
+              children: rankEntries.map((curr) {
+                final pvp = curr.value.rankSolo;
+                return InkWell(
+                  onTap: () => Navigator.push(context, MaterialPageRoute(builder: (c) => PlayerShipInfoPage(
+                    info: PlayerShipInfo.fromRank(rankShip, curr.key),
+                  ))),
+                  child: Column(
+                    children: [
+                      Text('Season ${curr.key}', style: Theme.of(context).textTheme.headline6),
+                      SizedBox(height: 10),
+                      BasicShipInfoTile(stats: pvp, compact: true),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          TextWithCaption(
+                            title: 'Max Frags',
+                            value: pvp.maxFrag,
+                          ),
+                          TextWithCaption(
+                            title: 'Max EXP',
+                            value: pvp.maxExp,
+                          ),
+                          TextWithCaption(
+                            title: 'Max Damage',
+                            value: pvp.maxDamage,
+                          )
+                        ],
+                      ),
+                      ExpansionTile(
+                        title: Text('More details'),
+                        children: [
+                          WeaponInfoTile(pvp: pvp, shipMode: true)
+                        ],
+                      )
+                    ],
+                  ),
+                );
+              }).toList(growable: false),
+            ),
           ),
         )
       ),

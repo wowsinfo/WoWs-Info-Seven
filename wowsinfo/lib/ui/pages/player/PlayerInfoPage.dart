@@ -24,6 +24,7 @@ import 'package:wowsinfo/ui/pages/player/PlayerChartPage.dart';
 import 'package:wowsinfo/ui/pages/player/PlayerRankInfoPage.dart';
 import 'package:wowsinfo/ui/pages/player/PlayerShipInfoPage.dart';
 import 'package:wowsinfo/ui/pages/wiki/WikiAchievementPage.dart';
+import 'package:wowsinfo/ui/widgets/ErrorIconWithText.dart';
 import 'package:wowsinfo/ui/widgets/PlatformLoadingIndiactor.dart';
 import 'package:wowsinfo/ui/widgets/TextWithCaption.dart';
 import 'package:wowsinfo/ui/widgets/WrapBox.dart';
@@ -50,6 +51,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
   RankPlayerShipInfo rankShipInfo;
   PlayerClanTag clanTag;
   RecentPlayerInfo recentInfo;
+  bool error = false;
 
   @override
   void initState() {
@@ -129,7 +131,15 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
             this.rankShipInfo = rankShipInfo;
           });
         }
+      } else {
+        setState(() {
+          error = true;
+        });
       }
+    } else {
+      setState(() {
+        error = true;
+      });
     }
   }
 
@@ -153,6 +163,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
   }
 
   Widget buildBasicInfo(BuildContext context) {
+    if (error) return ErrorIconWithText();
     if (basicInfo == null || clanTag == null) return PlatformLoadingIndiactor();
 
     final textTheme = Theme.of(context).textTheme;
@@ -254,20 +265,27 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
 
   /// Buttons to go to another page
   Widget buildButtons() {
-    return WrapBox(
-      width: 200,
-      spacing: 4,
-      children: [
-        buildAchievement(context),
-        buildChart(context),
-        buildShip(context),
-        buildRank(context),
-      ],
+    final width = Utils.of(context).getItemWidth(200, margin: 10);
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 300),
+      transitionBuilder: (w, a) => ScaleTransition(scale: a, child: w),
+      child: Center(
+        child: WrapBox(
+          width: width,
+          spacing: 4,
+          children: [
+            buildAchievement(context),
+            buildChart(context),
+            buildShip(context),
+            buildRank(context),
+          ],
+        ),
+      ),
     );
   }
 
   Widget buildAchievement(BuildContext context) {
-    if (achievement == null) return SizedBox.shrink();
+    if (achievement == null) return null;
     return RaisedButton(
       onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (c) => WikiAchievementPage(player: achievement))), 
       child: Text('Achievement')
@@ -275,7 +293,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
   }
 
   Widget buildChart(BuildContext context) {
-    if (shipInfo == null && recentInfo == null) return SizedBox.shrink();
+    if (shipInfo == null && recentInfo == null) return null;
     return RaisedButton(
       onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (c) => PlayerChartPage(info: PlayerChartData(shipInfo), recent: recentInfo))), 
       child: Text('Charts')
@@ -283,7 +301,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
   }
 
   Widget buildShip(BuildContext context) {
-    if (shipInfo == null) return SizedBox.shrink();
+    if (shipInfo == null) return null;
     return RaisedButton(
       onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (c) => PlayerShipInfoPage(info: shipInfo))), 
       child: Text('Ships')
@@ -291,7 +309,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
   }
 
   Widget buildRank(BuildContext context) {
-    if (rankInfo == null && rankShipInfo == null) return SizedBox.shrink();
+    if (rankInfo == null && rankShipInfo == null) return null;
     return RaisedButton(
       onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (c) => PlayerRankInfoPage(rank: rankInfo, rankShip: rankShipInfo))), 
       child: Text('Rank')

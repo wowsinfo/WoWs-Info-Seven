@@ -16,7 +16,7 @@ class BasicPlayerInfo {
   String nickname;
   int statsUpdatedAt;
 
-  bool get publicProfile => !hiddenProfile;
+  bool get publicProfile => !(hiddenProfile ?? true);
   String get level => 'Lv $levelingTier';
   String get createdDate => createdAt.dateString;
   String get lastBattleDate => lastBattleTime?.dateString;
