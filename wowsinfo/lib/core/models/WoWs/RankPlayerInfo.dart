@@ -24,17 +24,17 @@ class RankPlayerInfo {
 class Season {
   RankInfo rankInfo;
   RankPvP rankSolo;
-  // Thses two should always be null
-  dynamic rankDiv2;
-  dynamic rankDiv3;
+  // Thses two should always be null but there are cases where they are not
+  RankPvP rankDiv2;
+  RankPvP rankDiv3;
 
   bool get played => rankSolo != null;
 
   Season(Map<String, dynamic> json) {
     if (json['rank_info'] != null) this.rankInfo = RankInfo(json['rank_info']);
     if (json['rank_solo'] != null) this.rankSolo = RankPvP(json['rank_solo']);
-    this.rankDiv2 = json['rank_div2'];
-    this.rankDiv3 = json['rank_div3'];
+    if (json['rank_div2'] != null) this.rankDiv2 = RankPvP(json['rank_div2']);
+    if (json['rank_div3'] != null) this.rankDiv3 = RankPvP(json['rank_div3']);
   }
 }
 

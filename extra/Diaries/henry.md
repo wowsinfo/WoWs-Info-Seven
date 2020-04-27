@@ -9,7 +9,7 @@ Template
 
 ## 27/04/2020
 ### Summary
-Focused on small details and improved player info page quite a lot. Some bold experiments on theme. Now, theme will change based on player rating. Rank is not working anymore.
+Focused on small details and improved player info page quite a lot. Some bold experiments on theme. Now, theme will change based on player rating. Rank is not working anymore because rank should be div2 as well. Interesting... 
 ### What to do tomorrow?
 Same thing. Any parts I want to do. Fix rank.
 

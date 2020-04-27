@@ -10,6 +10,8 @@ import 'package:wowsinfo/ui/pages/player/PlayerShipInfoPage.dart';
 import 'package:wowsinfo/ui/widgets/TextWithCaption.dart';
 import 'package:wowsinfo/ui/widgets/WrapBox.dart';
 import 'package:wowsinfo/ui/widgets/player/BasicShipInfoTile.dart';
+import 'package:wowsinfo/ui/widgets/player/RatingBar.dart';
+import 'package:wowsinfo/ui/widgets/player/RatingTheme.dart';
 import 'package:wowsinfo/ui/widgets/player/WeaponInfoTile.dart';
 
 /// PlayerRankInfoPage class
@@ -28,19 +30,17 @@ class PlayerRankInfoPage extends StatelessWidget {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Theme(
-            // If you don't copy, it will go back to the default theme
-            data: Theme.of(context).copyWith(
-              dividerColor: Colors.transparent
-            ),
-            child: WrapBox(
-              width: 400,
-              children: rankEntries.map((curr) {
-                final pvp = curr.value.rankSolo;
-                return InkWell(
-                  onTap: () => Navigator.push(context, MaterialPageRoute(builder: (c) => PlayerShipInfoPage(
-                    info: PlayerShipInfo.fromRank(rankShip, curr.key),
-                  ))),
+          child: WrapBox(
+            width: 400,
+            children: rankEntries.map((curr) {
+              final pvp = curr.value.rankSolo;
+              final info = PlayerShipInfo.fromRank(rankShip, curr.key);
+              return InkWell(
+                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (c) => PlayerShipInfoPage(
+                  info: info,
+                ))),
+                child: RatingTheme(
+                  color: info.overallRating.colour,
                   child: Column(
                     children: [
                       Text('Season ${curr.key}', style: Theme.of(context).textTheme.headline6),
@@ -63,6 +63,7 @@ class PlayerRankInfoPage extends StatelessWidget {
                           )
                         ],
                       ),
+                      RatingBar(rating: info.overallRating),
                       ExpansionTile(
                         title: Text('More details'),
                         children: [
@@ -71,9 +72,9 @@ class PlayerRankInfoPage extends StatelessWidget {
                       )
                     ],
                   ),
-                );
-              }).toList(growable: false),
-            ),
+                ),
+              );
+            }).toList(growable: false),
           ),
         )
       ),

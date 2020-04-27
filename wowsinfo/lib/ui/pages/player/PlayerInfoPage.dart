@@ -319,7 +319,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
         child: Theme(
           data: Theme.of(context).copyWith(
             buttonTheme: ButtonThemeData(
-              textTheme: ButtonTextTheme.normal,
+              textTheme: ButtonTextTheme.primary,
             )
           ),
           child: WrapBox(

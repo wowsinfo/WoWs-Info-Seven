@@ -12,22 +12,22 @@ class PlayerShipInfo {
   bool get isSingleShip => ships.length == 1;
   PersonalRating overallRating = PersonalRating();
   bool canSort = true;
+  final _cached = CachedData.shared;
 
   PlayerShipInfo(Map<String, dynamic> data) {
     final List json = data.values.first;
     if (json != null) {
-      final cached = CachedData.shared;
       json.forEach((element) {
         final curr = ShipInfo(element);
         // TODO: Ignore removed ships (can consider to support them in the future)
-        if (cached.getShip(curr.shipId) != null) {
+        if (_cached.getShip(curr.shipId) != null) {
           ships.add(curr);
           if (curr.rating.hasRating) overallRating.add(curr.rating);
         }
-        
-        // Calculate overall rating
-        overallRating.calculate();
       });
+
+      // Calculate overall rating
+      overallRating.calculate();
     }
   }
 
@@ -35,8 +35,15 @@ class PlayerShipInfo {
   PlayerShipInfo.fromRank(RankPlayerShipInfo rank, String season) {
     canSort = false;
     rank.getShipsFor(season: season).forEach((element) {
-      ships.add(ShipInfo.fromSeason(element));
+      final curr = ShipInfo.fromSeason(element);
+      if (_cached.getShip(curr.shipId) != null) {
+        ships.add(curr);
+        if (curr.rating.hasRating) overallRating.add(curr.rating);
+      }
     });
+
+    // Calculate overall rating
+    overallRating.calculate();
   }
 }
 
