@@ -115,7 +115,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
         // Request for rank
         final r = RankPlayerInfoParser(server, accountId);
         final rankInfo = r.parse(await r.download());
-        if (rankInfo != null) {
+        if (rankInfo != null && rankInfo.season != null) {
           setState(() {
             this.rankInfo = rankInfo;
           });

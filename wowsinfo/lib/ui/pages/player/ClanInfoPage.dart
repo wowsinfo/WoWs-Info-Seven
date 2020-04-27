@@ -91,17 +91,15 @@ class _ClanInfoPageState extends State<ClanInfoPage> {
                     ),
                     TextWithCaption(
                       title: 'Disbanded',
-                      valueWidget: info.isClanDisbanded
-                      ? Icon(Icons.check, color: Colors.green)
-                      : Icon(Icons.close, color: Colors.red),
+                      valueWidget: buildIcon(info.isClanDisbanded),
                     ),
                     TextWithCaption(
                       title: 'OLD TAG',
-                      value: info.oldTag ?? '...',
+                      valueWidget: info.oldTag != null ? Text(info.oldTag) : buildCrossIcon(),
                     ),
                     TextWithCaption(
                       title: 'OLD NAME',
-                      value: info.oldName ?? '...',
+                      valueWidget: info.oldName != null ? Text(info.oldName) : buildCrossIcon(),
                     ),
                   ],
                 ),
@@ -134,6 +132,15 @@ class _ClanInfoPageState extends State<ClanInfoPage> {
       );
     }
   }
+
+  Icon buildIcon(bool yes) {
+    return yes
+      ? buildCheckIcon()
+      : buildCrossIcon();
+  }
+
+  Icon buildCheckIcon() => Icon(Icons.check, color: Colors.green);
+  Icon buildCrossIcon() => Icon(Icons.close, color: Colors.red);
 
   Column buildMemberList() {
     return Column(
