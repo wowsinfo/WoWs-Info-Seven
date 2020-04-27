@@ -17,7 +17,7 @@ class WeaponInfoTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (pvp == null) return SizedBox.shrink();
-    final width = Utils.of(context).getItemWidth(300, margin: 70);
+    final width = Utils.of(context).getItemWidth(300, maxCount: 5, margin: 30);
     return WrapBox(
       width: width,
       height: !shipMode ? 160 : 70,

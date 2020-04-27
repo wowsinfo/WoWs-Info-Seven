@@ -9,7 +9,9 @@ Template
 
 ## 27/04/2020
 ### Summary
+Focused on small details and improved player info page quite a lot.
 ### What to do tomorrow?
+Same thing. Any parts I want to do. 
 
 ## 26/04/2020
 ### Summary
