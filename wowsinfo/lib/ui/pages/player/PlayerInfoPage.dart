@@ -78,81 +78,86 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
   void loadAll() async {
     final server = widget.player.server;
     final accountId = widget.player.playerId;
-    final basic = BasicPlayerInfoParser(server, accountId);
-    final basicInfo = basic.parse(await basic.download());
-    if (basicInfo != null) {
-      setState(() {
-        // Update basic info first
-        this.basicInfo = basicInfo;
-      });
+    try {
+      final basic = BasicPlayerInfoParser(server, accountId);
+      final basicInfo = basic.parse(await basic.download());
+      if (basicInfo != null) {
+        setState(() {
+          // Update basic info first
+          this.basicInfo = basicInfo;
+        });
 
-      // Check if this is a public profile
-      if (basicInfo.publicProfile && (basicInfo?.statistic?.battle ?? 0) > 5) {
-        setState(() => this.pvp = basicInfo.statistic.pvp);
+        // Check if this is a public profile
+        if (basicInfo.publicProfile && (basicInfo?.statistic?.battle ?? 0) > 0) {
+          setState(() => this.pvp = basicInfo.statistic.pvp);
 
-        // Request for clan tag
-        final tag = PlayerClanTagParser(server, accountId);
-        final clanTag = tag.parse(await tag.download());
-        if (clanTag != null) {
-          setState(() {
-            this.clanTag = clanTag;
-          });
-        }
+          // Request for clan tag
+          final tag = PlayerClanTagParser(server, accountId);
+          final clanTag = tag.parse(await tag.download());
+          if (clanTag != null) {
+            setState(() {
+              this.clanTag = clanTag;
+            });
+          }
 
-        // Request for achievement
-        final a = PlayerAchievementParser(server, accountId);
-        final achievement = a.parse(await a.download());
-        if (achievement != null) {
-          setState(() {
-            this.achievement = achievement;
-          });
-        }
+          // Request for achievement
+          final a = PlayerAchievementParser(server, accountId);
+          final achievement = a.parse(await a.download());
+          if (achievement != null) {
+            setState(() {
+              this.achievement = achievement;
+            });
+          }
 
-        // Request for ship
-        final ship = PlayerShipInfoParser(server, accountId);
-        final shipInfo = ship.parse(await ship.download());
-        if (shipInfo != null) {
-          setState(() {
-            this.shipInfo = shipInfo;
-          });
-        }
+          // Request for ship
+          final ship = PlayerShipInfoParser(server, accountId);
+          final shipInfo = ship.parse(await ship.download());
+          if (shipInfo != null) {
+            setState(() {
+              this.shipInfo = shipInfo;
+            });
+          }
 
-        // Request for recent player info
-        final recent = RecentPlayerInfoParser(server, accountId);
-        final recentInfo = recent.parse(await recent.download());
-        if (recentInfo != null) {
-          setState(() {
-            this.recentInfo = recentInfo;
-          });
-        }
+          // Request for recent player info
+          final recent = RecentPlayerInfoParser(server, accountId);
+          final recentInfo = recent.parse(await recent.download());
+          if (recentInfo != null) {
+            setState(() {
+              this.recentInfo = recentInfo;
+            });
+          }
 
-        // Request for rank
-        final r = RankPlayerInfoParser(server, accountId);
-        final rankInfo = r.parse(await r.download());
-        if (rankInfo != null && rankInfo.season != null) {
-          setState(() {
-            this.rankInfo = rankInfo;
-          });
-        }
+          // Request for rank
+          final r = RankPlayerInfoParser(server, accountId);
+          final rankInfo = r.parse(await r.download());
+          if (rankInfo != null && rankInfo.season != null) {
+            setState(() {
+              this.rankInfo = rankInfo;
+            });
+          }
 
-        // Request for rank ship
-        final rs = RankPlayerShipInfoParser(server, accountId);
-        final rankShipInfo = rs.parse(await rs.download());
-        if (rankShipInfo != null && rankShipInfo.ships.length > 0) {
-          setState(() {
-            this.rankShipInfo = rankShipInfo;
-          });
+          // Request for rank ship
+          final rs = RankPlayerShipInfoParser(server, accountId);
+          final rankShipInfo = rs.parse(await rs.download());
+          if (rankShipInfo != null && rankShipInfo.ships.length > 0) {
+            setState(() {
+              this.rankShipInfo = rankShipInfo;
+            });
+          }
         }
       } else {
         setState(() {
           error = true;
         });
       }
-    } else {
+    } catch (e, s) {
+      Utils.debugPrint(e);
+      Utils.debugPrint(s);
       setState(() {
         error = true;
       });
     }
+    
   }
 
   @override
@@ -290,33 +295,6 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
           buildMorePlayerInfo(pvp),
           buildRecord(pvp),
           WeaponInfoTile(pvp: pvp),
-          // ExpansionTile(
-          //   title: Text('Random Battle'),
-          //   initiallyExpanded: true,
-          //   children: [
-          //   ],
-          // ),
-          // ExpansionTile(
-          //   title: Text('Random Battle Solo'),
-          //   children: [
-          //     BasicPlayerTile(stats: stats.solo),
-          //     buildRecord(stats.solo),
-          //   ],
-          // ),
-          // ExpansionTile(
-          //   title: Text('Random Battle Div2'),
-          //   children: [
-          //     BasicPlayerTile(stats: stats.div2),
-          //     buildRecord(stats.div2),
-          //   ],
-          // ),
-          // ExpansionTile(
-          //   title: Text('Random Battle Div3'),
-          //   children: [
-          //     BasicPlayerTile(stats: stats.div3),
-          //     buildRecord(stats.div3),
-          //   ],
-          // ),
         ],
       ),
     );
@@ -340,10 +318,10 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
             width: width,
             spacing: 4,
             children: [
-              buildAchievement(context),
-              buildChart(context),
-              buildShip(context),
-              buildRank(context),
+              if (achievement != null) buildAchievement(context),
+              if (shipInfo != null && recentInfo != null) buildChart(context),
+              if (shipInfo != null) buildShip(context),
+              if (rankInfo != null && rankShipInfo != null) buildRank(context),
             ],
           ),
         ),
@@ -352,7 +330,6 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
   }
 
   Widget buildAchievement(BuildContext context) {
-    if (achievement == null) return null;
     final lang = AppLocalization.of(context);
     return RaisedButton.icon(
       icon: Icon(Icons.brightness_7),
@@ -362,7 +339,6 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
   }
 
   Widget buildChart(BuildContext context) {
-    if (shipInfo == null && recentInfo == null) return null;
     final lang = AppLocalization.of(context);
     return RaisedButton.icon(
       icon: Icon(Icons.pie_chart),
@@ -372,7 +348,6 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
   }
 
   Widget buildShip(BuildContext context) {
-    if (shipInfo == null) return null;
     final lang = AppLocalization.of(context);
     return RaisedButton.icon(
       icon: Icon(Icons.directions_boat),
@@ -382,7 +357,6 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
   }
 
   Widget buildRank(BuildContext context) {
-    if (rankInfo == null && rankShipInfo == null) return null;
     final lang = AppLocalization.of(context);
     return RaisedButton.icon(
       icon: Icon(Icons.star),

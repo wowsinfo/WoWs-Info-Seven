@@ -22,6 +22,7 @@ class PersonalRating {
   double expectedWins = 0;
 
   Color get colour => index == -1 ? Colors.blueGrey : _ratingColours[index];
+  bool get hasRating => index >= 0;
 
   /// Colors for each ratings
   final _ratingColours = [
@@ -52,6 +53,9 @@ class PersonalRating {
   }
 
   void calculate() {
+    // No battle, no rating
+    if (battle == 0) return;
+
     final double rDmg = actualDmg / expectedDmg;
     final double rFrags = actualFrags / expectedFrags;
     final double rWins = actualWins / expectedWins;
@@ -66,7 +70,9 @@ class PersonalRating {
   }
 
   int _getRatingIndex(double rating) {
-    if (rating < 750) return 0;
+    // If it is nah, just return -1
+    if (rating.isNaN) return -1;
+    else if (rating < 750) return 0;
     else if (rating < 1100) return 1;
     else if (rating < 1350) return 2;
     else if (rating < 1550) return 3;

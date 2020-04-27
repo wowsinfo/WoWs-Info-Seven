@@ -22,7 +22,7 @@ class PlayerShipInfo {
         // TODO: Ignore removed ships (can consider to support them in the future)
         if (cached.getShip(curr.shipId) != null) {
           ships.add(curr);
-          overallRating.add(curr.rating);
+          if (curr.rating.hasRating) overallRating.add(curr.rating);
         }
         
         // Calculate overall rating
