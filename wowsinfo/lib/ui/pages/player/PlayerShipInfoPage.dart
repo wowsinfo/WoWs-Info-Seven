@@ -21,8 +21,13 @@ class _PlayerShipInfoPageState extends State<PlayerShipInfoPage> {
     final ships = widget.info.canSort ? (widget.info.ships.where((e) => e.battle > 0)
       .toList(growable: false)
       ..sort((b, a) => a.lastBattleTime.compareTo(b.lastBattleTime))) : widget.info.ships;
+
     // 120 can place 3 on iPhone 11
-    final itemCount = Utils.of(context).getItemCount(6, 1, 200);
+    final util = Utils.of(context);
+    const count = 6;
+    const width = 180;
+    final itemCount = util.getItemCount(count, 1, width);
+    final itemWidth = util.getItemWidth(width, maxCount: count);
     
     return Scaffold(
       appBar: AppBar(
@@ -33,7 +38,7 @@ class _PlayerShipInfoPageState extends State<PlayerShipInfoPage> {
           child: GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: itemCount,
-              childAspectRatio: 0.9
+              childAspectRatio: itemWidth / 250
             ),
             itemCount: ships.length,
             itemBuilder: (context, index) {
