@@ -28,7 +28,7 @@
     "website_page_title": "实用网站",
     "wiki_page_title": "战舰百科",
     "realtime_page_title": "实时数据",
-    
+
     "website_official_site": "战舰世界官网",
     "website_premium": "战舰商城",
     "website_global_wiki": "战舰全球百科",
@@ -71,5 +71,10 @@
     "warship_info_antiaircraft": "AA Defense",
     "warship_info_maneuverabilty": "Maneuverabilty",
     "warship_info_aircraft": "Aircraft",
-    "warship_info_concealment": "Concealment"
+    "warship_info_concealment": "Concealment",
+
+    "player_achievement": "Achievements",
+    "player_charts": "Charts",
+    "player_ships": "Ships",
+    "player_rank": "Rank"
 }

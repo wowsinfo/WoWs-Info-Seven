@@ -71,5 +71,10 @@
     "warship_info_antiaircraft": "AA Defense",
     "warship_info_maneuverabilty": "Maneuverabilty",
     "warship_info_aircraft": "Aircraft",
-    "warship_info_concealment": "Concealment"
+    "warship_info_concealment": "Concealment",
+
+    "player_achievement": "Achievements",
+    "player_charts": "Charts",
+    "player_ships": "Ships",
+    "player_rank": "Rank"
 }

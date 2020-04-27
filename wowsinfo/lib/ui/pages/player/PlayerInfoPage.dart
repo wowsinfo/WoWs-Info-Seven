@@ -296,33 +296,40 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
   Widget buildAchievement(BuildContext context) {
     if (achievement == null) return null;
     final lang = AppLocalization.of(context);
-    return RaisedButton(
-      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (c) => WikiAchievementPage(player: achievement))), 
-      child: Text('Achievement')
+    return RaisedButton.icon(
+      icon: Icon(Icons.brightness_7),
+      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (c) => WikiAchievementPage(player: achievement))),
+      label: Text(lang.localised('player_achievement')),
     );
   }
 
   Widget buildChart(BuildContext context) {
     if (shipInfo == null && recentInfo == null) return null;
-    return RaisedButton(
+    final lang = AppLocalization.of(context);
+    return RaisedButton.icon(
+      icon: Icon(Icons.pie_chart),
       onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (c) => PlayerChartPage(info: PlayerChartData(shipInfo), recent: recentInfo))), 
-      child: Text('Charts')
+      label: Text(lang.localised('player_charts')),
     );
   }
 
   Widget buildShip(BuildContext context) {
     if (shipInfo == null) return null;
-    return RaisedButton(
+    final lang = AppLocalization.of(context);
+    return RaisedButton.icon(
+      icon: Icon(Icons.directions_boat),
       onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (c) => PlayerShipInfoPage(info: shipInfo))), 
-      child: Text('Ships')
+      label: Text(lang.localised('player_ships'))
     );
   }
 
   Widget buildRank(BuildContext context) {
     if (rankInfo == null && rankShipInfo == null) return null;
-    return RaisedButton(
+    final lang = AppLocalization.of(context);
+    return RaisedButton.icon(
+      icon: Icon(Icons.star),
       onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (c) => PlayerRankInfoPage(rank: rankInfo, rankShip: rankShipInfo))), 
-      child: Text('Rank')
+      label: Text(lang.localised('player_rank')),
     );
   }
 

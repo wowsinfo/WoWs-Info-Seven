@@ -84,7 +84,7 @@ class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
                             duration: Duration(milliseconds: 200),
                             transitionBuilder: (w, a) => ScaleTransition(scale: a, child: w),
                             child: selected 
-                            ? Icon(Icons.close, size: 72)
+                            ? Icon(Icons.close, size: 72, color: Colors.black)
                             : SizedBox.shrink(),
                           ),
                         ),
