@@ -17,7 +17,8 @@ class ShipAverageStatistics extends StatelessWidget {
     final ship = cached.getShipStats(shipId.toString());
     final lang = AppLocalization.of(context);
     if (ship == null) return SizedBox.shrink();
-    if (myShip != null) return buildComparison(lang, ship);
+    // Make sure there is at least 1 battle, no battle no stats
+    if (myShip != null && myShip.battle > 0) return buildComparison(lang, ship);
     return buildNormal(lang, ship);
   }
 
