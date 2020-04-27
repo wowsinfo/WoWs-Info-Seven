@@ -149,48 +149,6 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        child: Row(
-          children: [
-            buildAchievement(context),
-            buildChart(context),
-            buildShip(context),
-            buildRank(context),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget buildAchievement(BuildContext context) {
-    if (achievement == null) return SizedBox.shrink();
-    return FlatButton(
-      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (c) => WikiAchievementPage(player: achievement))), 
-      child: Text('Achievement')
-    );
-  }
-
-  Widget buildChart(BuildContext context) {
-    if (shipInfo == null && recentInfo == null) return SizedBox.shrink();
-    return FlatButton(
-      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (c) => PlayerChartPage(info: PlayerChartData(shipInfo), recent: recentInfo))), 
-      child: Text('Charts')
-    );
-  }
-
-  Widget buildShip(BuildContext context) {
-    if (shipInfo == null) return SizedBox.shrink();
-    return FlatButton(
-      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (c) => PlayerShipInfoPage(info: shipInfo))), 
-      child: Text('Ships')
-    );
-  }
-
-  Widget buildRank(BuildContext context) {
-    if (rankInfo == null && rankShipInfo == null) return SizedBox.shrink();
-    return FlatButton(
-      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (c) => PlayerRankInfoPage(rank: rankInfo, rankShip: rankShipInfo))), 
-      child: Text('Rank')
     );
   }
 
@@ -221,7 +179,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
 
   WrapBox buildPlayerInfo() {
     return WrapBox(
-      width: 100,
+      width: 120,
       children: [
         TextWithCaption(
           title: 'Level',
@@ -258,6 +216,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
       child: Column(
         children: [
           BasicPlayerTile(stats: stats.pvp),
+          buildButtons(),
           buildMorePlayerInfo(stats.pvp),
           buildRecord(stats.pvp),
           WeaponInfoTile(pvp: stats.pvp),
@@ -290,6 +249,52 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
           // ),
         ],
       ),
+    );
+  }
+
+  /// Buttons to go to another page
+  Widget buildButtons() {
+    return WrapBox(
+      width: 200,
+      spacing: 4,
+      children: [
+        buildAchievement(context),
+        buildChart(context),
+        buildShip(context),
+        buildRank(context),
+      ],
+    );
+  }
+
+  Widget buildAchievement(BuildContext context) {
+    if (achievement == null) return SizedBox.shrink();
+    return RaisedButton(
+      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (c) => WikiAchievementPage(player: achievement))), 
+      child: Text('Achievement')
+    );
+  }
+
+  Widget buildChart(BuildContext context) {
+    if (shipInfo == null && recentInfo == null) return SizedBox.shrink();
+    return RaisedButton(
+      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (c) => PlayerChartPage(info: PlayerChartData(shipInfo), recent: recentInfo))), 
+      child: Text('Charts')
+    );
+  }
+
+  Widget buildShip(BuildContext context) {
+    if (shipInfo == null) return SizedBox.shrink();
+    return RaisedButton(
+      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (c) => PlayerShipInfoPage(info: shipInfo))), 
+      child: Text('Ships')
+    );
+  }
+
+  Widget buildRank(BuildContext context) {
+    if (rankInfo == null && rankShipInfo == null) return SizedBox.shrink();
+    return RaisedButton(
+      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (c) => PlayerRankInfoPage(rank: rankInfo, rankShip: rankShipInfo))), 
+      child: Text('Rank')
     );
   }
 
