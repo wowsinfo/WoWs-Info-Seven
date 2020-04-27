@@ -7,6 +7,7 @@ import 'package:wowsinfo/core/others/Utils.dart';
 import 'package:wowsinfo/ui/widgets/TextWithCaption.dart';
 import 'package:wowsinfo/ui/widgets/WrapBox.dart';
 import 'package:wowsinfo/ui/widgets/wiki/WikiWarshipCell.dart';
+import 'package:wowsinfo/core/extensions/NumberExtension.dart';
 
 class WeaponInfoTile extends StatelessWidget {
   final cached = CachedData.shared;
@@ -66,7 +67,7 @@ class WeaponInfoTile extends StatelessWidget {
     if (e.hasHitRatio) values.add(
       TextWithCaption(
         title: 'Hit Ratio',
-        value: e.hitRatio.toStringAsFixed(2) + '%',
+        value: e.hitRatio.myFixedString(2) + '%',
       )
     );
 

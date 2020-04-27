@@ -4,6 +4,7 @@ import 'package:wowsinfo/core/models/GitHub/PRData.dart';
 import 'package:wowsinfo/core/models/WoWs/PvP.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
 import 'package:wowsinfo/ui/widgets/TextWithCaption.dart';
+import 'package:wowsinfo/core/extensions/NumberExtension.dart';
 
 /// ShipAverageStatistics class, it shows ship average myStats and compare it to your myStats if provided
 class ShipAverageStatistics extends StatelessWidget {
@@ -51,17 +52,17 @@ class ShipAverageStatistics extends StatelessWidget {
         TextWithCaption(
           title: lang.localised('warship_avg_damage'),
           valueWidget: buildStatistics(ship.averageDamageString, 
-            myShip.avgDamage, ship.averageDamageDealt, (d) => d.toStringAsFixed(0)),
+            myShip.avgDamage, ship.averageDamageDealt, (d) => d.myFixedString(0)),
         ),
         TextWithCaption(
           title: lang.localised('warship_avg_winrate'),
           valueWidget: buildStatistics(ship.winRateString, 
-            myShip.winrate, ship.winRate, (d) => d.toStringAsFixed(1) + '%'),
+            myShip.winrate, ship.winRate, (d) => d.myFixedString(1) + '%'),
         ),
         TextWithCaption(
           title: lang.localised('warship_avg_frag'),
           valueWidget: buildStatistics(ship.averageFragString, 
-            myShip.avgFrag, ship.averageFrag, (d) => d.toStringAsFixed(2)),
+            myShip.avgFrag, ship.averageFrag, (d) => d.myFixedString(2)),
         ),
       ],
     );

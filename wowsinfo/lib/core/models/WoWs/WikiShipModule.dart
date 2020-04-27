@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
+import 'package:wowsinfo/core/extensions/NumberExtension.dart';
 
 /// This is the `WikiShipModule` class
 class WikiShipModule {
@@ -94,7 +95,7 @@ class TorpedoBomber {
   String get torpSpeed => '$torpedoMaxSpeed kt';
   String get planeSpeed => '$cruiseSpeed kt';
   String get squadronSize => '${countInSquadron.max} x';
-  String get torpRange => '${torpedoDistance.toStringAsFixed(1)} km';
+  String get torpRange => '${torpedoDistance.myFixedString(1)} km';
   String get levelString => 'Lv$planeLevel';
   String get healthString => '$maxHealth';
 
@@ -151,7 +152,7 @@ class AASlot {
 
   String get configuration => '$guns x';
   String get damageString => '$avgDamage';
-  String get rangeString => '${distance.toStringAsFixed(1)} km';
+  String get rangeString => '${distance.myFixedString(1)} km';
 
   AASlot(Map<String, dynamic> json) {
     this.distance = json['distance'];
@@ -190,7 +191,7 @@ class SecondarySlot {
   String get fireChance => '${burnProbability ?? 0} %';
   String get damageString => '$damage';
   String get speedString => '$bulletMass m/s';
-  String get reloadTime => '${(60 / gunRate).toStringAsFixed(1)} s';
+  String get reloadTime => '${(60 / gunRate).myFixedString(1)} s';
   String get nameWithShellType => '$type - $name';
 
   SecondarySlot(Map<String, dynamic> json) {
@@ -229,8 +230,8 @@ class Mobility {
   int turningRadius;
   double maxSpeed;
 
-  String get rudderString => '${rudderTime.toStringAsFixed(1)} s';
-  String get speedString => '${maxSpeed.toStringAsFixed(1)} kt';
+  String get rudderString => '${rudderTime.myFixedString(1)} s';
+  String get speedString => '${maxSpeed.myFixedString(1)} kt';
   String get radiusString => '$turningRadius m';
 
   Mobility(Map<String, dynamic> json) {
@@ -284,7 +285,7 @@ class Atba {
   double distance;
   Map<String, SecondarySlot> slot;
 
-  String get rangeString => '${distance.toStringAsFixed(1)} km';
+  String get rangeString => '${distance.myFixedString(1)} km';
   Iterable<SecondarySlot> get slots => slot.values;
 
   Atba(Map<String, dynamic> json) {
@@ -307,7 +308,7 @@ class Artillery {
 
   String get dispersionString => '$maxDispersion m';
   String get rotationString => '$rotationTime s';
-  String get rangeString => '${distance.toStringAsFixed(1)} km';
+  String get rangeString => '${distance.myFixedString(1)} km';
   double get reloadTime => 60 / gunRate;
   /// This is how many guns does she have, 2x3 1x2
   String get configurationString => slot.values.map((e) => '${e.barrels} x ${e.guns}').join(' | ');
@@ -339,7 +340,7 @@ class Shell {
   
   double get fireChance => burnProbability ?? 0;
   String get massString => '$bulletMass kg';
-  String get damageString => '$damage (${(damage / 3).toStringAsFixed(0)})';
+  String get damageString => '$damage (${(damage / 3).myFixedString(0)})';
   String get speed => '$bulletSpeed m/s';
   String get shellNameWithType => '$type - $name';
 
@@ -368,7 +369,7 @@ class Torpedoe {
 
   String get damageString => '$maxDamage';
   String get torpSpeed => '$torpedoSpeed kt';
-  String get detection => '${visibilityDist.toStringAsFixed(1)} km';
+  String get detection => '${visibilityDist.myFixedString(1)} km';
   String get range => '$distance km';
   String get reloadString => '$reloadTime s';
   String get configuration => slot.values.map((e) => e.gunBarrel).join(' | ');
@@ -471,8 +472,8 @@ class Concealment {
   double detectDistanceByPlane;
   double detectDistanceByShip;
 
-  String get planeDetection => '${detectDistanceByPlane.toStringAsFixed(1)} km';
-  String get shipDetection => '${detectDistanceByShip.toStringAsFixed(1)} km';
+  String get planeDetection => '${detectDistanceByPlane.myFixedString(1)} km';
+  String get shipDetection => '${detectDistanceByShip.myFixedString(1)} km';
 
   Concealment(Map<String, dynamic> json) {
     this.total = json['total'];
@@ -575,7 +576,7 @@ class DiveBomber {
 
   String get levelString => 'Lv$planeLevel';
   String get nameWithLevel => '$levelString $name';
-  String get fireChance => '${bombBurnProbability.toStringAsFixed(0)}%';
+  String get fireChance => '${bombBurnProbability.myFixedString(0)}%';
   String get damageString => '$maxDamage';
   String get healthString => '$maxHealth';
   String get planeSpeed => '$cruiseSpeed kt';

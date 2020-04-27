@@ -1,4 +1,5 @@
 import 'package:wowsinfo/core/models/Cacheable.dart';
+import 'package:wowsinfo/core/extensions/NumberExtension.dart';
 
 /// This is the `PRData` class, `Personal Rating Data`
 class PRData extends Cacheable {
@@ -21,11 +22,11 @@ class PRData extends Cacheable {
 /// This is the `AverageStats` class
 class AverageStats {
   double averageDamageDealt;
-  String get averageDamageString => averageDamageDealt.toStringAsFixed(0);
+  String get averageDamageString => averageDamageDealt.myFixedString(0);
   double averageFrag;
-  String get averageFragString => averageFrag.toStringAsFixed(2);
+  String get averageFragString => averageFrag.myFixedString(2);
   double winRate;
-  String get winRateString => winRate.toStringAsFixed(1) + '%';
+  String get winRateString => winRate.myFixedString(1) + '%';
 
   AverageStats.fromJson(Map<String, dynamic> json) {
     this.averageDamageDealt = json['average_damage_dealt'].toDouble();

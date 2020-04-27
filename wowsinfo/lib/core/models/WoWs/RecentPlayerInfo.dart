@@ -1,6 +1,7 @@
 import 'package:charts_flutter/flutter.dart';
 import 'package:wowsinfo/core/data/ChartColour.dart';
 import 'package:wowsinfo/core/models/UI/ChartValue.dart';
+import 'package:wowsinfo/core/extensions/NumberExtension.dart';
 
 /// This is the `RecentPlayerInfo` class
 class RecentPlayerInfo {
@@ -10,11 +11,11 @@ class RecentPlayerInfo {
   bool get isActive => hasRecentData;
 
   double avgDamage = 0;
-  String get avgDamageString => '${avgDamage.toStringAsFixed(0)}';
+  String get avgDamageString => '${avgDamage.myFixedString(0)}';
   double totalBattles = 0;
-  String get battleString => '${totalBattles.toStringAsFixed(0)} (${(totalBattles / days).toStringAsFixed(0)})';
+  String get battleString => '${totalBattles.myFixedString(0)} (${(totalBattles / days).myFixedString(0)})';
   double avgWinrate = 0;
-  String get avgWinrateString => '${avgWinrate.toStringAsFixed(1)}%';
+  String get avgWinrateString => '${avgWinrate.myFixedString(1)}%';
   int get days => _recent.length;
   
   List<ChartValue> recentBattles = [];
@@ -22,10 +23,10 @@ class RecentPlayerInfo {
     color: Color.fromHex(code: '#2196F3'));
   List<ChartValue> recentWinrate = [];
   List<Series<ChartValue, num>> get recentWinrateData => _convert('recent_winrate', listData: recentWinrate,
-   color: Color.fromHex(code: '#4CAF50'), labelFormatter: (v, _) => v.value.toStringAsFixed(1) + '%');
+   color: Color.fromHex(code: '#4CAF50'), labelFormatter: (v, _) => v.value.myFixedString(1) + '%');
   List<ChartValue> recentDamage = [];
   List<Series<ChartValue, num>> get recentDamageData => _convert('recent_damage', listData: recentDamage,
-    color: Color.fromHex(code: '#D32F2F'), labelFormatter: (v, _) => v.value.toStringAsFixed(0));
+    color: Color.fromHex(code: '#D32F2F'), labelFormatter: (v, _) => v.value.myFixedString(0));
 
   RecentPlayerInfo(Map<String, dynamic> data) {
     final json = data.values.first;

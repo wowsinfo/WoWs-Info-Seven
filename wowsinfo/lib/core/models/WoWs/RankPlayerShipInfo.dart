@@ -1,4 +1,5 @@
 import 'package:wowsinfo/core/models/WoWs/PlayerShipInfo.dart';
+import 'package:wowsinfo/core/extensions/NumberExtension.dart';
 
 import 'PvP.dart';
 
@@ -91,11 +92,11 @@ class RankPvP {
   double get avgPlaneDestroyed => planesKilled / battle;
 
   String get battleString => '$battle';
-  String get winrateString => '${winrate.toStringAsFixed(1)}%';
-  String get avgDamageString => '${avgDamage.toStringAsFixed(0)}';
-  String get avgExpString => '${avgExp.toStringAsFixed(0)}';
-  String get killDeathString => '${killDeath.toStringAsFixed(2)}';
-  String get mainHitRatioString => '${mainBattery.hitRatio.toStringAsFixed(2)}%';
+  String get winrateString => '${winrate.myFixedString(1)}%';
+  String get avgDamageString => '${avgDamage.myFixedString(0)}';
+  String get avgExpString => '${avgExp.myFixedString(0)}';
+  String get killDeathString => '${killDeath.myFixedString(2)}';
+  String get mainHitRatioString => '${mainBattery.hitRatio.myFixedString(2)}%';
   bool get canHit => mainBattery.shot > 0;
 
   String get maxDamage => '$maxDamageDealt';

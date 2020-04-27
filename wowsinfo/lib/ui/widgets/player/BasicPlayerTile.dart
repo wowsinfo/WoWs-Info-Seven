@@ -43,15 +43,14 @@ class BasicPlayerTile extends StatelessWidget {
         title: 'Battle',
         value: stats.killDeathString,
       ),
+      // Hide this if it is cv
+      // TODO: consider what to add more cv
+      if (stats.canHit) ImageTile(
+        image: AssetImage('assets/images/hitratio.png'),
+        title: 'Battle',
+        value: stats.mainHitRatioString,
+      ),
     ];
-
-    // Hide this if it is cv
-    // TODO: consider what to add more cv
-    if (stats.canHit) tiles.add(ImageTile(
-      image: AssetImage('assets/images/hitratio.png'),
-      title: 'Battle',
-      value: stats.mainHitRatioString,
-    ));
 
     return tiles;
   }

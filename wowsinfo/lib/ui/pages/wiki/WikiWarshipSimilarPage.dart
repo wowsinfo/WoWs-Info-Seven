@@ -7,6 +7,7 @@ import 'package:wowsinfo/core/models/GitHub/PRData.dart';
 import 'package:wowsinfo/core/models/UI/ChartValue.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
+import 'package:wowsinfo/core/extensions/NumberExtension.dart';
 
 /// WikiWarshipSimilarPage class
 class WikiWarshipSimilarPage extends StatelessWidget {
@@ -37,7 +38,7 @@ class WikiWarshipSimilarPage extends StatelessWidget {
     final damageList = convert('damage', ships.map((e) => ChartValue(
       e.name, 
       cached.getShipStats(e.shipId.toString())?.averageDamageDealt)
-    ).toList(growable: false), Color.fromHex(code: '#D32F2F'), (v, _) => v.value.toStringAsFixed(0));
+    ).toList(growable: false), Color.fromHex(code: '#D32F2F'), (v, _) => v.value.myFixedString(0));
 
     List<Series<ChartValue, String>> winrateList = [
       Series(
@@ -48,7 +49,7 @@ class WikiWarshipSimilarPage extends StatelessWidget {
         ).toList(growable: false), 
         domainFn: (v, _) => v.name, 
         measureFn: (v, _) => v.value,
-        labelAccessorFn: (v, _) => v.value.toStringAsFixed(1) + '%',
+        labelAccessorFn: (v, _) => v.value.myFixedString(1) + '%',
         colorFn: (v, _) => Color.fromHex(code: '#4CAF50')
       ),
     ];
@@ -62,7 +63,7 @@ class WikiWarshipSimilarPage extends StatelessWidget {
         ).toList(growable: false), 
         domainFn: (v, _) => v.name, 
         measureFn: (v, _) => v.value,
-        labelAccessorFn: (v, _) => v.value.toStringAsFixed(2),
+        labelAccessorFn: (v, _) => v.value.myFixedString(2),
         colorFn: (v, _) => Color.fromHex(code: '#2196F3')
       ),
     ];
@@ -140,11 +141,11 @@ class WikiWarshipSimilarPage extends StatelessWidget {
 
 class Average {
   double damage = 0;
-  String get damageString => damage.toStringAsFixed(0);
+  String get damageString => damage.myFixedString(0);
   double winrate = 0;
-  String get winrateString => winrate.toStringAsFixed(1) + '%';
+  String get winrateString => winrate.myFixedString(1) + '%';
   double frag = 0;
-  String get fragString => frag.toStringAsFixed(2);
+  String get fragString => frag.myFixedString(2);
   int count = 0;
 
   void add(AverageStats stats) {

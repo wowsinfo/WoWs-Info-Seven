@@ -5,6 +5,7 @@ import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/data/ChartColour.dart';
 import 'package:wowsinfo/core/models/UI/ChartValue.dart';
 import 'package:wowsinfo/core/models/WoWs/PlayerShipInfo.dart';
+import 'package:wowsinfo/core/extensions/NumberExtension.dart';
 
 /// This handles chart data relating to player ships
 class PlayerChartData {
@@ -15,16 +16,16 @@ class PlayerChartData {
     color: Color.fromHex(code: '#D32F2F'));
   List<ChartValue> topTenByWinrate = [];
   List<Series<ChartValue, String>> get topTenWinrateData => _convert('winrate', listData: topTenByWinrate,
-   color: Color.fromHex(code: '#4CAF50'), labelFormatter: (v, _) => v.value.toStringAsFixed(1) + '%');
+   color: Color.fromHex(code: '#4CAF50'), labelFormatter: (v, _) => v.value.myFixedString(1) + '%');
   List<ChartValue> topTenByDamage = [];
   List<Series<ChartValue, String>> get topTenDamageData => _convert('damage', listData: topTenByDamage,
-    color: Color.fromHex(code: '#2196F3'), labelFormatter: (v, _) => v.value.toStringAsFixed(0));
+    color: Color.fromHex(code: '#2196F3'), labelFormatter: (v, _) => v.value.myFixedString(0));
 
   double totalBattle = 0;
   double _battleTier = 0;
   double battleAvgTier = 0;
-  String get avgBattleTierString => '${battleAvgTier.toStringAsFixed(1)}';
-  String get battleString => '${totalBattle.toStringAsFixed(0)}';
+  String get avgBattleTierString => '${battleAvgTier.myFixedString(1)}';
+  String get battleString => '${totalBattle.myFixedString(0)}';
 
   SplayTreeMap<String, int> type = SplayTreeMap();
   List<Series<ChartValue, String>> get typeData => _convert('type', mapData: type);

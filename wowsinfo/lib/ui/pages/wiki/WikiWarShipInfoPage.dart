@@ -15,6 +15,7 @@ import 'package:wowsinfo/ui/widgets/WrapBox.dart';
 import 'package:wowsinfo/ui/widgets/wiki/ShipAverageStatistics.dart';
 import 'package:wowsinfo/ui/widgets/wiki/ShipParameter.dart';
 import 'package:wowsinfo/ui/widgets/wiki/WikiWarshipCell.dart';
+import 'package:wowsinfo/core/extensions/NumberExtension.dart';
 
 /// WikiWarShipInfoPage class
 class WikiWarShipInfoPage extends StatefulWidget {
@@ -434,7 +435,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
           children: [
             TextWithCaption(
               title: 'a',
-              value: main.reloadTime.toStringAsFixed(1),
+              value: main.reloadTime.myFixedString(1),
             ),
             TextWithCaption(
               title: 'a',
