@@ -17,6 +17,8 @@ class PlayerChartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = Utils.of(context).getItemWidth(400, margin: 60);
+    final shouldRenderRecent = recent.totalBattles > 0;
+    final shouldRenderRest = info.totalBattle > 0;
 
     return Scaffold(
       appBar: AppBar(
@@ -31,15 +33,18 @@ class PlayerChartPage extends StatelessWidget {
               height: 300,
               itemPadding: const EdgeInsets.only(top: 8, bottom: 8),
               children: <Widget>[
-                buildLineChart(context, recent.recentBattleData, 'Recent battles', subtitle: recent.battleString),
-                buildLineChart(context, recent.recentWinrateData, 'Recent average winrate', subtitle: recent.avgWinrateString),
-                buildLineChart(context, recent.recentDamageData, 'Recent average damage', subtitle: recent.avgDamageString),
-                buildPieChart(context, info.nationData, 'Battles by ship nation', subtitle: info.battleString),
-                buildPieChart(context, info.typeData, 'Battles by ship type', subtitle: info.battleString),
-                buildBarChart(context, info.tierData, 'Battles by ship tier', subtitle: 'Avg tier - ${info.avgBattleTierString}'),
-                buildBarChart(context, info.topTenBattleData, 'Top ten ships by battles', vertical: false),
-                buildBarChart(context, info.topTenWinrateData, 'Top ten ships by winrate', vertical: false),
-                buildBarChart(context, info.topTenDamageData, 'Top ten ships by damage', vertical: false),
+                // So at least one battle, no battle no stats
+                if (shouldRenderRecent) buildLineChart(context, recent.recentBattleData, 'Recent battles', subtitle: recent.battleString),
+                if (shouldRenderRecent) buildLineChart(context, recent.recentWinrateData, 'Recent average winrate', subtitle: recent.avgWinrateString),
+                if (shouldRenderRecent) buildLineChart(context, recent.recentDamageData, 'Recent average damage', subtitle: recent.avgDamageString),
+                // No battle no stats
+                if (shouldRenderRest) buildPieChart(context, info.nationData, 'Battles by ship nation', subtitle: info.battleString),
+                if (shouldRenderRest) buildPieChart(context, info.typeData, 'Battles by ship type', subtitle: info.battleString),
+                if (shouldRenderRest) buildBarChart(context, info.tierData, 'Battles by ship tier', subtitle: 'Avg tier - ${info.avgBattleTierString}'),
+                // They are 0 by default so a simple check can determine whether they should be rendered
+                if (info.topTenByBattles.length > 0) buildBarChart(context, info.topTenBattleData, 'Top ten ships by battles', vertical: false),
+                if (info.topTenByWinrate.length > 0) buildBarChart(context, info.topTenWinrateData, 'Top ten ships by winrate', vertical: false),
+                if (info.topTenByDamage.length > 0) buildBarChart(context, info.topTenDamageData, 'Top ten ships by damage', vertical: false),
               ],
             ),
           ),
