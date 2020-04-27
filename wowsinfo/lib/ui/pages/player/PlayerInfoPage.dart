@@ -52,6 +52,8 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
   /// - 2, div2
   /// - 3, div3
   int pvpMode = 0;
+  /// This changes based on how user selection
+  PvP pvp;
 
   BasicPlayerInfo basicInfo;
   PlayerAchievement achievement;
@@ -86,6 +88,8 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
 
       // Check if this is a public profile
       if (basicInfo.publicProfile && (basicInfo?.statistic?.battle ?? 0) > 5) {
+        setState(() => this.pvp = basicInfo.statistic.pvp);
+
         // Request for clan tag
         final tag = PlayerClanTagParser(server, accountId);
         final clanTag = tag.parse(await tag.download());
@@ -185,6 +189,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
             transitionBuilder: (w, a) => SizeTransition(sizeFactor: a, child: w),
             child: buildRating()
           ),
+          buildButtons(),
           buildPvPModeSelection(),
           buildStatistics(),
         ],
@@ -195,17 +200,45 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
   Widget buildPvPModeSelection() {
     return FractionallySizedBox(
       widthFactor: 1,
-      child: CupertinoSlidingSegmentedControl(
-        padding: const EdgeInsets.all(4),
-        groupValue: this.pvpMode,
-        backgroundColor: Colors.transparent,
-        children: {
-          0: Text('All'),
-          1: Text('Solo'),
-          2: Text('Div2'),
-          3: Text('Div3'),
-        }, 
-        onValueChanged: (index) => setState(() => pvpMode = index),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+        child: CupertinoSlidingSegmentedControl(
+          padding: const EdgeInsets.all(4),
+          groupValue: this.pvpMode,
+          backgroundColor: Colors.transparent,
+          children: {
+            0: Text('PvP'),
+            1: Text('Solo'),
+            2: Text('Div2'),
+            3: Text('Div3'),
+            4: Text('PvE'),
+            5: Text('Rank'),
+          }, 
+          onValueChanged: (index) => setState(() {
+            // UPdate selected index and also update 'PvP'
+            pvpMode = index;
+            switch (index) {
+              case 0:
+                pvp = basicInfo.statistic.pvp;
+                break;
+              case 1:
+                pvp = basicInfo.statistic.solo;
+                break;
+              case 2:
+                pvp = basicInfo.statistic.div2;
+                break;
+              case 3:
+                pvp = basicInfo.statistic.div3;
+                break;
+              case 4:
+                pvp = basicInfo.statistic.pve;
+                break;
+              case 5:
+                pvp = basicInfo.statistic.rank;
+                break;
+            }
+          }),
+        ),
       ),
     );
   }
@@ -253,11 +286,10 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
       data: theme,
       child: Column(
         children: [
-          BasicPlayerTile(stats: stats.pvp),
-          buildButtons(),
-          buildMorePlayerInfo(stats.pvp),
-          buildRecord(stats.pvp),
-          WeaponInfoTile(pvp: stats.pvp),
+          BasicPlayerTile(stats: pvp),
+          buildMorePlayerInfo(pvp),
+          buildRecord(pvp),
+          WeaponInfoTile(pvp: pvp),
           // ExpansionTile(
           //   title: Text('Random Battle'),
           //   initiallyExpanded: true,
