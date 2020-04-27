@@ -21,7 +21,8 @@ class FlatFilterChip extends StatelessWidget {
       // selectedColor: Colors.transparent,
       label: label,
       selected: selected ?? false,
-      onSelected: onSelected
+      onSelected: onSelected,
+      showCheckmark: false,
     );
   }
 }

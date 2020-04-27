@@ -46,7 +46,7 @@ class WikiWarshipCell extends StatelessWidget {
   /// Use a different colour for premium or special ships
   Text buildText(String name) {
     var style = TextStyle(fontSize: 14, fontWeight: FontWeight.w300);
-    if (ship.isSpecialOrPremium) style = TextStyle(fontSize: 14, color: Colors.orange);
+    if (ship.isSpecialOrPremium) style = TextStyle(fontSize: 14, color: Colors.orange[300], fontWeight: FontWeight.w500);
 
     return Text(
       name, 
