@@ -32,6 +32,7 @@ import 'package:wowsinfo/ui/widgets/TextWithCaption.dart';
 import 'package:wowsinfo/ui/widgets/WrapBox.dart';
 import 'package:wowsinfo/ui/widgets/player/BasicPlayerTile.dart';
 import 'package:wowsinfo/ui/widgets/player/RatingBar.dart';
+import 'package:wowsinfo/ui/widgets/player/RatingTheme.dart';
 import 'package:wowsinfo/ui/widgets/player/WeaponInfoTile.dart';
 import 'package:wowsinfo/ui/widgets/wiki/WikiWarshipCell.dart';
 
@@ -162,17 +163,21 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.player.playerIdString)
-      ),
-      body: SafeArea(
-        child: Center(
-          child: AnimatedSwitcher(
-            duration: Duration(milliseconds: 500),
-            transitionBuilder: (w, a) => ScaleTransition(scale: a, child: w),
-            switchInCurve: Curves.linearToEaseOut,
-            child: buildBasicInfo(context),
+    final theme = Theme.of(context);
+    return RatingTheme(
+      color: shipInfo?.overallRating?.colour,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(widget.player.playerIdString),
+        ),
+        body: SafeArea(
+          child: Center(
+            child: AnimatedSwitcher(
+              duration: Duration(milliseconds: 500),
+              transitionBuilder: (w, a) => ScaleTransition(scale: a, child: w),
+              switchInCurve: Curves.linearToEaseOut,
+              child: buildBasicInfo(context),
+            ),
           ),
         ),
       ),
@@ -291,7 +296,10 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
       data: theme,
       child: Column(
         children: [
-          BasicPlayerTile(stats: pvp),
+          RatingTheme(
+            color: shipInfo?.overallRating?.colour,
+            child: BasicPlayerTile(stats: pvp),
+          ),
           buildMorePlayerInfo(pvp),
           buildRecord(pvp),
           WeaponInfoTile(pvp: pvp),
@@ -311,16 +319,18 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
         child: Theme(
           data: Theme.of(context).copyWith(
             buttonTheme: ButtonThemeData(
-              textTheme: ButtonTextTheme.primary
+
             )
           ),
           child: WrapBox(
             width: width,
             spacing: 4,
             children: [
-              if (achievement != null) buildAchievement(context),
+              // at least one achievment I guess
+              if (achievement != null && achievement.achievement.length > 0) buildAchievement(context),
               if (shipInfo != null && recentInfo != null) buildChart(context),
-              if (shipInfo != null) buildShip(context),
+              // at least one ship
+              if (shipInfo != null && shipInfo.ships.length > 0) buildShip(context),
               if (rankInfo != null && rankShipInfo != null) buildRank(context),
             ],
           ),

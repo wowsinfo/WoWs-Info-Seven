@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/models/WoWs/PlayerShipInfo.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
+import 'package:wowsinfo/core/extensions/NumberExtension.dart';
 
 /// It should handle one ships and a list of ships
 class PersonalRating {
@@ -21,15 +22,15 @@ class PersonalRating {
   double expectedFrags = 0;
   double expectedWins = 0;
 
-  Color get colour => index == -1 ? Colors.blueGrey : _ratingColours[index];
+  MaterialColor get colour => index == -1 ? Colors.blueGrey : _ratingColours[index];
   bool get hasRating => index >= 0;
 
   /// Colors for each ratings
-  final _ratingColours = [
+  final List<MaterialColor> _ratingColours = [
     Colors.red, Colors.orange, 
     Colors.amber, Colors.green, 
-    Colors.green.shade800, Colors.cyan,
-    Colors.purple.shade300, Colors.deepPurple
+    Colors.green, Colors.cyan,
+    Colors.purple, Colors.deepPurple
   ];
 
   PersonalRating();
@@ -85,6 +86,7 @@ class PersonalRating {
   /// Add another ships
   void add(PersonalRating rating) {
     if (rating.battle == 0) return;
+    battle += rating.battle;
     actualDmg += rating.actualDmg;
     expectedDmg += rating.expectedDmg;
     actualFrags += rating.actualFrags;
@@ -96,6 +98,6 @@ class PersonalRating {
   /// Context is needed for localization to work
   String getComment(BuildContext context) {
     final lang = AppLocalization.of(context);
-    return '';
+    return personalRating.myFixedString(0);
   }
 }
