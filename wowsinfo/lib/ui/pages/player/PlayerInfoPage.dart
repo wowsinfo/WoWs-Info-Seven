@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/models/UI/PlayerChartData.dart';
@@ -45,6 +46,13 @@ class PlayerInfoPage extends StatefulWidget {
 
 class _PlayerInfoPageState extends State<PlayerInfoPage> {
   final cached = CachedData.shared;
+  bool error = false;
+  /// - 0, all
+  /// - 1, solo, one player
+  /// - 2, div2
+  /// - 3, div3
+  int pvpMode = 0;
+
   BasicPlayerInfo basicInfo;
   PlayerAchievement achievement;
   PlayerShipInfo shipInfo;
@@ -52,7 +60,6 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
   RankPlayerShipInfo rankShipInfo;
   PlayerClanTag clanTag;
   RecentPlayerInfo recentInfo;
-  bool error = false;
 
   @override
   void initState() {
@@ -178,8 +185,27 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
             transitionBuilder: (w, a) => SizeTransition(sizeFactor: a, child: w),
             child: buildRating()
           ),
+          buildPvPModeSelection(),
           buildStatistics(),
         ],
+      ),
+    );
+  }
+
+  Widget buildPvPModeSelection() {
+    return FractionallySizedBox(
+      widthFactor: 1,
+      child: CupertinoSlidingSegmentedControl(
+        padding: const EdgeInsets.all(4),
+        groupValue: this.pvpMode,
+        backgroundColor: Colors.transparent,
+        children: {
+          0: Text('All'),
+          1: Text('Solo'),
+          2: Text('Div2'),
+          3: Text('Div3'),
+        }, 
+        onValueChanged: (index) => setState(() => pvpMode = index),
       ),
     );
   }

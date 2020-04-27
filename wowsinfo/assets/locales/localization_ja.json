@@ -73,8 +73,8 @@
     "warship_info_aircraft": "Aircraft",
     "warship_info_concealment": "Concealment",
 
-    "player_achievement": "Achievements",
-    "player_charts": "Charts",
-    "player_ships": "Ships",
-    "player_rank": "Rank"
+    "player_achievement": "実績",
+    "player_charts": "チャート",
+    "player_ships": "艦艇",
+    "player_rank": "ランキング"
 }
