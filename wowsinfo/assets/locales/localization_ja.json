@@ -1,10 +1,12 @@
 {
     "app_name": "WoWs Info 2016年末の夢",
+
     "game_server_selection_title": "ゲームサーバ",
     "game_server_ru": "ロシア",
     "game_server_eu": "ユーロッパ",
     "game_server_na": "北アメリア",
     "game_server_asia": "アジア",
+
     "server_language_selection_title": "サーバ言語",
     "suffix_re": "2016年末の夢",
     "suffix_origin": "オリギン",
@@ -16,8 +18,17 @@
     "suffix_freedom": "自由",
     "suffix_new": "新",
     "suffix_ultra": "ウルトラ",
+    
     "bottom_tab_home": "ホーム",
     "bottom_tab_website": "サイト",
+    "bottom_tab_wiki": "ウィキ",
+    "bottom_tab_realtime": "リアル",
+    "bottom_tab_search": "サーチ",
+
+    "website_page_title": "便利なサイト",
+    "wiki_page_title": "WoWs Encyclopedia",
+    "realtime_page_title": "Real-time Statistics",
+
     "website_official_site": "World of Warships",
     "website_premium": "プレミアムショップ",
     "website_global_wiki": "グローバルウィキ",
@@ -50,12 +61,7 @@
     "website_youtuber_iChaseGaming": "iChaseGaming艦長",
     "website_youtuber_NoZoupForYou": "NoZoupForYou艦長",
     "website_youtuber_Toptier": "Toptier艦長",
-    "bottom_tab_wiki": "ウィキ",
-    "bottom_tab_realtime": "リアル",
-    "bottom_tab_search": "サーチ",
-    "website_page_title": "便利なサイト",
-    "wiki_page_title": "WoWs Encyclopedia",
-    "realtime_page_title": "Real-time Statistics",
+
     "warship_avg_damage": "Average Damage",
     "warship_avg_winrate": "Average Winrate",
     "warship_avg_frag": "Average Frags",

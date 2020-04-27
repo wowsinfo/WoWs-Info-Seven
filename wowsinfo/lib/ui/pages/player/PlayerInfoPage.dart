@@ -11,6 +11,7 @@ import 'package:wowsinfo/core/models/WoWs/PvP.dart';
 import 'package:wowsinfo/core/models/WoWs/RankPlayerInfo.dart';
 import 'package:wowsinfo/core/models/WoWs/RankPlayerShipInfo.dart';
 import 'package:wowsinfo/core/models/WoWs/RecentPlayerInfo.dart';
+import 'package:wowsinfo/core/others/AppLocalization.dart';
 import 'package:wowsinfo/core/others/Utils.dart';
 import 'package:wowsinfo/core/parsers/API/BasicPlayerInfoParser.dart';
 import 'package:wowsinfo/core/parsers/API/PlayerAchievementParser.dart';
@@ -266,19 +267,27 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
   /// Buttons to go to another page
   Widget buildButtons() {
     final width = Utils.of(context).getItemWidth(200, margin: 10);
+
     return AnimatedSwitcher(
       duration: const Duration(milliseconds: 300),
       transitionBuilder: (w, a) => ScaleTransition(scale: a, child: w),
       child: Center(
-        child: WrapBox(
-          width: width,
-          spacing: 4,
-          children: [
-            buildAchievement(context),
-            buildChart(context),
-            buildShip(context),
-            buildRank(context),
-          ],
+        child: Theme(
+          data: Theme.of(context).copyWith(
+            buttonTheme: ButtonThemeData(
+              textTheme: ButtonTextTheme.primary
+            )
+          ),
+          child: WrapBox(
+            width: width,
+            spacing: 4,
+            children: [
+              buildAchievement(context),
+              buildChart(context),
+              buildShip(context),
+              buildRank(context),
+            ],
+          ),
         ),
       ),
     );
@@ -286,6 +295,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
 
   Widget buildAchievement(BuildContext context) {
     if (achievement == null) return null;
+    final lang = AppLocalization.of(context);
     return RaisedButton(
       onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (c) => WikiAchievementPage(player: achievement))), 
       child: Text('Achievement')

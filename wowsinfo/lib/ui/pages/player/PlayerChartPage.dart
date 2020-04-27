@@ -16,7 +16,7 @@ class PlayerChartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = Utils.of(context).getItemWidth(400);
+    final width = Utils.of(context).getItemWidth(400, margin: 60);
 
     return Scaffold(
       appBar: AppBar(
@@ -25,6 +25,7 @@ class PlayerChartPage extends StatelessWidget {
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
+            padding: const EdgeInsets.all(8),
             child: WrapBox(
               width: width,
               height: 300,

@@ -1,10 +1,12 @@
 {
     "app_name": "WoWs Info Re",
+
     "game_server_selection_title": "Game Server",
     "game_server_ru": "Russia",
     "game_server_eu": "Europe",
     "game_server_na": "North Amercia",
     "game_server_asia": "Asia",
+
     "server_language_selection_title": "Server Language",
     "suffix_re": "Re",
     "suffix_origin": "Origin",
@@ -16,12 +18,17 @@
     "suffix_freedom": "Freedom",
     "suffix_new": "New",
     "suffix_ultra": "Ultra",
+
     "bottom_tab_home": "Home",
     "bottom_tab_website": "Website",
     "bottom_tab_wiki": "Wiki",
     "bottom_tab_realtime": "Real-time",
     "bottom_tab_search": "Search",
+    
     "website_page_title": "Useful Websites",
+    "wiki_page_title": "WoWs Encyclopedia",
+    "realtime_page_title": "Real-time Statistics",
+
     "website_official_site": "World of Warships",
     "website_premium": "Premium Shop",
     "website_global_wiki": "Global Wiki",
@@ -54,8 +61,7 @@
     "website_youtuber_iChaseGaming": "iChaseGaming",
     "website_youtuber_NoZoupForYou": "NoZoupForYou",
     "website_youtuber_Toptier": "Toptier",
-    "wiki_page_title": "WoWs Encyclopedia",
-    "realtime_page_title": "Real-time Statistics",
+
     "warship_avg_damage": "Average Damage",
     "warship_avg_winrate": "Average Winrate",
     "warship_avg_frag": "Average Frags",
