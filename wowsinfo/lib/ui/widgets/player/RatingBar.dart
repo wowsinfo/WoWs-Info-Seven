@@ -25,7 +25,7 @@ class RatingBar extends StatelessWidget {
         child: FractionallySizedBox(
           widthFactor: 1,
           child: RaisedButton(
-            child: Text(rating.getComment(context)),
+            child: Text(rating.getComment(context), textAlign: TextAlign.center),
             onPressed: () {},
           ),
         ),

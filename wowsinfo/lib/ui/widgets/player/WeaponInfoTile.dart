@@ -25,9 +25,9 @@ class WeaponInfoTile extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       itemPadding: const EdgeInsets.all(8),
       children: [
-        WeaponValue(pvp.mainBattery, 'Main'),
+        WeaponValue(pvp.mainBattery, cached.shipModule.artillery),
         WeaponValue(pvp.secondBattery, 'Secondary'),
-        WeaponValue(pvp.torpedo, 'Torpedos'),
+        WeaponValue(pvp.torpedo, cached.shipModule.torpedo),
         WeaponValue(pvp.aircraft, 'Aircraft'),
         WeaponValue(pvp.ramming, 'Ramming'),
         // It is kinda crazy here but for ship mode, it needs to have at least 1 frag
@@ -44,7 +44,7 @@ class WeaponInfoTile extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 buildWarshipCell(e),
-                buildValue(e),
+                Expanded(child: buildValue(e)),
               ],
             ),
           ),

@@ -101,8 +101,7 @@ class PersonalRating {
     String comment = '';
     switch (index) {
       case -1:
-        comment = lang.localised('rating_no_info');
-        break;
+        return lang.localised('rating_no_info');
       case 0:
         comment = lang.localised('rating_bad');
         break;

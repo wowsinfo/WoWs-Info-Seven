@@ -9,7 +9,9 @@ Template
 
 ## 28/04/2020
 ### Summary
+Wiki ship module can be changed now and rating comment can now be displayed. No rating has been added to counter the issue where super unicum is displayed. There are many more adjustments. Rank is still cause issues due to two player div. What mode allows two player division though. 
 ### What to do tomorrow?
+Player ship filter. Wiki next ship and upgrades. 
 
 ## 27/04/2020
 ### Summary
