@@ -309,13 +309,17 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
                     final module = e.value;
                     if (module.length > 1) {
                       // Sort by id
-                      module.sort((b, a) => a - b);
+                      module.sort((a, b) {
+                        final moduleB = moduleTree.getPart(b);
+                        final moduleA = moduleTree.getPart(a);
+                        return moduleA.compareTo(moduleB);
+                      });
                       return Column(
                         children: <Widget>[
                           buildTitle(key),
                           Column(
                             children: module.map((e) {
-                              final curr = moduleTree.getPart(e.toString());
+                              final curr = moduleTree.getPart(e);
                               return ListTile(
                                 title: Text(curr.name),
                                 subtitle: Text(curr.creditString),

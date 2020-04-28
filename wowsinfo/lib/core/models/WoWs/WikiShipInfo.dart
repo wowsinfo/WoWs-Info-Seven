@@ -94,7 +94,7 @@ class Module {
 class ModulesTree {
   Map<String, Part> parts;
 
-  Part getPart(String id) => parts[id];
+  Part getPart(int id) => parts[id.toString()];
 
   ModulesTree(Map<String, dynamic> json) {
     parts = json.map((key, value) => MapEntry(key, Part(value)));
@@ -127,6 +127,18 @@ class Part {
     this.moduleId = json['module_id'];
     this.type = json['type'];
     this.moduleIdStr = json['module_id_str'];
+  }
+
+  int compareTo(Part other) {
+    // Copied from https://github.com/HenryQuan/WoWs-Info-Future/blob/legacy_version/WoWsInfo/src/page/wiki/WarshipModule.js
+    if (this.priceXp != other.priceXp) {
+      return this.priceXp.compareTo(other.priceXp);      
+    } else if (this.hasNextModule && other.hasNextModule) {
+      // Check if the next module of this is actually other
+      return (this.nextModule.first == other.moduleId) ? -1 : 1;
+    } else {
+      return this.hasNextModule ? -1 : 1;
+    }
   }
 }
 
