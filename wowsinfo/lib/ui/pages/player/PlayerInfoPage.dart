@@ -163,7 +163,6 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return RatingTheme(
       color: shipInfo?.overallRating?.colour,
       child: Scaffold(

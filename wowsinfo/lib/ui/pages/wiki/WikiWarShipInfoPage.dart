@@ -206,7 +206,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
       ),
       buildParameter(),
       if (info.hasOtherModules) buildModuleTree(),
-      renderMobile(),
+      ...renderMobile(),
     ];
 
     // if (Utils.of(context).isTablet()) {
@@ -243,20 +243,18 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
     );
   }
 
-  Widget renderMobile() {
-    return Column(
-      children: [
-        buildSurvivability(),
-        buildTorpBomber(),
-        buildDiveBomber(),
-        buildArtillery(),
-        buildSecondary(),
-        buildTorpedo(),
-        buildAA(),
-        buildMeuverability(),
-        buildConcealment(),
-      ],
-    );
+  List<Widget> renderMobile() {
+    return [
+      buildSurvivability(),
+      buildTorpBomber(),
+      buildDiveBomber(),
+      buildArtillery(),
+      buildSecondary(),
+      buildTorpedo(),
+      buildAA(),
+      buildMeuverability(),
+      buildConcealment(),
+    ];
   }
 
   Widget renderTablet() {
@@ -304,21 +302,23 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
             builder: (context) {
               return SingleChildScrollView(
                 child: Column(
-                  children: modules.map((e) {
-                    final key = e.key;
-                    final module = e.value;
-                    if (module.length > 1) {
-                      // Sort by id
-                      module.sort((a, b) {
-                        final moduleB = moduleTree.getPart(b);
-                        final moduleA = moduleTree.getPart(a);
-                        return moduleA.compareTo(moduleB);
-                      });
-                      return Column(
-                        children: <Widget>[
-                          buildTitle(key),
-                          Column(
-                            children: module.map((e) {
+                  children: [
+                    // Spread the list
+                    ...modules.map((e) {
+                      final key = e.key;
+                      final module = e.value;
+                      if (module.length > 1) {
+                        // Sort by id
+                        module.sort((a, b) {
+                          final moduleB = moduleTree.getPart(b);
+                          final moduleA = moduleTree.getPart(a);
+                          return moduleA.compareTo(moduleB);
+                        });
+                        
+                        return Column(
+                          children: <Widget>[
+                            buildTitle(key),
+                            ...module.map((e) {
                               final curr = moduleTree.getPart(e);
                               return ListTile(
                                 title: Text(curr.name),
@@ -326,13 +326,22 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
                                 trailing: Text(curr.xpString),
                               );
                             }).toList(growable: false),
-                          )
-                        ],
-                      );
-                    }
+                          ],
+                        );
+                      }
 
-                    return SizedBox.shrink();
-                  }).toList(growable: false),
+                      return SizedBox.shrink();
+                    }).toList(growable: false),
+                    FractionallySizedBox(
+                      widthFactor: 1,
+                      child: RaisedButton(
+                        child: Text('Update module'),
+                        onPressed: () {
+
+                        },
+                      ),
+                    ),
+                  ],
                 ),
               );
             },
@@ -379,7 +388,6 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
             ),
           ],
         ),
-
       ],
     );
   }
