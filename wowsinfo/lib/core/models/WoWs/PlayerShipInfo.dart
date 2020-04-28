@@ -35,10 +35,12 @@ class PlayerShipInfo {
   PlayerShipInfo.fromRank(RankPlayerShipInfo rank, String season) {
     canSort = false;
     rank.getShipsFor(season: season).forEach((element) {
-      final curr = ShipInfo.fromSeason(element);
-      if (_cached.getShip(curr.shipId) != null) {
-        ships.add(curr);
-        if (curr.rating.hasRating) overallRating.add(curr.rating);
+      if (element.played) {
+        final curr = ShipInfo.fromSeason(element);
+        if (_cached.getShip(curr.shipId) != null) {
+          ships.add(curr);
+          if (curr.rating.hasRating) overallRating.add(curr.rating);
+        }
       }
     });
 

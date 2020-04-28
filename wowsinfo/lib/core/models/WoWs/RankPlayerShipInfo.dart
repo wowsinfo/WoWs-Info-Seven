@@ -52,6 +52,8 @@ class Season {
     this.rankDiv3 = json['rank_div3'];
     this.shipInfo = ShipInfo(json);
   }
+
+  bool get played => rankSolo != null;
 }
 
 /// This is the `RankPvP` class
