@@ -23,6 +23,7 @@ class PlayerRankInfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final rankEntries = rank.sortedSeasons;
+    final width = Utils.of(context).getItemWidth(400);
 
     return Scaffold(
       appBar: AppBar(
@@ -31,7 +32,7 @@ class PlayerRankInfoPage extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: WrapBox(
-            width: 400,
+            width: width,
             children: rankEntries.map((curr) {
               final pvp = curr.value.rankSolo;
               final info = PlayerShipInfo.fromRank(rankShip, curr.key);
@@ -63,7 +64,10 @@ class PlayerRankInfoPage extends StatelessWidget {
                           )
                         ],
                       ),
-                      RatingBar(rating: info.overallRating),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+                        child: RatingBar(rating: info.overallRating),
+                      ),
                       ExpansionTile(
                         title: Text('More details'),
                         children: [
