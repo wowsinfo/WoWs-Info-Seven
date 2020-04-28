@@ -25,6 +25,8 @@ class Consumable {
   String type;
   String description;
 
+  String get priceString => isGold ? priceGold.toString() : priceCredit.toString();
+  bool get isGold => priceGold > 0;
   String get profileString => profile.values.map((e) => e.description).join('\n');
 
   Consumable.fromJson(Map<String, dynamic> json) {

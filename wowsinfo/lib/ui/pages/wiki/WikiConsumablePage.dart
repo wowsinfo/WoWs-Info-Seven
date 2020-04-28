@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/data/CachedData.dart';
+import 'package:wowsinfo/core/models/Wiki/WikiConsumable.dart';
 import 'package:wowsinfo/core/others/Utils.dart';
 
 /// WikiConsumablePage class, this is shared by flag, consumable, upgrade and collection
@@ -23,40 +24,66 @@ class _WikiConsumablePageState extends State<WikiConsumablePage> {
       appBar: AppBar(
         title: Text('WikiConsumablePage')
       ),
-      body: Scrollbar(
-        child: GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: itemCount,
-            childAspectRatio: 1.0,
-          ),
-          itemCount: consumable.length,
-          itemBuilder: (c, i) {
-            final curr = consumable.elementAt(i);
-            return InkWell(
-              onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (context) => AlertDialog(
-                    content: ListTile(
-                      contentPadding: const EdgeInsets.all(2),
-                      isThreeLine: true,
-                      title: Text(curr.name),
-                      subtitle: Text(curr.description + '\n\n' + curr.profileString),
-                      leading: Image.network(curr.image),
+      body: SafeArea(
+        child: Scrollbar(
+          child: GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: itemCount,
+              childAspectRatio: 1.0,
+            ),
+            itemCount: consumable.length,
+            itemBuilder: (c, i) {
+              final curr = consumable.elementAt(i);
+              return InkWell(
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      content: ListTile(
+                        contentPadding: const EdgeInsets.all(2),
+                        isThreeLine: true,
+                        title: Text(curr.name),
+                        subtitle: RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: curr.priceString + ' ',
+                                style: TextStyle(color: curr.isGold ? Colors.orange : Colors.grey)
+                              ),
+                              TextSpan(
+                                text: curr.description + '\n\n',
+                                style: TextStyle(fontSize: 14)
+                              ),
+                              TextSpan(
+                                text: curr.profileString,
+                                style: TextStyle(fontSize: 12)
+                              ),
+                            ]
+                          ),
+                        ),
+                        leading: buildHeroImage(curr),
+                      ),
                     ),
+                  );
+                },
+                child: Tooltip(
+                  message: curr.name,
+                  child: FittedBox(
+                    child: buildHeroImage(curr),
                   ),
-                );
-              },
-              child: Tooltip(
-                message: curr.name,
-                child: FittedBox(
-                  child: Image.network(consumable.elementAt(i).image)
                 ),
-              ),
-            );
-          }
+              );
+            }
+          ),
         ),
       ),
+    );
+  }
+
+  Hero buildHeroImage(Consumable curr) {
+    return Hero(
+      tag: curr.consumableId,
+      child: Image.network(curr.image)
     );
   }
 }

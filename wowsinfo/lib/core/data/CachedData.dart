@@ -156,7 +156,10 @@ class CachedData extends LocalData {
   Iterable<Consumable> get wikiConsumables => _consumable.consumable.values;
   Iterable<Consumable> get sortedWikiConsumables => wikiConsumables
     .toList(growable: false)..sort((a, b) {
-      if (a.type == b.type) return a.consumableId - b.consumableId;
+      if (a.type == b.type) {
+        if (a.priceGold == b.priceGold) return a.priceCredit - b.priceCredit;
+        return a.priceGold - b.priceGold;
+      }
       return a.type.compareTo(b.type);
     });
   void loadConsumable() => _consumable = decode(WIKI_CONSUMABLE, (j) => WikiConsumable.fromJson(j));
