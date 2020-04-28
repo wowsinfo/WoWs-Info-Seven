@@ -35,6 +35,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
   WikiShipInfo info;
   /// Modules can be changed by users
   WikiShipModule modules;
+  Map<String, int> selectedModuleMap = {};
 
   ScrollController controller;
   AnimationController slideController;
@@ -301,56 +302,66 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
           showModalBottomSheet(
             context: context, 
             builder: (context) {
-              return SingleChildScrollView(
-                child: Column(
-                  children: [
-                    // Spread the list
-                    ...modules.map((e) {
-                      final key = e.key;
-                      final module = e.value;
-                      if (module.length > 1) {
-                        // Sort by id
-                        module.sort((a, b) {
-                          final moduleB = moduleTree.getPart(b);
-                          final moduleA = moduleTree.getPart(a);
-                          return moduleA.compareTo(moduleB);
-                        });
-                        
-                        return Column(
-                          children: <Widget>[
-                            buildTitle(key),
-                            ...module.map((e) {
-                              final curr = moduleTree.getPart(e);
-                              return ListTile(
-                                title: Text(curr.name),
-                                subtitle: Text(curr.creditString),
-                                trailing: Text(curr.xpString),
-                                onTap: () {},
-                              );
-                            }).toList(growable: false),
-                          ],
-                        );
-                      }
-
-                      return SizedBox.shrink();
-                    }).toList(growable: false),
-                    FractionallySizedBox(
-                      widthFactor: 1,
-                      child: RaisedButton(
-                        child: Text('Update ship modules'),
-                        onPressed: () async {
-                          final moduleParser = WikiShipModuleParser(pref.gameServer, info.shipId);
-                          final module = moduleParser.parse(await moduleParser.download());
-                          if (module != null) {
-                            setState(() => this.modules = module);
+              return StatefulBuilder(
+                builder: (context, setState) {
+                  return SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        // Spread the list
+                        ...modules.map((e) {
+                          final key = e.key;
+                          final module = e.value;
+                          if (module.length > 1) {
+                            // Sort by id
+                            module.sort((a, b) {
+                              final moduleB = moduleTree.getPart(b);
+                              final moduleA = moduleTree.getPart(a);
+                              return moduleA.compareTo(moduleB);
+                            });
+                            
+                            return Column(
+                              children: <Widget>[
+                                buildTitle(key),
+                                ...module.map((e) {
+                                  final curr = moduleTree.getPart(e);
+                                  final selected = selectedModuleMap[key] == e;
+                                  return ListTile(
+                                    title: Text(curr.name),
+                                    subtitle: Text(curr.creditString),
+                                    trailing: Text(curr.xpString),
+                                    leading: selected ? Icon(Icons.check, size: 32) : SizedBox.shrink(),
+                                    onTap: () {
+                                      setState(() {
+                                        selectedModuleMap[key] = e;
+                                      });
+                                    },
+                                  );
+                                }).toList(growable: false),
+                              ],
+                            );
                           }
 
-                          Navigator.pop(context);
-                        },
-                      ),
+                          return SizedBox.shrink();
+                        }).toList(growable: false),
+                        FractionallySizedBox(
+                          widthFactor: 1,
+                          child: RaisedButton(
+                            child: Text('Update ship modules'),
+                            onPressed: () async {
+                              final moduleParser = WikiShipModuleParser(pref.gameServer, info.shipId);
+                              final module = moduleParser.parse(await moduleParser.download());
+                              if (module != null) {
+                                setState(() => this.modules = module);
+                              }
+
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  );
+                },
               );
             },
           );
