@@ -98,6 +98,36 @@ class PersonalRating {
   /// Context is needed for localization to work
   String getComment(BuildContext context) {
     final lang = AppLocalization.of(context);
-    return personalRating.myFixedString(0);
+    String comment = '';
+    switch (index) {
+      case -1:
+        comment = lang.localised('rating_no_info');
+        break;
+      case 0:
+        comment = lang.localised('rating_bad');
+        break;
+      case 1:
+        comment = lang.localised('rating_below_average');
+        break;
+      case 2:
+        comment = lang.localised('rating_average');
+        break;
+      case 3:
+        comment = lang.localised('rating_good');
+        break;
+      case 4:
+        comment = lang.localised('rating_very_good');
+        break;
+      case 5:
+        comment = lang.localised('rating_great');
+        break;
+      case 6:  
+        comment = lang.localised('rating_unicum');
+        break;
+      default:
+        comment = lang.localised('rating_super_unicum');
+        break;
+    }
+    return '$comment - ${personalRating.myFixedString(0)}';
   }
 }

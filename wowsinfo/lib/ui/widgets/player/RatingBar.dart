@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/models/UI/PersonalRating.dart';
-import 'package:wowsinfo/core/extensions/NumberExtension.dart';
 
 /// RatingBar class
 class RatingBar extends StatelessWidget {
@@ -26,7 +25,7 @@ class RatingBar extends StatelessWidget {
         child: FractionallySizedBox(
           widthFactor: 1,
           child: RaisedButton(
-            child: Text(rating.personalRating.myFixedString(0)),
+            child: Text(rating.getComment(context)),
             onPressed: () {},
           ),
         ),

@@ -41,9 +41,10 @@ class WeaponInfoTile extends StatelessWidget {
           Text(e.title, style: Theme.of(context).textTheme.headline6),
           Expanded(
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 buildWarshipCell(e),
-                Expanded(child: buildValue(e)),
+                buildValue(e),
               ],
             ),
           ),
