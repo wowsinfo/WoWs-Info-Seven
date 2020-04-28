@@ -1,3 +1,4 @@
+import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/models/UI/GameServer.dart';
 import 'package:wowsinfo/core/models/WoWs/WikiShipModule.dart';
 
@@ -5,12 +6,30 @@ import 'APIParser.dart';
 
 class WikiShipModuleParser extends APIParser {
   String _id;
+  final _module = CachedData.shared.shipModule;
 
-  WikiShipModuleParser(GameServer server, int shipId) : super(server) {
+  Map<String, String> get _apiMap => {
+    _module.engine: 'engine_id',
+    _module.torpedoBomber: 'torpedo_bomber_id',
+    _module.fighter: 'fighter_id',
+    _module.hull: 'hull_id',
+    _module.artillery: 'artillery_id',
+    _module.torpedo: 'torpedoes_id',
+    _module.suo: 'fire_control_id',
+    _module.flightControl: 'fire_control_id',
+    _module.diveBomber: 'dive_bomber_id',
+  };
+
+  WikiShipModuleParser(GameServer server, int shipId, Map<String, int> modules) : super(server) {
     this._id = shipId.toString();
     this.link += '/wows/encyclopedia/shipprofile/';
     addAPIKey();
     this.link += '&ship_id=$_id';
+    this.link += '&' + modules.entries.map((e) {
+      final key = e.key;
+      final currModule = e.value;
+      return '${_apiMap[key]}=$currModule';
+    }).join('&');
   }
 
   @override

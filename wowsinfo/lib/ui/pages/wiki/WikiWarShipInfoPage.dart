@@ -329,7 +329,10 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
                                     title: Text(curr.name),
                                     subtitle: Text(curr.creditString),
                                     trailing: Text(curr.xpString),
-                                    leading: selected ? Icon(Icons.check, size: 32) : SizedBox.shrink(),
+                                    leading: AnimatedSwitcher(
+                                      duration: const Duration(milliseconds: 300),
+                                      child: selected ? Icon(Icons.check, size: 32) : SizedBox.shrink(),
+                                    ),
                                     onTap: () {
                                       setState(() {
                                         selectedModuleMap[key] = e;
@@ -348,13 +351,15 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
                           child: RaisedButton(
                             child: Text('Update ship modules'),
                             onPressed: () async {
-                              final moduleParser = WikiShipModuleParser(pref.gameServer, info.shipId);
-                              final module = moduleParser.parse(await moduleParser.download());
-                              if (module != null) {
-                                setState(() => this.modules = module);
-                              }
+                              if (selectedModuleMap.length > 0) {
+                                final moduleParser = WikiShipModuleParser(pref.gameServer, info.shipId, selectedModuleMap);
+                                final module = moduleParser.parse(await moduleParser.download());
+                                if (module != null) {
+                                  setState(() => this.modules = module);
+                                }
 
-                              Navigator.pop(context);
+                                Navigator.pop(context);
+                              }
                             },
                           ),
                         ),
