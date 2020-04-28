@@ -40,7 +40,7 @@ class ShipModule {
   String suo;
   String hull;
   String artillery;
-  String torpedoe;
+  String torpedo;
   String torpedoBomber;
   String diveBomber;
   String fighter;
@@ -51,7 +51,7 @@ class ShipModule {
     this.suo = json['Suo'];
     this.hull = json['Hull'];
     this.artillery = json['Artillery'];
-    this.torpedoe = json['Torpedoes'];
+    this.torpedo = json['Torpedoes'];
     this.torpedoBomber = json['TorpedoBomber'];
     this.diveBomber = json['DiveBomber'];
     this.fighter = json['Fighter'];
@@ -64,7 +64,7 @@ class ShipModule {
       'Suo': this.suo,
       'Hull': this.hull,
       'Artillery': this.artillery,
-      'Torpedoes': this.torpedoe,
+      'Torpedoes': this.torpedo,
       'TorpedoBomber': this.torpedoBomber,
       'DiveBomber': this.diveBomber,
       'Fighter': this.fighter,

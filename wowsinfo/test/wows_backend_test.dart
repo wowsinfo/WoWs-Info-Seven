@@ -127,7 +127,7 @@ void main() {
 
     expect(cv != null, isTrue);
     expect(cv.defaultProfile.diveBomber.accuracy.max == 120.0, isTrue);
-    expect(cv.defaultProfile.torpedoe == null, isTrue);
+    expect(cv.defaultProfile.torpedo == null, isTrue);
 
     print('Test battleships');
     final bbfile = File('test/json/ship_wiki_gneisenau.json');
@@ -138,7 +138,7 @@ void main() {
 
     expect(bb != null, isTrue);
     expect(bb.upgrade.length == 12, isTrue);
-    expect(bb.defaultProfile.torpedoe.reloadTime == 68, isTrue);
+    expect(bb.defaultProfile.torpedo.reloadTime == 68, isTrue);
     expect(bb.defaultProfile.diveBomber == null, isTrue);
   });
 }

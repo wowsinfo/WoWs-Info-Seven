@@ -1,3 +1,5 @@
+import 'package:wowsinfo/core/data/CachedData.dart';
+
 import 'WikiShipModule.dart';
 
 /// This is the `WikiShipInfo` class
@@ -20,6 +22,8 @@ class WikiShipInfo {
   String type;
   bool isSpecial;
   String name;
+
+  bool get hasOtherModules => module.hasOtherModules;
 
   WikiShipInfo(Map<String, dynamic> data) {
     final json = data.values.first;
@@ -53,10 +57,25 @@ class Module {
   List<int> fighter;
   List<int> hull;
   List<int> artillery;
-  List<int> torpedoe;
+  List<int> torpedo;
   List<int> fireControl;
   List<int> flightControl;
   List<int> diveBomber;
+  final _module = CachedData.shared.shipModule;
+
+  // at least two items in it
+  bool get hasOtherModules => moduleMap.values.any((element) => element.length > 1);
+  Map<String, List<int>> get moduleMap => {
+    _module.engine: engine,
+    _module.torpedoBomber: torpedoBomber,
+    _module.fighter: fighter,
+    _module.hull: hull,
+    _module.artillery: artillery,
+    _module.torpedo: torpedo,
+    _module.suo: fireControl,
+    _module.flightControl: flightControl,
+    _module.diveBomber: diveBomber,
+  };
 
   Module(Map<String, dynamic> json) {
     this.engine = (json['engine'] ?? []).cast<int>();
@@ -64,7 +83,7 @@ class Module {
     this.fighter = (json['fighter'] ?? []).cast<int>();
     this.hull = (json['hull'] ?? []).cast<int>();
     this.artillery = (json['artillery'] ?? []).cast<int>();
-    this.torpedoe = (json['torpedoes'] ?? []).cast<int>();
+    this.torpedo = (json['torpedoes'] ?? []).cast<int>();
     this.fireControl = (json['fire_control'] ?? []).cast<int>();
     this.flightControl = (json['flight_control'] ?? []).cast<int>();
     this.diveBomber = (json['dive_bomber'] ?? []).cast<int>();
@@ -74,6 +93,8 @@ class Module {
 /// This is the `ModulesTree` class
 class ModulesTree {
   Map<String, Part> parts;
+
+  Part getPart(String id) => parts[id];
 
   ModulesTree(Map<String, dynamic> json) {
     parts = json.map((key, value) => MapEntry(key, Part(value)));
@@ -91,6 +112,10 @@ class Part {
   int moduleId;
   String type;
   String moduleIdStr;
+
+  bool get hasNextModule => nextModule.length > 0;
+  String get xpString => '$priceXp xp';
+  String get creditString => '$priceCredit';
 
   Part(Map<String, dynamic> json) {
     this.name = json['name'];

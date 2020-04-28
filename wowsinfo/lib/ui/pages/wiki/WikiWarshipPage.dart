@@ -153,7 +153,8 @@ class WarshipList extends StatelessWidget {
     return OrientationBuilder(
       builder: (context, _) {
         // 120 can place 3 on iPhone 11
-        final itemCount = Utils.of(context).getItemCount(6, 1, 150);
+        final util = Utils.of(context);
+        final itemCount = util.getItemCount(6, 1, 180);
         
         return Scrollbar(
           child: GridView.builder(

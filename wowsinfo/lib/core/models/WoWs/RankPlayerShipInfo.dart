@@ -70,7 +70,7 @@ class RankPvP {
   int maxPlanesKilled;
 
   // Reuse classes in PvP.dart
-  Torpedoe torpedoe;
+  Torpedoe torpedo;
   Aircraft aircraft;
   Ramming ramming;
   MainBattery mainBattery;
@@ -113,7 +113,7 @@ class RankPvP {
     this.win = json['wins'];
     this.planesKilled = json['planes_killed'];
     this.loss = json['losss'];
-    if (json['torpedoes'] != null) this.torpedoe = Torpedoe(json['torpedoes']);
+    if (json['torpedoes'] != null) this.torpedo = Torpedoe(json['torpedoes']);
     this.battle = json['battles'];
     this.maxDamageDealt = json['max_damage_dealt'];
     this.damageDealt = json['damage_dealt'];

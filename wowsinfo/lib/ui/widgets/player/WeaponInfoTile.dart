@@ -27,7 +27,7 @@ class WeaponInfoTile extends StatelessWidget {
       children: [
         WeaponValue(pvp.mainBattery, 'Main'),
         WeaponValue(pvp.secondBattery, 'Secondary'),
-        WeaponValue(pvp.torpedoe, 'Torpedos'),
+        WeaponValue(pvp.torpedo, 'Torpedos'),
         WeaponValue(pvp.aircraft, 'Aircraft'),
         WeaponValue(pvp.ramming, 'Ramming'),
         // It is kinda crazy here but for ship mode, it needs to have at least 1 frag

@@ -12,7 +12,7 @@ class WikiShipModule {
   Hull hull;
   Atba atba;
   Artillery artillery;
-  Torpedoe torpedoe;
+  Torpedoe torpedo;
   Fighter fighter;
   FireControl fireControl;
   Weaponry weaponry;
@@ -30,7 +30,7 @@ class WikiShipModule {
     return [
       [lang.localised('warship_info_survivability'), armour?.total?.toDouble()],
       [cached.shipModule.artillery, weaponry?.artillery?.toDouble()],
-      [cached.shipModule.torpedoe, weaponry?.torpedoe?.toDouble()],
+      [cached.shipModule.torpedo, weaponry?.torpedo?.toDouble()],
       [lang.localised('warship_info_antiaircraft'), weaponry?.antiAircraft?.toDouble()],
       [lang.localised('warship_info_maneuverabilty'), mobility?.total?.toDouble()],
       [lang.localised('warship_info_aircraft'), weaponry?.aircraft?.toDouble()],
@@ -46,7 +46,7 @@ class WikiShipModule {
     if (json['hull'] != null) this.hull = Hull(json['hull']);
     if (json['atbas'] != null) this.atba = Atba(json['atbas']);
     if (json['artillery'] != null) this.artillery = Artillery(json['artillery']);
-    if (json['torpedoes'] != null) this.torpedoe = Torpedoe(json['torpedoes']);
+    if (json['torpedoes'] != null) this.torpedo = Torpedoe(json['torpedoes']);
     if (json['fighters'] != null) this.fighter = Fighter(json['fighters']);
     if (json['fire_control'] != null) this.fireControl = FireControl(json['fire_control']);
     if (json['weaponry'] != null) this.weaponry = Weaponry(json['weaponry']);
@@ -439,13 +439,13 @@ class Weaponry {
   int antiAircraft;
   int aircraft;
   int artillery;
-  int torpedoe;
+  int torpedo;
 
   Weaponry(Map<String, dynamic> json) {
     this.antiAircraft = json['anti_aircraft'];
     this.aircraft = json['aircraft'];
     this.artillery = json['artillery'];
-    this.torpedoe = json['torpedoes'];
+    this.torpedo = json['torpedoes'];
   }
 }
 

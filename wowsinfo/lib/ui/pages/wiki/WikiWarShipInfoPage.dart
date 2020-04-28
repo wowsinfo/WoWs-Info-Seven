@@ -205,6 +205,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
         child: Text(info.description, style: textTheme.bodyText1, textAlign: TextAlign.center),
       ),
       buildParameter(),
+      if (info.hasOtherModules) buildModuleTree(),
       renderMobile(),
     ];
 
@@ -286,6 +287,54 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
           )
         ),
       ],
+    );
+  }
+
+  /// Build module tree if there is one
+  Widget buildModuleTree() {
+    final modules = info.module.moduleMap.entries;
+    final moduleTree = info.modulesTree;
+    return FractionallySizedBox(
+      widthFactor: 1,
+      child: RaisedButton(
+        child: Text('Update ship modules'),
+        onPressed: () {
+          showModalBottomSheet(
+            context: context, 
+            builder: (context) {
+              return SingleChildScrollView(
+                child: Column(
+                  children: modules.map((e) {
+                    final key = e.key;
+                    final module = e.value;
+                    if (module.length > 1) {
+                      // Sort by id
+                      module.sort((b, a) => a - b);
+                      return Column(
+                        children: <Widget>[
+                          buildTitle(key),
+                          Column(
+                            children: module.map((e) {
+                              final curr = moduleTree.getPart(e.toString());
+                              return ListTile(
+                                title: Text(curr.name),
+                                subtitle: Text(curr.creditString),
+                                trailing: Text(curr.xpString),
+                              );
+                            }).toList(growable: false),
+                          )
+                        ],
+                      );
+                    }
+
+                    return SizedBox.shrink();
+                  }).toList(growable: false),
+                ),
+              );
+            },
+          );
+        }
+      ),
     );
   }
 
@@ -530,7 +579,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
   }
 
   Widget buildTorpedo() {
-    final torp = modules.torpedoe;
+    final torp = modules.torpedo;
     if (torp == null) return SizedBox.shrink();
     return Column(
       children: [
