@@ -24,18 +24,18 @@ class WikiShipModule {
   DiveBomber diveBomber;
 
   // Make sure the second value is DOUBLE
-  List<List<Object>> getParameter(BuildContext context) {
+  Map<String, int> getParameter(BuildContext context) {
     final lang = AppLocalization.of(context);
     final cached = CachedData.shared;
-    return [
-      [lang.localised('warship_info_survivability'), armour?.total?.toDouble()],
-      [cached.shipModule.artillery, weaponry?.artillery?.toDouble()],
-      [cached.shipModule.torpedo, weaponry?.torpedo?.toDouble()],
-      [lang.localised('warship_info_antiaircraft'), weaponry?.antiAircraft?.toDouble()],
-      [lang.localised('warship_info_maneuverabilty'), mobility?.total?.toDouble()],
-      [lang.localised('warship_info_aircraft'), weaponry?.aircraft?.toDouble()],
-      [lang.localised('warship_info_concealment'), concealment?.total?.toDouble()],
-    ];
+    return {
+      lang.localised('warship_info_survivability'): armour?.total,
+      cached.shipModule.artillery: weaponry?.artillery,
+      cached.shipModule.torpedo: weaponry?.torpedo,
+      lang.localised('warship_info_antiaircraft'): weaponry?.antiAircraft,
+      lang.localised('warship_info_maneuverabilty'): mobility?.total,
+      lang.localised('warship_info_aircraft'): weaponry?.aircraft,
+      lang.localised('warship_info_concealment'): concealment?.total,
+    };
   }
 
   WikiShipModule(Map<String, dynamic> json) {

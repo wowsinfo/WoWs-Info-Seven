@@ -206,7 +206,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
         padding: const EdgeInsets.all(8.0),
         child: Text(info.description, style: textTheme.bodyText1, textAlign: TextAlign.center),
       ),
-      buildParameter(),
+      ...buildParameter(),
       if (info.hasOtherModules) buildModuleTree(),
       ...renderMobile(),
     ];
@@ -355,7 +355,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
                                 final moduleParser = WikiShipModuleParser(pref.gameServer, info.shipId, selectedModuleMap);
                                 final module = moduleParser.parse(await moduleParser.download());
                                 if (module != null) {
-                                  setState(() => this.modules = module);
+                                  this.setState(() => this.modules = module);
                                 }
 
                                 Navigator.pop(context);
@@ -382,11 +382,9 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
   }
 
   /// Build ship parameter
-  Widget buildParameter() {
-    return Column(
-      children: modules.getParameter(context).map((e) => 
-        ShipParameter(paramater: e)).toList(growable: false),
-    );
+  List<Widget> buildParameter() {
+    return this.modules.getParameter(context).entries.map((e) => 
+      ShipParameter(paramater: e)).toList(growable: false);
   }
 
   Widget buildSurvivability() {
