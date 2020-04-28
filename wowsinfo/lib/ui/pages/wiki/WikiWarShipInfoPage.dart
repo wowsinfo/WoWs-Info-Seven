@@ -8,6 +8,7 @@ import 'package:wowsinfo/core/models/WoWs/WikiShipModule.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
 import 'package:wowsinfo/core/others/Utils.dart';
 import 'package:wowsinfo/core/parsers/API/WikiShipInfoParser.dart';
+import 'package:wowsinfo/core/parsers/API/WikiShipModuleParser.dart';
 import 'package:wowsinfo/ui/pages/wiki/WikiWarshipSimilarPage.dart';
 import 'package:wowsinfo/ui/widgets/PlatformLoadingIndiactor.dart';
 import 'package:wowsinfo/ui/widgets/TextWithCaption.dart';
@@ -324,6 +325,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
                                 title: Text(curr.name),
                                 subtitle: Text(curr.creditString),
                                 trailing: Text(curr.xpString),
+                                onTap: () {},
                               );
                             }).toList(growable: false),
                           ],
@@ -335,9 +337,15 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
                     FractionallySizedBox(
                       widthFactor: 1,
                       child: RaisedButton(
-                        child: Text('Update module'),
-                        onPressed: () {
+                        child: Text('Update ship modules'),
+                        onPressed: () async {
+                          final moduleParser = WikiShipModuleParser(pref.gameServer, info.shipId);
+                          final module = moduleParser.parse(await moduleParser.download());
+                          if (module != null) {
+                            setState(() => this.modules = module);
+                          }
 
+                          Navigator.pop(context);
                         },
                       ),
                     ),
