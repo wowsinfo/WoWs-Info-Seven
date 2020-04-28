@@ -18,8 +18,8 @@ class WikiGameMapPage extends StatelessWidget {
         child: ListView.builder(
           itemCount: maps.length,
           itemBuilder: (context, index) => ListTile(
-            title: Text(maps[index].name),
-            subtitle: Text(maps[index].description),
+            title: Text(maps[index].name, textAlign: TextAlign.center),
+            subtitle: Text(maps[index].description, textAlign: TextAlign.center),
             onTap: () {
               showDialog(
                 context: context,
@@ -30,13 +30,7 @@ class WikiGameMapPage extends StatelessWidget {
                     contentPadding: EdgeInsets.all(0),
                     content: Image.network(
                       maps[index].icon,
-                      loadingBuilder: (c, w, loading) {
-                        if (loading == null) return w;
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: PlatformLoadingIndiactor(),
-                        );
-                      },
+                      fit: BoxFit.fill,
                     ),
                     actions: [
                       FlatButton(child: Text('Close'), onPressed: () => Navigator.pop(context)),
