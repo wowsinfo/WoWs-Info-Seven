@@ -256,6 +256,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
       buildAA(),
       buildMeuverability(),
       buildConcealment(),
+      buildNextShip(),
     ];
   }
 
@@ -304,66 +305,68 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
             builder: (context) {
               return StatefulBuilder(
                 builder: (context, setState) {
-                  return SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        // Spread the list
-                        ...modules.map((e) {
-                          final key = e.key;
-                          final module = e.value;
-                          if (module.length > 1) {
-                            // Sort by id
-                            module.sort((a, b) {
-                              final moduleB = moduleTree.getPart(b);
-                              final moduleA = moduleTree.getPart(a);
-                              return moduleA.compareTo(moduleB);
-                            });
-                            
-                            return Column(
-                              children: <Widget>[
-                                buildTitle(key),
-                                ...module.map((e) {
-                                  final curr = moduleTree.getPart(e);
-                                  final selected = selectedModuleMap[key] == e;
-                                  return ListTile(
-                                    title: Text(curr.name),
-                                    subtitle: Text(curr.creditString),
-                                    trailing: Text(curr.xpString),
-                                    leading: AnimatedSwitcher(
-                                      duration: const Duration(milliseconds: 300),
-                                      child: selected ? Icon(Icons.check, size: 32) : SizedBox.shrink(),
-                                    ),
-                                    onTap: () {
-                                      setState(() {
-                                        selectedModuleMap[key] = e;
-                                      });
-                                    },
-                                  );
-                                }).toList(growable: false),
-                              ],
-                            );
-                          }
+                  return SafeArea(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          // Spread the list
+                          ...modules.map((e) {
+                            final key = e.key;
+                            final module = e.value;
+                            if (module.length > 1) {
+                              // Sort by id
+                              module.sort((a, b) {
+                                final moduleB = moduleTree.getPart(b);
+                                final moduleA = moduleTree.getPart(a);
+                                return moduleA.compareTo(moduleB);
+                              });
+                              
+                              return Column(
+                                children: <Widget>[
+                                  buildTitle(key),
+                                  ...module.map((e) {
+                                    final curr = moduleTree.getPart(e);
+                                    final selected = selectedModuleMap[key] == e;
+                                    return ListTile(
+                                      title: Text(curr.name),
+                                      subtitle: Text(curr.creditString),
+                                      trailing: Text(curr.xpString),
+                                      leading: AnimatedSwitcher(
+                                        duration: const Duration(milliseconds: 300),
+                                        child: selected ? Icon(Icons.check, size: 32) : SizedBox.shrink(),
+                                      ),
+                                      onTap: () {
+                                        setState(() {
+                                          selectedModuleMap[key] = e;
+                                        });
+                                      },
+                                    );
+                                  }).toList(growable: false),
+                                ],
+                              );
+                            }
 
-                          return SizedBox.shrink();
-                        }).toList(growable: false),
-                        FractionallySizedBox(
-                          widthFactor: 1,
-                          child: RaisedButton(
-                            child: Text('Update ship modules'),
-                            onPressed: () async {
-                              if (selectedModuleMap.length > 0) {
-                                final moduleParser = WikiShipModuleParser(pref.gameServer, info.shipId, selectedModuleMap);
-                                final module = moduleParser.parse(await moduleParser.download());
-                                if (module != null) {
-                                  this.setState(() => this.modules = module);
+                            return SizedBox.shrink();
+                          }).toList(growable: false),
+                          FractionallySizedBox(
+                            widthFactor: 1,
+                            child: RaisedButton(
+                              child: Text('Update ship modules'),
+                              onPressed: () async {
+                                if (selectedModuleMap.length > 0) {
+                                  final moduleParser = WikiShipModuleParser(pref.gameServer, info.shipId, selectedModuleMap);
+                                  final module = moduleParser.parse(await moduleParser.download());
+                                  if (module != null) {
+                                    this.setState(() => this.modules = module);
+                                  }
+
+                                  Navigator.pop(context);
                                 }
-
-                                Navigator.pop(context);
-                              }
-                            },
+                              },
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   );
                 },
@@ -750,6 +753,10 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
   }
 
   Widget buildNextShip() {
+    if (info.hasNextShip) {
+      return Text('YES');
+    }
 
+    return SizedBox.shrink();
   }
 }

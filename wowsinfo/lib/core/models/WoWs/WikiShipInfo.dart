@@ -23,7 +23,8 @@ class WikiShipInfo {
   bool isSpecial;
   String name;
 
-  bool get hasOtherModules => module.hasOtherModules;
+  bool get hasOtherModules => module?.hasOtherModules ?? false;
+  bool get hasNextShip => (nextShip?.ships?.length ?? 0) > 0;
 
   WikiShipInfo(Map<String, dynamic> data) {
     final json = data.values.first;
