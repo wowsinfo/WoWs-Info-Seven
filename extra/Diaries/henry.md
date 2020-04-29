@@ -9,7 +9,7 @@ Template
 
 ## 29/04/2020
 ### Summary
-Wiki has been completed but there are way more to do like updating flags and upgrades to reflect on stats but I can just add the best possible values I guess. 
+Wiki has been completed but there are way more to do like updating flags and upgrades to reflect on stats but I can just add the best possible values I guess. Personal rating button shows a list of rating and their colours for users to remember. Now, I am working on fastlane but it doesn't work... I might need to try screenshots for flutter.  
 ### What to do tomorrow?
 
 ## 28/04/2020
