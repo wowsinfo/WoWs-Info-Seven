@@ -9,6 +9,7 @@ Template
 
 ## 29/04/2020
 ### Summary
+Wiki has been completed but there are way more to do like updating flags and upgrades to reflect on stats but I can just add the best possible values I guess. 
 ### What to do tomorrow?
 
 ## 28/04/2020

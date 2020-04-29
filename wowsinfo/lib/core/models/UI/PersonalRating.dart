@@ -25,10 +25,11 @@ class PersonalRating {
   MaterialColor get colour => index == -1 ? Colors.blueGrey : _ratingColours[index];
   bool get hasRating => index >= 0;
 
+  MaterialColor getColour(int index) => index == -1 ? Colors.blueGrey : _ratingColours[index];
   /// Colors for each ratings
   final List<MaterialColor> _ratingColours = [
     Colors.red, Colors.orange, 
-    Colors.amber, Colors.green, 
+    Colors.amber, Colors.lightGreen, 
     Colors.green, Colors.cyan,
     Colors.purple, Colors.deepPurple
   ];
@@ -93,6 +94,20 @@ class PersonalRating {
     expectedFrags += rating.expectedFrags;
     actualWins += rating.actualWins;
     expectedWins += rating.expectedWins;
+  }
+
+  List<MapEntry<String, String>> getRatingMap(BuildContext context) {
+    final lang = AppLocalization.of(context);
+    return {
+      lang.localised('rating_bad'): '0 - 750',
+      lang.localised('rating_below_average'): '750 - 1100',
+      lang.localised('rating_average'): '1100 - 1350',
+      lang.localised('rating_good'): '1350 - 1550',
+      lang.localised('rating_very_good'): '1550 - 1750',
+      lang.localised('rating_great'): '1750 - 2100',
+      lang.localised('rating_unicum'): '2100 - 2450',
+      lang.localised('rating_super_unicum'): '2450 - 9999+',
+    }.entries.toList(growable: false);
   }
 
   /// Context is needed for localization to work

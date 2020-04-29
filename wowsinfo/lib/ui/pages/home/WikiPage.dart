@@ -67,6 +67,14 @@ class _WikiPageState extends State<WikiPage> {
               Navigator.of(context).push(MaterialPageRoute(builder: (c) => WikiCommanderSkillPage()));
             },
           ),
+          ListTile(
+            title: Text('Collections'),
+            subtitle: Text('...'),
+            leading: Icon(Icons.map),
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (c) => WikiCommanderSkillPage()));
+            },
+          ),
         ],
       ),
     );
