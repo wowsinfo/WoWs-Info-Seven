@@ -80,10 +80,7 @@ class _WikiConsumablePageState extends State<WikiConsumablePage> {
     );
   }
 
-  Hero buildHeroImage(Consumable curr) {
-    return Hero(
-      tag: curr.consumableId,
-      child: Image.network(curr.image)
-    );
+  Widget buildHeroImage(Consumable curr) {
+    return Image.network(curr.image);
   }
 }

@@ -153,6 +153,7 @@ class CachedData extends LocalData {
   }
 
   WikiConsumable _consumable;
+  Consumable getConsumable(int id) => _consumable.consumable[id.toString()];
   Iterable<Consumable> get wikiConsumables => _consumable.consumable.values;
   Iterable<Consumable> get sortedWikiConsumables => wikiConsumables
     .toList(growable: false)..sort((a, b) {

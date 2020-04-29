@@ -257,6 +257,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
       buildAA(),
       buildMeuverability(),
       buildConcealment(),
+      buildUpgrades(),
       buildNextShip(),
     ];
   }
@@ -750,7 +751,33 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
   }
 
   Widget buildUpgrades() {
+    final slots = info.modSlot;
+    final upgrades = info.upgrade.map((e) => cached.getConsumable(e));
+    if (slots > 0 && upgrades.length > 0) {
+      final slotList = List.generate(slots, (i) => i);
+      return Column(
+        children: [
+          buildTitle('Upgrades'),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: slotList.map((e) {
+                final upgradeSlots = upgrades.where((element) => element.slot == e);
+                return Column(
+                  children: [
+                    Text('${e + 1}.'),
+                    ...upgradeSlots.map((e) => Image.network(e.image)).toList(growable: false),
+                  ],
+                );
+              }).toList(growable: false),
+            ),
+          )
+        ],
+      );
+    }
 
+    return SizedBox.shrink();
   }
 
   Widget buildNextShip() {
