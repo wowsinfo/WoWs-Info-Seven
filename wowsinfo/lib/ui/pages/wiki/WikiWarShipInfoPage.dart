@@ -29,6 +29,7 @@ class WikiWarShipInfoPage extends StatefulWidget {
 
 class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTickerProviderStateMixin {
   final pref = Preference.shared;
+  final cached = CachedData.shared;
   AppLocalization lang;
   bool loading = true;
   bool error = false;
@@ -754,7 +755,23 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
 
   Widget buildNextShip() {
     if (info.hasNextShip) {
-      return Text('YES');
+      return Column(
+        children: <Widget>[
+          buildTitle('Next Ship(s)'),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: SizedBox(
+              height: 120,
+              child: Row(
+                children: info.nextShipIds.map((e) => WikiWarshipCell(
+                  ship: cached.getShip(e),
+                  showDetail: true,
+                )).toList(growable: false),
+              ),
+            ),
+          ),
+        ],
+      );
     }
 
     return SizedBox.shrink();

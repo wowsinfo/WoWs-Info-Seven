@@ -25,6 +25,7 @@ class WikiShipInfo {
 
   bool get hasOtherModules => module?.hasOtherModules ?? false;
   bool get hasNextShip => (nextShip?.ships?.length ?? 0) > 0;
+  Iterable<int> get nextShipIds => nextShip?.ships?.keys?.map((e) => int.parse(e)) ?? [];
 
   WikiShipInfo(Map<String, dynamic> data) {
     final json = data.values.first;
@@ -65,7 +66,7 @@ class Module {
   final _module = CachedData.shared.shipModule;
 
   // at least two items in it
-  bool get hasOtherModules => moduleMap.values.any((element) => element.length > 1);
+  bool get hasOtherModules => moduleMap?.values?.any((element) => element.length > 1) ?? false;
   Map<String, List<int>> get moduleMap => {
     _module.engine: engine,
     _module.torpedoBomber: torpedoBomber,
