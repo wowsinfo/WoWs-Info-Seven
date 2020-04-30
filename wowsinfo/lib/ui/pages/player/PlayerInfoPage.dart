@@ -26,11 +26,13 @@ import 'package:wowsinfo/ui/pages/player/PlayerChartPage.dart';
 import 'package:wowsinfo/ui/pages/player/PlayerRankInfoPage.dart';
 import 'package:wowsinfo/ui/pages/player/PlayerShipInfoPage.dart';
 import 'package:wowsinfo/ui/pages/wiki/WikiAchievementPage.dart';
+import 'package:wowsinfo/ui/widgets/CrossTick.dart';
 import 'package:wowsinfo/ui/widgets/ErrorIconWithText.dart';
 import 'package:wowsinfo/ui/widgets/PlatformLoadingIndiactor.dart';
 import 'package:wowsinfo/ui/widgets/TextWithCaption.dart';
 import 'package:wowsinfo/ui/widgets/WrapBox.dart';
 import 'package:wowsinfo/ui/widgets/player/BasicPlayerTile.dart';
+import 'package:wowsinfo/ui/widgets/player/PvPInfo.dart';
 import 'package:wowsinfo/ui/widgets/player/RatingBar.dart';
 import 'package:wowsinfo/ui/widgets/player/RatingTheme.dart';
 import 'package:wowsinfo/ui/widgets/player/WeaponInfoTile.dart';
@@ -259,11 +261,6 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
   }
 
   WrapBox buildPlayerInfo() {
-    final extra = [];
-    if (basicInfo != null && recentInfo != null) {
-
-    }
-
     return WrapBox(
       width: 120,
       children: [
@@ -280,14 +277,21 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
           value: basicInfo.lastBattleDate,
         ),
         TextWithCaption(
+          title: 'Online',
+          valueWidget: CrossTick(value: basicInfo.isOnline),
+        ),
+        TextWithCaption(
           title: 'Total battle',
           value: basicInfo.totalBattleString,
+        ),
+        TextWithCaption(
+          title: 'Active player',
+          valueWidget: CrossTick(value: recentInfo != null),
         ),
         TextWithCaption(
           title: 'Distance travlled',
           value: basicInfo.distanceString,
         ),
-        ...extra,
       ],
     );
   }
@@ -306,7 +310,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
             color: shipInfo?.overallRating?.colour,
             child: BasicPlayerTile(stats: pvp),
           ),
-          buildMorePlayerInfo(pvp),
+          PvPInfo(pvp: pvp),
           buildRecord(pvp),
           WeaponInfoTile(pvp: pvp),
         ],
@@ -397,87 +401,6 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
           style: textTheme.headline6.copyWith(fontSize: 24)
         ),
       )
-    );
-  }
-
-  Widget buildMorePlayerInfo(PvP pvp) {
-    if (pvp == null) return SizedBox.shrink();
-    return WrapBox(
-      width: 100,
-      children: [
-        TextWithCaption(
-          title: 'argo',
-          value: pvp.artAgro.toString(),
-        ),
-        TextWithCaption(
-          title: '510',
-          value: pvp.draw.toString(),
-        ),
-        TextWithCaption(
-          title: 'argo',
-          value: pvp.controlCapturedPoint.toString(),
-        ),
-        TextWithCaption(
-          title: 'argo',
-          value: pvp.controlDroppedPoint.toString(),
-        ),
-        TextWithCaption(
-          title: 'argo',
-          value: pvp.droppedCapturePoint.toString(),
-        ),
-        TextWithCaption(
-          title: 'argo',
-          value: pvp.artAgro.toString(),
-        ),
-        TextWithCaption(
-          title: '510',
-          value: pvp.draw.toString(),
-        ),
-        TextWithCaption(
-          title: 'argo',
-          value: pvp.droppedCapturePoint.toString(),
-        ),
-        TextWithCaption(
-          title: 'argo',
-          value: pvp.loss.toString(),
-        ),
-        TextWithCaption(
-          title: 'argo',
-          value: pvp.planesKilled.toString(),
-        ),
-        TextWithCaption(
-          title: 'argo',
-          value: pvp.shipsSpotted.toString(),
-        ),
-        TextWithCaption(
-          title: '510',
-          value: pvp.survivedBattle.toString(),
-        ),
-        TextWithCaption(
-          title: 'argo',
-          value: pvp.survivedWin.toString(),
-        ),
-        TextWithCaption(
-          title: 'argo',
-          value: pvp.teamCapturePoint.toString(),
-        ),
-        TextWithCaption(
-          title: 'argo',
-          value: pvp.teamDroppedCapturePoint.toString(),
-        ),
-        TextWithCaption(
-          title: 'argo',
-          value: pvp.torpedoAgro.toString(),
-        ),
-        TextWithCaption(
-          title: '510',
-          value: pvp.win.toString(),
-        ),
-        TextWithCaption(
-          title: 'argo',
-          value: pvp.xp.toString(),
-        ),
-      ],
     );
   }
 

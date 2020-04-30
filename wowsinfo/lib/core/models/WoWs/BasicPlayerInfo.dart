@@ -11,20 +11,21 @@ class BasicPlayerInfo {
   int levelingPoint;
   int updatedAt;
   bool hiddenProfile;
-  int logoutAt;
+  WoWsDate logoutAt;
   Statistic statistic;
   String nickname;
   int statsUpdatedAt;
 
-  bool get publicProfile => !(hiddenProfile ?? true);
   String get level => 'Lv $levelingTier';
   String get createdDate => createdAt.dateString;
-  String get lastBattleDate => lastBattleTime?.dateString;
+  String get lastBattleDate => lastBattleTime.dateString;
   String get distanceString => statistic?.distanceString ?? '0 km';
   String get totalBattleString => statistic?.totalBattleString ?? '0';
 
+  bool get publicProfile => !(hiddenProfile ?? true);
   bool get hasBattle => (statistic?.battle ?? 0) > 0;
-
+  /// Last battle is less than an hour and the player hasn't logged out
+  bool get isOnline => lastBattleTime.lessThan(Duration(hours: 1)) && logoutAt.isBefore(lastBattleTime);
 
   BasicPlayerInfo(Map<String, dynamic> data) {
     // There should be only one key inside
@@ -38,7 +39,7 @@ class BasicPlayerInfo {
       this.levelingPoint = json['leveling_points'] ?? 0;
       this.updatedAt = json['updated_at'];
       this.hiddenProfile = json['hidden_profile'];
-      this.logoutAt = json['logout_at'];
+      this.logoutAt = WoWsDate(json['logout_at']);
       this.nickname = json['nickname'];
       this.statsUpdatedAt = json['stats_updated_at'];
       // statistic is only available if the account is public
