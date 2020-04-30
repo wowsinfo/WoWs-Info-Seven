@@ -9,8 +9,9 @@ Template
 
 ## 30/04/2020
 ### Summary
-Fixed several minor issues and extracted some more widgets to use. More data have been added to player page, rank info page and player ship detail page. With proper localization and ship filter, I think player page is completed. I could also add test ships and more ship? 
+Fixed several minor issues and extracted some more widgets to use. More data have been added to player page, rank info page and player ship detail page. With proper localization and ship filter, I think player page is completed. I could also add test ships and more ship? All ships are now visible and some widgets are hidden when certain condition is not met. I am so far quite satisfied with this build but it needs more work, especially support large devices. 
 ### What to do tomorrow?
+Ship filter and localization.
 
 ## 29/04/2020
 ### Summary
