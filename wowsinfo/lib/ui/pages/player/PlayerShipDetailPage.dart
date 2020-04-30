@@ -6,6 +6,7 @@ import 'package:wowsinfo/ui/widgets/player/BasicPlayerTile.dart';
 import 'package:wowsinfo/ui/widgets/player/PvPInfo.dart';
 import 'package:wowsinfo/ui/widgets/player/RatingBar.dart';
 import 'package:wowsinfo/ui/widgets/player/RatingTheme.dart';
+import 'package:wowsinfo/ui/widgets/player/RecordTile.dart';
 import 'package:wowsinfo/ui/widgets/player/WeaponInfoTile.dart';
 import 'package:wowsinfo/ui/widgets/wiki/ShipAverageStatistics.dart';
 import 'package:wowsinfo/ui/widgets/wiki/WikiWarshipCell.dart';
@@ -58,6 +59,7 @@ class PlayerShipDetailPage extends StatelessWidget {
                   ),
                   BasicPlayerTile(stats: ship.pvp),
                   PvPInfo(pvp: ship.pvp),
+                  RecordTile(pvp: ship.pvp, shipMode: true),
                   WeaponInfoTile(pvp: ship.pvp, shipMode: true)
                 ],
               )

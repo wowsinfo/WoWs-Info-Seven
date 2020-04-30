@@ -9,6 +9,7 @@ Template
 
 ## 30/04/2020
 ### Summary
+Fixed several minor issues and extracted some more widgets to use. More data have been added to player page, rank info page and player ship detail page. With proper localization and ship filter, I think player page is completed. I could also add test ships and more ship? 
 ### What to do tomorrow?
 
 ## 29/04/2020

@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/models/UI/PlayerChartData.dart';
-import 'package:wowsinfo/core/models/UI/RecordValue.dart';
 import 'package:wowsinfo/core/models/User/Player.dart';
 import 'package:wowsinfo/core/models/WoWs/BasicPlayerInfo.dart';
 import 'package:wowsinfo/core/models/WoWs/PlayerAchievement.dart';
@@ -35,6 +34,7 @@ import 'package:wowsinfo/ui/widgets/player/BasicPlayerTile.dart';
 import 'package:wowsinfo/ui/widgets/player/PvPInfo.dart';
 import 'package:wowsinfo/ui/widgets/player/RatingBar.dart';
 import 'package:wowsinfo/ui/widgets/player/RatingTheme.dart';
+import 'package:wowsinfo/ui/widgets/player/RecordTile.dart';
 import 'package:wowsinfo/ui/widgets/player/WeaponInfoTile.dart';
 import 'package:wowsinfo/ui/widgets/wiki/WikiWarshipCell.dart';
 
@@ -311,7 +311,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
             child: BasicPlayerTile(stats: pvp),
           ),
           PvPInfo(pvp: pvp),
-          buildRecord(pvp),
+          RecordTile(pvp: pvp),
           WeaponInfoTile(pvp: pvp),
         ],
       ),
@@ -401,34 +401,6 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
           style: textTheme.headline6.copyWith(fontSize: 24)
         ),
       )
-    );
-  }
-
-  Widget buildRecord(PvP pvp) {
-    if (pvp == null) return SizedBox.shrink();
-    final width = Utils.of(context).getItemWidth(150);
-    return WrapBox(
-      width: width,
-      height: 150,
-      itemPadding: const EdgeInsets.only(top: 8),
-      children: [
-        RecordValue(pvp.maxDamageDealtShipId, 'damage', pvp.maxDamage),
-        RecordValue(pvp.maxXpShipId, 'max exp', pvp.maxExp),
-        RecordValue(pvp.maxFragsShipId, 'max frag', pvp.maxFrag),
-        RecordValue(pvp.maxTotalAgroShipId, 'max potential', pvp.maxPotential),
-        RecordValue(pvp.maxShipsSpottedShipId, 'max spotted', pvp.maxSpotted),
-        RecordValue(pvp.maxScoutingDamageShipId, 'max spotting', pvp.maxSpottingDamage),
-        RecordValue(pvp.maxPlanesKilledShipId, 'max plane destoryed', pvp.maxPlane),
-        RecordValue(pvp.maxDamageDealtToBuildingsShipId, 'damage to buildings', pvp.maxDamageToBuilding),
-        RecordValue(pvp.maxSuppressionsShipId, 'max supression', pvp.maxSupression),
-      ].where((e) => cached.getShip(e.shipId) != null).map((e) => WikiWarshipCell(
-        showDetail: true,
-        ship: cached.getShip(e.shipId),
-        bottom: TextWithCaption(
-          title: e.title,
-          value: e.value,
-        ),
-      )).toList(growable: false),
     );
   }
 }
