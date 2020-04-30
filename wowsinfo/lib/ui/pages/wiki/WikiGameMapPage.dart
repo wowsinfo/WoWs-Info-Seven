@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/data/CachedData.dart';
-import 'package:wowsinfo/ui/widgets/PlatformLoadingIndiactor.dart';
 
 /// WikiGameMapPage class
 class WikiGameMapPage extends StatelessWidget {

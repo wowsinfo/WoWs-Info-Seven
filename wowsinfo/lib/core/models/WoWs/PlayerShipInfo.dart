@@ -63,6 +63,10 @@ class ShipInfo {
 
   Warship get ship => CachedData.shared.getShip(shipId);
 
+  String get totalBattleString => '$battle';
+  String get lastBattleDate => lastBattleTime.dateTimeString;
+  String get distanceString => '$distance km';
+
   ShipInfo(Map<String, dynamic> json) {
     if (json['pvp'] != null) this.pvp = PvP(json['pvp']);
     if (json['last_battle_time'] != null) this.lastBattleTime = WoWsDate(json['last_battle_time']);

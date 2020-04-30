@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wowsinfo/core/models/UI/PersonalRating.dart';
-import 'package:wowsinfo/ui/widgets/player/RatingTheme.dart';
 
 /// RatingBar class
 class RatingBar extends StatelessWidget {

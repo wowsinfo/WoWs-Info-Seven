@@ -19,7 +19,6 @@ class _WikiPageState extends State<WikiPage> {
   @override
   Widget build(BuildContext context) {
     final lang = AppLocalization.of(context);
-    final wiki = [1,2,3,4,5,6];
 
     return Scaffold(
       appBar: AppBar(

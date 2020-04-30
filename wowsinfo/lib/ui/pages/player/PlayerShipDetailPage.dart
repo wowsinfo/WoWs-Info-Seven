@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/models/WoWs/PlayerShipInfo.dart';
+import 'package:wowsinfo/ui/widgets/TextWithCaption.dart';
+import 'package:wowsinfo/ui/widgets/WrapBox.dart';
 import 'package:wowsinfo/ui/widgets/player/BasicPlayerTile.dart';
 import 'package:wowsinfo/ui/widgets/player/PvPInfo.dart';
 import 'package:wowsinfo/ui/widgets/player/RatingBar.dart';
@@ -11,7 +13,7 @@ import 'package:wowsinfo/ui/widgets/wiki/WikiWarshipCell.dart';
 /// PlayerShipDetailPage class
 class PlayerShipDetailPage extends StatelessWidget {
   final ShipInfo ship;
-  PlayerShipDetailPage({Key key, this.ship}) : super(key: key);
+  const PlayerShipDetailPage({Key key, this.ship}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +32,23 @@ class PlayerShipDetailPage extends StatelessWidget {
                   SizedBox(
                     height: 150,
                     child: WikiWarshipCell(ship: ship.ship, hero: true, showDetail: true)
+                  ),
+                  WrapBox(
+                    width: 120,
+                    children: [
+                      TextWithCaption(
+                        title: 'Last battle',
+                        value: ship.lastBattleDate,
+                      ),
+                      TextWithCaption(
+                        title: 'Total battle',
+                        value: ship.totalBattleString,
+                      ),
+                      TextWithCaption(
+                        title: 'Distance travlled',
+                        value: ship.distanceString,
+                      ),
+                    ],
                   ),
                   RatingBar(rating: rating),
                   Padding(
