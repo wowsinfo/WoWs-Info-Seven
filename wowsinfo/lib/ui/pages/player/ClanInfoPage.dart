@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/data/Preference.dart';
+import 'package:wowsinfo/core/models/UI/GameServer.dart';
 import 'package:wowsinfo/core/models/User/Clan.dart';
 import 'package:wowsinfo/core/models/WoWs/ClanInfo.dart';
 import 'package:wowsinfo/core/others/Utils.dart';
@@ -15,7 +16,8 @@ import 'PlayerInfoPage.dart';
 /// ClanInfoPage class
 class ClanInfoPage extends StatefulWidget {
   final Clan clan;
-  ClanInfoPage({Key key, @required this.clan}) : super(key: key);
+  final GameServer server;
+  ClanInfoPage({Key key, @required this.clan, this.server}) : super(key: key);
 
   @override
   _ClanInfoPageState createState() => _ClanInfoPageState();
@@ -29,8 +31,8 @@ class _ClanInfoPageState extends State<ClanInfoPage> {
   @override
   void initState() {
     super.initState();
-    // Saved server should be used here
-    final parser = ClanInfoParser(widget.clan.server, widget.clan.clanId);
+    // Saved server should be used here, if server is passed in, use it
+    final parser = ClanInfoParser(widget.server ?? widget.clan.server, widget.clan.clanId);
     parser.download().then((json) {
       final info = parser.parse(json);
       if (info != null) {
