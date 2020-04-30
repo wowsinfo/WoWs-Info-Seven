@@ -8,11 +8,11 @@ class WoWsDate {
   WoWsDate(this.time) {
     if (time != null && time > 0) {
       this.date = DateTime.fromMillisecondsSinceEpoch(time * 1000);
-      final formatted = [date.year, date.month, date.day, date.hour, date.minute, date.year, date.second]
+      final formatted = [date.year, date.month, date.day, date.hour, date.minute, date.second]
         .map((e) => e.toString().padLeft(2, '0'))
         .toList(growable: false);
 
-      this.dateTimeString = '${formatted[0]}.${formatted[1]}.${formatted[2]} ${formatted[3]}.${formatted[5]}.${formatted[6]}';
+      this.dateTimeString = '${formatted[0]}.${formatted[1]}.${formatted[2]} ${formatted[3]}:${formatted[4]}:${formatted[5]}';
       this.dateString = dateTimeString.split(' ').first;
     }
   }

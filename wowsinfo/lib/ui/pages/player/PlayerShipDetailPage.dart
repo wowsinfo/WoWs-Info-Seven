@@ -33,8 +33,9 @@ class PlayerShipDetailPage extends StatelessWidget {
                     height: 150,
                     child: WikiWarshipCell(ship: ship.ship, hero: true, showDetail: true)
                   ),
-                  WrapBox(
+                  if (!ship.isRank) WrapBox(
                     width: 120,
+                    padding: const EdgeInsets.only(bottom: 8),
                     children: [
                       TextWithCaption(
                         title: 'Last battle',
@@ -45,7 +46,7 @@ class PlayerShipDetailPage extends StatelessWidget {
                         value: ship.totalBattleString,
                       ),
                       TextWithCaption(
-                        title: 'Distance travlled',
+                        title: 'Distance travelled',
                         value: ship.distanceString,
                       ),
                     ],

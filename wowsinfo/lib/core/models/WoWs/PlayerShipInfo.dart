@@ -60,16 +60,18 @@ class ShipInfo {
   int shipId;
   dynamic private;
   PersonalRating rating;
+  /// Rank has different data available
+  bool isRank = false;
 
   Warship get ship => CachedData.shared.getShip(shipId);
 
   String get totalBattleString => '$battle';
-  String get lastBattleDate => lastBattleTime.dateTimeString;
-  String get distanceString => '$distance km';
+  String get lastBattleDate => lastBattleTime?.dateString ?? '???';
+  String get distanceString => '${distance ?? '???'} km';
 
   ShipInfo(Map<String, dynamic> json) {
     if (json['pvp'] != null) this.pvp = PvP(json['pvp']);
-    if (json['last_battle_time'] != null) this.lastBattleTime = WoWsDate(json['last_battle_time']);
+    this.lastBattleTime = WoWsDate(json['last_battle_time']);
     this.accountId = json['account_id'];
     this.distance = json['distance'];
     this.updatedAt = json['updated_at'];
@@ -81,6 +83,7 @@ class ShipInfo {
 
   /// Data is all stored in season
   ShipInfo.fromSeason(Season season) {
+    isRank = true;
     pvp = season.rankSolo;
     shipId = season.shipId;
     rating = PersonalRating.fromShip(this);
