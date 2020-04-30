@@ -27,7 +27,7 @@ abstract class APIParser {
 
   /// Download API String, `download all pages` and do some basic checks
   Future<List<Map<String, dynamic>>> download() async {
-    // Utils.debugPrint(this.link);
+    Utils.debugPrint(this.link);
     // Append language string first
     _addLanguage();
     List<Map<String, dynamic>> data = [];

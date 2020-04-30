@@ -88,18 +88,18 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
           this.basicInfo = basicInfo;
         });
 
-        // Check if this is a public profile
-        if (basicInfo.publicProfile && (basicInfo?.statistic?.battle ?? 0) > 0) {
-          setState(() => this.pvp = basicInfo.statistic.pvp);
+        // Request for clan tag
+        final tag = PlayerClanTagParser(server, accountId);
+        final clanTag = tag.parse(await tag.download());
+        if (clanTag != null) {
+          setState(() {
+            this.clanTag = clanTag;
+          });
+        }
 
-          // Request for clan tag
-          final tag = PlayerClanTagParser(server, accountId);
-          final clanTag = tag.parse(await tag.download());
-          if (clanTag != null) {
-            setState(() {
-              this.clanTag = clanTag;
-            });
-          }
+        // Check if this is a public profile
+        if (basicInfo.publicProfile && basicInfo.hasBattle) {
+          setState(() => this.pvp = basicInfo.statistic.pvp);
 
           // Request for achievement
           final a = PlayerAchievementParser(server, accountId);
@@ -199,8 +199,9 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
             transitionBuilder: (w, a) => SizeTransition(sizeFactor: a, child: w),
             child: buildRating()
           ),
-          buildPvPModeSelection(),
-          buildStatistics(),
+          // Mek sure pvp is not null
+          if (pvp != null) buildPvPModeSelection(),
+          if (pvp != null) buildStatistics(),
         ],
       ),
     );
@@ -258,6 +259,11 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
   }
 
   WrapBox buildPlayerInfo() {
+    final extra = [];
+    if (basicInfo != null && recentInfo != null) {
+
+    }
+
     return WrapBox(
       width: 120,
       children: [
@@ -281,6 +287,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
           title: 'Distance travlled',
           value: basicInfo.distanceString,
         ),
+        ...extra,
       ],
     );
   }

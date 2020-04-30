@@ -23,6 +23,8 @@ class BasicPlayerInfo {
   String get distanceString => statistic?.distanceString ?? '0 km';
   String get totalBattleString => statistic?.totalBattleString ?? '0';
 
+  bool get hasBattle => (statistic?.battle ?? 0) > 0;
+
 
   BasicPlayerInfo(Map<String, dynamic> data) {
     // There should be only one key inside
