@@ -74,18 +74,20 @@ class WebsitePage extends StatelessWidget {
       appBar: AppBar(
         title: Text(lang.localised('website_page_title'))
       ),
-      body: ListView(
-        children: websites.map((e) => ExpansionTile(
-          initiallyExpanded: e.expanded,
-          title: Text(e.title),
-          subtitle: Text(e.subtitle),
-          children: e.items.map((e) => ListTile(
+      body: Scrollbar(
+        child: ListView(
+          children: websites.map((e) => ExpansionTile(
+            initiallyExpanded: e.expanded,
             title: Text(e.title),
-            subtitle: Text(e.link),
-            onTap: () => launch(e.link),
-            trailing: e.favourite ? Icon(Icons.star, color: Colors.orange) : SizedBox.shrink(),
+            subtitle: Text(e.subtitle),
+            children: e.items.map((e) => ListTile(
+              title: Text(e.title),
+              subtitle: Text(e.link),
+              onTap: () => launch(e.link),
+              trailing: e.favourite ? Icon(Icons.star, color: Colors.orange) : SizedBox.shrink(),
+            )).toList(growable: false),
           )).toList(growable: false),
-        )).toList(growable: false),
+        ),
       ),
     );
   }

@@ -190,21 +190,23 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
     if (basicInfo == null || clanTag == null) return PlatformLoadingIndiactor();
 
     final textTheme = Theme.of(context).textTheme;
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          buildNickname(context, textTheme),
-          buildPlayerInfo(),
-          buildButtons(),
-          AnimatedSwitcher(
-            duration: Duration(milliseconds: 300),
-            transitionBuilder: (w, a) => SizeTransition(sizeFactor: a, child: w),
-            child: buildRating()
-          ),
-          // Mek sure pvp is not null
-          if (pvp != null) buildPvPModeSelection(),
-          if (pvp != null) buildStatistics(),
-        ],
+    return Scrollbar(
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            buildNickname(context, textTheme),
+            buildPlayerInfo(),
+            buildButtons(),
+            AnimatedSwitcher(
+              duration: Duration(milliseconds: 300),
+              transitionBuilder: (w, a) => SizeTransition(sizeFactor: a, child: w),
+              child: buildRating()
+            ),
+            // Mek sure pvp is not null
+            if (pvp != null) buildPvPModeSelection(),
+            if (pvp != null) buildStatistics(),
+          ],
+        ),
       ),
     );
   }

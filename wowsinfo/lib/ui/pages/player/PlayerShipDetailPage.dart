@@ -27,42 +27,44 @@ class PlayerShipDetailPage extends StatelessWidget {
         ),
         body: SafeArea(
           child: Center(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 150,
-                    child: WikiWarshipCell(ship: ship.ship, hero: true, showDetail: true)
-                  ),
-                  if (ship.pvp.hasBattle && !ship.isRank) WrapBox(
-                    width: 120,
-                    padding: const EdgeInsets.only(bottom: 8),
-                    children: [
-                      TextWithCaption(
-                        title: 'Last battle',
-                        value: ship.lastBattleDate,
-                      ),
-                      TextWithCaption(
-                        title: 'Total battle',
-                        value: ship.totalBattleString,
-                      ),
-                      TextWithCaption(
-                        title: 'Distance travelled',
-                        value: ship.distanceString,
-                      ),
-                    ],
-                  ),
-                  RatingBar(rating: rating),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 4.0),
-                    child: ShipAverageStatistics(shipId: ship.shipId, myShip: ship.pvp),
-                  ),
-                  BasicPlayerTile(stats: ship.pvp),
-                  PvPInfo(pvp: ship.pvp),
-                  RecordTile(pvp: ship.pvp, shipMode: true),
-                  WeaponInfoTile(pvp: ship.pvp, shipMode: true)
-                ],
-              )
+            child: Scrollbar(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 150,
+                      child: WikiWarshipCell(ship: ship.ship, hero: true, showDetail: true)
+                    ),
+                    if (ship.pvp.hasBattle && !ship.isRank) WrapBox(
+                      width: 120,
+                      padding: const EdgeInsets.only(bottom: 8),
+                      children: [
+                        TextWithCaption(
+                          title: 'Last battle',
+                          value: ship.lastBattleDate,
+                        ),
+                        TextWithCaption(
+                          title: 'Total battle',
+                          value: ship.totalBattleString,
+                        ),
+                        TextWithCaption(
+                          title: 'Distance travelled',
+                          value: ship.distanceString,
+                        ),
+                      ],
+                    ),
+                    RatingBar(rating: rating),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 4.0),
+                      child: ShipAverageStatistics(shipId: ship.shipId, myShip: ship.pvp),
+                    ),
+                    BasicPlayerTile(stats: ship.pvp),
+                    PvPInfo(pvp: ship.pvp),
+                    RecordTile(pvp: ship.pvp, shipMode: true),
+                    WeaponInfoTile(pvp: ship.pvp, shipMode: true)
+                  ],
+                )
+              ),
             ),
           ),
         ),
