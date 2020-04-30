@@ -12,6 +12,7 @@ class BasicPlayerTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (stats == null || !stats.hasBattle) return SizedBox.shrink();
     return Wrap(
       alignment: WrapAlignment.center,
       children: <Widget>[

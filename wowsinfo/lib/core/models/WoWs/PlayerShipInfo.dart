@@ -89,4 +89,6 @@ class ShipInfo {
     rating = PersonalRating.fromShip(this);
     battle = season.rankSolo.battle;
   }
+
+  int compareTo(ShipInfo other) => rating.personalRating.compareTo(other.rating.personalRating);
 }

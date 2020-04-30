@@ -118,8 +118,7 @@ class PersonalRating {
       case -1:
         return lang.localised('rating_no_info');
       case 0:
-        comment = lang.localised('rating_bad');
-        break;
+        return lang.localised('rating_bad');
       case 1:
         comment = lang.localised('rating_below_average');
         break;

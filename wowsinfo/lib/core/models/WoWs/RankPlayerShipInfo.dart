@@ -81,6 +81,8 @@ class RankPvP {
   int xp;
   int survivedBattle;
 
+  bool get hasBattle => battle > 0;
+
   int get deadBattle => battle - survivedBattle;
 
   double get winrate => (win * 10000 / battle) / 100.0;

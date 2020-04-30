@@ -20,9 +20,27 @@ class RecordTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (pvp == null) return SizedBox.shrink();
+    if (pvp == null || !pvp.hasBattle) return SizedBox.shrink();
+
     final cached = CachedData.shared;
     final width = Utils.of(context).getItemWidth(shipMode ? 120 : 150);
+
+    final data = [
+      RecordValue(pvp.maxDamageDealtShipId, 'damage', pvp.maxDamage),
+      RecordValue(pvp.maxXpShipId, 'max exp', pvp.maxExp),
+      RecordValue(pvp.maxFragsShipId, 'max frag', pvp.maxFrag),
+      RecordValue(pvp.maxTotalAgroShipId, 'max potential', pvp.maxPotential),
+      RecordValue(pvp.maxShipsSpottedShipId, 'max spotted', pvp.maxSpotted),
+      RecordValue(pvp.maxScoutingDamageShipId, 'max spotting', pvp.maxSpottingDamage),
+      RecordValue(pvp.maxPlanesKilledShipId, 'max plane destoryed', pvp.maxPlane),
+      RecordValue(pvp.maxDamageDealtToBuildingsShipId, 'damage to buildings', pvp.maxDamageToBuilding),
+      RecordValue(pvp.maxSuppressionsShipId, 'max supression', pvp.maxSupression),
+    // ship mode is safe by default (removed 0s) and only check for normal mode
+    ].where((e) => (shipMode && e.value != '0' && e.value != 'null') || cached.getShip(e.shipId) != null);
+
+    // Dont render anything (for the title)
+    if (data.length == 0) return SizedBox.shrink();
+
     return Padding(
       padding: const EdgeInsets.only(top: 16),
       child: Column(
@@ -31,19 +49,7 @@ class RecordTile extends StatelessWidget {
           WrapBox(
             width: width,
             itemPadding: const EdgeInsets.only(top: 8),
-            children: [
-              RecordValue(pvp.maxDamageDealtShipId, 'damage', pvp.maxDamage),
-              RecordValue(pvp.maxXpShipId, 'max exp', pvp.maxExp),
-              RecordValue(pvp.maxFragsShipId, 'max frag', pvp.maxFrag),
-              RecordValue(pvp.maxTotalAgroShipId, 'max potential', pvp.maxPotential),
-              RecordValue(pvp.maxShipsSpottedShipId, 'max spotted', pvp.maxSpotted),
-              RecordValue(pvp.maxScoutingDamageShipId, 'max spotting', pvp.maxSpottingDamage),
-              RecordValue(pvp.maxPlanesKilledShipId, 'max plane destoryed', pvp.maxPlane),
-              RecordValue(pvp.maxDamageDealtToBuildingsShipId, 'damage to buildings', pvp.maxDamageToBuilding),
-              RecordValue(pvp.maxSuppressionsShipId, 'max supression', pvp.maxSupression),
-            // ship mode is safe by default (removed 0s) and only check for normal mode
-            ].where((e) => (shipMode && e.value != '0') || cached.getShip(e.shipId) != null)
-            .map((e) => buildCell(cached, e)).toList(growable: false),
+            children: data.map((e) => buildCell(cached, e)).toList(growable: false),
           ),
         ],
       ),

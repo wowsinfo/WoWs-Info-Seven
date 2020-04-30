@@ -15,7 +15,7 @@ class PvPInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (pvp == null) return SizedBox.shrink();
+    if (pvp == null || !pvp.hasBattle) return SizedBox.shrink();
     return WrapBox(
       width: 100,
       children: [
