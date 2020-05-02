@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart' as Wiki;
 import 'package:wowsinfo/ui/pages/wiki/WikiWarShipInfoPage.dart';
 
@@ -9,6 +10,8 @@ class WikiWarshipCell extends StatelessWidget {
   final bool hero;
   final Widget bottom;
   final void Function() onTap;
+  final cached = CachedData.shared;
+
   WikiWarshipCell({
     Key key, 
     @required this.ship, 
@@ -45,7 +48,9 @@ class WikiWarshipCell extends StatelessWidget {
 
   /// Use a different colour for premium or special ships
   Text buildText(String name) {
+    final extra = cached.getExtraShipWiki(ship.shipId.toString());
     var style = TextStyle(fontSize: 14, fontWeight: FontWeight.w300);
+    if (extra.isPaperShip ?? false) style = TextStyle(fontSize: 14, color: Colors.blue[500], fontWeight: FontWeight.w300);
     if (ship.isPremium) style = TextStyle(fontSize: 14, color: Colors.orange[300], fontWeight: FontWeight.w500);
     if (ship.isSpecial) style = TextStyle(fontSize: 14, color: Colors.deepOrangeAccent[100], fontWeight: FontWeight.w600);
 

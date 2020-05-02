@@ -190,6 +190,9 @@ class CachedData extends LocalData {
   }
 
   Plugin _plugin;
+  Iterable<MapEntry<String, Modernization>> get upgradeList => _plugin.upgrade.entries;
+  ShipWiki getExtraShipWiki(String key) => _plugin.shipWiki[key];
+  ShipConsumableData getShipConsumable(ShipConsumableValue value) => _plugin.getConsumable(value);
   void loadPlugin() => _collection = decode(GITHUB_PLUGIN, (j) => WikiCollection.fromJson(j));
   void savePlugin(Plugin data) {
     _plugin = data;

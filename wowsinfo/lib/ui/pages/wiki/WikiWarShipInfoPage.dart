@@ -513,7 +513,9 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
   Widget buildArtillery() {
     final main = modules.artillery;
     if (main == null) return SizedBox.shrink();
+
     final width = Utils.of(context).getItemWidth(100);
+    final extra = cached.getExtraShipWiki(info.shipId.toString());
     return Column(
       children: [
         buildTitle('Main (${main.rangeString})'),
@@ -539,7 +541,11 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
             ),
             TextWithCaption(
               title: 'sigma',
-              value: main.rotationString,
+              value: extra.sigmaString,
+            ),
+            TextWithCaption(
+              title: 'he pen',
+              value: extra.hePenString,
             ),
           ],
         ),

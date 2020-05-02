@@ -2,14 +2,16 @@ import 'package:wowsinfo/core/models/Cacheable.dart';
 
 /// This is the `Plugin` class
 class Plugin extends Cacheable {
-  Map<String, Modernization> consumable;
-  Map<String, Upgrade> upgrade;
+  Map<String, ShipConsumable> consumable;
+  Map<String, Modernization> upgrade;
   Map<String, OldShip> oldShip;
   Map<String, ShipWiki> shipWiki;
 
+  ShipConsumableData getConsumable(ShipConsumableValue v) => consumable[v.type].getConsumable(v.name);
+
   Plugin.fromJson(Map<String, dynamic> json) {
-    this.consumable = (json['consumables'] as Map).map((a, b) => MapEntry(a, Modernization.fromJson(b)));
-    this.upgrade = (json['upgrades'] as Map).map((a, b) => MapEntry(a, Upgrade.fromJson(b)));
+    this.consumable = (json['consumables'] as Map).map((a, b) => MapEntry(a, ShipConsumable.fromJson(b)));
+    this.upgrade = (json['upgrades'] as Map).map((a, b) => MapEntry(a, Modernization.fromJson(b)));
     this.oldShip = (json['old_ships'] as Map).map((a, b) => MapEntry(a, OldShip.fromJson(b)));
     this.shipWiki = (json['ship_wiki'] as Map).map((a, b) => MapEntry(a, ShipWiki.fromJson(b)));
   }
@@ -27,17 +29,19 @@ class Plugin extends Cacheable {
   void save() => cached.savePlugin(this);
 }
 
-/// This is the `Modernization` class
-class Modernization {
+/// This is the `ShipConsumable` class
+class ShipConsumable {
   bool canBuy;
   int costCR;
   bool freeOfCharge;
   int id;
   String index;
   String name;
-  List<Map<String, ModernizationData>> data;
+  Map<String, ShipConsumableData> data;
 
-  Modernization.fromJson(Map<String, dynamic> json) {
+  ShipConsumableData getConsumable(String key) => data[key];
+
+  ShipConsumable.fromJson(Map<String, dynamic> json) {
     this.canBuy = json['canBuy'];
     this.costCR = json['costCR'];
     this.freeOfCharge = json['freeOfCharge'];
@@ -45,9 +49,7 @@ class Modernization {
     this.index = json['index'];
     this.name = json['name'];
     // This is crazy...
-    this.data = (json['data'] as List).map((e) => 
-      (e as Map<String, dynamic>).map((a, b) => MapEntry(a, ModernizationData.fromJson(b))))
-      .toList(growable: false);
+    this.data = (json['data'] as Map).map((a, b) => MapEntry(a, ShipConsumableData.fromJson(b)));
   }
 
   Map<String, dynamic> toJson() {
@@ -59,13 +61,13 @@ class Modernization {
       'index': this.index,
       'name': this.name,
       // Make it dynamic and see if it works
-      'data': this.data.cast<Map<String, dynamic>>(),
+      'data': this.data.cast<String, dynamic>(),
     };
   }
 }
 
-/// This is the `ModernizationData` class
-class ModernizationData {
+/// This is the `ShipConsumableData` class, `this is actual data for the consumable`
+class ShipConsumableData {
   // All consumables has this
   String consumableType;
   double reloadTime;
@@ -112,7 +114,7 @@ class ModernizationData {
   /// Convert Multiplier to a string, +0.5%, +20.0%
   String _convertMultiplier(double coeff) => '+ ${(coeff * 100).toStringAsFixed(1)}%';
 
-  ModernizationData.fromJson(Map<String, dynamic> json) {
+  ShipConsumableData.fromJson(Map<String, dynamic> json) {
     this.consumableType = json['consumableType'];
     this.reloadTime = json['reloadTime'];
     this.workTime = json['workTime'];
@@ -153,8 +155,8 @@ class ModernizationData {
   }
 }
 
-/// This is the `Upgrade` class
-class Upgrade {
+/// This is the `Modernization` class
+class Modernization {
   int slot;
   // This is the top priority, if it is in it, stop checking
   List<String> ship;
@@ -163,7 +165,7 @@ class Upgrade {
   List<String> shiptype;
   List<String> nation;
 
-  Upgrade.fromJson(Map<String, dynamic> json) {
+  Modernization.fromJson(Map<String, dynamic> json) {
     this.slot = json['slot'];
     this.ship = (json['ships'] ?? []).cast<String>();
     this.shiplevel = (json['shiplevel'] ?? []).cast<int>();
@@ -207,10 +209,13 @@ class ShipWiki {
   APCurve ap;
   double sigma;
   /// First list is the slot but then one slot can have 2 consumables
-  List<List<ShipConsumable>> consumable;
+  List<List<ShipConsumableValue>> consumable;
   bool isPaperShip;
   List<int> permoflage;
   int battle;
+
+  String get sigmaString => '${sigma.toStringAsFixed(2)}';
+  String get hePenString => '${alphaPiercingHE.toStringAsFixed(0)} mm';
 
   ShipWiki.fromJson(Map<String, dynamic> json) {
     this.alphaPiercingHE = json['alphaPiercingHE'];
@@ -218,7 +223,7 @@ class ShipWiki {
     this.sigma = json['sigma'];
     // Another crazy one
     this.consumable = (json['consumables'] as List).map((slot) {
-      return (slot as List).map((c) => ShipConsumable.fromJson(c)).toList(growable: false);
+      return (slot as List).map((c) => ShipConsumableValue.fromJson(c)).toList(growable: false);
     }).toList(growable: false);
       
     this.isPaperShip = json['isPaperShip'];
@@ -239,12 +244,12 @@ class ShipWiki {
   }
 }
 
-/// This is the `ShipConsumable` class
-class ShipConsumable {
+/// This is the `ShipConsumableValue` class, it has the type and name
+class ShipConsumableValue {
   String name;
   String type;
 
-  ShipConsumable.fromJson(Map<String, dynamic> json) {
+  ShipConsumableValue.fromJson(Map<String, dynamic> json) {
     this.name = json['name'];
     this.type = json['type'];
   }
