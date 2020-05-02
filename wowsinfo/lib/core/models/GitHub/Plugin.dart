@@ -30,7 +30,7 @@ class Consumable {
   int id;
   String index;
   String name;
-  List<ConsumableData> data;
+  List<Map<String, ConsumableData>> data;
 
   Consumable.fromJson(Map<String, dynamic> json) {
     this.canBuy = json['canBuy'];
@@ -57,13 +57,57 @@ class Consumable {
 
 /// This is the `ConsumableData` class
 class ConsumableData {
+  // All consumables has this
   String consumableType;
-  double reloadTime;
-  double workTime;
+  int reloadTime;
+  int workTime;
+
+  // Optional, if null, it is unlimited
+  int numConsumable;
+  // Repair party, per second
+  double regenerationHPSpeed;
+  // Anti-AA
+  int areaDamageMultiplier;
+  int bubbleDamageMultiplier;
+  // Fighter, there are too many info so I only take a few
+  String fightersName;
+  int fightersNum;
+  int radius;
+  // Spotter, the multiplier
+  double artilleryDistCoeff;
+  // Smoke, radius is also here
+  int lifeTime;
+  double speedLimit;
+  // Engine boost
+  double boostCoeff;
+  // Sonar and radar, divide by 33.35 to km
+  int distShip;
+  int distTorpedo;
+  List<String> affectedClasses; // this is for the radar that can only spots bb and cv
+  // Torpedo reload booster
+  int torpedoReloadTime;
+  // Gun booster, boostCoeff is also here
+  double criticalChance; // not idea what this is for
+
+  String get spotShipDistance => '${_convertToKM(distShip)} km';
+  String get spotTorpedoDistance => '${_convertToKM(distTorpedo)} km';
+
+  String get hpRegeneration => '${_convertMultiplier(regenerationHPSpeed)}';
+  String get artilleryDistance => '${_convertMultiplier(artilleryDistCoeff)}';
+  /// For both engine boost and gun booster
+  String get boostPercentage => '${_convertMultiplier(boostCoeff)}';
+
+  // Some utils
+  /// WG doesn't use km in the game
+  String _convertToKM(int dist) => (dist / 33.35).toStringAsFixed(2);
+  /// Convert Multiplier to a string, +0.5%, +20.0%
+  String _convertMultiplier(double coeff) => '+ ${(coeff * 100).toStringAsFixed(1)}%';
 
   ConsumableData.fromJson(Map<String, dynamic> json) {
     this.consumableType = json['consumableType'];
     this.reloadTime = json['reloadTime'];
+    this.numConsumable = json['numConsumables'];
+    this.regenerationHPSpeed = json['regenerationHPSpeed'];
     this.workTime = json['workTime'];
   }
 
@@ -197,4 +241,6 @@ class APCurve {
       'krupp': this.krupp,
     };
   }
+
+  // Get chart data here?
 }
