@@ -1,12 +1,14 @@
+import 'package:wowsinfo/core/models/Cacheable.dart';
+
 /// This is the `Plugin` class
-class Plugin {
-  Map<String, Consumable> consumable;
+class Plugin extends Cacheable {
+  Map<String, Modernization> consumable;
   Map<String, Upgrade> upgrade;
   Map<String, OldShip> oldShip;
   Map<String, ShipWiki> shipWiki;
 
   Plugin.fromJson(Map<String, dynamic> json) {
-    this.consumable = (json['consumables'] as Map).map((a, b) => MapEntry(a, Consumable.fromJson(b)));
+    this.consumable = (json['consumables'] as Map).map((a, b) => MapEntry(a, Modernization.fromJson(b)));
     this.upgrade = (json['upgrades'] as Map).map((a, b) => MapEntry(a, Upgrade.fromJson(b)));
     this.oldShip = (json['old_ships'] as Map).map((a, b) => MapEntry(a, OldShip.fromJson(b)));
     this.shipWiki = (json['ship_wiki'] as Map).map((a, b) => MapEntry(a, ShipWiki.fromJson(b)));
@@ -20,19 +22,22 @@ class Plugin {
       'ship_wiki': this.shipWiki.cast<String, dynamic>(),
     };
   }
+
+  @override
+  void save() => cached.savePlugin(this);
 }
 
-/// This is the `Consumable` class
-class Consumable {
+/// This is the `Modernization` class
+class Modernization {
   bool canBuy;
   int costCR;
   bool freeOfCharge;
   int id;
   String index;
   String name;
-  List<Map<String, ConsumableData>> data;
+  List<Map<String, ModernizationData>> data;
 
-  Consumable.fromJson(Map<String, dynamic> json) {
+  Modernization.fromJson(Map<String, dynamic> json) {
     this.canBuy = json['canBuy'];
     this.costCR = json['costCR'];
     this.freeOfCharge = json['freeOfCharge'];
@@ -41,7 +46,7 @@ class Consumable {
     this.name = json['name'];
     // This is crazy...
     this.data = (json['data'] as List).map((e) => 
-      (e as Map).map((a, b) => MapEntry(a, ConsumableData.fromJson(b))));
+      (e as Map).map((a, b) => MapEntry(a, ModernizationData.fromJson(b))));
   }
 
   Map<String, dynamic> toJson() {
@@ -58,8 +63,8 @@ class Consumable {
   }
 }
 
-/// This is the `ConsumableData` class
-class ConsumableData {
+/// This is the `ModernizationData` class
+class ModernizationData {
   // All consumables has this
   String consumableType;
   int reloadTime;
@@ -106,7 +111,7 @@ class ConsumableData {
   /// Convert Multiplier to a string, +0.5%, +20.0%
   String _convertMultiplier(double coeff) => '+ ${(coeff * 100).toStringAsFixed(1)}%';
 
-  ConsumableData.fromJson(Map<String, dynamic> json) {
+  ModernizationData.fromJson(Map<String, dynamic> json) {
     this.consumableType = json['consumableType'];
     this.reloadTime = json['reloadTime'];
     this.workTime = json['workTime'];

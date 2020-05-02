@@ -7,6 +7,7 @@ import 'package:wowsinfo/core/data/Preference.dart';
 import 'package:wowsinfo/core/models/Cacheable.dart';
 import 'package:wowsinfo/core/models/Clan/ClanGlossary.dart';
 import 'package:wowsinfo/core/models/GitHub/PRData.dart';
+import 'package:wowsinfo/core/models/GitHub/Plugin.dart';
 import 'package:wowsinfo/core/models/GitHub/ShipAlias.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiAchievement.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiCollection.dart';
@@ -47,6 +48,7 @@ const WIKI_CONSUMABLE = 'wiki_consumable';
 const WIKI_ENCYCLOPEDIA = 'wiki_encyclopedia';
 const WIKI_GAME_MAP = 'wiki_game_map';
 const WIKI_WARSHIP = 'wiki_warship';
+const GITHUB_PLUGIN = 'github_plugin';
 
 /// It handles cached data but mainly wiki
 /// - it is usually read only
@@ -184,6 +186,13 @@ class CachedData extends LocalData {
   void saveEncyclopedia(WikiEncyclopedia data) {
     _encyclopedia = data;
     box.put(WIKI_ENCYCLOPEDIA, jsonEncode(data.toJson()));
+  }
+
+  Plugin _plugin;
+  void loadPlugin() => _collection = decode(GITHUB_PLUGIN, (j) => WikiCollection.fromJson(j));
+  void savePlugin(Plugin data) {
+    _plugin = data;
+    box.put(GITHUB_PLUGIN, jsonEncode(data.toJson()));
   }
 
   ///
