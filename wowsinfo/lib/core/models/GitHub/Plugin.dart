@@ -6,18 +6,18 @@ class Plugin {
   Map<String, ShipWiki> shipWiki;
 
   Plugin.fromJson(Map<String, dynamic> json) {
-    this.consumable = json['consumables'];
-    this.upgrade = json['upgrades'];
-    this.oldShip = json['old_ships'];
-    this.shipWiki = json['ship_wiki'];
+    this.consumable = (json['consumables'] as Map).map((a, b) => MapEntry(a, Consumable.fromJson(b)));
+    this.upgrade = (json['upgrades'] as Map).map((a, b) => MapEntry(a, Upgrade.fromJson(b)));
+    this.oldShip = (json['old_ships'] as Map).map((a, b) => MapEntry(a, OldShip.fromJson(b)));
+    this.shipWiki = (json['ship_wiki'] as Map).map((a, b) => MapEntry(a, ShipWiki.fromJson(b)));
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'consumables': this.consumable,
-      'upgrades': this.upgrade,
-      'old_ships': this.oldShip,
-      'ship_wiki': this.shipWiki,
+      'consumables': this.consumable.cast<String, dynamic>(),
+      'upgrades': this.upgrade.cast<String, dynamic>(),
+      'old_ships': this.oldShip.cast<String, dynamic>(),
+      'ship_wiki': this.shipWiki.cast<String, dynamic>(),
     };
   }
 }
@@ -39,7 +39,9 @@ class Consumable {
     this.id = json['id'];
     this.index = json['index'];
     this.name = json['name'];
-    this.data = json['data'];
+    // This is crazy...
+    this.data = (json['data'] as List).map((e) => 
+      (e as Map).map((a, b) => MapEntry(a, ConsumableData.fromJson(b))));
   }
 
   Map<String, dynamic> toJson() {
@@ -50,7 +52,8 @@ class Consumable {
       'id': this.id,
       'index': this.index,
       'name': this.name,
-      'data': this.data,
+      // Make it dynamic and see if it works
+      'data': this.data.cast<Map<String, dynamic>>(),
     };
   }
 }
@@ -106,9 +109,32 @@ class ConsumableData {
   ConsumableData.fromJson(Map<String, dynamic> json) {
     this.consumableType = json['consumableType'];
     this.reloadTime = json['reloadTime'];
-    this.numConsumable = json['numConsumables'];
-    this.regenerationHPSpeed = json['regenerationHPSpeed'];
     this.workTime = json['workTime'];
+
+    this.numConsumable = json['numConsumables'];
+    
+    this.regenerationHPSpeed = json['regenerationHPSpeed'];
+
+    this.areaDamageMultiplier = json['areaDamageMultiplier'];
+    this.bubbleDamageMultiplier = json['bubbleDamageMultiplier'];
+
+    this.fightersName = json['fightersName'];
+    this.fightersNum = json['fightersNum'];
+    this.radius = json['radius'];
+
+    this.artilleryDistCoeff = json['artilleryDistCoeff'];
+
+    this.lifeTime = json['lifeTime'];
+    this.speedLimit = json['speedLimit'];
+
+    this.boostCoeff = json['boostCoeff'];
+    this.distShip = json['distShip'];
+    this.distTorpedo = json['distTorpedo'];
+    this.affectedClasses = (json['affectedClasses'] as List).cast<String>();
+
+    this.torpedoReloadTime = json['regenerationHPSpeed'];
+
+    this.criticalChance = json['criticalChance'];
   }
 
   Map<String, dynamic> toJson() {
@@ -132,10 +158,10 @@ class Upgrade {
 
   Upgrade.fromJson(Map<String, dynamic> json) {
     this.slot = json['slot'];
-    this.shiplevel = json['shiplevel'];
-    this.ship = json['ships'];
-    this.shiptype = json['shiptype'];
-    this.nation = json['nation'];
+    this.ship = (json['ships'] as List).cast<String>();
+    this.shiplevel = (json['shiplevel'] as List).cast<int>();
+    this.shiptype = (json['shiptype'] as List).cast<String>();
+    this.nation = (json['nation'] as List).cast<String>();
   }
 
   Map<String, dynamic> toJson() {
@@ -182,9 +208,9 @@ class ShipWiki {
     this.alphaPiercingHE = json['alphaPiercingHE'];
     this.ap = json['ap'];
     this.sigma = json['sigma'];
-    this.consumable = json['consumables'];
+    this.consumable = (json['consumables'] as List).map((e) => ShipConsumable.fromJson(e)).toList(growable: false);
     this.isPaperShip = json['isPaperShip'];
-    this.permoflage = json['permoflages'];
+    this.permoflage = (json['permoflages'] as List).cast<int>();
     this.battle = json['battles'];
   }
 
