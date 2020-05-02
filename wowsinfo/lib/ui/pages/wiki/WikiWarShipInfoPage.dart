@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/data/Preference.dart';
+import 'package:wowsinfo/core/models/GitHub/Plugin.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart' as Wiki;
 import 'package:wowsinfo/core/models/WoWs/WikiShipInfo.dart';
 import 'package:wowsinfo/core/models/WoWs/WikiShipModule.dart';
@@ -34,6 +35,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
   bool loading = true;
   bool error = false;
   WikiShipInfo info;
+  ShipWiki extraInfo;
   /// Modules can be changed by users
   WikiShipModule modules;
   Map<String, int> selectedModuleMap = {};
@@ -77,11 +79,17 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
       return widget.ship.isSimilar(s);
     });
 
+    // Extra info collected by me
+
     // Load data
     final parser = WikiShipInfoParser(pref.gameServer, widget.ship.shipId);
     parser.download().then((value) {
       this.info = parser.parse(value);
-      this.modules = info.defaultProfile;
+      if (info != null) {
+        this.extraInfo = cached.getExtraShipWiki(info.shipId.toString());
+        this.modules = info.defaultProfile;
+      }
+
       setState(() {
         loading = false;
         // The value must not be null
@@ -192,8 +200,14 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
 
     final textTheme = Theme.of(context).textTheme;
 
+    // Show a blue ship name if it is a paper ship
+    var shipNameStyle = textTheme.headline6;
+    if (extraInfo.isPaperShip) shipNameStyle = shipNameStyle.copyWith(
+      color: Colors.blue[500]
+    );
+
     var widgets = [
-      Text(widget.ship.tierName, style: textTheme.headline6),
+      Text(widget.ship.tierName, style: shipNameStyle),
       Padding(
         padding: const EdgeInsets.only(top: 8.0),
         child: Text(widget.ship.nationShipType),
@@ -515,7 +529,6 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
     if (main == null) return SizedBox.shrink();
 
     final width = Utils.of(context).getItemWidth(100);
-    final extra = cached.getExtraShipWiki(info.shipId.toString());
     return Column(
       children: [
         buildTitle('Main (${main.rangeString})'),
@@ -541,11 +554,11 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
             ),
             TextWithCaption(
               title: 'sigma',
-              value: extra.sigmaString,
+              value: extraInfo.sigmaString,
             ),
             TextWithCaption(
               title: 'he pen',
-              value: extra.hePenString,
+              value: extraInfo.hePenString,
             ),
           ],
         ),

@@ -226,7 +226,7 @@ class ShipWiki {
       return (slot as List).map((c) => ShipConsumableValue.fromJson(c)).toList(growable: false);
     }).toList(growable: false);
       
-    this.isPaperShip = json['isPaperShip'];
+    this.isPaperShip = json['isPaperShip'] ?? false;
     this.permoflage = (json['permoflages'] ?? []).cast<int>();
     this.battle = json['battles'];
   }
