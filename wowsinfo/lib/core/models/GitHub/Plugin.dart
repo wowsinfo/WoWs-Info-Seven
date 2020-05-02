@@ -123,8 +123,10 @@ class ConsumableData {
 /// This is the `Upgrade` class
 class Upgrade {
   int slot;
-  List<int> shiplevel;
+  // This is the top priority, if it is in it, stop checking
   List<String> ship;
+  // Then, we need to check the level, type and nation if exists
+  List<int> shiplevel;
   List<String> shiptype;
   List<String> nation;
 
@@ -147,13 +149,14 @@ class Upgrade {
   }
 }
 
-/// This is the `OldShip` class
+/// This is the `OldShip` class, for removed ship name and tier
 class OldShip {
   String name;
   int tier;
 
   OldShip.fromJson(Map<String, dynamic> json) {
-    this.name = json['name'];
+    // Add this letter to mark that it has been removed
+    this.name = json['name'] + ' 𐌈';
     this.tier = json['tier'];
   }
 
