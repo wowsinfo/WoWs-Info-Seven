@@ -31,6 +31,7 @@ import 'package:wowsinfo/core/parsers/API/WikiGameMapParser.dart';
 import 'package:wowsinfo/core/parsers/API/WikiWarshipParser.dart';
 import 'package:wowsinfo/core/parsers/GitHub/GitHubParser.dart';
 import 'package:wowsinfo/core/parsers/GitHub/PRDataParser.dart';
+import 'package:wowsinfo/core/parsers/GitHub/PluginParser.dart';
 import 'package:wowsinfo/core/parsers/GitHub/ShipAliasParser.dart';
 
 
@@ -242,6 +243,7 @@ class CachedData extends LocalData {
       List<GitHubParser> github = [
         ShipAliasParser(),
         PRDataParser(),
+        PluginParser(),
       ];
 
       // Download from WarGaming API

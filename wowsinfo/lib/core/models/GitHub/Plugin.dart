@@ -46,7 +46,8 @@ class Modernization {
     this.name = json['name'];
     // This is crazy...
     this.data = (json['data'] as List).map((e) => 
-      (e as Map).map((a, b) => MapEntry(a, ModernizationData.fromJson(b))));
+      (e as Map<String, dynamic>).map((a, b) => MapEntry(a, ModernizationData.fromJson(b))))
+      .toList(growable: false);
   }
 
   Map<String, dynamic> toJson() {
@@ -67,33 +68,33 @@ class Modernization {
 class ModernizationData {
   // All consumables has this
   String consumableType;
-  int reloadTime;
-  int workTime;
+  double reloadTime;
+  double workTime;
 
   // Optional, if null, it is unlimited
   int numConsumable;
   // Repair party, per second
   double regenerationHPSpeed;
   // Anti-AA
-  int areaDamageMultiplier;
-  int bubbleDamageMultiplier;
+  double areaDamageMultiplier;
+  num bubbleDamageMultiplier;
   // Fighter, there are too many info so I only take a few
   String fightersName;
   int fightersNum;
-  int radius;
+  double radius;
   // Spotter, the multiplier
   double artilleryDistCoeff;
   // Smoke, radius is also here
-  int lifeTime;
+  double lifeTime;
   double speedLimit;
   // Engine boost
   double boostCoeff;
   // Sonar and radar, divide by 33.35 to km
-  int distShip;
-  int distTorpedo;
+  double distShip;
+  double distTorpedo;
   List<String> affectedClasses; // this is for the radar that can only spots bb and cv
   // Torpedo reload booster
-  int torpedoReloadTime;
+  double torpedoReloadTime;
   // Gun booster, boostCoeff is also here
   double criticalChance; // not idea what this is for
 
@@ -107,7 +108,7 @@ class ModernizationData {
 
   // Some utils
   /// WG doesn't use km in the game
-  String _convertToKM(int dist) => (dist / 33.35).toStringAsFixed(2);
+  String _convertToKM(double dist) => (dist / 33.35).toStringAsFixed(2);
   /// Convert Multiplier to a string, +0.5%, +20.0%
   String _convertMultiplier(double coeff) => '+ ${(coeff * 100).toStringAsFixed(1)}%';
 
@@ -121,6 +122,7 @@ class ModernizationData {
     this.regenerationHPSpeed = json['regenerationHPSpeed'];
 
     this.areaDamageMultiplier = json['areaDamageMultiplier'];
+    // It can be int sometimes
     this.bubbleDamageMultiplier = json['bubbleDamageMultiplier'];
 
     this.fightersName = json['fightersName'];
@@ -135,7 +137,7 @@ class ModernizationData {
     this.boostCoeff = json['boostCoeff'];
     this.distShip = json['distShip'];
     this.distTorpedo = json['distTorpedo'];
-    this.affectedClasses = (json['affectedClasses'] as List).cast<String>();
+    this.affectedClasses = (json['affectedClasses'] ?? []).cast<String>();
 
     this.torpedoReloadTime = json['regenerationHPSpeed'];
 
@@ -163,10 +165,10 @@ class Upgrade {
 
   Upgrade.fromJson(Map<String, dynamic> json) {
     this.slot = json['slot'];
-    this.ship = (json['ships'] as List).cast<String>();
-    this.shiplevel = (json['shiplevel'] as List).cast<int>();
-    this.shiptype = (json['shiptype'] as List).cast<String>();
-    this.nation = (json['nation'] as List).cast<String>();
+    this.ship = (json['ships'] ?? []).cast<String>();
+    this.shiplevel = (json['shiplevel'] ?? []).cast<int>();
+    this.shiptype = (json['shiptype'] ?? []).cast<String>();
+    this.nation = (json['nation'] ?? []).cast<String>();
   }
 
   Map<String, dynamic> toJson() {
@@ -204,18 +206,23 @@ class ShipWiki {
   double alphaPiercingHE;
   APCurve ap;
   double sigma;
-  List<ShipConsumable> consumable;
+  /// First list is the slot but then one slot can have 2 consumables
+  List<List<ShipConsumable>> consumable;
   bool isPaperShip;
   List<int> permoflage;
   int battle;
 
   ShipWiki.fromJson(Map<String, dynamic> json) {
     this.alphaPiercingHE = json['alphaPiercingHE'];
-    this.ap = json['ap'];
+    if (json['ap'] != null) this.ap = APCurve.fromJson(json['ap']);
     this.sigma = json['sigma'];
-    this.consumable = (json['consumables'] as List).map((e) => ShipConsumable.fromJson(e)).toList(growable: false);
+    // Another crazy one
+    this.consumable = (json['consumables'] as List).map((slot) {
+      return (slot as List).map((c) => ShipConsumable.fromJson(c)).toList(growable: false);
+    }).toList(growable: false);
+      
     this.isPaperShip = json['isPaperShip'];
-    this.permoflage = (json['permoflages'] as List).cast<int>();
+    this.permoflage = (json['permoflages'] ?? []).cast<int>();
     this.battle = json['battles'];
   }
 
