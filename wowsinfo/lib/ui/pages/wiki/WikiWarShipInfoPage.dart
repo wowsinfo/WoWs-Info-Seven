@@ -271,6 +271,8 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
       buildAA(),
       buildMeuverability(),
       buildConcealment(),
+      buildPermoflages(),
+      buildConsumables(),
       buildUpgrades(),
       buildNextShip(),
     ];
@@ -769,6 +771,54 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
     );
   }
 
+  Widget buildPermoflages() {
+    final list = extraInfo.permoflage;
+    if (list.length == 0) return SizedBox.shrink();
+
+    return Column(
+      children: [
+        buildTitle('Permoflages'),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: list.map((e) {
+              final curr = cached.getConsumable(e);
+              if (curr != null) return Image.network(curr.image);
+              return SizedBox.shrink();
+            }).toList(growable: false),
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget buildConsumables() {
+    final list = extraInfo.consumable;
+    if (list.length == 0) return SizedBox.shrink();
+
+    final slot = List.generate(list.length, (i) => i);
+    return Column(
+      children: [
+        buildTitle('Consumables'),
+        SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: slot.map((e) {
+                final consumable = list[e];
+                return Column(
+                  children: [
+                    Text('${e + 1}.'),
+                    ...consumable.map((e) => Text(e.type)).toList(growable: false),
+                  ],
+                );
+              }).toList(growable: false),
+            ),
+          ),
+      ],
+    );
+  }
+
   Widget buildUpgrades() {
     final slots = info.modSlot;
     final upgrades = info.upgrade.map((e) => cached.getConsumable(e));
@@ -791,7 +841,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
                 );
               }).toList(growable: false),
             ),
-          )
+          ),
         ],
       );
     }
