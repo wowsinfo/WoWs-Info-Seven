@@ -17,6 +17,7 @@ import 'package:wowsinfo/ui/widgets/TextWithCaption.dart';
 import 'package:wowsinfo/ui/widgets/WrapBox.dart';
 import 'package:wowsinfo/ui/widgets/wiki/ShipAverageStatistics.dart';
 import 'package:wowsinfo/ui/widgets/wiki/ShipParameter.dart';
+import 'package:wowsinfo/ui/widgets/wiki/WikiItemCell.dart';
 import 'package:wowsinfo/ui/widgets/wiki/WikiWarshipCell.dart';
 import 'package:wowsinfo/core/extensions/NumberExtension.dart';
 
@@ -562,7 +563,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
               title: 'sigma',
               value: extraInfo.sigmaString,
             ),
-            TextWithCaption(
+            if (extraInfo.alphaPiercingHE != null) TextWithCaption(
               title: 'he pen',
               value: extraInfo.hePenString,
             ),
@@ -787,7 +788,11 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
-            children: list.map((e) => Image.network(e.image)).toList(growable: false),
+            children: list.map((e) => WikiItemCell(
+              item: e,
+              onTap: () => e.displayDialog(context),
+              fit: false,
+            )).toList(growable: false),
           ),
         )
       ],
@@ -807,14 +812,15 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: slot.map((e) {
-                final consumable = list[e];
+                final consumable = list[e].map((e) => cached.getShipConsumable(e));
                 return Column(
                   children: [
                     Text('${e + 1}.'),
-                    ...consumable.map((e) {
-                      final curr = cached.getShipConsumable(e);
-                      return Image.asset('assets/consumables/${curr.consumableType}.png');
-                    }).toList(growable: false),
+                    ...consumable.map((e) => WikiItemCell(
+                      item: e, 
+                      asset: true, fit: false,
+                      onTap: () => e.displayDialog(context),
+                    )).toList(growable: false),
                   ],
                 );
               }).toList(growable: false),
@@ -837,19 +843,19 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: slotList.map((e) {
-                final upgradeSlots = upgrades.where((element) => element.value.slot == e);
+                final upgradeSlots = upgrades
+                  // filter out only compatible ones
+                  .where((u) => u.value.slot == e && u.value.compatible(info))
+                  // Map it to upgrade
+                  .map((e) => cached.getConsumableByString(e.key));
                 return Column(
                   children: [
                     Text('${e + 1}.'),
-                    ...upgradeSlots.map((e) {
-                      // Check if this is for this ship
-                      final fit = e.value.compatible(info);
-                      if (fit) {
-                        final upgrade = cached.getConsumableByString(e.key);
-                        return Image.network(upgrade.image);
-                      }
-                      return SizedBox.shrink();
-                    }).toList(growable: false),
+                    ...upgradeSlots.map((e) => WikiItemCell(
+                      item: e, 
+                      onTap: () => e.displayDialog(context),
+                      fit: false,
+                    )).toList(growable: false),
                   ],
                 );
               }).toList(growable: false),

@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:wowsinfo/core/models/Cacheable.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiItem.dart';
 
@@ -43,6 +45,21 @@ class Skill extends WikiItem {
       'tier': this.tier,
       'icon': this.image,
     };
+  }
+
+  @override
+  Future displayDialog(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        content: ListTile(
+          contentPadding: const EdgeInsets.all(2),
+          leading: Image.network(image),
+          title: Text(name, maxLines: 1, overflow: TextOverflow.ellipsis),
+          subtitle: Text(description),
+        ),
+      ),
+    );
   }
 }
 

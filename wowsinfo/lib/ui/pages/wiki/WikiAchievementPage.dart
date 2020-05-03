@@ -29,32 +29,6 @@ class WikiAchievementPage extends StatelessWidget {
     );
   }
 
-  void onTap(BuildContext context, Achievement a) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        content: ListTile(
-          contentPadding: const EdgeInsets.all(2),
-          leading: Image.network(
-            a.image,
-          ),
-          title: Text(a.name, maxLines: 1, overflow: TextOverflow.ellipsis),
-          subtitle: Text(a.description)
-        ),
-      ),
-    );
-    // showModalBottomSheet(
-    //   context: context, 
-    //   builder: (context) => BottomSheet(
-    //     onClosing: () => Navigator.pop(context), 
-    //     builder: (context) => ListTile(
-    //       title: Text(a.name),
-    //       subtitle: Text(a.description),
-    //     ),
-    //   ),
-    // );
-  }
-
   GridView buildGridView(int itemCount) {
     if (player == null) {
       final achievment = cached.sortedAchievement.toList(growable: false);
@@ -69,7 +43,7 @@ class WikiAchievementPage extends StatelessWidget {
           final curr = achievment[index];
           return WikiItemCell(
             item: curr,
-            onTap: () => this.onTap(context, curr),
+            onTap: () => curr.displayDialog(context),
           );
         }
       );
@@ -89,7 +63,7 @@ class WikiAchievementPage extends StatelessWidget {
           final count = sorted[index].value;
           final curr = cached.getAchievement(key);
           return InkWell(
-            onTap: () => this.onTap(context, curr),
+            onTap: () => curr.displayDialog(context),
             child: Tooltip(
               message: curr.name,
               child: FittedBox(child: buildPlayer(curr, count))

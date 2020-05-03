@@ -1,3 +1,4 @@
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:wowsinfo/core/models/Cacheable.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiItem.dart';
 
@@ -36,6 +37,12 @@ class CollectionItem extends WikiItem {
       'name': this.name,
       'card_id': this.cardId,
     };
+  }
+
+  @override
+  Future displayDialog(BuildContext context) {
+    // TODO: implement displayDialog
+    throw UnimplementedError();
   }
 }
 

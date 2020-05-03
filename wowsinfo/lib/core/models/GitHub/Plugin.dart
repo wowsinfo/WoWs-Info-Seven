@@ -1,5 +1,9 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:wowsinfo/core/models/Cacheable.dart';
+import 'package:wowsinfo/core/models/Wiki/WikiItem.dart';
 import 'package:wowsinfo/core/models/WoWs/WikiShipInfo.dart';
+import 'package:wowsinfo/core/others/AppLocalization.dart';
 
 /// This is the `Plugin` class
 class Plugin extends Cacheable {
@@ -49,8 +53,8 @@ class ShipConsumable {
     this.id = json['id'];
     this.index = json['index'];
     this.name = json['name'];
-    // This is crazy...
-    this.data = (json['data'] as Map).map((a, b) => MapEntry(a, ShipConsumableData.fromJson(b)));
+    // Set name to the key
+    this.data = (json['data'] as Map).map((a, b) => MapEntry(a, ShipConsumableData.fromJson(b)..name = a));
   }
 
   Map<String, dynamic> toJson() {
@@ -68,7 +72,8 @@ class ShipConsumable {
 }
 
 /// This is the `ShipConsumableData` class, `this is actual data for the consumable`
-class ShipConsumableData {
+class ShipConsumableData extends WikiItem {
+  String image;
   // All consumables has this
   String consumableType;
   double reloadTime;
@@ -114,9 +119,35 @@ class ShipConsumableData {
   String _convertToKM(double dist) => (dist / 33.35).toStringAsFixed(2);
   /// Convert Multiplier to a string, +0.5%, +20.0%
   String _convertMultiplier(double coeff) => '+ ${(coeff * 100).toStringAsFixed(1)}%';
+  ///
+  String _getDescription(BuildContext context) {
+    final lang = AppLocalization.of(context);
+    final list = {
+      'b': consumableType,
+      'c': reloadTime,
+      'd': workTime,
+      'e': numConsumable,
+      'f': regenerationHPSpeed,
+      'g': areaDamageMultiplier,
+      'h': bubbleDamageMultiplier,
+      'i': fightersName,
+      'j': fightersNum,
+      'k': radius,
+      'l': artilleryDistCoeff,
+      'm': lifeTime,
+      'n': speedLimit,
+      'o': boostCoeff,
+      'p': distShip,
+      'q': distTorpedo,
+      'r': torpedoReloadTime,
+    }..removeWhere((_, v) => v == null);
+
+    return list.entries.map((e) => e.key + ': ' + e.value.toString()).join(('\n'));
+  }
 
   ShipConsumableData.fromJson(Map<String, dynamic> json) {
     this.consumableType = json['consumableType'];
+
     this.reloadTime = json['reloadTime'];
     this.workTime = json['workTime'];
 
@@ -145,6 +176,9 @@ class ShipConsumableData {
     this.torpedoReloadTime = json['regenerationHPSpeed'];
 
     this.criticalChance = json['criticalChance'];
+
+    /// Setup field for `wiki item`
+    this.image = 'assets/consumables/$consumableType.png';
   }
 
   Map<String, dynamic> toJson() {
@@ -153,6 +187,23 @@ class ShipConsumableData {
       'reloadTime': this.reloadTime,
       'workTime': this.workTime,
     };
+  }
+
+  @override
+  Future displayDialog(BuildContext context) {
+    final info = _getDescription(context);
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        content: ListTile(
+          contentPadding: const EdgeInsets.all(2),
+          isThreeLine: true,
+          title: Text('$consumableType $name'),
+          subtitle: Text(info),
+          leading: Image.asset(image),
+        ),
+      ),
+    );
   }
 }
 

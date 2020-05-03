@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/models/Cacheable.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiItem.dart';
 
@@ -49,6 +50,42 @@ class Consumable extends WikiItem {
       'type': this.type,
       'description': this.description,
     };
+  }
+
+  @override
+  Future displayDialog(BuildContext context) {
+    final dark = Theme.of(context).brightness == Brightness.dark;
+
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        content: ListTile(
+          contentPadding: const EdgeInsets.all(2),
+          isThreeLine: true,
+          title: Text(name),
+          subtitle: RichText(
+            text: TextSpan(
+              style: TextStyle(color: dark ? Colors.white : Colors.black),
+              children: [
+                TextSpan(
+                  text: priceString + '\n',
+                  style: TextStyle(color: isGold ? Colors.orange : Colors.grey)
+                ),
+                TextSpan(
+                  text: description + '\n\n',
+                  style: TextStyle(fontSize: 14)
+                ),
+                TextSpan(
+                  text: profileString,
+                  style: TextStyle(fontSize: 12)
+                ),
+              ]
+            ),
+          ),
+          leading: Image.network(image),
+        ),
+      ),
+    );
   }
 }
 

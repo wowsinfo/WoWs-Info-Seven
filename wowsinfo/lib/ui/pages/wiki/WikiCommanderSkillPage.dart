@@ -121,17 +121,7 @@ class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
       });
     } else {
       // Show skill details
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          content: ListTile(
-            contentPadding: const EdgeInsets.all(2),
-            leading: Image.network(curr.image),
-            title: Text(curr.name, maxLines: 1, overflow: TextOverflow.ellipsis),
-            subtitle: Text(curr.description),
-          ),
-        ),
-      );
+      curr.displayDialog(context);
     }
   }
 
