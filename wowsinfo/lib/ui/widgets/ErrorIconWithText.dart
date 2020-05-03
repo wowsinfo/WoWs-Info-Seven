@@ -6,12 +6,14 @@ class ErrorIconWithText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Icon(Icons.error, color: Colors.red, size: 64),
-        Text('Failed to load!')
-      ],
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Icon(Icons.error, color: Colors.red, size: 64),
+          Text('Failed to load!')
+        ],
+      ),
     );
   }
 }

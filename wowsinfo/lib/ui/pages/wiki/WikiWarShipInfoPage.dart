@@ -11,6 +11,7 @@ import 'package:wowsinfo/core/others/Utils.dart';
 import 'package:wowsinfo/core/parsers/API/WikiShipInfoParser.dart';
 import 'package:wowsinfo/core/parsers/API/WikiShipModuleParser.dart';
 import 'package:wowsinfo/ui/pages/wiki/WikiWarshipSimilarPage.dart';
+import 'package:wowsinfo/ui/widgets/ErrorIconWithText.dart';
 import 'package:wowsinfo/ui/widgets/PlatformLoadingIndiactor.dart';
 import 'package:wowsinfo/ui/widgets/TextWithCaption.dart';
 import 'package:wowsinfo/ui/widgets/WrapBox.dart';
@@ -95,7 +96,10 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
         // The value must not be null
         error = this.info == null;
       });
-    }).catchError((e) => setState(() => error = true));
+    }).catchError((e, s) {
+      Utils.debugPrint(s);
+      setState(() => error = true);
+    });
   }
 
   @override
@@ -167,7 +171,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
   );
 
   Widget buildBody() {
-    if (error) return SizedBox.shrink();
+    if (error) return ErrorIconWithText();
     return buildInfo();
   }
 
@@ -772,7 +776,9 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
   }
 
   Widget buildPermoflages() {
-    final list = extraInfo.permoflage;
+    final list = extraInfo.permoflage
+      .map((e) => cached.getConsumable(e))
+      .where((e) => e != null);
     if (list.length == 0) return SizedBox.shrink();
 
     return Column(
@@ -781,11 +787,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
-            children: list.map((e) {
-              final curr = cached.getConsumable(e);
-              if (curr != null) return Image.network(curr.image);
-              return SizedBox.shrink();
-            }).toList(growable: false),
+            children: list.map((e) => Image.network(e.image)).toList(growable: false),
           ),
         )
       ],

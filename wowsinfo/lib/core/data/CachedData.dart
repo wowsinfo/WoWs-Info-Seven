@@ -194,7 +194,7 @@ class CachedData extends LocalData {
   Iterable<MapEntry<String, Modernization>> get getUpgradeList => _plugin.upgrade.entries;
   ShipWiki getExtraShipWiki(String key) => _plugin.shipWiki[key];
   ShipConsumableData getShipConsumable(ShipConsumableValue value) => _plugin.getConsumable(value);
-  void loadPlugin() => _collection = decode(GITHUB_PLUGIN, (j) => WikiCollection.fromJson(j));
+  void loadPlugin() => _plugin = decode(GITHUB_PLUGIN, (j) => Plugin.fromJson(j));
   void savePlugin(Plugin data) {
     _plugin = data;
     box.put(GITHUB_PLUGIN, jsonEncode(data.toJson()));
@@ -284,6 +284,7 @@ class CachedData extends LocalData {
     loadGameMap();
     loadPRData();
     loadWarship();
+    loadPlugin();
     loadCommanderSkill();
   }
 
