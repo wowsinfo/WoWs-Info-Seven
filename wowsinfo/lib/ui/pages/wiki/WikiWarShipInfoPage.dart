@@ -809,7 +809,10 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
                 return Column(
                   children: [
                     Text('${e + 1}.'),
-                    ...consumable.map((e) => Text(e.type)).toList(growable: false),
+                    ...consumable.map((e) {
+                      final curr = cached.getShipConsumable(e);
+                      return Image.asset('assets/consumables/${curr.consumableType}.png');
+                    }).toList(growable: false),
                   ],
                 );
               }).toList(growable: false),

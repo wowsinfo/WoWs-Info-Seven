@@ -12,7 +12,7 @@ void main() {
     final output = jsonEncode(jsonMap);
     
     final a = Plugin.fromJson(jsonMap);
-    expect(a.consumable['PCY020_RLSSearchPremium'].data[10]['USSR_8_BB'].distShip == 500, isTrue);
+    expect(a.consumable['PCY020_RLSSearchPremium'].data['USSR_8_BB'].distShip == 500, isTrue);
     final myOutput = jsonEncode(a.toJson());
 
     // I ignored many data

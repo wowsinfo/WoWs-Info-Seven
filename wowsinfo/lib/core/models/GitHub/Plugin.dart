@@ -7,7 +7,7 @@ class Plugin extends Cacheable {
   Map<String, OldShip> oldShip;
   Map<String, ShipWiki> shipWiki;
 
-  ShipConsumableData getConsumable(ShipConsumableValue v) => consumable[v.type].getConsumable(v.name);
+  ShipConsumableData getConsumable(ShipConsumableValue v) => consumable[v.name].getConsumable(v.type);
 
   Plugin.fromJson(Map<String, dynamic> json) {
     this.consumable = (json['consumables'] as Map).map((a, b) => MapEntry(a, ShipConsumable.fromJson(b)));
