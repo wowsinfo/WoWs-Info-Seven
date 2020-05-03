@@ -3,6 +3,7 @@ import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiAchievement.dart';
 import 'package:wowsinfo/core/models/WoWs/PlayerAchievement.dart';
 import 'package:wowsinfo/core/others/Utils.dart';
+import 'package:wowsinfo/ui/widgets/wiki/WikiItemCell.dart';
 
 /// WikiAchievementPage class
 class WikiAchievementPage extends StatelessWidget {
@@ -66,12 +67,9 @@ class WikiAchievementPage extends StatelessWidget {
         itemCount: achievment.length,
         itemBuilder: (context, index) {
           final curr = achievment[index];
-          return InkWell(
+          return WikiItemCell(
+            item: curr,
             onTap: () => this.onTap(context, curr),
-            child: Tooltip(
-              message: curr.name,
-              child: buildImage(curr)
-            ),
           );
         }
       );
@@ -111,15 +109,6 @@ class WikiAchievementPage extends StatelessWidget {
         ),
         Text(count.toString()),
       ],
-    );
-  }
-
-  Padding buildImage(Achievement curr) {
-    return Padding(
-      padding: const EdgeInsets.all(4.0),
-      child: FittedBox(
-        child: Image.network(curr.hidden > 0 ? curr.imageInactive : curr.image),
-      ),
     );
   }
 }

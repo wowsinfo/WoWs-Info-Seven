@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiCommanderSkill.dart';
+import 'package:wowsinfo/ui/widgets/wiki/WikiItemCell.dart';
 
 /// WikiCommanderSkillPage class
 class WikiCommanderSkillPage extends StatefulWidget {
@@ -69,15 +70,9 @@ class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
                   return FittedBox(
                     child: Stack(
                       children: <Widget>[
-                        InkWell(
+                        WikiItemCell(
+                          item: curr,
                           onTap: () => this.onTap(curr, e.name),
-                          child: Tooltip(
-                            message: curr.name,
-                            child: Padding(
-                              padding: const EdgeInsets.all(4),
-                              child: Image.network(curr.image),
-                            ),
-                          ),
                         ),
                         Positioned.fill(
                           child: AnimatedSwitcher(
