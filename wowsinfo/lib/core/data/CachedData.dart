@@ -156,7 +156,8 @@ class CachedData extends LocalData {
   }
 
   WikiConsumable _consumable;
-  Consumable getConsumable(int id) => _consumable.consumable[id.toString()];
+  Consumable getConsumable(int id) => getConsumableByString(id.toString());
+  Consumable getConsumableByString(String id) => _consumable.consumable[id];
   Iterable<Consumable> get wikiConsumables => _consumable.consumable.values;
   Iterable<Consumable> get sortedWikiConsumables => wikiConsumables
     .toList(growable: false)..sort((a, b) {
@@ -190,7 +191,7 @@ class CachedData extends LocalData {
   }
 
   Plugin _plugin;
-  Iterable<MapEntry<String, Modernization>> get upgradeList => _plugin.upgrade.entries;
+  Iterable<MapEntry<String, Modernization>> get getUpgradeList => _plugin.upgrade.entries;
   ShipWiki getExtraShipWiki(String key) => _plugin.shipWiki[key];
   ShipConsumableData getShipConsumable(ShipConsumableValue value) => _plugin.getConsumable(value);
   void loadPlugin() => _collection = decode(GITHUB_PLUGIN, (j) => WikiCollection.fromJson(j));

@@ -23,6 +23,8 @@ class WikiShipInfo {
   bool isSpecial;
   String name;
 
+  String get tierString => '$tier';
+
   bool get hasOtherModules => module?.hasOtherModules ?? false;
   bool get hasNextShip => (nextShip?.ships?.length ?? 0) > 0;
   Iterable<int> get nextShipIds => nextShip?.ships?.keys?.map((e) => int.parse(e)) ?? [];

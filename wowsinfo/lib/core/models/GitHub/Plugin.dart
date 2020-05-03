@@ -1,4 +1,5 @@
 import 'package:wowsinfo/core/models/Cacheable.dart';
+import 'package:wowsinfo/core/models/WoWs/WikiShipInfo.dart';
 
 /// This is the `Plugin` class
 class Plugin extends Cacheable {
@@ -164,6 +165,18 @@ class Modernization {
   List<int> shiplevel;
   List<String> shiptype;
   List<String> nation;
+
+  bool get nationOnly => nation.length > 0;
+
+  bool compatible(WikiShipInfo info) {
+    if (ship.contains(info.shipIdStr)) return true;
+    else if (shiplevel.contains(info.tier) && shiptype.contains(info.type)) {
+      if (nationOnly) return nation.contains(info.nation);
+      return true;
+    }
+
+    return false;
+  }
 
   Modernization.fromJson(Map<String, dynamic> json) {
     this.slot = json['slot'];

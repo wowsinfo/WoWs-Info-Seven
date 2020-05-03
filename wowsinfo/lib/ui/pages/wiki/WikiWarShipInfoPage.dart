@@ -824,7 +824,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
 
   Widget buildUpgrades() {
     final slots = info.modSlot;
-    final upgrades = info.upgrade.map((e) => cached.getConsumable(e));
+    final upgrades = cached.getUpgradeList;
     if (slots > 0 && upgrades.length > 0) {
       final slotList = List.generate(slots, (i) => i);
       return Column(
@@ -835,11 +835,19 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: slotList.map((e) {
-                final upgradeSlots = upgrades.where((element) => element.slot == e);
+                final upgradeSlots = upgrades.where((element) => element.value.slot == e);
                 return Column(
                   children: [
                     Text('${e + 1}.'),
-                    ...upgradeSlots.map((e) => Image.network(e.image)).toList(growable: false),
+                    ...upgradeSlots.map((e) {
+                      // Check if this is for this ship
+                      final fit = e.value.compatible(info);
+                      if (fit) {
+                        final upgrade = cached.getConsumableByString(e.key);
+                        return Image.network(upgrade.image);
+                      }
+                      return SizedBox.shrink();
+                    }).toList(growable: false),
                   ],
                 );
               }).toList(growable: false),
