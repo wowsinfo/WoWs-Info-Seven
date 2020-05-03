@@ -1,4 +1,5 @@
-import '../Cacheable.dart';
+import 'package:wowsinfo/core/models/Cacheable.dart';
+import 'package:wowsinfo/core/models/Wiki/WikiItem.dart';
 
 /// This is the `WikiAchievement` class
 class WikiAchievement extends Cacheable {
@@ -15,13 +16,10 @@ class WikiAchievement extends Cacheable {
 }
 
 /// This is the `Achievement` class
-class Achievement {
-  String description;
-  String image;
+class Achievement extends WikiItem {
   String achievementId;
   String imageInactive;
   int hidden;
-  String name;
 
   Achievement.fromJson(Map<String, dynamic> json) {
     this.description = json['description'];

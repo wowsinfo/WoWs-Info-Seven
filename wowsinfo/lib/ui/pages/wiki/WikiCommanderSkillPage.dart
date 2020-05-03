@@ -75,7 +75,7 @@ class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
                             message: curr.name,
                             child: Padding(
                               padding: const EdgeInsets.all(4),
-                              child: Image.network(curr.icon),
+                              child: Image.network(curr.image),
                             ),
                           ),
                         ),
@@ -131,7 +131,7 @@ class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
         builder: (context) => AlertDialog(
           content: ListTile(
             contentPadding: const EdgeInsets.all(2),
-            leading: Image.network(curr.icon),
+            leading: Image.network(curr.image),
             title: Text(curr.name, maxLines: 1, overflow: TextOverflow.ellipsis),
             subtitle: Text(curr.description),
           ),

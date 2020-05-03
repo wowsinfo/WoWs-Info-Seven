@@ -1,4 +1,5 @@
-import '../Cacheable.dart';
+import 'package:wowsinfo/core/models/Cacheable.dart';
+import 'package:wowsinfo/core/models/Wiki/WikiItem.dart';
 
 /// This is the `WikiCollectionItem` class
 class WikiCollectionItem extends Cacheable {
@@ -15,15 +16,12 @@ class WikiCollectionItem extends Cacheable {
 }
 
 /// This is the `CollectionItem` class
-class CollectionItem {
-  Image image;
+class CollectionItem extends WikiItem {
   int collectionId;
-  String description;
-  String name;
   int cardId;
 
   CollectionItem.fromJson(Map<String, dynamic> json) {
-    if (json['images'] != null) this.image = Image.fromJson(json['images']);
+    if (json['images'] != null) this.image = Image.fromJson(json['images'])?.small;
     this.collectionId = json['collection_id'];
     this.description = json['description'];
     this.name = json['name'];
