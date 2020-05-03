@@ -7,8 +7,9 @@ Template
 ### What to do tomorrow?
 ~~~
 
-## 01/05/2020
+## 03/05/2020
 ### Summary
+I was playing for the past 2 days and didn't do much. Now, permoflages, consumables and upgrades are added. They are really useful. 
 ### What to do tomorrow?
 
 ## 30/04/2020

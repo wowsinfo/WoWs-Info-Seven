@@ -118,28 +118,28 @@ class ShipConsumableData extends WikiItem {
   /// WG doesn't use km in the game
   String _convertToKM(double dist) => (dist / 33.35).toStringAsFixed(2);
   /// Convert Multiplier to a string, +0.5%, +20.0%
-  String _convertMultiplier(double coeff) => '+ ${(coeff * 100).toStringAsFixed(1)}%';
+  String _convertMultiplier(double coeff) => '+${(coeff * 100).toStringAsFixed(1)}%';
   ///
   String _getDescription(BuildContext context) {
     final lang = AppLocalization.of(context);
     final list = {
-      'b': consumableType,
-      'c': reloadTime,
-      'd': workTime,
-      'e': numConsumable,
-      'f': regenerationHPSpeed,
+      'type': consumableType,
+      'reload time': reloadTime,
+      'active time': workTime,
+      'number of charge': numConsumable,
+      'HP regeneration': regenerationHPSpeed,
       'g': areaDamageMultiplier,
       'h': bubbleDamageMultiplier,
-      'i': fightersName,
-      'j': fightersNum,
-      'k': radius,
+      'fighter name': fightersName,
+      'number of fighters': fightersNum,
+      'radius': radius,
       'l': artilleryDistCoeff,
-      'm': lifeTime,
-      'n': speedLimit,
+      'life time': lifeTime,
+      'speed limit': speedLimit,
       'o': boostCoeff,
-      'p': distShip,
-      'q': distTorpedo,
-      'r': torpedoReloadTime,
+      'detect ship distance': distShip,
+      'detect torpedo distance': distTorpedo,
+      'torpedo reload time': torpedoReloadTime,
     }..removeWhere((_, v) => v == null);
 
     return list.entries.map((e) => e.key + ': ' + e.value.toString()).join(('\n'));
@@ -156,7 +156,6 @@ class ShipConsumableData extends WikiItem {
     this.regenerationHPSpeed = json['regenerationHPSpeed'];
 
     this.areaDamageMultiplier = json['areaDamageMultiplier'];
-    // It can be int sometimes
     this.bubbleDamageMultiplier = json['bubbleDamageMultiplier'];
 
     this.fightersName = json['fightersName'];
@@ -173,7 +172,7 @@ class ShipConsumableData extends WikiItem {
     this.distTorpedo = json['distTorpedo'];
     this.affectedClasses = (json['affectedClasses'] ?? []).cast<String>();
 
-    this.torpedoReloadTime = json['regenerationHPSpeed'];
+    this.torpedoReloadTime = json['torpedoReloadTime'];
 
     this.criticalChance = json['criticalChance'];
 
@@ -182,11 +181,28 @@ class ShipConsumableData extends WikiItem {
   }
 
   Map<String, dynamic> toJson() {
+    // This is why I don't want to do this
     return {
       'consumableType': this.consumableType,
       'reloadTime': this.reloadTime,
       'workTime': this.workTime,
-    };
+      'numConsumables': this.numConsumable,
+      'regenerationHPSpeed': this.regenerationHPSpeed,
+      'areaDamageMultiplier': this.areaDamageMultiplier,
+      'bubbleDamageMultiplier': this.bubbleDamageMultiplier,
+      'fightersName': this.fightersName,
+      'fightersNum': this.fightersNum,
+      'radius': this.radius,
+      'artilleryDistCoeff': this.artilleryDistCoeff,
+      'lifeTime': this.lifeTime,
+      'speedLimit': this.speedLimit,
+      'boostCoeff': this.boostCoeff,
+      'distShip': this.distShip,
+      'distTorpedo': this.distTorpedo,
+      'affectedClasses': this.affectedClasses,
+      'torpedoReloadTime': this.torpedoReloadTime,
+      'criticalChance': this.criticalChance,
+    }..removeWhere((key, value) => value == null);
   }
 
   @override
