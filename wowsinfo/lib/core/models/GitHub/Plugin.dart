@@ -106,40 +106,43 @@ class ShipConsumableData extends WikiItem {
   // Gun booster, boostCoeff is also here
   double criticalChance; // not idea what this is for
 
-  String get spotShipDistance => '${_convertToKM(distShip)} km';
-  String get spotTorpedoDistance => '${_convertToKM(distTorpedo)} km';
+  String get spotShipDistance => '${_toKM(distShip)} km';
+  String get spotTorpedoDistance => '${_toKM(distTorpedo)} km';
 
-  String get hpRegeneration => '${_convertMultiplier(regenerationHPSpeed)}';
-  String get artilleryDistance => '${_convertMultiplier(artilleryDistCoeff)}';
+  String get hpRegeneration => '${_toPercent(regenerationHPSpeed)}';
+  String get artilleryDistance => '${_toPercent(artilleryDistCoeff)}';
   /// For both engine boost and gun booster
-  String get boostPercentage => '${_convertMultiplier(boostCoeff)}';
+  String get boostPercentage => '${_toPercent(boostCoeff)}';
 
   // Some utils
   /// WG doesn't use km in the game
-  String _convertToKM(double dist) => (dist / 33.35).toStringAsFixed(2);
+  String _toKM(double v) => v != null ? '${(v / 33.35).toStringAsFixed(1)} km' : null;
   /// Convert Multiplier to a string, +0.5%, +20.0%
-  String _convertMultiplier(double coeff) => '+${(coeff * 100).toStringAsFixed(1)}%';
+  String _toPercent(double v) => v != null ? '+${(v * 100).toStringAsFixed(1)}%' : null;
+  String _toTime(num v) => v != null ? '$v s' : null;
+  String _toKnot(num v) => v != null ? '$v kt' : null;
+  String _toMeter(num v) => v != null ? '$v m' : null;
   ///
   String _getDescription(BuildContext context) {
     final lang = AppLocalization.of(context);
     final list = {
       'type': consumableType,
-      'reload time': reloadTime,
-      'active time': workTime,
-      'number of charge': numConsumable,
-      'HP regeneration': regenerationHPSpeed,
-      'g': areaDamageMultiplier,
-      'h': bubbleDamageMultiplier,
+      'reload time': _toTime(reloadTime),
+      'active time': _toTime(workTime),
+      'number of charge': numConsumable ?? '∞',
+      'HP regeneration/s': _toPercent(regenerationHPSpeed),
+      'area damage': _toPercent(areaDamageMultiplier),
+      'bubble damage': _toPercent(bubbleDamageMultiplier),
       'fighter name': fightersName,
       'number of fighters': fightersNum,
-      'radius': radius,
-      'l': artilleryDistCoeff,
-      'life time': lifeTime,
-      'speed limit': speedLimit,
-      'o': boostCoeff,
-      'detect ship distance': distShip,
-      'detect torpedo distance': distTorpedo,
-      'torpedo reload time': torpedoReloadTime,
+      'radius': _toMeter(radius),
+      'artillery range boost': _toPercent(artilleryDistCoeff),
+      'life time': _toTime(lifeTime),
+      'speed limit': _toKnot(speedLimit),
+      'boost': _toPercent(boostCoeff),
+      'detect ship distance': _toKM(distShip),
+      'detect torpedo distance': _toKM(distTorpedo),
+      'torpedo reload time': _toTime(torpedoReloadTime),
     }..removeWhere((_, v) => v == null);
 
     return list.entries.map((e) => e.key + ': ' + e.value.toString()).join(('\n'));
