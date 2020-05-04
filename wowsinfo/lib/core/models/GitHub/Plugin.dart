@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:wowsinfo/core/models/Cacheable.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiItem.dart';
+import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart';
 import 'package:wowsinfo/core/models/WoWs/WikiShipInfo.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
 
@@ -13,11 +13,13 @@ class Plugin extends Cacheable {
   Map<String, ShipWiki> shipWiki;
 
   ShipConsumableData getConsumable(ShipConsumableValue v) => consumable[v.name].getConsumable(v.type);
+  OldShip getShip(int key) => oldShip[key.toString()];
 
   Plugin.fromJson(Map<String, dynamic> json) {
     this.consumable = (json['consumables'] as Map).map((a, b) => MapEntry(a, ShipConsumable.fromJson(b)));
     this.upgrade = (json['upgrades'] as Map).map((a, b) => MapEntry(a, Modernization.fromJson(b)));
-    this.oldShip = (json['old_ships'] as Map).map((a, b) => MapEntry(a, OldShip.fromJson(b)));
+    // Set ship id here
+    this.oldShip = (json['old_ships'] as Map).map((a, b) => MapEntry(a, OldShip.fromJson(b)..shipId = int.parse(a)));
     this.shipWiki = (json['ship_wiki'] as Map).map((a, b) => MapEntry(a, ShipWiki.fromJson(b)));
   }
 
@@ -272,14 +274,15 @@ class Modernization {
 }
 
 /// This is the `OldShip` class, for removed ship name and tier
-class OldShip {
+class OldShip extends Warship {
   String name;
   int tier;
 
-  OldShip.fromJson(Map<String, dynamic> json) {
-    // Add this letter to mark that it has been removed
-    this.name = json['name'] + ' 𐌈';
-    this.tier = json['tier'];
+  OldShip.fromJson(Map<String, dynamic> json) : super.fromJson(json) {
+    // Add a marker
+    this.name += ' 𐌈';
+    this.isPremium = false;
+    this.isSpecial = true;
   }
 
   Map<String, dynamic> toJson() {

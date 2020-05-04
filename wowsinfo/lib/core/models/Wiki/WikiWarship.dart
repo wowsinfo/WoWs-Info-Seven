@@ -27,8 +27,10 @@ class Warship {
   String nation;
   bool isPremium;
   DefaultProfile _defaultProfile;
-  Image _image;
+  WarshipImage _image;
   String type;
+
+  bool get hasImage => _image != null;
 
   int get health => _defaultProfile.health;
   String get tierString => ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'][tier - 1];
@@ -37,7 +39,7 @@ class Warship {
   String get nationShipType => '$nationString $typeString';
   String get shipIdAndIdStr => '$shipIdStr $shipId';
   bool get isSpecialOrPremium => isSpecial || isPremium;
-  String get smallImage => _image.small;
+  String get smallImage => _image?.small;
   String get typeString {
     final cached = CachedData.shared;
     return cached.getTypeString(type);
@@ -61,8 +63,8 @@ class Warship {
     this.nation = json['nation'];
     this.isPremium = json['is_premium'];
     this.shipIdStr = json['ship_id_str'];
-    this._defaultProfile = DefaultProfile.fromJson(json['default_profile']);
-    this._image = Image.fromJson(json['images']);
+    if (json['default_profile'] != null) this._defaultProfile = DefaultProfile.fromJson(json['default_profile']);
+    if (json['images'] != null) this._image = WarshipImage.fromJson(json['images']);
     this.type = json['type'];
   }
 
@@ -114,11 +116,11 @@ class Armour {
   }
 }
 
-/// This is the `Image` class
-class Image {
+/// This is the `WarshipImage` class
+class WarshipImage {
   String small;
 
-  Image.fromJson(Map<String, dynamic> json) {
+  WarshipImage.fromJson(Map<String, dynamic> json) {
     this.small = json['small'];
   }
 

@@ -19,7 +19,7 @@ class WoWsDate {
 
   int compareTo(WoWsDate date) => this.time - date.time;
   /// Less than a period so `this.date` must be after the date
-  bool lessThan(Duration d) => this.date.isAfter(DateTime.now().subtract(d));
+  bool lessThan(Duration d) => this.date?.isAfter(DateTime.now().subtract(d)) ?? false;
   /// Before a certain `WoWsDate`
-  bool isBefore(WoWsDate date) => this.date.isBefore(date.date);
+  bool isBefore(WoWsDate date) => this.date?.isBefore(date.date) ?? false;
 }

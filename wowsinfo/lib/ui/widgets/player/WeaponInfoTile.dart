@@ -80,6 +80,7 @@ class WeaponInfoTile extends StatelessWidget {
     } else {
       return Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: values,
       );
     }
