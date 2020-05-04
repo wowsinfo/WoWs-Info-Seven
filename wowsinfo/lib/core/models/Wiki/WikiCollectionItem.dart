@@ -1,4 +1,4 @@
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/models/Cacheable.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiItem.dart';
 
@@ -22,7 +22,7 @@ class CollectionItem extends WikiItem {
   int cardId;
 
   CollectionItem.fromJson(Map<String, dynamic> json) {
-    if (json['images'] != null) this.image = Image.fromJson(json['images'])?.small;
+    if (json['images'] != null) this.image = CollectionItemImage.fromJson(json['images']).small;
     this.collectionId = json['collection_id'];
     this.description = json['description'];
     this.name = json['name'];
@@ -46,12 +46,13 @@ class CollectionItem extends WikiItem {
   }
 }
 
-/// This is the `Image` class
-class Image {
+/// This is the `CollectionItemImage` class
+class CollectionItemImage {
   String small;
 
-  Image.fromJson(Map<String, dynamic> json) {
-    this.small = json['small'];
+  CollectionItemImage.fromJson(json) {
+    if (json is String) this.small = json;
+    else this.small = json['small'];
   }
 
   Map<String, dynamic> toJson() {

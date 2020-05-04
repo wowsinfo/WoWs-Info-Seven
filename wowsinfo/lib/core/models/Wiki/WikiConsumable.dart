@@ -52,6 +52,11 @@ class Consumable extends WikiItem {
     };
   }
 
+  int compareTo(Consumable other) {
+    if (priceCredit == other.priceCredit) return consumableId.compareTo(other.consumableId);
+    return priceCredit.compareTo(other.priceCredit);
+  }
+
   @override
   Future displayDialog(BuildContext context) {
     final dark = Theme.of(context).brightness == Brightness.dark;

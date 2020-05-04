@@ -231,6 +231,7 @@ class Modernization {
   int slot;
   // This is the top priority, if it is in it, stop checking
   List<String> ship;
+  List<String> exclude;
   // Then, we need to check the level, type and nation if exists
   List<int> shiplevel;
   List<String> shiptype;
@@ -239,7 +240,8 @@ class Modernization {
   bool get nationOnly => nation.length > 0;
 
   bool compatible(WikiShipInfo info) {
-    if (ship.contains(info.shipIdStr)) return true;
+    if (exclude.contains(info.shipIdStr)) return false;
+    else if (ship.contains(info.shipIdStr)) return true;
     else if (shiplevel.contains(info.tier) && shiptype.contains(info.type)) {
       if (nationOnly) return nation.contains(info.nation);
       return true;
@@ -251,6 +253,7 @@ class Modernization {
   Modernization.fromJson(Map<String, dynamic> json) {
     this.slot = json['slot'];
     this.ship = (json['ships'] ?? []).cast<String>();
+    this.exclude = (json['excludes'] ?? []).cast<String>();
     this.shiplevel = (json['shiplevel'] ?? []).cast<int>();
     this.shiptype = (json['shiptype'] ?? []).cast<String>();
     this.nation = (json['nation'] ?? []).cast<String>();
@@ -259,8 +262,9 @@ class Modernization {
   Map<String, dynamic> toJson() {
     return {
       'slot': this.slot,
-      'shiplevel': this.shiplevel,
       'ships': this.ship,
+      'excludes': this.exclude,
+      'shiplevel': this.shiplevel,
       'shiptype': this.shiptype,
       'nation': this.nation,
     };
@@ -289,6 +293,7 @@ class OldShip {
 /// This is the `ShipWiki` class
 class ShipWiki {
   double alphaPiercingHE;
+  double alphaPiercingCS;
   APCurve ap;
   double sigma;
   /// First list is the slot but then one slot can have 2 consumables
@@ -298,10 +303,12 @@ class ShipWiki {
   int battle;
 
   String get sigmaString => '${sigma.toStringAsFixed(2)}';
-  String get hePenString => '${alphaPiercingHE.toStringAsFixed(0)} mm';
+  String get hePenString => '${alphaPiercingHE.toStringAsFixed(1)} mm';
+  String get csPenString => '${alphaPiercingCS.toStringAsFixed(1)} mm';
 
   ShipWiki.fromJson(Map<String, dynamic> json) {
-    this.alphaPiercingHE = json['alphaPiercingHE'];
+    if (json['alphaPiercingHE'] != null) this.alphaPiercingHE = json['alphaPiercingHE'];
+    if (json['alphaPiercingCS'] != null) this.alphaPiercingCS = json['alphaPiercingCS'];
     if (json['ap'] != null) this.ap = APCurve.fromJson(json['ap']);
     this.sigma = json['sigma'];
     // Another crazy one
@@ -317,13 +324,14 @@ class ShipWiki {
   Map<String, dynamic> toJson() {
     return {
       'alphaPiercingHE': this.alphaPiercingHE,
+      'alphaPiercingCS': this.alphaPiercingCS,
       'ap': this.ap,
       'sigma': this.sigma,
       'consumables': this.consumable,
       'isPaperShip': this.isPaperShip,
       'permoflages': this.permoflage,
       'battles': this.battle,
-    };
+    }..removeWhere((_, v) => v == null);
   }
 }
 

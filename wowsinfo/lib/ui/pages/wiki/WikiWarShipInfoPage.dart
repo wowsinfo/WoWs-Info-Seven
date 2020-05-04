@@ -567,6 +567,10 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
               title: 'he pen',
               value: extraInfo.hePenString,
             ),
+            if (extraInfo.alphaPiercingCS != null) TextWithCaption(
+              title: 'sap pen',
+              value: extraInfo.csPenString,
+            ),
           ],
         ),
         Column(
@@ -847,7 +851,9 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
                   // filter out only compatible ones
                   .where((u) => u.value.slot == e && u.value.compatible(info))
                   // Map it to upgrade
-                  .map((e) => cached.getConsumableByString(e.key));
+                  .map((e) => cached.getConsumableByString(e.key))
+                  .toList(growable: false)
+                  ..sort((a, b) => a.compareTo(b));
                 return Column(
                   children: [
                     Text('${e + 1}.'),

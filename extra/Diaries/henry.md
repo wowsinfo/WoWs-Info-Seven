@@ -7,6 +7,11 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## 04/05/2020
+### Summary
+More info added in `Plugin`. 
+### What to do tomorrow?
+
 ## 03/05/2020
 ### Summary
 I was playing for the past 2 days and didn't do much. Now, permoflages, consumables and upgrades are added. They are really useful. 
