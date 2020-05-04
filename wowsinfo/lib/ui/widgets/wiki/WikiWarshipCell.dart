@@ -27,7 +27,13 @@ class WikiWarshipCell extends StatelessWidget {
     ? AspectRatio(
       // This is the ratio of the image from the API
       aspectRatio: 1.7,
-      child: Image.asset('assets/images/logo_white.png'),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Image.asset(
+          'assets/images/logo_white.png', 
+          color: Colors.blue,
+        ),
+      ),
     )
     : Image.network(ship?.smallImage);
 
