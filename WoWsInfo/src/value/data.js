@@ -8,13 +8,13 @@ import { lang } from './lang';
  * App information
  */
 export const APP = {
-  Version: '1.0.7.1',
-  IOSVersion: '1.6.7',
-  GameVersion: '0.9.1.0',
+  Version: '1.0.8',
+  IOSVersion: '1.6.8',
+  GameVersion: '0.9.3.0',
   Github: 'https://github.com/HenryQuan/WoWs-Info',
   AppStore: 'https://itunes.apple.com/app/id1202750166',
   GooglePlay: 'https://play.google.com/store/apps/details?id=com.yihengquan.wowsinfo',
-  Developer: `mailto:development.henryquan@gmail.com?subject=[WoWs Info 1.0.7.1] `,
+  Developer: `mailto:development.henryquan@gmail.com?subject=[WoWs Info 1.0.8] `,
   Patreon: 'https://www.patreon.com/henryquan',
   PayPal: 'https://www.paypal.me/YihengQuan',
   WeChat: 'https://github.com/HenryQuan/WoWs-Info-Origin/blob/master/Support/WeChat.png',

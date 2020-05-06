@@ -45,7 +45,7 @@ class Setup extends Component {
   }
 
   render() {
-    const { loading, server, selected_server, langList, selected_lang } = this.state;
+    const { loading, server, selected_server, langList, selected_lang, error } = this.state;
     const { fab, titleStyle, wrapView, scroll } = styles;
     return (
       <WoWsInfo hideAds empty>
@@ -76,7 +76,14 @@ class Setup extends Component {
     const { titleStyle, wrapView } = styles;
 
     if (loading) return <LoadingIndicator />;
-    if (error) return <Paragraph style={titleStyle}>{lang.error_download_issue}</Paragraph>;
+    if (error) return (
+      <View>
+        <Paragraph style={titleStyle}>{lang.error_download_issue}</Paragraph>
+        <List.Item title={lang.settings_app_send_feedback}
+          description={lang.settings_app_send_feedback_subtitle}
+          onPress={() => Linking.openURL(APP.Developer)} />
+      </View>
+    );
 
     return (
       <View style={wrapView}>

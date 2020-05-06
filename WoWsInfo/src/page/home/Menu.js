@@ -49,20 +49,32 @@ class Menu extends Component {
   }
 
   componentDidMount() {
-    if (this.first) {
+    if (!this.first) {
       // Update data here if it is not first launch
       let dn = new Downloader(getCurrServer());
-      dn.updateAll(true).then(obj => {
-        // Make sure it finishes downloading
-        if (obj.status) {
+      Promise.race([
+        new Promise((_, reject) => {
+          // Timeout after a few seconds to throw an error
+          setTimeout(() => reject(console.log('downloading took too long')), 10000)
+        }),
+        dn.updateAll(true),
+      ]).then(obj => {
+        if (obj == null) {
+          Alert.alert(lang.error_title, lang.error_download_issue);
           this.setState({loading: false});
-          setFirstLaunch(false);
         } else {
-          // Reset to a special page
-          // For now, just an error message
-          Alert.alert(lang.error_title, lang.error_download_issue + '\n\n' + obj.log);
+          // Make sure it finishes downloading
+          if (obj.status) {
+            this.setState({loading: false});
+            setFirstLaunch(false);
+          } else {
+            // Reset to a special page
+            // For now, just an error message
+            Alert.alert(lang.error_title, lang.error_download_issue + '\n\n' + obj.log);
+            this.setState({loading: false});
+          }
         }
-      });
+      }, _ => null);
     } else {
       if (differentMonth()) {
         this.setState({loading: false});
@@ -189,7 +201,8 @@ class Menu extends Component {
         <View style={wrap}>
           <List.Item title={lang.extra_wowsinfo_re} description={lang.extra_wowsinfo_re_subtitle} style={{width: bestItemWidth}} 
             onPress={() => Linking.openURL('https://wowsinfo.firebaseapp.com/')}/>
-          <List.Item title='RS Beta' description={lang.extra_rs_beta} style={{width: bestItemWidth}} 
+          <List.Item title='RS Beta' description={lang.extra_rs_beta} style={{width: bestItemWidth}}
+            titleStyle={{color: Colors.orange500}} 
             onPress={() => onlyProVersion() ? SafeAction('RS') : null}/>
           <List.Item title={lang.settings_app_write_review} style={{width: bestItemWidth}}
             onPress={() => {
