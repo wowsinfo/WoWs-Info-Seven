@@ -282,12 +282,12 @@ export const updateCurrData = () => {
   SafeStorage.set(str, today);
 }
 
-export const isSameDay = () => {
+export const differentMonth = () => {
   const today = new Date();
   const curr = new Date(getCurrDate());
-  const sameDay = today.getDay() === curr.getDay();
-  console.log('Same day - ' + sameDay);
-  return sameDay;
+  const sameMonth = today.getMonth() === curr.getMonth();
+  console.log('Same month - ' + sameMonth);
+  return sameMonth;
 }
 
 export const getLastUpdate = () => {

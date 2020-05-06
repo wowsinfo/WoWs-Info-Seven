@@ -39,11 +39,13 @@ class DetailedInfo extends Component {
     if (pvp.max_damage_dealt_ship_id) playerMode = true;
     
     const { more } = this.state;
+
     return (
       <View style={container} onLayout={this.updateBestWidth}>
         { !playerMode ? <InfoLabel title={lang.basic_last_battle} info={humanTimeString(last_battle_time)}/> : null }
         <Info6Icon data={pvp}/>
         { more ? this.renderMore(playerMode) : <Button onPress={() => onlyProVersion() ? this.setState({more: true}) : null}>{lang.basic_more_stat}</Button> }
+        { this.renderAllShipRecord(data.pvp, playerMode) }
       </View>
     )
   };
@@ -69,11 +71,7 @@ class DetailedInfo extends Component {
       max_planes_killed,
       max_ships_spotted,
       max_xp,
-      aircraft, main_battery, ramming, second_battery, torpedoes
     } = data;
-
-    let weapons = [{name: lang.warship_artillery_main, data: main_battery}, {name: lang.warship_artillery_secondary, data: second_battery}, 
-      {name: lang.warship_torpedoes, data: torpedoes}, {name: lang.warship_aircraft, data: aircraft}, {name: lang.warship_ramming, data: ramming}];
 
     return (
       <View style={container}>
@@ -138,9 +136,20 @@ class DetailedInfo extends Component {
             <InfoLabel title={lang.record_max_planes_killed} info={max_planes_killed}/>
           </View> 
         </View>: null }
-        { !playerMode ? weapons.map(d => this.renderShipRecord(d)) : null }
       </View>
     )
+  }
+
+  renderAllShipRecord(data, playerMode) {
+    const {
+      aircraft, main_battery, ramming, second_battery, torpedoes
+    } = data;
+
+    let weapons = [{name: lang.warship_artillery_main, data: main_battery}, {name: lang.warship_artillery_secondary, data: second_battery}, 
+      {name: lang.warship_torpedoes, data: torpedoes}, {name: lang.warship_aircraft, data: aircraft}, {name: lang.warship_ramming, data: ramming}];
+    
+    if (!playerMode) return weapons.map(d => this.renderShipRecord(d));
+    return null;
   }
 
   renderShipRecord(weapon) {

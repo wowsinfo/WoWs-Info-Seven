@@ -14,7 +14,7 @@ import { WoWsInfo, SectionTitle, AppName } from '../../component';
 import { lang } from '../../value/lang';
 import { SafeAction, Downloader, bestWidth } from '../../core';
 import { ThemeBackColour, TintColour } from '../../value/colour';
-import { getCurrDomain, getCurrServer, getCurrPrefix, LOCAL, getFirstLaunch, setFirstLaunch, setLastLocation, SAVED, isProVersion, onlyProVersion, validateProVersion, setProVersion, isSameDay, APP } from '../../value/data';
+import { getCurrDomain, getCurrServer, getCurrPrefix, LOCAL, getFirstLaunch, setFirstLaunch, setLastLocation, SAVED, isProVersion, onlyProVersion, validateProVersion, setProVersion, differentMonth, APP } from '../../value/data';
 import { Loading } from '../common/Loading';
 import { Actions } from 'react-native-router-flux';
 
@@ -64,10 +64,10 @@ class Menu extends Component {
         }
       });
     } else {
-      if (isSameDay()) {
+      if (differentMonth()) {
         this.setState({loading: false});
       } else {
-        // Valid pro version once a day
+        // Valid pro version once a month
         validateProVersion().then(() => {
           this.setState({loading: false});
         }).catch();
@@ -147,7 +147,7 @@ class Menu extends Component {
     if (title === '-  -') title = '- ??? -';
     
     return (
-      <WoWsInfo noRight title={title} onPress={enabled ? () => (onlyProVersion() ? SafeAction('Statistics', {info: main}) : null) : null} home upper={false}>
+      <WoWsInfo noRight title={title} onPress={enabled ? () => SafeAction('Statistics', {info: main}) : null} home upper={false}>
         <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='always' onLayout={this.updateBestWidth}>
           <Animatable.View ref='AppName' animation='fadeInDown' easing='ease'>
             <AppName />
@@ -165,9 +165,11 @@ class Menu extends Component {
   renderProButton() {
     if (isProVersion()) return null;
     return (
-      <Button mode='contained' theme={{roundness: 0}} style={{marginTop: 8}} onPress={() => Actions.ProVersion()}>
-        {lang.pro_upgrade_button}
-      </Button>
+      <>
+        <Button mode='contained' theme={{roundness: 0}} style={{marginTop: 8}} onPress={() => Actions.ProVersion()}>
+          {lang.pro_upgrade_button}
+        </Button>
+      </>
     );
   }
 
@@ -189,8 +191,26 @@ class Menu extends Component {
             onPress={() => Linking.openURL('https://wowsinfo.firebaseapp.com/')}/>
           <List.Item title='RS Beta' description={lang.extra_rs_beta} style={{width: bestItemWidth}} 
             onPress={() => onlyProVersion() ? SafeAction('RS') : null}/>
-          <List.Item title={lang.settings_app_send_feedback} style={{width: bestItemWidth}}
-            onPress={() => Linking.openURL(APP.Developer)} description={lang.settings_app_send_feedback_subtitle}/>
+          <List.Item title={lang.settings_app_write_review} style={{width: bestItemWidth}}
+            onPress={() => {
+              // Add an alert to prevent
+              Alert.alert(
+                lang.settings_app_write_review_title,
+                lang.settings_app_write_review_message,
+                [
+                  { 
+                    text: lang.settings_app_write_review_yes, 
+                    onPress: () => Linking.openURL(APP.Developer),
+                    style: "default",
+                  },
+                  {
+                    text: lang.settings_app_write_review_no,
+                    onPress: () => Linking.openURL(store),
+                  },
+                ],
+                { cancelable: false }
+              );
+            }} description={store}/>
           <List.Item title={lang.settings_app_share} onPress={() => this.shareApp(store)} style={{width: bestItemWidth}}
             description={lang.settings_app_share_subtitle}/>
         </View>
