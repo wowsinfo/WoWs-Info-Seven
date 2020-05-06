@@ -7,6 +7,11 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## 06/05/2020
+### Summary
+Merged into `master` and I will work on the legecy version for a while. 
+### What to do tomorrow?
+
 ## 04/05/2020
 ### Summary
 More info added in `Plugin`. Removed ships will now show up and my rating dropped a little bit. Upgrades are showing up properly now. I could make consumables better but maybe later. I am considering to add AA info and SAP for italian ships as well. This way, wiki is now completed. For player, I will just add a basic filter and it should be good as well. The rest is all about UI and localization. When I have time, I will fix some issues for the legacy version.
