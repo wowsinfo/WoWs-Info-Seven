@@ -185,10 +185,12 @@ class Menu extends Component {
         </View>
         <SectionTitle title={lang.extra_section_title}/>
         <View style={wrap}>
+          <List.Item title={lang.extra_wowsinfo_re} description={lang.extra_wowsinfo_re_subtitle} style={{width: bestItemWidth}} 
+            onPress={() => Linking.openURL('https://wowsinfo.firebaseapp.com/')}/>
           <List.Item title='RS Beta' description={lang.extra_rs_beta} style={{width: bestItemWidth}} 
             onPress={() => onlyProVersion() ? SafeAction('RS') : null}/>
-          <List.Item title={lang.settings_app_write_review} style={{width: bestItemWidth}}
-            onPress={() => Linking.openURL(store)} description={store}/>
+          <List.Item title={lang.settings_app_send_feedback} style={{width: bestItemWidth}}
+            onPress={() => Linking.openURL(APP.Developer)} description={lang.settings_app_send_feedback_subtitle}/>
           <List.Item title={lang.settings_app_share} onPress={() => this.shareApp(store)} style={{width: bestItemWidth}}
             description={lang.settings_app_share_subtitle}/>
         </View>

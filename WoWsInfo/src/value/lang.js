@@ -138,6 +138,8 @@ export const lang = new LocalizedStrings({
     // Extra
     extra_section_title: 'Extra',
     extra_support_wowsinfo: 'Support WoWs Info',
+    extra_wowsinfo_re: 'WoWs Info Re',
+    extra_wowsinfo_re_subtitle: 'Try out the new version currently under development.',
     extra_rs_beta: 'Realtime Statistics Beta',
     extra_rs_beta_download: 'Download RS on your computer',
     extra_support_wowsinfo_subtitle: 'Donations and Ads',
@@ -269,7 +271,7 @@ export const lang = new LocalizedStrings({
     weapon_total_frags: 'Total Frags',
     weapon_hit_ratio: 'Hit Ratio',
     /// App name section
-    app_name: 'WoWs Info Origin',
+    app_name: 'WoWs Info Future',
     wowsinfo_black: 'Black',
     wowsinfo_white: 'White',
     wowsinfo_ultra: 'Ultra',
@@ -432,6 +434,8 @@ export const lang = new LocalizedStrings({
     // Extra
     extra_section_title: '其他',
     extra_support_wowsinfo: '支持 WoWs Info',
+    extra_wowsinfo_re: 'WoWs Info 梦回2016',
+    extra_wowsinfo_re_subtitle: '尝试在开发中的全新版本',
     extra_rs_beta: '实时数据 Beta 测试版',
     extra_rs_beta_download: '在电脑上下载 RS',
     extra_support_wowsinfo_subtitle: '捐助以及广告',
@@ -563,7 +567,7 @@ export const lang = new LocalizedStrings({
     weapon_total_frags: '总击杀',
     weapon_hit_ratio: '命中率',
     /// App name section
-    app_name: 'WoWs Info 起源',
+    app_name: 'WoWs Info 未来',
     wowsinfo_black: '黑',
     wowsinfo_white: '白',
     wowsinfo_ultra: '超级版',
@@ -726,6 +730,8 @@ export const lang = new LocalizedStrings({
     // Extra
     extra_section_title: '其他',
     extra_support_wowsinfo: '支持 WoWs Info',
+    extra_wowsinfo_re: 'WoWs Info 夢回2016',
+    extra_wowsinfo_re_subtitle: '嘗試在開發中的全新版本',
     extra_rs_beta: '實時數據 Beta 測試版',
     extra_rs_beta_download: '在電腦上下載 RS',
     extra_support_wowsinfo_subtitle: '捐助以及廣告',
@@ -857,7 +863,7 @@ export const lang = new LocalizedStrings({
     weapon_total_frags: '總擊殺',
     weapon_hit_ratio: '命中率',
     /// App name section
-    app_name: 'WoWs Info 起源',
+    app_name: 'WoWs Info 未來',
     wowsinfo_black: '黑',
     wowsinfo_white: '白',
     wowsinfo_ultra: '超級版',
@@ -1020,6 +1026,8 @@ export const lang = new LocalizedStrings({
     // Extra
     extra_section_title: 'その他',
     extra_support_wowsinfo: 'WoWs Infoへの支援',
+    extra_wowsinfo_re_subtitle: '開発中の新しいバージョン',
+    extra_wowsinfo_re: 'WoWs Info 2016年末の夢',
     extra_rs_beta: 'リアルタイム統計 Beta',
     extra_rs_beta_download: 'パソコンでダウンロード',
     extra_support_wowsinfo_subtitle: 'ドネーションと広告',
@@ -1151,7 +1159,7 @@ export const lang = new LocalizedStrings({
     weapon_total_frags: '総艦艇撃沈数',
     weapon_hit_ratio: '命中率',
     /// App name section
-    app_name: 'WoWs Info オリジン',
+    app_name: 'WoWs Info 未来',
     wowsinfo_black: '黒',
     wowsinfo_white: '白',
     wowsinfo_ultra: 'ウルトラ',
@@ -1314,6 +1322,8 @@ export const lang = new LocalizedStrings({
     // Extra
     extra_section_title: 'Extra',
     extra_support_wowsinfo: 'Support WoWs Info',
+    extra_wowsinfo_re: 'WoWs Info Re',
+    extra_wowsinfo_re_subtitle: 'Try out the new version currently under development.',
     extra_rs_beta: 'Realtime Statistics Beta',
     extra_rs_beta_download: 'Download RS on your computer',
     extra_support_wowsinfo_subtitle: 'Donations and Ads',
@@ -1445,7 +1455,7 @@ export const lang = new LocalizedStrings({
     weapon_total_frags: 'Total Frags',
     weapon_hit_ratio: 'Hit Ratio',
     /// App name section
-    app_name: 'WoWs Info Origin',
+    app_name: 'WoWs Info Future',
     wowsinfo_black: 'Black',
     wowsinfo_white: 'White',
     wowsinfo_ultra: 'Ultra',
