@@ -130,7 +130,7 @@ class Downloader {
       //   log += err;
       //   return this.makeObj(false, log);
       // }
-    }, 11000);
+    }, 20000);
   }
 
   makeObj(status, log) {

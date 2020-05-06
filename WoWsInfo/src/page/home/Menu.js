@@ -50,13 +50,14 @@ class Menu extends Component {
 
   componentDidMount() {
     if (!this.first) {
+      const time = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error('timeout')), 10000)
+      );
+
       // Update data here if it is not first launch
       let dn = new Downloader(getCurrServer());
       Promise.race([
-        new Promise((_, reject) => {
-          // Timeout after a few seconds to throw an error
-          setTimeout(() => reject(console.log('downloading took too long')), 10000)
-        }),
+        time,
         dn.updateAll(true),
       ]).then(obj => {
         if (obj == null) {
@@ -74,7 +75,7 @@ class Menu extends Component {
             this.setState({loading: false});
           }
         }
-      }, _ => null);
+      }).catch(err => console.error(err));
     } else {
       if (differentMonth()) {
         this.setState({loading: false});
