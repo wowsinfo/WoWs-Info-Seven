@@ -1,6 +1,6 @@
 <div align="center">
 <img src="https://raw.githubusercontent.com/HenryQuan/WoWs-Info-Origin/master/WoWsInfo/ios/WoWsInfo/Images.xcassets/AppIcon.appiconset/_AppIcon_1024x1024.png" width="128px" height="128px" />
-<h1>WoWs Info Origin</h1>
+<h1>WoWs Info Re:2016</h1>
 
 [中文](https://github.com/HenryQuan/WoWs-Info-Re/blob/master/README_zh.md) | [English](https://github.com/HenryQuan/WoWs-Info-Re/blob/master/README.md) | [日本語](https://github.com/HenryQuan/WoWs-Info-Re/blob/master/README_ja.md)
 
@@ -42,6 +42,6 @@ If you don't want to pay for the pro version, you can change the source code and
 # Support WoWs Info
 - Star this repository
 - Share with your friends
-- [Patreon](https://www.patreon.com/henryquan) | [PayPal](https://www.paypal.me/YihengQuan) | [WeChat](https://github.com/HenryQuan/WoWs-Info-Origin/blob/master/Support/WeChat.png) 
-- [(IOS) App Store](https://itunes.apple.com/app/id1202750166) | [(Android) Google Play](https://play.google.com/store/apps/details?id=com.yihengquan.wowsinfo)
-- Upgrade pro version
+- Download the app from [App Store](https://itunes.apple.com/app/id1202750166) or [Google Play](https://play.google.com/store/apps/details?id=com.yihengquan.wowsinfo)
+- Upgrade to Pro version
+- Support me on [Patreon](https://www.patreon.com/henryquan), [PayPal](https://www.paypal.me/YihengQuan) or [WeChat](https://github.com/HenryQuan/WoWs-Info-Origin/blob/master/Support/WeChat.png) 

@@ -14,3 +14,5 @@ WoWsInfo/index\.android\.js
 .DS_Store
 **/._*
 **/*.ttf
+**/key.dart
+**/.last_build_id
