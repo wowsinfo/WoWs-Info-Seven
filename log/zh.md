@@ -1,6 +1,13 @@
 [English](https://github.com/HenryQuan/WoWs-Info-Re/blob/master/log/en.md) | [中文简体](https://github.com/HenryQuan/WoWs-Info-Re/blob/master/log/zh.md) | [中文繁體](https://github.com/HenryQuan/WoWs-Info-Re/blob/master/log/zh-hant.md) | [日本語](https://github.com/HenryQuan/WoWs-Info-Re/blob/master/log/ja.md)
 
 # 1.0.8 / 1.6.8
+- 修复数据加载问题
+- 增加图表
+- 提升应用的性能和稳定性
+- 改善应用界面
+- 在免费版玩家战舰界面中加入了一些数据
+
+新版本目前也在开发中，欢迎大家尝试以及反馈（其他 - WoWs Info）
 
 # 1.0.7.1 / 1.6.7
 - WoWs Info专业版回归！
