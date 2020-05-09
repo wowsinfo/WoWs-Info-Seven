@@ -13,7 +13,8 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		9226CE6F23FBB3D4005CC829 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9226CE6E23FBB3D4005CC829 /* LaunchScreen.storyboard */; };
-		929A64BC2411C7E0001927CB /* Bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929A64BB2411C7E0001927CB /* Bridge.swift */; };
+		927A9FA224664D510090C3E2 /* Bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927A9FA124664D510090C3E2 /* Bridge.swift */; };
+		927A9FA324664D510090C3E2 /* Bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927A9FA124664D510090C3E2 /* Bridge.swift */; };
 		EF26542171CF9ABB20A2311E /* libPods-WoWsInfo-WoWsInfoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B38C153A9AAD395D108E5132 /* libPods-WoWsInfo-WoWsInfoTests.a */; };
 /* End PBXBuildFile section */
 
@@ -57,8 +58,9 @@
 		75951F8802397AD159135C38 /* Pods-WoWsInfo-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WoWsInfo-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-WoWsInfo-tvOS/Pods-WoWsInfo-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		7F3837A856994710B2ACEC6C /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		9226CE6E23FBB3D4005CC829 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = WoWsInfo/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		929A64BA2411C7DF001927CB /* WoWsInfo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WoWsInfo-Bridging-Header.h"; sourceTree = "<group>"; };
-		929A64BB2411C7E0001927CB /* Bridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bridge.swift; sourceTree = "<group>"; };
+		927A9F9F24664D510090C3E2 /* WoWsInfo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WoWsInfo-Bridging-Header.h"; sourceTree = "<group>"; };
+		927A9FA024664D510090C3E2 /* WoWsInfoTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WoWsInfoTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		927A9FA124664D510090C3E2 /* Bridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bridge.swift; sourceTree = "<group>"; };
 		92A5BFCB23F613F20020C4C5 /* WoWsInfo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = WoWsInfo.entitlements; path = WoWsInfo/WoWsInfo.entitlements; sourceTree = "<group>"; };
 		92C7427F16404EEDA1783A58 /* Pods-WoWsInfo-WoWsInfoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WoWsInfo-WoWsInfoTests.debug.xcconfig"; path = "Target Support Files/Pods-WoWsInfo-WoWsInfoTests/Pods-WoWsInfo-WoWsInfoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		960456AAA51643DAA7796A77 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
@@ -124,8 +126,6 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				9226CE6E23FBB3D4005CC829 /* LaunchScreen.storyboard */,
-				929A64BB2411C7E0001927CB /* Bridge.swift */,
-				929A64BA2411C7DF001927CB /* WoWsInfo-Bridging-Header.h */,
 			);
 			name = WoWsInfo;
 			sourceTree = "<group>";
@@ -176,6 +176,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				927A9FA124664D510090C3E2 /* Bridge.swift */,
 				13B07FAE1A68108700A75B9A /* WoWsInfo */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* WoWsInfoTests */,
@@ -183,6 +184,8 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				DA1ED887AA1CB1E9A59E57AF /* Pods */,
 				4F4F320737C44A23AD81FD29 /* Resources */,
+				927A9F9F24664D510090C3E2 /* WoWsInfo-Bridging-Header.h */,
+				927A9FA024664D510090C3E2 /* WoWsInfoTests-Bridging-Header.h */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -271,12 +274,13 @@
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = 4YSG3SYMLE;
+						LastSwiftMigration = 1140;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 4YSG3SYMLE;
-						LastSwiftMigration = 1130;
+						LastSwiftMigration = 1140;
 					};
 				};
 			};
@@ -499,6 +503,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				927A9FA324664D510090C3E2 /* Bridge.swift in Sources */,
 				00E356F31AD99517003FC87E /* WoWsInfoTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -509,7 +514,7 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
-				929A64BC2411C7E0001927CB /* Bridge.swift in Sources */,
+				927A9FA224664D510090C3E2 /* Bridge.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -530,6 +535,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -550,6 +556,9 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "WoWsInfoTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WoWsInfo.app/WoWsInfo";
 			};
 			name = Debug;
@@ -560,6 +569,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -577,6 +587,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "WoWsInfoTests-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WoWsInfo.app/WoWsInfo";
 			};
 			name = Release;
@@ -694,6 +706,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Debug;
 		};
@@ -740,6 +753,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
