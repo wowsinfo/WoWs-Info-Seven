@@ -49,7 +49,7 @@ class Menu extends Component {
   }
 
   componentDidMount() {
-    if (!this.first) {
+    if (this.first) {
       const time = new Promise((r, _) =>
         setTimeout(() => r(false), 20000)
       );
@@ -223,6 +223,7 @@ class Menu extends Component {
         <SectionTitle title={lang.extra_section_title}/>
         <View style={wrap}>
           <List.Item title={lang.extra_wowsinfo_re} description={lang.extra_wowsinfo_re_subtitle} style={{width: bestItemWidth}} 
+            titleStyle={{color: Colors.orange500}} 
             onPress={() => Linking.openURL('https://wowsinfo.firebaseapp.com/')}/>
           <List.Item title='RS Beta' description={lang.extra_rs_beta} style={{width: bestItemWidth}}
             titleStyle={{color: Colors.orange500}} 

@@ -88,7 +88,6 @@ class ProVersion extends Component {
           <Title style={titleStyle}>{lang.pro_title}</Title>
           <List.Item title={lang.pro_rs} description={lang.pro_rs_subtite} />
           <List.Item title={lang.pro_more_stats} description={lang.pro_more_stats_subtitle} />
-          <List.Item title={lang.pro_quick_access_main} description={lang.pro_quick_access_main_subtitle} />
           <List.Item title={lang.pro_support_development} description={lang.pro_support_development_subtitle} />
         </ScrollView>
         { this.renderPurchaseView() }
@@ -112,7 +111,7 @@ class ProVersion extends Component {
         <View style={buttonView}>
           <Text style={discount}>{lang.pro_50_off_until_re}</Text>
           <Button mode='contained' theme={{roundness: 0}} onPress={this.buy}>{`${price} / ${lang.pro_per_year}`}</Button>
-          <Button style={restoreButton} theme={{roundness: 0}} onPress={this.restore}>{lang.pro_restore_pro}</Button>
+          <Button mode='outlined'style={restoreButton} theme={{roundness: 0}} onPress={this.restore}>{lang.pro_restore_pro}</Button>
         </View>
       );
     }
