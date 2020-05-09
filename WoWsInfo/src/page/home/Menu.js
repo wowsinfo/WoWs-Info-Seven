@@ -49,18 +49,23 @@ class Menu extends Component {
   }
 
   componentDidMount() {
-    if (!this.first) {
-      const time = new Promise((_, reject) =>
-        setTimeout(() => reject(new Error('timeout')), 10000)
+    if (this.first) {
+      const time = new Promise((r, _) =>
+        setTimeout(() => r(false), 10000)
       );
 
       // Update data here if it is not first launch
       let dn = new Downloader(getCurrServer());
+      const update = new Promise(async (r, _) => {
+        const data = await dn.updateAll(true);
+        r(data);
+      });
+
       Promise.race([
         time,
-        dn.updateAll(true),
+        update,
       ]).then(obj => {
-        if (obj == null) {
+        if (!obj) {
           Alert.alert(lang.error_title, lang.error_download_issue);
           this.setState({loading: false});
         } else {
