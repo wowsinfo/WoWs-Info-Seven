@@ -11,7 +11,7 @@ import { roundTo, bestWidth } from '../../core';
 
 class Info6Icon extends Component {
   state = {
-    cellWidth: bestWidth(120),
+    cellWidth: bestWidth(100),
   }
 
   updateBestWidth = (event) => {
