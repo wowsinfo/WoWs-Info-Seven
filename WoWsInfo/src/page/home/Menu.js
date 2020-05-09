@@ -82,7 +82,7 @@ class Menu extends Component {
               [
                 { 
                   text: lang.settings_app_send_feedback_subtitle, 
-                  onPress: () => Linking.openURL(APP.Developer),
+                  onPress: () => Linking.openURL(APP.Developer + `&body=${obj.log}`),
                   style: "default",
                 },
                 {

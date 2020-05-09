@@ -25,11 +25,11 @@ const calRating = (actualDmg, expectedDmg, actualWins, expectedWins, actualFrags
  * @param {*} ships 
  */
 export const getOverallRating = (ships) => {
-  if (ships == null) return 0;
+  if (ships == null) return -1;
 
   let actualDmg = 0, expectedDmg = 0, actualWins = 0, expectedWins = 0, actualFrags = 0, expectedFrags = 0;
   for (let ship of ships) {
-    ship.rating = 0;
+    ship.rating = -1;
     ship.ap = 0;
     
     const pvp = SafeValue(ship.pvp, null);
@@ -67,11 +67,11 @@ export const getOverallRating = (ships) => {
 };
 
 export const getAP = (rating, battle) => {
-  if (rating == 0|| battle == 0) return 0;
+  if (rating == -1 || battle == 0) return 0;
   else return Number(roundTo(Math.log10(Math.max(10, battle)) * rating));
 }
 
-export const getRatingRange = () => [750, 1100, 1350, 1550, 1750, 2100, 2450, 9999, 0];
+export const getRatingRange = () => [0, 750, 1100, 1350, 1550, 1750, 2100, 2450, 9999];
 export const getRatingIndex = (rating) => {
   let index = 0;
   for (let range of getRatingRange()) {
@@ -80,15 +80,15 @@ export const getRatingIndex = (rating) => {
   }
 }
 
-export const getColourList = () => ['red', 'orange', '#F5C84C', '#67AF34', '#4A7D23', '#60C6B3', 'magenta', 'purple', 'black'];
+export const getColourList = () => ['#607D8B', 'red', 'orange', '#F5C84C', '#67AF34', '#4A7D23', '#60C6B3', 'magenta', 'purple', 'black'];
 
 export const getColour = (rating) => {
   const colours = getColourList();
-  return SafeValue(colours[getRatingIndex(rating)], 'red');
+  return SafeValue(colours[getRatingIndex(rating)], '#607D8B');
 };
 
-export const getRatingList = () => [lang.rating_bad, lang.rating_below_average, lang.rating_average, lang.rating_good, 
-  lang.rating_very_good, lang.rating_great, lang.rating_unicum, lang.rating_super_unicum, lang.rating_Unkwown];
+export const getRatingList = () => [lang.rating_Unkwown, lang.rating_bad, lang.rating_below_average, lang.rating_average, lang.rating_good, 
+  lang.rating_very_good, lang.rating_great, lang.rating_unicum, lang.rating_super_unicum];
 
 export const getComment = (rating) => {
   const comments = getRatingList();
