@@ -14,7 +14,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		9226CE6F23FBB3D4005CC829 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9226CE6E23FBB3D4005CC829 /* LaunchScreen.storyboard */; };
 		929A64BC2411C7E0001927CB /* Bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929A64BB2411C7E0001927CB /* Bridge.swift */; };
-		DAD8894B77119F8B0BF919AB /* libPods-WoWsInfoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9554D926034B8E63154A6EA7 /* libPods-WoWsInfoTests.a */; };
+		EF26542171CF9ABB20A2311E /* libPods-WoWsInfo-WoWsInfoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B38C153A9AAD395D108E5132 /* libPods-WoWsInfo-WoWsInfoTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,16 +60,18 @@
 		929A64BA2411C7DF001927CB /* WoWsInfo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WoWsInfo-Bridging-Header.h"; sourceTree = "<group>"; };
 		929A64BB2411C7E0001927CB /* Bridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bridge.swift; sourceTree = "<group>"; };
 		92A5BFCB23F613F20020C4C5 /* WoWsInfo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = WoWsInfo.entitlements; path = WoWsInfo/WoWsInfo.entitlements; sourceTree = "<group>"; };
-		9554D926034B8E63154A6EA7 /* libPods-WoWsInfoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WoWsInfoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		92C7427F16404EEDA1783A58 /* Pods-WoWsInfo-WoWsInfoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WoWsInfo-WoWsInfoTests.debug.xcconfig"; path = "Target Support Files/Pods-WoWsInfo-WoWsInfoTests/Pods-WoWsInfo-WoWsInfoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		960456AAA51643DAA7796A77 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		9F9D4CD0EB5D1983D220ABE9 /* libPods-WoWsInfo-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WoWsInfo-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4AEA1B7D8B8AA7526DEE865 /* Pods-WoWsInfo-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WoWsInfo-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-WoWsInfo-tvOSTests/Pods-WoWsInfo-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		B1E884193A3E4428845D2896 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		B316807171850AB65AAE40A3 /* Pods-WoWsInfo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WoWsInfo.release.xcconfig"; path = "Target Support Files/Pods-WoWsInfo/Pods-WoWsInfo.release.xcconfig"; sourceTree = "<group>"; };
+		B38C153A9AAD395D108E5132 /* libPods-WoWsInfo-WoWsInfoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WoWsInfo-WoWsInfoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD7B02F77D4C469991D8F3C1 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
 		C72BD531E4DF467D8A02BB6D /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		CBDC0ABB47107695CA469185 /* libPods-WoWsInfo-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WoWsInfo-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC77709AEF1993118487DD15 /* Pods-WoWsInfo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WoWsInfo.debug.xcconfig"; path = "Target Support Files/Pods-WoWsInfo/Pods-WoWsInfo.debug.xcconfig"; sourceTree = "<group>"; };
+		CFA3586558E74F01A73E8C6E /* Pods-WoWsInfo-WoWsInfoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WoWsInfo-WoWsInfoTests.release.xcconfig"; path = "Target Support Files/Pods-WoWsInfo-WoWsInfoTests/Pods-WoWsInfo-WoWsInfoTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
@@ -79,7 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DAD8894B77119F8B0BF919AB /* libPods-WoWsInfoTests.a in Frameworks */,
+				EF26542171CF9ABB20A2311E /* libPods-WoWsInfo-WoWsInfoTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,7 +138,7 @@
 				4B8B79903A470593D24C8E1C /* libPods-WoWsInfo.a */,
 				9F9D4CD0EB5D1983D220ABE9 /* libPods-WoWsInfo-tvOS.a */,
 				CBDC0ABB47107695CA469185 /* libPods-WoWsInfo-tvOSTests.a */,
-				9554D926034B8E63154A6EA7 /* libPods-WoWsInfoTests.a */,
+				B38C153A9AAD395D108E5132 /* libPods-WoWsInfo-WoWsInfoTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -207,6 +209,8 @@
 				A4AEA1B7D8B8AA7526DEE865 /* Pods-WoWsInfo-tvOSTests.release.xcconfig */,
 				201029289A0AC32860EE681A /* Pods-WoWsInfoTests.debug.xcconfig */,
 				186E1B5D74334A959F124FE0 /* Pods-WoWsInfoTests.release.xcconfig */,
+				92C7427F16404EEDA1783A58 /* Pods-WoWsInfo-WoWsInfoTests.debug.xcconfig */,
+				CFA3586558E74F01A73E8C6E /* Pods-WoWsInfo-WoWsInfoTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -222,6 +226,7 @@
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
+				FA2D9C7946A4F0734E9E1517 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -391,7 +396,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-WoWsInfoTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-WoWsInfo-WoWsInfoTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -418,6 +423,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FA2D9C7946A4F0734E9E1517 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WoWsInfo-WoWsInfoTests/Pods-WoWsInfo-WoWsInfoTests-resources.sh",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Feather.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Foundation.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Octicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Zocial.ttf",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AntDesign.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Entypo.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EvilIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Feather.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Brands.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Regular.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Solid.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Fontisto.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Foundation.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Ionicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialCommunityIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Octicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SimpleLineIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Zocial.ttf",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WoWsInfo-WoWsInfoTests/Pods-WoWsInfo-WoWsInfoTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -473,7 +526,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 201029289A0AC32860EE681A /* Pods-WoWsInfoTests.debug.xcconfig */;
+			baseConfigurationReference = 92C7427F16404EEDA1783A58 /* Pods-WoWsInfo-WoWsInfoTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -503,7 +556,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 186E1B5D74334A959F124FE0 /* Pods-WoWsInfoTests.release.xcconfig */;
+			baseConfigurationReference = CFA3586558E74F01A73E8C6E /* Pods-WoWsInfo-WoWsInfoTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
