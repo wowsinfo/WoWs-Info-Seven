@@ -201,7 +201,7 @@ class Downloader {
         if (curr.name.includes('[')) {
           delete data[id];
         } else {
-          curr.icon = curr.images.small;
+          curr.icon = Guard(curr, 'images.small', '');
           delete curr.images;
           // Orange name or not
           curr.premium = curr.is_premium || curr.is_special;
@@ -209,10 +209,11 @@ class Downloader {
           delete curr.is_special;
           // If it is undefined then it is new
           if (this.new === true) {
-            curr.new = DATA[SAVED.warship][id] ? false : true;
+            let isOld = Guard(DATA[SAVED.warship], `${id}`, true);
+            curr.new = isOld ? false : true;
           }
           // If it has some extra data
-          if (model3D[id] != null) {
+          if (model3D!= null && model3D[id] != null) {
             curr.model = model3D[id].model;
           }
 

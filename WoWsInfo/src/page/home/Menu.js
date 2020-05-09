@@ -66,7 +66,7 @@ class Menu extends Component {
         update,
       ]).then(obj => {
         if (!obj) {
-          Alert.alert(lang.error_title, lang.error_download_issue);
+          Alert.alert(lang.error_title, lang.error_download_issue + '\n\nTimeout');
           this.setState({loading: false});
         } else {
           // Make sure it finishes downloading
@@ -76,11 +76,28 @@ class Menu extends Component {
           } else {
             // Reset to a special page
             // For now, just an error message
-            Alert.alert(lang.error_title, lang.error_download_issue + '\n\n' + obj.log);
+            Alert.alert(
+              lang.error_title, 
+              lang.error_download_issue + '\n\n' + obj.log,
+              [
+                { 
+                  text: lang.settings_app_send_feedback_subtitle, 
+                  onPress: () => Linking.openURL(APP.Developer),
+                  style: "default",
+                },
+                {
+                  text: 'OK',
+                  onPress: () => {},
+                }
+              ]
+            );
             this.setState({loading: false});
           }
         }
-      }).catch(err => console.error(err));
+      }).catch(err => {
+        console.error(err);
+        this.setState({loading: false});
+      });
     } else {
       if (differentMonth()) {
         this.setState({loading: false});
