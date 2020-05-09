@@ -49,9 +49,9 @@ class Menu extends Component {
   }
 
   componentDidMount() {
-    if (this.first) {
+    if (!this.first) {
       const time = new Promise((r, _) =>
-        setTimeout(() => r(false), 10000)
+        setTimeout(() => r(false), 20000)
       );
 
       // Update data here if it is not first launch
@@ -66,7 +66,7 @@ class Menu extends Component {
         update,
       ]).then(obj => {
         if (!obj) {
-          Alert.alert(lang.error_title, lang.error_download_issue + '\n\nTimeout');
+          Alert.alert(lang.error_title, '- Timeout -');
           this.setState({loading: false});
         } else {
           // Make sure it finishes downloading

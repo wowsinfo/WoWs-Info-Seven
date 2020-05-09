@@ -201,7 +201,8 @@ class Downloader {
         if (curr.name.includes('[')) {
           delete data[id];
         } else {
-          curr.icon = Guard(curr, 'images.small', '');
+          // curr.icon = Guard(curr, 'images.small', '');
+           curr.icon = curr.images.small;
           delete curr.images;
           // Orange name or not
           curr.premium = curr.is_premium || curr.is_special;
