@@ -595,7 +595,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
   }
 
   List<Widget> renderArtilleryExtraInfo() {
-    var list = [];
+    List<Widget> list = [];
     if (extraInfo != null) {
       list.add(TextWithCaption(
         title: 'sigma',
@@ -700,7 +700,6 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
             ),
           ],
         ),
-
       ],
     );
   }
