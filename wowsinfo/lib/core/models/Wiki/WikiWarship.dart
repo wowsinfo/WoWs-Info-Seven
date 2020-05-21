@@ -30,6 +30,7 @@ class Warship {
   WarshipImage _image;
   String type;
 
+  bool get isRemoved => type == null;
   bool get hasImage => _image != null;
 
   int get health => _defaultProfile.health;

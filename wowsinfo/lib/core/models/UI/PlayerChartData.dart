@@ -39,7 +39,7 @@ class PlayerChartData {
     info.ships.forEach((curr) {
       final ship = cached.getShip(curr.shipId);
       // Ignore removed ships
-      if (ship != null) {
+      if (ship != null && !ship.isRemoved) {
         // Battles by nations
         final nation = cached.getNationString(ship.nation);
         _addToMap(this.nation, nation, curr.battle);
