@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, ScrollView, Alert, Platform } from 'react-native';
+import { View, StyleSheet, ScrollView, Alert, Linking } from 'react-native';
 import { WoWsInfo, LoadingIndicator } from '../../component';
 import { Title, List, Button, Text, Colors } from 'react-native-paper';
 import { initConnection, getSubscriptions, requestSubscription, getAvailablePurchases, finishTransaction, purchaseUpdatedListener, purchaseErrorListener } from 'react-native-iap';
@@ -91,9 +91,20 @@ class ProVersion extends Component {
           <List.Item title={lang.pro_support_development} description={lang.pro_support_development_subtitle} />
         </ScrollView>
         { this.renderPurchaseView() }
+        { this.renderPolicies() }
       </WoWsInfo>
     )
   };
+
+  renderPolicies() {
+    const { horizontal } = styles;
+    return (
+      <View style={horizontal}>
+        <Button onPress={() => Linking.openURL('https://github.com/HenryQuan/WoWs-Info-Future/blob/legacy_version/Privacy%20Policy.md')}>Privacy policy</Button>
+        <Button onPress={() => Linking.openURL('https://github.com/HenryQuan/WoWs-Info-Future/blob/legacy_version/Term%20of%20Use.md')}>Term of use</Button>
+      </View>
+    );
+  }
 
   renderPurchaseView() {
     const { loading, error, price } = this.state;
@@ -139,6 +150,10 @@ class ProVersion extends Component {
 const styles = StyleSheet.create({
   viewStyle: {
     flex: 1
+  },
+  horizontal: {
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   titleStyle: {
     padding: 16,
