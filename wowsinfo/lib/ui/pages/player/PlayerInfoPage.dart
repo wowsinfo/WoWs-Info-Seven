@@ -83,7 +83,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
     final accountId = widget.player.playerId;
     try {
       final basic = BasicPlayerInfoParser(server, accountId);
-      final basicInfo = basic.parse(await basic.download());
+      final basicInfo = basic.parse(await basic.download(appendLang: false));
       if (basicInfo != null) {
         setState(() {
           // Update basic info first
@@ -92,7 +92,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
 
         // Request for clan tag
         final tag = PlayerClanTagParser(server, accountId);
-        final clanTag = tag.parse(await tag.download());
+        final clanTag = tag.parse(await tag.download(appendLang: false));
         if (clanTag != null) {
           setState(() {
             this.clanTag = clanTag;
@@ -105,7 +105,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
 
           // Request for achievement
           final a = PlayerAchievementParser(server, accountId);
-          final achievement = a.parse(await a.download());
+          final achievement = a.parse(await a.download(appendLang: false));
           if (achievement != null) {
             setState(() {
               this.achievement = achievement;
@@ -114,7 +114,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
 
           // Request for ship
           final ship = PlayerShipInfoParser(server, accountId);
-          final shipInfo = ship.parse(await ship.download());
+          final shipInfo = ship.parse(await ship.download(appendLang: false));
           if (shipInfo != null) {
             setState(() {
               this.shipInfo = shipInfo;
@@ -123,7 +123,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
 
           // Request for recent player info
           final recent = RecentPlayerInfoParser(server, accountId);
-          final recentInfo = recent.parse(await recent.download());
+          final recentInfo = recent.parse(await recent.download(appendLang: false));
           if (recentInfo != null) {
             setState(() {
               this.recentInfo = recentInfo;
@@ -132,7 +132,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
 
           // Request for rank
           final r = RankPlayerInfoParser(server, accountId);
-          final rankInfo = r.parse(await r.download());
+          final rankInfo = r.parse(await r.download(appendLang: false));
           if (rankInfo != null && rankInfo.season != null) {
             setState(() {
               this.rankInfo = rankInfo;
@@ -141,7 +141,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
 
           // Request for rank ship
           final rs = RankPlayerShipInfoParser(server, accountId);
-          final rankShipInfo = rs.parse(await rs.download());
+          final rankShipInfo = rs.parse(await rs.download(appendLang: false));
           if (rankShipInfo != null && rankShipInfo.ships.length > 0) {
             setState(() {
               this.rankShipInfo = rankShipInfo;
@@ -288,7 +288,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
         ),
         TextWithCaption(
           title: 'Active player',
-          valueWidget: CrossTick(value: recentInfo != null),
+          valueWidget: CrossTick(value: recentInfo != null && recentInfo.hasRecentData),
         ),
         TextWithCaption(
           title: 'Distance travlled',

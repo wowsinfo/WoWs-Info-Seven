@@ -133,7 +133,7 @@ class _SearchPageState extends State<SearchPage> {
     // At least 3 characters for players, max 24 according to the API
     if (input.length < 3 || input.length > 24) return;
     final parser = SearchPlayerResultParser(pref.gameServer, input.trim());
-    final player = parser.parse(await parser.download());
+    final player = parser.parse(await parser.download(appendLang: false));
     if (player != null) {
       setState(() => this.players = player.players ?? []);
     }
