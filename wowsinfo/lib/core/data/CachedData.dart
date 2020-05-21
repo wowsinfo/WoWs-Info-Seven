@@ -121,6 +121,9 @@ class CachedData extends LocalData {
   }
 
   WikiCollection _collection;
+  Iterable<Collection> get wikiCollections => _collection.collection.values;
+  Iterable<Collection> get sortedWikiCollections => wikiCollections
+    .toList(growable: false)..sort((a, b) => a.collectionId.compareTo(b.collectionId));
   void loadCollection() => _collection = decode(WIKI_COLLECTION, (j) => WikiCollection.fromJson(j));
   void saveCollection(WikiCollection data) {
     _collection = data;

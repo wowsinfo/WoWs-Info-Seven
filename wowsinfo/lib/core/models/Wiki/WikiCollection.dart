@@ -38,7 +38,7 @@ class Collection extends WikiItem {
 
   @override
   Future displayDialog(BuildContext context) {
-    // TODO: implement displayDialog
+    // This shouldn't be called
     throw UnimplementedError();
   }
 }
