@@ -30,8 +30,8 @@ class AverageStats {
 
   AverageStats.fromJson(Map<String, dynamic> json) {
     this.averageDamageDealt = json['average_damage_dealt'].toDouble();
-    this.averageFrag = json['average_frags'];
-    this.winRate = json['win_rate'];
+    this.averageFrag = json['average_frags'].toDouble();
+    this.winRate = json['win_rate'].toDouble();
   }
 
   Map<String, dynamic> toJson() {

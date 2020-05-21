@@ -207,7 +207,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
 
     // Show a blue ship name if it is a paper ship
     var shipNameStyle = textTheme.headline6;
-    if (extraInfo.isPaperShip) shipNameStyle = shipNameStyle.copyWith(
+    if (extraInfo != null && extraInfo.isPaperShip) shipNameStyle = shipNameStyle.copyWith(
       color: Colors.blue[500]
     );
 
@@ -559,18 +559,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
               title: 'a',
               value: main.rotationString,
             ),
-            TextWithCaption(
-              title: 'sigma',
-              value: extraInfo.sigmaString,
-            ),
-            if (extraInfo.alphaPiercingHE != null) TextWithCaption(
-              title: 'he pen',
-              value: extraInfo.hePenString,
-            ),
-            if (extraInfo.alphaPiercingCS != null) TextWithCaption(
-              title: 'sap pen',
-              value: extraInfo.csPenString,
-            ),
+            ...renderArtilleryExtraInfo()
           ],
         ),
         Column(
@@ -603,6 +592,30 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
 
       ],
     );
+  }
+
+  List<Widget> renderArtilleryExtraInfo() {
+    var list = [];
+    if (extraInfo != null) {
+      list.add(TextWithCaption(
+        title: 'sigma',
+        value: extraInfo.sigmaString,
+      ));
+              
+      if (extraInfo.alphaPiercingHE != null) {
+        list.add(TextWithCaption(
+          title: 'he pen',
+          value: extraInfo.hePenString,
+        ));
+      }
+      if (extraInfo.alphaPiercingCS != null) {
+        list.add(TextWithCaption(
+          title: 'sap pen',
+          value: extraInfo.csPenString,
+        ));
+      }
+    }
+    return list;
   }
 
   Widget buildSecondary() {
@@ -781,6 +794,9 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
   }
 
   Widget buildPermoflages() {
+    // Make sure extra info exists
+    if (extraInfo == null) return SizedBox.shrink();
+
     final list = extraInfo.permoflage
       .map((e) => cached.getConsumable(e))
       .where((e) => e != null);
@@ -804,8 +820,8 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
   }
 
   Widget buildConsumables() {
-    final list = extraInfo.consumable;
-    if (list.length == 0) return SizedBox.shrink();
+    final list = extraInfo?.consumable;
+    if (list == null || list.length == 0) return SizedBox.shrink();
 
     final slot = List.generate(list.length, (i) => i);
     return Column(
