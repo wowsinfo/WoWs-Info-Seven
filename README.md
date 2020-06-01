@@ -1,6 +1,7 @@
 <div align="center">
 <img src="https://raw.githubusercontent.com/HenryQuan/WoWs-Info-Origin/master/WoWsInfo/ios/WoWsInfo/Images.xcassets/AppIcon.appiconset/_AppIcon_1024x1024.png" width="128px" height="128px" />
 <h1>WoWs Info Re:2016</h1>
+<img alt="GitHub All Releases" src="https://img.shields.io/github/downloads/henryquan/WoWs-Info-Future/total?style=plastic">
 
 [中文](https://github.com/HenryQuan/WoWs-Info-Re/blob/master/README_zh.md) | [English](https://github.com/HenryQuan/WoWs-Info-Re/blob/master/README.md) | [日本語](https://github.com/HenryQuan/WoWs-Info-Re/blob/master/README_ja.md)
 
