@@ -2,10 +2,15 @@
 This will track what I have done today and what I will do tomorrow.
 ~~~
 Template
-## /05/2020
+## /06/2020
 ### Summary
 ### What to do tomorrow?
 ~~~
+
+## 13/06/2020
+### Summary
+Updated packages. 
+### What to do tomorrow?
 
 ## 06/05/2020
 ### Summary

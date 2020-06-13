@@ -27,7 +27,11 @@ dependencies:
   html: ^0.14.0+3
   # Database
   hive: ^1.4.1+1
-  hive_flutter: ^0.3.0+2
+  hive_flutter: 
+    # use the github version for now
+    git: 
+      url: https://github.com/hivedb/hive.git
+      path: hive_flutter
   # Keep device awake
   wakelock: ^0.1.4
   # Charts
