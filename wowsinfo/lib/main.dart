@@ -41,8 +41,10 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => settings,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<AppSettings>(create: (c) => settings)
+      ],
       child: Builder(builder: (c) {
         final wowsinfo = Provider.of<AppSettings>(c);
         return MaterialApp(

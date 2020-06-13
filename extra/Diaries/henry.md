@@ -9,13 +9,20 @@ Template
 
 ## 13/06/2020
 ### Summary
-Updated packages. 
-### What to do tomorrow?
+Updated packages. I am examining the current structure and state of the app. 
+- Updating global theme needs a full rebuild and it is inevitable
+- Singleton classes can be improved
+- Data loading can happen inside the loading screen and can show some meaningful message
+- Auto detection data corruption and redownload them automatically
+- Basic Q&A and add developer messages for all users with README
+- Better data loading (in parallel)
+- Providers can be used to commnuicate across widgets
+
+There are still many issues existing in the rework. The goal of this version is do it right. The app should be stable and can fix certain issues automatically. Better communication with my users. Proper testing is also essential and how the app handles error. 
 
 ## 06/05/2020
 ### Summary
 Merged into `master` and I will work on the legecy version for a while. 
-### What to do tomorrow?
 
 ## 04/05/2020
 ### Summary
