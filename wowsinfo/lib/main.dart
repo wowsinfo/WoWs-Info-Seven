@@ -10,9 +10,6 @@ import 'package:wowsinfo/core/data/Preference.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
 import 'package:wowsinfo/ui/pages/InitialPage.dart';
 import 'package:wowsinfo/ui/pages/setup/IntroPage.dart';
-// import 'package:wowsinfo/ui/widgets/PlatformLoadingIndiactor.dart';
-
-final pref = Preference.shared;
 
 void main() async {
   // Run a loading screen here
@@ -28,7 +25,7 @@ void main() async {
   /// Setup local data
   await Hive.initFlutter();
   // Init preference box 
-  await pref.init();
+  final pref = Preference()..init();
   // Create and setup AppSetting
   final settings = AppSettings()..init();
   // Init cached data
@@ -37,6 +34,7 @@ void main() async {
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider<AppSettings>.value(value: settings),
+      Provider.value(value: pref),
     ],
     child: MyApp(),
   ));
@@ -79,7 +77,11 @@ class MyApp extends StatelessWidget {
 
   /// Setup should be the home
   Widget buildHome() {
-    if (pref.firstLaunch) return IntroPage();
-    return InitialPage();
+    return Consumer<Preference>(
+      builder: (context, pref, child) {
+        if (pref.firstLaunch) return IntroPage();
+        return InitialPage();
+      }
+    );
   }
 }

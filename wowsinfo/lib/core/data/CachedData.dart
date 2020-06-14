@@ -18,7 +18,6 @@ import 'package:wowsinfo/core/models/Wiki/WikiEncyclopedia.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiGameMap.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart';
 import 'package:wowsinfo/core/others/Utils.dart';
-import 'package:wowsinfo/core/extensions/DateTimeExtension.dart';
 import 'package:wowsinfo/core/parsers/API/APIParser.dart';
 import 'package:wowsinfo/core/parsers/API/ClanGlossaryParser.dart';
 import 'package:wowsinfo/core/parsers/API/WikiAchievementParser.dart';

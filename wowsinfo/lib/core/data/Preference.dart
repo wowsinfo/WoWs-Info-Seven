@@ -35,10 +35,6 @@ class Preference extends LocalData {
   static const GAME_VERSION = 'game_version';
   static const APP_VERSION = 'app_version';
 
-  /// Singleton pattern 
-  Preference._init();
-  static final Preference shared = Preference._init();
-
   ///
   /// Variables, default value will be provided as well
   ///
