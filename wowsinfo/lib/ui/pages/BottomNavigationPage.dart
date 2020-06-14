@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:wowsinfo/core/data/Preference.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
 import 'package:wowsinfo/ui/pages/home/HomePage.dart';
@@ -17,63 +18,57 @@ class BottomNavigationPage extends StatefulWidget {
 
 
 class _BottomNavigationPageState extends State<BottomNavigationPage> {
-  final pref = Preference.shared;
-  int selectedIndex;
-
-  @override
-  void initState() {
-    super.initState();
-    if (pref.firstLaunch) pref.firstLaunch = false;
-    selectedIndex = pref.bottomTabIndex;
-  }
 
   @override
   Widget build(BuildContext context) {
     // Not first launch anymore
     final localization = AppLocalization.of(context);
 
-    return Scaffold(
-      body: IndexedStack(
-        index: selectedIndex,
-        children: [
-          HomePage(),
-          WebsitePage(),
-          WikiPage(),
-          RealtimePage(),
-          SearchPage(),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title: Text(localization.localised('bottom_tab_home')),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.language),
-            title: Text(localization.localised('bottom_tab_website')),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.book),
-            title: Text(localization.localised('bottom_tab_wiki')),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.table_chart),
-            title: Text(localization.localised('bottom_tab_realtime')),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            title: Text(localization.localised('bottom_tab_search')),
-          ),
-        ],
-        currentIndex: selectedIndex,
-        onTap: (index) {
-          // Update and save index
-          setState(() => selectedIndex = index);
-          pref.bottomTabIndex = index;
-        },
+    return Consumer<Preference>(
+      builder: (context, pref, child) => Scaffold(
+        body: IndexedStack(
+          index: pref.bottomTabIndex,
+          children: [
+            HomePage(),
+            WebsitePage(),
+            WikiPage(),
+            RealtimePage(),
+            SearchPage(),
+          ],
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              title: Text(localization.localised('bottom_tab_home')),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.language),
+              title: Text(localization.localised('bottom_tab_website')),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.book),
+              title: Text(localization.localised('bottom_tab_wiki')),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.table_chart),
+              title: Text(localization.localised('bottom_tab_realtime')),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.search),
+              title: Text(localization.localised('bottom_tab_search')),
+            ),
+          ],
+          currentIndex: pref.bottomTabIndex,
+          onTap: (index) {
+            // Update and save index
+            setState(() {});
+            pref.bottomTabIndex = index;
+          },
+        ),
       ),
     );
   }
+
 }

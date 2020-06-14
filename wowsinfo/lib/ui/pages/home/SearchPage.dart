@@ -7,8 +7,6 @@ import 'package:wowsinfo/core/parsers/API/SearchPlayerResultParser.dart';
 import 'package:wowsinfo/ui/pages/player/ClanInfoPage.dart';
 import 'package:wowsinfo/ui/pages/player/PlayerInfoPage.dart';
 
-final pref = Preference.shared; 
-
 /// SearchPage class
 class SearchPage extends StatefulWidget {
   SearchPage({Key key}) : super(key: key);
@@ -38,14 +36,6 @@ class _SearchPageState extends State<SearchPage> {
     });
 
     showContact();
-  }
-
-  /// Show contact
-  void showContact() {
-    setState(() {
-      clans = pref.contactList.clans;
-      players = pref.contactList.players;
-    });
   }
 
   @override

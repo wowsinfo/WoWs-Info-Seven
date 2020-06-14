@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/data/Preference.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
@@ -16,14 +17,6 @@ class ServerLanguageSelection extends StatefulWidget {
 
 class _ServerLanguageSelectionState extends State<ServerLanguageSelection> {
   final cached = CachedData.shared;
-  final pref = Preference.shared;
-  String langCode;
-
-  @override
-  void initState() {
-    super.initState();
-    this.langCode = pref.serverLanguage;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,13 +36,15 @@ class _ServerLanguageSelectionState extends State<ServerLanguageSelection> {
           WrapBox(
             spacing: 2,
             children: cached.serverLanguage.entries.map((e) {
-              return FlatFilterChip(
-                label: Text(e.value),
-                selected: e.key == langCode, 
-                onSelected: (_) {
-                  setState(() => this.langCode = e.key);
-                  pref.serverLanguage = e.key;
-                }
+              return Consumer<Preference>(
+                builder: (context, pref, child) => FlatFilterChip(
+                  label: Text(e.value),
+                  selected: e.key == pref.appLanguage, 
+                  onSelected: (_) {
+                    setState(() {});
+                    pref.serverLanguage = e.key;
+                  }
+                ),
               );
             }).toList(growable: false),
           ),

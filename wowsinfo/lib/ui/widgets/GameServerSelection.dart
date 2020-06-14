@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:wowsinfo/core/models/UI/GameServer.dart';
 import 'package:wowsinfo/core/data/Preference.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
@@ -14,13 +15,10 @@ class GameServerSelection extends StatefulWidget {
 }
 
 class _GameServerSelectionState extends State<GameServerSelection> {
-  final pref = Preference.shared;
-  int selectedIndex;
   
   @override
   void initState() {
     super.initState();
-    this.selectedIndex = pref.gameServer.index;
   }
 
   @override
@@ -48,13 +46,15 @@ class _GameServerSelectionState extends State<GameServerSelection> {
             spacing: 2,
             children: servers.map((e) {
               final curr = servers.indexOf(e);
-              return FlatFilterChip(
-                label: Text(e),
-                selected: selectedIndex == curr, 
-                onSelected: (_) {
-                  setState(() => selectedIndex = curr);
-                  pref.gameServer = GameServer.fromIndex(selectedIndex);
-                },
+              return Consumer<Preference>(
+                builder: (context, pref, child) => FlatFilterChip(
+                  label: Text(e),
+                  selected: pref.gameServer.index == curr, 
+                  onSelected: (_) {
+                    setState(() {});
+                    pref.gameServer = GameServer.fromIndex(curr);
+                  },
+                ),
               );
             }).toList(growable: false),
           ),

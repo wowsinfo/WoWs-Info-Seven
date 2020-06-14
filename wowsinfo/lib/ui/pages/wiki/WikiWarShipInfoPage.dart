@@ -31,7 +31,6 @@ class WikiWarShipInfoPage extends StatefulWidget {
 }
 
 class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTickerProviderStateMixin {
-  final pref = Preference.shared;
   final cached = CachedData.shared;
   AppLocalization lang;
   bool loading = true;

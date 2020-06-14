@@ -21,13 +21,10 @@ class InitialPage extends StatefulWidget {
 }
 
 class _InitialPageState extends State<InitialPage> {
-  final pref = Preference.shared;
   final cached = CachedData.shared;
   bool showLogo = false;
 
-  @override
-  void initState() {
-    super.initState();
+  void update(BuildContext context) {
     cached.update().then((updated) {
       setState(() => showLogo = true);
       cached.close();
@@ -39,6 +36,7 @@ class _InitialPageState extends State<InitialPage> {
 
       // Update last update time
       if (updated) {
+        final pref = Provider.of<Preference>(context, listen: false);
         pref.appVersion = Constant.app_version;
         pref.lastUpdate = DateTime.now();
       }
