@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:provider/provider.dart';
 import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/data/Preference.dart';
 import 'package:wowsinfo/core/models/GitHub/Plugin.dart';
@@ -70,6 +71,8 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
         }
       }
     });
+
+    final pref = Provider.of<Preference>(context);
 
     // Setup slide controller
     this.slideController = AnimationController(vsync: this, duration: Duration(milliseconds: 300));
