@@ -28,7 +28,7 @@ class ContactList {
     this.clans = (json['clans'] as List).map((e) => Clan.fromJson(e)).toList();
   }
 
-  void _save() => pref.setContactList(this);
+  void _save() => pref.contactList = this;
 
   Map<String, dynamic> toJson() {
     /// Although `Set` is used, it might be great to 

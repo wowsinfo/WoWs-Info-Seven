@@ -53,7 +53,7 @@ class _GameServerSelectionState extends State<GameServerSelection> {
                 selected: selectedIndex == curr, 
                 onSelected: (_) {
                   setState(() => selectedIndex = curr);
-                  pref.setGameServer(Server.values[curr]);
+                  pref.gameServer = GameServer.fromIndex(selectedIndex);
                 },
               );
             }).toList(growable: false),

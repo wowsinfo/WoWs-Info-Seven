@@ -23,7 +23,7 @@ class _BottomNavigationPageState extends State<BottomNavigationPage> {
   @override
   void initState() {
     super.initState();
-    if (pref.firstLaunch) pref.setFirstLaunch(false);
+    if (pref.firstLaunch) pref.firstLaunch = false;
     selectedIndex = pref.bottomTabIndex;
   }
 
@@ -71,7 +71,7 @@ class _BottomNavigationPageState extends State<BottomNavigationPage> {
         onTap: (index) {
           // Update and save index
           setState(() => selectedIndex = index);
-          pref.setBottomTabIndex(index);
+          pref.bottomTabIndex = index;
         },
       ),
     );

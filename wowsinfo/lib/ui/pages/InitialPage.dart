@@ -39,8 +39,8 @@ class _InitialPageState extends State<InitialPage> {
 
       // Update last update time
       if (updated) {
-        pref.setAppVersion(Constant.app_version);
-        pref.setLastUpdate(DateTime.now());
+        pref.appVersion = Constant.app_version;
+        pref.lastUpdate = DateTime.now();
       }
     });
   }
