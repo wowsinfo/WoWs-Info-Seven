@@ -37,11 +37,6 @@ const THEME_BRIGHTNESS_MODE = [
 
 /// it saves locale, theme colour and app brightness
 class AppSettings extends LocalData with ChangeNotifier {
-
-  AppSettings() {
-    this.init();
-  }
-
   ///
   /// Variables
   ///
@@ -129,5 +124,5 @@ class AppSettings extends LocalData with ChangeNotifier {
     if (scriptCode != null) return langCode + '_' + scriptCode;
     return langCode;
   }
-  
+
 }

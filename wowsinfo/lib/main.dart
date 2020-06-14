@@ -29,50 +29,51 @@ void main() async {
   await Hive.initFlutter();
   // Init preference box 
   await pref.init();
+  // Create and setup AppSetting
+  final settings = AppSettings()..init();
   // Init cached data
   await CachedData.shared.init();
   // Cached data can be loaded later
-  runApp(MyApp());
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider<AppSettings>.value(value: settings),
+    ],
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<AppSettings>(create: (c) => AppSettings())
-      ],
-      child: Builder(builder: (c) {
-        final wowsinfo = Provider.of<AppSettings>(c);
-        return MaterialApp(
-          localizationsDelegates: [
-            AppLocalization.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          locale: wowsinfo.locale,
-          supportedLocales: AppLocalization.supportedLocales,
-          localeResolutionCallback: (locale, supported) {
-            if (locale == null) return supported.first;
-            switch (locale.languageCode) {
-              case 'en':
-              case 'ja':
-              case 'zh':
-                return locale;
-              default:
-                // This should be english
-                return supported.first;
-            }
-          },
-          title: 'WoWs Info Re',
-          theme: wowsinfo.theme,
-          darkTheme: wowsinfo.darkTheme,
-          themeMode: wowsinfo.themeMode,
-          // This should depend on whether first_launch is true or not
-          home: buildHome()
-        );
-      }),
+    return Consumer<AppSettings>(
+      builder: (context, wowsinfo, child) => MaterialApp(
+        localizationsDelegates: [
+          AppLocalization.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        locale: wowsinfo.locale,
+        supportedLocales: AppLocalization.supportedLocales,
+        localeResolutionCallback: (locale, supported) {
+          if (locale == null) return supported.first;
+          switch (locale.languageCode) {
+            case 'en':
+            case 'ja':
+            case 'zh':
+              return locale;
+            default:
+              // This should be english
+              return supported.first;
+          }
+        },
+        title: 'WoWs Info Re',
+        theme: wowsinfo.theme,
+        darkTheme: wowsinfo.darkTheme,
+        themeMode: wowsinfo.themeMode,
+        // This should depend on whether first_launch is true or not
+        home: buildHome()
+      ),
     );
   }
 
