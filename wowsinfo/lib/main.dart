@@ -13,7 +13,6 @@ import 'package:wowsinfo/ui/pages/setup/IntroPage.dart';
 // import 'package:wowsinfo/ui/widgets/PlatformLoadingIndiactor.dart';
 
 final pref = Preference.shared;
-final settings = AppSettings.shared;
 
 void main() async {
   // Run a loading screen here
@@ -30,8 +29,6 @@ void main() async {
   await Hive.initFlutter();
   // Init preference box 
   await pref.init();
-  // Init app settins box
-  await settings.init();
   // Init cached data
   await CachedData.shared.init();
   // Cached data can be loaded later
@@ -43,7 +40,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<AppSettings>(create: (c) => settings)
+        ChangeNotifierProvider<AppSettings>(create: (c) => AppSettings())
       ],
       child: Builder(builder: (c) {
         final wowsinfo = Provider.of<AppSettings>(c);

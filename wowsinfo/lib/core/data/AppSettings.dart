@@ -37,9 +37,10 @@ const THEME_BRIGHTNESS_MODE = [
 
 /// it saves locale, theme colour and app brightness
 class AppSettings extends LocalData with ChangeNotifier {
-  /// Singleton pattern 
-  AppSettings._init();
-  static final AppSettings shared = AppSettings._init();
+
+  AppSettings() {
+    this.init();
+  }
 
   ///
   /// Variables
@@ -53,30 +54,30 @@ class AppSettings extends LocalData with ChangeNotifier {
   // By default, it is blue
   MaterialColor _color;
   MaterialColor get color => _color;
-  setColor(MaterialColor m) {
+  set color(MaterialColor m) {
     _color = m;
     _generateTheme();
-    notifyListeners();
     this.box.put('color', THEME_COLOUR_LIST.indexOf(_color));
+    notifyListeners();
   }
 
   ThemeMode _brightness;
-  ThemeMode get themeMode => _brightness;
   bool isDarkMode() => _brightness == ThemeMode.dark;
   bool isLightMode() => _brightness == ThemeMode.light;
-  setBrightness(ThemeMode m) {
+  ThemeMode get themeMode => _brightness;
+  set brightness(ThemeMode m) {
     _brightness = m;
-    notifyListeners();
     this.box.put('brightness', THEME_BRIGHTNESS_MODE.indexOf(_brightness));
+    notifyListeners();
   }
   
   // If locale is null, system locale will be used
   Locale _locale;
   Locale get locale => _locale;
-  setLocale(Locale l) {
+  set locale(Locale l) {
     _locale = l;
-    notifyListeners();
     this.box.put('locale', _localeToCode());
+    notifyListeners();
   }
 
   ///
@@ -128,4 +129,5 @@ class AppSettings extends LocalData with ChangeNotifier {
     if (scriptCode != null) return langCode + '_' + scriptCode;
     return langCode;
   }
+  
 }

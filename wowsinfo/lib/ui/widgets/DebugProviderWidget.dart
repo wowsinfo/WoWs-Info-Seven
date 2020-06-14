@@ -16,19 +16,19 @@ class DebugProviderWidget extends StatelessWidget {
         child: Column(
           children: <Widget>[
             FlatButton(onPressed: () {
-              app.setLocale(Locale('en'));
+              app.locale = Locale('en');
             }, child: Text('English')),
             FlatButton(onPressed: () {
-              app.setLocale(Locale('ja'));
+              app.locale = Locale('ja');
             }, child: Text('日本語')),
             FlatButton(onPressed: () {
-              app.setLocale(Locale('zh'));
+              app.locale = Locale('zh');
             }, child: Text('简体中文')),
             FlatButton(onPressed: () {
-              app.setBrightness(ThemeMode.dark);
+              app.brightness = ThemeMode.dark;
             }, child: Text('Dark')),
             FlatButton(onPressed: () {
-              app.setBrightness(ThemeMode.light);
+              app.brightness = ThemeMode.light;
             }, child: Text('Light')),
             FlatButton(onPressed: () {
               final list = [
@@ -50,7 +50,7 @@ class DebugProviderWidget extends StatelessWidget {
                 Colors.amber,
               ];
               final index = Random();
-              app.setColor(list[index.nextInt(list.length)]);
+              app.color = list[index.nextInt(list.length)];
             }, child: Text('Colour')),
           ],
         ),

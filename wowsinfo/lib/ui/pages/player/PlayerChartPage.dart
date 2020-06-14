@@ -1,6 +1,5 @@
 import 'package:charts_flutter/flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:wowsinfo/core/data/AppSettings.dart';
 import 'package:wowsinfo/core/models/UI/ChartValue.dart';
 import 'package:wowsinfo/core/models/UI/PlayerChartData.dart';
 import 'package:wowsinfo/core/models/WoWs/RecentPlayerInfo.dart';
@@ -11,7 +10,6 @@ import 'package:wowsinfo/ui/widgets/WrapBox.dart';
 class PlayerChartPage extends StatelessWidget {
   final PlayerChartData info;
   final RecentPlayerInfo recent;
-  final app = AppSettings.shared;
   PlayerChartPage({Key key, this.info, this.recent}) : super(key: key);
 
   @override

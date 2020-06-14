@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:wowsinfo/core/data/AppSettings.dart';
 import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/data/Constant.dart';
@@ -20,7 +21,6 @@ class InitialPage extends StatefulWidget {
 }
 
 class _InitialPageState extends State<InitialPage> {
-  final settings = AppSettings.shared;
   final pref = Preference.shared;
   final cached = CachedData.shared;
   bool showLogo = false;
@@ -61,21 +61,23 @@ class _InitialPageState extends State<InitialPage> {
           children: <Widget>[
             // This app bar will update the status bar color
             AppBar(brightness: Brightness.dark),
-            Container(
-              color: settings.isDarkMode() ? Colors.grey[900] : Colors.blue,
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    AnimatedSwitcher(
-                      duration: Duration(milliseconds: 1000),
-                      switchInCurve: Curves.linearToEaseOut,
-                      switchOutCurve: Curves.linearToEaseOut,
-                      transitionBuilder: (w, a) => SizeTransition(sizeFactor: a, child: w),
-                      child: buildLogo(c),
-                    ),
-                    PlatformLoadingIndiactor(),
-                  ],
+            Consumer<AppSettings>(
+              builder: (context, settings, child) => Container(
+                color: settings.isDarkMode() ? Colors.grey[900] : Colors.blue,
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      AnimatedSwitcher(
+                        duration: Duration(milliseconds: 1000),
+                        switchInCurve: Curves.linearToEaseOut,
+                        switchOutCurve: Curves.linearToEaseOut,
+                        transitionBuilder: (w, a) => SizeTransition(sizeFactor: a, child: w),
+                        child: buildLogo(c),
+                      ),
+                      PlatformLoadingIndiactor(),
+                    ],
+                  ),
                 ),
               ),
             ),
