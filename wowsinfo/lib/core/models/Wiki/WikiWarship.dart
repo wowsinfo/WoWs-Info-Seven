@@ -1,5 +1,6 @@
 
 import 'package:wowsinfo/core/data/CachedData.dart';
+import 'package:wowsinfo/core/models/GitHub/ShipAlias.dart';
 
 import '../Cacheable.dart';
 
@@ -7,8 +8,17 @@ import '../Cacheable.dart';
 class WikiWarship extends Cacheable {
   Map<String, Warship> ships;
 
-  WikiWarship.fromJson(Map<String, dynamic> json) {
+  WikiWarship.fromJson(Map<String, dynamic> json, {ShipAlias alias}) {
     this.ships = json.map((a, b) => MapEntry(a, Warship.fromJson(b)));
+    injectAlias(alias);
+  }
+
+  /// Inject alias to all ships if available
+  void injectAlias(ShipAlias alias) {
+    if (alias == null) return;
+    ships.forEach((key, value) {
+      if (alias.hasAlias(key)) value.name = alias.getAlisa(key);
+    });
   }
 
   Map<String, dynamic> toJson() => this.ships.cast<String, dynamic>();

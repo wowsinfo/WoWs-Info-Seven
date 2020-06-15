@@ -112,7 +112,7 @@ class CachedData extends LocalData {
       return a.tier - b.tier;
     });
   }
-  void loadWarship() => _warship = decode(WIKI_WARSHIP, (j) => WikiWarship.fromJson(j));
+  void loadWarship() => _warship = decode(WIKI_WARSHIP, (j) => WikiWarship.fromJson(j, alias: _alias));
   void saveWarship(WikiWarship data) {
     _warship = data;
     box.put(WIKI_WARSHIP, jsonEncode(data.toJson()));
@@ -265,6 +265,8 @@ class CachedData extends LocalData {
 
       // Only save new version here
       encyclopedia.save();
+      // Attach alisa to wiki warship
+      _warship.injectAlias(_alias);
       return true;
     }
 
