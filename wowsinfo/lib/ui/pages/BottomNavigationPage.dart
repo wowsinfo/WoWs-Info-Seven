@@ -16,48 +16,48 @@ class BottomNavigationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // Not first launch anymore
     final localization = AppLocalization.of(context);
-    final pref = Provider.of<Preference>(context);
 
     return Scaffold(
-      body: IndexedStack(
-        index: pref.bottomTabIndex,
-        children: [
-          HomePage(),
-          WebsitePage(),
-          WikiPage(),
-          RealtimePage(),
-          SearchPage(),
-        ],
+      body: Consumer<Preference>(
+        builder: (context, pref, child) => IndexedStack(
+          index: pref.bottomTabIndex,
+          children: [
+            HomePage(),
+            WebsitePage(),
+            WikiPage(),
+            RealtimePage(),
+            SearchPage(),
+          ],
+        ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title: Text(localization.localised('bottom_tab_home')),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.language),
-            title: Text(localization.localised('bottom_tab_website')),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.book),
-            title: Text(localization.localised('bottom_tab_wiki')),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.table_chart),
-            title: Text(localization.localised('bottom_tab_realtime')),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            title: Text(localization.localised('bottom_tab_search')),
-          ),
-        ],
-        currentIndex: pref.bottomTabIndex,
-        onTap: (index) {
-          // Update and save index
-          pref.bottomTabIndex = index;
-        },
+      bottomNavigationBar: Consumer<Preference>(
+        builder: (context, pref, child) => BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              title: Text(localization.localised('bottom_tab_home')),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.language),
+              title: Text(localization.localised('bottom_tab_website')),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.book),
+              title: Text(localization.localised('bottom_tab_wiki')),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.table_chart),
+              title: Text(localization.localised('bottom_tab_realtime')),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.search),
+              title: Text(localization.localised('bottom_tab_search')),
+            ),
+          ],
+          currentIndex: pref.bottomTabIndex,
+          onTap: (index) => pref.bottomTabIndex = index,
+        ),
       ),
     );
   }

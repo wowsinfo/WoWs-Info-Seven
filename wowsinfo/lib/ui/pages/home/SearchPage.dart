@@ -28,7 +28,7 @@ class _SearchPageState extends State<SearchPage> {
   void initState() {
     super.initState();
     /// TODO: this page needs to be updated because now I am using provider
-    this.pref = Provider.of<Preference>(context);
+    this.pref = Provider.of<Preference>(context, listen: false);
     showContact();
   }
 
@@ -52,7 +52,6 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
-    final pref = Provider.of(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Row(

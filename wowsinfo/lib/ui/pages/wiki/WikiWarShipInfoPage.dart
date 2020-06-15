@@ -52,7 +52,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
   @override
   void initState() {
     super.initState();
-    this.pref = Provider.of<Preference>(context);
+    this.pref = Provider.of<Preference>(context, listen: false);
 
     // Setup scroll controller to hide bottom app bar
     this.controller = ScrollController();

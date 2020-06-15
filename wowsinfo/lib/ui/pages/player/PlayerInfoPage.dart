@@ -392,7 +392,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
   InkWell buildNickname(BuildContext context, TextTheme textTheme) {
     return InkWell(
       onTap: clanTag.hasTag ? () {
-        final pref = Provider.of<Preference>(context);
+        final pref = Provider.of<Preference>(context, listen: false);
         Navigator.push(context, MaterialPageRoute(builder: (c) => ClanInfoPage(clan: clanTag.toClan(pref), server: widget.player.server)));
       } : null,
       child: Padding(

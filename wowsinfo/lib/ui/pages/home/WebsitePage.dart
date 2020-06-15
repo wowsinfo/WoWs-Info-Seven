@@ -13,7 +13,7 @@ class WebsitePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final lang = AppLocalization.of(context);
-    final server = Provider.of<Preference>(context).gameServer;
+    final server = Provider.of<Preference>(context, listen: false).gameServer;
     final domain = server.domain;
     final prefix = server.prefix;
 

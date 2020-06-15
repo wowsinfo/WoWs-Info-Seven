@@ -31,6 +31,7 @@ class _InitialPageState extends State<InitialPage> {
     cached.update(pref).then((updated) {
       setState(() => showLogo = true);
       cached.close();
+
       Future.delayed(Duration(milliseconds: 2000)).then((_) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (_) => BottomNavigationPage(), fullscreenDialog: true)
@@ -44,7 +45,7 @@ class _InitialPageState extends State<InitialPage> {
       }
     });
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Theme(
