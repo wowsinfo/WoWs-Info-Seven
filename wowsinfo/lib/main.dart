@@ -34,7 +34,7 @@ void main() async {
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider<AppSettings>.value(value: settings),
-      Provider.value(value: pref),
+      ChangeNotifierProvider<Preference>.value(value: pref),
     ],
     child: MyApp(),
   ));

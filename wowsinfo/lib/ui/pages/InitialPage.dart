@@ -24,8 +24,11 @@ class _InitialPageState extends State<InitialPage> {
   final cached = CachedData.shared;
   bool showLogo = false;
 
-  void update(BuildContext context) {
-    cached.update().then((updated) {
+  @override
+  void initState() {
+    super.initState();
+    final pref = Provider.of<Preference>(context, listen: false);
+    cached.update(pref).then((updated) {
       setState(() => showLogo = true);
       cached.close();
       Future.delayed(Duration(milliseconds: 2000)).then((_) {
@@ -36,13 +39,12 @@ class _InitialPageState extends State<InitialPage> {
 
       // Update last update time
       if (updated) {
-        final pref = Provider.of<Preference>(context, listen: false);
         pref.appVersion = Constant.app_version;
         pref.lastUpdate = DateTime.now();
       }
     });
   }
-
+  
   @override
   Widget build(BuildContext context) {
     return Theme(

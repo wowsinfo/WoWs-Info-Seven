@@ -1,3 +1,4 @@
+import 'package:wowsinfo/core/data/Preference.dart';
 import 'package:wowsinfo/core/models/UI/WoWsDate.dart';
 import 'package:wowsinfo/core/models/User/Player.dart';
 
@@ -60,7 +61,7 @@ class Member {
   bool get hasRole => role != 'commissioned_officer';
   bool get isCommander => role == 'commander';
   bool get isExecutive => role == 'executive_officer';
-  Player get player => Player(accountName, accountId);
+  Player toPlayer(Preference pref) => Player(accountName, accountId, pref.gameServer);
 
   Member(Map<String, dynamic> json) {
     this.role = json['role'];

@@ -32,28 +32,29 @@ import 'package:wowsinfo/core/parsers/GitHub/GitHubParser.dart';
 import 'package:wowsinfo/core/parsers/GitHub/PRDataParser.dart';
 import 'package:wowsinfo/core/parsers/GitHub/PluginParser.dart';
 import 'package:wowsinfo/core/parsers/GitHub/ShipAliasParser.dart';
-
-
-const BOX_NAME = 'cached_data';
-
-const PERSONAL_RATING = 'personal_rating';
-const SHIP_ALIAS = 'ship_alias';
-
-const CLAN_GLOSSARY = 'clan_glossary';
-const WIKI_ACHIEVEMENT = 'ship_achievement';
-const WIKI_COLLECTION = 'wiki_collection';
-const WIKI_COLLECTION_ITEM = 'wiki_collection_item';
-const WIKI_COMMANDER_SKILL = 'wiki_commander_skill';
-const WIKI_CONSUMABLE = 'wiki_consumable';
-const WIKI_ENCYCLOPEDIA = 'wiki_encyclopedia';
-const WIKI_GAME_MAP = 'wiki_game_map';
-const WIKI_WARSHIP = 'wiki_warship';
-const GITHUB_PLUGIN = 'github_plugin';
+import 'package:wowsinfo/core/extensions/DateTimeExtension.dart';
 
 /// It handles cached data but mainly wiki
 /// - it is usually read only
 /// - it only updates when necessary
 class CachedData extends LocalData {
+
+  static const BOX_NAME = 'cached_data';
+
+  static const PERSONAL_RATING = 'personal_rating';
+  static const SHIP_ALIAS = 'ship_alias';
+
+  static const CLAN_GLOSSARY = 'clan_glossary';
+  static const WIKI_ACHIEVEMENT = 'ship_achievement';
+  static const WIKI_COLLECTION = 'wiki_collection';
+  static const WIKI_COLLECTION_ITEM = 'wiki_collection_item';
+  static const WIKI_COMMANDER_SKILL = 'wiki_commander_skill';
+  static const WIKI_CONSUMABLE = 'wiki_consumable';
+  static const WIKI_ENCYCLOPEDIA = 'wiki_encyclopedia';
+  static const WIKI_GAME_MAP = 'wiki_game_map';
+  static const WIKI_WARSHIP = 'wiki_warship';
+  static const GITHUB_PLUGIN = 'github_plugin';
+
   /// Singleton pattern 
   CachedData._init();
   static final CachedData shared = CachedData._init();
@@ -62,8 +63,6 @@ class CachedData extends LocalData {
   /// Variables
   ///
   
-  final pref = Preference.shared;
-
   PRData _prData;
   AverageStats getShipStats(String shipId) => _prData.ships[shipId];
   void loadPRData() => _prData = decode(PERSONAL_RATING, (j) => PRData.fromJson(j));
@@ -217,7 +216,7 @@ class CachedData extends LocalData {
   }
 
   /// Check for update and only update when game updates, app updates or it has been a week
-  Future<bool> update({bool force = false}) async {
+  Future<bool> update(Preference pref, {bool force = false}) async {
     // Open the box again if it is closed
     this.box = await Hive.openBox(BOX_NAME);
     // Load everything from storage, it is fine because if there are new data, it will be replaced

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/models/UI/ChartValue.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart';
-import 'package:wowsinfo/core/others/AppLocalization.dart';
 
 /// WikiWarshipOverviewPage class
 class WikiWarshipOverviewPage extends StatelessWidget {
@@ -13,7 +12,7 @@ class WikiWarshipOverviewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final overview = WikiWarshipOverview(cached.sortedWarshipList);
-    final lang = AppLocalization.of(context);
+    // final lang = AppLocalization.of(context);
 
     return Scaffold(
       appBar: AppBar(

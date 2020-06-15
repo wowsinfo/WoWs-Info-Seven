@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/data/Preference.dart';
@@ -24,13 +25,14 @@ class ClanInfoPage extends StatefulWidget {
 }
 
 class _ClanInfoPageState extends State<ClanInfoPage> {
-  final pref = Preference.shared;
+  Preference pref;
   final cached = CachedData.shared;
   ClanInfo info;
   
   @override
   void initState() {
     super.initState();
+    this.pref = Provider.of<Preference>(context);
     // Saved server should be used here, if server is passed in, use it
     final parser = ClanInfoParser(widget.server ?? widget.clan.server, widget.clan.clanId);
     parser.download().then((json) {
@@ -148,7 +150,11 @@ class _ClanInfoPageState extends State<ClanInfoPage> {
     return Column(
       children: info.sortedMembers.map((e) {
         final joined = Text(e.joinedDate);
-        final Function gotoPlayer = () => Navigator.push(context, MaterialPageRoute(builder: (c) => PlayerInfoPage(player: e.player)));
+        final Function gotoPlayer = () {
+          final pref = Provider.of<Preference>(context, listen: false);
+          Navigator.push(context, MaterialPageRoute(builder: (c) => PlayerInfoPage(player: e.toPlayer(pref))));
+        };
+
         if (e.hasRole) {
           final role = cached.getClanRoleName(e.role);
           TextStyle style;

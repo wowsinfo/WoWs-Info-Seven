@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:wowsinfo/core/data/CachedData.dart';
+import 'package:wowsinfo/core/data/Preference.dart';
 import 'package:wowsinfo/core/models/UI/PlayerChartData.dart';
 import 'package:wowsinfo/core/models/User/Player.dart';
 import 'package:wowsinfo/core/models/WoWs/BasicPlayerInfo.dart';
@@ -36,7 +38,6 @@ import 'package:wowsinfo/ui/widgets/player/RatingBar.dart';
 import 'package:wowsinfo/ui/widgets/player/RatingTheme.dart';
 import 'package:wowsinfo/ui/widgets/player/RecordTile.dart';
 import 'package:wowsinfo/ui/widgets/player/WeaponInfoTile.dart';
-import 'package:wowsinfo/ui/widgets/wiki/WikiWarshipCell.dart';
 
 /// PlayerInfoPage class
 class PlayerInfoPage extends StatefulWidget {
@@ -390,9 +391,10 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
   /// Merge clan tag and player together
   InkWell buildNickname(BuildContext context, TextTheme textTheme) {
     return InkWell(
-      onTap: clanTag.hasTag 
-      ? () => Navigator.push(context, MaterialPageRoute(builder: (c) => ClanInfoPage(clan: clanTag.clan, server: widget.player.server)))
-      : null,
+      onTap: clanTag.hasTag ? () {
+        final pref = Provider.of<Preference>(context);
+        Navigator.push(context, MaterialPageRoute(builder: (c) => ClanInfoPage(clan: clanTag.toClan(pref), server: widget.player.server)));
+      } : null,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:wowsinfo/core/data/Preference.dart';
 import 'package:wowsinfo/core/models/UI/WebsiteItem.dart';
 import 'package:wowsinfo/core/models/UI/WebsiteSection.dart';
@@ -7,13 +8,12 @@ import 'package:url_launcher/url_launcher.dart';
 
 /// WebsitePage class
 class WebsitePage extends StatelessWidget {
-  final pref = Preference.shared;
   WebsitePage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final lang = AppLocalization.of(context);
-    final server = pref.gameServer;
+    final server = Provider.of<Preference>(context).gameServer;
     final domain = server.domain;
     final prefix = server.prefix;
 

@@ -34,6 +34,7 @@ class WikiWarShipInfoPage extends StatefulWidget {
 class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTickerProviderStateMixin {
   final cached = CachedData.shared;
   AppLocalization lang;
+  Preference pref;
   bool loading = true;
   bool error = false;
   WikiShipInfo info;
@@ -51,6 +52,8 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
   @override
   void initState() {
     super.initState();
+    this.pref = Provider.of<Preference>(context);
+
     // Setup scroll controller to hide bottom app bar
     this.controller = ScrollController();
     controller.addListener(() {
@@ -72,7 +75,6 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage> with SingleTi
       }
     });
 
-    final pref = Provider.of<Preference>(context);
 
     // Setup slide controller
     this.slideController = AnimationController(vsync: this, duration: Duration(milliseconds: 300));

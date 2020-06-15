@@ -5,38 +5,39 @@ import 'package:hive/hive.dart';
 import 'package:wowsinfo/core/data/LocalData.dart';
 import 'package:wowsinfo/core/others/Utils.dart';
 
-/// All material colour
-const THEME_COLOUR_LIST = [
-  Colors.red,
-  Colors.pink,
-  Colors.purple,
-  Colors.deepPurple,
-  Colors.indigo,
-  Colors.blue,
-  Colors.lightBlue,
-  Colors.cyan,
-  Colors.teal,
-  Colors.green,
-  Colors.lightGreen,
-  Colors.lime,
-  Colors.yellow,
-  Colors.amber,
-  // Orange is removed
-  Colors.deepOrange,
-  Colors.brown,
-  Colors.grey,
-  Colors.blueGrey,
-];
-
-/// light or dark
-const THEME_BRIGHTNESS_MODE = [
-  ThemeMode.light,
-  ThemeMode.dark,
-  ThemeMode.system,
-];
 
 /// it saves locale, theme colour and app brightness
 class AppSettings extends LocalData with ChangeNotifier {
+  /// All material colour
+  static const THEME_COLOUR_LIST = [
+    Colors.red,
+    Colors.pink,
+    Colors.purple,
+    Colors.deepPurple,
+    Colors.indigo,
+    Colors.blue,
+    Colors.lightBlue,
+    Colors.cyan,
+    Colors.teal,
+    Colors.green,
+    Colors.lightGreen,
+    Colors.lime,
+    Colors.yellow,
+    Colors.amber,
+    // Orange is removed
+    Colors.deepOrange,
+    Colors.brown,
+    Colors.grey,
+    Colors.blueGrey,
+  ];
+
+  /// light or dark
+  static const THEME_BRIGHTNESS_MODE = [
+    ThemeMode.light,
+    ThemeMode.dark,
+    ThemeMode.system,
+  ];
+  
   ///
   /// Variables
   ///

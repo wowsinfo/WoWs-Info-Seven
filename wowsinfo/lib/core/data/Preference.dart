@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:wowsinfo/core/data/Constant.dart';
 import 'package:wowsinfo/core/data/LocalData.dart';
@@ -13,7 +14,7 @@ import 'package:wowsinfo/core/extensions/DateTimeExtension.dart';
 /// This is the `Preference` class
 /// - it manages all const a preferences including those that are used in app provider
 /// - mainly changable ones
-class Preference extends LocalData {
+class Preference extends LocalData with ChangeNotifier {
   /// `KEYS` are stored here so that I won't have any typo or changed the string accidentally
   static const BOX_NAME = 'preference';
   static const FIRST_LAUNCH = 'first_launch';
@@ -57,8 +58,8 @@ class Preference extends LocalData {
   /// returns saved player contact or an empty one
   ContactList get contactList {
     final jsonString = this.box.get(CONTACT_LIST);
-    if (jsonString != null) return ContactList.fromJson(jsonDecode(jsonString));
-    return ContactList();
+    if (jsonString != null) return ContactList.fromJson(jsonDecode(jsonString), this);
+    return ContactList(this);
   }
   set contactList(ContactList contact) => this.box.put(CONTACT_LIST, jsonEncode(contact));
 
@@ -77,7 +78,7 @@ class Preference extends LocalData {
   set proVersion(bool value) => this.box.put(PRO_VERSION, value);
 
   int get bottomTabIndex => this.box.get(BOTTOM_TAB_INDEX) ?? 0;
-  set bottomTabIndex(int value) => this.box.put(BOTTOM_TAB_INDEX, value);
+  set bottomTabIndex(int value) => _update(BOTTOM_TAB_INDEX, value);
 
   String get realtimeIP => this.box.get(REALTIME_IP);
   set realtimeIP(String value) => this.box.put(REALTIME_IP, value);
@@ -87,6 +88,12 @@ class Preference extends LocalData {
 
   String get appVersion => this.box.get(APP_VERSION) ?? '1.0.8';
   set appVersion(String value) => this.box.put(APP_VERSION, value);
+
+  /// This updates key-value and also notify listeners
+  _update(dynamic key, dynamic value) {
+    this.box.put(key, value);
+    notifyListeners();
+  }  
 
   ///
   /// Functions

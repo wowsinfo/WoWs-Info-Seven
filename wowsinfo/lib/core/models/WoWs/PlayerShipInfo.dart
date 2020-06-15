@@ -19,7 +19,7 @@ class PlayerShipInfo {
     if (json != null) {
       json.forEach((element) {
         final curr = ShipInfo(element);
-        // TODO: Ignore removed ships (can consider to support them in the future)
+        // getShip only works for removed ships as well
         if (_cached.getShip(curr.shipId) != null) {
           ships.add(curr);
           if (curr.rating.hasRating) overallRating.add(curr.rating);

@@ -3,7 +3,6 @@ import 'package:wowsinfo/core/models/Cacheable.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiItem.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart';
 import 'package:wowsinfo/core/models/WoWs/WikiShipInfo.dart';
-import 'package:wowsinfo/core/others/AppLocalization.dart';
 
 /// This is the `Plugin` class
 class Plugin extends Cacheable {
@@ -126,7 +125,7 @@ class ShipConsumableData extends WikiItem {
   String _toMeter(num v) => v != null ? '$v m' : null;
   ///
   String _getDescription(BuildContext context) {
-    final lang = AppLocalization.of(context);
+    // final lang = AppLocalization.of(context);
     final list = {
       'type': consumableType,
       'reload time': _toTime(reloadTime),

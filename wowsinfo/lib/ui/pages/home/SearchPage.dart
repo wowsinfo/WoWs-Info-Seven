@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:wowsinfo/core/data/Preference.dart';
 import 'package:wowsinfo/core/models/User/Clan.dart';
 import 'package:wowsinfo/core/models/User/Player.dart';
@@ -21,10 +22,13 @@ class _SearchPageState extends State<SearchPage> {
   String previousInput;
   List<Clan> clans = [];
   List<Player> players = [];
+  Preference pref;
 
   @override
   void initState() {
     super.initState();
+    /// TODO: this page needs to be updated because now I am using provider
+    this.pref = Provider.of<Preference>(context);
     showContact();
   }
 
@@ -38,8 +42,17 @@ class _SearchPageState extends State<SearchPage> {
     showContact();
   }
 
+  /// Show contact
+  void showContact() {
+    setState(() {
+      clans = pref.contactList.clans;
+      players = pref.contactList.players;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    final pref = Provider.of(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -78,14 +91,14 @@ class _SearchPageState extends State<SearchPage> {
               AnimatedSwitcher(
                 transitionBuilder: (w, a) => SizeTransition(sizeFactor: a, child: w),
                 duration: Duration(milliseconds: 300),
-                child: ClanList(clans: clans, key: Key(clans.length.toString())),
+                child: ClanList(clans: clans, key: Key(clans.length.toString()), pref: pref),
               ),
               Divider(),
               ListTile(title: Text('Player - ${players.length}')),
               AnimatedSwitcher(
                 transitionBuilder: (w, a) => SizeTransition(sizeFactor: a, child: w),
                 duration: Duration(milliseconds: 300),
-                child: PlayerList(players: players, key: Key(players.length.toString())),
+                child: PlayerList(players: players, key: Key(players.length.toString()), pref: pref),
               ),
             ],
           ),
@@ -134,16 +147,17 @@ class PlayerList extends StatefulWidget {
   const PlayerList({
     Key key,
     @required this.players,
+    @required this.pref,
   }) : super(key: key);
 
   final List<Player> players;
+  final Preference pref;
 
   @override
   _PlayerListState createState() => _PlayerListState();
 }
 
 class _PlayerListState extends State<PlayerList> {
-  final list = pref.contactList;
 
   @override
   Widget build(BuildContext context) {
@@ -158,6 +172,7 @@ class _PlayerListState extends State<PlayerList> {
   }
 
   buildIconButton(Player e) {
+    final list = widget.pref.contactList;
     final remove = list.containsPlayer(e);
     return IconButton(
       icon: remove ? Icon(Icons.remove) : Icon(Icons.add),
@@ -173,16 +188,17 @@ class ClanList extends StatefulWidget {
   const ClanList({
     Key key,
     @required this.clans,
+    @required this.pref
   }) : super(key: key);
 
   final List<Clan> clans;
+  final Preference pref;
 
   @override
   _ClanListState createState() => _ClanListState();
 }
 
 class _ClanListState extends State<ClanList> {
-  final list = pref.contactList;
 
   @override
   Widget build(BuildContext context) {
@@ -197,6 +213,7 @@ class _ClanListState extends State<ClanList> {
   }
 
   buildIconButton(Clan e) {
+    final list = widget.pref.contactList;
     final remove = list.containsClan(e);
     return IconButton(
       icon: remove ? Icon(Icons.remove) : Icon(Icons.add),

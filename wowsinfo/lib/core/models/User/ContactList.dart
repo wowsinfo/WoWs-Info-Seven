@@ -4,7 +4,10 @@ import 'package:wowsinfo/core/models/User/Clan.dart';
 
 /// This stores and manages player contact including players and clans
 class ContactList {
-  final pref = Preference.shared;
+
+  final Preference pref;
+
+  ContactList(this.pref);
 
   List<Player> players = [];
   updatePlayer(Player player, {bool add = true}) {
@@ -22,8 +25,7 @@ class ContactList {
   }
   bool containsClan(Clan clan) => this.clans.any((element) => element.clanId == clan.clanId);
 
-  ContactList();
-  ContactList.fromJson(Map<String, dynamic> json) {
+  ContactList.fromJson(Map<String, dynamic> json, this.pref) {
     this.players = (json['players'] as List).map((e) => Player.fromJson(e)).toList();
     this.clans = (json['clans'] as List).map((e) => Clan.fromJson(e)).toList();
   }
