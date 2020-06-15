@@ -7,6 +7,12 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## 15/06/2020
+### Summary
+App is running again and I injected alias to wiki warship. However, the injection should only happen when the locale is zh or ja. There are also some minor adjustments. I need to fix my architecture more. 
+### What to do tomorrow?
+More architecture improvement.
+
 ## 13/06/2020
 ### Summary
 Updated packages. I am examining the current structure and state of the app. 

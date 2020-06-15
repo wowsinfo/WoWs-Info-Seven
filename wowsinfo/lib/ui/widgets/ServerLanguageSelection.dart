@@ -39,7 +39,7 @@ class _ServerLanguageSelectionState extends State<ServerLanguageSelection> {
               return Consumer<Preference>(
                 builder: (context, pref, child) => FlatFilterChip(
                   label: Text(e.value),
-                  selected: e.key == pref.appLanguage, 
+                  selected: e.key == pref.serverLanguage, 
                   onSelected: (_) {
                     setState(() {});
                     pref.serverLanguage = e.key;

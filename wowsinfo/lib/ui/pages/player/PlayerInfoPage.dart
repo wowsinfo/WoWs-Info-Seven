@@ -106,48 +106,58 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
 
           // Request for achievement
           final a = PlayerAchievementParser(server, accountId);
-          final achievement = a.parse(await a.download(appendLang: false));
-          if (achievement != null) {
-            setState(() {
-              this.achievement = achievement;
-            });
-          }
+          a.download(appendLang: false).then((value) {
+            final achievement = a.parse(value);
+            if (achievement != null) {
+              setState(() {
+                this.achievement = achievement;
+              });
+            }
+          });
 
           // Request for ship
           final ship = PlayerShipInfoParser(server, accountId);
-          final shipInfo = ship.parse(await ship.download(appendLang: false));
-          if (shipInfo != null) {
-            setState(() {
-              this.shipInfo = shipInfo;
-            });
-          }
+          ship.download(appendLang: false).then((value) {
+            final shipInfo = ship.parse(value);
+            if (shipInfo != null) {
+              setState(() {
+                this.shipInfo = shipInfo;
+              });
+            }
+          });
 
           // Request for recent player info
           final recent = RecentPlayerInfoParser(server, accountId);
-          final recentInfo = recent.parse(await recent.download(appendLang: false));
-          if (recentInfo != null) {
-            setState(() {
-              this.recentInfo = recentInfo;
-            });
-          }
+          recent.download(appendLang: false).then((value) {
+            final recentInfo = recent.parse(value);
+            if (recentInfo != null) {
+              setState(() {
+                this.recentInfo = recentInfo;
+              });
+            }
+          });
 
           // Request for rank
           final r = RankPlayerInfoParser(server, accountId);
-          final rankInfo = r.parse(await r.download(appendLang: false));
-          if (rankInfo != null && rankInfo.season != null) {
-            setState(() {
-              this.rankInfo = rankInfo;
-            });
-          }
+          r.download(appendLang: false).then((value) {
+            final rankInfo = r.parse(value);
+            if (rankInfo != null && rankInfo.season != null) {
+              setState(() {
+                this.rankInfo = rankInfo;
+              });
+            }
+          });
 
           // Request for rank ship
           final rs = RankPlayerShipInfoParser(server, accountId);
-          final rankShipInfo = rs.parse(await rs.download(appendLang: false));
-          if (rankShipInfo != null && rankShipInfo.ships.length > 0) {
-            setState(() {
-              this.rankShipInfo = rankShipInfo;
-            });
-          }
+          rs.download(appendLang: false).then((value) {
+            final rankShipInfo = rs.parse(value);
+            if (rankShipInfo != null && rankShipInfo.ships.length > 0) {
+              setState(() {
+                this.rankShipInfo = rankShipInfo;
+              });
+            }
+          });
         }
       } else {
         setState(() {
@@ -333,6 +343,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
           data: Theme.of(context).copyWith(
             buttonTheme: ButtonThemeData(
               textTheme: ButtonTextTheme.primary,
+              buttonColor: shipInfo?.overallRating?.colour,
             )
           ),
           child: WrapBox(
