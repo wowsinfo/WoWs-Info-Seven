@@ -78,7 +78,7 @@ import com.android.build.OutputFile
  */
 
 project.ext.react = [
-    enableHermes: false,  // clean and rebuild if changing
+    enableHermes: true,  // clean and rebuild if changing
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
@@ -132,8 +132,8 @@ android {
         applicationId "com.yihengquan.wowsinfo"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 10710
-        versionName "1.0.7.1"
+        versionCode 10800
+        versionName "1.0.8"
     }
     splits {
         abi {
