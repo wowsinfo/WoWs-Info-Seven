@@ -15,7 +15,7 @@ import { APP } from '../../value/data';
 class Rating extends Component {
   render() {
     const { container, range } = styles;
-    const ratingRange = ['0 - 750', '750 - 1100', '1100 - 1350', '1350 - 1550', '1550 - 1750', '1750 - 2100', '2100 - 2450', '2450 - 9999'];
+    const ratingRange = ['0', '1 - 750', '750 - 1100', '1100 - 1350', '1350 - 1550', '1550 - 1750', '1750 - 2100', '2100 - 2450', '2450 - 9999'];
     const ratingComments = getRatingList();
     const ratingColours = getColourList();
 
