@@ -29,12 +29,13 @@ void main() async {
   // Create and setup AppSetting
   final settings = AppSettings()..init();
   // Init cached data
-  await CachedData.shared.init();
-  // Cached data can be loaded later
+  final cache = CachedData()..init();
+
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider<AppSettings>.value(value: settings),
       ChangeNotifierProvider<Preference>.value(value: pref),
+      Provider<CachedData>.value(value: cache),
     ],
     child: MyApp(),
   ));

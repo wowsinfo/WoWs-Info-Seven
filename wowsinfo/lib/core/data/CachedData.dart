@@ -55,10 +55,6 @@ class CachedData extends LocalData {
   static const WIKI_WARSHIP = 'wiki_warship';
   static const GITHUB_PLUGIN = 'github_plugin';
 
-  /// Singleton pattern 
-  CachedData._init();
-  static final CachedData shared = CachedData._init();
-
   ///
   /// Variables
   ///

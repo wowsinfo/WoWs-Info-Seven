@@ -1,14 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:wowsinfo/core/data/CachedData.dart';
 import 'package:wowsinfo/core/models/UI/GameServer.dart';
 
 void main() {
-  test('Test Preference.shared and CachedData.shared', () {
-    final e = CachedData.shared;
-    final f = CachedData.shared;
-    expect(identical(e, f), isTrue);
-  });
-
   test('Test GameServer', () {
     final a = GameServer(Server.ASIA);
     expect(a.domain == 'asia', isTrue);

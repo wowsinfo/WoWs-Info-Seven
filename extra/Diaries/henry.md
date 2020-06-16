@@ -7,6 +7,11 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## 16/06/2020
+### Summary
+Removed all singletons and use provider instead. I am still thinking how should I do it? Maybe I should draw a diagram. If it is not available everything then I need to pass it down through the widget tree. 
+### What to do tomorrow?
+
 ## 15/06/2020
 ### Summary
 App is running again and I injected alias to wiki warship. However, the injection should only happen when the locale is zh or ja. There are also some minor adjustments. I need to fix my architecture more. 
