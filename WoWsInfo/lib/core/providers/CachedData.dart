@@ -60,6 +60,8 @@ class CachedData extends LocalData {
   ///
   
   PRData _prData;
+  final Preference pref;
+
   AverageStats getShipStats(String shipId) => _prData.ships[shipId];
   void loadPRData() => _prData = decode(PERSONAL_RATING, (j) => PRData.fromJson(j));
   void savePRData(PRData data) {
@@ -201,6 +203,8 @@ class CachedData extends LocalData {
   /// Functions
   ///
 
+  CachedData(this.pref);
+
   @override
   Future<bool> init() async {
     this.box = await Hive.openBox(BOX_NAME);
@@ -212,7 +216,7 @@ class CachedData extends LocalData {
   }
 
   /// Check for update and only update when game updates, app updates or it has been a week
-  Future<bool> update(Preference pref, {bool force = false}) async {
+  Future<bool> update({bool force = false}) async {
     // Open the box again if it is closed
     this.box = await Hive.openBox(BOX_NAME);
     // Load everything from storage, it is fine because if there are new data, it will be replaced

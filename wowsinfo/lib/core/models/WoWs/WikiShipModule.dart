@@ -22,15 +22,15 @@ class WikiShipModule {
   Concealment concealment;
   Armour armour;
   DiveBomber diveBomber;
+  final CachedData _cached;
 
   // Make sure the second value is DOUBLE
   Map<String, int> getParameter(BuildContext context) {
     final lang = AppLocalization.of(context);
-    final cached = CachedData.shared;
     return {
       lang.localised('warship_info_survivability'): armour?.total,
-      cached.shipModule.artillery: weaponry?.artillery,
-      cached.shipModule.torpedo: weaponry?.torpedo,
+      _cached.shipModule.artillery: weaponry?.artillery,
+      _cached.shipModule.torpedo: weaponry?.torpedo,
       lang.localised('warship_info_antiaircraft'): weaponry?.antiAircraft,
       lang.localised('warship_info_maneuverabilty'): mobility?.total,
       lang.localised('warship_info_aircraft'): weaponry?.aircraft,
@@ -38,7 +38,7 @@ class WikiShipModule {
     };
   }
 
-  WikiShipModule(Map<String, dynamic> json) {
+  WikiShipModule(Map<String, dynamic> json, this._cached) {
     if (json['engine'] != null) this.engine = Engine(json['engine']);
     if (json['torpedo_bomber'] != null) this.torpedoBomber = TorpedoBomber(json['torpedo_bomber']);
     if (json['anti_aircraft'] != null) this.antiAircraft = AntiAircraft(json['anti_aircraft']);

@@ -34,8 +34,7 @@ class PlayerChartData {
   SplayTreeMap<String, int> tier = SplayTreeMap() ;
   List<Series<ChartValue, String>> get tierData => _convert('tier', mapData: tier);
 
-  PlayerChartData(this.info) {
-    final cached = CachedData.shared;
+  PlayerChartData(this.info, CachedData cached) {
     info.ships.forEach((curr) {
       final ship = cached.getShip(curr.shipId);
       // Ignore removed ships

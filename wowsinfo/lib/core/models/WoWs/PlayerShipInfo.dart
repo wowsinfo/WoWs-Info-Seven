@@ -12,15 +12,14 @@ class PlayerShipInfo {
   bool get isSingleShip => ships.length == 1;
   PersonalRating overallRating = PersonalRating();
   bool canSort = true;
-  final _cached = CachedData.shared;
 
-  PlayerShipInfo(Map<String, dynamic> data) {
+  PlayerShipInfo(Map<String, dynamic> data, CachedData cached) {
     final List json = data.values.first;
     if (json != null) {
       json.forEach((element) {
-        final curr = ShipInfo(element);
+        final curr = ShipInfo(element, cached);
         // getShip only works for removed ships as well
-        if (_cached.getShip(curr.shipId) != null) {
+        if (cached.getShip(curr.shipId) != null) {
           ships.add(curr);
           if (curr.rating.hasRating) overallRating.add(curr.rating);
         }
@@ -32,12 +31,12 @@ class PlayerShipInfo {
   }
 
   /// Convert rank player ship info into a normal ship info
-  PlayerShipInfo.fromRank(RankPlayerShipInfo rank, String season) {
+  PlayerShipInfo.fromRank(RankPlayerShipInfo rank, String season, CachedData cached) {
     canSort = false;
     rank.getShipsFor(season: season).forEach((element) {
       if (element.played) {
-        final curr = ShipInfo.fromSeason(element);
-        if (_cached.getShip(curr.shipId) != null) {
+        final curr = ShipInfo.fromSeason(element, cached);
+        if (cached.getShip(curr.shipId) != null) {
           ships.add(curr);
           if (curr.rating.hasRating) overallRating.add(curr.rating);
         }
@@ -62,14 +61,15 @@ class ShipInfo {
   PersonalRating rating;
   /// Rank has different data available
   bool isRank = false;
+  final CachedData _cached;
 
-  Warship get ship => CachedData.shared.getShip(shipId);
+  Warship get ship => _cached.getShip(shipId);
 
   String get totalBattleString => '$battle';
   String get lastBattleDate => lastBattleTime?.dateString ?? '???';
   String get distanceString => '${distance ?? '???'} km';
 
-  ShipInfo(Map<String, dynamic> json) {
+  ShipInfo(Map<String, dynamic> json, this._cached) {
     if (json['pvp'] != null) this.pvp = PvP(json['pvp']);
     this.lastBattleTime = WoWsDate(json['last_battle_time']);
     this.accountId = json['account_id'];
@@ -78,15 +78,15 @@ class ShipInfo {
     this.battle = json['battles'];
     this.shipId = json['ship_id'];
     this.private = json['private'];
-    this.rating = PersonalRating.fromShip(this);
+    this.rating = PersonalRating.fromShip(this, _cached);
   }
 
   /// Data is all stored in season
-  ShipInfo.fromSeason(Season season) {
+  ShipInfo.fromSeason(Season season, this._cached) {
     isRank = true;
     pvp = season.rankSolo;
     shipId = season.shipId;
-    rating = PersonalRating.fromShip(this);
+    rating = PersonalRating.fromShip(this, _cached);
     battle = season.rankSolo.battle;
   }
 

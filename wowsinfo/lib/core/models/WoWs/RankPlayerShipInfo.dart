@@ -1,5 +1,6 @@
 import 'package:wowsinfo/core/models/WoWs/PlayerShipInfo.dart';
 import 'package:wowsinfo/core/extensions/NumberExtension.dart';
+import 'package:wowsinfo/core/providers/CachedData.dart';
 
 import 'PvP.dart';
 
@@ -12,10 +13,10 @@ class RankPlayerShipInfo {
       .toList(growable: false);
   }
 
-  RankPlayerShipInfo(Map<String, dynamic> data) {
+  RankPlayerShipInfo(Map<String, dynamic> data, CachedData cached) {
     final json = data.values.first;
     if (json != null) {
-      json.forEach((item) => ships.add(SeasonShipInfo(item)));
+      json.forEach((item) => ships.add(SeasonShipInfo(item, cached)));
     }
   }
 }
@@ -31,9 +32,9 @@ class SeasonShipInfo {
   /// Get stats for a certain season
   RankPvP getPvP(String key) => season[key].rankSolo;
 
-  SeasonShipInfo(json) {
+  SeasonShipInfo(json, CachedData cached) {
     this.shipId = json['ship_id'];
-    this.season = (json['seasons'] as Map).map((a, b) => MapEntry(a, Season(b)..shipId = shipId));
+    this.season = (json['seasons'] as Map).map((a, b) => MapEntry(a, Season(b, cached)..shipId = shipId));
     this.accountId = json['account_id'];
   }
 }
@@ -46,11 +47,11 @@ class Season {
   int shipId;
   ShipInfo shipInfo;
 
-  Season(json) {
+  Season(json, CachedData cached) {
     if (json['rank_solo'] != null) this.rankSolo = PvP(json['rank_solo']);
     this.rankDiv2 = json['rank_div2'];
     this.rankDiv3 = json['rank_div3'];
-    this.shipInfo = ShipInfo(json);
+    this.shipInfo = ShipInfo(json, cached);
   }
 
   bool get played => rankSolo != null;

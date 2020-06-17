@@ -35,8 +35,9 @@ class PersonalRating {
     Colors.purple, Colors.deepPurple
   ];
 
-  PersonalRating.fromShip(ShipInfo ship) {
-    final AverageStats prData = CachedData.shared.getShipStats(ship.shipId.toString());
+  PersonalRating();
+  PersonalRating.fromShip(ShipInfo ship, CachedData cached) {
+    final AverageStats prData = cached.getShipStats(ship.shipId.toString());
     final pvp = ship.pvp;
     if (prData != null && pvp != null) {
       battle = pvp.battle;

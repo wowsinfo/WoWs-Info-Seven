@@ -1,3 +1,4 @@
+import 'package:wowsinfo/core/models/Wiki/WikiEncyclopedia.dart';
 import 'package:wowsinfo/core/providers/CachedData.dart';
 
 import 'WikiShipModule.dart';
@@ -29,20 +30,20 @@ class WikiShipInfo {
   bool get hasNextShip => (nextShip?.ships?.length ?? 0) > 0;
   Iterable<int> get nextShipIds => nextShip?.ships?.keys?.map((e) => int.parse(e)) ?? [];
 
-  WikiShipInfo(Map<String, dynamic> data) {
+  WikiShipInfo(Map<String, dynamic> data, CachedData cached) {
     final json = data.values.first;
     if (json != null) {
       this.description = json['description'];
       this.priceGold = json['price_gold'];
       this.shipIdStr = json['ship_id_str'];
       this.hasDemoProfile = json['has_demo_profile'];
-      if (json['modules'] != null) this.module = Module(json['modules']);
+      if (json['modules'] != null) this.module = Module(json['modules'], cached);
       if (json['modules_tree'] != null) this.modulesTree = ModulesTree(json['modules_tree']);
       this.nation = json['nation'];
       this.isPremium = json['is_premium'];
       this.shipId = json['ship_id'];
       this.priceCredit = json['price_credit'];
-      if (json['default_profile'] != null) this.defaultProfile = WikiShipModule(json['default_profile']);
+      if (json['default_profile'] != null) this.defaultProfile = WikiShipModule(json['default_profile'], cached);
       this.upgrade = (json['upgrades'] ?? []).cast<int>();
       this.tier = json['tier'];
       if (json['next_ships'] != null) this.nextShip = NextShip(json['next_ships']);
@@ -65,7 +66,7 @@ class Module {
   List<int> fireControl;
   List<int> flightControl;
   List<int> diveBomber;
-  final _module = CachedData.shared.shipModule;
+  ShipModule _module;
 
   // at least two items in it
   bool get hasOtherModules => moduleMap?.values?.any((element) => element.length > 1) ?? false;
@@ -81,7 +82,8 @@ class Module {
     _module.diveBomber: diveBomber,
   };
 
-  Module(Map<String, dynamic> json) {
+  Module(Map<String, dynamic> json, CachedData cached) {
+    this._module = cached.shipModule;
     this.engine = (json['engine'] ?? []).cast<int>();
     this.torpedoBomber = (json['torpedo_bomber'] ?? []).cast<int>();
     this.fighter = (json['fighter'] ?? []).cast<int>();
