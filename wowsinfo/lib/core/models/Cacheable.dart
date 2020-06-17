@@ -1,4 +1,4 @@
-import 'package:wowsinfo/core/data/CachedData.dart';
+import 'package:wowsinfo/core/providers/CachedData.dart';
 import 'package:wowsinfo/core/models/APIModel.dart';
 
 /// The parent of all Cacheable models including GitHub ones

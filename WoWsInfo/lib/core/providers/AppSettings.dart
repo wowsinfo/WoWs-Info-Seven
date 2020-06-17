@@ -2,12 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:wowsinfo/core/data/LocalData.dart';
+import 'package:wowsinfo/core/providers/LocalData.dart';
 import 'package:wowsinfo/core/others/Utils.dart';
 
-
-/// it saves locale, theme colour and app brightness
-class AppSettings extends LocalData with ChangeNotifier {
+/// This includes app locale, theme colour and brightness (light, dark or system)
+class GlobalAppSettings extends LocalData with ChangeNotifier {
   /// All material colour
   static const THEME_COLOUR_LIST = [
     Colors.red,

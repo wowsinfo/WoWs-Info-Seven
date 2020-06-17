@@ -14,7 +14,7 @@ class WelcomeWidget extends StatelessWidget {
       body: Center(
         child: FlatButton(
           onPressed: () {
-            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (c) => InitialPage()));
+            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (c) => AppLoadingPage()));
           }, 
           child: Text('Initial')
         ),

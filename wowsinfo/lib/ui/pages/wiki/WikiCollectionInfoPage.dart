@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wowsinfo/core/data/CachedData.dart';
+import 'package:wowsinfo/core/providers/CachedData.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiCollectionItem.dart';
 import 'package:wowsinfo/core/others/Utils.dart';
 import 'package:wowsinfo/ui/widgets/wiki/WikiItemCell.dart';

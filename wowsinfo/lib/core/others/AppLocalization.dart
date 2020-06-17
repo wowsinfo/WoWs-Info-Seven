@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 /// It manages localization, mainly from https://www.youtube.com/watch?v=lDfbbTvq4qM
 class AppLocalization {
   /// A list of supported locales
-  static final List<Locale> supportedLocales = [
+  static const List<Locale> supportedLocales = [
     // English
     const Locale('en'),
     // Japanese
@@ -19,8 +19,8 @@ class AppLocalization {
   ];
 
   /// A list of supported locale string (only locales but script code)
-  static final List<String> supportedLocaleStrings = ['en', 'ja', 'zh'];
-  static final delegate = _AppLocalizationDelegate();
+  static const List<String> supportedLocaleStrings = ['en', 'ja', 'zh'];
+  static const delegate = _AppLocalizationDelegate();
 
   AppLocalization(this.locale);
 
@@ -30,14 +30,12 @@ class AppLocalization {
   String localised(String key) => _strings[key];
 
   /// Load the correct JSON file from disk
-  Future<bool> load() async {
+  Future<void> load() async {
     final jsonPath = 'assets/locales/localization_${getLocalFileName()}.json';
     final jsonString = await rootBundle.loadString(jsonPath);
     Map<String, dynamic> jsonMap = json.decode(jsonString);
     // Convert dynamic to String
     _strings = jsonMap.map((key, value) => MapEntry(key, value.toString()));
-
-    return true;
   }
 
   /// Access this class anywhere

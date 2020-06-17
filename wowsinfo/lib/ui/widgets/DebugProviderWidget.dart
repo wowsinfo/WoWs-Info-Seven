@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wowsinfo/core/data/AppSettings.dart';
+import 'package:wowsinfo/core/providers/AppSettings.dart';
 
 /// DebugProviderWidget class
 class DebugProviderWidget extends StatelessWidget {
@@ -10,7 +10,7 @@ class DebugProviderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final app = Provider.of<AppSettings>(context);
+    final app = Provider.of<GlobalAppSettings>(context);
     return Center(
       child: SingleChildScrollView(
         child: Column(

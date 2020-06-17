@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:wowsinfo/core/data/CachedData.dart';
+import 'package:wowsinfo/core/providers/CachedData.dart';
 import 'package:wowsinfo/core/models/UI/RecordValue.dart';
 import 'package:wowsinfo/core/models/WoWs/PvP.dart';
 import 'package:wowsinfo/core/others/Utils.dart';

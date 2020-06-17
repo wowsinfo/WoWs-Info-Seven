@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:wowsinfo/core/data/AppSettings.dart';
-import 'package:wowsinfo/core/data/CachedData.dart';
-import 'package:wowsinfo/core/data/Constant.dart';
-import 'package:wowsinfo/core/data/Preference.dart';
+import 'package:wowsinfo/core/providers/AppSettings.dart';
+import 'package:wowsinfo/core/providers/CachedData.dart';
+import 'package:wowsinfo/core/providers/Constant.dart';
+import 'package:wowsinfo/core/providers/Preference.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
 import 'package:wowsinfo/ui/pages/BottomNavigationPage.dart';
 import 'package:wowsinfo/ui/widgets/PlatformLoadingIndiactor.dart';
@@ -13,14 +13,14 @@ import 'package:wowsinfo/ui/widgets/PlatformLoadingIndiactor.dart';
 /// InitialPage class
 /// - It shows a full screen overlay
 /// - Maybe display some messages as well
-class InitialPage extends StatefulWidget {
-  InitialPage({Key key}) : super(key: key);
+class AppLoadingPage extends StatefulWidget {
+  AppLoadingPage({Key key}) : super(key: key);
 
   @override
-  _InitialPageState createState() => _InitialPageState();
+  _AppLoadingPageState createState() => _AppLoadingPageState();
 }
 
-class _InitialPageState extends State<InitialPage> {
+class _AppLoadingPageState extends State<AppLoadingPage> {
   final cached = CachedData.shared;
   bool showLogo = false;
 
@@ -62,7 +62,7 @@ class _InitialPageState extends State<InitialPage> {
           children: <Widget>[
             // This app bar will update the status bar color
             AppBar(brightness: Brightness.dark),
-            Consumer<AppSettings>(
+            Consumer<GlobalAppSettings>(
               builder: (context, settings, child) => Container(
                 color: settings.isDarkMode() ? Colors.grey[900] : Colors.blue,
                 child: Center(

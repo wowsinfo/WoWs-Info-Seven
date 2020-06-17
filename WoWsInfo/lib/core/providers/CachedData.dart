@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:hive/hive.dart';
-import 'package:wowsinfo/core/data/Constant.dart';
-import 'package:wowsinfo/core/data/LocalData.dart';
-import 'package:wowsinfo/core/data/Preference.dart';
+import 'package:wowsinfo/core/providers/Constant.dart';
+import 'package:wowsinfo/core/providers/LocalData.dart';
+import 'package:wowsinfo/core/providers/Preference.dart';
 import 'package:wowsinfo/core/models/Cacheable.dart';
 import 'package:wowsinfo/core/models/Clan/ClanGlossary.dart';
 import 'package:wowsinfo/core/models/GitHub/PRData.dart';

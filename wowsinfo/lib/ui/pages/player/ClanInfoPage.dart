@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:wowsinfo/core/data/CachedData.dart';
-import 'package:wowsinfo/core/data/Preference.dart';
+import 'package:wowsinfo/core/providers/CachedData.dart';
+import 'package:wowsinfo/core/providers/Preference.dart';
 import 'package:wowsinfo/core/models/UI/GameServer.dart';
 import 'package:wowsinfo/core/models/User/Clan.dart';
 import 'package:wowsinfo/core/models/WoWs/ClanInfo.dart';

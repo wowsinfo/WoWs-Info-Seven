@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wowsinfo/core/data/CachedData.dart';
+import 'package:wowsinfo/core/providers/CachedData.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart' as Wiki;
 import 'package:wowsinfo/ui/pages/wiki/WikiWarShipInfoPage.dart';
 

@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:wowsinfo/core/data/Constant.dart';
-import 'package:wowsinfo/core/data/LocalData.dart';
+import 'package:wowsinfo/core/providers/Constant.dart';
+import 'package:wowsinfo/core/providers/LocalData.dart';
 import 'package:wowsinfo/core/models/UI/GameServer.dart';
 import 'package:wowsinfo/core/models/User/ContactList.dart';
 import 'package:wowsinfo/core/models/User/Player.dart';

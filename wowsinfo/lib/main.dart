@@ -4,49 +4,28 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:wowsinfo/core/data/AppSettings.dart';
-import 'package:wowsinfo/core/data/CachedData.dart';
-import 'package:wowsinfo/core/data/Preference.dart';
+import 'package:wowsinfo/core/providers/AppSettings.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
 import 'package:wowsinfo/ui/pages/InitialPage.dart';
-import 'package:wowsinfo/ui/pages/setup/IntroPage.dart';
 
 void main() async {
-  // Run a loading screen here
-  // runApp(Theme(
-  //   data: ThemeData(
-  //     brightness: Brightness.dark,
-  //   ),
-  //   child: Container(
-  //     color: Colors.blue,
-  //   )
-  // ));
-
-  /// Setup local data
+  // Setup HiveDB
   await Hive.initFlutter();
-  // Init preference box 
-  final pref = Preference()..init();
   // Create and setup AppSetting
-  final settings = AppSettings()..init();
-  // Init cached data
-  final cache = CachedData()..init();
-
-  runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider<AppSettings>.value(value: settings),
-      ChangeNotifierProvider<Preference>.value(value: pref),
-      Provider<CachedData>.value(value: cache),
-    ],
-    child: MyApp(),
-  ));
+  final settings = GlobalAppSettings()..init();
+  // Start app
+  runApp(WoWsInfoApp(settings));
 }
 
-class MyApp extends StatelessWidget {
+class WoWsInfoApp extends StatelessWidget {
+  final GlobalAppSettings settings;
+  const WoWsInfoApp(this.settings, {Key key});
+
   @override
   Widget build(BuildContext context) {
-    return Consumer<AppSettings>(
+    return Consumer<GlobalAppSettings>(
       builder: (context, wowsinfo, child) => MaterialApp(
-        localizationsDelegates: [
+        localizationsDelegates: const [
           AppLocalization.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
@@ -71,18 +50,8 @@ class MyApp extends StatelessWidget {
         darkTheme: wowsinfo.darkTheme,
         themeMode: wowsinfo.themeMode,
         // This should depend on whether first_launch is true or not
-        home: buildHome()
+        home: AppLoadingPage(),
       ),
-    );
-  }
-
-  /// Setup should be the home
-  Widget buildHome() {
-    return Consumer<Preference>(
-      builder: (context, pref, child) {
-        if (pref.firstLaunch) return IntroPage();
-        return InitialPage();
-      }
     );
   }
 }

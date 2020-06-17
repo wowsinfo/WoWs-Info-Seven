@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wowsinfo/core/data/CachedData.dart';
+import 'package:wowsinfo/core/providers/CachedData.dart';
 import 'package:wowsinfo/core/models/UI/GameServer.dart';
 import 'package:wowsinfo/core/parsers/API/WikiEncyclopediaParser.dart';
 import 'package:wowsinfo/ui/pages/InitialPage.dart';
@@ -64,7 +64,7 @@ class _InitialSetupWidgetState extends State<InitialSetupWidget> {
         padding: const EdgeInsets.only(bottom: 16),
         child: FloatingActionButton(
           onPressed: () {
-            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (c) => InitialPage()));
+            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (c) => AppLoadingPage()));
           },
           child: Icon(Icons.done),
         ),

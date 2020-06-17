@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
-import 'package:wowsinfo/core/data/CachedData.dart';
-import 'package:wowsinfo/core/data/Preference.dart';
+import 'package:wowsinfo/core/providers/CachedData.dart';
+import 'package:wowsinfo/core/providers/Preference.dart';
 import 'package:wowsinfo/core/models/GitHub/Plugin.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart' as Wiki;
 import 'package:wowsinfo/core/models/WoWs/WikiShipInfo.dart';

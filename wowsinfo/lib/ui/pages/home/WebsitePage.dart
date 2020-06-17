@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wowsinfo/core/data/Preference.dart';
+import 'package:wowsinfo/core/providers/Preference.dart';
 import 'package:wowsinfo/core/models/UI/WebsiteItem.dart';
 import 'package:wowsinfo/core/models/UI/WebsiteSection.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';

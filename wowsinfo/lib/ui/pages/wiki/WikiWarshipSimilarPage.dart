@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:charts_flutter/flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:wowsinfo/core/data/CachedData.dart';
+import 'package:wowsinfo/core/providers/CachedData.dart';
 import 'package:wowsinfo/core/models/GitHub/PRData.dart';
 import 'package:wowsinfo/core/models/UI/ChartValue.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart';
