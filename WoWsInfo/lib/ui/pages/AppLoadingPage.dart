@@ -33,9 +33,8 @@ class _AppLoadingPageState extends State<AppLoadingPage> {
       cached.close();
 
       Future.delayed(Duration(milliseconds: 2000)).then((_) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (_) => BottomNavigationPage(), fullscreenDialog: true)
-        );
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (_) => BottomNavigationPage(), fullscreenDialog: true));
       });
 
       // Update last update time
@@ -53,9 +52,7 @@ class _AppLoadingPageState extends State<AppLoadingPage> {
       data: ThemeData(
         accentColor: Colors.white,
         brightness: Brightness.dark,
-        textTheme: TextTheme(
-          subtitle1: TextStyle(color: Colors.white)
-        ),
+        textTheme: TextTheme(subtitle1: TextStyle(color: Colors.white)),
       ),
       child: Builder(builder: (c) {
         return Stack(
@@ -73,7 +70,8 @@ class _AppLoadingPageState extends State<AppLoadingPage> {
                         duration: Duration(milliseconds: 1000),
                         switchInCurve: Curves.linearToEaseOut,
                         switchOutCurve: Curves.linearToEaseOut,
-                        transitionBuilder: (w, a) => SizeTransition(sizeFactor: a, child: w),
+                        transitionBuilder: (w, a) =>
+                            SizeTransition(sizeFactor: a, child: w),
                         child: buildLogo(c),
                       ),
                       PlatformLoadingIndiactor(),
@@ -97,10 +95,8 @@ class _AppLoadingPageState extends State<AppLoadingPage> {
             Image(image: AssetImage('assets/images/logo_white.png')),
             Padding(
               padding: const EdgeInsets.all(16),
-              child: Text(
-                AppLocalization.of(c).localised('app_name'), 
-                style: Theme.of(c).textTheme.subtitle1
-              ),
+              child: Text(AppLocalization.of(c).localised('app_name'),
+                  style: Theme.of(c).textTheme.subtitle1),
             )
           ],
         ),

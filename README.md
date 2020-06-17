@@ -2,6 +2,8 @@
 <img src="https://raw.githubusercontent.com/HenryQuan/WoWs-Info-Origin/master/WoWsInfo/ios/WoWsInfo/Images.xcassets/AppIcon.appiconset/_AppIcon_1024x1024.png" width="128px" height="128px" />
 <h1>WoWs Info Re:2016</h1>
 <img alt="GitHub All Releases" src="https://img.shields.io/github/downloads/henryquan/WoWs-Info-Future/total?style=plastic">
+<a href="https://github.com/HenryQuan/WoWs-Info-Future/blob/master/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/henryquan/wows-info-future"></a>
+<img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/henryquan/wows-info-future">
 
 [中文](https://github.com/HenryQuan/WoWs-Info-Re/blob/master/README_zh.md) | [English](https://github.com/HenryQuan/WoWs-Info-Re/blob/master/README.md) | [日本語](https://github.com/HenryQuan/WoWs-Info-Re/blob/master/README_ja.md)
 
