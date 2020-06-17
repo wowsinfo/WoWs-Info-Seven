@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:wowsinfo/core/providers/CachedData.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiCommanderSkill.dart';
 import 'package:wowsinfo/ui/widgets/wiki/WikiItemCell.dart';
@@ -18,8 +19,8 @@ class WikiCommanderSkillPage extends StatefulWidget {
 }
 
 class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
-  final cached = CachedData.shared;
   bool horizontalLock = false;
+
   /// Maximum 19 points currently
   int points = 19;
   List<String> selectedSkills = [];
@@ -30,6 +31,7 @@ class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
   @override
   void initState() {
     super.initState();
+    final cached = Provider.of<CachedData>(context, listen: false);
     this.skills = cached.sortedCommanderSkill.toList(growable: false);
     if (widget.simulation) {
       Future.delayed(Duration(milliseconds: 500)).then((value) {
@@ -55,49 +57,52 @@ class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
           widget.simulation ? buildReset() : buildRotationLock(),
         ],
       ),
-      bottomNavigationBar: widget.simulation ? null : buildBottomAppBar(context),
+      bottomNavigationBar:
+          widget.simulation ? null : buildBottomAppBar(context),
       body: SafeArea(
-        child: Center(
-          child: Table(
-            defaultColumnWidth: FixedColumnWidth(maxWidth),
-            // There are only 4 levels now
-            children: [1,2,3,4].map((level) {
-              final tier = skills.where((e) => e.tier == level);
-              return TableRow(
-                children: tier.map((e) {
-                  final curr = e;
-                  final selected = selectedSkills.contains(e.name);
-                  return FittedBox(
-                    child: Stack(
-                      children: <Widget>[
-                        WikiItemCell(
-                          item: curr,
-                          onTap: () => this.onTap(curr, e.name),
+          child: Center(
+        child: Table(
+          defaultColumnWidth: FixedColumnWidth(maxWidth),
+          // There are only 4 levels now
+          children: [1, 2, 3, 4].map((level) {
+            final tier = skills.where((e) => e.tier == level);
+            return TableRow(
+              children: tier.map((e) {
+                final curr = e;
+                final selected = selectedSkills.contains(e.name);
+                return FittedBox(
+                  child: Stack(
+                    children: <Widget>[
+                      WikiItemCell(
+                        item: curr,
+                        onTap: () => this.onTap(curr, e.name),
+                      ),
+                      Positioned.fill(
+                        child: AnimatedSwitcher(
+                          duration: Duration(milliseconds: 200),
+                          transitionBuilder: (w, a) =>
+                              ScaleTransition(scale: a, child: w),
+                          child: selected
+                              ? Icon(Icons.close, size: 72, color: Colors.black)
+                              : SizedBox.shrink(),
                         ),
-                        Positioned.fill(
-                          child: AnimatedSwitcher(
-                            duration: Duration(milliseconds: 200),
-                            transitionBuilder: (w, a) => ScaleTransition(scale: a, child: w),
-                            child: selected 
-                            ? Icon(Icons.close, size: 72, color: Colors.black)
-                            : SizedBox.shrink(),
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                }).toList(growable: false),
-              );
-            }).toList(growable: false),
-          ),
-        )
-      ),
+                      ),
+                    ],
+                  ),
+                );
+              }).toList(growable: false),
+            );
+          }).toList(growable: false),
+        ),
+      )),
     );
   }
 
   Text buildTitle(BuildContext context) {
-    if (widget.simulation) return Text(points.toString());
-    else return Text('Commander Skill');
+    if (widget.simulation)
+      return Text(points.toString());
+    else
+      return Text('Commander Skill');
   }
 
   /// Decide who to do when the skill icon is pressed
@@ -130,14 +135,17 @@ class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
       child: RaisedButton(
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         child: Text('Simulation'),
-        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (c) => WikiCommanderSkillPage(simulation: true))),
+        onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (c) => WikiCommanderSkillPage(simulation: true))),
       ),
     );
   }
 
   IconButton buildReset() {
     return IconButton(
-      icon: Icon(Icons.refresh), 
+      icon: Icon(Icons.refresh),
       onPressed: () {
         setState(() {
           points = 19;
@@ -150,12 +158,12 @@ class _WikiCommanderSkillPageState extends State<WikiCommanderSkillPage> {
 
   IconButton buildRotationLock() {
     return IconButton(
-      icon: Icon(Icons.screen_rotation), 
+      icon: Icon(Icons.screen_rotation),
       onPressed: () {
         if (!horizontalLock) {
           setLandscape();
           this.horizontalLock = true;
-        } else {          
+        } else {
           setAllRotation();
           this.horizontalLock = false;
         }

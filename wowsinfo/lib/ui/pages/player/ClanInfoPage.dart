@@ -26,15 +26,15 @@ class ClanInfoPage extends StatefulWidget {
 
 class _ClanInfoPageState extends State<ClanInfoPage> {
   Preference pref;
-  final cached = CachedData.shared;
   ClanInfo info;
-  
+
   @override
   void initState() {
     super.initState();
     this.pref = Provider.of<Preference>(context, listen: false);
     // Saved server should be used here, if server is passed in, use it
-    final parser = ClanInfoParser(widget.server ?? widget.clan.server, widget.clan.clanId);
+    final parser =
+        ClanInfoParser(widget.server ?? widget.clan.server, widget.clan.clanId);
     parser.download().then((json) {
       final info = parser.parse(json);
       if (info != null) {
@@ -48,9 +48,7 @@ class _ClanInfoPageState extends State<ClanInfoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.clan.clanIdString)
-      ),
+      appBar: AppBar(title: Text(widget.clan.clanIdString)),
       body: SafeArea(
         child: AnimatedSwitcher(
           duration: Duration(milliseconds: 500),
@@ -76,7 +74,8 @@ class _ClanInfoPageState extends State<ClanInfoPage> {
             child: Column(
               children: [
                 Text(info.tag, style: theme.headline2),
-                Text(info.name, style: theme.headline6, textAlign: TextAlign.center),
+                Text(info.name,
+                    style: theme.headline6, textAlign: TextAlign.center),
                 WrapBox(
                   padding: const EdgeInsets.only(top: 8),
                   width: width,
@@ -99,11 +98,15 @@ class _ClanInfoPageState extends State<ClanInfoPage> {
                     ),
                     TextWithCaption(
                       title: 'OLD TAG',
-                      valueWidget: info.oldTag != null ? Text(info.oldTag) : buildCrossIcon(),
+                      valueWidget: info.oldTag != null
+                          ? Text(info.oldTag)
+                          : buildCrossIcon(),
                     ),
                     TextWithCaption(
                       title: 'OLD NAME',
-                      valueWidget: info.oldName != null ? Text(info.oldName) : buildCrossIcon(),
+                      valueWidget: info.oldName != null
+                          ? Text(info.oldName)
+                          : buildCrossIcon(),
                     ),
                   ],
                 ),
@@ -114,9 +117,9 @@ class _ClanInfoPageState extends State<ClanInfoPage> {
                 FractionallySizedBox(
                   widthFactor: 1,
                   child: RaisedButton(
-                    child: Text('More information on WoWs Number'),
-                    onPressed: () => launch(pref.gameServer.getClanNumberWebsite(info))
-                  ),
+                      child: Text('More information on WoWs Number'),
+                      onPressed: () =>
+                          launch(pref.gameServer.getClanNumberWebsite(info))),
                 ),
                 FractionallySizedBox(
                   widthFactor: 1,
@@ -138,21 +141,24 @@ class _ClanInfoPageState extends State<ClanInfoPage> {
   }
 
   Icon buildIcon(bool yes) {
-    return yes
-      ? buildCheckIcon()
-      : buildCrossIcon();
+    return yes ? buildCheckIcon() : buildCrossIcon();
   }
 
   Icon buildCheckIcon() => Icon(Icons.check, color: Colors.green);
   Icon buildCrossIcon() => Icon(Icons.close, color: Colors.red);
 
   Column buildMemberList() {
+    final cached = Provider.of<CachedData>(context, listen: false);
+
     return Column(
       children: info.sortedMembers.map((e) {
         final joined = Text(e.joinedDate);
         final Function gotoPlayer = () {
           final pref = Provider.of<Preference>(context, listen: false);
-          Navigator.push(context, MaterialPageRoute(builder: (c) => PlayerInfoPage(player: e.toPlayer(pref))));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (c) => PlayerInfoPage(player: e.toPlayer(pref))));
         };
 
         if (e.hasRole) {

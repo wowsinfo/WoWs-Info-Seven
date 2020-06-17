@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:wowsinfo/core/providers/CachedData.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart' as Wiki;
 import 'package:wowsinfo/ui/pages/wiki/WikiWarShipInfoPage.dart';
 
@@ -10,7 +9,6 @@ class WikiWarshipCell extends StatelessWidget {
   final bool hero;
   final Widget bottom;
   final void Function() onTap;
-  final cached = CachedData.shared;
 
   WikiWarshipCell({
     Key key, 

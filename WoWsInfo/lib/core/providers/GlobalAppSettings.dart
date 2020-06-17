@@ -79,6 +79,16 @@ class GlobalAppSettings extends LocalData with ChangeNotifier {
   /// Functions
   ///
 
+  GlobalAppSettings({testing = false}) {
+    if (testing) {
+      // 5 is the index of blue
+      _color = THEME_COLOUR_LIST[5];
+      // 2 is the index of following system
+      _brightness = THEME_BRIGHTNESS_MODE[2];
+      this._generateTheme();
+    }
+  }
+
   /// Update theme if brightness or colour changed
   _generateTheme() {
     _theme = ThemeData(

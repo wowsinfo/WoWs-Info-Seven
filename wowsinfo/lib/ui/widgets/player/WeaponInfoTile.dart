@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:wowsinfo/core/providers/CachedData.dart';
 import 'package:wowsinfo/core/models/UI/WeaponValue.dart';
 import 'package:wowsinfo/core/models/WoWs/RankPlayerShipInfo.dart';
@@ -10,14 +10,15 @@ import 'package:wowsinfo/ui/widgets/wiki/WikiWarshipCell.dart';
 import 'package:wowsinfo/core/extensions/NumberExtension.dart';
 
 class WeaponInfoTile extends StatelessWidget {
-  final cached = CachedData.shared;
   final RankPvP pvp;
   final bool shipMode;
-  WeaponInfoTile({Key key, @required this.pvp, this.shipMode = false}) : super(key: key);
+  WeaponInfoTile({Key key, @required this.pvp, this.shipMode = false})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     if (pvp == null) return SizedBox.shrink();
+    final cached = Provider.of<CachedData>(context, listen: false);
     final width = Utils.of(context).getItemWidth(300, maxCount: 5, margin: 30);
     return WrapBox(
       width: width,
@@ -32,24 +33,25 @@ class WeaponInfoTile extends StatelessWidget {
         WeaponValue(pvp.ramming, 'Ramming'),
         // It is kinda crazy here but for ship mode, it needs to have at least 1 frag
         // For player mode, it needs to make sure the ship id is not null
-      ].where((e) => (e.weapon != null) 
-        && (
-          (shipMode && e.hasFrag) 
-          || cached.getShip(e.shipId) != null
-      )).map((e) => Column(
-        children: <Widget>[
-          Text(e.title, style: Theme.of(context).textTheme.headline6),
-          Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                buildWarshipCell(e),
-                Expanded(child: buildValue(e)),
-              ],
-            ),
-          ),
-        ],
-      )).toList(growable: false),
+      ]
+          .where((e) =>
+              (e.weapon != null) &&
+              ((shipMode && e.hasFrag) || cached.getShip(e.shipId) != null))
+          .map((e) => Column(
+                children: <Widget>[
+                  Text(e.title, style: Theme.of(context).textTheme.headline6),
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        buildWarshipCell(e, cached),
+                        Expanded(child: buildValue(e)),
+                      ],
+                    ),
+                  ),
+                ],
+              ))
+          .toList(growable: false),
     );
   }
 
@@ -65,12 +67,11 @@ class WeaponInfoTile extends StatelessWidget {
       ),
     ];
 
-    if (e.hasHitRatio) values.add(
-      TextWithCaption(
+    if (e.hasHitRatio)
+      values.add(TextWithCaption(
         title: 'Hit Ratio',
         value: e.hitRatio.myFixedString(2) + '%',
-      )
-    );
+      ));
 
     if (shipMode) {
       return Row(
@@ -86,7 +87,7 @@ class WeaponInfoTile extends StatelessWidget {
     }
   }
 
-  Widget buildWarshipCell(WeaponValue e) {
+  Widget buildWarshipCell(WeaponValue e, CachedData cached) {
     if (shipMode) return SizedBox.shrink();
     return WikiWarshipCell(
       showDetail: true,

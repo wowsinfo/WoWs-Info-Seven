@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:wowsinfo/core/providers/CachedData.dart';
 import 'package:wowsinfo/core/models/GitHub/PRData.dart';
 import 'package:wowsinfo/core/models/WoWs/PvP.dart';
@@ -10,11 +11,12 @@ import 'package:wowsinfo/core/extensions/NumberExtension.dart';
 class ShipAverageStatistics extends StatelessWidget {
   final int shipId;
   final PvP myShip;
-  final cached = CachedData.shared;
-  ShipAverageStatistics({Key key, @required this.shipId, this.myShip}) : super(key: key);
+  ShipAverageStatistics({Key key, @required this.shipId, this.myShip})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final cached = Provider.of<CachedData>(context, listen: false);
     final ship = cached.getShipStats(shipId.toString());
     final lang = AppLocalization.of(context);
     if (ship == null) return SizedBox.shrink();
@@ -51,31 +53,36 @@ class ShipAverageStatistics extends StatelessWidget {
       children: [
         TextWithCaption(
           title: lang.localised('warship_avg_damage'),
-          valueWidget: buildStatistics(ship.averageDamageString, 
-            myShip.avgDamage, ship.averageDamageDealt, (d) => d.myFixedString(0)),
+          valueWidget: buildStatistics(
+              ship.averageDamageString,
+              myShip.avgDamage,
+              ship.averageDamageDealt,
+              (d) => d.myFixedString(0)),
         ),
         TextWithCaption(
           title: lang.localised('warship_avg_winrate'),
-          valueWidget: buildStatistics(ship.winRateString, 
-            myShip.winrate, ship.winRate, (d) => d.myFixedString(1) + '%'),
+          valueWidget: buildStatistics(ship.winRateString, myShip.winrate,
+              ship.winRate, (d) => d.myFixedString(1) + '%'),
         ),
         TextWithCaption(
           title: lang.localised('warship_avg_frag'),
-          valueWidget: buildStatistics(ship.averageFragString, 
-            myShip.avgFrag, ship.averageFrag, (d) => d.myFixedString(2)),
+          valueWidget: buildStatistics(ship.averageFragString, myShip.avgFrag,
+              ship.averageFrag, (d) => d.myFixedString(2)),
         ),
       ],
     );
   }
 
   /// basically a wrapper around diff text
-  Widget buildStatistics(String first, double mine, double expected, String Function(double) formatter) {
+  Widget buildStatistics(String first, double mine, double expected,
+      String Function(double) formatter) {
     return buildDiffText(mine - expected, formatter);
   }
 
   Widget buildDiffText(double value, String Function(double) formatter) {
     if (value > 0) {
-      return Text('+' + formatter(value), style: TextStyle(color: Colors.green));
+      return Text('+' + formatter(value),
+          style: TextStyle(color: Colors.green));
     } else if (value < 0) {
       return Text(formatter(value), style: TextStyle(color: Colors.red));
     } else {

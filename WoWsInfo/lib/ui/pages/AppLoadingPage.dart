@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:wowsinfo/core/providers/AppSettings.dart';
+import 'package:wowsinfo/core/providers/GlobalAppSettings.dart';
 import 'package:wowsinfo/core/providers/CachedData.dart';
 import 'package:wowsinfo/core/providers/Constant.dart';
 import 'package:wowsinfo/core/providers/Preference.dart';

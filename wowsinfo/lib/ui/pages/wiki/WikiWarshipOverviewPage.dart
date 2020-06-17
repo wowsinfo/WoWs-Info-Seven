@@ -1,23 +1,22 @@
 import 'package:charts_flutter/flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:wowsinfo/core/providers/CachedData.dart';
 import 'package:wowsinfo/core/models/UI/ChartValue.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart';
 
 /// WikiWarshipOverviewPage class
 class WikiWarshipOverviewPage extends StatelessWidget {
-  final cached = CachedData.shared;
   WikiWarshipOverviewPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final cached = Provider.of<CachedData>(context, listen: false);
     final overview = WikiWarshipOverview(cached.sortedWarshipList);
     // final lang = AppLocalization.of(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Overview')
-      ),
+      appBar: AppBar(title: Text('Overview')),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
@@ -33,8 +32,7 @@ class WikiWarshipOverviewPage extends StatelessWidget {
                       animate: true,
                       vertical: false,
                       barRendererDecorator: BarLabelDecorator<String>(
-                        labelAnchor: BarLabelAnchor.end
-                      ),
+                          labelAnchor: BarLabelAnchor.end),
                     ),
                   ),
                   SizedBox(
@@ -44,8 +42,7 @@ class WikiWarshipOverviewPage extends StatelessWidget {
                       overview.tierData,
                       animate: true,
                       barRendererDecorator: BarLabelDecorator<String>(
-                        labelAnchor: BarLabelAnchor.end
-                      ),
+                          labelAnchor: BarLabelAnchor.end),
                     ),
                   ),
                   SizedBox(
@@ -56,8 +53,7 @@ class WikiWarshipOverviewPage extends StatelessWidget {
                       animate: true,
                       vertical: false,
                       barRendererDecorator: BarLabelDecorator<String>(
-                        labelAnchor: BarLabelAnchor.end
-                      ),
+                          labelAnchor: BarLabelAnchor.end),
                     ),
                   ),
                   SizedBox(
@@ -68,8 +64,7 @@ class WikiWarshipOverviewPage extends StatelessWidget {
                       animate: true,
                       vertical: false,
                       barRendererDecorator: BarLabelDecorator<String>(
-                        labelAnchor: BarLabelAnchor.end
-                      ),
+                          labelAnchor: BarLabelAnchor.end),
                     ),
                   ),
                 ],
@@ -90,52 +85,66 @@ class WikiWarshipOverview {
 
   Map<String, int> types = {};
   List<Series<ChartValue, String>> get typeData {
-    return [Series<ChartValue, String>(
-      data: types.entries.map((e) => ChartValue(e.key.toString(), e.value)).toList(growable: false),
-      id: 'type',
-      domainFn: (v, _) => v.name,
-      measureFn: (v, _) => v.value,
-      labelAccessorFn: (v, _) => v.value.toString(),
-    )];
+    return [
+      Series<ChartValue, String>(
+        data: types.entries
+            .map((e) => ChartValue(e.key.toString(), e.value))
+            .toList(growable: false),
+        id: 'type',
+        domainFn: (v, _) => v.name,
+        measureFn: (v, _) => v.value,
+        labelAccessorFn: (v, _) => v.value.toString(),
+      )
+    ];
   }
 
   Map<String, int> nations = {};
   List<Series<ChartValue, String>> get nationData {
-    return [Series<ChartValue, String>(
-      data: nations.entries.map((e) => ChartValue(e.key.toString(), e.value)).toList(growable: false),
-      id: 'nation',
-      domainFn: (v, _) => v.name,
-      measureFn: (v, _) => v.value,
-      labelAccessorFn: (v, _) => v.value.toString(),
-    )];
+    return [
+      Series<ChartValue, String>(
+        data: nations.entries
+            .map((e) => ChartValue(e.key.toString(), e.value))
+            .toList(growable: false),
+        id: 'nation',
+        domainFn: (v, _) => v.name,
+        measureFn: (v, _) => v.value,
+        labelAccessorFn: (v, _) => v.value.toString(),
+      )
+    ];
   }
 
   Map<int, int> tiers = {};
   List<Series<ChartValue, String>> get tierData {
-    return [Series<ChartValue, String>(
-      data: tiers.entries.map((e) => ChartValue(e.key.toString(), e.value)).toList(growable: false),
-      id: 'tier',
-      domainFn: (v, _) => v.name,
-      measureFn: (v, _) => v.value,
-      labelAccessorFn: (v, _) => v.value.toString(),
-    )];
+    return [
+      Series<ChartValue, String>(
+        data: tiers.entries
+            .map((e) => ChartValue(e.key.toString(), e.value))
+            .toList(growable: false),
+        id: 'tier',
+        domainFn: (v, _) => v.name,
+        measureFn: (v, _) => v.value,
+        labelAccessorFn: (v, _) => v.value.toString(),
+      )
+    ];
   }
 
   int premium = 0;
   int special = 0;
   List<Series<ChartValue, String>> get overallData {
-    return [Series<ChartValue, String>(
-      data: [
-        ChartValue('Total', total), 
-        ChartValue('Premium', premium), 
-        ChartValue('Special', special),
-        ChartValue('Normal', normal),
-      ],
-      id: 'overall',
-      domainFn: (v, _) => v.name,
-      measureFn: (v, _) => v.value,
-      labelAccessorFn: (v, _) => v.value.toString(),
-    )];
+    return [
+      Series<ChartValue, String>(
+        data: [
+          ChartValue('Total', total),
+          ChartValue('Premium', premium),
+          ChartValue('Special', special),
+          ChartValue('Normal', normal),
+        ],
+        id: 'overall',
+        domainFn: (v, _) => v.name,
+        measureFn: (v, _) => v.value,
+        labelAccessorFn: (v, _) => v.value.toString(),
+      )
+    ];
   }
 
   WikiWarshipOverview(this.ships) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:wowsinfo/core/providers/CachedData.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart';
 import 'package:wowsinfo/core/others/Utils.dart';
@@ -15,7 +16,7 @@ class WikiWarshipPage extends StatefulWidget {
 }
 
 class _WikiWarshipPageState extends State<WikiWarshipPage> with SingleTickerProviderStateMixin {
-  final cached = CachedData.shared;
+  CachedData cached;
   /// Only one nation can be shown at a time
   String nation;
   /// Only one type can be shown if selected, when nation changed type is cleared, select again to cancel
@@ -28,6 +29,8 @@ class _WikiWarshipPageState extends State<WikiWarshipPage> with SingleTickerProv
   @override
   void initState() {
     super.initState();
+    this.cached = Provider.of<CachedData>(context, listen: false);
+
     // Grab a sorted list
     this.sortedList = cached.sortedWarshipList;
     // Select a random nation here

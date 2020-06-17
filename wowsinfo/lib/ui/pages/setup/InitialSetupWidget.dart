@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:wowsinfo/core/providers/CachedData.dart';
 import 'package:wowsinfo/core/models/UI/GameServer.dart';
 import 'package:wowsinfo/core/parsers/API/WikiEncyclopediaParser.dart';
-import 'package:wowsinfo/ui/pages/InitialPage.dart';
+import 'package:wowsinfo/ui/pages/AppLoadingPage.dart';
 import 'package:wowsinfo/ui/widgets/GameServerSelection.dart';
 import 'package:wowsinfo/ui/widgets/PlatformLoadingIndiactor.dart';
 import 'package:wowsinfo/ui/widgets/ServerLanguageSelection.dart';
@@ -16,7 +17,6 @@ class InitialSetupWidget extends StatefulWidget {
 }
 
 class _InitialSetupWidgetState extends State<InitialSetupWidget> {
-  final cached = CachedData.shared;
   bool loading = true;
   bool error = false;
   
@@ -30,6 +30,7 @@ class _InitialSetupWidgetState extends State<InitialSetupWidget> {
       if (e == null) {
         // TODO: handle error here
       } else {
+        final cached = Provider.of<CachedData>(context, listen: false);
         cached.saveEncyclopedia(e);
         setState(() => loading = false);
       }

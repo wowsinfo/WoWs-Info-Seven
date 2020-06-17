@@ -8,20 +8,19 @@ import 'package:wowsinfo/ui/widgets/WrapBox.dart';
 
 /// ServerLanguageSelection class
 class ServerLanguageSelection extends StatefulWidget {
-
   ServerLanguageSelection({Key key}) : super(key: key);
 
   @override
-  _ServerLanguageSelectionState createState() => _ServerLanguageSelectionState();
+  _ServerLanguageSelectionState createState() =>
+      _ServerLanguageSelectionState();
 }
 
 class _ServerLanguageSelectionState extends State<ServerLanguageSelection> {
-  final cached = CachedData.shared;
-
   @override
   Widget build(BuildContext context) {
     final lang = AppLocalization.of(context);
-    
+    final cached = Provider.of<CachedData>(context, listen: false);
+
     return Center(
       child: Column(
         children: [
@@ -38,13 +37,12 @@ class _ServerLanguageSelectionState extends State<ServerLanguageSelection> {
             children: cached.serverLanguage.entries.map((e) {
               return Consumer<Preference>(
                 builder: (context, pref, child) => FlatFilterChip(
-                  label: Text(e.value),
-                  selected: e.key == pref.serverLanguage, 
-                  onSelected: (_) {
-                    setState(() {});
-                    pref.serverLanguage = e.key;
-                  }
-                ),
+                    label: Text(e.value),
+                    selected: e.key == pref.serverLanguage,
+                    onSelected: (_) {
+                      setState(() {});
+                      pref.serverLanguage = e.key;
+                    }),
               );
             }).toList(growable: false),
           ),

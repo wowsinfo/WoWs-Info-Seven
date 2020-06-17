@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wowsinfo/core/providers/CachedData.dart';
 import 'package:wowsinfo/core/providers/Preference.dart';
 import 'package:wowsinfo/core/models/UI/PlayerChartData.dart';
 import 'package:wowsinfo/core/models/User/Player.dart';
@@ -49,7 +48,6 @@ class PlayerInfoPage extends StatefulWidget {
 }
 
 class _PlayerInfoPageState extends State<PlayerInfoPage> {
-  final cached = CachedData.shared;
   bool error = false;
   /// - 0, all
   /// - 1, solo, one player

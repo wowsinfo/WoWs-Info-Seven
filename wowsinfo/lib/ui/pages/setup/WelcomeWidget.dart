@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wowsinfo/ui/pages/InitialPage.dart';
+import 'package:wowsinfo/ui/pages/AppLoadingPage.dart';
 
 /// WelcomeWidget class
 class WelcomeWidget extends StatelessWidget {
