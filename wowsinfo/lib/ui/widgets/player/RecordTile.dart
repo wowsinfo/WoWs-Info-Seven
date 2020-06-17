@@ -4,8 +4,8 @@ import 'package:wowsinfo/core/providers/CachedData.dart';
 import 'package:wowsinfo/core/models/UI/RecordValue.dart';
 import 'package:wowsinfo/core/models/WoWs/PvP.dart';
 import 'package:wowsinfo/core/others/Utils.dart';
-import 'package:wowsinfo/ui/widgets/TextWithCaption.dart';
-import 'package:wowsinfo/ui/widgets/WrapBox.dart';
+import 'package:wowsinfo/ui/widgets/common/TextWithCaption.dart';
+import 'package:wowsinfo/ui/widgets/common/WrapBox.dart';
 import 'package:wowsinfo/ui/widgets/wiki/WikiWarshipCell.dart';
 
 class RecordTile extends StatelessWidget {

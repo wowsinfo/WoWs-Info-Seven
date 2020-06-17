@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:wowsinfo/core/models/UI/GameServer.dart';
 import 'package:wowsinfo/core/providers/Preference.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
-import 'package:wowsinfo/ui/widgets/FlatFilterChip.dart';
-import 'package:wowsinfo/ui/widgets/WrapBox.dart';
+import 'package:wowsinfo/ui/widgets/common/FlatFilterChip.dart';
+import 'package:wowsinfo/ui/widgets/common/WrapBox.dart';
 
 /// GameServerSelection class
 class GameServerSelection extends StatefulWidget {
@@ -15,7 +15,6 @@ class GameServerSelection extends StatefulWidget {
 }
 
 class _GameServerSelectionState extends State<GameServerSelection> {
-  
   @override
   void initState() {
     super.initState();
@@ -49,7 +48,7 @@ class _GameServerSelectionState extends State<GameServerSelection> {
               return Consumer<Preference>(
                 builder: (context, pref, child) => FlatFilterChip(
                   label: Text(e),
-                  selected: pref.gameServer.index == curr, 
+                  selected: pref.gameServer.index == curr,
                   onSelected: (_) {
                     setState(() {});
                     pref.gameServer = GameServer.fromIndex(curr);

@@ -8,9 +8,9 @@ import 'package:wowsinfo/core/models/User/Clan.dart';
 import 'package:wowsinfo/core/models/WoWs/ClanInfo.dart';
 import 'package:wowsinfo/core/others/Utils.dart';
 import 'package:wowsinfo/core/parsers/API/ClanInfoParser.dart';
-import 'package:wowsinfo/ui/widgets/PlatformLoadingIndiactor.dart';
-import 'package:wowsinfo/ui/widgets/TextWithCaption.dart';
-import 'package:wowsinfo/ui/widgets/WrapBox.dart';
+import 'package:wowsinfo/ui/widgets/common/PlatformLoadingIndiactor.dart';
+import 'package:wowsinfo/ui/widgets/common/TextWithCaption.dart';
+import 'package:wowsinfo/ui/widgets/common/WrapBox.dart';
 
 import 'PlayerInfoPage.dart';
 
@@ -164,7 +164,8 @@ class _ClanInfoPageState extends State<ClanInfoPage> {
         if (e.hasRole) {
           final role = cached.getClanRoleName(e.role);
           TextStyle style;
-          if (e.isCommander) style = TextStyle(color: Colors.orange);
+          if (e.isCommander)
+            style = TextStyle(color: Colors.orange);
           else if (e.isExecutive) style = TextStyle(color: Colors.lightBlue);
 
           return ListTile(

@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:wowsinfo/core/providers/CachedData.dart';
 import 'package:wowsinfo/core/providers/Preference.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
-import 'package:wowsinfo/ui/widgets/FlatFilterChip.dart';
-import 'package:wowsinfo/ui/widgets/WrapBox.dart';
+import 'package:wowsinfo/ui/widgets/common/FlatFilterChip.dart';
+import 'package:wowsinfo/ui/widgets/common/WrapBox.dart';
 
 /// ServerLanguageSelection class
 class ServerLanguageSelection extends StatefulWidget {

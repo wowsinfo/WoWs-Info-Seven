@@ -4,7 +4,7 @@ import 'package:wowsinfo/core/providers/CachedData.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart';
 import 'package:wowsinfo/core/others/Utils.dart';
 import 'package:wowsinfo/ui/pages/wiki/WikiWarshipOverviewPage.dart';
-import 'package:wowsinfo/ui/widgets/FlatFilterChip.dart';
+import 'package:wowsinfo/ui/widgets/common/FlatFilterChip.dart';
 import 'package:wowsinfo/ui/widgets/wiki/WikiWarshipCell.dart';
 
 /// WikiWarshipPage class
@@ -15,10 +15,13 @@ class WikiWarshipPage extends StatefulWidget {
   _WikiWarshipPageState createState() => _WikiWarshipPageState();
 }
 
-class _WikiWarshipPageState extends State<WikiWarshipPage> with SingleTickerProviderStateMixin {
+class _WikiWarshipPageState extends State<WikiWarshipPage>
+    with SingleTickerProviderStateMixin {
   CachedData cached;
+
   /// Only one nation can be shown at a time
   String nation;
+
   /// Only one type can be shown if selected, when nation changed type is cleared, select again to cancel
   String type;
   // One is saved for quick ship type filter
@@ -34,7 +37,8 @@ class _WikiWarshipPageState extends State<WikiWarshipPage> with SingleTickerProv
     // Grab a sorted list
     this.sortedList = cached.sortedWarshipList;
     // Select a random nation here
-    this.updateNation((cached.shipNation.keys.toList(growable: false)..shuffle()).first);
+    this.updateNation(
+        (cached.shipNation.keys.toList(growable: false)..shuffle()).first);
   }
 
   @override
@@ -47,9 +51,10 @@ class _WikiWarshipPageState extends State<WikiWarshipPage> with SingleTickerProv
         title: Text('WikiWarshipPage'),
         actions: [
           IconButton(
-            icon: Icon(Icons.info_outline), 
+            icon: Icon(Icons.info_outline),
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (c) => WikiWarshipOverviewPage()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (c) => WikiWarshipOverviewPage()));
             },
           ),
         ],
@@ -61,27 +66,28 @@ class _WikiWarshipPageState extends State<WikiWarshipPage> with SingleTickerProv
               child: Row(
                 children: <Widget>[
                   SingleChildScrollView(
-                    padding: EdgeInsets.all(8),
-                    child: AnimatedSize(
-                      duration: Duration(milliseconds: 300),
-                      vsync: this,
-                      child: SizedBox(
-                        width: Utils.of(context).isTablet() ? 200 : 100,
-                        child: buildNationList(nation, context),
-                      ),
-                    )
-                  ),
+                      padding: EdgeInsets.all(8),
+                      child: AnimatedSize(
+                        duration: Duration(milliseconds: 300),
+                        vsync: this,
+                        child: SizedBox(
+                          width: Utils.of(context).isTablet() ? 200 : 100,
+                          child: buildNationList(nation, context),
+                        ),
+                      )),
                   VerticalDivider(width: 1),
                   Expanded(
-                    child: Column(
-                      children: [
-                        Expanded(child: AnimatedSwitcher(
-                          duration: Duration(milliseconds: 300),
-                          child: WarshipList(ships: displayedShips.toList(growable: false), key: Key('$nation$type')),
-                        )),
-                      ],
-                    )
-                  ),
+                      child: Column(
+                    children: [
+                      Expanded(
+                          child: AnimatedSwitcher(
+                        duration: Duration(milliseconds: 300),
+                        child: WarshipList(
+                            ships: displayedShips.toList(growable: false),
+                            key: Key('$nation$type')),
+                      )),
+                    ],
+                  )),
                 ],
               ),
             ),
@@ -99,21 +105,26 @@ class _WikiWarshipPageState extends State<WikiWarshipPage> with SingleTickerProv
   Row buildTypeList(Map<String, String> type) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
-      children: cached.sortedTypeKeys.map((e) => FlatFilterChip(
-        onSelected: (_) => this.updateType(e), 
-        selected: e == this.type,
-        label: Text(type[e]),
-      )).toList(growable: false),
+      children: cached.sortedTypeKeys
+          .map((e) => FlatFilterChip(
+                onSelected: (_) => this.updateType(e),
+                selected: e == this.type,
+                label: Text(type[e]),
+              ))
+          .toList(growable: false),
     );
   }
 
   Column buildNationList(Map<String, String> nation, BuildContext context) {
     return Column(
-      children: cached.sortedNationKeys.map((e) => FlatFilterChip(
-        selected: e == this.nation,
-        onSelected: (_) => this.updateNation(e), 
-        label: Text(nation[e], style: Theme.of(context).textTheme.overline),
-      )).toList(growable: false),
+      children: cached.sortedNationKeys
+          .map((e) => FlatFilterChip(
+                selected: e == this.nation,
+                onSelected: (_) => this.updateNation(e),
+                label: Text(nation[e],
+                    style: Theme.of(context).textTheme.overline),
+              ))
+          .toList(growable: false),
     );
   }
 
@@ -156,20 +167,20 @@ class WarshipList extends StatelessWidget {
         // 120 can place 3 on iPhone 11
         final util = Utils.of(context);
         final itemCount = util.getItemCount(6, 1, 180);
-        
+
         return Scrollbar(
           child: GridView.builder(
-            padding: EdgeInsets.all(8),
-            itemCount: ships.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: itemCount,
-              childAspectRatio: 1.3,
-            ),
-            itemBuilder: (context, index) {
-              final ship = ships[index];
-              return WikiWarshipCell(ship: ship, showDetail: true, hero: true);
-            }
-          ),
+              padding: EdgeInsets.all(8),
+              itemCount: ships.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: itemCount,
+                childAspectRatio: 1.3,
+              ),
+              itemBuilder: (context, index) {
+                final ship = ships[index];
+                return WikiWarshipCell(
+                    ship: ship, showDetail: true, hero: true);
+              }),
         );
       },
     );

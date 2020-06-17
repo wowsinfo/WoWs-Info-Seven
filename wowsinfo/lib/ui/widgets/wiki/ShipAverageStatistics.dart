@@ -4,7 +4,7 @@ import 'package:wowsinfo/core/providers/CachedData.dart';
 import 'package:wowsinfo/core/models/GitHub/PRData.dart';
 import 'package:wowsinfo/core/models/WoWs/PvP.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
-import 'package:wowsinfo/ui/widgets/TextWithCaption.dart';
+import 'package:wowsinfo/ui/widgets/common/TextWithCaption.dart';
 import 'package:wowsinfo/core/extensions/NumberExtension.dart';
 
 /// ShipAverageStatistics class, it shows ship average myStats and compare it to your myStats if provided

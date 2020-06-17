@@ -1,8 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/models/WoWs/PvP.dart';
-import 'package:wowsinfo/ui/widgets/TextWithCaption.dart';
-import 'package:wowsinfo/ui/widgets/WrapBox.dart';
+import 'package:wowsinfo/ui/widgets/common/TextWithCaption.dart';
+import 'package:wowsinfo/ui/widgets/common/WrapBox.dart';
 
 /// Extra info for pvp
 class PvPInfo extends StatelessWidget {

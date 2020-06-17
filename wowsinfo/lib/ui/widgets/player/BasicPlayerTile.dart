@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/models/WoWs/PvP.dart';
 import 'package:wowsinfo/core/others/Utils.dart';
-import 'package:wowsinfo/ui/widgets/ImageTile.dart';
-import 'package:wowsinfo/ui/widgets/WrapBox.dart';
+import 'package:wowsinfo/ui/widgets/common/ImageTile.dart';
+import 'package:wowsinfo/ui/widgets/common/WrapBox.dart';
 import 'package:wowsinfo/ui/widgets/player/BasicShipInfoTile.dart';
 
 /// BasicPlayerTile class, it shows the classic 6 cell
@@ -46,11 +46,12 @@ class BasicPlayerTile extends StatelessWidget {
       ),
       // Hide this if it is cv
       // TODO: consider what to add more cv
-      if (stats.canHit) ImageTile(
-        image: AssetImage('assets/images/hitratio.png'),
-        title: 'Battle',
-        value: stats.mainHitRatioString,
-      ),
+      if (stats.canHit)
+        ImageTile(
+          image: AssetImage('assets/images/hitratio.png'),
+          title: 'Battle',
+          value: stats.mainHitRatioString,
+        ),
     ];
 
     return tiles;

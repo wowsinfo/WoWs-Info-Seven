@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/models/WoWs/RankPlayerShipInfo.dart';
 import 'package:wowsinfo/core/others/Utils.dart';
-import 'package:wowsinfo/ui/widgets/ImageTile.dart';
-import 'package:wowsinfo/ui/widgets/WrapBox.dart';
+import 'package:wowsinfo/ui/widgets/common/ImageTile.dart';
+import 'package:wowsinfo/ui/widgets/common/WrapBox.dart';
 
 /// BasicShipInfoTile class
 class BasicShipInfoTile extends StatelessWidget {
   final RankPvP stats;
   final bool compact;
-  BasicShipInfoTile({Key key, this.stats, this.compact = false}) : super(key: key);
+  BasicShipInfoTile({Key key, this.stats, this.compact = false})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

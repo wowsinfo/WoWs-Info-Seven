@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wowsinfo/ui/widgets/TextWithCaption.dart';
+import 'package:wowsinfo/ui/widgets/common/TextWithCaption.dart';
 
 /// ImageTile class
 class ImageTile extends StatelessWidget {
@@ -15,7 +15,8 @@ class ImageTile extends StatelessWidget {
       children: [
         Image(
           image: image,
-          width: size, height: size,
+          width: size,
+          height: size,
           color: Theme.of(context).accentColor,
         ),
         TextWithCaption(

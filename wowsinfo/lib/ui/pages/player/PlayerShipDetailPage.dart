@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/models/WoWs/PlayerShipInfo.dart';
-import 'package:wowsinfo/ui/widgets/TextWithCaption.dart';
-import 'package:wowsinfo/ui/widgets/WrapBox.dart';
+import 'package:wowsinfo/ui/widgets/common/TextWithCaption.dart';
+import 'package:wowsinfo/ui/widgets/common/WrapBox.dart';
 import 'package:wowsinfo/ui/widgets/player/BasicPlayerTile.dart';
 import 'package:wowsinfo/ui/widgets/player/PvPInfo.dart';
 import 'package:wowsinfo/ui/widgets/player/RatingBar.dart';
@@ -29,13 +29,14 @@ class PlayerShipDetailPage extends StatelessWidget {
           child: Center(
             child: Scrollbar(
               child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    SizedBox(
+                  child: Column(
+                children: [
+                  SizedBox(
                       height: 150,
-                      child: WikiWarshipCell(ship: ship.ship, hero: true, showDetail: true)
-                    ),
-                    if (ship.pvp.hasBattle && !ship.isRank) WrapBox(
+                      child: WikiWarshipCell(
+                          ship: ship.ship, hero: true, showDetail: true)),
+                  if (ship.pvp.hasBattle && !ship.isRank)
+                    WrapBox(
                       width: 120,
                       padding: const EdgeInsets.only(bottom: 8),
                       children: [
@@ -53,18 +54,18 @@ class PlayerShipDetailPage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    RatingBar(rating: rating),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 4.0),
-                      child: ShipAverageStatistics(shipId: ship.shipId, myShip: ship.pvp),
-                    ),
-                    BasicPlayerTile(stats: ship.pvp),
-                    PvPInfo(pvp: ship.pvp),
-                    RecordTile(pvp: ship.pvp, shipMode: true),
-                    WeaponInfoTile(pvp: ship.pvp, shipMode: true)
-                  ],
-                )
-              ),
+                  RatingBar(rating: rating),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 4.0),
+                    child: ShipAverageStatistics(
+                        shipId: ship.shipId, myShip: ship.pvp),
+                  ),
+                  BasicPlayerTile(stats: ship.pvp),
+                  PvPInfo(pvp: ship.pvp),
+                  RecordTile(pvp: ship.pvp, shipMode: true),
+                  WeaponInfoTile(pvp: ship.pvp, shipMode: true)
+                ],
+              )),
             ),
           ),
         ),

@@ -4,9 +4,9 @@ import 'package:wowsinfo/core/providers/CachedData.dart';
 import 'package:wowsinfo/core/models/UI/GameServer.dart';
 import 'package:wowsinfo/core/parsers/API/WikiEncyclopediaParser.dart';
 import 'package:wowsinfo/ui/pages/AppLoadingPage.dart';
-import 'package:wowsinfo/ui/widgets/GameServerSelection.dart';
-import 'package:wowsinfo/ui/widgets/PlatformLoadingIndiactor.dart';
-import 'package:wowsinfo/ui/widgets/ServerLanguageSelection.dart';
+import 'package:wowsinfo/ui/widgets/common/GameServerSelection.dart';
+import 'package:wowsinfo/ui/widgets/common/PlatformLoadingIndiactor.dart';
+import 'package:wowsinfo/ui/widgets/common/ServerLanguageSelection.dart';
 
 /// InitialSetupWidget class
 class InitialSetupWidget extends StatefulWidget {
@@ -19,7 +19,7 @@ class InitialSetupWidget extends StatefulWidget {
 class _InitialSetupWidgetState extends State<InitialSetupWidget> {
   bool loading = true;
   bool error = false;
-  
+
   @override
   void initState() {
     super.initState();
@@ -40,9 +40,7 @@ class _InitialSetupWidgetState extends State<InitialSetupWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('InitialSetupWidget')
-      ),
+      appBar: AppBar(title: Text('InitialSetupWidget')),
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -65,7 +63,8 @@ class _InitialSetupWidgetState extends State<InitialSetupWidget> {
         padding: const EdgeInsets.only(bottom: 16),
         child: FloatingActionButton(
           onPressed: () {
-            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (c) => AppLoadingPage()));
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (c) => AppLoadingPage()));
           },
           child: Icon(Icons.done),
         ),

@@ -26,11 +26,11 @@ import 'package:wowsinfo/ui/pages/player/PlayerChartPage.dart';
 import 'package:wowsinfo/ui/pages/player/PlayerRankInfoPage.dart';
 import 'package:wowsinfo/ui/pages/player/PlayerShipInfoPage.dart';
 import 'package:wowsinfo/ui/pages/wiki/WikiAchievementPage.dart';
-import 'package:wowsinfo/ui/widgets/CrossTick.dart';
-import 'package:wowsinfo/ui/widgets/ErrorIconWithText.dart';
-import 'package:wowsinfo/ui/widgets/PlatformLoadingIndiactor.dart';
-import 'package:wowsinfo/ui/widgets/TextWithCaption.dart';
-import 'package:wowsinfo/ui/widgets/WrapBox.dart';
+import 'package:wowsinfo/ui/widgets/common/CrossTick.dart';
+import 'package:wowsinfo/ui/widgets/common/ErrorIconWithText.dart';
+import 'package:wowsinfo/ui/widgets/common/PlatformLoadingIndiactor.dart';
+import 'package:wowsinfo/ui/widgets/common/TextWithCaption.dart';
+import 'package:wowsinfo/ui/widgets/common/WrapBox.dart';
 import 'package:wowsinfo/ui/widgets/player/BasicPlayerTile.dart';
 import 'package:wowsinfo/ui/widgets/player/PvPInfo.dart';
 import 'package:wowsinfo/ui/widgets/player/RatingBar.dart';
@@ -49,11 +49,13 @@ class PlayerInfoPage extends StatefulWidget {
 
 class _PlayerInfoPageState extends State<PlayerInfoPage> {
   bool error = false;
+
   /// - 0, all
   /// - 1, solo, one player
   /// - 2, div2
   /// - 3, div3
   int pvpMode = 0;
+
   /// This changes based on how user selection
   PvP pvp;
 
@@ -73,8 +75,10 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
 
   @override
   void setState(fn) {
-    if (mounted) super.setState(fn);
-    else Utils.debugPrint('Cancel set state');
+    if (mounted)
+      super.setState(fn);
+    else
+      Utils.debugPrint('Cancel set state');
   }
 
   void loadAll() async {
@@ -169,7 +173,6 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
         error = true;
       });
     }
-    
   }
 
   @override
@@ -207,10 +210,10 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
             buildPlayerInfo(),
             buildButtons(),
             AnimatedSwitcher(
-              duration: Duration(milliseconds: 300),
-              transitionBuilder: (w, a) => SizeTransition(sizeFactor: a, child: w),
-              child: buildRating()
-            ),
+                duration: Duration(milliseconds: 300),
+                transitionBuilder: (w, a) =>
+                    SizeTransition(sizeFactor: a, child: w),
+                child: buildRating()),
             // Mek sure pvp is not null
             if (pvp != null) buildPvPModeSelection(),
             if (pvp != null) buildStatistics(),
@@ -236,7 +239,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
             3: Text('Div3'),
             4: Text('PvE'),
             5: Text('Rank'),
-          }, 
+          },
           onValueChanged: (index) => setState(() {
             // UPdate selected index and also update 'PvP'
             pvpMode = index;
@@ -297,7 +300,8 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
         ),
         TextWithCaption(
           title: 'Active player',
-          valueWidget: CrossTick(value: recentInfo != null && recentInfo.hasRecentData),
+          valueWidget:
+              CrossTick(value: recentInfo != null && recentInfo.hasRecentData),
         ),
         TextWithCaption(
           title: 'Distance travlled',
@@ -339,20 +343,21 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
       child: Center(
         child: Theme(
           data: Theme.of(context).copyWith(
-            buttonTheme: ButtonThemeData(
-              textTheme: ButtonTextTheme.primary,
-              buttonColor: shipInfo?.overallRating?.colour,
-            )
-          ),
+              buttonTheme: ButtonThemeData(
+            textTheme: ButtonTextTheme.primary,
+            buttonColor: shipInfo?.overallRating?.colour,
+          )),
           child: WrapBox(
             width: width,
             spacing: 4,
             children: [
               // at least one achievment I guess
-              if (achievement != null && achievement.achievement.length > 0) buildAchievement(context),
+              if (achievement != null && achievement.achievement.length > 0)
+                buildAchievement(context),
               if (shipInfo != null && recentInfo != null) buildChart(context),
               // at least one ship
-              if (shipInfo != null && shipInfo.ships.length > 0) buildShip(context),
+              if (shipInfo != null && shipInfo.ships.length > 0)
+                buildShip(context),
               if (rankInfo != null && rankShipInfo != null) buildRank(context),
             ],
           ),
@@ -365,7 +370,10 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
     final lang = AppLocalization.of(context);
     return RaisedButton.icon(
       icon: Icon(Icons.brightness_7),
-      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (c) => WikiAchievementPage(player: achievement))),
+      onPressed: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (c) => WikiAchievementPage(player: achievement))),
       label: Text(lang.localised('player_achievement')),
     );
   }
@@ -374,7 +382,11 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
     final lang = AppLocalization.of(context);
     return RaisedButton.icon(
       icon: Icon(Icons.pie_chart),
-      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (c) => PlayerChartPage(info: PlayerChartData(shipInfo), recent: recentInfo))), 
+      onPressed: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (c) => PlayerChartPage(
+                  info: PlayerChartData(shipInfo), recent: recentInfo))),
       label: Text(lang.localised('player_charts')),
     );
   }
@@ -382,17 +394,23 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
   Widget buildShip(BuildContext context) {
     final lang = AppLocalization.of(context);
     return RaisedButton.icon(
-      icon: Icon(Icons.directions_boat),
-      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (c) => PlayerShipInfoPage(info: shipInfo))), 
-      label: Text(lang.localised('player_ships'))
-    );
+        icon: Icon(Icons.directions_boat),
+        onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (c) => PlayerShipInfoPage(info: shipInfo))),
+        label: Text(lang.localised('player_ships')));
   }
 
   Widget buildRank(BuildContext context) {
     final lang = AppLocalization.of(context);
     return RaisedButton.icon(
       icon: Icon(Icons.star),
-      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (c) => PlayerRankInfoPage(rank: rankInfo, rankShip: rankShipInfo))), 
+      onPressed: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (c) =>
+                  PlayerRankInfoPage(rank: rankInfo, rankShip: rankShipInfo))),
       label: Text(lang.localised('player_rank')),
     );
   }
@@ -400,20 +418,25 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
   /// Merge clan tag and player together
   InkWell buildNickname(BuildContext context, TextTheme textTheme) {
     return InkWell(
-      onTap: clanTag.hasTag ? () {
-        final pref = Provider.of<Preference>(context, listen: false);
-        Navigator.push(context, MaterialPageRoute(builder: (c) => ClanInfoPage(clan: clanTag.toClan(pref), server: widget.player.server)));
-      } : null,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          clanTag.hasTag 
-          ? clanTag.tagString + '\n${basicInfo.nickname}' 
-          : basicInfo.nickname, 
-          textAlign: TextAlign.center,
-          style: textTheme.headline6.copyWith(fontSize: 24)
-        ),
-      )
-    );
+        onTap: clanTag.hasTag
+            ? () {
+                final pref = Provider.of<Preference>(context, listen: false);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (c) => ClanInfoPage(
+                            clan: clanTag.toClan(pref),
+                            server: widget.player.server)));
+              }
+            : null,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+              clanTag.hasTag
+                  ? clanTag.tagString + '\n${basicInfo.nickname}'
+                  : basicInfo.nickname,
+              textAlign: TextAlign.center,
+              style: textTheme.headline6.copyWith(fontSize: 24)),
+        ));
   }
 }
