@@ -9,7 +9,9 @@ Template
 
 ## 17/06/2020
 ### Summary
+I have added providers in all widgets. The main problem now is that how to handle my models. I am passing `CachedData` down but this is high coupling I think. UI part is fine and I am using FutureBuilder to load data. It is better because it handles error state for me so that I can show an error widget and can pass a function to it to reload the widget again. I will do some more thinking and make it right this time.
 ### What to do tomorrow?
+Refactor core
 
 ## 16/06/2020
 ### Summary
