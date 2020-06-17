@@ -7,6 +7,10 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## 17/06/2020
+### Summary
+### What to do tomorrow?
+
 ## 16/06/2020
 ### Summary
 Removed all singletons and use provider instead. I am still thinking how should I do it? Maybe I should draw a diagram. If it is not available everything then I need to pass it down through the widget tree. 

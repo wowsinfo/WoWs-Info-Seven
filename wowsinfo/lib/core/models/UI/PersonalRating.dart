@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/data/CachedData.dart';
+import 'package:wowsinfo/core/models/GitHub/PRData.dart';
 import 'package:wowsinfo/core/models/WoWs/PlayerShipInfo.dart';
 import 'package:wowsinfo/core/others/AppLocalization.dart';
 import 'package:wowsinfo/core/extensions/NumberExtension.dart';
@@ -34,9 +35,8 @@ class PersonalRating {
     Colors.purple, Colors.deepPurple
   ];
 
-  PersonalRating();
   PersonalRating.fromShip(ShipInfo ship) {
-    final prData = CachedData.shared.getShipStats(ship.shipId.toString());
+    final AverageStats prData = CachedData.shared.getShipStats(ship.shipId.toString());
     final pvp = ship.pvp;
     if (prData != null && pvp != null) {
       battle = pvp.battle;
