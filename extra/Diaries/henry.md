@@ -10,7 +10,11 @@ Template
 ## 18/06/2020
 ### Summary
 After windows 10 update, my hackintosh wasn't bootable but it has now been fixed. I want to seperate services and my models. Now, I have a `parser` to request data to API and parses response to `model` and `hive` will save the model locally. The issue is that what if I want to have a fake `parser` and a fake `hive`. Model is the same and it can only load data from a map and make itself a map. However, the parser can also just take read a local file and give a map to the model and If I replace `hive` with `shared preference`, it should also work but now, I pass a shared preference in. 
+
+Lots of refactors. I need to make it right this time. It has been 3 years and this app is still a mess. I am doing too much things in a class and have almost no testings. I don't even know how the app can still work like this. I spent lots of studying and thinking about architectures. I want my app to be maintainable. I need to consider what if. I was really rushed and put lots of things together. I won't make the same mistake again. From the original to the original rework, I mainly worked on data caching and that's why it still kinda works even now after 2 years. Then, moving to react native in order to support Android and for the first time, I could write UI with code and have an image of it. Later, I started reusing code. Now, I want to make the struture right. 
+
 ### What to do tomorrow?
+More refactors.
 
 ## 17/06/2020
 ### Summary
@@ -128,7 +132,7 @@ Player info. This is just amazing. I didn't even do that much.
 ### Summary
 Basic consumable and game map are now added. They need to have better ui for sure. Commander skill and achievment are also added. The simulation is also working. They all need more ui polishment. However, wiki is almost done. I am still amazed at how rapid the development can be. It holds state so you can just add UI can see how it changes. I just hope the release version is not this laggy... based on Anime Go, it is actually quite smooth. I will soon work on clan and player search. Then, since clan info is not that challenging so I will do it first and followed by player info. Then, the app is basically done I think. More polishment after that, add in-app purchase, handle my plugin data (ship consumable, sigma and more) and finally Realtime Statistics. It will no longer be BETA. 
 ### What to do tomorrow?
-Maybe copy website links back?? 
+Maybe copy website links back??  
 
 ## 17/04/2020
 ### Summary
