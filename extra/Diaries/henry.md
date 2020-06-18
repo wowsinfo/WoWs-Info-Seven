@@ -7,6 +7,11 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## 18/06/2020
+### Summary
+After windows 10 update, my hackintosh wasn't bootable but it has now been fixed. I want to seperate services and my models. Now, I have a `parser` to request data to API and parses response to `model` and `hive` will save the model locally. The issue is that what if I want to have a fake `parser` and a fake `hive`. Model is the same and it can only load data from a map and make itself a map. However, the parser can also just take read a local file and give a map to the model and If I replace `hive` with `shared preference`, it should also work but now, I pass a shared preference in. 
+### What to do tomorrow?
+
 ## 17/06/2020
 ### Summary
 I have added providers in all widgets. The main problem now is that how to handle my models. I am passing `CachedData` down but this is high coupling I think. UI part is fine and I am using FutureBuilder to load data. It is better because it handles error state for me so that I can show an error widget and can pass a function to it to reload the widget again. I will do some more thinking and make it right this time.

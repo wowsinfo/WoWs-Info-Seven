@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/ui/pages/OriginalPage.dart';
 import 'package:wowsinfo/ui/pages/SettingPage.dart';
-import 'package:wowsinfo/ui/widgets/DebugProviderWidget.dart';
+import 'package:wowsinfo/ui/widgets/common/DebugProviderWidget.dart';
 import 'package:wowsinfo/ui/widgets/common/ShiftingText.dart';
 
 /// HomePage class

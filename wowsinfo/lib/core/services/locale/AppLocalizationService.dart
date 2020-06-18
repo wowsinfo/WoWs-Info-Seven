@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-/// It manages localization, mainly from https://www.youtube.com/watch?v=lDfbbTvq4qM
-class AppLocalization {
+/// It manages app localization, mainly from https://www.youtube.com/watch?v=lDfbbTvq4qM
+class AppLocalizationService {
   /// A list of supported locales
   static const List<Locale> supportedLocales = [
     // English
@@ -22,7 +22,7 @@ class AppLocalization {
   static const List<String> supportedLocaleStrings = ['en', 'ja', 'zh'];
   static const delegate = _AppLocalizationDelegate();
 
-  AppLocalization(this.locale);
+  AppLocalizationService(this.locale);
 
   final Locale locale;
   Map<String, String> _strings;
@@ -39,8 +39,8 @@ class AppLocalization {
   }
 
   /// Access this class anywhere
-  static AppLocalization of(BuildContext context) {
-    return Localizations.of<AppLocalization>(context, AppLocalization);
+  static AppLocalizationService of(BuildContext context) {
+    return Localizations.of<AppLocalizationService>(context, AppLocalizationService);
   }
 
   /// If it has a script code like Chinese, it will merge the code and lang
@@ -57,18 +57,18 @@ class AppLocalization {
   }
 }
 
-class _AppLocalizationDelegate extends LocalizationsDelegate<AppLocalization> {
+class _AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizationService> {
   /// It never changes
   const _AppLocalizationDelegate();
 
   @override
   bool isSupported(Locale locale) {
-    return AppLocalization.supportedLocaleStrings.contains(locale.languageCode);
+    return AppLocalizationService.supportedLocaleStrings.contains(locale.languageCode);
   }
   
   @override
-  Future<AppLocalization> load(Locale locale) async {
-    final localization = AppLocalization(locale);
+  Future<AppLocalizationService> load(Locale locale) async {
+    final localization = AppLocalizationService(locale);
     await localization.load();
     return localization;
   }

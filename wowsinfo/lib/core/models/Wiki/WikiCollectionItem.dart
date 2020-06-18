@@ -11,7 +11,7 @@ class WikiCollectionItem extends Cacheable {
   }
 
   Map<String, dynamic> toJson() => this.item.cast<String, dynamic>();
-  
+
   @override
   void save() => cached.saveCollectionItem(this);
 }
@@ -22,7 +22,8 @@ class CollectionItem extends WikiItem {
   int cardId;
 
   CollectionItem.fromJson(Map<String, dynamic> json) {
-    if (json['images'] != null) this.image = CollectionItemImage.fromJson(json['images']).small;
+    if (json['images'] != null)
+      this.image = CollectionItemImage.fromJson(json['images']).small;
     this.collectionId = json['collection_id'];
     this.description = json['description'];
     this.name = json['name'];
@@ -51,8 +52,10 @@ class CollectionItemImage {
   String small;
 
   CollectionItemImage.fromJson(json) {
-    if (json is String) this.small = json;
-    else this.small = json['small'];
+    if (json is String)
+      this.small = json;
+    else
+      this.small = json['small'];
   }
 
   Map<String, dynamic> toJson() {
