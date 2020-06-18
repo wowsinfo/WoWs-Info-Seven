@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/models/Cacheable.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiItem.dart';
-import 'package:wowsinfo/core/providers/CachedData.dart';
 
 /// This is the `WikiAchievement` class
 class WikiAchievement extends Cacheable {
   Map<String, Achievement> achievement;
 
-  WikiAchievement.fromJson(Map<String, dynamic> json, CachedData cached) : super(cached) {
+  WikiAchievement.fromJson(Map<String, dynamic> json) : super(json) {
     this.achievement = json.map((a, b) => MapEntry(a, Achievement.fromJson(b)));
   }
 
   Map<String, dynamic> toJson() => this.achievement.cast<String, dynamic>();
-  
-  @override
-  void save() => cached.saveAchievement(this);
 }
 
 /// This is the `Achievement` class

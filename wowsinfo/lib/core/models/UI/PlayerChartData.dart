@@ -1,8 +1,8 @@
 import 'dart:collection';
 
 import 'package:charts_flutter/flutter.dart';
+import 'package:wowsinfo/core/constants/ChartColour.dart';
 import 'package:wowsinfo/core/providers/CachedData.dart';
-import 'package:wowsinfo/core/providers/ChartColour.dart';
 import 'package:wowsinfo/core/models/UI/ChartValue.dart';
 import 'package:wowsinfo/core/models/WoWs/PlayerShipInfo.dart';
 import 'package:wowsinfo/core/extensions/NumberExtension.dart';
@@ -84,7 +84,7 @@ class PlayerChartData {
       domainFn: (v, _) => v.name,
       measureFn: (v, _) => v.value,
       labelAccessorFn: labelFormatter ?? (v, _) => v.value.toString(),
-      colorFn: (_, index) => color ?? chartColours[index % chartColours.length],
+      colorFn: (_, index) => color ?? ChartColour.from(index)
     )];
   }
 

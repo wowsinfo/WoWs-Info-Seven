@@ -1,4 +1,4 @@
 /// A class full of constants
 class AppConstant {
-  static const app_version = '1.1.0';
+  static const APP_VERSION = '1.1.0';
 }

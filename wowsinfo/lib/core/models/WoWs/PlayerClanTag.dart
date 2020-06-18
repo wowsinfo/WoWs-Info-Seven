@@ -1,6 +1,6 @@
 import 'package:wowsinfo/core/providers/Preference.dart';
 import 'package:wowsinfo/core/models/User/Clan.dart';
-import 'package:wowsinfo/core/others/Utils.dart';
+import 'package:wowsinfo/core/utils/Utils.dart';
 
 /// This is the `PlayerClanTag` class
 class PlayerClanTag {

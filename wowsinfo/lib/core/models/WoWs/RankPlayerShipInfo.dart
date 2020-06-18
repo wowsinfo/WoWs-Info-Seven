@@ -1,3 +1,4 @@
+import 'package:wowsinfo/core/models/JsonModel.dart';
 import 'package:wowsinfo/core/models/WoWs/PlayerShipInfo.dart';
 import 'package:wowsinfo/core/extensions/NumberExtension.dart';
 import 'package:wowsinfo/core/providers/CachedData.dart';
@@ -58,7 +59,7 @@ class Season {
 }
 
 /// This is the `RankPvP` class
-class RankPvP {
+class RankPvP extends JsonModel {
   int maxFragsBattle;
   int draw;
   int maxXp;
@@ -109,7 +110,7 @@ class RankPvP {
   String get maxFrag => '$maxFragsBattle';
   String get maxPlane => '$maxPlanesKilled';
 
-  RankPvP(json) {
+  RankPvP(Map<String, dynamic> json) : super(json) {
     this.maxFragsBattle = json['max_frags_battle'];
     this.draw = json['draws'];
     this.maxXp = json['max_xp'];

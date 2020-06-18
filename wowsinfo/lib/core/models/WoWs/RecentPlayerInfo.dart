@@ -1,5 +1,5 @@
 import 'package:charts_flutter/flutter.dart';
-import 'package:wowsinfo/core/providers/ChartColour.dart';
+import 'package:wowsinfo/core/constants/ChartColour.dart';
 import 'package:wowsinfo/core/models/UI/ChartValue.dart';
 import 'package:wowsinfo/core/extensions/NumberExtension.dart';
 
@@ -76,7 +76,7 @@ class RecentPlayerInfo {
       id: id,
       measureFn: (v, _) => v.value,
       domainFn: (_, index) => index,
-      colorFn: (_, index) => color ?? chartColours[index % chartColours.length],
+      colorFn: (_, index) => color ?? ChartColour.from(index),
     )];
   }
 }
