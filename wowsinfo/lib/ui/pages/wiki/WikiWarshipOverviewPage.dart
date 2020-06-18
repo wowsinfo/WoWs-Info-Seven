@@ -13,7 +13,7 @@ class WikiWarshipOverviewPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final cached = Provider.of<CachedData>(context, listen: false);
     final overview = WikiWarshipOverview(cached.sortedWarshipList);
-    // final lang = AppLocalization.of(context);
+    // final lang = AppLocalizationService.of(context);
 
     return Scaffold(
       appBar: AppBar(title: Text('Overview')),

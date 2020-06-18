@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wowsinfo/core/others/AppLocalization.dart';
+import 'package:wowsinfo/core/services/locale/AppLocalizationService.dart';
 import 'package:wowsinfo/ui/pages/wiki/WikiAchievementPage.dart';
 import 'package:wowsinfo/ui/pages/wiki/WikiCollectionPage.dart';
 import 'package:wowsinfo/ui/pages/wiki/WikiCommanderSkillPage.dart';
@@ -19,7 +19,7 @@ class WikiPage extends StatefulWidget {
 class _WikiPageState extends State<WikiPage> {
   @override
   Widget build(BuildContext context) {
-    final lang = AppLocalization.of(context);
+    final lang = AppLocalizationService.of(context);
 
     return Scaffold(
       appBar: AppBar(

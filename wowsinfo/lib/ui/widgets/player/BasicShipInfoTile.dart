@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/models/WoWs/RankPlayerShipInfo.dart';
-import 'package:wowsinfo/core/others/Utils.dart';
+import 'package:wowsinfo/core/utils/Utils.dart';
 import 'package:wowsinfo/ui/widgets/common/ImageTile.dart';
 import 'package:wowsinfo/ui/widgets/common/WrapBox.dart';
 

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:hive/hive.dart';
-import 'package:wowsinfo/core/providers/Constant.dart';
+import 'package:wowsinfo/core/constants/AppConstant.dart';
 import 'package:wowsinfo/core/providers/LocalData.dart';
 import 'package:wowsinfo/core/providers/Preference.dart';
 import 'package:wowsinfo/core/models/Cacheable.dart';
@@ -17,7 +17,6 @@ import 'package:wowsinfo/core/models/Wiki/WikiConsumable.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiEncyclopedia.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiGameMap.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart';
-import 'package:wowsinfo/core/others/Utils.dart';
 import 'package:wowsinfo/core/parsers/API/APIParser.dart';
 import 'package:wowsinfo/core/parsers/API/ClanGlossaryParser.dart';
 import 'package:wowsinfo/core/parsers/API/WikiAchievementParser.dart';
@@ -33,6 +32,7 @@ import 'package:wowsinfo/core/parsers/GitHub/PRDataParser.dart';
 import 'package:wowsinfo/core/parsers/GitHub/PluginParser.dart';
 import 'package:wowsinfo/core/parsers/GitHub/ShipAliasParser.dart';
 import 'package:wowsinfo/core/extensions/DateTimeExtension.dart';
+import 'package:wowsinfo/core/utils/Utils.dart';
 
 /// It handles cached data but mainly wiki
 /// - it is usually read only
@@ -229,7 +229,7 @@ class CachedData extends LocalData {
     // Either game updates, app updates or the data is too old
     if (force
       || (encyclopedia != null && encyclopedia.gameVersion != this.gameVersion)
-      || pref.appVersion != Constant.app_version
+      || pref.appVersion != AppAppConstant.APP_VERSION
       || pref.lastUpdate.dayDifference(DateTime.now()) > 10) {
       // Update data here
       List<APIParser> wows = [

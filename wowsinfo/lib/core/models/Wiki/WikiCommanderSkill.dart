@@ -6,14 +6,11 @@ import 'package:wowsinfo/core/models/Wiki/WikiItem.dart';
 class WikiCommanderSkill extends Cacheable {
   Map<String, Skill> skill;
 
-  WikiCommanderSkill.fromJson(Map<String, dynamic> json) {
+  WikiCommanderSkill.fromJson(Map<String, dynamic> json): super(json) {
     this.skill = json.map((a, b) => MapEntry(a, Skill.fromJson(b)));
   }
 
   Map<String, dynamic> toJson() => this.skill.cast<String, dynamic>();
-  
-  @override
-  void save() => cached.saveCommanderSkill(this);
 }
 
 /// This is the `Skill` class

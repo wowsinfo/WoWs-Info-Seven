@@ -4,9 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:wowsinfo/core/providers/GlobalAppSettings.dart';
 import 'package:wowsinfo/core/providers/CachedData.dart';
-import 'package:wowsinfo/core/providers/Constant.dart';
+import 'package:wowsinfo/core/constants/AppConstant.dart';
 import 'package:wowsinfo/core/providers/Preference.dart';
-import 'package:wowsinfo/core/others/AppLocalization.dart';
+import 'package:wowsinfo/core/services/locale/AppLocalizationService.dart';
 import 'package:wowsinfo/ui/pages/BottomNavigationPage.dart';
 import 'package:wowsinfo/ui/widgets/common/ErrorIconWithText.dart';
 import 'package:wowsinfo/ui/widgets/common/PlatformLoadingIndiactor.dart';
@@ -43,7 +43,7 @@ class _AppLoadingPageState extends State<AppLoadingPage> {
         child: Builder(builder: (c) {
           return Consumer<CachedData>(
             builder: (context, cached, child) => FutureBuilder(
-              future: cached.update(pref),
+              future: cached.update(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   if (snapshot.hasData) {
@@ -56,7 +56,7 @@ class _AppLoadingPageState extends State<AppLoadingPage> {
                     });
 
                     // Update last update time
-                    pref.appVersion = Constant.app_version;
+                    pref.appVersion = AppConstant.APP_VERSION;
                     pref.lastUpdate = DateTime.now();
 
                     return buildSuccess();
@@ -113,7 +113,7 @@ class _AppLoadingPageState extends State<AppLoadingPage> {
             Image(image: AssetImage('assets/images/logo_white.png')),
             Padding(
               padding: const EdgeInsets.all(16),
-              child: Text(AppLocalization.of(c).localised('app_name'),
+              child: Text(AppLocalizationService.of(c).localised('app_name'),
                   style: Theme.of(c).textTheme.subtitle1),
             )
           ],

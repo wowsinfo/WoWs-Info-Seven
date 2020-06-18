@@ -7,8 +7,8 @@ import 'package:wowsinfo/core/models/GitHub/Plugin.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart' as Wiki;
 import 'package:wowsinfo/core/models/WoWs/WikiShipInfo.dart';
 import 'package:wowsinfo/core/models/WoWs/WikiShipModule.dart';
-import 'package:wowsinfo/core/others/AppLocalization.dart';
-import 'package:wowsinfo/core/others/Utils.dart';
+import 'package:wowsinfo/core/services/locale/AppLocalizationService.dart';
+import 'package:wowsinfo/core/utils/Utils.dart';
 import 'package:wowsinfo/core/parsers/API/WikiShipInfoParser.dart';
 import 'package:wowsinfo/core/parsers/API/WikiShipModuleParser.dart';
 import 'package:wowsinfo/ui/pages/wiki/WikiWarshipSimilarPage.dart';
@@ -33,7 +33,7 @@ class WikiWarShipInfoPage extends StatefulWidget {
 
 class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage>
     with SingleTickerProviderStateMixin {
-  AppLocalization lang;
+  AppLocalizationService lang;
   CachedData cached;
   Preference pref;
 
@@ -115,7 +115,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage>
   @override
   Widget build(BuildContext context) {
     // Setup localization
-    lang = AppLocalization.of(context);
+    lang = AppLocalizationService.of(context);
     return Scaffold(
       appBar: AppBar(title: Text(widget.ship.shipIdAndIdStr)),
       body: SafeArea(child: buildBody()),

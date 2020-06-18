@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/providers/CachedData.dart';
 import 'package:wowsinfo/core/models/GitHub/PRData.dart';
 import 'package:wowsinfo/core/models/WoWs/PlayerShipInfo.dart';
-import 'package:wowsinfo/core/others/AppLocalization.dart';
 import 'package:wowsinfo/core/extensions/NumberExtension.dart';
+import 'package:wowsinfo/core/services/locale/AppLocalizationService.dart';
 
 /// It should handle one ships and a list of ships
 class PersonalRating {
@@ -85,7 +85,7 @@ class PersonalRating {
     else return 7;
   }
 
-  /// Add another ships
+  /// Add another rating
   void add(PersonalRating rating) {
     if (rating.battle == 0) return;
     battle += rating.battle;
@@ -98,7 +98,7 @@ class PersonalRating {
   }
 
   List<MapEntry<String, String>> getRatingMap(BuildContext context) {
-    final lang = AppLocalization.of(context);
+    final lang = AppLocalizationService.of(context);
     return {
       lang.localised('rating_bad'): '0 - 750',
       lang.localised('rating_below_average'): '750 - 1100',
@@ -113,7 +113,7 @@ class PersonalRating {
 
   /// Context is needed for localization to work
   String getComment(BuildContext context) {
-    final lang = AppLocalization.of(context);
+    final lang = AppLocalizationService.of(context);
     String comment = '';
     switch (index) {
       case -1:

@@ -8,7 +8,7 @@ class ShipInfoAdditional extends Cacheable {
   List<Consumable> consumable;
   List<int> permoflage;
 
-  ShipInfoAdditional.fromJson(Map<String, dynamic> json) {
+  ShipInfoAdditional.fromJson(Map<String, dynamic> json): super(json) {
     this.alphaPiercingHE = json['alphaPiercingHE'];
     this.ap = AP.fromJson(json['ap']);
     this.sigma = json['sigma'];
@@ -25,9 +25,6 @@ class ShipInfoAdditional extends Cacheable {
       'permoflages': this.permoflage,
     };
   }
-  
-  @override
-  void save() => throw Error();
 }
 
 /// This is the `AP` class

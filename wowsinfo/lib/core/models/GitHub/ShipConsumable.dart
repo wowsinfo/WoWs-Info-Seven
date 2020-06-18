@@ -10,7 +10,7 @@ class ShipConsumable extends Cacheable {
   String index;
   String name;
 
-  ShipConsumable.fromJson(Map<String, dynamic> json) {
+  ShipConsumable.fromJson(Map<String, dynamic> json): super(json) {
     json.forEach((key, value) {
       if (value is Map && value.keys.length > 0) {
         this.profiles[key] = BasicConsumable.fromJson(value);
@@ -34,9 +34,6 @@ class ShipConsumable extends Cacheable {
       'name': this.name,
     };
   }
-  
-  @override
-  void save() => throw Error();
 }
 
 /// This is the `BasicConsumable` class

@@ -6,7 +6,7 @@ import 'package:wowsinfo/core/providers/Preference.dart';
 import 'package:wowsinfo/core/models/UI/GameServer.dart';
 import 'package:wowsinfo/core/models/User/Clan.dart';
 import 'package:wowsinfo/core/models/WoWs/ClanInfo.dart';
-import 'package:wowsinfo/core/others/Utils.dart';
+import 'package:wowsinfo/core/utils/Utils.dart';
 import 'package:wowsinfo/core/parsers/API/ClanInfoParser.dart';
 import 'package:wowsinfo/ui/widgets/common/PlatformLoadingIndiactor.dart';
 import 'package:wowsinfo/ui/widgets/common/TextWithCaption.dart';

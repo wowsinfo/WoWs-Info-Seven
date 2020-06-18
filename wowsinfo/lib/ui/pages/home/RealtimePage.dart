@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wowsinfo/core/others/AppLocalization.dart';
+import 'package:wowsinfo/core/services/locale/AppLocalizationService.dart';
 
 /// RealtimePage class
 class RealtimePage extends StatefulWidget {
@@ -13,7 +13,7 @@ class RealtimePage extends StatefulWidget {
 class _RealtimePageState extends State<RealtimePage> {
   @override
   Widget build(BuildContext context) {
-    final lang = AppLocalization.of(context);
+    final lang = AppLocalizationService.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(lang.localised('realtime_page_title'))

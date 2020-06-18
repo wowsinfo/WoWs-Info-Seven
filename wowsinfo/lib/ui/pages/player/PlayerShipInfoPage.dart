@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/models/WoWs/PlayerShipInfo.dart';
-import 'package:wowsinfo/core/others/Utils.dart';
+import 'package:wowsinfo/core/utils/Utils.dart';
 import 'package:wowsinfo/ui/pages/player/PlayerShipDetailPage.dart';
 import 'package:wowsinfo/ui/widgets/player/BasicShipInfoTile.dart';
 import 'package:wowsinfo/ui/widgets/player/RatingBar.dart';

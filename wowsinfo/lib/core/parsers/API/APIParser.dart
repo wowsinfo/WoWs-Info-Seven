@@ -4,7 +4,7 @@ import 'package:wowsinfo/core/models/Meta.dart';
 
 import 'key.dart';
 
-import 'package:wowsinfo/core/others/Utils.dart';
+import 'package:wowsinfo/core/utils/Utils.dart';
 import 'package:http/http.dart' as http;
 
 /// This is the base of all API parsers, it fetches data and parse it to objects

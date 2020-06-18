@@ -4,7 +4,7 @@ import '../Cacheable.dart';
 class ClanGlossary extends Cacheable {
   Map<String, String> roles;
 
-  ClanGlossary.fromJson(Map<String, dynamic> json) {
+  ClanGlossary.fromJson(Map<String, dynamic> json) : super(null) {
     this.roles = (json['clans_roles'] as Map).cast<String, String>();
   }
 
@@ -13,7 +13,4 @@ class ClanGlossary extends Cacheable {
       'clans_roles': this.roles,
     };
   }
-
-  @override
-  void save() => cached.saveClanGlossary(this);
 }

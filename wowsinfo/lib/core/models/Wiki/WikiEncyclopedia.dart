@@ -9,7 +9,7 @@ class WikiEncyclopedia extends Cacheable {
   Map<String, String> shipType;
   String gameVersion;
 
-  WikiEncyclopedia.fromJson(Map<String, dynamic> json) {
+  WikiEncyclopedia.fromJson(Map<String, dynamic> json): super(json) {
     this.language = (json['languages'] as Map).cast<String, String>();
     if (json['ship_modules'] != null) this.shipModule = ShipModule.fromJson(json['ship_modules']);
     this.shipTypeImage = (json['ship_type_images'] as Map).map((a, b) => MapEntry(a, ShipTypeImage.fromJson(b)));
@@ -28,9 +28,6 @@ class WikiEncyclopedia extends Cacheable {
       'game_version': this.gameVersion,
     };
   }
-  
-  @override
-  void save() => cached.saveEncyclopedia(this);
 }
 
 /// This is the `ShipModule` class

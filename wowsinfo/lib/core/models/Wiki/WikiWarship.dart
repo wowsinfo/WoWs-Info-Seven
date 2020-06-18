@@ -1,14 +1,15 @@
 
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:wowsinfo/core/models/Cacheable.dart';
 import 'package:wowsinfo/core/providers/CachedData.dart';
 import 'package:wowsinfo/core/models/GitHub/ShipAlias.dart';
-
-import '../Cacheable.dart';
 
 /// This is the `WikiWarship` class
 class WikiWarship extends Cacheable {
   Map<String, Warship> ships;
 
-  WikiWarship.fromJson(Map<String, dynamic> json, {ShipAlias alias}) {
+  WikiWarship.fromJson(Map<String, dynamic> json, {ShipAlias alias}): super(json) {
     this.ships = json.map((a, b) => MapEntry(a, Warship.fromJson(b)));
     injectAlias(alias);
   }
@@ -22,9 +23,6 @@ class WikiWarship extends Cacheable {
   }
 
   Map<String, dynamic> toJson() => this.ships.cast<String, dynamic>();
-  
-  @override
-  void save() => cached.saveWarship(this);
 }
 
 /// This is the `Warship` class
@@ -51,12 +49,12 @@ class Warship {
   String get shipIdAndIdStr => '$shipIdStr $shipId';
   bool get isSpecialOrPremium => isSpecial || isPremium;
   String get smallImage => _image?.small;
-  String get typeString {
-    final cached = CachedData.shared;
+  String typeString(BuildContext context) {
+    final cached = Provider.of<CachedData>(context);
     return cached.getTypeString(type);
   }
-  String get nationString {
-    final cached = CachedData.shared;
+  String nationString(BuildContext context) {
+    final cached = Provider.of<CachedData>(context);
     return cached.getNationString(nation);
   }
 

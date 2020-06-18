@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:wowsinfo/core/providers/CachedData.dart';
 import 'package:wowsinfo/core/models/UI/WeaponValue.dart';
 import 'package:wowsinfo/core/models/WoWs/RankPlayerShipInfo.dart';
-import 'package:wowsinfo/core/others/Utils.dart';
+import 'package:wowsinfo/core/utils/Utils.dart';
 import 'package:wowsinfo/ui/widgets/common/TextWithCaption.dart';
 import 'package:wowsinfo/ui/widgets/common/WrapBox.dart';
 import 'package:wowsinfo/ui/widgets/wiki/WikiWarshipCell.dart';

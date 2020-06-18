@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/models/WoWs/PlayerShipInfo.dart';
 import 'package:wowsinfo/core/models/WoWs/RankPlayerInfo.dart';
 import 'package:wowsinfo/core/models/WoWs/RankPlayerShipInfo.dart';
-import 'package:wowsinfo/core/others/Utils.dart';
+import 'package:wowsinfo/core/utils/Utils.dart';
 import 'package:wowsinfo/ui/pages/player/PlayerShipInfoPage.dart';
 import 'package:wowsinfo/ui/widgets/common/TextWithCaption.dart';
 import 'package:wowsinfo/ui/widgets/common/WrapBox.dart';

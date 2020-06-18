@@ -14,7 +14,7 @@ class Plugin extends Cacheable {
   ShipConsumableData getConsumable(ShipConsumableValue v) => consumable[v.name].getConsumable(v.type);
   OldShip getShip(int key) => oldShip[key.toString()];
 
-  Plugin.fromJson(Map<String, dynamic> json) {
+  Plugin.fromJson(Map<String, dynamic> json): super(json) {
     this.consumable = (json['consumables'] as Map).map((a, b) => MapEntry(a, ShipConsumable.fromJson(b)));
     this.upgrade = (json['upgrades'] as Map).map((a, b) => MapEntry(a, Modernization.fromJson(b)));
     // Set ship id here
@@ -30,9 +30,6 @@ class Plugin extends Cacheable {
       'ship_wiki': this.shipWiki.cast<String, dynamic>(),
     };
   }
-
-  @override
-  void save() => cached.savePlugin(this);
 }
 
 /// This is the `ShipConsumable` class
@@ -125,7 +122,7 @@ class ShipConsumableData extends WikiItem {
   String _toMeter(num v) => v != null ? '$v m' : null;
   ///
   String _getDescription(BuildContext context) {
-    // final lang = AppLocalization.of(context);
+    // final lang = AppLocalizationService.of(context);
     final list = {
       'type': consumableType,
       'reload time': _toTime(reloadTime),

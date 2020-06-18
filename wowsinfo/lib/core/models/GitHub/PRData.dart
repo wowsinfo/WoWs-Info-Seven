@@ -5,7 +5,7 @@ import 'package:wowsinfo/core/extensions/NumberExtension.dart';
 class PRData extends Cacheable {
   Map<String, AverageStats> ships;
 
-  PRData.fromJson(Map<String, dynamic> json) {
+  PRData.fromJson(Map<String, dynamic> json): super(json) {
     ships = json.map((key, value) {
       // If it is a list it means that it is an empty entry
       if (value == null || value is List) return MapEntry(key, null);
@@ -14,9 +14,6 @@ class PRData extends Cacheable {
   }
 
   Map<String, dynamic> toJson() => ships.cast<String, dynamic>();
-
-  @override
-  void save() => cached.savePRData(this);
 }
 
 /// This is the `AverageStats` class

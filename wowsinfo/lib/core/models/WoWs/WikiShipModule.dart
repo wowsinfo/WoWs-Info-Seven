@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:wowsinfo/core/providers/CachedData.dart';
-import 'package:wowsinfo/core/others/AppLocalization.dart';
 import 'package:wowsinfo/core/extensions/NumberExtension.dart';
+import 'package:wowsinfo/core/services/locale/AppLocalizationService.dart';
 
 /// This is the `WikiShipModule` class
 class WikiShipModule {
@@ -22,15 +23,14 @@ class WikiShipModule {
   Concealment concealment;
   Armour armour;
   DiveBomber diveBomber;
-  final CachedData _cached;
 
-  // Make sure the second value is DOUBLE
   Map<String, int> getParameter(BuildContext context) {
-    final lang = AppLocalization.of(context);
+    final lang = AppLocalizationService.of(context);
+    final cached = Provider.of<CachedData>(context);
     return {
       lang.localised('warship_info_survivability'): armour?.total,
-      _cached.shipModule.artillery: weaponry?.artillery,
-      _cached.shipModule.torpedo: weaponry?.torpedo,
+      cached.shipModule.artillery: weaponry?.artillery,
+      cached.shipModule.torpedo: weaponry?.torpedo,
       lang.localised('warship_info_antiaircraft'): weaponry?.antiAircraft,
       lang.localised('warship_info_maneuverabilty'): mobility?.total,
       lang.localised('warship_info_aircraft'): weaponry?.aircraft,
@@ -38,7 +38,7 @@ class WikiShipModule {
     };
   }
 
-  WikiShipModule(Map<String, dynamic> json, this._cached) {
+  WikiShipModule(Map<String, dynamic> json) {
     if (json['engine'] != null) this.engine = Engine(json['engine']);
     if (json['torpedo_bomber'] != null) this.torpedoBomber = TorpedoBomber(json['torpedo_bomber']);
     if (json['anti_aircraft'] != null) this.antiAircraft = AntiAircraft(json['anti_aircraft']);

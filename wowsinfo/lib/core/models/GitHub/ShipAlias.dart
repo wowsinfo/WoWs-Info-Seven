@@ -7,7 +7,7 @@ class ShipAlias extends Cacheable {
   /// Call `hasAlias` to check if id exists first
   String getAlisa(String id) => alias[id].name;
 
-  ShipAlias.fromJson(Map<String, dynamic> json) {
+  ShipAlias.fromJson(Map<String, dynamic> json): super(json) {
     this.alias = (json['alias'] as Map).map((a, b) => MapEntry(a, Alias.fromJson(b)));
   }
 
@@ -16,9 +16,6 @@ class ShipAlias extends Cacheable {
       'alias': this.alias.cast<String, dynamic>(),
     };
   }
-
-  @override
-  void save() => cached.saveAlias(this);
 }
 
 /// This is the `Alias` class

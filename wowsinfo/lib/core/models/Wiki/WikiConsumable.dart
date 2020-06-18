@@ -6,14 +6,11 @@ import 'package:wowsinfo/core/models/Wiki/WikiItem.dart';
 class WikiConsumable extends Cacheable {
   Map<String, Consumable> consumable;
 
-  WikiConsumable.fromJson(Map<String, dynamic> json) {
+  WikiConsumable.fromJson(Map<String, dynamic> json): super(json) {
     this.consumable = json.map((a, b) => MapEntry(a, Consumable.fromJson(b)));
   }
 
   Map<String, dynamic> toJson() => this.consumable.cast<String, dynamic>();
-  
-  @override
-  void save() => cached.saveConsumable(this);
 }
 
 /// This is the `Consumable` class

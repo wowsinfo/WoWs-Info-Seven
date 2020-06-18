@@ -2,13 +2,13 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:wowsinfo/core/providers/Constant.dart';
+import 'package:wowsinfo/core/constants/AppConstant.dart';
 import 'package:wowsinfo/core/providers/LocalData.dart';
 import 'package:wowsinfo/core/models/UI/GameServer.dart';
 import 'package:wowsinfo/core/models/User/ContactList.dart';
 import 'package:wowsinfo/core/models/User/Player.dart';
-import 'package:wowsinfo/core/others/Utils.dart';
 import 'package:wowsinfo/core/extensions/DateTimeExtension.dart';
+import 'package:wowsinfo/core/utils/Utils.dart';
 
 
 /// This is the `Preference` class
@@ -83,7 +83,7 @@ class Preference extends LocalData with ChangeNotifier {
   String get realtimeIP => this.box.get(REALTIME_IP);
   set realtimeIP(String value) => this.box.put(REALTIME_IP, value);
 
-  String get gameVersion => this.box.get(GAME_VERSION) ?? Constant.app_version;
+  String get gameVersion => this.box.get(GAME_VERSION) ?? AppConstant.APP_VERSION;
   set gameVersion(String value) => this.box.put(GAME_VERSION, value);
 
   String get appVersion => this.box.get(APP_VERSION) ?? '1.0.8';

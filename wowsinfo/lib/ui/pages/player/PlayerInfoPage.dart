@@ -12,8 +12,8 @@ import 'package:wowsinfo/core/models/WoWs/PvP.dart';
 import 'package:wowsinfo/core/models/WoWs/RankPlayerInfo.dart';
 import 'package:wowsinfo/core/models/WoWs/RankPlayerShipInfo.dart';
 import 'package:wowsinfo/core/models/WoWs/RecentPlayerInfo.dart';
-import 'package:wowsinfo/core/others/AppLocalization.dart';
-import 'package:wowsinfo/core/others/Utils.dart';
+import 'package:wowsinfo/core/services/locale/AppLocalizationService.dart';
+import 'package:wowsinfo/core/utils/Utils.dart';
 import 'package:wowsinfo/core/parsers/API/BasicPlayerInfoParser.dart';
 import 'package:wowsinfo/core/parsers/API/PlayerAchievementParser.dart';
 import 'package:wowsinfo/core/parsers/API/PlayerClanTagParser.dart';
@@ -367,7 +367,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
   }
 
   Widget buildAchievement(BuildContext context) {
-    final lang = AppLocalization.of(context);
+    final lang = AppLocalizationService.of(context);
     return RaisedButton.icon(
       icon: Icon(Icons.brightness_7),
       onPressed: () => Navigator.push(
@@ -379,7 +379,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
   }
 
   Widget buildChart(BuildContext context) {
-    final lang = AppLocalization.of(context);
+    final lang = AppLocalizationService.of(context);
     return RaisedButton.icon(
       icon: Icon(Icons.pie_chart),
       onPressed: () => Navigator.push(
@@ -392,7 +392,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
   }
 
   Widget buildShip(BuildContext context) {
-    final lang = AppLocalization.of(context);
+    final lang = AppLocalizationService.of(context);
     return RaisedButton.icon(
         icon: Icon(Icons.directions_boat),
         onPressed: () => Navigator.push(
@@ -403,7 +403,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
   }
 
   Widget buildRank(BuildContext context) {
-    final lang = AppLocalization.of(context);
+    final lang = AppLocalizationService.of(context);
     return RaisedButton.icon(
       icon: Icon(Icons.star),
       onPressed: () => Navigator.push(

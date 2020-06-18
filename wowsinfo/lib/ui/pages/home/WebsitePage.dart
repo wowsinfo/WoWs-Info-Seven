@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:wowsinfo/core/providers/Preference.dart';
 import 'package:wowsinfo/core/models/UI/WebsiteItem.dart';
 import 'package:wowsinfo/core/models/UI/WebsiteSection.dart';
-import 'package:wowsinfo/core/others/AppLocalization.dart';
+import 'package:wowsinfo/core/services/locale/AppLocalizationService.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// WebsitePage class
@@ -12,7 +12,7 @@ class WebsitePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final lang = AppLocalization.of(context);
+    final lang = AppLocalizationService.of(context);
     final server = Provider.of<Preference>(context, listen: false).gameServer;
     final domain = server.domain;
     final prefix = server.prefix;

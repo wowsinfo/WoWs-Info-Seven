@@ -6,14 +6,11 @@ import 'package:wowsinfo/core/models/Wiki/WikiItem.dart';
 class WikiCollectionItem extends Cacheable {
   Map<String, CollectionItem> item;
 
-  WikiCollectionItem.fromJson(Map<String, dynamic> json) {
+  WikiCollectionItem.fromJson(Map<String, dynamic> json): super(json) {
     this.item = json.map((a, b) => MapEntry(a, CollectionItem.fromJson(b)));
   }
 
   Map<String, dynamic> toJson() => this.item.cast<String, dynamic>();
-
-  @override
-  void save() => cached.saveCollectionItem(this);
 }
 
 /// This is the `CollectionItem` class

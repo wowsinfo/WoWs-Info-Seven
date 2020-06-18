@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wowsinfo/core/providers/CachedData.dart';
 import 'package:wowsinfo/core/providers/Preference.dart';
-import 'package:wowsinfo/core/others/AppLocalization.dart';
+import 'package:wowsinfo/core/services/locale/AppLocalizationService.dart';
 import 'package:wowsinfo/ui/widgets/common/FlatFilterChip.dart';
 import 'package:wowsinfo/ui/widgets/common/WrapBox.dart';
 
@@ -18,7 +18,7 @@ class ServerLanguageSelection extends StatefulWidget {
 class _ServerLanguageSelectionState extends State<ServerLanguageSelection> {
   @override
   Widget build(BuildContext context) {
-    final lang = AppLocalization.of(context);
+    final lang = AppLocalizationService.of(context);
     final cached = Provider.of<CachedData>(context, listen: false);
 
     return Center(

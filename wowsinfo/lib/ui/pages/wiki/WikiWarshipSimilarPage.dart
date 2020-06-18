@@ -7,7 +7,7 @@ import 'package:wowsinfo/core/providers/CachedData.dart';
 import 'package:wowsinfo/core/models/GitHub/PRData.dart';
 import 'package:wowsinfo/core/models/UI/ChartValue.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart';
-import 'package:wowsinfo/core/others/AppLocalization.dart';
+import 'package:wowsinfo/core/services/locale/AppLocalizationService.dart';
 import 'package:wowsinfo/core/extensions/NumberExtension.dart';
 
 /// WikiWarshipSimilarPage class
@@ -72,7 +72,7 @@ class WikiWarshipSimilarPage extends StatelessWidget {
           colorFn: (v, _) => Color.fromHex(code: '#2196F3')),
     ];
 
-    final lang = AppLocalization.of(context);
+    final lang = AppLocalizationService.of(context);
     return Scaffold(
       appBar: AppBar(title: Text(ships.first.tierType)),
       body: SafeArea(

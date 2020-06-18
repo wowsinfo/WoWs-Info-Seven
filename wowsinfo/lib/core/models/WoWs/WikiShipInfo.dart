@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiEncyclopedia.dart';
 import 'package:wowsinfo/core/providers/CachedData.dart';
 
@@ -30,20 +32,20 @@ class WikiShipInfo {
   bool get hasNextShip => (nextShip?.ships?.length ?? 0) > 0;
   Iterable<int> get nextShipIds => nextShip?.ships?.keys?.map((e) => int.parse(e)) ?? [];
 
-  WikiShipInfo(Map<String, dynamic> data, CachedData cached) {
+  WikiShipInfo(Map<String, dynamic> data) {
     final json = data.values.first;
     if (json != null) {
       this.description = json['description'];
       this.priceGold = json['price_gold'];
       this.shipIdStr = json['ship_id_str'];
       this.hasDemoProfile = json['has_demo_profile'];
-      if (json['modules'] != null) this.module = Module(json['modules'], cached);
+      if (json['modules'] != null) this.module = Module(json['modules']);
       if (json['modules_tree'] != null) this.modulesTree = ModulesTree(json['modules_tree']);
       this.nation = json['nation'];
       this.isPremium = json['is_premium'];
       this.shipId = json['ship_id'];
       this.priceCredit = json['price_credit'];
-      if (json['default_profile'] != null) this.defaultProfile = WikiShipModule(json['default_profile'], cached);
+      if (json['default_profile'] != null) this.defaultProfile = WikiShipModule(json['default_profile']);
       this.upgrade = (json['upgrades'] ?? []).cast<int>();
       this.tier = json['tier'];
       if (json['next_ships'] != null) this.nextShip = NextShip(json['next_ships']);
@@ -66,24 +68,25 @@ class Module {
   List<int> fireControl;
   List<int> flightControl;
   List<int> diveBomber;
-  ShipModule _module;
 
   // at least two items in it
-  bool get hasOtherModules => moduleMap?.values?.any((element) => element.length > 1) ?? false;
-  Map<String, List<int>> get moduleMap => {
-    _module.engine: engine,
-    _module.torpedoBomber: torpedoBomber,
-    _module.fighter: fighter,
-    _module.hull: hull,
-    _module.artillery: artillery,
-    _module.torpedo: torpedo,
-    _module.suo: fireControl,
-    _module.flightControl: flightControl,
-    _module.diveBomber: diveBomber,
-  };
+  bool hasOtherModules(Map<String, List<int>> moduleMap) => moduleMap?.values?.any((element) => element.length > 1) ?? false;
+  Map<String, List<int>> moduleMap(BuildContext context) {
+    final module = Provider.of<CachedData>(context, listen: false).shipModule;
+    return {
+      module.engine: engine,
+      module.torpedoBomber: torpedoBomber,
+      module.fighter: fighter,
+      module.hull: hull,
+      module.artillery: artillery,
+      module.torpedo: torpedo,
+      module.suo: fireControl,
+      module.flightControl: flightControl,
+      module.diveBomber: diveBomber,
+    };
+  }
 
-  Module(Map<String, dynamic> json, CachedData cached) {
-    this._module = cached.shipModule;
+  Module(Map<String, dynamic> json) {
     this.engine = (json['engine'] ?? []).cast<int>();
     this.torpedoBomber = (json['torpedo_bomber'] ?? []).cast<int>();
     this.fighter = (json['fighter'] ?? []).cast<int>();

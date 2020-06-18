@@ -5,7 +5,7 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:wowsinfo/core/providers/GlobalAppSettings.dart';
-import 'package:wowsinfo/core/others/AppLocalization.dart';
+import 'package:wowsinfo/core/services/locale/AppLocalizationService.dart';
 import 'package:wowsinfo/ui/pages/AppLoadingPage.dart';
 
 void main() async {
@@ -26,13 +26,13 @@ class WoWsInfoApp extends StatelessWidget {
     return Consumer<GlobalAppSettings>(
       builder: (context, wowsinfo, child) => MaterialApp(
         localizationsDelegates: const [
-          AppLocalization.delegate,
+          AppLocalizationService.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
         locale: wowsinfo.locale,
-        supportedLocales: AppLocalization.supportedLocales,
+        supportedLocales: AppLocalizationService.supportedLocales,
         localeResolutionCallback: (locale, supported) {
           if (locale == null) return supported.first;
           switch (locale.languageCode) {

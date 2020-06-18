@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:wowsinfo/core/providers/LocalData.dart';
-import 'package:wowsinfo/core/others/Utils.dart';
+import 'package:wowsinfo/core/utils/Utils.dart';
 
 /// This includes app locale, theme colour and brightness (light, dark or system)
 class GlobalAppSettings extends LocalData with ChangeNotifier {

@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:wowsinfo/core/providers/CachedData.dart';
 import 'package:wowsinfo/core/models/GitHub/PRData.dart';
 import 'package:wowsinfo/core/models/WoWs/PvP.dart';
-import 'package:wowsinfo/core/others/AppLocalization.dart';
+import 'package:wowsinfo/core/services/locale/AppLocalizationService.dart';
 import 'package:wowsinfo/ui/widgets/common/TextWithCaption.dart';
 import 'package:wowsinfo/core/extensions/NumberExtension.dart';
 
@@ -18,7 +18,7 @@ class ShipAverageStatistics extends StatelessWidget {
   Widget build(BuildContext context) {
     final cached = Provider.of<CachedData>(context, listen: false);
     final ship = cached.getShipStats(shipId.toString());
-    final lang = AppLocalization.of(context);
+    final lang = AppLocalizationService.of(context);
     if (ship == null) return SizedBox.shrink();
     // Make sure there is at least 1 battle, no battle no stats
     if (myShip != null && myShip.battle > 0) return buildComparison(lang, ship);
@@ -26,7 +26,7 @@ class ShipAverageStatistics extends StatelessWidget {
   }
 
   /// When my ship is null
-  Row buildNormal(AppLocalization lang, AverageStats ship) {
+  Row buildNormal(AppLocalizationService lang, AverageStats ship) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
@@ -47,7 +47,7 @@ class ShipAverageStatistics extends StatelessWidget {
   }
 
   /// Only inside ship detail page
-  Row buildComparison(AppLocalization lang, AverageStats ship) {
+  Row buildComparison(AppLocalizationService lang, AverageStats ship) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [

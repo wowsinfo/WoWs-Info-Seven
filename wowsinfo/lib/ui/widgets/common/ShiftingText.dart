@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:wowsinfo/core/others/AppLocalization.dart';
+import 'package:wowsinfo/core/services/locale/AppLocalizationService.dart';
 
 /// ShiftingText class
 class ShiftingText extends StatefulWidget {
@@ -62,7 +62,7 @@ class _ShiftingTextState extends State<ShiftingText> with SingleTickerProviderSt
 
   @override
   Widget build(BuildContext context) {
-    final lang = AppLocalization.of(context);
+    final lang = AppLocalizationService.of(context);
     list = [
       lang.localised('suffix_re'),
       lang.localised('suffix_origin'),

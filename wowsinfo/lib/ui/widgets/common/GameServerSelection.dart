@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wowsinfo/core/models/UI/GameServer.dart';
 import 'package:wowsinfo/core/providers/Preference.dart';
-import 'package:wowsinfo/core/others/AppLocalization.dart';
+import 'package:wowsinfo/core/services/locale/AppLocalizationService.dart';
 import 'package:wowsinfo/ui/widgets/common/FlatFilterChip.dart';
 import 'package:wowsinfo/ui/widgets/common/WrapBox.dart';
 
@@ -22,7 +22,7 @@ class _GameServerSelectionState extends State<GameServerSelection> {
 
   @override
   Widget build(BuildContext context) {
-    final lang = AppLocalization.of(context);
+    final lang = AppLocalizationService.of(context);
     final servers = [
       lang.localised('game_server_ru'),
       lang.localised('game_server_eu'),
