@@ -2,8 +2,8 @@ import 'package:wowsinfo/core/models/UI/GameServer.dart';
 import 'package:wowsinfo/core/models/WoWs/SearchPlayerResult.dart';
 import 'APIParser.dart';
 
-class SearchPlayerResultParser extends APIParser {
-  SearchPlayerResultParser(GameServer server, String name) : super(server) {
+class SearchPlayerResultGetter extends WoWsApiService {
+  SearchPlayerResultGetter(GameServer server, String name) : super(server) {
     this.link += '/wows/account/list/';
     addAPIKey();
     this.link += '&search=$name&limit=50';

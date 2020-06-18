@@ -2,9 +2,9 @@ import 'package:wowsinfo/core/models/UI/GameServer.dart';
 import 'package:wowsinfo/core/models/WoWs/OnlinePlayerCount.dart';
 import 'APIParser.dart';
 
-class OnlinePlayerCountParser extends APIParser {
+class OnlinePlayerCountGetter extends WoWsApiService {
   /// It requests to world of tank
-  OnlinePlayerCountParser(GameServer server, String name) : super(null) {
+  OnlinePlayerCountGetter(GameServer server, String name) : super(null) {
     this.link = 'https://api.worldoftanks.${server.domain}/wgn/servers/info/';
     addAPIKey();
     this.link += '&fields=players_online&game=wows';

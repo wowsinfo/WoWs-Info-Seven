@@ -223,7 +223,7 @@ class CachedData extends LocalData {
     loadAll();
 
     final server = pref.gameServer;
-    final parser = WikiEncyclopediaParser(server);
+    final parser = WikiEncyclopediaGetter(server);
     final encyclopedia = parser.parse(await parser.download());
 
     // Either game updates, app updates or the data is too old
@@ -233,22 +233,22 @@ class CachedData extends LocalData {
       || pref.lastUpdate.dayDifference(DateTime.now()) > 10) {
       // Update data here
       List<APIParser> wows = [
-        WikiAchievementParser(server),
-        WikiCollectionParser(server),
-        WikiCollectionItemParser(server),
-        WikiCommanderSkillParser(server),
-        WikiConsumableParser(server),
+        WikiAchievementGetter(server),
+        WikiCollectionGetter(server),
+        WikiCollectionItemGetter(server),
+        WikiCommanderSkillGetter(server),
+        WikiConsumableGetter(server),
         // Encyclopedia will also be updated
-        // WikiEncyclopediaParser(server),
-        WikiGameMapParser(server),
-        WikiWarshipParser(server),
-        ClanGlossaryParser(server),
+        // WikiEncyclopediaGetter(server),
+        WikiGameMapGetter(server),
+        WikiWarshipGetter(server),
+        ClanGlossaryGetter(server),
       ];
       // Extra data from GitHub
       List<GitHubParser> github = [
-        ShipAliasParser(),
-        PRDataParser(),
-        PluginParser(),
+        ShipAliasGetter(),
+        PRDataGetter(),
+        PluginGetter(),
       ];
 
       // Download from WarGaming API

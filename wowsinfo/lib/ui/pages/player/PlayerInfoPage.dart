@@ -85,7 +85,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
     final server = widget.player.server;
     final accountId = widget.player.playerId;
     try {
-      final basic = BasicPlayerInfoParser(server, accountId);
+      final basic = BasicPlayerInfoGetter(server, accountId);
       final basicInfo = basic.parse(await basic.download(appendLang: false));
       if (basicInfo != null) {
         setState(() {
@@ -94,7 +94,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
         });
 
         // Request for clan tag
-        final tag = PlayerClanTagParser(server, accountId);
+        final tag = PlayerClanTagGetter(server, accountId);
         final clanTag = tag.parse(await tag.download(appendLang: false));
         if (clanTag != null) {
           setState(() {
@@ -107,7 +107,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
           setState(() => this.pvp = basicInfo.statistic.pvp);
 
           // Request for achievement
-          final a = PlayerAchievementParser(server, accountId);
+          final a = PlayerAchievementGetter(server, accountId);
           a.download(appendLang: false).then((value) {
             final achievement = a.parse(value);
             if (achievement != null) {
@@ -118,7 +118,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
           });
 
           // Request for ship
-          final ship = PlayerShipInfoParser(server, accountId);
+          final ship = PlayerShipInfoGetter(server, accountId);
           ship.download(appendLang: false).then((value) {
             final shipInfo = ship.parse(value);
             if (shipInfo != null) {
@@ -129,7 +129,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
           });
 
           // Request for recent player info
-          final recent = RecentPlayerInfoParser(server, accountId);
+          final recent = RecentPlayerInfoGetter(server, accountId);
           recent.download(appendLang: false).then((value) {
             final recentInfo = recent.parse(value);
             if (recentInfo != null) {
@@ -140,7 +140,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
           });
 
           // Request for rank
-          final r = RankPlayerInfoParser(server, accountId);
+          final r = RankPlayerInfoGetter(server, accountId);
           r.download(appendLang: false).then((value) {
             final rankInfo = r.parse(value);
             if (rankInfo != null && rankInfo.season != null) {
@@ -151,7 +151,7 @@ class _PlayerInfoPageState extends State<PlayerInfoPage> {
           });
 
           // Request for rank ship
-          final rs = RankPlayerShipInfoParser(server, accountId);
+          final rs = RankPlayerShipInfoGetter(server, accountId);
           rs.download(appendLang: false).then((value) {
             final rankShipInfo = rs.parse(value);
             if (rankShipInfo != null && rankShipInfo.ships.length > 0) {

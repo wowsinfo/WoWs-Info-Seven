@@ -3,8 +3,8 @@ import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart';
 
 import 'APIParser.dart';
 
-class WikiWarshipParser extends APIParser {
-  WikiWarshipParser(GameServer server) : super(server) {
+class WikiWarshipGetter extends WoWsApiService {
+  WikiWarshipGetter(GameServer server) : super(server) {
     this.link += '/wows/encyclopedia/ships/';
     addAPIKey();
   }

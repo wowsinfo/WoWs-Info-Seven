@@ -2,8 +2,8 @@ import 'package:wowsinfo/core/models/UI/GameServer.dart';
 import 'package:wowsinfo/core/models/WoWs/BasicPlayerInfo.dart';
 import 'APIParser.dart';
 
-class BasicPlayerInfoParser extends APIParser {
-  BasicPlayerInfoParser(GameServer server, int accountId) : super(server) {
+class BasicPlayerInfoGetter extends WoWsApiService {
+  BasicPlayerInfoGetter(GameServer server, int accountId) : super(server) {
     this.link += '/wows/account/info/';
     addAPIKey();
     // Add pve, rank, solo, div2 and div3

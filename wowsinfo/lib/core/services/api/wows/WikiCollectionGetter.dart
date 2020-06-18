@@ -2,8 +2,8 @@ import 'package:wowsinfo/core/models/UI/GameServer.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiCollection.dart';
 import 'APIParser.dart';
 
-class WikiCollectionParser extends APIParser {
-  WikiCollectionParser(GameServer server) : super(server) {
+class WikiCollectionGetter extends WoWsApiService {
+  WikiCollectionGetter(GameServer server) : super(server) {
     this.link += '/wows/encyclopedia/collections/';
     addAPIKey();
     this.link += '&fields=-card_cost%2C-tag';

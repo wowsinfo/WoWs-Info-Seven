@@ -3,8 +3,8 @@ import 'package:wowsinfo/core/models/Wiki/WikiCommanderSkill.dart';
 
 import 'APIParser.dart';
 
-class WikiCommanderSkillParser extends APIParser {
-  WikiCommanderSkillParser(GameServer server) : super(server) {
+class WikiCommanderSkillGetter extends WoWsApiService {
+  WikiCommanderSkillGetter(GameServer server) : super(server) {
     this.link += '/wows/encyclopedia/crewskills/';
     addAPIKey();
   }

@@ -34,7 +34,7 @@ class _ClanInfoPageState extends State<ClanInfoPage> {
     this.pref = Provider.of<Preference>(context, listen: false);
     // Saved server should be used here, if server is passed in, use it
     final parser =
-        ClanInfoParser(widget.server ?? widget.clan.server, widget.clan.clanId);
+        ClanInfoGetter(widget.server ?? widget.clan.server, widget.clan.clanId);
     parser.download().then((json) {
       final info = parser.parse(json);
       if (info != null) {

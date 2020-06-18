@@ -2,8 +2,8 @@ import 'package:wowsinfo/core/models/UI/GameServer.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiGameMap.dart';
 import 'APIParser.dart';
 
-class WikiGameMapParser extends APIParser {
-  WikiGameMapParser(GameServer server) : super(server) {
+class WikiGameMapGetter extends WoWsApiService {
+  WikiGameMapGetter(GameServer server) : super(server) {
     this.link += '/wows/encyclopedia/battlearenas/';
     addAPIKey();
     this.link += '&fields=-battle_arena_id';

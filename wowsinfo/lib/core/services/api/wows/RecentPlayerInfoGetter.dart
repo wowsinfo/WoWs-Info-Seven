@@ -3,8 +3,8 @@ import 'package:wowsinfo/core/models/UI/RecentDate.dart';
 import 'package:wowsinfo/core/models/WoWs/RecentPlayerInfo.dart';
 import 'APIParser.dart';
 
-class RecentPlayerInfoParser extends APIParser {
-  RecentPlayerInfoParser(GameServer server, int accountId) : super(server) {
+class RecentPlayerInfoGetter extends WoWsApiService {
+  RecentPlayerInfoGetter(GameServer server, int accountId) : super(server) {
     this.link += '/wows/account/statsbydate/';
     addAPIKey();
     final recent = RecentDate();

@@ -124,7 +124,7 @@ class _SearchPageState extends State<SearchPage> {
   searchClan() async {
     // At least 2 characters for clans and at most 5 characters
     if (input.length < 2 || input.length > 5) return;
-    final parser = SearchClanResultParser(pref.gameServer, input.trim());
+    final parser = SearchClanResultGetter(pref.gameServer, input.trim());
     final clan = parser.parse(await parser.download());
     if (clan != null) {
       setState(() => this.clans = clan.data ?? []);
@@ -134,7 +134,7 @@ class _SearchPageState extends State<SearchPage> {
   searchPlayer() async {
     // At least 3 characters for players, max 24 according to the API
     if (input.length < 3 || input.length > 24) return;
-    final parser = SearchPlayerResultParser(pref.gameServer, input.trim());
+    final parser = SearchPlayerResultGetter(pref.gameServer, input.trim());
     final player = parser.parse(await parser.download(appendLang: false));
     if (player != null) {
       setState(() => this.players = player.players ?? []);

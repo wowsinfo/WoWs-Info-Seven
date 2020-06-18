@@ -93,7 +93,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage>
     // Extra info collected by me
 
     // Load data
-    final parser = WikiShipInfoParser(pref.gameServer, widget.ship.shipId);
+    final parser = WikiShipInfoGetter(pref.gameServer, widget.ship.shipId);
     parser.download().then((value) {
       this.info = parser.parse(value);
       if (info != null) {
@@ -397,7 +397,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage>
                                 child: Text('Update ship modules'),
                                 onPressed: () async {
                                   if (selectedModuleMap.length > 0) {
-                                    final moduleParser = WikiShipModuleParser(
+                                    final moduleParser = WikiShipModuleGetter(
                                         pref.gameServer,
                                         info.shipId,
                                         selectedModuleMap);

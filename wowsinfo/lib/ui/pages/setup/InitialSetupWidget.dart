@@ -24,7 +24,7 @@ class _InitialSetupWidgetState extends State<InitialSetupWidget> {
   void initState() {
     super.initState();
     // Load some data here
-    final parser = WikiEncyclopediaParser(GameServer.fromIndex(3));
+    final parser = WikiEncyclopediaGetter(GameServer.fromIndex(3));
     parser.download().then((value) {
       final e = parser.parse(value);
       if (e == null) {

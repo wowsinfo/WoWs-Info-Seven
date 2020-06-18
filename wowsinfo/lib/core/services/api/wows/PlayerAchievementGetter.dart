@@ -2,8 +2,8 @@ import 'package:wowsinfo/core/models/UI/GameServer.dart';
 import 'package:wowsinfo/core/models/WoWs/PlayerAchievement.dart';
 import 'APIParser.dart';
 
-class PlayerAchievementParser extends APIParser {
-  PlayerAchievementParser(GameServer server, int accountId) : super(server) {
+class PlayerAchievementGetter extends WoWsApiService {
+  PlayerAchievementGetter(GameServer server, int accountId) : super(server) {
     this.link += '/wows/account/achievements/';
     addAPIKey();
     this.link += '&fields=battle&account_id=$accountId';

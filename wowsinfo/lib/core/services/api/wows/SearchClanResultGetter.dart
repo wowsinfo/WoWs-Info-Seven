@@ -2,8 +2,8 @@ import 'package:wowsinfo/core/models/UI/GameServer.dart';
 import 'package:wowsinfo/core/models/WoWs/SearchClanResult.dart';
 import 'APIParser.dart';
 
-class SearchClanResultParser extends APIParser {
-  SearchClanResultParser(GameServer server, String tag) : super(server) {
+class SearchClanResultGetter extends WoWsApiService {
+  SearchClanResultGetter(GameServer server, String tag) : super(server) {
     this.link += '/wows/clans/list/';
     addAPIKey();
     this.link += '&fields=clan_id%2Ctag&search=$tag&limit=10';

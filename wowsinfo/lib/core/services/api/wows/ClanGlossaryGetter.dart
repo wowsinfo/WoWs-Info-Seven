@@ -3,8 +3,8 @@ import 'package:wowsinfo/core/models/Clan/ClanGlossary.dart';
 
 import 'APIParser.dart';
 
-class ClanGlossaryParser extends APIParser {
-  ClanGlossaryParser(GameServer server) : super(server) {
+class ClanGlossaryGetter extends WoWsApiService {
+  ClanGlossaryGetter(GameServer server) : super(server) {
     this.link += '/wows/clans/glossary/';
     addAPIKey();
     this.link += '&fields=clans_roles';

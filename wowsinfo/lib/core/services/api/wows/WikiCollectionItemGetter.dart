@@ -2,8 +2,8 @@ import 'package:wowsinfo/core/models/UI/GameServer.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiCollectionItem.dart';
 import 'APIParser.dart';
 
-class WikiCollectionItemParser extends APIParser {
-  WikiCollectionItemParser(GameServer server) : super(server) {
+class WikiCollectionItemGetter extends WoWsApiService {
+  WikiCollectionItemGetter(GameServer server) : super(server) {
     this.link += '/wows/encyclopedia/collectioncards/';
     addAPIKey();
     this.link += '&fields=-tag%2C-images.large%2C-images.medium';

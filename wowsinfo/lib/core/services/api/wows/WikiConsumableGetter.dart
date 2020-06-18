@@ -2,8 +2,8 @@ import 'package:wowsinfo/core/models/UI/GameServer.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiConsumable.dart';
 import 'APIParser.dart';
 
-class WikiConsumableParser extends APIParser {
-  WikiConsumableParser(GameServer server) : super(server) {
+class WikiConsumableGetter extends WoWsApiService {
+  WikiConsumableGetter(GameServer server) : super(server) {
     this.link += '/wows/encyclopedia/consumables/';
     addAPIKey();
   }

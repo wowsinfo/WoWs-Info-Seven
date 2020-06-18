@@ -2,8 +2,8 @@ import 'package:wowsinfo/core/models/UI/GameServer.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiEncyclopedia.dart';
 import 'APIParser.dart';
 
-class WikiEncyclopediaParser extends APIParser {
-  WikiEncyclopediaParser(GameServer server) : super(server) {
+class WikiEncyclopediaGetter extends WoWsApiService {
+  WikiEncyclopediaGetter(GameServer server) : super(server) {
     this.link += '/wows/encyclopedia/info/';
     addAPIKey();
     this.link += '&fields=-ship_type_images.image_elite,-ship_modifications,-ships_updated_at';

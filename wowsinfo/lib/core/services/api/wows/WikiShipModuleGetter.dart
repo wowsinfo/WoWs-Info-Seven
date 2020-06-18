@@ -5,7 +5,7 @@ import 'package:wowsinfo/core/models/WoWs/WikiShipModule.dart';
 
 import 'APIParser.dart';
 
-class WikiShipModuleParser extends APIParser {
+class WikiShipModuleGetter extends WoWsApiService {
   String _id;
   ShipModule _module;
 
@@ -21,7 +21,7 @@ class WikiShipModuleParser extends APIParser {
     _module.diveBomber: 'dive_bomber_id',
   };
 
-  WikiShipModuleParser(CachedData cached, GameServer server, int shipId, Map<String, int> modules) : super(server) {
+  WikiShipModuleGetter(CachedData cached, GameServer server, int shipId, Map<String, int> modules) : super(server) {
     this._module = cached.shipModule;
     this._id = shipId.toString();
     this.link += '/wows/encyclopedia/shipprofile/';
