@@ -1,16 +1,16 @@
-import 'package:wowsinfo/core/services/caching/BaseCache.dart';
+import 'package:wowsinfo/core/models/Cacheable.dart';
 import 'package:wowsinfo/core/services/storage/BaseStorage.dart';
 
 /// This uses hive as the storage provider
-class HiveStorage extends BaseStorage<String> {
+class HiveStorage extends BaseStorage<String, Cacheable> {
   @override
-  String load(String key) {
+  Cacheable load(String key) {
     
   }
 
   @override
-  void save(String key, BaseCache cache) {
-    // TODO: implement save
+  void save(String key, Cacheable cache) {
+
   }
 
 }

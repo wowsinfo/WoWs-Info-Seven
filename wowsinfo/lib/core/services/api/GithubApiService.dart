@@ -1,11 +1,14 @@
+import 'dart:convert';
+
+import 'package:wowsinfo/core/models/JsonModel.dart';
 import 'package:wowsinfo/core/services/api/BaseApiService.dart';
 import 'package:wowsinfo/core/utils/Utils.dart';
 import 'package:http/http.dart' as http;
 
 /// Only an url is needed for data from Github
-abstract class GithubApiService extends BaseApiService<String> {
+abstract class GithubApiService<T extends JsonModel> extends BaseApiService<T> {
   @override
-  Future<String> requestData() async {
+  Future<T> requestData() async {
     try {
       final response = await http
           .get(
@@ -15,7 +18,8 @@ abstract class GithubApiService extends BaseApiService<String> {
 
       // Return the body only when it is 200 all good
       if (response.statusCode == 200) {
-        return response.body;
+        final body = response.body;
+        if (body.isNotEmpty) return parse(body);
       }
 
       return null;

@@ -6,4 +6,5 @@ abstract class BaseApiService<T> {
   String getRequestLink() => getBaseLink() + getExtraFields();
   String getBaseLink();
   String getExtraFields();
+  T parse(Object response);
 }
