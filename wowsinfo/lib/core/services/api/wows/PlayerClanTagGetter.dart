@@ -1,18 +1,14 @@
 import 'package:wowsinfo/core/models/UI/GameServer.dart';
-import 'package:wowsinfo/core/models/WoWs/PlayerClanTag.dart';
-import 'APIParser.dart';
+import 'package:wowsinfo/core/services/api/WoWsApiService.dart';
 
 class PlayerClanTagGetter extends WoWsApiService {
-  PlayerClanTagGetter(GameServer server, int accountId) : super(server) {
-    this.link += '/wows/clans/accountinfo/';
-    addAPIKey();
-    this.link += '&extra=clan&fields=clan.tag,clan.clan_id&account_id=$accountId';
-  }
+  final int _accountId;
+  PlayerClanTagGetter(GameServer server, this._accountId) : super(server);
 
   @override
-  PlayerClanTag parse(List<Map<String, dynamic>> json) {
-    if (json.length == 0) return null;
-    final data = PlayerClanTag(json[0]['data']);
-    return data;
-  }
+  String getDomainFields() => 'wows/clans/accountinfo/';
+
+  @override
+  String getExtraFields() =>
+      '&extra=clan&fields=clan.tag,clan.clan_id&account_id=$_accountId';
 }

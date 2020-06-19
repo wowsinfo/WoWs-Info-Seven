@@ -1,22 +1,12 @@
 import 'package:wowsinfo/core/models/UI/GameServer.dart';
-import 'package:wowsinfo/core/models/Wiki/WikiCommanderSkill.dart';
-
-import 'APIParser.dart';
+import 'package:wowsinfo/core/services/api/WoWsApiService.dart';
 
 class WikiCommanderSkillGetter extends WoWsApiService {
-  WikiCommanderSkillGetter(GameServer server) : super(server) {
-    this.link += '/wows/encyclopedia/crewskills/';
-    addAPIKey();
-  }
+  WikiCommanderSkillGetter(GameServer server) : super(server);
 
   @override
-  WikiCommanderSkill parse(List<Map<String, dynamic>> json) {
-    if (json.length == 0) return null;
-    final first = WikiCommanderSkill.fromJson(json.removeAt(0)['data']);
-    // Merge everything
-    json.forEach((element) {
-      first.skill.addAll(WikiCommanderSkill.fromJson(element['data']).skill);
-    });
-    return first;
-  }
+  String getDomainFields() => 'wows/encyclopedia/crewskills/';
+
+  @override
+  String getExtraFields() => '';
 }

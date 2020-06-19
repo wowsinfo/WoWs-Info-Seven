@@ -1,22 +1,12 @@
 import 'package:wowsinfo/core/models/UI/GameServer.dart';
-import 'package:wowsinfo/core/models/Wiki/WikiCollectionItem.dart';
-import 'APIParser.dart';
+import 'package:wowsinfo/core/services/api/WoWsApiService.dart';
 
 class WikiCollectionItemGetter extends WoWsApiService {
-  WikiCollectionItemGetter(GameServer server) : super(server) {
-    this.link += '/wows/encyclopedia/collectioncards/';
-    addAPIKey();
-    this.link += '&fields=-tag%2C-images.large%2C-images.medium';
-  }
+  WikiCollectionItemGetter(GameServer server) : super(server);
 
   @override
-  WikiCollectionItem parse(List<Map<String, dynamic>> json) {
-    if (json.length == 0) return null;
-    final first = WikiCollectionItem.fromJson(json.removeAt(0)['data']);
-    // Merge everything
-    json.forEach((element) {
-      first.item.addAll(WikiCollectionItem.fromJson(element['data']).item);
-    });
-    return first;
-  }
+  String getDomainFields() => '/wows/encyclopedia/collectioncards/';
+
+  @override
+  String getExtraFields() => '&fields=-tag%2C-images.large%2C-images.medium';
 }

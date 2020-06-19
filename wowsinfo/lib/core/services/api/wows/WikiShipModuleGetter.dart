@@ -1,43 +1,34 @@
 import 'package:wowsinfo/core/models/Wiki/WikiEncyclopedia.dart';
 import 'package:wowsinfo/core/providers/CachedData.dart';
 import 'package:wowsinfo/core/models/UI/GameServer.dart';
-import 'package:wowsinfo/core/models/WoWs/WikiShipModule.dart';
-
-import 'APIParser.dart';
+import 'package:wowsinfo/core/services/api/WoWsApiService.dart';
 
 class WikiShipModuleGetter extends WoWsApiService {
-  String _id;
-  ShipModule _module;
+  final String _id;
+  final ShipModule _shipModule;
+  final Map<String, int> _modules;
 
-  Map<String, String> get _apiMap => {
-    _module.engine: 'engine_id',
-    _module.torpedoBomber: 'torpedo_bomber_id',
-    _module.fighter: 'fighter_id',
-    _module.hull: 'hull_id',
-    _module.artillery: 'artillery_id',
-    _module.torpedo: 'torpedoes_id',
-    _module.suo: 'fire_control_id',
-    _module.flightControl: 'fire_control_id',
-    _module.diveBomber: 'dive_bomber_id',
+  Map<String, String> _getApiMap() => {
+    _shipModule.engine: 'engine_id',
+    _shipModule.torpedoBomber: 'torpedo_bomber_id',
+    _shipModule.fighter: 'fighter_id',
+    _shipModule.hull: 'hull_id',
+    _shipModule.artillery: 'artillery_id',
+    _shipModule.torpedo: 'torpedoes_id',
+    _shipModule.suo: 'fire_control_id',
+    _shipModule.flightControl: 'fire_control_id',
+    _shipModule.diveBomber: 'dive_bomber_id',
   };
 
-  WikiShipModuleGetter(CachedData cached, GameServer server, int shipId, Map<String, int> modules) : super(server) {
-    this._module = cached.shipModule;
-    this._id = shipId.toString();
-    this.link += '/wows/encyclopedia/shipprofile/';
-    addAPIKey();
-    this.link += '&ship_id=$_id';
-    this.link += '&' + modules.entries.map((e) {
-      final key = e.key;
-      final currModule = e.value;
-      return '${_apiMap[key]}=$currModule';
-    }).join('&');
-  }
+  WikiShipModuleGetter(GameServer server, this._id, this._shipModule, this._modules) : super(server);
+  
+  @override
+  String getDomainFields() => 'wows/encyclopedia/shipprofile/';
 
   @override
-  WikiShipModule parse(List<Map<String, dynamic>> json) {
-    if (json.length == 0) return null;
-    final first = WikiShipModule(json[0]['data'][_id]);
-    return first;
-  }
+  String getExtraFields() => '&ship_id=$_id&' + _modules.entries.map((e) {
+      final key = e.key;
+      final currModule = e.value;
+      return '${_getApiMap()[key]}=$currModule';
+    }).join('&');
 }

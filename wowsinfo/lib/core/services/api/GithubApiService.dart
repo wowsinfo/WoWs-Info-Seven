@@ -25,7 +25,7 @@ abstract class GithubApiService extends BaseApiService<String> {
     }
   }
 
-  // This is the top level link which is just my GitHub profile page
+  /// This is the top level link which is just my GitHub profile page
   @override
-  String getRequestLink() => 'https://raw.githubusercontent.com/HenryQuan/';
+  String getBaseLink() => 'https://raw.githubusercontent.com/HenryQuan/';
 }

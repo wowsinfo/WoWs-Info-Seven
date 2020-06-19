@@ -1,18 +1,13 @@
 import 'package:wowsinfo/core/models/UI/GameServer.dart';
-import 'package:wowsinfo/core/models/Wiki/WikiEncyclopedia.dart';
-import 'APIParser.dart';
+import 'package:wowsinfo/core/services/api/WoWsApiService.dart';
 
 class WikiEncyclopediaGetter extends WoWsApiService {
-  WikiEncyclopediaGetter(GameServer server) : super(server) {
-    this.link += '/wows/encyclopedia/info/';
-    addAPIKey();
-    this.link += '&fields=-ship_type_images.image_elite,-ship_modifications,-ships_updated_at';
-  }
+  WikiEncyclopediaGetter(GameServer server) : super(server);
 
   @override
-  WikiEncyclopedia parse(List<Map<String, dynamic>> json) {
-    if (json.length == 0) return null;
-    final info = WikiEncyclopedia.fromJson(json[0]['data']);
-    return info;
-  }
+  String getDomainFields() => 'wows/encyclopedia/info/';
+
+  @override
+  String getExtraFields() =>
+      '&fields=-ship_type_images.image_elite,-ship_modifications,-ships_updated_at';
 }

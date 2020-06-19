@@ -1,18 +1,13 @@
 import 'package:wowsinfo/core/models/UI/GameServer.dart';
-import 'package:wowsinfo/core/models/WoWs/RankPlayerInfo.dart';
-import 'APIParser.dart';
+import 'package:wowsinfo/core/services/api/WoWsApiService.dart';
 
 class RankPlayerInfoGetter extends WoWsApiService {
-  RankPlayerInfoGetter(GameServer server, int accountId) : super(server) {
-    this.link += '/wows/seasons/accountinfo/';
-    addAPIKey();
-    this.link += '&account_id=$accountId';
-  }
+  final int _accountId;
+  RankPlayerInfoGetter(GameServer server, this._accountId) : super(server);
 
   @override
-  RankPlayerInfo parse(List<Map<String, dynamic>> json) {
-    if (json.length == 0) return null;
-    final data = RankPlayerInfo(json[0]['data']);
-    return data;
-  }
+  String getDomainFields() => 'wows/seasons/accountinfo/';
+
+  @override
+  String getExtraFields() => '&account_id=$_accountId';
 }

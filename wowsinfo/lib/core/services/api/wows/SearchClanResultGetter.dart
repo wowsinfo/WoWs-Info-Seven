@@ -1,18 +1,14 @@
 import 'package:wowsinfo/core/models/UI/GameServer.dart';
-import 'package:wowsinfo/core/models/WoWs/SearchClanResult.dart';
-import 'APIParser.dart';
+import 'package:wowsinfo/core/services/api/WoWsApiService.dart';
 
 class SearchClanResultGetter extends WoWsApiService {
-  SearchClanResultGetter(GameServer server, String tag) : super(server) {
-    this.link += '/wows/clans/list/';
-    addAPIKey();
-    this.link += '&fields=clan_id%2Ctag&search=$tag&limit=10';
-  }
+  final String _tag;
+  SearchClanResultGetter(GameServer server, this._tag) : super(server);
 
   @override
-  SearchClanResult parse(List<Map<String, dynamic>> json) {
-    if (json.length == 0) return null;
-    final data = SearchClanResult(json[0]['data']);
-    return data;
-  }
+  String getDomainFields() => 'wows/clans/list/';
+
+  /// Here the limit is 10 because there will usually be more clans than players
+  @override
+  String getExtraFields() => '&fields=clan_id%2Ctag&search=$_tag&limit=10';
 }

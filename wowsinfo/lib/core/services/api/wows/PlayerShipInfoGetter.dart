@@ -1,19 +1,19 @@
 import 'package:wowsinfo/core/models/UI/GameServer.dart';
-import 'package:wowsinfo/core/models/WoWs/PlayerShipInfo.dart';
-import 'APIParser.dart';
+import 'package:wowsinfo/core/services/api/WoWsApiService.dart';
 
 class PlayerShipInfoGetter extends WoWsApiService {
+  final int _accountId;
+  String _shipId;
+
   /// If `shipId` is `empty`, all ships will be returned
-  PlayerShipInfoGetter(GameServer server, int accountId, {String shipId = ''}) : super(server) {
-    this.link += '/wows/ships/stats/';
-    addAPIKey();
-    this.link += '&account_id=$accountId&ship_id=$shipId';
+  PlayerShipInfoGetter(GameServer server, this._accountId, {String shipId = ''})
+      : super(server) {
+    this._shipId = shipId;
   }
 
   @override
-  PlayerShipInfo parse(List<Map<String, dynamic>> json) {
-    if (json.length == 0) return null;
-    final data = PlayerShipInfo(json[0]['data']);
-    return data;
-  }
+  String getDomainFields() => 'wows/ships/stats/';
+
+  @override
+  String getExtraFields() => '&account_id=$_accountId&ship_id=$_shipId';
 }
