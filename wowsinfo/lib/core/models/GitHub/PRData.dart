@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:wowsinfo/core/models/Cacheable.dart';
 import 'package:wowsinfo/core/extensions/NumberExtension.dart';
 
@@ -17,6 +19,9 @@ class PRData implements Cacheable {
 
   @override
   bool isValid() => ships.isNotEmpty;
+
+  @override
+  output() => jsonEncode(toJson());
 }
 
 /// This is the `AverageStats` class
