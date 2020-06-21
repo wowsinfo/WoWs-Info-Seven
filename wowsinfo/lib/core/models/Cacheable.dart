@@ -7,6 +7,9 @@ import 'package:wowsinfo/core/models/JsonModel.dart';
 abstract class Cacheable extends JsonModel {
   Cacheable(Map<String, dynamic> json) : super(json);
 
+  /// Check if the data is valid and whether it is corrupted
+  bool isValid();
+
   Map<String, dynamic> toJson();
 
   String jsonString() => jsonEncode(this.toJson());

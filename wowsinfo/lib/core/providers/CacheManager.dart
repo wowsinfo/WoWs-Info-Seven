@@ -1,8 +1,6 @@
 import 'dart:convert';
 
 import 'package:hive/hive.dart';
-import 'package:wowsinfo/core/constants/AppConstant.dart';
-import 'package:wowsinfo/core/providers/LocalData.dart';
 import 'package:wowsinfo/core/providers/Preference.dart';
 import 'package:wowsinfo/core/models/Cacheable.dart';
 import 'package:wowsinfo/core/models/Clan/ClanGlossary.dart';
@@ -23,7 +21,7 @@ import 'package:wowsinfo/core/utils/Utils.dart';
 /// It handles cached data but mainly wiki
 /// - it is usually read only
 /// - it only updates when necessary
-class CachedData extends LocalData {
+class CacheManager {
 
   static const BOX_NAME = 'cached_data';
 

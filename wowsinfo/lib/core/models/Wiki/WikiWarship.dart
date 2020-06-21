@@ -23,6 +23,12 @@ class WikiWarship extends Cacheable {
   }
 
   Map<String, dynamic> toJson() => this.ships.cast<String, dynamic>();
+
+  @override
+  bool isValid() {
+    // TODO: implement isValid
+    throw UnimplementedError();
+  }
 }
 
 /// This is the `Warship` class

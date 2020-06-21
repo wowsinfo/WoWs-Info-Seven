@@ -14,7 +14,7 @@ import 'package:wowsinfo/core/utils/Utils.dart';
 /// This is the `Preference` class
 /// - it manages all const a preferences including those that are used in app provider
 /// - mainly changable ones
-class Preference extends LocalData with ChangeNotifier {
+class ConfigurationManager with ChangeNotifier {
   /// `KEYS` are stored here so that I won't have any typo or changed the string accidentally
   static const BOX_NAME = 'preference';
   static const FIRST_LAUNCH = 'first_launch';

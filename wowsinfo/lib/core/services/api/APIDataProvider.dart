@@ -1,7 +1,7 @@
+import 'package:wowsinfo/core/services/data/BaseDataProvider.dart';
+
 /// This gets data via API or something similar
-abstract class BaseApiService<T> {
-  // Request data from API (or some other data providers)
-  Future<T> requestData();
+abstract class APIDataProvider<T> extends BaseDataProvider<T> {
   // The address of the link, usually made of a base link and extra fields
   String getRequestLink() => getBaseLink() + getExtraFields();
   String getBaseLink();

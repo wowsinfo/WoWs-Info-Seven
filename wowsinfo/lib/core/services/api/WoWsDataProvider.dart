@@ -1,7 +1,6 @@
-import 'package:wowsinfo/core/models/Cacheable.dart';
 import 'package:wowsinfo/core/models/JsonModel.dart';
 import 'package:wowsinfo/core/models/UI/GameServer.dart';
-import 'package:wowsinfo/core/services/api/BaseApiService.dart';
+import 'package:wowsinfo/core/services/api/APIDataProvider.dart';
 import 'package:wowsinfo/core/services/api/key.dart';
 import 'package:wowsinfo/core/utils/Utils.dart';
 import 'package:http/http.dart' as http;
@@ -9,7 +8,7 @@ import 'package:http/http.dart' as http;
 /// Wargmaing API is a bit complicated. Often, it needs an api key, data language and some fields
 /// - Paging is necessary sometimes
 /// - It returns a list of string
-abstract class WoWsApiService<T extends JsonModel> extends BaseApiService<T> {
+abstract class WoWsDataProvider<T extends JsonModel> extends APIDataProvider<T> {
   int _pageNumber = 1;
   final GameServer server;
 
@@ -18,7 +17,7 @@ abstract class WoWsApiService<T extends JsonModel> extends BaseApiService<T> {
   bool get isNotEmpty => _jsonList.length > 0;
 
   /// Server is necessary for almost all getters
-  WoWsApiService(this.server);
+  WoWsDataProvider(this.server);
 
   /// This requests to Wargaming API server and will check if it is valid and will request more if it has more data
   @override

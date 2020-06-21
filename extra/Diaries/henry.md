@@ -7,6 +7,11 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## 21/06/2020
+### Summary
+I did some thinkings yesterday and I will start working on it again. 
+### What to do tomorrow?
+
 ## 19/06/2020
 ### Summary
 More work on data getters and now, they will just return the data we want. This is a good step but I still don't think it is versatile enough. I want a `Cacheable` to work for all types. It should handle saving to local storage and able to load as well. Some data needs to be downloaded so they are a different type of `Cacheable` where a data provider needs to pass in if the local storage doesn't have it. There are managers to manage relavent `Cacheables` and ask them to load, save and provider data. 
