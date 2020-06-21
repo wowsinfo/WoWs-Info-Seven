@@ -1,14 +1,16 @@
+import 'dart:convert';
+
 import 'package:wowsinfo/core/models/Cacheable.dart';
 
 /// This is the `ShipAlias` class
-class ShipAlias extends Cacheable {
+class ShipAlias implements Cacheable {
   Map<String, Alias> alias;
   bool hasAlias(String id) => this.alias.containsKey(id);
 
   /// Call `hasAlias` to check if id exists first
   String getAlisa(String id) => alias[id].name;
 
-  ShipAlias.fromJson(Map<String, dynamic> json) : super(json) {
+  ShipAlias.fromJson(Map<String, dynamic> json) {
     this.alias =
         (json['alias'] as Map).map((a, b) => MapEntry(a, Alias.fromJson(b)));
   }
@@ -21,6 +23,9 @@ class ShipAlias extends Cacheable {
 
   @override
   bool isValid() => alias.isNotEmpty;
+
+  @override
+  output() => jsonEncode(toJson());
 }
 
 /// This is the `Alias` class

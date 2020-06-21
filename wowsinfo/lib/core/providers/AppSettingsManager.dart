@@ -70,7 +70,7 @@ class AppSettingsManager with ChangeNotifier {
 
 /// This saves the material app main theme colour
 /// - It uses blue colour by default
-class AppThemeColour extends Cacheable {
+class AppThemeColour implements Cacheable {
   /// All material colour
   static const THEME_COLOUR_LIST = [
     Colors.red,
@@ -102,7 +102,7 @@ class AppThemeColour extends Cacheable {
     _colour = c;
   }
 
-  AppThemeColour(Map<String, dynamic> json) : super(json) {
+  AppThemeColour(Map<String, dynamic> json){
     this._colour = json['colour'];
   }
 
@@ -116,7 +116,7 @@ class AppThemeColour extends Cacheable {
 
 /// This saves the material app's brightness
 /// - It follows system theme by default
-class AppBrightness extends Cacheable {
+class AppBrightness implements Cacheable {
   /// light, dark or follow system
   static const THEME_BRIGHTNESS_MODE = [
     ThemeMode.light,
@@ -134,7 +134,7 @@ class AppBrightness extends Cacheable {
     _brightness = b;
   }
 
-  AppBrightness(Map<String, dynamic> json) : super(json) {
+  AppBrightness(Map<String, dynamic> json){
     _brightness = THEME_BRIGHTNESS_MODE[json['brightness'] ?? 2];
   }
 
@@ -149,7 +149,7 @@ class AppBrightness extends Cacheable {
 
 /// This saves the material app's main locel
 /// - If the locale is null, it means that the app will follow `system language`
-class AppLocale extends Cacheable {
+class AppLocale implements Cacheable {
   // Locale can be null, it simply follows system!
   Locale _locale;
   Locale get locale => _locale;
@@ -158,7 +158,7 @@ class AppLocale extends Cacheable {
     _locale = l;
   }
 
-  AppLocale(Map<String, dynamic> json) : super(json) {
+  AppLocale(Map<String, dynamic> json){
     final code = json['locale'];
     if (code != null) {
       if (code.contains('_')) {
@@ -186,4 +186,10 @@ class AppLocale extends Cacheable {
   Map<String, dynamic> toJson() => {
         'locale': _localeToCode(),
       };
+
+  @override
+  output() {
+    // TODO: implement output
+    throw UnimplementedError();
+  }
 }

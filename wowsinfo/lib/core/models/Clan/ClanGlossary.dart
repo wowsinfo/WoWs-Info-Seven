@@ -1,10 +1,12 @@
-import '../Cacheable.dart';
+import 'dart:convert';
+
+import 'package:wowsinfo/core/models/Cacheable.dart';
 
 /// This is the `ClanGlossary` class
-class ClanGlossary extends Cacheable {
+class ClanGlossary implements Cacheable {
   Map<String, String> roles;
 
-  ClanGlossary.fromJson(Map<String, dynamic> json) : super(null) {
+  ClanGlossary.fromJson(Map<String, dynamic> json) {
     this.roles = (json['clans_roles'] as Map).cast<String, String>();
   }
 
@@ -13,7 +15,10 @@ class ClanGlossary extends Cacheable {
       'clans_roles': this.roles,
     };
   }
-  
+
   @override
   bool isValid() => roles.isNotEmpty;
+
+  @override
+  output() => jsonEncode(toJson());
 }

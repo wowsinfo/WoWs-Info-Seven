@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wowsinfo/core/models/Cacheable.dart';
@@ -5,11 +7,10 @@ import 'package:wowsinfo/core/models/GitHub/ShipAlias.dart';
 import 'package:wowsinfo/core/models/Mergeable.dart';
 
 /// This is the `WikiWarship` class
-class WikiWarship extends Cacheable implements Mergeable<WikiWarship> {
+class WikiWarship implements Cacheable, Mergeable<WikiWarship> {
   Map<String, Warship> ships;
 
-  WikiWarship.fromJson(Map<String, dynamic> json, {ShipAlias alias})
-      : super(json) {
+  WikiWarship.fromJson(Map<String, dynamic> json, {ShipAlias alias}) {
     this.ships = json.map((a, b) => MapEntry(a, Warship.fromJson(b)));
     injectAlias(alias);
   }
@@ -36,6 +37,9 @@ class WikiWarship extends Cacheable implements Mergeable<WikiWarship> {
   mergeAll(Iterable<WikiWarship> object) {
     object.forEach((e) => this.merge(e));
   }
+
+  @override
+  output() => jsonEncode(toJson());
 }
 
 /// This is the `Warship` class

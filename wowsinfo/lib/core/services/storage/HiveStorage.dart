@@ -18,6 +18,6 @@ class HiveStorage<String, V extends Cacheable> extends BaseStorage<String, V> {
 
   @override
   Future<void> save(String key, V value) async {
-    _box.put(key, value);
+    _box.put(key, value.output());
   }
 }

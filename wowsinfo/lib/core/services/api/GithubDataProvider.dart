@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:wowsinfo/core/models/Cacheable.dart';
-import 'package:wowsinfo/core/models/JsonModel.dart';
 import 'package:wowsinfo/core/services/api/APIDataProvider.dart';
 import 'package:wowsinfo/core/utils/Utils.dart';
 import 'package:http/http.dart' as http;

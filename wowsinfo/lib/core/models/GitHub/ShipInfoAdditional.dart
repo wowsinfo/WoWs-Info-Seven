@@ -1,14 +1,16 @@
+import 'dart:convert';
+
 import 'package:wowsinfo/core/models/Cacheable.dart';
 
 /// This is the `ShipInfoAdditional` class
-class ShipInfoAdditional extends Cacheable {
+class ShipInfoAdditional implements Cacheable {
   double alphaPiercingHE;
   AP ap;
   double sigma;
   List<Consumable> consumable;
   List<int> permoflage;
 
-  ShipInfoAdditional.fromJson(Map<String, dynamic> json) : super(json) {
+  ShipInfoAdditional.fromJson(Map<String, dynamic> json) {
     this.alphaPiercingHE = json['alphaPiercingHE'];
     this.ap = AP.fromJson(json['ap']);
     this.sigma = json['sigma'];
@@ -30,6 +32,9 @@ class ShipInfoAdditional extends Cacheable {
 
   @override
   bool isValid() => consumable.isNotEmpty;
+
+  @override
+  output() => jsonEncode(toJson());
 }
 
 /// This is the `AP` class

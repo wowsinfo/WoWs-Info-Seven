@@ -1,13 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/models/Cacheable.dart';
 import 'package:wowsinfo/core/models/Mergeable.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiItem.dart';
 
 /// This is the `WikiCollectionItem` class
-class WikiCollectionItem extends Cacheable implements Mergeable<WikiCollectionItem>  {
+class WikiCollectionItem implements Cacheable, Mergeable<WikiCollectionItem>  {
   Map<String, CollectionItem> item;
 
-  WikiCollectionItem.fromJson(Map<String, dynamic> json): super(json) {
+  WikiCollectionItem.fromJson(Map<String, dynamic> json){
     this.item = json.map((a, b) => MapEntry(a, CollectionItem.fromJson(b)));
   }
 
@@ -25,6 +27,9 @@ class WikiCollectionItem extends Cacheable implements Mergeable<WikiCollectionIt
   mergeAll(Iterable<WikiCollectionItem> object) {
     object.forEach((e) => this.merge(e));
   }
+
+  @override
+  output() => jsonEncode(toJson());
 }
 
 /// This is the `CollectionItem` class

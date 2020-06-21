@@ -1,13 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/models/Cacheable.dart';
 import 'package:wowsinfo/core/models/Mergeable.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiItem.dart';
 
 /// This is the `WikiCommanderSkill` class
-class WikiCommanderSkill extends Cacheable implements Mergeable<WikiCommanderSkill>  {
+class WikiCommanderSkill implements Cacheable, Mergeable<WikiCommanderSkill>  {
   Map<String, Skill> skill;
 
-  WikiCommanderSkill.fromJson(Map<String, dynamic> json) : super(json) {
+  WikiCommanderSkill.fromJson(Map<String, dynamic> json){
     this.skill = json.map((a, b) => MapEntry(a, Skill.fromJson(b)));
   }
 
@@ -25,6 +27,9 @@ class WikiCommanderSkill extends Cacheable implements Mergeable<WikiCommanderSki
   mergeAll(Iterable<WikiCommanderSkill> object) {
     object.forEach((e) => this.merge(e));
   }
+
+  @override
+  output() => jsonEncode(toJson());
 }
 
 /// This is the `Skill` class

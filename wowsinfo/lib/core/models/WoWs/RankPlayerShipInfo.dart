@@ -110,7 +110,7 @@ class RankPvP extends JsonModel {
   String get maxFrag => '$maxFragsBattle';
   String get maxPlane => '$maxPlanesKilled';
 
-  RankPvP(Map<String, dynamic> json) : super(json) {
+  RankPvP(Map<String, dynamic> json){
     this.maxFragsBattle = json['max_frags_battle'];
     this.draw = json['draws'];
     this.maxXp = json['max_xp'];

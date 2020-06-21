@@ -1,13 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/models/Cacheable.dart';
 import 'package:wowsinfo/core/models/Mergeable.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiItem.dart';
 
 /// This is the `WikiConsumable` class
-class WikiConsumable extends Cacheable implements Mergeable<WikiConsumable>  {
+class WikiConsumable implements Cacheable, Mergeable<WikiConsumable>  {
   Map<String, Consumable> consumable;
 
-  WikiConsumable.fromJson(Map<String, dynamic> json) : super(json) {
+  WikiConsumable.fromJson(Map<String, dynamic> json){
     this.consumable = json.map((a, b) => MapEntry(a, Consumable.fromJson(b)));
   }
 
@@ -25,6 +27,9 @@ class WikiConsumable extends Cacheable implements Mergeable<WikiConsumable>  {
   mergeAll(Iterable<WikiConsumable> object) {
     object.forEach((e) => this.merge(e));
   }
+
+  @override
+  output() => jsonEncode(toJson());
 }
 
 /// This is the `Consumable` class

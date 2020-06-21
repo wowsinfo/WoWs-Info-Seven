@@ -1,7 +1,9 @@
+import 'dart:convert';
+
 import 'package:wowsinfo/core/models/Cacheable.dart';
 
 /// This is the `WikiEncyclopedia` class
-class WikiEncyclopedia extends Cacheable  {
+class WikiEncyclopedia implements Cacheable  {
   Map<String, String> language;
   ShipModule shipModule;
   Map<String, ShipTypeImage> shipTypeImage;
@@ -9,7 +11,7 @@ class WikiEncyclopedia extends Cacheable  {
   Map<String, String> shipType;
   String gameVersion;
 
-  WikiEncyclopedia.fromJson(Map<String, dynamic> json) : super(json) {
+  WikiEncyclopedia.fromJson(Map<String, dynamic> json){
     this.language = (json['languages'] as Map).cast<String, String>();
     if (json['ship_modules'] != null)
       this.shipModule = ShipModule.fromJson(json['ship_modules']);
@@ -34,6 +36,9 @@ class WikiEncyclopedia extends Cacheable  {
   @override
   bool isValid() =>
       language.isNotEmpty && shipNation.isNotEmpty && shipType.isNotEmpty;
+
+  @override
+  output() => jsonEncode(toJson());
 }
 
 /// This is the `ShipModule` class

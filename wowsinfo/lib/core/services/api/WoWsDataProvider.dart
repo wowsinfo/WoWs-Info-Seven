@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:wowsinfo/core/models/JsonModel.dart';
 import 'package:wowsinfo/core/models/Mergeable.dart';
 import 'package:wowsinfo/core/models/UI/GameServer.dart';
 import 'package:wowsinfo/core/services/api/APIDataProvider.dart';
@@ -11,7 +10,7 @@ import 'package:http/http.dart' as http;
 /// Wargmaing API is a bit complicated. Often, it needs an api key, data language and some fields
 /// - Paging is necessary sometimes
 /// - It returns a list of string
-abstract class WoWsDataProvider<T extends JsonModel> extends APIDataProvider<T> {
+abstract class WoWsDataProvider<T> extends APIDataProvider<T> {
   int _pageNumber = 1;
   final GameServer server;
 

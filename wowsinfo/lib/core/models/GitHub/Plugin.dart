@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/models/Cacheable.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiItem.dart';
@@ -5,7 +7,7 @@ import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart';
 import 'package:wowsinfo/core/models/WoWs/WikiShipInfo.dart';
 
 /// This is the `Plugin` class
-class Plugin extends Cacheable {
+class Plugin implements Cacheable {
   Map<String, ShipConsumable> consumable;
   Map<String, Modernization> upgrade;
   Map<String, OldShip> oldShip;
@@ -15,7 +17,7 @@ class Plugin extends Cacheable {
       consumable[v.name].getConsumable(v.type);
   OldShip getShip(int key) => oldShip[key.toString()];
 
-  Plugin.fromJson(Map<String, dynamic> json) : super(json) {
+  Plugin.fromJson(Map<String, dynamic> json) {
     this.consumable = (json['consumables'] as Map)
         .map((a, b) => MapEntry(a, ShipConsumable.fromJson(b)));
     this.upgrade = (json['upgrades'] as Map)
@@ -42,6 +44,9 @@ class Plugin extends Cacheable {
       upgrade.isNotEmpty &&
       oldShip.isNotEmpty &&
       shipWiki.isNotEmpty;
+
+  @override
+  output() => jsonEncode(toJson());
 }
 
 /// This is the `ShipConsumable` class

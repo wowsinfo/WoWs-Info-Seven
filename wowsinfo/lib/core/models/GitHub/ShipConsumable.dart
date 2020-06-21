@@ -1,7 +1,9 @@
+import 'dart:convert';
+
 import 'package:wowsinfo/core/models/Cacheable.dart';
 
 /// This is the `ShipConsumable` class
-class ShipConsumable extends Cacheable {
+class ShipConsumable implements Cacheable {
   Map<String, BasicConsumable> profiles;
   bool canBuy;
   int costCR;
@@ -10,7 +12,7 @@ class ShipConsumable extends Cacheable {
   String index;
   String name;
 
-  ShipConsumable.fromJson(Map<String, dynamic> json) : super(json) {
+  ShipConsumable.fromJson(Map<String, dynamic> json) {
     json.forEach((key, value) {
       if (value is Map && value.keys.length > 0) {
         this.profiles[key] = BasicConsumable.fromJson(value);
@@ -37,6 +39,9 @@ class ShipConsumable extends Cacheable {
 
   @override
   bool isValid() => profiles.isNotEmpty;
+
+  @override
+  output() => jsonEncode(toJson());
 }
 
 /// This is the `BasicConsumable` class

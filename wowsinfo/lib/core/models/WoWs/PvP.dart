@@ -41,7 +41,7 @@ class PvP extends RankPvP {
   String get maxSupression => '$maxSuppressionsCount';
   String get maxPotential => '$maxTotalAgro';
 
-  PvP(Map<String, dynamic> json) : super(json) {
+  PvP(Map<String, dynamic> json){
     this.damageToBuilding = json['damage_to_buildings'];
     this.maxShipsSpottedShipId = json['max_ships_spotted_ship_id'];
     this.maxDamageScouting = json['max_damage_scouting'];
