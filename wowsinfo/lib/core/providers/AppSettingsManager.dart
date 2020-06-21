@@ -14,6 +14,7 @@ class AppSettingsManager with ChangeNotifier {
     if (b != appThemeBrightness) {
       _appBrightness.value.brightness = b;
       _appBrightness.save();
+      _generateTheme();
       notifyListeners();
     }
   }
@@ -24,6 +25,7 @@ class AppSettingsManager with ChangeNotifier {
     if (c != primaryColour) {
       _themeColour.value.colour = c;
       _themeColour.save();
+      _generateTheme();
       notifyListeners();
     }
   }
@@ -52,6 +54,12 @@ class AppSettingsManager with ChangeNotifier {
     this._generateTheme();
   }
 
+  Future<void> load() async {
+    _appBrightness.load();
+    _themeColour.load();
+    _appLocale.load();
+  }
+
   /// This will update ThemeData
   _generateTheme() {
     final colour = primaryColour;
@@ -69,7 +77,7 @@ class AppSettingsManager with ChangeNotifier {
 }
 
 /// This saves the material app main theme colour
-/// - It uses blue colour by default
+/// - It uses blue colour by default, 5
 class AppThemeColour implements Cacheable {
   /// All material colour
   static const THEME_COLOUR_LIST = [
@@ -102,20 +110,19 @@ class AppThemeColour implements Cacheable {
     _colour = c;
   }
 
-  AppThemeColour(Map<String, dynamic> json){
-    this._colour = json['colour'];
+  AppThemeColour(int index){
+    this._colour = THEME_COLOUR_LIST[index ?? 5];
   }
 
   @override
   bool isValid() => _colour != null;
 
   @override
-  Map<String, dynamic> toJson() =>
-      {'colour': THEME_COLOUR_LIST.indexOf(_colour)};
+  output() => THEME_COLOUR_LIST.indexOf(_colour);
 }
 
 /// This saves the material app's brightness
-/// - It follows system theme by default
+/// - It follows system theme by default, 2
 class AppBrightness implements Cacheable {
   /// light, dark or follow system
   static const THEME_BRIGHTNESS_MODE = [
@@ -134,17 +141,15 @@ class AppBrightness implements Cacheable {
     _brightness = b;
   }
 
-  AppBrightness(Map<String, dynamic> json){
-    _brightness = THEME_BRIGHTNESS_MODE[json['brightness'] ?? 2];
+  AppBrightness(int index){
+    _brightness = THEME_BRIGHTNESS_MODE[index ?? 2];
   }
 
   @override
   bool isValid() => _brightness != null;
 
   @override
-  Map<String, dynamic> toJson() => {
-        'brightness': THEME_BRIGHTNESS_MODE.indexOf(_brightness),
-      };
+  output() => THEME_BRIGHTNESS_MODE.indexOf(_brightness);
 }
 
 /// This saves the material app's main locel
@@ -158,8 +163,7 @@ class AppLocale implements Cacheable {
     _locale = l;
   }
 
-  AppLocale(Map<String, dynamic> json){
-    final code = json['locale'];
+  AppLocale(String code){
     if (code != null) {
       if (code.contains('_')) {
         final codes = code.split('_');
@@ -183,13 +187,5 @@ class AppLocale implements Cacheable {
   bool isValid() => true;
 
   @override
-  Map<String, dynamic> toJson() => {
-        'locale': _localeToCode(),
-      };
-
-  @override
-  output() {
-    // TODO: implement output
-    throw UnimplementedError();
-  }
+  output() => _localeToCode();
 }

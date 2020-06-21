@@ -1,5 +1,4 @@
 import 'package:wowsinfo/core/services/storage/BaseStorage.dart';
-import 'package:wowsinfo/core/utils/Utils.dart';
 
 /// A cache should be able to
 /// - Retrieve data from storage services

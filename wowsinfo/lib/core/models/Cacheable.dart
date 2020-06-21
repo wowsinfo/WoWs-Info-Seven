@@ -3,8 +3,6 @@
 abstract class Cacheable {
   /// Check if the data is valid and whether it is corrupted
   bool isValid();
-  /// Convert itself to a json map
-  Map<String, dynamic> toJson();
   /// This is the final output to be saved
   dynamic output();
 }

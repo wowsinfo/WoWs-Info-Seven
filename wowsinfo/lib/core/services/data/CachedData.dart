@@ -32,4 +32,7 @@ class CachedData<String, V extends Cacheable>
       return false;
     }
   }
+
+  @override
+  Future<void> save() => storage.save(key, value.output());
 }
