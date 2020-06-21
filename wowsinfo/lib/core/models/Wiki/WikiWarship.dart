@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wowsinfo/core/models/Cacheable.dart';
 import 'package:wowsinfo/core/models/GitHub/ShipAlias.dart';
+import 'package:wowsinfo/core/models/Mergeable.dart';
 
 /// This is the `WikiWarship` class
-class WikiWarship extends Cacheable {
+class WikiWarship extends Cacheable implements Mergeable<WikiWarship> {
   Map<String, Warship> ships;
 
   WikiWarship.fromJson(Map<String, dynamic> json, {ShipAlias alias})
@@ -25,6 +26,16 @@ class WikiWarship extends Cacheable {
 
   @override
   bool isValid() => ships.isNotEmpty;
+
+  @override
+  merge(WikiWarship object) {
+    if (object != null) ships.addAll(object.ships);
+  }
+
+  @override
+  mergeAll(Iterable<WikiWarship> object) {
+    object.forEach((e) => this.merge(e));
+  }
 }
 
 /// This is the `Warship` class

@@ -1,7 +1,8 @@
-import '../Cacheable.dart';
+import 'package:wowsinfo/core/models/Cacheable.dart';
+import 'package:wowsinfo/core/models/Mergeable.dart';
 
 /// This is the `WikiGameMap` class
-class WikiGameMap extends Cacheable {
+class WikiGameMap extends Cacheable implements Mergeable<WikiGameMap>  {
   Map<String, GameMap> gameMap;
 
   WikiGameMap.fromJson(Map<String, dynamic> json) : super(json) {
@@ -12,6 +13,16 @@ class WikiGameMap extends Cacheable {
 
   @override
   bool isValid() => gameMap.isNotEmpty;
+
+  @override
+  merge(WikiGameMap object) {
+    if (object != null) gameMap.addAll(object.gameMap);
+  }
+
+  @override
+  mergeAll(Iterable<WikiGameMap> object) {
+    object.forEach((e) => this.merge(e));
+  }
 }
 
 /// This is the `GameMap` class

@@ -1,8 +1,9 @@
+import 'package:wowsinfo/core/models/Cacheable.dart';
 import 'package:wowsinfo/core/models/User/Player.dart';
 import 'package:wowsinfo/core/models/User/Clan.dart';
 
 /// This stores and manages player contact including players and clans
-class ContactList {
+class ContactList extends Cacheable {
   List<Player> players = [];
   updatePlayer(Player player, {bool add = true}) {
     if (add)
@@ -27,7 +28,7 @@ class ContactList {
   bool containsClan(Clan clan) =>
       this.clans.any((element) => element.clanId == clan.clanId);
 
-  ContactList.fromJson(Map<String, dynamic> json, this.pref) {
+  ContactList.fromJson(Map<String, dynamic> json, this.pref): super(json) {
     this.players =
         (json['players'] as List).map((e) => Player.fromJson(e)).toList();
     this.clans = (json['clans'] as List).map((e) => Clan.fromJson(e)).toList();
@@ -42,4 +43,7 @@ class ContactList {
       'clans': clans,
     };
   }
+
+  @override
+  bool isValid() => true;
 }

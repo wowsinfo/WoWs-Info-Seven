@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/models/Cacheable.dart';
+import 'package:wowsinfo/core/models/Mergeable.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiItem.dart';
 
 /// This is the `WikiAchievement` class
-class WikiAchievement extends Cacheable {
+class WikiAchievement extends Cacheable implements Mergeable<WikiAchievement> {
   Map<String, Achievement> achievement;
 
   WikiAchievement.fromJson(Map<String, dynamic> json) : super(json) {
@@ -14,6 +15,16 @@ class WikiAchievement extends Cacheable {
 
   @override
   bool isValid() => achievement.isNotEmpty;
+
+  @override
+  merge(WikiAchievement object) {
+    if (object != null) achievement.addAll(object.achievement);
+  }
+
+  @override
+  mergeAll(Iterable<WikiAchievement> object) {
+    object.forEach((e) => this.merge(e));
+  }
 }
 
 /// This is the `Achievement` class

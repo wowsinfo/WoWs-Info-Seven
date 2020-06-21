@@ -1,7 +1,7 @@
-import '../Cacheable.dart';
+import 'package:wowsinfo/core/models/Cacheable.dart';
 
 /// This is the `WikiEncyclopedia` class
-class WikiEncyclopedia extends Cacheable {
+class WikiEncyclopedia extends Cacheable  {
   Map<String, String> language;
   ShipModule shipModule;
   Map<String, ShipTypeImage> shipTypeImage;

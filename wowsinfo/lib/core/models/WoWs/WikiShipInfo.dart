@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wowsinfo/core/models/Wiki/WikiEncyclopedia.dart';
 import 'package:wowsinfo/core/providers/CachedData.dart';
 
 import 'WikiShipModule.dart';

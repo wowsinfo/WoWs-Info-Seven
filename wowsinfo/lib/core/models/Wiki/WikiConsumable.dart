@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/models/Cacheable.dart';
+import 'package:wowsinfo/core/models/Mergeable.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiItem.dart';
 
 /// This is the `WikiConsumable` class
-class WikiConsumable extends Cacheable {
+class WikiConsumable extends Cacheable implements Mergeable<WikiConsumable>  {
   Map<String, Consumable> consumable;
 
   WikiConsumable.fromJson(Map<String, dynamic> json) : super(json) {
@@ -14,6 +15,16 @@ class WikiConsumable extends Cacheable {
 
   @override
   bool isValid() => consumable.isNotEmpty;
+
+  @override
+  merge(WikiConsumable object) {
+    if (object != null) consumable.addAll(object.consumable);
+  }
+
+  @override
+  mergeAll(Iterable<WikiConsumable> object) {
+    object.forEach((e) => this.merge(e));
+  }
 }
 
 /// This is the `Consumable` class

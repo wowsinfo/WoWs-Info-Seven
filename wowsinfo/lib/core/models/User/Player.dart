@@ -1,16 +1,16 @@
+import 'package:wowsinfo/core/models/Cacheable.dart';
 import 'package:wowsinfo/core/models/UI/GameServer.dart';
 
 /// player nickname, account id and server code
-class Player {
+class Player extends Cacheable {
   String nickname;
   int playerId;
   GameServer server;
 
   String get playerIdString => '$playerId';
 
-  Player(this.nickname, this.playerId, this.server);
-
-  Player.fromJson(Map<String, dynamic> json) {
+  Player(this.nickname, this.playerId, this.server) : super(null);
+  Player.fromJson(Map<String, dynamic> json): super(json) {
     this.nickname = json['nickname'];
     this.playerId = json['account_id'];
     this.server = GameServer.fromIndex(json['server']);
@@ -23,4 +23,7 @@ class Player {
       'server': server.index,
     };
   }
+
+  @override
+  bool isValid() => true;
 }

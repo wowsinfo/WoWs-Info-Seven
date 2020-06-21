@@ -1,4 +1,4 @@
-import 'package:wowsinfo/core/providers/Preference.dart';
+import 'package:wowsinfo/core/models/UI/GameServer.dart';
 import 'package:wowsinfo/core/models/UI/WoWsDate.dart';
 import 'package:wowsinfo/core/models/User/Player.dart';
 
@@ -38,7 +38,8 @@ class ClanInfo {
       this.leaderName = json['leader_name'];
       this.creatorId = json['creator_id'];
       this.tag = json['tag'];
-      this.member = (json['members'] as Map).map((a, b) => MapEntry(a, Member(b)));
+      this.member =
+          (json['members'] as Map).map((a, b) => MapEntry(a, Member(b)));
       this.oldName = json['old_name'];
       this.isClanDisbanded = json['is_clan_disbanded'];
       this.renamedAt = json['renamed_at'];
@@ -61,7 +62,7 @@ class Member {
   bool get hasRole => role != 'commissioned_officer';
   bool get isCommander => role == 'commander';
   bool get isExecutive => role == 'executive_officer';
-  Player toPlayer(Preference pref) => Player(accountName, accountId, pref.gameServer);
+  Player toPlayer(GameServer server) => Player(accountName, accountId, server);
 
   Member(Map<String, dynamic> json) {
     this.role = json['role'];

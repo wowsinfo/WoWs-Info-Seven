@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:wowsinfo/core/models/JsonModel.dart';
+import 'package:wowsinfo/core/models/Mergeable.dart';
 import 'package:wowsinfo/core/models/UI/GameServer.dart';
 import 'package:wowsinfo/core/services/api/APIDataProvider.dart';
 import 'package:wowsinfo/core/services/api/key.dart';
@@ -22,7 +23,7 @@ abstract class WoWsDataProvider<T extends JsonModel> extends APIDataProvider<T> 
   /// This requests to Wargaming API server and will check if it is valid and will request more if it has more data
   @override
   Future<T> requestData({T Function(dynamic) creator}) async {
-    if (creator == null) throw Exception('A creator for GithubDataProvider is necessary');
+    if (creator == null) throw Exception('A creator for WoWsDataProvider is necessary');
     try {
       while (true) {
         final response = await http
@@ -45,7 +46,14 @@ abstract class WoWsDataProvider<T extends JsonModel> extends APIDataProvider<T> 
 
       if (_jsonList.length == 1) return creator(jsonDecode(_jsonList.first));
       else if (_jsonList.length > 1) {
-        
+        if (T is Mergeable) {
+          final data = creator(jsonDecode(_jsonList.removeLast()));
+          // Cast data to mergeable and merge all the rest
+          (data as Mergeable).mergeAll(_jsonList.map((e) => creator(jsonDecode(e))));
+          return data;
+        }
+
+        throw Exception('${T.runtimeType} has more than one page of data but it does not implement `Mergeable`');
       }
       return null;
     } catch (e) {

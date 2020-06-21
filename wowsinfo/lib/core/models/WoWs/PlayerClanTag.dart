@@ -1,4 +1,4 @@
-import 'package:wowsinfo/core/providers/Preference.dart';
+import 'package:wowsinfo/core/models/UI/GameServer.dart';
 import 'package:wowsinfo/core/models/User/Clan.dart';
 import 'package:wowsinfo/core/utils/Utils.dart';
 
@@ -9,7 +9,7 @@ class PlayerClanTag {
 
   String get tagString => '[$tag]';
   bool get hasTag => tag != null;
-  Clan toClan(Preference pref) => Clan(tag, clanId, pref.gameServer);
+  Clan toClan(GameServer server) => Clan(tag, clanId, server);
 
   PlayerClanTag(Map<String, dynamic> data) {
     final json = data.values.first;

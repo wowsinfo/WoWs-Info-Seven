@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/core/models/Cacheable.dart';
+import 'package:wowsinfo/core/models/Mergeable.dart';
 import 'package:wowsinfo/core/models/Wiki/WikiItem.dart';
 
 /// This is the `WikiCommanderSkill` class
-class WikiCommanderSkill extends Cacheable {
+class WikiCommanderSkill extends Cacheable implements Mergeable<WikiCommanderSkill>  {
   Map<String, Skill> skill;
 
   WikiCommanderSkill.fromJson(Map<String, dynamic> json) : super(json) {
@@ -14,6 +15,16 @@ class WikiCommanderSkill extends Cacheable {
 
   @override
   bool isValid() => skill.isNotEmpty;
+
+  @override
+  merge(WikiCommanderSkill object) {
+    if (object != null) skill.addAll(object.skill);
+  }
+
+  @override
+  mergeAll(Iterable<WikiCommanderSkill> object) {
+    object.forEach((e) => this.merge(e));
+  }
 }
 
 /// This is the `Skill` class
