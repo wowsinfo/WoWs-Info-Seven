@@ -8,5 +8,5 @@ abstract class BaseStorage<K, V> {
   Future<V> load(K key, {V Function(dynamic) creator});
 
   /// Save data to that key
-  void save(K key, V value);
+  Future<void> save(K key, V value);
 }
