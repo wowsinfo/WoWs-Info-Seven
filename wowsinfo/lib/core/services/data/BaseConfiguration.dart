@@ -21,10 +21,12 @@ abstract class BaseConfiguration<K, V> {
     // Only update if values are different
     if (newValue != _value) {
       _value = newValue;
-      storage.save(key, newValue);
+      save();
     }
   }
 
   /// Load value from storage
   Future<bool> load();
+  /// Save value to storage
+  Future<void> save() => storage.save(key, value);
 }

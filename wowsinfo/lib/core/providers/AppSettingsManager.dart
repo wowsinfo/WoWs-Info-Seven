@@ -10,16 +10,33 @@ class AppSettingsManager with ChangeNotifier {
 
   AppConfiguration<String, AppBrightness> _appBrightness;
   ThemeMode get appThemeBrightness => _appBrightness.value.themeMode;
+  set appThemeBrightness(ThemeMode b) {
+    if (b != appThemeBrightness) {
+      _appBrightness.value.brightness = b;
+      _appBrightness.save();
+      notifyListeners();
+    }
+  }
 
   AppConfiguration<String, AppThemeColour> _themeColour;
   MaterialColor get primaryColour => _themeColour.value.colour;
   set primaryColour(MaterialColor c) {
     if (c != primaryColour) {
-      
+      _themeColour.value.colour = c;
+      _themeColour.save();
+      notifyListeners();
     }
   }
 
   AppConfiguration<String, AppLocale> _appLocale;
+  Locale get appLocale => _appLocale.value.locale;
+  set appLocale(Locale l) {
+    if (l != appLocale) {
+      _appLocale.value.locale = l;
+      _appLocale.save();
+      notifyListeners();
+    }
+  }
 
   ThemeData _theme;
   ThemeData _darkTheme;
