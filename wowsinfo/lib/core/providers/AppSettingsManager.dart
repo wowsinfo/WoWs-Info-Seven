@@ -1,21 +1,25 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:wowsinfo/core/models/Cacheable.dart';
 import 'package:wowsinfo/core/services/data/AppConfiguration.dart';
 import 'package:wowsinfo/core/services/storage/BaseStorage.dart';
-import 'package:wowsinfo/core/services/storage/HiveStorage.dart';
-import 'package:wowsinfo/core/utils/Utils.dart';
 
 /// This includes app locale, theme colour and brightness (light, dark or system)
 class AppSettingsManager with ChangeNotifier {
   // Handles how to save AppConfiguration
   BaseStorage _storage;
 
-  AppConfiguration<String, AppBrightness> _brighness;
-  AppConfiguration<String, AppThemeColour> _colour;
-  AppConfiguration<String, AppLocale> _locale;
+  AppConfiguration<String, AppBrightness> _appBrightness;
+  ThemeMode get appThemeBrightness => _appBrightness.value.themeMode;
+
+  AppConfiguration<String, AppThemeColour> _themeColour;
+  MaterialColor get primaryColour => _themeColour.value.colour;
+  set primaryColour(MaterialColor c) {
+    if (c != primaryColour) {
+      
+    }
+  }
+
+  AppConfiguration<String, AppLocale> _appLocale;
 
   ThemeData _theme;
   ThemeData _darkTheme;
@@ -23,14 +27,17 @@ class AppSettingsManager with ChangeNotifier {
   ThemeData get darkTheme => _darkTheme;
 
   AppSettingsManager(this._storage) {
-    _brighness = AppConfiguration(_storage, 'brightness');
-    _colour = AppConfiguration(_storage, 'colour');
-    _locale = AppConfiguration(_storage, 'locale');
+    _appBrightness = AppConfiguration(_storage, 'brightness');
+    _themeColour = AppConfiguration(_storage, 'colour');
+    _appLocale = AppConfiguration(_storage, 'locale');
+
+    // Generate theme based on the data we have
+    this._generateTheme();
   }
 
   /// This will update ThemeData
   _generateTheme() {
-    final colour = _colour.value.colour;
+    final colour = primaryColour;
     _theme = ThemeData(
       primarySwatch: colour,
     );
@@ -45,6 +52,7 @@ class AppSettingsManager with ChangeNotifier {
 }
 
 /// This saves the material app main theme colour
+/// - It uses blue colour by default
 class AppThemeColour extends Cacheable {
   /// All material colour
   static const THEME_COLOUR_LIST = [
@@ -85,12 +93,12 @@ class AppThemeColour extends Cacheable {
   bool isValid() => _colour != null;
 
   @override
-  Map<String, dynamic> toJson() => {
-    'colour': THEME_COLOUR_LIST.indexOf(_colour)
-  };
+  Map<String, dynamic> toJson() =>
+      {'colour': THEME_COLOUR_LIST.indexOf(_colour)};
 }
 
 /// This saves the material app's brightness
+/// - It follows system theme by default
 class AppBrightness extends Cacheable {
   /// light, dark or follow system
   static const THEME_BRIGHTNESS_MODE = [
@@ -110,7 +118,7 @@ class AppBrightness extends Cacheable {
   }
 
   AppBrightness(Map<String, dynamic> json) : super(json) {
-    _brightness = THEME_BRIGHTNESS_MODE[json['brightness']];
+    _brightness = THEME_BRIGHTNESS_MODE[json['brightness'] ?? 2];
   }
 
   @override
@@ -118,11 +126,12 @@ class AppBrightness extends Cacheable {
 
   @override
   Map<String, dynamic> toJson() => {
-    'brightness': THEME_BRIGHTNESS_MODE.indexOf(_brightness),
-  };
+        'brightness': THEME_BRIGHTNESS_MODE.indexOf(_brightness),
+      };
 }
 
 /// This saves the material app's main locel
+/// - If the locale is null, it means that the app will follow `system language`
 class AppLocale extends Cacheable {
   // Locale can be null, it simply follows system!
   Locale _locale;
@@ -137,14 +146,14 @@ class AppLocale extends Cacheable {
     if (code != null) {
       if (code.contains('_')) {
         final codes = code.split('_');
-        _locale = Locale.fromSubtags(countryCode: codes[0], scriptCode: codes[1]);
+        _locale =
+            Locale.fromSubtags(countryCode: codes[0], scriptCode: codes[1]);
       } else {
         _locale = Locale(code);
       }
     }
   }
 
-  
   /// Convert locale object to a string
   String _localeToCode() {
     final scriptCode = _locale.scriptCode;
@@ -158,6 +167,6 @@ class AppLocale extends Cacheable {
 
   @override
   Map<String, dynamic> toJson() => {
-    'locale': _localeToCode(),
-  };
+        'locale': _localeToCode(),
+      };
 }
