@@ -1,7 +1,7 @@
 import 'package:wowsinfo/core/models/UI/GameServer.dart';
-import 'package:wowsinfo/core/services/api/WoWsApiService.dart';
+import 'package:wowsinfo/core/services/api/WoWsDataProvider.dart';
 
-class ClanInfoGetter extends WoWsApiService {
+class ClanInfoGetter extends WoWsDataProvider {
   final int _clanId;
   ClanInfoGetter(GameServer server, this._clanId) : super(server);
 

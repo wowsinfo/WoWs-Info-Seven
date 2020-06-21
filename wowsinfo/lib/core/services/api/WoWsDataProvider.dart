@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:wowsinfo/core/models/JsonModel.dart';
 import 'package:wowsinfo/core/models/UI/GameServer.dart';
 import 'package:wowsinfo/core/services/api/APIDataProvider.dart';
@@ -13,15 +15,14 @@ abstract class WoWsDataProvider<T extends JsonModel> extends APIDataProvider<T> 
   final GameServer server;
 
   final List<String> _jsonList = [];
-  bool get isSinglePage => _jsonList.length == 1;
-  bool get isNotEmpty => _jsonList.length > 0;
 
   /// Server is necessary for almost all getters
   WoWsDataProvider(this.server);
 
   /// This requests to Wargaming API server and will check if it is valid and will request more if it has more data
   @override
-  Future<T> requestData() async {
+  Future<T> requestData({T Function(dynamic) creator}) async {
+    if (creator == null) throw Exception('A creator for GithubDataProvider is necessary');
     try {
       while (true) {
         final response = await http
@@ -42,7 +43,10 @@ abstract class WoWsDataProvider<T extends JsonModel> extends APIDataProvider<T> 
         _pageNumber += 1;
       }
 
-      if (isNotEmpty) parse(_jsonList);
+      if (_jsonList.length == 1) return creator(jsonDecode(_jsonList.first));
+      else if (_jsonList.length > 1) {
+        
+      }
       return null;
     } catch (e) {
       Utils.debugPrint(e);

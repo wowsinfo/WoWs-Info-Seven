@@ -6,5 +6,4 @@ abstract class APIDataProvider<T> extends BaseDataProvider<T> {
   String getRequestLink() => getBaseLink() + getExtraFields();
   String getBaseLink();
   String getExtraFields();
-  T parse(Object response);
 }

@@ -1,7 +1,7 @@
 import 'package:wowsinfo/core/models/UI/GameServer.dart';
-import 'package:wowsinfo/core/services/api/WoWsApiService.dart';
+import 'package:wowsinfo/core/services/api/WoWsDataProvider.dart';
 
-class PlayerClanTagGetter extends WoWsApiService {
+class PlayerClanTagGetter extends WoWsDataProvider {
   final int _accountId;
   PlayerClanTagGetter(GameServer server, this._accountId) : super(server);
 

@@ -1,7 +1,7 @@
 import 'package:wowsinfo/core/models/UI/GameServer.dart';
-import 'package:wowsinfo/core/services/api/WoWsApiService.dart';
+import 'package:wowsinfo/core/services/api/WoWsDataProvider.dart';
 
-class WikiEncyclopediaGetter extends WoWsApiService {
+class WikiEncyclopediaGetter extends WoWsDataProvider {
   WikiEncyclopediaGetter(GameServer server) : super(server);
 
   @override

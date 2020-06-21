@@ -13,4 +13,7 @@ class ClanGlossary extends Cacheable {
       'clans_roles': this.roles,
     };
   }
+  
+  @override
+  bool isValid() => roles.isNotEmpty;
 }

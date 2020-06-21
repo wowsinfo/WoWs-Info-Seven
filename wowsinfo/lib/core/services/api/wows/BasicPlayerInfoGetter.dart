@@ -1,7 +1,7 @@
 import 'package:wowsinfo/core/models/UI/GameServer.dart';
-import 'package:wowsinfo/core/services/api/WoWsApiService.dart';
+import 'package:wowsinfo/core/services/api/WoWsDataProvider.dart';
 
-class BasicPlayerInfoGetter extends WoWsApiService {
+class BasicPlayerInfoGetter extends WoWsDataProvider {
   final int _accountId;
   BasicPlayerInfoGetter(GameServer server, this._accountId) : super(server);
 

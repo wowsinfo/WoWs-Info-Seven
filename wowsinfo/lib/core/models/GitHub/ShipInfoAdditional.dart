@@ -8,11 +8,13 @@ class ShipInfoAdditional extends Cacheable {
   List<Consumable> consumable;
   List<int> permoflage;
 
-  ShipInfoAdditional.fromJson(Map<String, dynamic> json): super(json) {
+  ShipInfoAdditional.fromJson(Map<String, dynamic> json) : super(json) {
     this.alphaPiercingHE = json['alphaPiercingHE'];
     this.ap = AP.fromJson(json['ap']);
     this.sigma = json['sigma'];
-    this.consumable = (json['consumables'] as List).map((e) => Consumable.fromJson(e)).toList(growable: false);
+    this.consumable = (json['consumables'] as List)
+        .map((e) => Consumable.fromJson(e))
+        .toList(growable: false);
     this.permoflage = (json['permoflages'] as List).cast<int>();
   }
 
@@ -25,6 +27,9 @@ class ShipInfoAdditional extends Cacheable {
       'permoflages': this.permoflage,
     };
   }
+
+  @override
+  bool isValid() => consumable.isNotEmpty;
 }
 
 /// This is the `AP` class

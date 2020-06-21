@@ -1,7 +1,7 @@
 import 'package:wowsinfo/core/models/UI/GameServer.dart';
-import 'package:wowsinfo/core/services/api/WoWsApiService.dart';
+import 'package:wowsinfo/core/services/api/WoWsDataProvider.dart';
 
-class OnlinePlayerCountGetter extends WoWsApiService {
+class OnlinePlayerCountGetter extends WoWsDataProvider {
   OnlinePlayerCountGetter(GameServer server) : super(server);
 
   /// It requests to world of tank

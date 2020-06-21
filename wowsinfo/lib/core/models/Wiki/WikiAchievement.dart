@@ -11,6 +11,9 @@ class WikiAchievement extends Cacheable {
   }
 
   Map<String, dynamic> toJson() => this.achievement.cast<String, dynamic>();
+
+  @override
+  bool isValid() => achievement.isNotEmpty;
 }
 
 /// This is the `Achievement` class
@@ -45,18 +48,17 @@ class Achievement extends WikiItem {
       context: context,
       builder: (context) => AlertDialog(
         content: ListTile(
-          contentPadding: const EdgeInsets.all(2),
-          leading: Image.network(image),
-          title: Text(name, maxLines: 1, overflow: TextOverflow.ellipsis),
-          subtitle: Text(description)
-        ),
+            contentPadding: const EdgeInsets.all(2),
+            leading: Image.network(image),
+            title: Text(name, maxLines: 1, overflow: TextOverflow.ellipsis),
+            subtitle: Text(description)),
       ),
     );
-    
+
     // showModalBottomSheet(
-    //   context: context, 
+    //   context: context,
     //   builder: (context) => BottomSheet(
-    //     onClosing: () => Navigator.pop(context), 
+    //     onClosing: () => Navigator.pop(context),
     //     builder: (context) => ListTile(
     //       title: Text(a.name),
     //       subtitle: Text(a.description),

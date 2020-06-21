@@ -4,11 +4,14 @@ import '../Cacheable.dart';
 class WikiGameMap extends Cacheable {
   Map<String, GameMap> gameMap;
 
-  WikiGameMap.fromJson(Map<String, dynamic> json): super(json) {
+  WikiGameMap.fromJson(Map<String, dynamic> json) : super(json) {
     this.gameMap = json.map((a, b) => MapEntry(a, GameMap.fromJson(b)));
   }
 
   Map<String, dynamic> toJson() => this.gameMap.cast<String, dynamic>();
+
+  @override
+  bool isValid() => gameMap.isNotEmpty;
 }
 
 /// This is the `GameMap` class

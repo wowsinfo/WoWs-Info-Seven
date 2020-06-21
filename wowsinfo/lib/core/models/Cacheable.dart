@@ -9,8 +9,8 @@ abstract class Cacheable extends JsonModel {
 
   /// Check if the data is valid and whether it is corrupted
   bool isValid();
-
+  /// Convert itself to a json map
   Map<String, dynamic> toJson();
-
+  /// Get the json string from the map
   String jsonString() => jsonEncode(this.toJson());
 }

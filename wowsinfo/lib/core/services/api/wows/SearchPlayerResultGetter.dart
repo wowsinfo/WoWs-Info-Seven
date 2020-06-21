@@ -1,7 +1,7 @@
 import 'package:wowsinfo/core/models/UI/GameServer.dart';
-import 'package:wowsinfo/core/services/api/WoWsApiService.dart';
+import 'package:wowsinfo/core/services/api/WoWsDataProvider.dart';
 
-class SearchPlayerResultGetter extends WoWsApiService {
+class SearchPlayerResultGetter extends WoWsDataProvider {
   final String _name;
   SearchPlayerResultGetter(GameServer server, this._name) : super(server);
   

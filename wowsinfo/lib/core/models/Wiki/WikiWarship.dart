@@ -1,15 +1,14 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wowsinfo/core/models/Cacheable.dart';
-import 'package:wowsinfo/core/providers/CachedData.dart';
 import 'package:wowsinfo/core/models/GitHub/ShipAlias.dart';
 
 /// This is the `WikiWarship` class
 class WikiWarship extends Cacheable {
   Map<String, Warship> ships;
 
-  WikiWarship.fromJson(Map<String, dynamic> json, {ShipAlias alias}): super(json) {
+  WikiWarship.fromJson(Map<String, dynamic> json, {ShipAlias alias})
+      : super(json) {
     this.ships = json.map((a, b) => MapEntry(a, Warship.fromJson(b)));
     injectAlias(alias);
   }
@@ -25,10 +24,7 @@ class WikiWarship extends Cacheable {
   Map<String, dynamic> toJson() => this.ships.cast<String, dynamic>();
 
   @override
-  bool isValid() {
-    // TODO: implement isValid
-    throw UnimplementedError();
-  }
+  bool isValid() => ships.isNotEmpty;
 }
 
 /// This is the `Warship` class
@@ -48,7 +44,8 @@ class Warship {
   bool get hasImage => _image != null;
 
   int get health => _defaultProfile.health;
-  String get tierString => ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'][tier - 1];
+  String get tierString =>
+      ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'][tier - 1];
   String get tierName => '$tierString $name';
   String get tierType => '$tierString $typeString';
   String get nationShipType => '$nationString $typeString';
@@ -59,6 +56,7 @@ class Warship {
     final cached = Provider.of<CachedData>(context);
     return cached.getTypeString(type);
   }
+
   String nationString(BuildContext context) {
     final cached = Provider.of<CachedData>(context);
     return cached.getNationString(nation);
@@ -78,8 +76,10 @@ class Warship {
     this.nation = json['nation'];
     this.isPremium = json['is_premium'];
     this.shipIdStr = json['ship_id_str'];
-    if (json['default_profile'] != null) this._defaultProfile = DefaultProfile.fromJson(json['default_profile']);
-    if (json['images'] != null) this._image = WarshipImage.fromJson(json['images']);
+    if (json['default_profile'] != null)
+      this._defaultProfile = DefaultProfile.fromJson(json['default_profile']);
+    if (json['images'] != null)
+      this._image = WarshipImage.fromJson(json['images']);
     this.type = json['type'];
   }
 
@@ -113,7 +113,6 @@ class DefaultProfile {
       'armour': this.armour,
     };
   }
-
 }
 
 /// This is the `Armour` class

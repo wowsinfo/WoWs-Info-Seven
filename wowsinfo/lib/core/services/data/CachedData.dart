@@ -21,7 +21,7 @@ class CachedData<String, V extends Cacheable>
       Cacheable data = await storage.load(key, creator: this._creator);
       // If data is null or corrupted, load from data provider
       if (data == null || !data.isValid()) {
-        data = await dataProvider.requestData();
+        data = await dataProvider.requestData(creator: this._creator);
       }
 
       this.value = data;

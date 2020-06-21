@@ -1,9 +1,8 @@
 import 'package:wowsinfo/core/models/Wiki/WikiEncyclopedia.dart';
-import 'package:wowsinfo/core/providers/CachedData.dart';
 import 'package:wowsinfo/core/models/UI/GameServer.dart';
-import 'package:wowsinfo/core/services/api/WoWsApiService.dart';
+import 'package:wowsinfo/core/services/api/WoWsDataProvider.dart';
 
-class WikiShipModuleGetter extends WoWsApiService {
+class WikiShipModuleGetter extends WoWsDataProvider {
   final String _id;
   final ShipModule _shipModule;
   final Map<String, int> _modules;

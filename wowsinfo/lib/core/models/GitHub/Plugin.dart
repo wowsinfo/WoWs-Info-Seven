@@ -11,15 +11,20 @@ class Plugin extends Cacheable {
   Map<String, OldShip> oldShip;
   Map<String, ShipWiki> shipWiki;
 
-  ShipConsumableData getConsumable(ShipConsumableValue v) => consumable[v.name].getConsumable(v.type);
+  ShipConsumableData getConsumable(ShipConsumableValue v) =>
+      consumable[v.name].getConsumable(v.type);
   OldShip getShip(int key) => oldShip[key.toString()];
 
-  Plugin.fromJson(Map<String, dynamic> json): super(json) {
-    this.consumable = (json['consumables'] as Map).map((a, b) => MapEntry(a, ShipConsumable.fromJson(b)));
-    this.upgrade = (json['upgrades'] as Map).map((a, b) => MapEntry(a, Modernization.fromJson(b)));
+  Plugin.fromJson(Map<String, dynamic> json) : super(json) {
+    this.consumable = (json['consumables'] as Map)
+        .map((a, b) => MapEntry(a, ShipConsumable.fromJson(b)));
+    this.upgrade = (json['upgrades'] as Map)
+        .map((a, b) => MapEntry(a, Modernization.fromJson(b)));
     // Set ship id here
-    this.oldShip = (json['old_ships'] as Map).map((a, b) => MapEntry(a, OldShip.fromJson(b)..shipId = int.parse(a)));
-    this.shipWiki = (json['ship_wiki'] as Map).map((a, b) => MapEntry(a, ShipWiki.fromJson(b)));
+    this.oldShip = (json['old_ships'] as Map)
+        .map((a, b) => MapEntry(a, OldShip.fromJson(b)..shipId = int.parse(a)));
+    this.shipWiki = (json['ship_wiki'] as Map)
+        .map((a, b) => MapEntry(a, ShipWiki.fromJson(b)));
   }
 
   Map<String, dynamic> toJson() {
@@ -30,6 +35,13 @@ class Plugin extends Cacheable {
       'ship_wiki': this.shipWiki.cast<String, dynamic>(),
     };
   }
+
+  @override
+  bool isValid() =>
+      consumable.isNotEmpty &&
+      upgrade.isNotEmpty &&
+      oldShip.isNotEmpty &&
+      shipWiki.isNotEmpty;
 }
 
 /// This is the `ShipConsumable` class
@@ -52,7 +64,8 @@ class ShipConsumable {
     this.index = json['index'];
     this.name = json['name'];
     // Set name to the key
-    this.data = (json['data'] as Map).map((a, b) => MapEntry(a, ShipConsumableData.fromJson(b)..name = a));
+    this.data = (json['data'] as Map)
+        .map((a, b) => MapEntry(a, ShipConsumableData.fromJson(b)..name = a));
   }
 
   Map<String, dynamic> toJson() {
@@ -98,7 +111,8 @@ class ShipConsumableData extends WikiItem {
   // Sonar and radar, divide by 33.35 to km
   double distShip;
   double distTorpedo;
-  List<String> affectedClasses; // this is for the radar that can only spots bb and cv
+  List<String>
+      affectedClasses; // this is for the radar that can only spots bb and cv
   // Torpedo reload booster
   double torpedoReloadTime;
   // Gun booster, boostCoeff is also here
@@ -109,17 +123,22 @@ class ShipConsumableData extends WikiItem {
 
   String get hpRegeneration => '${_toPercent(regenerationHPSpeed)}';
   String get artilleryDistance => '${_toPercent(artilleryDistCoeff)}';
+
   /// For both engine boost and gun booster
   String get boostPercentage => '${_toPercent(boostCoeff)}';
 
   // Some utils
   /// WG doesn't use km in the game
-  String _toKM(double v) => v != null ? '${(v / 33.35).toStringAsFixed(1)} km' : null;
+  String _toKM(double v) =>
+      v != null ? '${(v / 33.35).toStringAsFixed(1)} km' : null;
+
   /// Convert Multiplier to a string, +0.5%, +20.0%
-  String _toPercent(double v) => v != null ? '+${(v * 100).toStringAsFixed(1)}%' : null;
+  String _toPercent(double v) =>
+      v != null ? '+${(v * 100).toStringAsFixed(1)}%' : null;
   String _toTime(num v) => v != null ? '$v s' : null;
   String _toKnot(num v) => v != null ? '$v kt' : null;
   String _toMeter(num v) => v != null ? '$v m' : null;
+
   ///
   String _getDescription(BuildContext context) {
     // final lang = AppLocalizationService.of(context);
@@ -143,7 +162,9 @@ class ShipConsumableData extends WikiItem {
       'torpedo reload time': _toTime(torpedoReloadTime),
     }..removeWhere((_, v) => v == null);
 
-    return list.entries.map((e) => e.key + ': ' + e.value.toString()).join(('\n'));
+    return list.entries
+        .map((e) => e.key + ': ' + e.value.toString())
+        .join(('\n'));
   }
 
   ShipConsumableData.fromJson(Map<String, dynamic> json) {
@@ -153,7 +174,7 @@ class ShipConsumableData extends WikiItem {
     this.workTime = json['workTime'];
 
     this.numConsumable = json['numConsumables'];
-    
+
     this.regenerationHPSpeed = json['regenerationHPSpeed'];
 
     this.areaDamageMultiplier = json['areaDamageMultiplier'];
@@ -238,8 +259,10 @@ class Modernization {
   bool get nationOnly => nation.length > 0;
 
   bool compatible(WikiShipInfo info) {
-    if (exclude.contains(info.shipIdStr)) return false;
-    else if (ship.contains(info.shipIdStr)) return true;
+    if (exclude.contains(info.shipIdStr))
+      return false;
+    else if (ship.contains(info.shipIdStr))
+      return true;
     else if (shiplevel.contains(info.tier) && shiptype.contains(info.type)) {
       if (nationOnly) return nation.contains(info.nation);
       return true;
@@ -295,6 +318,7 @@ class ShipWiki {
   double alphaPiercingCS;
   APCurve ap;
   double sigma;
+
   /// First list is the slot but then one slot can have 2 consumables
   List<List<ShipConsumableValue>> consumable;
   bool isPaperShip;
@@ -306,15 +330,19 @@ class ShipWiki {
   String get csPenString => '${alphaPiercingCS.toStringAsFixed(1)} mm';
 
   ShipWiki.fromJson(Map<String, dynamic> json) {
-    if (json['alphaPiercingHE'] != null) this.alphaPiercingHE = json['alphaPiercingHE'];
-    if (json['alphaPiercingCS'] != null) this.alphaPiercingCS = json['alphaPiercingCS'];
+    if (json['alphaPiercingHE'] != null)
+      this.alphaPiercingHE = json['alphaPiercingHE'];
+    if (json['alphaPiercingCS'] != null)
+      this.alphaPiercingCS = json['alphaPiercingCS'];
     if (json['ap'] != null) this.ap = APCurve.fromJson(json['ap']);
     this.sigma = json['sigma'];
     // Another crazy one
     this.consumable = (json['consumables'] as List).map((slot) {
-      return (slot as List).map((c) => ShipConsumableValue.fromJson(c)).toList(growable: false);
+      return (slot as List)
+          .map((c) => ShipConsumableValue.fromJson(c))
+          .toList(growable: false);
     }).toList(growable: false);
-      
+
     this.isPaperShip = json['isPaperShip'] ?? false;
     this.permoflage = (json['permoflages'] ?? []).cast<int>();
     this.battle = json['battles'];

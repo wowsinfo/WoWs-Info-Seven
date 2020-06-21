@@ -1,14 +1,7 @@
-import 'dart:convert';
-
 import 'package:wowsinfo/core/models/GitHub/PRData.dart';
-import 'package:wowsinfo/core/services/api/GithubApiService.dart';
+import 'package:wowsinfo/core/services/api/GithubDataProvider.dart';
 
-class PRDataGetter extends GithubApiService<PRData> {
+class PRDataGetter extends GithubDataProvider<PRData> {
   @override
   String getExtraFields() => 'WoWs-Info-Future/API/json/personal_rating.json';
-
-  @override
-  PRData parse(Object response) {
-    return PRData.fromJson(jsonDecode(response));
-  }
 }

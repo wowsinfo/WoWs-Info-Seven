@@ -1,7 +1,7 @@
 import 'package:wowsinfo/core/models/UI/GameServer.dart';
-import 'package:wowsinfo/core/services/api/WoWsApiService.dart';
+import 'package:wowsinfo/core/services/api/WoWsDataProvider.dart';
 
-class WikiShipInfoGetter extends WoWsApiService {
+class WikiShipInfoGetter extends WoWsDataProvider {
   final int _shipId;
   WikiShipInfoGetter(GameServer server, this._shipId) : super(server);
 

@@ -1,7 +1,7 @@
 import 'package:wowsinfo/core/models/UI/GameServer.dart';
-import 'package:wowsinfo/core/services/api/WoWsApiService.dart';
+import 'package:wowsinfo/core/services/api/WoWsDataProvider.dart';
 
-class PlayerShipInfoGetter extends WoWsApiService {
+class PlayerShipInfoGetter extends WoWsDataProvider {
   final int _accountId;
   String _shipId;
 

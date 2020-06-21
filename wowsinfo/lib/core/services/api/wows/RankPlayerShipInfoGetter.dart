@@ -1,7 +1,7 @@
 import 'package:wowsinfo/core/models/UI/GameServer.dart';
-import 'package:wowsinfo/core/services/api/WoWsApiService.dart';
+import 'package:wowsinfo/core/services/api/WoWsDataProvider.dart';
 
-class RankPlayerShipInfoGetter extends WoWsApiService {
+class RankPlayerShipInfoGetter extends WoWsDataProvider {
   final int _accountId;
   RankPlayerShipInfoGetter(GameServer server, this._accountId) : super(server);
 

@@ -11,6 +11,9 @@ class WikiCollectionItem extends Cacheable {
   }
 
   Map<String, dynamic> toJson() => this.item.cast<String, dynamic>();
+
+  @override
+  bool isValid() => item.isNotEmpty;
 }
 
 /// This is the `CollectionItem` class

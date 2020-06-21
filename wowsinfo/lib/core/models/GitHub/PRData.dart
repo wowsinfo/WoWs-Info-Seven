@@ -14,6 +14,9 @@ class PRData extends Cacheable {
   }
 
   Map<String, dynamic> toJson() => ships.cast<String, dynamic>();
+
+  @override
+  bool isValid() => ships.isNotEmpty;
 }
 
 /// This is the `AverageStats` class

@@ -1,7 +1,7 @@
 import 'package:wowsinfo/core/models/UI/GameServer.dart';
-import 'package:wowsinfo/core/services/api/WoWsApiService.dart';
+import 'package:wowsinfo/core/services/api/WoWsDataProvider.dart';
 
-class WikiAchievementGetter extends WoWsApiService {
+class WikiAchievementGetter extends WoWsDataProvider {
   WikiAchievementGetter(GameServer server) : super(server);
 
   @override

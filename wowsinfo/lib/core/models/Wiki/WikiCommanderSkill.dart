@@ -6,11 +6,14 @@ import 'package:wowsinfo/core/models/Wiki/WikiItem.dart';
 class WikiCommanderSkill extends Cacheable {
   Map<String, Skill> skill;
 
-  WikiCommanderSkill.fromJson(Map<String, dynamic> json): super(json) {
+  WikiCommanderSkill.fromJson(Map<String, dynamic> json) : super(json) {
     this.skill = json.map((a, b) => MapEntry(a, Skill.fromJson(b)));
   }
 
   Map<String, dynamic> toJson() => this.skill.cast<String, dynamic>();
+
+  @override
+  bool isValid() => skill.isNotEmpty;
 }
 
 /// This is the `Skill` class
@@ -24,12 +27,15 @@ class Skill extends WikiItem {
     this.name = json['name'];
     this.typeId = json['type_id'];
     this.typeName = json['type_name'];
-    this.perk = (json['perks'] as List).map((e) => Perk.fromJson(e)).toList(growable: false);
+    this.perk = (json['perks'] as List)
+        .map((e) => Perk.fromJson(e))
+        .toList(growable: false);
     this.tier = json['tier'];
     this.image = json['icon'];
-    
+
     // Add description here
-    this.description = typeName + '\n' + perk.map((e) => e.description).join('\n');
+    this.description =
+        typeName + '\n' + perk.map((e) => e.description).join('\n');
   }
 
   Map<String, dynamic> toJson() {

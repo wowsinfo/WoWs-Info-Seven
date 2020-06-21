@@ -10,7 +10,7 @@ class ShipConsumable extends Cacheable {
   String index;
   String name;
 
-  ShipConsumable.fromJson(Map<String, dynamic> json): super(json) {
+  ShipConsumable.fromJson(Map<String, dynamic> json) : super(json) {
     json.forEach((key, value) {
       if (value is Map && value.keys.length > 0) {
         this.profiles[key] = BasicConsumable.fromJson(value);
@@ -34,14 +34,19 @@ class ShipConsumable extends Cacheable {
       'name': this.name,
     };
   }
+
+  @override
+  bool isValid() => profiles.isNotEmpty;
 }
 
 /// This is the `BasicConsumable` class
 class BasicConsumable {
   String consumableType;
   int _numConsumable;
+
   /// If `_numConsumable` is not present, that means it can be used infinitely
   bool get isInfinite => _numConsumable == null;
+
   /// If it is infinite, I will treat it as 99
   int get numConsumable => this._numConsumable ?? 99;
   int reloadTime;
