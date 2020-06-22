@@ -1,8 +1,8 @@
-/// This is the `AccountCreatedAt` class
-class AccountCreatedAt {
+/// This is the `AccountCreatedDate` class
+class AccountCreatedDate {
   List<Data> data;
 
-  AccountCreatedAt(json) {
+  AccountCreatedDate(json) {
     this.data = json['data'];
   }
 }
