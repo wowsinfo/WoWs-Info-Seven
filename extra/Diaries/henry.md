@@ -7,6 +7,10 @@ Template
 ### What to do tomorrow?
 ~~~
 
+## 22/06/2020
+### Summary
+### What to do tomorrow?
+
 ## 21/06/2020
 ### Summary
 I did some thinkings yesterday and I will start working on it again. Many refactors but I don't think I have a clear image of what I want to do. Now, there is a big issue. I have so many classes for API and model. I want to refactor my files as well. My architecture is not good enough sadly. I should just advantage of hive and do some crazy stuffs. Now, I still use json and hive at the same time. I can just use hive and get data almost instantly. However, the issue is testing. Hive is not there while testing. I also want to shrink the size of APIDataProvider and all those models.
