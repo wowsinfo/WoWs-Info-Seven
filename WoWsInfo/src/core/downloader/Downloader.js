@@ -113,6 +113,8 @@ class Downloader {
           log += `${lang.rating_title} - mirror\n`;
           DATA[SAVED.pr] = await this.getPR();
           if (PR == null || Object.keys(PR).length < 10) {
+            log += `${lang.error_pr_corruption}\n`;
+            return this.makeObj(false, log); 
           }
         }
         

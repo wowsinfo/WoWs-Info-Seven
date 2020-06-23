@@ -66,7 +66,7 @@ class Menu extends Component {
         update,
       ]).then(obj => {
         if (!obj) {
-          Alert.alert(lang.error_title, '- Timeout -');
+          Alert.alert(lang.error_title, lang.error_timeout);
           this.setState({loading: false});
         } else {
           // Make sure it finishes downloading

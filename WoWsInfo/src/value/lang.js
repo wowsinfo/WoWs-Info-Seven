@@ -297,6 +297,8 @@ export const lang = new LocalizedStrings({
     // General errors
     error_title: 'Error',
     error_download_issue: 'Failed to update data. \nPlease try again later.\n\nIf it persists, please try using a VPN or changing your DNS to "8.8.8.8".\nIf it still persists, it means that the server is OFFLINE',
+    error_timeout: 'Timeout',
+    error_pr_corruption: 'Personal rating data cannot be downloaded',
     /// About WoWs Info section
     // Github link
     abour_github_link: 'https://github.com/HenryQuan/WoWs-Info-Origin/blob/master/README.md'
@@ -597,6 +599,8 @@ export const lang = new LocalizedStrings({
     // General errors
     error_title: '错误',
     error_download_issue: '无法更新数据，\n请稍后重试。\n\n如果问题依然存在，请尝试修改DNS为【8.8.8.8】或者使用VPN。\n如果还是不可以的话，说明服务器正在维护中。',
+    error_timeout: '请求超时',
+    error_pr_corruption: '无法下载评分数据',
     /// About WoWs Info section
     // Github link
     abour_github_link: 'https://github.com/HenryQuan/WoWs-Info-Origin/blob/master/README.md'
@@ -897,6 +901,8 @@ export const lang = new LocalizedStrings({
     // General errors
     error_title: '錯誤',
     error_download_issue: '無法更新數據，\n請稍後重試。\n\n如果問題依然存在，請嘗試修改DNS為【8.8.8.8】或者使用VPN。\n如果還是不可以的話，說明服務器正在維護中。',
+    error_timeout: '請求超時',
+    error_pr_corruption: '無法下載評分數據',
     /// About WoWs Info section
     // Github link
     abour_github_link: 'https://github.com/HenryQuan/WoWs-Info-Origin/blob/master/README.md'
@@ -1197,6 +1203,8 @@ export const lang = new LocalizedStrings({
     // General errors
     error_title: 'エラー',
     error_download_issue: 'アップデート失敗\nやり直してください\n\nいつも失敗の場合はVPNを使ったりDNSを「８.８.８.８」に変えたりしてみてください\nメンテナンスを行う可能性もある',
+    error_timeout: 'タイムアウト',
+    error_pr_corruption: '操艦技術のデータがダウンロードできません',
     /// About WoWs Info section
     // Github link
     abour_github_link: 'https://github.com/HenryQuan/WoWs-Info-Origin/blob/master/README.md'
@@ -1497,6 +1505,8 @@ export const lang = new LocalizedStrings({
     // General errors
     error_title: 'Error',
     error_download_issue: 'Gagal untuk mengupdate data. \nSilakan coba kembali.',
+    error_timeout: 'Timeout',
+    error_pr_corruption: 'Personal rating data cannot be downloaded',
     /// About WoWs Info section
     // Github link
     abour_github_link: 'https://github.com/HenryQuan/WoWs-Info-Origin/blob/master/README.md'
