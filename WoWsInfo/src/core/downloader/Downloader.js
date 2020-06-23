@@ -1,6 +1,7 @@
 import { WoWsAPI, WikiAPI } from '../../value/api';
 import { APP, LOCAL, SAVED, langStr, getCurrDomain, getAPILanguage, updateCurrData, shouldUpdateWithCycle, getCurrDate } from '../../value/data';
 import { SafeFetch, Guard, SafeStorage } from '../';
+import { lang } from '../../value/lang';
 
 class Downloader {
   constructor(server) {
@@ -80,37 +81,39 @@ class Downloader {
         console.log('Downloader\nUpdating all data from API');
         // Download language
         DATA[SAVED.language] = await this.getLanguage();
-        log += 'language\n';
+        log += `${lang.setting_api_language}\n`;
         // Download ship type, nation and module names for Wiki
         DATA[SAVED.encyclopedia] = await this.getEncyclopedia();
-        log += 'encyclopedia\n';
+        log += `${lang.wiki_section_title}\n`;
         
         // Wiki
         DATA[SAVED.warship] = await this.getWarship();
-        log += 'warship\n';
+        log += `${lang.wiki_warships}\n`;
 
         DATA[SAVED.achievement] = await this.getAchievement();
-        log += 'achievement\n';
+        log += `${lang.wiki_achievement}\n`;
 
         DATA[SAVED.collection] = await this.getCollectionAndItem();
-        log += 'collection\n';
+        log += `${lang.wiki_collections}\n`;
 
         DATA[SAVED.commanderSkill] = await this.getCommanderSkill();
-        log += 'commanderSkill\n';
+        log += `${lang.wiki_skills}\n`;
 
         DATA[SAVED.consumable] = await this.getConsumable();
-        log += 'consumable\n';
+        log += `${lang.wiki_upgrades}\n`;
         
         DATA[SAVED.map] = await this.getMap();
-        log += 'map\n';
+        log += `${lang.wiki_maps}\n`;
         
         DATA[SAVED.pr] = await this.getPR();
-        log += 'pr\n';
+        log += `${lang.rating_title}\n`;
 
         let PR = DATA[SAVED.pr];
         if (PR == null || Object.keys(PR).length < 10) {
-          log += 'pr is corrupted, try again later\n';
-          return this.makeObj(false, log);
+          log += `${lang.rating_title} - mirror\n`;
+          DATA[SAVED.pr] = await this.getPR();
+          if (PR == null || Object.keys(PR).length < 10) {
+          }
         }
         
         console.log(DATA);
@@ -344,7 +347,22 @@ class Downloader {
 
   async getPR() {
     let res = await SafeFetch.normal(WikiAPI.PersonalRating);
-    let json = Guard(res, 'data', {});;
+    let json = Guard(res, 'data', {});
+    // Cleanup empty key
+    for (let key in json) {
+      let curr = json[key];
+      if (curr.length === 0) {
+        delete json[key];
+      }
+    }
+      
+    await SafeStorage.set(SAVED.pr, json);
+    return json;
+  }
+
+  async getPRMirror() {
+    let res = await SafeFetch.normal(WikiAPI.PersonalRatingMirror);
+    let json = Guard(res, 'data', {});
     // Cleanup empty key
     for (let key in json) {
       let curr = json[key];
