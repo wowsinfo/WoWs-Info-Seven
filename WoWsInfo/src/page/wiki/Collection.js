@@ -51,7 +51,7 @@ class Collection extends PureComponent {
 
     return (
       <WoWsInfo title={ID}>
-        <FlatGrid inverted={!collection} itemDimension={80} items={data} renderItem={({item}) => {
+        <FlatGrid inverted={!collection} itemDimension={80} data={data} renderItem={({item}) => {
           return <WikiIcon item={item} onPress={() => this.itemOrCollection(item)}/>
         }} ListHeaderComponent={() => {
           if (collection) {

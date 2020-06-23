@@ -38,7 +38,7 @@ class Achievement extends PureComponent {
     const { data } = this.state;
     return (
       <WoWsInfo>
-        <FlatGrid itemDimension={80} items={data} renderItem={({item}) => {
+        <FlatGrid itemDimension={80} data={data} renderItem={({item}) => {
           return <WikiIcon item={item} onPress={() => SafeAction('BasicDetail', {item: item})}/>
         }} showsVerticalScrollIndicator={false}/>
       </WoWsInfo>

@@ -32,7 +32,7 @@ class License extends Component {
   render() {
     return (
       <WoWsInfo hideAds>
-        <FlatGrid items={libraries} renderItem={({item}) => {
+        <FlatGrid data={libraries} renderItem={({item}) => {
           return <List.Item key={item.name} title={item.name} description={item.link}
             onPress={() => Linking.openURL(item.link)}/>
         }} itemDimension={300} spacing={0}/>

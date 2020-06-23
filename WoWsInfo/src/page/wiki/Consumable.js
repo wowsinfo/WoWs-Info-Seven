@@ -71,7 +71,7 @@ class Consumable extends PureComponent {
 
     return (
       <View style={{flex: 1}}>
-        <FlatGrid itemDimension={80} items={data} renderItem={({item}) => {
+        <FlatGrid itemDimension={80} data={data} renderItem={({item}) => {
           return <WikiIcon item={item} onPress={() => SafeAction('BasicDetail', {item: item})}/>
         }} showsVerticalScrollIndicator={false}/>
       </View>

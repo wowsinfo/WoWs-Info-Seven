@@ -83,9 +83,9 @@ class RS extends Component {
           <RatingButton rating={enemyRating} number/>
         </View>
         <View style={horizontal}>
-          <FlatGrid items={allay} itemDimension={120} renderItem={({item}) => this.renderPlayerCell(item)}
+          <FlatGrid data={allay} itemDimension={120} renderItem={({item}) => this.renderPlayerCell(item)}
             keyExtractor={p => String(p.account_id)} style={{margin: 8, width: '50%'}}/>
-          <FlatGrid items={enemy} itemDimension={120} renderItem={({item}) => this.renderPlayerCell(item)}
+          <FlatGrid data={enemy} itemDimension={120} renderItem={({item}) => this.renderPlayerCell(item)}
             keyExtractor={p => String(p.account_id)} style={{margin: 8, width: '50%'}}/>
         </View>
       </ScrollView>

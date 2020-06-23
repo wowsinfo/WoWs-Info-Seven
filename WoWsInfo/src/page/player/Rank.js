@@ -37,7 +37,7 @@ class Rank extends PureComponent {
     console.log(data);
     return (
       <WoWsInfo title={`${lang.tab_rank_title} - ${data.length}`}>
-        <FlatGrid itemDimension={300} items={data} renderItem={({item}) => {
+        <FlatGrid itemDimension={300} data={data} renderItem={({item}) => {
           const { season, rank_info } = item;
           const { rank, start_rank } = rank_info;
           const shipData = ship[season];

@@ -35,7 +35,7 @@ class PlayerAchievement extends PureComponent {
     return (
       <WoWsInfo title={`${lang.tab_achievement_title} - ${data.length}`}>
         <Anime.View useNativeDriver animation='fadeIn'>
-          <FlatGrid itemDimension={80} items={data} renderItem={({item}) => {
+          <FlatGrid itemDimension={80} data={data} renderItem={({item}) => {
             return (
               <Touchable onPress={() => SafeAction('BasicDetail', {item: item.data})}>
                 <WikiIcon item={item.data} />

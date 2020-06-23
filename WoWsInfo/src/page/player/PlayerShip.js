@@ -49,7 +49,7 @@ class PlayerShip extends PureComponent {
     return (
       <WoWsInfo hideAds title={`${lang.wiki_warship_footer} - ${data.length}`} onPress={() => SafeAction('WarshipFilter', {applyFunc: this.updateShip})}>
         <RatingButton rating={rating}/>        
-        <FlatGrid itemDimension={150} items={data} renderItem={({item}) => this.renderShip(item)} 
+        <FlatGrid itemDimension={150} data={data} renderItem={({item}) => this.renderShip(item)} 
           showsVerticalScrollIndicator={false}/>
         <FooterPlus>
           <FlatList data={sortingMethod} renderItem={({item}) => <Button style={{margin: 8}} mode='contained' onPress={() => this.sortData(item.v)}>{item.n}</Button>} 

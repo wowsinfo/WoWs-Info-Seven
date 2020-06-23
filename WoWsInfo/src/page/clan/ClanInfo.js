@@ -104,7 +104,7 @@ class ClanInfo extends Component {
           { canBeFriend ? <Button icon='contacts' onPress={this.addFriend} style={{padding: 4}}>{lang.basic_add_friend}</Button> : null }
           <Paragraph style={{padding: 16}}>{description}</Paragraph>
           <SectionTitle style={{alignSelf: 'flex-start'}} title={`${lang.clan_member_title} - ${members_count}`}/>
-          <FlatGrid items={memberInfo} itemDimension={300} renderItem={({item}) => {
+          <FlatGrid data={memberInfo} itemDimension={300} renderItem={({item}) => {
             return (
               <List.Item title={item.account_name} description={humanTimeString(item.joined_at)}
                 onPress={() => this.pushToPlayer(item)} key={String(item.account_id)}

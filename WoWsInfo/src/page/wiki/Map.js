@@ -38,7 +38,7 @@ class Map extends Component {
 
     return (
       <WoWsInfo>
-        <FlatGrid items={data} itemDimension={300} spacing={0} renderItem={({item}) => {
+        <FlatGrid data={data} itemDimension={300} spacing={0} renderItem={({item}) => {
           return <List.Item title={item.name} description={item.description} key={item.name}
             onPress={() => this.setState({shown: true, map: item.icon})}/>
         }} showsVerticalScrollIndicator={false}/>
