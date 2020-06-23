@@ -1,5 +1,8 @@
 [English](https://github.com/HenryQuan/WoWs-Info-Re/blob/master/log/en.md) | [中文简体](https://github.com/HenryQuan/WoWs-Info-Re/blob/master/log/zh.md) | [中文繁體](https://github.com/HenryQuan/WoWs-Info-Re/blob/master/log/zh-hant.md) | [日本語](https://github.com/HenryQuan/WoWs-Info-Re/blob/master/log/ja.md)
 
+# 1.0.8.1 / 1.6.9
+- 如果評分數據無法加載會使用備用網址
+
 # 1.0.8 / 1.6.8
 - 修復數據加載問題
 - 增加圖表
