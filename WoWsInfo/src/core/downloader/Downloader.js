@@ -110,10 +110,14 @@ class Downloader {
 
         let PR = DATA[SAVED.pr];
         if (PR == null || Object.keys(PR).length < 10) {
+          // Get data from the mirror
+          DATA[SAVED.pr] = await this.getPRMirror();
           log += `${lang.rating_title} - mirror\n`;
-          DATA[SAVED.pr] = await this.getPR();
+          PR = DATA[SAVED.pr];
+          // Check if the mirror is ok
           if (PR == null || Object.keys(PR).length < 10) {
             log += `${lang.error_pr_corruption}\n`;
+            log += ` ${lang.rating_title} - ${JSON.stringify(PR)}\n`;
             return this.makeObj(false, log); 
           }
         }
