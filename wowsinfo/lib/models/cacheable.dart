@@ -3,6 +3,7 @@
 abstract class Cacheable {
   /// Check if the data is valid and whether it is corrupted
   bool isValid();
+
   /// This is the final output to be saved
   dynamic output();
 }
