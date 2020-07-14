@@ -33,17 +33,17 @@ dependencies:
       url: https://github.com/hivedb/hive.git
       path: hive_flutter
   # Keep device awake
-  wakelock: ^0.1.4
+  wakelock: ^0.1.4+2
   # Charts
   charts_flutter: ^0.9.0
   # Vibraton
   vibration: ^1.2.4
   # IAP
-  in_app_purchase: ^0.3.1+2
+  in_app_purchase: ^0.3.4+1
   # Change app theme, brightess, locale and more
-  provider: ^4.0.4
+  provider: ^4.3.1
   # launch website in app
-  url_launcher: ^5.4.2
+  url_launcher: ^5.5.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

@@ -7,8 +7,9 @@ Template
 ### What to do tomorrow?
 ~~~
 
-## 22/06/2020
+## 14/07/2020
 ### Summary
+I am back again. I think it was too complicated and I should simplify it a little bit. I can request data one place and have several repositories. I also want to have a UI based data manager so that my dear users can see what's going on. I should encourage my users to email me because I don't really check the ratings that much any more. Make it simple and just make sure it works for this app. 
 ### What to do tomorrow?
 
 ## 21/06/2020
