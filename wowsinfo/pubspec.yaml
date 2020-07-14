@@ -25,6 +25,7 @@ dependencies:
   # API request
   http: ^0.12.0+4
   html: ^0.14.0+3
+  dio: ^3.0.9
   # Database
   hive: ^1.4.1+1
   hive_flutter: 
