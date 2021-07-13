@@ -11,9 +11,9 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		79A52616DAF3E2BBE8BFA9E4 /* libPods-wowsinfo-wowsinfoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A261A29186CF4ABF5EF06DBE /* libPods-wowsinfo-wowsinfoTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		C3B572691E996F970C186AA5 /* libPods-wowsinfo-wowsinfoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 520F03E7D864C7351F4ADAA5 /* libPods-wowsinfo-wowsinfoTests.a */; };
-		D701DB098D18EB32AFE17887 /* libPods-wowsinfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F59AAF378B05F0758A0EF8A3 /* libPods-wowsinfo.a */; };
+		87A0A8B17AFD77F60DF548F9 /* libPods-wowsinfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04D1B4D1B7E2F5CA3EAF856C /* libPods-wowsinfo.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,20 +30,20 @@
 		00E356EE1AD99517003FC87E /* wowsinfoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = wowsinfoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* wowsinfoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = wowsinfoTests.m; sourceTree = "<group>"; };
+		04D1B4D1B7E2F5CA3EAF856C /* libPods-wowsinfo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-wowsinfo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07F961A680F5B00A75B9A /* wowsinfo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wowsinfo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = wowsinfo/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = wowsinfo/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = wowsinfo/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = wowsinfo/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = wowsinfo/main.m; sourceTree = "<group>"; };
-		3672159C64FCB36E28B1F453 /* Pods-wowsinfo-wowsinfoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wowsinfo-wowsinfoTests.release.xcconfig"; path = "Target Support Files/Pods-wowsinfo-wowsinfoTests/Pods-wowsinfo-wowsinfoTests.release.xcconfig"; sourceTree = "<group>"; };
-		520F03E7D864C7351F4ADAA5 /* libPods-wowsinfo-wowsinfoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-wowsinfo-wowsinfoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		656A01C4709D18D65CA49DE3 /* Pods-wowsinfo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wowsinfo.release.xcconfig"; path = "Target Support Files/Pods-wowsinfo/Pods-wowsinfo.release.xcconfig"; sourceTree = "<group>"; };
+		3F884DAB111E902106D3DBDF /* Pods-wowsinfo-wowsinfoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wowsinfo-wowsinfoTests.debug.xcconfig"; path = "Target Support Files/Pods-wowsinfo-wowsinfoTests/Pods-wowsinfo-wowsinfoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		4B8899AF2F8BF192E4B9B50F /* Pods-wowsinfo-wowsinfoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wowsinfo-wowsinfoTests.release.xcconfig"; path = "Target Support Files/Pods-wowsinfo-wowsinfoTests/Pods-wowsinfo-wowsinfoTests.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = wowsinfo/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		AE54E64CF33669B6E87C6D3F /* Pods-wowsinfo-wowsinfoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wowsinfo-wowsinfoTests.debug.xcconfig"; path = "Target Support Files/Pods-wowsinfo-wowsinfoTests/Pods-wowsinfo-wowsinfoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A261A29186CF4ABF5EF06DBE /* libPods-wowsinfo-wowsinfoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-wowsinfo-wowsinfoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AFD80FCDDC77023CA60CE9F0 /* Pods-wowsinfo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wowsinfo.release.xcconfig"; path = "Target Support Files/Pods-wowsinfo/Pods-wowsinfo.release.xcconfig"; sourceTree = "<group>"; };
+		BB8D2349E451EC7989E55E35 /* Pods-wowsinfo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wowsinfo.debug.xcconfig"; path = "Target Support Files/Pods-wowsinfo/Pods-wowsinfo.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		F59AAF378B05F0758A0EF8A3 /* libPods-wowsinfo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-wowsinfo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FD6A3B5578A52B8887697D71 /* Pods-wowsinfo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wowsinfo.debug.xcconfig"; path = "Target Support Files/Pods-wowsinfo/Pods-wowsinfo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,7 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C3B572691E996F970C186AA5 /* libPods-wowsinfo-wowsinfoTests.a in Frameworks */,
+				79A52616DAF3E2BBE8BFA9E4 /* libPods-wowsinfo-wowsinfoTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,7 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D701DB098D18EB32AFE17887 /* libPods-wowsinfo.a in Frameworks */,
+				87A0A8B17AFD77F60DF548F9 /* libPods-wowsinfo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,10 +100,22 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				F59AAF378B05F0758A0EF8A3 /* libPods-wowsinfo.a */,
-				520F03E7D864C7351F4ADAA5 /* libPods-wowsinfo-wowsinfoTests.a */,
+				04D1B4D1B7E2F5CA3EAF856C /* libPods-wowsinfo.a */,
+				A261A29186CF4ABF5EF06DBE /* libPods-wowsinfo-wowsinfoTests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5E4EC087CBB3FDC44B11BE6D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BB8D2349E451EC7989E55E35 /* Pods-wowsinfo.debug.xcconfig */,
+				AFD80FCDDC77023CA60CE9F0 /* Pods-wowsinfo.release.xcconfig */,
+				3F884DAB111E902106D3DBDF /* Pods-wowsinfo-wowsinfoTests.debug.xcconfig */,
+				4B8899AF2F8BF192E4B9B50F /* Pods-wowsinfo-wowsinfoTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -121,7 +133,7 @@
 				00E356EF1AD99517003FC87E /* wowsinfoTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				AB651465DAE3D286372E1C32 /* Pods */,
+				5E4EC087CBB3FDC44B11BE6D /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -137,17 +149,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		AB651465DAE3D286372E1C32 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				FD6A3B5578A52B8887697D71 /* Pods-wowsinfo.debug.xcconfig */,
-				656A01C4709D18D65CA49DE3 /* Pods-wowsinfo.release.xcconfig */,
-				AE54E64CF33669B6E87C6D3F /* Pods-wowsinfo-wowsinfoTests.debug.xcconfig */,
-				3672159C64FCB36E28B1F453 /* Pods-wowsinfo-wowsinfoTests.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -155,12 +156,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "wowsinfoTests" */;
 			buildPhases = (
-				CAD687E76CDD2C79069FFD88 /* [CP] Check Pods Manifest.lock */,
+				CADB98024907B25E1234F60D /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				277B91CF6FD2F0538B0DDAF1 /* [CP] Embed Pods Frameworks */,
-				3BF2090DE69D865882783BAF /* [CP] Copy Pods Resources */,
+				57FAA75C6D0B684140B3D32C /* [CP] Embed Pods Frameworks */,
+				13F5A6F718F8721C68D4D1BD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -176,14 +177,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "wowsinfo" */;
 			buildPhases = (
-				3B8BFB0C6E9194AE432668F5 /* [CP] Check Pods Manifest.lock */,
+				9811E8622AF069D70959C6A5 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				5C3D2F06397967798B7D02D5 /* [CP] Embed Pods Frameworks */,
-				33B54522024E77167450BC90 /* [CP] Copy Pods Resources */,
+				AAD715049D09132BE94600C5 /* [CP] Embed Pods Frameworks */,
+				38D9DC27CCD79239C72914FB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -211,7 +212,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "WoWsInfo" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "wowsinfo" */;
 			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -264,24 +265,24 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
-		277B91CF6FD2F0538B0DDAF1 /* [CP] Embed Pods Frameworks */ = {
+		13F5A6F718F8721C68D4D1BD /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-wowsinfo-wowsinfoTests/Pods-wowsinfo-wowsinfoTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-wowsinfo-wowsinfoTests/Pods-wowsinfo-wowsinfoTests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-wowsinfo-wowsinfoTests/Pods-wowsinfo-wowsinfoTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-wowsinfo-wowsinfoTests/Pods-wowsinfo-wowsinfoTests-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-wowsinfo-wowsinfoTests/Pods-wowsinfo-wowsinfoTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-wowsinfo-wowsinfoTests/Pods-wowsinfo-wowsinfoTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		33B54522024E77167450BC90 /* [CP] Copy Pods Resources */ = {
+		38D9DC27CCD79239C72914FB /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -298,7 +299,24 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-wowsinfo/Pods-wowsinfo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		3B8BFB0C6E9194AE432668F5 /* [CP] Check Pods Manifest.lock */ = {
+		57FAA75C6D0B684140B3D32C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-wowsinfo-wowsinfoTests/Pods-wowsinfo-wowsinfoTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-wowsinfo-wowsinfoTests/Pods-wowsinfo-wowsinfoTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-wowsinfo-wowsinfoTests/Pods-wowsinfo-wowsinfoTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9811E8622AF069D70959C6A5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -320,24 +338,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		3BF2090DE69D865882783BAF /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-wowsinfo-wowsinfoTests/Pods-wowsinfo-wowsinfoTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-wowsinfo-wowsinfoTests/Pods-wowsinfo-wowsinfoTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-wowsinfo-wowsinfoTests/Pods-wowsinfo-wowsinfoTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5C3D2F06397967798B7D02D5 /* [CP] Embed Pods Frameworks */ = {
+		AAD715049D09132BE94600C5 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -354,7 +355,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-wowsinfo/Pods-wowsinfo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CAD687E76CDD2C79069FFD88 /* [CP] Check Pods Manifest.lock */ = {
+		CADB98024907B25E1234F60D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -428,7 +429,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AE54E64CF33669B6E87C6D3F /* Pods-wowsinfo-wowsinfoTests.debug.xcconfig */;
+			baseConfigurationReference = 3F884DAB111E902106D3DBDF /* Pods-wowsinfo-wowsinfoTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -455,7 +456,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3672159C64FCB36E28B1F453 /* Pods-wowsinfo-wowsinfoTests.release.xcconfig */;
+			baseConfigurationReference = 4B8899AF2F8BF192E4B9B50F /* Pods-wowsinfo-wowsinfoTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -479,7 +480,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FD6A3B5578A52B8887697D71 /* Pods-wowsinfo.debug.xcconfig */;
+			baseConfigurationReference = BB8D2349E451EC7989E55E35 /* Pods-wowsinfo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -490,7 +491,6 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.9;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -506,7 +506,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 656A01C4709D18D65CA49DE3 /* Pods-wowsinfo.release.xcconfig */;
+			baseConfigurationReference = AFD80FCDDC77023CA60CE9F0 /* Pods-wowsinfo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -516,7 +516,6 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.9;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -673,7 +672,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "WoWsInfo" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "wowsinfo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
