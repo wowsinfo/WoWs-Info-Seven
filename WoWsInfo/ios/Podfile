@@ -1,7 +1,7 @@
 require_relative '../node_modules/react-native/scripts/react_native_pods'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-platform :ios, '10.0'
+platform :ios, '11.0'
 
 target 'wowsinfo' do
   config = use_native_modules!
@@ -25,12 +25,10 @@ target 'wowsinfo' do
 
   post_install do |installer|
     react_native_post_install(installer)
-
     installer.pods_project.targets.each do |target|
-      flutter_additional_ios_build_settings(target)
       target.build_configurations.each do |config|
-        # set deployment target to iOS 10
-        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '10.0'
+        # set all target to iOS 10
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '11.0'
       end
     end
   end
