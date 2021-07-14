@@ -1,16 +1,18 @@
 
 .project
-*.class
-WoWsInfo/src/value/key.js
-API/parser.py
-API/node_modules/
-API/package-lock.json
-API/temp.json
-WoWsInfo/.vscode/
-WoWsInfo/ios/Pods
+**/*.class
+**/src/value/key.js
+**/API/parser.py
+**/API/package-lock.json
+**/API/temp.json
+**/.vscode/
+**/Pods
 
 WoWsInfo/index\.android\.js
-*.zip
-.DS_Store
+**/*.zip
+**/.DS_Store
 **/._*
 **/*.ttf
+
+# react native
+**/node_modules
