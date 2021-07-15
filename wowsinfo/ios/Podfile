@@ -12,11 +12,11 @@ target 'wowsinfo' do
     :hermes_enabled => false
   )
 
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   target 'wowsinfo-test' do
     inherit! :complete
     # Pods for testing
-    pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
-
   end
 
   # Enables Flipper.

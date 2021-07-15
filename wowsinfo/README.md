@@ -6,6 +6,9 @@ The root folder of WoWs Info containing iOS, Android and React Native.
 
 Read [this guide](https://reactnative.dev/docs/integration-with-existing-apps) to setup react native with existing apps. The better way is to be native first and use react native as a framework instead.
 
+- [vector icons](https://oblador.github.io/react-native-vector-icons/)
+- [material icons](https://materialdesignicons.com/)
+
 ### IOS
 
 React Native is now used as a module so the app is native first. Although the entire is in React Native, this way I can have full control over the native side.
