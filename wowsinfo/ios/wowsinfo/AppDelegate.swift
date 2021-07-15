@@ -6,13 +6,30 @@
 //
 
 import UIKit
+import FlipperKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        #if DEBUG
+        setupFlipper()
+        #endif
+
+        RNHandler.shared.setup(with: launchOptions)
         return true
+    }
+    
+    private func setupFlipper() {
+        #if FB_SONARKIT_ENABLED
+        let client = FlipperClient.shared()
+        let layoutDescriptorMapper = SKDescriptorMapper(defaults: ())
+        client?.add(FlipperKitLayoutPlugin(rootNode: application, with: layoutDescriptorMapper))
+        client?.add(FKUserDefaultsPlugin(suiteName: nil))
+        client?.add(FlipperKitReactPlugin())
+        client?.add(FlipperKitNetworkPlugin(networkAdapter: SKIOSNetworkAdapter()))
+        client?.start()
+        #endif
     }
 
     // MARK: UISceneSession Lifecycle
