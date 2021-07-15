@@ -1,7 +1,7 @@
 
 .project
 **/*.class
-**/src/value/key.js
+**/key.js
 **/API/parser.py
 **/API/package-lock.json
 **/API/temp.json

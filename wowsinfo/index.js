@@ -1,33 +1,15 @@
-import React from "react";
-import { AppRegistry, StyleSheet, Text, View } from "react-native";
+import * as React from "react";
+import { AppRegistry } from "react-native";
+import App from "./src/wowsinfo";
+import { Provider as PaperProvider, DefaultTheme } from "react-native-paper";
+import "./src/value/global";
 
-const WoWsInfo = () => {
+export function Main() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.highScoresTitle}>WoWs Info</Text>
-      <Text style={styles.scores}>Comming from React Native</Text>
-    </View>
+    <PaperProvider theme={DefaultTheme}>
+      <App />
+    </PaperProvider>
   );
-};
+}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#FFFFFF",
-  },
-  highScoresTitle: {
-    fontSize: 20,
-    textAlign: "center",
-    margin: 10,
-  },
-  scores: {
-    textAlign: "center",
-    color: "#333333",
-    marginBottom: 5,
-  },
-});
-
-// Module name
-AppRegistry.registerComponent("WoWsInfo", () => WoWsInfo);
+AppRegistry.registerComponent("WoWsInfo", () => Main);

@@ -6,9 +6,9 @@
     "start": "npx react-native start"
   },
   "dependencies": {
+    "native-chart-experiment": "^1.0.1",
     "react": "17.0.1",
     "react-native": "^0.64.2",
-    "native-chart-experiment": "^1.0.1",
     "react-native-iap": "^7.0.3",
     "react-native-keep-awake": "^4.0.0",
     "react-native-localization": "^2.1.7",
@@ -26,6 +26,7 @@
     "jest": "^26.6.3",
     "metro-react-native-babel-preset": "^0.64.0",
     "react-native-device-detection": "^0.2.1",
+    "@react-native-async-storage/async-storage": "^1.15.5",
     "react-native-exception-handler": "^2.10.10",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-material-color": "^1.0.15",

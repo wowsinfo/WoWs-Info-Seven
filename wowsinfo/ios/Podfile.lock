@@ -328,6 +328,8 @@ PODS:
     - React-Core
   - ReactNativeLocalization (2.1.7):
     - React-Core
+  - RNCAsyncStorage (1.15.5):
+    - React-Core
   - RNGestureHandler (1.10.3):
     - React-Core
   - RNIap (7.0.4):
@@ -423,6 +425,7 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - ReactNativeExceptionHandler (from `../node_modules/react-native-exception-handler`)
   - ReactNativeLocalization (from `../node_modules/react-native-localization`)
+  - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNIap (from `../node_modules/react-native-iap`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
@@ -509,6 +512,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-exception-handler"
   ReactNativeLocalization:
     :path: "../node_modules/react-native-localization"
+  RNCAsyncStorage:
+    :path: "../node_modules/@react-native-async-storage/async-storage"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNIap:
@@ -566,6 +571,7 @@ SPEC CHECKSUMS:
   ReactCommon: 149906e01aa51142707a10665185db879898e966
   ReactNativeExceptionHandler: b11ff67c78802b2f62eed0e10e75cb1ef7947c60
   ReactNativeLocalization: 90a1181b7672309701dd7e5364fbf587319d41c6
+  RNCAsyncStorage: 56a3355a10b5d660c48c6e37325ac85ebfd09885
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNIap: ce8d0283321b9422eac4c3ffcf6d401b8680229c
   RNReanimated: 9c13c86454bfd54dab7505c1a054470bfecd2563

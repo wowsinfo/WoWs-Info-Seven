@@ -22,6 +22,11 @@ class RNHandler: NSObject, RCTBridgeDelegate {
     
     func setup(with launchOptions: [AnyHashable: Any]?) {
         bridge = RCTBridge(delegate: self, launchOptions: launchOptions)
+        
+        /// https://stackoverflow.com/a/48903673, RCTBridge required dispatch_sync to load RCTDevLoadingView
+        #if RCT_DEV
+        bridge?.module(for: RCTDevLoadingView.self)
+        #endif
     }
     
     private(set) lazy var jsBundleURL: URL = {
