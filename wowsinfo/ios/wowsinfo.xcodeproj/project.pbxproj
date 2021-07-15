@@ -13,6 +13,14 @@
 		92188677269F0D8D00FE3099 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92188675269F0D8D00FE3099 /* Main.storyboard */; };
 		92188679269F0D8F00FE3099 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92188678269F0D8F00FE3099 /* Assets.xcassets */; };
 		9218867C269F0D8F00FE3099 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9218867A269F0D8F00FE3099 /* LaunchScreen.storyboard */; };
+		9275F50F26A04F3300D9EEB0 /* InfoTest.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9275F50B26A04F2500D9EEB0 /* InfoTest.plist */; };
+		9275F51026A04F3600D9EEB0 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9218867D269F0D8F00FE3099 /* Info.plist */; };
+		9275F51226A04F5F00D9EEB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9218866F269F0D8D00FE3099 /* AppDelegate.swift */; };
+		9275F51326A04F6100D9EEB0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92188671269F0D8D00FE3099 /* SceneDelegate.swift */; };
+		9275F51426A04F6400D9EEB0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92188673269F0D8D00FE3099 /* ViewController.swift */; };
+		9275F51526A04F6D00D9EEB0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92188675269F0D8D00FE3099 /* Main.storyboard */; };
+		9275F51626A04F7000D9EEB0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9218867A269F0D8F00FE3099 /* LaunchScreen.storyboard */; };
+		9275F51726A04F7800D9EEB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92188678269F0D8F00FE3099 /* Assets.xcassets */; };
 		A532E1FFEA16644DB0040FD7 /* libPods-wowsinfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F3158889382523185E226FA /* libPods-wowsinfo.a */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +35,8 @@
 		92188678269F0D8F00FE3099 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9218867B269F0D8F00FE3099 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9218867D269F0D8F00FE3099 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9275F4FB26A04F2100D9EEB0 /* wowsinfo-test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "wowsinfo-test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9275F50B26A04F2500D9EEB0 /* InfoTest.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = InfoTest.plist; sourceTree = "<group>"; };
 		92AE130D26A03D9C007F495C /* wowsinfo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "wowsinfo-Bridging-Header.h"; sourceTree = "<group>"; };
 		B40A305DAEC4658DEB1575DB /* Pods-wowsinfo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wowsinfo.release.xcconfig"; path = "Target Support Files/Pods-wowsinfo/Pods-wowsinfo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -37,6 +47,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A532E1FFEA16644DB0040FD7 /* libPods-wowsinfo.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9275F4F826A04F2100D9EEB0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,7 +71,9 @@
 		92188663269F0D8D00FE3099 = {
 			isa = PBXGroup;
 			children = (
+				9275F51126A04F4200D9EEB0 /* support */,
 				9218866E269F0D8D00FE3099 /* wowsinfo */,
+				9275F4FC26A04F2100D9EEB0 /* wowsinfo-test */,
 				9218866D269F0D8D00FE3099 /* Products */,
 				BF12D85FE48871B926C1820B /* Pods */,
 				081A3D13AA87BC422CF41957 /* Frameworks */,
@@ -65,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				9218866C269F0D8D00FE3099 /* wowsinfo.app */,
+				9275F4FB26A04F2100D9EEB0 /* wowsinfo-test.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -76,12 +96,27 @@
 				92188671269F0D8D00FE3099 /* SceneDelegate.swift */,
 				92188673269F0D8D00FE3099 /* ViewController.swift */,
 				92188675269F0D8D00FE3099 /* Main.storyboard */,
-				92188678269F0D8F00FE3099 /* Assets.xcassets */,
 				9218867A269F0D8F00FE3099 /* LaunchScreen.storyboard */,
-				9218867D269F0D8F00FE3099 /* Info.plist */,
 				92AE130D26A03D9C007F495C /* wowsinfo-Bridging-Header.h */,
 			);
 			path = wowsinfo;
+			sourceTree = "<group>";
+		};
+		9275F4FC26A04F2100D9EEB0 /* wowsinfo-test */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "wowsinfo-test";
+			sourceTree = "<group>";
+		};
+		9275F51126A04F4200D9EEB0 /* support */ = {
+			isa = PBXGroup;
+			children = (
+				9218867D269F0D8F00FE3099 /* Info.plist */,
+				9275F50B26A04F2500D9EEB0 /* InfoTest.plist */,
+				92188678269F0D8F00FE3099 /* Assets.xcassets */,
+			);
+			path = support;
 			sourceTree = "<group>";
 		};
 		BF12D85FE48871B926C1820B /* Pods */ = {
@@ -116,6 +151,23 @@
 			productReference = 9218866C269F0D8D00FE3099 /* wowsinfo.app */;
 			productType = "com.apple.product-type.application";
 		};
+		9275F4FA26A04F2100D9EEB0 /* wowsinfo-test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9275F50E26A04F2500D9EEB0 /* Build configuration list for PBXNativeTarget "wowsinfo-test" */;
+			buildPhases = (
+				9275F4F726A04F2100D9EEB0 /* Sources */,
+				9275F4F826A04F2100D9EEB0 /* Frameworks */,
+				9275F4F926A04F2100D9EEB0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "wowsinfo-test";
+			productName = "wowsinfo-test";
+			productReference = 9275F4FB26A04F2100D9EEB0 /* wowsinfo-test.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -128,6 +180,9 @@
 					9218866B269F0D8D00FE3099 = {
 						CreatedOnToolsVersion = 12.5.1;
 						LastSwiftMigration = 1250;
+					};
+					9275F4FA26A04F2100D9EEB0 = {
+						CreatedOnToolsVersion = 12.5.1;
 					};
 				};
 			};
@@ -145,6 +200,7 @@
 			projectRoot = "";
 			targets = (
 				9218866B269F0D8D00FE3099 /* wowsinfo */,
+				9275F4FA26A04F2100D9EEB0 /* wowsinfo-test */,
 			);
 		};
 /* End PBXProject section */
@@ -154,9 +210,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9275F51026A04F3600D9EEB0 /* Info.plist in Resources */,
 				9218867C269F0D8F00FE3099 /* LaunchScreen.storyboard in Resources */,
 				92188679269F0D8F00FE3099 /* Assets.xcassets in Resources */,
 				92188677269F0D8D00FE3099 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9275F4F926A04F2100D9EEB0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9275F51626A04F7000D9EEB0 /* LaunchScreen.storyboard in Resources */,
+				9275F50F26A04F3300D9EEB0 /* InfoTest.plist in Resources */,
+				9275F51726A04F7800D9EEB0 /* Assets.xcassets in Resources */,
+				9275F51526A04F6D00D9EEB0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,6 +300,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9275F4F726A04F2100D9EEB0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9275F51426A04F6400D9EEB0 /* ViewController.swift in Sources */,
+				9275F51226A04F5F00D9EEB0 /* AppDelegate.swift in Sources */,
+				9275F51326A04F6100D9EEB0 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
@@ -288,6 +366,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 100;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -307,6 +386,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MARKETING_VERSION = 1.7.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -350,6 +430,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 100;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -363,6 +444,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MARKETING_VERSION = 1.7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -419,6 +501,44 @@
 			};
 			name = Release;
 		};
+		9275F50C26A04F2500D9EEB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "wowsinfo-test/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yihengquan.wowsinfo-test";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9275F50D26A04F2500D9EEB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "wowsinfo-test/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yihengquan.wowsinfo-test";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -436,6 +556,15 @@
 			buildConfigurations = (
 				92188681269F0D8F00FE3099 /* Debug */,
 				92188682269F0D8F00FE3099 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9275F50E26A04F2500D9EEB0 /* Build configuration list for PBXNativeTarget "wowsinfo-test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9275F50C26A04F2500D9EEB0 /* Debug */,
+				9275F50D26A04F2500D9EEB0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
