@@ -1,14 +1,14 @@
 /**
  * Get and set storage keys safely
  */
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 class SafeStorage {
   /**
    * Get a key from async storage and return a default value if not defined
    * It will also save the default value if it is null
-   * @param {string} key 
-   * @param {any} value 
+   * @param {string} key
+   * @param {any} value
    */
   static async get(key, value) {
     const data = await AsyncStorage.getItem(key);
@@ -24,8 +24,8 @@ class SafeStorage {
 
   /**
    * Set any values to a key
-   * @param {string} key 
-   * @param {any} value 
+   * @param {string} key
+   * @param {any} value
    */
   static set(key, value) {
     // Stringify values to json format

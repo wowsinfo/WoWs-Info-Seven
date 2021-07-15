@@ -10,18 +10,18 @@ import React
 
 typealias RNDict = [NSObject: Any]
 
-class RNHandler: NSObject, RCTBridgeDelegate {
+class RNHandler {
     
     // Singleton
     static let shared = RNHandler()
-    private override init() {}
+    private init() {}
     
     /// Setup the bridge so only one JSC VM is created to save resources and simplify the communication between RN views in different parts of your native app,
     /// you can have multiple views powered by React Native that are associated with a single JS runtime.
     private var bridge: RCTBridge!
     
-    func setup(with launchOptions: [AnyHashable: Any]?) {
-        bridge = RCTBridge(delegate: self, launchOptions: launchOptions)
+    func setup(with delegate: RCTBridgeDelegate, and launchOptions: [AnyHashable: Any]?) {
+        bridge = RCTBridge(delegate: delegate, launchOptions: launchOptions)
         
         /// https://stackoverflow.com/a/48903673, RCTBridge required dispatch_sync to load RCTDevLoadingView
         #if RCT_DEV
@@ -29,17 +29,18 @@ class RNHandler: NSObject, RCTBridgeDelegate {
         #endif
     }
     
-    private(set) lazy var jsBundleURL: URL = {
-        sourceURL(for: bridge)
-    }()
-    
-    func sourceURL(for bridge: RCTBridge!) -> URL! {
+    private(set) lazy var jsBundleURL: URL! = {
         #if DEBUG
-        return RCTBundleURLProvider.sharedSettings().jsBundleURL(forBundleRoot: "index", fallbackResource: nil)
+        if let settings = RCTBundleURLProvider.sharedSettings() {
+            return settings.jsBundleURL(forBundleRoot: "index", fallbackResource: nil)
+        } else {
+            assertionFailure("Run npm start from wowsinfo folder")
+            return nil
+        }
         #else
         return Bundle.main.url(forResource: "main", withExtension: "jsbundle")
         #endif
-    }
+    }()
     
     /// The wrapper of RCTRootView
     func getRNView(with name: String, and props: RNDict? = nil) -> RCTRootView {

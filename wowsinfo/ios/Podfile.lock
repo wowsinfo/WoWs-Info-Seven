@@ -260,6 +260,8 @@ PODS:
   - React-jsinspector (0.64.2)
   - react-native-keep-awake (4.0.0):
     - React
+  - react-native-safe-area-context (3.2.0):
+    - React-Core
   - React-perflogger (0.64.2)
   - React-RCTActionSheet (0.64.2):
     - React-Core/RCTActionSheetHeaders (= 0.64.2)
@@ -411,6 +413,7 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - react-native-keep-awake (from `../node_modules/react-native-keep-awake`)
+  - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -484,6 +487,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   react-native-keep-awake:
     :path: "../node_modules/react-native-keep-awake"
+  react-native-safe-area-context:
+    :path: "../node_modules/react-native-safe-area-context"
   React-perflogger:
     :path: "../node_modules/react-native/ReactCommon/reactperflogger"
   React-RCTActionSheet:
@@ -557,6 +562,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 80c46bd381fd06e418e0d4f53672dc1d1945c4c3
   React-jsinspector: cc614ec18a9ca96fd275100c16d74d62ee11f0ae
   react-native-keep-awake: afad8a51dfef9fe9655a6344771be32c8596d774
+  react-native-safe-area-context: f0906bf8bc9835ac9a9d3f97e8bde2a997d8da79
   React-perflogger: 25373e382fed75ce768a443822f07098a15ab737
   React-RCTActionSheet: af7796ba49ffe4ca92e7277a5d992d37203f7da5
   React-RCTAnimation: 6a2e76ab50c6f25b428d81b76a5a45351c4d77aa
