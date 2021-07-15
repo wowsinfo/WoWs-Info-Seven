@@ -22,12 +22,21 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DeY-Mg-IjU">
+                                <rect key="frame" x="163.5" y="466.5" width="87" height="30"/>
+                                <state key="normal" title="React Native"/>
+                                <connections>
+                                    <action selector="onReactNativeButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gNC-T4-1yt"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="DeY-Mg-IjU" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5dV-za-Gdh"/>
                             <constraint firstItem="H84-wk-W4b" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="8Fb-Hq-14m"/>
                             <constraint firstItem="H84-wk-W4b" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="B3d-EV-A2X"/>
+                            <constraint firstItem="DeY-Mg-IjU" firstAttribute="top" secondItem="H84-wk-W4b" secondAttribute="bottom" constant="8" id="g3j-hd-kWi"/>
                         </constraints>
                     </view>
                 </viewController>
