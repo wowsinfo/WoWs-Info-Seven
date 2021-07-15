@@ -12,10 +12,10 @@ target 'wowsinfo' do
     :hermes_enabled => false
   )
 
-  # target 'RnDiffAppTests' do
-  #   inherit! :complete
-  #   # Pods for testing
-  # end
+  target 'wowsinfo-test' do
+    inherit! :complete
+    # Pods for testing
+  end
 
   # Enables Flipper.
   #

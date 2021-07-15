@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		83213183617FACCCAD3517C4 /* libPods-wowsinfo-wowsinfo-test.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E47153E58A65E510DBD1E8 /* libPods-wowsinfo-wowsinfo-test.a */; };
 		92188670269F0D8D00FE3099 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9218866F269F0D8D00FE3099 /* AppDelegate.swift */; };
 		92188672269F0D8D00FE3099 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92188671269F0D8D00FE3099 /* SceneDelegate.swift */; };
 		92188674269F0D8D00FE3099 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92188673269F0D8D00FE3099 /* ViewController.swift */; };
@@ -25,7 +26,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A4ADF3BFB95FCDD5D9CB289 /* Pods-wowsinfo-wowsinfo-test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wowsinfo-wowsinfo-test.debug.xcconfig"; path = "Target Support Files/Pods-wowsinfo-wowsinfo-test/Pods-wowsinfo-wowsinfo-test.debug.xcconfig"; sourceTree = "<group>"; };
 		2F3158889382523185E226FA /* libPods-wowsinfo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-wowsinfo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		32288B2A23568E021FF922E8 /* Pods-wowsinfo-wowsinfo-test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wowsinfo-wowsinfo-test.release.xcconfig"; path = "Target Support Files/Pods-wowsinfo-wowsinfo-test/Pods-wowsinfo-wowsinfo-test.release.xcconfig"; sourceTree = "<group>"; };
+		55E47153E58A65E510DBD1E8 /* libPods-wowsinfo-wowsinfo-test.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-wowsinfo-wowsinfo-test.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6862BFAEC5E4882B07158C5B /* Pods-wowsinfo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wowsinfo.debug.xcconfig"; path = "Target Support Files/Pods-wowsinfo/Pods-wowsinfo.debug.xcconfig"; sourceTree = "<group>"; };
 		9218866C269F0D8D00FE3099 /* wowsinfo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wowsinfo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9218866F269F0D8D00FE3099 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -54,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83213183617FACCCAD3517C4 /* libPods-wowsinfo-wowsinfo-test.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,6 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				2F3158889382523185E226FA /* libPods-wowsinfo.a */,
+				55E47153E58A65E510DBD1E8 /* libPods-wowsinfo-wowsinfo-test.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -124,6 +130,8 @@
 			children = (
 				6862BFAEC5E4882B07158C5B /* Pods-wowsinfo.debug.xcconfig */,
 				B40A305DAEC4658DEB1575DB /* Pods-wowsinfo.release.xcconfig */,
+				1A4ADF3BFB95FCDD5D9CB289 /* Pods-wowsinfo-wowsinfo-test.debug.xcconfig */,
+				32288B2A23568E021FF922E8 /* Pods-wowsinfo-wowsinfo-test.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -155,9 +163,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9275F50E26A04F2500D9EEB0 /* Build configuration list for PBXNativeTarget "wowsinfo-test" */;
 			buildPhases = (
+				C57ADE278FE58AAE325AE0A7 /* [CP] Check Pods Manifest.lock */,
 				9275F4F726A04F2100D9EEB0 /* Sources */,
 				9275F4F826A04F2100D9EEB0 /* Frameworks */,
 				9275F4F926A04F2100D9EEB0 /* Resources */,
+				1B24F8F9ED9DB89701A423C5 /* [CP] Embed Pods Frameworks */,
+				40E036BD46F9A89B20F0A352 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -231,6 +242,40 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1B24F8F9ED9DB89701A423C5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-wowsinfo-wowsinfo-test/Pods-wowsinfo-wowsinfo-test-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-wowsinfo-wowsinfo-test/Pods-wowsinfo-wowsinfo-test-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-wowsinfo-wowsinfo-test/Pods-wowsinfo-wowsinfo-test-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		40E036BD46F9A89B20F0A352 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-wowsinfo-wowsinfo-test/Pods-wowsinfo-wowsinfo-test-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-wowsinfo-wowsinfo-test/Pods-wowsinfo-wowsinfo-test-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-wowsinfo-wowsinfo-test/Pods-wowsinfo-wowsinfo-test-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		572954A7B86874177537C979 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -285,6 +330,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-wowsinfo/Pods-wowsinfo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C57ADE278FE58AAE325AE0A7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-wowsinfo-wowsinfo-test-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -463,7 +530,7 @@
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = wowsinfo/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/support/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -487,7 +554,7 @@
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = wowsinfo/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/support/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -503,11 +570,12 @@
 		};
 		9275F50C26A04F2500D9EEB0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1A4ADF3BFB95FCDD5D9CB289 /* Pods-wowsinfo-wowsinfo-test.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "wowsinfo-test/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/support/InfoTest.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -522,11 +590,12 @@
 		};
 		9275F50D26A04F2500D9EEB0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 32288B2A23568E021FF922E8 /* Pods-wowsinfo-wowsinfo-test.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "wowsinfo-test/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/support/InfoTest.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
