@@ -2,6 +2,7 @@ import requests
 import os
 import datetime
 
+input("=> Press any key to update personal rating")
 link = 'https://wows-numbers.com/personal/rating/expected/json/'
 res = requests.get(link)
 if res.status_code == 200:
@@ -10,9 +11,9 @@ if res.status_code == 200:
     f.write(res.text + '\n')
     f.close()
 
-  print("Write to personal_rating.json")
+  print("=> Write to personal_rating.json")
   os.system("git commit -am '{} update personal rating'".format(datetime.datetime.now()))
-  input("Press any key to push to remote")
+  input("=> Press any key to push to remote")
   os.system("git push origin API")
 else:
   exit("Status Code wasn't 200 OK")
