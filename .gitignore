@@ -1,2 +1,7 @@
 **/key.py
+
+# python cache
 **/__pycache__
+
+# python virtual env
+**/env
