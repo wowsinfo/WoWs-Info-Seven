@@ -11,7 +11,7 @@ if res.status_code == 200:
     f.close()
 
   print("Write to personal_rating.json")
-  os.system("git commit -am 'update personal rating - {}'".format(datetime.datetime.now()))
+  os.system("git commit -am '{} update personal rating'".format(datetime.datetime.now()))
   input("Press any key to push to remote")
   os.system("git push origin API")
 else:
