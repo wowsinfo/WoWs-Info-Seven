@@ -21,7 +21,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCTBridgeDelegate {
         #endif
 
         RNHandler.shared.setup(with: self, and: launchOptions)
+        setup3DTouchItems()
         return true
+    }
+    
+    private func setup3DTouchItems() {
+        UIApplication.shared.shortcutItems = [
+            UIApplicationShortcutItem(
+                type: "search", localizedTitle: "Search",
+                localizedSubtitle: nil,
+                icon: .init(type: .search), userInfo: nil),
+            UIApplicationShortcutItem(
+                type: "warships", localizedTitle: "Warships",
+                localizedSubtitle: nil,
+                icon: .init(type: .bookmark), userInfo: nil),
+        ]
     }
     
     private func setupFlipper() {
