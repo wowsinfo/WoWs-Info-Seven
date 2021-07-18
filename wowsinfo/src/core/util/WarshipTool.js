@@ -1,27 +1,27 @@
-import { SAVED } from "../../value/data";
+import {SAVED} from '../../value/data';
 
-export const getTierLabel = (tier) => {
+export const getTierLabel = tier => {
   if (tier < 1) return 'O';
   // From 1 to 15
   const label = getTierList();
   return label[tier - 1];
-}
+};
 
 /**
  * A function that returns a colour between red and green depending on curr / max
  */
 export const getColourWithRange = (min, curr, max) => {
   if (curr < min) return '#FF0000';
-  let scale = Number((curr - min) / (max - min) * 100).toFixed(0);
+  let scale = Number(((curr - min) / (max - min)) * 100).toFixed(0);
 
   function componentToHex(c) {
     let hex = c.toString(16);
     hex = hex.substring(0, 2);
-    return hex.length == 1 ? "0" + hex : hex;
+    return hex.length == 1 ? '0' + hex : hex;
   }
 
   function rgbToHex(r, g, b) {
-      return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+    return '#' + componentToHex(r) + componentToHex(g) + componentToHex(b);
   }
 
   let G = (255 * scale) / 100;
@@ -29,20 +29,26 @@ export const getColourWithRange = (min, curr, max) => {
   let colour = rgbToHex(R, G, 0);
   console.log(colour);
   return colour;
-}
+};
 
 export const getKeyByValue = (object, value) => {
   return Object.keys(object).find(key => object[key] === value);
-}
+};
 
 export const getTierList = () => {
   return ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
-}
+};
 
 export const filterShip = (data, shipData = null) => {
-  const { premium, name, nation, type, tier } = data;
+  const {premium, name, nation, type, tier} = data;
   console.log(data);
-  if (premium === false && name == '' && nation.length === 0 && type.length === 0 && tier.length === 0) {
+  if (
+    premium === false &&
+    name == '' &&
+    nation.length === 0 &&
+    type.length === 0 &&
+    tier.length === 0
+  ) {
     return null;
   }
 
@@ -82,7 +88,7 @@ export const filterShip = (data, shipData = null) => {
   }
 
   return sorted;
-}
+};
 
 const validShip = (curr, fname, fdata, premium) => {
   let filterTier = false;
@@ -96,7 +102,7 @@ const validShip = (curr, fname, fdata, premium) => {
   let ftype = fdata.type;
 
   // It includes this name or name is empty
-  if (curr.name.toLowerCase().includes(fname) || fname.trim() === "") {
+  if (curr.name.toLowerCase().includes(fname) || fname.trim() === '') {
     filterName = true;
   }
 
@@ -120,13 +126,14 @@ const validShip = (curr, fname, fdata, premium) => {
     filterType = true;
   }
 
-  if (filterName && filterNation && filterPremium && filterTier && filterType) return true;
+  if (filterName && filterNation && filterPremium && filterTier && filterType)
+    return true;
   return false;
-}
+};
 
-const isEmpty = (obj) => {
+const isEmpty = obj => {
   return Object.keys(obj).length === 0;
-}
+};
 
 const normalise = (nation, type, tier) => {
   let data = {nation: {}, type: {}, tier: {}};
@@ -144,4 +151,4 @@ const normalise = (nation, type, tier) => {
   });
 
   return data;
-}
+};

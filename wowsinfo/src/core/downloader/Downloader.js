@@ -1,7 +1,17 @@
-import { WoWsAPI, WikiAPI } from '../../value/api';
-import { APP, LOCAL, SAVED, langStr, getCurrDomain, getAPILanguage, updateCurrData, shouldUpdateWithCycle, getCurrDate } from '../../value/data';
-import { SafeFetch, Guard, SafeStorage } from '../';
-import { lang } from '../../value/lang';
+import {WoWsAPI, WikiAPI} from '../../value/api';
+import {
+  APP,
+  LOCAL,
+  SAVED,
+  langStr,
+  getCurrDomain,
+  getAPILanguage,
+  updateCurrData,
+  shouldUpdateWithCycle,
+  getCurrDate,
+} from '../../value/data';
+import {SafeFetch, Guard, SafeStorage} from '../';
+import {lang} from '../../value/lang';
 
 class Downloader {
   constructor(server) {
@@ -41,9 +51,7 @@ class Downloader {
   /**
    * Show random review and share to users
    */
-  reviewOrShareIfLucky() {
-    
-  }
+  reviewOrShareIfLucky() {}
 
   /**
    * Update current date and check if lastUpdate has been a week
@@ -58,9 +66,9 @@ class Downloader {
 
   /**
    * Update all data if there is a new version except for force mode
-   * @param {Boolean} force 
+   * @param {Boolean} force
    */
-  async updateAll(force=false) {
+  async updateAll(force = false) {
     // Get server version
     console.log('Downloader\nChecking for new version');
     let log = 'Getting gameVersion\n';
@@ -68,14 +76,19 @@ class Downloader {
       let gameVersion = await this.getVersion();
       log += `gameVersion - ${gameVersion}\n`;
       // Do not continue if we cannot get current game version
-      if (gameVersion == null) return this.makeObj(false, log); 
+      if (gameVersion == null) return this.makeObj(false, log);
       let currVersion = DATA[LOCAL.gameVersion];
       console.log(`Current: ${currVersion}\nAPI: ${gameVersion}`);
       let appVersion = await SafeStorage.get(LOCAL.appVersion, '1.0.4.2');
       log += `appVersion - ${appVersion}\n`;
       console.log(`Current app version: ${appVersion}\nLatest: ${APP.Version}`);
       // Check for update cycle, game update, force mode or app update
-      if (this.checkUpdateCycle() || this.checkVersionUpdate(currVersion, gameVersion) || force || appVersion !== APP.Version) {
+      if (
+        this.checkUpdateCycle() ||
+        this.checkVersionUpdate(currVersion, gameVersion) ||
+        force ||
+        appVersion !== APP.Version
+      ) {
         // Update all data
         log += 'Updating Data\n';
         console.log('Downloader\nUpdating all data from API');
@@ -85,7 +98,7 @@ class Downloader {
         // Download ship type, nation and module names for Wiki
         DATA[SAVED.encyclopedia] = await this.getEncyclopedia();
         log += `${lang.wiki_section_title}\n`;
-        
+
         // Wiki
         DATA[SAVED.warship] = await this.getWarship();
         log += `${lang.wiki_warships}\n`;
@@ -101,10 +114,10 @@ class Downloader {
 
         DATA[SAVED.consumable] = await this.getConsumable();
         log += `${lang.wiki_upgrades}\n`;
-        
+
         DATA[SAVED.map] = await this.getMap();
         log += `${lang.wiki_maps}\n`;
-        
+
         DATA[SAVED.pr] = await this.getPR();
         log += `${lang.rating_title}\n`;
 
@@ -118,10 +131,10 @@ class Downloader {
           if (PR == null || Object.keys(PR).length < 10) {
             log += `${lang.error_pr_corruption}\n`;
             log += ` ${lang.rating_title} - ${JSON.stringify(PR)}\n`;
-            return this.makeObj(false, log); 
+            return this.makeObj(false, log);
           }
         }
-        
+
         console.log(DATA);
 
         // Make sure it is also great than current version
@@ -129,7 +142,7 @@ class Downloader {
         SafeStorage.set(LOCAL.gameVersion, gameVersion);
         SafeStorage.set(LOCAL.appVersion, APP.Version);
         // Save last update as well
-        SafeStorage.set(LOCAL.lastUpdate, getCurrDate())
+        SafeStorage.set(LOCAL.lastUpdate, getCurrDate());
       }
       return this.makeObj(true, log);
     } catch (err) {
@@ -160,15 +173,19 @@ class Downloader {
     let data = Guard(json, 'data.languages', {});
     // Save data
     await SafeStorage.set(SAVED.language, data);
-    return data; 
+    return data;
   }
-  
+
   /**
    * Get ship types, nations and module names
    */
 
   async getEncyclopedia() {
-    let json = await SafeFetch.get(WikiAPI.Encyclopedia, this.domain, this.language);
+    let json = await SafeFetch.get(
+      WikiAPI.Encyclopedia,
+      this.domain,
+      this.language,
+    );
     let data = Guard(json, 'data', {});
     await SafeStorage.set(SAVED.encyclopedia, data);
     return data;
@@ -198,10 +215,14 @@ class Downloader {
     if (currLang.includes('zh') || currLang.includes('ja')) {
       JapaneseShips = await SafeFetch.normal(WikiAPI.Github_Alias);
     }
-    
+
     while (page < pageTotal) {
       // page + 1 to get actually page not index
-      let json = await SafeFetch.get(WikiAPI.Warship, this.domain, `&page_no=${page+1}&${this.language}`);
+      let json = await SafeFetch.get(
+        WikiAPI.Warship,
+        this.domain,
+        `&page_no=${page + 1}&${this.language}`,
+      );
       pageTotal = Guard(json, 'meta.page_total', 1);
       let data = Guard(json, 'data', {});
 
@@ -211,7 +232,7 @@ class Downloader {
           delete data[id];
         } else {
           // curr.icon = Guard(curr, 'images.small', '');
-           curr.icon = curr.images.small;
+          curr.icon = curr.images.small;
           delete curr.images;
           // Orange name or not
           curr.premium = curr.is_premium || curr.is_special;
@@ -223,7 +244,7 @@ class Downloader {
             curr.new = isOld ? false : true;
           }
           // If it has some extra data
-          if (model3D!= null && model3D[id] != null) {
+          if (model3D != null && model3D[id] != null) {
             curr.model = model3D[id].model;
           }
 
@@ -246,7 +267,11 @@ class Downloader {
   }
 
   async getAchievement() {
-    let json = await SafeFetch.get(WikiAPI.Achievement, this.domain, `${this.language}`);
+    let json = await SafeFetch.get(
+      WikiAPI.Achievement,
+      this.domain,
+      `${this.language}`,
+    );
     let data = Guard(json, 'data.battle', {});
     if (this.new === true) {
       for (let id in data) {
@@ -261,12 +286,20 @@ class Downloader {
   async getCollectionAndItem() {
     let all = {};
 
-    let collection = await SafeFetch.get(WikiAPI.Collection, this.domain, `${this.language}`);
-    let item = await SafeFetch.get(WikiAPI.CollectionItem, this.domain, `${this.language}`);
+    let collection = await SafeFetch.get(
+      WikiAPI.Collection,
+      this.domain,
+      `${this.language}`,
+    );
+    let item = await SafeFetch.get(
+      WikiAPI.CollectionItem,
+      this.domain,
+      `${this.language}`,
+    );
 
     collection = Guard(collection, 'data', {});
     item = Guard(item, 'data', {});
-    
+
     for (let id in item) {
       let curr = item[id];
       curr.image = curr.images.small;
@@ -289,7 +322,11 @@ class Downloader {
   }
 
   async getCommanderSkill() {
-    let json = await SafeFetch.get(WikiAPI.CommanderSkill, this.domain, `${this.language}`);
+    let json = await SafeFetch.get(
+      WikiAPI.CommanderSkill,
+      this.domain,
+      `${this.language}`,
+    );
 
     let skill = Guard(json, 'data', []);
     let data = Object.keys(skill).map(k => skill[k]);
@@ -306,17 +343,20 @@ class Downloader {
 
     while (page < pageTotal) {
       // page + 1 to get actually page not index
-      let json = await SafeFetch.get(WikiAPI.Consumable, this.domain, `&page_no=${page+1}&${this.language}`);
+      let json = await SafeFetch.get(
+        WikiAPI.Consumable,
+        this.domain,
+        `&page_no=${page + 1}&${this.language}`,
+      );
       pageTotal = Guard(json, 'meta.page_total', 1);
       let data = Guard(json, 'data', {});
 
       for (let id in data) {
         let curr = data[id];
-        if (this.new === true)
-        {
+        if (this.new === true) {
           curr.new = DATA[SAVED.consumable][id] ? false : true;
-        } 
-        
+        }
+
         if (curr.type === 'Modernization') {
           // Calculate their slots
           let price = curr.price_credit;
@@ -325,7 +365,7 @@ class Downloader {
             price /= 2;
             slot += 1;
           }
-          
+
           // Legendary upgrades
           if (slot > 6) continue;
           curr.slot = slot;
@@ -336,13 +376,17 @@ class Downloader {
       Object.assign(all, data);
       page++;
     }
-    
+
     await SafeStorage.set(SAVED.consumable, all);
     return all;
   }
 
   async getMap() {
-    let json = await SafeFetch.get(WikiAPI.GameMap, this.domain, `${this.language}`);
+    let json = await SafeFetch.get(
+      WikiAPI.GameMap,
+      this.domain,
+      `${this.language}`,
+    );
 
     let map = Guard(json, 'data', []);
     let data = Object.keys(map).map(k => map[k]);
@@ -361,7 +405,7 @@ class Downloader {
         delete json[key];
       }
     }
-      
+
     await SafeStorage.set(SAVED.pr, json);
     return json;
   }
@@ -376,10 +420,10 @@ class Downloader {
         delete json[key];
       }
     }
-      
+
     await SafeStorage.set(SAVED.pr, json);
     return json;
   }
 }
 
-export { Downloader };
+export {Downloader};

@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
-import { FAB } from 'react-native-paper';
-import { Actions } from 'react-native-router-flux';
+import React, {Component} from 'react';
+import {SafeAreaView, StyleSheet} from 'react-native';
+import {FAB} from 'react-native-paper';
+import {Actions} from 'react-native-router-flux';
 
 class FloatingButton extends Component {
   constructor(props) {
@@ -14,28 +14,28 @@ class FloatingButton extends Component {
 
     this.state = {
       menu: hasMenu,
-      icon: hasMenu ? 'home' : require('../../img/Ship.png')
-    }
+      icon: hasMenu ? 'home' : require('../../img/Ship.png'),
+    };
   }
 
   render() {
-    const { container } = styles;
-    const { icon } = this.state;
+    const {container} = styles;
+    const {icon} = this.state;
 
     return (
       <SafeAreaView style={container}>
-        <FAB onPress={() => this.navigate()} mode='contained' icon={icon}/>
+        <FAB onPress={() => this.navigate()} mode="contained" icon={icon} />
       </SafeAreaView>
-    )
+    );
   }
 
   /**
    * Navigate to Menu page
    */
   navigate() {
-    const { menu } = this.state;
+    const {menu} = this.state;
     if (menu) {
-      // Pop to menu 
+      // Pop to menu
       Actions.popTo('Menu');
     } else if (Actions.currentScene !== 'Menu') {
       // Add guard so that it wont push twice]
@@ -47,9 +47,9 @@ class FloatingButton extends Component {
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    right: 16, 
-    bottom: 16
-  }
-})
+    right: 16,
+    bottom: 16,
+  },
+});
 
-export { FloatingButton };
+export {FloatingButton};

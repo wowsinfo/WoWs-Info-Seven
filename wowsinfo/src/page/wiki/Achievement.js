@@ -1,15 +1,15 @@
 /**
  * Achievement.js
- * 
+ *
  * This is the wiki achievements
  */
 
-import React, { PureComponent } from 'react';
-import { StyleSheet } from 'react-native';
-import { FlatGrid } from 'react-native-super-grid';
-import { WikiIcon, WoWsInfo } from '../../component';
-import { SAVED, setLastLocation } from '../../value/data';
-import { SafeAction } from '../../core';
+import React, {PureComponent} from 'react';
+import {StyleSheet} from 'react-native';
+import {FlatGrid} from 'react-native-super-grid';
+import {WikiIcon, WoWsInfo} from '../../component';
+import {SAVED, setLastLocation} from '../../value/data';
+import {SafeAction} from '../../core';
 
 class Achievement extends PureComponent {
   constructor(props) {
@@ -30,28 +30,38 @@ class Achievement extends PureComponent {
     console.log(sorted);
 
     this.state = {
-      data: sorted
+      data: sorted,
     };
   }
 
   render() {
-    const { data } = this.state;
+    const {data} = this.state;
     return (
       <WoWsInfo>
-        <FlatGrid itemDimension={80} data={data} renderItem={({item}) => {
-          return <WikiIcon item={item} onPress={() => SafeAction('BasicDetail', {item: item})}/>
-        }} showsVerticalScrollIndicator={false}/>
+        <FlatGrid
+          itemDimension={80}
+          data={data}
+          renderItem={({item}) => {
+            return (
+              <WikiIcon
+                item={item}
+                onPress={() => SafeAction('BasicDetail', {item: item})}
+              />
+            );
+          }}
+          showsVerticalScrollIndicator={false}
+        />
       </WoWsInfo>
-    )
-  };
+    );
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+  },
 });
 
-export { Achievement };
+export {Achievement};

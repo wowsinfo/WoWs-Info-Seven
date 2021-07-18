@@ -1,54 +1,70 @@
 /**
  * CommanderSkill.js
- * 
+ *
  * Display commander skills in tiers
  */
 
-import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
-import { SAVED, setLastLocation } from '../../value/data';
-import { WoWsInfo, WikiIcon, SectionTitle } from '../../component';
-import { SectionGrid } from 'react-native-super-grid';
-import { SafeAction, copy } from '../../core';
-import { lang } from '../../value/lang';
+import React, {Component} from 'react';
+import {StyleSheet} from 'react-native';
+import {SAVED, setLastLocation} from '../../value/data';
+import {WoWsInfo, WikiIcon, SectionTitle} from '../../component';
+import {SectionGrid} from 'react-native-super-grid';
+import {SafeAction, copy} from '../../core';
+import {lang} from '../../value/lang';
 
 class CommanderSkill extends Component {
   constructor(props) {
     super(props);
     setLastLocation('CommanderSkill');
-    console.log("WIKI - Commander Skill");
+    console.log('WIKI - Commander Skill');
     let skill = DATA[SAVED.commanderSkill];
     let cloned = copy(skill);
-    
+
     let section = [];
     cloned.forEach(i => {
       let index = i.tier - 1;
       // Data is sorted so we wont need to worry about not in order
-      if (!section[index]) section.push({title: `${lang.wiki_skills_tier} ${i.tier}`, data: []});
+      if (!section[index])
+        section.push({title: `${lang.wiki_skills_tier} ${i.tier}`, data: []});
       section[index].data.push(Object.assign(i));
     });
-  
+
     this.state = {
       data: section,
-      point: 19
+      point: 19,
     };
   }
 
   render() {
-    const { data, point } = this.state;
+    const {data, point} = this.state;
 
     return (
-      <WoWsInfo title={`${point} ${lang.wiki_skills_point}`} onPress={() => this.reset()}>
-        <SectionGrid itemDimension={80} sections={data} renderItem={({item}) => {
-          return <WikiIcon item={item} selected={item.selected} onPress={() => this.skillSelected(item)} 
-            onLongPress={() => SafeAction('BasicDetail', {item: item})}/>
-        }} renderSectionHeader={({section}) => <SectionTitle title={section.title}/>}/>
+      <WoWsInfo
+        title={`${point} ${lang.wiki_skills_point}`}
+        onPress={() => this.reset()}>
+        <SectionGrid
+          itemDimension={80}
+          sections={data}
+          renderItem={({item}) => {
+            return (
+              <WikiIcon
+                item={item}
+                selected={item.selected}
+                onPress={() => this.skillSelected(item)}
+                onLongPress={() => SafeAction('BasicDetail', {item: item})}
+              />
+            );
+          }}
+          renderSectionHeader={({section}) => (
+            <SectionTitle title={section.title} />
+          )}
+        />
       </WoWsInfo>
-    )
-  };
+    );
+  }
 
   skillSelected(item) {
-    const { point } = this.state;
+    const {point} = this.state;
     let pointLeft = point;
     if (item.selected == true) {
       // Remember to set it to a number otherwise you will have weird issues
@@ -69,9 +85,9 @@ class CommanderSkill extends Component {
   }
 
   reset() {
-    const { data } = this.state;
+    const {data} = this.state;
     data.forEach(i => {
-      i.data.forEach(j => delete j.selected)
+      i.data.forEach(j => delete j.selected);
     });
     this.setState({point: 19, data: data});
   }
@@ -79,8 +95,8 @@ class CommanderSkill extends Component {
 
 const styles = StyleSheet.create({
   header: {
-    textAlign: 'center'
-  }
+    textAlign: 'center',
+  },
 });
 
-export { CommanderSkill };
+export {CommanderSkill};

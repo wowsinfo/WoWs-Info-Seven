@@ -1,4 +1,4 @@
-import { AppKey } from './key';
+import {AppKey} from './key';
 
 // This part is for getting player information (rank, ship, clan and achievement) and some wiki ship
 export const WoWsAPI = {
@@ -21,15 +21,18 @@ export const WoWsAPI = {
   OneShipInfo: `https://api.worldofwarships.{0}/wows/ships/stats/?application_id=${AppKey}&ship_id={1}&account_id=`,
   ShipWiki: `https://api.worldofwarships.{0}/wows/encyclopedia/ships/?application_id=${AppKey}&ship_id={1}`,
   ShipModule: `https://api.worldofwarships.{0}/wows/encyclopedia/shipprofile/?application_id=${AppKey}&ship_id={1}&artillery_id={2}&dive_bomber_id={3}&engine_id={4}&fighter_id={5}&fire_control_id={6}&flight_control_id={7}&hull_id={8}&torpedo_bomber_id={9}&torpedoes_id={10}`,
-}
+};
 
 // This part is mainly for Wiki
 export const WikiAPI = {
   // Personal rating and ship model
-  PersonalRating: 'https://raw.githubusercontent.com/HenryQuan/WoWs-Info-Origin/API/json/personal_rating.json',
-  PersonalRatingMirror: 'https://gitee.com/HenryQuan/WoWs-Info-Future/raw/API/json/personal_rating.json',
+  PersonalRating:
+    'https://raw.githubusercontent.com/HenryQuan/WoWs-Info-Origin/API/json/personal_rating.json',
+  PersonalRatingMirror:
+    'https://gitee.com/HenryQuan/WoWs-Info-Future/raw/API/json/personal_rating.json',
   // TODO: update this link when I remove this branch
-  ShipModel: 'https://raw.githubusercontent.com/HenryQuan/WoWs-Info-Ultra/API/json/model.json',
+  ShipModel:
+    'https://raw.githubusercontent.com/HenryQuan/WoWs-Info-Ultra/API/json/model.json',
   // Wiki
   Achievement: `https://api.worldofwarships.{0}/wows/encyclopedia/achievements/?application_id=${AppKey}&fields=battle.hidden%2Cbattle.achievement_id%2Cbattle.name%2Cbattle.image%2Cbattle.image_inactive%2Cbattle.description`,
   Warship: `https://api.worldofwarships.{0}/wows/encyclopedia/ships/?application_id=${AppKey}&fields=name%2Cnation%2Ctype%2Ctier%2Cship_id%2Cship_id_str%2Cimages.small%2Cis_premium%2Cis_special`,
@@ -44,7 +47,10 @@ export const WikiAPI = {
   Encyclopedia: `https://api.worldofwarships.{0}/wows/encyclopedia/info/?application_id=${AppKey}&fields=ship_nations%2Cship_modules%2Cship_types`,
   // Additional data collected by me
   // Currently support model and version
-  Github_Model: 'https://raw.githubusercontent.com/HenryQuan/WoWs-Info-Origin/API/json/model.json',
-  Github_Alias: 'https://raw.githubusercontent.com/HenryQuan/WoWs-Info-Origin/API/json/alias.json',
-  Github_AppVersion: 'https://raw.githubusercontent.com/HenryQuan/WoWs-Info-Origin/API/json/app.json',
-}
+  Github_Model:
+    'https://raw.githubusercontent.com/HenryQuan/WoWs-Info-Origin/API/json/model.json',
+  Github_Alias:
+    'https://raw.githubusercontent.com/HenryQuan/WoWs-Info-Origin/API/json/alias.json',
+  Github_AppVersion:
+    'https://raw.githubusercontent.com/HenryQuan/WoWs-Info-Origin/API/json/app.json',
+};

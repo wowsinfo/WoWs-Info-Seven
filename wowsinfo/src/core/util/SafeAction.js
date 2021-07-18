@@ -1,4 +1,4 @@
-import { Actions } from "react-native-router-flux";
+import {Actions} from 'react-native-router-flux';
 
 // Add safe action to check if that screen already exists in the stack
 // max is for the case where you need to push another same screen

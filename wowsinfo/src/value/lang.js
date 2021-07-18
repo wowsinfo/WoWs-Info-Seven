@@ -92,7 +92,8 @@ export const lang = new LocalizedStrings({
     settings_app_report_issues: 'Report an issue',
     settings_app_write_review: 'Write a review',
     settings_app_write_review_title: 'About review and feedback',
-    settings_app_write_review_message: 'If you have any questions, issues or suggestions, please send an email to the developer so that we could discuss and solve the problem together.',
+    settings_app_write_review_message:
+      'If you have any questions, issues or suggestions, please send an email to the developer so that we could discuss and solve the problem together.',
     settings_app_write_review_yes: 'Send an email',
     settings_app_write_review_no: 'Write a review',
     settings_app_share: 'Share with friends',
@@ -103,7 +104,8 @@ export const lang = new LocalizedStrings({
     settings_open_source: 'Open Source',
     settings_open_source_github: 'Github',
     settings_open_source_licence: 'Licences',
-    settings_open_source_licence_subtitle: 'Great modules that are used by WoWs Info',
+    settings_open_source_licence_subtitle:
+      'Great modules that are used by WoWs Info',
     // Footer
     menu_footer: 'Search',
     menu_search_player: 'Player',
@@ -116,9 +118,11 @@ export const lang = new LocalizedStrings({
     pro_more_stats: 'More detailed statistics',
     pro_more_stats_subtitle: 'Show even more statistics in your profile',
     pro_quick_access_main: 'Quick access to main account',
-    pro_quick_access_main_subtitle: 'Check statistics for your main account with just a tap',
+    pro_quick_access_main_subtitle:
+      'Check statistics for your main account with just a tap',
     pro_support_development: 'Support development',
-    pro_support_development_subtitle: 'More features are currently under development',
+    pro_support_development_subtitle:
+      'More features are currently under development',
     pro_50_off_until_re: '50% off for the first purchase',
     pro_per_year: 'Year',
     pro_restore_pro: 'Restore Pro Version',
@@ -143,7 +147,8 @@ export const lang = new LocalizedStrings({
     extra_section_title: 'Extra',
     extra_support_wowsinfo: 'Support WoWs Info',
     extra_wowsinfo_re: 'WoWs Info Re',
-    extra_wowsinfo_re_subtitle: 'Try out the new version currently under development.',
+    extra_wowsinfo_re_subtitle:
+      'Try out the new version currently under development.',
     extra_rs_beta: 'Realtime Statistics Beta',
     extra_rs_beta_download: 'Download RS on your computer',
     extra_support_wowsinfo_subtitle: 'Donations and Ads',
@@ -173,7 +178,8 @@ export const lang = new LocalizedStrings({
     website_wowsft: 'WoWs Fitting Tool',
     website_ingame_title: 'In-game Websites',
     website_wargming_login: 'Wargming.net Login',
-    website_wargming_login_subtitle: 'You have to login first to use websites below. It works better on Tablets.',
+    website_wargming_login_subtitle:
+      'You have to login first to use websites below. It works better on Tablets.',
     website_userbonus: 'My Bonus',
     website_news_ingame: 'In-game News',
     website_ingame_armory: 'My Armory',
@@ -204,7 +210,8 @@ export const lang = new LocalizedStrings({
     rating_title: 'Personal Rating',
     rating_description: 'It is a measure of skill.',
     rating_read_more: '- Read More -',
-    rating_warning: 'Please do not judge other players simply by his/her rating',
+    rating_warning:
+      'Please do not judge other players simply by his/her rating',
     rating_author: 'By Wiochi',
     rating_scale: 'Colour Scale',
     rating_bad: 'Improvement Needed',
@@ -288,20 +295,25 @@ export const lang = new LocalizedStrings({
     /// RS section
     // Tips
     rs_tip_download: '1. Download',
-    rs_tip_one: 'Please visit this Github repository and download the latest release. This program does not use lots of RAM and storage. Currently, it is in its beta stage and has no GUI.\n',
+    rs_tip_one:
+      'Please visit this Github repository and download the latest release. This program does not use lots of RAM and storage. Currently, it is in its beta stage and has no GUI.\n',
     rs_tip_setup: '2. Setup',
-    rs_tip_two: "Copy and paste the path of your game folder into this program and you have to run it with admin or it will not work. It won't do anything harmful to your computer.\n",
+    rs_tip_two:
+      "Copy and paste the path of your game folder into this program and you have to run it with admin or it will not work. It won't do anything harmful to your computer.\n",
     rs_tip_enjoy: '3. Enjoy',
-    rs_tip_three: 'Enter the IP address you see on the screen and WoWs Info will start giving you real-time statistics for both teams.\n',
+    rs_tip_three:
+      'Enter the IP address you see on the screen and WoWs Info will start giving you real-time statistics for both teams.\n',
     /// Error section
     // General errors
     error_title: 'Error',
-    error_download_issue: 'Failed to update data. \nPlease try again later.\n\nIf it persists, please try using a VPN or changing your DNS to "8.8.8.8".\nIf it still persists, it means that the server is OFFLINE',
+    error_download_issue:
+      'Failed to update data. \nPlease try again later.\n\nIf it persists, please try using a VPN or changing your DNS to "8.8.8.8".\nIf it still persists, it means that the server is OFFLINE',
     error_timeout: 'Timeout',
     error_pr_corruption: 'Personal rating data cannot be downloaded',
     /// About WoWs Info section
     // Github link
-    abour_github_link: 'https://github.com/HenryQuan/WoWs-Info-Origin/blob/master/README.md'
+    abour_github_link:
+      'https://github.com/HenryQuan/WoWs-Info-Origin/blob/master/README.md',
   },
   zh: {
     /// Setup section
@@ -394,7 +406,8 @@ export const lang = new LocalizedStrings({
     settings_app_report_issues: '报告错误',
     settings_app_write_review: '给软件打分',
     settings_app_write_review_title: '关于评分和反馈',
-    settings_app_write_review_message: '如果 APP 有任何问题或者建议，请给开发者发送电子邮件，我们可以一起讨论解决问题。',
+    settings_app_write_review_message:
+      '如果 APP 有任何问题或者建议，请给开发者发送电子邮件，我们可以一起讨论解决问题。',
     settings_app_write_review_yes: '发送邮件',
     settings_app_write_review_no: '给软件打分',
     settings_app_share: '分享',
@@ -475,7 +488,8 @@ export const lang = new LocalizedStrings({
     website_wowsft: 'WoWs Fitting Tool',
     website_ingame_title: '游戏内网站',
     website_wargming_login: '登陆 Wargming.net',
-    website_wargming_login_subtitle: '需要登陆才可以使用下面的网站，推荐使用大屏设备',
+    website_wargming_login_subtitle:
+      '需要登陆才可以使用下面的网站，推荐使用大屏设备',
     website_userbonus: '我的奖赏',
     website_news_ingame: '游戏内新闻',
     website_ingame_armory: '我的武器库',
@@ -590,20 +604,25 @@ export const lang = new LocalizedStrings({
     /// RS section
     // Tips
     rs_tip_download: '1. 下载',
-    rs_tip_one: 'Please visit this Github repository and download the latest release. This program does not use lots of RAM and storage. Currently, it is in its beta stage and has no GUI.\n',
+    rs_tip_one:
+      'Please visit this Github repository and download the latest release. This program does not use lots of RAM and storage. Currently, it is in its beta stage and has no GUI.\n',
     rs_tip_setup: '2. 设置',
-    rs_tip_two: "Copy and paste the path of your game folder into this program and you have to run it with admin or it will not work. It won't do anything harmful to your computer.\n",
+    rs_tip_two:
+      "Copy and paste the path of your game folder into this program and you have to run it with admin or it will not work. It won't do anything harmful to your computer.\n",
     rs_tip_enjoy: '3. 使用RS',
-    rs_tip_three: 'Enter the IP address you see on the screen and WoWs Info will start giving you real-time statistics for both teams.\n',
+    rs_tip_three:
+      'Enter the IP address you see on the screen and WoWs Info will start giving you real-time statistics for both teams.\n',
     /// Error section
     // General errors
     error_title: '错误',
-    error_download_issue: '无法更新数据，\n请稍后重试。\n\n如果问题依然存在，请尝试修改DNS为【8.8.8.8】或者使用VPN。\n如果还是不可以的话，说明服务器正在维护中。',
+    error_download_issue:
+      '无法更新数据，\n请稍后重试。\n\n如果问题依然存在，请尝试修改DNS为【8.8.8.8】或者使用VPN。\n如果还是不可以的话，说明服务器正在维护中。',
     error_timeout: '请求超时',
     error_pr_corruption: '无法下载评分数据',
     /// About WoWs Info section
     // Github link
-    abour_github_link: 'https://github.com/HenryQuan/WoWs-Info-Origin/blob/master/README.md'
+    abour_github_link:
+      'https://github.com/HenryQuan/WoWs-Info-Origin/blob/master/README.md',
   },
   'zh-hant': {
     /// Setup section
@@ -696,7 +715,8 @@ export const lang = new LocalizedStrings({
     settings_app_report_issues: '報告錯誤',
     settings_app_write_review: '給軟件打分',
     settings_app_write_review_title: '關於評分和反饋',
-    settings_app_write_review_message: '如果有任何問題或者建議，請給開發者發送電子郵件，我們可以壹起討論解決問題。',
+    settings_app_write_review_message:
+      '如果有任何問題或者建議，請給開發者發送電子郵件，我們可以壹起討論解決問題。',
     settings_app_write_review_yes: '發送郵件',
     settings_app_write_review_no: '給軟件打分',
     settings_app_share: '分享',
@@ -777,7 +797,8 @@ export const lang = new LocalizedStrings({
     website_wowsft: 'WoWs Fitting Tool',
     website_ingame_title: '遊戲內網站',
     website_wargming_login: '登陸 Wargming.net',
-    website_wargming_login_subtitle: '需要登陸才可以使用下面的網站，推薦使用大屏設備',
+    website_wargming_login_subtitle:
+      '需要登陸才可以使用下面的網站，推薦使用大屏設備',
     website_userbonus: '我的獎賞',
     website_news_ingame: '遊戲內新聞',
     website_ingame_armory: '我的武器庫',
@@ -892,20 +913,25 @@ export const lang = new LocalizedStrings({
     /// RS section
     // Tips
     rs_tip_download: '1. 下載',
-    rs_tip_one: 'Please visit this Github repository and download the latest release. This program does not use lots of RAM and storage. Currently, it is in its beta stage and has no GUI.\n',
+    rs_tip_one:
+      'Please visit this Github repository and download the latest release. This program does not use lots of RAM and storage. Currently, it is in its beta stage and has no GUI.\n',
     rs_tip_setup: '2. 設置',
-    rs_tip_two: "Copy and paste the path of your game folder into this program and you have to run it with admin or it will not work. It won't do anything harmful to your computer.\n",
+    rs_tip_two:
+      "Copy and paste the path of your game folder into this program and you have to run it with admin or it will not work. It won't do anything harmful to your computer.\n",
     rs_tip_enjoy: '3. 使用RS',
-    rs_tip_three: 'Enter the IP address you see on the screen and WoWs Info will start giving you real-time statistics for both teams.\n',
+    rs_tip_three:
+      'Enter the IP address you see on the screen and WoWs Info will start giving you real-time statistics for both teams.\n',
     /// Error section
     // General errors
     error_title: '錯誤',
-    error_download_issue: '無法更新數據，\n請稍後重試。\n\n如果問題依然存在，請嘗試修改DNS為【8.8.8.8】或者使用VPN。\n如果還是不可以的話，說明服務器正在維護中。',
+    error_download_issue:
+      '無法更新數據，\n請稍後重試。\n\n如果問題依然存在，請嘗試修改DNS為【8.8.8.8】或者使用VPN。\n如果還是不可以的話，說明服務器正在維護中。',
     error_timeout: '請求超時',
     error_pr_corruption: '無法下載評分數據',
     /// About WoWs Info section
     // Github link
-    abour_github_link: 'https://github.com/HenryQuan/WoWs-Info-Origin/blob/master/README.md'
+    abour_github_link:
+      'https://github.com/HenryQuan/WoWs-Info-Origin/blob/master/README.md',
   },
   ja: {
     /// Setup section
@@ -998,7 +1024,8 @@ export const lang = new LocalizedStrings({
     settings_app_report_issues: 'バグの報告',
     settings_app_write_review: 'レビューを書く',
     settings_app_write_review_title: 'レビューとフィードバックについて',
-    settings_app_write_review_message: 'アプリについての問題や質問や意見などは開発者にメールを送って下さい。',
+    settings_app_write_review_message:
+      'アプリについての問題や質問や意見などは開発者にメールを送って下さい。',
     settings_app_write_review_yes: '開発者にメール',
     settings_app_write_review_no: 'レビューを書く',
     settings_app_share: '友達とシェア',
@@ -1009,7 +1036,8 @@ export const lang = new LocalizedStrings({
     settings_open_source: 'オープンソース',
     settings_open_source_github: 'Github',
     settings_open_source_licence: 'ライセンス',
-    settings_open_source_licence_subtitle: '本アプリは以下のモジュールを使って頂いました。',
+    settings_open_source_licence_subtitle:
+      '本アプリは以下のモジュールを使って頂いました。',
     // Footer
     menu_footer: 'サーチ',
     menu_search_player: 'プレーヤー',
@@ -1022,7 +1050,8 @@ export const lang = new LocalizedStrings({
     pro_more_stats: 'もっと詳しい情報',
     pro_more_stats_subtitle: 'プレーヤーの詳しい情報を開放する',
     pro_quick_access_main: 'メインプレヤー',
-    pro_quick_access_main_subtitle: 'ホームページに自分のアカウントのアクセスを開放する',
+    pro_quick_access_main_subtitle:
+      'ホームページに自分のアカウントのアクセスを開放する',
     pro_support_development: '開発者への支援',
     pro_support_development_subtitle: '新しい機能が開発しているよ',
     pro_50_off_until_re: '初めての購入は５０％　OFF！',
@@ -1079,7 +1108,8 @@ export const lang = new LocalizedStrings({
     website_wowsft: 'WoWs Fitting Tool',
     website_ingame_title: 'ゲーム内のサイト',
     website_wargming_login: 'Wargming.net ログイン',
-    website_wargming_login_subtitle: 'ログインしてから使おう。タブレットをおすすめ！',
+    website_wargming_login_subtitle:
+      'ログインしてから使おう。タブレットをおすすめ！',
     website_userbonus: '私のボーナス',
     website_news_ingame: 'ゲーム内のニュース',
     website_ingame_armory: '私の武器庫',
@@ -1194,20 +1224,25 @@ export const lang = new LocalizedStrings({
     /// RS section
     // Tips
     rs_tip_download: '1. ダウンロード',
-    rs_tip_one: 'Please visit this Github repository and download the latest release. This program does not use lots of RAM and storage. Currently, it is in its beta stage and has no GUI.\n',
+    rs_tip_one:
+      'Please visit this Github repository and download the latest release. This program does not use lots of RAM and storage. Currently, it is in its beta stage and has no GUI.\n',
     rs_tip_setup: '2. Setup',
-    rs_tip_two: "Copy and paste the path of your game folder into this program and you have to run it with admin or it will not work. It won't do anything harmful to your computer.\n",
+    rs_tip_two:
+      "Copy and paste the path of your game folder into this program and you have to run it with admin or it will not work. It won't do anything harmful to your computer.\n",
     rs_tip_enjoy: '3. Enjoy',
-    rs_tip_three: 'Enter the IP address you see on the screen and WoWs Info will start giving you real-time statistics for both teams.\n',
+    rs_tip_three:
+      'Enter the IP address you see on the screen and WoWs Info will start giving you real-time statistics for both teams.\n',
     /// Error section
     // General errors
     error_title: 'エラー',
-    error_download_issue: 'アップデート失敗\nやり直してください\n\nいつも失敗の場合はVPNを使ったりDNSを「８.８.８.８」に変えたりしてみてください\nメンテナンスを行う可能性もある',
+    error_download_issue:
+      'アップデート失敗\nやり直してください\n\nいつも失敗の場合はVPNを使ったりDNSを「８.８.８.８」に変えたりしてみてください\nメンテナンスを行う可能性もある',
     error_timeout: 'タイムアウト',
     error_pr_corruption: '操艦技術のデータがダウンロードできません',
     /// About WoWs Info section
     // Github link
-    abour_github_link: 'https://github.com/HenryQuan/WoWs-Info-Origin/blob/master/README.md'
+    abour_github_link:
+      'https://github.com/HenryQuan/WoWs-Info-Origin/blob/master/README.md',
   },
   id: {
     /// Setup section
@@ -1306,7 +1341,8 @@ export const lang = new LocalizedStrings({
     settings_app_share: 'Share aplikasi ke teman',
     settings_app_share_subtitle: 'Share WoWs Info jika anda menyukai app ini!',
     settings_app_check_for_update: 'Periksa pembaruan',
-    settings_app_no_update: 'Anda sudah menggunakan aplikasi dengan versi terbaru.',
+    settings_app_no_update:
+      'Anda sudah menggunakan aplikasi dengan versi terbaru.',
     settings_app_has_update: 'Ada {0} pembaruan baru',
     settings_open_source: 'Open Source',
     settings_open_source_github: 'Github',
@@ -1324,9 +1360,11 @@ export const lang = new LocalizedStrings({
     pro_more_stats: 'More detailed statistics',
     pro_more_stats_subtitle: 'Show even more statistics in your profile',
     pro_quick_access_main: 'Quick access to main account',
-    pro_quick_access_main_subtitle: 'Check statistics for your main account with just a tap',
+    pro_quick_access_main_subtitle:
+      'Check statistics for your main account with just a tap',
     pro_support_development: 'Support development',
-    pro_support_development_subtitle: 'More features are currently under development',
+    pro_support_development_subtitle:
+      'More features are currently under development',
     pro_50_off_until_re: '50% off for the first purchase',
     pro_per_year: 'Year',
     pro_restore_pro: 'Restore Pro Version',
@@ -1351,7 +1389,8 @@ export const lang = new LocalizedStrings({
     extra_section_title: 'Extra',
     extra_support_wowsinfo: 'Support WoWs Info',
     extra_wowsinfo_re: 'WoWs Info Re',
-    extra_wowsinfo_re_subtitle: 'Try out the new version currently under development.',
+    extra_wowsinfo_re_subtitle:
+      'Try out the new version currently under development.',
     extra_rs_beta: 'Realtime Statistics Beta',
     extra_rs_beta_download: 'Download RS on your computer',
     extra_support_wowsinfo_subtitle: 'Donations and Ads',
@@ -1381,7 +1420,8 @@ export const lang = new LocalizedStrings({
     website_wowsft: 'WoWs Fitting Tool',
     website_ingame_title: 'In-game Websites',
     website_wargming_login: 'Wargming.net Login',
-    website_wargming_login_subtitle: 'You have to login first to use websites below. It works better on Tablets.',
+    website_wargming_login_subtitle:
+      'You have to login first to use websites below. It works better on Tablets.',
     website_userbonus: 'My Bonus',
     website_news_ingame: 'In-game News',
     website_ingame_armory: 'My Armory',
@@ -1412,7 +1452,8 @@ export const lang = new LocalizedStrings({
     rating_title: 'Personal Rating',
     rating_description: 'It is a measure of skill.',
     rating_read_more: '- Read More -',
-    rating_warning: 'Please do not judge other players simply by his/her rating',
+    rating_warning:
+      'Please do not judge other players simply by his/her rating',
     rating_author: 'By Wiochi',
     rating_scale: 'Colour Scale',
     rating_bad: 'Improvement Needed',
@@ -1496,19 +1537,24 @@ export const lang = new LocalizedStrings({
     /// RS section
     // Tips
     rs_tip_download: '1. Download',
-    rs_tip_one: 'Please visit this Github repository and download the latest release. This program does not use lots of RAM and storage. Currently, it is in its beta stage and has no GUI.\n',
+    rs_tip_one:
+      'Please visit this Github repository and download the latest release. This program does not use lots of RAM and storage. Currently, it is in its beta stage and has no GUI.\n',
     rs_tip_setup: '2. Setup',
-    rs_tip_two: "Copy and paste the path of your game folder into this program and you have to run it with admin or it will not work. It won't do anything harmful to your computer.\n",
+    rs_tip_two:
+      "Copy and paste the path of your game folder into this program and you have to run it with admin or it will not work. It won't do anything harmful to your computer.\n",
     rs_tip_enjoy: '3. Enjoy',
-    rs_tip_three: 'Enter the IP address you see on the screen and WoWs Info will start giving you real-time statistics for both teams.\n',
+    rs_tip_three:
+      'Enter the IP address you see on the screen and WoWs Info will start giving you real-time statistics for both teams.\n',
     /// Error section
     // General errors
     error_title: 'Error',
-    error_download_issue: 'Gagal untuk mengupdate data. \nSilakan coba kembali.',
+    error_download_issue:
+      'Gagal untuk mengupdate data. \nSilakan coba kembali.',
     error_timeout: 'Timeout',
     error_pr_corruption: 'Personal rating data cannot be downloaded',
     /// About WoWs Info section
     // Github link
-    abour_github_link: 'https://github.com/HenryQuan/WoWs-Info-Origin/blob/master/README.md'
-  }
+    abour_github_link:
+      'https://github.com/HenryQuan/WoWs-Info-Origin/blob/master/README.md',
+  },
 });

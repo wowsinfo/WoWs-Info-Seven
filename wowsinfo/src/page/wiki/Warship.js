@@ -1,16 +1,16 @@
 /**
  * Warship.js
- * 
+ *
  * This is wiki warship
  */
 
-import React, { PureComponent } from 'react';
-import { StyleSheet } from 'react-native';
-import { WoWsInfo, WarshipCell } from '../../component';
-import { FlatGrid } from 'react-native-super-grid';
-import { SAVED, setLastLocation } from '../../value/data';
-import { lang } from '../../value/lang';
-import { SafeAction, filterShip, bestCellWidth } from '../../core';
+import React, {PureComponent} from 'react';
+import {StyleSheet} from 'react-native';
+import {WoWsInfo, WarshipCell} from '../../component';
+import {FlatGrid} from 'react-native-super-grid';
+import {SAVED, setLastLocation} from '../../value/data';
+import {lang} from '../../value/lang';
+import {SafeAction, filterShip, bestCellWidth} from '../../core';
 
 class Warship extends PureComponent {
   constructor(props) {
@@ -27,18 +27,18 @@ class Warship extends PureComponent {
     });
 
     // Remove extra information (ship id)
-    sorted.forEach((s, i) => sorted[i] = Object.assign(s[1]));
+    sorted.forEach((s, i) => (sorted[i] = Object.assign(s[1])));
     this.original = sorted;
     console.log(sorted);
 
     this.state = {
       data: sorted,
-      filter: {}
+      filter: {},
     };
   }
 
   componentDidUpdate() {
-    const { filter } = this.props;
+    const {filter} = this.props;
     if (filter) {
       // Prevent repetitive update
       if (filter === this.state.filter) return;
@@ -48,18 +48,34 @@ class Warship extends PureComponent {
   }
 
   render() {
-    const { data } = this.state;
+    const {data} = this.state;
 
     const width = bestCellWidth(100);
     return (
-      <WoWsInfo title={`${lang.wiki_warship_footer} - ${data.length}`} 
-        onPress={() => SafeAction('WarshipFilter', {applyFunc: this.updateShip})}>
-        <FlatGrid itemDimension={width} data={data} renderItem={({item}) => {
-          return <WarshipCell scale={width / 80} key={item.ship_id} item={item} onPress={() => SafeAction('WarshipDetail', {item: item})}/>
-        }} showsVerticalScrollIndicator={false} fixed/>
+      <WoWsInfo
+        title={`${lang.wiki_warship_footer} - ${data.length}`}
+        onPress={() =>
+          SafeAction('WarshipFilter', {applyFunc: this.updateShip})
+        }>
+        <FlatGrid
+          itemDimension={width}
+          data={data}
+          renderItem={({item}) => {
+            return (
+              <WarshipCell
+                scale={width / 80}
+                key={item.ship_id}
+                item={item}
+                onPress={() => SafeAction('WarshipDetail', {item: item})}
+              />
+            );
+          }}
+          showsVerticalScrollIndicator={false}
+          fixed
+        />
       </WoWsInfo>
-    )
-  };
+    );
+  }
 
   updateShip(data) {
     let sorted = filterShip(data);
@@ -72,14 +88,14 @@ const styles = StyleSheet.create({
   container: {
     position: 'absolute',
     bottom: 0,
-    left: 0
+    left: 0,
   },
   input: {
-    padding: 4
+    padding: 4,
   },
   apply: {
-    padding: 8
-  }
+    padding: 8,
+  },
 });
 
-export { Warship };
+export {Warship};

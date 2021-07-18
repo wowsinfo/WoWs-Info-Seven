@@ -1,7 +1,7 @@
 /**
  * Get and set storage keys safely
  */
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class SafeStorage {
   /**
@@ -40,4 +40,4 @@ class SafeStorage {
   }
 }
 
-export { SafeStorage };
+export {SafeStorage};

@@ -1,16 +1,16 @@
 /**
  * Loading.js
- * 
+ *
  * The loading screen with loading animation
  */
 
-import React, { Component } from 'react';
-import { StatusBar, Image, StyleSheet, Text } from 'react-native';
+import React, {Component} from 'react';
+import {StatusBar, Image, StyleSheet, Text} from 'react-native';
 import * as Anime from 'react-native-animatable';
-import { Surface } from 'react-native-paper';
-import { BLUE } from 'react-native-material-color';
-import { getRandomAnimation } from '../../core';
-import { lang } from '../../value/lang';
+import {Surface} from 'react-native-paper';
+import {BLUE} from 'react-native-material-color';
+import {getRandomAnimation} from '../../core';
+import {lang} from '../../value/lang';
 
 class Loading extends Component {
   constructor(props) {
@@ -36,18 +36,22 @@ class Loading extends Component {
   // }
 
   render() {
-    const { container, logo, label } = styles;
+    const {container, logo, label} = styles;
 
     return (
       <Surface style={container}>
-        <StatusBar backgroundColor={BLUE[700]}/>
-        <Anime.View animation={getRandomAnimation()} iterationCount='infinite' easing='ease' useNativeDriver>
-          <Image style={logo} source={require('../../img/Logo.png')}/>
+        <StatusBar backgroundColor={BLUE[700]} />
+        <Anime.View
+          animation={getRandomAnimation()}
+          iterationCount="infinite"
+          easing="ease"
+          useNativeDriver>
+          <Image style={logo} source={require('../../img/Logo.png')} />
         </Anime.View>
         <Text style={label}>{lang.setup_loading}</Text>
       </Surface>
-    )
-  };
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -55,14 +59,14 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: BLUE[500]
+    backgroundColor: BLUE[500],
   },
   logo: {
-    tintColor: 'white'
+    tintColor: 'white',
   },
   label: {
-    color: 'white'
-  }
+    color: 'white',
+  },
 });
 
-export { Loading };
+export {Loading};

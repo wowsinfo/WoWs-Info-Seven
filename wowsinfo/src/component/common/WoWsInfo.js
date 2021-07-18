@@ -4,21 +4,21 @@
  * This is used as a footer if no name is passed, it is a about button
  */
 
-import React, { Component } from "react";
-import { SafeAreaView, StyleSheet, StatusBar, Dimensions } from "react-native";
-import { Button, Surface } from "react-native-paper";
-import { isAndroid } from "react-native-device-detection";
-import { lang } from "../../value/lang";
-import { LOCAL } from "../../value/data";
-import { FooterButton } from "./FooterButton";
-import { SafeAction, random } from "../../core";
+import React, {Component} from 'react';
+import {SafeAreaView, StyleSheet, StatusBar, Dimensions} from 'react-native';
+import {Button, Surface} from 'react-native-paper';
+import {isAndroid} from 'react-native-device-detection';
+import {lang} from '../../value/lang';
+import {LOCAL} from '../../value/data';
+import {FooterButton} from './FooterButton';
+import {SafeAction, random} from '../../core';
 import {
   ThemeBackColour,
   ThemeColour,
   ViewBackColour,
   TintColour,
-} from "../../value/colour";
-import { View } from "react-native-animatable";
+} from '../../value/colour';
+import {View} from 'react-native-animatable';
 
 class WoWsInfo extends Component {
   constructor(props) {
@@ -31,56 +31,56 @@ class WoWsInfo extends Component {
       lang.wowsinfo_ultimate,
       lang.wowsinfo_ultra,
       lang.wowsinfo_white,
-      "X",
-      "Y",
-      "Z",
-      ">_<",
-      "#",
-      "0_0",
-      "",
-      "^_^",
-      "★",
-      "α",
-      "θ",
-      "Ω",
-      "Ф",
-      "∞",
-      "░",
-      "( ͡° ͜ʖ ͡°)",
-      "¯_(ツ)_/¯",
-      "2018",
-      "?!",
-      "!!",
-      "?!",
-      "2017",
-      "2016",
-      "2019",
-      "2020",
-      "2021",
-      "2022",
-      "I",
-      "II",
-      "III",
-      "IV",
-      "V",
-      "VI",
-      "VII",
-      "VIII",
-      "IX",
-      "X",
-      "DD",
-      "BB",
-      "CV",
-      "CA",
-      "SUB",
+      'X',
+      'Y',
+      'Z',
+      '>_<',
+      '#',
+      '0_0',
+      '',
+      '^_^',
+      '★',
+      'α',
+      'θ',
+      'Ω',
+      'Ф',
+      '∞',
+      '░',
+      '( ͡° ͜ʖ ͡°)',
+      '¯_(ツ)_/¯',
+      '2018',
+      '?!',
+      '!!',
+      '?!',
+      '2017',
+      '2016',
+      '2019',
+      '2020',
+      '2021',
+      '2022',
+      'I',
+      'II',
+      'III',
+      'IV',
+      'V',
+      'VI',
+      'VII',
+      'VIII',
+      'IX',
+      'X',
+      'DD',
+      'BB',
+      'CV',
+      'CA',
+      'SUB',
       // People and clans that really supports me during development (I will add more)
-      "Auris2010k",
-      "HenryQuan",
-      "Zetesian",
-      "CJokerLukas",
-      "VladimirlS",
-      "CICN",
-      "FFD",
+      'Auris2010k',
+      'HenryQuan',
+      'Zetesian',
+      'CJokerLukas',
+      'VladimirlS',
+      'CICN',
+      'FFD',
     ];
 
     // 80% of the time, it will be the app name
@@ -90,15 +90,15 @@ class WoWsInfo extends Component {
   }
 
   render() {
-    const { container, safeView, child } = styles;
-    const { children, empty, style } = this.props;
+    const {container, safeView, child} = styles;
+    const {children, empty, style} = this.props;
 
     // Add a margin for android devices (full screen so add a margin)
     return (
       <Surface style={[container, style, ThemeBackColour()]}>
         <SafeAreaView style={safeView}>
           <StatusBar
-            barStyle={DARKMODE ? "light-content" : "dark-content"}
+            barStyle={DARKMODE ? 'light-content' : 'dark-content'}
             backgroundColor={ThemeColour()}
           />
           <View style={[child, ViewBackColour()]}>{children}</View>
@@ -109,8 +109,8 @@ class WoWsInfo extends Component {
   }
 
   renderFooter() {
-    const { text, footer } = styles;
-    const { title, onPress, about, upper } = this.props;
+    const {text, footer} = styles;
+    const {title, onPress, about, upper} = this.props;
 
     let shouldDisable = !onPress && !about;
 
@@ -121,8 +121,7 @@ class WoWsInfo extends Component {
           disabled={shouldDisable}
           onPress={this.pressEvent}
           style={text}
-          uppercase={upper}
-        >
+          uppercase={upper}>
           {title ? title : this.lucky}
         </Button>
         {SWAPBUTTON ? this.renderLeft() : this.renderRight()}
@@ -131,16 +130,16 @@ class WoWsInfo extends Component {
   }
 
   renderLeft() {
-    const { noLeft, home } = this.props;
+    const {noLeft, home} = this.props;
     return noLeft ? null : (
-      <FooterButton icon={home ? "cog" : "home"} left={!SWAPBUTTON} />
+      <FooterButton icon={home ? 'cog' : 'home'} left={!SWAPBUTTON} />
     );
   }
 
   renderRight() {
-    const { noRight, home } = this.props;
+    const {noRight, home} = this.props;
     return noRight ? null : (
-      <FooterButton icon={home ? "search" : "arrow-left"} left={SWAPBUTTON} />
+      <FooterButton icon={home ? 'search' : 'arrow-left'} left={SWAPBUTTON} />
     );
   }
 
@@ -148,7 +147,7 @@ class WoWsInfo extends Component {
    * Handle press event, dont always go to about page
    */
   pressEvent = () => {
-    const { onPress, about } = this.props;
+    const {onPress, about} = this.props;
     if (onPress) return onPress();
     else if (about) return this.navigate();
   };
@@ -157,7 +156,7 @@ class WoWsInfo extends Component {
    * Navigate to About page
    */
   navigate() {
-    SafeAction("About");
+    SafeAction('About');
   }
 }
 
@@ -167,10 +166,10 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 17,
-    fontWeight: isAndroid ? "bold" : "300",
-    textAlign: "center",
-    alignSelf: "center",
-    width: "70%",
+    fontWeight: isAndroid ? 'bold' : '300',
+    textAlign: 'center',
+    alignSelf: 'center',
+    width: '70%',
   },
   child: {
     flex: 1,
@@ -180,8 +179,8 @@ const styles = StyleSheet.create({
   },
   footer: {
     height: 48,
-    justifyContent: "center",
+    justifyContent: 'center',
   },
 });
 
-export { WoWsInfo };
+export {WoWsInfo};

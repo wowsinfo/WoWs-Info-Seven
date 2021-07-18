@@ -1,12 +1,30 @@
-import React, { Component } from 'react';
-import { View, ScrollView, StyleSheet, Linking } from 'react-native';
-import { Text, IconButton, Title, Button } from 'react-native-paper';
-import { LoadingIndicator, WoWsInfo, FooterPlus, TabButton, InfoLabel, SectionTitle, PlayerRecord, DetailedInfo, RatingButton } from '../../component';
-import { SafeFetch, Guard, humanTimeString, SafeAction, SafeStorage, getOverallRating, currDeviceWidth } from '../../core';
-import { WoWsAPI } from '../../value/api';
-import { getDomain, getPrefix, LOCAL, setLastLocation } from '../../value/data';
-import { TintColour } from '../../value/colour';
-import { lang } from '../../value/lang';
+import React, {Component} from 'react';
+import {View, ScrollView, StyleSheet, Linking} from 'react-native';
+import {Text, IconButton, Title, Button} from 'react-native-paper';
+import {
+  LoadingIndicator,
+  WoWsInfo,
+  FooterPlus,
+  TabButton,
+  InfoLabel,
+  SectionTitle,
+  PlayerRecord,
+  DetailedInfo,
+  RatingButton,
+} from '../../component';
+import {
+  SafeFetch,
+  Guard,
+  humanTimeString,
+  SafeAction,
+  SafeStorage,
+  getOverallRating,
+  currDeviceWidth,
+} from '../../core';
+import {WoWsAPI} from '../../value/api';
+import {getDomain, getPrefix, LOCAL, setLastLocation} from '../../value/data';
+import {TintColour} from '../../value/colour';
+import {lang} from '../../value/lang';
 
 class Statistics extends Component {
   constructor(props) {
@@ -15,7 +33,7 @@ class Statistics extends Component {
     let ID = Guard(props, 'info.account_id', null);
     // ID must be valid
     if (ID != null && ID !== '') {
-      const { account_id, nickname, server } = props.info;
+      const {account_id, nickname, server} = props.info;
       // Check if this player is inside friend list
       let friend = DATA[LOCAL.friendList];
       let master = DATA[LOCAL.userInfo];
@@ -44,14 +62,14 @@ class Statistics extends Component {
         // Whether show everything
         showMore: false,
       };
-  
+
       // Save domain
       this.domain = getDomain(server);
       this.prefix = getPrefix(server);
       console.log(this.domain);
       // Save theme colour
       this.theme = TintColour()[500];
-  
+
       if (this.domain != null) {
         this.getBasic();
         this.getRank();
@@ -65,7 +83,7 @@ class Statistics extends Component {
     } else {
       this.state = {
         id: null,
-        valid: false
+        valid: false,
       };
     }
   }
@@ -74,7 +92,7 @@ class Statistics extends Component {
    * Get basic player info
    */
   getBasic() {
-    const { server, id } = this.state;
+    const {server, id} = this.state;
     SafeFetch.get(WoWsAPI.PlayerInfo, getDomain(server), id).then(data => {
       // Check if account is hidden
       console.log(data);
@@ -101,7 +119,7 @@ class Statistics extends Component {
   }
 
   getClan() {
-    const { id } = this.state;
+    const {id} = this.state;
     SafeFetch.get(WoWsAPI.PlayerClan, this.domain, id).then(data => {
       let tag = Guard(data, `data.${id}.clan.tag`, '');
       if (tag !== '') {
@@ -114,7 +132,7 @@ class Statistics extends Component {
    * Get player achievement
    */
   getAchievement() {
-    const { id } = this.state;
+    const {id} = this.state;
     SafeFetch.get(WoWsAPI.PlayerAchievement, this.domain, id).then(data => {
       let achievement = Guard(data, `data.${id}.battle`, null);
       if (achievement != null) {
@@ -127,7 +145,7 @@ class Statistics extends Component {
    * Get player past rank info
    */
   getRank() {
-    const { id } = this.state
+    const {id} = this.state;
     // Get current rank info
     SafeFetch.get(WoWsAPI.RankInfo, this.domain, id).then(data => {
       let rank = Guard(data, `data.${id}.seasons`, null);
@@ -149,14 +167,14 @@ class Statistics extends Component {
       if (ships != null) {
         let formatted = {};
         for (let ship of ships) {
-          const { seasons, ship_id } = ship;
+          const {seasons, ship_id} = ship;
           for (let season in seasons) {
             // Init if not already
             if (formatted[season] == null) formatted[season] = [];
             // Put this ship inside
             let curr = seasons[season];
             // TO make there is data there
-            const { rank_solo, rank_div2, rank_div3 } = curr;
+            const {rank_solo, rank_div2, rank_div3} = curr;
             if (rank_solo) {
               curr.pvp = curr.rank_solo;
               delete curr.rank_solo;
@@ -182,7 +200,7 @@ class Statistics extends Component {
    * Get all player ship info
    */
   getShip() {
-    const { id } = this.state;
+    const {id} = this.state;
     SafeFetch.get(WoWsAPI.ShipInfo, this.domain, id).then(data => {
       let ship = Guard(data, `data.${id}`, null);
       console.log(ship);
@@ -195,12 +213,12 @@ class Statistics extends Component {
   }
 
   render() {
-    const { error, container, footer } = styles;
-    const { name, id, valid,
-            achievement, rank, rankShip, basic, ship, graph } = this.state;
+    const {error, container, footer} = styles;
+    const {name, id, valid, achievement, rank, rankShip, basic, ship, graph} =
+      this.state;
 
     console.log(this.state);
-    if (id == null || id === "") {
+    if (id == null || id === '') {
       // Show an error page or if it is from home, ask user to add an account first
       return (
         <WoWsInfo style={error}>
@@ -217,59 +235,83 @@ class Statistics extends Component {
     } else {
       // Display player data
       return (
-        <WoWsInfo style={container} title={`- ${id} -`} 
-          onPress={() => Linking.openURL(`https://${this.prefix}.wows-numbers.com/player/${id},${name}/`)}>
-          <ScrollView>
-            { this.renderBasic(basic) }
-          </ScrollView>
+        <WoWsInfo
+          style={container}
+          title={`- ${id} -`}
+          onPress={() =>
+            Linking.openURL(
+              `https://${this.prefix}.wows-numbers.com/player/${id},${name}/`,
+            )
+          }>
+          <ScrollView>{this.renderBasic(basic)}</ScrollView>
           <FooterPlus style={footer}>
-            { this.renderAchievement(achievement) }
-            { this.renderGraph(graph) }
-            { this.renderShip(ship) }
-            { this.renderRank(rank, rankShip) }
+            {this.renderAchievement(achievement)}
+            {this.renderGraph(graph)}
+            {this.renderShip(ship)}
+            {this.renderRank(rank, rankShip)}
           </FooterPlus>
         </WoWsInfo>
       );
     }
-
-  };
+  }
 
   ///
-  // I will do parallel data loading so each of them will have 
+  // I will do parallel data loading so each of them will have
   // their own state to check if the button could be rendered
   ///
 
   renderBasic(basic) {
-    const { container, horizontal, playerName, level } = styles;
+    const {container, horizontal, playerName, level} = styles;
     if (!basic) {
-      const { name } = this.state;
+      const {name} = this.state;
       return (
         <View style={container}>
           <Title style={playerName}>{name}</Title>
           <LoadingIndicator />
         </View>
-      )
+      );
     } else {
-      const { created_at, leveling_tier, last_battle_time, nickname } = basic;
-      const { hidden, clan, currRank, canBeFriend, canBeMaster, rating } = this.state;
+      const {created_at, leveling_tier, last_battle_time, nickname} = basic;
+      const {hidden, clan, currRank, canBeFriend, canBeMaster, rating} =
+        this.state;
 
       let register = humanTimeString(created_at);
-      let lastBattle = humanTimeString(last_battle_time)
+      let lastBattle = humanTimeString(last_battle_time);
       if (hidden) {
         return (
           <View style={container}>
             <View style={horizontal}>
-              <SectionTitle title={nickname} style={playerName}/>
-              <IconButton icon='https' size={24} style={{alignSelf: 'center'}}/>
+              <SectionTitle title={nickname} style={playerName} />
+              <IconButton
+                icon="https"
+                size={24}
+                style={{alignSelf: 'center'}}
+              />
             </View>
             <View style={styles.hidden}>
-              { canBeFriend ? <Button icon='contacts' onPress={this.addFriend}>{lang.basic_add_friend}</Button> : null }
-              <InfoLabel left title={lang.basic_register_date} info={register}/>
-              <InfoLabel left title={lang.basic_last_battle} info={lastBattle}/>
-              <InfoLabel left title={lang.basic_level_tier} info={lang.basic_data_unknown}/>
+              {canBeFriend ? (
+                <Button icon="contacts" onPress={this.addFriend}>
+                  {lang.basic_add_friend}
+                </Button>
+              ) : null}
+              <InfoLabel
+                left
+                title={lang.basic_register_date}
+                info={register}
+              />
+              <InfoLabel
+                left
+                title={lang.basic_last_battle}
+                info={lastBattle}
+              />
+              <InfoLabel
+                left
+                title={lang.basic_level_tier}
+                info={lang.basic_data_unknown}
+              />
             </View>
           </View>
-        )
+        );
       } else {
         let name = nickname;
         if (clan !== '') name = `[${clan}]\n${nickname}`;
@@ -280,23 +322,31 @@ class Statistics extends Component {
             <Title style={playerName}>{name}</Title>
             <Text style={level}>{extraInfo}</Text>
             <View style={horizontal}>
-              <InfoLabel title={lang.basic_register_date} info={register}/>
-              <InfoLabel title={lang.basic_last_battle} info={lastBattle}/>
+              <InfoLabel title={lang.basic_register_date} info={register} />
+              <InfoLabel title={lang.basic_last_battle} info={lastBattle} />
             </View>
-            <RatingButton rating={rating}/>
+            <RatingButton rating={rating} />
             <View style={{padding: 4}}>
-              { canBeFriend ? <Button icon='contacts' onPress={this.addFriend}>{lang.basic_add_friend}</Button> : null }
-              { canBeMaster ? <Button icon='heart' onPress={this.setMainAccount}>{lang.basic_set_main}</Button> : null }
+              {canBeFriend ? (
+                <Button icon="contacts" onPress={this.addFriend}>
+                  {lang.basic_add_friend}
+                </Button>
+              ) : null}
+              {canBeMaster ? (
+                <Button icon="heart" onPress={this.setMainAccount}>
+                  {lang.basic_set_main}
+                </Button>
+              ) : null}
             </View>
-            { this.renderStatistics(basic.statistics) }
+            {this.renderStatistics(basic.statistics)}
           </View>
-        )
+        );
       }
     }
   }
 
   getPlayerInfo() {
-    const { account_id, nickname, server } = this.props.info;
+    const {account_id, nickname, server} = this.props.info;
     return {nickname: nickname, account_id: account_id, server: server};
   }
 
@@ -305,60 +355,84 @@ class Statistics extends Component {
     DATA[LOCAL.userInfo] = info;
     SafeStorage.set(LOCAL.userInfo, info);
     this.setState({canBeMaster: false});
-  }
+  };
 
   addFriend = () => {
     let info = this.getPlayerInfo();
-    
+
     // Update object
     let str = LOCAL.friendList;
     DATA[str].player[info.account_id] = info;
 
     SafeStorage.set(str, DATA[str]);
     this.setState({canBeFriend: false});
-  }
+  };
 
   renderStatistics(statistics) {
     if (!statistics) return null;
-    const { showMore } = this.state;
+    const {showMore} = this.state;
     return (
       <View style={{paddingBottom: 8}}>
-        <DetailedInfo data={statistics} more={showMore}/>
-        <PlayerRecord data={statistics.pvp}/>
+        <DetailedInfo data={statistics} more={showMore} />
+        <PlayerRecord data={statistics.pvp} />
       </View>
-    )
+    );
   }
 
   renderAchievement(achievement) {
     let loading = true;
     if (achievement && Object.keys(achievement).length > 0) loading = false;
-    return <TabButton icon={require('../../img/AchievementTab.png')} color={this.theme}
-      disabled={loading} onPress={() => SafeAction('PlayerAchievement', {data: achievement})}/>
+    return (
+      <TabButton
+        icon={require('../../img/AchievementTab.png')}
+        color={this.theme}
+        disabled={loading}
+        onPress={() => SafeAction('PlayerAchievement', {data: achievement})}
+      />
+    );
   }
 
   renderShip(ship) {
     let loading = true;
     if (ship && ship.length > 0) loading = false;
 
-    return <TabButton icon={require('../../img/Ship.png')} color={this.theme}
-      disabled={loading} onPress={() => SafeAction('PlayerShip', {data: ship}, 1)}/>  
+    return (
+      <TabButton
+        icon={require('../../img/Ship.png')}
+        color={this.theme}
+        disabled={loading}
+        onPress={() => SafeAction('PlayerShip', {data: ship}, 1)}
+      />
+    );
   }
 
   renderRank(rank, rankShip) {
     let loading = true;
     if (rank && rankShip) loading = false;
 
-    return <TabButton icon={require('../../img/Rank.png')} color={this.theme}
-      disabled={loading} onPress={() => SafeAction('Rank', {data: rank, ship: rankShip})}/>
+    return (
+      <TabButton
+        icon={require('../../img/Rank.png')}
+        color={this.theme}
+        disabled={loading}
+        onPress={() => SafeAction('Rank', {data: rank, ship: rankShip})}
+      />
+    );
   }
 
   renderGraph(graph) {
     let loading = true;
     if (graph && graph.length > 0) loading = false;
-    const { hidden } = this.state;
+    const {hidden} = this.state;
 
-    return <TabButton icon={require('../../img/Graph.png')} color={this.theme}
-      disabled={loading || hidden} onPress={() => SafeAction('Graph', {data: graph})}/>
+    return (
+      <TabButton
+        icon={require('../../img/Graph.png')}
+        color={this.theme}
+        disabled={loading || hidden}
+        onPress={() => SafeAction('Graph', {data: graph})}
+      />
+    );
   }
 }
 
@@ -366,16 +440,14 @@ const styles = StyleSheet.create({
   error: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
-  hiddenProfile: {
-
-  },
+  hiddenProfile: {},
   container: {
     flex: 1,
   },
   horizontal: {
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   playerName: {
     alignSelf: 'center',
@@ -383,15 +455,15 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     paddingTop: 32,
     paddingBottom: 8,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   level: {
     alignSelf: 'center',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   hidden: {
     paddingLeft: 16,
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
   },
   footer: {
     flexDirection: 'row',
@@ -399,4 +471,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export { Statistics };
+export {Statistics};

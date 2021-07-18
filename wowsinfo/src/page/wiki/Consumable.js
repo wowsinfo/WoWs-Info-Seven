@@ -1,21 +1,21 @@
 /**
  * Consumable.js
- * 
+ *
  * Display flag and camouflage or upgrade.
  * There are two modes for this page
  */
 
-import React, { PureComponent } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { FlatGrid } from 'react-native-super-grid';
-import { LoadingModal, WikiIcon, WoWsInfo } from '../../component';
-import { SAVED, setLastLocation } from '../../value/data';
-import { SafeAction } from '../../core';
+import React, {PureComponent} from 'react';
+import {View, StyleSheet} from 'react-native';
+import {FlatGrid} from 'react-native-super-grid';
+import {LoadingModal, WikiIcon, WoWsInfo} from '../../component';
+import {SAVED, setLastLocation} from '../../value/data';
+import {SafeAction} from '../../core';
 
 class Consumable extends PureComponent {
   constructor(props) {
     super(props);
-    const { upgrade } = props;
+    const {upgrade} = props;
     let loc = 'Consumable';
     if (upgrade === true) loc = 'Upgrade';
     setLastLocation(loc);
@@ -48,34 +48,40 @@ class Consumable extends PureComponent {
       } else {
         return a.price_gold - b.price_gold;
       }
-    })
+    });
 
     console.log(data);
 
     this.state = {
-      data: data
-    }
+      data: data,
+    };
   }
 
   render() {
-    return (
-      <WoWsInfo>
-        { this.renderGrid() }
-      </WoWsInfo>
-    )
-  };
+    return <WoWsInfo>{this.renderGrid()}</WoWsInfo>;
+  }
 
   renderGrid() {
-    const { data } = this.state;
+    const {data} = this.state;
     if (!data) return <LoadingModal />;
 
     return (
       <View style={{flex: 1}}>
-        <FlatGrid itemDimension={80} data={data} renderItem={({item}) => {
-          return <WikiIcon item={item} onPress={() => SafeAction('BasicDetail', {item: item})}/>
-        }} showsVerticalScrollIndicator={false}/>
+        <FlatGrid
+          itemDimension={80}
+          data={data}
+          renderItem={({item}) => {
+            return (
+              <WikiIcon
+                item={item}
+                onPress={() => SafeAction('BasicDetail', {item: item})}
+              />
+            );
+          }}
+          showsVerticalScrollIndicator={false}
+        />
       </View>
-    )
+    );
   }
 }
 
@@ -83,8 +89,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+  },
 });
 
-export { Consumable };
+export {Consumable};

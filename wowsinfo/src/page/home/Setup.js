@@ -4,14 +4,28 @@
  * It only displays when you first launched WoWs Info
  */
 
-import React, { Component } from 'react';
-import { View, ScrollView, StyleSheet } from 'react-native';
-import { Button, List, Paragraph, FAB, Text, Headline, Title, Subheading } from 'react-native-paper';
-import { Actions } from 'react-native-router-flux';
-import { lang } from '../../value/lang';
-import { SERVER, getCurrServer, setCurrServer, setAPILanguage } from '../../value/data';
-import { Downloader } from '../../core';
-import { WoWsInfo, SectionTitle, LoadingIndicator } from '../../component';
+import React, {Component} from 'react';
+import {View, ScrollView, StyleSheet} from 'react-native';
+import {
+  Button,
+  List,
+  Paragraph,
+  FAB,
+  Text,
+  Headline,
+  Title,
+  Subheading,
+} from 'react-native-paper';
+import {Actions} from 'react-native-router-flux';
+import {lang} from '../../value/lang';
+import {
+  SERVER,
+  getCurrServer,
+  setCurrServer,
+  setAPILanguage,
+} from '../../value/data';
+import {Downloader} from '../../core';
+import {WoWsInfo, SectionTitle, LoadingIndicator} from '../../component';
 
 class Setup extends Component {
   constructor(props) {
@@ -45,49 +59,66 @@ class Setup extends Component {
   }
 
   render() {
-    const { loading, server, selected_server, langList, selected_lang, error } = this.state;
-    const { fab, titleStyle, wrapView, scroll } = styles;
+    const {loading, server, selected_server, langList, selected_lang, error} =
+      this.state;
+    const {fab, titleStyle, wrapView, scroll} = styles;
     return (
       <WoWsInfo hideAds empty>
         <ScrollView contentContainerStyle={scroll}>
-          <SectionTitle title={lang.settings_api_settings} center bold/>
+          <SectionTitle title={lang.settings_api_settings} center bold />
           <Subheading style={titleStyle}>
             {`${lang.setting_game_server}: ${lang.server_name[selected_server]}`}
           </Subheading>
           <View style={wrapView}>
-            { server.map((_, index) => <Button onPress={() => this.updateServer(index)}>{lang.server_name[index]}</Button>) }
+            {server.map((_, index) => (
+              <Button onPress={() => this.updateServer(index)}>
+                {lang.server_name[index]}
+              </Button>
+            ))}
           </View>
-            {/* <FlatList data={server} renderItem={({index}) => {
+          {/* <FlatList data={server} renderItem={({index}) => {
               return <Button onPress={() => this.updateServer(index)}>{lang.server_name[index]}</Button>
             }} keyExtractor={i => i} numColumns={2}/> */}
           <Subheading style={titleStyle}>
             {`${lang.setting_api_language}: ${langList[selected_lang]}`}
           </Subheading>
-          { this.renderAPILanguage() }
+          {this.renderAPILanguage()}
         </ScrollView>
-        <FAB visible={!loading} icon='check' style={fab} label={lang.setup_done_button}
-          onPress={loading ? null : () => this.finishSetup()} />
+        <FAB
+          visible={!loading}
+          icon="check"
+          style={fab}
+          label={lang.setup_done_button}
+          onPress={loading ? null : () => this.finishSetup()}
+        />
       </WoWsInfo>
-    )
-  };
+    );
+  }
 
   renderAPILanguage() {
-    const { loading, error, langData, langList } = this.state;
-    const { titleStyle, wrapView } = styles;
+    const {loading, error, langData, langList} = this.state;
+    const {titleStyle, wrapView} = styles;
 
     if (loading) return <LoadingIndicator />;
-    if (error) return (
-      <View>
-        <Paragraph style={titleStyle}>{lang.error_download_issue}</Paragraph>
-        <List.Item title={lang.settings_app_send_feedback}
-          description={lang.settings_app_send_feedback_subtitle}
-          onPress={() => Linking.openURL(APP.Developer)} />
-      </View>
-    );
+    if (error)
+      return (
+        <View>
+          <Paragraph style={titleStyle}>{lang.error_download_issue}</Paragraph>
+          <List.Item
+            title={lang.settings_app_send_feedback}
+            description={lang.settings_app_send_feedback_subtitle}
+            onPress={() => Linking.openURL(APP.Developer)}
+          />
+        </View>
+      );
 
     return (
       <View style={wrapView}>
-        { langData.map(item => <Button onPress={() => this.updateApiLanguage(item)}>{langList[item]}</Button>) }
+        {langData.map(item => (
+          <Button onPress={() => this.updateApiLanguage(item)}>
+            {langList[item]}
+          </Button>
+        ))}
       </View>
     );
   }
@@ -115,17 +146,17 @@ const styles = StyleSheet.create({
   scroll: {
     flexGrow: 1,
     alignItems: 'center',
-    paddingTop: '15%'
+    paddingTop: '15%',
   },
   top: {
-    flex: 1
+    flex: 1,
   },
   fab: {
     position: 'absolute',
     bottom: 0,
     right: 0,
     left: 0,
-    margin: 16
+    margin: 16,
   },
   titleStyle: {
     alignSelf: 'center',
@@ -135,8 +166,8 @@ const styles = StyleSheet.create({
   wrapView: {
     justifyContent: 'center',
     flexWrap: 'wrap',
-    flexDirection: 'row'
-  }
+    flexDirection: 'row',
+  },
 });
 
-export { Setup };
+export {Setup};

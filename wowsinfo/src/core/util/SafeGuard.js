@@ -1,8 +1,8 @@
 /**
  * Get to path of obj and return its value or return default value
- * @param {*} obj 
- * @param {string} path 
- * @param {*} dval 
+ * @param {*} obj
+ * @param {string} path
+ * @param {*} dval
  */
 export const Guard = (obj, path, dval) => {
   // This is a just a simple check if obj is null or undefined
@@ -15,16 +15,16 @@ export const Guard = (obj, path, dval) => {
       // o is the object (accumulator), and n is from path (current value)
       // o && o[n] -> to go further or just return default value
       // only asking for the object
-      return p.reduce((o, n) => (o != null && o[n] != null) ? o[n] : dval, obj);
+      return p.reduce((o, n) => (o != null && o[n] != null ? o[n] : dval), obj);
     }
-  } 
+  }
   return dval;
 };
 
 /**
  * Return a default value if obj is not valid
- * @param {*} obj 
- * @param {*} dval 
+ * @param {*} obj
+ * @param {*} dval
  */
 export const SafeValue = (obj, dval) => {
   if (obj == null) return dval;
