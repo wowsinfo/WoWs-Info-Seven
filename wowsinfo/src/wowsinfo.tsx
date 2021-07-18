@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { StyleSheet, Alert, BackHandler, Linking } from "react-native";
-import { Router, Stack, Scene, Actions } from "react-native-router-flux";
-import { withTheme, DarkTheme, DefaultTheme } from "react-native-paper";
+import React, {Component} from 'react';
+import {StyleSheet, Alert, BackHandler, Linking} from 'react-native';
+import {Router, Stack, Scene, Actions} from 'react-native-router-flux';
+import {withTheme, DarkTheme, DefaultTheme} from 'react-native-paper';
 import {
   Menu,
   Settings,
@@ -28,54 +28,54 @@ import {
   License,
   RS,
   ProVersion,
-} from "./page";
-import { LOCAL, getFirstLaunch, getCurrServer, APP } from "./value/data";
-import { DataLoader, Downloader } from "./core";
-import { GREY, BLUE } from "react-native-material-color";
-import { TintColour } from "./value/colour";
-import { lang } from "./value/lang";
-import { PlayerShip } from "./page/player/PlayerShip";
-import { Detailed } from "./page/player/Detailed";
-import { Rank } from "./page/player/Rank";
+} from './page';
+import {LOCAL, getFirstLaunch, getCurrServer, APP} from './value/data';
+import {DataLoader, Downloader} from './core';
+import {GREY, BLUE} from 'react-native-material-color';
+import {TintColour} from './value/colour';
+import {lang} from './value/lang';
+import {PlayerShip} from './page/player/PlayerShip';
+import {Detailed} from './page/player/Detailed';
+import {Rank} from './page/player/Rank';
 import {
   setJSExceptionHandler,
   setNativeExceptionHandler,
-} from "react-native-exception-handler";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+} from 'react-native-exception-handler';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 setJSExceptionHandler((e, fatal) => {
   if (fatal) {
-    showAlert(`${e.name}\n${e.message}`, "JS");
+    showAlert(`${e.name}\n${e.message}`, 'JS');
   } else {
     console.log(`JSException\n${e}`);
   }
 }, true);
 
-setNativeExceptionHandler((e) => {
-  showAlert(e, "NATIVE");
+setNativeExceptionHandler(e => {
+  showAlert(e, 'NATIVE');
   console.log(`NativeException\n${e}`);
 });
 
 // Ask user to email me the log
-function showAlert(msg, mode) {
+function showAlert(msg: string, mode: string) {
   Alert.alert(
     `FATAL ${mode} ERROR`,
     `${msg}\n\nPlease contact developer`,
     [
       {
-        text: "OK",
-        style: "cancel",
+        text: 'OK',
+        style: 'cancel',
         onPress: () => null,
       },
       {
-        text: "E-mail",
+        text: 'E-mail',
         onPress: () =>
           Linking.openURL(
-            `mailto:development.henryquan@gmail.com?subject=[WoWs Info ${APP.Version}] &body=${msg}`
+            `mailto:development.henryquan@gmail.com?subject=[WoWs Info ${APP.Version}] &body=${msg}`,
           ),
       },
     ],
-    { cancelable: false }
+    {cancelable: false},
   );
 }
 
@@ -97,7 +97,7 @@ class App extends Component {
     };
 
     // Load all data from AsyncStorage
-    DataLoader.loadAll().then((data) => {
+    DataLoader.loadAll().then(data => {
       console.log(data);
 
       global.DATA = data;
@@ -109,9 +109,9 @@ class App extends Component {
       // No more auto dark mode
 
       let userLang = DATA[LOCAL.userLanguage];
-      if (userLang !== "") lang.setLanguage(userLang);
+      if (userLang !== '') lang.setLanguage(userLang);
 
-      console.log("state has been set");
+      console.log('state has been set');
 
       let tint = TintColour();
       if (!tint[50]) tint = BLUE;
@@ -120,7 +120,7 @@ class App extends Component {
       global.DARK = {
         colors: {
           ...DarkTheme.colors,
-          surface: "black",
+          surface: 'black',
           text: GREY[50],
           primary: tint[500],
           accent: tint[300],
@@ -131,7 +131,7 @@ class App extends Component {
       global.LIGHT = {
         colors: {
           ...DefaultTheme.colors,
-          surface: "white",
+          surface: 'white',
           text: GREY[900],
           primary: tint[500],
           accent: tint[300],
@@ -147,31 +147,30 @@ class App extends Component {
       if (!first) {
         // Update data here if it is not first launch
         let dn = new Downloader(getCurrServer());
-        dn.updateAll(false).then((obj) => {
+        dn.updateAll(false).then(obj => {
           // Since data are loaded even if user is offline, it should be fine
-          this.setState({ loading: false, dark: DARKMODE });
+          this.setState({loading: false, dark: DARKMODE});
           // Display message if it is not success
           if (!obj.status) {
             Alert.alert(
               lang.error_title,
-              lang.error_download_issue + "\n\n" + obj.log
+              lang.error_download_issue + '\n\n' + obj.log,
             );
           }
         });
       } else {
-        this.setState({ loading: false, dark: DARKMODE });
+        this.setState({loading: false, dark: DARKMODE});
       }
     });
   }
 
   render() {
-    const { loading, dark } = this.state;
+    const {loading, dark} = this.state;
     if (loading) return <Loading />;
     return (
       <Router
-        sceneStyle={{ flex: 1, backgroundColor: dark ? "black" : "white" }}
-        backAndroidHandler={this.handleBack}
-      >
+        sceneStyle={{flex: 1, backgroundColor: dark ? 'black' : 'white'}}
+        backAndroidHandler={this.handleBack}>
         <Stack key="root" hideNavBar>
           <Scene key="Menu" component={Menu} />
           <Scene key="Setup" component={Setup} initial={getFirstLaunch()} />
