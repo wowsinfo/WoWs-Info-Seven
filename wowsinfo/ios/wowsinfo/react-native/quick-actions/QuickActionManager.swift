@@ -42,7 +42,7 @@ class QuickActionManager: RCTEventEmitter {
     func performShortcut(shortcutItem: UIApplicationShortcutItem, success: @escaping (Bool) -> Void) {
         let type = shortcutItem.type
         // Send event to react native
-        sendEvent(withName: type, body: [type: type])
+        sendEvent(withName: type, body: ["type": type])
     }
     
     // Search & Warships
