@@ -21,21 +21,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCTBridgeDelegate {
         #endif
 
         RNHandler.shared.setup(with: self, and: launchOptions)
-        setup3DTouchItems()
+        QuickActionManager.shared.setDefaultActions()
         return true
     }
     
-    private func setup3DTouchItems() {
-        UIApplication.shared.shortcutItems = [
-            UIApplicationShortcutItem(
-                type: "search", localizedTitle: "Search",
-                localizedSubtitle: nil,
-                icon: .init(type: .search), userInfo: nil),
-            UIApplicationShortcutItem(
-                type: "warships", localizedTitle: "Warships",
-                localizedSubtitle: nil,
-                icon: .init(type: .bookmark), userInfo: nil),
-        ]
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        QuickActionManager.shared.performShortcut(shortcutItem: shortcutItem, success: completionHandler)
     }
     
     private func setupFlipper() {
