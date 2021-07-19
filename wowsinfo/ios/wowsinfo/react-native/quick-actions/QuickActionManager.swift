@@ -5,8 +5,8 @@
 //  Created by Yiheng Quan on 19/7/21.
 //
 
-import Foundation
 import UIKit
+import React
 
 private enum QuickActionType: String {
     case search
@@ -18,6 +18,7 @@ private enum RNEvents: String, CaseIterable {
     case quick_action
 }
 
+/// A good discussion https://stackoverflow.com/questions/31870775/react-native-sending-events-to-javascript-in-swift
 @objc(QuickActionManager)
 class QuickActionManager: RCTEventEmitter {
     
@@ -39,30 +40,14 @@ class QuickActionManager: RCTEventEmitter {
     ]
     
     func performShortcut(shortcutItem: UIApplicationShortcutItem, success: @escaping (Bool) -> Void) {
-        if let type = QuickActionType(rawValue: shortcutItem.type) {
-            // Send this event to React Native
-            quickActionEvent(type: type.rawValue)
-        } else {
-            assertionFailure("Unknown QuickActionType")
-            success(false)
-        }
+        let type = shortcutItem.type
+        // Send event to react native
+        sendEvent(withName: type, body: [type: type])
     }
-    
-    func sendShortcutToRN(type: String, complete: RCTResponseSenderBlock) {}
     
     // Search & Warships
     func setDefaultActions() {
         UIApplication.shared.shortcutItems = defaultActions
-    }
-    
-    // Add main account with username
-    func addMainAccount(with username: String) {
-        UIApplication.shared.shortcutItems = defaultActions + [
-            UIApplicationShortcutItem(
-                type: QuickActionType.account.rawValue, localizedTitle: username,
-                localizedSubtitle: nil,
-                icon: .init(type: .favorite), userInfo: nil)
-        ]
     }
     
     // MARK: - RCTEventEmitter
@@ -77,12 +62,16 @@ class QuickActionManager: RCTEventEmitter {
         hasListener = false
     }
     
-    // Send quick action event from native to react native
-    @objc func quickActionEvent(type: String) {
-        if hasListener {
-            sendEvent(withName: RNEvents.quick_action.rawValue, body: [type: type])
-        }
+    // Add main account with username
+    @objc func addMainAccount(username: String) {
+        UIApplication.shared.shortcutItems = defaultActions + [
+            UIApplicationShortcutItem(
+                type: QuickActionType.account.rawValue, localizedTitle: username,
+                localizedSubtitle: nil,
+                icon: .init(type: .favorite), userInfo: nil)
+        ]
     }
+    
     
     override func supportedEvents() -> [String]! {
         RNEvents.allCases.map { $0.rawValue }

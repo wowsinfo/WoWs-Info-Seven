@@ -42,6 +42,7 @@ import {
   setNativeExceptionHandler,
 } from 'react-native-exception-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { NativeManager } from './core/native/native-manager';
 
 setJSExceptionHandler((e, fatal) => {
   if (fatal) {
@@ -82,6 +83,9 @@ function showAlert(msg: string, mode: string) {
 class App extends Component {
   constructor(props) {
     super(props);
+
+    // Load all native modules here
+    NativeManager.Instance.setup();
 
     // const json = {};
     // AsyncStorage.getAllKeys().then(keys => {

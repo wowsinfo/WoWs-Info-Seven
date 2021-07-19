@@ -8,14 +8,8 @@
 #import <React/RCTBridgeModule.h>
 #import <React/RCTEventEmitter.h>
 
-@interface QuickActionManager : RCTEventEmitter <RCTBridgeModule>
-@end
+@interface RCT_EXTERN_MODULE(QuickActionManager, RCTEventEmitter)
 
-@implementation QuickActionManager
-
-// Export this module
-RCT_EXPORT_MODULE()
-
-RCT_EXTERN_METHOD(quickActionEvent: (NSString *)type)
+RCT_EXTERN_METHOD(addMainAccount: (NSString *)username)
 
 @end
