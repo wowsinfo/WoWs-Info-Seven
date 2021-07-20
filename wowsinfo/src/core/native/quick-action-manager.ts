@@ -1,29 +1,13 @@
 import {NativeModules, NativeEventEmitter} from 'react-native';
-const QuickActionManagerSwift = NativeModules.QuickActionManager;
+const NativeQuickActionManager = NativeModules.QuickActionManager;
 
-class QuickActionManager {
+class QuickActionManager extends NativeEventEmitter {
   constructor() {
-    const eventEmitter = new NativeEventEmitter(QuickActionManagerSwift);
-    eventEmitter.addListener('quick_action', type => {
-      console.log(`QuickActionManager - ${type}`);
-      switch (type) {
-        case 'search':
-          // Push to search
-          break;
-        case 'warships':
-          // Push to wiki warhips
-          break;
-        case 'account':
-          // Push to main account
-          break;
-        default:
-          console.log(`Unknown action - ${type}`);
-      }
-    });
+    super(NativeQuickActionManager);
   }
 
   addMainAccount(name: string) {
-    QuickActionManagerSwift.addMainAccount(name);
+    NativeQuickActionManager.addMainAccount(name);
   }
 }
 

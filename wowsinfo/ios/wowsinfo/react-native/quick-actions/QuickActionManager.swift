@@ -71,7 +71,8 @@ class QuickActionManager: RCTEventEmitter {
         hasListener = false
     }
     
-    // Add main account with username
+    /// Add main account with username
+    /// Note: it needs to be (_ username: String) here so that JS can call it properly
     @objc func addMainAccount(_ username: String) {
         DispatchQueue.main.async {
             UIApplication.shared.shortcutItems = self.defaultActions + [
