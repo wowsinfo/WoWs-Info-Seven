@@ -9,25 +9,10 @@ class NativeManager {
     return this._instance || (this._instance = new this());
   }
 
-  quickActionManager = new QuickActionManager();
+  quickActionManager!: QuickActionManager;
 
   setup() {
-    this.quickActionManager.addListener('quick_action', type => {
-      console.log(`QuickActionManager - ${type}`);
-      switch (type) {
-        case 'search':
-          // Push to search
-          break;
-        case 'warships':
-          // Push to wiki warhips
-          break;
-        case 'account':
-          // Push to main account
-          break;
-        default:
-          console.log(`Unknown action - ${type}`);
-      }
-    });
+    this.quickActionManager = new QuickActionManager();
   }
 }
 

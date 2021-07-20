@@ -49,14 +49,14 @@ class ReactNativeManager {
     }
     
     /// The wrapper of RCTRootView
-    func getRNView(with name: String, and props: ReactNativeDictionary? = nil) -> RCTRootView {
+    func getRCTRootView(with name: String, and props: ReactNativeDictionary? = nil) -> RCTRootView {
         RCTRootView(bridge: bridge, moduleName: name, initialProperties: props)
     }
     
     /// Get a RCTRootView and wrap it in a view controller
-    func getRNViewController(with name: String, and props: ReactNativeDictionary? = nil) -> UIViewController {
+    func getRCTRootViewController(with name: String, and props: ReactNativeDictionary? = nil) -> UIViewController {
         let vc = UIViewController()
-        vc.view = getRNView(with: name, and: props)
+        vc.view = getRCTRootView(with: name, and: props)
         return vc
     }
 }

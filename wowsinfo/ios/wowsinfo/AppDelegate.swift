@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCTBridgeDelegate {
     }
     
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
-        QuickActionManager.shared.performShortcut(shortcutItem: shortcutItem, success: completionHandler)
+        QuickActionManager.shared.performShortcut(shortcutItem: shortcutItem)
     }
     
     private func setupFlipper() {

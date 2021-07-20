@@ -13,6 +13,7 @@ import {
   Linking,
   View,
   Share,
+  NativeEventEmitter,
 } from 'react-native';
 import {isAndroid, isIos} from 'react-native-device-detection';
 import {List, Colors, FAB, Button} from 'react-native-paper';
@@ -39,6 +40,7 @@ import {
 } from '../../value/data';
 import {Loading} from '../common/Loading';
 import {Actions} from 'react-native-router-flux';
+import {NativeManager} from '../../core/native/native-manager';
 
 class Menu extends Component {
   constructor(props) {
@@ -70,6 +72,7 @@ class Menu extends Component {
   }
 
   componentDidMount() {
+    NativeManager.Instance.quickActionManager.performPendingShortcut();
     if (this.first) {
       const time = new Promise((r, _) => setTimeout(() => r(false), 20000));
 

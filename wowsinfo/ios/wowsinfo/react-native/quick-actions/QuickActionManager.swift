@@ -5,7 +5,6 @@
 //  Created by Yiheng Quan on 19/7/21.
 //
 
-import React
 import UIKit
 
 private enum QuickActionType: String {
@@ -14,22 +13,22 @@ private enum QuickActionType: String {
     case account
 }
 
-private enum RNEvents: String, CaseIterable {
-    case quick_action
-}
-
 /// A good discussion https://stackoverflow.com/questions/31870775/react-native-sending-events-to-javascript-in-swift
 @objc(QuickActionManager)
-class QuickActionManager: RCTEventEmitter {
+class QuickActionManager: NSObject {
     
     // Singleton
     static let shared = QuickActionManager()
-    override private init() {
+    private override init() {
         super.init()
-        /// NOTE: bridge must be set here
-        self.bridge = ReactNativeManager.shared.bridge
     }
     
+    /// NOTE: RCTEventEmitter is created by React Native so shouldn't subclass it
+    /// It will be injected with it is created by React Native
+    private var emitter: QuickActionEventEmitter?
+    
+    private var pendingShortcut: String?
+
     private let defaultActions = [
         UIApplicationShortcutItem(
             type: QuickActionType.search.rawValue, localizedTitle: "Search",
@@ -41,34 +40,23 @@ class QuickActionManager: RCTEventEmitter {
             icon: .init(type: .bookmark), userInfo: nil)
     ]
     
-    func performShortcut(shortcutItem: UIApplicationShortcutItem, success: @escaping (Bool) -> Void) {
+    func injectEventEmitter(_ emitter: QuickActionEventEmitter) {
+        self.emitter = emitter
+    }
+    
+    func performShortcut(shortcutItem: UIApplicationShortcutItem) {
         let type = shortcutItem.type
-        // Send event to react native
-        if hasListener {
-            sendEvent(withName: RNEvents.quick_action.rawValue, body: ["type": type])
-            success(true)
+        if let emitter = emitter {
+            emitter.sendEvent(with: type)
         } else {
-            success(false)
+            // The user started the app by using 3D Touch, add this to pending
+            pendingShortcut = type
         }
     }
     
     // Search & Warships
     func setDefaultActions() {
         UIApplication.shared.shortcutItems = defaultActions
-    }
-    
-    // MARK: - RCTEventEmitter
-    
-    private var hasListener = false
-
-    override func startObserving() {
-        super.startObserving()
-        hasListener = true
-    }
-
-    override func stopObserving() {
-        super.stopObserving()
-        hasListener = false
     }
     
     /// Add main account with username
@@ -84,7 +72,11 @@ class QuickActionManager: RCTEventEmitter {
         }
     }
     
-    override func supportedEvents() -> [String]! {
-        RNEvents.allCases.map { $0.rawValue }
+    @objc func performPendingShortcut() {
+        // Perform pending shortcut once it is initialised
+        if let shortcut = pendingShortcut {
+            emitter?.sendEvent(with: shortcut)
+            pendingShortcut = nil
+        }
     }
 }

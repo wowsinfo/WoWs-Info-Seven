@@ -8,8 +8,6 @@
 #import <React/RCTBridgeModule.h>
 #import <React/RCTEventEmitter.h>
 
-@interface RCT_EXTERN_MODULE(QuickActionManager, RCTEventEmitter)
-
-RCT_EXTERN_METHOD(addMainAccount: (NSString *)value)
+@interface RCT_EXTERN_MODULE(QuickActionEventEmitter, RCTEventEmitter)
 
 @end

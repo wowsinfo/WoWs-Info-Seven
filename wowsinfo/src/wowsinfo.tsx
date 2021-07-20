@@ -84,9 +84,7 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    // Load all native modules here
     NativeManager.Instance.setup();
-    NativeManager.Instance.quickActionManager.addMainAccount("HenryQuan");
 
     // const json = {};
     // AsyncStorage.getAllKeys().then(keys => {
