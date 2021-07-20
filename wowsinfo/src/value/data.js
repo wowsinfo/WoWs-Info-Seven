@@ -9,8 +9,8 @@ import {lang} from './lang';
  */
 export const APP = {
   Version: '1.1.0',
-  IOSVersion: '1.7.9',
-  GameVersion: '0.9.5.0',
+  IOSVersion: '1.7.0',
+  GameVersion: '0.10.6.0',
   Github: 'https://github.com/HenryQuan/WoWs-Info',
   AppStore: 'https://itunes.apple.com/app/id1202750166',
   GooglePlay:

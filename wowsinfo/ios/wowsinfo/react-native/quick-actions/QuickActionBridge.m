@@ -10,6 +10,6 @@
 
 @interface RCT_EXTERN_MODULE(QuickActionManager, RCTEventEmitter)
 
-RCT_EXTERN_METHOD(addMainAccount: (NSString *)username)
+RCT_EXTERN_METHOD(addMainAccount: (NSString *)value)
 
 @end

@@ -5,8 +5,8 @@
 //  Created by Yiheng Quan on 19/7/21.
 //
 
-import UIKit
 import React
+import UIKit
 
 private enum QuickActionType: String {
     case search
@@ -26,6 +26,8 @@ class QuickActionManager: RCTEventEmitter {
     static let shared = QuickActionManager()
     override private init() {
         super.init()
+        /// NOTE: bridge must be set here
+        self.bridge = ReactNativeManager.shared.bridge
     }
     
     private let defaultActions = [
@@ -42,7 +44,12 @@ class QuickActionManager: RCTEventEmitter {
     func performShortcut(shortcutItem: UIApplicationShortcutItem, success: @escaping (Bool) -> Void) {
         let type = shortcutItem.type
         // Send event to react native
-        sendEvent(withName: type, body: ["type": type])
+        if hasListener {
+            sendEvent(withName: RNEvents.quick_action.rawValue, body: ["type": type])
+            success(true)
+        } else {
+            success(false)
+        }
     }
     
     // Search & Warships
@@ -52,26 +59,29 @@ class QuickActionManager: RCTEventEmitter {
     
     // MARK: - RCTEventEmitter
     
-    var hasListener = false
+    private var hasListener = false
 
     override func startObserving() {
+        super.startObserving()
         hasListener = true
     }
 
     override func stopObserving() {
+        super.stopObserving()
         hasListener = false
     }
     
     // Add main account with username
-    @objc func addMainAccount(username: String) {
-        UIApplication.shared.shortcutItems = defaultActions + [
-            UIApplicationShortcutItem(
-                type: QuickActionType.account.rawValue, localizedTitle: username,
-                localizedSubtitle: nil,
-                icon: .init(type: .favorite), userInfo: nil)
-        ]
+    @objc func addMainAccount(_ username: String) {
+        DispatchQueue.main.async {
+            UIApplication.shared.shortcutItems = self.defaultActions + [
+                UIApplicationShortcutItem(
+                    type: QuickActionType.account.rawValue, localizedTitle: username,
+                    localizedSubtitle: nil,
+                    icon: .init(type: .favorite), userInfo: nil)
+            ]
+        }
     }
-    
     
     override func supportedEvents() -> [String]! {
         RNEvents.allCases.map { $0.rawValue }

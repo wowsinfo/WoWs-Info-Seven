@@ -135,7 +135,8 @@ class Downloader {
           }
         }
 
-        console.log(DATA);
+        // Uncomment this line to log everything
+        // console.log(DATA);
 
         // Make sure it is also great than current version
         // Update this value only if all data are saved correctly

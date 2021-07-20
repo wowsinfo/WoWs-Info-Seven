@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCTBridgeDelegate {
         setupFlipper()
         #endif
 
-        RNHandler.shared.setup(with: self, and: launchOptions)
+        ReactNativeManager.shared.setup(with: self, and: launchOptions)
         QuickActionManager.shared.setDefaultActions()
         return true
     }
@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCTBridgeDelegate {
     }
     
     func sourceURL(for bridge: RCTBridge!) -> URL! {
-        RNHandler.shared.jsBundleURL
+        ReactNativeManager.shared.jsBundleURL
     }
 }
 

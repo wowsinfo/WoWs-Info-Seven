@@ -86,6 +86,7 @@ class App extends Component {
 
     // Load all native modules here
     NativeManager.Instance.setup();
+    NativeManager.Instance.quickActionManager.addMainAccount("HenryQuan");
 
     // const json = {};
     // AsyncStorage.getAllKeys().then(keys => {
@@ -102,7 +103,7 @@ class App extends Component {
 
     // Load all data from AsyncStorage
     DataLoader.loadAll().then(data => {
-      console.log(data);
+      // console.log(data);
 
       global.DATA = data;
       SWAPBUTTON = DATA[LOCAL.swapButton];
