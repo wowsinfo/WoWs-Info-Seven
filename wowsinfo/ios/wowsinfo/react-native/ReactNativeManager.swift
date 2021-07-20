@@ -10,17 +10,22 @@ import React
 
 typealias ReactNativeDictionary = [NSObject: Any]
 
-class ReactNativeManager {
+@objc(ReactNativeManager)
+class ReactNativeManager: NSObject {
     
     // Singleton
     static let shared = ReactNativeManager()
-    private init() {}
+    private override init() {
+        super.init()
+    }
     
     /// Setup the bridge so only one JSC VM is created to save resources and simplify the communication between RN views in different parts of your native app,
     /// you can have multiple views powered by React Native that are associated with a single JS runtime.
     private(set) var bridge: RCTBridge!
     // An instance of the root view controller
     private(set) var rootViewController: UIViewController?
+    // From React Native side, to inform whether the Home Page is loaded
+    private(set) var isReactNativeLoaded: Bool = false
     
     private(set) lazy var jsBundleURL: URL! = {
         #if DEBUG
@@ -58,5 +63,9 @@ class ReactNativeManager {
         let vc = UIViewController()
         vc.view = getRCTRootView(with: name, and: props)
         return vc
+    }
+    
+    @objc func setReactNativeLoaded(_ loaded: Bool) {
+        isReactNativeLoaded = loaded
     }
 }
