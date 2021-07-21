@@ -1,9 +1,9 @@
 import {NativeModules, NativeEventEmitter} from 'react-native';
-import {SafeAction} from '../../core';
+import {SafeAction} from '..';
 const manager = NativeModules.QuickActionManager;
 const eventEmitter = NativeModules.QuickActionEventEmitter;
 
-class QuickActionManager {
+class QuickAction {
   constructor() {
     const emitter = new NativeEventEmitter(eventEmitter);
     emitter.addListener('quick_action', (type: string) => {
@@ -26,13 +26,13 @@ class QuickActionManager {
     });
   }
 
-  addMainAccount(name: string) {
+  static addMainAccount(name: string) {
     manager.addMainAccount(name);
   }
 
-  performPendingShortcut() {
+  static performPendingShortcut() {
     manager.performPendingShortcut();
   }
 }
 
-export {QuickActionManager};
+export {QuickAction};

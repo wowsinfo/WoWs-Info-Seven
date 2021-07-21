@@ -9,6 +9,6 @@
 
 @interface RCT_EXTERN_MODULE(ReactNativeManager, NSObject)
 
-RCT_EXTERN_METHOD(setReactNativeLoaded: (BOOL)value)
+RCT_EXTERN_METHOD(reactNativeHasLoaded)
 
 @end

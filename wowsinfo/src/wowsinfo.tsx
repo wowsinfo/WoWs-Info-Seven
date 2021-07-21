@@ -42,7 +42,7 @@ import {
   setNativeExceptionHandler,
 } from 'react-native-exception-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { NativeManager } from './core/native/native-manager';
+import { NativeManager } from './core/native/NativeManager';
 
 setJSExceptionHandler((e, fatal) => {
   if (fatal) {

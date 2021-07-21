@@ -25,7 +25,7 @@ class ReactNativeManager: NSObject {
     // An instance of the root view controller
     private(set) var rootViewController: UIViewController?
     // From React Native side, to inform whether the Home Page is loaded
-    private(set) var isReactNativeLoaded: Bool = false
+    var isLoaded: Bool = false
     
     private(set) lazy var jsBundleURL: URL! = {
         #if DEBUG
@@ -65,7 +65,8 @@ class ReactNativeManager: NSObject {
         return vc
     }
     
-    @objc func setReactNativeLoaded(_ loaded: Bool) {
-        isReactNativeLoaded = loaded
+    // React Native created a new instance so the shared one is not updated
+    @objc func reactNativeHasLoaded() {
+        ReactNativeManager.shared.isLoaded = true
     }
 }

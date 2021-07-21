@@ -46,7 +46,8 @@ class QuickActionManager: NSObject {
     
     func performShortcut(shortcutItem: UIApplicationShortcutItem) {
         let type = shortcutItem.type
-        if let emitter = emitter {
+        // App is loaded
+        if ReactNativeManager.shared.isLoaded, let emitter = emitter {
             emitter.sendEvent(with: type)
         } else {
             // The user started the app by using 3D Touch, add this to pending

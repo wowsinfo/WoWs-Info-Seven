@@ -27,4 +27,8 @@ React Native is now used as a module so the app is native first. Although the en
   - https://stackoverflow.com/a/48716140
   - https://gist.github.com/brennanMKE/1ebba84a0fd7c2e8b481e4f8a5349b99
   - React Native will initilise the emitter so it needs to be injected to the singleton
-- Remember React Native does a lot of things for you. Don't do too much in the native side.
+- IMPORTANT
+  - React Native always creates a new copy so Singleton won't work
+    - A new instance can be created even if init is private (due to Obj-C signal)
+  - A helper class needs to be used to inject to the Singleton
+  - Do not use a class for both native and react native (it won't work)
