@@ -3,7 +3,6 @@ import webbrowser
 import os
 import datetime
 
-input("=> Press any key to update personal rating")
 link = 'https://wows-numbers.com/personal/rating/expected/json/'
 res = requests.get(link)
 if res.status_code == 200:
