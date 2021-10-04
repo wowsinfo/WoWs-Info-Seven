@@ -8,9 +8,12 @@
     "link-icons": "npx react-native link react-native-vector-icons",
     "android": "npx react-native run-android",
     "ios": "npx react-native run-ios",
+    "clean": "rm -rf node_modules/",
+    "clean-ios": "cd ios && rm -rf Pods/ Podfile.lock",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "format-all": "npx prettier --write 'src/**/*.js'"
+    "format-all": "npx prettier --write 'src/**/*.js'",
+    "setup": "npx yarn && npx yarn pod"
   },
   "dependencies": {
     "native-chart-experiment": "^1.0.1",

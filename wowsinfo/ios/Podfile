@@ -34,6 +34,14 @@ target 'wowsinfo' do
         # update the min deployment target to iOS 10.0
         config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '10.0'
       end
+
+      case target.name
+      when 'RCT-Folly'
+        # https://github.com/facebook/flipper/issues/834#issuecomment-900550142
+        target.build_configurations.each do |config|
+          config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '9.0'
+        end
+      end
     end
   end
 end

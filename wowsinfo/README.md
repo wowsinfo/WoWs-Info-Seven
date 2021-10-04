@@ -11,6 +11,7 @@ Read [this guide](https://reactnative.dev/docs/integration-with-existing-apps) t
 - [Native components](https://reactnative.dev/docs/native-components-android)
 - [Vector icons](https://oblador.github.io/react-native-vector-icons/)
 - [Material icons](https://materialdesignicons.com/)
+- [React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/)
 
 ### IOS
 
