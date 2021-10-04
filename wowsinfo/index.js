@@ -1,8 +1,8 @@
-import * as React from "react";
-import { AppRegistry } from "react-native";
-import App from "./src/wowsinfo";
-import { Provider as PaperProvider, DefaultTheme } from "react-native-paper";
-import "./src/value/global";
+import * as React from 'react';
+import {AppRegistry} from 'react-native';
+import App from './src/wowsinfo';
+import {Provider as PaperProvider, DefaultTheme} from 'react-native-paper';
+import './src/value/global';
 
 export function Main() {
   return (
@@ -12,4 +12,4 @@ export function Main() {
   );
 }
 
-AppRegistry.registerComponent("WoWsInfo", () => Main);
+AppRegistry.registerComponent('WoWsInfo', () => Main);
