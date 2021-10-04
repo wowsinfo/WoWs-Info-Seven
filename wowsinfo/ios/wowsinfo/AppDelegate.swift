@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCTBridgeDelegate {
 
         ReactNativeManager.shared.setup(with: self, and: launchOptions)
         QuickActionManager.shared.setDefaultActions()
+        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         return true
     }
     

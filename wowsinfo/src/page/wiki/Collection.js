@@ -52,7 +52,6 @@ class Collection extends PureComponent {
     return (
       <WoWsInfo title={ID}>
         <FlatGrid
-          inverted={!collection}
           itemDimension={80}
           data={data}
           renderItem={({item}) => {
