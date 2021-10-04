@@ -16,6 +16,7 @@
     "setup": "npx yarn && npx yarn pod"
   },
   "dependencies": {
+    "@types/react": "^17",
     "native-chart-experiment": "^1.0.1",
     "react": "17.0.1",
     "react-native": "^0.64.2",
