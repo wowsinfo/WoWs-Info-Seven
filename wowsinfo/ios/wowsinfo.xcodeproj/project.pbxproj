@@ -30,6 +30,7 @@
 		923855C826A0587B0074F220 /* ReactNativeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923855C626A0587B0074F220 /* ReactNativeManager.swift */; };
 		923855CB26A058D30074F220 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923855CA26A058D30074F220 /* UIViewController+Extension.swift */; };
 		923855CC26A058D30074F220 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923855CA26A058D30074F220 /* UIViewController+Extension.swift */; };
+		924102E72712EF58000AFE2C /* InfoTest.plist in Resources */ = {isa = PBXBuildFile; fileRef = 924102E62712EF58000AFE2C /* InfoTest.plist */; };
 		9275F51026A04F3600D9EEB0 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9218867D269F0D8F00FE3099 /* Info.plist */; };
 		9275F51226A04F5F00D9EEB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9218866F269F0D8D00FE3099 /* AppDelegate.swift */; };
 		9275F51426A04F6400D9EEB0 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92188673269F0D8D00FE3099 /* RootViewController.swift */; };
@@ -79,6 +80,7 @@
 		9218867D269F0D8F00FE3099 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		923855C626A0587B0074F220 /* ReactNativeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReactNativeManager.swift; path = "wowsinfo/react-native/ReactNativeManager.swift"; sourceTree = SOURCE_ROOT; };
 		923855CA26A058D30074F220 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		924102E62712EF58000AFE2C /* InfoTest.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InfoTest.plist; sourceTree = "<group>"; };
 		9275F4FB26A04F2100D9EEB0 /* wowsinfo-test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "wowsinfo-test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9288F7E626A6E8E000F87A68 /* QuickActionEventEmitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickActionEventEmitter.swift; sourceTree = "<group>"; };
 		9288F7E926A6E99200F87A68 /* QuickActionManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickActionManager.m; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				9218867D269F0D8F00FE3099 /* Info.plist */,
+				924102E62712EF58000AFE2C /* InfoTest.plist */,
 				92AE130D26A03D9C007F495C /* wowsinfo-Bridging-Header.h */,
 				92188678269F0D8F00FE3099 /* Assets.xcassets */,
 			);
@@ -350,6 +353,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				924102E72712EF58000AFE2C /* InfoTest.plist in Resources */,
 				9275F51626A04F7000D9EEB0 /* LaunchScreen.storyboard in Resources */,
 				9275F51726A04F7800D9EEB0 /* Assets.xcassets in Resources */,
 				9275F51526A04F6D00D9EEB0 /* Main.storyboard in Resources */,
