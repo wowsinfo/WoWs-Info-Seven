@@ -15,6 +15,6 @@ if res.status_code == 200:
     os.system(
         "git commit -am '{} update personal rating'".format(datetime.datetime.now()))
     os.system("git push origin API")
-    webbrowser.open('https://github.com/HenryQuan/WoWs-Info-End/commits/API')
+    # webbrowser.open('https://github.com/HenryQuan/WoWs-Info-End/commits/API')
 else:
     exit("Status Code wasn't 200 OK")
