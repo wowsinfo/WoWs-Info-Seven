@@ -12,4 +12,4 @@ export function Main() {
   );
 }
 
-AppRegistry.registerComponent('WoWsInfo', () => Main);
+AppRegistry.registerComponent('wowsinfo', () => Main);

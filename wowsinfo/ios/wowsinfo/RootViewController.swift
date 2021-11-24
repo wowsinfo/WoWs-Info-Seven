@@ -12,6 +12,6 @@ class RootViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ReactNativeManager.shared.attach(rootViewController: self)
-        view = ReactNativeManager.shared.getRCTRootView(with: "WoWsInfo")
+        view = ReactNativeManager.shared.getRCTRootView(with: "wowsinfo")
     }
 }

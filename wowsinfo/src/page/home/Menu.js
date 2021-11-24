@@ -13,6 +13,7 @@ import {
   Linking,
   View,
   Share,
+  Platform,
 } from 'react-native';
 import {isAndroid, isIos} from 'react-native-device-detection';
 import {List, Colors, FAB, Button} from 'react-native-paper';
@@ -72,8 +73,10 @@ class Menu extends Component {
   }
 
   componentDidMount() {
-    NativeManager.appHasLoaded();
-    QuickAction.performPendingShortcut();
+    if (Platform.OS == 'ios') {
+      NativeManager.appHasLoaded();
+      QuickAction.performPendingShortcut();
+    }
 
     if (this.first) {
       const time = new Promise((r, _) => setTimeout(() => r(false), 20000));

@@ -7,6 +7,9 @@ buildscript {
         compileSdkVersion = 30
         targetSdkVersion = 30
         ndkVersion = "21.4.7075529"
+        androidXAnnotation = "1.1.0"
+        androidXBrowser = "1.0.0"
+        // Put here other AndroidX dependencies
     }
     repositories {
         google()
@@ -23,6 +26,9 @@ allprojects {
     repositories {
         mavenCentral()
         mavenLocal()
+        // still required by react native
+        jcenter()
+
         maven {
             // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
             url("$rootDir/../node_modules/react-native/android")

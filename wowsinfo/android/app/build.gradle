@@ -136,6 +136,8 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        // react-native-iap: we only use the Google Play flavor
+        missingDimensionStrategy 'store', 'play'
     }
     splits {
         abi {
