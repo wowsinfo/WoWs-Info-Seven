@@ -30,11 +30,9 @@ import {
   getFirstLaunch,
   setFirstLaunch,
   setLastLocation,
-  SAVED,
   isProVersion,
   onlyProVersion,
   validateProVersion,
-  setProVersion,
   differentMonth,
   APP,
 } from '../../value/data';
@@ -349,6 +347,7 @@ class Menu extends Component {
               title={item.t}
               style={{padding: 0, paddingLeft: 8, width: bestItemWidth}}
               onPress={() => item.p()}
+              key={item.t}
               left={() => (
                 <List.Icon
                   style={[icon, ThemeBackColour()]}

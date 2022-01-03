@@ -6,16 +6,7 @@
 
 import React, {Component} from 'react';
 import {View, ScrollView, StyleSheet} from 'react-native';
-import {
-  Button,
-  List,
-  Paragraph,
-  FAB,
-  Text,
-  Headline,
-  Title,
-  Subheading,
-} from 'react-native-paper';
+import {Button, List, Paragraph, FAB, Subheading} from 'react-native-paper';
 import {Actions} from 'react-native-router-flux';
 import {lang} from '../../value/lang';
 import {
@@ -70,8 +61,10 @@ class Setup extends Component {
             {`${lang.setting_game_server}: ${lang.server_name[selected_server]}`}
           </Subheading>
           <View style={wrapView}>
-            {server.map((_, index) => (
-              <Button onPress={() => this.updateServer(index)}>
+            {server.map((_: any, index: number) => (
+              <Button
+                onPress={() => this.updateServer(index)}
+                key={index.toString()}>
                 {lang.server_name[index]}
               </Button>
             ))}
@@ -115,7 +108,7 @@ class Setup extends Component {
     return (
       <View style={wrapView}>
         {langData.map(item => (
-          <Button onPress={() => this.updateApiLanguage(item)}>
+          <Button onPress={() => this.updateApiLanguage(item)} key={item}>
             {langList[item]}
           </Button>
         ))}

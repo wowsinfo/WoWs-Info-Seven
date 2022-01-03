@@ -211,6 +211,7 @@ class App extends Component {
   }
 
   handleBack = () => {
+    // @ts-ignore
     if (Actions.state.routes.length == 1) {
       BackHandler.exitApp();
     }
