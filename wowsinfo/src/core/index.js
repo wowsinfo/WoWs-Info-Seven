@@ -6,6 +6,6 @@ export * from './util/SafeGuard';
 export * from './util/SafeFetch';
 export * from './util/SafeStorage';
 export * from './util/SafeAction';
-export * from './util/WarshipTool';
+export * from './util/WarshipUtils';
 export * from './util/Util';
 export * from './util/PersonalRating';
