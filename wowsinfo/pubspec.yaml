@@ -1,6 +1,10 @@
 name: wowsinfo
 description: A new Flutter project.
 
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
 # followed by an optional build number separated by a +.
@@ -14,45 +18,44 @@ description: A new Flutter project.
 version: 1.1.0+1
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.16.1 <3.0.0"
 
+# Dependencies specify other packages that your package needs in order to work.
+# To automatically upgrade your package dependencies to the latest versions
+# consider running `flutter pub upgrade --major-versions`. Alternatively,
+# dependencies can be manually updated by changing the version numbers below to
+# the latest version available on pub.dev. To see which dependencies have newer
+# versions available, run `flutter pub outdated`.
 dependencies:
   flutter:
     sdk: flutter
-  flutter_localizations:
-    sdk: flutter
 
-  # API request
-  http: ^0.12.0+4
-  html: ^0.14.0+3
-  dio: ^3.0.9
-  # Database
-  hive: ^1.4.1+1
-  hive_flutter: 
-    # use the github version for now
-    git: 
-      url: https://github.com/hivedb/hive.git
-      path: hive_flutter
-  # Keep device awake
-  wakelock: ^0.1.4+2
-  # Charts
-  charts_flutter: ^0.9.0
-  # Vibraton
-  vibration: ^1.2.4
-  # IAP
-  in_app_purchase: ^0.3.4+1
-  # Change app theme, brightess, locale and more
-  provider: ^4.3.1
-  # launch website in app
-  url_launcher: ^5.5.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^0.1.3
+  cupertino_icons: ^1.0.2
+  html: ^0.15.0
+  http: ^0.13.4
+  dio: ^4.0.4
+  hive: ^2.0.6
+  hive_flutter: ^1.1.0
+  wakelock: ^0.6.1+1
+  charts_flutter: ^0.12.0
+  vibration: ^1.7.3
+  in_app_purchase: ^3.0.0
+  provider: ^6.0.2
+  url_launcher: ^6.0.20
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  # The "flutter_lints" package below contains a set of recommended lints to
+  # encourage good coding practices. The lint set provided by the package is
+  # activated in the `analysis_options.yaml` file located at the root of your
+  # package. See that file for information about deactivating specific lint
+  # rules and activating additional ones.
+  flutter_lints: ^1.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
