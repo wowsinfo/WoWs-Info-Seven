@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wowsinfo/core/models/WoWs/PvP.dart';
-import 'package:wowsinfo/core/utils/Utils.dart';
+import 'package:wowsinfo/models/WoWs/PvP.dart';
+import 'package:wowsinfo/utils/Utils.dart';
 import 'package:wowsinfo/ui/widgets/common/ImageTile.dart';
 import 'package:wowsinfo/ui/widgets/common/WrapBox.dart';
 import 'package:wowsinfo/ui/widgets/player/BasicShipInfoTile.dart';

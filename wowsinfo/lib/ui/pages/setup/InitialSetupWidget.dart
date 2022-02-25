@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wowsinfo/core/providers/CachedData.dart';
-import 'package:wowsinfo/core/models/UI/GameServer.dart';
-import 'package:wowsinfo/core/parsers/API/WikiEncyclopediaParser.dart';
+import 'package:wowsinfo/providers/CachedData.dart';
+import 'package:wowsinfo/models/game_server.dart';
+import 'package:wowsinfo/parsers/API/WikiEncyclopediaParser.dart';
 import 'package:wowsinfo/ui/pages/AppLoadingPage.dart';
 import 'package:wowsinfo/ui/widgets/common/GameServerSelection.dart';
 import 'package:wowsinfo/ui/widgets/common/PlatformLoadingIndiactor.dart';

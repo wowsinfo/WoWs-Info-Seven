@@ -1,4 +1,4 @@
-import 'package:wowsinfo/core/models/WoWs/PvP.dart';
+import 'package:wowsinfo/models/WoWs/PvP.dart';
 
 /// Stores all value relating to record (max something)
 class WeaponValue {

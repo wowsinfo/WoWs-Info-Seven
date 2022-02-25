@@ -1,15 +1,16 @@
-import 'package:wowsinfo/core/models/Cacheable.dart';
-import 'package:wowsinfo/core/services/data/BaseConfiguration.dart';
-import 'package:wowsinfo/core/services/data/BaseDataProvider.dart';
-import 'package:wowsinfo/core/services/storage/BaseStorage.dart';
-import 'package:wowsinfo/core/utils/Utils.dart';
+import 'package:wowsinfo/models/Cacheable.dart';
+import 'package:wowsinfo/services/data/BaseConfiguration.dart';
+import 'package:wowsinfo/services/data/BaseDataProvider.dart';
+import 'package:wowsinfo/services/storage/BaseStorage.dart';
+import 'package:wowsinfo/utils/Utils.dart';
 
 class CachedData<String, V extends Cacheable>
     extends BaseConfiguration<String, V> {
   BaseDataProvider<V> dataProvider;
   V Function(dynamic) _creator;
 
-  CachedData(this._creator, BaseStorage<String, V> storage, this.dataProvider, String key) {
+  CachedData(this._creator, BaseStorage<String, V> storage, this.dataProvider,
+      String key) {
     this.storage = storage;
     this.key = key;
   }

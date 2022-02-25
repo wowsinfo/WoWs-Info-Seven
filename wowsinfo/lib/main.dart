@@ -4,8 +4,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:wowsinfo/core/providers/GlobalAppSettings.dart';
-import 'package:wowsinfo/core/services/locale/AppLocalizationService.dart';
+import 'package:wowsinfo/providers/GlobalAppSettings.dart';
+import 'package:wowsinfo/services/locale/AppLocalizationService.dart';
 import 'package:wowsinfo/ui/pages/AppLoadingPage.dart';
 
 void main() async {

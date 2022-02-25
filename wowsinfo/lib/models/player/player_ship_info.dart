@@ -1,8 +1,8 @@
-import 'package:wowsinfo/core/providers/CachedData.dart';
-import 'package:wowsinfo/core/models/UI/PersonalRating.dart';
-import 'package:wowsinfo/core/models/UI/WoWsDate.dart';
-import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart';
-import 'package:wowsinfo/core/models/WoWs/RankPlayerShipInfo.dart';
+import 'package:wowsinfo/providers/CachedData.dart';
+import 'package:wowsinfo/models/ui/PersonalRating.dart';
+import 'package:wowsinfo/models/ui/WoWsDate.dart';
+import 'package:wowsinfo/models/Wiki/WikiWarship.dart';
+import 'package:wowsinfo/models/WoWs/RankPlayerShipInfo.dart';
 
 import 'PvP.dart';
 
@@ -31,7 +31,8 @@ class PlayerShipInfo {
   }
 
   /// Convert rank player ship info into a normal ship info
-  PlayerShipInfo.fromRank(RankPlayerShipInfo rank, String season, CachedData cached) {
+  PlayerShipInfo.fromRank(
+      RankPlayerShipInfo rank, String season, CachedData cached) {
     canSort = false;
     rank.getShipsFor(season: season).forEach((element) {
       if (element.played) {
@@ -59,6 +60,7 @@ class ShipInfo {
   int shipId;
   dynamic private;
   PersonalRating rating;
+
   /// Rank has different data available
   bool isRank = false;
   final CachedData _cached;
@@ -90,5 +92,6 @@ class ShipInfo {
     battle = season.rankSolo.battle;
   }
 
-  int compareTo(ShipInfo other) => rating.personalRating.compareTo(other.rating.personalRating);
+  int compareTo(ShipInfo other) =>
+      rating.personalRating.compareTo(other.rating.personalRating);
 }

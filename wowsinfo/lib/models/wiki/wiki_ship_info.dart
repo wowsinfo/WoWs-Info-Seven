@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wowsinfo/core/providers/CachedData.dart';
+import 'package:wowsinfo/providers/CachedData.dart';
 
 import 'WikiShipModule.dart';
 
@@ -29,7 +29,8 @@ class WikiShipInfo {
 
   bool get hasOtherModules => module?.hasOtherModules ?? false;
   bool get hasNextShip => (nextShip?.ships?.length ?? 0) > 0;
-  Iterable<int> get nextShipIds => nextShip?.ships?.keys?.map((e) => int.parse(e)) ?? [];
+  Iterable<int> get nextShipIds =>
+      nextShip?.ships?.keys?.map((e) => int.parse(e)) ?? [];
 
   WikiShipInfo(Map<String, dynamic> data) {
     final json = data.values.first;
@@ -39,15 +40,18 @@ class WikiShipInfo {
       this.shipIdStr = json['ship_id_str'];
       this.hasDemoProfile = json['has_demo_profile'];
       if (json['modules'] != null) this.module = Module(json['modules']);
-      if (json['modules_tree'] != null) this.modulesTree = ModulesTree(json['modules_tree']);
+      if (json['modules_tree'] != null)
+        this.modulesTree = ModulesTree(json['modules_tree']);
       this.nation = json['nation'];
       this.isPremium = json['is_premium'];
       this.shipId = json['ship_id'];
       this.priceCredit = json['price_credit'];
-      if (json['default_profile'] != null) this.defaultProfile = WikiShipModule(json['default_profile']);
+      if (json['default_profile'] != null)
+        this.defaultProfile = WikiShipModule(json['default_profile']);
       this.upgrade = (json['upgrades'] ?? []).cast<int>();
       this.tier = json['tier'];
-      if (json['next_ships'] != null) this.nextShip = NextShip(json['next_ships']);
+      if (json['next_ships'] != null)
+        this.nextShip = NextShip(json['next_ships']);
       this.modSlot = json['mod_slots'];
       this.type = json['type'];
       this.isSpecial = json['is_special'];
@@ -69,7 +73,8 @@ class Module {
   List<int> diveBomber;
 
   // at least two items in it
-  bool hasOtherModules(Map<String, List<int>> moduleMap) => moduleMap?.values?.any((element) => element.length > 1) ?? false;
+  bool hasOtherModules(Map<String, List<int>> moduleMap) =>
+      moduleMap?.values?.any((element) => element.length > 1) ?? false;
   Map<String, List<int>> moduleMap(BuildContext context) {
     final module = Provider.of<CachedData>(context, listen: false).shipModule;
     return {
@@ -140,7 +145,7 @@ class Part {
   int compareTo(Part other) {
     // Copied from https://github.com/HenryQuan/WoWs-Info-Future/blob/legacy_version/WoWsInfo/src/page/wiki/WarshipModule.js
     if (this.priceXp != other.priceXp) {
-      return this.priceXp.compareTo(other.priceXp);      
+      return this.priceXp.compareTo(other.priceXp);
     } else if (!this.hasNextModule && !other.hasNextModule) {
       return this.moduleId - other.moduleId;
     } else {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wowsinfo/core/services/locale/AppLocalizationService.dart';
+import 'package:wowsinfo/services/locale/AppLocalizationService.dart';
 import 'package:wowsinfo/ui/pages/wiki/WikiAchievementPage.dart';
 import 'package:wowsinfo/ui/pages/wiki/WikiCollectionPage.dart';
 import 'package:wowsinfo/ui/pages/wiki/WikiCommanderSkillPage.dart';
@@ -15,24 +15,22 @@ class WikiPage extends StatefulWidget {
   _WikiPageState createState() => _WikiPageState();
 }
 
-
 class _WikiPageState extends State<WikiPage> {
   @override
   Widget build(BuildContext context) {
     final lang = AppLocalizationService.of(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(lang.localised('wiki_page_title'))
-      ),
+      appBar: AppBar(title: Text(lang.localised('wiki_page_title'))),
       body: ListView(
         children: [
-            ListTile(
+          ListTile(
             title: Text('WIKI'),
             subtitle: Text('...'),
             leading: Icon(Icons.wallpaper),
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (c) => WikiWarshipPage()));
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (c) => WikiWarshipPage()));
             },
           ),
           ListTile(
@@ -40,7 +38,8 @@ class _WikiPageState extends State<WikiPage> {
             subtitle: Text('...'),
             leading: Icon(Icons.wallpaper),
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (c) => WikiConsumablePage()));
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (c) => WikiConsumablePage()));
             },
           ),
           ListTile(
@@ -48,7 +47,8 @@ class _WikiPageState extends State<WikiPage> {
             subtitle: Text('...'),
             leading: Icon(Icons.map),
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (c) => WikiGameMapPage()));
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (c) => WikiGameMapPage()));
             },
           ),
           ListTile(
@@ -56,7 +56,8 @@ class _WikiPageState extends State<WikiPage> {
             subtitle: Text('...'),
             leading: Icon(Icons.map),
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (c) => WikiAchievementPage()));
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (c) => WikiAchievementPage()));
             },
           ),
           ListTile(
@@ -64,7 +65,8 @@ class _WikiPageState extends State<WikiPage> {
             subtitle: Text('...'),
             leading: Icon(Icons.map),
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (c) => WikiCommanderSkillPage()));
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (c) => WikiCommanderSkillPage()));
             },
           ),
           ListTile(
@@ -72,7 +74,8 @@ class _WikiPageState extends State<WikiPage> {
             subtitle: Text('...'),
             leading: Icon(Icons.map),
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (c) => WikiCollectionPage()));
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (c) => WikiCollectionPage()));
             },
           ),
         ],

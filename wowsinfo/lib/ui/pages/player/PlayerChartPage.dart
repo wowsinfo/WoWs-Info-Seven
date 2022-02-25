@@ -1,9 +1,9 @@
 import 'package:charts_flutter/flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:wowsinfo/core/models/UI/ChartValue.dart';
-import 'package:wowsinfo/core/models/UI/PlayerChartData.dart';
-import 'package:wowsinfo/core/models/WoWs/RecentPlayerInfo.dart';
-import 'package:wowsinfo/core/utils/Utils.dart';
+import 'package:wowsinfo/models/ui/ChartValue.dart';
+import 'package:wowsinfo/models/ui/PlayerChartData.dart';
+import 'package:wowsinfo/models/WoWs/RecentPlayerInfo.dart';
+import 'package:wowsinfo/utils/Utils.dart';
 import 'package:wowsinfo/ui/widgets/common/WrapBox.dart';
 
 /// PlayerChartPage class

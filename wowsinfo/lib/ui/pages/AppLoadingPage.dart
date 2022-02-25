@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:wowsinfo/core/providers/GlobalAppSettings.dart';
-import 'package:wowsinfo/core/providers/CachedData.dart';
-import 'package:wowsinfo/core/constants/AppConstant.dart';
-import 'package:wowsinfo/core/providers/Preference.dart';
-import 'package:wowsinfo/core/services/locale/AppLocalizationService.dart';
+import 'package:wowsinfo/providers/GlobalAppSettings.dart';
+import 'package:wowsinfo/providers/CachedData.dart';
+import 'package:wowsinfo/constants/AppConstant.dart';
+import 'package:wowsinfo/providers/Preference.dart';
+import 'package:wowsinfo/services/locale/AppLocalizationService.dart';
 import 'package:wowsinfo/ui/pages/BottomNavigationPage.dart';
 import 'package:wowsinfo/ui/widgets/common/ErrorIconWithText.dart';
 import 'package:wowsinfo/ui/widgets/common/PlatformLoadingIndiactor.dart';
@@ -52,7 +52,8 @@ class _AppLoadingPageState extends State<AppLoadingPage> {
 
                     Future.delayed(Duration(milliseconds: 2000)).then((_) {
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (_) => BottomNavigationPage(), fullscreenDialog: true));
+                          builder: (_) => BottomNavigationPage(),
+                          fullscreenDialog: true));
                     });
 
                     // Update last update time

@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wowsinfo/core/models/Cacheable.dart';
-import 'package:wowsinfo/core/models/GitHub/ShipAlias.dart';
-import 'package:wowsinfo/core/models/Mergeable.dart';
+import 'package:wowsinfo/models/Cacheable.dart';
+import 'package:wowsinfo/models/GitHub/ShipAlias.dart';
+import 'package:wowsinfo/models/Mergeable.dart';
 
 /// This is the `WikiWarship` class
 class WikiWarship implements Cacheable, Mergeable<WikiWarship> {

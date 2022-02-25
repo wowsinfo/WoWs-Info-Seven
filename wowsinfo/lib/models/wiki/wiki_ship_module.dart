@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wowsinfo/core/providers/CachedData.dart';
-import 'package:wowsinfo/core/extensions/NumberExtension.dart';
-import 'package:wowsinfo/core/services/locale/AppLocalizationService.dart';
+import 'package:wowsinfo/providers/CachedData.dart';
+import 'package:wowsinfo/extensions/NumberExtension.dart';
+import 'package:wowsinfo/services/locale/AppLocalizationService.dart';
 
 /// This is the `WikiShipModule` class
 class WikiShipModule {
@@ -40,22 +40,29 @@ class WikiShipModule {
 
   WikiShipModule(Map<String, dynamic> json) {
     if (json['engine'] != null) this.engine = Engine(json['engine']);
-    if (json['torpedo_bomber'] != null) this.torpedoBomber = TorpedoBomber(json['torpedo_bomber']);
-    if (json['anti_aircraft'] != null) this.antiAircraft = AntiAircraft(json['anti_aircraft']);
+    if (json['torpedo_bomber'] != null)
+      this.torpedoBomber = TorpedoBomber(json['torpedo_bomber']);
+    if (json['anti_aircraft'] != null)
+      this.antiAircraft = AntiAircraft(json['anti_aircraft']);
     if (json['mobility'] != null) this.mobility = Mobility(json['mobility']);
     if (json['hull'] != null) this.hull = Hull(json['hull']);
     if (json['atbas'] != null) this.atba = Atba(json['atbas']);
-    if (json['artillery'] != null) this.artillery = Artillery(json['artillery']);
+    if (json['artillery'] != null)
+      this.artillery = Artillery(json['artillery']);
     if (json['torpedoes'] != null) this.torpedo = Torpedoe(json['torpedoes']);
     if (json['fighters'] != null) this.fighter = Fighter(json['fighters']);
-    if (json['fire_control'] != null) this.fireControl = FireControl(json['fire_control']);
+    if (json['fire_control'] != null)
+      this.fireControl = FireControl(json['fire_control']);
     if (json['weaponry'] != null) this.weaponry = Weaponry(json['weaponry']);
     this.battleLevelRangeMax = json['battle_level_range_max'];
     this.battleLevelRangeMin = json['battle_level_range_min'];
-    if (json['flight_control'] != null) this.flightControl = FlightControl(json['flight_control']);
-    if (json['concealment'] != null) this.concealment = Concealment(json['concealment']);
+    if (json['flight_control'] != null)
+      this.flightControl = FlightControl(json['flight_control']);
+    if (json['concealment'] != null)
+      this.concealment = Concealment(json['concealment']);
     if (json['armour'] != null) this.armour = Armour(json['armour']);
-    if (json['dive_bomber'] != null) this.diveBomber = DiveBomber(json['dive_bomber']);
+    if (json['dive_bomber'] != null)
+      this.diveBomber = DiveBomber(json['dive_bomber']);
   }
 }
 
@@ -107,7 +114,8 @@ class TorpedoBomber {
     this.cruiseSpeed = json['cruise_speed'];
     this.prepareTime = json['prepare_time'];
     this.torpedoDamage = json['torpedo_damage'];
-    if (json['count_in_squadron'] != null) this.countInSquadron = CountInSquadron(json['count_in_squadron']);
+    if (json['count_in_squadron'] != null)
+      this.countInSquadron = CountInSquadron(json['count_in_squadron']);
     this.torpedoMaxSpeed = json['torpedo_max_speed'];
     this.torpedoBomberIdStr = json['torpedo_bomber_id_str'];
     this.gunnerDamage = json['gunner_damage'];
@@ -137,7 +145,8 @@ class AntiAircraft {
   Iterable<AASlot> get slots => slot.values;
 
   AntiAircraft(Map<String, dynamic> json) {
-    this.slot = (json['slots'] as Map).map((key, value) => MapEntry(key, AASlot(value)));
+    this.slot = (json['slots'] as Map)
+        .map((key, value) => MapEntry(key, AASlot(value)));
     this.defense = json['defense'];
   }
 }
@@ -161,7 +170,6 @@ class AASlot {
     this.name = json['name'];
     this.guns = json['guns'];
   }
-
 }
 
 /// This is the `MainGunSlot` class
@@ -290,7 +298,8 @@ class Atba {
 
   Atba(Map<String, dynamic> json) {
     this.distance = json['distance'];
-    this.slot = (json['slots'] as Map).map((key, value) => MapEntry(key, SecondarySlot(value)));
+    this.slot = (json['slots'] as Map)
+        .map((key, value) => MapEntry(key, SecondarySlot(value)));
   }
 }
 
@@ -310,21 +319,27 @@ class Artillery {
   String get rotationString => '$rotationTime s';
   String get rangeString => '${distance.myFixedString(1)} km';
   double get reloadTime => 60 / gunRate;
+
   /// This is how many guns does she have, 2x3 1x2
-  String get configurationString => slot.values.map((e) => '${e.barrels} x ${e.guns}').join(' | ');
+  String get configurationString =>
+      slot.values.map((e) => '${e.barrels} x ${e.guns}').join(' | ');
+
   /// HE, AP, CS -> reverse it to put HE first
-  Iterable<Shell> get shellReversed => shell.values.toList(growable: false).reversed;
+  Iterable<Shell> get shellReversed =>
+      shell.values.toList(growable: false).reversed;
   Iterable<Shell> get shells => shellReversed;
 
   Artillery(Map<String, dynamic> json) {
     this.maxDispersion = json['max_dispersion'];
-    this.shell = (json['shells'] as Map).map((key, value) => MapEntry(key, Shell(value)));
+    this.shell = (json['shells'] as Map)
+        .map((key, value) => MapEntry(key, Shell(value)));
     this.shotDelay = json['shot_delay'];
     this.rotationTime = json['rotation_time'];
     this.distance = json['distance'];
     this.artilleryId = json['artillery_id'];
     this.artilleryIdStr = json['artillery_id_str'];
-    this.slot = (json['slots'] as Map).map((key, value) => MapEntry(key, MainGunSlot(value)));
+    this.slot = (json['slots'] as Map)
+        .map((key, value) => MapEntry(key, MainGunSlot(value)));
     this.gunRate = json['gun_rate'];
   }
 }
@@ -337,7 +352,7 @@ class Shell {
   int damage;
   int bulletMass;
   String type;
-  
+
   double get fireChance => burnProbability ?? 0;
   String get massString => '$bulletMass kg';
   String get damageString => '$damage (${(damage / 3).myFixedString(0)})';
@@ -383,7 +398,8 @@ class Torpedoe {
     this.torpedoSpeed = json['torpedo_speed'];
     this.rotationTime = json['rotation_time'];
     this.torpedoesIdStr = json['torpedoes_id_str'];
-    this.slot = (json['slots'] as Map).map((key, value) => MapEntry(key, TorpedoeSlot(value)));
+    this.slot = (json['slots'] as Map)
+        .map((key, value) => MapEntry(key, TorpedoeSlot(value)));
     this.maxDamage = json['max_damage'];
   }
 }
@@ -411,7 +427,8 @@ class Fighter {
     this.prepareTime = json['prepare_time'];
     this.gunnerDamage = json['gunner_damage'];
     this.fightersIdStr = json['fighters_id_str'];
-    if (json['count_in_squadron'] != null) this.countInSquadron = CountInSquadron(json['count_in_squadron']);
+    if (json['count_in_squadron'] != null)
+      this.countInSquadron = CountInSquadron(json['count_in_squadron']);
     this.maxAmmo = json['max_ammo'];
     this.planeLevel = json['plane_level'];
     this.avgDamage = json['avg_damage'];
@@ -505,7 +522,8 @@ class Armour {
     this.floodDamage = json['flood_damage'];
     if (json['range'] != null) this.range = Range(json['range']);
     this.health = json['health'];
-    if (json['extremities'] != null) this.extremitie = Extremitie(json['extremities']);
+    if (json['extremities'] != null)
+      this.extremitie = Extremitie(json['extremities']);
     this.total = json['total'];
     if (json['citadel'] != null) this.citadel = Citadel(json['citadel']);
   }
@@ -590,7 +608,8 @@ class DiveBomber {
     this.prepareTime = json['prepare_time'];
     this.gunnerDamage = json['gunner_damage'];
     this.bombDamage = json['bomb_damage'];
-    if (json['count_in_squadron'] != null) this.countInSquadron = CountInSquadron(json['count_in_squadron']);
+    if (json['count_in_squadron'] != null)
+      this.countInSquadron = CountInSquadron(json['count_in_squadron']);
     this.bombName = json['bomb_name'];
     this.bombBulletMas = json['bomb_bullet_mass'];
     this.planeLevel = json['plane_level'];

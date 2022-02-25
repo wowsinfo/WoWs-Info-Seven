@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:wowsinfo/core/models/Cacheable.dart';
-import 'package:wowsinfo/core/models/User/Player.dart';
-import 'package:wowsinfo/core/models/User/Clan.dart';
+import 'package:wowsinfo/models/Cacheable.dart';
+import 'package:wowsinfo/models/User/Player.dart';
+import 'package:wowsinfo/models/User/Clan.dart';
 
 /// This stores and manages player contact including players and clans
 class ContactList implements Cacheable {

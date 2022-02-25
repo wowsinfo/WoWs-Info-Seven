@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:wowsinfo/core/models/Cacheable.dart';
-import 'package:wowsinfo/core/models/UI/GameServer.dart';
+import 'package:wowsinfo/models/Cacheable.dart';
+import 'package:wowsinfo/models/game_server.dart';
 
 /// clan tag, clan id and server code
 class Clan implements Cacheable {

@@ -1,13 +1,13 @@
 import 'dart:convert';
 
-import 'package:wowsinfo/core/models/Cacheable.dart';
-import 'package:wowsinfo/core/models/Mergeable.dart';
+import 'package:wowsinfo/models/Cacheable.dart';
+import 'package:wowsinfo/models/Mergeable.dart';
 
 /// This is the `WikiGameMap` class
-class WikiGameMap implements Cacheable, Mergeable<WikiGameMap>  {
+class WikiGameMap implements Cacheable, Mergeable<WikiGameMap> {
   Map<String, GameMap> gameMap;
 
-  WikiGameMap.fromJson(Map<String, dynamic> json){
+  WikiGameMap.fromJson(Map<String, dynamic> json) {
     this.gameMap = json.map((a, b) => MapEntry(a, GameMap.fromJson(b)));
   }
 

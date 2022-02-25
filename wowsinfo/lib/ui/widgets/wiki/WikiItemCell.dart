@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wowsinfo/core/models/Wiki/WikiItem.dart';
+import 'package:wowsinfo/models/Wiki/WikiItem.dart';
 
 /// WikiItemCell class
 class WikiItemCell extends StatelessWidget {
@@ -7,15 +7,18 @@ class WikiItemCell extends StatelessWidget {
   final void Function() onTap;
   final bool fit;
   final bool asset;
-  
-  const WikiItemCell({
-    Key key, @required this.item, 
-    this.onTap, this.fit = true, this.asset = false
-  }) : super(key: key);
+
+  const WikiItemCell(
+      {Key key,
+      @required this.item,
+      this.onTap,
+      this.fit = true,
+      this.asset = false})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final image = asset? Image.asset(item.image) : Image.network(item.image);
+    final image = asset ? Image.asset(item.image) : Image.network(item.image);
     return InkWell(
       onTap: this.onTap,
       child: Tooltip(

@@ -1,24 +1,28 @@
 import 'dart:collection';
 
 import 'package:charts_flutter/flutter.dart';
-import 'package:wowsinfo/core/constants/ChartColour.dart';
-import 'package:wowsinfo/core/models/UI/ChartValue.dart';
-import 'package:wowsinfo/core/models/WoWs/PlayerShipInfo.dart';
-import 'package:wowsinfo/core/extensions/NumberExtension.dart';
+import 'package:wowsinfo/constants/ChartColour.dart';
+import 'package:wowsinfo/models/ui/ChartValue.dart';
+import 'package:wowsinfo/models/WoWs/PlayerShipInfo.dart';
+import 'package:wowsinfo/extensions/NumberExtension.dart';
 
 /// This handles chart data relating to player ships
 class PlayerChartData {
   final PlayerShipInfo info;
 
   List<ChartValue> topTenByBattles = [];
-  List<Series<ChartValue, String>> get topTenBattleData => _convert('battle', listData: topTenByBattles, 
-    color: Color.fromHex(code: '#D32F2F'));
+  List<Series<ChartValue, String>> get topTenBattleData => _convert('battle',
+      listData: topTenByBattles, color: Color.fromHex(code: '#D32F2F'));
   List<ChartValue> topTenByWinrate = [];
-  List<Series<ChartValue, String>> get topTenWinrateData => _convert('winrate', listData: topTenByWinrate,
-   color: Color.fromHex(code: '#4CAF50'), labelFormatter: (v, _) => v.value.myFixedString(1) + '%');
+  List<Series<ChartValue, String>> get topTenWinrateData => _convert('winrate',
+      listData: topTenByWinrate,
+      color: Color.fromHex(code: '#4CAF50'),
+      labelFormatter: (v, _) => v.value.myFixedString(1) + '%');
   List<ChartValue> topTenByDamage = [];
-  List<Series<ChartValue, String>> get topTenDamageData => _convert('damage', listData: topTenByDamage,
-    color: Color.fromHex(code: '#2196F3'), labelFormatter: (v, _) => v.value.myFixedString(0));
+  List<Series<ChartValue, String>> get topTenDamageData => _convert('damage',
+      listData: topTenByDamage,
+      color: Color.fromHex(code: '#2196F3'),
+      labelFormatter: (v, _) => v.value.myFixedString(0));
 
   double totalBattle = 0;
   double _battleTier = 0;
@@ -27,11 +31,14 @@ class PlayerChartData {
   String get battleString => '${totalBattle.myFixedString(0)}';
 
   SplayTreeMap<String, int> type = SplayTreeMap();
-  List<Series<ChartValue, String>> get typeData => _convert('type', mapData: type);
+  List<Series<ChartValue, String>> get typeData =>
+      _convert('type', mapData: type);
   SplayTreeMap<String, int> nation = SplayTreeMap();
-  List<Series<ChartValue, String>> get nationData => _convert('nation', mapData: nation);
-  SplayTreeMap<String, int> tier = SplayTreeMap() ;
-  List<Series<ChartValue, String>> get tierData => _convert('tier', mapData: tier);
+  List<Series<ChartValue, String>> get nationData =>
+      _convert('nation', mapData: nation);
+  SplayTreeMap<String, int> tier = SplayTreeMap();
+  List<Series<ChartValue, String>> get tierData =>
+      _convert('tier', mapData: tier);
 
   PlayerChartData(this.info, CachedData cached) {
     info.ships.forEach((curr) {
@@ -41,7 +48,7 @@ class PlayerChartData {
         // Battles by nations
         final nation = cached.getNationString(ship.nation);
         _addToMap(this.nation, nation, curr.battle);
-        
+
         // Battles by ship types
         final type = cached.getTypeString(ship.type);
         _addToMap(this.type, type, curr.battle);
@@ -56,9 +63,11 @@ class PlayerChartData {
           topTenByBattles.add(ChartValue(ship.name, curr.battle));
           // Only add those if they are not NAN
           final avgDamage = curr.pvp.avgDamage;
-          if (!avgDamage.isNaN) topTenByDamage.add(ChartValue(ship.name, avgDamage));
+          if (!avgDamage.isNaN)
+            topTenByDamage.add(ChartValue(ship.name, avgDamage));
           final winrate = curr.pvp.winrate;
-          if (!winrate.isNaN) topTenByWinrate.add(ChartValue(ship.name, winrate));
+          if (!winrate.isNaN)
+            topTenByWinrate.add(ChartValue(ship.name, winrate));
         }
       }
     });
@@ -66,29 +75,44 @@ class PlayerChartData {
     // Calculate avg tier
     battleAvgTier = _battleTier / totalBattle;
     // Take first ten elements
-    topTenByBattles = (topTenByBattles..sort(sortNum)).take(10).toList(growable: false);
-    topTenByDamage = (topTenByDamage..sort(sortNum)).take(10).toList(growable: false);
+    topTenByBattles =
+        (topTenByBattles..sort(sortNum)).take(10).toList(growable: false);
+    topTenByDamage =
+        (topTenByDamage..sort(sortNum)).take(10).toList(growable: false);
     // Ignore 100% winrate
-    topTenByWinrate = (topTenByWinrate..sort(sortNum)).where((e) => e.value < 99).take(10).toList(growable: false);
+    topTenByWinrate = (topTenByWinrate..sort(sortNum))
+        .where((e) => e.value < 99)
+        .take(10)
+        .toList(growable: false);
   }
 
-
   /// sort by value
-  int sortNum(ChartValue a, ChartValue b) => (b.value.compareTo(a.value)).toInt();
+  int sortNum(ChartValue a, ChartValue b) =>
+      (b.value.compareTo(a.value)).toInt();
 
-  List<Series<ChartValue, String>> _convert(String id, {Map mapData, List listData, Color color, String Function(ChartValue, int) labelFormatter}) {
-    return [Series<ChartValue, String>(
-      data: listData ?? mapData.entries.map((e) => ChartValue(e.key, e.value)).toList(growable: false),
-      id: id,
-      domainFn: (v, _) => v.name,
-      measureFn: (v, _) => v.value,
-      labelAccessorFn: labelFormatter ?? (v, _) => v.value.toString(),
-      colorFn: (_, index) => color ?? ChartColour.from(index)
-    )];
+  List<Series<ChartValue, String>> _convert(String id,
+      {Map mapData,
+      List listData,
+      Color color,
+      String Function(ChartValue, int) labelFormatter}) {
+    return [
+      Series<ChartValue, String>(
+          data: listData ??
+              mapData.entries
+                  .map((e) => ChartValue(e.key, e.value))
+                  .toList(growable: false),
+          id: id,
+          domainFn: (v, _) => v.name,
+          measureFn: (v, _) => v.value,
+          labelAccessorFn: labelFormatter ?? (v, _) => v.value.toString(),
+          colorFn: (_, index) => color ?? ChartColour.from(index))
+    ];
   }
 
   void _addToMap(Map m, dynamic key, int count) {
-    if (m[key] == null) m[key] = count;
-    else m[key] += count;
+    if (m[key] == null)
+      m[key] = count;
+    else
+      m[key] += count;
   }
 }

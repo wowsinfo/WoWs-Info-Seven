@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:wowsinfo/core/models/Cacheable.dart';
-import 'package:wowsinfo/core/models/UI/GameServer.dart';
+import 'package:wowsinfo/models/Cacheable.dart';
+import 'package:wowsinfo/models/game_server.dart';
 
 /// player nickname, account id and server code
 class Player implements Cacheable {
@@ -12,7 +12,7 @@ class Player implements Cacheable {
   String get playerIdString => '$playerId';
 
   Player(this.nickname, this.playerId, this.server);
-  Player.fromJson(Map<String, dynamic> json){
+  Player.fromJson(Map<String, dynamic> json) {
     this.nickname = json['nickname'];
     this.playerId = json['account_id'];
     this.server = GameServer.fromIndex(json['server']);

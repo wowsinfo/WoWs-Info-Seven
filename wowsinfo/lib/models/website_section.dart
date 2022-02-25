@@ -1,4 +1,4 @@
-import 'package:wowsinfo/core/models/UI/WebsiteItem.dart';
+import 'package:wowsinfo/models/ui/WebsiteItem.dart';
 
 class WebsiteSection {
   final String title;
@@ -6,5 +6,6 @@ class WebsiteSection {
   final List<WebsiteItem> items;
   final bool expanded;
 
-  WebsiteSection(this.title, this.subtitle, this.items, {this.expanded = false});
+  WebsiteSection(this.title, this.subtitle, this.items,
+      {this.expanded = false});
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wowsinfo/core/models/WoWs/PvP.dart';
+import 'package:wowsinfo/models/WoWs/PvP.dart';
 import 'package:wowsinfo/ui/widgets/common/TextWithCaption.dart';
 import 'package:wowsinfo/ui/widgets/common/WrapBox.dart';
 

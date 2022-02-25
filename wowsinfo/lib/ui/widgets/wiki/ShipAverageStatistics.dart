@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wowsinfo/core/providers/CachedData.dart';
-import 'package:wowsinfo/core/models/GitHub/PRData.dart';
-import 'package:wowsinfo/core/models/WoWs/PvP.dart';
-import 'package:wowsinfo/core/services/locale/AppLocalizationService.dart';
+import 'package:wowsinfo/providers/CachedData.dart';
+import 'package:wowsinfo/models/GitHub/PRData.dart';
+import 'package:wowsinfo/models/WoWs/PvP.dart';
+import 'package:wowsinfo/services/locale/AppLocalizationService.dart';
 import 'package:wowsinfo/ui/widgets/common/TextWithCaption.dart';
-import 'package:wowsinfo/core/extensions/NumberExtension.dart';
+import 'package:wowsinfo/extensions/NumberExtension.dart';
 
 /// ShipAverageStatistics class, it shows ship average myStats and compare it to your myStats if provided
 class ShipAverageStatistics extends StatelessWidget {

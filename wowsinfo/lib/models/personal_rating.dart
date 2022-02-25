@@ -1,10 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:wowsinfo/core/models/GitHub/PRData.dart';
-import 'package:wowsinfo/core/models/WoWs/PlayerShipInfo.dart';
-import 'package:wowsinfo/core/extensions/NumberExtension.dart';
-import 'package:wowsinfo/core/services/locale/AppLocalizationService.dart';
+import 'package:wowsinfo/models/GitHub/PRData.dart';
+import 'package:wowsinfo/models/WoWs/PlayerShipInfo.dart';
+import 'package:wowsinfo/extensions/NumberExtension.dart';
+import 'package:wowsinfo/services/locale/AppLocalizationService.dart';
 
 /// It should handle one ships and a list of ships
 class PersonalRating {
@@ -22,16 +22,23 @@ class PersonalRating {
   double expectedFrags = 0;
   double expectedWins = 0;
 
-  MaterialColor get colour => index == -1 ? Colors.blueGrey : _ratingColours[index];
+  MaterialColor get colour =>
+      index == -1 ? Colors.blueGrey : _ratingColours[index];
   bool get hasRating => index >= 0;
 
-  MaterialColor getColour(int index) => index == -1 ? Colors.blueGrey : _ratingColours[index];
+  MaterialColor getColour(int index) =>
+      index == -1 ? Colors.blueGrey : _ratingColours[index];
+
   /// Colors for each ratings
   final List<MaterialColor> _ratingColours = [
-    Colors.red, Colors.orange, 
-    Colors.amber, Colors.lightGreen, 
-    Colors.green, Colors.cyan,
-    Colors.purple, Colors.deepPurple
+    Colors.red,
+    Colors.orange,
+    Colors.amber,
+    Colors.lightGreen,
+    Colors.green,
+    Colors.cyan,
+    Colors.purple,
+    Colors.deepPurple
   ];
 
   PersonalRating();
@@ -73,15 +80,24 @@ class PersonalRating {
 
   int _getRatingIndex(double rating) {
     // If it is nah, just return -1
-    if (rating.isNaN) return -1;
-    else if (rating < 750) return 0;
-    else if (rating < 1100) return 1;
-    else if (rating < 1350) return 2;
-    else if (rating < 1550) return 3;
-    else if (rating < 1750) return 4;
-    else if (rating < 2100) return 5;
-    else if (rating < 2450) return 6;
-    else return 7;
+    if (rating.isNaN)
+      return -1;
+    else if (rating < 750)
+      return 0;
+    else if (rating < 1100)
+      return 1;
+    else if (rating < 1350)
+      return 2;
+    else if (rating < 1550)
+      return 3;
+    else if (rating < 1750)
+      return 4;
+    else if (rating < 2100)
+      return 5;
+    else if (rating < 2450)
+      return 6;
+    else
+      return 7;
   }
 
   /// Add another rating
@@ -134,7 +150,7 @@ class PersonalRating {
       case 5:
         comment = lang.localised('rating_great');
         break;
-      case 6:  
+      case 6:
         comment = lang.localised('rating_unicum');
         break;
       default:

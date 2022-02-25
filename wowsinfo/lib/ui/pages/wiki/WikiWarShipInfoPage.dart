@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
-import 'package:wowsinfo/core/providers/CachedData.dart';
-import 'package:wowsinfo/core/providers/Preference.dart';
-import 'package:wowsinfo/core/models/GitHub/Plugin.dart';
-import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart' as Wiki;
-import 'package:wowsinfo/core/models/WoWs/WikiShipInfo.dart';
-import 'package:wowsinfo/core/models/WoWs/WikiShipModule.dart';
-import 'package:wowsinfo/core/services/locale/AppLocalizationService.dart';
-import 'package:wowsinfo/core/utils/Utils.dart';
-import 'package:wowsinfo/core/parsers/API/WikiShipInfoParser.dart';
-import 'package:wowsinfo/core/parsers/API/WikiShipModuleParser.dart';
+import 'package:wowsinfo/providers/CachedData.dart';
+import 'package:wowsinfo/providers/Preference.dart';
+import 'package:wowsinfo/models/github/github_plugins.dart';
+import 'package:wowsinfo/models/Wiki/WikiWarship.dart' as Wiki;
+import 'package:wowsinfo/models/WoWs/WikiShipInfo.dart';
+import 'package:wowsinfo/models/WoWs/WikiShipModule.dart';
+import 'package:wowsinfo/services/locale/AppLocalizationService.dart';
+import 'package:wowsinfo/utils/Utils.dart';
+import 'package:wowsinfo/parsers/API/WikiShipInfoParser.dart';
+import 'package:wowsinfo/parsers/API/WikiShipModuleParser.dart';
 import 'package:wowsinfo/ui/pages/wiki/WikiWarshipSimilarPage.dart';
 import 'package:wowsinfo/ui/widgets/common/ErrorIconWithText.dart';
 import 'package:wowsinfo/ui/widgets/common/PlatformLoadingIndiactor.dart';
@@ -20,7 +20,7 @@ import 'package:wowsinfo/ui/widgets/wiki/ShipAverageStatistics.dart';
 import 'package:wowsinfo/ui/widgets/wiki/ShipParameter.dart';
 import 'package:wowsinfo/ui/widgets/wiki/WikiItemCell.dart';
 import 'package:wowsinfo/ui/widgets/wiki/WikiWarshipCell.dart';
-import 'package:wowsinfo/core/extensions/NumberExtension.dart';
+import 'package:wowsinfo/extensions/NumberExtension.dart';
 
 /// WikiWarShipInfoPage class
 class WikiWarShipInfoPage extends StatefulWidget {
@@ -906,7 +906,7 @@ class _WikiWarShipInfoPageState extends State<WikiWarShipInfoPage>
                     // Map it to upgrade
                     .map((e) => cached.getConsumableByString(e.key))
                     .toList(growable: false)
-                      ..sort((a, b) => a.compareTo(b));
+                  ..sort((a, b) => a.compareTo(b));
                 return Column(
                   children: [
                     Text('${e + 1}.'),

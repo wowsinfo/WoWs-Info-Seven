@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wowsinfo/core/providers/CachedData.dart';
-import 'package:wowsinfo/core/models/Wiki/WikiAchievement.dart';
-import 'package:wowsinfo/core/models/WoWs/PlayerAchievement.dart';
-import 'package:wowsinfo/core/utils/Utils.dart';
+import 'package:wowsinfo/providers/CachedData.dart';
+import 'package:wowsinfo/models/Wiki/WikiAchievement.dart';
+import 'package:wowsinfo/models/WoWs/PlayerAchievement.dart';
+import 'package:wowsinfo/utils/Utils.dart';
 import 'package:wowsinfo/ui/widgets/wiki/WikiItemCell.dart';
 
 /// WikiAchievementPage class

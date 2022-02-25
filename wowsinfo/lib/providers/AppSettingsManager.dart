@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:wowsinfo/core/models/Cacheable.dart';
-import 'package:wowsinfo/core/services/data/AppConfiguration.dart';
-import 'package:wowsinfo/core/services/storage/BaseStorage.dart';
+import 'package:wowsinfo/models/Cacheable.dart';
+import 'package:wowsinfo/services/data/AppConfiguration.dart';
+import 'package:wowsinfo/services/storage/BaseStorage.dart';
 
 /// This includes app locale, theme colour and brightness (light, dark or system)
 class AppSettingsManager with ChangeNotifier {
@@ -110,7 +110,7 @@ class AppThemeColour implements Cacheable {
     _colour = c;
   }
 
-  AppThemeColour(int index){
+  AppThemeColour(int index) {
     this._colour = THEME_COLOUR_LIST[index ?? 5];
   }
 
@@ -141,7 +141,7 @@ class AppBrightness implements Cacheable {
     _brightness = b;
   }
 
-  AppBrightness(int index){
+  AppBrightness(int index) {
     _brightness = THEME_BRIGHTNESS_MODE[index ?? 2];
   }
 
@@ -163,7 +163,7 @@ class AppLocale implements Cacheable {
     _locale = l;
   }
 
-  AppLocale(String code){
+  AppLocale(String code) {
     if (code != null) {
       if (code.contains('_')) {
         final codes = code.split('_');

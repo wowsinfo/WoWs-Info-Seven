@@ -1,4 +1,4 @@
-import 'package:wowsinfo/core/models/User/Clan.dart';
+import 'package:wowsinfo/models/User/Clan.dart';
 
 /// This is the `SearchClanResult` class
 class SearchClanResult {

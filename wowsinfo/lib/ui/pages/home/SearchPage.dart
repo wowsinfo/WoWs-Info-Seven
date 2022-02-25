@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wowsinfo/core/providers/Preference.dart';
-import 'package:wowsinfo/core/models/User/Clan.dart';
-import 'package:wowsinfo/core/models/User/Player.dart';
-import 'package:wowsinfo/core/parsers/API/SearchClanResultParser.dart';
-import 'package:wowsinfo/core/parsers/API/SearchPlayerResultParser.dart';
+import 'package:wowsinfo/providers/Preference.dart';
+import 'package:wowsinfo/models/User/Clan.dart';
+import 'package:wowsinfo/models/User/Player.dart';
+import 'package:wowsinfo/parsers/API/SearchClanResultParser.dart';
+import 'package:wowsinfo/parsers/API/SearchPlayerResultParser.dart';
 import 'package:wowsinfo/ui/pages/player/ClanInfoPage.dart';
 import 'package:wowsinfo/ui/pages/player/PlayerInfoPage.dart';
 
@@ -27,6 +27,7 @@ class _SearchPageState extends State<SearchPage> {
   @override
   void initState() {
     super.initState();
+
     /// TODO: this page needs to be updated because now I am using provider
     this.pref = Provider.of<Preference>(context, listen: false);
     showContact();
@@ -54,14 +55,14 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(right: 12.0),
-              child: Icon(Icons.search, size: 32),
-            ),
-            Expanded(
-              child: TextField(
+          title: Row(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(right: 12.0),
+            child: Icon(Icons.search, size: 32),
+          ),
+          Expanded(
+            child: TextField(
                 style: TextStyle(color: Colors.white, fontSize: 20),
                 decoration: InputDecoration.collapsed(
                   hintText: 'Search players or clans',
@@ -72,32 +73,38 @@ class _SearchPageState extends State<SearchPage> {
                 autocorrect: false,
                 autofocus: false,
                 onChanged: (t) => setState(() => this.input = t),
-                onEditingComplete: () => this.search()
-              ),
-            ),
-            IconButton(
-              icon: Icon(Icons.close), 
-              onPressed: () => this.resetInput(),
-            ),
-          ],
-        )
-      ),
+                onEditingComplete: () => this.search()),
+          ),
+          IconButton(
+            icon: Icon(Icons.close),
+            onPressed: () => this.resetInput(),
+          ),
+        ],
+      )),
       body: Scrollbar(
         child: SingleChildScrollView(
           child: Column(
             children: [
               ListTile(title: Text('Clan - ${clans.length}')),
               AnimatedSwitcher(
-                transitionBuilder: (w, a) => SizeTransition(sizeFactor: a, child: w),
+                transitionBuilder: (w, a) =>
+                    SizeTransition(sizeFactor: a, child: w),
                 duration: Duration(milliseconds: 300),
-                child: ClanList(clans: clans, key: Key(clans.length.toString()), pref: pref),
+                child: ClanList(
+                    clans: clans,
+                    key: Key(clans.length.toString()),
+                    pref: pref),
               ),
               Divider(),
               ListTile(title: Text('Player - ${players.length}')),
               AnimatedSwitcher(
-                transitionBuilder: (w, a) => SizeTransition(sizeFactor: a, child: w),
+                transitionBuilder: (w, a) =>
+                    SizeTransition(sizeFactor: a, child: w),
                 duration: Duration(milliseconds: 300),
-                child: PlayerList(players: players, key: Key(players.length.toString()), pref: pref),
+                child: PlayerList(
+                    players: players,
+                    key: Key(players.length.toString()),
+                    pref: pref),
               ),
             ],
           ),
@@ -115,7 +122,7 @@ class _SearchPageState extends State<SearchPage> {
       players = [];
       clans = [];
     });
-    
+
     searchPlayer();
     searchClan();
     previousInput = input;
@@ -157,16 +164,20 @@ class PlayerList extends StatefulWidget {
 }
 
 class _PlayerListState extends State<PlayerList> {
-
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: widget.players.map((e) => ListTile(
-        title: Text(e.nickname),
-        subtitle: Text(e.playerId.toString()),
-        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (c) => PlayerInfoPage(player: e))),
-        trailing: buildIconButton(e),
-      )).toList(growable: false),
+      children: widget.players
+          .map((e) => ListTile(
+                title: Text(e.nickname),
+                subtitle: Text(e.playerId.toString()),
+                onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (c) => PlayerInfoPage(player: e))),
+                trailing: buildIconButton(e),
+              ))
+          .toList(growable: false),
     );
   }
 
@@ -184,11 +195,8 @@ class _PlayerListState extends State<PlayerList> {
 }
 
 class ClanList extends StatefulWidget {
-  const ClanList({
-    Key key,
-    @required this.clans,
-    @required this.pref
-  }) : super(key: key);
+  const ClanList({Key key, @required this.clans, @required this.pref})
+      : super(key: key);
 
   final List<Clan> clans;
   final Preference pref;
@@ -198,16 +206,18 @@ class ClanList extends StatefulWidget {
 }
 
 class _ClanListState extends State<ClanList> {
-
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: widget.clans.map((e) => ListTile(
-        title: Text(e.tag),
-        subtitle: Text(e.clanIdString),
-        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (c) => ClanInfoPage(clan: e))),
-        trailing: buildIconButton(e),
-      )).toList(growable: false),
+      children: widget.clans
+          .map((e) => ListTile(
+                title: Text(e.tag),
+                subtitle: Text(e.clanIdString),
+                onTap: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (c) => ClanInfoPage(clan: e))),
+                trailing: buildIconButton(e),
+              ))
+          .toList(growable: false),
     );
   }
 

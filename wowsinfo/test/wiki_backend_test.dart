@@ -2,14 +2,14 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:wowsinfo/core/models/Wiki/WikiAchievement.dart';
-import 'package:wowsinfo/core/models/Wiki/WikiCollection.dart';
-import 'package:wowsinfo/core/models/Wiki/WikiCollectionItem.dart';
-import 'package:wowsinfo/core/models/Wiki/WikiCommanderSkill.dart';
-import 'package:wowsinfo/core/models/Wiki/WikiConsumable.dart';
-import 'package:wowsinfo/core/models/Wiki/WikiEncyclopedia.dart';
-import 'package:wowsinfo/core/models/Wiki/WikiGameMap.dart';
-import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart';
+import 'package:wowsinfo/models/Wiki/WikiAchievement.dart';
+import 'package:wowsinfo/models/Wiki/WikiCollection.dart';
+import 'package:wowsinfo/models/Wiki/WikiCollectionItem.dart';
+import 'package:wowsinfo/models/Wiki/WikiCommanderSkill.dart';
+import 'package:wowsinfo/models/Wiki/WikiConsumable.dart';
+import 'package:wowsinfo/models/Wiki/WikiEncyclopedia.dart';
+import 'package:wowsinfo/models/Wiki/WikiGameMap.dart';
+import 'package:wowsinfo/models/Wiki/WikiWarship.dart';
 
 void main() {
   test('Load achievement into memory', () async {
@@ -17,9 +17,12 @@ void main() {
     final jsonString = await file.readAsString();
     Map<String, dynamic> jsonMap = jsonDecode(jsonString);
     final output = jsonEncode(jsonMap['data']['battle']);
-    
+
     final a = WikiAchievement.fromJson(jsonMap['data']['battle']);
-    expect(a.achievement['TOP_LEAGUE_CLAN_SEASON_6'].achievementId == 'TOP_LEAGUE_CLAN_SEASON_6', isTrue);
+    expect(
+        a.achievement['TOP_LEAGUE_CLAN_SEASON_6'].achievementId ==
+            'TOP_LEAGUE_CLAN_SEASON_6',
+        isTrue);
     final myOutput = jsonEncode(a.toJson());
 
     expect(myOutput == output, isTrue);
@@ -30,7 +33,7 @@ void main() {
     final jsonString = await file.readAsString();
     Map<String, dynamic> jsonMap = jsonDecode(jsonString);
     final output = jsonEncode(jsonMap['data']);
-    
+
     final item = WikiCollectionItem.fromJson(jsonMap['data']);
     final myOutput = jsonEncode(item.toJson());
 
@@ -42,7 +45,7 @@ void main() {
     final jsonString = await file.readAsString();
     Map<String, dynamic> jsonMap = jsonDecode(jsonString);
     final output = jsonEncode(jsonMap['data']);
-    
+
     final collection = WikiCollection.fromJson(jsonMap['data']);
     final myOutput = jsonEncode(collection.toJson());
 
@@ -54,7 +57,7 @@ void main() {
     final jsonString = await file.readAsString();
     Map<String, dynamic> jsonMap = jsonDecode(jsonString);
     final output = jsonEncode(jsonMap['data']);
-    
+
     final skill = WikiCommanderSkill.fromJson(jsonMap['data']);
     final myOutput = jsonEncode(skill.toJson());
 
@@ -66,7 +69,7 @@ void main() {
     final jsonString = await file.readAsString();
     Map<String, dynamic> jsonMap = jsonDecode(jsonString);
     final output = jsonEncode(jsonMap['data']);
-    
+
     final consumable = WikiConsumable.fromJson(jsonMap['data']);
     final myOutput = jsonEncode(consumable.toJson());
 
@@ -78,7 +81,7 @@ void main() {
     final jsonString = await file.readAsString();
     Map<String, dynamic> jsonMap = jsonDecode(jsonString);
     final output = jsonEncode(jsonMap['data']);
-    
+
     final encyclopedia = WikiEncyclopedia.fromJson(jsonMap['data']);
     final myOutput = jsonEncode(encyclopedia.toJson());
 
@@ -90,7 +93,7 @@ void main() {
     final jsonString = await file.readAsString();
     Map<String, dynamic> jsonMap = jsonDecode(jsonString);
     final output = jsonEncode(jsonMap['data']);
-    
+
     final gameMap = WikiGameMap.fromJson(jsonMap['data']);
     final myOutput = jsonEncode(gameMap.toJson());
 
@@ -102,7 +105,7 @@ void main() {
     final jsonString = await file.readAsString();
     Map<String, dynamic> jsonMap = jsonDecode(jsonString);
     final output = jsonEncode(jsonMap['data']);
-    
+
     final warship = WikiWarship.fromJson(jsonMap['data']);
     final myOutput = jsonEncode(warship.toJson());
 

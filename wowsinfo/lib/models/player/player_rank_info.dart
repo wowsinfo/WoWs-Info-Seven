@@ -1,20 +1,21 @@
-import 'package:wowsinfo/core/models/WoWs/RankPlayerShipInfo.dart';
+import 'package:wowsinfo/models/WoWs/RankPlayerShipInfo.dart';
 
 /// This is the `RankPlayerInfo` class
 class RankPlayerInfo {
   Map<String, Season> season;
+
   /// Sort by season name and also ignore seasons that the player never played a single game
-  List<MapEntry<String, Season>> get sortedSeasons => season.entries
-    .where((e) => e.value.played)
-    .toList(growable: false)
-    // Parse it as number and sort it by it
-    ..sort((b, a) => int.parse(a.key) - int.parse(b.key));
+  List<MapEntry<String, Season>> get sortedSeasons =>
+      season.entries.where((e) => e.value.played).toList(growable: false)
+        // Parse it as number and sort it by it
+        ..sort((b, a) => int.parse(a.key) - int.parse(b.key));
   int accountId;
 
   RankPlayerInfo(Map<String, dynamic> data) {
     final json = data.values.first;
     if (json != null) {
-      this.season = (json['seasons'] as Map).map((a, b) => MapEntry(a, Season(b)));
+      this.season =
+          (json['seasons'] as Map).map((a, b) => MapEntry(a, Season(b)));
       this.accountId = json['account_id'];
     }
   }

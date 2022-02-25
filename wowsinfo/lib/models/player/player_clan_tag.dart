@@ -1,6 +1,6 @@
-import 'package:wowsinfo/core/models/UI/GameServer.dart';
-import 'package:wowsinfo/core/models/User/Clan.dart';
-import 'package:wowsinfo/core/utils/Utils.dart';
+import 'package:wowsinfo/models/game_server.dart';
+import 'package:wowsinfo/models/User/Clan.dart';
+import 'package:wowsinfo/utils/Utils.dart';
 
 /// This is the `PlayerClanTag` class
 class PlayerClanTag {

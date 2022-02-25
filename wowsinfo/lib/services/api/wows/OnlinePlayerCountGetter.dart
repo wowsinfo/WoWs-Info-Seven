@@ -1,5 +1,5 @@
-import 'package:wowsinfo/core/models/UI/GameServer.dart';
-import 'package:wowsinfo/core/services/api/WoWsDataProvider.dart';
+import 'package:wowsinfo/models/game_server.dart';
+import 'package:wowsinfo/services/api/WoWsDataProvider.dart';
 
 class OnlinePlayerCountGetter extends WoWsDataProvider {
   OnlinePlayerCountGetter(GameServer server) : super(server);

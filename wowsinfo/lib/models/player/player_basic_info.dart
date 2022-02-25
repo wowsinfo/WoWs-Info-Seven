@@ -1,4 +1,4 @@
-import 'package:wowsinfo/core/models/UI/WoWsDate.dart';
+import 'package:wowsinfo/models/ui/WoWsDate.dart';
 
 import 'PvP.dart';
 
@@ -24,8 +24,11 @@ class BasicPlayerInfo {
 
   bool get publicProfile => !(hiddenProfile ?? true);
   bool get hasBattle => (statistic?.battle ?? 0) > 0;
+
   /// Last battle is less than an hour and the player hasn't logged out
-  bool get isOnline => lastBattleTime.lessThan(Duration(hours: 1)) && logoutAt.isBefore(lastBattleTime);
+  bool get isOnline =>
+      lastBattleTime.lessThan(Duration(hours: 1)) &&
+      logoutAt.isBefore(lastBattleTime);
 
   BasicPlayerInfo(Map<String, dynamic> data) {
     // There should be only one key inside
@@ -43,7 +46,8 @@ class BasicPlayerInfo {
       this.nickname = json['nickname'];
       this.statsUpdatedAt = json['stats_updated_at'];
       // statistic is only available if the account is public
-      if (json['statistics'] != null) this.statistic = Statistic(json['statistics']);
+      if (json['statistics'] != null)
+        this.statistic = Statistic(json['statistics']);
     }
   }
 }

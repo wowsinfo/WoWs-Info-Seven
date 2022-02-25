@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:wowsinfo/core/services/locale/AppLocalizationService.dart';
+import 'package:wowsinfo/services/locale/AppLocalizationService.dart';
 
 /// ShiftingText class
 class ShiftingText extends StatefulWidget {
@@ -12,8 +12,8 @@ class ShiftingText extends StatefulWidget {
   _ShiftingTextState createState() => _ShiftingTextState();
 }
 
-
-class _ShiftingTextState extends State<ShiftingText> with SingleTickerProviderStateMixin {
+class _ShiftingTextState extends State<ShiftingText>
+    with SingleTickerProviderStateMixin {
   Animation<double> oneOpacity;
   Animation<double> onePadding;
   Animation<double> twoOpacity;
@@ -21,7 +21,7 @@ class _ShiftingTextState extends State<ShiftingText> with SingleTickerProviderSt
   String oneText;
   String twoText;
   AnimationController controller;
-  
+
   final animationDuration = const Duration(milliseconds: 500);
   List<String> list;
   final randomIndex = Random();
@@ -37,13 +37,12 @@ class _ShiftingTextState extends State<ShiftingText> with SingleTickerProviderSt
     twoPadding = Tween<double>(begin: 0, end: 24).animate(controller)
       ..addListener(() => setState(() {}));
 
-
     // We do this everything 2 seconds
     Timer.periodic(Duration(seconds: 6), (_) {
       setState(() {
         twoText = list[randomIndex.nextInt(list.length)];
       });
-      
+
       controller.forward().whenComplete(() {
         // Update label text
         controller.reset();
@@ -96,9 +95,9 @@ class _ShiftingTextState extends State<ShiftingText> with SingleTickerProviderSt
                   opacity: oneOpacity.value,
                   // Provide a default value here
                   child: SizedBox(
-                    height: 25,
-                    child: Center(child: Text(oneText ?? lang.localised('suffix_re')))
-                  ),
+                      height: 25,
+                      child: Center(
+                          child: Text(oneText ?? lang.localised('suffix_re')))),
                 ),
               ),
               Padding(
@@ -107,9 +106,9 @@ class _ShiftingTextState extends State<ShiftingText> with SingleTickerProviderSt
                   opacity: twoOpacity.value,
                   // Provide a default value here, make sure it is the same as above
                   child: SizedBox(
-                    height: 25,
-                    child: Center(child: Text(twoText ?? lang.localised('suffix_re')))
-                  ),
+                      height: 25,
+                      child: Center(
+                          child: Text(twoText ?? lang.localised('suffix_re')))),
                 ),
               ),
             ],

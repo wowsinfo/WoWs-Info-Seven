@@ -1,5 +1,5 @@
-import 'package:wowsinfo/core/models/GitHub/ShipAlias.dart';
-import 'package:wowsinfo/core/services/api/GithubDataProvider.dart';
+import 'package:wowsinfo/models/github/ship_alias.dart';
+import 'package:wowsinfo/services/api/GithubDataProvider.dart';
 
 class ShipAliasGetter extends GithubDataProvider<ShipAlias> {
   @override

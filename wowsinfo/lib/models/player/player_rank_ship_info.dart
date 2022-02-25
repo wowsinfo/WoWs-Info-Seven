@@ -1,7 +1,7 @@
-import 'package:wowsinfo/core/models/JsonModel.dart';
-import 'package:wowsinfo/core/models/WoWs/PlayerShipInfo.dart';
-import 'package:wowsinfo/core/extensions/NumberExtension.dart';
-import 'package:wowsinfo/core/providers/CachedData.dart';
+import 'package:wowsinfo/models/JsonModel.dart';
+import 'package:wowsinfo/models/WoWs/PlayerShipInfo.dart';
+import 'package:wowsinfo/extensions/NumberExtension.dart';
+import 'package:wowsinfo/providers/CachedData.dart';
 
 import 'PvP.dart';
 
@@ -9,9 +9,10 @@ import 'PvP.dart';
 class RankPlayerShipInfo {
   List<SeasonShipInfo> ships = [];
   List<Season> getShipsFor({String season}) {
-    return ships.where((e) => e.season[season] != null)
-      .map((e) => e.season[season])
-      .toList(growable: false);
+    return ships
+        .where((e) => e.season[season] != null)
+        .map((e) => e.season[season])
+        .toList(growable: false);
   }
 
   RankPlayerShipInfo(Map<String, dynamic> data, CachedData cached) {
@@ -24,7 +25,7 @@ class RankPlayerShipInfo {
 
 /// This is the `SeasonShipInfo` class
 class SeasonShipInfo {
-  // If you used the same ship in two seasons, more entries will be shown. 
+  // If you used the same ship in two seasons, more entries will be shown.
   // Therefore, this should be a map
   Map<String, Season> season;
   int accountId;
@@ -35,7 +36,8 @@ class SeasonShipInfo {
 
   SeasonShipInfo(json, CachedData cached) {
     this.shipId = json['ship_id'];
-    this.season = (json['seasons'] as Map).map((a, b) => MapEntry(a, Season(b, cached)..shipId = shipId));
+    this.season = (json['seasons'] as Map)
+        .map((a, b) => MapEntry(a, Season(b, cached)..shipId = shipId));
     this.accountId = json['account_id'];
   }
 }
@@ -77,7 +79,7 @@ class RankPvP extends JsonModel {
   Ramming ramming;
   MainBattery mainBattery;
   SecondBattery secondBattery;
-  
+
   int survivedWin;
   int frag;
   int xp;
@@ -110,7 +112,7 @@ class RankPvP extends JsonModel {
   String get maxFrag => '$maxFragsBattle';
   String get maxPlane => '$maxPlanesKilled';
 
-  RankPvP(Map<String, dynamic> json){
+  RankPvP(Map<String, dynamic> json) {
     this.maxFragsBattle = json['max_frags_battle'];
     this.draw = json['draws'];
     this.maxXp = json['max_xp'];
@@ -124,8 +126,10 @@ class RankPvP extends JsonModel {
     this.maxPlanesKilled = json['max_planes_killed'];
     if (json['aircraft'] != null) this.aircraft = Aircraft(json['aircraft']);
     if (json['ramming'] != null) this.ramming = Ramming(json['ramming']);
-    if (json['main_battery'] != null) this.mainBattery = MainBattery(json['main_battery']);
-    if (json['second_battery'] != null) this.secondBattery = SecondBattery(json['second_battery']);
+    if (json['main_battery'] != null)
+      this.mainBattery = MainBattery(json['main_battery']);
+    if (json['second_battery'] != null)
+      this.secondBattery = SecondBattery(json['second_battery']);
     this.survivedWin = json['survived_wins'];
     this.frag = json['frags'];
     this.xp = json['xp'];

@@ -1,5 +1,5 @@
-import 'package:wowsinfo/core/models/GitHub/Plugin.dart';
-import 'package:wowsinfo/core/services/api/GithubDataProvider.dart';
+import 'package:wowsinfo/models/github/github_plugins.dart';
+import 'package:wowsinfo/services/api/GithubDataProvider.dart';
 
 class PluginApi extends GithubDataProvider<Plugin> {
   @override

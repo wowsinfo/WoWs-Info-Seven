@@ -1,22 +1,22 @@
 import 'dart:convert';
 
 import 'package:hive/hive.dart';
-import 'package:wowsinfo/core/providers/Preference.dart';
-import 'package:wowsinfo/core/models/Cacheable.dart';
-import 'package:wowsinfo/core/models/Clan/ClanGlossary.dart';
-import 'package:wowsinfo/core/models/GitHub/PRData.dart';
-import 'package:wowsinfo/core/models/GitHub/Plugin.dart';
-import 'package:wowsinfo/core/models/GitHub/ShipAlias.dart';
-import 'package:wowsinfo/core/models/Wiki/WikiAchievement.dart';
-import 'package:wowsinfo/core/models/Wiki/WikiCollection.dart';
-import 'package:wowsinfo/core/models/Wiki/WikiCollectionItem.dart';
-import 'package:wowsinfo/core/models/Wiki/WikiCommanderSkill.dart';
-import 'package:wowsinfo/core/models/Wiki/WikiConsumable.dart';
-import 'package:wowsinfo/core/models/Wiki/WikiEncyclopedia.dart';
-import 'package:wowsinfo/core/models/Wiki/WikiGameMap.dart';
-import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart';
-import 'package:wowsinfo/core/extensions/DateTimeExtension.dart';
-import 'package:wowsinfo/core/utils/Utils.dart';
+import 'package:wowsinfo/providers/Preference.dart';
+import 'package:wowsinfo/models/Cacheable.dart';
+import 'package:wowsinfo/models/Clan/ClanGlossary.dart';
+import 'package:wowsinfo/models/GitHub/PRData.dart';
+import 'package:wowsinfo/models/github/github_plugins.dart';
+import 'package:wowsinfo/models/GitHub/ShipAlias.dart';
+import 'package:wowsinfo/models/Wiki/WikiAchievement.dart';
+import 'package:wowsinfo/models/Wiki/WikiCollection.dart';
+import 'package:wowsinfo/models/Wiki/WikiCollectionItem.dart';
+import 'package:wowsinfo/models/Wiki/WikiCommanderSkill.dart';
+import 'package:wowsinfo/models/Wiki/WikiConsumable.dart';
+import 'package:wowsinfo/models/Wiki/WikiEncyclopedia.dart';
+import 'package:wowsinfo/models/Wiki/WikiGameMap.dart';
+import 'package:wowsinfo/models/Wiki/WikiWarship.dart';
+import 'package:wowsinfo/extensions/DateTimeExtension.dart';
+import 'package:wowsinfo/utils/Utils.dart';
 
 /// It handles cached data but mainly wiki
 /// - it is usually read only

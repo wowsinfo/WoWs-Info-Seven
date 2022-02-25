@@ -1,4 +1,4 @@
-import 'package:wowsinfo/core/models/WoWs/ClanInfo.dart';
+import 'package:wowsinfo/models/WoWs/ClanInfo.dart';
 
 /// All four servers
 enum Server { RU, EU, NA, ASIA }

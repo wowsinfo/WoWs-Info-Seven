@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wowsinfo/core/providers/Preference.dart';
-import 'package:wowsinfo/core/services/locale/AppLocalizationService.dart';
+import 'package:wowsinfo/providers/Preference.dart';
+import 'package:wowsinfo/services/locale/AppLocalizationService.dart';
 import 'package:wowsinfo/ui/pages/home/HomePage.dart';
 import 'package:wowsinfo/ui/pages/home/RealtimePage.dart';
 import 'package:wowsinfo/ui/pages/home/SearchPage.dart';
@@ -61,5 +61,4 @@ class BottomNavigationPage extends StatelessWidget {
       ),
     );
   }
-
 }

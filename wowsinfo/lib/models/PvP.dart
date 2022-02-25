@@ -1,4 +1,4 @@
-import 'package:wowsinfo/core/models/WoWs/RankPlayerShipInfo.dart';
+import 'package:wowsinfo/models/WoWs/RankPlayerShipInfo.dart';
 
 /// This is the `PvP` class
 class PvP extends RankPvP {
@@ -41,7 +41,7 @@ class PvP extends RankPvP {
   String get maxSupression => '$maxSuppressionsCount';
   String get maxPotential => '$maxTotalAgro';
 
-  PvP(Map<String, dynamic> json){
+  PvP(Map<String, dynamic> json) {
     this.damageToBuilding = json['damage_to_buildings'];
     this.maxShipsSpottedShipId = json['max_ships_spotted_ship_id'];
     this.maxDamageScouting = json['max_damage_scouting'];
@@ -65,7 +65,8 @@ class PvP extends RankPvP {
     this.maxPlanesKilledShipId = json['max_planes_killed_ship_id'];
     this.teamCapturePoint = json['team_capture_points'];
     this.controlDroppedPoint = json['control_dropped_points'];
-    this.maxDamageDealtToBuildingsShipId = json['max_damage_dealt_to_buildings_ship_id'];
+    this.maxDamageDealtToBuildingsShipId =
+        json['max_damage_dealt_to_buildings_ship_id'];
     this.maxDamageDealtShipId = json['max_damage_dealt_ship_id'];
     this.maxScoutingDamageShipId = json['max_scouting_damage_ship_id'];
     this.teamDroppedCapturePoint = json['team_dropped_capture_points'];
@@ -131,7 +132,7 @@ class Torpedoe extends Weapon {
 }
 
 /// This is the `Aircraft` class
-class Aircraft extends Weapon  {
+class Aircraft extends Weapon {
   Aircraft(Map<String, dynamic> json) {
     this.maxFragsBattle = json['max_frags_battle'];
     this.frag = json['frags'];

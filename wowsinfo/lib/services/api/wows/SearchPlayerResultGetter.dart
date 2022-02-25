@@ -1,10 +1,10 @@
-import 'package:wowsinfo/core/models/UI/GameServer.dart';
-import 'package:wowsinfo/core/services/api/WoWsDataProvider.dart';
+import 'package:wowsinfo/models/game_server.dart';
+import 'package:wowsinfo/services/api/WoWsDataProvider.dart';
 
 class SearchPlayerResultGetter extends WoWsDataProvider {
   final String _name;
   SearchPlayerResultGetter(GameServer server, this._name) : super(server);
-  
+
   @override
   String getDomainFields() => 'wows/account/list/';
 

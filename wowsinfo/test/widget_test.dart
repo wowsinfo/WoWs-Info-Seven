@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:wowsinfo/core/providers/GlobalAppSettings.dart';
+import 'package:wowsinfo/providers/GlobalAppSettings.dart';
 
 import 'package:wowsinfo/main.dart';
 

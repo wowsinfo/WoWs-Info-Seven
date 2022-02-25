@@ -1,4 +1,4 @@
-import 'package:wowsinfo/core/services/data/BaseDataProvider.dart';
+import 'package:wowsinfo/services/data/BaseDataProvider.dart';
 
 /// This gets data via API or something similar
 abstract class APIDataProvider<T> extends BaseDataProvider<T> {

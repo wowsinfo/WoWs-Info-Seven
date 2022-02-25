@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:wowsinfo/core/models/Cacheable.dart';
-import 'package:wowsinfo/core/models/Mergeable.dart';
-import 'package:wowsinfo/core/models/Wiki/WikiItem.dart';
+import 'package:wowsinfo/models/Cacheable.dart';
+import 'package:wowsinfo/models/Mergeable.dart';
+import 'package:wowsinfo/models/Wiki/WikiItem.dart';
 
 /// This is the `WikiCollection` class
 class WikiCollection implements Cacheable, Mergeable<WikiCollection> {

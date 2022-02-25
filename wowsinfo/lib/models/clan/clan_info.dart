@@ -1,6 +1,6 @@
-import 'package:wowsinfo/core/models/UI/GameServer.dart';
-import 'package:wowsinfo/core/models/UI/WoWsDate.dart';
-import 'package:wowsinfo/core/models/User/Player.dart';
+import 'package:wowsinfo/models/game_server.dart';
+import 'package:wowsinfo/models/ui/WoWsDate.dart';
+import 'package:wowsinfo/models/User/Player.dart';
 
 /// This is the `ClanInfo` class
 class ClanInfo {

@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:wowsinfo/core/models/Cacheable.dart';
-import 'package:wowsinfo/core/models/Wiki/WikiItem.dart';
-import 'package:wowsinfo/core/models/Wiki/WikiWarship.dart';
-import 'package:wowsinfo/core/models/WoWs/WikiShipInfo.dart';
+import 'package:wowsinfo/models/Cacheable.dart';
+import 'package:wowsinfo/models/Wiki/WikiItem.dart';
+import 'package:wowsinfo/models/Wiki/WikiWarship.dart';
+import 'package:wowsinfo/models/WoWs/WikiShipInfo.dart';
 
 /// This is the `Plugin` class
 class Plugin implements Cacheable {

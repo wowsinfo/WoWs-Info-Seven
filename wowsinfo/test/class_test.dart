@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:wowsinfo/core/models/UI/GameServer.dart';
+import 'package:wowsinfo/models/game_server.dart';
 
 void main() {
   test('Test GameServer', () {

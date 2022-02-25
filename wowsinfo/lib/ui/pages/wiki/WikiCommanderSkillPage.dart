@@ -3,8 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:wowsinfo/core/providers/CachedData.dart';
-import 'package:wowsinfo/core/models/Wiki/WikiCommanderSkill.dart';
+import 'package:wowsinfo/providers/CachedData.dart';
+import 'package:wowsinfo/models/Wiki/WikiCommanderSkill.dart';
 import 'package:wowsinfo/ui/widgets/wiki/WikiItemCell.dart';
 
 /// WikiCommanderSkillPage class

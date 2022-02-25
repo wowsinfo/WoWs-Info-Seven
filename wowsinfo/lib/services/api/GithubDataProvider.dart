@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:wowsinfo/core/models/Cacheable.dart';
-import 'package:wowsinfo/core/services/api/APIDataProvider.dart';
-import 'package:wowsinfo/core/utils/Utils.dart';
+import 'package:wowsinfo/models/Cacheable.dart';
+import 'package:wowsinfo/services/api/APIDataProvider.dart';
+import 'package:wowsinfo/utils/Utils.dart';
 import 'package:http/http.dart' as http;
 
 /// Only an url is needed for data from Github
@@ -10,7 +10,8 @@ abstract class GithubDataProvider<T extends Cacheable>
     extends APIDataProvider<T> {
   @override
   Future<T> requestData({T Function(dynamic) creator}) async {
-    if (creator == null) throw Exception('A creator for GithubDataProvider is necessary');
+    if (creator == null)
+      throw Exception('A creator for GithubDataProvider is necessary');
     try {
       final response = await http
           .get(

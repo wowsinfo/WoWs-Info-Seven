@@ -1,4 +1,4 @@
-import 'package:wowsinfo/core/services/storage/BaseStorage.dart';
+import 'package:wowsinfo/services/storage/BaseStorage.dart';
 
 /// A cache should be able to
 /// - Retrieve data from storage services
@@ -26,6 +26,7 @@ abstract class BaseConfiguration<K, V> {
 
   /// Load value from storage
   Future<bool> load();
+
   /// Save value to storage
   Future<void> save();
 }

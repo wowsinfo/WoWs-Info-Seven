@@ -1,5 +1,4 @@
-
-import 'package:wowsinfo/core/utils/Utils.dart';
+import 'package:wowsinfo/utils/Utils.dart';
 
 /// This is the `OnlinePlayerCount` class
 class OnlinePlayerCount {

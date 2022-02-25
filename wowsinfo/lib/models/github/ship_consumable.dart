@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:wowsinfo/core/models/Cacheable.dart';
+import 'package:wowsinfo/models/Cacheable.dart';
 
 /// This is the `ShipConsumable` class
 class ShipConsumable implements Cacheable {

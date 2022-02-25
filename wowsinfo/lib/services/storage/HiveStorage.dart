@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:hive/hive.dart';
-import 'package:wowsinfo/core/models/Cacheable.dart';
-import 'package:wowsinfo/core/services/storage/BaseStorage.dart';
+import 'package:wowsinfo/models/Cacheable.dart';
+import 'package:wowsinfo/services/storage/BaseStorage.dart';
 
 /// This uses hive as the storage provider
 class HiveStorage<String, V extends Cacheable> extends BaseStorage<String, V> {
@@ -12,7 +12,8 @@ class HiveStorage<String, V extends Cacheable> extends BaseStorage<String, V> {
 
   @override
   Future<V> load(String key, {V Function(dynamic) creator}) async {
-    if (creator == null) throw Exception('Creator for HiveStorage must not be null');
+    if (creator == null)
+      throw Exception('Creator for HiveStorage must not be null');
     return creator(jsonDecode(_box.get(key)));
   }
 

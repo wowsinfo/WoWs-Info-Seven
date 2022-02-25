@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:wowsinfo/core/models/Cacheable.dart';
-import 'package:wowsinfo/core/extensions/NumberExtension.dart';
+import 'package:wowsinfo/models/Cacheable.dart';
+import 'package:wowsinfo/extensions/NumberExtension.dart';
 
 /// This is the `PRData` class, `Personal Rating Data`
 class PRData implements Cacheable {

@@ -2,14 +2,13 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:wowsinfo/core/constants/AppConstant.dart';
-import 'package:wowsinfo/core/providers/LocalData.dart';
-import 'package:wowsinfo/core/models/UI/GameServer.dart';
-import 'package:wowsinfo/core/models/User/ContactList.dart';
-import 'package:wowsinfo/core/models/User/Player.dart';
-import 'package:wowsinfo/core/extensions/DateTimeExtension.dart';
-import 'package:wowsinfo/core/utils/Utils.dart';
-
+import 'package:wowsinfo/constants/AppConstant.dart';
+import 'package:wowsinfo/providers/LocalData.dart';
+import 'package:wowsinfo/models/game_server.dart';
+import 'package:wowsinfo/models/User/ContactList.dart';
+import 'package:wowsinfo/models/User/Player.dart';
+import 'package:wowsinfo/extensions/DateTimeExtension.dart';
+import 'package:wowsinfo/utils/Utils.dart';
 
 /// This is the `Preference` class
 /// - it manages all const a preferences including those that are used in app provider
@@ -49,23 +48,31 @@ class ConfigurationManager with ChangeNotifier {
     if (jsonString != null) return Player.fromJson(jsonDecode(jsonString));
     return null;
   }
-  set mainAccount(Player player) => this.box.put(MAIN_ACCOUNT, jsonEncode(player));
+
+  set mainAccount(Player player) =>
+      this.box.put(MAIN_ACCOUNT, jsonEncode(player));
 
   /// it returns a game server object and it is by default 3
-  GameServer get gameServer => GameServer.fromIndex(this.box.get(GAME_SERVER) ?? 3);
+  GameServer get gameServer =>
+      GameServer.fromIndex(this.box.get(GAME_SERVER) ?? 3);
   set gameServer(GameServer value) => this.box.put(GAME_SERVER, value.index);
 
   /// returns saved player contact or an empty one
   ContactList get contactList {
     final jsonString = this.box.get(CONTACT_LIST);
-    if (jsonString != null) return ContactList.fromJson(jsonDecode(jsonString), this);
+    if (jsonString != null)
+      return ContactList.fromJson(jsonDecode(jsonString), this);
     return ContactList(this);
   }
-  set contactList(ContactList contact) => this.box.put(CONTACT_LIST, jsonEncode(contact));
+
+  set contactList(ContactList contact) =>
+      this.box.put(CONTACT_LIST, jsonEncode(contact));
 
   /// the default date is the date I first published this app
-  DateTime get lastUpdate => DateTime.parse(this.box.get(LAST_UPDATE) ?? '2017-02-06');
-  set lastUpdate(DateTime value) => this.box.put(LAST_UPDATE, value.toHumanString());
+  DateTime get lastUpdate =>
+      DateTime.parse(this.box.get(LAST_UPDATE) ?? '2017-02-06');
+  set lastUpdate(DateTime value) =>
+      this.box.put(LAST_UPDATE, value.toHumanString());
 
   /// Provide a default language
   String get serverLanguage => this.box.get(SERVER_LANGUAGE) ?? 'en';
@@ -83,7 +90,8 @@ class ConfigurationManager with ChangeNotifier {
   String get realtimeIP => this.box.get(REALTIME_IP);
   set realtimeIP(String value) => this.box.put(REALTIME_IP, value);
 
-  String get gameVersion => this.box.get(GAME_VERSION) ?? AppConstant.APP_VERSION;
+  String get gameVersion =>
+      this.box.get(GAME_VERSION) ?? AppConstant.APP_VERSION;
   set gameVersion(String value) => this.box.put(GAME_VERSION, value);
 
   String get appVersion => this.box.get(APP_VERSION) ?? '1.0.8';
@@ -93,11 +101,11 @@ class ConfigurationManager with ChangeNotifier {
   _update(dynamic key, dynamic value) {
     this.box.put(key, value);
     notifyListeners();
-  }  
+  }
 
   ///
   /// Functions
-  /// 
+  ///
 
   /// This is necessary to be called before using anything else
   @override
