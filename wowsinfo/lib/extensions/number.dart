@@ -1,7 +1,7 @@
 extension NumberExtension on num {
-  /// Convert `num` to a string but it will make `nan` -> `0`
-  String myFixedString(fractionDigits) {
-    if (isNaN) return 0.toStringAsFixed(fractionDigits);
+  /// Call `toStringAsFixed` and convert `nan` -> `-`
+  String toFixedString(int fractionDigits) {
+    if (isNaN || isInfinite) return '-';
     return toStringAsFixed(fractionDigits);
   }
 }

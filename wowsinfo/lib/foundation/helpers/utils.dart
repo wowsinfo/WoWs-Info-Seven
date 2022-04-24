@@ -14,20 +14,24 @@ class Utils {
     if (kDebugMode) print(object);
   }
 
-  /// A simple wrapper for Future.delayed
+  /// A simple wrapper of Future.delayed
   static Future<void> delay(int duration) {
     return Future.delayed(Duration(milliseconds: duration));
   }
 
-  /// Check if this device is IOS
-  static bool isIOS() {
+  /// Check if this device is IOS or MacOS
+  static bool isApple() {
     // Web doesn't support platform so prevent calling it
     if (kIsWeb) return false;
     return Platform.isIOS || Platform.isMacOS;
   }
 
+  static bool isWeb() => kIsWeb;
+
   /// From https://stackoverflow.com/a/53912090
   /// - Check whether this is a tabler or a large screen device
+  /// This might be not accurate, but it's a good enough way to check
+  /// On Android, it is better if we use the native channel
   bool isTablet() {
     var size = MediaQuery.of(context).size;
     var diagonal =
