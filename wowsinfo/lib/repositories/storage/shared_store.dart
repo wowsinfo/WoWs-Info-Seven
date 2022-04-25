@@ -36,4 +36,9 @@ class SharedStore extends StoreInterface {
     if (value is List<String>) return _prefs.setStringList(key, value);
     return Future.value(false);
   }
+
+  @override
+  bool has(String key) {
+    return _prefs.containsKey(key);
+  }
 }

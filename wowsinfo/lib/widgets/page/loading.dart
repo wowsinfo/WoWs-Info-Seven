@@ -33,7 +33,7 @@ class _AppLoadingState extends State<AppLoading> {
                   minHeight: 8,
                 ),
               ),
-              const Text("Fetching API...")
+              const Text("Fetching API..."),
             ],
           ),
         ),

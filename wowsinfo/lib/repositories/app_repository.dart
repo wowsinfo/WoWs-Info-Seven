@@ -9,9 +9,9 @@ class AppRepository {
   static final AppRepository instance = AppRepository._init();
   AppRepository._init();
 
-  /// Database
-  late final StoreInterface _database;
-  void inject(StoreInterface database) {
-    _database = database;
+  // Store
+  late final StoreInterface _store;
+  void inject(StoreInterface store) {
+    _store = store;
   }
 }
