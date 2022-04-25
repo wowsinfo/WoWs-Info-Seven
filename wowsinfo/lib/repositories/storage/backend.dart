@@ -1,7 +1,8 @@
 import 'dart:ffi';
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:wowsinfo/storage/backend_interface.dart';
+
+import 'backend_interface.dart';
 
 class Backend extends BackendInterface {
   late final SharedPreferences _prefs;

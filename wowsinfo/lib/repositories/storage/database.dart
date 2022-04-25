@@ -1,18 +1,19 @@
 import 'package:logging/logging.dart';
-import 'package:wowsinfo/storage/backend.dart';
+import 'backend.dart';
+import 'backend_interface.dart';
 
 class Database {
-  /// The shared instance of the database.
-  static final Database instance = Database._init();
-  Database._init();
-
-  final _backend = Backend();
+  final BackendInterface _backend = Backend();
   final _log = Logger('Database');
+
+  Database() {
+    _log.info('Database initialized');
+  }
 
   /// Initialize the database and its backend.
   Future<bool> initialize() async {
     final loaded = await _backend.load();
-    _log.info('Database loaded: $loaded');
+    _log.info('Database loaded is $loaded');
     return loaded;
   }
 }
