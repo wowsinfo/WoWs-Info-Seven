@@ -1,10 +1,9 @@
-import 'dart:ffi';
-
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'backend_interface.dart';
+import 'store_interface.dart';
 
-class Backend extends BackendInterface {
+/// A shared store across the entire app.
+class SharedStore extends StoreInterface {
   late final SharedPreferences _prefs;
 
   @override

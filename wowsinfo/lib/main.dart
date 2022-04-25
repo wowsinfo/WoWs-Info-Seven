@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:wowsinfo/repositories/app_repository.dart';
-import 'package:wowsinfo/repositories/storage/database.dart';
+import 'package:wowsinfo/repositories/storage/shared_store.dart';
 import 'package:wowsinfo/repositories/user_repository.dart';
 import 'package:wowsinfo/widgets/wowsinfo.dart';
 
@@ -16,13 +16,13 @@ Future<void> setup() async {
     }
   });
 
-  // setup database
-  final database = Database();
-  await database.initialize();
+  // setup the store
+  final store = SharedStore();
+  await store.load();
 
   // inject to repositories
-  AppRepository.instance.inject(database);
-  UserRepository.instance.inject(database);
+  AppRepository.instance.inject(store);
+  UserRepository.instance.inject(store);
 }
 
 void main() async {

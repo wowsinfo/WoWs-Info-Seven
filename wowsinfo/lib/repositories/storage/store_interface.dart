@@ -1,5 +1,5 @@
-/// The interface for the database backend.
-abstract class BackendInterface {
+/// The interface of the store, it can be database, shared preferences, etc.
+abstract class StoreInterface {
   Future<bool> load();
   Future<bool> remove(String key);
   Future<bool> clear();
