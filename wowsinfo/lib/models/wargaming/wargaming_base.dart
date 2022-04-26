@@ -8,7 +8,7 @@ abstract class WargamingAPI<T> {
 
   /// The status can either be ok or error.
   bool get good => _status == 'ok' && _error == null;
-  bool get error => _status == 'error';
+  bool get error => _status == 'error' && _error != null;
 
   WargamingAPI.fromJson(Map<String, dynamic> json) {
     _status = json['status'] as String?;
@@ -34,8 +34,8 @@ class WargamingAPIError {
   }
 }
 
-/// Some API can have multiple pages so this is provided to help with pagination.
-/// It is required if pageTotal is provided.
+/// Some APIs may have multiple pages so this is provided to help with pagination.
+/// Pagination is required if pageTotal is provided.
 class WargamingAPIMeta {
   int? count;
   int? pageTotal;
