@@ -1,4 +1,6 @@
-/// The interface of the store, it can be database, shared preferences, etc.
+/// The interface of the store
+///
+/// The store can be database, shared preferences or anything.
 abstract class StoreInterface {
   Future<bool> load();
   Future<bool> remove(String key);

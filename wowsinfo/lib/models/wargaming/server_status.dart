@@ -1,5 +1,6 @@
-import 'package:wowsinfo/models/wargaming/wargaming_base.dart';
+import 'package:wowsinfo/models/wargaming/wargaming_api.dart';
 
+/// Online players count of the server.
 class ServerStatus extends WargamingAPI<_StatusData> {
   int? get playersOnline {
     final wows = data?.wows;

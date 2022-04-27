@@ -1,4 +1,4 @@
-/// The base of all Wargaming API models, including status, error, data and meta.
+/// The base of all Wargaming API models
 abstract class WargamingAPI<T> {
   String? _status;
   WargamingAPIError? _error;
@@ -18,8 +18,11 @@ abstract class WargamingAPI<T> {
   }
 }
 
+/// Wargaming API error with additional information
+///
 /// This is included only if something goes wrong.
 /// It can be used to validate the response.
+/// TODO: we can potentially ignore all the fields here because they are not used.
 class WargamingAPIError {
   String? field;
   String? message;
@@ -34,6 +37,8 @@ class WargamingAPIError {
   }
 }
 
+/// Wargaming API meta data
+///
 /// Some APIs may have multiple pages so this is provided to help with pagination.
 /// Pagination is required if pageTotal is provided.
 class WargamingAPIMeta {

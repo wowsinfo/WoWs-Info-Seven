@@ -1,7 +1,14 @@
 import 'storage/store_interface.dart';
 
-/// This repository manages the user's settings, such as app & data language,
-/// username & account id, app theme colour, game server, dark mode, etc.
+/// This repository manages the user's settings
+///
+/// This include
+/// - app & data language
+/// - username & account id
+/// - app theme colour,
+/// - game server
+/// - dark mode
+/// - more...
 class UserRepository {
   // Key values
   static const String _appLanguageKey = 'wowsinfo@app_language';
