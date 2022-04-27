@@ -14,9 +14,13 @@ class ServiceResult<T> {
   bool get hasError => errorMessage != null;
   bool get isNotEmpty => data != null;
 
-  ServiceResult({T? data, String? errorMessage}) {
-    data = data;
-    errorMessage = errorMessage;
+  ServiceResult({this.data, this.errorMessage});
+
+  /// Returns a new instance of [ServiceResult] with the same data and error.
+  ///
+  /// This is often used to cast to a different type.
+  static ServiceResult<T> copyWith<T>(ServiceResult other) {
+    return ServiceResult(data: other.data, errorMessage: other.errorMessage);
   }
 }
 
@@ -31,7 +35,7 @@ abstract class BaseService {
   final _logger = Logger('BaseService');
 
   /// Get decoded object from the url with proper error handling & timeout.
-  Future<ServiceResult<Object?>> getObject(String url) async {
+  Future<ServiceResult<Object>> getObject(String url) async {
     try {
       final uri = Uri.parse(url);
       final response = await http.get(uri).timeout(Duration(seconds: timeout));
