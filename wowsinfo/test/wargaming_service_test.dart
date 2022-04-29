@@ -8,9 +8,7 @@ void main() {
     expect(result.hasError, false);
     expect(result.isNotEmpty, true);
     final data = result.data;
-    if (data == null) {
-      fail('ServerStatus should be valid');
-    }
+    if (data == null) fail('ServerStatus should be valid');
     expect(data.playersOnline, isNotNull);
     expect(data.playersOnline! > 0, isNotNull);
   });

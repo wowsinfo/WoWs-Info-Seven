@@ -20,11 +20,25 @@ class WargamingService extends BaseService {
     final url =
         'https://api.worldoftanks.$_server/wgn/servers/info/$_applicationID&game=wows';
 
-    final result = await getObject(url);
-    if (result.hasError) return ServiceResult.copyWith(result);
+    final result = await super.getObject<ServerStatus>(
+      url,
+      (json) => ServerStatus.fromJson(json),
+    );
 
-    final data = result.data as Map<String, dynamic>?;
-    if (data == null) return ServiceResult(errorMessage: 'No data');
-    return ServiceResult(data: ServerStatus.fromJson(data));
+    return result;
+  }
+
+  @override
+  T? decoder<T>(Object? json, ModelCreator<T> creator) {
+    if (json is Map<String, dynamic>) {
+      final data = json['data'];
+      // we only need the data and nothing else
+      if (data is Map<String, dynamic>) {
+        return creator(data);
+      }
+    }
+
+    assert(false, 'Decoding error, json or data is invalid');
+    return null;
   }
 }

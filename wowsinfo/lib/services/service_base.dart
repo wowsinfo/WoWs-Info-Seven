@@ -1,6 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:logging/logging.dart';
 import 'dart:convert';
+
+/// Create a model using T.fromJson method from models
+typedef ModelCreator<T> = T? Function(Map<String, dynamic>);
 
 /// The result of a request from BaseService.
 ///
@@ -35,14 +39,26 @@ abstract class BaseService {
   final _logger = Logger('BaseService');
 
   /// Get decoded object from the url with proper error handling & timeout.
-  Future<ServiceResult<Object>> getObject(String url) async {
+  @protected
+  Future<ServiceResult<T>> getObject<T>(
+    String url,
+    ModelCreator<T> creator,
+  ) async {
     try {
       final uri = Uri.parse(url);
       final response = await http.get(uri).timeout(Duration(seconds: timeout));
       if (response.statusCode == 200) {
         // dynamic shouldn't be used because it disables type checking
         final Object? json = jsonDecode(response.body);
-        return ServiceResult(data: json);
+        final data = decoder(json, creator);
+        if (data != null) {
+          _logger.info('Successfully fetched data from $url');
+          return ServiceResult(data: data);
+        } else {
+          _logger.severe('Failed to decode $T');
+          // TODO: localise error message here
+          return ServiceResult(errorMessage: 'Data is not decoded correctly');
+        }
       } else {
         final errorCode = response.statusCode;
         _logger.warning('getObject failed with code: $errorCode');
@@ -57,4 +73,10 @@ abstract class BaseService {
       return ServiceResult(errorMessage: e.toString());
     }
   }
+
+  /// Decode json object into [T] with a [creator] function.
+  T? decoder<T>(
+    Object? json,
+    ModelCreator<T> creator,
+  );
 }
