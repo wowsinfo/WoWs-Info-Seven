@@ -19,6 +19,12 @@ class SharedStore extends StoreInterface {
 
   @override
   Future<bool> clear() {
+    throw AssertionError('''
+      Calling clear() on SharedStore will erase all data.
+      This is extremely dangerous.
+      Only uncomment this if you know what you are doing.
+      ''');
+
     return _prefs.clear();
   }
 
