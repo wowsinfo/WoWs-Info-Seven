@@ -1,14 +1,14 @@
 import 'package:flutter/foundation.dart';
 
-/// Format timestamp to [DateTime] with readable strings.
+/// Convert timestamp to [DateTime] with readable strings.
 @immutable
-class WoWsDate {
+class TimeStampDate {
   final int timeStamp;
   late final DateTime date;
   late final String dateString;
   late final String dateTimeString;
 
-  WoWsDate(this.timeStamp) {
+  TimeStampDate(this.timeStamp) {
     assert(this.timeStamp >= 0, 'timeStamp must be at least 0');
     final timeStamp = this.timeStamp >= 0 ? this.timeStamp : 0;
     date = DateTime.fromMillisecondsSinceEpoch(timeStamp * 1000);
@@ -31,7 +31,7 @@ class WoWsDate {
   }
 
   /// Compare [date] with [other]
-  int compareTo(WoWsDate other) => timeStamp - other.timeStamp;
+  int compareTo(TimeStampDate other) => timeStamp - other.timeStamp;
 
   /// Check if within [d] from now
   bool isWithinDurationFromNow(Duration duration) =>
@@ -42,5 +42,5 @@ class WoWsDate {
       date.isAfter(begin.subtract(duration));
 
   /// Check if [date] is before [other]
-  bool isBefore(WoWsDate other) => date.isBefore(other.date);
+  bool isBefore(TimeStampDate other) => date.isBefore(other.date);
 }

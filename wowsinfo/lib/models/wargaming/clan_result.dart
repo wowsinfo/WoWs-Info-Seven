@@ -4,7 +4,7 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:wowsinfo/models/encodable.dart';
-import 'package:wowsinfo/models/wowsinfo/wows_date.dart';
+import 'package:wowsinfo/models/wowsinfo/timestamp.dart';
 
 @immutable
 class ClanResult implements Encodable {
@@ -17,15 +17,16 @@ class ClanResult implements Encodable {
   });
 
   final int? membersCount;
-  final WoWsDate? createdAt;
+  final TimeStampDate? createdAt;
   final int? clanId;
   final String? tag;
   final String? name;
 
   factory ClanResult.fromJson(Map<String, dynamic> json) => ClanResult(
         membersCount: json['members_count'],
-        createdAt:
-            json['created_at'] == null ? null : WoWsDate(json['created_at']),
+        createdAt: json['created_at'] == null
+            ? null
+            : TimeStampDate(json['created_at']),
         clanId: json['clan_id'],
         tag: json['tag'],
         name: json['name'],

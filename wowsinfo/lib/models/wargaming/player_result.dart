@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:wowsinfo/models/encodable.dart';
-import 'package:wowsinfo/models/wowsinfo/wows_date.dart';
+import 'package:wowsinfo/models/wowsinfo/timestamp.dart';
 
 /// The search result with a given nickname.
 @immutable
@@ -13,13 +13,14 @@ class PlayerResult implements Encodable {
 
   final String? nickname;
   final int? accountId;
-  final WoWsDate? createdAt;
+  final TimeStampDate? createdAt;
 
   factory PlayerResult.fromJson(Map<String, dynamic> json) => PlayerResult(
         nickname: json['nickname'],
         accountId: json['account_id'],
-        createdAt:
-            json['created_at'] == null ? null : WoWsDate(json['created_at']),
+        createdAt: json['created_at'] == null
+            ? null
+            : TimeStampDate(json['created_at']),
       );
 
   @override
