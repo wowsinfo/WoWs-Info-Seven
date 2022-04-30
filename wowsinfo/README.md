@@ -1,16 +1,2 @@
-# wowsinfo
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# WoWs Info Flutter
+The final rewrite of WoWs Info in Flutter. Use [6b4a4478ca](https://github.com/WoWs-Info/WoWs-Info-End/tree/6b4a4478ca329fd2996fb70c0a1fab2e5d40d048) as a reference.

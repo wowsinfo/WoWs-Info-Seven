@@ -1,6 +1,10 @@
+import 'package:flutter/foundation.dart';
+import 'package:wowsinfo/models/encodable.dart';
+
 /// The search result with a given nickname.
-class PlayerResult {
-  PlayerResult({
+@immutable
+class PlayerResult implements Encodable {
+  const PlayerResult({
     this.nickname,
     this.accountId,
   });
@@ -12,4 +16,10 @@ class PlayerResult {
         nickname: json['nickname'],
         accountId: json['account_id'],
       );
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'nickname': nickname,
+        'account_id': accountId,
+      };
 }
