@@ -11,30 +11,35 @@ typedef AttackAircraft = Weapon;
 class Weapon {
   const Weapon({
     this.maxFragsBattle,
-    this.frag,
+    this.frags,
     this.hits,
     this.maxFragsShipId,
-    this.shot,
+    this.shots,
   });
 
   final int? maxFragsBattle;
-  final int? frag;
+  final int? frags;
   final int? hits;
   final int? maxFragsShipId;
-  final int? shot;
+  final int? shots;
 
   factory Weapon.fromJson(Map<String, dynamic> json) => Weapon(
         maxFragsBattle: json['max_frags_battle'],
-        frag: json['frag'],
+        frags: json['frags'],
         hits: json['hits'],
         maxFragsShipId: json['max_frags_ship_id'],
-        shot: json['shot'],
+        shots: json['shots'],
       );
 
   /// hits ratio doesn't apply to all weapons
-  bool get hasHitRatio => shot != null && hits != null && hits! > 0;
+  bool get hasHitRatio => shots != null && hits != null && hits! > 0;
   double get hitRatio =>
-      hasHitRatio ? hits! * 10000 / shot! / 100.0 : double.nan;
+      hasHitRatio ? hits! * 10000 / shots! / 100.0 : double.nan;
   String get maxFrag => maxFragsBattle.toString();
-  String get totalFrag => frag.toString();
+  String get totalFrag => frags.toString();
+
+  @override
+  String toString() {
+    return 'Weapon(maxFragsBattle: $maxFragsBattle, frag: $frags, hits: $hits, maxFragsShipId: $maxFragsShipId, shot: $shots)';
+  }
 }

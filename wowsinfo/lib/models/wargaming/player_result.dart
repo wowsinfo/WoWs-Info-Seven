@@ -29,4 +29,9 @@ class PlayerResult implements Encodable {
         'account_id': accountId,
         'created_at': createdAt?.timeStamp,
       };
+
+  @override
+  String toString() {
+    return 'PlayerResult(nickname: $nickname, accountId: $accountId, createdAt: $createdAt)';
+  }
 }

@@ -40,4 +40,9 @@ class ClanResult implements Encodable {
         'tag': tag,
         'name': name,
       };
+
+  @override
+  String toString() {
+    return 'ClanResult(membersCount: $membersCount, createdAt: $createdAt, clanId: $clanId, tag: $tag, name: $name)';
+  }
 }

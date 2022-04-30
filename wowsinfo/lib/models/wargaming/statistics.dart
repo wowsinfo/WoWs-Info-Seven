@@ -1,52 +1,61 @@
+import 'package:flutter/foundation.dart';
 import 'package:wowsinfo/extensions/number.dart';
 
 import 'weapon.dart';
 
-/// The base of the PVP model
-class BasePvP {
-  BasePvP({
+typedef PvP = ModeStatistics;
+typedef PvE = ModeStatistics;
+typedef ClanClan = ModeStatistics;
+typedef PvPDiv2 = ModeStatistics;
+typedef PvPDiv3 = ModeStatistics;
+typedef Rank = ModeStatistics;
+
+/// All the statistics of a player in a certain mode.
+@immutable
+class ModeStatistics {
+  const ModeStatistics({
     this.maxFragsBattle,
-    this.draw,
+    this.draws,
     this.maxXp,
-    this.win,
+    this.wins,
     this.planesKilled,
-    this.loss,
-    this.battle,
+    this.losses,
+    this.battles,
     this.maxDamageDealt,
     this.damageDealt,
     this.maxPlanesKilled,
-    this.torpedo,
+    this.torpedoes,
     this.aircraft,
     this.ramming,
     this.mainBattery,
-    this.secondBattery,
-    this.survivedWin,
-    this.frag,
+    this.secondaries,
+    this.survivedWins,
+    this.frags,
     this.xp,
-    this.survivedBattle,
-    this.damageToBuilding,
+    this.survivedBattles,
+    this.damageToBuildings,
     this.maxShipsSpottedShipId,
     this.maxDamageScouting,
     this.artAgro,
     this.maxXpShipId,
     this.shipsSpotted,
     this.maxFragsShipId,
-    this.droppedCapturePoint,
-    this.maxDamageDealtToBuilding,
+    this.droppedCapturePoints,
+    this.maxDamageDealtToBuildings,
     this.torpedoAgro,
-    this.controlCapturedPoint,
+    this.controlCapturedPoints,
     this.battlesSince510,
     this.maxTotalAgroShipId,
     this.maxShipsSpotted,
     this.maxSuppressionsShipId,
     this.damageScouting,
     this.maxTotalAgro,
-    this.capturePoint,
+    this.capturePoints,
     this.suppressionsCount,
     this.maxSuppressionsCount,
     this.maxPlanesKilledShipId,
-    this.teamCapturePoint,
-    this.controlDroppedPoint,
+    this.teamCapturePoints,
+    this.controlDroppedPoints,
     this.maxDamageDealtToBuildingsShipId,
     this.maxDamageDealtShipId,
     this.maxScoutingDamageShipId,
@@ -55,70 +64,71 @@ class BasePvP {
   });
 
   final int? maxFragsBattle;
-  final int? draw;
+  final int? draws;
   final int? maxXp;
-  final int? win;
+  final int? wins;
   final int? planesKilled;
-  final int? loss;
-  final int? battle;
+  final int? losses;
+  final int? battles;
   final int? maxDamageDealt;
   final int? damageDealt;
   final int? maxPlanesKilled;
 
   // Reuse classes in PvP.dart
-  final Torpedoe? torpedo;
+  final Torpedoe? torpedoes;
   final AttackAircraft? aircraft;
   final RamAttack? ramming;
   final MainBattery? mainBattery;
-  final SecondaryBattery? secondBattery;
+  final SecondaryBattery? secondaries;
 
-  final int? survivedWin;
-  final int? frag;
+  final int? survivedWins;
+  final int? frags;
   final int? xp;
-  final int? survivedBattle;
+  final int? survivedBattles;
 
-  final int? damageToBuilding;
+  final int? damageToBuildings;
   final int? maxShipsSpottedShipId;
   final int? maxDamageScouting;
   final int? artAgro;
   final int? maxXpShipId;
   final int? shipsSpotted;
   final int? maxFragsShipId;
-  final int? droppedCapturePoint;
-  final int? maxDamageDealtToBuilding;
+  final int? droppedCapturePoints;
+  final int? maxDamageDealtToBuildings;
   final int? torpedoAgro;
-  final int? controlCapturedPoint;
+  final int? controlCapturedPoints;
   final int? battlesSince510;
   final int? maxTotalAgroShipId;
   final int? maxShipsSpotted;
   final int? maxSuppressionsShipId;
   final int? damageScouting;
   final int? maxTotalAgro;
-  final int? capturePoint;
+  final int? capturePoints;
   final int? suppressionsCount;
   final int? maxSuppressionsCount;
   final int? maxPlanesKilledShipId;
-  final int? teamCapturePoint;
-  final int? controlDroppedPoint;
+  final int? teamCapturePoints;
+  final int? controlDroppedPoints;
   final int? maxDamageDealtToBuildingsShipId;
   final int? maxDamageDealtShipId;
   final int? maxScoutingDamageShipId;
   final int? teamDroppedCapturePoint;
   final int? battlesSince512;
 
-  factory BasePvP.fromJson(Map<String, dynamic> json) => BasePvP(
+  factory ModeStatistics.fromJson(Map<String, dynamic> json) => ModeStatistics(
         maxFragsBattle: json['max_frags_battle'],
-        draw: json['draw'],
+        draws: json['draws'],
         maxXp: json['max_xp'],
-        win: json['win'],
+        wins: json['wins'],
         planesKilled: json['planes_killed'],
-        loss: json['loss'],
-        battle: json['battle'],
+        losses: json['losses'],
+        battles: json['battles'],
         maxDamageDealt: json['max_damage_dealt'],
         damageDealt: json['damage_dealt'],
         maxPlanesKilled: json['max_planes_killed'],
-        torpedo:
-            json['torpedo'] == null ? null : Torpedoe.fromJson(json['torpedo']),
+        torpedoes: json['torpedoes'] == null
+            ? null
+            : Torpedoe.fromJson(json['torpedoes']),
         aircraft: json['aircraft'] == null
             ? null
             : AttackAircraft.fromJson(json['aircraft']),
@@ -128,36 +138,36 @@ class BasePvP {
         mainBattery: json['main_battery'] == null
             ? null
             : MainBattery.fromJson(json['main_battery']),
-        secondBattery: json['second_battery'] == null
+        secondaries: json['second_battery'] == null
             ? null
             : SecondaryBattery.fromJson(json['second_battery']),
-        survivedWin: json['survived_win'],
-        frag: json['frag'],
+        survivedWins: json['survived_wins'],
+        frags: json['frags'],
         xp: json['xp'],
-        survivedBattle: json['survived_battle'],
-        damageToBuilding: json['damage_to_buildings'],
+        survivedBattles: json['survived_battles'],
+        damageToBuildings: json['damage_to_buildings'],
         maxShipsSpottedShipId: json['max_ships_spotted_ship_id'],
         maxDamageScouting: json['max_damage_scouting'],
         artAgro: json['art_agro'],
         maxXpShipId: json['max_xp_ship_id'],
         shipsSpotted: json['ships_spotted'],
         maxFragsShipId: json['max_frags_ship_id'],
-        droppedCapturePoint: json['dropped_capture_points'],
-        maxDamageDealtToBuilding: json['max_damage_dealt_to_buildings'],
+        droppedCapturePoints: json['dropped_capture_points'],
+        maxDamageDealtToBuildings: json['max_damage_dealt_to_buildings'],
         torpedoAgro: json['torpedo_agro'],
-        controlCapturedPoint: json['control_captured_points'],
+        controlCapturedPoints: json['control_captured_points'],
         battlesSince510: json['battles_since_510'],
         maxTotalAgroShipId: json['max_total_agro_ship_id'],
         maxShipsSpotted: json['max_ships_spotted'],
         maxSuppressionsShipId: json['max_suppressions_ship_id'],
         damageScouting: json['damage_scouting'],
         maxTotalAgro: json['max_total_agro'],
-        capturePoint: json['capture_points'],
+        capturePoints: json['capture_points'],
         suppressionsCount: json['suppressions_count'],
         maxSuppressionsCount: json['max_suppressions_count'],
         maxPlanesKilledShipId: json['max_planes_killed_ship_id'],
-        teamCapturePoint: json['team_capture_points'],
-        controlDroppedPoint: json['control_dropped_points'],
+        teamCapturePoints: json['team_capture_points'],
+        controlDroppedPoints: json['control_dropped_points'],
         maxDamageDealtToBuildingsShipId:
             json['max_damage_dealt_to_buildings_ship_id'],
         maxDamageDealtShipId: json['max_damage_dealt_ship_id'],
@@ -166,48 +176,48 @@ class BasePvP {
         battlesSince512: json['battles_since_512'],
       );
 
-  /// Calculate the average of [value] by dividing it by [battle].
+  /// Calculate the average of [value] by dividing it by [battles].
   double _avg(int? value) {
     if (value == null) return double.nan;
-    if (battle == null) return double.nan;
-    return value / battle!;
+    if (battles == null) return double.nan;
+    return value / battles!;
   }
 
-  /// Calculate the rate of [value] by dividing it by [battle].
+  /// Calculate the rate of [value] by dividing it by [battles].
   double _rate(int? value) {
     if (value == null) return double.nan;
-    if (battle == null) return double.nan;
-    return (value * 10000 / battle!) / 100.0;
+    if (battles == null) return double.nan;
+    return (value * 10000 / battles!) / 100.0;
   }
 
-  bool get hasBattle => battle != null && battle != 0;
-  bool get hasHit => (mainBattery?.shot ?? 0) > 0;
+  bool get hasBattle => battles != null && battles != 0;
+  bool get hasHit => (mainBattery?.shots ?? 0) > 0;
 
   int get sunkBattle {
-    if (survivedBattle == null) return 0;
-    if (battle == null) return 0;
-    return battle! - survivedBattle!;
+    if (survivedBattles == null) return 0;
+    if (battles == null) return 0;
+    return battles! - survivedBattles!;
   }
 
   double get killDeath {
-    if (frag == null) return double.nan;
-    return frag! / sunkBattle;
+    if (frags == null) return double.nan;
+    return frags! / sunkBattle;
   }
 
-  double get winrate => _rate(win);
-  double get survivedWinrate => _rate(survivedWin);
-  double get survivedRate => _rate(survivedBattle);
+  double get winrate => _rate(wins);
+  double get survivedWinrate => _rate(survivedWins);
+  double get survivedRate => _rate(survivedBattles);
 
   double get avgExp => _avg(xp);
   double get avgDamage => _avg(damageDealt);
-  double get avgFrag => _avg(frag);
+  double get avgFrag => _avg(frags);
   double get avgPlaneDestroyed => _avg(planesKilled);
 
   double get avgSpottingDamage => _avg(damageScouting);
   double get avgSpottedShips => _avg(shipsSpotted);
   double get avgPotentialDamage => _avg((artAgro ?? 0) + (torpedoAgro ?? 0));
 
-  String get battleString => battleString.toString();
+  String get battleString => battles.toString();
   String get winrateString => '${winrate.toFixedString(1)}%';
   String get avgDamageString => avgDamage.toFixedString(0);
   String get avgExpString => avgExp.toFixedString(0);
@@ -220,7 +230,7 @@ class BasePvP {
   String get mostFrag => maxFragsBattle.toString();
   String get mostPlane => maxPlanesKilled.toString();
 
-  String get mostDamageToBuilding => maxDamageDealtToBuilding.toString();
+  String get mostDamageToBuilding => maxDamageDealtToBuildings.toString();
   String get mostSpottingDamage => maxDamageScouting.toString();
   String get mostSpotted => maxShipsSpotted.toString();
   String get mostSupression => maxSuppressionsCount.toString();

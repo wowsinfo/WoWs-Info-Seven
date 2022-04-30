@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:wowsinfo/models/wargaming/clan_result.dart';
+import 'package:wowsinfo/models/wargaming/player_information.dart';
 import 'package:wowsinfo/models/wargaming/player_result.dart';
 import 'package:wowsinfo/models/wargaming/server_status.dart';
 import 'package:wowsinfo/models/wowsinfo/game_server.dart';
@@ -57,5 +58,19 @@ class WargamingService extends BaseService {
       baseUrl + '/clans/list/$_applicationId&search=$tag',
     );
     return decodeList(result, ClanResult.fromJson);
+  }
+
+  /// Get a player's information by [accountId].
+  Future<ServiceResult<PlayerInformation>> getPlayerInformation(
+    String accountId,
+  ) async {
+    // extra fields are provideded to get all the statistics
+    final result = await getObject(
+      baseUrl +
+          '/account/info/$_applicationId&account_id=$accountId'
+              '&extra=statistics.pve%2Cstatistics.pvp_div2'
+              '%2Cstatistics.pvp_div3%2Cstatistics.rank_solo',
+    );
+    return decodeObject(result, PlayerInformation.fromJson);
   }
 }
