@@ -1,23 +1,3 @@
-/// The base of all Wargaming API models
-abstract class WargamingAPI<T> {
-  String? _status;
-  WargamingAPIError? _error;
-
-  T? data;
-  WargamingAPIMeta? meta;
-
-  /// The status can either be ok or error.
-  bool get good => _status == 'ok' && _error == null;
-  bool get error => _status == 'error' && _error != null;
-
-  WargamingAPI.fromJson(Map<String, dynamic> json) {
-    _status = json['status'] as String?;
-    _error = json['error'] as WargamingAPIError?;
-    data = json['data'] as T?;
-    meta = json['meta'] as WargamingAPIMeta?;
-  }
-}
-
 /// Wargaming API error with additional information
 ///
 /// This is included only if something goes wrong.
@@ -34,6 +14,11 @@ class WargamingAPIError {
     message = json['message'] as String?;
     code = json['code'] as int?;
     value = json['value'] as String?;
+  }
+
+  @override
+  String toString() {
+    return 'WargamingAPIError{field: $field, message: $message, code: $code, value: $value}';
   }
 }
 
@@ -62,5 +47,10 @@ class WargamingAPIMeta {
     total = json['total'] as int?;
     limit = json['limit'] as int?;
     page = json['page'] as int?;
+  }
+
+  @override
+  String toString() {
+    return 'WargamingAPIMeta{count: $count, pageTotal: $pageTotal, total: $total, limit: $limit, page: $page}';
   }
 }

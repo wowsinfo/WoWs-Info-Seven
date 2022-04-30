@@ -23,7 +23,6 @@ linter:
   # producing the lint.
   rules:
     prefer_single_quotes: true
-    avoid_dynamic_calls: true
 
 analyzer:
   # we can change errors to warning, error or info

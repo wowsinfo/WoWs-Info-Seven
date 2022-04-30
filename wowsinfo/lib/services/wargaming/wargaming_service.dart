@@ -1,3 +1,4 @@
+import 'package:logging/logging.dart';
 import 'package:wowsinfo/models/wargaming/server_status.dart';
 import 'package:wowsinfo/services/service_base.dart';
 
@@ -11,6 +12,7 @@ class WargamingService extends BaseService {
   final String _server;
   late final String _language;
   final String _applicationID = '?application_id=$apiKey';
+  final _logger = Logger('WargamingService');
 
   WargamingService(this._server, {String language = 'en'}) {
     _language = language;
@@ -20,25 +22,32 @@ class WargamingService extends BaseService {
     final url =
         'https://api.worldoftanks.$_server/wgn/servers/info/$_applicationID&game=wows';
 
-    final result = await super.getObject<ServerStatus>(
-      url,
-      (json) => ServerStatus.fromJson(json),
-    );
-
-    return result;
+    final result = await getObject(url);
+    return _decode(result, ServerStatus.fromJson);
   }
 
-  @override
-  T? decoder<T>(Object? json, ModelCreator<T> creator) {
-    if (json is Map<String, dynamic>) {
-      final data = json['data'];
-      // we only need the data and nothing else
-      if (data is Map<String, dynamic>) {
-        return creator(data);
+  ServiceResult<T> _decode<T>(
+    ServiceResult<Object?> json,
+    ModelCreator creator,
+  ) {
+    if (json.hasError) return ServiceResult.copyWith(json);
+
+    if (json.isNotEmpty) {
+      final jsonData = json.data;
+      if (jsonData is Map<String, dynamic>) {
+        final data = jsonData['data'];
+        if (data is Map<String, dynamic>) {
+          _logger.info('Successfully decoded $T');
+          return ServiceResult(data: creator(data));
+        } else {
+          _logger.severe('data is not a Map<String, dynamic>');
+        }
       }
+    } else {
+      _logger.severe('json.data is null, API failure');
     }
 
-    assert(false, 'Decoding error, json or data is invalid');
-    return null;
+    _logger.severe('failed to decode $T', json);
+    return ServiceResult(errorMessage: 'Decoding failure in $T');
   }
 }

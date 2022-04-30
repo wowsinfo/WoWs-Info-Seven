@@ -30,6 +30,11 @@ class ServerStatus {
   Map<String, dynamic> toJson() => {
         'wows': wows == null ? null : List.from(wows!.map((x) => x.toJson())),
       };
+
+  @override
+  String toString() {
+    return 'ServerStatus{online: $playersOnline}';
+  }
 }
 
 @immutable

@@ -26,6 +26,11 @@ class ServiceResult<T> {
   static ServiceResult<T> copyWith<T>(ServiceResult other) {
     return ServiceResult(data: other.data, errorMessage: other.errorMessage);
   }
+
+  @override
+  String toString() {
+    return 'ServiceResult{data: $data, errorMessage: $errorMessage}';
+  }
 }
 
 /// The base class of all services.
@@ -40,43 +45,31 @@ abstract class BaseService {
 
   /// Get decoded object from the url with proper error handling & timeout.
   @protected
-  Future<ServiceResult<T>> getObject<T>(
-    String url,
-    ModelCreator<T> creator,
-  ) async {
+  Future<ServiceResult<Object?>> getObject(String url) async {
     try {
       final uri = Uri.parse(url);
       final response = await http.get(uri).timeout(Duration(seconds: timeout));
       if (response.statusCode == 200) {
         // dynamic shouldn't be used because it disables type checking
         final Object? json = jsonDecode(response.body);
-        final data = decoder(json, creator);
-        if (data != null) {
+        if (json != null) {
           _logger.info('Successfully fetched data from $url');
-          return ServiceResult(data: data);
+          return ServiceResult(data: json);
         } else {
-          _logger.severe('Failed to decode $T');
+          _logger.severe('jsonDecode returned null');
           // TODO: localise error message here
-          return ServiceResult(errorMessage: 'Data is not decoded correctly');
+          return ServiceResult(errorMessage: 'JSON decoding error');
         }
       } else {
         final errorCode = response.statusCode;
         _logger.warning('getObject failed with code: $errorCode');
         // TODO: add a localizable error message here as well
-        return ServiceResult(
-          errorMessage: 'HTTP Error: $errorCode',
-        );
+        return ServiceResult(errorMessage: 'HTTP Error: $errorCode');
       }
-    } catch (e) {
-      _logger.severe('getObject exception: $e');
+    } catch (e, stackTrace) {
+      _logger.severe('getObject exception', e, stackTrace);
       // TODO: we can add a properly localised error message here
       return ServiceResult(errorMessage: e.toString());
     }
   }
-
-  /// Decode json object into [T] with a [creator] function.
-  T? decoder<T>(
-    Object? json,
-    ModelCreator<T> creator,
-  );
 }
