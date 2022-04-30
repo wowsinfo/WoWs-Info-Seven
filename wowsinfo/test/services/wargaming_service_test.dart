@@ -28,4 +28,19 @@ void main() {
     expect(data[0].createdAt, isNotNull);
     expect(data[0].createdAt?.dateString, '2016.03.01');
   });
+
+  test('test search clan tag FFD', () async {
+    final service = WargamingService(testServer);
+    final result = await service.searchClan('FFD');
+    expect(result.hasError, false);
+    expect(result.isNotEmpty, true);
+    final data = result.data;
+    if (data == null) fail('ClanResultList should be valid');
+    // there should be only one result which is me
+    expect(data.isNotEmpty, true);
+    expect(data[0].tag, 'FFD');
+    expect(data[0].name, 'Fubuki Fubuki Dance');
+    expect(data[0].createdAt, isNotNull);
+    expect(data[0].createdAt?.dateString, '2018.06.02');
+  });
 }

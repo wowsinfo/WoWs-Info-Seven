@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:wowsinfo/models/wargaming/clan_result.dart';
 import 'package:wowsinfo/models/wargaming/player_result.dart';
 import 'package:wowsinfo/models/wargaming/server_status.dart';
 import 'package:wowsinfo/models/wowsinfo/game_server.dart';
@@ -46,5 +47,15 @@ class WargamingService extends BaseService {
       _wgnUrl + '/account/list/$_applicationId&game=wows&search=$nickname',
     );
     return decodeList(result, PlayerResult.fromJson);
+  }
+
+  /// Get a list of clans with the given [tag].
+  Future<ServiceResult<List<ClanResult>>> searchClan(
+    String tag,
+  ) async {
+    final result = await getObject(
+      baseUrl + '/clans/list/$_applicationId&search=$tag',
+    );
+    return decodeList(result, ClanResult.fromJson);
   }
 }
