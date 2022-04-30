@@ -42,9 +42,9 @@ class WargamingService extends BaseService {
   Future<ServiceResult<List<PlayerResult>>> searchPlayer(
     String nickname,
   ) async {
-    // TODO: https://api.worldoftanks.asia/wgn/account/list/ is a better endpoint
-    final url = baseUrl + '/account/list/$_applicationId&search=$nickname';
-    final result = await getObject(url);
+    final result = await getObject(
+      _wgnUrl + '/account/list/$_applicationId&game=wows&search=$nickname',
+    );
     return decodeList(result, PlayerResult.fromJson);
   }
 }

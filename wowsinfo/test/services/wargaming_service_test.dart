@@ -25,5 +25,7 @@ void main() {
     // there should be only one result which is me
     expect(data.isNotEmpty, true);
     expect(data[0].nickname, 'HenryQuan');
+    expect(data[0].createdAt, isNotNull);
+    expect(data[0].createdAt?.dateString, '2016.03.01');
   });
 }
