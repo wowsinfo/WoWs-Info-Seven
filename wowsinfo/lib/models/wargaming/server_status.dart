@@ -8,7 +8,7 @@ class ServerStatus {
     this.wows,
   });
 
-  final List<_PlayerOnline>? wows;
+  final List<ServerPlayerOnline>? wows;
 
   /// Online players count of the server.
   int? get playersOnline {
@@ -22,14 +22,10 @@ class ServerStatus {
   }
 
   factory ServerStatus.fromJson(Map<String, dynamic> json) => ServerStatus(
-        wows: List<_PlayerOnline>.from(
-          json['wows'].map((x) => _PlayerOnline.fromJson(x)),
+        wows: List<ServerPlayerOnline>.from(
+          json['wows'].map((x) => ServerPlayerOnline.fromJson(x)),
         ),
       );
-
-  Map<String, dynamic> toJson() => {
-        'wows': wows == null ? null : List.from(wows!.map((x) => x.toJson())),
-      };
 
   @override
   String toString() {
@@ -38,8 +34,8 @@ class ServerStatus {
 }
 
 @immutable
-class _PlayerOnline {
-  const _PlayerOnline({
+class ServerPlayerOnline {
+  const ServerPlayerOnline({
     this.playersOnline,
     this.server,
   });
@@ -47,13 +43,9 @@ class _PlayerOnline {
   final int? playersOnline;
   final String? server;
 
-  factory _PlayerOnline.fromJson(Map<String, dynamic> json) => _PlayerOnline(
+  factory ServerPlayerOnline.fromJson(Map<String, dynamic> json) =>
+      ServerPlayerOnline(
         playersOnline: json['players_online'],
         server: json['server'],
       );
-
-  Map<String, dynamic> toJson() => {
-        'players_online': playersOnline,
-        'server': server,
-      };
 }

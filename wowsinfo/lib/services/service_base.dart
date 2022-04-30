@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:logging/logging.dart';
 import 'dart:convert';
 
-/// Create a model using T.fromJson method from models
+/// Create a model by provider a [Map]
 typedef ModelCreator<T> = T? Function(Map<String, dynamic>);
 
 /// The result of a request from BaseService.
@@ -53,7 +53,7 @@ abstract class BaseService {
         // dynamic shouldn't be used because it disables type checking
         final Object? json = jsonDecode(response.body);
         if (json != null) {
-          _logger.info('Successfully fetched data from $url');
+          _logger.info('fetched data from $url successfully');
           return ServiceResult(data: json);
         } else {
           _logger.severe('jsonDecode returned null');
@@ -71,5 +71,61 @@ abstract class BaseService {
       // TODO: we can add a properly localised error message here
       return ServiceResult(errorMessage: e.toString());
     }
+  }
+
+  /// Decode Map<String, dynamic> to [T] using [creator] and return as [ServiceResult].
+  @protected
+  ServiceResult<T> decodeObject<T>(
+    ServiceResult<Object?> json,
+    ModelCreator creator,
+  ) {
+    if (json.hasError) return ServiceResult.copyWith(json);
+
+    if (json.isNotEmpty) {
+      final jsonData = json.data;
+      if (jsonData is Map<String, dynamic>) {
+        final data = jsonData['data'];
+        if (data is Map<String, dynamic>) {
+          final result = creator(data);
+          _logger.info('decoded json successfully as $result');
+          return ServiceResult(data: result);
+        } else {
+          _logger.severe('data is not a Map<String, dynamic>');
+        }
+      }
+    } else {
+      _logger.severe('json.data is null, API failure');
+    }
+
+    _logger.severe('failed to decode $T', json);
+    return ServiceResult(errorMessage: 'Decoding failure in $T');
+  }
+
+  /// Decode List<dynamic> to a list of [T] using [creator] and return as [ServiceResult].
+  @protected
+  ServiceResult<List<T>> decodeList<T>(
+    ServiceResult<Object?> json,
+    ModelCreator creator,
+  ) {
+    if (json.hasError) return ServiceResult.copyWith(json);
+
+    if (json.isNotEmpty) {
+      final jsonData = json.data;
+      if (jsonData is Map<String, dynamic>) {
+        final data = jsonData['data'];
+        if (data is List) {
+          final list = List<T>.from(data.map((e) => creator(e)));
+          _logger.info('decoded json successfully as $list');
+          return ServiceResult(data: list);
+        } else {
+          _logger.severe('data is not a List');
+        }
+      }
+    } else {
+      _logger.severe('json.data is null, API failure');
+    }
+
+    _logger.severe('failed to decode $T', json);
+    return ServiceResult(errorMessage: 'Decoding failure in $T');
   }
 }
