@@ -1,4 +1,4 @@
-import 'store_interface.dart';
+import 'package:wowsinfo/repositories/stores/store_interface.dart';
 
 /// A dummy store using map for testing.
 class DummyStore implements StoreInterface {

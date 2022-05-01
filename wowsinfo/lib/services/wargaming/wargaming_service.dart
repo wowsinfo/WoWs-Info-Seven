@@ -7,6 +7,8 @@ import 'package:wowsinfo/models/wargaming/server_status.dart';
 import 'package:wowsinfo/models/wowsinfo/game_server.dart';
 import 'package:wowsinfo/services/service_base.dart';
 
+import 'wargaming_interface.dart';
+
 /// This imports [apiKey] from key.dart.
 import 'key.dart';
 
@@ -33,7 +35,7 @@ class WargamingService extends BaseService {
   final String _applicationId = '?application_id=$apiKey';
 
   /// Get the current online players count.
-  Future<ServiceResult<ServerStatus?>> getServerStatus() async {
+  ApiResult<ServerStatus?> getServerStatus() async {
     // this is under wowt
     final result = await getObject(
       _wgnUrl + '/servers/info/$_applicationId&game=wows',
@@ -42,9 +44,7 @@ class WargamingService extends BaseService {
   }
 
   /// Get a list of players with the given [nickname].
-  Future<ServiceResult<List<PlayerResult>>> searchPlayer(
-    String nickname,
-  ) async {
+  ApiResult<List<PlayerResult>> searchPlayer(String nickname) async {
     final result = await getObject(
       _wgnUrl + '/account/list/$_applicationId&game=wows&search=$nickname',
     );
@@ -52,9 +52,7 @@ class WargamingService extends BaseService {
   }
 
   /// Get a list of clans with the given [tag].
-  Future<ServiceResult<List<ClanResult>>> searchClan(
-    String tag,
-  ) async {
+  ApiResult<List<ClanResult>> searchClan(String tag) async {
     final result = await getObject(
       baseUrl + '/clans/list/$_applicationId&search=$tag',
     );
@@ -62,9 +60,7 @@ class WargamingService extends BaseService {
   }
 
   /// Get a player's information by [accountId].
-  Future<ServiceResult<PlayerInformation>> getPlayerInformation(
-    String accountId,
-  ) async {
+  ApiResult<PlayerInformation> getPlayerInformation(String accountId) async {
     // extra fields are provideded to get all the statistics
     final result = await getObject(
       baseUrl +
@@ -76,9 +72,7 @@ class WargamingService extends BaseService {
   }
 
   /// Get a player's achievements by [accountId].
-  Future<ServiceResult<PlayerAchievement>> getPlayerAchievements(
-    String accountId,
-  ) async {
+  ApiResult<PlayerAchievement> getPlayerAchievements(String accountId) async {
     final result = await getObject(
       baseUrl + '/account/achievements/$_applicationId&account_id=$accountId',
     );

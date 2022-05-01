@@ -1,0 +1,43 @@
+{
+    "status": "ok",
+    "meta": {
+        "count": 1,
+        "hidden": null
+    },
+    "data": {
+        "2011774448": {
+            "pvp": {
+                "20220429": {
+                    "capture_points": 0,
+                    "account_id": 2011774448,
+                    "max_xp": 4792,
+                    "wins": 2474,
+                    "planes_killed": 8148,
+                    "battles": 4575,
+                    "damage_dealt": 187309289,
+                    "battle_type": "pvp",
+                    "date": "20220429",
+                    "xp": 4853196,
+                    "frags": 3512,
+                    "survived_battles": 2025,
+                    "dropped_capture_points": 0
+                },
+                "20220423": {
+                    "capture_points": 0,
+                    "account_id": 2011774448,
+                    "max_xp": 4792,
+                    "wins": 2472,
+                    "planes_killed": 8130,
+                    "battles": 4568,
+                    "damage_dealt": 186956151,
+                    "battle_type": "pvp",
+                    "date": "20220423",
+                    "xp": 4847076,
+                    "frags": 3507,
+                    "survived_battles": 2025,
+                    "dropped_capture_points": 0
+                }
+            }
+        }
+    }
+}

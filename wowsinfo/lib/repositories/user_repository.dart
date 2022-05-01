@@ -1,4 +1,4 @@
-import 'storage/store_interface.dart';
+import 'stores/store_interface.dart';
 
 /// This repository manages the user's settings
 ///

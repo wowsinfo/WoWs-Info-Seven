@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:wowsinfo/extensions/number.dart';
+import 'package:wowsinfo/models/calculation.dart';
 
 import 'weapon.dart';
 
@@ -12,7 +13,7 @@ typedef Rank = ModeStatistics;
 
 /// All the statistics of a player in a certain mode.
 @immutable
-class ModeStatistics {
+class ModeStatistics with Calculation {
   const ModeStatistics({
     this.maxFragsBattle,
     this.draws,
@@ -176,20 +177,7 @@ class ModeStatistics {
         battlesSince512: json['battles_since_512'],
       );
 
-  /// Calculate the average of [value] by dividing it by [battles].
-  double _avg(int? value) {
-    if (value == null) return double.nan;
-    if (battles == null) return double.nan;
-    return value / battles!;
-  }
-
-  /// Calculate the rate of [value] by dividing it by [battles].
-  double _rate(int? value) {
-    if (value == null) return double.nan;
-    if (battles == null) return double.nan;
-    return (value * 10000 / battles!) / 100.0;
-  }
-
+  // TODO: maybe we can put all these calculations in `calculation.dart`
   bool get hasBattle => battles != null && battles != 0;
   bool get hasHit => (mainBattery?.shots ?? 0) > 0;
 
@@ -204,18 +192,20 @@ class ModeStatistics {
     return frags! / sunkBattle;
   }
 
-  double get winrate => _rate(wins);
-  double get survivedWinrate => _rate(survivedWins);
-  double get survivedRate => _rate(survivedBattles);
+  int get totalPotentialDamage => (artAgro ?? 0) + (torpedoAgro ?? 0);
 
-  double get avgExp => _avg(xp);
-  double get avgDamage => _avg(damageDealt);
-  double get avgFrag => _avg(frags);
-  double get avgPlaneDestroyed => _avg(planesKilled);
+  double get winrate => rate(wins, battles);
+  double get survivedWinrate => rate(survivedWins, battles);
+  double get survivedRate => rate(survivedBattles, battles);
 
-  double get avgSpottingDamage => _avg(damageScouting);
-  double get avgSpottedShips => _avg(shipsSpotted);
-  double get avgPotentialDamage => _avg((artAgro ?? 0) + (torpedoAgro ?? 0));
+  double get avgExp => average(xp, battles);
+  double get avgDamage => average(damageDealt, battles);
+  double get avgFrag => average(frags, battles);
+  double get avgPlaneDestroyed => average(planesKilled, battles);
+
+  double get avgSpottingDamage => average(damageScouting, battles);
+  double get avgSpottedShips => average(shipsSpotted, battles);
+  double get avgPotentialDamage => average(totalPotentialDamage, battles);
 
   String get battleString => battles.toString();
   String get winrateString => '${winrate.toFixedString(1)}%';

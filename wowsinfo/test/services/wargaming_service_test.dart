@@ -1,6 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:wowsinfo/models/wargaming/player_recent_overview.dart';
 import 'package:wowsinfo/models/wowsinfo/game_server.dart';
 import 'package:wowsinfo/services/wargaming/wargaming_service.dart';
+
+import '../dummies/dummy_service.dart';
 
 void main() {
   // Test a public account
@@ -12,6 +15,9 @@ void main() {
   final hiddenServer = GameServer(WoWsServer.northAmerica);
   final hiddenService = WargamingService(hiddenServer);
   const hiddenAccountId = '1025459900';
+
+  // the local data service
+  final localService = DummyService();
 
   test('test server status', () async {
     final result = await testService.getServerStatus();
@@ -110,5 +116,21 @@ void main() {
     // no data should be returned
     expect(hiddenData.battle, isNull);
     expect(hiddenData.progress, isNull);
+  });
+
+  test('test player recent overview data', () async {
+    final goodData = await localService.loadGoodRecentOverview();
+    final goodOverview = PlayerRecentOverview.fromJson(goodData);
+    final pvp = goodOverview.pvp;
+    expect(pvp, isNotNull);
+    expect(pvp!.length, 2);
+
+    final emptyData = await localService.loadEmptyRecentOverview();
+    final emptyOverview = PlayerRecentOverview.fromJson(emptyData);
+    expect(emptyOverview.pvp, isNull);
+
+    final hiddenData = await localService.loadHiddenRecentOverview();
+    final hiddenOverview = PlayerRecentOverview.fromJson(hiddenData);
+    expect(hiddenOverview.pvp, isNull);
   });
 }

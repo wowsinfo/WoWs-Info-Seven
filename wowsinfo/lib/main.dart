@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:wowsinfo/repositories/app_repository.dart';
-import 'package:wowsinfo/repositories/storage/shared_store.dart';
+import 'package:wowsinfo/repositories/stores/shared_store.dart';
 import 'package:wowsinfo/repositories/user_repository.dart';
 import 'package:wowsinfo/widgets/wowsinfo.dart';
 
