@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:wowsinfo/models/wargaming/clan_result.dart';
+import 'package:wowsinfo/models/wargaming/player_achievement.dart';
 import 'package:wowsinfo/models/wargaming/player_information.dart';
 import 'package:wowsinfo/models/wargaming/player_result.dart';
 import 'package:wowsinfo/models/wargaming/server_status.dart';
@@ -72,5 +73,15 @@ class WargamingService extends BaseService {
               '%2Cstatistics.pvp_div3%2Cstatistics.rank_solo',
     );
     return decodeObject(result, PlayerInformation.fromJson);
+  }
+
+  /// Get a player's achievements by [accountId].
+  Future<ServiceResult<PlayerAchievement>> getPlayerAchievements(
+    String accountId,
+  ) async {
+    final result = await getObject(
+      baseUrl + '/account/achievements/$_applicationId&account_id=$accountId',
+    );
+    return decodeObject(result, PlayerAchievement.fromJson);
   }
 }

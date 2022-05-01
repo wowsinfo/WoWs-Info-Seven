@@ -32,6 +32,8 @@ class PlayerInformation {
   final int? statsUpdatedAt;
 
   factory PlayerInformation.fromJson(Map<String, dynamic> json) {
+    if (json.isEmpty) return const PlayerInformation();
+
     final player = json.values.first;
     if (player is Map<String, dynamic>) {
       return PlayerInformation(
@@ -53,7 +55,7 @@ class PlayerInformation {
       );
     }
 
-    assert(false, 'json does not contain player information');
+    assert(false, 'Not a hidden account but data is missing');
     return const PlayerInformation();
   }
 }

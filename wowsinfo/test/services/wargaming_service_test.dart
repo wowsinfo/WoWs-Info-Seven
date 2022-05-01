@@ -3,12 +3,18 @@ import 'package:wowsinfo/models/wowsinfo/game_server.dart';
 import 'package:wowsinfo/services/wargaming/wargaming_service.dart';
 
 void main() {
+  // Test a public account
   final testServer = GameServer(WoWsServer.asia);
-  final testAccountId = '2011774448';
+  final testService = WargamingService(testServer);
+  const testAccountId = '2011774448';
+
+  // Test a hidden account
+  final hiddenServer = GameServer(WoWsServer.northAmerica);
+  final hiddenService = WargamingService(hiddenServer);
+  const hiddenAccountId = '1025459900';
 
   test('test server status', () async {
-    final service = WargamingService(testServer);
-    final result = await service.getServerStatus();
+    final result = await testService.getServerStatus();
     expect(result.hasError, false);
     expect(result.isNotEmpty, true);
     final data = result.data;
@@ -18,8 +24,7 @@ void main() {
   });
 
   test('test search player henryquan', () async {
-    final service = WargamingService(testServer);
-    final result = await service.searchPlayer('henryquan');
+    final result = await testService.searchPlayer('henryquan');
     expect(result.hasError, false);
     expect(result.isNotEmpty, true);
     final data = result.data;
@@ -32,8 +37,7 @@ void main() {
   });
 
   test('test search clan tag FFD', () async {
-    final service = WargamingService(testServer);
-    final result = await service.searchClan('FFD');
+    final result = await testService.searchClan('FFD');
     expect(result.hasError, false);
     expect(result.isNotEmpty, true);
     final data = result.data;
@@ -47,8 +51,7 @@ void main() {
   });
 
   test('test player information by ID', () async {
-    final service = WargamingService(testServer);
-    final result = await service.getPlayerInformation(testAccountId);
+    final result = await testService.getPlayerInformation(testAccountId);
     expect(result.hasError, false);
     expect(result.isNotEmpty, true);
     final data = result.data;
@@ -72,6 +75,40 @@ void main() {
     expect(pvp.secondaries, isNotNull);
     expect(pvp.ramming, isNotNull);
 
-    // TODO: add even more tests here
+    // test hidden account
+    final hiddenResult = await hiddenService.getPlayerInformation(
+      hiddenAccountId,
+    );
+    expect(hiddenResult.hasError, false);
+    expect(hiddenResult.isNotEmpty, true);
+    final hiddenData = hiddenResult.data;
+    // The data is still valid but we don't know much about the player's statistics
+    if (hiddenData == null) fail('PlayerInformation should be valid');
+    expect(hiddenData.hiddenProfile, true);
+    expect(hiddenData.statistics, isNull);
+  });
+
+  test('test player achievements by ID', () async {
+    final result = await testService.getPlayerAchievements(testAccountId);
+    expect(result.hasError, false);
+    expect(result.isNotEmpty, true);
+    final data = result.data;
+    if (data == null) fail('PlayerAchievement should be valid');
+    expect(data.battle, isNotNull);
+    expect(data.progress, isNotNull);
+    expect(data.battle?.isNotEmpty, true);
+    expect(data.progress?.isNotEmpty, true);
+
+    // test hidden account
+    final hiddenResult = await hiddenService.getPlayerAchievements(
+      hiddenAccountId,
+    );
+    expect(hiddenResult.hasError, false);
+    expect(hiddenResult.isNotEmpty, true);
+    final hiddenData = hiddenResult.data;
+    if (hiddenData == null) fail('PlayerAchievement should be valid');
+    // no data should be returned
+    expect(hiddenData.battle, isNull);
+    expect(hiddenData.progress, isNull);
   });
 }
