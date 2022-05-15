@@ -23,6 +23,7 @@ class GameRepository {
   /// Load wowsinfo.json from /gamedata/app/data/
   Future<void> initialise() async {
     if (_initialised) {
+      _logger.severe('GameRepository already initialised');
       throw Exception('GameRepository is already initialised');
     }
 
@@ -31,8 +32,9 @@ class GameRepository {
       'gamedata/app/data/wowsinfo.json',
       cache: false,
     );
-    final dataObject = jsonDecode(jsonString);
     _timer.log(message: 'Loaded wowsinfo.json');
+    final dataObject = jsonDecode(jsonString);
+    _timer.log(message: 'Parsed wowsinfo.json');
 
     // decode data into models and store them in the repository
     _alias = (dataObject['alias'] as Map).map((key, value) {
