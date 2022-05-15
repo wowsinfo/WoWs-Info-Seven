@@ -26,6 +26,7 @@ Future<void> setup() async {
 }
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await setup();
   runApp(const WoWsInfoApp());
 }
