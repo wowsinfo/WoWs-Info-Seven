@@ -1,0 +1,3 @@
+[submodule "wowsinfo/WoWs-Game-Data"]
+	path = wowsinfo/gamedata
+	url = https://github.com/WoWs-Info/WoWs-Game-Data/
