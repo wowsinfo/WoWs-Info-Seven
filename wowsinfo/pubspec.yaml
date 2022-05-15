@@ -1,5 +1,5 @@
 name: wowsinfo
-description: A new Flutter project.
+description: The unofficial World of Warships mobile app.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+1
+version: 1.8.0+1
 
 environment:
   sdk: ">=2.16.0 <3.0.0"
@@ -67,6 +67,16 @@ flutter:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
+  assets:
+    - gamedata/app/assets/achievements/
+    - gamedata/app/assets/camouflages/
+    - gamedata/app/assets/consumables/
+    - gamedata/app/assets/flags/
+    - gamedata/app/assets/permoflages/
+    - gamedata/app/assets/ships/
+    - gamedata/app/assets/skills/
+    - gamedata/app/assets/upgrades/
+    - gamedata/app/data/wowsinfo.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
