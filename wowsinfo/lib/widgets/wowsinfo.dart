@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wowsinfo/widgets/page/loading.dart';
+import 'package:wowsinfo/widgets/page/app_loading.dart';
 import 'package:wowsinfo/widgets/page/setup.dart';
 
 class WoWsInfoApp extends StatelessWidget {
@@ -12,7 +12,7 @@ class WoWsInfoApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Setup(),
+      home: const AppLoading(),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wowsinfo/repositories/game_repository.dart';
 
 class AppLoading extends StatefulWidget {
   const AppLoading({Key? key}) : super(key: key);
@@ -8,6 +9,14 @@ class AppLoading extends StatefulWidget {
 }
 
 class _AppLoadingState extends State<AppLoading> {
+  @override
+  void initState() {
+    super.initState();
+    GameRepository.instance.initialise().then((value) {
+      // go to home screen here
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +42,7 @@ class _AppLoadingState extends State<AppLoading> {
                   minHeight: 8,
                 ),
               ),
-              const Text("Fetching API..."),
+              const Text('Loading...'),
             ],
           ),
         ),
