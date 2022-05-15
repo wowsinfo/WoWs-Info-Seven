@@ -2,8 +2,9 @@ import 'package:flutter/foundation.dart';
 
 import 'consumable.dart';
 
+@immutable
 class Aircraft {
-  Aircraft({
+  const Aircraft({
     required this.type,
     required this.nation,
     required this.name,
