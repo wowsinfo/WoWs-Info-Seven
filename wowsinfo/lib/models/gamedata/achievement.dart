@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
+
+@immutable
 class Achievement {
-  Achievement({
+  const Achievement({
     required this.icon,
     required this.name,
     required this.description,
@@ -8,14 +11,14 @@ class Achievement {
     required this.constants,
   });
 
-  String icon;
-  String name;
-  String description;
-  List<String> type;
-  int id;
+  final String icon;
+  final String name;
+  final String description;
+  final List<String> type;
+  final int id;
 
   /// This field can be empty. The number can be int or double.
-  Map<String, dynamic> constants;
+  final Map<String, dynamic> constants;
 
   factory Achievement.fromJson(Map<String, dynamic> json) => Achievement(
         icon: json['icon'],

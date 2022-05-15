@@ -1,5 +1,8 @@
+import 'package:flutter/foundation.dart';
+
+@immutable
 class Ability {
-  Ability({
+  const Ability({
     required this.nation,
     required this.name,
     required this.description,
@@ -8,12 +11,12 @@ class Ability {
     required this.abilities,
   });
 
-  String nation;
-  String name;
-  String description;
-  String filter;
-  String type;
-  Map<String, AbilityInfo> abilities;
+  final String nation;
+  final String name;
+  final String description;
+  final String filter;
+  final String type;
+  final Map<String, AbilityInfo> abilities;
 
   factory Ability.fromJson(Map<String, dynamic> json) => Ability(
         nation: json['nation'],
@@ -28,8 +31,9 @@ class Ability {
 
 // TODO: too many fields but consumables are all different, what to do?
 // TODO: we should probably use dynamic for this one I guess
+@immutable
 class AbilityInfo {
-  AbilityInfo({
+  const AbilityInfo({
     this.numConsumables,
     this.preparationTime,
     this.reloadTime,
@@ -99,73 +103,73 @@ class AbilityInfo {
     this.weaponTypes,
   });
 
-  int? numConsumables;
-  num? preparationTime;
-  num? reloadTime;
-  num? workTime;
-  num? regenerationHPSpeed;
-  num? regenerationHPSpeedUnits;
-  num? areaDamageMultiplier;
-  num? bubbleDamageMultiplier;
-  int? climbAngle;
-  num? distanceToKill;
-  num? dogFightTime;
-  String? fightersName;
-  int? fightersNum;
-  num? flyAwayTime;
-  num? radius;
-  num? timeDelayAttack;
-  num? timeFromHeaven;
-  num? timeToTryingCatch;
-  num? timeWaitDelayAttack;
-  num? artilleryDistCoeff;
-  num? activationDelay;
-  num? height;
-  num? lifeTime;
-  num? spawnBackwardShift;
-  num? speedLimit;
-  num? startDelayTime;
-  String? descIDs;
-  String? iconIDs;
-  String? titleIDs;
-  num? backwardEngineForsag;
-  num? backwardEngineForsagMaxSpeed;
-  num? boostCoeff;
-  num? forwardEngineForsag;
-  num? forwardEngineForsagMaxSpeed;
-  num? distShip;
-  num? distTorpedo;
-  Map<String, num>? targetBuoyancyCoefficients;
-  num? torpedoReloadTime;
-  List<String>? affectedClasses;
-  num? regenerationRate;
-  String? ammo;
-  num? acousticWaveRadius;
-  num? updateFrequency;
-  num? zoneLifetime;
-  num? buoyancyRudderResetTimeCoeff;
-  num? buoyancyRudderTimeCoeff;
-  num? maxBuoyancySpeedCoeff;
-  num? underwaterMaxRudderAngleCoeff;
-  bool? canUseOnEmpty;
-  String? logic;
-  num? criticalChance;
-  List<String>? source;
-  List<String>? target;
-  num? zoneRadius;
-  String? allyAuraBuff;
-  String? selfAuraBuff;
-  num? startDistance;
-  int? waveDistance;
-  String? waveParams;
-  String? absoluteBuff;
-  String? condition;
-  String? conditionalBuff;
-  String? targetBuff;
-  int? buoyancyState;
-  num? effectOnEndLongivity;
-  num? reloadBoostCoeff;
-  List<String>? weaponTypes;
+  final int? numConsumables;
+  final num? preparationTime;
+  final num? reloadTime;
+  final num? workTime;
+  final num? regenerationHPSpeed;
+  final num? regenerationHPSpeedUnits;
+  final num? areaDamageMultiplier;
+  final num? bubbleDamageMultiplier;
+  final int? climbAngle;
+  final num? distanceToKill;
+  final num? dogFightTime;
+  final String? fightersName;
+  final int? fightersNum;
+  final num? flyAwayTime;
+  final num? radius;
+  final num? timeDelayAttack;
+  final num? timeFromHeaven;
+  final num? timeToTryingCatch;
+  final num? timeWaitDelayAttack;
+  final num? artilleryDistCoeff;
+  final num? activationDelay;
+  final num? height;
+  final num? lifeTime;
+  final num? spawnBackwardShift;
+  final num? speedLimit;
+  final num? startDelayTime;
+  final String? descIDs;
+  final String? iconIDs;
+  final String? titleIDs;
+  final num? backwardEngineForsag;
+  final num? backwardEngineForsagMaxSpeed;
+  final num? boostCoeff;
+  final num? forwardEngineForsag;
+  final num? forwardEngineForsagMaxSpeed;
+  final num? distShip;
+  final num? distTorpedo;
+  final Map<String, num>? targetBuoyancyCoefficients;
+  final num? torpedoReloadTime;
+  final List<String>? affectedClasses;
+  final num? regenerationRate;
+  final String? ammo;
+  final num? acousticWaveRadius;
+  final num? updateFrequency;
+  final num? zoneLifetime;
+  final num? buoyancyRudderResetTimeCoeff;
+  final num? buoyancyRudderTimeCoeff;
+  final num? maxBuoyancySpeedCoeff;
+  final num? underwaterMaxRudderAngleCoeff;
+  final bool? canUseOnEmpty;
+  final String? logic;
+  final num? criticalChance;
+  final List<String>? source;
+  final List<String>? target;
+  final num? zoneRadius;
+  final String? allyAuraBuff;
+  final String? selfAuraBuff;
+  final num? startDistance;
+  final int? waveDistance;
+  final String? waveParams;
+  final String? absoluteBuff;
+  final String? condition;
+  final String? conditionalBuff;
+  final String? targetBuff;
+  final int? buoyancyState;
+  final num? effectOnEndLongivity;
+  final num? reloadBoostCoeff;
+  final List<String>? weaponTypes;
 
   factory AbilityInfo.fromJson(Map<String, dynamic> json) => AbilityInfo(
         numConsumables: json['numConsumables'],

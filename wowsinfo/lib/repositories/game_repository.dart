@@ -5,6 +5,7 @@ import 'package:logging/logging.dart';
 import 'package:wowsinfo/foundation/helpers/time_tracker.dart';
 import 'package:wowsinfo/models/gamedata/ability.dart';
 import 'package:wowsinfo/models/gamedata/achievement.dart';
+import 'package:wowsinfo/models/gamedata/aircraft.dart';
 import 'package:wowsinfo/models/gamedata/alias.dart';
 
 /// This repository manages game data from WoWs-Game-Data
@@ -19,6 +20,7 @@ class GameRepository {
   late final Map<String, Alias> _alias;
   late final Map<String, Ability> _abilities;
   late final Map<String, Achievement> _achievements;
+  late final Map<String, Aircraft> _aircrafts;
 
   /// Load wowsinfo.json from /gamedata/app/data/
   Future<void> initialise() async {
@@ -46,26 +48,35 @@ class GameRepository {
     _achievements = (dataObject['achievements'] as Map).map((key, value) {
       return MapEntry(key, Achievement.fromJson(value));
     });
+    _aircrafts = (dataObject['aircrafts'] as Map).map((key, value) {
+      return MapEntry(key, Aircraft.fromJson(value));
+    });
 
     _initialised = true;
     _timer.log(message: 'Initialised GameRepository');
   }
 
-  /// Get an alias string by its key
+  /// Get an alias string by its key.
   /// If the alias is not found, it will return null
   String? aliasOf(String key) {
     return _alias[key]?.alias;
   }
 
-  /// Get an ability by its key
+  /// Get an ability by its key.
   /// If the ability is not found, it will return null
   Ability? abilityOf(String key) {
     return _abilities[key];
   }
 
-  /// Get an achievement by its key
+  /// Get an achievement by its key.
   /// If the achievement is not found, it will return null
   Achievement? achievementOf(String key) {
     return _achievements[key];
+  }
+
+  /// Get an aircraft by its key.
+  /// If the aircraft is not found, it will return null
+  Aircraft? aircraftOf(String key) {
+    return _aircrafts[key];
   }
 }
