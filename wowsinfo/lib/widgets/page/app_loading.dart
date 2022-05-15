@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
+import 'package:wowsinfo/widgets/page/wiki/achievement_page.dart';
 
 class AppLoading extends StatefulWidget {
   const AppLoading({Key? key}) : super(key: key);
@@ -13,7 +14,10 @@ class _AppLoadingState extends State<AppLoading> {
   void initState() {
     super.initState();
     GameRepository.instance.initialise().then((value) {
-      // go to home screen here
+      // TODO: go to home screen here
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (ctx) => AchievementPage(),
+      ));
     });
   }
 

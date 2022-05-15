@@ -89,6 +89,8 @@ class GameRepository {
     return _achievements[key];
   }
 
+  Map<String, Achievement> get achievements => _achievements;
+
   /// Get an aircraft by its key.
   /// If the aircraft is not found, it will return null
   Aircraft? aircraftOf(String key) {

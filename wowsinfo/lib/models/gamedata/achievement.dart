@@ -29,4 +29,9 @@ class Achievement {
         constants: Map.from(json['constants'])
             .map((k, v) => MapEntry<String, dynamic>(k, v)),
       );
+
+  @override
+  String toString() {
+    return 'Achievement{icon: $icon, name: $name, description: $description, type: $type, id: $id, constants: $constants}';
+  }
 }
