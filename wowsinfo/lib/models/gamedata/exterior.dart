@@ -11,6 +11,7 @@ class Exterior {
     required this.id,
     required this.name,
     required this.costGold,
+    required this.costCR,
     required this.modifiers,
     required this.type,
   });
@@ -18,6 +19,7 @@ class Exterior {
   final int id;
   final String name;
   final int? costGold;
+  final int? costCR;
   final ExteriorModifiers? modifiers;
   final String type;
 
@@ -25,6 +27,7 @@ class Exterior {
         id: json['id'],
         name: json['name'],
         costGold: json['costGold'],
+        costCR: json['costCR'],
         modifiers: json['modifiers'] == null
             ? null
             : ExteriorModifiers.fromJson(json['modifiers']),

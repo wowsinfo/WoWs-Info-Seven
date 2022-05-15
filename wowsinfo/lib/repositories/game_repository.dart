@@ -9,6 +9,7 @@ import 'package:wowsinfo/models/gamedata/aircraft.dart';
 import 'package:wowsinfo/models/gamedata/alias.dart';
 import 'package:wowsinfo/models/gamedata/exterior.dart';
 import 'package:wowsinfo/models/gamedata/modernization.dart';
+import 'package:wowsinfo/models/gamedata/projectile.dart';
 
 /// This repository manages game data from WoWs-Game-Data
 class GameRepository {
@@ -25,6 +26,7 @@ class GameRepository {
   late final Map<String, Aircraft> _aircrafts;
   late final Map<String, Exterior> _exteriors;
   late final Map<String, Modernization> _modernizations;
+  late final Map<String, Projectile> _projectiles;
 
   /// Load wowsinfo.json from /gamedata/app/data/
   Future<void> initialise() async {
@@ -60,6 +62,9 @@ class GameRepository {
     });
     _modernizations = (dataObject['modernizations'] as Map).map((key, value) {
       return MapEntry(key, Modernization.fromJson(value));
+    });
+    _projectiles = (dataObject['projectiles'] as Map).map((key, value) {
+      return MapEntry(key, Projectile.fromJson(value));
     });
 
     _initialised = true;
@@ -120,5 +125,11 @@ class GameRepository {
   /// If the modernization is not found, it will return null
   Modernization? modernizationOf(String key) {
     return _modernizations[key];
+  }
+
+  /// Get a projectile by its key.
+  /// If the projectile is not found, it will return null
+  Projectile? projectileOf(String key) {
+    return _projectiles[key];
   }
 }
