@@ -7,6 +7,7 @@ import 'package:wowsinfo/models/gamedata/ability.dart';
 import 'package:wowsinfo/models/gamedata/achievement.dart';
 import 'package:wowsinfo/models/gamedata/aircraft.dart';
 import 'package:wowsinfo/models/gamedata/alias.dart';
+import 'package:wowsinfo/models/gamedata/exterior.dart';
 
 /// This repository manages game data from WoWs-Game-Data
 class GameRepository {
@@ -21,6 +22,7 @@ class GameRepository {
   late final Map<String, Ability> _abilities;
   late final Map<String, Achievement> _achievements;
   late final Map<String, Aircraft> _aircrafts;
+  late final Map<String, Exterior> _exteriors;
 
   /// Load wowsinfo.json from /gamedata/app/data/
   Future<void> initialise() async {
@@ -51,6 +53,9 @@ class GameRepository {
     _aircrafts = (dataObject['aircrafts'] as Map).map((key, value) {
       return MapEntry(key, Aircraft.fromJson(value));
     });
+    _exteriors = (dataObject['exteriors'] as Map).map((key, value) {
+      return MapEntry(key, Exterior.fromJson(value));
+    });
 
     _initialised = true;
     _timer.log(message: 'Initialised GameRepository');
@@ -78,5 +83,31 @@ class GameRepository {
   /// If the aircraft is not found, it will return null
   Aircraft? aircraftOf(String key) {
     return _aircrafts[key];
+  }
+
+  /// Get a flag by its key.
+  /// If the flag is not found, it will return null
+  Flag? flagOf(String key) {
+    final flag = _exteriors[key];
+    if (flag == null) return null;
+    // make sure this is a flag not a camouflage
+    if (flag.type != 'Flags') {
+      throw Exception('$key is not a flag');
+    }
+
+    return flag;
+  }
+
+  /// Get a camouflage (permouflage or skin) by its key.
+  /// If the camouflage is not found, it will return null
+  Camouflage? camouflageOf(String key) {
+    final camouflage = _exteriors[key];
+    if (camouflage == null) return null;
+    // make sure this is a camouflage not a flag
+    if (camouflage.type == 'Flags') {
+      throw Exception('$key is not a camouflage');
+    }
+
+    return camouflage;
   }
 }
