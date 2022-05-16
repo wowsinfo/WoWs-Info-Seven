@@ -17,9 +17,9 @@ class _AppLoadingState extends State<AppLoading> {
     App.instance.inject(context);
     GameRepository.instance.initialise().then((value) {
       // TODO: go to home screen here
-      Navigator.of(context).push(MaterialPageRoute(
-        builder: (ctx) => AchievementPage(),
-      ));
+      Navigator.of(context).push(
+        App.platformPageRoute(builder: (_) => AchievementPage()),
+      );
     });
   }
 

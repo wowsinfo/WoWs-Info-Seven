@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:wowsinfo/foundation/helpers/utils.dart';
+import 'package:wowsinfo/models/gamedata/achievement.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
+import 'package:wowsinfo/widgets/shared/placeholder.dart';
 
 class AchievementPage extends StatelessWidget {
   AchievementPage({Key? key}) : super(key: key);
@@ -18,13 +20,13 @@ class AchievementPage extends StatelessWidget {
       ),
       body: SafeArea(
         child: Scrollbar(
-          child: buildGridView(context, itemCount),
+          child: buildGridView(itemCount),
         ),
       ),
     );
   }
 
-  GridView buildGridView(BuildContext context, int itemCount) {
+  GridView buildGridView(int itemCount) {
     // Display everything
     return GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -45,14 +47,41 @@ class AchievementPage extends StatelessWidget {
                   //   error,
                   //   stackTrace,
                   // );
-                  return Container();
+                  return const IconPlaceholder();
                 },
               ),
             ),
             onTap: () {
-              _logger.info(curr);
+              showInfo(context, curr);
             },
           );
         });
+  }
+
+  void showInfo(BuildContext context, Achievement achievement) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        content: ListTile(
+            contentPadding: const EdgeInsets.all(2),
+            leading: Image.asset(
+              'gamedata/app/assets/achievements/${achievement.icon}.png',
+              errorBuilder: (context, error, stackTrace) {
+                // _logger.severe(
+                //   'Failed to load image: $imageName',
+                //   error,
+                //   stackTrace,
+                // );
+                return const IconPlaceholder();
+              },
+            ),
+            title: Text(
+              achievement.name,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+            subtitle: Text(achievement.description)),
+      ),
+    );
   }
 }
