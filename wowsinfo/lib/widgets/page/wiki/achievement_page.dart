@@ -62,25 +62,35 @@ class AchievementPage extends StatelessWidget {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        content: ListTile(
-            contentPadding: const EdgeInsets.all(2),
-            leading: Image.asset(
-              'gamedata/app/assets/achievements/${achievement.icon}.png',
-              errorBuilder: (context, error, stackTrace) {
-                // _logger.severe(
-                //   'Failed to load image: $imageName',
-                //   error,
-                //   stackTrace,
-                // );
-                return const IconPlaceholder();
-              },
-            ),
-            title: Text(
-              achievement.name,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-            subtitle: Text(achievement.description)),
+        content: ConstrainedBox(
+          constraints: const BoxConstraints(
+            maxWidth: 500,
+          ),
+          child: ListTile(
+              contentPadding: const EdgeInsets.all(2),
+              leading: Image.asset(
+                'gamedata/app/assets/achievements/${achievement.icon}.png',
+                errorBuilder: (context, error, stackTrace) {
+                  // _logger.severe(
+                  //   'Failed to load image: $imageName',
+                  //   error,
+                  //   stackTrace,
+                  // );
+                  return const IconPlaceholder();
+                },
+              ),
+              title: Text(
+                GameRepository.instance.stringOf(achievement.name),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+              subtitle: Text(
+                GameRepository.instance.stringOf(
+                  achievement.description,
+                  constants: achievement.constants,
+                ),
+              )),
+        ),
       ),
     );
   }

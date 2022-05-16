@@ -8,7 +8,7 @@ import 'package:wowsinfo/widgets/wowsinfo.dart';
 
 Future<void> setup() async {
   // setup logger and make sure it only prints in debug mode
-  Logger.root.level = Level.INFO; // defaults to Level.INFO
+  Logger.root.level = Level.ALL; // defaults to Level.INFO
   Logger.root.onRecord.listen((record) {
     if (kDebugMode) {
       final message = '${record.loggerName}: ${record.message}';

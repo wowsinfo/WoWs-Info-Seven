@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:logging/logging.dart';
+import 'package:wowsinfo/extensions/number.dart';
 import 'package:wowsinfo/foundation/helpers/time_tracker.dart';
 import 'package:wowsinfo/models/gamedata/ability.dart';
 import 'package:wowsinfo/models/gamedata/achievement.dart';
@@ -27,6 +28,9 @@ class GameRepository {
   late final Map<String, Exterior> _exteriors;
   late final Map<String, Modernization> _modernizations;
   late final Map<String, Projectile> _projectiles;
+
+  late final Map<String, Map<String, String>> _lang;
+  late String _gameLang;
 
   /// Load wowsinfo.json from /gamedata/app/data/
   Future<void> initialise() async {
@@ -66,9 +70,75 @@ class GameRepository {
     _projectiles = (dataObject['projectiles'] as Map).map((key, value) {
       return MapEntry(key, Projectile.fromJson(value));
     });
+    _timer.log(message: 'Decoded wowsinfo.json');
+
+    // load the language file
+    final langString = await rootBundle.loadString(
+      'gamedata/app/lang/lang.json',
+      cache: false,
+    );
+    _timer.log(message: 'Loaded lang.json');
+    final langObject = jsonDecode(langString);
+    _timer.log(message: 'Parsed lang.json');
+    _lang = (langObject as Map).map((key, value) {
+      return MapEntry(key, (value as Map).cast<String, String>());
+    });
+    _gameLang = 'en';
 
     _initialised = true;
     _timer.log(message: 'Initialised GameRepository');
+  }
+
+  void setLanguage(String language) {
+    _gameLang = language;
+  }
+
+  String stringOf(String key, {Map<String, dynamic>? constants}) {
+    if (_lang[_gameLang] == null) {
+      _logger.severe('Language $_gameLang not found');
+      return ' ';
+    }
+
+    final rawString = _lang[_gameLang]?[key];
+    if (rawString == null) {
+      _logger.severe('Language key $key not found');
+      return ' ';
+    }
+
+    // TODO: we can move this to probably another class if needed
+    if (constants == null || constants.isEmpty) {
+      return rawString;
+    }
+
+    // put constants into the string if needed
+    // check if value has %(key) in it
+    var formattedString = rawString;
+    final regex = RegExp(r'%\((.*?)\)s');
+    final matches = regex.allMatches(rawString);
+    for (final match in matches) {
+      final key = match.group(1);
+      if (key == null) {
+        _logger.severe('Invalid match, key is null');
+        continue;
+      }
+
+      // the key doesn't include _percent at the end
+      final constantKey = key.replaceAll('_percent', '');
+      var constantValue = constants[constantKey];
+      _logger.fine('Constant $key = $constantValue');
+      if (key.endsWith('_percent')) {
+        final number = constantValue as num;
+        // format to percentage
+        constantValue = '${(number * 100).toDecimalString()}%';
+      }
+
+      formattedString = formattedString.replaceAll(
+        '%($key)s',
+        constantValue.toString(),
+      );
+    }
+
+    return formattedString;
   }
 
   /// Get an alias string by its key.
