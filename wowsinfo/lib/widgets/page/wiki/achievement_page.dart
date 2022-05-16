@@ -36,9 +36,17 @@ class AchievementPage extends StatelessWidget {
           final curr = _achievements[index];
           final imageName = curr.icon;
           return InkWell(
-            child: Image(
-              image: AssetImage(
+            child: FittedBox(
+              child: Image.asset(
                 'gamedata/app/assets/achievements/$imageName.png',
+                errorBuilder: (context, error, stackTrace) {
+                  // _logger.severe(
+                  //   'Failed to load image: $imageName',
+                  //   error,
+                  //   stackTrace,
+                  // );
+                  return Container();
+                },
               ),
             ),
             onTap: () {
