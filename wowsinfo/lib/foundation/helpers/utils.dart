@@ -1,7 +1,5 @@
-import 'dart:io';
 import 'dart:math';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class Utils {
@@ -9,36 +7,9 @@ class Utils {
   Utils(this.context);
   static Utils of(BuildContext context) => Utils(context);
 
-  /// Print only in debug mode
-  static void debugPrint(Object object) {
-    if (kDebugMode) print(object);
-  }
-
   /// A simple wrapper of Future.delayed
   static Future<void> delay(int duration) {
     return Future.delayed(Duration(milliseconds: duration));
-  }
-
-  /// Check if this device is IOS or MacOS
-  static bool isApple() {
-    // Web doesn't support platform so prevent calling it
-    if (kIsWeb) return false;
-    return Platform.isIOS || Platform.isMacOS;
-  }
-
-  static bool isWeb() => kIsWeb;
-
-  /// From https://stackoverflow.com/a/53912090
-  /// - Check whether this is a tabler or a large screen device
-  /// This might be not accurate, but it's a good enough way to check
-  /// On Android, it is better if we use the native channel
-  bool isTablet() {
-    var size = MediaQuery.of(context).size;
-    var diagonal =
-        sqrt((size.width * size.width) + (size.height * size.height));
-
-    var isTablet = diagonal > 1100.0;
-    return isTablet;
   }
 
   int getItemCount(int maxItem, int minItem, int itemWidth) {
