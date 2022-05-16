@@ -32,6 +32,11 @@ class GameRepository {
   late final Map<String, Map<String, String>> _lang;
   late String _gameLang;
 
+  late final List<Achievement> achievementList;
+  late final List<Ability> abilityList;
+  late final List<Exterior> exteriorList;
+  late final List<Modernization> modernizationList;
+
   /// Load wowsinfo.json from /gamedata/app/data/
   Future<void> initialise() async {
     if (_initialised) {
@@ -40,11 +45,14 @@ class GameRepository {
     }
 
     final _timer = TimeTracker();
+
+    // load game data
     final jsonString = await rootBundle.loadString(
       'gamedata/app/data/wowsinfo.json',
       cache: false,
     );
     _timer.log(message: 'Loaded wowsinfo.json');
+
     final dataObject = jsonDecode(jsonString);
     _timer.log(message: 'Parsed wowsinfo.json');
 
@@ -78,15 +86,36 @@ class GameRepository {
       cache: false,
     );
     _timer.log(message: 'Loaded lang.json');
+
     final langObject = jsonDecode(langString);
     _timer.log(message: 'Parsed lang.json');
+
     _lang = (langObject as Map).map((key, value) {
       return MapEntry(key, (value as Map).cast<String, String>());
     });
     _gameLang = 'en';
+    _timer.log(message: 'Decoded lang.json');
 
+    _generateLists();
     _initialised = true;
     _timer.log(message: 'Initialised GameRepository');
+  }
+
+  void _generateLists() {
+    // sort achievements by id
+    achievementList = _achievements.values.toList();
+    achievementList.sort((a, b) => b.id.compareTo(a.id));
+
+    // we don't have to sort abilities
+    abilityList = _abilities.values.toList();
+
+    // sort exteriors by id
+    exteriorList = _exteriors.values.toList();
+    exteriorList.sort((a, b) => b.id.compareTo(a.id));
+
+    // sort modernizations by id
+    modernizationList = _modernizations.values.toList();
+    modernizationList.sort((a, b) => b.id.compareTo(a.id));
   }
 
   void setLanguage(String language) {
@@ -158,8 +187,6 @@ class GameRepository {
   Achievement? achievementOf(String key) {
     return _achievements[key];
   }
-
-  Map<String, Achievement> get achievements => _achievements;
 
   /// Get an aircraft by its key.
   /// If the aircraft is not found, it will return null
