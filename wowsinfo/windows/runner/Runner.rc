@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "wowsinfo" "\0"
+            VALUE "CompanyName", "Yiheng Quan" "\0"
+            VALUE "FileDescription", "WoWs Info Windows" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "wowsinfo" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2022 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "wowsinfo.exe" "\0"
-            VALUE "ProductName", "wowsinfo" "\0"
+            VALUE "InternalName", "WoWsInfo" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2022 Yiheng Quan. All rights reserved." "\0"
+            VALUE "OriginalFilename", "WoWsInfo.exe" "\0"
+            VALUE "ProductName", "WoWsInfo" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
