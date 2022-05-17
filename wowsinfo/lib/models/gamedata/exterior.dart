@@ -10,6 +10,7 @@ class Exterior {
   const Exterior({
     required this.id,
     required this.name,
+    required this.icon,
     this.description,
     this.costGold,
     this.costCR,
@@ -19,6 +20,7 @@ class Exterior {
 
   final int id;
   final String name;
+  final String icon;
   final String? description;
   final int? costGold;
   final int? costCR;
@@ -28,6 +30,7 @@ class Exterior {
   factory Exterior.fromJson(Map<String, dynamic> json) => Exterior(
         id: json['id'],
         name: json['name'],
+        icon: json['icon'],
         description: json['description'],
         costGold: json['costGold'],
         costCR: json['costCR'],

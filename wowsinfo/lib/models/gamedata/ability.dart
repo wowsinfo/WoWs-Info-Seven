@@ -4,7 +4,9 @@ import 'package:flutter/foundation.dart';
 class Ability {
   const Ability({
     required this.nation,
+    required this.id,
     required this.name,
+    required this.icon,
     required this.description,
     required this.filter,
     required this.type,
@@ -12,7 +14,9 @@ class Ability {
   });
 
   final String nation;
+  final int id;
   final String name;
+  final String icon;
   final String description;
   final String filter;
   final String type;
@@ -20,7 +24,9 @@ class Ability {
 
   factory Ability.fromJson(Map<String, dynamic> json) => Ability(
         nation: json['nation'],
+        id: json['id'],
         name: json['name'],
+        icon: json['icon'],
         description: json['description'],
         filter: json['filter'],
         type: json['type'],
@@ -31,6 +37,7 @@ class Ability {
 
 // TODO: too many fields but consumables are all different, what to do?
 // TODO: we should probably use dynamic for this one I guess
+// TODO: we can default everything to 1??
 @immutable
 class AbilityInfo {
   const AbilityInfo({

@@ -33,7 +33,7 @@ class GameRepository {
   late String _gameLang;
 
   late final List<Achievement> achievementList;
-  late final List<Ability> abilityList;
+  late final List<Ability> consumableList;
   late final List<Exterior> exteriorList;
   late final List<Modernization> modernizationList;
 
@@ -106,8 +106,9 @@ class GameRepository {
     achievementList = _achievements.values.toList();
     achievementList.sort((a, b) => b.id.compareTo(a.id));
 
-    // we don't have to sort abilities
-    abilityList = _abilities.values.toList();
+    // sort consumables by id
+    consumableList = _abilities.values.toList();
+    consumableList.sort((a, b) => b.id.compareTo(a.id));
 
     // sort exteriors by id
     exteriorList = _exteriors.values.toList();

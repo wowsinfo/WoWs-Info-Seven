@@ -7,6 +7,7 @@ class Modernization {
     required this.slot,
     required this.id,
     required this.name,
+    required this.icon,
     required this.description,
     required this.level,
     required this.type,
@@ -19,6 +20,7 @@ class Modernization {
   final int slot;
   final int id;
   final String name;
+  final String icon;
   final String description;
   final List<int>? level;
   final List<String>? type;
@@ -33,6 +35,7 @@ class Modernization {
         slot: json['slot'],
         id: json['id'],
         name: json['name'],
+        icon: json['icon'],
         description: json['description'],
         level: json['level'] == null
             ? null
