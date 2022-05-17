@@ -13,6 +13,7 @@ class Ability {
     required this.filter,
     required this.type,
     required this.abilities,
+    required this.abilityList,
   });
 
   final String nation;
@@ -22,7 +23,23 @@ class Ability {
   final String description;
   final String filter;
   final String type;
-  final Map<String, AbilityInfo> abilities;
+  // final Map<String, AbilityInfo> abilities;
+  // TODO: we shouldn't do this because in the future, we need the actual value
+  final Map<String, Map<String, dynamic>> abilities;
+  final List<Map<String, dynamic>> abilityList;
+
+  String descriptionOf(int index) {
+    final ability = abilityList[index];
+    return ability.entries
+        .map((e) {
+          final key = 'IDS_PARAMS_MODIFIER_' + e.key.toUpperCase();
+          final description = GameRepository.instance.stringOf(key);
+          if (description == ' ') return description;
+          return '$description: ${e.value}';
+        })
+        .where((e) => e != ' ')
+        .join('\n');
+  }
 
   factory Ability.fromJson(Map<String, dynamic> json) => Ability(
         nation: json['nation'],
@@ -32,14 +49,12 @@ class Ability {
         description: json['description'],
         filter: json['filter'],
         type: json['type'],
-        abilities: Map.from(json['abilities']).map((k, v) =>
-            MapEntry<String, AbilityInfo>(k, AbilityInfo.fromJson(v))),
+        // abilities: Map.from(json['abilities']).map((k, v) =>
+        //     MapEntry<String, AbilityInfo>(k, AbilityInfo.fromJson(v))),
+        abilities: Map.from(json['abilities']).map((key, value) =>
+            MapEntry<String, Map<String, dynamic>>(key, Map.from(value))),
+        abilityList: List.from(json['abilities'].values),
       );
-
-  @override
-  String toString() {
-    return 'Ability{nation: $nation, id: $id, name: $name, icon: $icon, description: $description, filter: $filter, type: $type, abilities: $abilities}';
-  }
 }
 
 // TODO: too many fields but consumables are all different, what to do?

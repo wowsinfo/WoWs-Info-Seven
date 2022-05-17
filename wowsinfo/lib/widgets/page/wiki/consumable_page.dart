@@ -52,7 +52,6 @@ class ConsumablePage extends StatelessWidget {
             ),
           ),
           onTap: () {
-            _logger.fine('Tapped on $curr');
             showInfo(context, curr);
           },
         );
@@ -62,7 +61,7 @@ class ConsumablePage extends StatelessWidget {
 
   void showInfo(BuildContext context, Ability consumable) {
     final icon = consumable.icon;
-    final modifierString = consumable.abilities.values.first.toString();
+    final modifierString = consumable.descriptionOf(0);
 
     showDialog(
       context: context,
