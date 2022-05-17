@@ -52,6 +52,7 @@ class ConsumablePage extends StatelessWidget {
             ),
           ),
           onTap: () {
+            _logger.fine('Tapped on $curr');
             showInfo(context, curr);
           },
         );
@@ -59,7 +60,10 @@ class ConsumablePage extends StatelessWidget {
     );
   }
 
-  void showInfo(BuildContext context, Ability achievement) {
+  void showInfo(BuildContext context, Ability consumable) {
+    final icon = consumable.icon;
+    final modifierString = consumable.abilities.values.first.toString();
+
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -70,7 +74,7 @@ class ConsumablePage extends StatelessWidget {
           child: ListTile(
               contentPadding: const EdgeInsets.all(2),
               leading: Image.asset(
-                'gamedata/app/assets/achievements/${achievement.icon}.png',
+                'gamedata/app/assets/consumables/$icon.png',
                 errorBuilder: (context, error, stackTrace) {
                   // _logger.severe(
                   //   'Failed to load image: $imageName',
@@ -81,14 +85,16 @@ class ConsumablePage extends StatelessWidget {
                 },
               ),
               title: Text(
-                GameRepository.instance.stringOf(achievement.name),
+                GameRepository.instance.stringOf(consumable.name),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
               subtitle: Text(
                 GameRepository.instance.stringOf(
-                  achievement.description,
-                ),
+                      consumable.description,
+                    ) +
+                    '\n' +
+                    modifierString,
               )),
         ),
       ),

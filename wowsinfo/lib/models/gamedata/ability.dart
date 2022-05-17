@@ -1,4 +1,6 @@
 import 'package:flutter/foundation.dart';
+import 'package:wowsinfo/extensions/number.dart';
+import 'package:wowsinfo/repositories/game_repository.dart';
 
 @immutable
 class Ability {
@@ -33,6 +35,11 @@ class Ability {
         abilities: Map.from(json['abilities']).map((k, v) =>
             MapEntry<String, AbilityInfo>(k, AbilityInfo.fromJson(v))),
       );
+
+  @override
+  String toString() {
+    return 'Ability{nation: $nation, id: $id, name: $name, icon: $icon, description: $description, filter: $filter, type: $type, abilities: $abilities}';
+  }
 }
 
 // TODO: too many fields but consumables are all different, what to do?
@@ -177,6 +184,27 @@ class AbilityInfo {
   final num? effectOnEndLongivity;
   final num? reloadBoostCoeff;
   final List<String>? weaponTypes;
+
+  @override
+  String toString() {
+    var description = '';
+
+    return description;
+  }
+
+  String _format(String key, num value) {
+    final langKey = 'IDS_PARAMS_MODIFIER_' + key.toUpperCase();
+    final description = GameRepository.instance.stringOf(langKey);
+    if (description == ' ') return '';
+
+    final valueString = value.toDecimalString();
+
+    if (key.contains('time')) {
+      return valueString + 's';
+    }
+
+    return valueString;
+  }
 
   factory AbilityInfo.fromJson(Map<String, dynamic> json) => AbilityInfo(
         numConsumables: json['numConsumables'],
