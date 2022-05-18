@@ -7,7 +7,9 @@ extension NumberExtension on num {
 
   /// Convert to decimal string and remove trailing zeros if it has no decimal
   String toDecimalString() {
-    if (this % 1 == 0) return toStringAsFixed(0);
-    return toString();
+    // handle precision because the number can be 8.000001
+    final rounded = (this * 1000).round() / 1000;
+    if (rounded % 1 == 0) return rounded.toStringAsFixed(0);
+    return rounded.toFixedString(2);
   }
 }

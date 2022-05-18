@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:wowsinfo/extensions/number.dart';
+import 'package:wowsinfo/models/gamedata/modifier.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
 
 @immutable
@@ -25,20 +26,12 @@ class Ability {
   final String type;
   // final Map<String, AbilityInfo> abilities;
   // TODO: we shouldn't do this because in the future, we need the actual value
-  final Map<String, Map<String, dynamic>> abilities;
-  final List<Map<String, dynamic>> abilityList;
+  final Map<String, Modifiers> abilities;
+  final List<Modifiers> abilityList;
 
   String descriptionOf(int index) {
     final ability = abilityList[index];
-    return ability.entries
-        .map((e) {
-          final key = 'IDS_PARAMS_MODIFIER_' + e.key.toUpperCase();
-          final description = GameRepository.instance.stringOf(key);
-          if (description == ' ') return description;
-          return '$description: ${e.value}';
-        })
-        .where((e) => e != ' ')
-        .join('\n');
+    return ability.toString();
   }
 
   factory Ability.fromJson(Map<String, dynamic> json) => Ability(
@@ -52,8 +45,9 @@ class Ability {
         // abilities: Map.from(json['abilities']).map((k, v) =>
         //     MapEntry<String, AbilityInfo>(k, AbilityInfo.fromJson(v))),
         abilities: Map.from(json['abilities']).map((key, value) =>
-            MapEntry<String, Map<String, dynamic>>(key, Map.from(value))),
-        abilityList: List.from(json['abilities'].values),
+            MapEntry<String, Modifiers>(key, Modifiers.fromJson(value))),
+        abilityList: List.from(
+            json['abilities'].values.map((e) => Modifiers.fromJson(e))),
       );
 }
 

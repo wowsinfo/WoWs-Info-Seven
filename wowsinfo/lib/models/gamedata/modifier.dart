@@ -1,8 +1,12 @@
 import 'package:flutter/foundation.dart';
+import 'package:logging/logging.dart';
+import 'package:wowsinfo/extensions/number.dart';
+import 'package:wowsinfo/repositories/game_repository.dart';
 
 @immutable
 class Modifiers {
   const Modifiers({
+    required this.raw,
     this.aaAuraDamage,
     this.aaAuraReceiveDamageCoeff,
     this.aaBubbleDamage,
@@ -241,6 +245,64 @@ class Modifiers {
     this.zoneRadius,
   });
 
+  // Save a copy of the raw data for the desciption
+  final Map<String, dynamic> raw;
+
+  @override
+  String toString() {
+    final _logger = Logger('Modifiers');
+
+    var description = '';
+    for (final entry in raw.entries) {
+      final key = entry.key.toLowerCase();
+      if (key == 'preparationtime') continue;
+
+      final langString = GameRepository.instance.stringOf(
+        'IDS_PARAMS_MODIFIER_' + key.toUpperCase(),
+      );
+
+      if (langString == ' ') continue;
+
+      final value = entry.value;
+      if (value == null) continue;
+      _logger.fine('$key: $value');
+
+      var valueString = '';
+
+      // format to string first
+      if (value is num) {
+        if (value == -1) {
+          // -1 means infinite
+          valueString = '∞';
+        } else {
+          if (key.contains('coeff')) {
+            var adjustedValue = value;
+            if (value < 0.35) {
+              // TODO: need to find a better way
+              adjustedValue = value + 1;
+            }
+            final positive = adjustedValue > 1;
+            final offset = ((adjustedValue - 1).abs() * 100).toDecimalString();
+            valueString = '${positive ? '+' : '-'}$offset%';
+          } else if (key.contains('time')) {
+            valueString = value.toDecimalString() + 's';
+          } else if (key.contains('dist')) {
+            valueString = (value / 33.35).toDecimalString() + 'km';
+          } else {
+            valueString = value.toDecimalString();
+          }
+        }
+      } else if (value is List) {
+        if (value.isEmpty) continue;
+        valueString = value.join(', ');
+      }
+
+      description += '$langString: $valueString\n';
+    }
+
+    return description;
+  }
+
   final ModifierShipType? aaAuraDamage;
   final double? aaAuraReceiveDamageCoeff;
   final ModifierShipType? aaBubbleDamage;
@@ -284,7 +346,7 @@ class Modifiers {
   final double? airDefenseDispWorkTimeCoeff;
   final String? allyAuraBuff;
   final String? ammo;
-  final double? areaDamageMultiplier;
+  final num? areaDamageMultiplier;
   final bool? artilleryAlertEnabled;
   final num? artilleryAlertMinDistance;
   final double? artilleryBoostersReloadCoeff;
@@ -299,7 +361,7 @@ class Modifiers {
   final double? bombAlphaDamageMultiplier;
   final double? bombApAlphaDamageMultiplier;
   final double? bombBurnChanceBonus;
-  final double? boostCoeff;
+  final num? boostCoeff;
   final num? bubbleDamageMultiplier;
   final double? buoyancyRudderResetTimeCoeff;
   final double? buoyancyRudderTimeCoeff;
@@ -479,6 +541,7 @@ class Modifiers {
   final double? zoneRadius;
 
   factory Modifiers.fromJson(Map<String, dynamic> json) => Modifiers(
+        raw: json,
         aaAuraDamage: ModifierShipType.fromJson(json['AAAuraDamage']),
         aaAuraReceiveDamageCoeff: json['AAAuraReceiveDamageCoeff'],
         aaBubbleDamage: ModifierShipType.fromJson(json['AABubbleDamage']),
@@ -518,7 +581,9 @@ class Modifiers {
         acousticWaveRadius: json['acousticWaveRadius'],
         activationDelay: json['activationDelay'],
         additionalConsumables: json['additionalConsumables'],
-        affectedClasses: json['affectedClasses'],
+        affectedClasses: json['affectedClasses'] == null
+            ? null
+            : List<String>.from(json['affectedClasses']),
         afterBattleRepair: json['afterBattleRepair'],
         airDefenseDispReloadCoeff: json['airDefenseDispReloadCoeff'],
         airDefenseDispWorkTimeCoeff: json['airDefenseDispWorkTimeCoeff'],
@@ -683,7 +748,8 @@ class Modifiers {
         smokeGeneratorWorkTimeCoeff: json['smokeGeneratorWorkTimeCoeff'],
         softCriticalEnabled: json['softCriticalEnabled'],
         sonarWorkTimeCoeff: json['sonarWorkTimeCoeff'],
-        source: json['source'],
+        source:
+            json['source'] == null ? null : List<String>.from(json['source']),
         spawnBackwardShift: json['spawnBackwardShift'],
         speedBoostersWorkTimeCoeff: json['speedBoostersWorkTimeCoeff'],
         speedCoef: json['speedCoef'],
@@ -691,7 +757,8 @@ class Modifiers {
         startDelayTime: json['startDelayTime'],
         startDistance: json['startDistance'],
         switchAmmoReloadCoef: json['switchAmmoReloadCoef'],
-        target: json['target'],
+        target:
+            json['target'] == null ? null : List<String>.from(json['target']),
         targetBuff: json['targetBuff'],
         timeDelayAttack: json['timeDelayAttack'],
         timeFromHeaven: json['timeFromHeaven'],
@@ -721,7 +788,9 @@ class Modifiers {
         visionXRayTorpedoDist: json['visionXRayTorpedoDist'],
         waveDistance: json['waveDistance'],
         waveParams: json['waveParams'],
-        weaponTypes: json['weaponTypes'],
+        weaponTypes: json['weaponTypes'] == null
+            ? null
+            : List<String>.from(json['weaponTypes']),
         workTime: json['workTime'],
         zoneLifetime: json['zoneLifetime'],
         zoneRadius: json['zoneRadius'],
