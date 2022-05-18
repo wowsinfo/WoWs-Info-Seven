@@ -25,7 +25,7 @@ class Modernization {
   final List<int>? level;
   final List<String>? type;
   final List<String>? nation;
-  final ModernizationModifiers modifiers;
+  final Modifiers modifiers;
   final List<int>? ships;
   final List<int>? excludes;
 
@@ -46,7 +46,7 @@ class Modernization {
         nation: json['nation'] == null
             ? null
             : List<String>.from(json['nation'].map((x) => x)),
-        modifiers: ModernizationModifiers.fromJson(json['modifiers']),
+        modifiers: Modifiers.fromJson(json['modifiers']),
         ships: json['ships'] == null
             ? null
             : List<int>.from(json['ships'].map((x) => x)),

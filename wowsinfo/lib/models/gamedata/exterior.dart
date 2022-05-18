@@ -24,7 +24,7 @@ class Exterior {
   final String? description;
   final int? costGold;
   final int? costCR;
-  final ExteriorModifiers? modifiers;
+  final Modifiers? modifiers;
   final String type;
 
   factory Exterior.fromJson(Map<String, dynamic> json) => Exterior(
@@ -36,7 +36,7 @@ class Exterior {
         costCR: json['costCR'],
         modifiers: json['modifiers'] == null
             ? null
-            : ExteriorModifiers.fromJson(json['modifiers']),
+            : Modifiers.fromJson(json['modifiers']),
         type: json['type'],
       );
 }

@@ -1,391 +1,730 @@
 import 'package:flutter/foundation.dart';
 
-// TODO: can be merged with another modifiers later
 @immutable
-class ExteriorModifiers {
-  const ExteriorModifiers({
-    required this.afterBattleRepair,
-    required this.expFactor,
-    required this.shootShift,
-    required this.visibilityFactor,
-    required this.creditsFactor,
-    required this.freeExpFactor,
-    required this.collisionDamageApply,
-    required this.collisionDamageNerf,
-    required this.crewExpFactor,
-    required this.speedCoef,
-    required this.planeRegenerationRate,
-    required this.regenerationHPSpeed,
-    required this.burnTime,
-    required this.floodTime,
-    required this.pmDetonationProb,
-    required this.gsIdealRadius,
-    required this.gsMaxDist,
-    required this.gsShotDelay,
-    required this.consumableReloadTime,
-    required this.aaAuraDamage,
-    required this.aaBubbleDamage,
-    required this.burnChanceFactorBig,
-    required this.burnChanceFactorSmall,
-    required this.floodChanceFactor,
-    required this.floodChanceFactorPlane,
-    required this.smokeGeneratorWorkTimeCoeff,
-    required this.airDefenseDispReloadCoeff,
-    required this.sonarWorkTimeCoeff,
+class Modifiers {
+  const Modifiers({
+    this.aaAuraDamage,
+    this.aaAuraReceiveDamageCoeff,
+    this.aaBubbleDamage,
+    this.aaExtraBubbles,
+    this.aaInnerExtraBubbles,
+    this.aaMaxHp,
+    this.consumableReloadTime,
+    this.consumablesWorkTime,
+    this.gmapDamageCoeff,
+    this.gmBigGunVisibilityCoeff,
+    this.gmCritProb,
+    this.gmhecsDamageCoeff,
+    this.gmHeavyCruiserCaliberDamageCoeff,
+    this.gmIdealRadius,
+    this.gmMaxDist,
+    this.gmMaxHp,
+    this.gmRepairTime,
+    this.gmRotationSpeed,
+    this.gmShotDelay,
+    this.gsIdealRadius,
+    this.gsMaxDist,
+    this.gsMaxHp,
+    this.gsShotDelay,
+    this.gtCritProb,
+    this.gtMaxHp,
+    this.gtRepairTime,
+    this.gtRotationSpeed,
+    this.gtShotDelay,
+    this.pmDetonationProb,
+    this.sgCritProb,
+    this.sgCritRudderTime,
+    this.sgRepairTime,
+    this.sgRudderTime,
+    this.absoluteBuff,
+    this.acousticWaveRadius,
+    this.activationDelay,
+    this.additionalConsumables,
+    this.affectedClasses,
+    this.afterBattleRepair,
+    this.airDefenseDispReloadCoeff,
+    this.airDefenseDispWorkTimeCoeff,
+    this.allyAuraBuff,
+    this.ammo,
+    this.areaDamageMultiplier,
+    this.artilleryAlertEnabled,
+    this.artilleryAlertMinDistance,
+    this.artilleryBoostersReloadCoeff,
+    this.artilleryBurnChanceBonus,
+    this.artilleryDistCoeff,
+    this.asMaxHealthCoeff,
+    this.asReloadTimeCoeff,
+    this.backwardEngineForsag,
+    this.backwardEngineForsagMaxSpeed,
+    this.batteryCapacityCoeff,
+    this.batteryRegenCoeff,
+    this.bombAlphaDamageMultiplier,
+    this.bombApAlphaDamageMultiplier,
+    this.bombBurnChanceBonus,
+    this.boostCoeff,
+    this.bubbleDamageMultiplier,
+    this.buoyancyRudderResetTimeCoeff,
+    this.buoyancyRudderTimeCoeff,
+    this.buoyancyState,
+    this.burnChanceFactorBig,
+    this.burnChanceFactorHighLevel,
+    this.burnChanceFactorLowLevel,
+    this.burnChanceFactorSmall,
+    this.burnProb,
+    this.burnTime,
+    this.callFightersAdditionalConsumables,
+    this.callFightersAirOnly,
+    this.callFightersAppearDelay,
+    this.callFightersRadiusCoeff,
+    this.callFightersTimeDelayAttack,
+    this.callFightersWorkTimeCoeff,
+    this.canUseOnEmpty,
+    this.climbAngle,
+    this.collisionDamageApply,
+    this.collisionDamageNerf,
+    this.condition,
+    this.conditionalBuff,
+    this.consumableType,
+    this.crashCrewAdditionalConsumables,
+    this.crashCrewReloadCoeff,
+    this.crashCrewWorkTimeCoeff,
+    this.creditsFactor,
+    this.crewExpFactor,
+    this.critProbCoefficient,
+    this.criticalChance,
+    this.damagedEngineCoeff,
+    this.dcAlphaDamageMultiplier,
+    this.dcNumPacksBonus,
+    this.dcSplashRadiusMultiplier,
+    this.descIDs,
+    this.distShip,
+    this.distTorpedo,
+    this.distanceToKill,
+    this.diveBomberAccuracyIncRateCoeff,
+    this.diveBomberHealth,
+    this.diveBomberMaxSpeedMultiplier,
+    this.diveBomberMinSpeedMultiplier,
+    this.diveBomberSpeedMultiplier,
+    this.dogFightTime,
+    this.effectOnEndLongivity,
+    this.engineBackwardForsageMaxSpeed,
+    this.engineBackwardForsagePower,
+    this.engineBackwardUpTime,
+    this.engineCritProb,
+    this.engineForwardForsageMaxSpeed,
+    this.engineForwardForsagePower,
+    this.engineForwardUpTime,
+    this.engineRepairTime,
+    this.expFactor,
+    this.extraFighterCount,
+    this.fighterAccuracyIncRateCoeff,
+    this.fighterAimingTime,
+    this.fighterHealth,
+    this.fighterReloadCoeff,
+    this.fightersName,
+    this.fightersNum,
+    this.fireResistanceEnabled,
+    this.firstSectorTimeCoeff,
+    this.floodChanceFactor,
+    this.floodChanceFactorPlane,
+    this.floodProb,
+    this.floodTime,
+    this.flyAwayTime,
+    this.forwardEngineForsag,
+    this.forwardEngineForsagMaxSpeed,
+    this.freeExpFactor,
+    this.healForsageReloadCoeff,
+    this.healthPerLevel,
+    this.height,
+    this.hlCritTimeCoeff,
+    this.hydrophoneUpdateFrequencyCoeff,
+    this.hydrophoneWaveSpeedCoeff,
+    this.iconIDs,
+    this.ignorePtzBonus,
+    this.lastChanceReloadCoefficient,
+    this.lifeTime,
+    this.logic,
+    this.maxBuoyancySpeedCoeff,
+    this.nearEnemyIntuitionEnabled,
+    this.nearRlsEnabled,
+    this.numConsumables,
+    this.penetrationCoeffHe,
+    this.pingerCritProb,
+    this.pingerRepairTime,
+    this.pingerWaveSpeedCoeff,
+    this.planeBubbleArmorCoeff,
+    this.planeConsumablesWorkTime,
+    this.planeEmptyReturnSpeed,
+    this.planeEscapeHeightCoeff,
+    this.planeExtraHangarSize,
+    this.planeForsageTimeCoeff,
+    this.planeHealth,
+    this.planeHealthPerLevel,
+    this.planeMaxSpeedMultiplier,
+    this.planeRegenerationRate,
+    this.planeSpawnTime,
+    this.planeSpeed,
+    this.planeTorpedoArmingTimeCoeff,
+    this.planeTorpedoSpeedMultiplier,
+    this.planeVisibilityFactor,
+    this.preparationTime,
+    this.prioritySectorCooldownMultiplier,
+    this.prioritySectorStrengthBonus,
+    this.priorityTargetEnabled,
+    this.radius,
+    this.regenCrewAdditionalConsumables,
+    this.regenCrewReloadCoeff,
+    this.regenCrewWorkTimeCoeff,
+    this.regenerateHealthAdditionalConsumables,
+    this.regenerateHealthWorkTimeCoeff,
+    this.regenerationHpSpeed,
+    this.regenerationHpSpeedUnits,
+    this.regenerationRate,
+    this.reloadBoostCoeff,
+    this.reloadTime,
+    this.restoreForsage,
+    this.rlsWorkTimeCoeff,
+    this.rocketApAlphaDamageMultiplier,
+    this.rocketBurnChanceBonus,
+    this.scoutAdditionalConsumables,
+    this.scoutReloadCoeff,
+    this.scoutWorkTimeCoeff,
+    this.secondSectorTimeCoeff,
+    this.selfAuraBuff,
+    this.shootShift,
+    this.skipBomberAccuracyIncRateCoeff,
+    this.skipBomberAimingTime,
+    this.skipBomberHealth,
+    this.skipBomberSpeedMultiplier,
+    this.smokeGeneratorLifeTime,
+    this.smokeGeneratorWorkTimeCoeff,
+    this.softCriticalEnabled,
+    this.sonarWorkTimeCoeff,
+    this.source,
+    this.spawnBackwardShift,
+    this.speedBoostersWorkTimeCoeff,
+    this.speedCoef,
+    this.speedLimit,
+    this.startDelayTime,
+    this.startDistance,
+    this.switchAmmoReloadCoef,
+    this.target,
+    this.targetBuff,
+    this.timeDelayAttack,
+    this.timeFromHeaven,
+    this.timeToTryingCatch,
+    this.timeWaitDelayAttack,
+    this.titleIDs,
+    this.torpedoBomberAccuracyIncRateCoeff,
+    this.torpedoBomberAimingTime,
+    this.torpedoBomberHealth,
+    this.torpedoDamageCoeff,
+    this.torpedoDetectionCoefficient,
+    this.torpedoDetectionCoefficientByPlane,
+    this.torpedoFullPingDamageCoeff,
+    this.torpedoReloadTime,
+    this.torpedoReloaderReloadCoeff,
+    this.torpedoSpeedMultiplier,
+    this.torpedoVisibilityFactor,
+    this.underwaterMaxRudderAngleCoeff,
+    this.updateFrequency,
+    this.uwCoeffBonus,
+    this.visibilityDistCoeff,
+    this.visibilityFactor,
+    this.visibilityForSubmarineCoeff,
+    this.visionXRayTorpedoDist,
+    this.waveDistance,
+    this.waveParams,
+    this.weaponTypes,
+    this.workTime,
+    this.zoneLifetime,
+    this.zoneRadius,
   });
 
-  final double afterBattleRepair;
-  final double expFactor;
-  final double shootShift;
-  final double visibilityFactor;
-  final double creditsFactor;
-  final num freeExpFactor;
-  final double collisionDamageApply;
-  final double collisionDamageNerf;
-  final double crewExpFactor;
-  final double speedCoef;
-  final double planeRegenerationRate;
-  final double regenerationHPSpeed;
-  final double burnTime;
-  final double floodTime;
-  final double pmDetonationProb;
-  final double gsIdealRadius;
-  final double gsMaxDist;
-  final double gsShotDelay;
-  final ModifierShipType consumableReloadTime;
-  final ModifierShipType aaAuraDamage;
-  final ModifierShipType aaBubbleDamage;
-  final double burnChanceFactorBig;
-  final double burnChanceFactorSmall;
-  final double floodChanceFactor;
-  final double floodChanceFactorPlane;
-  final double smokeGeneratorWorkTimeCoeff;
-  final double airDefenseDispReloadCoeff;
-  final double sonarWorkTimeCoeff;
+  final ModifierShipType? aaAuraDamage;
+  final double? aaAuraReceiveDamageCoeff;
+  final ModifierShipType? aaBubbleDamage;
+  final num? aaExtraBubbles;
+  final num? aaInnerExtraBubbles;
+  final num? aaMaxHp;
+  final ModifierShipType? consumableReloadTime;
+  final double? consumablesWorkTime;
+  final double? gmapDamageCoeff;
+  final double? gmBigGunVisibilityCoeff;
+  final double? gmCritProb;
+  final double? gmhecsDamageCoeff;
+  final double? gmHeavyCruiserCaliberDamageCoeff;
+  final double? gmIdealRadius;
+  final double? gmMaxDist;
+  final double? gmMaxHp;
+  final double? gmRepairTime;
+  final ModifierShipType? gmRotationSpeed;
+  final double? gmShotDelay;
+  final double? gsIdealRadius;
+  final double? gsMaxDist;
+  final num? gsMaxHp;
+  final double? gsShotDelay;
+  final double? gtCritProb;
+  final double? gtMaxHp;
+  final double? gtRepairTime;
+  final double? gtRotationSpeed;
+  final double? gtShotDelay;
+  final double? pmDetonationProb;
+  final double? sgCritProb;
+  final num? sgCritRudderTime;
+  final double? sgRepairTime;
+  final double? sgRudderTime;
+  final String? absoluteBuff;
+  final num? acousticWaveRadius;
+  final num? activationDelay;
+  final num? additionalConsumables;
+  final List<String>? affectedClasses;
+  final double? afterBattleRepair;
+  final double? airDefenseDispReloadCoeff;
+  final double? airDefenseDispWorkTimeCoeff;
+  final String? allyAuraBuff;
+  final String? ammo;
+  final double? areaDamageMultiplier;
+  final bool? artilleryAlertEnabled;
+  final num? artilleryAlertMinDistance;
+  final double? artilleryBoostersReloadCoeff;
+  final ModifierShipType? artilleryBurnChanceBonus;
+  final double? artilleryDistCoeff;
+  final double? asMaxHealthCoeff;
+  final double? asReloadTimeCoeff;
+  final num? backwardEngineForsag;
+  final num? backwardEngineForsagMaxSpeed;
+  final double? batteryCapacityCoeff;
+  final double? batteryRegenCoeff;
+  final double? bombAlphaDamageMultiplier;
+  final double? bombApAlphaDamageMultiplier;
+  final double? bombBurnChanceBonus;
+  final double? boostCoeff;
+  final num? bubbleDamageMultiplier;
+  final double? buoyancyRudderResetTimeCoeff;
+  final double? buoyancyRudderTimeCoeff;
+  final num? buoyancyState;
+  final double? burnChanceFactorBig;
+  final double? burnChanceFactorHighLevel;
+  final double? burnChanceFactorLowLevel;
+  final double? burnChanceFactorSmall;
+  final double? burnProb;
+  final double? burnTime;
+  final num? callFightersAdditionalConsumables;
+  final bool? callFightersAirOnly;
+  final double? callFightersAppearDelay;
+  final double? callFightersRadiusCoeff;
+  final double? callFightersTimeDelayAttack;
+  final double? callFightersWorkTimeCoeff;
+  final bool? canUseOnEmpty;
+  final num? climbAngle;
+  final double? collisionDamageApply;
+  final double? collisionDamageNerf;
+  final String? condition;
+  final String? conditionalBuff;
+  final String? consumableType;
+  final num? crashCrewAdditionalConsumables;
+  final double? crashCrewReloadCoeff;
+  final double? crashCrewWorkTimeCoeff;
+  final double? creditsFactor;
+  final double? crewExpFactor;
+  final double? critProbCoefficient;
+  final num? criticalChance;
+  final double? damagedEngineCoeff;
+  final ModifierShipType? dcAlphaDamageMultiplier;
+  final num? dcNumPacksBonus;
+  final double? dcSplashRadiusMultiplier;
+  final String? descIDs;
+  final num? distShip;
+  final num? distTorpedo;
+  final num? distanceToKill;
+  final double? diveBomberAccuracyIncRateCoeff;
+  final double? diveBomberHealth;
+  final double? diveBomberMaxSpeedMultiplier;
+  final double? diveBomberMinSpeedMultiplier;
+  final double? diveBomberSpeedMultiplier;
+  final num? dogFightTime;
+  final num? effectOnEndLongivity;
+  final num? engineBackwardForsageMaxSpeed;
+  final double? engineBackwardForsagePower;
+  final double? engineBackwardUpTime;
+  final double? engineCritProb;
+  final double? engineForwardForsageMaxSpeed;
+  final double? engineForwardForsagePower;
+  final double? engineForwardUpTime;
+  final double? engineRepairTime;
+  final double? expFactor;
+  final num? extraFighterCount;
+  final double? fighterAccuracyIncRateCoeff;
+  final num? fighterAimingTime;
+  final double? fighterHealth;
+  final double? fighterReloadCoeff;
+  final String? fightersName;
+  final num? fightersNum;
+  final bool? fireResistanceEnabled;
+  final double? firstSectorTimeCoeff;
+  final double? floodChanceFactor;
+  final double? floodChanceFactorPlane;
+  final double? floodProb;
+  final double? floodTime;
+  final num? flyAwayTime;
+  final num? forwardEngineForsag;
+  final num? forwardEngineForsagMaxSpeed;
+  final num? freeExpFactor;
+  final double? healForsageReloadCoeff;
+  final ModifierShipType? healthPerLevel;
+  final num? height;
+  final double? hlCritTimeCoeff;
+  final double? hydrophoneUpdateFrequencyCoeff;
+  final num? hydrophoneWaveSpeedCoeff;
+  final String? iconIDs;
+  final num? ignorePtzBonus;
+  final double? lastChanceReloadCoefficient;
+  final num? lifeTime;
+  final String? logic;
+  final double? maxBuoyancySpeedCoeff;
+  final bool? nearEnemyIntuitionEnabled;
+  final bool? nearRlsEnabled;
+  final num? numConsumables;
+  final double? penetrationCoeffHe;
+  final double? pingerCritProb;
+  final double? pingerRepairTime;
+  final double? pingerWaveSpeedCoeff;
+  final double? planeBubbleArmorCoeff;
+  final double? planeConsumablesWorkTime;
+  final double? planeEmptyReturnSpeed;
+  final double? planeEscapeHeightCoeff;
+  final num? planeExtraHangarSize;
+  final double? planeForsageTimeCoeff;
+  final double? planeHealth;
+  final num? planeHealthPerLevel;
+  final double? planeMaxSpeedMultiplier;
+  final double? planeRegenerationRate;
+  final double? planeSpawnTime;
+  final double? planeSpeed;
+  final double? planeTorpedoArmingTimeCoeff;
+  final double? planeTorpedoSpeedMultiplier;
+  final double? planeVisibilityFactor;
+  final num? preparationTime;
+  final double? prioritySectorCooldownMultiplier;
+  final num? prioritySectorStrengthBonus;
+  final bool? priorityTargetEnabled;
+  final num? radius;
+  final num? regenCrewAdditionalConsumables;
+  final double? regenCrewReloadCoeff;
+  final double? regenCrewWorkTimeCoeff;
+  final num? regenerateHealthAdditionalConsumables;
+  final double? regenerateHealthWorkTimeCoeff;
+  final num? regenerationHpSpeed;
+  final num? regenerationHpSpeedUnits;
+  final double? regenerationRate;
+  final double? reloadBoostCoeff;
+  final num? reloadTime;
+  final bool? restoreForsage;
+  final double? rlsWorkTimeCoeff;
+  final double? rocketApAlphaDamageMultiplier;
+  final double? rocketBurnChanceBonus;
+  final num? scoutAdditionalConsumables;
+  final double? scoutReloadCoeff;
+  final double? scoutWorkTimeCoeff;
+  final double? secondSectorTimeCoeff;
+  final String? selfAuraBuff;
+  final double? shootShift;
+  final double? skipBomberAccuracyIncRateCoeff;
+  final num? skipBomberAimingTime;
+  final double? skipBomberHealth;
+  final double? skipBomberSpeedMultiplier;
+  final double? smokeGeneratorLifeTime;
+  final double? smokeGeneratorWorkTimeCoeff;
+  final bool? softCriticalEnabled;
+  final double? sonarWorkTimeCoeff;
+  final List<String>? source;
+  final double? spawnBackwardShift;
+  final double? speedBoostersWorkTimeCoeff;
+  final double? speedCoef;
+  final double? speedLimit;
+  final num? startDelayTime;
+  final num? startDistance;
+  final double? switchAmmoReloadCoef;
+  final List<String>? target;
+  final String? targetBuff;
+  final num? timeDelayAttack;
+  final num? timeFromHeaven;
+  final num? timeToTryingCatch;
+  final num? timeWaitDelayAttack;
+  final String? titleIDs;
+  final double? torpedoBomberAccuracyIncRateCoeff;
+  final num? torpedoBomberAimingTime;
+  final double? torpedoBomberHealth;
+  final double? torpedoDamageCoeff;
+  final double? torpedoDetectionCoefficient;
+  final num? torpedoDetectionCoefficientByPlane;
+  final double? torpedoFullPingDamageCoeff;
+  final num? torpedoReloadTime;
+  final double? torpedoReloaderReloadCoeff;
+  final double? torpedoSpeedMultiplier;
+  final double? torpedoVisibilityFactor;
+  final num? underwaterMaxRudderAngleCoeff;
+  final num? updateFrequency;
+  final num? uwCoeffBonus;
+  final ModifierShipType? visibilityDistCoeff;
+  final double? visibilityFactor;
+  final double? visibilityForSubmarineCoeff;
+  final num? visionXRayTorpedoDist;
+  final num? waveDistance;
+  final String? waveParams;
+  final List<String>? weaponTypes;
+  final num? workTime;
+  final double? zoneLifetime;
+  final double? zoneRadius;
 
-  factory ExteriorModifiers.fromJson(Map<String, dynamic> json) =>
-      ExteriorModifiers(
-        afterBattleRepair: json['afterBattleRepair'] ?? 1,
-        expFactor: json['expFactor'] ?? 1,
-        shootShift: json['shootShift'] ?? 1,
-        visibilityFactor: json['visibilityFactor'] ?? 1,
-        creditsFactor: json['creditsFactor'] ?? 1,
-        freeExpFactor: json['freeExpFactor'] ?? 1,
-        collisionDamageApply: json['collisionDamageApply'] ?? 1,
-        collisionDamageNerf: json['collisionDamageNerf'] ?? 1,
-        crewExpFactor: json['crewExpFactor'] ?? 1,
-        speedCoef: json['speedCoef'] ?? 1,
-        planeRegenerationRate: json['planeRegenerationRate'] ?? 1,
-        regenerationHPSpeed: json['regenerationHPSpeed'] ?? 1,
-        burnTime: json['burnTime'] ?? 1,
-        floodTime: json['floodTime'] ?? 1,
-        pmDetonationProb: json['PMDetonationProb'] ?? 1,
-        gsIdealRadius: json['GSIdealRadius'] ?? 1,
-        gsMaxDist: json['GSMaxDist'] ?? 1,
-        gsShotDelay: json['GSShotDelay'] ?? 1,
-        consumableReloadTime: ModifierShipType.fromJson(
-          json['ConsumableReloadTime'],
-        ),
+  factory Modifiers.fromJson(Map<String, dynamic> json) => Modifiers(
         aaAuraDamage: ModifierShipType.fromJson(json['AAAuraDamage']),
+        aaAuraReceiveDamageCoeff: json['AAAuraReceiveDamageCoeff'],
         aaBubbleDamage: ModifierShipType.fromJson(json['AABubbleDamage']),
-        burnChanceFactorBig: json['burnChanceFactorBig'] ?? 1,
-        burnChanceFactorSmall: json['burnChanceFactorSmall'] ?? 1,
-        floodChanceFactor: json['floodChanceFactor'] ?? 1,
-        floodChanceFactorPlane: json['floodChanceFactorPlane'] ?? 1,
-        smokeGeneratorWorkTimeCoeff: json['smokeGeneratorWorkTimeCoeff'] ?? 1,
-        airDefenseDispReloadCoeff: json['airDefenseDispReloadCoeff'] ?? 1,
-        sonarWorkTimeCoeff: json['sonarWorkTimeCoeff'] ?? 1,
-      );
-}
-
-// TODO: is it better to separate or merge modifiers into one big class?
-@immutable
-class ModernizationModifiers {
-  const ModernizationModifiers({
-    required this.planeEmptyReturnSpeed,
-    required this.gmRotationSpeed,
-    required this.planeExtraHangarSize,
-    required this.planeSpawnTime,
-    required this.gsIdealRadius,
-    required this.gsMaxDist,
-    required this.gmShotDelay,
-    required this.gtCritProb,
-    required this.gtShotDelay,
-    required this.gmMaxDist,
-    required this.planeSpeed,
-    required this.planeHealth,
-    required this.prioritySectorCooldownMultiplier,
-    required this.burnProb,
-    required this.floodProb,
-    required this.burnTime,
-    required this.floodTime,
-    required this.engineBackwardForsageMaxSpeed,
-    required this.engineBackwardForsagePower,
-    required this.engineBackwardUpTime,
-    required this.engineForwardForsageMaxSpeed,
-    required this.engineForwardForsagePower,
-    required this.engineForwardUpTime,
-    required this.sgRudderTime,
-    required this.visionXRayTorpedoDist,
-    required this.planeVisibilityFactor,
-    required this.shootShift,
-    required this.visibilityDistCoeff,
-    required this.visibilityForSubmarineCoeff,
-    required this.gmIdealRadius,
-    required this.gmCritProb,
-    required this.gmMaxHP,
-    required this.gmRepairTime,
-    required this.gtMaxHP,
-    required this.gtRepairTime,
-    required this.aaMaxHP,
-    required this.gsMaxHP,
-    required this.pmDetonationProb,
-    required this.gtRotationSpeed,
-    required this.sgRepairTime,
-    required this.speedBoostersWorkTimeCoeff,
-    required this.smokeGeneratorLifeTime,
-    required this.smokeGeneratorWorkTimeCoeff,
-    required this.scoutWorkTimeCoeff,
-    required this.crashCrewWorkTimeCoeff,
-    required this.airDefenseDispReloadCoeff,
-    required this.airDefenseDispWorkTimeCoeff,
-    required this.sonarWorkTimeCoeff,
-    required this.rlsWorkTimeCoeff,
-    required this.gsShotDelay,
-    required this.consumableReloadTime,
-    required this.additionalConsumables,
-    required this.consumablesWorkTime,
-    required this.torpedoVisibilityFactor,
-    required this.bombAlphaDamageMultiplier,
-    required this.diveBomberMaxSpeedMultiplier,
-    required this.diveBomberMinSpeedMultiplier,
-    required this.diveBomberSpeedMultiplier,
-    required this.planeForsageTimeCoeff,
-    required this.planeMaxSpeedMultiplier,
-    required this.fighterHealth,
-    required this.torpedoBomberHealth,
-    required this.diveBomberHealth,
-    required this.torpedoBomberAimingTime,
-    required this.fighterAimingTime,
-    required this.sgCritProb,
-    required this.engineCritProb,
-    required this.engineRepairTime,
-    required this.torpedoSpeedMultiplier,
-    required this.planeTorpedoSpeedMultiplier,
-    required this.planeConsumablesWorkTime,
-    required this.aaAuraDamage,
-    required this.aaBubbleDamage,
-    required this.aaInnerExtraBubbles,
-    required this.torpedoDamageCoeff,
-    required this.skipBomberHealth,
-    required this.batteryBurnRateCoeff,
-    required this.hydrophoneUpdateFrequencyCoeff,
-    required this.hydrophoneWaveSpeedCoeff,
-    required this.pingerCritProb,
-    required this.pingerRepairTime,
-    required this.pingerWaveSpeedCoeff,
-    required this.batteryCapacityCoeff,
-    required this.asMaxHealthCoeff,
-    required this.asReloadTimeCoeff,
-    required this.dcAlphaDamageMultiplier,
-    required this.dcNumPacksBonus,
-    required this.buoyancyRudderResetTimeCoeff,
-    required this.buoyancyRudderTimeCoeff,
-    required this.skipBomberAimingTime,
-  });
-
-  final double planeEmptyReturnSpeed;
-  final ModifierShipType gmRotationSpeed;
-  final int planeExtraHangarSize;
-  final double planeSpawnTime;
-  final double gsIdealRadius;
-  final double gsMaxDist;
-  final double gmShotDelay;
-  final double gtCritProb;
-  final double gtShotDelay;
-  final double gmMaxDist;
-  final double planeSpeed;
-  final double planeHealth;
-  final double prioritySectorCooldownMultiplier;
-  final double burnProb;
-  final double floodProb;
-  final double burnTime;
-  final double floodTime;
-  final double engineBackwardForsageMaxSpeed;
-  final double engineBackwardForsagePower;
-  final double engineBackwardUpTime;
-  final double engineForwardForsageMaxSpeed;
-  final double engineForwardForsagePower;
-  final double engineForwardUpTime;
-  final double sgRudderTime;
-  final int visionXRayTorpedoDist;
-  final double planeVisibilityFactor;
-  final double shootShift;
-  final ModifierShipType visibilityDistCoeff;
-  final double visibilityForSubmarineCoeff;
-  final double gmIdealRadius;
-  final double gmCritProb;
-  final double gmMaxHP;
-  final double gmRepairTime;
-  final double gtMaxHP;
-  final double gtRepairTime;
-  final double aaMaxHP;
-  final double gsMaxHP;
-  final double pmDetonationProb;
-  final double gtRotationSpeed;
-  final double sgRepairTime;
-  final double speedBoostersWorkTimeCoeff;
-  final double smokeGeneratorLifeTime;
-  final double smokeGeneratorWorkTimeCoeff;
-  final double scoutWorkTimeCoeff;
-  final double crashCrewWorkTimeCoeff;
-  final double airDefenseDispReloadCoeff;
-  final double airDefenseDispWorkTimeCoeff;
-  final double sonarWorkTimeCoeff;
-  final double rlsWorkTimeCoeff;
-  final double gsShotDelay;
-  final ModifierShipType consumableReloadTime;
-  final int additionalConsumables;
-  final double consumablesWorkTime;
-  final double torpedoVisibilityFactor;
-  final double bombAlphaDamageMultiplier;
-  final double diveBomberMaxSpeedMultiplier;
-  final double diveBomberMinSpeedMultiplier;
-  final double diveBomberSpeedMultiplier;
-  final double planeForsageTimeCoeff;
-  final double planeMaxSpeedMultiplier;
-  final double fighterHealth;
-  final double torpedoBomberHealth;
-  final double diveBomberHealth;
-  final int torpedoBomberAimingTime;
-  final int fighterAimingTime;
-  final double sgCritProb;
-  final double engineCritProb;
-  final double engineRepairTime;
-  final double torpedoSpeedMultiplier;
-  final double planeTorpedoSpeedMultiplier;
-  final double planeConsumablesWorkTime;
-  final ModifierShipType aaAuraDamage;
-  final ModifierShipType aaBubbleDamage;
-  final int aaInnerExtraBubbles;
-  final double torpedoDamageCoeff;
-  final double skipBomberHealth;
-  final double batteryBurnRateCoeff;
-  final double hydrophoneUpdateFrequencyCoeff;
-  final double hydrophoneWaveSpeedCoeff;
-  final double pingerCritProb;
-  final double pingerRepairTime;
-  final double pingerWaveSpeedCoeff;
-  final double batteryCapacityCoeff;
-  final double asMaxHealthCoeff;
-  final double asReloadTimeCoeff;
-  final ModifierShipType dcAlphaDamageMultiplier;
-  final int dcNumPacksBonus;
-  final double buoyancyRudderResetTimeCoeff;
-  final double buoyancyRudderTimeCoeff;
-  final double skipBomberAimingTime;
-
-  factory ModernizationModifiers.fromJson(Map<String, dynamic> json) =>
-      ModernizationModifiers(
-        planeEmptyReturnSpeed: json['planeEmptyReturnSpeed'] ?? 1,
-        gmRotationSpeed: ModifierShipType.fromJson(json['gmRotationSpeed']),
-        planeExtraHangarSize: json['planeExtraHangarSize'] ?? 1,
-        planeSpawnTime: json['planeSpawnTime'] ?? 1,
-        gsIdealRadius: json['GSIdealRadius'] ?? 1,
-        gsMaxDist: json['GSMaxDist'] ?? 1,
-        gmShotDelay: json['GMShotDelay'] ?? 1,
-        gtCritProb: json['GTCritProb'] ?? 1,
-        gtShotDelay: json['GTShotDelay'] ?? 1,
-        gmMaxDist: json['GMMaxDist'] ?? 1,
-        planeSpeed: json['planeSpeed'] ?? 1,
-        planeHealth: json['planeHealth'] ?? 1,
+        aaExtraBubbles: json['AAExtraBubbles'],
+        aaInnerExtraBubbles: json['AAInnerExtraBubbles'],
+        aaMaxHp: json['AAMaxHP'],
+        consumableReloadTime:
+            ModifierShipType.fromJson(json['ConsumableReloadTime']),
+        consumablesWorkTime: json['ConsumablesWorkTime'],
+        gmapDamageCoeff: json['GMAPDamageCoeff'],
+        gmBigGunVisibilityCoeff: json['GMBigGunVisibilityCoeff'],
+        gmCritProb: json['GMCritProb'],
+        gmhecsDamageCoeff: json['GMHECSDamageCoeff'],
+        gmHeavyCruiserCaliberDamageCoeff:
+            json['GMHeavyCruiserCaliberDamageCoeff'],
+        gmIdealRadius: json['GMIdealRadius'],
+        gmMaxDist: json['GMMaxDist'],
+        gmMaxHp: json['GMMaxHP'],
+        gmRepairTime: json['GMRepairTime'],
+        gmRotationSpeed: ModifierShipType.fromJson(json['GMRotationSpeed']),
+        gmShotDelay: json['GMShotDelay'],
+        gsIdealRadius: json['GSIdealRadius'],
+        gsMaxDist: json['GSMaxDist'],
+        gsMaxHp: json['GSMaxHP'],
+        gsShotDelay: json['GSShotDelay'],
+        gtCritProb: json['GTCritProb'],
+        gtMaxHp: json['GTMaxHP'],
+        gtRepairTime: json['GTRepairTime'],
+        gtRotationSpeed: json['GTRotationSpeed'],
+        gtShotDelay: json['GTShotDelay'],
+        pmDetonationProb: json['PMDetonationProb'],
+        sgCritProb: json['SGCritProb'],
+        sgCritRudderTime: json['SGCritRudderTime'],
+        sgRepairTime: json['SGRepairTime'],
+        sgRudderTime: json['SGRudderTime'],
+        absoluteBuff: json['absoluteBuff'],
+        acousticWaveRadius: json['acousticWaveRadius'],
+        activationDelay: json['activationDelay'],
+        additionalConsumables: json['additionalConsumables'],
+        affectedClasses: json['affectedClasses'],
+        afterBattleRepair: json['afterBattleRepair'],
+        airDefenseDispReloadCoeff: json['airDefenseDispReloadCoeff'],
+        airDefenseDispWorkTimeCoeff: json['airDefenseDispWorkTimeCoeff'],
+        allyAuraBuff: json['allyAuraBuff'],
+        ammo: json['ammo'],
+        areaDamageMultiplier: json['areaDamageMultiplier'],
+        artilleryAlertEnabled: json['artilleryAlertEnabled'],
+        artilleryAlertMinDistance: json['artilleryAlertMinDistance'],
+        artilleryBoostersReloadCoeff: json['artilleryBoostersReloadCoeff'],
+        artilleryBurnChanceBonus:
+            ModifierShipType.fromJson(json['artilleryBurnChanceBonus']),
+        artilleryDistCoeff: json['artilleryDistCoeff'],
+        asMaxHealthCoeff: json['asMaxHealthCoeff'],
+        asReloadTimeCoeff: json['asReloadTimeCoeff'],
+        backwardEngineForsag: json['backwardEngineForsag'],
+        backwardEngineForsagMaxSpeed: json['backwardEngineForsagMaxSpeed'],
+        batteryCapacityCoeff: json['batteryCapacityCoeff'],
+        batteryRegenCoeff: json['batteryRegenCoeff'],
+        bombAlphaDamageMultiplier: json['bombAlphaDamageMultiplier'],
+        bombApAlphaDamageMultiplier: json['bombApAlphaDamageMultiplier'],
+        bombBurnChanceBonus: json['bombBurnChanceBonus'],
+        boostCoeff: json['boostCoeff'],
+        bubbleDamageMultiplier: json['bubbleDamageMultiplier'],
+        buoyancyRudderResetTimeCoeff: json['buoyancyRudderResetTimeCoeff'],
+        buoyancyRudderTimeCoeff: json['buoyancyRudderTimeCoeff'],
+        buoyancyState: json['buoyancyState'],
+        burnChanceFactorBig: json['burnChanceFactorBig'],
+        burnChanceFactorHighLevel: json['burnChanceFactorHighLevel'],
+        burnChanceFactorLowLevel: json['burnChanceFactorLowLevel'],
+        burnChanceFactorSmall: json['burnChanceFactorSmall'],
+        burnProb: json['burnProb'],
+        burnTime: json['burnTime'],
+        callFightersAdditionalConsumables:
+            json['callFightersAdditionalConsumables'],
+        callFightersAirOnly: json['callFightersAirOnly'],
+        callFightersAppearDelay: json['callFightersAppearDelay'],
+        callFightersRadiusCoeff: json['callFightersRadiusCoeff'],
+        callFightersTimeDelayAttack: json['callFightersTimeDelayAttack'],
+        callFightersWorkTimeCoeff: json['callFightersWorkTimeCoeff'],
+        canUseOnEmpty: json['canUseOnEmpty'],
+        climbAngle: json['climbAngle'],
+        collisionDamageApply: json['collisionDamageApply'],
+        collisionDamageNerf: json['collisionDamageNerf'],
+        condition: json['condition'],
+        conditionalBuff: json['conditionalBuff'],
+        consumableType: json['consumableType'],
+        crashCrewAdditionalConsumables: json['crashCrewAdditionalConsumables'],
+        crashCrewReloadCoeff: json['crashCrewReloadCoeff'],
+        crashCrewWorkTimeCoeff: json['crashCrewWorkTimeCoeff'],
+        creditsFactor: json['creditsFactor'],
+        crewExpFactor: json['crewExpFactor'],
+        critProbCoefficient: json['critProbCoefficient'],
+        criticalChance: json['criticalChance'],
+        damagedEngineCoeff: json['damagedEngineCoeff'],
+        dcAlphaDamageMultiplier:
+            ModifierShipType.fromJson(json['dcAlphaDamageMultiplier']),
+        dcNumPacksBonus: json['dcNumPacksBonus'],
+        dcSplashRadiusMultiplier: json['dcSplashRadiusMultiplier'],
+        descIDs: json['descIDs'],
+        distShip: json['distShip'],
+        distTorpedo: json['distTorpedo'],
+        distanceToKill: json['distanceToKill'],
+        diveBomberAccuracyIncRateCoeff: json['diveBomberAccuracyIncRateCoeff'],
+        diveBomberHealth: json['diveBomberHealth'],
+        diveBomberMaxSpeedMultiplier: json['diveBomberMaxSpeedMultiplier'],
+        diveBomberMinSpeedMultiplier: json['diveBomberMinSpeedMultiplier'],
+        diveBomberSpeedMultiplier: json['diveBomberSpeedMultiplier'],
+        dogFightTime: json['dogFightTime'],
+        effectOnEndLongivity: json['effectOnEndLongivity'],
+        engineBackwardForsageMaxSpeed: json['engineBackwardForsageMaxSpeed'],
+        engineBackwardForsagePower: json['engineBackwardForsagePower'],
+        engineBackwardUpTime: json['engineBackwardUpTime'],
+        engineCritProb: json['engineCritProb'],
+        engineForwardForsageMaxSpeed: json['engineForwardForsageMaxSpeed'],
+        engineForwardForsagePower: json['engineForwardForsagePower'],
+        engineForwardUpTime: json['engineForwardUpTime'],
+        engineRepairTime: json['engineRepairTime'],
+        expFactor: json['expFactor'],
+        extraFighterCount: json['extraFighterCount'],
+        fighterAccuracyIncRateCoeff: json['fighterAccuracyIncRateCoeff'],
+        fighterAimingTime: json['fighterAimingTime'],
+        fighterHealth: json['fighterHealth'],
+        fighterReloadCoeff: json['fighterReloadCoeff'],
+        fightersName: json['fightersName'],
+        fightersNum: json['fightersNum'],
+        fireResistanceEnabled: json['fireResistanceEnabled'],
+        firstSectorTimeCoeff: json['firstSectorTimeCoeff'],
+        floodChanceFactor: json['floodChanceFactor'],
+        floodChanceFactorPlane: json['floodChanceFactorPlane'],
+        floodProb: json['floodProb'],
+        floodTime: json['floodTime'],
+        flyAwayTime: json['flyAwayTime'],
+        forwardEngineForsag: json['forwardEngineForsag'],
+        forwardEngineForsagMaxSpeed: json['forwardEngineForsagMaxSpeed'],
+        freeExpFactor: json['freeExpFactor'],
+        healForsageReloadCoeff: json['healForsageReloadCoeff'],
+        healthPerLevel: ModifierShipType.fromJson(json['healthPerLevel']),
+        height: json['height'],
+        hlCritTimeCoeff: json['hlCritTimeCoeff'],
+        hydrophoneUpdateFrequencyCoeff: json['hydrophoneUpdateFrequencyCoeff'],
+        hydrophoneWaveSpeedCoeff: json['hydrophoneWaveSpeedCoeff'],
+        iconIDs: json['iconIDs'],
+        ignorePtzBonus: json['ignorePTZBonus'],
+        lastChanceReloadCoefficient: json['lastChanceReloadCoefficient'],
+        lifeTime: json['lifeTime'],
+        logic: json['logic'],
+        maxBuoyancySpeedCoeff: json['maxBuoyancySpeedCoeff'],
+        nearEnemyIntuitionEnabled: json['nearEnemyIntuitionEnabled'],
+        nearRlsEnabled: json['nearRLSEnabled'],
+        numConsumables: json['numConsumables'],
+        penetrationCoeffHe: json['penetrationCoeffHE'],
+        pingerCritProb: json['pingerCritProb'],
+        pingerRepairTime: json['pingerRepairTime'],
+        pingerWaveSpeedCoeff: json['pingerWaveSpeedCoeff'],
+        planeBubbleArmorCoeff: json['planeBubbleArmorCoeff'],
+        planeConsumablesWorkTime: json['planeConsumablesWorkTime'],
+        planeEmptyReturnSpeed: json['planeEmptyReturnSpeed'],
+        planeEscapeHeightCoeff: json['planeEscapeHeightCoeff'],
+        planeExtraHangarSize: json['planeExtraHangarSize'],
+        planeForsageTimeCoeff: json['planeForsageTimeCoeff'],
+        planeHealth: json['planeHealth'],
+        planeHealthPerLevel: json['planeHealthPerLevel'],
+        planeMaxSpeedMultiplier: json['planeMaxSpeedMultiplier'],
+        planeRegenerationRate: json['planeRegenerationRate'],
+        planeSpawnTime: json['planeSpawnTime'],
+        planeSpeed: json['planeSpeed'],
+        planeTorpedoArmingTimeCoeff: json['planeTorpedoArmingTimeCoeff'],
+        planeTorpedoSpeedMultiplier: json['planeTorpedoSpeedMultiplier'],
+        planeVisibilityFactor: json['planeVisibilityFactor'],
+        preparationTime: json['preparationTime'],
         prioritySectorCooldownMultiplier:
-            json['prioritySectorCooldownMultiplier'] ?? 1,
-        burnProb: json['burnProb'] ?? 1,
-        floodProb: json['floodProb'] ?? 1,
-        burnTime: json['burnTime'] ?? 1,
-        floodTime: json['floodTime'] ?? 1,
-        engineBackwardForsageMaxSpeed:
-            json['engineBackwardForsageMaxSpeed'] ?? 1,
-        engineBackwardForsagePower: json['engineBackwardForsagePower'] ?? 1,
-        engineBackwardUpTime: json['engineBackwardUpTime'] ?? 1,
-        engineForwardForsageMaxSpeed: json['engineForwardForsageMaxSpeed'] ?? 1,
-        engineForwardForsagePower: json['engineForwardForsagePower'] ?? 1,
-        engineForwardUpTime: json['engineForwardUpTime'] ?? 1,
-        sgRudderTime: json['SGRudderTime'] ?? 1,
-        visionXRayTorpedoDist: json['visionXRayTorpedoDist'] ?? 1,
-        planeVisibilityFactor: json['planeVisibilityFactor'] ?? 1,
-        shootShift: json['shootShift'] ?? 1,
-        visibilityDistCoeff: ModifierShipType.fromJson(
-          json['visibilityDistCoeff'],
-        ),
-        visibilityForSubmarineCoeff: json['visibilityForSubmarineCoeff'] ?? 1,
-        gmIdealRadius: json['GMIdealRadius'] ?? 1,
-        gmCritProb: json['GMCritProb'] ?? 1,
-        gmMaxHP: json['GMMaxHP'] ?? 1,
-        gmRepairTime: json['GMRepairTime'] ?? 1,
-        gtMaxHP: json['GTMaxHP'] ?? 1,
-        gtRepairTime: json['GTRepairTime'] ?? 1,
-        aaMaxHP: json['AAMaxHP'] ?? 1,
-        gsMaxHP: json['GSMaxHP'] ?? 1,
-        pmDetonationProb: json['PMDetonationProb'] ?? 1,
-        gtRotationSpeed: json['GTRotationSpeed'] ?? 1,
-        sgRepairTime: json['SGRepairTime'] ?? 1,
-        speedBoostersWorkTimeCoeff: json['speedBoostersWorkTimeCoeff'] ?? 1,
-        smokeGeneratorLifeTime: json['smokeGeneratorLifeTime'] ?? 1,
-        smokeGeneratorWorkTimeCoeff: json['smokeGeneratorWorkTimeCoeff'] ?? 1,
-        scoutWorkTimeCoeff: json['scoutWorkTimeCoeff'] ?? 1,
-        crashCrewWorkTimeCoeff: json['crashCrewWorkTimeCoeff'] ?? 1,
-        airDefenseDispReloadCoeff: json['airDefenseDispReloadCoeff'] ?? 1,
-        airDefenseDispWorkTimeCoeff: json['airDefenseDispWorkTimeCoeff'] ?? 1,
-        sonarWorkTimeCoeff: json['sonarWorkTimeCoeff'] ?? 1,
-        rlsWorkTimeCoeff: json['rlsWorkTimeCoeff'] ?? 1,
-        gsShotDelay: json['GSShotDelay'] ?? 1,
-        consumableReloadTime: ModifierShipType.fromJson(
-          json['ConsumableReloadTime'],
-        ),
-        additionalConsumables: json['additionalConsumables'] ?? 1,
-        consumablesWorkTime: json['ConsumablesWorkTime'] ?? 1,
-        torpedoVisibilityFactor: json['torpedoVisibilityFactor'] ?? 1,
-        bombAlphaDamageMultiplier: json['bombAlphaDamageMultiplier'] ?? 1,
-        diveBomberMaxSpeedMultiplier: json['diveBomberMaxSpeedMultiplier'] ?? 1,
-        diveBomberMinSpeedMultiplier: json['diveBomberMinSpeedMultiplier'] ?? 1,
-        diveBomberSpeedMultiplier: json['diveBomberSpeedMultiplier'] ?? 1,
-        planeForsageTimeCoeff: json['planeForsageTimeCoeff'] ?? 1,
-        planeMaxSpeedMultiplier: json['planeMaxSpeedMultiplier'] ?? 1,
-        fighterHealth: json['fighterHealth'] ?? 1,
-        torpedoBomberHealth: json['torpedoBomberHealth'] ?? 1,
-        diveBomberHealth: json['diveBomberHealth'] ?? 1,
-        torpedoBomberAimingTime: json['torpedoBomberAimingTime'] ?? 1,
-        fighterAimingTime: json['fighterAimingTime'] ?? 1,
-        sgCritProb: json['SGCritProb'] ?? 1,
-        engineCritProb: json['engineCritProb'] ?? 1,
-        engineRepairTime: json['engineRepairTime'] ?? 1,
-        torpedoSpeedMultiplier: json['torpedoSpeedMultiplier'] ?? 1,
-        planeTorpedoSpeedMultiplier: json['planeTorpedoSpeedMultiplier'] ?? 1,
-        planeConsumablesWorkTime: json['planeConsumablesWorkTime'] ?? 1,
-        aaAuraDamage: ModifierShipType.fromJson(json['AAAuraDamage']),
-        aaBubbleDamage: ModifierShipType.fromJson(json['AABubbleDamage']),
-        aaInnerExtraBubbles: json['AAInnerExtraBubbles'] ?? 1,
-        torpedoDamageCoeff: json['torpedoDamageCoeff'] ?? 1,
-        skipBomberHealth: json['skipBomberHealth'] ?? 1,
-        batteryBurnRateCoeff: json['batteryBurnRateCoeff'] ?? 1,
-        hydrophoneUpdateFrequencyCoeff:
-            json['hydrophoneUpdateFrequencyCoeff'] ?? 1,
-        hydrophoneWaveSpeedCoeff: json['hydrophoneWaveSpeedCoeff'] ?? 1,
-        pingerCritProb: json['pingerCritProb'] ?? 1,
-        pingerRepairTime: json['pingerRepairTime'] ?? 1,
-        pingerWaveSpeedCoeff: json['pingerWaveSpeedCoeff'] ?? 1,
-        batteryCapacityCoeff: json['batteryCapacityCoeff'] ?? 1,
-        asMaxHealthCoeff: json['asMaxHealthCoeff'] ?? 1,
-        asReloadTimeCoeff: json['asReloadTimeCoeff'] ?? 1,
-        dcAlphaDamageMultiplier: ModifierShipType.fromJson(
-          json['dcAlphaDamageMultiplier'],
-        ),
-        dcNumPacksBonus: json['dcNumPacksBonus'] ?? 1,
-        buoyancyRudderResetTimeCoeff: json['buoyancyRudderResetTimeCoeff'] ?? 1,
-        buoyancyRudderTimeCoeff: json['buoyancyRudderTimeCoeff'] ?? 1,
-        skipBomberAimingTime: json['skipBomberAimingTime'] ?? 1,
+            json['prioritySectorCooldownMultiplier'],
+        prioritySectorStrengthBonus: json['prioritySectorStrengthBonus'],
+        priorityTargetEnabled: json['priorityTargetEnabled'],
+        radius: json['radius'],
+        regenCrewAdditionalConsumables: json['regenCrewAdditionalConsumables'],
+        regenCrewReloadCoeff: json['regenCrewReloadCoeff'],
+        regenCrewWorkTimeCoeff: json['regenCrewWorkTimeCoeff'],
+        regenerateHealthAdditionalConsumables:
+            json['regenerateHealthAdditionalConsumables'],
+        regenerateHealthWorkTimeCoeff: json['regenerateHealthWorkTimeCoeff'],
+        regenerationHpSpeed: json['regenerationHPSpeed'],
+        regenerationHpSpeedUnits: json['regenerationHPSpeedUnits'],
+        regenerationRate: json['regenerationRate'],
+        reloadBoostCoeff: json['reloadBoostCoeff'],
+        reloadTime: json['reloadTime'],
+        restoreForsage: json['restoreForsage'],
+        rlsWorkTimeCoeff: json['rlsWorkTimeCoeff'],
+        rocketApAlphaDamageMultiplier: json['rocketApAlphaDamageMultiplier'],
+        rocketBurnChanceBonus: json['rocketBurnChanceBonus'],
+        scoutAdditionalConsumables: json['scoutAdditionalConsumables'],
+        scoutReloadCoeff: json['scoutReloadCoeff'],
+        scoutWorkTimeCoeff: json['scoutWorkTimeCoeff'],
+        secondSectorTimeCoeff: json['secondSectorTimeCoeff'],
+        selfAuraBuff: json['selfAuraBuff'],
+        shootShift: json['shootShift'],
+        skipBomberAccuracyIncRateCoeff: json['skipBomberAccuracyIncRateCoeff'],
+        skipBomberAimingTime: json['skipBomberAimingTime'],
+        skipBomberHealth: json['skipBomberHealth'],
+        skipBomberSpeedMultiplier: json['skipBomberSpeedMultiplier'],
+        smokeGeneratorLifeTime: json['smokeGeneratorLifeTime'],
+        smokeGeneratorWorkTimeCoeff: json['smokeGeneratorWorkTimeCoeff'],
+        softCriticalEnabled: json['softCriticalEnabled'],
+        sonarWorkTimeCoeff: json['sonarWorkTimeCoeff'],
+        source: json['source'],
+        spawnBackwardShift: json['spawnBackwardShift'],
+        speedBoostersWorkTimeCoeff: json['speedBoostersWorkTimeCoeff'],
+        speedCoef: json['speedCoef'],
+        speedLimit: json['speedLimit'],
+        startDelayTime: json['startDelayTime'],
+        startDistance: json['startDistance'],
+        switchAmmoReloadCoef: json['switchAmmoReloadCoef'],
+        target: json['target'],
+        targetBuff: json['targetBuff'],
+        timeDelayAttack: json['timeDelayAttack'],
+        timeFromHeaven: json['timeFromHeaven'],
+        timeToTryingCatch: json['timeToTryingCatch'],
+        timeWaitDelayAttack: json['timeWaitDelayAttack'],
+        titleIDs: json['titleIDs'],
+        torpedoBomberAccuracyIncRateCoeff:
+            json['torpedoBomberAccuracyIncRateCoeff'],
+        torpedoBomberAimingTime: json['torpedoBomberAimingTime'],
+        torpedoBomberHealth: json['torpedoBomberHealth'],
+        torpedoDamageCoeff: json['torpedoDamageCoeff'],
+        torpedoDetectionCoefficient: json['torpedoDetectionCoefficient'],
+        torpedoDetectionCoefficientByPlane:
+            json['torpedoDetectionCoefficientByPlane'],
+        torpedoFullPingDamageCoeff: json['torpedoFullPingDamageCoeff'],
+        torpedoReloadTime: json['torpedoReloadTime'],
+        torpedoReloaderReloadCoeff: json['torpedoReloaderReloadCoeff'],
+        torpedoSpeedMultiplier: json['torpedoSpeedMultiplier'],
+        torpedoVisibilityFactor: json['torpedoVisibilityFactor'],
+        underwaterMaxRudderAngleCoeff: json['underwaterMaxRudderAngleCoeff'],
+        updateFrequency: json['updateFrequency'],
+        uwCoeffBonus: json['uwCoeffBonus'],
+        visibilityDistCoeff:
+            ModifierShipType.fromJson(json['visibilityDistCoeff']),
+        visibilityFactor: json['visibilityFactor'],
+        visibilityForSubmarineCoeff: json['visibilityForSubmarineCoeff'],
+        visionXRayTorpedoDist: json['visionXRayTorpedoDist'],
+        waveDistance: json['waveDistance'],
+        waveParams: json['waveParams'],
+        weaponTypes: json['weaponTypes'],
+        workTime: json['workTime'],
+        zoneLifetime: json['zoneLifetime'],
+        zoneRadius: json['zoneRadius'],
       );
 }
 
@@ -393,40 +732,33 @@ class ModernizationModifiers {
 @immutable
 class ModifierShipType {
   const ModifierShipType({
-    required this.airCarrier,
-    required this.auxiliary,
-    required this.battleship,
-    required this.cruiser,
-    required this.destroyer,
-    required this.submarine,
+    this.airCarrier,
+    this.auxiliary,
+    this.battleship,
+    this.cruiser,
+    this.destroyer,
+    this.submarine,
   });
 
-  final double airCarrier;
-  final double auxiliary;
-  final double battleship;
-  final double cruiser;
-  final double destroyer;
-  final double submarine;
+  final double? airCarrier;
+  final double? auxiliary;
+  final double? battleship;
+  final double? cruiser;
+  final double? destroyer;
+  final double? submarine;
 
   factory ModifierShipType.fromJson(Map<String, dynamic>? json) {
     if (json == null) {
-      return const ModifierShipType(
-        airCarrier: 1,
-        auxiliary: 1,
-        battleship: 1,
-        cruiser: 1,
-        destroyer: 1,
-        submarine: 1,
-      );
+      return const ModifierShipType();
     }
 
     return ModifierShipType(
-      airCarrier: json['AirCarrier'].toDouble(),
-      auxiliary: json['Auxiliary'].toDouble(),
-      battleship: json['Battleship'].toDouble(),
-      cruiser: json['Cruiser'].toDouble(),
-      destroyer: json['Destroyer'].toDouble(),
-      submarine: json['Submarine'].toDouble(),
+      airCarrier: json['AirCarrier'],
+      auxiliary: json['Auxiliary'],
+      battleship: json['Battleship'],
+      cruiser: json['Cruiser'],
+      destroyer: json['Destroyer'],
+      submarine: json['Submarine'],
     );
   }
 }
