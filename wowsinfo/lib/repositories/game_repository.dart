@@ -11,6 +11,7 @@ import 'package:wowsinfo/models/gamedata/alias.dart';
 import 'package:wowsinfo/models/gamedata/exterior.dart';
 import 'package:wowsinfo/models/gamedata/modernization.dart';
 import 'package:wowsinfo/models/gamedata/projectile.dart';
+import 'package:wowsinfo/models/gamedata/ship.dart';
 
 /// This repository manages game data from WoWs-Game-Data
 class GameRepository {
@@ -28,6 +29,7 @@ class GameRepository {
   late final Map<String, Exterior> _exteriors;
   late final Map<String, Modernization> _modernizations;
   late final Map<String, Projectile> _projectiles;
+  late final Map<String, Ship> _ships;
 
   late final Map<String, Map<String, String>> _lang;
   late String _gameLang;
@@ -36,6 +38,7 @@ class GameRepository {
   late final List<Ability> consumableList;
   late final List<Exterior> exteriorList;
   late final List<Modernization> modernizationList;
+  late final List<Ship> shipList;
 
   /// Load wowsinfo.json from /gamedata/app/data/
   Future<void> initialise() async {
@@ -78,6 +81,9 @@ class GameRepository {
     _projectiles = (dataObject['projectiles'] as Map).map((key, value) {
       return MapEntry(key, Projectile.fromJson(value));
     });
+    _ships = (dataObject['ships'] as Map).map((key, value) {
+      return MapEntry(key, Ship.fromJson(value));
+    });
     _timer.log(message: 'Decoded wowsinfo.json');
 
     // load the language file
@@ -117,6 +123,10 @@ class GameRepository {
     // sort modernizations by id
     modernizationList = _modernizations.values.toList();
     modernizationList.sort((a, b) => b.greater(a));
+
+    // sort ships by id
+    shipList = _ships.values.toList();
+    shipList.sort((a, b) => b.greater(a));
   }
 
   void setLanguage(String language) {

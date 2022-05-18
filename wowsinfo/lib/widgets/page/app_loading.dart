@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/foundation/app.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
+import 'package:wowsinfo/widgets/page/wiki/ship_page.dart';
 import 'package:wowsinfo/widgets/page/wiki/upgrade_page.dart';
 
 class AppLoading extends StatefulWidget {
@@ -18,7 +19,7 @@ class _AppLoadingState extends State<AppLoading> {
     GameRepository.instance.initialise().then((value) {
       // TODO: go to home screen here
       Navigator.of(context).push(
-        App.platformPageRoute(builder: (_) => UpgradePage()),
+        App.platformPageRoute(builder: (_) => const ShipPage()),
       );
     });
   }

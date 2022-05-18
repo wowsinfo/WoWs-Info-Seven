@@ -71,7 +71,7 @@ class Projectile {
         deepWater: json['deepWater'],
         ignoreClasses: json['ignoreClasses'] == null
             ? null
-            : List<String>.from(json['ignoreClasses'].map((x) => x)),
+            : List<String>.from(json['ignoreClasses']),
       );
 }
 

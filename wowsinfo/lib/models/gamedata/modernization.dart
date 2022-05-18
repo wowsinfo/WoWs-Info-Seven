@@ -63,22 +63,14 @@ class Modernization {
         name: json['name'],
         icon: json['icon'],
         description: json['description'],
-        level: json['level'] == null
-            ? null
-            : List<int>.from(json['level'].map((x) => x)),
-        type: json['type'] == null
-            ? null
-            : List<String>.from(json['type'].map((x) => x)),
-        nation: json['nation'] == null
-            ? null
-            : List<String>.from(json['nation'].map((x) => x)),
+        level: json['level'] == null ? null : List<int>.from(json['level']),
+        type: json['type'] == null ? null : List<String>.from(json['type']),
+        nation:
+            json['nation'] == null ? null : List<String>.from(json['nation']),
         modifiers: Modifiers.fromJson(json['modifiers']),
-        ships: json['ships'] == null
-            ? null
-            : List<int>.from(json['ships'].map((x) => x)),
-        excludes: json['excludes'] == null
-            ? null
-            : List<int>.from(json['excludes'].map((x) => x)),
+        ships: json['ships'] == null ? null : List<int>.from(json['ships']),
+        excludes:
+            json['excludes'] == null ? null : List<int>.from(json['excludes']),
         special: json['special'],
         unique: json['unique'],
       );

@@ -24,7 +24,7 @@ class Achievement {
         icon: json['icon'],
         name: json['name'],
         description: json['description'],
-        type: List<String>.from(json['type'].map((x) => x)),
+        type: List<String>.from(json['type']),
         id: json['id'],
         constants: Map.from(json['constants'])
             .map((k, v) => MapEntry<String, dynamic>(k, v)),
