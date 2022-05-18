@@ -7,19 +7,23 @@ class Modernization {
   const Modernization({
     required this.slot,
     required this.id,
+    required this.costCR,
     required this.name,
     required this.icon,
     required this.description,
-    required this.level,
-    required this.type,
-    required this.nation,
+    this.level,
+    this.type,
+    this.nation,
     required this.modifiers,
-    required this.ships,
-    required this.excludes,
+    this.ships,
+    this.excludes,
+    this.special,
+    this.unique,
   });
 
   final int slot;
   final int id;
+  final int costCR;
   final String name;
   final String icon;
   final String description;
@@ -29,22 +33,33 @@ class Modernization {
   final Modifiers modifiers;
   final List<int>? ships;
   final List<int>? excludes;
-
-  bool get isUnique => ships != null && ships!.length == 1;
+  final bool? special;
+  final bool? unique;
 
   @override
   String toString() {
     final description = modifiers.toString();
-    if (isUnique) {
+    if (unique != null) {
       return description + '\n' + GameRepository.instance.stringOf(name);
     }
 
     return description;
   }
 
+  int greater(Modernization other) {
+    if (special == other.special && unique == other.unique) {
+      return id - other.id;
+    }
+
+    if (special == null && unique == null) return 2;
+    if (unique == null && other.unique != null) return 1;
+    return -1;
+  }
+
   factory Modernization.fromJson(Map<String, dynamic> json) => Modernization(
         slot: json['slot'],
         id: json['id'],
+        costCR: json['costCR'],
         name: json['name'],
         icon: json['icon'],
         description: json['description'],
@@ -64,5 +79,7 @@ class Modernization {
         excludes: json['excludes'] == null
             ? null
             : List<int>.from(json['excludes'].map((x) => x)),
+        special: json['special'],
+        unique: json['unique'],
       );
 }

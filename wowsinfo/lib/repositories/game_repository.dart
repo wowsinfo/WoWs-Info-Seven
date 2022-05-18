@@ -116,7 +116,7 @@ class GameRepository {
 
     // sort modernizations by id
     modernizationList = _modernizations.values.toList();
-    modernizationList.sort((a, b) => b.id.compareTo(a.id));
+    modernizationList.sort((a, b) => b.greater(a));
   }
 
   void setLanguage(String language) {

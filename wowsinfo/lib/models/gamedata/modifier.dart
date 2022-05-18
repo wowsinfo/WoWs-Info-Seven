@@ -275,26 +275,15 @@ class Modifiers {
           // -1 means infinite
           valueString = '∞';
         } else {
-          if (key.contains('time')) {
+          // coeff has the highest priority
+          if (key.contains('coeff')) {
+            valueString = _formatNumber(value);
+          } else if (key.contains('time')) {
             valueString = value.toDecimalString() + 's';
           } else if (key.contains('dist')) {
             valueString = (value / 33.35).toDecimalString() + 'km';
-          } else if (key.contains('coeff') || value < 2) {
-            if (value == 1) {
-              valueString = '+1';
-            } else {
-              var adjustedValue = value;
-              // TODO: need to find a better way, this is more or less a hack
-              // TODO: we shouldn't adjust the value based on its value
-              if (value < 0.35) {
-                // if the number is too small, we need to add 1 to make it positive
-                adjustedValue = value + 1;
-              }
-              final positive = adjustedValue > 1;
-              final offset =
-                  ((adjustedValue - 1).abs() * 100).toDecimalString();
-              valueString = '${positive ? '+' : '-'}$offset%';
-            }
+          } else if (value < 2) {
+            valueString = _formatNumber(value);
           } else {
             valueString = value.toDecimalString();
           }
@@ -308,6 +297,20 @@ class Modifiers {
     }
 
     return description;
+  }
+
+  String _formatNumber(num value) {
+    if (value == 1) return '+1';
+    var adjustedValue = value;
+    // TODO: need to find a better way, this is more or less a hack
+    // TODO: we shouldn't adjust the value based on its value
+    if (value < 0.35) {
+      // if the number is too small, we need to add 1 to make it positive
+      adjustedValue = value + 1;
+    }
+    final positive = adjustedValue > 1;
+    final offset = ((adjustedValue - 1).abs() * 100).toDecimalString();
+    return '${positive ? '+' : '-'}$offset%';
   }
 
   final ModifierShipType? aaAuraDamage;
