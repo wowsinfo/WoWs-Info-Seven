@@ -14,7 +14,7 @@ class _SetupState extends State<Setup> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       setState(() {
         logoOpacity = 1;
       });

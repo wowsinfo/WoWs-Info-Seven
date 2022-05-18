@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:wowsinfo/models/gamedata/modifier.dart';
+import 'package:wowsinfo/repositories/game_repository.dart';
 
 @immutable
 class Modernization {
@@ -30,6 +31,16 @@ class Modernization {
   final List<int>? excludes;
 
   bool get isUnique => ships != null && ships!.length == 1;
+
+  @override
+  String toString() {
+    final description = modifiers.toString();
+    if (isUnique) {
+      return description + '\n' + GameRepository.instance.stringOf(name);
+    }
+
+    return description;
+  }
 
   factory Modernization.fromJson(Map<String, dynamic> json) => Modernization(
         slot: json['slot'],

@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:wowsinfo/foundation/helpers/utils.dart';
-import 'package:wowsinfo/models/gamedata/ability.dart';
+import 'package:wowsinfo/models/gamedata/modernization.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
 import 'package:wowsinfo/widgets/shared/placeholder.dart';
 
-class ConsumablePage extends StatelessWidget {
-  ConsumablePage({Key? key}) : super(key: key);
+class UpgradePage extends StatelessWidget {
+  UpgradePage({Key? key}) : super(key: key);
 
-  final _consumaibles = GameRepository.instance.consumableList;
-  final _logger = Logger('ConsumablePage');
+  final _modernization = GameRepository.instance.modernizationList;
+  final _logger = Logger('UpgradePage');
 
   @override
   Widget build(BuildContext context) {
     final itemCount = Utils.of(context).getItemCount(8, 2, 100);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Consumable Page'),
+        title: const Text('Upgrade Page'),
       ),
       body: SafeArea(
         child: Scrollbar(
@@ -33,14 +33,14 @@ class ConsumablePage extends StatelessWidget {
         crossAxisCount: itemCount,
         childAspectRatio: 1.0,
       ),
-      itemCount: _consumaibles.length,
+      itemCount: _modernization.length,
       itemBuilder: (context, index) {
-        final curr = _consumaibles[index];
+        final curr = _modernization[index];
         final imageName = curr.icon;
         return InkWell(
           child: FittedBox(
             child: Image.asset(
-              'gamedata/app/assets/consumables/$imageName.png',
+              'gamedata/app/assets/upgrades/$imageName.png',
               errorBuilder: (context, error, stackTrace) {
                 // _logger.severe(
                 //   'Failed to load image: $imageName',
@@ -59,9 +59,9 @@ class ConsumablePage extends StatelessWidget {
     );
   }
 
-  void showInfo(BuildContext context, Ability consumable) {
-    final icon = consumable.icon;
-    final modifierString = consumable.descriptionOf(0);
+  void showInfo(BuildContext context, Modernization upgrade) {
+    final icon = upgrade.icon;
+    final additionalString = upgrade.toString();
 
     showDialog(
       context: context,
@@ -73,7 +73,7 @@ class ConsumablePage extends StatelessWidget {
           child: ListTile(
               contentPadding: const EdgeInsets.all(2),
               leading: Image.asset(
-                'gamedata/app/assets/consumables/$icon.png',
+                'gamedata/app/assets/upgrades/$icon.png',
                 errorBuilder: (context, error, stackTrace) {
                   // _logger.severe(
                   //   'Failed to load image: $imageName',
@@ -84,16 +84,16 @@ class ConsumablePage extends StatelessWidget {
                 },
               ),
               title: Text(
-                GameRepository.instance.stringOf(consumable.name),
+                GameRepository.instance.stringOf(upgrade.name),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
               subtitle: Text(
                 GameRepository.instance.stringOf(
-                      consumable.description,
+                      upgrade.description,
                     ) +
-                    '\n' +
-                    modifierString,
+                    '\n\n' +
+                    additionalString,
               )),
         ),
       ),
