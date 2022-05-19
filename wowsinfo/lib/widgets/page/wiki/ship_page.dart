@@ -43,25 +43,27 @@ class _ShipPageState extends State<ShipPage> {
         final curr = _ships[index];
         final imageName = curr.index;
         return InkWell(
-          child: FittedBox(
-              child: Column(
+          child: Column(
             children: [
-              Image.asset(
-                'gamedata/app/assets/ships/$imageName.png',
-                errorBuilder: (context, error, stackTrace) {
-                  // _logger.severe(
-                  //   'Failed to load image: $imageName',
-                  //   error,
-                  //   stackTrace,
-                  // );
-                  return Image.asset('gamedata/app/assets/ships/_default.png');
-                },
+              FittedBox(
+                child: Image.asset(
+                  'gamedata/app/assets/ships/$imageName.png',
+                  errorBuilder: (context, error, stackTrace) {
+                    // _logger.severe(
+                    //   'Failed to load image: $imageName',
+                    //   error,
+                    //   stackTrace,
+                    // );
+                    return Image.asset(
+                        'gamedata/app/assets/ships/_default.png');
+                  },
+                ),
               ),
               Text(curr.tierString +
                   ' ' +
                   (GameRepository.instance.stringOf(curr.name) ?? '')),
             ],
-          )),
+          ),
           onTap: () {
             showInfo(context, curr);
           },
