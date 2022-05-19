@@ -19,7 +19,7 @@ class _AppLoadingState extends State<AppLoading> {
     GameRepository.instance.initialise().then((value) {
       // TODO: go to home screen here
       Navigator.of(context).push(
-        App.platformPageRoute(builder: (_) => const ShipPage()),
+        App.platformPageRoute(builder: (_) => UpgradePage()),
       );
     });
   }

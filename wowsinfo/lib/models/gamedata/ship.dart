@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:wowsinfo/models/wargaming/weapon.dart';
 
 import 'consumable.dart';
 
@@ -190,8 +189,8 @@ class TorpedoInfo {
 }
 
 @immutable
-class DepthChargeClass {
-  const DepthChargeClass({
+class DepthChargeInfo {
+  const DepthChargeInfo({
     required this.reload,
     required this.ammo,
     required this.bombs,
@@ -203,8 +202,8 @@ class DepthChargeClass {
   final int bombs;
   final int groups;
 
-  factory DepthChargeClass.fromJson(Map<String, dynamic> json) =>
-      DepthChargeClass(
+  factory DepthChargeInfo.fromJson(Map<String, dynamic> json) =>
+      DepthChargeInfo(
         reload: json['reload'],
         ammo: json['ammo'],
         bombs: json['bombs'],
