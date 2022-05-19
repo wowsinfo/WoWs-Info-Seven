@@ -18,7 +18,7 @@ class _ShipPageState extends State<ShipPage> {
 
   @override
   Widget build(BuildContext context) {
-    final itemCount = Utils.of(context).getItemCount(8, 2, 100);
+    final itemCount = Utils.of(context).getItemCount(8, 2, 150);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Upgrade Page'),
@@ -43,30 +43,33 @@ class _ShipPageState extends State<ShipPage> {
         final curr = _ships[index];
         final imageName = curr.index;
         return InkWell(
-          child: Column(
-            children: [
-              FittedBox(
-                child: Image.asset(
-                  'gamedata/app/assets/ships/$imageName.png',
-                  errorBuilder: (context, error, stackTrace) {
-                    // _logger.severe(
-                    //   'Failed to load image: $imageName',
-                    //   error,
-                    //   stackTrace,
-                    // );
-                    return Image.asset(
-                        'gamedata/app/assets/ships/_default.png');
-                  },
-                ),
-              ),
-              Text(curr.tierString +
-                  ' ' +
-                  (GameRepository.instance.stringOf(curr.name) ?? '')),
-            ],
-          ),
           onTap: () {
             showInfo(context, curr);
           },
+          child: FittedBox(
+            child: Column(
+              children: [
+                SizedBox(
+                  child: Image.asset(
+                    'gamedata/app/assets/ships/$imageName.png',
+                    errorBuilder: (context, error, stackTrace) {
+                      // _logger.severe(
+                      //   'Failed to load image: $imageName',
+                      //   error,
+                      //   stackTrace,
+                      // );
+                      return Image.asset(
+                          'gamedata/app/assets/ships/_default.png');
+                    },
+                  ),
+                  height: 80,
+                ),
+                Text(curr.tierString +
+                    ' ' +
+                    (GameRepository.instance.stringOf(curr.name) ?? '')),
+              ],
+            ),
+          ),
         );
       },
     );

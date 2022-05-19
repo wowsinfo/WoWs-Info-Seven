@@ -1,11 +1,14 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:logging/logging.dart';
 
 class Utils {
   BuildContext context;
   Utils(this.context);
   static Utils of(BuildContext context) => Utils(context);
+
+  final _logger = Logger('Utils');
 
   /// A simple wrapper of Future.delayed
   static Future<void> delay(int duration) {
@@ -14,7 +17,9 @@ class Utils {
 
   int getItemCount(int maxItem, int minItem, int itemWidth) {
     final width = MediaQuery.of(context).size.width;
-    return min(maxItem, max(width / itemWidth, minItem)).toInt();
+    final count = min(maxItem, max(width / itemWidth, minItem)).toInt();
+    _logger.fine('Item count: $count ($width)');
+    return count;
   }
 
   double getItemWidth(int itemWidth, {int maxCount = 0, int margin = 0}) {
