@@ -1,5 +1,23 @@
 import 'consumable.dart';
 
+const _tierList = [
+  'I',
+  'II',
+  'III',
+  'IV',
+  'V',
+  'VI',
+  'VII',
+  'VIII',
+  'IX',
+  'X',
+  '★',
+  '✱',
+  '✸',
+  '✹',
+  '✺',
+];
+
 class Ship {
   Ship({
     required this.name,
@@ -36,6 +54,9 @@ class Ship {
   final int costCr;
   final List<int>? nextShips;
   final AirDefense? airDefense;
+
+  /// Convert to tier symbol, [tier] starts from 1.
+  String get tierString => _tierList[tier - 1];
 
   @override
   String toString() {

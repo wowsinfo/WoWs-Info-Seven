@@ -57,7 +57,9 @@ class _ShipPageState extends State<ShipPage> {
                   return Image.asset('gamedata/app/assets/ships/_default.png');
                 },
               ),
-              Text(GameRepository.instance.stringOf(curr.name)),
+              Text(curr.tierString +
+                  ' ' +
+                  GameRepository.instance.stringOf(curr.name)),
             ],
           )),
           onTap: () {
