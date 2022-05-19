@@ -1,3 +1,6 @@
+import 'package:flutter/foundation.dart';
+import 'package:wowsinfo/models/wargaming/weapon.dart';
+
 import 'consumable.dart';
 
 const _tierList = [
@@ -12,14 +15,15 @@ const _tierList = [
   'IX',
   'X',
   '★',
-  '✱',
+  '✱', // preserved for future tiers
   '✸',
   '✹',
   '✺',
 ];
 
+@immutable
 class Ship {
-  Ship({
+  const Ship({
     required this.name,
     required this.description,
     required this.year,
@@ -36,6 +40,8 @@ class Ship {
     required this.costCr,
     this.nextShips,
     this.airDefense,
+    required this.modules,
+    required this.components,
   });
 
   final String name;
@@ -54,13 +60,15 @@ class Ship {
   final int costCr;
   final List<int>? nextShips;
   final AirDefense? airDefense;
+  final Map<String, Map<String, ShipModule>> modules;
+  final Map<String, dynamic> components;
 
   /// Convert to tier symbol, [tier] starts from 1.
   String get tierString => _tierList[tier - 1];
 
   @override
   String toString() {
-    return 'Ship{name: $name, description: $description, year: $year, paperShip: $paperShip, id: $id, index: $index, tier: $tier, region: $region, type: $type, group: $group, consumables: $consumables, costXp: $costXp, costGold: $costGold, costCr: $costCr, nextShips: $nextShips, airDefense: $airDefense}';
+    return 'Ship{name: $name, description: $description, year: $year, paperShip: $paperShip, id: $id, index: $index, tier: $tier, region: $region, type: $type, group: $group, consumables: $consumables, costXp: $costXp, costGold: $costGold, costCr: $costCr, nextShips: $nextShips, airDefense: $airDefense, modules: $modules, components: $components}';
   }
 
   int greater(Ship other) {
@@ -101,11 +109,292 @@ class Ship {
         airDefense: json['airDefense'] == null
             ? null
             : AirDefense.fromJson(json['airDefense']),
+        modules: Map.from(json['modules']).map(
+          (key, value) => MapEntry(
+            key,
+            Map<String, ShipModule>.from(
+              value.map(
+                (key, value) => MapEntry(key, ShipModule.fromJson(value)),
+              ),
+            ),
+          ),
+        ),
+        components: Map.from(json['components']),
       );
 }
 
+@immutable
+class ShipModule {
+  const ShipModule({
+    required this.cost,
+    required this.index,
+    required this.components,
+  });
+
+  final Cost cost;
+  final int index;
+  final Map<String, List<String>> components;
+
+  factory ShipModule.fromJson(Map<String, dynamic> json) => ShipModule(
+        cost: Cost.fromJson(json['cost']),
+        index: json['index'],
+        components: Map.from(json['components']).map(
+          (k, v) => MapEntry<String, List<String>>(k, List<String>.from(v)),
+        ),
+      );
+
+  @override
+  String toString() {
+    return 'ShipModule{cost: $cost, index: $index, components: $components}';
+  }
+}
+
+@immutable
+class ShipComponent {}
+
+@immutable
+class GunInfo {
+  const GunInfo({
+    required this.range,
+    required this.sigma,
+    required this.guns,
+  });
+
+  final int range;
+  final int sigma;
+  final List<WeaponInfo> guns;
+
+  factory GunInfo.fromJson(Map<String, dynamic> json) => GunInfo(
+        range: json['range'],
+        sigma: json['sigma'],
+        guns: List<WeaponInfo>.from(
+            json['guns'].map((x) => WeaponInfo.fromJson(x))),
+      );
+}
+
+@immutable
+class TorpedoInfo {
+  const TorpedoInfo({
+    required this.singleShot,
+    required this.launchers,
+  });
+
+  final bool singleShot;
+  final List<WeaponInfo> launchers;
+
+  factory TorpedoInfo.fromJson(Map<String, dynamic> json) => TorpedoInfo(
+        singleShot: json['singleShot'],
+        launchers: List<WeaponInfo>.from(
+            json['launchers'].map((x) => WeaponInfo.fromJson(x))),
+      );
+}
+
+@immutable
+class DepthChargeClass {
+  const DepthChargeClass({
+    required this.reload,
+    required this.ammo,
+    required this.bombs,
+    required this.groups,
+  });
+
+  final int reload;
+  final String ammo;
+  final int bombs;
+  final int groups;
+
+  factory DepthChargeClass.fromJson(Map<String, dynamic> json) =>
+      DepthChargeClass(
+        reload: json['reload'],
+        ammo: json['ammo'],
+        bombs: json['bombs'],
+        groups: json['groups'],
+      );
+}
+
+@immutable
+class AirSupportInfo {
+  const AirSupportInfo({
+    required this.name,
+    required this.reload,
+    required this.bombs,
+    required this.range,
+  });
+
+  final String name;
+  final int reload;
+  final int bombs;
+  final int range;
+
+  factory AirSupportInfo.fromJson(Map<String, dynamic> json) => AirSupportInfo(
+        name: json['name'],
+        reload: json['reload'],
+        bombs: json['bombs'],
+        range: json['range'],
+      );
+}
+
+class FireControlInfo {
+  FireControlInfo({
+    required this.maxDistCoef,
+    required this.sigmaCountCoef,
+  });
+
+  final double maxDistCoef;
+  final int sigmaCountCoef;
+
+  factory FireControlInfo.fromJson(Map<String, dynamic> json) =>
+      FireControlInfo(
+        maxDistCoef: json['maxDistCoef'],
+        sigmaCountCoef: json['sigmaCountCoef'],
+      );
+}
+
+class PingerInfo {
+  PingerInfo({
+    required this.reload,
+    required this.range,
+    required this.lifeTime1,
+    required this.lifeTime2,
+    required this.speed,
+  });
+
+  final double reload;
+  final int range;
+  final int lifeTime1;
+  final int lifeTime2;
+  final int speed;
+
+  factory PingerInfo.fromJson(Map<String, dynamic> json) => PingerInfo(
+        reload: json['reload'],
+        range: json['range'],
+        lifeTime1: json['lifeTime1'],
+        lifeTime2: json['lifeTime2'],
+        speed: json['speed'],
+      );
+}
+
+@immutable
+class HullInfo {
+  const HullInfo({
+    required this.health,
+    required this.visibility,
+    required this.mobility,
+  });
+
+  final double health;
+  final VisibilityInfo visibility;
+  final MobilityInfo mobility;
+
+  factory HullInfo.fromJson(Map<String, dynamic> json) => HullInfo(
+        health: json['health'],
+        visibility: VisibilityInfo.fromJson(json['visibility']),
+        mobility: MobilityInfo.fromJson(json['mobility']),
+      );
+}
+
+@immutable
+class MobilityInfo {
+  const MobilityInfo({
+    required this.speed,
+    required this.turningRadius,
+    required this.rudderTime,
+  });
+
+  final double speed;
+  final double turningRadius;
+  final double rudderTime;
+
+  factory MobilityInfo.fromJson(Map<String, dynamic> json) => MobilityInfo(
+        speed: json['speed'],
+        turningRadius: json['turningRadius'],
+        rudderTime: json['rudderTime'],
+      );
+}
+
+@immutable
+class VisibilityInfo {
+  const VisibilityInfo({
+    required this.sea,
+    required this.plane,
+    required this.seaInSmoke,
+    required this.planeInSmoke,
+    required this.submarine,
+    required this.seaFireCoeff,
+    required this.planeFireCoeff,
+  });
+
+  final double sea;
+  final double plane;
+  final double seaInSmoke;
+  final double planeInSmoke;
+  final double submarine;
+  final double seaFireCoeff;
+  final double planeFireCoeff;
+
+  factory VisibilityInfo.fromJson(Map<String, dynamic> json) => VisibilityInfo(
+        sea: json['sea'],
+        plane: json['plane'],
+        seaInSmoke: json['seaInSmoke'],
+        planeInSmoke: json['planeInSmoke'],
+        submarine: json['submarine'],
+        seaFireCoeff: json['seaFireCoeff'],
+        planeFireCoeff: json['planeFireCoeff'],
+      );
+}
+
+@immutable
+class WeaponInfo {
+  const WeaponInfo({
+    required this.reload,
+    required this.rotation,
+    required this.each,
+    required this.ammo,
+    required this.vertSector,
+    required this.count,
+  });
+
+  final int reload;
+  final int rotation;
+  final int each;
+  final List<String> ammo;
+  final int vertSector;
+  final int count;
+
+  factory WeaponInfo.fromJson(Map<String, dynamic> json) => WeaponInfo(
+        reload: json['reload'],
+        rotation: json['rotation'],
+        each: json['each'],
+        ammo: List<String>.from(json['ammo']),
+        vertSector: json['vertSector'],
+        count: json['count'],
+      );
+}
+
+@immutable
+class Cost {
+  const Cost({
+    required this.costCr,
+    required this.costXp,
+  });
+
+  final int costCr;
+  final int costXp;
+
+  factory Cost.fromJson(Map<String, dynamic> json) => Cost(
+        costCr: json['costCR'],
+        costXp: json['costXP'],
+      );
+
+  @override
+  String toString() {
+    return 'Cost{costCr: $costCr, costXp: $costXp}';
+  }
+}
+
+@immutable
 class AirDefense {
-  AirDefense({
+  const AirDefense({
     this.medium,
     this.near,
     this.far,
@@ -128,8 +417,9 @@ class AirDefense {
       );
 }
 
+@immutable
 class AirBubbles {
-  AirBubbles({
+  const AirBubbles({
     required this.inner,
     required this.outer,
     required this.rof,
@@ -151,15 +441,16 @@ class AirBubbles {
         inner: json['inner'],
         outer: json['outer'],
         rof: json['rof'],
-        minRange: json['minRange'].toDouble(),
-        maxRange: json['maxRange'].toDouble(),
-        spawnTime: json['spawnTime'].toDouble(),
+        minRange: json['minRange'],
+        maxRange: json['maxRange'],
+        spawnTime: json['spawnTime'],
         damage: json['damage'],
       );
 }
 
+@immutable
 class AuraInfo {
-  AuraInfo({
+  const AuraInfo({
     required this.minRange,
     required this.maxRange,
     required this.hitChance,
@@ -176,11 +467,11 @@ class AuraInfo {
   final num dps;
 
   factory AuraInfo.fromJson(Map<String, dynamic> json) => AuraInfo(
-        minRange: json['minRange'].toDouble(),
-        maxRange: json['maxRange'].toDouble(),
-        hitChance: json['hitChance'].toDouble(),
+        minRange: json['minRange'],
+        maxRange: json['maxRange'],
+        hitChance: json['hitChance'],
         damage: json['damage'],
-        rof: json['rof'].toDouble(),
+        rof: json['rof'],
         dps: json['dps'],
       );
 }
