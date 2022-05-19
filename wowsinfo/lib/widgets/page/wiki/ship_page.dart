@@ -59,7 +59,7 @@ class _ShipPageState extends State<ShipPage> {
               ),
               Text(curr.tierString +
                   ' ' +
-                  GameRepository.instance.stringOf(curr.name)),
+                  (GameRepository.instance.stringOf(curr.name) ?? '')),
             ],
           )),
           onTap: () {
@@ -83,16 +83,15 @@ class _ShipPageState extends State<ShipPage> {
           child: ListTile(
               contentPadding: const EdgeInsets.all(2),
               title: Text(
-                GameRepository.instance.stringOf(ship.name),
+                GameRepository.instance.stringOf(ship.name) ?? '',
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
               subtitle: Text(
                 GameRepository.instance.stringOf(
                       ship.description,
-                    ) +
-                    '\n\n' +
-                    additionalString,
+                    ) ??
+                    '' '\n\n' + additionalString,
               )),
         ),
       ),

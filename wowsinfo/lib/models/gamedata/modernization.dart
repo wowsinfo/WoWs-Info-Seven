@@ -39,8 +39,14 @@ class Modernization {
   @override
   String toString() {
     final description = modifiers.toString();
-    if (unique != null) {
-      return description + '\n' + GameRepository.instance.stringOf(name);
+    if (unique != null && ships != null) {
+      // try to get the ship name for unique upgrades
+      final shipName = GameRepository.instance.shipNameOf(
+        ships!.first.toString(),
+      );
+      if (shipName != null) {
+        return '$description\n\n- $shipName';
+      }
     }
 
     return description;

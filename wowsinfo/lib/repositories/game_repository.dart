@@ -9,6 +9,7 @@ import 'package:wowsinfo/models/gamedata/achievement.dart';
 import 'package:wowsinfo/models/gamedata/aircraft.dart';
 import 'package:wowsinfo/models/gamedata/alias.dart';
 import 'package:wowsinfo/models/gamedata/exterior.dart';
+import 'package:wowsinfo/models/gamedata/game_info.dart';
 import 'package:wowsinfo/models/gamedata/modernization.dart';
 import 'package:wowsinfo/models/gamedata/projectile.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
@@ -30,6 +31,7 @@ class GameRepository {
   late final Map<String, Modernization> _modernizations;
   late final Map<String, Projectile> _projectiles;
   late final Map<String, Ship> _ships;
+  late final GameInfo _gameInfo;
 
   late final Map<String, Map<String, String>> _lang;
   late String _gameLang;
@@ -39,6 +41,8 @@ class GameRepository {
   late final List<Exterior> exteriorList;
   late final List<Modernization> modernizationList;
   late final List<Ship> shipList;
+  late final List<String> shipRegionList;
+  late final List<String> shipTypeList;
 
   /// Load wowsinfo.json from /gamedata/app/data/
   Future<void> initialise() async {
@@ -84,6 +88,7 @@ class GameRepository {
     _ships = (dataObject['ships'] as Map).map((key, value) {
       return MapEntry(key, Ship.fromJson(value));
     });
+    _gameInfo = GameInfo.fromJson(dataObject['game']);
     _timer.log(message: 'Decoded wowsinfo.json');
 
     // load the language file
@@ -127,22 +132,28 @@ class GameRepository {
     // sort ships by id
     shipList = _ships.values.toList();
     shipList.sort((a, b) => b.greater(a));
+
+    // sort only to make sure they are the same
+    shipRegionList = _gameInfo.regions;
+    shipRegionList.sort();
+    shipTypeList = _gameInfo.types;
+    shipTypeList.sort();
   }
 
   void setLanguage(String language) {
     _gameLang = language;
   }
 
-  String stringOf(String key, {Map<String, dynamic>? constants}) {
+  String? stringOf(String key, {Map<String, dynamic>? constants}) {
     if (_lang[_gameLang] == null) {
       _logger.severe('Language $_gameLang not found');
-      return ' ';
+      return null;
     }
 
     final rawString = _lang[_gameLang]?[key];
     if (rawString == null) {
       _logger.severe('Language key $key not found');
-      return ' ';
+      return null;
     }
 
     // TODO: we can move this to probably another class if needed
@@ -241,5 +252,18 @@ class GameRepository {
   /// If the projectile is not found, it will return null
   Projectile? projectileOf(String key) {
     return _projectiles[key];
+  }
+
+  /// Get a ship by its id.
+  /// If the ship is not found, it will return null
+  Ship? shipOf(String id) {
+    // TODO: we can check if this id is numeric
+    return _ships[id];
+  }
+
+  String? shipNameOf(String id) {
+    final ship = shipOf(id);
+    if (ship == null) return null;
+    return stringOf(ship.name);
   }
 }

@@ -80,15 +80,16 @@ class AchievementPage extends StatelessWidget {
                 },
               ),
               title: Text(
-                GameRepository.instance.stringOf(achievement.name),
+                GameRepository.instance.stringOf(achievement.name) ?? '',
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
               subtitle: Text(
                 GameRepository.instance.stringOf(
-                  achievement.description,
-                  constants: achievement.constants,
-                ),
+                      achievement.description,
+                      constants: achievement.constants,
+                    ) ??
+                    '',
               )),
         ),
       ),
