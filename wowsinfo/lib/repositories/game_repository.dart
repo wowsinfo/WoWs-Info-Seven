@@ -144,15 +144,23 @@ class GameRepository {
     _gameLang = language;
   }
 
-  String? stringOf(String key, {Map<String, dynamic>? constants}) {
+  String? stringOf(
+    String key, {
+    Map<String, dynamic>? constants,
+    String? prefix,
+  }) {
     if (_lang[_gameLang] == null) {
       _logger.severe('Language $_gameLang not found');
       return null;
     }
 
-    final rawString = _lang[_gameLang]?[key];
+    var langKey = key.toUpperCase();
+    if (prefix != null) {
+      langKey = prefix + langKey;
+    }
+    final rawString = _lang[_gameLang]![langKey];
     if (rawString == null) {
-      _logger.severe('Language key $key not found');
+      _logger.severe('Language key $langKey not found');
       return null;
     }
 
