@@ -61,4 +61,15 @@ class FilterShipProvider with ChangeNotifier {
     _tierMap = Map.fromEntries(_tierMap.entries.toList());
     notifyListeners();
   }
+
+  void resetAll() {
+    _regionMap = _makeMap(_regions);
+    _typeMap = _makeMap(_types);
+    _tierMap = {for (final tier in GameInfo.tiers) tier: false};
+    notifyListeners();
+  }
+
+  ShipFilter onFilter() {
+    //
+  }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:wowsinfo/foundation/app.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_filter.dart';
 import 'package:wowsinfo/providers/wiki/filter_ship_provider.dart';
 
@@ -30,34 +31,48 @@ class _ShipFilterDialog extends StatefulWidget {
 class _ShipFilterDialogState extends State<_ShipFilterDialog> {
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<FilterShipProvider>(context, listen: false);
     return Dialog(
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 500),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextField(
-              decoration: const InputDecoration(
-                labelText: 'Name',
+      child: SingleChildScrollView(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 500),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                decoration: const InputDecoration(
+                  labelText: 'Name',
+                ),
+                onChanged: (value) {
+                  setState(() {});
+                },
               ),
-              onChanged: (value) {
-                setState(() {});
-              },
-            ),
-            // render a list of names in chips and we need to animate when we move a chip up to be selected
-            renderTierList(),
-            const Divider(),
-            renderRegionList(),
-            const Divider(),
-            renderTypeList(),
-            const Divider(),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Filter'),
-            )
-          ],
+              // render a list of names in chips and we need to animate when we move a chip up to be selected
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  renderTierList(),
+                  renderTypeList(),
+                  renderRegionList(),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      provider.resetAll();
+                    },
+                    icon: const Icon(Icons.refresh),
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.check),
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -70,18 +85,22 @@ class _ShipFilterDialogState extends State<_ShipFilterDialog> {
   ) {
     return Align(
       alignment: Alignment.topLeft,
-      child: Wrap(
-        spacing: 4,
-        runSpacing: 4,
-        children: [
-          for (final key in filterList)
-            FilterChip(
-              pressElevation: 0,
-              selected: selectedList[filterList.indexOf(key)],
-              label: Text(key),
-              onSelected: (_) => onSelected(key),
-            )
-        ],
+      child: Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: Wrap(
+          direction: Axis.vertical,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          spacing: App.isMobile ? -8 : 8,
+          children: [
+            for (final key in filterList)
+              ChoiceChip(
+                selectedColor: Colors.blue,
+                selected: selectedList[filterList.indexOf(key)],
+                label: Text(key),
+                onSelected: (_) => onSelected(key),
+              )
+          ],
+        ),
       ),
     );
   }
