@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
+import 'package:provider/provider.dart';
 import 'package:wowsinfo/foundation/helpers/utils.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
+import 'package:wowsinfo/providers/wiki/ship_provider.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
-import 'package:wowsinfo/widgets/shared/placeholder.dart';
 
 class ShipPage extends StatefulWidget {
   const ShipPage({Key? key}) : super(key: key);
@@ -13,34 +14,45 @@ class ShipPage extends StatefulWidget {
 }
 
 class _ShipPageState extends State<ShipPage> {
-  final _ships = GameRepository.instance.shipList;
-  final _logger = Logger('ShipPage');
+  late final _provider = ShipProvider(context);
 
   @override
   Widget build(BuildContext context) {
     final itemCount = Utils.of(context).getItemCount(8, 2, 150);
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Upgrade Page'),
-      ),
-      body: SafeArea(
-        child: Scrollbar(
-          child: buildGridView(itemCount),
+    return ChangeNotifierProvider.value(
+      value: _provider,
+      builder: (context, widget) => Scaffold(
+        appBar: AppBar(
+          title: const Text('Upgrade Page'),
         ),
+        body: SafeArea(
+          child: Scrollbar(
+            child: buildGridView(itemCount),
+          ),
+        ),
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: () => _provider.showFilter(),
+          icon: const Icon(Icons.filter_alt),
+          label: Text(_provider.filterString),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),
     );
   }
 
   GridView buildGridView(int itemCount) {
+    final shipList = _provider.shipList;
+    final shipCount = _provider.shipCount;
+
     // Display everything
     return GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: itemCount,
         childAspectRatio: 1.0,
       ),
-      itemCount: _ships.length,
+      itemCount: shipCount,
       itemBuilder: (context, index) {
-        final curr = _ships[index];
+        final curr = shipList[index];
         final imageName = curr.index;
         return InkWell(
           onTap: () {
@@ -58,8 +70,7 @@ class _ShipPageState extends State<ShipPage> {
                       //   error,
                       //   stackTrace,
                       // );
-                      return Image.asset(
-                          'gamedata/app/assets/ships/_default.png');
+                      return Image.asset(_provider.defaultImage);
                     },
                   ),
                   height: 80,

@@ -100,8 +100,8 @@ class Ship {
         tier: json['tier'],
         region: json['region'],
         type: json['type'],
-        regionId: json['regionId'],
-        typeId: json['typeId'],
+        regionId: json['regionID'],
+        typeId: json['typeID'],
         group: json['group'],
         consumables: List<List<Consumable>>.from(json['consumables'].map((x) =>
             List<Consumable>.from(x.map((x) => Consumable.fromJson(x))))),
