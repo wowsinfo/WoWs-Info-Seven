@@ -1,24 +1,7 @@
 import 'package:flutter/foundation.dart';
+import 'package:wowsinfo/models/gamedata/game_info.dart';
 
 import 'consumable.dart';
-
-const _tierList = [
-  'I',
-  'II',
-  'III',
-  'IV',
-  'V',
-  'VI',
-  'VII',
-  'VIII',
-  'IX',
-  'X',
-  '★',
-  '✱', // preserved for future tiers
-  '✸',
-  '✹',
-  '✺',
-];
 
 @immutable
 class Ship {
@@ -67,7 +50,7 @@ class Ship {
   final Map<String, dynamic> components;
 
   /// Convert to tier symbol, [tier] starts from 1.
-  String get tierString => _tierList[tier - 1];
+  String get tierString => GameInfo.tiers[tier - 1];
 
   @override
   String toString() {

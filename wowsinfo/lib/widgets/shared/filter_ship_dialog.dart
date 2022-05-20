@@ -30,9 +30,8 @@ class _ShipFilterDialogState extends State<_ShipFilterDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: const Text('Filter Ships'),
-      content: Column(
+    return Dialog(
+      child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           TextField(
@@ -43,33 +42,11 @@ class _ShipFilterDialogState extends State<_ShipFilterDialog> {
               setState(() {});
             },
           ),
-          TextField(
-            decoration: const InputDecoration(
-              labelText: 'Nation',
-            ),
-            onChanged: (value) {
-              setState(() {});
-            },
-          ),
-          TextField(
-            decoration: const InputDecoration(
-              labelText: 'Type',
-            ),
-            onChanged: (value) {
-              setState(() {});
-            },
-          ),
-          TextField(
-            decoration: const InputDecoration(
-              labelText: 'Tier',
-            ),
-            onChanged: (value) {
-              setState(() {});
-            },
-          ),
+          // render a list of names in chips and we need to animate when we move a chip up to be selected
+          const Divider(),
           ElevatedButton(
             onPressed: () {
-              ///
+              Navigator.of(context).pop();
             },
             child: const Text('Filter'),
           )
