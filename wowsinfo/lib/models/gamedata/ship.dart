@@ -32,6 +32,8 @@ class Ship {
     required this.tier,
     required this.region,
     required this.type,
+    required this.regionId,
+    required this.typeId,
     required this.group,
     required this.consumables,
     required this.costXp,
@@ -52,6 +54,8 @@ class Ship {
   final int tier;
   final String region;
   final String type;
+  final String regionId;
+  final String typeId;
   final String group;
   final List<List<Consumable>> consumables;
   final int costXp;
@@ -96,6 +100,8 @@ class Ship {
         tier: json['tier'],
         region: json['region'],
         type: json['type'],
+        regionId: json['regionId'],
+        typeId: json['typeId'],
         group: json['group'],
         consumables: List<List<Consumable>>.from(json['consumables'].map((x) =>
             List<Consumable>.from(x.map((x) => Consumable.fromJson(x))))),

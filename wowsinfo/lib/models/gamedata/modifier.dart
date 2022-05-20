@@ -293,6 +293,8 @@ class Modifiers {
         valueString = value.join(', ');
       }
 
+      // TODO: need to handle ModifierShipType as well
+
       description += '$langString: $valueString\n';
     }
 
