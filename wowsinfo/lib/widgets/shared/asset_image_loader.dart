@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 
-class AssetImageLoader extends StatefulWidget {
+class AssetImageLoader extends StatelessWidget {
   const AssetImageLoader({
     Key? key,
     required this.name,
@@ -12,23 +12,9 @@ class AssetImageLoader extends StatefulWidget {
   final String? placeholder;
 
   @override
-  State<AssetImageLoader> createState() => _AssetImageLoaderState();
-}
-
-class _AssetImageLoaderState extends State<AssetImageLoader> {
-  late Future<Widget> image;
-  final _logger = Logger('ImageLoader');
-
-  @override
-  void initState() {
-    super.initState();
-    image = loadAssetImage(context);
-  }
-
-  @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: image,
+      future: loadAssetImage(context),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return snapshot.data as Widget;
@@ -40,13 +26,12 @@ class _AssetImageLoaderState extends State<AssetImageLoader> {
 
   /// Load image from gamedata/ folder and some can be missing.
   Future<Widget> loadAssetImage(BuildContext context) async {
-    final imageName = widget.name;
+    final _logger = Logger('ImageLoader');
     try {
-      final memoryImage = await DefaultAssetBundle.of(context).load(imageName);
+      final memoryImage = await DefaultAssetBundle.of(context).load(name);
       return Image.memory(memoryImage.buffer.asUint8List());
     } catch (e) {
-      _logger.warning('Failed to load image: $imageName');
-      final placeholder = widget.placeholder;
+      _logger.warning('Failed to load image: $name');
       if (placeholder == null) {
         return const Icon(
           Icons.close,
@@ -54,7 +39,7 @@ class _AssetImageLoaderState extends State<AssetImageLoader> {
         );
       }
 
-      return Image.asset(placeholder);
+      return Image.asset(placeholder!);
     }
   }
 }

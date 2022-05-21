@@ -255,10 +255,10 @@ class PingerInfo {
   });
 
   final double reload;
-  final int range;
-  final int lifeTime1;
-  final int lifeTime2;
-  final int speed;
+  final num range;
+  final num lifeTime1;
+  final num lifeTime2;
+  final num speed;
 
   factory PingerInfo.fromJson(Map<String, dynamic> json) => PingerInfo(
         reload: json['reload'],

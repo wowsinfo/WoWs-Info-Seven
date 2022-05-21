@@ -24,6 +24,94 @@ class ShipModules {
   final List<Aircraft> _torpedoBomberInfo = [];
   final List<Aircraft> _diveBomberInfo = [];
 
+  // selected modules by default 0
+  int _selectedHull = 0;
+  int _selectedGun = 0;
+  int _selectedSecondary = 0;
+  int _selectedTorp = 0;
+  int _selectedPinger = 0;
+  int _selectedFireControl = 0;
+  int _selectedAirSupport = 0;
+  int _selectedDepthCharge = 0;
+
+  int _selectedFighter = 0;
+  int _selectedSkipBomber = 0;
+  int _selectedTorpedoBomber = 0;
+  int _selectedDiveBomber = 0;
+
+  T? _valueAt<T>(List<T> list, int index) {
+    if (index < 0 || index >= list.length) return null;
+    return list[index];
+  }
+
+  HullInfo? get hullInfo => _valueAt(_hullInfo, _selectedHull);
+  GunInfo? get gunInfo => _valueAt(_gunInfo, _selectedGun);
+  GunInfo? get secondaryInfo => _valueAt(_secondaryInfo, _selectedSecondary);
+  TorpedoInfo? get torpedoInfo => _valueAt(_torpInfo, _selectedTorp);
+  PingerInfo? get pingerInfo => _valueAt(_pingerInfo, _selectedPinger);
+  FireControlInfo? get fireControlInfo =>
+      _valueAt(_fireControlInfo, _selectedFireControl);
+  AirSupportInfo? get airSupportInfo =>
+      _valueAt(_airSupportInfo, _selectedAirSupport);
+  DepthChargeInfo? get depthChargeInfo =>
+      _valueAt(_depthChargeInfo, _selectedDepthCharge);
+
+  Aircraft? get fighterInfo => _valueAt(_fighterInfo, _selectedFighter);
+  Aircraft? get skipBomberInfo =>
+      _valueAt(_skipBomberInfo, _selectedSkipBomber);
+  Aircraft? get torpedoBomberInfo =>
+      _valueAt(_torpedoBomberInfo, _selectedTorpedoBomber);
+  Aircraft? get diveBomberInfo =>
+      _valueAt(_diveBomberInfo, _selectedDiveBomber);
+
+  void updateHull(int index) {
+    _selectedHull = index;
+  }
+
+  void updateGun(int index) {
+    _selectedGun = index;
+  }
+
+  void updateSecondary(int index) {
+    _selectedSecondary = index;
+  }
+
+  void updateTorpedo(int index) {
+    _selectedTorp = index;
+  }
+
+  void updatePinger(int index) {
+    _selectedPinger = index;
+  }
+
+  void updateFireControl(int index) {
+    _selectedFireControl = index;
+  }
+
+  void updateAirSupport(int index) {
+    _selectedAirSupport = index;
+  }
+
+  void updateDepthCharge(int index) {
+    _selectedDepthCharge = index;
+  }
+
+  void updateFighter(int index) {
+    _selectedFighter = index;
+  }
+
+  void updateSkipBomber(int index) {
+    _selectedSkipBomber = index;
+  }
+
+  void updateTorpedoBomber(int index) {
+    _selectedTorpedoBomber = index;
+  }
+
+  void updateDiveBomber(int index) {
+    _selectedDiveBomber = index;
+  }
+
   void unpackModules() {
     final shipModules = _ship.components;
     for (final module in _ship.modules.entries) {
