@@ -22,11 +22,19 @@ class _ShipInfoPageState extends State<ShipInfoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.ship.name),
+        title: Text(_provider.title),
       ),
       body: SingleChildScrollView(
         child: Column(children: [
-          _ShipTitleSection(icon: _provider.shipIcon),
+          _ShipTitleSection(
+            icon: _provider.shipIcon,
+            name: _provider.shipName,
+            region: _provider.region,
+            type: _provider.type,
+            costCR: _provider.costCR,
+            costGold: _provider.costGold,
+            description: _provider.description,
+          ),
         ]),
       ),
     );
@@ -37,9 +45,21 @@ class _ShipTitleSection extends StatelessWidget {
   const _ShipTitleSection({
     Key? key,
     required this.icon,
+    required this.name,
+    required this.region,
+    required this.type,
+    this.costCR,
+    this.costGold,
+    required this.description,
   }) : super(key: key);
 
   final String icon;
+  final String name;
+  final String region;
+  final String type;
+  final String? costCR;
+  final String? costGold;
+  final String description;
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +70,12 @@ class _ShipTitleSection extends StatelessWidget {
             name: icon,
             height: 128,
           ),
+          Text(name),
+          Text(region),
+          Text(type),
+          if (costCR != null) Text(costCR!),
+          if (costGold != null) Text(costGold!),
+          Text(description),
         ],
       ),
     );

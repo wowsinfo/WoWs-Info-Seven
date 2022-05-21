@@ -6,16 +6,19 @@ class ShipIcon extends StatelessWidget {
     Key? key,
     required this.name,
     this.height,
+    this.width,
   }) : super(key: key);
 
   final String name;
   final double? height;
+  final double? width;
 
   @override
   Widget build(BuildContext context) {
     final icon = 'gamedata/app/assets/ships/$name.png';
     return SizedBox(
       height: height ?? 80,
+      width: width,
       child: AssetImageLoader(
         name: icon,
         placeholder: 'gamedata/app/assets/ships/_default.png',
