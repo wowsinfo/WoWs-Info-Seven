@@ -1,8 +1,15 @@
 import 'package:logging/logging.dart';
-import 'package:wowsinfo/models/gamedata/ship.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
 
 enum _ShipFilterKey { nation, shipname, shiptype, level }
+
+/// An interface for filtering ships with a [ShipFilter]
+abstract class ShipFilterInterface {
+  String get name;
+  int get tier;
+  String get region;
+  String get type;
+}
 
 /// Filter ships with conditions
 class ShipFilter {
@@ -48,7 +55,7 @@ class ShipFilter {
   }
 
   /// Check if this ship should be displayed
-  bool shouldDisplay(Ship ship) {
+  bool shouldDisplay(ShipFilterInterface ship) {
     if (name.trim().isNotEmpty && ship.name.contains(name) == false) {
       return false;
     }

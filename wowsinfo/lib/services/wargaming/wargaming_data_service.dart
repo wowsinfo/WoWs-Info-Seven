@@ -9,6 +9,7 @@ import 'key.dart';
 /// This service is unlike `WargamingService` where it needs to download data
 /// from the API. The API splits the data into multiple pages so often multiple
 /// requests are needed to get all the data in a method.
+@Deprecated('This service is replaced with `GameRepository`.')
 class WargamingDataService extends BaseService {
   /// The wargaming server
   WargamingDataService(GameServer server, {String language = 'en'}) {

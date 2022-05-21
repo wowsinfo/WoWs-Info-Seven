@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final clanResult = clanResultFromJson(jsonString);
-
 import 'package:flutter/foundation.dart';
 import 'package:wowsinfo/models/encodable.dart';
 import 'package:wowsinfo/models/wowsinfo/timestamp.dart';

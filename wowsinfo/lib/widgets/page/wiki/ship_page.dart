@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
 import 'package:wowsinfo/foundation/helpers/utils.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';

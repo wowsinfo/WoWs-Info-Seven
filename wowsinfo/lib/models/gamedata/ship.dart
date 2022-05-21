@@ -1,10 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:wowsinfo/models/gamedata/game_info.dart';
+import 'package:wowsinfo/models/wowsinfo/ship_filter.dart';
 
 import 'consumable.dart';
 
 @immutable
-class Ship {
+class Ship implements ShipFilterInterface {
   const Ship({
     required this.name,
     required this.description,
@@ -28,14 +29,18 @@ class Ship {
     required this.components,
   });
 
+  @override
   final String name;
   final String description;
   final String year;
   final bool paperShip;
   final int id;
   final String index;
+  @override
   final int tier;
+  @override
   final String region;
+  @override
   final String type;
   final String regionId;
   final String typeId;
