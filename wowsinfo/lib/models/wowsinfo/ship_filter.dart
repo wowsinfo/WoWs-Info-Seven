@@ -40,6 +40,13 @@ class ShipFilter {
     return name;
   }
 
+  bool get isEmpty {
+    return shipName.trim().isEmpty &&
+        tierList.isEmpty &&
+        regionList.isEmpty &&
+        typeList.isEmpty;
+  }
+
   /// Check if this ship should be displayed
   bool shouldDisplay(Ship ship) {
     if (shipName.trim().isNotEmpty && ship.name.contains(shipName) == false) {
@@ -56,7 +63,11 @@ class ShipFilter {
       return false;
     }
 
-    _logger.fine('Ship ${ship.index} should be displayed');
     return true;
+  }
+
+  @override
+  String toString() {
+    return 'ShipFilter{shipName: $shipName, tierList: $tierList, regionList: $regionList, typeList: $typeList}';
   }
 }

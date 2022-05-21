@@ -70,6 +70,15 @@ class FilterShipProvider with ChangeNotifier {
   }
 
   ShipFilter onFilter() {
-    //
+    final region =
+        _regionMap.entries.where((e) => e.value).map((e) => e.key).toList();
+    final type =
+        _typeMap.entries.where((e) => e.value).map((e) => e.key).toList();
+    final tier = _tierMap.entries
+        .where((e) => e.value)
+        .map((e) => GameInfo.tiers.indexOf(e.key) + 1)
+        .toList();
+
+    return ShipFilter('', tier, type, region);
   }
 }

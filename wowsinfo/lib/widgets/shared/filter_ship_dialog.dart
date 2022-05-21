@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:wowsinfo/extensions/list.dart';
 import 'package:wowsinfo/foundation/app.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_filter.dart';
 import 'package:wowsinfo/providers/wiki/filter_ship_provider.dart';
@@ -48,25 +49,24 @@ class _ShipFilterDialogState extends State<_ShipFilterDialog> {
                 },
               ),
               // render a list of names in chips and we need to animate when we move a chip up to be selected
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  renderTierList(),
-                  renderTypeList(),
-                  renderRegionList(),
-                ],
-              ),
+              renderTierList(),
+              const Divider(),
+              renderTypeList(),
+              const Divider(),
+              renderRegionList(),
+              const Divider(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   IconButton(
-                    onPressed: () {
-                      provider.resetAll();
-                    },
+                    onPressed: () => provider.resetAll(),
                     icon: const Icon(Icons.refresh),
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      widget.onFilter(provider.onFilter());
+                      Navigator.of(context).pop();
+                    },
                     icon: const Icon(Icons.check),
                   ),
                 ],
@@ -88,16 +88,34 @@ class _ShipFilterDialogState extends State<_ShipFilterDialog> {
       child: Padding(
         padding: const EdgeInsets.all(4.0),
         child: Wrap(
-          direction: Axis.vertical,
           crossAxisAlignment: WrapCrossAlignment.center,
           spacing: App.isMobile ? -8 : 8,
+          runSpacing: 8,
           children: [
-            for (final key in filterList)
-              ChoiceChip(
-                selectedColor: Colors.blue,
-                selected: selectedList[filterList.indexOf(key)],
-                label: Text(key),
-                onSelected: (_) => onSelected(key),
+            for (final filter in filterList.enumerate())
+              InkWell(
+                onTap: () => onSelected(filter.value),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Checkbox(
+                      value: selectedList[filter.key],
+                      onChanged: (_) => onSelected(filter.value),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0,
+                        vertical: 8.0,
+                      ),
+                      child: Text(
+                        filter.value,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               )
           ],
         ),

@@ -33,56 +33,59 @@ class _ShipPageState extends State<ShipPage> {
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () => _provider.showFilter(),
           icon: const Icon(Icons.filter_alt),
-          label: Text(_provider.filterString),
+          label: Consumer<ShipProvider>(
+            builder: (context, provider, child) => Text(
+              provider.filterString,
+            ),
+          ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),
     );
   }
 
-  GridView buildGridView(int itemCount) {
-    final shipList = _provider.shipList;
-    final shipCount = _provider.shipCount;
-
+  Widget buildGridView(int itemCount) {
     // Display everything
-    return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: itemCount,
-        childAspectRatio: 1.0,
-      ),
-      itemCount: shipCount,
-      itemBuilder: (context, index) {
-        final curr = shipList[index];
-        final imageName = curr.index;
-        return InkWell(
-          onTap: () {
-            showInfo(context, curr);
-          },
-          child: FittedBox(
-            child: Column(
-              children: [
-                SizedBox(
-                  child: Image.asset(
-                    'gamedata/app/assets/ships/$imageName.png',
-                    errorBuilder: (context, error, stackTrace) {
-                      // _logger.severe(
-                      //   'Failed to load image: $imageName',
-                      //   error,
-                      //   stackTrace,
-                      // );
-                      return Image.asset(_provider.defaultImage);
-                    },
+    return Consumer<ShipProvider>(
+      builder: (context, provider, child) => GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: itemCount,
+          childAspectRatio: 1.0,
+        ),
+        itemCount: provider.shipCount,
+        itemBuilder: (context, index) {
+          final curr = provider.shipList[index];
+          final imageName = curr.index;
+          return InkWell(
+            onTap: () {
+              showInfo(context, curr);
+            },
+            child: FittedBox(
+              child: Column(
+                children: [
+                  SizedBox(
+                    child: Image.asset(
+                      'gamedata/app/assets/ships/$imageName.png',
+                      errorBuilder: (context, error, stackTrace) {
+                        // _logger.severe(
+                        //   'Failed to load image: $imageName',
+                        //   error,
+                        //   stackTrace,
+                        // );
+                        return Image.asset(_provider.defaultImage);
+                      },
+                    ),
+                    height: 80,
                   ),
-                  height: 80,
-                ),
-                Text(curr.tierString +
-                    ' ' +
-                    (GameRepository.instance.stringOf(curr.name) ?? '')),
-              ],
+                  Text(curr.tierString +
+                      ' ' +
+                      (GameRepository.instance.stringOf(curr.name) ?? '')),
+                ],
+              ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 
@@ -97,18 +100,19 @@ class _ShipPageState extends State<ShipPage> {
             maxWidth: 500,
           ),
           child: ListTile(
-              contentPadding: const EdgeInsets.all(2),
-              title: Text(
-                GameRepository.instance.stringOf(ship.name) ?? '',
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-              subtitle: Text(
-                GameRepository.instance.stringOf(
-                      ship.description,
-                    ) ??
-                    '' '\n\n' + additionalString,
-              )),
+            contentPadding: const EdgeInsets.all(2),
+            title: Text(
+              GameRepository.instance.stringOf(ship.name) ?? '',
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+            subtitle: Text(
+              GameRepository.instance.stringOf(
+                    ship.description,
+                  ) ??
+                  '' '\n\n' + additionalString,
+            ),
+          ),
         ),
       ),
     );
