@@ -47,6 +47,7 @@ class _ShipPageState extends State<ShipPage> {
     // Display everything
     return Consumer<ShipProvider>(
       builder: (context, provider, child) => GridView.builder(
+        padding: const EdgeInsets.only(bottom: 64),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: itemCount,
           childAspectRatio: 1.0,

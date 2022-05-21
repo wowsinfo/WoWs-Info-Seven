@@ -64,7 +64,9 @@ class ShipFilter {
         throw Exception('Failed to get ship name: ${ship.name}');
       }
 
-      return shipName.toLowerCase().contains(name.toLowerCase());
+      if (!shipName.toLowerCase().contains(name.toLowerCase())) {
+        return false;
+      }
     }
 
     if (tiers.isNotEmpty && tiers.contains(ship.tier) == false) {
