@@ -44,6 +44,19 @@ class ShipModules {
     return list[index];
   }
 
+  late final bool canChangeModules = _hullInfo.length > 1 ||
+      _gunInfo.length > 1 ||
+      _secondaryInfo.length > 1 ||
+      _torpInfo.length > 1 ||
+      _pingerInfo.length > 1 ||
+      _fireControlInfo.length > 1 ||
+      _airSupportInfo.length > 1 ||
+      _depthChargeInfo.length > 1 ||
+      _fighterInfo.length > 1 ||
+      _skipBomberInfo.length > 1 ||
+      _torpedoBomberInfo.length > 1 ||
+      _diveBomberInfo.length > 1;
+
   HullInfo? get hullInfo => _valueAt(_hullInfo, _selectedHull);
   GunInfo? get gunInfo => _valueAt(_gunInfo, _selectedGun);
   GunInfo? get secondaryInfo => _valueAt(_secondaryInfo, _selectedSecondary);

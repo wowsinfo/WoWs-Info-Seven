@@ -26,4 +26,15 @@ class ShipInfoProvider with ChangeNotifier {
   String get region => GameRepository.instance.stringOf(_ship.regionId) ?? '';
   String? get costCR => _ship.costCr > 0 ? '${_ship.costCr}' : null;
   String? get costGold => _ship.costGold > 0 ? '${_ship.costGold}' : null;
+
+  bool get canChangeModules => _shipModules.canChangeModules;
+
+  HullInfo? get _hullInfo => _shipModules.hullInfo;
+  bool get renderHull => _hullInfo != null;
+  String get health => _hullInfo?.health.toStringAsFixed(0) ?? '0';
+  String get torpedoProtection =>
+      _hullInfo?.protection?.toStringAsFixed(0) ?? '0%';
+
+  GunInfo? get _mainGunInfo => _shipModules.gunInfo;
+  bool get renderMainGun => _mainGunInfo != null;
 }

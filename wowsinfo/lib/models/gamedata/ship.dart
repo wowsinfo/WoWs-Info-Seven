@@ -273,16 +273,19 @@ class PingerInfo {
 class HullInfo {
   const HullInfo({
     required this.health,
+    this.protection,
     required this.visibility,
     required this.mobility,
   });
 
   final double health;
+  final double? protection;
   final VisibilityInfo visibility;
   final MobilityInfo mobility;
 
   factory HullInfo.fromJson(Map<String, dynamic> json) => HullInfo(
         health: json['health'],
+        protection: json['protection'],
         visibility: VisibilityInfo.fromJson(json['visibility']),
         mobility: MobilityInfo.fromJson(json['mobility']),
       );

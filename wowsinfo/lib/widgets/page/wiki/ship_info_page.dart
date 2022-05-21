@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
 import 'package:wowsinfo/providers/wiki/ship_info_provider.dart';
+import 'package:wowsinfo/widgets/shared/text_with_caption.dart';
 import 'package:wowsinfo/widgets/shared/wiki/ship_icon.dart';
 
 class ShipInfoPage extends StatefulWidget {
@@ -36,6 +37,11 @@ class _ShipInfoPageState extends State<ShipInfoPage> {
               costGold: _provider.costGold,
               description: _provider.description,
             ),
+            if (_provider.renderHull)
+              _ShipSurvivabilty(
+                health: _provider.health,
+                protection: _provider.torpedoProtection,
+              )
           ],
         ),
       ),
@@ -85,6 +91,80 @@ class _ShipTitleSection extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _ShipSurvivabilty extends StatelessWidget {
+  const _ShipSurvivabilty({
+    Key? key,
+    required this.health,
+    required this.protection,
+  }) : super(key: key);
+
+  final String health;
+  final String protection;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          Text(
+            'Surviabilty',
+            style: Theme.of(context).textTheme.headline6,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              TextWithCaption(
+                title: 'Health',
+                value: health,
+              ),
+              TextWithCaption(
+                title: 'Protection',
+                value: protection,
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ShipMainBettery extends StatelessWidget {
+  const _ShipMainBettery({
+    Key? key,
+    required this.reload,
+    required this.range,
+    required this.config,
+    required this.dispersion,
+    required this.rotation,
+    required this.gunName,
+  }) : super(key: key);
+
+  final String reload;
+  final String range;
+  final String config;
+  final String dispersion;
+  final String rotation;
+
+  final String gunName;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          Text(
+            'Main Battery',
+            style: Theme.of(context).textTheme.headline6,
+          ),
+        ],
       ),
     );
   }
