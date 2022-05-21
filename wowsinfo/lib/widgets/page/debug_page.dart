@@ -4,6 +4,7 @@ import 'package:wowsinfo/repositories/game_repository.dart';
 import 'package:wowsinfo/widgets/page/wiki/achievement_page.dart';
 import 'package:wowsinfo/widgets/page/wiki/ship_page.dart';
 import 'package:wowsinfo/widgets/page/wiki/upgrade_page.dart';
+import 'package:wowsinfo/widgets/shared/filter_ship_dialog.dart';
 
 class DebugPage extends StatefulWidget {
   const DebugPage({Key? key}) : super(key: key);
@@ -70,6 +71,10 @@ class _DebugPageState extends State<DebugPage> {
             },
             child: const Text('Achievements'),
           ),
+          TextButton(
+            onPressed: () => showFilterShipDialog(context, (_) {}),
+            child: const Text('ship filter'),
+          )
         ],
       ),
     );

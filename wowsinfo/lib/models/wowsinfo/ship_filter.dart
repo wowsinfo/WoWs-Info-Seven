@@ -7,18 +7,18 @@ enum _ShipFilterKey { nation, shipname, shiptype, level }
 /// Filter ships with conditions
 class ShipFilter {
   // empty lists are not allowed
-  ShipFilter(
-    this.shipName,
-    this.tierList,
-    this.regionList,
-    this.typeList,
-  );
+  ShipFilter({
+    required this.name,
+    required this.tiers,
+    required this.regions,
+    required this.types,
+  });
 
   final _logger = Logger('ShipFilter');
-  final String shipName;
-  final List<int> tierList;
-  final List<String> regionList;
-  final List<String> typeList;
+  final String name;
+  final List<int> tiers;
+  final List<String> regions;
+  final List<String> types;
 
   /// TODO: who should handle all these string keys??
   /// TODO: maybe we need a language class to handle all these strings
@@ -41,25 +41,25 @@ class ShipFilter {
   }
 
   bool get isEmpty {
-    return shipName.trim().isEmpty &&
-        tierList.isEmpty &&
-        regionList.isEmpty &&
-        typeList.isEmpty;
+    return name.trim().isEmpty &&
+        tiers.isEmpty &&
+        regions.isEmpty &&
+        types.isEmpty;
   }
 
   /// Check if this ship should be displayed
   bool shouldDisplay(Ship ship) {
-    if (shipName.trim().isNotEmpty && ship.name.contains(shipName) == false) {
+    if (name.trim().isNotEmpty && ship.name.contains(name) == false) {
       return false;
     }
 
-    if (tierList.isNotEmpty && tierList.contains(ship.tier) == false) {
+    if (tiers.isNotEmpty && tiers.contains(ship.tier) == false) {
       return false;
     }
-    if (regionList.isNotEmpty && regionList.contains(ship.region) == false) {
+    if (regions.isNotEmpty && regions.contains(ship.region) == false) {
       return false;
     }
-    if (typeList.isNotEmpty && typeList.contains(ship.type) == false) {
+    if (types.isNotEmpty && types.contains(ship.type) == false) {
       return false;
     }
 
@@ -68,6 +68,6 @@ class ShipFilter {
 
   @override
   String toString() {
-    return 'ShipFilter{shipName: $shipName, tierList: $tierList, regionList: $regionList, typeList: $typeList}';
+    return 'ShipFilter{shipName: $name, tierList: $tiers, regionList: $regions, typeList: $types}';
   }
 }

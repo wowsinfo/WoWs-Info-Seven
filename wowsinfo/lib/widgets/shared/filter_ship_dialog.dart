@@ -5,7 +5,10 @@ import 'package:wowsinfo/foundation/app.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_filter.dart';
 import 'package:wowsinfo/providers/wiki/filter_ship_provider.dart';
 
-void showFilterShipDialog(BuildContext context, Function(ShipFilter) onFilter) {
+void showFilterShipDialog(
+  BuildContext context,
+  void Function(ShipFilter) onFilter,
+) {
   showDialog(
     context: context,
     builder: (context) => ChangeNotifierProvider(
@@ -80,7 +83,7 @@ class _ShipFilterDialogState extends State<_ShipFilterDialog> {
 
   Widget _renderFilterList(
     List<String> filterList,
-    List<bool> selectedList,
+    bool Function(int) isSelected,
     Function(String) onSelected,
   ) {
     return Align(
@@ -99,7 +102,7 @@ class _ShipFilterDialogState extends State<_ShipFilterDialog> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Checkbox(
-                      value: selectedList[filter.key],
+                      value: isSelected(filter.key),
                       onChanged: (_) => onSelected(filter.value),
                     ),
                     Padding(
@@ -127,7 +130,7 @@ class _ShipFilterDialogState extends State<_ShipFilterDialog> {
     final provider = Provider.of<FilterShipProvider>(context);
     return _renderFilterList(
       provider.regionList,
-      provider.regionSelectedList,
+      provider.isRegionSelected,
       provider.updateRegion,
     );
   }
@@ -136,7 +139,7 @@ class _ShipFilterDialogState extends State<_ShipFilterDialog> {
     final provider = Provider.of<FilterShipProvider>(context);
     return _renderFilterList(
       provider.typeList,
-      provider.typeSelectedList,
+      provider.isTypeSelected,
       provider.updateType,
     );
   }
@@ -145,7 +148,7 @@ class _ShipFilterDialogState extends State<_ShipFilterDialog> {
     final provider = Provider.of<FilterShipProvider>(context);
     return _renderFilterList(
       provider.tierList,
-      provider.tierSelectedList,
+      provider.isTierSelected,
       provider.updateTier,
     );
   }

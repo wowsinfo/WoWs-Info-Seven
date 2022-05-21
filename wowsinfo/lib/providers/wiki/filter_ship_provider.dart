@@ -10,15 +10,10 @@ class FilterShipProvider with ChangeNotifier {
   final _types = GameRepository.instance.shipTypeList;
   final _logger = Logger('FilterShipProvider');
 
-  late Map<String, bool> _regionMap = _makeMap(_regions);
-  late Map<String, bool> _typeMap = _makeMap(_types);
-  late Map<String, bool> _tierMap = {
-    for (final tier in GameInfo.tiers) tier: false
-  };
-
-  Map<String, bool> _makeMap(List<String> list) {
-    return {for (var e in list.map((e) => _getStringOf(e))) e: false};
-  }
+  // selected filters
+  var _selectedRegion = <int>{};
+  var _selectedType = <int>{};
+  var _selectedTier = <int>{};
 
   String _getStringOf(String key) {
     final name = GameRepository.instance.stringOf(key, prefix: 'IDS_');
@@ -31,54 +26,68 @@ class FilterShipProvider with ChangeNotifier {
     return name;
   }
 
-  List<String> get regionList => _regionMap.keys.toList();
-  List<bool> get regionSelectedList => _regionMap.values.toList();
-  List<String> get typeList => _typeMap.keys.toList();
-  List<bool> get typeSelectedList => _typeMap.values.toList();
-  List<String> get tierList => _tierMap.keys.toList();
-  List<bool> get tierSelectedList => _tierMap.values.toList();
+  // generate region lists for UI
+  late final regionList =
+      _regions.map((r) => _getStringOf(r)).toList(growable: false);
+  late final typeList =
+      _types.map((t) => _getStringOf(t)).toList(growable: false);
+  final tierList = GameInfo.tiers;
+
+  bool isRegionSelected(int index) => _selectedRegion.contains(index);
+  bool isTypeSelected(int index) => _selectedType.contains(index);
+  bool isTierSelected(int index) => _selectedTier.contains(index);
 
   void updateRegion(String key) {
-    final value = _regionMap[key]!;
-    _regionMap[key] = !value;
-    _logger.fine('$key is ${_regionMap[key]}');
-    _regionMap = Map.fromEntries(_regionMap.entries.toList());
+    final index = regionList.indexOf(key);
+    if (_selectedRegion.contains(index)) {
+      _selectedRegion.remove(index);
+      _logger.fine('$key is removed from region list');
+    } else {
+      _selectedRegion.add(index);
+      _logger.fine('$key is added to region list');
+    }
+    _selectedRegion = _selectedRegion;
     notifyListeners();
   }
 
   void updateType(String key) {
-    final value = _typeMap[key]!;
-    _typeMap[key] = !value;
-    _logger.fine('$key is ${_typeMap[key]}');
-    _typeMap = Map.fromEntries(_typeMap.entries.toList());
+    final index = typeList.indexOf(key);
+    if (_selectedType.contains(index)) {
+      _selectedType.remove(index);
+      _logger.fine('$key is removed from type list');
+    } else {
+      _selectedType.add(index);
+      _logger.fine('$key is added to type list');
+    }
+    _selectedType = _selectedType;
     notifyListeners();
   }
 
   void updateTier(String key) {
-    final value = _tierMap[key]!;
-    _tierMap[key] = !value;
-    _logger.fine('$key is ${_tierMap[key]}');
-    _tierMap = Map.fromEntries(_tierMap.entries.toList());
+    final index = GameInfo.tiers.indexOf(key);
+    if (_selectedTier.contains(index)) {
+      _selectedTier.remove(index);
+      _logger.fine('$key is removed from tier list');
+    } else {
+      _selectedTier.add(index);
+      _logger.fine('$key is added to tier list');
+    }
+    _selectedTier = _selectedTier;
     notifyListeners();
   }
 
   void resetAll() {
-    _regionMap = _makeMap(_regions);
-    _typeMap = _makeMap(_types);
-    _tierMap = {for (final tier in GameInfo.tiers) tier: false};
+    _selectedRegion.clear();
+    _selectedType.clear();
+    _selectedTier.clear();
     notifyListeners();
   }
 
   ShipFilter onFilter() {
-    final region =
-        _regionMap.entries.where((e) => e.value).map((e) => e.key).toList();
-    final type =
-        _typeMap.entries.where((e) => e.value).map((e) => e.key).toList();
-    final tier = _tierMap.entries
-        .where((e) => e.value)
-        .map((e) => GameInfo.tiers.indexOf(e.key) + 1)
-        .toList();
+    final tiers = _selectedTier.map((e) => e + 1).toList();
+    final types = _selectedType.map((e) => _types[e]).toList();
+    final regions = _selectedRegion.map((e) => _regions[e]).toList();
 
-    return ShipFilter('', tier, type, region);
+    return ShipFilter(name: '', tiers: tiers, regions: regions, types: types);
   }
 }
