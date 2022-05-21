@@ -51,7 +51,7 @@ class Ship implements ShipFilterInterface {
   final int costCr;
   final List<int>? nextShips;
   final AirDefense? airDefense;
-  final Map<String, List<ShipModule>> modules;
+  final Map<String, List<ShipModuleInfo>> modules;
   final Map<String, dynamic> components;
 
   /// Convert to tier symbol, [tier] starts from 1.
@@ -102,11 +102,12 @@ class Ship implements ShipFilterInterface {
         airDefense: json['airDefense'] == null
             ? null
             : AirDefense.fromJson(json['airDefense']),
-        modules: Map<String, List<ShipModule>>.from(
+        modules: Map<String, List<ShipModuleInfo>>.from(
           json['modules'].map(
-            (x, y) => MapEntry<String, List<ShipModule>>(
+            (x, y) => MapEntry<String, List<ShipModuleInfo>>(
               x,
-              List<ShipModule>.from(y.map((x) => ShipModule.fromJson(x))),
+              List<ShipModuleInfo>.from(
+                  y.map((x) => ShipModuleInfo.fromJson(x))),
             ),
           ),
         ),
@@ -115,8 +116,8 @@ class Ship implements ShipFilterInterface {
 }
 
 @immutable
-class ShipModule {
-  const ShipModule({
+class ShipModuleInfo {
+  const ShipModuleInfo({
     required this.cost,
     required this.index,
     required this.name,
@@ -128,7 +129,7 @@ class ShipModule {
   final String name;
   final Map<String, List<String>> components;
 
-  factory ShipModule.fromJson(Map<String, dynamic> json) => ShipModule(
+  factory ShipModuleInfo.fromJson(Map<String, dynamic> json) => ShipModuleInfo(
         cost: Cost.fromJson(json['cost']),
         index: json['index'],
         name: json['name'],
@@ -154,8 +155,8 @@ class GunInfo {
     required this.guns,
   });
 
-  final int range;
-  final int sigma;
+  final double range;
+  final double sigma;
   final List<WeaponInfo> guns;
 
   factory GunInfo.fromJson(Map<String, dynamic> json) => GunInfo(
@@ -192,7 +193,7 @@ class DepthChargeInfo {
     required this.groups,
   });
 
-  final int reload;
+  final num reload;
   final String ammo;
   final int bombs;
   final int groups;
@@ -216,9 +217,9 @@ class AirSupportInfo {
   });
 
   final String name;
-  final int reload;
+  final num reload;
   final int bombs;
-  final int range;
+  final double range;
 
   factory AirSupportInfo.fromJson(Map<String, dynamic> json) => AirSupportInfo(
         name: json['name'],
@@ -235,7 +236,7 @@ class FireControlInfo {
   });
 
   final double maxDistCoef;
-  final int sigmaCountCoef;
+  final double sigmaCountCoef;
 
   factory FireControlInfo.fromJson(Map<String, dynamic> json) =>
       FireControlInfo(
@@ -348,11 +349,11 @@ class WeaponInfo {
     required this.count,
   });
 
-  final int reload;
-  final int rotation;
+  final double reload;
+  final double rotation;
   final int each;
   final List<String> ammo;
-  final int vertSector;
+  final double vertSector;
   final int count;
 
   factory WeaponInfo.fromJson(Map<String, dynamic> json) => WeaponInfo(
