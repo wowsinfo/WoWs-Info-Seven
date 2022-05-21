@@ -33,6 +33,8 @@ class _ShipFilterDialog extends StatefulWidget {
 }
 
 class _ShipFilterDialogState extends State<_ShipFilterDialog> {
+  final nameController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<FilterShipProvider>(context, listen: false);
@@ -43,14 +45,18 @@ class _ShipFilterDialogState extends State<_ShipFilterDialog> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              TextField(
-                decoration: const InputDecoration(
-                  labelText: 'Name',
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: TextField(
+                  controller: nameController,
+                  // remove underline
+                  decoration: const InputDecoration(
+                    labelText: 'Name',
+                    border: InputBorder.none,
+                  ),
                 ),
-                onChanged: (value) {
-                  setState(() {});
-                },
               ),
+              const Divider(),
               // render a list of names in chips and we need to animate when we move a chip up to be selected
               renderTierList(),
               const Divider(),
@@ -67,7 +73,7 @@ class _ShipFilterDialogState extends State<_ShipFilterDialog> {
                   ),
                   IconButton(
                     onPressed: () {
-                      widget.onFilter(provider.onFilter());
+                      widget.onFilter(provider.onFilter(nameController.text));
                       Navigator.of(context).pop();
                     },
                     icon: const Icon(Icons.check),

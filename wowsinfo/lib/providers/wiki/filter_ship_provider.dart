@@ -83,11 +83,11 @@ class FilterShipProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  ShipFilter onFilter() {
+  ShipFilter onFilter(String name) {
     final tiers = _selectedTier.map((e) => e + 1).toList();
     final types = _selectedType.map((e) => _types[e]).toList();
     final regions = _selectedRegion.map((e) => _regions[e]).toList();
 
-    return ShipFilter(name: '', tiers: tiers, regions: regions, types: types);
+    return ShipFilter(name: name, tiers: tiers, regions: regions, types: types);
   }
 }
