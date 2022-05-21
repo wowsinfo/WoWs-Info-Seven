@@ -51,7 +51,7 @@ class Ship implements ShipFilterInterface {
   final int costCr;
   final List<int>? nextShips;
   final AirDefense? airDefense;
-  final Map<String, Map<String, ShipModule>> modules;
+  final Map<String, List<ShipModule>> modules;
   final Map<String, dynamic> components;
 
   /// Convert to tier symbol, [tier] starts from 1.
@@ -102,13 +102,11 @@ class Ship implements ShipFilterInterface {
         airDefense: json['airDefense'] == null
             ? null
             : AirDefense.fromJson(json['airDefense']),
-        modules: Map.from(json['modules']).map(
-          (key, value) => MapEntry(
-            key,
-            Map<String, ShipModule>.from(
-              value.map(
-                (key, value) => MapEntry(key, ShipModule.fromJson(value)),
-              ),
+        modules: Map<String, List<ShipModule>>.from(
+          json['modules'].map(
+            (x, y) => MapEntry<String, List<ShipModule>>(
+              x,
+              List<ShipModule>.from(y.map((x) => ShipModule.fromJson(x))),
             ),
           ),
         ),
@@ -121,16 +119,19 @@ class ShipModule {
   const ShipModule({
     required this.cost,
     required this.index,
+    required this.name,
     required this.components,
   });
 
   final Cost cost;
   final int index;
+  final String name;
   final Map<String, List<String>> components;
 
   factory ShipModule.fromJson(Map<String, dynamic> json) => ShipModule(
         cost: Cost.fromJson(json['cost']),
         index: json['index'],
+        name: json['name'],
         components: Map.from(json['components']).map(
           (k, v) => MapEntry<String, List<String>>(k, List<String>.from(v)),
         ),

@@ -25,17 +25,19 @@ class _ShipInfoPageState extends State<ShipInfoPage> {
         title: Text(_provider.title),
       ),
       body: SingleChildScrollView(
-        child: Column(children: [
-          _ShipTitleSection(
-            icon: _provider.shipIcon,
-            name: _provider.shipName,
-            region: _provider.region,
-            type: _provider.type,
-            costCR: _provider.costCR,
-            costGold: _provider.costGold,
-            description: _provider.description,
-          ),
-        ]),
+        child: Column(
+          children: [
+            _ShipTitleSection(
+              icon: _provider.shipIcon,
+              name: _provider.shipName,
+              region: _provider.region,
+              type: _provider.type,
+              costCR: _provider.costCR,
+              costGold: _provider.costGold,
+              description: _provider.description,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -64,19 +66,25 @@ class _ShipTitleSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        children: [
-          ShipIcon(
-            name: icon,
-            height: 128,
-          ),
-          Text(name),
-          Text(region),
-          Text(type),
-          if (costCR != null) Text(costCR!),
-          if (costGold != null) Text(costGold!),
-          Text(description),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            ShipIcon(
+              name: icon,
+              height: 128,
+            ),
+            Text(name),
+            Text(region),
+            Text(type),
+            if (costCR != null) Text(costCR!),
+            if (costGold != null) Text(costGold!),
+            Text(
+              description,
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
       ),
     );
   }
