@@ -43,37 +43,50 @@ class _DebugPageState extends State<DebugPage> {
     }
 
     return Center(
-      child: Column(
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        // crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                App.platformPageRoute(builder: (_) => UpgradePage()),
-              );
-            },
-            child: const Text('Upgrades'),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            // crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Text('Pages'),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    App.platformPageRoute(builder: (_) => UpgradePage()),
+                  );
+                },
+                child: const Text('Upgrades'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    App.platformPageRoute(builder: (_) => const ShipPage()),
+                  );
+                },
+                child: const Text('Ships'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    App.platformPageRoute(builder: (_) => AchievementPage()),
+                  );
+                },
+                child: const Text('Achievements'),
+              ),
+            ],
           ),
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                App.platformPageRoute(builder: (_) => const ShipPage()),
-              );
-            },
-            child: const Text('Ships'),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                App.platformPageRoute(builder: (_) => AchievementPage()),
-              );
-            },
-            child: const Text('Achievements'),
-          ),
-          TextButton(
-            onPressed: () => showFilterShipDialog(context, (_) {}),
-            child: const Text('ship filter'),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text('Dialogs'),
+              TextButton(
+                onPressed: () => showFilterShipDialog(context, (_) {}),
+                child: const Text('Ship Filter Dialog'),
+              ),
+            ],
           )
         ],
       ),

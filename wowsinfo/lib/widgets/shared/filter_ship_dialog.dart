@@ -81,11 +81,50 @@ class _ShipFilterDialogState extends State<_ShipFilterDialog> {
     );
   }
 
-  Widget _renderFilterList(
-    List<String> filterList,
-    bool Function(int) isSelected,
-    Function(String) onSelected,
-  ) {
+  Widget renderRegionList() {
+    final provider = Provider.of<FilterShipProvider>(context);
+    return _FilterList(
+      filterList: provider.regionList,
+      isSelected: provider.isRegionSelected,
+      onSelected: provider.updateRegion,
+    );
+  }
+
+  Widget renderTypeList() {
+    final provider = Provider.of<FilterShipProvider>(context);
+    return _FilterList(
+      filterList: provider.typeList,
+      isSelected: provider.isTypeSelected,
+      onSelected: provider.updateType,
+    );
+  }
+
+  Widget renderTierList() {
+    final provider = Provider.of<FilterShipProvider>(context);
+    return _FilterList(
+      filterList: provider.tierList,
+      isSelected: provider.isTierSelected,
+      onSelected: provider.updateTier,
+    );
+  }
+}
+
+/// A list of chips that can be selected
+@immutable
+class _FilterList extends StatelessWidget {
+  const _FilterList({
+    Key? key,
+    required this.filterList,
+    required this.isSelected,
+    required this.onSelected,
+  }) : super(key: key);
+
+  final List<String> filterList;
+  final bool Function(int) isSelected;
+  final Function(String) onSelected;
+
+  @override
+  Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.topLeft,
       child: Padding(
@@ -123,33 +162,6 @@ class _ShipFilterDialogState extends State<_ShipFilterDialog> {
           ],
         ),
       ),
-    );
-  }
-
-  Widget renderRegionList() {
-    final provider = Provider.of<FilterShipProvider>(context);
-    return _renderFilterList(
-      provider.regionList,
-      provider.isRegionSelected,
-      provider.updateRegion,
-    );
-  }
-
-  Widget renderTypeList() {
-    final provider = Provider.of<FilterShipProvider>(context);
-    return _renderFilterList(
-      provider.typeList,
-      provider.isTypeSelected,
-      provider.updateType,
-    );
-  }
-
-  Widget renderTierList() {
-    final provider = Provider.of<FilterShipProvider>(context);
-    return _renderFilterList(
-      provider.tierList,
-      provider.isTierSelected,
-      provider.updateTier,
     );
   }
 }
