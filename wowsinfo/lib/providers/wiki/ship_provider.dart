@@ -27,8 +27,6 @@ class ShipProvider with ChangeNotifier {
   int get shipCount => shipList.length;
   String get filterString => '-  $shipCount';
 
-  final defaultImage = 'gamedata/app/assets/ships/_default.png';
-
   void resetFilter() {
     _filteredShips = null;
     notifyListeners();

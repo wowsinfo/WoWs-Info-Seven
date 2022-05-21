@@ -3,6 +3,7 @@ import 'package:logging/logging.dart';
 import 'package:wowsinfo/foundation/helpers/utils.dart';
 import 'package:wowsinfo/models/gamedata/achievement.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
+import 'package:wowsinfo/widgets/shared/asset_image_loader.dart';
 import 'package:wowsinfo/widgets/shared/placeholder.dart';
 
 class AchievementPage extends StatelessWidget {
@@ -39,16 +40,8 @@ class AchievementPage extends StatelessWidget {
           final imageName = curr.icon;
           return InkWell(
             child: FittedBox(
-              child: Image.asset(
-                'gamedata/app/assets/achievements/$imageName.png',
-                errorBuilder: (context, error, stackTrace) {
-                  // _logger.severe(
-                  //   'Failed to load image: $imageName',
-                  //   error,
-                  //   stackTrace,
-                  // );
-                  return const IconPlaceholder();
-                },
+              child: AssetImageLoader(
+                name: 'gamedata/app/assets/achievements/$imageName.png',
               ),
             ),
             onTap: () {
@@ -68,17 +61,6 @@ class AchievementPage extends StatelessWidget {
           ),
           child: ListTile(
               contentPadding: const EdgeInsets.all(2),
-              leading: Image.asset(
-                'gamedata/app/assets/achievements/${achievement.icon}.png',
-                errorBuilder: (context, error, stackTrace) {
-                  // _logger.severe(
-                  //   'Failed to load image: $imageName',
-                  //   error,
-                  //   stackTrace,
-                  // );
-                  return const IconPlaceholder();
-                },
-              ),
               title: Text(
                 GameRepository.instance.stringOf(achievement.name) ?? '',
                 maxLines: 1,

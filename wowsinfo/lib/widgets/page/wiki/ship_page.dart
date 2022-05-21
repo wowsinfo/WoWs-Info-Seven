@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:wowsinfo/foundation/app.dart';
 import 'package:wowsinfo/foundation/helpers/utils.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
 import 'package:wowsinfo/providers/wiki/ship_provider.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
+import 'package:wowsinfo/widgets/shared/wiki/ship_icon.dart';
+
+import 'ship_info_page.dart';
 
 class ShipPage extends StatefulWidget {
   const ShipPage({Key? key}) : super(key: key);
@@ -58,25 +62,16 @@ class _ShipPageState extends State<ShipPage> {
           final imageName = curr.index;
           return InkWell(
             onTap: () {
-              showInfo(context, curr);
+              Navigator.of(context).push(
+                App.platformPageRoute(
+                  builder: (_) => ShipInfoPage(ship: curr),
+                ),
+              );
             },
             child: FittedBox(
               child: Column(
                 children: [
-                  SizedBox(
-                    child: Image.asset(
-                      'gamedata/app/assets/ships/$imageName.png',
-                      errorBuilder: (context, error, stackTrace) {
-                        // _logger.severe(
-                        //   'Failed to load image: $imageName',
-                        //   error,
-                        //   stackTrace,
-                        // );
-                        return Image.asset(_provider.defaultImage);
-                      },
-                    ),
-                    height: 80,
-                  ),
+                  ShipIcon(name: imageName),
                   Text(curr.tierString +
                       ' ' +
                       (GameRepository.instance.stringOf(curr.name) ?? '')),
@@ -85,35 +80,6 @@ class _ShipPageState extends State<ShipPage> {
             ),
           );
         },
-      ),
-    );
-  }
-
-  void showInfo(BuildContext context, Ship ship) {
-    final additionalString = ship.toString();
-
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        content: ConstrainedBox(
-          constraints: const BoxConstraints(
-            maxWidth: 500,
-          ),
-          child: ListTile(
-            contentPadding: const EdgeInsets.all(2),
-            title: Text(
-              GameRepository.instance.stringOf(ship.name) ?? '',
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-            subtitle: Text(
-              GameRepository.instance.stringOf(
-                    ship.description,
-                  ) ??
-                  '' '\n\n' + additionalString,
-            ),
-          ),
-        ),
       ),
     );
   }
