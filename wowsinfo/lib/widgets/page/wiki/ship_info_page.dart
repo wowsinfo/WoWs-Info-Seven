@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
 import 'package:wowsinfo/providers/wiki/ship_info_provider.dart';
+import 'package:wowsinfo/repositories/game_repository.dart';
 import 'package:wowsinfo/widgets/shared/text_with_caption.dart';
 import 'package:wowsinfo/widgets/shared/wiki/ship_icon.dart';
 
@@ -27,6 +28,7 @@ class _ShipInfoPageState extends State<ShipInfoPage> {
       ),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             _ShipTitleSection(
               icon: _provider.shipIcon,
@@ -37,11 +39,16 @@ class _ShipInfoPageState extends State<ShipInfoPage> {
               costGold: _provider.costGold,
               description: _provider.description,
             ),
+            if (_provider.canChangeModules)
+              _ShipModuleButton(
+                title: 'Change Ship Modules',
+                moduleList: _provider.moduleList,
+              ),
             if (_provider.renderHull)
               _ShipSurvivabilty(
                 health: _provider.health,
                 protection: _provider.torpedoProtection,
-              )
+              ),
           ],
         ),
       ),
@@ -93,6 +100,54 @@ class _ShipTitleSection extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class _ShipModuleButton extends StatelessWidget {
+  const _ShipModuleButton({
+    Key? key,
+    required this.title,
+    required this.moduleList,
+  }) : super(key: key);
+
+  final String title;
+  final List<List<ShipModuleInfo>> moduleList;
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      child: Text(title),
+      onPressed: () {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return Dialog(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: renderModuleList(),
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  List<Widget> renderModuleList() {
+    return moduleList.map((list) {
+      return Column(
+        children: [
+          for (final module in list)
+            ListTile(
+              title: Text(GameRepository.instance.stringOf(module.name) ?? ''),
+              subtitle: Text(module.cost.costCr.toString()),
+              trailing: Text(module.cost.costXp.toString() + ' xp'),
+            ),
+          const Divider(),
+        ],
+      );
+    }).toList();
   }
 }
 

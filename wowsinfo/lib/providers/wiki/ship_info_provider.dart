@@ -16,6 +16,7 @@ class ShipInfoProvider with ChangeNotifier {
     _shipModules.unpackModules();
   }
 
+  // TODO: some should be final instead of a getter
   String get shipName => GameRepository.instance.stringOf(_ship.name) ?? '';
   String get shipIcon => _ship.index;
   String get title => '$shipIcon ${_ship.id}';
@@ -27,7 +28,8 @@ class ShipInfoProvider with ChangeNotifier {
   String? get costCR => _ship.costCr > 0 ? '${_ship.costCr}' : null;
   String? get costGold => _ship.costGold > 0 ? '${_ship.costGold}' : null;
 
-  bool get canChangeModules => _shipModules.canChangeModules;
+  late final bool canChangeModules = _shipModules.canChangeModules;
+  late final List<List<ShipModuleInfo>> moduleList = _shipModules.moduleList;
 
   HullInfo? get _hullInfo => _shipModules.hullInfo;
   bool get renderHull => _hullInfo != null;
