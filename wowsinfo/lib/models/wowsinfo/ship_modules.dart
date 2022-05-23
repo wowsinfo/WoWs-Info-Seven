@@ -15,6 +15,7 @@ class ShipModules {
   final List<ShipModuleHolder<TorpedoInfo>> _torpInfo = [];
   final List<ShipModuleHolder<PingerInfo>> _pingerInfo = [];
   final List<ShipModuleHolder<FireControlInfo>> _fireControlInfo = [];
+  final List<ShipModuleHolder<EngineInfo>> _engineInfo = [];
   final List<ShipModuleHolder<AirSupportInfo>> _airSupportInfo = [];
   final List<ShipModuleHolder<DepthChargeInfo>> _depthChargeInfo = [];
 
@@ -31,6 +32,7 @@ class ShipModules {
   int _selectedTorp = 0;
   int _selectedPinger = 0;
   int _selectedFireControl = 0;
+  int _selectedEngine = 0;
   int _selectedAirSupport = 0;
   int _selectedDepthCharge = 0;
 
@@ -50,6 +52,7 @@ class ShipModules {
       _torpInfo.length > 1 ||
       _pingerInfo.length > 1 ||
       _fireControlInfo.length > 1 ||
+      _engineInfo.length > 1 ||
       _airSupportInfo.length > 1 ||
       _depthChargeInfo.length > 1 ||
       _fighterInfo.length > 1 ||
@@ -67,6 +70,9 @@ class ShipModules {
     if (_torpInfo.length > 1) list.add(_torpInfo.map((e) => e.module).toList());
     if (_secondaryInfo.length > 1) {
       list.add(_secondaryInfo.map((e) => e.module).toList());
+    }
+    if (_engineInfo.length > 1) {
+      list.add(_engineInfo.map((e) => e.module).toList());
     }
     if (_pingerInfo.length > 1) {
       list.add(_pingerInfo.map((e) => e.module).toList());
@@ -100,6 +106,7 @@ class ShipModules {
   GunInfo? get secondaryInfo =>
       _valueAt(_secondaryInfo, _selectedSecondary)?.data;
   TorpedoInfo? get torpedoInfo => _valueAt(_torpInfo, _selectedTorp)?.data;
+  EngineInfo? get engineInfo => _valueAt(_engineInfo, _selectedEngine)?.data;
   PingerInfo? get pingerInfo => _valueAt(_pingerInfo, _selectedPinger)?.data;
   FireControlInfo? get fireControlInfo =>
       _valueAt(_fireControlInfo, _selectedFireControl)?.data;
@@ -221,6 +228,14 @@ class ShipModules {
               _fireControlInfo.add(holder);
             }
             break;
+          case '_Engine':
+            for (final key in components['engine'] ?? []) {
+              final info = shipModules[key];
+              final holder =
+                  ShipModuleHolder(module, EngineInfo.fromJson(info));
+              _engineInfo.add(holder);
+            }
+            break;
           case '_SkipBomber':
           case '_TorpedoBomber':
           case '_DiveBomber':
@@ -261,7 +276,6 @@ class ShipModules {
           case '_SecondaryWeapons':
           case '_PrimaryWeapons':
           case '_FlightControl':
-          case '_Engine':
             // ignore these for now
             break;
           default:
