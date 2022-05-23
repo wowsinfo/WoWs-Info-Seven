@@ -179,15 +179,13 @@ class ShipModules {
               _hullInfo.add(holder);
             }
             for (final key in components['depthCharges'] ?? []) {
-              // TODO: same as below, should be removed
-              final info = shipModules[key]['depthCharge'];
+              final info = shipModules[key];
               final holder =
                   ShipModuleHolder(module, DepthChargeInfo.fromJson(info));
               _depthChargeInfo.add(holder);
             }
             for (final key in components['airSupport'] ?? []) {
-              // TODO: we should remove this in the game
-              final info = shipModules[key]['airSupport'];
+              final info = shipModules[key];
               final holder =
                   ShipModuleHolder(module, AirSupportInfo.fromJson(info));
               _airSupportInfo.add(holder);
@@ -203,15 +201,11 @@ class ShipModules {
                   ShipModuleHolder(module, PingerInfo.fromJson(info));
               _pingerInfo.add(holder);
             }
-            break;
-          case '_Artillery':
             for (final key in components['artillery'] ?? []) {
               final info = shipModules[key];
               final holder = ShipModuleHolder(module, GunInfo.fromJson(info));
               _gunInfo.add(holder);
             }
-            break;
-          case '_Torpedoes':
             for (final key in components['torpedoes'] ?? []) {
               final info = shipModules[key];
               final holder =
@@ -257,6 +251,10 @@ class ShipModules {
                 }
               }
             }
+            break;
+          case '_Artillery':
+          case '_Torpedoes':
+            // they are included in hull
             break;
           case '_Sonar':
           case '_Abilities':

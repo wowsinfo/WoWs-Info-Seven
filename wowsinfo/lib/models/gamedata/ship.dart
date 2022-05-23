@@ -153,17 +153,25 @@ class GunInfo {
     required this.range,
     required this.sigma,
     required this.guns,
+    this.far,
+    this.bubbles,
   });
 
   final double range;
   final double sigma;
   final List<WeaponInfo> guns;
+  final AuraInfo? far;
+  final AirBubbles? bubbles;
 
   factory GunInfo.fromJson(Map<String, dynamic> json) => GunInfo(
         range: json['range'],
         sigma: json['sigma'],
         guns: List<WeaponInfo>.from(
             json['guns'].map((x) => WeaponInfo.fromJson(x))),
+        far: json['far'] == null ? null : AuraInfo.fromJson(json['far']),
+        bubbles: json['bubbles'] == null
+            ? null
+            : AirBubbles.fromJson(json['bubbles']),
       );
 }
 
@@ -229,8 +237,9 @@ class AirSupportInfo {
       );
 }
 
+@immutable
 class FireControlInfo {
-  FireControlInfo({
+  const FireControlInfo({
     required this.maxDistCoef,
     required this.sigmaCountCoef,
   });
@@ -245,8 +254,22 @@ class FireControlInfo {
       );
 }
 
+@immutable
+class EngineInfo {
+  const EngineInfo({
+    required this.speedCoef,
+  });
+
+  final double speedCoef;
+
+  factory EngineInfo.fromJson(Map<String, dynamic> json) => EngineInfo(
+        speedCoef: json['speedCoef'],
+      );
+}
+
+@immutable
 class PingerInfo {
-  PingerInfo({
+  const PingerInfo({
     required this.reload,
     required this.range,
     required this.lifeTime1,
@@ -396,22 +419,17 @@ class AirDefense {
     this.medium,
     this.near,
     this.far,
-    this.bubbles,
   });
 
   final AuraInfo? medium;
   final AuraInfo? near;
   final AuraInfo? far;
-  final AirBubbles? bubbles;
 
   factory AirDefense.fromJson(Map<String, dynamic> json) => AirDefense(
         medium:
             json['medium'] == null ? null : AuraInfo.fromJson(json['medium']),
         near: json['near'] == null ? null : AuraInfo.fromJson(json['near']),
         far: json['far'] == null ? null : AuraInfo.fromJson(json['far']),
-        bubbles: json['bubbles'] == null
-            ? null
-            : AirBubbles.fromJson(json['bubbles']),
       );
 }
 
