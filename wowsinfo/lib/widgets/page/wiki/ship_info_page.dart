@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
+import 'package:wowsinfo/models/wowsinfo/ship_modules.dart';
 import 'package:wowsinfo/providers/wiki/ship_info_provider.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
 import 'package:wowsinfo/widgets/shared/text_with_caption.dart';
@@ -42,7 +43,7 @@ class _ShipInfoPageState extends State<ShipInfoPage> {
             if (_provider.canChangeModules)
               _ShipModuleButton(
                 title: 'Change Ship Modules',
-                moduleList: _provider.moduleList,
+                moduleMap: _provider.moduleList,
               ),
             if (_provider.renderHull)
               _ShipSurvivabilty(
@@ -107,11 +108,11 @@ class _ShipModuleButton extends StatelessWidget {
   const _ShipModuleButton({
     Key? key,
     required this.title,
-    required this.moduleList,
+    required this.moduleMap,
   }) : super(key: key);
 
   final String title;
-  final List<List<ShipModuleInfo>> moduleList;
+  final ShipModuleMap moduleMap;
 
   @override
   Widget build(BuildContext context) {
@@ -124,7 +125,7 @@ class _ShipModuleButton extends StatelessWidget {
             return Dialog(
               child: SingleChildScrollView(
                 child: Column(
-                  children: renderModuleList(),
+                  children: renderModuleMap(context),
                 ),
               ),
             );
@@ -134,17 +135,30 @@ class _ShipModuleButton extends StatelessWidget {
     );
   }
 
-  List<Widget> renderModuleList() {
-    return moduleList.map((list) {
+  List<Widget> renderModuleMap(BuildContext context) {
+    final entries = moduleMap.entries;
+    return entries.map((entry) {
+      final moduleName = entry.key;
+      final list = entry.value;
       return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+            child: Text(
+              moduleName,
+              style: Theme.of(context).textTheme.headline6,
+            ),
+          ),
           for (final module in list)
             ListTile(
               title: Text(GameRepository.instance.stringOf(module.name) ?? ''),
               subtitle: Text(module.cost.costCr.toString()),
-              trailing: Text(module.cost.costXp.toString() + ' xp'),
+              trailing: Text(module.cost.costXp.toString() + ' XP'),
+              onTap: () {},
             ),
-          const Divider(),
+          // add divider if this is not the last module
+          if (entry.key != entries.last.key) const Divider(),
         ],
       );
     }).toList();

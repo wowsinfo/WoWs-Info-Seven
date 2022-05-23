@@ -29,7 +29,7 @@ class ShipInfoProvider with ChangeNotifier {
   String? get costGold => _ship.costGold > 0 ? '${_ship.costGold}' : null;
 
   late final bool canChangeModules = _shipModules.canChangeModules;
-  late final List<List<ShipModuleInfo>> moduleList = _shipModules.moduleList;
+  late final ShipModuleMap moduleList = _shipModules.moduleList;
 
   HullInfo? get _hullInfo => _shipModules.hullInfo;
   bool get renderHull => _hullInfo != null;
