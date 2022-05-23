@@ -65,38 +65,30 @@ class ShipModules {
   /// Get all modules with at least 2 items in it.
   List<List<ShipModuleInfo>> _makeModuleList() {
     final List<List<ShipModuleInfo>> list = [];
-    if (_hullInfo.length > 1) list.add(_hullInfo.map((e) => e.module).toList());
-    if (_gunInfo.length > 1) list.add(_gunInfo.map((e) => e.module).toList());
-    if (_torpInfo.length > 1) list.add(_torpInfo.map((e) => e.module).toList());
-    if (_secondaryInfo.length > 1) {
-      list.add(_secondaryInfo.map((e) => e.module).toList());
+    if (_gunInfo.length > 1) list.add(_gunInfo.map((e) => e.module!).toList());
+    if (_hullInfo.length > 1) {
+      list.add(_hullInfo.map((e) => e.module!).toList());
+    }
+    if (_torpInfo.length > 1) {
+      list.add(_torpInfo.map((e) => e.module!).toList());
     }
     if (_engineInfo.length > 1) {
-      list.add(_engineInfo.map((e) => e.module).toList());
-    }
-    if (_pingerInfo.length > 1) {
-      list.add(_pingerInfo.map((e) => e.module).toList());
+      list.add(_engineInfo.map((e) => e.module!).toList());
     }
     if (_fireControlInfo.length > 1) {
-      list.add(_fireControlInfo.map((e) => e.module).toList());
-    }
-    if (_airSupportInfo.length > 1) {
-      list.add(_airSupportInfo.map((e) => e.module).toList());
-    }
-    if (_depthChargeInfo.length > 1) {
-      list.add(_depthChargeInfo.map((e) => e.module).toList());
+      list.add(_fireControlInfo.map((e) => e.module!).toList());
     }
     if (_fighterInfo.length > 1) {
-      list.add(_fighterInfo.map((e) => e.module).toList());
+      list.add(_fighterInfo.map((e) => e.module!).toList());
     }
     if (_skipBomberInfo.length > 1) {
-      list.add(_skipBomberInfo.map((e) => e.module).toList());
+      list.add(_skipBomberInfo.map((e) => e.module!).toList());
     }
     if (_torpedoBomberInfo.length > 1) {
-      list.add(_torpedoBomberInfo.map((e) => e.module).toList());
+      list.add(_torpedoBomberInfo.map((e) => e.module!).toList());
     }
     if (_diveBomberInfo.length > 1) {
-      list.add(_diveBomberInfo.map((e) => e.module).toList());
+      list.add(_diveBomberInfo.map((e) => e.module!).toList());
     }
     return list;
   }
@@ -137,6 +129,10 @@ class ShipModules {
 
   void updateTorpedo(int index) {
     _selectedTorp = index;
+  }
+
+  void updateEngine(int index) {
+    _selectedEngine = index;
   }
 
   void updatePinger(int index) {
@@ -188,24 +184,23 @@ class ShipModules {
             for (final key in components['depthCharges'] ?? []) {
               final info = shipModules[key];
               final holder =
-                  ShipModuleHolder(module, DepthChargeInfo.fromJson(info));
+                  ShipModuleHolder(null, DepthChargeInfo.fromJson(info));
               _depthChargeInfo.add(holder);
             }
             for (final key in components['airSupport'] ?? []) {
               final info = shipModules[key];
               final holder =
-                  ShipModuleHolder(module, AirSupportInfo.fromJson(info));
+                  ShipModuleHolder(null, AirSupportInfo.fromJson(info));
               _airSupportInfo.add(holder);
             }
             for (final key in components['atba'] ?? []) {
               final info = shipModules[key];
-              final holder = ShipModuleHolder(module, GunInfo.fromJson(info));
+              final holder = ShipModuleHolder(null, GunInfo.fromJson(info));
               _secondaryInfo.add(holder);
             }
             for (final key in components['pinger'] ?? []) {
               final info = shipModules[key];
-              final holder =
-                  ShipModuleHolder(module, PingerInfo.fromJson(info));
+              final holder = ShipModuleHolder(null, PingerInfo.fromJson(info));
               _pingerInfo.add(holder);
             }
             break;
@@ -291,7 +286,7 @@ class ShipModules {
 
 /// A data holder with a [ShipModuleInfo] and the data [T].
 class ShipModuleHolder<T> {
-  final ShipModuleInfo module;
+  final ShipModuleInfo? module;
   final T data;
 
   ShipModuleHolder(this.module, this.data);
