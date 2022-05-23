@@ -208,11 +208,15 @@ class ShipModules {
                   ShipModuleHolder(module, PingerInfo.fromJson(info));
               _pingerInfo.add(holder);
             }
+            break;
+          case '_Artillery':
             for (final key in components['artillery'] ?? []) {
               final info = shipModules[key];
               final holder = ShipModuleHolder(module, GunInfo.fromJson(info));
               _gunInfo.add(holder);
             }
+            break;
+          case '_Torpedoes':
             for (final key in components['torpedoes'] ?? []) {
               final info = shipModules[key];
               final holder =
@@ -266,10 +270,6 @@ class ShipModules {
                 }
               }
             }
-            break;
-          case '_Artillery':
-          case '_Torpedoes':
-            // they are included in hull
             break;
           case '_Sonar':
           case '_Abilities':

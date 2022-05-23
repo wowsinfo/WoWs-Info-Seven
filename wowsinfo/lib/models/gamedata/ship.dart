@@ -262,9 +262,11 @@ class EngineInfo {
 
   final double speedCoef;
 
-  factory EngineInfo.fromJson(Map<String, dynamic> json) => EngineInfo(
-        speedCoef: json['speedCoef'],
-      );
+  factory EngineInfo.fromJson(Map<String, dynamic>? json) {
+    // when it is 1, it is not specified
+    if (json == null) return const EngineInfo(speedCoef: 1.0);
+    return EngineInfo(speedCoef: json['speedCoef']);
+  }
 }
 
 @immutable
