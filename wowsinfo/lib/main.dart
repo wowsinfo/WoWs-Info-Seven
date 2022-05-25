@@ -12,7 +12,7 @@ Future<void> setup() async {
   Logger.root.onRecord.listen((record) {
     if (kDebugMode) {
       final message = '${record.loggerName}: ${record.message}';
-      print(record.level.name + '|' + message);
+      print('${record.level.name}|$message');
     }
   });
 

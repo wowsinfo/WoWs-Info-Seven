@@ -38,7 +38,7 @@ class WargamingService extends BaseService {
   ApiResult<ServerStatus?> getServerStatus() async {
     // this is under wowt
     final result = await getObject(
-      _wgnUrl + '/servers/info/$_applicationId&game=wows',
+      '$_wgnUrl/servers/info/$_applicationId&game=wows',
     );
     return decodeObject(result, ServerStatus.fromJson);
   }
@@ -46,7 +46,7 @@ class WargamingService extends BaseService {
   /// Get a list of players with the given [nickname].
   ApiResult<List<PlayerResult>> searchPlayer(String nickname) async {
     final result = await getObject(
-      _wgnUrl + '/account/list/$_applicationId&game=wows&search=$nickname',
+      '$_wgnUrl/account/list/$_applicationId&game=wows&search=$nickname',
     );
     return decodeList(result, PlayerResult.fromJson);
   }
@@ -54,7 +54,7 @@ class WargamingService extends BaseService {
   /// Get a list of clans with the given [tag].
   ApiResult<List<ClanResult>> searchClan(String tag) async {
     final result = await getObject(
-      baseUrl + '/clans/list/$_applicationId&search=$tag',
+      '$baseUrl/clans/list/$_applicationId&search=$tag',
     );
     return decodeList(result, ClanResult.fromJson);
   }
@@ -63,10 +63,7 @@ class WargamingService extends BaseService {
   ApiResult<PlayerInformation> getPlayerInformation(String accountId) async {
     // extra fields are provideded to get all the statistics
     final result = await getObject(
-      baseUrl +
-          '/account/info/$_applicationId&account_id=$accountId'
-              '&extra=statistics.pve%2Cstatistics.pvp_div2'
-              '%2Cstatistics.pvp_div3%2Cstatistics.rank_solo',
+      '$baseUrl/account/info/$_applicationId&account_id=$accountId&extra=statistics.pve%2Cstatistics.pvp_div2%2Cstatistics.pvp_div3%2Cstatistics.rank_solo',
     );
     return decodeObject(result, PlayerInformation.fromJson);
   }
@@ -74,7 +71,7 @@ class WargamingService extends BaseService {
   /// Get a player's achievements by [accountId].
   ApiResult<PlayerAchievement> getPlayerAchievements(String accountId) async {
     final result = await getObject(
-      baseUrl + '/account/achievements/$_applicationId&account_id=$accountId',
+      '$baseUrl/account/achievements/$_applicationId&account_id=$accountId',
     );
     return decodeObject(result, PlayerAchievement.fromJson);
   }

@@ -15,7 +15,7 @@ class ShipInfoPage extends StatefulWidget {
   final Ship ship;
 
   @override
-  _ShipInfoPageState createState() => _ShipInfoPageState();
+  State<ShipInfoPage> createState() => _ShipInfoPageState();
 }
 
 class _ShipInfoPageState extends State<ShipInfoPage> {

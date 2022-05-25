@@ -26,12 +26,12 @@ class AssetImageLoader extends StatelessWidget {
 
   /// Load image from gamedata/ folder and some can be missing.
   Future<Widget> loadAssetImage(BuildContext context) async {
-    final _logger = Logger('ImageLoader');
+    final logger = Logger('ImageLoader');
     try {
       final memoryImage = await DefaultAssetBundle.of(context).load(name);
       return Image.memory(memoryImage.buffer.asUint8List());
     } catch (e) {
-      _logger.warning('Failed to load image: $name');
+      logger.warning('Failed to load image: $name');
       if (placeholder == null) {
         return const Icon(
           Icons.close,

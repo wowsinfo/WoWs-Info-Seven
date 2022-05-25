@@ -17,16 +17,16 @@ class DummyService {
 
   /// Load the correct player's recent data overview.
   Future<JSON> loadGoodRecentOverview() {
-    return _loadAsMap(_jsonPath + 'recent_data.json');
+    return _loadAsMap('${_jsonPath}recent_data.json');
   }
 
   /// Load the null player's recent data overview.
   Future<JSON> loadEmptyRecentOverview() {
-    return _loadAsMap(_jsonPath + 'recent_data_null.json');
+    return _loadAsMap('${_jsonPath}recent_data_null.json');
   }
 
   /// Load the hidden player's recent data overview.
   Future<JSON> loadHiddenRecentOverview() {
-    return _loadAsMap(_jsonPath + 'recent_data_hidden.json');
+    return _loadAsMap('${_jsonPath}recent_data_hidden.json');
   }
 }

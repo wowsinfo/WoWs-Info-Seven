@@ -71,12 +71,7 @@ class UpgradePage extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
               subtitle: Text(
-                (GameRepository.instance.stringOf(
-                          upgrade.description,
-                        ) ??
-                        '') +
-                    '\n' +
-                    additionalString,
+                '${GameRepository.instance.stringOf(upgrade.description) ?? ''}\n$additionalString',
               )),
         ),
       ),

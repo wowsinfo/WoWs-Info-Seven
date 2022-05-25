@@ -202,14 +202,14 @@ class AbilityInfo {
   }
 
   String _format(String key, num value) {
-    final langKey = 'IDS_PARAMS_MODIFIER_' + key.toUpperCase();
+    final langKey = 'IDS_PARAMS_MODIFIER_${key.toUpperCase()}';
     final description = GameRepository.instance.stringOf(langKey);
     if (description == ' ') return '';
 
     final valueString = value.toDecimalString();
 
     if (key.contains('time')) {
-      return valueString + 's';
+      return '${valueString}s';
     }
 
     return valueString;

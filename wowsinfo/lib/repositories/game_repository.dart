@@ -51,17 +51,17 @@ class GameRepository {
       throw Exception('GameRepository is already initialised');
     }
 
-    final _timer = TimeTracker();
+    final timer = TimeTracker();
 
     // load game data
     final jsonString = await rootBundle.loadString(
       'gamedata/app/data/wowsinfo.json',
       cache: false,
     );
-    _timer.log(message: 'Loaded wowsinfo.json');
+    timer.log(message: 'Loaded wowsinfo.json');
 
     final dataObject = jsonDecode(jsonString);
-    _timer.log(message: 'Parsed wowsinfo.json');
+    timer.log(message: 'Parsed wowsinfo.json');
 
     // decode data into models and store them in the repository
     _alias = (dataObject['alias'] as Map).map((key, value) {
@@ -89,27 +89,27 @@ class GameRepository {
       return MapEntry(key, Ship.fromJson(value));
     });
     _gameInfo = GameInfo.fromJson(dataObject['game']);
-    _timer.log(message: 'Decoded wowsinfo.json');
+    timer.log(message: 'Decoded wowsinfo.json');
 
     // load the language file
     final langString = await rootBundle.loadString(
       'gamedata/app/lang/lang.json',
       cache: false,
     );
-    _timer.log(message: 'Loaded lang.json');
+    timer.log(message: 'Loaded lang.json');
 
     final langObject = jsonDecode(langString);
-    _timer.log(message: 'Parsed lang.json');
+    timer.log(message: 'Parsed lang.json');
 
     _lang = (langObject as Map).map((key, value) {
       return MapEntry(key, (value as Map).cast<String, String>());
     });
     _gameLang = 'en';
-    _timer.log(message: 'Decoded lang.json');
+    timer.log(message: 'Decoded lang.json');
 
     _generateLists();
     _initialised = true;
-    _timer.log(message: 'Initialised GameRepository');
+    timer.log(message: 'Initialised GameRepository');
   }
 
   void _generateLists() {

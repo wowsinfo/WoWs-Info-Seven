@@ -72,9 +72,9 @@ class _ShipPageState extends State<ShipPage> {
               child: Column(
                 children: [
                   ShipIcon(name: imageName),
-                  Text(curr.tierString +
-                      ' ' +
-                      (GameRepository.instance.stringOf(curr.name) ?? '')),
+                  Text(
+                    '${curr.tierString} ${GameRepository.instance.stringOf(curr.name) ?? ''}',
+                  ),
                 ],
               ),
             ),

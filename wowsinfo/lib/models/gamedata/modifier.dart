@@ -250,7 +250,7 @@ class Modifiers {
 
   @override
   String toString() {
-    final _logger = Logger('Modifiers');
+    final logger = Logger('Modifiers');
 
     var description = '';
     for (final entry in raw.entries) {
@@ -258,14 +258,14 @@ class Modifiers {
       if (key == 'preparationtime') continue;
 
       final langString = GameRepository.instance.stringOf(
-        'IDS_PARAMS_MODIFIER_' + key.toUpperCase(),
+        'IDS_PARAMS_MODIFIER_${key.toUpperCase()}',
       );
 
       if (langString == ' ') continue;
 
       final value = entry.value;
       if (value == null) continue;
-      _logger.fine('$key: $value');
+      logger.fine('$key: $value');
 
       var valueString = '';
 
@@ -279,9 +279,9 @@ class Modifiers {
           if (key.contains('coeff')) {
             valueString = _formatNumber(value);
           } else if (key.contains('time')) {
-            valueString = value.toDecimalString() + 's';
+            valueString = '${value.toDecimalString()}s';
           } else if (key.contains('dist')) {
-            valueString = (value / 33.35).toDecimalString() + 'km';
+            valueString = '${(value / 33.35).toDecimalString()}km';
           } else if (value < 2) {
             valueString = _formatNumber(value);
           } else {
