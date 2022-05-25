@@ -142,7 +142,7 @@ class _ShipModuleButton extends StatelessWidget {
       final moduleName = entry.key;
       final list = entry.value;
       return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
@@ -159,6 +159,15 @@ class _ShipModuleButton extends StatelessWidget {
             ),
           // add divider if this is not the last module
           if (entry.key != entries.last.key) const Divider(),
+          // add the update button to dimiss the dialog
+          if (entry.key == entries.last.key)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: ElevatedButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: Text('Close'),
+              ),
+            ),
         ],
       );
     }).toList();
@@ -171,6 +180,10 @@ class _ShipModuleButton extends StatelessWidget {
   ) {
     final info = module.module!;
     return ListTile(
+      leading: Checkbox(
+        value: true,
+        onChanged: (_) => module.onSelect(index),
+      ),
       title: Text(GameRepository.instance.stringOf(info.name) ?? ''),
       subtitle: Text(info.cost.costCr.toString()),
       trailing: Text('${info.cost.costXp} XP'),

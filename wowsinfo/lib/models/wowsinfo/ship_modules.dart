@@ -102,54 +102,67 @@ class ShipModules {
 
   void updateHull(int index) {
     _selectedHull = index;
+    _logger.fine('updateHull: $index');
   }
 
   void updateGun(int index) {
     _selectedGun = index;
+    _logger.fine('updateGun: $index');
   }
 
   void updateSecondary(int index) {
     _selectedSecondary = index;
+    _logger.fine('updateSecondary: $index');
   }
 
   void updateTorpedo(int index) {
     _selectedTorp = index;
+    _logger.fine('updateTorpedo: $index');
   }
 
   void updateEngine(int index) {
     _selectedEngine = index;
+    _logger.fine('updateEngine: $index');
   }
 
   void updatePinger(int index) {
     _selectedPinger = index;
+    _logger.fine('updatePinger: $index');
   }
 
   void updateFireControl(int index) {
     _selectedFireControl = index;
+    _logger.fine('updateFireControl: $index');
   }
 
   void updateAirSupport(int index) {
     _selectedAirSupport = index;
+    _logger.fine('updateAirSupport: $index');
   }
 
   void updateDepthCharge(int index) {
     _selectedDepthCharge = index;
+    _logger.fine('updateDepthCharge: $index');
   }
 
   void updateFighter(int index) {
     _selectedFighter = index;
+    _logger.fine('updateFighter: $index');
   }
 
   void updateSkipBomber(int index) {
     _selectedSkipBomber = index;
+    _logger.fine('updateSkipBomber: $index');
   }
 
   void updateTorpedoBomber(int index) {
     _selectedTorpedoBomber = index;
+    _logger.fine('updateTorpedoBomber: $index');
   }
 
   void updateDiveBomber(int index) {
     _selectedDiveBomber = index;
+    _logger.fine('updateDiveBomber: $index');
   }
 
   void unpackModules() {
