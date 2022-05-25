@@ -3,7 +3,7 @@ import 'package:wowsinfo/models/gamedata/aircraft.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
 
-typedef ShipModuleMap = Map<String, List<ShipModuleInfo>>;
+typedef ShipModuleMap<T> = Map<String, List<ShipModuleHolder<T>>>;
 
 class ShipModules {
   final _logger = Logger('ShipModules');
@@ -66,33 +66,15 @@ class ShipModules {
   /// Get all modules with at least 2 items in it.
   ShipModuleMap _makeModuleList() {
     final ShipModuleMap moduleMap = {};
-    if (_hullInfo.length > 1) {
-      moduleMap['aaa'] = _hullInfo.map((e) => e.module!).toList();
-    }
-    if (_gunCount > 1) {
-      moduleMap['bbb'] = _gunInfo.map((e) => e.module!).toList();
-    }
-    if (_torpCount > 1) {
-      moduleMap['ccc'] = _torpInfo.map((e) => e.module!).toList();
-    }
-    if (_fireControlInfo.length > 1) {
-      moduleMap['ddd'] = _fireControlInfo.map((e) => e.module!).toList();
-    }
-    if (_engineInfo.length > 1) {
-      moduleMap['eee'] = _engineInfo.map((e) => e.module!).toList();
-    }
-    if (_fighterInfo.length > 1) {
-      moduleMap['fff'] = _fighterInfo.map((e) => e.module!).toList();
-    }
-    if (_skipBomberInfo.length > 1) {
-      moduleMap['ggg'] = _skipBomberInfo.map((e) => e.module!).toList();
-    }
-    if (_torpedoBomberInfo.length > 1) {
-      moduleMap['hhh'] = _torpedoBomberInfo.map((e) => e.module!).toList();
-    }
-    if (_diveBomberInfo.length > 1) {
-      moduleMap['iii'] = _diveBomberInfo.map((e) => e.module!).toList();
-    }
+    if (_hullInfo.length > 1) moduleMap['aaa'] = _hullInfo;
+    if (_gunCount > 1) moduleMap['bbb'] = _gunInfo;
+    if (_torpCount > 1) moduleMap['ccc'] = _torpInfo;
+    if (_fireControlInfo.length > 1) moduleMap['ddd'] = _fireControlInfo;
+    if (_engineInfo.length > 1) moduleMap['eee'] = _engineInfo;
+    if (_fighterInfo.length > 1) moduleMap['fff'] = _fighterInfo;
+    if (_skipBomberInfo.length > 1) moduleMap['ggg'] = _skipBomberInfo;
+    if (_torpedoBomberInfo.length > 1) moduleMap['hhh'] = _torpedoBomberInfo;
+    if (_diveBomberInfo.length > 1) moduleMap['iii'] = _diveBomberInfo;
     return moduleMap;
   }
 
@@ -183,23 +165,30 @@ class ShipModules {
           String key,
           T Function(Map<String, dynamic>) creator,
           void Function(ShipModuleHolder<T>) add,
+          void Function(int) onSelect,
         ) {
           final moduleList = components[key];
           if (moduleList == null || moduleList.isEmpty) return;
           final info = shipModules[moduleList.first];
-          final holder = ShipModuleHolder(module, creator(info));
+          final holder = ShipModuleHolder<T>(
+            module: module,
+            data: creator(info),
+            onSelect: onSelect,
+          );
           add(holder);
         }
 
         switch (moduleType) {
           case '_Hull':
-            addModule('hull', HullInfo.fromJson, _hullInfo.add);
+            addModule('hull', HullInfo.fromJson, _hullInfo.add, updateHull);
+            addModule('depthCharges', DepthChargeInfo.fromJson,
+                _depthChargeInfo.add, updateDepthCharge);
+            addModule('airSupport', AirSupportInfo.fromJson,
+                _airSupportInfo.add, updateAirSupport);
             addModule(
-                'depthCharges', DepthChargeInfo.fromJson, _depthChargeInfo.add);
+                'atba', GunInfo.fromJson, _secondaryInfo.add, updateSecondary);
             addModule(
-                'airSupport', AirSupportInfo.fromJson, _airSupportInfo.add);
-            addModule('atba', GunInfo.fromJson, _secondaryInfo.add);
-            addModule('pinger', PingerInfo.fromJson, _pingerInfo.add);
+                'pinger', PingerInfo.fromJson, _pingerInfo.add, updatePinger);
 
             // There can be multiple of guns & torps. However, they can be the
             // same although having different names. It is only accurate from
@@ -208,20 +197,26 @@ class ShipModules {
             _torpCount = components['torpedoes']?.length ?? 0;
             break;
           case '_Artillery':
-            addModule('artillery', GunInfo.fromJson, _secondaryInfo.add);
+            addModule(
+                'artillery', GunInfo.fromJson, _secondaryInfo.add, updateGun);
             break;
           case '_Torpedoes':
-            addModule('torpedoes', TorpedoInfo.fromJson, _torpInfo.add);
+            addModule('torpedoes', TorpedoInfo.fromJson, _torpInfo.add,
+                updateTorpedo);
             break;
           case '_Suo':
-            addModule(
-                'fireControl', FireControlInfo.fromJson, _fireControlInfo.add);
+            addModule('fireControl', FireControlInfo.fromJson,
+                _fireControlInfo.add, updateFireControl);
             break;
           case '_Engine':
             final moduleList = components['engine'];
             if (moduleList == null || moduleList.isEmpty) return;
             final info = shipModules[moduleList.first];
-            final holder = ShipModuleHolder(module, EngineInfo.fromJson(info));
+            final holder = ShipModuleHolder(
+              module: module,
+              data: EngineInfo.fromJson(info),
+              onSelect: updateEngine,
+            );
             _engineInfo.add(holder);
             break;
           case '_SkipBomber':
@@ -241,18 +236,37 @@ class ShipModules {
               _logger.fine('Found aircraft ($moduleType) info of $key');
             }
 
-            final holder = ShipModuleHolder<Aircraft>(module, info);
             switch (moduleType) {
               case '_SkipBomber':
+                final holder = ShipModuleHolder(
+                  module: module,
+                  data: info,
+                  onSelect: updateSkipBomber,
+                );
                 _skipBomberInfo.add(holder);
                 break;
               case '_TorpedoBomber':
+                final holder = ShipModuleHolder(
+                  module: module,
+                  data: info,
+                  onSelect: updateTorpedoBomber,
+                );
                 _torpedoBomberInfo.add(holder);
                 break;
               case '_DiveBomber':
+                final holder = ShipModuleHolder(
+                  module: module,
+                  data: info,
+                  onSelect: updateDiveBomber,
+                );
                 _diveBomberInfo.add(holder);
                 break;
               case '_Fighter':
+                final holder = ShipModuleHolder(
+                  module: module,
+                  data: info,
+                  onSelect: updateFighter,
+                );
                 _fighterInfo.add(holder);
                 break;
             }
@@ -277,8 +291,13 @@ class ShipModules {
 
 /// A data holder with a [ShipModuleInfo] and the data [T].
 class ShipModuleHolder<T> {
+  ShipModuleHolder({
+    this.module,
+    required this.data,
+    required this.onSelect,
+  });
+
   final ShipModuleInfo? module;
   final T data;
-
-  ShipModuleHolder(this.module, this.data);
+  final void Function(int) onSelect;
 }

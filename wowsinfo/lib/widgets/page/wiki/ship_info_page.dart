@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wowsinfo/extensions/list.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_modules.dart';
 import 'package:wowsinfo/providers/wiki/ship_info_provider.dart';
@@ -150,18 +151,31 @@ class _ShipModuleButton extends StatelessWidget {
               style: Theme.of(context).textTheme.headline6,
             ),
           ),
-          for (final module in list)
-            ListTile(
-              title: Text(GameRepository.instance.stringOf(module.name) ?? ''),
-              subtitle: Text(module.cost.costCr.toString()),
-              trailing: Text(module.cost.costXp.toString() + ' XP'),
-              onTap: () {},
+          for (final module in list.enumerate())
+            buildModuleListTile(
+              context,
+              module.key,
+              module.value,
             ),
           // add divider if this is not the last module
           if (entry.key != entries.last.key) const Divider(),
         ],
       );
     }).toList();
+  }
+
+  ListTile buildModuleListTile(
+    BuildContext context,
+    int index,
+    ShipModuleHolder module,
+  ) {
+    final info = module.module!;
+    return ListTile(
+      title: Text(GameRepository.instance.stringOf(info.name) ?? ''),
+      subtitle: Text(info.cost.costCr.toString()),
+      trailing: Text('${info.cost.costXp} XP'),
+      onTap: () => module.onSelect(index),
+    );
   }
 }
 
