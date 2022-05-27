@@ -128,83 +128,96 @@ class ShipModules {
       case 'hull':
         return _selectedHull == index;
       default:
-        return false;
+        throw Exception('Unknown key: $key');
     }
   }
 
   void updateHull(int index) {
+    if (_selectedHull == index) return;
     _selectedHull = index;
     _logger.fine('updateHull: $index');
     notifyChanges();
   }
 
   void updateGun(int index) {
+    if (_selectedGun == index) return;
     _selectedGun = index;
     _logger.fine('updateGun: $index');
     notifyChanges();
   }
 
   void updateSecondary(int index) {
+    if (_selectedSecondary == index) return;
     _selectedSecondary = index;
     _logger.fine('updateSecondary: $index');
     notifyChanges();
   }
 
   void updateTorpedo(int index) {
+    if (_selectedTorp == index) return;
     _selectedTorp = index;
     _logger.fine('updateTorpedo: $index');
     notifyChanges();
   }
 
   void updateEngine(int index) {
+    if (_selectedEngine == index) return;
     _selectedEngine = index;
     _logger.fine('updateEngine: $index');
     notifyChanges();
   }
 
   void updatePinger(int index) {
+    if (_selectedPinger == index) return;
     _selectedPinger = index;
     _logger.fine('updatePinger: $index');
     notifyChanges();
   }
 
   void updateFireControl(int index) {
+    if (_selectedFireControl == index) return;
     _selectedFireControl = index;
     _logger.fine('updateFireControl: $index');
     notifyChanges();
   }
 
   void updateAirSupport(int index) {
+    if (_selectedAirSupport == index) return;
     _selectedAirSupport = index;
     _logger.fine('updateAirSupport: $index');
     notifyChanges();
   }
 
   void updateDepthCharge(int index) {
+    if (_selectedDepthCharge == index) return;
     _selectedDepthCharge = index;
     _logger.fine('updateDepthCharge: $index');
     notifyChanges();
   }
 
   void updateFighter(int index) {
+    if (_selectedFighter == index) return;
     _selectedFighter = index;
     _logger.fine('updateFighter: $index');
     notifyChanges();
   }
 
   void updateSkipBomber(int index) {
+    if (_selectedSkipBomber == index) return;
     _selectedSkipBomber = index;
     _logger.fine('updateSkipBomber: $index');
     notifyChanges();
   }
 
   void updateTorpedoBomber(int index) {
+    if (_selectedTorpedoBomber == index) return;
     _selectedTorpedoBomber = index;
     _logger.fine('updateTorpedoBomber: $index');
     notifyChanges();
   }
 
   void updateDiveBomber(int index) {
+    if (_selectedDiveBomber == index) return;
     _selectedDiveBomber = index;
     _logger.fine('updateDiveBomber: $index');
     notifyChanges();

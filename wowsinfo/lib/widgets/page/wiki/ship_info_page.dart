@@ -5,6 +5,7 @@ import 'package:wowsinfo/extensions/list.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_modules.dart';
 import 'package:wowsinfo/providers/wiki/ship_info_provider.dart';
+import 'package:wowsinfo/providers/wiki/ship_provider.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
 import 'package:wowsinfo/widgets/shared/text_with_caption.dart';
 import 'package:wowsinfo/widgets/shared/wiki/ship_icon.dart';
@@ -54,8 +55,11 @@ class _ShipInfoPageState extends State<ShipInfoPage> {
                 description: _provider.description,
               ),
               if (_provider.canChangeModules)
-                const _ShipModuleButton(
-                  title: 'Change Ship Modules',
+                Consumer<ShipInfoProvider>(
+                  builder: (context, value, child) => _ShipModuleButton(
+                    title: 'Change Ship Modules',
+                    shipModules: value.moduleList,
+                  ),
                 ),
               if (_provider.renderHull)
                 _ShipSurvivabilty(
@@ -121,9 +125,11 @@ class _ShipModuleButton extends StatelessWidget {
   const _ShipModuleButton({
     Key? key,
     required this.title,
+    required this.shipModules,
   }) : super(key: key);
 
   final String title;
+  final ShipModuleMap shipModules;
 
   @override
   Widget build(BuildContext context) {
@@ -147,8 +153,9 @@ class _ShipModuleButton extends StatelessWidget {
   }
 
   List<Widget> renderModuleMap(BuildContext context) {
-    final provider = Provider.of<ShipInfoProvider>(context);
-    final entries = provider.moduleList.entries;
+    final provider = Provider.of<ShipInfoProvider>(context, listen: false);
+    final entries = shipModules.entries;
+    _logger.fine('rerender');
     return entries.map((entry) {
       final moduleName = entry.key;
       final list = entry.value;
@@ -182,7 +189,7 @@ class _ShipModuleButton extends StatelessWidget {
             ),
         ],
       );
-    }).toList();
+    }).toList(growable: false);
   }
 
   ListTile buildModuleListTile(
@@ -192,7 +199,6 @@ class _ShipModuleButton extends StatelessWidget {
     ShipModuleHolder module,
   ) {
     final info = module.module!;
-    _logger.info('Module: ${info.name}, selected: $selected');
     return ListTile(
       leading: Checkbox(
         value: selected,
