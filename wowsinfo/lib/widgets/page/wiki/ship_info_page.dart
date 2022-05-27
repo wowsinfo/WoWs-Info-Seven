@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:logging/logging.dart';
+import 'package:provider/provider.dart';
 import 'package:wowsinfo/extensions/list.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_modules.dart';
@@ -6,6 +8,8 @@ import 'package:wowsinfo/providers/wiki/ship_info_provider.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
 import 'package:wowsinfo/widgets/shared/text_with_caption.dart';
 import 'package:wowsinfo/widgets/shared/wiki/ship_icon.dart';
+
+late final _logger = Logger('ShipInfoPage');
 
 class ShipInfoPage extends StatefulWidget {
   const ShipInfoPage({
@@ -20,38 +24,46 @@ class ShipInfoPage extends StatefulWidget {
 }
 
 class _ShipInfoPageState extends State<ShipInfoPage> {
-  late final _provider = ShipInfoProvider(context, widget.ship);
+  late final ShipInfoProvider _provider;
+
+  @override
+  void initState() {
+    super.initState();
+    _provider = ShipInfoProvider(context, widget.ship);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(_provider.title),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _ShipTitleSection(
-              icon: _provider.shipIcon,
-              name: _provider.shipName,
-              region: _provider.region,
-              type: _provider.type,
-              costCR: _provider.costCR,
-              costGold: _provider.costGold,
-              description: _provider.description,
-            ),
-            if (_provider.canChangeModules)
-              _ShipModuleButton(
-                title: 'Change Ship Modules',
-                moduleMap: _provider.moduleList,
+    return ChangeNotifierProvider.value(
+      value: _provider,
+      builder: (context, _) => Scaffold(
+        appBar: AppBar(
+          title: Text(_provider.title),
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _ShipTitleSection(
+                icon: _provider.shipIcon,
+                name: _provider.shipName,
+                region: _provider.region,
+                type: _provider.type,
+                costCR: _provider.costCR,
+                costGold: _provider.costGold,
+                description: _provider.description,
               ),
-            if (_provider.renderHull)
-              _ShipSurvivabilty(
-                health: _provider.health,
-                protection: _provider.torpedoProtection,
-              ),
-          ],
+              if (_provider.canChangeModules)
+                const _ShipModuleButton(
+                  title: 'Change Ship Modules',
+                ),
+              if (_provider.renderHull)
+                _ShipSurvivabilty(
+                  health: _provider.health,
+                  protection: _provider.torpedoProtection,
+                ),
+            ],
+          ),
         ),
       ),
     );
@@ -109,11 +121,9 @@ class _ShipModuleButton extends StatelessWidget {
   const _ShipModuleButton({
     Key? key,
     required this.title,
-    required this.moduleMap,
   }) : super(key: key);
 
   final String title;
-  final ShipModuleMap moduleMap;
 
   @override
   Widget build(BuildContext context) {
@@ -122,7 +132,7 @@ class _ShipModuleButton extends StatelessWidget {
       onPressed: () {
         showDialog(
           context: context,
-          builder: (context) {
+          builder: (_) {
             return Dialog(
               child: SingleChildScrollView(
                 child: Column(
@@ -137,7 +147,8 @@ class _ShipModuleButton extends StatelessWidget {
   }
 
   List<Widget> renderModuleMap(BuildContext context) {
-    final entries = moduleMap.entries;
+    final provider = Provider.of<ShipInfoProvider>(context);
+    final entries = provider.moduleList.entries;
     return entries.map((entry) {
       final moduleName = entry.key;
       final list = entry.value;
@@ -155,6 +166,7 @@ class _ShipModuleButton extends StatelessWidget {
             buildModuleListTile(
               context,
               module.key,
+              provider.isSelected(module.value.name, module.key),
               module.value,
             ),
           // add divider if this is not the last module
@@ -165,7 +177,7 @@ class _ShipModuleButton extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: ElevatedButton(
                 onPressed: () => Navigator.of(context).pop(),
-                child: Text('Close'),
+                child: const Text('Close'),
               ),
             ),
         ],
@@ -176,12 +188,14 @@ class _ShipModuleButton extends StatelessWidget {
   ListTile buildModuleListTile(
     BuildContext context,
     int index,
+    bool selected,
     ShipModuleHolder module,
   ) {
     final info = module.module!;
+    _logger.info('Module: ${info.name}, selected: $selected');
     return ListTile(
       leading: Checkbox(
-        value: true,
+        value: selected,
         onChanged: (_) => module.onSelect(index),
       ),
       title: Text(GameRepository.instance.stringOf(info.name) ?? ''),

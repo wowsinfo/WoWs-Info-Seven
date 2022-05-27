@@ -9,7 +9,8 @@ class ShipModules {
   final _logger = Logger('ShipModules');
 
   final Ship _ship;
-  ShipModules(this._ship);
+  final void Function() notifyChanges;
+  ShipModules(this._ship, {required this.notifyChanges});
 
   int _gunCount = 0;
   int _torpCount = 0;
@@ -100,69 +101,113 @@ class ShipModules {
   Aircraft? get diveBomberInfo =>
       _valueAt(_diveBomberInfo, _selectedDiveBomber)?.data;
 
+  bool isSelected(String key, int index) {
+    switch (key) {
+      case 'engine':
+        return _selectedEngine == index;
+      case 'artillery':
+        return _selectedGun == index;
+      case 'atba':
+        return _selectedSecondary == index;
+      case 'torpedoes':
+        return _selectedTorp == index;
+      case 'pinger':
+        return _selectedPinger == index;
+      case 'fireControl':
+        return _selectedFireControl == index;
+      case 'airSupport':
+        return _selectedAirSupport == index;
+      case 'depthCharges':
+        return _selectedDepthCharge == index;
+      case 'fighter':
+        return _selectedFighter == index;
+      case 'skipBomber':
+        return _selectedSkipBomber == index;
+      case 'torpedoBomber':
+        return _selectedTorpedoBomber == index;
+      case 'hull':
+        return _selectedHull == index;
+      default:
+        return false;
+    }
+  }
+
   void updateHull(int index) {
     _selectedHull = index;
     _logger.fine('updateHull: $index');
+    notifyChanges();
   }
 
   void updateGun(int index) {
     _selectedGun = index;
     _logger.fine('updateGun: $index');
+    notifyChanges();
   }
 
   void updateSecondary(int index) {
     _selectedSecondary = index;
     _logger.fine('updateSecondary: $index');
+    notifyChanges();
   }
 
   void updateTorpedo(int index) {
     _selectedTorp = index;
     _logger.fine('updateTorpedo: $index');
+    notifyChanges();
   }
 
   void updateEngine(int index) {
     _selectedEngine = index;
     _logger.fine('updateEngine: $index');
+    notifyChanges();
   }
 
   void updatePinger(int index) {
     _selectedPinger = index;
     _logger.fine('updatePinger: $index');
+    notifyChanges();
   }
 
   void updateFireControl(int index) {
     _selectedFireControl = index;
     _logger.fine('updateFireControl: $index');
+    notifyChanges();
   }
 
   void updateAirSupport(int index) {
     _selectedAirSupport = index;
     _logger.fine('updateAirSupport: $index');
+    notifyChanges();
   }
 
   void updateDepthCharge(int index) {
     _selectedDepthCharge = index;
     _logger.fine('updateDepthCharge: $index');
+    notifyChanges();
   }
 
   void updateFighter(int index) {
     _selectedFighter = index;
     _logger.fine('updateFighter: $index');
+    notifyChanges();
   }
 
   void updateSkipBomber(int index) {
     _selectedSkipBomber = index;
     _logger.fine('updateSkipBomber: $index');
+    notifyChanges();
   }
 
   void updateTorpedoBomber(int index) {
     _selectedTorpedoBomber = index;
     _logger.fine('updateTorpedoBomber: $index');
+    notifyChanges();
   }
 
   void updateDiveBomber(int index) {
     _selectedDiveBomber = index;
     _logger.fine('updateDiveBomber: $index');
+    notifyChanges();
   }
 
   void unpackModules() {
@@ -185,6 +230,7 @@ class ShipModules {
           final info = shipModules[moduleList.first];
           final holder = ShipModuleHolder<T>(
             module: module,
+            name: key,
             data: creator(info),
             onSelect: onSelect,
           );
@@ -226,6 +272,7 @@ class ShipModules {
             if (moduleList == null || moduleList.isEmpty) return;
             final info = shipModules[moduleList.first];
             final holder = ShipModuleHolder(
+              name: 'engine',
               module: module,
               data: EngineInfo.fromJson(info),
               onSelect: updateEngine,
@@ -252,6 +299,7 @@ class ShipModules {
             switch (moduleType) {
               case '_SkipBomber':
                 final holder = ShipModuleHolder(
+                  name: 'skipBomber',
                   module: module,
                   data: info,
                   onSelect: updateSkipBomber,
@@ -260,6 +308,7 @@ class ShipModules {
                 break;
               case '_TorpedoBomber':
                 final holder = ShipModuleHolder(
+                  name: 'torpedoBomber',
                   module: module,
                   data: info,
                   onSelect: updateTorpedoBomber,
@@ -268,6 +317,7 @@ class ShipModules {
                 break;
               case '_DiveBomber':
                 final holder = ShipModuleHolder(
+                  name: 'diveBomber',
                   module: module,
                   data: info,
                   onSelect: updateDiveBomber,
@@ -276,6 +326,7 @@ class ShipModules {
                 break;
               case '_Fighter':
                 final holder = ShipModuleHolder(
+                  name: 'fighter',
                   module: module,
                   data: info,
                   onSelect: updateFighter,
@@ -307,10 +358,12 @@ class ShipModuleHolder<T> {
   ShipModuleHolder({
     this.module,
     required this.data,
+    required this.name,
     required this.onSelect,
   });
 
   final ShipModuleInfo? module;
   final T data;
+  final String name;
   final void Function(int) onSelect;
 }

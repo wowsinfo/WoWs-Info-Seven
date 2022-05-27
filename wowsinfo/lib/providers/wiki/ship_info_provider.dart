@@ -11,10 +11,13 @@ class ShipInfoProvider with ChangeNotifier {
 
   final BuildContext _context;
   final Ship _ship;
-  late final _shipModules = ShipModules(_ship);
+  late final _shipModules = ShipModules(_ship, notifyChanges: _onChange);
   ShipInfoProvider(this._context, this._ship) {
     _shipModules.unpackModules();
   }
+
+  void _onChange() => notifyListeners();
+  bool isSelected(String key, int index) => _shipModules.isSelected(key, index);
 
   // TODO: some should be final instead of a getter
   String get shipName => GameRepository.instance.stringOf(_ship.name) ?? '';
