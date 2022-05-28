@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:wowsinfo/extensions/list.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_module_selection.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_modules.dart';
+import 'package:wowsinfo/providers/wiki/ship_module_provider.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
 
 void showShipModuleDialog(
@@ -11,28 +13,27 @@ void showShipModuleDialog(
 ) {
   showDialog(
     context: context,
-    builder: (_) => _ShipModuleDialog(
-      modules: modules,
-      selection: selection,
+    builder: (_) => ChangeNotifierProvider<ShipModuleProvider>(
+      create: (_) => ShipModuleProvider(
+        modules: modules,
+        // make a deep copy of the selection
+        selection: ShipModuleSelection.fromSelection(selection),
+      ),
+      builder: (context, child) => _ShipModuleDialog(
+        modules: modules,
+      ),
     ),
   );
 }
 
-class _ShipModuleDialog extends StatefulWidget {
+class _ShipModuleDialog extends StatelessWidget {
   const _ShipModuleDialog({
     Key? key,
     required this.modules,
-    required this.selection,
   }) : super(key: key);
 
   final ShipModuleMap modules;
-  final ShipModuleSelection selection;
 
-  @override
-  _ShipModuleDialogState createState() => _ShipModuleDialogState();
-}
-
-class _ShipModuleDialogState extends State<_ShipModuleDialog> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -45,13 +46,15 @@ class _ShipModuleDialogState extends State<_ShipModuleDialog> {
   }
 
   List<Widget> renderModuleMap(BuildContext context) {
-    final entries = widget.modules.entries;
+    final provider = Provider.of<ShipModuleProvider>(context);
+    final entries = modules.entries;
     return entries.map((entry) {
       final moduleType = entry.key;
       final list = entry.value;
       return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          Container(height: 8),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
             child: Text(
@@ -63,8 +66,9 @@ class _ShipModuleDialogState extends State<_ShipModuleDialog> {
             buildModuleListTile(
               context,
               module.key,
-              widget.selection.isSelected(moduleType, module.key),
+              provider.isSelected(moduleType, module.key),
               module.value,
+              provider.updateSelection,
             ),
           // add divider if this is not the last module
           if (entry.key != entries.last.key) const Divider(),
@@ -87,19 +91,19 @@ class _ShipModuleDialogState extends State<_ShipModuleDialog> {
     int index,
     bool selected,
     ShipModuleHolder module,
+    void Function(ShipModuleType, int) onChange,
   ) {
     final info = module.module!;
-    final selection = widget.selection;
     final type = module.type;
     return ListTile(
       leading: Checkbox(
         value: selected,
-        onChanged: (_) => selection.updateSelected(type, index),
+        onChanged: (_) => onChange(type, index),
       ),
       title: Text(GameRepository.instance.stringOf(info.name) ?? ''),
       subtitle: Text(info.cost.costCr.toString()),
       trailing: Text('${info.cost.costXp} XP'),
-      onTap: () => selection.updateSelected(type, index),
+      onTap: () => onChange(type, index),
     );
   }
 }

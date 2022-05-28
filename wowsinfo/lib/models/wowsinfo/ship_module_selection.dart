@@ -35,6 +35,26 @@ class ShipModuleSelection {
   int get torpedoBomberIndex => _selectedTorpedoBomber;
   int get diveBomberIndex => _selectedDiveBomber;
 
+  ShipModuleSelection();
+
+  /// Copy from another [selection]
+  ShipModuleSelection.fromSelection(ShipModuleSelection selection) {
+    _selectedHull = selection.hullIndex;
+    _selectedGun = selection.gunIndex;
+    _selectedSecondary = selection.secondaryIndex;
+    _selectedTorp = selection.torpIndex;
+    _selectedPinger = selection.pingerIndex;
+    _selectedFireControl = selection.fireControlIndex;
+    _selectedEngine = selection.engineIndex;
+    _selectedAirSupport = selection.airSupportIndex;
+    _selectedDepthCharge = selection.depthChargeIndex;
+
+    _selectedFighter = selection.fighterIndex;
+    _selectedSkipBomber = selection.skipBomberIndex;
+    _selectedTorpedoBomber = selection.torpedoBomberIndex;
+    _selectedDiveBomber = selection.diveBomberIndex;
+  }
+
   /// Check if the module of [type] at [index] is selected
   bool isSelected(ShipModuleType type, int index) {
     switch (type) {
@@ -73,7 +93,7 @@ class ShipModuleSelection {
 
   /// Update selected module [index] based on [type].
   /// Same selection will be ignored.
-  void updateSelected(ShipModuleType type, int index) {
+  void updateSelection(ShipModuleType type, int index) {
     switch (type) {
       case ShipModuleType.hull:
         if (_selectedHull == index) return;

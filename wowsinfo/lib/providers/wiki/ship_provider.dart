@@ -8,7 +8,8 @@ import 'package:wowsinfo/widgets/shared/filter_ship_dialog.dart';
 /// Provides the entire ship list and filter it with the given [ShipFilter]
 class ShipProvider with ChangeNotifier {
   final BuildContext _context;
-  ShipProvider(this._context);
+  final bool _special;
+  ShipProvider(this._context, this._special);
 
   static const _specialGroups = [
     'preserved',
@@ -17,8 +18,8 @@ class ShipProvider with ChangeNotifier {
     'unavailable'
   ];
 
-  final _ships = GameRepository.instance.shipList.where((ship) {
-    return _specialGroups.contains(ship.group) == false;
+  late final _ships = GameRepository.instance.shipList.where((ship) {
+    return _specialGroups.contains(ship.group) == _special;
   }).toList();
   final _logger = Logger('ShipProvider');
   List<Ship>? _filteredShips;

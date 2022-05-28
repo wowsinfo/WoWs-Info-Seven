@@ -138,6 +138,10 @@ class ShipModuleInfo {
         ),
       );
 
+  int compareTo(ShipModuleInfo other) {
+    return index - other.index;
+  }
+
   @override
   String toString() {
     return 'ShipModule{cost: $cost, index: $index, components: $components}';
@@ -303,7 +307,7 @@ class HullInfo {
     required this.mobility,
   });
 
-  final double health;
+  final num health;
   final double? protection;
   final VisibilityInfo visibility;
   final MobilityInfo mobility;
@@ -324,9 +328,9 @@ class MobilityInfo {
     required this.rudderTime,
   });
 
-  final double speed;
-  final double turningRadius;
-  final double rudderTime;
+  final num speed;
+  final num turningRadius;
+  final num rudderTime;
 
   factory MobilityInfo.fromJson(Map<String, dynamic> json) => MobilityInfo(
         speed: json['speed'],

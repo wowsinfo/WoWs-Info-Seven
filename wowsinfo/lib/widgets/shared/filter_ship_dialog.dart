@@ -20,24 +20,18 @@ void showFilterShipDialog(
   );
 }
 
-class _ShipFilterDialog extends StatefulWidget {
-  const _ShipFilterDialog({
+class _ShipFilterDialog extends StatelessWidget {
+  _ShipFilterDialog({
     Key? key,
     required this.onFilter,
   }) : super(key: key);
 
   final Function(ShipFilter) onFilter;
-
-  @override
-  _ShipFilterDialogState createState() => _ShipFilterDialogState();
-}
-
-class _ShipFilterDialogState extends State<_ShipFilterDialog> {
   final nameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<FilterShipProvider>(context, listen: false);
+    final provider = Provider.of<FilterShipProvider>(context);
     return Dialog(
       child: SingleChildScrollView(
         child: ConstrainedBox(
@@ -58,11 +52,11 @@ class _ShipFilterDialogState extends State<_ShipFilterDialog> {
               ),
               const Divider(),
               // render a list of names in chips and we need to animate when we move a chip up to be selected
-              renderTierList(),
+              renderTierList(context),
               const Divider(),
-              renderTypeList(),
+              renderTypeList(context),
               const Divider(),
-              renderRegionList(),
+              renderRegionList(context),
               const Divider(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -73,7 +67,7 @@ class _ShipFilterDialogState extends State<_ShipFilterDialog> {
                   ),
                   IconButton(
                     onPressed: () {
-                      widget.onFilter(provider.onFilter(nameController.text));
+                      onFilter(provider.onFilter(nameController.text));
                       Navigator.of(context).pop();
                     },
                     icon: const Icon(Icons.check),
@@ -87,7 +81,7 @@ class _ShipFilterDialogState extends State<_ShipFilterDialog> {
     );
   }
 
-  Widget renderRegionList() {
+  Widget renderRegionList(BuildContext context) {
     final provider = Provider.of<FilterShipProvider>(context);
     return _FilterList(
       filterList: provider.regionList,
@@ -96,7 +90,7 @@ class _ShipFilterDialogState extends State<_ShipFilterDialog> {
     );
   }
 
-  Widget renderTypeList() {
+  Widget renderTypeList(BuildContext context) {
     final provider = Provider.of<FilterShipProvider>(context);
     return _FilterList(
       filterList: provider.typeList,
@@ -105,7 +99,7 @@ class _ShipFilterDialogState extends State<_ShipFilterDialog> {
     );
   }
 
-  Widget renderTierList() {
+  Widget renderTierList(BuildContext context) {
     final provider = Provider.of<FilterShipProvider>(context);
     return _FilterList(
       filterList: provider.tierList,

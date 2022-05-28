@@ -320,7 +320,26 @@ class ShipModules {
       }
     }
 
+    // save the sorting if there are no alternative modules
+    if (canChangeModules) _sortModuleLists();
     _logger.fine('Unpacked modules of ${_ship.index}');
+  }
+
+  /// Sort all lists to make sure the order is always correct
+  void _sortModuleLists() {
+    _hullInfo.sort((a, b) => a.compareTo(b));
+    _secondaryInfo.sort((a, b) => a.compareTo(b));
+    _pingerInfo.sort((a, b) => a.compareTo(b));
+    _torpInfo.sort((a, b) => a.compareTo(b));
+    _fireControlInfo.sort((a, b) => a.compareTo(b));
+    _engineInfo.sort((a, b) => a.compareTo(b));
+    _skipBomberInfo.sort((a, b) => a.compareTo(b));
+    _torpedoBomberInfo.sort((a, b) => a.compareTo(b));
+    _diveBomberInfo.sort((a, b) => a.compareTo(b));
+    _fighterInfo.sort((a, b) => a.compareTo(b));
+    _airSupportInfo.sort((a, b) => a.compareTo(b));
+    _depthChargeInfo.sort((a, b) => a.compareTo(b));
+    _logger.fine('Sorted all module lists');
   }
 }
 
@@ -335,4 +354,10 @@ class ShipModuleHolder<T> {
   final ShipModuleInfo? module;
   final T data;
   final ShipModuleType type;
+
+  int compareTo(ShipModuleHolder other) {
+    if (other.module == null) return 0;
+    if (module == null) return 0;
+    return module!.compareTo(other.module!);
+  }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wowsinfo/foundation/app.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
 import 'package:wowsinfo/widgets/page/wiki/achievement_page.dart';
-import 'package:wowsinfo/widgets/page/wiki/ship_page.dart';
+import 'package:wowsinfo/widgets/page/wiki/ship/ship_page.dart';
 import 'package:wowsinfo/widgets/page/wiki/upgrade_page.dart';
 import 'package:wowsinfo/widgets/shared/filter_ship_dialog.dart';
 
@@ -67,6 +67,16 @@ class _DebugPageState extends State<DebugPage> {
                   );
                 },
                 child: const Text('Ships'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    App.platformPageRoute(
+                      builder: (_) => const ShipPage(special: true),
+                    ),
+                  );
+                },
+                child: const Text('Ships (Special)'),
               ),
               TextButton(
                 onPressed: () {
