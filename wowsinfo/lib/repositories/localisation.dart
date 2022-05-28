@@ -31,7 +31,7 @@ class Localisation {
   final _logger = Logger('Localisation');
 
   /// This is a list of game languages World of Warships supports.
-  static const _validGameLanguages = [
+  static const validGameLanguages = [
     'cs',
     'de',
     'en',
@@ -49,10 +49,14 @@ class Localisation {
     'th',
     'tr',
     'uk',
-    'zh', // This is used in the mainland server
+    'zh', // TODO: do we need this or simply use zh_sg instead?
     'zh_sg',
     'zh_tw',
   ];
+
+  /// This is a list of supported game languages in the app.
+  /// TODO: we can add more languages, but it will dramatically increase the size of the app.
+  late final supportedGameLanguages = _lang.keys.toList(growable: false);
 
   late final Map<String, Map<String, String>> _lang;
   late String _gameLang;
@@ -79,8 +83,7 @@ class Localisation {
     _lang = (langObject as Map).map((key, value) {
       return MapEntry(key, (value as Map).cast<String, String>());
     });
-    // _gameLang = _decideLang(Platform.localeName);
-    _gameLang = 'zh_sg';
+    _gameLang = _decideLang(Platform.localeName);
     timer.log(message: 'Decoded lang.json');
 
     _initialised = true;
@@ -90,13 +93,13 @@ class Localisation {
   String _decideLang(String lang) {
     _logger.info('System locale is $lang');
     final langCode = lang.toLowerCase();
-    if (_validGameLanguages.contains(langCode)) {
+    if (validGameLanguages.contains(langCode)) {
       return langCode;
     }
 
     if (langCode.contains('_')) {
       final localeCode = langCode.split('_')[0];
-      if (_validGameLanguages.contains(localeCode)) {
+      if (validGameLanguages.contains(localeCode)) {
         _logger.info('Using locale `$localeCode`');
         return localeCode;
       }
@@ -108,7 +111,7 @@ class Localisation {
 
   /// Update the data language. The app language won't change.
   void updateDataLanguage(String language) {
-    if (!_validGameLanguages.contains(language)) {
+    if (!validGameLanguages.contains(language)) {
       _logger.severe('Invalid language $language');
       return;
     }
@@ -117,6 +120,7 @@ class Localisation {
       return;
     }
 
+    _logger.info('Updating data language to $language');
     _gameLang = language;
   }
 

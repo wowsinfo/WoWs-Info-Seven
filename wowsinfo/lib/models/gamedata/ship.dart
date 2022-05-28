@@ -381,7 +381,7 @@ class WeaponInfo {
     required this.count,
   });
 
-  final double reload;
+  final num reload;
   final double rotation;
   final int each;
   final List<String> ammo;

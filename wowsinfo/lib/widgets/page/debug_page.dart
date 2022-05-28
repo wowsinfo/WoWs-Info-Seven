@@ -99,6 +99,19 @@ class _DebugPageState extends State<DebugPage> {
                 child: const Text('Ship Filter Dialog'),
               ),
             ],
+          ),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text('Game Languages'),
+              for (final lang in Localisation.instance.supportedGameLanguages)
+                TextButton(
+                  onPressed: () => Localisation.instance.updateDataLanguage(
+                    lang,
+                  ),
+                  child: Text(lang),
+                ),
+            ],
           )
         ],
       ),
