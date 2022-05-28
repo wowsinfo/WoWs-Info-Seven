@@ -1,9 +1,94 @@
 import 'package:logging/logging.dart';
 import 'package:wowsinfo/models/gamedata/aircraft.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
+import 'package:wowsinfo/models/wowsinfo/ship_module_selection.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
 
-typedef ShipModuleMap<T> = Map<String, List<ShipModuleHolder<T>>>;
+typedef ShipModuleMap<T> = Map<ShipModuleType, List<ShipModuleHolder<T>>>;
+
+const _langIDS = 'IDS_MODULE_TYPE_';
+
+/// All ship module types.
+enum ShipModuleType {
+  hull,
+  gun,
+  secondary,
+  torpedo,
+  pinger,
+  fireControl,
+  engine,
+  airSupport,
+  depthCharge,
+  fighter,
+  skipBomber,
+  torpedoBomber,
+  diveBomber,
+  unknown;
+
+  /// The key from the GameData
+  String get key {
+    switch (this) {
+      case ShipModuleType.hull:
+        return 'hull';
+      case ShipModuleType.gun:
+        return 'artillery';
+      case ShipModuleType.secondary:
+        return 'atba';
+      case ShipModuleType.torpedo:
+        return 'torpedoes';
+      case ShipModuleType.pinger:
+        return 'pinger';
+      case ShipModuleType.fireControl:
+        return 'fireControl';
+      case ShipModuleType.engine:
+        return 'engine';
+      case ShipModuleType.airSupport:
+        return 'airSupport';
+      case ShipModuleType.depthCharge:
+        return 'depthCharges';
+      case ShipModuleType.fighter:
+      case ShipModuleType.skipBomber:
+      case ShipModuleType.torpedoBomber:
+      case ShipModuleType.diveBomber:
+        return ''; // aircrafts are special so they don't need a key
+      case ShipModuleType.unknown:
+        throw ArgumentError('Unknown module type: $this');
+    }
+  }
+
+  /// The module type's name.
+  String? get name {
+    switch (this) {
+      case ShipModuleType.hull:
+        return GameRepository.instance.stringOf('${_langIDS}HULL');
+      case ShipModuleType.gun:
+        return GameRepository.instance.stringOf('${_langIDS}ARTILLERY');
+      case ShipModuleType.secondary:
+        return GameRepository.instance.stringOf('${_langIDS}SECONDARYWEAPONS');
+      case ShipModuleType.torpedo:
+        return GameRepository.instance.stringOf('${_langIDS}TORPEDOES');
+      case ShipModuleType.pinger:
+        return GameRepository.instance.stringOf('${_langIDS}SONAR');
+      case ShipModuleType.fireControl:
+        return GameRepository.instance.stringOf('${_langIDS}SUO');
+      case ShipModuleType.engine:
+        return GameRepository.instance.stringOf('${_langIDS}ENGINE');
+      case ShipModuleType.depthCharge:
+      case ShipModuleType.airSupport:
+        return '';
+      case ShipModuleType.fighter:
+        return GameRepository.instance.stringOf('${_langIDS}FIGHTER');
+      case ShipModuleType.skipBomber:
+        return GameRepository.instance.stringOf('${_langIDS}SKIPBOMBER');
+      case ShipModuleType.torpedoBomber:
+        return GameRepository.instance.stringOf('${_langIDS}TORPEDOBOMBER');
+      case ShipModuleType.diveBomber:
+        return GameRepository.instance.stringOf('${_langIDS}DIVEBOMBER');
+      case ShipModuleType.unknown:
+        throw ArgumentError('Unknown module type: $this');
+    }
+  }
+}
 
 class ShipModules {
   final _logger = Logger('ShipModules');
@@ -30,21 +115,8 @@ class ShipModules {
   final List<ShipModuleHolder<Aircraft>> _torpedoBomberInfo = [];
   final List<ShipModuleHolder<Aircraft>> _diveBomberInfo = [];
 
-  // selected modules by default 0
-  int _selectedHull = 0;
-  int _selectedGun = 0;
-  int _selectedSecondary = 0;
-  int _selectedTorp = 0;
-  int _selectedPinger = 0;
-  int _selectedFireControl = 0;
-  int _selectedEngine = 0;
-  int _selectedAirSupport = 0;
-  int _selectedDepthCharge = 0;
-
-  int _selectedFighter = 0;
-  int _selectedSkipBomber = 0;
-  int _selectedTorpedoBomber = 0;
-  int _selectedDiveBomber = 0;
+  ShipModuleSelection _moduleSelection = ShipModuleSelection();
+  ShipModuleSelection get selection => _moduleSelection;
 
   ShipModuleHolder<T>? _valueAt<T>(List<ShipModuleHolder<T>> list, int index) {
     if (index < 0 || index >= list.length) return null;
@@ -67,167 +139,54 @@ class ShipModules {
   /// Get all modules with at least 2 items in it.
   ShipModuleMap _makeModuleList() {
     final ShipModuleMap moduleMap = {};
-    if (_hullInfo.length > 1) moduleMap['hull'] = _hullInfo;
-    if (_gunCount > 1) moduleMap['gun'] = _gunInfo;
-    if (_torpCount > 1) moduleMap['torp'] = _torpInfo;
+    if (_hullInfo.length > 1) moduleMap[ShipModuleType.hull] = _hullInfo;
+    if (_gunCount > 1) moduleMap[ShipModuleType.gun] = _gunInfo;
+    if (_torpCount > 1) moduleMap[ShipModuleType.torpedo] = _torpInfo;
     if (_fireControlInfo.length > 1) {
-      moduleMap['fire control'] = _fireControlInfo;
+      moduleMap[ShipModuleType.fireControl] = _fireControlInfo;
     }
-    if (_engineInfo.length > 1) moduleMap['engine'] = _engineInfo;
-    if (_fighterInfo.length > 1) moduleMap['fighter'] = _fighterInfo;
-    if (_skipBomberInfo.length > 1) moduleMap['skip bomber'] = _skipBomberInfo;
+    if (_engineInfo.length > 1) moduleMap[ShipModuleType.engine] = _engineInfo;
+    if (_fighterInfo.length > 1) {
+      moduleMap[ShipModuleType.fighter] = _fighterInfo;
+    }
+    if (_skipBomberInfo.length > 1) {
+      moduleMap[ShipModuleType.skipBomber] = _skipBomberInfo;
+    }
     if (_torpedoBomberInfo.length > 1) {
-      moduleMap['torp bomber'] = _torpedoBomberInfo;
+      moduleMap[ShipModuleType.torpedoBomber] = _torpedoBomberInfo;
     }
-    if (_diveBomberInfo.length > 1) moduleMap['dive bomber'] = _diveBomberInfo;
+    if (_diveBomberInfo.length > 1) {
+      moduleMap[ShipModuleType.diveBomber] = _diveBomberInfo;
+    }
     return moduleMap;
   }
 
-  HullInfo? get hullInfo => _valueAt(_hullInfo, _selectedHull)?.data;
-  GunInfo? get gunInfo => _valueAt(_gunInfo, _selectedGun)?.data;
+  HullInfo? get hullInfo =>
+      _valueAt(_hullInfo, _moduleSelection.hullIndex)?.data;
+  GunInfo? get gunInfo => _valueAt(_gunInfo, _moduleSelection.gunIndex)?.data;
   GunInfo? get secondaryInfo =>
-      _valueAt(_secondaryInfo, _selectedSecondary)?.data;
-  TorpedoInfo? get torpedoInfo => _valueAt(_torpInfo, _selectedTorp)?.data;
-  EngineInfo? get engineInfo => _valueAt(_engineInfo, _selectedEngine)?.data;
-  PingerInfo? get pingerInfo => _valueAt(_pingerInfo, _selectedPinger)?.data;
+      _valueAt(_secondaryInfo, _moduleSelection.secondaryIndex)?.data;
+  TorpedoInfo? get torpedoInfo =>
+      _valueAt(_torpInfo, _moduleSelection.torpIndex)?.data;
+  EngineInfo? get engineInfo =>
+      _valueAt(_engineInfo, _moduleSelection.engineIndex)?.data;
+  PingerInfo? get pingerInfo =>
+      _valueAt(_pingerInfo, _moduleSelection.pingerIndex)?.data;
   FireControlInfo? get fireControlInfo =>
-      _valueAt(_fireControlInfo, _selectedFireControl)?.data;
+      _valueAt(_fireControlInfo, _moduleSelection.fireControlIndex)?.data;
   AirSupportInfo? get airSupportInfo =>
-      _valueAt(_airSupportInfo, _selectedAirSupport)?.data;
+      _valueAt(_airSupportInfo, _moduleSelection.airSupportIndex)?.data;
   DepthChargeInfo? get depthChargeInfo =>
-      _valueAt(_depthChargeInfo, _selectedDepthCharge)?.data;
+      _valueAt(_depthChargeInfo, _moduleSelection.depthChargeIndex)?.data;
 
-  Aircraft? get fighterInfo => _valueAt(_fighterInfo, _selectedFighter)?.data;
+  Aircraft? get fighterInfo =>
+      _valueAt(_fighterInfo, _moduleSelection.fighterIndex)?.data;
   Aircraft? get skipBomberInfo =>
-      _valueAt(_skipBomberInfo, _selectedSkipBomber)?.data;
+      _valueAt(_skipBomberInfo, _moduleSelection.skipBomberIndex)?.data;
   Aircraft? get torpedoBomberInfo =>
-      _valueAt(_torpedoBomberInfo, _selectedTorpedoBomber)?.data;
+      _valueAt(_torpedoBomberInfo, _moduleSelection.torpedoBomberIndex)?.data;
   Aircraft? get diveBomberInfo =>
-      _valueAt(_diveBomberInfo, _selectedDiveBomber)?.data;
-
-  bool isSelected(String key, int index) {
-    switch (key) {
-      case 'engine':
-        return _selectedEngine == index;
-      case 'artillery':
-        return _selectedGun == index;
-      case 'atba':
-        return _selectedSecondary == index;
-      case 'torpedoes':
-        return _selectedTorp == index;
-      case 'pinger':
-        return _selectedPinger == index;
-      case 'fireControl':
-        return _selectedFireControl == index;
-      case 'airSupport':
-        return _selectedAirSupport == index;
-      case 'depthCharges':
-        return _selectedDepthCharge == index;
-      case 'fighter':
-        return _selectedFighter == index;
-      case 'skipBomber':
-        return _selectedSkipBomber == index;
-      case 'torpedoBomber':
-        return _selectedTorpedoBomber == index;
-      case 'diveBomber':
-        return _selectedDiveBomber == index;
-      case 'hull':
-        return _selectedHull == index;
-      default:
-        throw Exception('Unknown key: $key');
-    }
-  }
-
-  void updateHull(int index) {
-    if (_selectedHull == index) return;
-    _selectedHull = index;
-    _logger.fine('updateHull: $index');
-    notifyChanges();
-  }
-
-  void updateGun(int index) {
-    if (_selectedGun == index) return;
-    _selectedGun = index;
-    _logger.fine('updateGun: $index');
-    notifyChanges();
-  }
-
-  void updateSecondary(int index) {
-    if (_selectedSecondary == index) return;
-    _selectedSecondary = index;
-    _logger.fine('updateSecondary: $index');
-    notifyChanges();
-  }
-
-  void updateTorpedo(int index) {
-    if (_selectedTorp == index) return;
-    _selectedTorp = index;
-    _logger.fine('updateTorpedo: $index');
-    notifyChanges();
-  }
-
-  void updateEngine(int index) {
-    if (_selectedEngine == index) return;
-    _selectedEngine = index;
-    _logger.fine('updateEngine: $index');
-    notifyChanges();
-  }
-
-  void updatePinger(int index) {
-    if (_selectedPinger == index) return;
-    _selectedPinger = index;
-    _logger.fine('updatePinger: $index');
-    notifyChanges();
-  }
-
-  void updateFireControl(int index) {
-    if (_selectedFireControl == index) return;
-    _selectedFireControl = index;
-    _logger.fine('updateFireControl: $index');
-    notifyChanges();
-  }
-
-  void updateAirSupport(int index) {
-    if (_selectedAirSupport == index) return;
-    _selectedAirSupport = index;
-    _logger.fine('updateAirSupport: $index');
-    notifyChanges();
-  }
-
-  void updateDepthCharge(int index) {
-    if (_selectedDepthCharge == index) return;
-    _selectedDepthCharge = index;
-    _logger.fine('updateDepthCharge: $index');
-    notifyChanges();
-  }
-
-  void updateFighter(int index) {
-    if (_selectedFighter == index) return;
-    _selectedFighter = index;
-    _logger.fine('updateFighter: $index');
-    notifyChanges();
-  }
-
-  void updateSkipBomber(int index) {
-    if (_selectedSkipBomber == index) return;
-    _selectedSkipBomber = index;
-    _logger.fine('updateSkipBomber: $index');
-    notifyChanges();
-  }
-
-  void updateTorpedoBomber(int index) {
-    if (_selectedTorpedoBomber == index) return;
-    _selectedTorpedoBomber = index;
-    _logger.fine('updateTorpedoBomber: $index');
-    notifyChanges();
-  }
-
-  void updateDiveBomber(int index) {
-    if (_selectedDiveBomber == index) return;
-    _selectedDiveBomber = index;
-    _logger.fine('updateDiveBomber: $index');
-    notifyChanges();
-  }
+      _valueAt(_diveBomberInfo, _moduleSelection.diveBomberIndex)?.data;
 
   void unpackModules() {
     final shipModules = _ship.components;
@@ -239,34 +198,32 @@ class ShipModules {
 
         // add a temp helper function
         void addModule<T>(
-          String key,
+          ShipModuleType type,
           T Function(Map<String, dynamic>) creator,
           void Function(ShipModuleHolder<T>) add,
-          void Function(int) onSelect,
         ) {
-          final moduleList = components[key];
+          final moduleList = components[type.key];
           if (moduleList == null || moduleList.isEmpty) return;
           final info = shipModules[moduleList.first];
           final holder = ShipModuleHolder<T>(
             module: module,
-            name: key,
+            type: type,
             data: creator(info),
-            onSelect: onSelect,
           );
           add(holder);
         }
 
         switch (moduleType) {
           case '_Hull':
-            addModule('hull', HullInfo.fromJson, _hullInfo.add, updateHull);
-            addModule('depthCharges', DepthChargeInfo.fromJson,
-                _depthChargeInfo.add, updateDepthCharge);
-            addModule('airSupport', AirSupportInfo.fromJson,
-                _airSupportInfo.add, updateAirSupport);
+            addModule(ShipModuleType.hull, HullInfo.fromJson, _hullInfo.add);
+            addModule(ShipModuleType.depthCharge, DepthChargeInfo.fromJson,
+                _depthChargeInfo.add);
+            addModule(ShipModuleType.airSupport, AirSupportInfo.fromJson,
+                _airSupportInfo.add);
             addModule(
-                'atba', GunInfo.fromJson, _secondaryInfo.add, updateSecondary);
+                ShipModuleType.secondary, GunInfo.fromJson, _secondaryInfo.add);
             addModule(
-                'pinger', PingerInfo.fromJson, _pingerInfo.add, updatePinger);
+                ShipModuleType.pinger, PingerInfo.fromJson, _pingerInfo.add);
 
             // There can be multiple of guns & torps. However, they can be the
             // same although having different names. It is only accurate from
@@ -275,26 +232,24 @@ class ShipModules {
             _torpCount = components['torpedoes']?.length ?? 0;
             break;
           case '_Artillery':
-            addModule(
-                'artillery', GunInfo.fromJson, _secondaryInfo.add, updateGun);
+            addModule(ShipModuleType.gun, GunInfo.fromJson, _secondaryInfo.add);
             break;
           case '_Torpedoes':
-            addModule('torpedoes', TorpedoInfo.fromJson, _torpInfo.add,
-                updateTorpedo);
+            addModule(
+                ShipModuleType.torpedo, TorpedoInfo.fromJson, _torpInfo.add);
             break;
           case '_Suo':
-            addModule('fireControl', FireControlInfo.fromJson,
-                _fireControlInfo.add, updateFireControl);
+            addModule(ShipModuleType.fireControl, FireControlInfo.fromJson,
+                _fireControlInfo.add);
             break;
           case '_Engine':
-            final moduleList = components['engine'];
+            final moduleList = components[ShipModuleType.engine.key];
             if (moduleList == null || moduleList.isEmpty) return;
             final info = shipModules[moduleList.first];
             final holder = ShipModuleHolder(
-              name: 'engine',
+              type: ShipModuleType.engine,
               module: module,
               data: EngineInfo.fromJson(info),
-              onSelect: updateEngine,
             );
             _engineInfo.add(holder);
             break;
@@ -305,7 +260,8 @@ class ShipModules {
             // add all aircrafts' information
             final plane = components.values.first.first;
             // NOTE: we need the first one only, some ships have broken
-            // entries like Midway. TODO: we should remove additional ones
+            // entries like Midway. TODO: we should remove additional ones from
+            // the game data in the future.
             final key = List<String>.from(shipModules[plane]).first;
             final info = GameRepository.instance.aircraftOf(key);
             if (info == null) {
@@ -318,37 +274,33 @@ class ShipModules {
             switch (moduleType) {
               case '_SkipBomber':
                 final holder = ShipModuleHolder(
-                  name: 'skipBomber',
+                  type: ShipModuleType.skipBomber,
                   module: module,
                   data: info,
-                  onSelect: updateSkipBomber,
                 );
                 _skipBomberInfo.add(holder);
                 break;
               case '_TorpedoBomber':
                 final holder = ShipModuleHolder(
-                  name: 'torpedoBomber',
+                  type: ShipModuleType.torpedoBomber,
                   module: module,
                   data: info,
-                  onSelect: updateTorpedoBomber,
                 );
                 _torpedoBomberInfo.add(holder);
                 break;
               case '_DiveBomber':
                 final holder = ShipModuleHolder(
-                  name: 'diveBomber',
+                  type: ShipModuleType.diveBomber,
                   module: module,
                   data: info,
-                  onSelect: updateDiveBomber,
                 );
                 _diveBomberInfo.add(holder);
                 break;
               case '_Fighter':
                 final holder = ShipModuleHolder(
-                  name: 'fighter',
+                  type: ShipModuleType.fighter,
                   module: module,
                   data: info,
-                  onSelect: updateFighter,
                 );
                 _fighterInfo.add(holder);
                 break;
@@ -374,15 +326,13 @@ class ShipModules {
 
 /// A data holder with a [ShipModuleInfo] and the data [T].
 class ShipModuleHolder<T> {
-  ShipModuleHolder({
+  const ShipModuleHolder({
     this.module,
     required this.data,
-    required this.name,
-    required this.onSelect,
+    required this.type,
   });
 
   final ShipModuleInfo? module;
   final T data;
-  final String name;
-  final void Function(int) onSelect;
+  final ShipModuleType type;
 }

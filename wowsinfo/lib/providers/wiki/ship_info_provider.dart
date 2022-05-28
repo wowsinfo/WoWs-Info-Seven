@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:wowsinfo/models/gamedata/game_info.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
+import 'package:wowsinfo/models/wowsinfo/ship_module_selection.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_modules.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
 
@@ -17,7 +18,8 @@ class ShipInfoProvider with ChangeNotifier {
   }
 
   void _onChange() => notifyListeners();
-  bool isSelected(String key, int index) => _shipModules.isSelected(key, index);
+
+  ShipModuleSelection get selection => _shipModules.selection;
 
   // TODO: some should be final instead of a getter
   String get shipName => GameRepository.instance.stringOf(_ship.name) ?? '';

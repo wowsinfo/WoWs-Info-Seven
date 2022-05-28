@@ -33,11 +33,11 @@ class TimeStampDate {
   /// Compare [date] with [other]
   int compareTo(TimeStampDate other) => timeStamp - other.timeStamp;
 
-  /// Check if within [d] from now
+  /// Check if within [duration] from now
   bool isWithinDurationFromNow(Duration duration) =>
       isWithinDurationFrom(DateTime.now(), duration);
 
-  /// Check if within [d] from [date]
+  /// Check if within [duration] from [date]
   bool isWithinDurationFrom(DateTime begin, Duration duration) =>
       date.isAfter(begin.subtract(duration));
 

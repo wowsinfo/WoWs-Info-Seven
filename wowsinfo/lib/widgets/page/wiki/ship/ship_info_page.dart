@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
-import 'package:wowsinfo/extensions/list.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
+import 'package:wowsinfo/models/wowsinfo/ship_module_selection.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_modules.dart';
 import 'package:wowsinfo/providers/wiki/ship_info_provider.dart';
-import 'package:wowsinfo/repositories/game_repository.dart';
 import 'package:wowsinfo/widgets/page/wiki/ship/ship_module_dialog.dart';
 import 'package:wowsinfo/widgets/shared/text_with_caption.dart';
 import 'package:wowsinfo/widgets/shared/wiki/ship_icon.dart';
@@ -59,6 +58,7 @@ class _ShipInfoPageState extends State<ShipInfoPage> {
                   builder: (context, value, child) => _ShipModuleButton(
                     title: 'Change Ship Modules',
                     shipModules: value.moduleList,
+                    selection: value.selection,
                   ),
                 ),
               if (_provider.renderHull)
@@ -126,10 +126,12 @@ class _ShipModuleButton extends StatelessWidget {
     Key? key,
     required this.title,
     required this.shipModules,
+    required this.selection,
   }) : super(key: key);
 
   final String title;
   final ShipModuleMap shipModules;
+  final ShipModuleSelection selection;
 
   @override
   Widget build(BuildContext context) {
@@ -137,7 +139,7 @@ class _ShipModuleButton extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: ElevatedButton(
         child: Text(title),
-        onPressed: () => showShipModuleDialog(context, shipModules),
+        onPressed: () => showShipModuleDialog(context, shipModules, selection),
       ),
     );
   }
