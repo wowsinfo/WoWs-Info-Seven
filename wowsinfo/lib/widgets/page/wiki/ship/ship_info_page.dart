@@ -6,6 +6,7 @@ import 'package:wowsinfo/models/gamedata/ship.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_modules.dart';
 import 'package:wowsinfo/providers/wiki/ship_info_provider.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
+import 'package:wowsinfo/widgets/page/wiki/ship/ship_module_dialog.dart';
 import 'package:wowsinfo/widgets/shared/text_with_caption.dart';
 import 'package:wowsinfo/widgets/shared/wiki/ship_icon.dart';
 
@@ -136,79 +137,8 @@ class _ShipModuleButton extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: ElevatedButton(
         child: Text(title),
-        onPressed: () {
-          showDialog(
-            context: context,
-            builder: (_) {
-              return Dialog(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: renderModuleMap(context),
-                  ),
-                ),
-              );
-            },
-          );
-        },
+        onPressed: () => showShipModuleDialog(context, shipModules),
       ),
-    );
-  }
-
-  List<Widget> renderModuleMap(BuildContext context) {
-    final provider = Provider.of<ShipInfoProvider>(context, listen: false);
-    final entries = shipModules.entries;
-    return entries.map((entry) {
-      final moduleName = entry.key;
-      final list = entry.value;
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-            child: Text(
-              moduleName,
-              style: Theme.of(context).textTheme.headline6,
-            ),
-          ),
-          for (final module in list.enumerate())
-            buildModuleListTile(
-              context,
-              module.key,
-              provider.isSelected(module.value.name, module.key),
-              module.value,
-            ),
-          // add divider if this is not the last module
-          if (entry.key != entries.last.key) const Divider(),
-          // add the update button to dimiss the dialog
-          if (entry.key == entries.last.key)
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: ElevatedButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: const Text('Close'),
-              ),
-            ),
-        ],
-      );
-    }).toList(growable: false);
-  }
-
-  ListTile buildModuleListTile(
-    BuildContext context,
-    int index,
-    bool selected,
-    ShipModuleHolder module,
-  ) {
-    final info = module.module!;
-    return ListTile(
-      leading: Checkbox(
-        value: selected,
-        onChanged: (_) => module.onSelect(index),
-      ),
-      title: Text(GameRepository.instance.stringOf(info.name) ?? ''),
-      subtitle: Text(info.cost.costCr.toString()),
-      trailing: Text('${info.cost.costXp} XP'),
-      onTap: () => module.onSelect(index),
     );
   }
 }
