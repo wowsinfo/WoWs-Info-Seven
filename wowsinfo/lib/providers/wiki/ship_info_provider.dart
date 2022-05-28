@@ -12,14 +12,17 @@ class ShipInfoProvider with ChangeNotifier {
 
   final BuildContext _context;
   final Ship _ship;
-  late final _shipModules = ShipModules(_ship, notifyChanges: _onChange);
+  late final _shipModules = ShipModules(_ship);
   ShipInfoProvider(this._context, this._ship) {
     _shipModules.unpackModules();
   }
 
-  void _onChange() => notifyListeners();
-
   ShipModuleSelection get selection => _shipModules.selection;
+  void updateSelection(ShipModuleSelection selection) {
+    _shipModules.updateSelection(selection);
+    _logger.fine('Updated ship module selection');
+    notifyListeners();
+  }
 
   // TODO: some should be final instead of a getter
   String get shipName => GameRepository.instance.stringOf(_ship.name) ?? '';
@@ -44,4 +47,11 @@ class ShipInfoProvider with ChangeNotifier {
 
   GunInfo? get _mainGunInfo => _shipModules.gunInfo;
   bool get renderMainGun => _mainGunInfo != null;
+
+  TorpedoInfo? get _torpedoInfo => _shipModules.torpedoInfo;
+  bool get renderTorpedo => _torpedoInfo != null;
+  String get torpedoName =>
+      GameRepository.instance
+          .stringOf('IDS_${_torpedoInfo?.launchers[0].ammo[0]}') ??
+      '';
 }

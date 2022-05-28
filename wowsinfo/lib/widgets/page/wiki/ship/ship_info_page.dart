@@ -66,6 +66,8 @@ class _ShipInfoPageState extends State<ShipInfoPage> {
                   health: _provider.health,
                   protection: _provider.torpedoProtection,
                 ),
+              if (_provider.renderMainGun) Container(),
+              if (_provider.renderTorpedo) Text(_provider.torpedoName),
             ],
           ),
         ),
@@ -135,11 +137,17 @@ class _ShipModuleButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<ShipInfoProvider>(context, listen: false);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: ElevatedButton(
         child: Text(title),
-        onPressed: () => showShipModuleDialog(context, shipModules, selection),
+        onPressed: () => showShipModuleDialog(
+          context,
+          shipModules,
+          selection,
+          (selection) => provider.updateSelection(selection),
+        ),
       ),
     );
   }

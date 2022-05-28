@@ -145,10 +145,15 @@ class GameRepository {
   }
 
   String? stringOf(
-    String key, {
+    String? key, {
     Map<String, dynamic>? constants,
     String? prefix,
   }) {
+    if (key == null) {
+      _logger.severe('Key is null');
+      return null;
+    }
+
     if (_lang[_gameLang] == null) {
       _logger.severe('Language $_gameLang not found');
       return null;

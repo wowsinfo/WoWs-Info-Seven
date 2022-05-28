@@ -10,9 +10,11 @@ void showShipModuleDialog(
   BuildContext context,
   ShipModuleMap modules,
   ShipModuleSelection selection,
+  void Function(ShipModuleSelection) onUpdate,
 ) {
   showDialog(
     context: context,
+    barrierDismissible: false,
     builder: (_) => ChangeNotifierProvider<ShipModuleProvider>(
       create: (_) => ShipModuleProvider(
         modules: modules,
@@ -21,6 +23,7 @@ void showShipModuleDialog(
       ),
       builder: (context, child) => _ShipModuleDialog(
         modules: modules,
+        onUpdate: onUpdate,
       ),
     ),
   );
@@ -30,9 +33,11 @@ class _ShipModuleDialog extends StatelessWidget {
   const _ShipModuleDialog({
     Key? key,
     required this.modules,
+    required this.onUpdate,
   }) : super(key: key);
 
   final ShipModuleMap modules;
+  final void Function(ShipModuleSelection) onUpdate;
 
   @override
   Widget build(BuildContext context) {
@@ -77,8 +82,11 @@ class _ShipModuleDialog extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: ElevatedButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: const Text('Close'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  onUpdate(provider.selection);
+                },
+                child: const Text('Update'),
               ),
             ),
         ],

@@ -94,8 +94,7 @@ class ShipModules {
   final _logger = Logger('ShipModules');
 
   final Ship _ship;
-  final void Function() notifyChanges;
-  ShipModules(this._ship, {required this.notifyChanges});
+  ShipModules(this._ship);
 
   int _gunCount = 0;
   int _torpCount = 0;
@@ -117,6 +116,9 @@ class ShipModules {
 
   ShipModuleSelection _moduleSelection = ShipModuleSelection();
   ShipModuleSelection get selection => _moduleSelection;
+  void updateSelection(ShipModuleSelection selection) {
+    _moduleSelection = selection;
+  }
 
   ShipModuleHolder<T>? _valueAt<T>(List<ShipModuleHolder<T>> list, int index) {
     if (index < 0 || index >= list.length) return null;
@@ -232,7 +234,7 @@ class ShipModules {
             _torpCount = components['torpedoes']?.length ?? 0;
             break;
           case '_Artillery':
-            addModule(ShipModuleType.gun, GunInfo.fromJson, _secondaryInfo.add);
+            addModule(ShipModuleType.gun, GunInfo.fromJson, _gunInfo.add);
             break;
           case '_Torpedoes':
             addModule(
