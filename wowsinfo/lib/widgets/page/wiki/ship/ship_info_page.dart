@@ -5,7 +5,6 @@ import 'package:wowsinfo/extensions/list.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_modules.dart';
 import 'package:wowsinfo/providers/wiki/ship_info_provider.dart';
-import 'package:wowsinfo/providers/wiki/ship_provider.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
 import 'package:wowsinfo/widgets/shared/text_with_caption.dart';
 import 'package:wowsinfo/widgets/shared/wiki/ship_icon.dart';
@@ -133,29 +132,31 @@ class _ShipModuleButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      child: Text(title),
-      onPressed: () {
-        showDialog(
-          context: context,
-          builder: (_) {
-            return Dialog(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: renderModuleMap(context),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: ElevatedButton(
+        child: Text(title),
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (_) {
+              return Dialog(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: renderModuleMap(context),
+                  ),
                 ),
-              ),
-            );
-          },
-        );
-      },
+              );
+            },
+          );
+        },
+      ),
     );
   }
 
   List<Widget> renderModuleMap(BuildContext context) {
     final provider = Provider.of<ShipInfoProvider>(context, listen: false);
     final entries = shipModules.entries;
-    _logger.fine('rerender');
     return entries.map((entry) {
       final moduleName = entry.key;
       final list = entry.value;

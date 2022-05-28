@@ -67,15 +67,19 @@ class ShipModules {
   /// Get all modules with at least 2 items in it.
   ShipModuleMap _makeModuleList() {
     final ShipModuleMap moduleMap = {};
-    if (_hullInfo.length > 1) moduleMap['aaa'] = _hullInfo;
-    if (_gunCount > 1) moduleMap['bbb'] = _gunInfo;
-    if (_torpCount > 1) moduleMap['ccc'] = _torpInfo;
-    if (_fireControlInfo.length > 1) moduleMap['ddd'] = _fireControlInfo;
-    if (_engineInfo.length > 1) moduleMap['eee'] = _engineInfo;
-    if (_fighterInfo.length > 1) moduleMap['fff'] = _fighterInfo;
-    if (_skipBomberInfo.length > 1) moduleMap['ggg'] = _skipBomberInfo;
-    if (_torpedoBomberInfo.length > 1) moduleMap['hhh'] = _torpedoBomberInfo;
-    if (_diveBomberInfo.length > 1) moduleMap['iii'] = _diveBomberInfo;
+    if (_hullInfo.length > 1) moduleMap['hull'] = _hullInfo;
+    if (_gunCount > 1) moduleMap['gun'] = _gunInfo;
+    if (_torpCount > 1) moduleMap['torp'] = _torpInfo;
+    if (_fireControlInfo.length > 1) {
+      moduleMap['fire control'] = _fireControlInfo;
+    }
+    if (_engineInfo.length > 1) moduleMap['engine'] = _engineInfo;
+    if (_fighterInfo.length > 1) moduleMap['fighter'] = _fighterInfo;
+    if (_skipBomberInfo.length > 1) moduleMap['skip bomber'] = _skipBomberInfo;
+    if (_torpedoBomberInfo.length > 1) {
+      moduleMap['torp bomber'] = _torpedoBomberInfo;
+    }
+    if (_diveBomberInfo.length > 1) moduleMap['dive bomber'] = _diveBomberInfo;
     return moduleMap;
   }
 
@@ -125,6 +129,8 @@ class ShipModules {
         return _selectedSkipBomber == index;
       case 'torpedoBomber':
         return _selectedTorpedoBomber == index;
+      case 'diveBomber':
+        return _selectedDiveBomber == index;
       case 'hull':
         return _selectedHull == index;
       default:
