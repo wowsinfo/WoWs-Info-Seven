@@ -4,7 +4,7 @@ import 'package:wowsinfo/models/gamedata/game_info.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_module_selection.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_modules.dart';
-import 'package:wowsinfo/repositories/game_repository.dart';
+import 'package:wowsinfo/repositories/localisation.dart';
 
 /// For the individual ship information.
 class ShipInfoProvider with ChangeNotifier {
@@ -25,14 +25,14 @@ class ShipInfoProvider with ChangeNotifier {
   }
 
   // TODO: some should be final instead of a getter
-  String get shipName => GameRepository.instance.stringOf(_ship.name) ?? '';
+  String get shipName => Localisation.instance.stringOf(_ship.name) ?? '';
   String get shipIcon => _ship.index;
   String get title => '$shipIcon ${_ship.id}';
   String get description =>
-      GameRepository.instance.stringOf(_ship.description) ?? '';
-  String get type => GameRepository.instance.stringOf(_ship.typeId) ?? '';
+      Localisation.instance.stringOf(_ship.description) ?? '';
+  String get type => Localisation.instance.stringOf(_ship.typeId) ?? '';
   String get tier => GameInfo.tiers[_ship.tier - 1];
-  String get region => GameRepository.instance.stringOf(_ship.regionId) ?? '';
+  String get region => Localisation.instance.stringOf(_ship.regionId) ?? '';
   String? get costCR => _ship.costCr > 0 ? '${_ship.costCr}' : null;
   String? get costGold => _ship.costGold > 0 ? '${_ship.costGold}' : null;
 
@@ -51,7 +51,7 @@ class ShipInfoProvider with ChangeNotifier {
   TorpedoInfo? get _torpedoInfo => _shipModules.torpedoInfo;
   bool get renderTorpedo => _torpedoInfo != null;
   String get torpedoName =>
-      GameRepository.instance
+      Localisation.instance
           .stringOf('IDS_${_torpedoInfo?.launchers[0].ammo[0]}') ??
       '';
 }

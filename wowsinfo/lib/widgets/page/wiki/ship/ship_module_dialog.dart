@@ -5,6 +5,7 @@ import 'package:wowsinfo/models/wowsinfo/ship_module_selection.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_modules.dart';
 import 'package:wowsinfo/providers/wiki/ship_module_provider.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
+import 'package:wowsinfo/repositories/localisation.dart';
 
 void showShipModuleDialog(
   BuildContext context,
@@ -108,7 +109,7 @@ class _ShipModuleDialog extends StatelessWidget {
         value: selected,
         onChanged: (_) => onChange(type, index),
       ),
-      title: Text(GameRepository.instance.stringOf(info.name) ?? ''),
+      title: Text(Localisation.instance.stringOf(info.name) ?? ''),
       subtitle: Text(info.cost.costCr.toString()),
       trailing: Text('${info.cost.costXp} XP'),
       onTap: () => onChange(type, index),

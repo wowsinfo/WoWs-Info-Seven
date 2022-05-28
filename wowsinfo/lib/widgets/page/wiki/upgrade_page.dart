@@ -3,6 +3,7 @@ import 'package:logging/logging.dart';
 import 'package:wowsinfo/foundation/helpers/utils.dart';
 import 'package:wowsinfo/models/gamedata/modernization.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
+import 'package:wowsinfo/repositories/localisation.dart';
 import 'package:wowsinfo/widgets/shared/asset_image_loader.dart';
 import 'package:wowsinfo/widgets/shared/placeholder.dart';
 
@@ -66,12 +67,12 @@ class UpgradePage extends StatelessWidget {
           child: ListTile(
               contentPadding: const EdgeInsets.all(2),
               title: Text(
-                GameRepository.instance.stringOf(upgrade.name) ?? '',
+                Localisation.instance.stringOf(upgrade.name) ?? '',
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
               subtitle: Text(
-                '${GameRepository.instance.stringOf(upgrade.description) ?? ''}\n$additionalString',
+                '${Localisation.instance.stringOf(upgrade.description) ?? ''}\n$additionalString',
               )),
         ),
       ),

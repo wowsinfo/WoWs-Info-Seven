@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:wowsinfo/foundation/app.dart';
+import 'package:wowsinfo/main.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
+import 'package:wowsinfo/repositories/localisation.dart';
 import 'package:wowsinfo/widgets/page/wiki/achievement_page.dart';
 import 'package:wowsinfo/widgets/page/wiki/ship/ship_page.dart';
 import 'package:wowsinfo/widgets/page/wiki/upgrade_page.dart';
@@ -18,7 +20,7 @@ class _DebugPageState extends State<DebugPage> {
   @override
   void initState() {
     super.initState();
-    GameRepository.instance.initialise().then((value) {
+    loadAppData().then((_) {
       setState(() {
         loadde = true;
       });

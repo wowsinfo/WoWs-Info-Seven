@@ -3,6 +3,7 @@ import 'package:logging/logging.dart';
 import 'package:wowsinfo/models/gamedata/game_info.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_filter.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
+import 'package:wowsinfo/repositories/localisation.dart';
 
 /// Provides data and handle logic for `showFilterShipDialog`
 class FilterShipProvider with ChangeNotifier {
@@ -16,7 +17,7 @@ class FilterShipProvider with ChangeNotifier {
   var _selectedTier = <int>{};
 
   String _getStringOf(String key) {
-    final name = GameRepository.instance.stringOf(key, prefix: 'IDS_');
+    final name = Localisation.instance.stringOf(key, prefix: 'IDS_');
 
     if (name == null) {
       _logger.severe('$key is invalid!');

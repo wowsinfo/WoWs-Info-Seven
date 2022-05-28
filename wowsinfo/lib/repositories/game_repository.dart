@@ -13,6 +13,7 @@ import 'package:wowsinfo/models/gamedata/game_info.dart';
 import 'package:wowsinfo/models/gamedata/modernization.dart';
 import 'package:wowsinfo/models/gamedata/projectile.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
+import 'package:wowsinfo/repositories/localisation.dart';
 
 /// This repository manages game data from WoWs-Game-Data
 class GameRepository {
@@ -32,9 +33,6 @@ class GameRepository {
   late final Map<String, Projectile> _projectiles;
   late final Map<String, Ship> _ships;
   late final GameInfo _gameInfo;
-
-  late final Map<String, Map<String, String>> _lang;
-  late String _gameLang;
 
   late final List<Achievement> achievementList;
   late final List<Ability> consumableList;
@@ -91,22 +89,6 @@ class GameRepository {
     _gameInfo = GameInfo.fromJson(dataObject['game']);
     timer.log(message: 'Decoded wowsinfo.json');
 
-    // load the language file
-    final langString = await rootBundle.loadString(
-      'gamedata/app/lang/lang.json',
-      cache: false,
-    );
-    timer.log(message: 'Loaded lang.json');
-
-    final langObject = jsonDecode(langString);
-    timer.log(message: 'Parsed lang.json');
-
-    _lang = (langObject as Map).map((key, value) {
-      return MapEntry(key, (value as Map).cast<String, String>());
-    });
-    _gameLang = 'en';
-    timer.log(message: 'Decoded lang.json');
-
     _generateLists();
     _initialised = true;
     timer.log(message: 'Initialised GameRepository');
@@ -138,71 +120,6 @@ class GameRepository {
     shipRegionList.sort();
     shipTypeList = _gameInfo.types;
     shipTypeList.sort();
-  }
-
-  void setLanguage(String language) {
-    _gameLang = language;
-  }
-
-  String? stringOf(
-    String? key, {
-    Map<String, dynamic>? constants,
-    String? prefix,
-  }) {
-    if (key == null) {
-      _logger.severe('Key is null');
-      return null;
-    }
-
-    if (_lang[_gameLang] == null) {
-      _logger.severe('Language $_gameLang not found');
-      return null;
-    }
-
-    var langKey = key.toUpperCase();
-    if (prefix != null) {
-      langKey = prefix + langKey;
-    }
-    final rawString = _lang[_gameLang]![langKey];
-    if (rawString == null) {
-      _logger.severe('Language key $langKey not found');
-      return null;
-    }
-
-    // TODO: we can move this to probably another class if needed
-    if (constants == null || constants.isEmpty) {
-      return rawString;
-    }
-
-    // put constants into the string if needed
-    // check if value has %(key) in it
-    var formattedString = rawString;
-    final regex = RegExp(r'%\((.*?)\)s');
-    final matches = regex.allMatches(rawString);
-    for (final match in matches) {
-      final key = match.group(1);
-      if (key == null) {
-        _logger.severe('Invalid match, key is null');
-        continue;
-      }
-
-      // the key doesn't include _percent at the end
-      final constantKey = key.replaceAll('_percent', '');
-      var constantValue = constants[constantKey];
-      _logger.fine('Constant $key = $constantValue');
-      if (key.endsWith('_percent')) {
-        final number = constantValue as num;
-        // format to percentage
-        constantValue = '${(number * 100).toDecimalString()}%';
-      }
-
-      formattedString = formattedString.replaceAll(
-        '%($key)s',
-        constantValue.toString(),
-      );
-    }
-
-    return formattedString;
   }
 
   /// Get an alias string by its key.
@@ -277,6 +194,6 @@ class GameRepository {
   String? shipNameOf(String id) {
     final ship = shipOf(id);
     if (ship == null) return null;
-    return stringOf(ship.name);
+    return Localisation.instance.stringOf(ship.name);
   }
 }

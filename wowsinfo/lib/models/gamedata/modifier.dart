@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:logging/logging.dart';
 import 'package:wowsinfo/extensions/number.dart';
-import 'package:wowsinfo/repositories/game_repository.dart';
+import 'package:wowsinfo/repositories/localisation.dart';
 
 @immutable
 class Modifiers {
@@ -257,8 +257,9 @@ class Modifiers {
       final key = entry.key.toLowerCase();
       if (key == 'preparationtime') continue;
 
-      final langString = GameRepository.instance.stringOf(
-        'IDS_PARAMS_MODIFIER_${key.toUpperCase()}',
+      final langString = Localisation.instance.stringOf(
+        key.toUpperCase(),
+        prefix: 'IDS_PARAMS_MODIFIER_',
       );
 
       if (langString == ' ') continue;

@@ -1,5 +1,5 @@
 import 'package:logging/logging.dart';
-import 'package:wowsinfo/repositories/game_repository.dart';
+import 'package:wowsinfo/repositories/localisation.dart';
 
 enum _ShipFilterKey { nation, shipname, shiptype, level }
 
@@ -38,7 +38,7 @@ class ShipFilter {
 
   String _getFilterName(_ShipFilterKey key) {
     final keyName = _ids + key.name.toUpperCase();
-    final name = GameRepository.instance.stringOf(keyName);
+    final name = Localisation.instance.stringOf(keyName);
     if (name == null) {
       _logger.severe('$keyName is invalid!');
       throw Exception('Failed to get filter name: $keyName');
@@ -58,7 +58,7 @@ class ShipFilter {
   bool shouldDisplay(ShipFilterInterface ship) {
     if (name.trim().isNotEmpty) {
       // [ship.name] is the key not the actual string
-      final shipName = GameRepository.instance.stringOf(ship.name);
+      final shipName = Localisation.instance.stringOf(ship.name);
       if (shipName == null) {
         _logger.severe('${ship.name} is invalid!');
         throw Exception('Failed to get ship name: ${ship.name}');

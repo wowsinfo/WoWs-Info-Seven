@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:wowsinfo/extensions/number.dart';
 import 'package:wowsinfo/models/gamedata/modifier.dart';
-import 'package:wowsinfo/repositories/game_repository.dart';
+import 'package:wowsinfo/repositories/localisation.dart';
 
 @immutable
 class Ability {
@@ -202,8 +202,10 @@ class AbilityInfo {
   }
 
   String _format(String key, num value) {
-    final langKey = 'IDS_PARAMS_MODIFIER_${key.toUpperCase()}';
-    final description = GameRepository.instance.stringOf(langKey);
+    final description = Localisation.instance.stringOf(
+      key.toUpperCase(),
+      prefix: 'IDS_PARAMS_MODIFIER_',
+    );
     if (description == ' ') return '';
 
     final valueString = value.toDecimalString();

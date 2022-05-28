@@ -3,6 +3,7 @@ import 'package:wowsinfo/models/gamedata/aircraft.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_module_selection.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
+import 'package:wowsinfo/repositories/localisation.dart';
 
 typedef ShipModuleMap<T> = Map<ShipModuleType, List<ShipModuleHolder<T>>>;
 
@@ -58,32 +59,35 @@ enum ShipModuleType {
 
   /// The module type's name.
   String? get name {
+    // TODO: should be moved to localisation instead
     switch (this) {
       case ShipModuleType.hull:
-        return GameRepository.instance.stringOf('${_langIDS}HULL');
+        return Localisation.instance.stringOf('HULL', prefix: _langIDS);
       case ShipModuleType.gun:
-        return GameRepository.instance.stringOf('${_langIDS}ARTILLERY');
+        return Localisation.instance.stringOf('ARTILLERY', prefix: _langIDS);
       case ShipModuleType.secondary:
-        return GameRepository.instance.stringOf('${_langIDS}SECONDARYWEAPONS');
+        return Localisation.instance
+            .stringOf('SECONDARYWEAPONS', prefix: _langIDS);
       case ShipModuleType.torpedo:
-        return GameRepository.instance.stringOf('${_langIDS}TORPEDOES');
+        return Localisation.instance.stringOf('TORPEDOES', prefix: _langIDS);
       case ShipModuleType.pinger:
-        return GameRepository.instance.stringOf('${_langIDS}SONAR');
+        return Localisation.instance.stringOf('SONAR', prefix: _langIDS);
       case ShipModuleType.fireControl:
-        return GameRepository.instance.stringOf('${_langIDS}SUO');
+        return Localisation.instance.stringOf('SUO', prefix: _langIDS);
       case ShipModuleType.engine:
-        return GameRepository.instance.stringOf('${_langIDS}ENGINE');
+        return Localisation.instance.stringOf('ENGINE', prefix: _langIDS);
       case ShipModuleType.depthCharge:
       case ShipModuleType.airSupport:
         return '';
       case ShipModuleType.fighter:
-        return GameRepository.instance.stringOf('${_langIDS}FIGHTER');
+        return Localisation.instance.stringOf('FIGHTER', prefix: _langIDS);
       case ShipModuleType.skipBomber:
-        return GameRepository.instance.stringOf('${_langIDS}SKIPBOMBER');
+        return Localisation.instance.stringOf('SKIPBOMBER', prefix: _langIDS);
       case ShipModuleType.torpedoBomber:
-        return GameRepository.instance.stringOf('${_langIDS}TORPEDOBOMBER');
+        return Localisation.instance
+            .stringOf('TORPEDOBOMBER', prefix: _langIDS);
       case ShipModuleType.diveBomber:
-        return GameRepository.instance.stringOf('${_langIDS}DIVEBOMBER');
+        return Localisation.instance.stringOf('DIVEBOMBER', prefix: _langIDS);
       case ShipModuleType.unknown:
         throw ArgumentError('Unknown module type: $this');
     }
