@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:wowsinfo/models/gamedata/game_info.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_filter.dart';
@@ -10,6 +10,9 @@ class FilterShipProvider with ChangeNotifier {
   final _regions = GameRepository.instance.shipRegionList;
   final _types = GameRepository.instance.shipTypeList;
   final _logger = Logger('FilterShipProvider');
+
+  BuildContext _context;
+  FilterShipProvider(this._context);
 
   // selected filters
   var _selectedRegion = <int>{};
@@ -37,6 +40,11 @@ class FilterShipProvider with ChangeNotifier {
   bool isRegionSelected(int index) => _selectedRegion.contains(index);
   bool isTypeSelected(int index) => _selectedType.contains(index);
   bool isTierSelected(int index) => _selectedTier.contains(index);
+
+  String get regionFilterName {
+    final name = Localisation.instance.regionFilterName;
+    return '$name (${Localisation.of(_context).region})';
+  }
 
   void updateRegion(String key) {
     final index = regionList.indexOf(key);

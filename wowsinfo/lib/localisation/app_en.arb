@@ -9,5 +9,9 @@
         "description": "The name of the person to greet"
       }
     }
+  },
+  "region": "Region",
+  "@region": {
+    "description": "The region a ship belongs to. Sometimes, nation is not applicable (like pan asia)"
   }
 }

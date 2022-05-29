@@ -1,3 +1,4 @@
 {
-    "helloWorld": "こんにちは、{name}！"
+    "helloWorld": "こんにちは、{name}！",
+    "region": "地域"
 }

@@ -1,3 +1,4 @@
 {
-    "helloWorld": "你好，{name}！"
+    "helloWorld": "你好，{name}！",
+    "region": "地区"
 }

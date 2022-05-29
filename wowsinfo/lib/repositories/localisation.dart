@@ -90,6 +90,7 @@ class Localisation {
     _logger.info('Localisation initialised');
   }
 
+  /// Decide the data language based on the device language.
   String _decideLang(String lang) {
     _logger.info('System locale is $lang');
     final langCode = lang.toLowerCase();
@@ -185,5 +186,25 @@ class Localisation {
     }
 
     return formattedString;
+  }
+
+  /// Predefined strings
+
+  final _shipFilter = 'IDS_CAROUSEL_APPLIED_FILTER_HINT_';
+  // filter names
+  String get regionFilterName => _get('nation', prefix: _shipFilter);
+  String get shipNameFilterName => _get('shipname', prefix: _shipFilter);
+  String get shipTypeFilterName => _get('shiptype', prefix: _shipFilter);
+  String get tierFilterName => _get('level', prefix: _shipFilter);
+
+  // Helper functions
+  String _get(String key, {String? prefix}) {
+    final string = stringOf(key, prefix: prefix);
+    if (string == null) {
+      _logger.severe('Failed to get string for $key');
+      throw Exception('Make sure $key is correct');
+    }
+
+    return string;
   }
 }

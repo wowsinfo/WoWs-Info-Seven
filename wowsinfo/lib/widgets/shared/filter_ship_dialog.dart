@@ -4,6 +4,7 @@ import 'package:wowsinfo/extensions/list.dart';
 import 'package:wowsinfo/foundation/app.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_filter.dart';
 import 'package:wowsinfo/providers/wiki/filter_ship_provider.dart';
+import 'package:wowsinfo/repositories/localisation.dart';
 
 void showFilterShipDialog(
   BuildContext context,
@@ -12,7 +13,7 @@ void showFilterShipDialog(
   showDialog(
     context: context,
     builder: (context) => ChangeNotifierProvider(
-      create: (context) => FilterShipProvider(),
+      create: (context) => FilterShipProvider(context),
       builder: (context, widget) => _ShipFilterDialog(
         onFilter: onFilter,
       ),
@@ -38,24 +39,37 @@ class _ShipFilterDialog extends StatelessWidget {
           constraints: const BoxConstraints(maxWidth: 500),
           child: Column(
             mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: renderListTitle(
+                  context,
+                  Localisation.instance.shipNameFilterName,
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: TextField(
                   controller: nameController,
                   // remove underline
                   decoration: const InputDecoration(
-                    labelText: 'Name',
                     border: InputBorder.none,
+                    hintText: '...',
                   ),
                 ),
               ),
               const Divider(),
-              // render a list of names in chips and we need to animate when we move a chip up to be selected
+              renderListTitle(context, Localisation.instance.tierFilterName),
               renderTierList(context),
               const Divider(),
+              renderListTitle(
+                context,
+                Localisation.instance.shipTypeFilterName,
+              ),
               renderTypeList(context),
               const Divider(),
+              renderListTitle(context, provider.regionFilterName),
               renderRegionList(context),
               const Divider(),
               Row(
@@ -77,6 +91,19 @@ class _ShipFilterDialog extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget renderListTitle(BuildContext context, String title) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 8.0),
+      child: Text(
+        title,
+        style: Theme.of(context)
+            .textTheme
+            .titleLarge
+            ?.copyWith(color: Theme.of(context).primaryColor),
       ),
     );
   }
