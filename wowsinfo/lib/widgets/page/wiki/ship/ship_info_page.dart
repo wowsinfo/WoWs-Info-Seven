@@ -5,6 +5,7 @@ import 'package:wowsinfo/models/gamedata/ship.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_module_selection.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_modules.dart';
 import 'package:wowsinfo/providers/wiki/ship_info_provider.dart';
+import 'package:wowsinfo/repositories/localisation.dart';
 import 'package:wowsinfo/widgets/page/wiki/ship/ship_module_dialog.dart';
 import 'package:wowsinfo/widgets/shared/text_with_caption.dart';
 import 'package:wowsinfo/widgets/shared/wiki/ship_icon.dart';
@@ -107,8 +108,11 @@ class _ShipTitleSection extends StatelessWidget {
               name: icon,
               height: 128,
             ),
-            Text(name),
-            Text(region),
+            Text(name, style: Theme.of(context).textTheme.titleLarge),
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Text(region),
+            ),
             Text(type),
             if (costCR != null) Text(costCR!),
             if (costGold != null) Text(costGold!),
@@ -170,18 +174,18 @@ class _ShipSurvivabilty extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            'Surviabilty',
-            style: Theme.of(context).textTheme.headline6,
+            Localisation.instance.durability,
+            style: Theme.of(context).textTheme.titleLarge,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               TextWithCaption(
-                title: 'Health',
+                title: Localisation.instance.health,
                 value: health,
               ),
               TextWithCaption(
-                title: 'Protection',
+                title: Localisation.instance.torpedoProtection,
                 value: protection,
               ),
             ],
