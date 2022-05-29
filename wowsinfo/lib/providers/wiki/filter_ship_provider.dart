@@ -19,7 +19,7 @@ class FilterShipProvider with ChangeNotifier {
   var _selectedType = <int>{};
   var _selectedTier = <int>{};
 
-  String _getStringOf(String key) {
+  String _get(String key) {
     final name = Localisation.instance.stringOf(key, prefix: 'IDS_');
 
     if (name == null) {
@@ -31,10 +31,8 @@ class FilterShipProvider with ChangeNotifier {
   }
 
   // generate region lists for UI
-  late final regionList =
-      _regions.map((r) => _getStringOf(r)).toList(growable: false);
-  late final typeList =
-      _types.map((t) => _getStringOf(t)).toList(growable: false);
+  late final regionList = _regions.map((r) => _get(r)).toList(growable: false);
+  late final typeList = _types.map((t) => _get(t)).toList(growable: false);
   final tierList = GameInfo.tiers;
 
   bool isRegionSelected(int index) => _selectedRegion.contains(index);

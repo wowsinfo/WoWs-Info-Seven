@@ -7,8 +7,6 @@ import 'package:wowsinfo/repositories/localisation.dart';
 
 typedef ShipModuleMap<T> = Map<ShipModuleType, List<ShipModuleHolder<T>>>;
 
-const _langIDS = 'IDS_MODULE_TYPE_';
-
 /// All ship module types.
 enum ShipModuleType {
   hull,
@@ -59,35 +57,32 @@ enum ShipModuleType {
 
   /// The module type's name.
   String? get name {
-    // TODO: should be moved to localisation instead
     switch (this) {
       case ShipModuleType.hull:
-        return Localisation.instance.stringOf('HULL', prefix: _langIDS);
+        return Localisation.instance.hull;
       case ShipModuleType.gun:
-        return Localisation.instance.stringOf('ARTILLERY', prefix: _langIDS);
+        return Localisation.instance.artillery;
       case ShipModuleType.secondary:
-        return Localisation.instance
-            .stringOf('SECONDARYWEAPONS', prefix: _langIDS);
+        return Localisation.instance.secondaries;
       case ShipModuleType.torpedo:
-        return Localisation.instance.stringOf('TORPEDOES', prefix: _langIDS);
+        return Localisation.instance.torpedoes;
       case ShipModuleType.pinger:
-        return Localisation.instance.stringOf('SONAR', prefix: _langIDS);
+        return Localisation.instance.sonar;
       case ShipModuleType.fireControl:
-        return Localisation.instance.stringOf('SUO', prefix: _langIDS);
+        return Localisation.instance.fireControl;
       case ShipModuleType.engine:
-        return Localisation.instance.stringOf('ENGINE', prefix: _langIDS);
+        return Localisation.instance.engine;
       case ShipModuleType.depthCharge:
       case ShipModuleType.airSupport:
         return '';
       case ShipModuleType.fighter:
-        return Localisation.instance.stringOf('FIGHTER', prefix: _langIDS);
+        return Localisation.instance.fighter;
       case ShipModuleType.skipBomber:
-        return Localisation.instance.stringOf('SKIPBOMBER', prefix: _langIDS);
+        return Localisation.instance.skipBomber;
       case ShipModuleType.torpedoBomber:
-        return Localisation.instance
-            .stringOf('TORPEDOBOMBER', prefix: _langIDS);
+        return Localisation.instance.torpedoBomber;
       case ShipModuleType.diveBomber:
-        return Localisation.instance.stringOf('DIVEBOMBER', prefix: _langIDS);
+        return Localisation.instance.diveBomber;
       case ShipModuleType.unknown:
         throw ArgumentError('Unknown module type: $this');
     }

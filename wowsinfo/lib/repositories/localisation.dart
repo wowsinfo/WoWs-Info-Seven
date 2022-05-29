@@ -190,14 +190,81 @@ class Localisation {
 
   /// Predefined strings
 
-  final _shipFilter = 'IDS_CAROUSEL_APPLIED_FILTER_HINT_';
-  // filter names
+  static const _shipFilter = 'IDS_CAROUSEL_APPLIED_FILTER_HINT_';
   String get regionFilterName => _get('nation', prefix: _shipFilter);
   String get shipNameFilterName => _get('shipname', prefix: _shipFilter);
   String get shipTypeFilterName => _get('shiptype', prefix: _shipFilter);
   String get tierFilterName => _get('level', prefix: _shipFilter);
 
-  // Helper functions
+  static const _moduleType = 'IDS_MODULE_TYPE_';
+  String get hull => _get('HULL', prefix: _moduleType);
+  String get artillery => _get('ARTILLERY', prefix: _moduleType);
+  String get secondaries => _get('SECONDARYWEAPONS', prefix: _moduleType);
+  String get torpedoes => _get('TORPEDOES', prefix: _moduleType);
+  String get sonar => _get('SONAR', prefix: _moduleType);
+  String get fireControl => _get('SUO', prefix: _moduleType);
+  String get engine => _get('ENGINE', prefix: _moduleType);
+  String get fighter => _get('FIGHTER', prefix: _moduleType);
+  String get skipBomber => _get('SKIPBOMBER', prefix: _moduleType);
+  String get torpedoBomber => _get('TORPEDOBOMBER', prefix: _moduleType);
+  String get diveBomber => _get('DIVEBOMBER', prefix: _moduleType);
+
+  static const _shipParam = 'IDS_SHIP_PARAM_';
+  String get maximumRange => _get('MAX_DIST', prefix: _shipParam);
+  String get reloadTime => _get('SHOT_DELAY', prefix: _shipParam);
+  String get rotationTime => _get('ROTATION_TIME', prefix: _shipParam);
+
+  // Durability
+  String get durability => _get('DURABILITY', prefix: _shipParam);
+  String get health => _get('HEALTH', prefix: _shipParam);
+  String get torpedoProtection => _get('PTZDAMAGEPROB', prefix: _shipParam);
+
+  // Main battery
+  String get shipArtillery => _get('ARTILLERY', prefix: _shipParam);
+  String get gunReloadTime => reloadTime;
+  String get gunRotationTime => rotationTime;
+  String get gunDamage => _get('ARTILLERY_MAX_DAMAGE', prefix: _shipParam);
+  String get gunRange => maximumRange;
+  String get shellVelocity => _get('ARTILLERY_AMMO_SPEED', prefix: _shipParam);
+  String get shellPenetration =>
+      _get('ARTILLERY_ALPHA_PIERCING', prefix: _shipParam);
+  String get shellFireChance => _get('ARTILLERY_BURN_PROB', prefix: _shipParam);
+
+  // Torpedo
+  String get torpedoRange => _get('TORPEDOES_MAX_DIST', prefix: _shipParam);
+  String get torpedoSpeed => _get('TORPEDO_SPEED', prefix: _shipParam);
+  String get torpedoReloadTime => reloadTime;
+  String get torpedoRotationTime => rotationTime;
+  String get torpedoDamage => _get('TORPEDO_DAMAGE', prefix: _shipParam);
+  String get torpedoDetection =>
+      _get('TORPEDO_VISIBILITY_DIST', prefix: _shipParam);
+
+  // AA
+  String get airDefense => _get('AIR_DEFENSE', prefix: _shipParam);
+  String get continousDamage =>
+      _get('AA_AVERAGE_CONST_DAMAGE', prefix: _shipParam);
+  String get airBubbleDamage =>
+      _get('AA_BUBBLE_DAMAGE_IN_A_SECOND', prefix: _shipParam);
+  String get aaRange => _get('AA_RANGE', prefix: _shipParam);
+
+  // Mobility
+  String get mobility => _get('MOBILITY', prefix: _shipParam);
+  String get maxSpeed => _get('MAXSPEED', prefix: _shipParam);
+  String get turningRadius => _get('TURNINGRADIUS', prefix: _shipParam);
+  String get rudderTime => _get('RUDDER_TIME', prefix: _shipParam);
+
+  // Visibility
+  String get visibility => _get('VISIBILITY', prefix: _shipParam);
+  String get seaDetection =>
+      _get('VISIBILITY_DIST_BY_SHIP', prefix: _shipParam);
+  String get airDetection =>
+      _get('VISIBILITY_DIST_BY_PLANE', prefix: _shipParam);
+
+  String get airSupport => _get('AIRSUPPORT', prefix: _shipParam);
+  String get depthCharge => _get('DEPTH_CHARGE', prefix: _shipParam);
+
+  /// Helper functions
+
   String _get(String key, {String? prefix}) {
     final string = stringOf(key, prefix: prefix);
     if (string == null) {
