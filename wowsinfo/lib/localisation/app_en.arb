@@ -1,6 +1,13 @@
 {
-    "helloWorld": "Hello World!",
-    "@helloWorld": {
-      "description": "The conventional newborn programmer greeting"
+  "helloWorld": "Hello, {name}!",
+  "@helloWorld": {
+    "description": "The conventional newborn programmer greeting",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Henry",
+        "description": "The name of the person to greet"
+      }
     }
+  }
 }
