@@ -67,7 +67,7 @@ class _ShipInfoPageState extends State<ShipInfoPage> {
                   health: _provider.health,
                   protection: _provider.torpedoProtection,
                 ),
-              if (_provider.renderMainGun) Container(),
+              if (_provider.renderMainGun) _ShipMainBattery(),
               if (_provider.renderTorpedo) Text(_provider.torpedoName),
             ],
           ),
@@ -196,35 +196,56 @@ class _ShipSurvivabilty extends StatelessWidget {
   }
 }
 
-class _ShipMainBettery extends StatelessWidget {
-  const _ShipMainBettery({
-    Key? key,
-    required this.reload,
-    required this.range,
-    required this.config,
-    required this.dispersion,
-    required this.rotation,
-    required this.gunName,
-  }) : super(key: key);
-
-  final String reload;
-  final String range;
-  final String config;
-  final String dispersion;
-  final String rotation;
-
-  final String gunName;
+class _ShipMainBattery extends StatelessWidget {
+  const _ShipMainBattery({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<ShipInfoProvider>(context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
           Text(
-            'Main Battery',
+            Localisation.instance.artillery,
             style: Theme.of(context).textTheme.headline6,
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              TextWithCaption(
+                title: Localisation.instance.gunReloadTime,
+                value: provider.gunReloadTime,
+              ),
+              TextWithCaption(
+                title: Localisation.instance.gunRange,
+                value: provider.gunRange,
+              ),
+              // TODO: this doesn't align as expected
+              TextWithCaption(
+                title: 'TODO config',
+                value: '',
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              TextWithCaption(
+                title: 'TODO dispersion',
+                value: '',
+              ),
+              TextWithCaption(
+                title: Localisation.instance.gunRotationTime,
+                value: provider.gunRotationTime,
+              ),
+            ],
+          ),
+          Text(
+            provider.gunName,
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
+          // render HE, AP or SAP
         ],
       ),
     );

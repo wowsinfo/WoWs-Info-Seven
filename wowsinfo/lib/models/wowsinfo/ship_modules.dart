@@ -162,32 +162,33 @@ class ShipModules {
     return moduleMap;
   }
 
-  HullInfo? get hullInfo =>
-      _valueAt(_hullInfo, _moduleSelection.hullIndex)?.data;
-  GunInfo? get gunInfo => _valueAt(_gunInfo, _moduleSelection.gunIndex)?.data;
-  GunInfo? get secondaryInfo =>
-      _valueAt(_secondaryInfo, _moduleSelection.secondaryIndex)?.data;
-  TorpedoInfo? get torpedoInfo =>
-      _valueAt(_torpInfo, _moduleSelection.torpIndex)?.data;
-  EngineInfo? get engineInfo =>
-      _valueAt(_engineInfo, _moduleSelection.engineIndex)?.data;
-  PingerInfo? get pingerInfo =>
-      _valueAt(_pingerInfo, _moduleSelection.pingerIndex)?.data;
-  FireControlInfo? get fireControlInfo =>
-      _valueAt(_fireControlInfo, _moduleSelection.fireControlIndex)?.data;
-  AirSupportInfo? get airSupportInfo =>
-      _valueAt(_airSupportInfo, _moduleSelection.airSupportIndex)?.data;
-  DepthChargeInfo? get depthChargeInfo =>
-      _valueAt(_depthChargeInfo, _moduleSelection.depthChargeIndex)?.data;
+  ShipModuleHolder<HullInfo>? get hullInfo =>
+      _valueAt(_hullInfo, _moduleSelection.hullIndex);
+  ShipModuleHolder<GunInfo>? get gunInfo =>
+      _valueAt(_gunInfo, _moduleSelection.gunIndex);
+  ShipModuleHolder<GunInfo>? get secondaryInfo =>
+      _valueAt(_secondaryInfo, _moduleSelection.secondaryIndex);
+  ShipModuleHolder<TorpedoInfo>? get torpedoInfo =>
+      _valueAt(_torpInfo, _moduleSelection.torpIndex);
+  ShipModuleHolder<EngineInfo>? get engineInfo =>
+      _valueAt(_engineInfo, _moduleSelection.engineIndex);
+  ShipModuleHolder<PingerInfo>? get pingerInfo =>
+      _valueAt(_pingerInfo, _moduleSelection.pingerIndex);
+  ShipModuleHolder<FireControlInfo>? get fireControlInfo =>
+      _valueAt(_fireControlInfo, _moduleSelection.fireControlIndex);
+  ShipModuleHolder<AirSupportInfo>? get airSupportInfo =>
+      _valueAt(_airSupportInfo, _moduleSelection.airSupportIndex);
+  ShipModuleHolder<DepthChargeInfo>? get depthChargeInfo =>
+      _valueAt(_depthChargeInfo, _moduleSelection.depthChargeIndex);
 
-  Aircraft? get fighterInfo =>
-      _valueAt(_fighterInfo, _moduleSelection.fighterIndex)?.data;
-  Aircraft? get skipBomberInfo =>
-      _valueAt(_skipBomberInfo, _moduleSelection.skipBomberIndex)?.data;
-  Aircraft? get torpedoBomberInfo =>
-      _valueAt(_torpedoBomberInfo, _moduleSelection.torpedoBomberIndex)?.data;
-  Aircraft? get diveBomberInfo =>
-      _valueAt(_diveBomberInfo, _moduleSelection.diveBomberIndex)?.data;
+  ShipModuleHolder<Aircraft>? get fighterInfo =>
+      _valueAt(_fighterInfo, _moduleSelection.fighterIndex);
+  ShipModuleHolder<Aircraft>? get skipBomberInfo =>
+      _valueAt(_skipBomberInfo, _moduleSelection.skipBomberIndex);
+  ShipModuleHolder<Aircraft>? get torpedoBomberInfo =>
+      _valueAt(_torpedoBomberInfo, _moduleSelection.torpedoBomberIndex);
+  ShipModuleHolder<Aircraft>? get diveBomberInfo =>
+      _valueAt(_diveBomberInfo, _moduleSelection.diveBomberIndex);
 
   void unpackModules() {
     final shipModules = _ship.components;
