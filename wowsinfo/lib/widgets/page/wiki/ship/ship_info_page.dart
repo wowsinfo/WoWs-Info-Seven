@@ -62,12 +62,8 @@ class _ShipInfoPageState extends State<ShipInfoPage> {
                     selection: value.selection,
                   ),
                 ),
-              if (_provider.renderHull)
-                _ShipSurvivabilty(
-                  health: _provider.health,
-                  protection: _provider.torpedoProtection,
-                ),
-              if (_provider.renderMainGun) _ShipMainBattery(),
+              if (_provider.renderHull) const _ShipSurvivabilty(),
+              if (_provider.renderMainGun) const _ShipMainBattery(),
               if (_provider.renderTorpedo) Text(_provider.torpedoName),
             ],
           ),
@@ -158,17 +154,11 @@ class _ShipModuleButton extends StatelessWidget {
 }
 
 class _ShipSurvivabilty extends StatelessWidget {
-  const _ShipSurvivabilty({
-    Key? key,
-    required this.health,
-    required this.protection,
-  }) : super(key: key);
-
-  final String health;
-  final String protection;
+  const _ShipSurvivabilty({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<ShipInfoProvider>(context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -182,11 +172,11 @@ class _ShipSurvivabilty extends StatelessWidget {
             children: [
               TextWithCaption(
                 title: Localisation.instance.health,
-                value: health,
+                value: provider.health,
               ),
               TextWithCaption(
                 title: Localisation.instance.torpedoProtection,
-                value: protection,
+                value: provider.torpedoProtection,
               ),
             ],
           ),
@@ -222,7 +212,7 @@ class _ShipMainBattery extends StatelessWidget {
                 value: provider.gunRange,
               ),
               // TODO: this doesn't align as expected
-              TextWithCaption(
+              const TextWithCaption(
                 title: 'TODO config',
                 value: '',
               ),
@@ -231,7 +221,7 @@ class _ShipMainBattery extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              TextWithCaption(
+              const TextWithCaption(
                 title: 'TODO dispersion',
                 value: '',
               ),
