@@ -225,6 +225,7 @@ class Localisation {
   String get gunRotationTime => rotationTime;
   String get gunDamage => _get('ARTILLERY_MAX_DAMAGE', prefix: _shipParam);
   String get gunRange => maximumRange;
+  String get gunDispersion => _get('DISPERSION', prefix: _shipParam);
   String get shellVelocity => _get('ARTILLERY_AMMO_SPEED', prefix: _shipParam);
   String get shellPenetration =>
       _get('ARTILLERY_ALPHA_PIERCING', prefix: _shipParam);

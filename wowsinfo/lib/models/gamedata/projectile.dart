@@ -38,7 +38,7 @@ class Projectile {
   final ArmorPiecingInfo? ap;
   final int? overmatch;
   final double? fuseTime;
-  final double? penHe;
+  final num? penHe;
   final double? penSAP;
   final double? burnChance;
   final double? visibility;
@@ -61,7 +61,7 @@ class Projectile {
         ap: json['ap'] == null ? null : ArmorPiecingInfo.fromJson(json['ap']),
         overmatch: json['overmatch'],
         fuseTime: json['fuseTime'],
-        penHe: json['penHe'],
+        penHe: json['penHE'],
         penSAP: json['penSAP'],
         burnChance: json['burnChance'],
         visibility: json['visibility'],

@@ -3,7 +3,6 @@ import 'package:logging/logging.dart';
 import 'package:wowsinfo/extensions/number.dart';
 import 'package:wowsinfo/models/gamedata/game_info.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
-import 'package:wowsinfo/models/wowsinfo/ammo_shells.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_module_selection.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_modules.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
@@ -29,12 +28,14 @@ class ShipInfoProvider with ChangeNotifier {
 
   String _percent(num? value) {
     if (value == null) return '-';
+    // some might be 0.35 instead of 35.0
+    if (value < 1) return '${(value * 100).toDecimalString()}%';
     return '${value.toDecimalString()}%';
   }
 
-  String _format(num? value) {
+  String _format(num? value, {String suffix = ''}) {
     if (value == null) return '-';
-    return value.toDecimalString();
+    return '${value.toDecimalString()} $suffix';
   }
 
   /// This is to calculate the maximum or minimum value
@@ -74,32 +75,76 @@ class ShipInfoProvider with ChangeNotifier {
   GunInfo? get _mainGunInfo => _shipModules.gunInfo?.data;
   bool get renderMainGun => _mainGunInfo != null;
   WeaponInfo? get _gun => _mainGunInfo?.guns.first;
-  String get gunReloadTime => '${_format(_gun?.reload)} s';
-  String get gunRange => '${_format(_mainGunInfo?.range)} km';
-  String get gunRotationTime => '${_format(_gun?.rotation)} s';
+  String get gunReloadTime => _format(_gun?.reload, suffix: 's');
+  // Consider the fire control system here
+  String get gunRange {
+    final suo = _shipModules.fireControlInfo;
+    final range = _mainGunInfo?.range;
+    if (range == null) return '-';
+    if (suo == null) return _format(range / 1000, suffix: 'km');
+    // increase the range
+    final improvedRange = range * suo.data.maxDistCoef;
+    return _format(improvedRange / 1000, suffix: 'km');
+  }
+
+  // Group guns together and format like 3 x 2 1 x 3 (9)
+  String get gunConfiguration {
+    final guns = _mainGunInfo?.guns;
+    if (guns == null) return '-';
+
+    List<String> config = [];
+    // int total = 0;
+    for (final gun in guns) {
+      config.add('${gun.each} x ${gun.count}');
+      // total += gun.each * gun.count;
+    }
+
+    if (config.isEmpty) return '-';
+    return config.join(' ');
+  }
+
+  String get gunRotationTime => _format(_gun?.rotation, suffix: 's');
   String get gunName =>
       Localisation.instance.stringOf(_shipModules.gunInfo?.module?.name) ?? '-';
 
-  List<Shell> shells = [];
-  List<Shell> _extractShells(GunInfo? gunInfo) {
+  List<ShellHolder> get shells => _extractShells(_mainGunInfo);
+  List<ShellHolder> _extractShells(GunInfo? gunInfo) {
     if (gunInfo == null) return [];
-    final List<Shell> shells = [];
+    final List<ShellHolder> shells = [];
     final gun = gunInfo.guns.first;
     for (final ammo in gun.ammo) {
       final ammoInfo = GameRepository.instance.projectileOf(ammo);
       if (ammoInfo == null) continue;
 
-      switch (ammoInfo.type) {
+      _logger.fine('Found ammo: ${ammoInfo.name}');
+      final type = ammoInfo.ammoType;
+      if (type == null) continue;
+
+      final shell = ShellHolder(name: type);
+      switch (ammoInfo.ammoType) {
         case 'HE':
-          ammoInfo.burnChance;
+          shell.burnChance = _percent(ammoInfo.burnChance);
+          shell.damage = _format(ammoInfo.damage);
+          shell.penetration = _format(ammoInfo.penHe, suffix: 'mm');
+          shell.velocity = _format(ammoInfo.speed, suffix: 'm/s');
           break;
         case 'AP':
+          shell.burnChance = _percent(ammoInfo.burnChance);
+          shell.damage = _format(ammoInfo.damage);
+          shell.overmatch = _format(ammoInfo.overmatch, suffix: 'mm');
+          shell.velocity = _format(ammoInfo.speed, suffix: 'm/s');
           break;
-        case 'SAP':
+        case 'CS':
+          shell.burnChance = _percent(ammoInfo.burnChance);
+          shell.damage = _format(ammoInfo.damage);
+          shell.penetration = _format(ammoInfo.penSAP, suffix: 'mm');
+          shell.velocity = _format(ammoInfo.speed, suffix: 'm/s');
           break;
         default:
-          _logger.warning('Unknown ammo type: ${ammoInfo.type}');
+          _logger.severe('Unknown ammo type: ${ammoInfo.type}');
+          continue;
       }
+      shells.add(shell);
     }
     return shells;
   }
@@ -110,4 +155,19 @@ class ShipInfoProvider with ChangeNotifier {
       Localisation.instance
           .stringOf('IDS_${_torpedoInfo?.launchers[0].ammo[0]}') ??
       '';
+}
+
+/// This model is used to hold the shell information
+class ShellHolder {
+  ShellHolder({
+    required this.name,
+  });
+
+  final String name;
+  String? burnChance;
+  String? weight;
+  String? velocity;
+  String? damage;
+  String? penetration;
+  String? overmatch;
 }

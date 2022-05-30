@@ -195,13 +195,17 @@ class _ShipMainBattery extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(
-            Localisation.instance.artillery,
-            style: Theme.of(context).textTheme.headline6,
+          Center(
+            child: Text(
+              Localisation.instance.artillery,
+              style: Theme.of(context).textTheme.headline6,
+            ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+          Wrap(
+            alignment: WrapAlignment.spaceAround,
+            spacing: 16,
             children: [
               TextWithCaption(
                 title: Localisation.instance.gunReloadTime,
@@ -212,17 +216,12 @@ class _ShipMainBattery extends StatelessWidget {
                 value: provider.gunRange,
               ),
               // TODO: this doesn't align as expected
-              const TextWithCaption(
+              TextWithCaption(
                 title: 'TODO config',
-                value: '',
+                value: provider.gunConfiguration,
               ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              const TextWithCaption(
-                title: 'TODO dispersion',
+              TextWithCaption(
+                title: Localisation.instance.gunDispersion,
                 value: '',
               ),
               TextWithCaption(
@@ -231,13 +230,53 @@ class _ShipMainBattery extends StatelessWidget {
               ),
             ],
           ),
-          Text(
-            provider.gunName,
-            style: Theme.of(context).textTheme.titleLarge,
+          Center(
+            child: Text(
+              provider.gunName,
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
           ),
-          // render HE, AP or SAP
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              for (final shell in provider.shells) _renderShell(context, shell),
+            ],
+          )
         ],
       ),
+    );
+  }
+
+  Widget _renderShell(BuildContext context, ShellHolder shell) {
+    return Column(
+      children: [
+        Text(shell.name, style: Theme.of(context).textTheme.titleLarge),
+        if (shell.burnChance != null)
+          TextWithCaption(
+            title: Localisation.instance.shellFireChance,
+            value: shell.burnChance!,
+          ),
+        if (shell.damage != null)
+          TextWithCaption(
+            title: Localisation.instance.gunDamage,
+            value: shell.damage!,
+          ),
+        if (shell.velocity != null)
+          TextWithCaption(
+            title: Localisation.instance.shellVelocity,
+            value: shell.velocity!,
+          ),
+        if (shell.penetration != null)
+          TextWithCaption(
+            title: Localisation.instance.shellPenetration,
+            value: shell.penetration!,
+          ),
+        if (shell.overmatch != null)
+          TextWithCaption(
+            title: 'OVERMATCH TODO!!!!!!!!!!!!!!!!!!',
+            value: shell.overmatch!,
+          ),
+      ],
     );
   }
 }
