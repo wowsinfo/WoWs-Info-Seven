@@ -66,6 +66,7 @@ class _ShipInfoPageState extends State<ShipInfoPage> {
               if (_provider.renderMainGun) const _ShipMainBattery(),
               if (_provider.renderSecondaryGun) const _ShipSecondaries(),
               if (_provider.renderTorpedo) const _ShipTorpedo(),
+              if (_provider.renderAirDefense) const _ShipAirDefense(),
             ],
           ),
         ),
@@ -413,6 +414,56 @@ class _ShipTorpedo extends StatelessWidget {
           TextWithCaption(
             title: Localisation.instance.torpedoSpeed,
             value: info.speed ?? '-',
+          ),
+        ],
+      ),
+    ];
+  }
+}
+
+class _ShipAirDefense extends StatelessWidget {
+  const _ShipAirDefense({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final provider = Provider.of<ShipInfoProvider>(context);
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Center(
+            child: Text(
+              Localisation.instance.airDefense,
+              style: Theme.of(context).textTheme.headline6,
+            ),
+          ),
+          for (final aa in provider.airDefenses)
+            ...renderAirDefense(context, aa),
+        ],
+      ),
+    );
+  }
+
+  List renderAirDefense(BuildContext context, AirDefenseHolder info) {
+    return [
+      Center(
+        child: Text(
+          info.name,
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+      ),
+      Wrap(
+        alignment: WrapAlignment.spaceAround,
+        spacing: 16,
+        children: [
+          TextWithCaption(
+            title: Localisation.instance.aaRange,
+            value: info.range ?? '-',
+          ),
+          TextWithCaption(
+            title: Localisation.instance.gunDamage,
+            value: info.damage ?? '-',
           ),
         ],
       ),

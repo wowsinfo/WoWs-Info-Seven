@@ -73,11 +73,13 @@ class ShipInfoProvider with ChangeNotifier {
   late final bool canChangeModules = _shipModules.canChangeModules;
   late final ShipModuleMap moduleList = _shipModules.moduleList;
 
+  // Hull
   HullInfo? get _hullInfo => _shipModules.hullInfo?.data;
   bool get renderHull => _hullInfo != null;
   String get health => _format(_hullInfo?.health);
   String get torpedoProtection => _percent(_hullInfo?.protection);
 
+  // Main battery
   GunInfo? get _mainGunInfo => _shipModules.gunInfo?.data;
   bool get renderMainGun => _mainGunInfo != null;
   WeaponInfo? get _gun => _mainGunInfo?.guns.first;
@@ -155,6 +157,7 @@ class ShipInfoProvider with ChangeNotifier {
     return shells;
   }
 
+  // Secondaries
   GunInfo? get _secondaryInfo => _shipModules.secondaryInfo?.data;
   bool get renderSecondaryGun => _secondaryInfo != null;
   List<SecondaryGunHolder> get secondaryGuns =>
@@ -179,15 +182,25 @@ class ShipInfoProvider with ChangeNotifier {
 
       holder.burnChance = _percent(ammoInfo.burnChance);
       holder.damage = _format(ammoInfo.damage);
-      holder.penetration = _format(ammoInfo.penHe, suffix: 'mm');
       holder.velocity = _format(ammoInfo.speed, suffix: 'm/s');
       holder.reloadTime = _format(gun.reload, suffix: 's');
 
+      switch (ammoInfo.ammoType) {
+        case 'HE':
+          holder.penetration = _format(ammoInfo.penHe, suffix: 'mm');
+          break;
+        case 'CS':
+          holder.penetration = _format(ammoInfo.penSAP, suffix: 'mm');
+          break;
+        default:
+          break;
+      }
       guns.add(holder);
     }
     return guns;
   }
 
+  // Torpedo
   TorpedoInfo? get _torpedoInfo => _shipModules.torpedoInfo?.data;
   bool get renderTorpedo => _torpedoInfo != null;
   WeaponInfo? get _torpedo => _torpedoInfo?.launchers.first;
@@ -254,6 +267,53 @@ class ShipInfoProvider with ChangeNotifier {
       Localisation.instance
           .stringOf('IDS_${_torpedoInfo?.launchers[0].ammo[0]}') ??
       '';
+
+  // Air Defense, it is coming from main battery, secondaries and AA guns
+  AirDefense? get _airDefense => _ship.airDefense;
+  bool get renderAirDefense => airDefenses.isNotEmpty;
+  List<AirDefenseHolder> get airDefenses => _extractAirDefenses(
+        _airDefense,
+        _mainGunInfo,
+        _secondaryInfo,
+      );
+
+  List<AirDefenseHolder> _extractAirDefenses(
+    AirDefense? airDefense,
+    GunInfo? mainGunInfo,
+    GunInfo? secondaryInfo,
+  ) {
+    final List<AirDefenseHolder> airDefenses = [];
+    final mid = airDefense?.medium;
+    final near = airDefense?.near;
+    final far = airDefense?.far;
+    final mainFar = mainGunInfo?.far;
+    final mainBubble = mainGunInfo?.bubbles;
+    final secondaryFar = secondaryInfo?.far;
+    final secondaryBubble = secondaryInfo?.bubbles;
+
+    for (final aa in [mainFar, secondaryFar, far, mid, near]) {
+      if (aa == null) continue;
+      final holder = AirDefenseHolder(
+        name: 'TODO',
+      );
+
+      holder.range = _format(aa.maxRange, suffix: 'km');
+      holder.damage = _format(aa.damage);
+      airDefenses.add(holder);
+    }
+
+    for (final bubble in [mainBubble, secondaryBubble]) {
+      if (bubble == null) continue;
+      final holder = AirDefenseHolder(
+        name: 'TODO',
+      );
+
+      holder.range = _format(bubble.maxRange, suffix: 'km');
+      holder.damage = _format(bubble.damage);
+      airDefenses.add(holder);
+    }
+    return airDefenses;
+  }
 }
 
 /// This model is used to hold the shell information
@@ -295,4 +355,15 @@ class TorpedoHolder {
   String? visibility;
   String? speed;
   String? reactionTime;
+}
+
+class AirDefenseHolder {
+  AirDefenseHolder({
+    required this.name,
+  });
+
+  final String name;
+  String? configuration;
+  String? damage;
+  String? range;
 }
