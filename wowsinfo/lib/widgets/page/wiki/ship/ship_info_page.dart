@@ -64,6 +64,7 @@ class _ShipInfoPageState extends State<ShipInfoPage> {
                 ),
               if (_provider.renderHull) const _ShipSurvivabilty(),
               if (_provider.renderMainGun) const _ShipMainBattery(),
+              if (_provider.renderSecondaryGun) const _ShipSecondaries(),
               if (_provider.renderTorpedo) const _ShipTorpedo(),
             ],
           ),
@@ -278,6 +279,68 @@ class _ShipMainBattery extends StatelessWidget {
           ),
       ],
     );
+  }
+}
+
+class _ShipSecondaries extends StatelessWidget {
+  const _ShipSecondaries({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final provider = Provider.of<ShipInfoProvider>(context);
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Center(
+            child: Text(
+              '${Localisation.instance.secondaries} (${provider.secondaryRange})',
+              style: Theme.of(context).textTheme.headline6,
+            ),
+          ),
+          for (final gun in provider.secondaryGuns)
+            ...renderSecondaries(context, gun),
+        ],
+      ),
+    );
+  }
+
+  List renderSecondaries(BuildContext context, SecondaryGunHolder info) {
+    return [
+      Center(
+        child: Text(
+          info.name,
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+      ),
+      Wrap(
+        alignment: WrapAlignment.spaceAround,
+        spacing: 16,
+        children: [
+          TextWithCaption(
+            title: Localisation.instance.gunReloadTime,
+            value: info.reloadTime ?? '-',
+          ),
+          TextWithCaption(
+            title: Localisation.instance.shellVelocity,
+            value: info.velocity ?? '-',
+          ),
+          TextWithCaption(
+            title: Localisation.instance.shellFireChance,
+            value: info.burnChance ?? '-',
+          ),
+          TextWithCaption(
+            title: Localisation.instance.gunDamage,
+            value: info.damage ?? '-',
+          ),
+          TextWithCaption(
+            title: Localisation.instance.shellPenetration,
+            value: info.penetration ?? '-',
+          ),
+        ],
+      ),
+    ];
   }
 }
 

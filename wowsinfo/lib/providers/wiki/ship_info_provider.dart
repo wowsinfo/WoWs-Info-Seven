@@ -155,6 +155,39 @@ class ShipInfoProvider with ChangeNotifier {
     return shells;
   }
 
+  GunInfo? get _secondaryInfo => _shipModules.secondaryInfo?.data;
+  bool get renderSecondaryGun => _secondaryInfo != null;
+  List<SecondaryGunHolder> get secondaryGuns =>
+      _extractSecondaryGuns(_secondaryInfo);
+  String get secondaryRange {
+    final range = _secondaryInfo?.range;
+    if (range == null) return '-';
+    return _format(range / 1000, suffix: 'km');
+  }
+
+  List<SecondaryGunHolder> _extractSecondaryGuns(GunInfo? gunInfo) {
+    if (gunInfo == null) return [];
+    final List<SecondaryGunHolder> guns = [];
+    for (final gun in gunInfo.guns) {
+      final ammo = gun.ammo.first;
+      final ammoInfo = GameRepository.instance.projectileOf(ammo);
+      if (ammoInfo == null) continue;
+
+      final holder = SecondaryGunHolder(
+        name: Localisation.instance.stringOf(ammo, prefix: 'IDS_') ?? '-',
+      );
+
+      holder.burnChance = _percent(ammoInfo.burnChance);
+      holder.damage = _format(ammoInfo.damage);
+      holder.penetration = _format(ammoInfo.penHe, suffix: 'mm');
+      holder.velocity = _format(ammoInfo.speed, suffix: 'm/s');
+      holder.reloadTime = _format(gun.reload, suffix: 's');
+
+      guns.add(holder);
+    }
+    return guns;
+  }
+
   TorpedoInfo? get _torpedoInfo => _shipModules.torpedoInfo?.data;
   bool get renderTorpedo => _torpedoInfo != null;
   WeaponInfo? get _torpedo => _torpedoInfo?.launchers.first;
@@ -236,6 +269,19 @@ class ShellHolder {
   String? damage;
   String? penetration;
   String? overmatch;
+}
+
+class SecondaryGunHolder {
+  SecondaryGunHolder({
+    required this.name,
+  });
+
+  final String name;
+  String? reloadTime;
+  String? burnChance;
+  String? damage;
+  String? penetration;
+  String? velocity;
 }
 
 class TorpedoHolder {
