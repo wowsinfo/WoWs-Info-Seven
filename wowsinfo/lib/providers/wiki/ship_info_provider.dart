@@ -3,6 +3,7 @@ import 'package:logging/logging.dart';
 import 'package:wowsinfo/extensions/number.dart';
 import 'package:wowsinfo/models/gamedata/game_info.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
+import 'package:wowsinfo/models/wargaming/weapon.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_module_selection.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_modules.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
@@ -55,7 +56,12 @@ class ShipInfoProvider with ChangeNotifier {
   String get title => '$shipIcon ${_ship.id}';
   String get tier => GameInfo.tiers[_ship.tier - 1];
 
-  String get shipName => Localisation.instance.stringOf(_ship.name) ?? '-';
+  String get shipName {
+    final name = Localisation.instance.stringOf(_ship.name);
+    if (name == null) return '-';
+    return '$tier $name';
+  }
+
   String get shipIcon => _ship.index;
   String get description =>
       Localisation.instance.stringOf(_ship.description) ?? '-';
@@ -151,6 +157,66 @@ class ShipInfoProvider with ChangeNotifier {
 
   TorpedoInfo? get _torpedoInfo => _shipModules.torpedoInfo?.data;
   bool get renderTorpedo => _torpedoInfo != null;
+  WeaponInfo? get _torpedo => _torpedoInfo?.launchers.first;
+  String get torpedoReloadTime => _format(_torpedo?.reload, suffix: 's');
+  String get torpedoRotationTime => _format(_torpedo?.rotation, suffix: 's');
+  String get torpedoConfiguration {
+    final launchers = _torpedoInfo?.launchers;
+    if (launchers == null) return '-';
+
+    List<String> config = [];
+    // int total = 0;
+    for (final launcher in launchers) {
+      config.add('${launcher.count} x ${launcher.each}');
+      // total += launcher.each * launcher.count;
+    }
+
+    if (config.isEmpty) return '-';
+    return config.join(' ');
+  }
+
+  List<TorpedoHolder> get torpedoes => _extractTorpedoes(_torpedoInfo);
+  List<TorpedoHolder> _extractTorpedoes(TorpedoInfo? torpedoInfo) {
+    if (_torpedo == null) return [];
+    final List<TorpedoHolder> torpedoes = [];
+    for (final ammo in _torpedo!.ammo) {
+      final ammoInfo = GameRepository.instance.projectileOf(ammo);
+      if (ammoInfo == null) continue;
+
+      final torpName = Localisation.instance.stringOf(ammo, prefix: 'IDS_');
+      final holder = TorpedoHolder(name: torpName ?? '-');
+      // calculate the actual torpedo damage
+      final alphaDamage = ammoInfo.alphaDamage ?? 0;
+      final damage = ammoInfo.damage ?? 0;
+      final actualDamage = (alphaDamage / 3 + damage).round();
+      if (actualDamage > 0) {
+        holder.damage = _format(actualDamage);
+      }
+
+      final range = ammoInfo.range ?? 0;
+      final actualRange = (range / (100.0 / 3.0));
+      if (actualRange > 0) {
+        holder.range = _format(actualRange, suffix: 'km');
+      }
+      final visibility = ammoInfo.visibility;
+      if (visibility != null) {
+        holder.visibility = _format(visibility, suffix: 'km');
+      }
+      final speed = ammoInfo.speed;
+      if (speed != null) {
+        holder.speed = _format(speed, suffix: 'kt');
+      }
+
+      // 2.6854 is the scale WG uses in game
+      final reaction = (visibility ?? 0) / (speed ?? 1) / 2.6854 * 1000;
+      if (reaction > 0) {
+        holder.reactionTime = _format(reaction, suffix: 's');
+      }
+      torpedoes.add(holder);
+    }
+    return torpedoes;
+  }
+
   String get torpedoName =>
       Localisation.instance
           .stringOf('IDS_${_torpedoInfo?.launchers[0].ammo[0]}') ??
@@ -170,4 +236,17 @@ class ShellHolder {
   String? damage;
   String? penetration;
   String? overmatch;
+}
+
+class TorpedoHolder {
+  TorpedoHolder({
+    required this.name,
+  });
+
+  final String name;
+  String? damage;
+  String? range;
+  String? visibility;
+  String? speed;
+  String? reactionTime;
 }

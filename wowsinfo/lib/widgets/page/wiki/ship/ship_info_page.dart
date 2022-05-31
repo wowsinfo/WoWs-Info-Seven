@@ -64,7 +64,7 @@ class _ShipInfoPageState extends State<ShipInfoPage> {
                 ),
               if (_provider.renderHull) const _ShipSurvivabilty(),
               if (_provider.renderMainGun) const _ShipMainBattery(),
-              if (_provider.renderTorpedo) Text(_provider.torpedoName),
+              if (_provider.renderTorpedo) const _ShipTorpedo(),
             ],
           ),
         ),
@@ -278,5 +278,81 @@ class _ShipMainBattery extends StatelessWidget {
           ),
       ],
     );
+  }
+}
+
+class _ShipTorpedo extends StatelessWidget {
+  const _ShipTorpedo({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final provider = Provider.of<ShipInfoProvider>(context);
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Center(
+            child: Text(
+              Localisation.instance.torpedoes,
+              style: Theme.of(context).textTheme.headline6,
+            ),
+          ),
+          Wrap(
+            alignment: WrapAlignment.spaceAround,
+            spacing: 16,
+            children: [
+              TextWithCaption(
+                title: Localisation.instance.torpedoReloadTime,
+                value: provider.torpedoReloadTime,
+              ),
+              TextWithCaption(
+                title: 'TODO config',
+                value: provider.torpedoConfiguration,
+              ),
+              TextWithCaption(
+                title: Localisation.instance.torpedoRotationTime,
+                value: provider.torpedoRotationTime,
+              ),
+            ],
+          ),
+          for (final torp in provider.torpedoes)
+            ...renderTorpedoInfo(context, torp),
+        ],
+      ),
+    );
+  }
+
+  List renderTorpedoInfo(BuildContext context, TorpedoHolder info) {
+    return [
+      Center(
+        child: Text(
+          '${info.name} (${info.reactionTime ?? '-'})',
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+      ),
+      Wrap(
+        alignment: WrapAlignment.spaceAround,
+        spacing: 16,
+        children: [
+          TextWithCaption(
+            title: Localisation.instance.torpedoDamage,
+            value: info.damage ?? '-',
+          ),
+          TextWithCaption(
+            title: Localisation.instance.torpedoDetection,
+            value: info.visibility ?? '-',
+          ),
+          TextWithCaption(
+            title: Localisation.instance.torpedoRange,
+            value: info.range ?? '-',
+          ),
+          TextWithCaption(
+            title: Localisation.instance.torpedoSpeed,
+            value: info.speed ?? '-',
+          ),
+        ],
+      ),
+    ];
   }
 }
