@@ -17,6 +17,7 @@ enum ShipModuleType {
   fireControl,
   engine,
   airSupport,
+  airDefense,
   depthCharge,
   fighter,
   skipBomber,
@@ -43,6 +44,8 @@ enum ShipModuleType {
         return 'engine';
       case ShipModuleType.airSupport:
         return 'airSupport';
+      case ShipModuleType.airDefense:
+        return 'airDefense';
       case ShipModuleType.depthCharge:
         return 'depthCharges';
       case ShipModuleType.fighter:
@@ -75,6 +78,8 @@ enum ShipModuleType {
       case ShipModuleType.depthCharge:
       case ShipModuleType.airSupport:
         return '';
+      case ShipModuleType.airDefense:
+        return Localisation.instance.airDefense;
       case ShipModuleType.fighter:
         return Localisation.instance.fighter;
       case ShipModuleType.skipBomber:
@@ -105,6 +110,7 @@ class ShipModules {
   final List<ShipModuleHolder<FireControlInfo>> _fireControlInfo = [];
   final List<ShipModuleHolder<EngineInfo>> _engineInfo = [];
   final List<ShipModuleHolder<AirSupportInfo>> _airSupportInfo = [];
+  final List<ShipModuleHolder<AirDefense>> _airDefenseInfo = [];
   final List<ShipModuleHolder<DepthChargeInfo>> _depthChargeInfo = [];
 
   // aircrafts
@@ -178,6 +184,8 @@ class ShipModules {
       _valueAt(_fireControlInfo, _moduleSelection.fireControlIndex);
   ShipModuleHolder<AirSupportInfo>? get airSupportInfo =>
       _valueAt(_airSupportInfo, _moduleSelection.airSupportIndex);
+  ShipModuleHolder<AirDefense>? get airDefenseInfo =>
+      _valueAt(_airDefenseInfo, _moduleSelection.airDefenseIndex);
   ShipModuleHolder<DepthChargeInfo>? get depthChargeInfo =>
       _valueAt(_depthChargeInfo, _moduleSelection.depthChargeIndex);
 
@@ -207,6 +215,10 @@ class ShipModules {
           final moduleList = components[type.key];
           if (moduleList == null || moduleList.isEmpty) return;
           final info = shipModules[moduleList.first];
+          if (info == null) {
+            _logger.severe('Module $moduleList not found');
+            return;
+          }
           final holder = ShipModuleHolder<T>(
             module: module,
             type: type,
@@ -222,6 +234,8 @@ class ShipModules {
                 _depthChargeInfo.add);
             addModule(ShipModuleType.airSupport, AirSupportInfo.fromJson,
                 _airSupportInfo.add);
+            addModule(ShipModuleType.airDefense, AirDefense.fromJson,
+                _airDefenseInfo.add);
             addModule(
                 ShipModuleType.secondary, GunInfo.fromJson, _secondaryInfo.add);
             addModule(

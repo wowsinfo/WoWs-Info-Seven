@@ -13,6 +13,7 @@ class ShipModuleSelection {
   int _selectedFireControl = 0;
   int _selectedEngine = 0;
   int _selectedAirSupport = 0;
+  int _selectedAirDefense = 0;
   int _selectedDepthCharge = 0;
 
   int _selectedFighter = 0;
@@ -28,6 +29,7 @@ class ShipModuleSelection {
   int get fireControlIndex => _selectedFireControl;
   int get engineIndex => _selectedEngine;
   int get airSupportIndex => _selectedAirSupport;
+  int get airDefenseIndex => _selectedAirDefense;
   int get depthChargeIndex => _selectedDepthCharge;
 
   int get fighterIndex => _selectedFighter;
@@ -47,6 +49,7 @@ class ShipModuleSelection {
     _selectedFireControl = selection.fireControlIndex;
     _selectedEngine = selection.engineIndex;
     _selectedAirSupport = selection.airSupportIndex;
+    _selectedAirDefense = selection.airDefenseIndex;
     _selectedDepthCharge = selection.depthChargeIndex;
 
     _selectedFighter = selection.fighterIndex;
@@ -74,6 +77,8 @@ class ShipModuleSelection {
         return _selectedEngine == index;
       case ShipModuleType.airSupport:
         return _selectedAirSupport == index;
+      case ShipModuleType.airDefense:
+        return _selectedAirDefense == index;
       case ShipModuleType.depthCharge:
         return _selectedDepthCharge == index;
 
@@ -134,6 +139,11 @@ class ShipModuleSelection {
         if (_selectedAirSupport == index) return;
         _selectedAirSupport = index;
         _logger.fine('updateAirSupport: $index');
+        break;
+      case ShipModuleType.airDefense:
+        if (_selectedAirDefense == index) return;
+        _selectedAirDefense = index;
+        _logger.fine('updateAirDefense: $index');
         break;
       case ShipModuleType.depthCharge:
         if (_selectedDepthCharge == index) return;

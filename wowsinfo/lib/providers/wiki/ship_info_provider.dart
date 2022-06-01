@@ -129,24 +129,19 @@ class ShipInfoProvider with ChangeNotifier {
       if (type == null) continue;
 
       final shell = ShellHolder(name: type);
+      shell.burnChance = _percent(ammoInfo.burnChance);
+      shell.damage = _format(ammoInfo.damage);
+      shell.velocity = _format(ammoInfo.speed, suffix: 'm/s');
+      shell.weight = _format(ammoInfo.weight, suffix: 'kg');
       switch (ammoInfo.ammoType) {
         case 'HE':
-          shell.burnChance = _percent(ammoInfo.burnChance);
-          shell.damage = _format(ammoInfo.damage);
           shell.penetration = _format(ammoInfo.penHe, suffix: 'mm');
-          shell.velocity = _format(ammoInfo.speed, suffix: 'm/s');
           break;
         case 'AP':
-          shell.burnChance = _percent(ammoInfo.burnChance);
-          shell.damage = _format(ammoInfo.damage);
           shell.overmatch = _format(ammoInfo.overmatch, suffix: 'mm');
-          shell.velocity = _format(ammoInfo.speed, suffix: 'm/s');
           break;
         case 'CS':
-          shell.burnChance = _percent(ammoInfo.burnChance);
-          shell.damage = _format(ammoInfo.damage);
           shell.penetration = _format(ammoInfo.penSAP, suffix: 'mm');
-          shell.velocity = _format(ammoInfo.speed, suffix: 'm/s');
           break;
         default:
           _logger.severe('Unknown ammo type: ${ammoInfo.type}');
@@ -269,7 +264,7 @@ class ShipInfoProvider with ChangeNotifier {
       '';
 
   // Air Defense, it is coming from main battery, secondaries and AA guns
-  AirDefense? get _airDefense => _ship.airDefense;
+  AirDefense? get _airDefense => _shipModules.airDefenseInfo?.data;
   bool get renderAirDefense => airDefenses.isNotEmpty;
   List<AirDefenseHolder> get airDefenses => _extractAirDefenses(
         _airDefense,
@@ -291,6 +286,17 @@ class ShipInfoProvider with ChangeNotifier {
     final secondaryFar = secondaryInfo?.far;
     final secondaryBubble = secondaryInfo?.bubbles;
 
+    for (final bubble in [mainBubble, secondaryBubble]) {
+      if (bubble == null) continue;
+      final holder = AirDefenseHolder(
+        name: 'TODO',
+      );
+
+      holder.range = _format(bubble.maxRange, suffix: 'km');
+      holder.damage = _format(bubble.damage);
+      airDefenses.add(holder);
+    }
+
     for (final aa in [mainFar, secondaryFar, far, mid, near]) {
       if (aa == null) continue;
       final holder = AirDefenseHolder(
@@ -302,16 +308,6 @@ class ShipInfoProvider with ChangeNotifier {
       airDefenses.add(holder);
     }
 
-    for (final bubble in [mainBubble, secondaryBubble]) {
-      if (bubble == null) continue;
-      final holder = AirDefenseHolder(
-        name: 'TODO',
-      );
-
-      holder.range = _format(bubble.maxRange, suffix: 'km');
-      holder.damage = _format(bubble.damage);
-      airDefenses.add(holder);
-    }
     return airDefenses;
   }
 }

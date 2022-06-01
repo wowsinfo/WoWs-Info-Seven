@@ -6,30 +6,32 @@ class Projectile {
     required this.type,
     required this.nation,
     required this.name,
-    required this.ammoType,
-    required this.speed,
-    required this.damage,
-    required this.ricochetAngle,
-    required this.ricochetAlways,
-    required this.diameter,
-    required this.ap,
-    required this.overmatch,
-    required this.fuseTime,
-    required this.penHe,
-    required this.burnChance,
-    required this.visibility,
-    required this.range,
-    required this.floodChance,
-    required this.alphaDamage,
-    required this.deepWater,
-    required this.penSAP,
-    required this.ignoreClasses,
+    this.weight,
+    this.ammoType,
+    this.speed,
+    this.damage,
+    this.ricochetAngle,
+    this.ricochetAlways,
+    this.diameter,
+    this.ap,
+    this.overmatch,
+    this.fuseTime,
+    this.penHe,
+    this.burnChance,
+    this.visibility,
+    this.range,
+    this.floodChance,
+    this.alphaDamage,
+    this.deepWater,
+    this.penSAP,
+    this.ignoreClasses,
   });
 
   final String type;
   final String nation;
   final String name;
   final String? ammoType;
+  final num? weight;
   final num? speed;
   final num? damage;
   final num? ricochetAngle;
@@ -53,6 +55,7 @@ class Projectile {
         nation: json['nation'],
         name: json['name'],
         ammoType: json['ammoType'],
+        weight: json['weight'],
         speed: json['speed'],
         damage: json['damage'],
         ricochetAngle: json['ricochetAngle'],

@@ -24,7 +24,6 @@ class Ship implements ShipFilterInterface {
     required this.costGold,
     required this.costCr,
     this.nextShips,
-    this.airDefense,
     required this.modules,
     required this.components,
   });
@@ -50,7 +49,6 @@ class Ship implements ShipFilterInterface {
   final int costGold;
   final int costCr;
   final List<int>? nextShips;
-  final AirDefense? airDefense;
   final Map<String, List<ShipModuleInfo>> modules;
   final Map<String, dynamic> components;
 
@@ -59,7 +57,7 @@ class Ship implements ShipFilterInterface {
 
   @override
   String toString() {
-    return 'Ship{name: $name, description: $description, year: $year, paperShip: $paperShip, id: $id, index: $index, tier: $tier, region: $region, type: $type, group: $group, consumables: $consumables, costXp: $costXp, costGold: $costGold, costCr: $costCr, nextShips: $nextShips, airDefense: $airDefense, modules: $modules, components: $components}';
+    return 'Ship{name: $name, description: $description, year: $year, paperShip: $paperShip, id: $id, index: $index, tier: $tier, region: $region, type: $type, group: $group, consumables: $consumables, costXp: $costXp, costGold: $costGold, costCr: $costCr, nextShips: $nextShips, modules: $modules, components: $components}';
   }
 
   int greater(Ship other) {
@@ -99,9 +97,6 @@ class Ship implements ShipFilterInterface {
         nextShips: json['nextShips'] == null
             ? null
             : List<int>.from(json['nextShips']),
-        airDefense: json['airDefense'] == null
-            ? null
-            : AirDefense.fromJson(json['airDefense']),
         modules: Map<String, List<ShipModuleInfo>>.from(
           json['modules'].map(
             (x, y) => MapEntry<String, List<ShipModuleInfo>>(

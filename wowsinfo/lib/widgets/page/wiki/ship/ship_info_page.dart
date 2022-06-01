@@ -258,6 +258,11 @@ class _ShipMainBattery extends StatelessWidget {
             title: Localisation.instance.shellFireChance,
             value: shell.burnChance!,
           ),
+        if (shell.weight != null)
+          TextWithCaption(
+            title: 'TODO weight',
+            value: shell.weight!,
+          ),
         if (shell.damage != null)
           TextWithCaption(
             title: Localisation.instance.gunDamage,
