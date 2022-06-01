@@ -310,6 +310,19 @@ class ShipInfoProvider with ChangeNotifier {
 
     return airDefenses;
   }
+
+  // Mobility
+  MobilityInfo? get _mobility => _hullInfo?.mobility;
+  bool get renderMobility => _mobility != null;
+  String get rudderTime => _format(_mobility?.rudderTime, suffix: 's');
+  String get maxSpeed => _format(_mobility?.speed, suffix: 'kt');
+  String get turninRadius => _format(_mobility?.turningRadius, suffix: 'm');
+
+  // Visibility
+  VisibilityInfo? get _visibility => _hullInfo?.visibility;
+  bool get renderVisibility => _visibility != null;
+  String get seaVisibility => _format(_visibility?.sea, suffix: 'km');
+  String get planeVisibility => _format(_visibility?.plane, suffix: 'km');
 }
 
 /// This model is used to hold the shell information

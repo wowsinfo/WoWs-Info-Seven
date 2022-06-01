@@ -67,6 +67,8 @@ class _ShipInfoPageState extends State<ShipInfoPage> {
               if (_provider.renderSecondaryGun) const _ShipSecondaries(),
               if (_provider.renderTorpedo) const _ShipTorpedo(),
               if (_provider.renderAirDefense) const _ShipAirDefense(),
+              if (_provider.renderMobility) const _ShipMobility(),
+              if (_provider.renderVisibility) const _ShipVisibility(),
             ],
           ),
         ),
@@ -473,5 +475,83 @@ class _ShipAirDefense extends StatelessWidget {
         ],
       ),
     ];
+  }
+}
+
+class _ShipMobility extends StatelessWidget {
+  const _ShipMobility({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final provider = Provider.of<ShipInfoProvider>(context);
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Center(
+            child: Text(
+              Localisation.instance.mobility,
+              style: Theme.of(context).textTheme.headline6,
+            ),
+          ),
+          Wrap(
+            alignment: WrapAlignment.spaceAround,
+            spacing: 16,
+            children: [
+              TextWithCaption(
+                title: Localisation.instance.rudderTime,
+                value: provider.rudderTime,
+              ),
+              TextWithCaption(
+                title: Localisation.instance.maxSpeed,
+                value: provider.maxSpeed,
+              ),
+              TextWithCaption(
+                title: Localisation.instance.turningRadius,
+                value: provider.turninRadius,
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ShipVisibility extends StatelessWidget {
+  const _ShipVisibility({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final provider = Provider.of<ShipInfoProvider>(context);
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Center(
+            child: Text(
+              Localisation.instance.visibility,
+              style: Theme.of(context).textTheme.headline6,
+            ),
+          ),
+          Wrap(
+            alignment: WrapAlignment.spaceAround,
+            spacing: 16,
+            children: [
+              TextWithCaption(
+                title: Localisation.instance.airDetection,
+                value: provider.planeVisibility,
+              ),
+              TextWithCaption(
+                title: Localisation.instance.seaDetection,
+                value: provider.seaVisibility,
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }
