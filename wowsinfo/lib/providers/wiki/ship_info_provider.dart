@@ -7,7 +7,7 @@ import 'package:wowsinfo/models/wargaming/weapon.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_module_selection.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_modules.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
-import 'package:wowsinfo/repositories/localisation.dart';
+import 'package:wowsinfo/localisation/localisation.dart';
 
 /// For the individual ship information.
 class ShipInfoProvider with ChangeNotifier {

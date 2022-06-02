@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:wowsinfo/repositories/app_repository.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
-import 'package:wowsinfo/repositories/localisation.dart';
+import 'package:wowsinfo/localisation/localisation.dart';
 import 'package:wowsinfo/repositories/stores/shared_store.dart';
 import 'package:wowsinfo/repositories/user_repository.dart';
 import 'package:wowsinfo/widgets/wowsinfo.dart';

@@ -213,6 +213,7 @@ class Localisation {
   String get maximumRange => _get('MAX_DIST', prefix: _shipParam);
   String get reloadTime => _get('SHOT_DELAY', prefix: _shipParam);
   String get rotationTime => _get('ROTATION_TIME', prefix: _shipParam);
+  String get shellWeight => _get('AMMO_BULLET_MASS', prefix: _shipParam);
 
   // Durability
   String get durability => _get('DURABILITY', prefix: _shipParam);
@@ -232,7 +233,7 @@ class Localisation {
   String get shellFireChance => _get('ARTILLERY_BURN_PROB', prefix: _shipParam);
 
   // Torpedo
-  String get torpedoRange => _get('TORPEDOES_MAX_DIST', prefix: _shipParam);
+  String get torpedoRange => _get('TORPEDO_MAX_DIST', prefix: _shipParam);
   String get torpedoSpeed => _get('TORPEDO_SPEED', prefix: _shipParam);
   String get torpedoReloadTime => reloadTime;
   String get torpedoRotationTime => rotationTime;

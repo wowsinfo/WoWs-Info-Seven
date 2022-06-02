@@ -5,7 +5,7 @@ import 'package:wowsinfo/models/wowsinfo/ship_module_selection.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_modules.dart';
 import 'package:wowsinfo/providers/wiki/ship_module_provider.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
-import 'package:wowsinfo/repositories/localisation.dart';
+import 'package:wowsinfo/localisation/localisation.dart';
 
 void showShipModuleDialog(
   BuildContext context,

@@ -4,7 +4,7 @@ import 'package:wowsinfo/extensions/list.dart';
 import 'package:wowsinfo/foundation/app.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_filter.dart';
 import 'package:wowsinfo/providers/wiki/filter_ship_provider.dart';
-import 'package:wowsinfo/repositories/localisation.dart';
+import 'package:wowsinfo/localisation/localisation.dart';
 
 void showFilterShipDialog(
   BuildContext context,

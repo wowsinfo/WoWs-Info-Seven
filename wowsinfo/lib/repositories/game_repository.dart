@@ -13,7 +13,7 @@ import 'package:wowsinfo/models/gamedata/game_info.dart';
 import 'package:wowsinfo/models/gamedata/modernization.dart';
 import 'package:wowsinfo/models/gamedata/projectile.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
-import 'package:wowsinfo/repositories/localisation.dart';
+import 'package:wowsinfo/localisation/localisation.dart';
 
 /// This repository manages game data from WoWs-Game-Data
 class GameRepository {

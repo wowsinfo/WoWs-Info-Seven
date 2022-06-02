@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:wowsinfo/extensions/number.dart';
 import 'package:wowsinfo/models/gamedata/modifier.dart';
-import 'package:wowsinfo/repositories/localisation.dart';
+import 'package:wowsinfo/localisation/localisation.dart';
 
 @immutable
 class Ability {

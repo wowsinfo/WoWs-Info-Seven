@@ -5,7 +5,7 @@ import 'package:wowsinfo/models/gamedata/ship.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_module_selection.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_modules.dart';
 import 'package:wowsinfo/providers/wiki/ship_info_provider.dart';
-import 'package:wowsinfo/repositories/localisation.dart';
+import 'package:wowsinfo/localisation/localisation.dart';
 import 'package:wowsinfo/widgets/page/wiki/ship/ship_module_dialog.dart';
 import 'package:wowsinfo/widgets/shared/text_with_caption.dart';
 import 'package:wowsinfo/widgets/shared/wiki/ship_icon.dart';
@@ -262,7 +262,7 @@ class _ShipMainBattery extends StatelessWidget {
           ),
         if (shell.weight != null)
           TextWithCaption(
-            title: 'TODO weight',
+            title: Localisation.instance.shellWeight,
             value: shell.weight!,
           ),
         if (shell.damage != null)

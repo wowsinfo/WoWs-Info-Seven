@@ -3,7 +3,7 @@ import 'package:wowsinfo/models/gamedata/aircraft.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_module_selection.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
-import 'package:wowsinfo/repositories/localisation.dart';
+import 'package:wowsinfo/localisation/localisation.dart';
 
 typedef ShipModuleMap<T> = Map<ShipModuleType, List<ShipModuleHolder<T>>>;
 

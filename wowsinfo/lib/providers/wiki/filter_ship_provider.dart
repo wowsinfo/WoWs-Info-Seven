@@ -3,7 +3,7 @@ import 'package:logging/logging.dart';
 import 'package:wowsinfo/models/gamedata/game_info.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_filter.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
-import 'package:wowsinfo/repositories/localisation.dart';
+import 'package:wowsinfo/localisation/localisation.dart';
 
 /// Provides data and handle logic for `showFilterShipDialog`
 class FilterShipProvider with ChangeNotifier {

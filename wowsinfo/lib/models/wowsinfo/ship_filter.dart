@@ -1,5 +1,5 @@
 import 'package:logging/logging.dart';
-import 'package:wowsinfo/repositories/localisation.dart';
+import 'package:wowsinfo/localisation/localisation.dart';
 
 /// An interface for filtering ships with a [ShipFilter]
 abstract class ShipFilterInterface {

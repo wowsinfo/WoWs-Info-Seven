@@ -4,7 +4,7 @@ import 'package:wowsinfo/foundation/app.dart';
 import 'package:wowsinfo/foundation/helpers/utils.dart';
 import 'package:wowsinfo/providers/wiki/ship_provider.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
-import 'package:wowsinfo/repositories/localisation.dart';
+import 'package:wowsinfo/localisation/localisation.dart';
 import 'package:wowsinfo/widgets/shared/wiki/ship_icon.dart';
 
 import 'ship_info_page.dart';
