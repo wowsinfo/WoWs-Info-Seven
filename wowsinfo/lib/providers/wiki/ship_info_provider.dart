@@ -83,16 +83,19 @@ class ShipInfoProvider with ChangeNotifier {
   GunInfo? get _mainGunInfo => _shipModules.gunInfo?.data;
   bool get renderMainGun => _mainGunInfo != null;
   WeaponInfo? get _gun => _mainGunInfo?.guns.first;
-  String get gunReloadTime => _format(_gun?.reload, suffix: 's');
+  String get gunReloadTime =>
+      _format(_gun?.reload, suffix: Localisation.instance.second);
   // Consider the fire control system here
   String get gunRange {
     final suo = _shipModules.fireControlInfo;
     final range = _mainGunInfo?.range;
     if (range == null) return '-';
-    if (suo == null) return _format(range / 1000, suffix: 'km');
+    if (suo == null)
+      return _format(range / 1000, suffix: Localisation.instance.kilometer);
     // increase the range
     final improvedRange = range * suo.data.maxDistCoef;
-    return _format(improvedRange / 1000, suffix: 'km');
+    return _format(improvedRange / 1000,
+        suffix: Localisation.instance.kilometer);
   }
 
   // Group guns together and format like 3 x 2 1 x 3 (9)
@@ -111,7 +114,8 @@ class ShipInfoProvider with ChangeNotifier {
     return config.join(' ');
   }
 
-  String get gunRotationTime => _format(_gun?.rotation, suffix: 's');
+  String get gunRotationTime =>
+      _format(_gun?.rotation, suffix: Localisation.instance.second);
   String get gunName =>
       Localisation.instance.stringOf(_shipModules.gunInfo?.module?.name) ?? '-';
 
@@ -131,17 +135,22 @@ class ShipInfoProvider with ChangeNotifier {
       final shell = ShellHolder(name: type);
       shell.burnChance = _percent(ammoInfo.burnChance);
       shell.damage = _format(ammoInfo.damage);
-      shell.velocity = _format(ammoInfo.speed, suffix: 'm/s');
-      shell.weight = _format(ammoInfo.weight, suffix: 'kg');
+      shell.velocity =
+          _format(ammoInfo.speed, suffix: Localisation.instance.meterPerSecond);
+      shell.weight =
+          _format(ammoInfo.weight, suffix: Localisation.instance.kilogram);
       switch (ammoInfo.ammoType) {
         case 'HE':
-          shell.penetration = _format(ammoInfo.penHe, suffix: 'mm');
+          shell.penetration =
+              _format(ammoInfo.penHe, suffix: Localisation.instance.millimeter);
           break;
         case 'AP':
-          shell.overmatch = _format(ammoInfo.overmatch, suffix: 'mm');
+          shell.overmatch = _format(ammoInfo.overmatch,
+              suffix: Localisation.instance.millimeter);
           break;
         case 'CS':
-          shell.penetration = _format(ammoInfo.penSAP, suffix: 'mm');
+          shell.penetration = _format(ammoInfo.penSAP,
+              suffix: Localisation.instance.millimeter);
           break;
         default:
           _logger.severe('Unknown ammo type: ${ammoInfo.type}');
@@ -160,7 +169,7 @@ class ShipInfoProvider with ChangeNotifier {
   String get secondaryRange {
     final range = _secondaryInfo?.range;
     if (range == null) return '-';
-    return _format(range / 1000, suffix: 'km');
+    return _format(range / 1000, suffix: Localisation.instance.kilometer);
   }
 
   List<SecondaryGunHolder> _extractSecondaryGuns(GunInfo? gunInfo) {
@@ -177,15 +186,19 @@ class ShipInfoProvider with ChangeNotifier {
 
       holder.burnChance = _percent(ammoInfo.burnChance);
       holder.damage = _format(ammoInfo.damage);
-      holder.velocity = _format(ammoInfo.speed, suffix: 'm/s');
-      holder.reloadTime = _format(gun.reload, suffix: 's');
+      holder.velocity =
+          _format(ammoInfo.speed, suffix: Localisation.instance.meterPerSecond);
+      holder.reloadTime =
+          _format(gun.reload, suffix: Localisation.instance.second);
 
       switch (ammoInfo.ammoType) {
         case 'HE':
-          holder.penetration = _format(ammoInfo.penHe, suffix: 'mm');
+          holder.penetration =
+              _format(ammoInfo.penHe, suffix: Localisation.instance.millimeter);
           break;
         case 'CS':
-          holder.penetration = _format(ammoInfo.penSAP, suffix: 'mm');
+          holder.penetration = _format(ammoInfo.penSAP,
+              suffix: Localisation.instance.millimeter);
           break;
         default:
           break;
@@ -199,8 +212,10 @@ class ShipInfoProvider with ChangeNotifier {
   TorpedoInfo? get _torpedoInfo => _shipModules.torpedoInfo?.data;
   bool get renderTorpedo => _torpedoInfo != null;
   WeaponInfo? get _torpedo => _torpedoInfo?.launchers.first;
-  String get torpedoReloadTime => _format(_torpedo?.reload, suffix: 's');
-  String get torpedoRotationTime => _format(_torpedo?.rotation, suffix: 's');
+  String get torpedoReloadTime =>
+      _format(_torpedo?.reload, suffix: Localisation.instance.second);
+  String get torpedoRotationTime =>
+      _format(_torpedo?.rotation, suffix: Localisation.instance.second);
   String get torpedoConfiguration {
     final launchers = _torpedoInfo?.launchers;
     if (launchers == null) return '-';
@@ -237,21 +252,24 @@ class ShipInfoProvider with ChangeNotifier {
       final range = ammoInfo.range ?? 0;
       final actualRange = (range / (100.0 / 3.0));
       if (actualRange > 0) {
-        holder.range = _format(actualRange, suffix: 'km');
+        holder.range =
+            _format(actualRange, suffix: Localisation.instance.kilometer);
       }
       final visibility = ammoInfo.visibility;
       if (visibility != null) {
-        holder.visibility = _format(visibility, suffix: 'km');
+        holder.visibility =
+            _format(visibility, suffix: Localisation.instance.kilometer);
       }
       final speed = ammoInfo.speed;
       if (speed != null) {
-        holder.speed = _format(speed, suffix: 'kt');
+        holder.speed = _format(speed, suffix: Localisation.instance.knot);
       }
 
       // 2.6854 is the scale WG uses in game
       final reaction = (visibility ?? 0) / (speed ?? 1) / 2.6854 * 1000;
       if (reaction > 0) {
-        holder.reactionTime = _format(reaction, suffix: 's');
+        holder.reactionTime =
+            _format(reaction, suffix: Localisation.instance.second);
       }
       torpedoes.add(holder);
     }
@@ -292,7 +310,8 @@ class ShipInfoProvider with ChangeNotifier {
         name: 'TODO',
       );
 
-      holder.range = _format(bubble.maxRange, suffix: 'km');
+      holder.range =
+          _format(bubble.maxRange, suffix: Localisation.instance.kilometer);
       holder.damage = _format(bubble.damage);
       airDefenses.add(holder);
     }
@@ -303,7 +322,8 @@ class ShipInfoProvider with ChangeNotifier {
         name: 'TODO',
       );
 
-      holder.range = _format(aa.maxRange, suffix: 'km');
+      holder.range =
+          _format(aa.maxRange, suffix: Localisation.instance.kilometer);
       holder.damage = _format(aa.damage);
       airDefenses.add(holder);
     }
@@ -314,15 +334,20 @@ class ShipInfoProvider with ChangeNotifier {
   // Mobility
   MobilityInfo? get _mobility => _hullInfo?.mobility;
   bool get renderMobility => _mobility != null;
-  String get rudderTime => _format(_mobility?.rudderTime, suffix: 's');
-  String get maxSpeed => _format(_mobility?.speed, suffix: 'kt');
-  String get turninRadius => _format(_mobility?.turningRadius, suffix: 'm');
+  String get rudderTime =>
+      _format(_mobility?.rudderTime, suffix: Localisation.instance.second);
+  String get maxSpeed =>
+      _format(_mobility?.speed, suffix: Localisation.instance.knot);
+  String get turninRadius =>
+      _format(_mobility?.turningRadius, suffix: Localisation.instance.meter);
 
   // Visibility
   VisibilityInfo? get _visibility => _hullInfo?.visibility;
   bool get renderVisibility => _visibility != null;
-  String get seaVisibility => _format(_visibility?.sea, suffix: 'km');
-  String get planeVisibility => _format(_visibility?.plane, suffix: 'km');
+  String get seaVisibility =>
+      _format(_visibility?.sea, suffix: Localisation.instance.kilometer);
+  String get planeVisibility =>
+      _format(_visibility?.plane, suffix: Localisation.instance.kilometer);
 }
 
 /// This model is used to hold the shell information

@@ -190,6 +190,15 @@ class Localisation {
 
   /// Predefined strings
 
+  // Units
+  String get second => _get('SECOND', prefix: 'IDS_');
+  String get kilometer => _get('KILOMETER', prefix: 'IDS_');
+  String get meter => _get('METER', prefix: 'IDS_');
+  String get millimeter => _get('MILLIMETER', prefix: 'IDS_');
+  String get kilogram => _get('KILOGRAMM', prefix: 'IDS_');
+  String get knot => _get('KNOT', prefix: 'IDS_');
+  String get meterPerSecond => _get('METER_SECOND', prefix: 'IDS_');
+
   static const _shipFilter = 'IDS_CAROUSEL_APPLIED_FILTER_HINT_';
   String get regionFilterName => _get('nation', prefix: _shipFilter);
   String get shipNameFilterName => _get('shipname', prefix: _shipFilter);
