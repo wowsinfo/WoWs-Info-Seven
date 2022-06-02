@@ -34,6 +34,8 @@ class App {
   /// Check if this device is IOS or MacOS
   static final bool isApple = !isWeb && (isIOS || Platform.isMacOS);
 
+  static const maxDialogWidth = 500.0;
+
   /// TODO: need to make sure the size changes and not fixed
   Size screenSize() {
     return MediaQuery.of(_context).size;

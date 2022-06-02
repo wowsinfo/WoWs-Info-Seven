@@ -4,8 +4,8 @@ import 'package:wowsinfo/extensions/list.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_module_selection.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_modules.dart';
 import 'package:wowsinfo/providers/wiki/ship_module_provider.dart';
-import 'package:wowsinfo/repositories/game_repository.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
+import 'package:wowsinfo/widgets/shared/max_width_box.dart';
 
 void showShipModuleDialog(
   BuildContext context,
@@ -15,7 +15,6 @@ void showShipModuleDialog(
 ) {
   showDialog(
     context: context,
-    barrierDismissible: false,
     builder: (_) => ChangeNotifierProvider<ShipModuleProvider>(
       create: (_) => ShipModuleProvider(
         modules: modules,
@@ -44,8 +43,10 @@ class _ShipModuleDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       child: SingleChildScrollView(
-        child: Column(
-          children: renderModuleMap(context),
+        child: MaxWidthBox(
+          child: Column(
+            children: renderModuleMap(context),
+          ),
         ),
       ),
     );

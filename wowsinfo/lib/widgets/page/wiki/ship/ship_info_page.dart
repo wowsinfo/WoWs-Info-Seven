@@ -171,6 +171,10 @@ class _ShipSurvivabilty extends StatelessWidget {
             Localisation.instance.durability,
             style: Theme.of(context).textTheme.titleLarge,
           ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Divider(),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -303,7 +307,7 @@ class _ShipSecondaries extends StatelessWidget {
         children: [
           Center(
             child: Text(
-              '${Localisation.instance.secondaries} (${provider.secondaryRange})',
+              '${Localisation.instance.secondaryBattery} (${provider.secondaryRange})',
               style: Theme.of(context).textTheme.headline6,
             ),
           ),

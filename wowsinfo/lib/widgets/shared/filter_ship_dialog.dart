@@ -5,6 +5,7 @@ import 'package:wowsinfo/foundation/app.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_filter.dart';
 import 'package:wowsinfo/providers/wiki/filter_ship_provider.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
+import 'package:wowsinfo/widgets/shared/max_width_box.dart';
 
 void showFilterShipDialog(
   BuildContext context,
@@ -35,8 +36,7 @@ class _ShipFilterDialog extends StatelessWidget {
     final provider = Provider.of<FilterShipProvider>(context);
     return Dialog(
       child: SingleChildScrollView(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 500),
+        child: MaxWidthBox(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,

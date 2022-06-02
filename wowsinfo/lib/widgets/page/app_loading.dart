@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wowsinfo/foundation/app.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
 import 'package:wowsinfo/widgets/page/wiki/upgrade_page.dart';
+import 'package:wowsinfo/widgets/shared/max_width_box.dart';
 
 class AppLoading extends StatefulWidget {
   const AppLoading({Key? key}) : super(key: key);
@@ -27,10 +28,7 @@ class _AppLoadingState extends State<AppLoading> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(
-            maxWidth: 500,
-          ),
+        child: MaxWidthBox(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

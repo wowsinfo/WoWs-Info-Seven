@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
+import 'package:wowsinfo/foundation/app.dart';
 import 'package:wowsinfo/foundation/helpers/utils.dart';
 import 'package:wowsinfo/models/gamedata/modernization.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
 import 'package:wowsinfo/widgets/shared/asset_image_loader.dart';
+import 'package:wowsinfo/widgets/shared/max_width_box.dart';
 import 'package:wowsinfo/widgets/shared/placeholder.dart';
 
 class UpgradePage extends StatelessWidget {
@@ -60,10 +62,7 @@ class UpgradePage extends StatelessWidget {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        content: ConstrainedBox(
-          constraints: const BoxConstraints(
-            maxWidth: 500,
-          ),
+        content: MaxWidthBox(
           child: ListTile(
               contentPadding: const EdgeInsets.all(2),
               title: Text(

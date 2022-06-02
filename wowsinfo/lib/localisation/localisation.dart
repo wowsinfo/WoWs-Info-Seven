@@ -241,6 +241,9 @@ class Localisation {
       _get('ARTILLERY_ALPHA_PIERCING', prefix: _shipParam);
   String get shellFireChance => _get('ARTILLERY_BURN_PROB', prefix: _shipParam);
 
+  // Secondary battery
+  String get secondaryBattery => _get('ATBA_SHORT', prefix: _shipParam);
+
   // Torpedo
   String get torpedoRange => _get('TORPEDO_MAX_DIST', prefix: _shipParam);
   String get torpedoSpeed => _get('TORPEDO_SPEED', prefix: _shipParam);
