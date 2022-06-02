@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
+import 'package:wowsinfo/foundation/colours.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_module_selection.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_modules.dart';
@@ -114,8 +115,16 @@ class _ShipTitleSection extends StatelessWidget {
               child: Text(region),
             ),
             Text(type),
-            if (costCR != null) Text(costCR!),
-            if (costGold != null) Text(costGold!),
+            if (costCR != null)
+              Text(
+                costCR!,
+                style: const TextStyle(color: WoWsColours.creditPrice),
+              ),
+            if (costGold != null)
+              Text(
+                costGold!,
+                style: const TextStyle(color: WoWsColours.goldPrice),
+              ),
             Text(
               description,
               textAlign: TextAlign.center,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wowsinfo/foundation/colours.dart';
 
 class ShipName extends StatelessWidget {
   const ShipName(
@@ -15,22 +16,24 @@ class ShipName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     /// Use a different colour for premium or special ships
-    var style = const TextStyle(
-      fontSize: 14,
-      fontWeight: FontWeight.w300,
-    );
+    final TextStyle style;
 
     if (isPremium) {
-      style = TextStyle(
+      style = const TextStyle(
         fontSize: 14,
-        color: Colors.orange[300],
+        color: WoWsColours.premiumShip,
         fontWeight: FontWeight.w500,
       );
     } else if (isSpecial) {
-      style = TextStyle(
+      style = const TextStyle(
         fontSize: 14,
-        color: Colors.deepOrangeAccent[100],
-        fontWeight: FontWeight.w600,
+        color: WoWsColours.specialShip,
+        fontWeight: FontWeight.w500,
+      );
+    } else {
+      style = const TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.w300,
       );
     }
 
