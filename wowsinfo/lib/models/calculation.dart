@@ -5,6 +5,7 @@ mixin Calculation {
     if (base == null) return double.nan;
     return value / base.toDouble();
   }
+  // TODO: should we return null instead of double.nan?
 
   /// Calculate the percentage of [value] by dividing it by [base].
   double rate(num? value, num? base) {

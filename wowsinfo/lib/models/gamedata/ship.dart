@@ -4,6 +4,27 @@ import 'package:wowsinfo/models/wowsinfo/ship_filter.dart';
 
 import 'consumable.dart';
 
+const _premiumGroups = [
+  'special',
+];
+
+const _specialGroups = [
+  'ultimate',
+  'specialUnsellable',
+  'upgradeableUltimate',
+  'upgradeableExclusive',
+  // removed ships or not in game
+  'unavailable',
+  'disabled',
+  'preserved',
+  // clan copy,
+  'clan',
+  // others
+  'earlyAccess',
+  'demoWithoutStats',
+  'demoWithStats'
+];
+
 @immutable
 class Ship implements ShipFilterInterface {
   const Ship({
@@ -54,6 +75,10 @@ class Ship implements ShipFilterInterface {
 
   /// Convert to tier symbol, [tier] starts from 1.
   String get tierString => GameInfo.tiers[tier - 1];
+
+  // TODO: we should move this to game data instead
+  bool get isSpecial => _specialGroups.contains(group);
+  bool get isPremium => _premiumGroups.contains(group);
 
   @override
   String toString() {

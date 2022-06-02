@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
 import 'package:wowsinfo/foundation/app.dart';
 import 'package:wowsinfo/foundation/helpers/utils.dart';
 import 'package:wowsinfo/providers/wiki/ship_provider.dart';
-import 'package:wowsinfo/repositories/game_repository.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
 import 'package:wowsinfo/widgets/shared/wiki/ship_icon.dart';
+import 'package:wowsinfo/widgets/shared/wiki/ship_name.dart';
 
 import 'ship_info_page.dart';
 
@@ -74,8 +75,10 @@ class _ShipPageState extends State<ShipPage> {
               child: Column(
                 children: [
                   ShipIcon(name: imageName),
-                  Text(
+                  ShipName(
                     '${curr.tierString} ${Localisation.instance.stringOf(curr.name) ?? ''}',
+                    isPremium: curr.isPremium,
+                    isSpecial: curr.isSpecial,
                   ),
                 ],
               ),
