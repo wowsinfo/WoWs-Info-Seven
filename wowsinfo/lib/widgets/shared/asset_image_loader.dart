@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 
-class AssetImageLoader extends StatelessWidget {
-  const AssetImageLoader({
+class AssetImageLoader extends StatefulWidget {
+  AssetImageLoader({
     Key? key,
     required this.name,
     this.placeholder,
@@ -12,9 +12,38 @@ class AssetImageLoader extends StatelessWidget {
   final String? placeholder;
 
   @override
+  State<AssetImageLoader> createState() => _AssetImageLoaderState();
+}
+
+class _AssetImageLoaderState extends State<AssetImageLoader> {
+  final _logger = Logger('AssetImageLoader');
+  late Future<Widget> _image;
+  late String name = widget.name;
+  late String? placeholder = widget.placeholder;
+
+  @override
+  void initState() {
+    super.initState();
+    _image = loadAssetImage(context);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (name != widget.name) {
+      setState(() {
+        name = widget.name;
+        placeholder = widget.placeholder;
+        _image = loadAssetImage(context);
+      });
+      _logger.fine('name changed to ${widget.name}');
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: loadAssetImage(context),
+      future: _image,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return snapshot.data as Widget;
