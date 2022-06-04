@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 
 class AssetImageLoader extends StatefulWidget {
-  AssetImageLoader({
+  const AssetImageLoader({
     Key? key,
     required this.name,
     this.placeholder,
@@ -55,7 +55,7 @@ class _AssetImageLoaderState extends State<AssetImageLoader> {
 
   /// Load image from gamedata/ folder and some can be missing.
   Future<Widget> loadAssetImage(BuildContext context) async {
-    final logger = Logger('ImageLoader');
+    final logger = Logger('AssetImageLoader');
     try {
       final memoryImage = await DefaultAssetBundle.of(context).load(name);
       return Image.memory(memoryImage.buffer.asUint8List());
