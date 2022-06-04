@@ -64,10 +64,9 @@ class Modernization {
   }
 
   bool isFor(Ship ship) {
-    // special cases, certain ships can bypass certain conditions
+    // special cases, certain ships can bypass all conditions
     final shipId = ship.id;
     if (ships != null && ships!.contains(shipId)) {
-      // this ship is included already
       return true;
     }
 
@@ -75,19 +74,16 @@ class Modernization {
       return false;
     }
 
-    // need to match ship nation/region, tier and type
-    if (nation != null && !nation!.contains(ship.region)) {
-      return false;
-    }
+    // need to match ship nation/region, tier and type if they are valid
+    // it is necesary to make an emptry list here because region, type and tier can all be null
+    // this means that the upgrade is valid for selected ships like special or unique
+    final region = nation ?? [];
+    final type = this.type ?? [];
+    final tier = level ?? [];
 
-    if (type != null && !type!.contains(ship.type)) {
-      return false;
-    }
-
-    if (level != null && !level!.contains(ship.tier)) {
-      return false;
-    }
-
+    if (!region.contains(ship.region)) return false;
+    if (!type.contains(ship.type)) return false;
+    if (!tier.contains(ship.tier)) return false;
     return true;
   }
 
