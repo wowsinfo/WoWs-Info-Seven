@@ -6,6 +6,7 @@ import 'package:wowsinfo/models/gamedata/ship.dart';
 import 'package:wowsinfo/models/wargaming/weapon.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_module_selection.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_modules.dart';
+import 'package:wowsinfo/models/wowsinfo/ship_upgrades.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
 
@@ -16,8 +17,10 @@ class ShipInfoProvider with ChangeNotifier {
   final BuildContext _context;
   final Ship _ship;
   late final _shipModules = ShipModules(_ship);
+  late final _shipUpgrades = ShipUpgrades(_ship);
   ShipInfoProvider(this._context, this._ship) {
     _shipModules.unpackModules();
+    _shipUpgrades.unpackUpgrades();
   }
 
   ShipModuleSelection get selection => _shipModules.selection;

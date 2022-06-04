@@ -125,9 +125,12 @@ class _ShipTitleSection extends StatelessWidget {
                 costGold!,
                 style: const TextStyle(color: WoWsColours.goldPrice),
               ),
-            Text(
-              description,
-              textAlign: TextAlign.center,
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Text(
+                description,
+                textAlign: TextAlign.center,
+              ),
             ),
           ],
         ),

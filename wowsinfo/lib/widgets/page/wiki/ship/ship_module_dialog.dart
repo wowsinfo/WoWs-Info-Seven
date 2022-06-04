@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wowsinfo/extensions/list.dart';
+import 'package:wowsinfo/foundation/colours.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_module_selection.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_modules.dart';
 import 'package:wowsinfo/providers/wiki/ship_module_provider.dart';
@@ -111,7 +112,10 @@ class _ShipModuleDialog extends StatelessWidget {
         onChanged: (_) => onChange(type, index),
       ),
       title: Text(Localisation.instance.stringOf(info.name) ?? ''),
-      subtitle: Text(info.cost.costCr.toString()),
+      subtitle: Text(
+        info.cost.costCr.toString(),
+        style: const TextStyle(color: WoWsColours.creditPrice),
+      ),
       trailing: Text('${info.cost.costXp} XP'),
       onTap: () => onChange(type, index),
     );

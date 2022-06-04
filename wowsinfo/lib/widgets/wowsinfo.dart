@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:logging/logging.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
 import 'package:wowsinfo/widgets/page/app_loading.dart';
@@ -16,9 +17,11 @@ class WoWsInfoApp extends StatelessWidget {
       localizationsDelegates: Localisation.localizationsDelegates,
       supportedLocales: Localisation.supportedLocales,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
       ),
-      home: const DebugPage(),
+      home: const GlobalShortcuts(
+        child: DebugPage(),
+      ),
     );
   }
 
@@ -35,5 +38,64 @@ class WoWsInfoApp extends StatelessWidget {
         'Platform brightness changed to ${window.platformBrightness}',
       );
     };
+  }
+}
+
+class LoggingActionDispatcher extends ActionDispatcher {
+  @override
+  Object? invokeAction(
+    covariant Action<Intent> action,
+    covariant Intent intent, [
+    BuildContext? context,
+  ]) {
+    Logger('LoggingActionDispatcher').fine(
+      'Action invoked: $action($intent) from $context',
+    );
+    super.invokeAction(action, intent, context);
+
+    return null;
+  }
+}
+
+class GlobalShortcuts extends StatelessWidget {
+  const GlobalShortcuts({
+    Key? key,
+    required this.child,
+  }) : super(key: key);
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Shortcuts(
+      shortcuts: <LogicalKeySet, Intent>{
+        LogicalKeySet(LogicalKeyboardKey.escape): const GoBackIntent(),
+      },
+      child: Actions(
+        dispatcher: LoggingActionDispatcher(),
+        actions: {
+          GoBackIntent: GoBackAction(context),
+        },
+        child: child,
+      ),
+    );
+  }
+}
+
+class GoBackIntent extends Intent {
+  const GoBackIntent();
+}
+
+class GoBackAction extends Action<GoBackIntent> {
+  GoBackAction(this.context);
+
+  final BuildContext context;
+  final _logger = Logger('GoBackAction');
+
+  @override
+  Object? invoke(GoBackIntent intent) {
+    _logger.info('Go back');
+    Navigator.pop(context);
+    return null;
   }
 }

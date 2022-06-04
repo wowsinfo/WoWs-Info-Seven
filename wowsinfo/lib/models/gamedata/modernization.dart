@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:wowsinfo/models/gamedata/modifier.dart';
+import 'package:wowsinfo/models/gamedata/ship.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
 
 @immutable
@@ -60,6 +61,34 @@ class Modernization {
     if (special == null && unique == null) return 2;
     if (unique == null && other.unique != null) return 1;
     return -1;
+  }
+
+  bool isFor(Ship ship) {
+    // special cases, certain ships can bypass certain conditions
+    final shipId = ship.id;
+    if (ships != null && ships!.contains(shipId)) {
+      // this ship is included already
+      return true;
+    }
+
+    if (excludes != null && excludes!.contains(shipId)) {
+      return false;
+    }
+
+    // need to match ship nation/region, tier and type
+    if (nation != null && !nation!.contains(ship.region)) {
+      return false;
+    }
+
+    if (type != null && !type!.contains(ship.type)) {
+      return false;
+    }
+
+    if (level != null && !level!.contains(ship.tier)) {
+      return false;
+    }
+
+    return true;
   }
 
   factory Modernization.fromJson(Map<String, dynamic> json) => Modernization(
