@@ -352,8 +352,17 @@ class ShipInfoProvider with ChangeNotifier {
   String get planeVisibility =>
       _format(_visibility?.plane, suffix: Localisation.instance.kilometer);
 
+  // Upgrades
   bool get hasUpgrades => _shipUpgrades.modernizations.isNotEmpty;
   List<List<Modernization>> get upgrades => _shipUpgrades.modernizationsBySlot;
+
+  // Next ship
+  bool get hasNextShip => _ship.nextShips?.isNotEmpty ?? false;
+  Iterable<Ship?> get nextShips =>
+      _ship.nextShips?.map(
+        (e) => GameRepository.instance.shipOf(e.toString()),
+      ) ??
+      [];
 }
 
 /// This model is used to hold the shell information

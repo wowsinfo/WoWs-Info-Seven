@@ -277,6 +277,10 @@ class Localisation {
   String get airSupport => _get('AIRSUPPORT', prefix: _shipParam);
   String get depthCharge => _get('DEPTH_CHARGE', prefix: _shipParam);
 
+  // Upgrades
+  String get upgrades => _get('MODERNIZATIONS', prefix: 'IDS_');
+  String get nextShip => _get('SPECTATE_SWITCH_SHIP', prefix: 'IDS_');
+
   /// Helper functions
 
   String _get(String key, {String? prefix}) {

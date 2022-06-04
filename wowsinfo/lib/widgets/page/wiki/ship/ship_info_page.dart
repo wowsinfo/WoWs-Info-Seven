@@ -13,6 +13,7 @@ import 'package:wowsinfo/widgets/page/wiki/ship/ship_module_dialog.dart';
 import 'package:wowsinfo/widgets/shared/asset_image_loader.dart';
 import 'package:wowsinfo/widgets/shared/text_with_caption.dart';
 import 'package:wowsinfo/widgets/shared/wiki/ship_icon.dart';
+import 'package:wowsinfo/widgets/shared/wiki/ship_name.dart';
 
 late final _logger = Logger('ShipInfoPage');
 
@@ -74,6 +75,8 @@ class _ShipInfoPageState extends State<ShipInfoPage> {
               if (_provider.renderMobility) const _ShipMobility(),
               if (_provider.renderVisibility) const _ShipVisibility(),
               if (_provider.hasUpgrades) const _ShipUpgrades(),
+              if (_provider.hasNextShip) const _ShipNextShip(),
+              Container(height: 64),
             ],
           ),
         ),
@@ -583,21 +586,30 @@ class _ShipUpgrades extends StatelessWidget {
   Widget build(BuildContext context) {
     final provider = Provider.of<ShipInfoProvider>(context);
     return Center(
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: provider.upgrades.map((slots) {
-            assert(slots.isNotEmpty, 'There should be at least one slot');
-            final slotNumber = slots[0].slot + 1;
-            return Column(
-              children: [
-                Text(slotNumber.toString()),
-                for (final upgrade in slots) renderUpgrade(context, upgrade),
-              ],
-            );
-          }).toList(growable: false),
-        ),
+      child: Column(
+        children: [
+          Text(
+            Localisation.instance.upgrades,
+            style: Theme.of(context).textTheme.headline6,
+          ),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: provider.upgrades.map((slots) {
+                assert(slots.isNotEmpty, 'There should be at least one slot');
+                final slotNumber = slots[0].slot + 1;
+                return Column(
+                  children: [
+                    Text(slotNumber.toString()),
+                    for (final upgrade in slots)
+                      renderUpgrade(context, upgrade),
+                  ],
+                );
+              }).toList(growable: false),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -605,5 +617,46 @@ class _ShipUpgrades extends StatelessWidget {
   Widget renderUpgrade(BuildContext context, Modernization upgrade) {
     final name = upgrade.icon;
     return AssetImageLoader(name: 'gamedata/app/assets/upgrades/$name.png');
+  }
+}
+
+class _ShipNextShip extends StatelessWidget {
+  const _ShipNextShip({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final provider = Provider.of<ShipInfoProvider>(context);
+    return Column(
+      children: [
+        Text(
+          Localisation.instance.nextShip,
+          style: Theme.of(context).textTheme.headline6,
+        ),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: provider.nextShips.map((ship) {
+              return renderNextShip(context, ship);
+            }).toList(growable: false),
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget renderNextShip(BuildContext context, Ship? nextShip) {
+    assert(nextShip != null, 'Next ship should not be null');
+    if (nextShip == null) return Container();
+    return Column(
+      children: [
+        ShipIcon(name: nextShip.index),
+        ShipName(
+          Localisation.instance.stringOf(nextShip.name) ?? '-',
+          isPremium: nextShip.isPremium,
+          isSpecial: nextShip.isSpecial,
+        )
+      ],
+    );
   }
 }
