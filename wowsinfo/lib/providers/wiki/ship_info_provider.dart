@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:wowsinfo/extensions/number.dart';
 import 'package:wowsinfo/models/gamedata/game_info.dart';
+import 'package:wowsinfo/models/gamedata/modernization.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
-import 'package:wowsinfo/models/wargaming/weapon.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_module_selection.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_modules.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_upgrades.dart';
@@ -351,6 +351,9 @@ class ShipInfoProvider with ChangeNotifier {
       _format(_visibility?.sea, suffix: Localisation.instance.kilometer);
   String get planeVisibility =>
       _format(_visibility?.plane, suffix: Localisation.instance.kilometer);
+
+  bool get hasUpgrades => _shipUpgrades.modernizations.isNotEmpty;
+  List<List<Modernization>> get upgrades => _shipUpgrades.modernizationsBySlot;
 }
 
 /// This model is used to hold the shell information

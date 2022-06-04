@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
 import 'package:wowsinfo/foundation/colours.dart';
+import 'package:wowsinfo/models/gamedata/modernization.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
+import 'package:wowsinfo/models/wargaming/statistics.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_module_selection.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_modules.dart';
 import 'package:wowsinfo/providers/wiki/ship_info_provider.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
 import 'package:wowsinfo/widgets/page/wiki/ship/ship_module_dialog.dart';
+import 'package:wowsinfo/widgets/shared/asset_image_loader.dart';
 import 'package:wowsinfo/widgets/shared/text_with_caption.dart';
 import 'package:wowsinfo/widgets/shared/wiki/ship_icon.dart';
 
@@ -70,6 +73,7 @@ class _ShipInfoPageState extends State<ShipInfoPage> {
               if (_provider.renderAirDefense) const _ShipAirDefense(),
               if (_provider.renderMobility) const _ShipMobility(),
               if (_provider.renderVisibility) const _ShipVisibility(),
+              if (_provider.hasUpgrades) const _ShipUpgrades(),
             ],
           ),
         ),
@@ -569,5 +573,37 @@ class _ShipVisibility extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class _ShipUpgrades extends StatelessWidget {
+  const _ShipUpgrades({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final provider = Provider.of<ShipInfoProvider>(context);
+    return Center(
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: provider.upgrades.map((slots) {
+            assert(slots.isNotEmpty, 'There should be at least one slot');
+            final slotNumber = slots[0].slot + 1;
+            return Column(
+              children: [
+                Text(slotNumber.toString()),
+                for (final upgrade in slots) renderUpgrade(context, upgrade),
+              ],
+            );
+          }).toList(growable: false),
+        ),
+      ),
+    );
+  }
+
+  Widget renderUpgrade(BuildContext context, Modernization upgrade) {
+    final name = upgrade.icon;
+    return AssetImageLoader(name: 'gamedata/app/assets/upgrades/$name.png');
   }
 }
