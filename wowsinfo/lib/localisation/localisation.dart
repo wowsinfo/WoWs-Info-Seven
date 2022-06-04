@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 import 'package:logging/logging.dart';
 import 'package:wowsinfo/extensions/number.dart';
 import 'package:wowsinfo/foundation/helpers/time_tracker.dart';
@@ -83,7 +84,8 @@ class Localisation {
     _lang = (langObject as Map).map((key, value) {
       return MapEntry(key, (value as Map).cast<String, String>());
     });
-    _gameLang = _decideLang(Platform.localeName);
+
+    _gameLang = _decideLang(Intl.getCurrentLocale());
     timer.log(message: 'Decoded lang.json');
 
     _initialised = true;
