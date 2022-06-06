@@ -91,7 +91,7 @@
     "settings_app_share_subtitle": "良かったらシェアしてね＞＿＜",
     "settings_app_check_for_update": "アップデートをチェック",
     "settings_app_no_update": "最新バージョンです",
-    "settings_app_has_update": "アップデート有り {0}",
+    "settings_app_has_update": "アップデート有り {version}",
     "settings_open_source": "オープンソース",
     "settings_open_source_github": "Github",
     "settings_open_source_licence": "ライセンス",

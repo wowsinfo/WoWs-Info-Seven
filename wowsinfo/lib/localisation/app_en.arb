@@ -101,7 +101,15 @@
   "settings_app_share_subtitle": "Share WoWs Info if you enjoy using it!",
   "settings_app_check_for_update": "Check for update",
   "settings_app_no_update": "You are using the latest version.",
-  "settings_app_has_update": "Update {0} is available",
+  "settings_app_has_update": "Update {version} is available",
+  "@settings_app_has_update": {
+    "placeholders": {
+      "version": {
+        "type": "String",
+        "example": "1.7.0"
+      }
+    }
+  },
   "settings_open_source": "Open Source",
   "settings_open_source_github": "Github",
   "settings_open_source_licence": "Licences",

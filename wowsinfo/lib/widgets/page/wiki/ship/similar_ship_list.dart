@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:wowsinfo/foundation/app.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
+import 'package:wowsinfo/widgets/page/wiki/ship/ship_similar_page.dart';
 import 'package:wowsinfo/widgets/shared/wiki/ship_icon.dart';
 import 'package:wowsinfo/widgets/shared/wiki/ship_name.dart';
 
@@ -25,7 +27,13 @@ class SimilarShipList extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(
+                    App.platformPageRoute(
+                      builder: (_) => const ShipSimilarPage(),
+                    ),
+                  );
+                },
                 child: Text(Localisation.of(context).warship_compare_similar),
               ),
             ),

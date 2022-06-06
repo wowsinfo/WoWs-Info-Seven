@@ -91,7 +91,7 @@
     "settings_app_share_subtitle": "如果喜歡使用 WoWs Info，記得分享給小夥伴們！",
     "settings_app_check_for_update": "檢查更新",
     "settings_app_no_update": "已經是最新版本",
-    "settings_app_has_update": "下載 {0} 版本",
+    "settings_app_has_update": "下載 {version} 版本",
     "settings_open_source": "開源相關",
     "settings_open_source_github": "Github",
     "settings_open_source_licence": "三方許可",
