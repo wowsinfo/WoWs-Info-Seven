@@ -28,7 +28,7 @@ class _ShipPageState extends State<ShipPage> {
       value: _provider,
       builder: (context, widget) => Scaffold(
         appBar: AppBar(
-          title: const Text('Upgrade Page'),
+          title: Text(Localisation.of(context).wiki_warships),
         ),
         body: SafeArea(
           child: Scrollbar(

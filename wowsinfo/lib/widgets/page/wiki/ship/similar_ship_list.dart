@@ -26,7 +26,7 @@ class SimilarShipList extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: ElevatedButton(
                 onPressed: () {},
-                child: const Text('Compare similar ships (NOT LOCALIZED)'),
+                child: Text(Localisation.of(context).warship_compare_similar),
               ),
             ),
           ),

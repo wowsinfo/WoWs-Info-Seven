@@ -264,7 +264,7 @@ class _ShipMainBattery extends StatelessWidget {
               ),
               // TODO: this doesn't align as expected
               TextWithCaption(
-                title: 'TODO config',
+                title: Localisation.of(context).warship_weapon_configuration,
                 value: provider.gunConfiguration,
               ),
               TextWithCaption(
@@ -325,7 +325,7 @@ class _ShipMainBattery extends StatelessWidget {
           ),
         if (shell.overmatch != null)
           TextWithCaption(
-            title: 'OVERMATCH TODO!!!!!!!!!!!!!!!!!!',
+            title: Localisation.of(context).warship_weapon_ap_overmatch,
             value: shell.overmatch!,
           ),
       ],
@@ -421,7 +421,7 @@ class _ShipTorpedo extends StatelessWidget {
                 value: provider.torpedoReloadTime,
               ),
               TextWithCaption(
-                title: 'TODO config',
+                title: Localisation.of(context).warship_weapon_configuration,
                 value: provider.torpedoConfiguration,
               ),
               TextWithCaption(

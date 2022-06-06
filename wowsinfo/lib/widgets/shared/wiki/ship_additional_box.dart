@@ -16,20 +16,21 @@ class ShipAdditionalBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final battles = shipAdditional.battles;
+    final localised = Localisation.of(context);
     return Wrap(
       alignment: WrapAlignment.spaceAround,
       spacing: 16,
       children: [
         TextWithCaption(
-          title: 'damage',
+          title: localised.warship_avg_damage,
           value: shipAdditional.damage.toDecimalString(),
         ),
         TextWithCaption(
-          title: 'winrate',
+          title: localised.warship_avg_winrate,
           value: shipAdditional.winrate.asPercentString(),
         ),
         TextWithCaption(
-          title: 'frags',
+          title: localised.warship_avg_frag,
           value: shipAdditional.frags.toDecimalString(),
         ),
         if (battles != null)
