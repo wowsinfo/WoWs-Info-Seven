@@ -50,3 +50,6 @@ app.*.map.json
 
 # all JSON files
 **/*.json
+
+# generated files by i10n
+desiredFileName.txt
