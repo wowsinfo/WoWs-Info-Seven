@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:wowsinfo/foundation/colours.dart';
 import 'package:wowsinfo/models/gamedata/modernization.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
+import 'package:wowsinfo/models/gamedata/ship_additional.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_module_selection.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_modules.dart';
 import 'package:wowsinfo/providers/wiki/ship_info_provider.dart';
@@ -13,6 +14,7 @@ import 'package:wowsinfo/widgets/page/wiki/ship/ship_module_dialog.dart';
 import 'package:wowsinfo/widgets/page/wiki/ship/similar_ship_list.dart';
 import 'package:wowsinfo/widgets/shared/asset_image_loader.dart';
 import 'package:wowsinfo/widgets/shared/text_with_caption.dart';
+import 'package:wowsinfo/widgets/shared/wiki/ship_additional_box.dart';
 import 'package:wowsinfo/widgets/shared/wiki/ship_icon.dart';
 import 'package:wowsinfo/widgets/shared/wiki/ship_name.dart';
 
@@ -58,6 +60,7 @@ class _ShipInfoPageState extends State<ShipInfoPage> {
                 type: _provider.type,
                 costCR: _provider.costCR,
                 costGold: _provider.costGold,
+                additional: _provider.shipAdditional,
                 description: _provider.description,
               ),
               if (_provider.canChangeModules)
@@ -100,6 +103,7 @@ class _ShipTitleSection extends StatelessWidget {
     required this.type,
     this.costCR,
     this.costGold,
+    this.additional,
     required this.description,
   }) : super(key: key);
 
@@ -110,6 +114,7 @@ class _ShipTitleSection extends StatelessWidget {
   final String? costCR;
   final String? costGold;
   final String description;
+  final ShipAdditional? additional;
 
   @override
   Widget build(BuildContext context) {
@@ -117,27 +122,36 @@ class _ShipTitleSection extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             ShipIcon(
               name: icon,
               height: 128,
             ),
-            Text(name, style: Theme.of(context).textTheme.titleLarge),
+            Center(
+              child: Text(name, style: Theme.of(context).textTheme.titleLarge),
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 8.0),
-              child: Text(region),
+              child: Center(child: Text(region)),
             ),
-            Text(type),
+            Center(child: Text(type)),
             if (costCR != null)
-              Text(
-                costCR!,
-                style: const TextStyle(color: WoWsColours.creditPrice),
+              Center(
+                child: Text(
+                  costCR!,
+                  style: const TextStyle(color: WoWsColours.creditPrice),
+                ),
               ),
             if (costGold != null)
-              Text(
-                costGold!,
-                style: const TextStyle(color: WoWsColours.goldPrice),
+              Center(
+                child: Text(
+                  costGold!,
+                  style: const TextStyle(color: WoWsColours.goldPrice),
+                ),
               ),
+            if (additional != null)
+              ShipAdditionalBox(shipAdditional: additional!),
             Padding(
               padding: const EdgeInsets.only(top: 8.0),
               child: Text(

@@ -15,4 +15,14 @@ extension NumberExtension on num {
     formatter.maximumFractionDigits = 2;
     return formatter.format(this);
   }
+
+  /// Convert as percent string without rounding
+  String asPercentString() {
+    return '${toDecimalString()}%';
+  }
+
+  /// Convert to percent string with rounding
+  String toPercentString() {
+    return (this * 100).asPercentString();
+  }
 }

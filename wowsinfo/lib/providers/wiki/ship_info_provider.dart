@@ -4,6 +4,7 @@ import 'package:wowsinfo/extensions/number.dart';
 import 'package:wowsinfo/models/gamedata/game_info.dart';
 import 'package:wowsinfo/models/gamedata/modernization.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
+import 'package:wowsinfo/models/gamedata/ship_additional.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_module_selection.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_modules.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_upgrades.dart';
@@ -33,8 +34,8 @@ class ShipInfoProvider with ChangeNotifier {
   String _percent(num? value) {
     if (value == null) return '-';
     // some might be 0.35 instead of 35.0
-    if (value < 1) return '${(value * 100).toDecimalString()}%';
-    return '${value.toDecimalString()}%';
+    if (value < 1) return value.toPercentString();
+    return value.asPercentString();
   }
 
   String _format(num? value, {String suffix = ''}) {
@@ -72,6 +73,8 @@ class ShipInfoProvider with ChangeNotifier {
   String get region => Localisation.instance.stringOf(_ship.regionId) ?? '-';
   String? get costCR => _ship.costCr > 0 ? _format(_ship.costCr) : null;
   String? get costGold => _ship.costGold > 0 ? _format(_ship.costGold) : null;
+  ShipAdditional? get shipAdditional =>
+      GameRepository.instance.shipAdditionalOf(_ship.id.toString());
 
   late final bool canChangeModules = _shipModules.canChangeModules;
   late final ShipModuleMap moduleList = _shipModules.moduleList;

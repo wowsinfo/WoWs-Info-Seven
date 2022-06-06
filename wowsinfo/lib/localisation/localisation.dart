@@ -192,6 +192,8 @@ class Localisation {
 
   /// Predefined strings
 
+  String get battles => _get('IDS_BATTLES');
+
   // Units
   String get second => _get('SECOND', prefix: 'IDS_');
   String get kilometer => _get('KILOMETER', prefix: 'IDS_');

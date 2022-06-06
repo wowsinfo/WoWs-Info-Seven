@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:logging/logging.dart';
-import 'package:wowsinfo/extensions/number.dart';
 import 'package:wowsinfo/foundation/helpers/time_tracker.dart';
 import 'package:wowsinfo/models/gamedata/ability.dart';
 import 'package:wowsinfo/models/gamedata/achievement.dart';
@@ -14,6 +13,7 @@ import 'package:wowsinfo/models/gamedata/modernization.dart';
 import 'package:wowsinfo/models/gamedata/projectile.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
+import 'package:wowsinfo/models/gamedata/ship_additional.dart';
 
 /// This repository manages game data from WoWs-Game-Data
 class GameRepository {
@@ -32,6 +32,7 @@ class GameRepository {
   late final Map<String, Modernization> _modernizations;
   late final Map<String, Projectile> _projectiles;
   late final Map<String, Ship> _ships;
+  late final Map<String, ShipAdditional> _shipAdditionals;
   late final GameInfo _gameInfo;
 
   late final List<Achievement> achievementList;
@@ -85,6 +86,9 @@ class GameRepository {
     });
     _ships = (dataObject['ships'] as Map).map((key, value) {
       return MapEntry(key, Ship.fromJson(value));
+    });
+    _shipAdditionals = (dataObject['number'] as Map).map((key, value) {
+      return MapEntry(key, ShipAdditional.fromJson(value));
     });
     _gameInfo = GameInfo.fromJson(dataObject['game']);
     timer.log(message: 'Decoded wowsinfo.json');
@@ -195,5 +199,9 @@ class GameRepository {
     final ship = shipOf(id);
     if (ship == null) return null;
     return Localisation.instance.stringOf(ship.name);
+  }
+
+  ShipAdditional? shipAdditionalOf(String id) {
+    return _shipAdditionals[id];
   }
 }
