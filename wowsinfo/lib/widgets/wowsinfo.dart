@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:logging/logging.dart';
@@ -14,6 +15,7 @@ class WoWsInfoApp extends StatelessWidget {
     setupListeners(context);
     return MaterialApp(
       title: 'WoWs Info',
+      scrollBehavior: WoWsInfocrollBehavior(),
       localizationsDelegates: Localisation.localizationsDelegates,
       supportedLocales: Localisation.supportedLocales,
       theme: ThemeData(
@@ -39,6 +41,18 @@ class WoWsInfoApp extends StatelessWidget {
       );
     };
   }
+}
+
+/// https://docs.flutter.dev/release/breaking-changes/default-scroll-behavior-drag
+class WoWsInfocrollBehavior extends MaterialScrollBehavior {
+  // Support dragging with a mouse or any alternative pointers.
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+        PointerDeviceKind.trackpad,
+        PointerDeviceKind.stylus,
+      };
 }
 
 class LoggingActionDispatcher extends ActionDispatcher {

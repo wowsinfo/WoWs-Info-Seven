@@ -4,18 +4,17 @@ import 'package:provider/provider.dart';
 import 'package:wowsinfo/foundation/colours.dart';
 import 'package:wowsinfo/models/gamedata/modernization.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
-import 'package:wowsinfo/models/wargaming/statistics.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_module_selection.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_modules.dart';
 import 'package:wowsinfo/providers/wiki/ship_info_provider.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
+import 'package:wowsinfo/providers/wiki/similar_ship_provider.dart';
 import 'package:wowsinfo/widgets/page/wiki/ship/ship_module_dialog.dart';
+import 'package:wowsinfo/widgets/page/wiki/ship/similar_ship_list.dart';
 import 'package:wowsinfo/widgets/shared/asset_image_loader.dart';
 import 'package:wowsinfo/widgets/shared/text_with_caption.dart';
 import 'package:wowsinfo/widgets/shared/wiki/ship_icon.dart';
 import 'package:wowsinfo/widgets/shared/wiki/ship_name.dart';
-
-late final _logger = Logger('ShipInfoPage');
 
 class ShipInfoPage extends StatefulWidget {
   const ShipInfoPage({
@@ -31,11 +30,13 @@ class ShipInfoPage extends StatefulWidget {
 
 class _ShipInfoPageState extends State<ShipInfoPage> {
   late final ShipInfoProvider _provider;
+  late final SimilarShipProvider _similarProvider;
 
   @override
   void initState() {
     super.initState();
     _provider = ShipInfoProvider(context, widget.ship);
+    _similarProvider = SimilarShipProvider(widget.ship);
   }
 
   @override
@@ -80,6 +81,11 @@ class _ShipInfoPageState extends State<ShipInfoPage> {
             ],
           ),
         ),
+        bottomNavigationBar: _similarProvider.hasSimilarShips
+            ? SimilarShipList(
+                ships: _similarProvider.similarShips,
+              )
+            : null,
       ),
     );
   }

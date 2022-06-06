@@ -11,15 +11,8 @@ class ShipProvider with ChangeNotifier {
   final bool _special;
   ShipProvider(this._context, this._special);
 
-  static const _specialGroups = [
-    'preserved',
-    'disabled',
-    'clan',
-    'unavailable'
-  ];
-
   late final _ships = GameRepository.instance.shipList.where((ship) {
-    return _specialGroups.contains(ship.group) == _special;
+    return ship.isSpecialGroup == _special;
   }).toList();
   final _logger = Logger('ShipProvider');
   List<Ship>? _filteredShips;
