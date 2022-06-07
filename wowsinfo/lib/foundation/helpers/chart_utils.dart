@@ -50,4 +50,20 @@ class ChartUtils {
       ),
     ];
   }
+
+  static List<Series<ChartValue, String>> convertDefault(
+    String id, {
+    required List<ChartValue> values,
+    required Color color,
+    required String Function(ChartValue, int?) labelFormatter,
+  }) {
+    return convert(
+      id,
+      values: values,
+      color: color,
+      domainFn: (v, _) => v.name,
+      measureFn: (v, _) => v.value,
+      labelFormatter: labelFormatter,
+    );
+  }
 }
