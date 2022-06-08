@@ -9,9 +9,11 @@ import 'package:wowsinfo/widgets/shared/wiki/ship_name.dart';
 class SimilarShipList extends StatelessWidget {
   const SimilarShipList({
     Key? key,
+    required this.source,
     required this.ships,
   }) : super(key: key);
 
+  final Ship source;
   final List<Ship> ships;
 
   @override
@@ -30,7 +32,7 @@ class SimilarShipList extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).push(
                     App.platformPageRoute(
-                      builder: (_) => const ShipSimilarPage(),
+                      builder: (_) => ShipSimilarPage(ship: source),
                     ),
                   );
                 },

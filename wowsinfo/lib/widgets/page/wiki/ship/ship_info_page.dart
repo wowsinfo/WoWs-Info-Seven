@@ -86,6 +86,7 @@ class _ShipInfoPageState extends State<ShipInfoPage> {
         ),
         bottomNavigationBar: _similarProvider.hasSimilarShips
             ? SimilarShipList(
+                source: widget.ship,
                 ships: _similarProvider.similarShips,
               )
             : null,

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:charts_flutter/flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
@@ -29,8 +31,11 @@ class SimilarShipProvider extends ChangeNotifier {
         .toList();
   }
 
+  late final _chartHeight = 20.0 * max(_similarShips.length, 5).toDouble();
+  double get chartHeight => _chartHeight;
+
   late final double _averageDamage;
-  String get averageDamage => _averageDamage.toDecimalString();
+  String get averageDamage => _averageDamage.round().toDecimalString();
 
   late final double _averageWinrate;
   String get averageWinrate => _averageWinrate.asPercentString();
@@ -74,15 +79,15 @@ class SimilarShipProvider extends ChangeNotifier {
       }
 
       damageChart.add(ChartValue(
-        ship.name,
+        shipName,
         info.damage,
       ));
       fragsChart.add(ChartValue(
-        ship.name,
+        shipName,
         info.frags,
       ));
       winrateChart.add(ChartValue(
-        ship.name,
+        shipName,
         info.winrate,
       ));
     }
