@@ -30,6 +30,7 @@ class ChartUtils {
   static final damageColour = Color.fromHex(code: '#D32F2F');
   static final fragsColour = Color.fromHex(code: '#2196F3');
   static final winrateColour = Color.fromHex(code: '#4CAF50');
+  static final battleColour = Color.fromHex(code: '#FF9800');
 
   static List<Series<ChartValue, String>> convert(
     String id, {

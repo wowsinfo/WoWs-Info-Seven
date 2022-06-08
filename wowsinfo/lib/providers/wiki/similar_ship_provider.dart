@@ -7,7 +7,7 @@ import 'package:wowsinfo/extensions/number.dart';
 import 'package:wowsinfo/foundation/helpers/chart_utils.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
-import 'package:wowsinfo/models/wowsinfo/average_counter.dart';
+import 'package:wowsinfo/models/wowsinfo/counter.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
 
 class SimilarShipProvider extends ChangeNotifier {
@@ -43,6 +43,9 @@ class SimilarShipProvider extends ChangeNotifier {
   late final double _averageFrags;
   String get averageFrags => _averageFrags.toDecimalString();
 
+  late final int _totalBattles;
+  String get totalBattles => _totalBattles.toDecimalString();
+
   late final List<Series<ChartValue, String>> _winrateSeries;
   List<Series<ChartValue, String>> get winrateSeries => _winrateSeries;
 
@@ -52,14 +55,19 @@ class SimilarShipProvider extends ChangeNotifier {
   late final List<Series<ChartValue, String>> _damageSeries;
   List<Series<ChartValue, String>> get damageSeries => _damageSeries;
 
+  late final List<Series<ChartValue, String>> _battleSeries;
+  List<Series<ChartValue, String>> get battleSeries => _battleSeries;
+
   // filter out winrate, damage and frags of similar ships
   void extractShipAdditional() {
     final damage = AverageCounter();
     final frags = AverageCounter();
     final winrate = AverageCounter();
+    final battles = TotalCounter();
     final List<ChartValue> damageChart = [];
     final List<ChartValue> fragsChart = [];
     final List<ChartValue> winrateChart = [];
+    final List<ChartValue> battlesChart = [];
 
     for (final ship in _similarShips) {
       final info = GameRepository.instance.shipAdditionalOf(ship.id.toString());
@@ -71,6 +79,8 @@ class SimilarShipProvider extends ChangeNotifier {
       damage.add(info.damage);
       frags.add(info.frags);
       winrate.add(info.winrate);
+      final shipBattleCount = info.battles ?? 0;
+      battles.add(shipBattleCount);
 
       final shipName = Localisation.instance.stringOf(ship.name);
       if (shipName == null) {
@@ -90,11 +100,16 @@ class SimilarShipProvider extends ChangeNotifier {
         shipName,
         info.winrate,
       ));
+      battlesChart.add(ChartValue(
+        shipName,
+        shipBattleCount,
+      ));
     }
 
     _averageDamage = damage.average;
     _averageFrags = frags.average;
     _averageWinrate = winrate.average;
+    _totalBattles = battles.total.toInt();
 
     _damageSeries = ChartUtils.convertDefault(
       'damage',
@@ -115,6 +130,13 @@ class SimilarShipProvider extends ChangeNotifier {
       values: winrateChart,
       color: ChartUtils.winrateColour,
       labelFormatter: (v, _) => v.value.asPercentString(),
+    );
+
+    _battleSeries = ChartUtils.convertDefault(
+      'battles',
+      values: battlesChart,
+      color: ChartUtils.battleColour,
+      labelFormatter: (v, _) => v.value.toDecimalString(),
     );
   }
 }
