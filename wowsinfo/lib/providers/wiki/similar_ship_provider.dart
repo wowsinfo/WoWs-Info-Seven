@@ -69,7 +69,9 @@ class SimilarShipProvider extends ChangeNotifier {
     final List<ChartValue> winrateChart = [];
     final List<ChartValue> battlesChart = [];
 
-    for (final ship in _similarShips) {
+    // similar ships don't include the source ship
+    final allShips = _similarShips..add(_ship);
+    for (final ship in allShips) {
       final info = GameRepository.instance.shipAdditionalOf(ship.id.toString());
       if (info == null) {
         _logger.warning('No ship additional info for ${ship.name}');
@@ -111,6 +113,8 @@ class SimilarShipProvider extends ChangeNotifier {
     _averageWinrate = winrate.average;
     _totalBattles = battles.total.toInt();
 
+    // sort the value to make it easier to read
+    damageChart.sort((a, b) => b.value.compareTo(a.value));
     _damageSeries = ChartUtils.convertDefault(
       'damage',
       values: damageChart,
@@ -118,6 +122,7 @@ class SimilarShipProvider extends ChangeNotifier {
       labelFormatter: (v, _) => v.value.toDecimalString(),
     );
 
+    fragsChart.sort((a, b) => b.value.compareTo(a.value));
     _fragsSeries = ChartUtils.convertDefault(
       'frags',
       values: fragsChart,
@@ -125,6 +130,7 @@ class SimilarShipProvider extends ChangeNotifier {
       labelFormatter: (v, _) => v.value.toDecimalString(),
     );
 
+    winrateChart.sort((a, b) => b.value.compareTo(a.value));
     _winrateSeries = ChartUtils.convertDefault(
       'winrate',
       values: winrateChart,
@@ -132,6 +138,7 @@ class SimilarShipProvider extends ChangeNotifier {
       labelFormatter: (v, _) => v.value.asPercentString(),
     );
 
+    battlesChart.sort((a, b) => b.value.compareTo(a.value));
     _battleSeries = ChartUtils.convertDefault(
       'battles',
       values: battlesChart,
