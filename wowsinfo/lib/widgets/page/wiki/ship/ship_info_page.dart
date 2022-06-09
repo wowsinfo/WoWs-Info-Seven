@@ -7,6 +7,7 @@ import 'package:wowsinfo/models/gamedata/ship.dart';
 import 'package:wowsinfo/models/gamedata/ship_additional.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_module_selection.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_modules.dart';
+import 'package:wowsinfo/providers/wiki/scroll_provider.dart';
 import 'package:wowsinfo/providers/wiki/ship_info_provider.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
 import 'package:wowsinfo/providers/wiki/similar_ship_provider.dart';
@@ -30,26 +31,44 @@ class ShipInfoPage extends StatefulWidget {
   State<ShipInfoPage> createState() => _ShipInfoPageState();
 }
 
-class _ShipInfoPageState extends State<ShipInfoPage> {
+class _ShipInfoPageState extends State<ShipInfoPage>
+    with SingleTickerProviderStateMixin {
   late final ShipInfoProvider _provider;
   late final SimilarShipProvider _similarProvider;
+
+  late final ScrollProvider _scrollProvider;
+  final ScrollController _scrollController = ScrollController();
+
+  late final _slideController = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 300),
+  );
 
   @override
   void initState() {
     super.initState();
     _provider = ShipInfoProvider(context, widget.ship);
     _similarProvider = SimilarShipProvider(widget.ship);
+    _scrollProvider = ScrollProvider(
+      scroll: _scrollController,
+      animation: _slideController,
+      height: 130,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider.value(
-      value: _provider,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider.value(value: _provider),
+        ChangeNotifierProvider.value(value: _scrollProvider),
+      ],
       builder: (context, _) => Scaffold(
         appBar: AppBar(
           title: Text(_provider.title),
         ),
         body: SingleChildScrollView(
+          controller: _scrollController,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -84,12 +103,28 @@ class _ShipInfoPageState extends State<ShipInfoPage> {
             ],
           ),
         ),
-        bottomNavigationBar: _similarProvider.hasSimilarShips
+        bottomNavigationBar: buildSimilarShips(),
+      ),
+    );
+  }
+
+  Widget? buildSimilarShips() {
+    if (!_similarProvider.hasSimilarShips) return null;
+
+    return Consumer<ScrollProvider>(
+      builder: (context, value, child) => AnimatedSwitcher(
+        // TODO: improve the animation here, it should slide down
+        transitionBuilder: (w, a) => SizeTransition(
+          sizeFactor: a,
+          child: w,
+        ),
+        duration: const Duration(milliseconds: 300),
+        child: value.display
             ? SimilarShipList(
                 source: widget.ship,
                 ships: _similarProvider.similarShips,
               )
-            : null,
+            : const SizedBox.shrink(),
       ),
     );
   }

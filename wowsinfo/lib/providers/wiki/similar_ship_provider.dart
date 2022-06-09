@@ -31,7 +31,8 @@ class SimilarShipProvider extends ChangeNotifier {
         .toList();
   }
 
-  late final _chartHeight = 20.0 * max(_similarShips.length, 5).toDouble();
+  // TODO: the height should be based on the screen size
+  late final _chartHeight = 25.0 * max(_similarShips.length, 5).toDouble();
   double get chartHeight => _chartHeight;
 
   late final double _averageDamage;
