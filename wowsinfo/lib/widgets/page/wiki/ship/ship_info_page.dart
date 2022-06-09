@@ -247,10 +247,6 @@ class _ShipSurvivabilty extends StatelessWidget {
             Localisation.instance.durability,
             style: Theme.of(context).textTheme.titleLarge,
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Divider(),
-          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [

@@ -3,6 +3,122 @@ import 'package:logging/logging.dart';
 import 'package:wowsinfo/extensions/number.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
 
+/// Those keys contain values like 1.2, 0.7. The base line is 1.0.
+/// All strings with coeff is considered as a percentage, they won't be added here.
+/// `Coeff`, `Multiplier`, `Factor` are included by default
+const _oneCoeff = [
+  'AAAuraDamage',
+  'AABubbleDamage',
+  'AAMaxHP',
+  'ConsumableReloadTime',
+  'ConsumablesWorkTime',
+  'GMCritProb',
+  'GMIdealRadius',
+  'GMMaxDist',
+  'GMMaxHP',
+  'GMRepairTime',
+  'GMRotationSpeed',
+  'GMShotDelay',
+  'GSIdealRadius',
+  'GSMaxDist',
+  'GSMaxHP',
+  'GSShotDelay',
+  'GTCritProb',
+  'GTMaxHP',
+  'GTRepairTime',
+  'GTRotationSpeed',
+  'GTShotDelay',
+  'PMDetonationProb',
+  'SGCritProb',
+  'SGCritProb',
+  'afterBattleRepair',
+  'torpedoBomberHealth',
+  'skipBomberHealth',
+  'planeHealth',
+  'fighterHealth',
+  'diveBomberHealth',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+];
+
+/// Similar to coeff, but the base line is 0.0.
+/// Coeff strings are included here.
+const _zeroCoeff = [
+  'boostCoeff',
+  'buoyancyRudderResetTimeCoeff', // not sure about this one
+  'damagedEngineCoeff', // not sure
+  'lastChanceReloadCoefficient', // not sure
+  'reloadBoostCoeff', // not sure
+  'burnChanceFactorBig',
+  'burnChanceFactorSmall',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+];
+
+// The value is a number meaning adding +7% for example
+const _addPercent = [
+  'uwCoeffBonus',
+];
+
+/// Addtional count like +1 all consumables
+const _plusCount = [
+  'AAExtraBubbles',
+  'AAInnerExtraBubbles',
+  'additionalConsumables',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+];
+
+// `Additional` is adding the number like +1
+// `dist` is for distance
+// `time` is for time
+
 @immutable
 class Modifiers {
   const Modifiers({
