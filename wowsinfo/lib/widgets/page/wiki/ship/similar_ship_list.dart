@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:wowsinfo/foundation/app.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
+import 'package:wowsinfo/widgets/page/wiki/ship/ship_info_page.dart';
 import 'package:wowsinfo/widgets/page/wiki/ship/ship_similar_page.dart';
 import 'package:wowsinfo/widgets/shared/wiki/ship_cell.dart';
-import 'package:wowsinfo/widgets/shared/wiki/ship_icon.dart';
-import 'package:wowsinfo/widgets/shared/wiki/ship_name.dart';
 
 class SimilarShipList extends StatelessWidget {
   const SimilarShipList({
@@ -50,11 +49,17 @@ class SimilarShipList extends StatelessWidget {
                 children: ships.map((ship) {
                   final name = Localisation.instance.stringOf(ship.name);
                   return ShipCell(
-                    icon: ship.index,
-                    name: name ?? '',
-                    isPremium: ship.isPremium,
-                    isSpecial: ship.isSpecial,
-                  );
+                      icon: ship.index,
+                      name: name ?? '',
+                      isPremium: ship.isPremium,
+                      isSpecial: ship.isSpecial,
+                      onTap: () {
+                        Navigator.of(context).push(
+                          App.platformPageRoute(
+                            builder: (_) => ShipInfoPage(ship: ship),
+                          ),
+                        );
+                      });
                 }).toList(growable: false),
               ),
             ),

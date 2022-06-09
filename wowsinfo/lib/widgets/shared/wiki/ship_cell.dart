@@ -13,6 +13,7 @@ class ShipCell extends StatelessWidget {
     this.height,
     this.width,
     this.hero,
+    this.onTap,
   }) : super(key: key);
 
   final String icon;
@@ -24,13 +25,21 @@ class ShipCell extends StatelessWidget {
   final bool isPremium;
   final bool isSpecial;
 
+  final void Function()? onTap;
+
   @override
   Widget build(BuildContext context) {
-    return Column(
+    final cell = Column(
       children: [
         ShipIcon(icon: icon, height: height, width: width, hero: hero),
         ShipName(name, isPremium: isPremium, isSpecial: isSpecial),
       ],
+    );
+
+    if (onTap == null) return cell;
+    return InkWell(
+      onTap: onTap,
+      child: cell,
     );
   }
 }
