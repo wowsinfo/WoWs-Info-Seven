@@ -4,6 +4,7 @@ import 'package:wowsinfo/foundation/app.dart';
 import 'package:wowsinfo/foundation/helpers/utils.dart';
 import 'package:wowsinfo/providers/wiki/ship_provider.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
+import 'package:wowsinfo/widgets/shared/wiki/ship_cell.dart';
 import 'package:wowsinfo/widgets/shared/wiki/ship_icon.dart';
 import 'package:wowsinfo/widgets/shared/wiki/ship_name.dart';
 
@@ -62,6 +63,7 @@ class _ShipPageState extends State<ShipPage> {
         itemBuilder: (context, index) {
           final curr = provider.shipList[index];
           final imageName = curr.index;
+
           return InkWell(
             onTap: () {
               Navigator.of(context).push(
@@ -71,15 +73,12 @@ class _ShipPageState extends State<ShipPage> {
               );
             },
             child: FittedBox(
-              child: Column(
-                children: [
-                  ShipIcon(name: imageName),
-                  ShipName(
+              child: ShipCell(
+                icon: imageName,
+                name:
                     '${curr.tierString} ${Localisation.instance.stringOf(curr.name) ?? ''}',
-                    isPremium: curr.isPremium,
-                    isSpecial: curr.isSpecial,
-                  ),
-                ],
+                isPremium: curr.isPremium,
+                isSpecial: curr.isSpecial,
               ),
             ),
           );

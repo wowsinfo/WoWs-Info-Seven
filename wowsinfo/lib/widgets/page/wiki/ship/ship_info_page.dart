@@ -16,6 +16,7 @@ import 'package:wowsinfo/widgets/page/wiki/ship/similar_ship_list.dart';
 import 'package:wowsinfo/widgets/shared/asset_image_loader.dart';
 import 'package:wowsinfo/widgets/shared/text_with_caption.dart';
 import 'package:wowsinfo/widgets/shared/wiki/ship_additional_box.dart';
+import 'package:wowsinfo/widgets/shared/wiki/ship_cell.dart';
 import 'package:wowsinfo/widgets/shared/wiki/ship_icon.dart';
 import 'package:wowsinfo/widgets/shared/wiki/ship_name.dart';
 
@@ -161,7 +162,7 @@ class _ShipTitleSection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             ShipIcon(
-              name: icon,
+              icon: icon,
               height: 128,
             ),
             Center(
@@ -704,15 +705,11 @@ class _ShipNextShip extends StatelessWidget {
   Widget renderNextShip(BuildContext context, Ship? nextShip) {
     assert(nextShip != null, 'Next ship should not be null');
     if (nextShip == null) return Container();
-    return Column(
-      children: [
-        ShipIcon(name: nextShip.index),
-        ShipName(
-          Localisation.instance.stringOf(nextShip.name) ?? '-',
-          isPremium: nextShip.isPremium,
-          isSpecial: nextShip.isSpecial,
-        )
-      ],
+    return ShipCell(
+      icon: nextShip.index,
+      name: Localisation.instance.stringOf(nextShip.name) ?? '-',
+      isPremium: nextShip.isPremium,
+      isSpecial: nextShip.isSpecial,
     );
   }
 }
