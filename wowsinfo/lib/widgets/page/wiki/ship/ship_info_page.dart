@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
+import 'package:wowsinfo/foundation/app.dart';
 import 'package:wowsinfo/foundation/colours.dart';
 import 'package:wowsinfo/models/gamedata/modernization.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
@@ -706,6 +707,13 @@ class _ShipNextShip extends StatelessWidget {
       name: Localisation.instance.stringOf(nextShip.name) ?? '-',
       isPremium: nextShip.isPremium,
       isSpecial: nextShip.isSpecial,
+      onTap: () {
+        Navigator.of(context).push(
+          App.platformPageRoute(
+            builder: (context) => ShipInfoPage(ship: nextShip),
+          ),
+        );
+      },
     );
   }
 }
