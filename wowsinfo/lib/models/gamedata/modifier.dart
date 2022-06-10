@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/foundation.dart';
 import 'package:logging/logging.dart';
 import 'package:wowsinfo/extensions/number.dart';
@@ -5,59 +7,43 @@ import 'package:wowsinfo/localisation/localisation.dart';
 
 /// Those keys contain values like 1.2, 0.7. The base line is 1.0.
 /// All strings with coeff is considered as a percentage, they won't be added here.
-/// `Coeff`, `Multiplier`, `Factor` are included by default
-const _oneCoeff = [
+/// `Coef`, `Multiplier`, `Factor`, `Time`, `Prob` are included by default
+const List<String> _coeffList = [
   'AAAuraDamage',
   'AABubbleDamage',
   'AAMaxHP',
-  'ConsumableReloadTime',
-  'ConsumablesWorkTime',
-  'GMCritProb',
   'GMIdealRadius',
   'GMMaxDist',
   'GMMaxHP',
-  'GMRepairTime',
   'GMRotationSpeed',
   'GMShotDelay',
   'GSIdealRadius',
   'GSMaxDist',
   'GSMaxHP',
   'GSShotDelay',
-  'GTCritProb',
   'GTMaxHP',
-  'GTRepairTime',
   'GTRotationSpeed',
   'GTShotDelay',
-  'PMDetonationProb',
-  'SGCritProb',
-  'SGCritProb',
   'afterBattleRepair',
   'torpedoBomberHealth',
   'skipBomberHealth',
   'planeHealth',
   'fighterHealth',
   'diveBomberHealth',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
+  'planeSpeed',
+  'planeSpawnTime',
+  'planeRegenerationRate',
+  'shootShift',
+];
+
+/// Zero is the baseline, but it is a negative value.
+const _negativeCoeff = [
+  'SGRepairTime',
 ];
 
 /// Similar to coeff, but the base line is 0.0.
 /// Coeff strings are included here.
-const _zeroCoeff = [
+const List<String> _coeffListZero = [
   'boostCoeff',
   'buoyancyRudderResetTimeCoeff', // not sure about this one
   'damagedEngineCoeff', // not sure
@@ -65,22 +51,8 @@ const _zeroCoeff = [
   'reloadBoostCoeff', // not sure
   'burnChanceFactorBig',
   'burnChanceFactorSmall',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
+  'rocketBurnChanceBonus',
+  'regenerationRate',
 ];
 
 // The value is a number meaning adding +7% for example
@@ -89,35 +61,22 @@ const _addPercent = [
 ];
 
 /// Addtional count like +1 all consumables
-const _plusCount = [
+/// `Additional`, `Extra` is included by default
+const List<String> _additionalList = [
   'AAExtraBubbles',
   'AAInnerExtraBubbles',
   'additionalConsumables',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
 ];
 
-// `Additional` is adding the number like +1
 // `dist` is for distance
 // `time` is for time
+const List<String> _timeList = [
+  'workTime',
+  'torpedoReloadTime',
+  'reloadTime',
+  'preparationTime',
+  'lifeTime',
+];
 
 @immutable
 class Modifiers {
@@ -368,51 +327,61 @@ class Modifiers {
   String toString() {
     final logger = Logger('Modifiers');
 
-    var description = '';
+    String description = '';
     for (final entry in raw.entries) {
-      final key = entry.key.toLowerCase();
-      if (key == 'preparationtime') continue;
+      // the original key is needed for checking in a predefined list
+      final keyOriginal = entry.key;
+      final key = keyOriginal.toLowerCase();
+
+      final value = entry.value;
+      if (value == null) continue;
+      logger.fine('$keyOriginal: $value');
+
+      if (value is Map) {
+        // we can have multiple modifiers in a single key
+        final types = ModifierShipType.fromJson(value as Map<String, dynamic>);
+        if (types.isEmpty()) continue;
+        logger.info('$keyOriginal: $types');
+      }
 
       final langString = Localisation.instance.stringOf(
         key.toUpperCase(),
         prefix: 'IDS_PARAMS_MODIFIER_',
       );
 
-      if (langString == ' ') continue;
+      // this might be some missing event modifiers
+      if (langString == null) continue;
 
-      final value = entry.value;
-      if (value == null) continue;
-      logger.fine('$key: $value');
-
-      var valueString = '';
-
-      // format to string first
-      if (value is num) {
-        if (value == -1) {
-          // -1 means infinite
-          valueString = '∞';
-        } else {
-          // coeff has the highest priority
-          if (key.contains('coeff')) {
-            valueString = _formatNumber(value);
-          } else if (key.contains('time')) {
-            valueString = '${value.toDecimalString()}s';
-          } else if (key.contains('dist')) {
-            valueString = '${(value / 33.35).toDecimalString()}km';
-          } else if (value < 2) {
-            valueString = _formatNumber(value);
-          } else {
-            valueString = value.toDecimalString();
-          }
-        }
-      } else if (value is List) {
-        if (value.isEmpty) continue;
-        valueString = value.join(', ');
+      if (_timeList.contains(keyOriginal)) {
+        final double time = value.toDouble();
+        description += '$langString: ${time.toDecimalString()}s\n';
+      } else if (_additionalList.contains(keyOriginal) ||
+          key.contains('additional') ||
+          key.contains('extra')) {
+        final double extra = value.toDouble();
+        // although it is `additional`, it can be NEGATIVE
+        final sign = extra >= 0 ? '+' : '-';
+        description += '$langString: $sign${extra.abs().toDecimalString()}\n';
+      } else if (_coeffListZero.contains(keyOriginal)) {
+        final double coeff = value.toDouble();
+        description += '$langString: +${coeff.toPercentString()}\n';
+      } else if (_coeffList.contains(keyOriginal) ||
+          key.contains('coef') ||
+          key.contains('factor') ||
+          key.contains('multiplier') ||
+          key.contains('time') ||
+          key.contains('prob')) {
+        final double coeff = value.toDouble();
+        final positive = coeff > 1.0;
+        final percent = (coeff - 1).abs().toPercentString();
+        description += '$langString: ${positive ? '+' : '-'}$percent\n';
+      } else if (key.contains('dist')) {
+        final double dist = value.toDouble();
+        description += '$langString: ${(dist / 33.35).toDecimalString()}km\n';
+      } else {
+        logger.warning('Unknown modifier: $keyOriginal');
+        description += '$langString: $value\n';
       }
-
-      // TODO: need to handle ModifierShipType as well
-
-      description += '$langString: $valueString\n';
     }
 
     return description;
@@ -958,5 +927,19 @@ class ModifierShipType {
       destroyer: json['Destroyer'],
       submarine: json['Submarine'],
     );
+  }
+
+  bool isEmpty() {
+    return airCarrier == null &&
+        auxiliary == null &&
+        battleship == null &&
+        cruiser == null &&
+        destroyer == null &&
+        submarine == null;
+  }
+
+  @override
+  String toString() {
+    return 'ModifierShipType{airCarrier: $airCarrier, auxiliary: $auxiliary, battleship: $battleship, cruiser: $cruiser, destroyer: $destroyer, submarine: $submarine}';
   }
 }
