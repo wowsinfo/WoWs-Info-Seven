@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:wowsinfo/extensions/number.dart';
+import 'package:wowsinfo/models/gamedata/consumable.dart';
 import 'package:wowsinfo/models/gamedata/game_info.dart';
 import 'package:wowsinfo/models/gamedata/modernization.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
@@ -366,6 +367,10 @@ class ShipInfoProvider with ChangeNotifier {
         (e) => GameRepository.instance.shipOf(e.toString()),
       ) ??
       [];
+
+  // Consumables
+  bool get hasConsumables => _ship.consumables.isNotEmpty;
+  List<List<Consumable>> get consumables => _ship.consumables;
 }
 
 /// This model is used to hold the shell information

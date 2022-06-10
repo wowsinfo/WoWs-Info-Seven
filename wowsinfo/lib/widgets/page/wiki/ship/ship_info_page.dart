@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
 import 'package:wowsinfo/foundation/app.dart';
 import 'package:wowsinfo/foundation/colours.dart';
+import 'package:wowsinfo/models/gamedata/ability.dart';
+import 'package:wowsinfo/models/gamedata/consumable.dart';
 import 'package:wowsinfo/models/gamedata/modernization.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
 import 'package:wowsinfo/models/gamedata/ship_additional.dart';
@@ -12,6 +13,7 @@ import 'package:wowsinfo/providers/wiki/scroll_provider.dart';
 import 'package:wowsinfo/providers/wiki/ship_info_provider.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
 import 'package:wowsinfo/providers/wiki/similar_ship_provider.dart';
+import 'package:wowsinfo/repositories/game_repository.dart';
 import 'package:wowsinfo/widgets/page/wiki/ship/ship_module_dialog.dart';
 import 'package:wowsinfo/widgets/page/wiki/ship/similar_ship_list.dart';
 import 'package:wowsinfo/widgets/shared/asset_image_loader.dart';
@@ -19,7 +21,6 @@ import 'package:wowsinfo/widgets/shared/text_with_caption.dart';
 import 'package:wowsinfo/widgets/shared/wiki/ship_additional_box.dart';
 import 'package:wowsinfo/widgets/shared/wiki/ship_cell.dart';
 import 'package:wowsinfo/widgets/shared/wiki/ship_icon.dart';
-import 'package:wowsinfo/widgets/shared/wiki/ship_name.dart';
 
 class ShipInfoPage extends StatefulWidget {
   const ShipInfoPage({
@@ -101,6 +102,7 @@ class _ShipInfoPageState extends State<ShipInfoPage>
               if (_provider.renderVisibility) const _ShipVisibility(),
               if (_provider.hasUpgrades) const _ShipUpgrades(),
               if (_provider.hasNextShip) const _ShipNextShip(),
+              if (_provider.hasConsumables) const _ShipConsumables(),
               Container(height: 64),
             ],
           ),
@@ -714,6 +716,58 @@ class _ShipNextShip extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+}
+
+class _ShipConsumables extends StatelessWidget {
+  const _ShipConsumables({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final provider = Provider.of<ShipInfoProvider>(context);
+    return Column(
+      children: [
+        Text(
+          Localisation.instance.consumables,
+          style: Theme.of(context).textTheme.headline6,
+        ),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: provider.consumables.map((consumables) {
+              assert(
+                consumables.isNotEmpty,
+                'There should be at least one consumable',
+              );
+
+              return Column(
+                children: [
+                  for (final consumable in consumables)
+                    renderConsumable(context, consumable),
+                ],
+              );
+            }).toList(growable: false),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget renderConsumable(BuildContext context, Consumable consumable) {
+    final name = consumable.name;
+    final type = consumable.type;
+    print('$name $type');
+    final info = GameRepository.instance.abilityOf(name);
+    assert(info != null, 'Consumable is not found');
+    return InkWell(
+      onTap: () {
+        print(info?.abilities[type]);
+      },
+      child: AssetImageLoader(
+        name: 'gamedata/app/assets/consumables/$name.png',
+      ),
     );
   }
 }

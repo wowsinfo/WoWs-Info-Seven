@@ -284,6 +284,7 @@ class Localisation {
   // Upgrades
   String get upgrades => _get('MODERNIZATIONS', prefix: 'IDS_');
   String get nextShip => _get('SPECTATE_SWITCH_SHIP', prefix: 'IDS_');
+  String get consumables => _get('ABILITIES', prefix: 'IDS_MODULE_TYPE_');
 
   /// Helper functions
 

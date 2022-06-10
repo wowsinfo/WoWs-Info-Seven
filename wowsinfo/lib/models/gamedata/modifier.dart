@@ -44,7 +44,6 @@ const _negativeCoeff = [
 /// Similar to coeff, but the base line is 0.0.
 /// Coeff strings are included here.
 const List<String> _coeffListZero = [
-  'boostCoeff',
   'buoyancyRudderResetTimeCoeff', // not sure about this one
   'damagedEngineCoeff', // not sure
   'lastChanceReloadCoefficient', // not sure
