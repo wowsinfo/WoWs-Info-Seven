@@ -11,7 +11,7 @@ class FilterShipProvider with ChangeNotifier {
   final _types = GameRepository.instance.shipTypeList;
   final _logger = Logger('FilterShipProvider');
 
-  BuildContext _context;
+  final BuildContext _context;
   FilterShipProvider(this._context);
 
   // selected filters

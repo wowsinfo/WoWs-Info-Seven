@@ -194,6 +194,13 @@ class Localisation {
 
   String get battles => _get('IDS_BATTLES');
 
+  // Ship type names
+  String get airCarrier => _get('IDS_AIRCARRIER');
+  String get battleship => _get('IDS_BATTLESHIP');
+  String get cruiser => _get('IDS_CRUISER');
+  String get destroyer => _get('IDS_DESTROYER');
+  String get submarine => _get('IDS_SUBMARINE');
+
   // Units
   String get second => _get('SECOND', prefix: 'IDS_');
   String get kilometer => _get('KILOMETER', prefix: 'IDS_');

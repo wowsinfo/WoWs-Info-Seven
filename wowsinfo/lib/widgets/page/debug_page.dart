@@ -4,6 +4,7 @@ import 'package:wowsinfo/main.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
 import 'package:wowsinfo/widgets/page/wiki/achievement_page.dart';
+import 'package:wowsinfo/widgets/page/wiki/commander_skill_page.dart';
 import 'package:wowsinfo/widgets/page/wiki/ship/ship_page.dart';
 import 'package:wowsinfo/widgets/page/wiki/upgrade_page.dart';
 import 'package:wowsinfo/widgets/shared/filter_ship_dialog.dart';
@@ -60,7 +61,7 @@ class _DebugPageState extends State<DebugPage> {
                     App.platformPageRoute(builder: (_) => UpgradePage()),
                   );
                 },
-                child: const Text('Upgrades'),
+                child: Text(Localisation.of(context).wiki_upgrades),
               ),
               TextButton(
                 onPressed: () {
@@ -68,7 +69,7 @@ class _DebugPageState extends State<DebugPage> {
                     App.platformPageRoute(builder: (_) => const ShipPage()),
                   );
                 },
-                child: const Text('Ships'),
+                child: Text(Localisation.of(context).wiki_warships),
               ),
               TextButton(
                 onPressed: () {
@@ -87,6 +88,16 @@ class _DebugPageState extends State<DebugPage> {
                   );
                 },
                 child: const Text('Achievements'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    App.platformPageRoute(
+                      builder: (_) => const CommanderSkillPage(),
+                    ),
+                  );
+                },
+                child: Text(Localisation.of(context).wiki_skills),
               ),
             ],
           ),

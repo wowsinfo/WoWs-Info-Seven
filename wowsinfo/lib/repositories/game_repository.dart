@@ -7,6 +7,7 @@ import 'package:wowsinfo/models/gamedata/ability.dart';
 import 'package:wowsinfo/models/gamedata/achievement.dart';
 import 'package:wowsinfo/models/gamedata/aircraft.dart';
 import 'package:wowsinfo/models/gamedata/alias.dart';
+import 'package:wowsinfo/models/gamedata/commander_skills.dart';
 import 'package:wowsinfo/models/gamedata/exterior.dart';
 import 'package:wowsinfo/models/gamedata/game_info.dart';
 import 'package:wowsinfo/models/gamedata/modernization.dart';
@@ -34,6 +35,7 @@ class GameRepository {
   late final Map<String, Ship> _ships;
   late final Map<String, ShipAdditional> _shipAdditionals;
   late final GameInfo _gameInfo;
+  late final CommandSkills _commandSkills;
 
   late final List<Achievement> achievementList;
   late final List<Ability> consumableList;
@@ -92,6 +94,15 @@ class GameRepository {
     });
     _gameInfo = GameInfo.fromJson(dataObject['game']);
     timer.log(message: 'Decoded wowsinfo.json');
+
+    // load commander skills
+    final commanderSkills = await rootBundle.loadString(
+      'gamedata/app/data/skills.json',
+      cache: false,
+    );
+    timer.log(message: 'Loaded skills.json');
+    _commandSkills = CommandSkills.fromJson(jsonDecode(commanderSkills));
+    timer.log(message: 'Decoded skills.json');
 
     _generateLists();
     _initialised = true;
@@ -203,5 +214,14 @@ class GameRepository {
 
   ShipAdditional? shipAdditionalOf(String id) {
     return _shipAdditionals[id];
+  }
+
+  Map<String, List<List<ShipSkill>>> get commanderSkills =>
+      _commandSkills.shipTypes;
+
+  List<List<ShipSkill>> commandSkillsOf(CommanderSkillType type) {
+    final skills = _commandSkills.shipTypes[type.rawName];
+    if (skills == null) throw Exception('No skills for $type');
+    return skills;
   }
 }

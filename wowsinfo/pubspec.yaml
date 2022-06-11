@@ -78,8 +78,8 @@ flutter:
     - gamedata/app/assets/ships/
     - gamedata/app/assets/skills/
     - gamedata/app/assets/upgrades/
-    - gamedata/app/data/wowsinfo.json
-    - gamedata/app/lang/lang.json
+    - gamedata/app/data/
+    - gamedata/app/lang/
 
   # Localisation
   generate: true
