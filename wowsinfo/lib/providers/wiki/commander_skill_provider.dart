@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
+import 'package:wowsinfo/localisation/localisation.dart';
 import 'package:wowsinfo/models/gamedata/commander_skills.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
 
-class CommanderSkillProvider {
+const _maxPoints = 21;
+
+class CommanderSkillProvider with ChangeNotifier {
   final _logger = Logger('CommanderSkillProvider');
 
   final BuildContext _context;
@@ -23,4 +26,22 @@ class CommanderSkillProvider {
   }
 
   final allSkills = GameRepository.instance.commanderSkills;
+
+  final airCarrier = Localisation.instance.airCarrier;
+  final destroyer = Localisation.instance.destroyer;
+  final cruiser = Localisation.instance.cruiser;
+  final battleship = Localisation.instance.battleship;
+  final submarine = Localisation.instance.submarine;
+
+  late String _selectedTab = destroyer;
+  String get selectedTab => _selectedTab;
+  void select(String tab) {
+    _logger.fine('Selected tab: $tab');
+    _selectedTab = tab;
+    notifyListeners();
+  }
+
+  int _selectedPoints = 0;
+  String get selectedPoints => _selectedPoints.toString();
+  String get totalPoints => _maxPoints.toString();
 }
