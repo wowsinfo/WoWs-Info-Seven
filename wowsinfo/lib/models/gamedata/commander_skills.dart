@@ -75,4 +75,7 @@ class ShipSkill {
         'tier': tier,
         'column': column,
       };
+
+  @override
+  String toString() => 'ShipSkill{name: $name, tier: $tier, column: $column}';
 }

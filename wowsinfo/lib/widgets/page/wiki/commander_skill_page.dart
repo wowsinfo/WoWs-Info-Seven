@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
+import 'package:wowsinfo/models/gamedata/commander_skills.dart';
 import 'package:wowsinfo/providers/wiki/commander_skill_provider.dart';
+import 'package:wowsinfo/widgets/shared/asset_image_loader.dart';
 
 class CommanderSkillPage extends StatefulWidget {
   const CommanderSkillPage({Key? key}) : super(key: key);
@@ -45,6 +47,7 @@ class _CommanderSkillPageState extends State<CommanderSkillPage> {
                 },
               ),
             ),
+            const CommanderSkillBox(),
           ],
         ),
       ),
@@ -62,8 +65,61 @@ class CommanderSkillBox extends StatefulWidget {
 class _CommanderSkillBoxState extends State<CommanderSkillBox> {
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Commander Skill Box'),
+    final provider = Provider.of<CommanderSkillProvider>(context);
+    return Column(
+      children: [
+        Text(provider.pointInfo),
+        ListView.builder(
+          shrinkWrap: true,
+          itemCount: provider.skills.length,
+          itemBuilder: (context, index) {
+            final skills = provider.skills[index];
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ...skills.map(
+                  (skill) => Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: buildItem(
+                      skill,
+                      provider.selectSkill,
+                      provider.isSkillSelected,
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget buildItem(
+    ShipSkill skill,
+    void Function(ShipSkill) onTap,
+    bool Function(ShipSkill) isSelected,
+  ) {
+    final icon = skill.name;
+    final selected = isSelected(skill);
+    return InkWell(
+      onTap: () => onTap(skill),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          border: Border.all(
+            width: 1.0,
+            style: selected ? BorderStyle.solid : BorderStyle.none,
+          ),
+          borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+        ),
+        child: SizedBox(
+          width: 80,
+          child: Image.asset(
+            'gamedata/app/assets/skills/$icon.png',
+            color: Colors.black87,
+          ),
+        ),
+      ),
     );
   }
 }
