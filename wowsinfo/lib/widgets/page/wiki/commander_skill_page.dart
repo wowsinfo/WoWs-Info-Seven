@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
 import 'package:wowsinfo/models/gamedata/commander_skills.dart';
 import 'package:wowsinfo/providers/wiki/commander_skill_provider.dart';
-import 'package:wowsinfo/widgets/shared/asset_image_loader.dart';
 
 class CommanderSkillPage extends StatefulWidget {
   const CommanderSkillPage({Key? key}) : super(key: key);
@@ -83,6 +82,7 @@ class _CommanderSkillBoxState extends State<CommanderSkillBox> {
                     child: buildItem(
                       skill,
                       provider.selectSkill,
+                      provider.onLongPress,
                       provider.isSkillSelected,
                     ),
                   ),
@@ -98,12 +98,14 @@ class _CommanderSkillBoxState extends State<CommanderSkillBox> {
   Widget buildItem(
     ShipSkill skill,
     void Function(ShipSkill) onTap,
+    void Function(ShipSkill) onLongPress,
     bool Function(ShipSkill) isSelected,
   ) {
     final icon = skill.name;
     final selected = isSelected(skill);
     return InkWell(
       onTap: () => onTap(skill),
+      onLongPress: () => onLongPress(skill),
       child: DecoratedBox(
         decoration: BoxDecoration(
           border: Border.all(

@@ -15,6 +15,7 @@ import 'package:wowsinfo/models/gamedata/projectile.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
 import 'package:wowsinfo/models/gamedata/ship_additional.dart';
+import 'package:wowsinfo/models/gamedata/skills.dart';
 
 /// This repository manages game data from WoWs-Game-Data
 class GameRepository {
@@ -33,9 +34,10 @@ class GameRepository {
   late final Map<String, Modernization> _modernizations;
   late final Map<String, Projectile> _projectiles;
   late final Map<String, Ship> _ships;
+  late final Map<String, CommanderSkill> _skills;
   late final Map<String, ShipAdditional> _shipAdditionals;
   late final GameInfo _gameInfo;
-  late final CommandSkills _commandSkills;
+  late final CommandSkillInfo _commandSkills;
 
   late final List<Achievement> achievementList;
   late final List<Ability> consumableList;
@@ -89,6 +91,9 @@ class GameRepository {
     _ships = (dataObject['ships'] as Map).map((key, value) {
       return MapEntry(key, Ship.fromJson(value));
     });
+    _skills = (dataObject['skills'] as Map).map((key, value) {
+      return MapEntry(key, CommanderSkill.fromJson(value));
+    });
     _shipAdditionals = (dataObject['number'] as Map).map((key, value) {
       return MapEntry(key, ShipAdditional.fromJson(value));
     });
@@ -101,7 +106,7 @@ class GameRepository {
       cache: false,
     );
     timer.log(message: 'Loaded skills.json');
-    _commandSkills = CommandSkills.fromJson(jsonDecode(commanderSkills));
+    _commandSkills = CommandSkillInfo.fromJson(jsonDecode(commanderSkills));
     timer.log(message: 'Decoded skills.json');
 
     _generateLists();
@@ -223,5 +228,9 @@ class GameRepository {
     final skills = _commandSkills.shipTypes[type.rawName];
     if (skills == null) throw Exception('No skills for $type');
     return skills;
+  }
+
+  CommanderSkill? skillOf(String name) {
+    return _skills[name];
   }
 }

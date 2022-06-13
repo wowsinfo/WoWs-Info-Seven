@@ -62,6 +62,10 @@ class CommanderSkillProvider with ChangeNotifier {
   void selectSkill(ShipSkill skill) {
     if (_selectedSkills.contains(skill)) {
       _logger.fine('Skill already selected: $skill');
+      // remove from the selection
+      _selectedPoints -= skill.tier;
+      _selectedSkills.remove(skill);
+      notifyListeners();
       return;
     }
 
@@ -90,6 +94,30 @@ class CommanderSkillProvider with ChangeNotifier {
     _selectedPoints += skill.tier;
     _logger.fine('Selected points: $_selectedPoints');
     notifyListeners();
+  }
+
+  void onLongPress(ShipSkill skill) {
+    // Show the information of the skill
+    final commanderSkill = GameRepository.instance.skillOf(skill.name);
+    if (commanderSkill == null) {
+      assert(false, 'Skill not found: ${skill.name}');
+      return;
+    }
+
+    final skillName = Localisation.instance.stringOf(commanderSkill.name);
+    showDialog(
+      context: _context,
+      builder: (context) => AlertDialog(
+        title: Text(skillName ?? '-'),
+        content: Text(commanderSkill.descriptions),
+        actions: [
+          TextButton(
+            child: const Text('Close'),
+            onPressed: () => Navigator.pop(context),
+          ),
+        ],
+      ),
+    );
   }
 
   String get selectedPoints => _selectedPoints.toString();

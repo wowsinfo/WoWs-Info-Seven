@@ -906,12 +906,12 @@ class ModifierShipType {
     this.submarine,
   });
 
-  final double? airCarrier;
-  final double? auxiliary;
-  final double? battleship;
-  final double? cruiser;
-  final double? destroyer;
-  final double? submarine;
+  final num? airCarrier;
+  final num? auxiliary;
+  final num? battleship;
+  final num? cruiser;
+  final num? destroyer;
+  final num? submarine;
 
   factory ModifierShipType.fromJson(Map<String, dynamic>? json) {
     if (json == null) {

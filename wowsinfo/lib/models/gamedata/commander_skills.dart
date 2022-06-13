@@ -15,8 +15,8 @@ enum CommanderSkillType {
 }
 
 @immutable
-class CommandSkills {
-  const CommandSkills({
+class CommandSkillInfo {
+  const CommandSkillInfo({
     required this.airCarrier,
     required this.battleship,
     required this.cruiser,
@@ -34,7 +34,8 @@ class CommandSkills {
   /// The raw map
   final Map<String, List<List<ShipSkill>>> shipTypes;
 
-  factory CommandSkills.fromJson(Map<String, dynamic> json) => CommandSkills(
+  factory CommandSkillInfo.fromJson(Map<String, dynamic> json) =>
+      CommandSkillInfo(
         airCarrier: List<List<ShipSkill>>.from(json['AirCarrier'].map(
             (x) => List<ShipSkill>.from(x.map((x) => ShipSkill.fromJson(x))))),
         battleship: List<List<ShipSkill>>.from(json['Battleship'].map(
