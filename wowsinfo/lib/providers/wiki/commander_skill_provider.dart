@@ -96,6 +96,12 @@ class CommanderSkillProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void reset() {
+    _selectedPoints = 0;
+    _selectedSkills.clear();
+    notifyListeners();
+  }
+
   void onLongPress(ShipSkill skill) {
     // Show the information of the skill
     final commanderSkill = GameRepository.instance.skillOf(skill.name);

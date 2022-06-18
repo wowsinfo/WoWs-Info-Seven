@@ -42,6 +42,11 @@ class _CommanderSkillPageState extends State<CommanderSkillPage> {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.refresh),
+        onPressed: () {},
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 
@@ -77,9 +82,7 @@ class _CommanderSkillPageState extends State<CommanderSkillPage> {
       builder: (context, provider, child) {
         return Text(
           provider.pointInfo,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
+          style: Theme.of(context).textTheme.titleLarge,
           textAlign: TextAlign.center,
         );
       },
@@ -93,35 +96,38 @@ class _CommanderSkillPageState extends State<CommanderSkillPage> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              ...provider.skills.enumerate().map((e) {
-                final index = e.key;
-                final skills = provider.skills[index];
-                return Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Wrap(
-                      alignment: WrapAlignment.center,
-                      children: [
-                        ...skills.map(
-                          (skill) => Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: buildItem(
-                              skill,
-                              provider.selectSkill,
-                              provider.onLongPress,
-                              provider.isSkillSelected,
+              ...provider.skills.enumerate().map(
+                (e) {
+                  final index = e.key;
+                  final skills = provider.skills[index];
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Wrap(
+                        alignment: WrapAlignment.center,
+                        children: [
+                          ...skills.map(
+                            (skill) => Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: buildItem(
+                                skill,
+                                provider.selectSkill,
+                                provider.onLongPress,
+                                provider.isSkillSelected,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      width: index < 3 ? 300 : 0,
-                      child: const Divider(),
-                    ),
-                  ],
-                );
-              })
+                        ],
+                      ),
+                      SizedBox(
+                        width: index < 3 ? 300 : 0,
+                        child: const Divider(),
+                      ),
+                    ],
+                  );
+                },
+              ),
+              const SizedBox(height: 50),
             ],
           ),
         );
