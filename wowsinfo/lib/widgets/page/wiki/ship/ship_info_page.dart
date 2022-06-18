@@ -761,9 +761,18 @@ class _ShipConsumables extends StatelessWidget {
     print('$name $type');
     final info = GameRepository.instance.abilityOf(name);
     assert(info != null, 'Consumable is not found');
+    final ability = info?.abilities[type];
+    final description = Localisation.instance.stringOf(info?.description) ?? '';
+    final abilityModifier = ability.toString();
     return InkWell(
       onTap: () {
-        print(info?.abilities[type]);
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text(Localisation.instance.stringOf(info?.name) ?? '-'),
+            content: Text('$description\n\n$abilityModifier'),
+          ),
+        );
       },
       child: AssetImageLoader(
         name: 'gamedata/app/assets/consumables/$name.png',
