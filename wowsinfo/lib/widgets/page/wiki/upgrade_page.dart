@@ -64,15 +64,16 @@ class UpgradePage extends StatelessWidget {
       builder: (context) => AlertDialog(
         content: MaxWidthBox(
           child: ListTile(
-              contentPadding: const EdgeInsets.all(2),
-              title: Text(
-                Localisation.instance.stringOf(upgrade.name) ?? '',
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-              subtitle: Text(
-                '${Localisation.instance.stringOf(upgrade.description) ?? ''}\n$additionalString',
-              )),
+            contentPadding: const EdgeInsets.all(2),
+            title: Text(
+              upgrade.title,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+            subtitle: Text(
+              '${Localisation.instance.stringOf(upgrade.description) ?? ''}\n\n$additionalString',
+            ),
+          ),
         ),
       ),
     );

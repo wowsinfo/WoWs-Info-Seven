@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:wowsinfo/localisation/localisation.dart';
 import 'package:wowsinfo/models/gamedata/modifier.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
@@ -51,6 +52,12 @@ class Modernization {
     }
 
     return description;
+  }
+
+  String get title {
+    final upgradeName = Localisation.instance.stringOf(name);
+    if (upgradeName == null) return '';
+    return '$upgradeName [${slot + 1}]';
   }
 
   int greater(Modernization other) {
