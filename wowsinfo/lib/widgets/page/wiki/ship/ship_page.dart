@@ -22,7 +22,8 @@ class _ShipPageState extends State<ShipPage> {
 
   @override
   Widget build(BuildContext context) {
-    final itemCount = Utils.of(context).getItemCount(8, 2, 150);
+    // 199 will fit 3 ships on most screens
+    final itemCount = Utils.of(context).getItemCount(8, 2, 119);
     return ChangeNotifierProvider.value(
       value: _provider,
       builder: (context, widget) => Scaffold(

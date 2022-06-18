@@ -29,29 +29,39 @@ class _CommanderSkillPageState extends State<CommanderSkillPage> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
-              child: Consumer<CommanderSkillProvider>(
-                builder: (context, value, child) {
-                  return CupertinoSlidingSegmentedControl(
-                    children: {
-                      _provider.submarine: buildTitle(_provider.submarine),
-                      _provider.destroyer: buildTitle(_provider.destroyer),
-                      _provider.cruiser: buildTitle(_provider.cruiser),
-                      _provider.battleship: buildTitle(_provider.battleship),
-                      _provider.airCarrier: buildTitle(_provider.airCarrier),
-                    },
-                    groupValue: value.selectedTab,
-                    onValueChanged: (value) => _provider.select(
-                      value as String,
-                    ),
-                  );
-                },
-              ),
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 2),
+              child: buildSegmentedControl(),
             ),
-            const CommanderSkillBox(),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: buildPointInfo(),
+            ),
+            Expanded(
+              child: buildCommanderSkills(),
+            ),
           ],
         ),
       ),
+    );
+  }
+
+  Widget buildSegmentedControl() {
+    return Consumer<CommanderSkillProvider>(
+      builder: (context, provider, child) {
+        return CupertinoSlidingSegmentedControl(
+          children: {
+            _provider.submarine: buildTitle(_provider.submarine),
+            _provider.destroyer: buildTitle(_provider.destroyer),
+            _provider.cruiser: buildTitle(_provider.cruiser),
+            _provider.battleship: buildTitle(_provider.battleship),
+            _provider.airCarrier: buildTitle(_provider.airCarrier),
+          },
+          groupValue: provider.selectedTab,
+          onValueChanged: (value) => _provider.select(
+            value as String,
+          ),
+        );
+      },
     );
   }
 
@@ -61,69 +71,61 @@ class _CommanderSkillPageState extends State<CommanderSkillPage> {
       textAlign: TextAlign.center,
     );
   }
-}
 
-class CommanderSkillBox extends StatefulWidget {
-  const CommanderSkillBox({Key? key}) : super(key: key);
-
-  @override
-  State<CommanderSkillBox> createState() => _CommanderSkillBoxState();
-}
-
-class _CommanderSkillBoxState extends State<CommanderSkillBox> {
-  @override
-  Widget build(BuildContext context) {
-    final provider = Provider.of<CommanderSkillProvider>(context);
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(bottom: 8.0),
-          child: Text(
-            provider.pointInfo,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
+  Widget buildPointInfo() {
+    return Consumer<CommanderSkillProvider>(
+      builder: (context, provider, child) {
+        return Text(
+          provider.pointInfo,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
           ),
-        ),
-        Expanded(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ...provider.skills.enumerate().map((e) {
-                  final index = e.key;
-                  final skills = provider.skills[index];
-                  return Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Wrap(
-                        alignment: WrapAlignment.center,
-                        children: [
-                          ...skills.map(
-                            (skill) => Padding(
-                              padding: const EdgeInsets.all(4.0),
-                              child: buildItem(
-                                skill,
-                                provider.selectSkill,
-                                provider.onLongPress,
-                                provider.isSkillSelected,
-                              ),
+          textAlign: TextAlign.center,
+        );
+      },
+    );
+  }
+
+  Widget buildCommanderSkills() {
+    return Consumer<CommanderSkillProvider>(
+      builder: (context, provider, child) {
+        return SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ...provider.skills.enumerate().map((e) {
+                final index = e.key;
+                final skills = provider.skills[index];
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Wrap(
+                      alignment: WrapAlignment.center,
+                      children: [
+                        ...skills.map(
+                          (skill) => Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: buildItem(
+                              skill,
+                              provider.selectSkill,
+                              provider.onLongPress,
+                              provider.isSkillSelected,
                             ),
                           ),
-                        ],
-                      ),
-                      SizedBox(
-                        width: index < 3 ? 300 : 0,
-                        child: const Divider(),
-                      ),
-                    ],
-                  );
-                })
-              ],
-            ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      width: index < 3 ? 300 : 0,
+                      child: const Divider(),
+                    ),
+                  ],
+                );
+              })
+            ],
           ),
-        ),
-      ],
+        );
+      },
     );
   }
 

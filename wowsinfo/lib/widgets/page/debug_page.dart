@@ -46,9 +46,8 @@ class _DebugPageState extends State<DebugPage> {
     }
 
     return Center(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Wrap(
+        alignment: WrapAlignment.center,
         children: [
           Column(
             mainAxisSize: MainAxisSize.min,

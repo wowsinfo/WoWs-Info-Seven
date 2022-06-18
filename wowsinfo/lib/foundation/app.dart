@@ -57,6 +57,20 @@ class App {
     return isTablet;
   }
 
+  /// Check if the device is iPhone 8 size (375 x 667)
+  bool isPhone8() {
+    final size = screenSize();
+    final width = size.width;
+    return width <= 375;
+  }
+
+  /// Check if the device is iPhone X size (320 x 568)
+  bool isPhoneSE() {
+    final size = screenSize();
+    final width = size.width;
+    return width <= 320;
+  }
+
   /// Platform specific page route to distinguish between mobile and desktop.
   static PageRoute platformPageRoute({
     required Widget Function(BuildContext context) builder,
