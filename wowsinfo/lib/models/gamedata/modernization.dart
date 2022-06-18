@@ -46,7 +46,7 @@ class Modernization {
         ships!.first.toString(),
       );
       if (shipName != null) {
-        return '$description\n\n- $shipName';
+        return '$description\n$shipName';
       }
     }
 

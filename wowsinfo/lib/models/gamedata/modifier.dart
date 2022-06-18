@@ -1,9 +1,8 @@
-import 'dart:collection';
-
 import 'package:flutter/foundation.dart';
 import 'package:logging/logging.dart';
 import 'package:wowsinfo/extensions/number.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
+import 'package:wowsinfo/models/wowsinfo/ship_modules.dart';
 
 /// Those keys contain values like 1.2, 0.7. The base line is 1.0.
 /// All strings with coeff is considered as a percentage, they won't be added here.
@@ -336,52 +335,84 @@ class Modifiers {
       if (value == null) continue;
       logger.fine('$keyOriginal: $value');
 
+      final List<ModifierShipTypeHolder> valueMap;
+
       if (value is Map) {
         // we can have multiple modifiers in a single key
         final types = ModifierShipType.fromJson(value as Map<String, dynamic>);
         if (types.isEmpty()) continue;
-        logger.info('$keyOriginal: $types');
+        valueMap = types.generateList(key.toUpperCase());
+      } else {
+        valueMap = [
+          ModifierShipTypeHolder(
+            key: key.toUpperCase(),
+            value: value,
+            type: null,
+          ),
+        ];
       }
 
-      // make a list to handle different ship types
+      for (final item in valueMap) {
+        final valueKey = item.fullKey;
+        final langString = Localisation.instance.stringOf(
+          valueKey,
+          prefix: 'IDS_PARAMS_MODIFIER_',
+        );
 
-      final langString = Localisation.instance.stringOf(
-        key.toUpperCase(),
-        prefix: 'IDS_PARAMS_MODIFIER_',
-      );
+        // this might be some missing event modifiers
+        if (langString == null) continue;
 
-      // this might be some missing event modifiers
-      if (langString == null) continue;
+        final value = item.value;
+        final shipType = item.type;
+        final String valueString;
 
-      if (_timeList.contains(keyOriginal)) {
-        final double time = value.toDouble();
-        description += '$langString: ${time.toDecimalString()}s\n';
-      } else if (_additionalList.contains(keyOriginal) ||
-          key.contains('additional') ||
-          key.contains('extra')) {
-        final double extra = value.toDouble();
-        // although it is `additional`, it can be NEGATIVE
-        final sign = extra >= 0 ? '+' : '-';
-        description += '$langString: $sign${extra.abs().toDecimalString()}\n';
-      } else if (_coeffListZero.contains(keyOriginal)) {
-        final double coeff = value.toDouble();
-        description += '$langString: +${coeff.toPercentString()}\n';
-      } else if (_coeffList.contains(keyOriginal) ||
-          key.contains('coef') ||
-          key.contains('factor') ||
-          key.contains('multiplier') ||
-          key.contains('time') ||
-          key.contains('prob')) {
-        final double coeff = value.toDouble();
-        final positive = coeff > 1.0;
-        final percent = (coeff - 1).abs().toPercentString();
-        description += '$langString: ${positive ? '+' : '-'}$percent\n';
-      } else if (key.contains('dist')) {
-        final double dist = value.toDouble();
-        description += '$langString: ${(dist / 33.35).toDecimalString()}km\n';
-      } else {
-        logger.warning('Unknown modifier: $keyOriginal');
-        description += '$langString: $value\n';
+        if (value == 0) continue;
+
+        if (_timeList.contains(keyOriginal)) {
+          final double time = value.toDouble();
+          valueString = '$langString: ${time.toDecimalString()}s\n';
+        } else if (_additionalList.contains(keyOriginal) ||
+            key.contains('additional') ||
+            key.contains('extra')) {
+          final double extra = value.toDouble();
+          // although it is `additional`, it can be NEGATIVE
+          final sign = extra >= 0 ? '+' : '-';
+          valueString = '$langString: $sign${extra.abs().toDecimalString()}\n';
+        } else if (_coeffListZero.contains(keyOriginal)) {
+          final double coeff = value.toDouble();
+          valueString = '$langString: +${coeff.toPercentString()}\n';
+        } else if (_coeffList.contains(keyOriginal) ||
+            key.contains('coef') ||
+            key.contains('factor') ||
+            key.contains('multiplier') ||
+            key.contains('time') ||
+            key.contains('prob')) {
+          final double coeff = value.toDouble();
+          final positive = coeff > 1.0;
+          final percent = (coeff - 1).abs().toPercentString();
+          valueString = '$langString: ${positive ? '+' : '-'}$percent\n';
+        } else if (key.contains('dist')) {
+          final double dist = value.toDouble();
+          valueString = '$langString: ${(dist / 33.35).toDecimalString()}km\n';
+        } else {
+          logger.warning('Unknown modifier: $keyOriginal');
+          if (value == -1) {
+            valueString = '$langString: ∞\n';
+          } else {
+            valueString = '$langString: $value\n';
+          }
+        }
+
+        logger.info('Ship type: $shipType');
+        if (shipType == null) {
+          // make sure there is no duplications
+          if (description.contains(valueString)) continue;
+          description += valueString;
+        } else {
+          final shipTypeString =
+              Localisation.instance.stringOf(shipType, prefix: 'IDS_');
+          description += '${valueString.trim()} ($shipTypeString)\n';
+        }
       }
     }
 
@@ -896,6 +927,21 @@ class Modifiers {
       );
 }
 
+@immutable
+class ModifierShipTypeHolder {
+  const ModifierShipTypeHolder({
+    required this.key,
+    required this.type,
+    required this.value,
+  });
+
+  final String key;
+  final String? type;
+  final dynamic value;
+
+  String get fullKey => type == null ? key : '${key}_$type';
+}
+
 /// Different values for different ship types.
 @immutable
 class ModifierShipType {
@@ -928,6 +974,37 @@ class ModifierShipType {
       destroyer: json['Destroyer'],
       submarine: json['Submarine'],
     );
+  }
+
+  /// Generate a list containing all types with key and value
+  List<ModifierShipTypeHolder> generateList(String key) {
+    return [
+      ModifierShipTypeHolder(
+        key: key,
+        type: 'AIRCARRIER',
+        value: airCarrier,
+      ),
+      ModifierShipTypeHolder(
+        key: key,
+        type: 'AUXILIARY',
+        value: auxiliary,
+      ),
+      ModifierShipTypeHolder(
+        key: key,
+        type: 'BATTLESHIP',
+        value: battleship,
+      ),
+      ModifierShipTypeHolder(
+        key: key,
+        type: 'CRUISER',
+        value: cruiser,
+      ),
+      ModifierShipTypeHolder(
+        key: key,
+        type: 'DESTROYER',
+        value: destroyer,
+      ),
+    ];
   }
 
   bool isEmpty() {
