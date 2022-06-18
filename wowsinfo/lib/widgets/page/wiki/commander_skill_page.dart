@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:wowsinfo/extensions/list.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
 import 'package:wowsinfo/models/gamedata/commander_skills.dart';
 import 'package:wowsinfo/providers/wiki/commander_skill_provider.dart';
@@ -25,18 +26,19 @@ class _CommanderSkillPageState extends State<CommanderSkillPage> {
         value: _provider,
         builder: (context, child) => Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisSize: MainAxisSize.min,
           children: [
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
               child: Consumer<CommanderSkillProvider>(
                 builder: (context, value, child) {
                   return CupertinoSlidingSegmentedControl(
                     children: {
-                      _provider.submarine: Text(_provider.submarine),
-                      _provider.destroyer: Text(_provider.destroyer),
-                      _provider.cruiser: Text(_provider.cruiser),
-                      _provider.battleship: Text(_provider.battleship),
-                      _provider.airCarrier: Text(_provider.airCarrier),
+                      _provider.submarine: buildTitle(_provider.submarine),
+                      _provider.destroyer: buildTitle(_provider.destroyer),
+                      _provider.cruiser: buildTitle(_provider.cruiser),
+                      _provider.battleship: buildTitle(_provider.battleship),
+                      _provider.airCarrier: buildTitle(_provider.airCarrier),
                     },
                     groupValue: value.selectedTab,
                     onValueChanged: (value) => _provider.select(
@@ -50,6 +52,13 @@ class _CommanderSkillPageState extends State<CommanderSkillPage> {
           ],
         ),
       ),
+    );
+  }
+
+  Text buildTitle(String title) {
+    return Text(
+      title,
+      textAlign: TextAlign.center,
     );
   }
 }
@@ -76,28 +85,43 @@ class _CommanderSkillBoxState extends State<CommanderSkillBox> {
             ),
           ),
         ),
-        ListView.builder(
-          shrinkWrap: true,
-          itemCount: provider.skills.length,
-          itemBuilder: (context, index) {
-            final skills = provider.skills[index];
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+        Expanded(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                ...skills.map(
-                  (skill) => Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: buildItem(
-                      skill,
-                      provider.selectSkill,
-                      provider.onLongPress,
-                      provider.isSkillSelected,
-                    ),
-                  ),
-                ),
+                ...provider.skills.enumerate().map((e) {
+                  final index = e.key;
+                  final skills = provider.skills[index];
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Wrap(
+                        alignment: WrapAlignment.center,
+                        children: [
+                          ...skills.map(
+                            (skill) => Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: buildItem(
+                                skill,
+                                provider.selectSkill,
+                                provider.onLongPress,
+                                provider.isSkillSelected,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        width: index < 3 ? 300 : 0,
+                        child: const Divider(),
+                      ),
+                    ],
+                  );
+                })
               ],
-            );
-          },
+            ),
+          ),
         ),
       ],
     );

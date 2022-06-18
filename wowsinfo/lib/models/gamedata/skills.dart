@@ -21,7 +21,7 @@ class CommanderSkill {
   final bool uiTreatAsTrigger;
   final String name;
 
-  String get descriptions => '$modifiers\n${logicTrigger.modifiers}';
+  String get descriptions => '$modifiers${logicTrigger.modifiers}';
 
   factory CommanderSkill.fromJson(Map<String, dynamic> json) => CommanderSkill(
         logicTrigger: LogicTrigger.fromJson(json['LogicTrigger']),
