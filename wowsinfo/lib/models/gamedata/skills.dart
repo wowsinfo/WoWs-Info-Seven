@@ -4,7 +4,7 @@ import 'package:wowsinfo/models/gamedata/modifier.dart';
 @immutable
 class CommanderSkill {
   const CommanderSkill({
-    // required this.logicTrigger,
+    required this.logicTrigger,
     required this.canBeLearned,
     required this.isEpic,
     required this.modifiers,
@@ -13,7 +13,7 @@ class CommanderSkill {
     required this.name,
   });
 
-  // final LogicTrigger logicTrigger;
+  final LogicTrigger logicTrigger;
   final bool canBeLearned;
   final bool isEpic;
   final Modifiers modifiers;
@@ -21,10 +21,10 @@ class CommanderSkill {
   final bool uiTreatAsTrigger;
   final String name;
 
-  String get descriptions => modifiers.toString();
+  String get descriptions => '$modifiers\n${logicTrigger.modifiers}';
 
   factory CommanderSkill.fromJson(Map<String, dynamic> json) => CommanderSkill(
-        // logicTrigger: LogicTrigger.fromJson(json['LogicTrigger']),
+        logicTrigger: LogicTrigger.fromJson(json['LogicTrigger']),
         canBeLearned: json['canBeLearned'],
         isEpic: json['isEpic'],
         modifiers: Modifiers.fromJson(json['modifiers']),
@@ -54,17 +54,17 @@ class LogicTrigger {
   });
 
   final int burnCount;
-  final int changePriorityTargetPenalty;
+  final num changePriorityTargetPenalty;
   final String consumableType;
   final int coolingDelay;
-  final List<dynamic> coolingInterpolator;
+  final List<List<int>> coolingInterpolator;
   final String dividerType;
   final int dividerValue;
   final int duration;
   final int energyCoeff;
   final int floodCount;
-  final List<dynamic> heatInterpolator;
-  final LogicTriggerModifiers modifiers;
+  final List<List<num>> heatInterpolator;
+  final Modifiers modifiers;
   final String triggerDescIds;
   final String triggerType;
 
@@ -73,24 +73,17 @@ class LogicTrigger {
         changePriorityTargetPenalty: json['changePriorityTargetPenalty'],
         consumableType: json['consumableType'],
         coolingDelay: json['coolingDelay'],
-        coolingInterpolator:
-            List<dynamic>.from(json['coolingInterpolator'].map((x) => x)),
+        coolingInterpolator: List<List<int>>.from(
+            json['coolingInterpolator'].map((x) => List<int>.from(x))),
         dividerType: json['dividerType'],
         dividerValue: json['dividerValue'],
         duration: json['duration'],
         energyCoeff: json['energyCoeff'],
         floodCount: json['floodCount'],
-        heatInterpolator:
-            List<dynamic>.from(json['heatInterpolator'].map((x) => x)),
-        modifiers: LogicTriggerModifiers.fromJson(json['modifiers']),
+        heatInterpolator: List<List<num>>.from(
+            json['heatInterpolator'].map((x) => List<num>.from(x))),
+        modifiers: Modifiers.fromJson(json['modifiers']),
         triggerDescIds: json['triggerDescIds'],
         triggerType: json['triggerType'],
       );
-}
-
-class LogicTriggerModifiers {
-  LogicTriggerModifiers();
-
-  factory LogicTriggerModifiers.fromJson(Map<String, dynamic> json) =>
-      LogicTriggerModifiers();
 }
