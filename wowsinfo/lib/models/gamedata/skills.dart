@@ -53,16 +53,16 @@ class LogicTrigger {
     required this.triggerType,
   });
 
-  final int burnCount;
+  final num burnCount;
   final num changePriorityTargetPenalty;
   final String consumableType;
-  final int coolingDelay;
-  final List<List<int>> coolingInterpolator;
+  final num coolingDelay;
+  final List<List<num>> coolingInterpolator;
   final String dividerType;
-  final int dividerValue;
-  final int duration;
-  final int energyCoeff;
-  final int floodCount;
+  final num dividerValue;
+  final num duration;
+  final num energyCoeff;
+  final num floodCount;
   final List<List<num>> heatInterpolator;
   final Modifiers modifiers;
   final String triggerDescIds;
@@ -73,8 +73,8 @@ class LogicTrigger {
         changePriorityTargetPenalty: json['changePriorityTargetPenalty'],
         consumableType: json['consumableType'],
         coolingDelay: json['coolingDelay'],
-        coolingInterpolator: List<List<int>>.from(
-            json['coolingInterpolator'].map((x) => List<int>.from(x))),
+        coolingInterpolator: List<List<num>>.from(
+            json['coolingInterpolator'].map((x) => List<num>.from(x))),
         dividerType: json['dividerType'],
         dividerValue: json['dividerValue'],
         duration: json['duration'],

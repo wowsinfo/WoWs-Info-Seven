@@ -343,6 +343,8 @@ class Modifiers {
         logger.info('$keyOriginal: $types');
       }
 
+      // make a list to handle different ship types
+
       final langString = Localisation.instance.stringOf(
         key.toUpperCase(),
         prefix: 'IDS_PARAMS_MODIFIER_',

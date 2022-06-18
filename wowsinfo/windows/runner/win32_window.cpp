@@ -192,10 +192,12 @@ Win32Window::MessageHandler(HWND hwnd,
             return 0;
 
         case WM_GETMINMAXINFO:
+            break;
             // change the minimum window size here
-            LPMINMAXINFO lpMMI = (LPMINMAXINFO)lparam;
-            lpMMI->ptMinTrackSize.x = 1280;
-            lpMMI->ptMinTrackSize.y = 720;
+            // LPMINMAXINFO lpMMI = (LPMINMAXINFO)lparam;
+            // todo: change the minimum window size
+            // lpMMI->ptMinTrackSize.x = 1280;
+            // lpMMI->ptMinTrackSize.y = 720;
     }
 
     return DefWindowProc(window_handle_, message, wparam, lparam);

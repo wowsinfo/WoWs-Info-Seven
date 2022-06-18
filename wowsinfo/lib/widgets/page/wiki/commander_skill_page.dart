@@ -67,7 +67,15 @@ class _CommanderSkillBoxState extends State<CommanderSkillBox> {
     final provider = Provider.of<CommanderSkillProvider>(context);
     return Column(
       children: [
-        Text(provider.pointInfo),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 8.0),
+          child: Text(
+            provider.pointInfo,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
         ListView.builder(
           shrinkWrap: true,
           itemCount: provider.skills.length,
