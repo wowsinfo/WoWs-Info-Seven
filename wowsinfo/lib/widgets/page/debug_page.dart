@@ -3,6 +3,7 @@ import 'package:wowsinfo/foundation/app.dart';
 import 'package:wowsinfo/main.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
+import 'package:wowsinfo/widgets/page/search_page.dart';
 import 'package:wowsinfo/widgets/page/wiki/achievement_page.dart';
 import 'package:wowsinfo/widgets/page/wiki/commander_skill_page.dart';
 import 'package:wowsinfo/widgets/page/wiki/ship/ship_page.dart';
@@ -35,6 +36,17 @@ class _DebugPageState extends State<DebugPage> {
         title: const Text('Debug Page'),
       ),
       body: renderTest(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).push(
+            App.platformPageRoute(
+              builder: (context) => const SearchPage(),
+            ),
+          );
+        },
+        child: const Icon(Icons.search),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 

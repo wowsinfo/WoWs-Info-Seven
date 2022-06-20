@@ -108,31 +108,33 @@ class ShipSimilarPage extends StatelessWidget {
     logger.fine('chartWidth: $chartWidth');
     logger.fine('screenWidth: $screenWidth');
 
-    return MaxWidthBox(
-      maxWidth: chartWidth,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Text(title, style: Theme.of(context).textTheme.headline5),
-            Text(
-              subtitle,
-              style: Theme.of(context).textTheme.subtitle1,
-            ),
-            SizedBox(
-              height: height,
-              child: BarChart(
-                list,
-                animate: true,
-                vertical: false,
-                barRendererDecorator: BarLabelDecorator<String>(
-                  labelAnchor: BarLabelAnchor.end,
-                ),
-                domainAxis: dAxis,
-                primaryMeasureAxis: axis,
+    return RepaintBoundary(
+      child: MaxWidthBox(
+        maxWidth: chartWidth,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              Text(title, style: Theme.of(context).textTheme.headline5),
+              Text(
+                subtitle,
+                style: Theme.of(context).textTheme.subtitle1,
               ),
-            ),
-          ],
+              SizedBox(
+                height: height,
+                child: BarChart(
+                  list,
+                  animate: true,
+                  vertical: false,
+                  barRendererDecorator: BarLabelDecorator<String>(
+                    labelAnchor: BarLabelAnchor.end,
+                  ),
+                  domainAxis: dAxis,
+                  primaryMeasureAxis: axis,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
