@@ -1,8 +1,7 @@
 import 'package:flutter/foundation.dart';
-import 'package:wowsinfo/models/wargaming/clan_result.dart';
 import 'package:wowsinfo/models/wargaming/player_achievement.dart';
 import 'package:wowsinfo/models/wargaming/player_information.dart';
-import 'package:wowsinfo/models/wargaming/player_result.dart';
+import 'package:wowsinfo/models/wargaming/search_result.dart';
 import 'package:wowsinfo/models/wargaming/server_status.dart';
 import 'package:wowsinfo/models/wowsinfo/game_server.dart';
 import 'package:wowsinfo/services/service_base.dart';

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wowsinfo/localisation/localisation.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -12,11 +13,45 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Search Page'),
+        title: TextField(
+          decoration: InputDecoration(
+            border: InputBorder.none,
+            hintText: 'Search',
+          ),
+          style: Theme.of(context).textTheme.labelLarge,
+        ),
       ),
-      body: const Center(
-        child: Text('Search Page'),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            renderClan(),
+            renderPlayer(),
+          ],
+        ),
       ),
+    );
+  }
+
+  Widget renderClan() {
+    return Column(
+      children: [
+        Text(
+          Localisation.of(context).menu_search_clan,
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+      ],
+    );
+  }
+
+  Widget renderPlayer() {
+    return Column(
+      children: [
+        Text(
+          Localisation.of(context).menu_search_player,
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+      ],
     );
   }
 }
