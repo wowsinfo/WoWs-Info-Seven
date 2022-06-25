@@ -40,7 +40,7 @@ void main() async {
   await setup();
 
   // debug
-  // debugRepaintRainbowEnabled = true;
+  debugRepaintRainbowEnabled = true;
 
   runApp(const WoWsInfoApp());
 }

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:wowsinfo/models/wargaming/search_result.dart';
@@ -14,6 +16,7 @@ class SearchProvider extends ChangeNotifier {
   }
 
   String _input = '';
+  Timer? _timer;
 
   int _numOfPlayers = 0;
   int _numOfClans = 0;
@@ -31,6 +34,8 @@ class SearchProvider extends ChangeNotifier {
   final service = WargamingService(GameServer(GameServer.defaultServer));
 
   void _onTextChanged() {
+    // cancel previous timer
+    _timer?.cancel();
     final input = _searchController.text;
 
     // prevent excessive requests
@@ -40,7 +45,9 @@ class SearchProvider extends ChangeNotifier {
     }
     _input = input;
 
-    search(input);
+    _timer = Timer(const Duration(milliseconds: 500), () {
+      search(input);
+    });
   }
 
   void search(String query) {
@@ -48,13 +55,15 @@ class SearchProvider extends ChangeNotifier {
     _logger.info('Searching for $query');
     if (length <= 1) {
       _logger.info('Search query is too short');
-      reset();
+      _resetAll();
       return;
     }
 
-    // min 2 characters for clans
-    if (length > 1) {
+    //  2 - 5 characters for clans
+    if (length > 1 && length <= 5) {
       _searchClan(query);
+    } else {
+      _resetClans();
     }
 
     // min 3 characters for players
@@ -89,11 +98,20 @@ class SearchProvider extends ChangeNotifier {
     }
   }
 
-  void reset() {
+  void _resetPlayers() {
     _numOfPlayers = 0;
-    _numOfClans = 0;
-    _clans = [];
     _players = [];
     notifyListeners();
+  }
+
+  void _resetClans() {
+    _numOfClans = 0;
+    _clans = [];
+    notifyListeners();
+  }
+
+  void _resetAll() {
+    _resetPlayers();
+    _resetClans();
   }
 }

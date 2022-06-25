@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:wowsinfo/foundation/app.dart';
+import 'package:wowsinfo/foundation/helpers/utils.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
 import 'package:wowsinfo/models/wargaming/search_result.dart';
 import 'package:wowsinfo/providers/search_provider.dart';
@@ -52,7 +54,7 @@ class _SearchPageState extends State<SearchPage> {
   Widget renderClan() {
     return Consumer<SearchProvider>(
       builder: (context, provider, child) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -61,7 +63,7 @@ class _SearchPageState extends State<SearchPage> {
               provider.numOfClans,
             ),
           ),
-          renderList(provider.clans),
+          renderGrid(provider.clans),
         ],
       ),
     );
@@ -70,7 +72,7 @@ class _SearchPageState extends State<SearchPage> {
   Widget renderPlayer() {
     return Consumer<SearchProvider>(
       builder: (context, provider, child) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -79,22 +81,27 @@ class _SearchPageState extends State<SearchPage> {
               provider.numOfPlayers,
             ),
           ),
-          renderList(provider.players),
+          renderGrid(provider.players),
         ],
       ),
     );
   }
 
-  Widget renderList(List<SearchResult> result) {
-    return Column(
-      children: [
-        for (final item in result)
-          ListTile(
-            title: Text(item.displayName),
-            trailing: Text(item.id),
-            onTap: () {},
-          ),
-      ],
+  Widget renderGrid(List<SearchResult> result) {
+    final count = Utils(context).getItemCount(6, 1, 300);
+    final width = MediaQuery.of(context).size.width;
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.center,
+      children: result
+          .map((e) => SizedBox(
+                width: width / count,
+                child: ListTile(
+                  title: Text(e.displayName),
+                  trailing: Text(e.id),
+                  onTap: () {},
+                ),
+              ))
+          .toList(growable: false),
     );
   }
 }
