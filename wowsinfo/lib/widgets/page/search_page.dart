@@ -20,25 +20,56 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: TextField(
-          controller: _searchController,
-          decoration: const InputDecoration(
-            border: InputBorder.none,
-            hintText: 'Search',
+      body: Column(
+        children: [
+          renderSearchBar(),
+          Expanded(
+            child: SingleChildScrollView(
+              child: ChangeNotifierProvider.value(
+                value: _provider,
+                builder: (context, provider) => Column(
+                  children: [
+                    renderClan(),
+                    renderPlayer(),
+                  ],
+                ),
+              ),
+            ),
           ),
-          style: Theme.of(context).textTheme.labelLarge,
-        ),
+        ],
       ),
-      body: SingleChildScrollView(
-        child: ChangeNotifierProvider.value(
-          value: _provider,
-          builder: (context, provider) => Column(
-            children: [
-              renderClan(),
-              renderPlayer(),
-            ],
-          ),
+    );
+  }
+
+  /// A rounded search bar with a back button
+  Widget renderSearchBar() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Material(
+        elevation: 4,
+        borderRadius: BorderRadius.circular(100),
+        child: Row(
+          children: [
+            SizedBox(
+              width: 48,
+              height: 48,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(24),
+                onTap: () => Navigator.of(context).pop(),
+                child: const Icon(Icons.arrow_back),
+              ),
+            ),
+            Expanded(
+              child: TextField(
+                controller: _searchController,
+                onSubmitted: (value) => _provider.search(value),
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Search',
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

@@ -33,17 +33,19 @@ class SearchProvider extends ChangeNotifier {
   // TODO: read from settings and this value should be provided.
   final service = WargamingService(GameServer(GameServer.defaultServer));
 
+  bool _isSameInput(String input) {
+    return input == _input;
+  }
+
   void _onTextChanged() {
     // cancel previous timer
     _timer?.cancel();
     final input = _searchController.text;
 
-    // prevent excessive requests
-    if (input == _input) {
+    if (_isSameInput(input)) {
       _logger.fine('input is the same as previous one');
       return;
     }
-    _input = input;
 
     _timer = Timer(const Duration(milliseconds: 500), () {
       search(input);
@@ -51,6 +53,12 @@ class SearchProvider extends ChangeNotifier {
   }
 
   void search(String query) {
+    if (_isSameInput(query)) {
+      _logger.fine('input is the same as previous one');
+      return;
+    }
+    _input = query;
+
     final length = query.length;
     _logger.info('Searching for $query');
     if (length <= 1) {
