@@ -1,24 +1,53 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:logging/logging.dart';
 import 'package:wowsinfo/models/wargaming/search_result.dart';
 import 'package:wowsinfo/models/wowsinfo/game_server.dart';
 import 'package:wowsinfo/services/wargaming/wargaming_service.dart';
 
 class SearchProvider extends ChangeNotifier {
+  final _logger = Logger('SearchProvider');
+  final TextEditingController _searchController;
+  SearchProvider(this._searchController) {
+    _searchController.addListener(() {
+      _onTextChanged();
+    });
+  }
+
+  String _input = '';
+
   int _numOfPlayers = 0;
   int _numOfClans = 0;
-
-  List<ClanResult> _clans = [];
-  List<PlayerResult> _players = [];
 
   int get numOfPlayers => _numOfPlayers;
   int get numOfClans => _numOfClans;
 
+  List<ClanResult> _clans = [];
+  List<PlayerResult> _players = [];
+
+  List<ClanResult> get clans => _clans;
+  List<PlayerResult> get players => _players;
+
   // TODO: read from settings and this value should be provided.
   final service = WargamingService(GameServer(GameServer.defaultServer));
 
+  void _onTextChanged() {
+    final input = _searchController.text;
+
+    // prevent excessive requests
+    if (input == _input) {
+      _logger.fine('input is the same as previous one');
+      return;
+    }
+    _input = input;
+
+    search(input);
+  }
+
   void search(String query) {
     final length = query.length;
+    _logger.info('Searching for $query');
     if (length <= 1) {
+      _logger.info('Search query is too short');
       reset();
       return;
     }
@@ -35,23 +64,27 @@ class SearchProvider extends ChangeNotifier {
   }
 
   void _searchClan(String query) async {
+    _logger.info('Searching for clan $query');
     final result = await service.searchClan(query);
     if (result.isNotEmpty) {
       final clanList = result.data;
       if (clanList != null) {
         _numOfClans = clanList.length;
         _clans = clanList;
+        notifyListeners();
       }
     }
   }
 
   void _searchPlayer(String query) async {
+    _logger.info('Searching for player $query');
     final result = await service.searchPlayer(query);
     if (result.isNotEmpty) {
       final playerList = result.data;
       if (playerList != null) {
         _numOfPlayers = playerList.length;
         _players = playerList;
+        notifyListeners();
       }
     }
   }
@@ -59,6 +92,8 @@ class SearchProvider extends ChangeNotifier {
   void reset() {
     _numOfPlayers = 0;
     _numOfClans = 0;
+    _clans = [];
+    _players = [];
     notifyListeners();
   }
 }

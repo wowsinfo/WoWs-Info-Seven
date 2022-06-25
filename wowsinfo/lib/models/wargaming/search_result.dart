@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:wowsinfo/models/encodable.dart';
+import 'package:wowsinfo/models/wowsinfo/timestamp.dart';
 
 abstract class SearchResult implements Encodable {
   String get displayName;
