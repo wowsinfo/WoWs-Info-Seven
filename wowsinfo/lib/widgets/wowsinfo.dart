@@ -20,6 +20,7 @@ class WoWsInfoApp extends StatelessWidget {
       supportedLocales: Localisation.supportedLocales,
       theme: ThemeData(
         primarySwatch: Colors.red,
+        // brightness: Brightness.dark,
       ),
       home: const GlobalShortcuts(
         child: DebugPage(),

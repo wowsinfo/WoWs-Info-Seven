@@ -16,6 +16,8 @@ class SearchProvider extends ChangeNotifier {
   }
 
   String _input = '';
+  bool get canClear => _input.isNotEmpty;
+
   Timer? _timer;
 
   int _numOfPlayers = 0;
@@ -63,7 +65,7 @@ class SearchProvider extends ChangeNotifier {
     _logger.info('Searching for $query');
     if (length <= 1) {
       _logger.info('Search query is too short');
-      _resetAll();
+      resetAll();
       return;
     }
 
@@ -118,8 +120,9 @@ class SearchProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void _resetAll() {
+  void resetAll() {
     _resetPlayers();
     _resetClans();
+    _searchController.clear();
   }
 }

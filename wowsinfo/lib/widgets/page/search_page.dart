@@ -1,71 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wowsinfo/foundation/app.dart';
 import 'package:wowsinfo/foundation/helpers/utils.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
 import 'package:wowsinfo/models/wargaming/search_result.dart';
 import 'package:wowsinfo/providers/search_provider.dart';
+import 'package:wowsinfo/widgets/shared/icon_ink_well.dart';
 
-class SearchPage extends StatefulWidget {
+class SearchPage extends StatelessWidget {
   const SearchPage({Key? key}) : super(key: key);
 
   @override
-  State<SearchPage> createState() => _SearchPageState();
-}
-
-class _SearchPageState extends State<SearchPage> {
-  final _searchController = TextEditingController();
-  late final _provider = SearchProvider(_searchController);
-
-  @override
   Widget build(BuildContext context) {
+    final searchController = TextEditingController();
+    final provider = SearchProvider(searchController);
     return Scaffold(
-      body: Column(
-        children: [
-          renderSearchBar(),
-          Expanded(
-            child: SingleChildScrollView(
-              child: ChangeNotifierProvider.value(
-                value: _provider,
-                builder: (context, provider) => Column(
-                  children: [
-                    renderClan(),
-                    renderPlayer(),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  /// A rounded search bar with a back button
-  Widget renderSearchBar() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Material(
-        elevation: 4,
-        borderRadius: BorderRadius.circular(100),
-        child: Row(
+      body: ChangeNotifierProvider.value(
+        value: provider,
+        builder: (context, child) => Column(
           children: [
-            SizedBox(
-              width: 48,
-              height: 48,
-              child: InkWell(
-                borderRadius: BorderRadius.circular(24),
-                onTap: () => Navigator.of(context).pop(),
-                child: const Icon(Icons.arrow_back),
-              ),
+            renderSearchBar(
+              context,
+              searchController,
+              provider.search,
             ),
             Expanded(
-              child: TextField(
-                controller: _searchController,
-                onSubmitted: (value) => _provider.search(value),
-                decoration: const InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Search',
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    renderClan(context),
+                    renderPlayer(context),
+                  ],
                 ),
               ),
             ),
@@ -75,14 +39,59 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
-  Text renderTitle(String title, int count) {
+  /// A rounded search bar with a back button
+  Widget renderSearchBar(
+    BuildContext context,
+    TextEditingController? controller,
+    void Function(String)? onSubmitted,
+  ) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Material(
+        elevation: 4,
+        borderRadius: BorderRadius.circular(100),
+        child: Row(
+          children: [
+            IconInkWell(
+              icon: Icons.arrow_back,
+              onTap: () => Navigator.of(context).pop(),
+            ),
+            Expanded(
+              child: TextField(
+                autofocus: true,
+                autocorrect: false,
+                controller: controller,
+                onSubmitted: onSubmitted,
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Search',
+                ),
+              ),
+            ),
+            Consumer<SearchProvider>(
+              builder: (context, value, child) => AnimatedOpacity(
+                opacity: value.canClear ? 1 : 0,
+                duration: const Duration(milliseconds: 300),
+                child: IconInkWell(
+                  icon: Icons.close,
+                  onTap: () => value.resetAll(),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Text renderTitle(BuildContext context, String title, int count) {
     return Text(
       '$title ($count)',
       style: Theme.of(context).textTheme.titleLarge,
     );
   }
 
-  Widget renderClan() {
+  Widget renderClan(BuildContext context) {
     return Consumer<SearchProvider>(
       builder: (context, provider, child) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -90,17 +99,18 @@ class _SearchPageState extends State<SearchPage> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: renderTitle(
+              context,
               Localisation.of(context).menu_search_clan,
               provider.numOfClans,
             ),
           ),
-          renderGrid(provider.clans),
+          renderGrid(context, provider.clans),
         ],
       ),
     );
   }
 
-  Widget renderPlayer() {
+  Widget renderPlayer(BuildContext context) {
     return Consumer<SearchProvider>(
       builder: (context, provider, child) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -108,17 +118,18 @@ class _SearchPageState extends State<SearchPage> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: renderTitle(
+              context,
               Localisation.of(context).menu_search_player,
               provider.numOfPlayers,
             ),
           ),
-          renderGrid(provider.players),
+          renderGrid(context, provider.players),
         ],
       ),
     );
   }
 
-  Widget renderGrid(List<SearchResult> result) {
+  Widget renderGrid(BuildContext context, List<SearchResult> result) {
     final count = Utils(context).getItemCount(6, 1, 300);
     final width = MediaQuery.of(context).size.width;
     return Wrap(
