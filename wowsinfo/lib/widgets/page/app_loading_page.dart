@@ -4,14 +4,14 @@ import 'package:wowsinfo/repositories/game_repository.dart';
 import 'package:wowsinfo/widgets/page/wiki/upgrade_page.dart';
 import 'package:wowsinfo/widgets/shared/max_width_box.dart';
 
-class AppLoading extends StatefulWidget {
-  const AppLoading({Key? key}) : super(key: key);
+class AppLoadingPage extends StatefulWidget {
+  const AppLoadingPage({Key? key}) : super(key: key);
 
   @override
-  State<AppLoading> createState() => _AppLoadingState();
+  State<AppLoadingPage> createState() => _AppLoadingPageState();
 }
 
-class _AppLoadingState extends State<AppLoading> {
+class _AppLoadingPageState extends State<AppLoadingPage> {
   @override
   void initState() {
     super.initState();

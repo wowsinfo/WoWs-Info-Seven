@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:logging/logging.dart';
 import 'package:wowsinfo/repositories/app_repository.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';

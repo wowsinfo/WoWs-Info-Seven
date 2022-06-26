@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:logging/logging.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
-import 'package:wowsinfo/widgets/page/app_loading.dart';
 import 'package:wowsinfo/widgets/page/debug_page.dart';
-import 'package:wowsinfo/widgets/page/setup.dart';
 
 class WoWsInfoApp extends StatelessWidget {
   const WoWsInfoApp({Key? key}) : super(key: key);

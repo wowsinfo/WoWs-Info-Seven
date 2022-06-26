@@ -3,6 +3,7 @@ import 'package:wowsinfo/foundation/app.dart';
 import 'package:wowsinfo/main.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
+import 'package:wowsinfo/widgets/page/app_settings_page.dart';
 import 'package:wowsinfo/widgets/page/search_page.dart';
 import 'package:wowsinfo/widgets/page/wiki/achievement_page.dart';
 import 'package:wowsinfo/widgets/page/wiki/commander_skill_page.dart';
@@ -109,6 +110,16 @@ class _DebugPageState extends State<DebugPage> {
                   );
                 },
                 child: Text(Localisation.of(context).wiki_skills),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    App.platformPageRoute(
+                      builder: (_) => const AppSettingsPage(),
+                    ),
+                  );
+                },
+                child: Text(Localisation.of(context).settings_app_settings),
               ),
             ],
           ),
