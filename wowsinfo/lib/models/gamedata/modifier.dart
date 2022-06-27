@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:logging/logging.dart';
 import 'package:wowsinfo/extensions/number.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
-import 'package:wowsinfo/models/wowsinfo/ship_modules.dart';
 
 /// Those keys contain values like 1.2, 0.7. The base line is 1.0.
 /// All strings with coeff is considered as a percentage, they won't be added here.
@@ -352,6 +351,18 @@ class Modifiers {
         ];
       }
 
+      // check all modifiers are the same string
+      final stringValueMap = valueMap
+          .map((e) {
+            final valueKey = e.fullKey;
+            return Localisation.instance.stringOf(
+              valueKey,
+              prefix: 'IDS_PARAMS_MODIFIER_',
+            );
+          })
+          .toSet()
+          .toList();
+
       for (final item in valueMap) {
         final valueKey = item.fullKey;
         final langString = Localisation.instance.stringOf(
@@ -404,9 +415,10 @@ class Modifiers {
         }
 
         logger.info('Ship type: $shipType');
-        if (shipType == null) {
+        if (description.contains(valueString.trim())) continue;
+        // if this modifier for all ship types are the same, don't add things like [Battleship]
+        if (shipType == null || stringValueMap.length == 1) {
           // make sure there is no duplications
-          if (description.contains(valueString)) continue;
           description += valueString;
         } else {
           final shipTypeString =
