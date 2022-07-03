@@ -6,7 +6,7 @@ import 'package:wowsinfo/models/wargaming/search_result.dart';
 import 'package:wowsinfo/models/wowsinfo/game_server.dart';
 import 'package:wowsinfo/services/wargaming/wargaming_service.dart';
 
-class SearchProvider extends ChangeNotifier {
+class SearchProvider with ChangeNotifier {
   final _logger = Logger('SearchProvider');
   final TextEditingController _searchController;
   SearchProvider(this._searchController) {

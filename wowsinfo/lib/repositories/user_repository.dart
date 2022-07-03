@@ -1,3 +1,6 @@
+import 'package:wowsinfo/models/wargaming/search_result.dart';
+import 'package:wowsinfo/models/wowsinfo/id_entry.dart';
+
 import 'stores/store_interface.dart';
 
 /// This repository manages the user's settings
@@ -19,6 +22,10 @@ class UserRepository {
   // by default, the app should follow the system.
   static const String _darkModeKey = 'wowsinfo@dark_mode';
   static const String _themeColourKey = 'wowsinfo@theme_colour';
+
+  // TODO: let's add this back if anyone ask for it.
+  // static const String _playerListKey = 'wowsinfo@player_list';
+  // static const String _clanListKey = 'wowsinfo@clan_list';
 
   /// The shared instance of the UserRepository.
   static final UserRepository instance = UserRepository._init();
@@ -49,12 +56,12 @@ class UserRepository {
   String get accountID => _store.get(_accountIDKey) as String? ?? '';
   set accountID(String value) => _store.set(_accountIDKey, value);
 
-  /// The current game server the app is using
-  String get gameServer => _store.get(_gameServerKey) as String? ?? 'asia';
-  set gameServer(String value) => _store.set(_gameServerKey, value);
+  /// The current game server the app is using, use 3 (asia) as the default
+  int get gameServer => _store.get(_gameServerKey) as int? ?? 3;
+  set gameServer(int value) => _store.set(_gameServerKey, value);
 
   /// The current theme colour of the app
-  String get themeColour => _store.get(_themeColourKey) as String? ?? 'blue';
+  String get themeColour => _store.get(_themeColourKey) as String? ?? 'red';
   set themeColour(String value) => _store.set(_themeColourKey, value);
 
   /// Check if the app should be in dark mode

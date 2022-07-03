@@ -10,7 +10,7 @@ import 'package:wowsinfo/models/gamedata/ship.dart';
 import 'package:wowsinfo/models/wowsinfo/counter.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
 
-class SimilarShipProvider extends ChangeNotifier {
+class SimilarShipProvider with ChangeNotifier {
   final _logger = Logger('SimilarShipProvider');
   final Ship _ship;
   SimilarShipProvider(this._ship);

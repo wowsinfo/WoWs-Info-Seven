@@ -20,18 +20,18 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
           children: [
             _DropdownListTile(
               options: ['A', 'B', 'C'],
-              title: Text('Server'),
+              title: Text(Localisation.of(context).setting_game_server),
               value: 'A',
               onChanged: (value) {},
             ),
             const Divider(),
             CheckboxListTile(
-              title: Text('Dark mode'),
+              title: Text(Localisation.of(context).settings_app_dark_mode),
               value: true,
               onChanged: (checked) {},
             ),
             ListTile(
-              title: Text('Theme colour'),
+              title: Text(Localisation.of(context).settings_app_theme_colour),
               subtitle: Container(
                 color: Colors.blue,
                 height: 24,

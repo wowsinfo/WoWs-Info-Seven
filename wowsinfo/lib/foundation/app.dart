@@ -5,6 +5,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class App {
+  static const githubLink = 'https://github.com/WoWs-Info/WoWs-Info-Seven';
+  static const appstoreLink = 'https://itunes.apple.com/app/id1202750166';
+  static const playstoreLink =
+      'https://play.google.com/store/apps/details?id=com.yihengquan.wowsinfo';
+  static const latestRelease = '$githubLink/releases/latest';
+
   /// The shared instance of the App.
   static final App instance = App._init();
   App._init();

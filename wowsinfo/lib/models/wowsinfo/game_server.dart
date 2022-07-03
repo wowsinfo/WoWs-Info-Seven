@@ -21,19 +21,21 @@ const _numberDomain = ['ru.', '', 'na.', 'asia.'];
 
 @immutable
 class GameServer {
-  GameServer(this.server);
+  GameServer(this._server);
 
-  final WoWsServer server;
+  final WoWsServer _server;
 
   /// The domain of the game website & API.
-  late final domain = _domain[server.index];
+  late final domain = _domain[_server.index];
 
   /// The prefix of the forum (and something else).
-  late final prefix = _prefix[server.index];
+  late final prefix = _prefix[_server.index];
 
   /// The domain of the wows-numbers.com.
   /// TODO: should this be here, this is not related to the GameServer though.
-  late final numberDomain = _numberDomain[server.index];
+  late final numberDomain = _numberDomain[_server.index];
+
+  int get index => _server.index;
 
   factory GameServer.fromIndex(int index) {
     if (index < 0 || index > 3) {
