@@ -30,8 +30,8 @@ class AppProvider with ChangeNotifier {
       primarySwatch: color,
       primaryColor: color,
       brightness: _darkMode ? Brightness.dark : Brightness.light,
-      floatingActionButtonTheme: const FloatingActionButtonThemeData(
-        backgroundColor: Colors.red,
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: color,
       ),
       checkboxTheme: CheckboxThemeData(
         fillColor: MaterialStateProperty.all(color),

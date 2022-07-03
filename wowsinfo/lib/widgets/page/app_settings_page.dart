@@ -49,7 +49,9 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                     ),
                   ),
                 ),
-                onTap: () {},
+                onTap: () {
+                  app.updateThemeColour(Colors.yellow);
+                },
               ),
               const Divider(),
               ListTile(
