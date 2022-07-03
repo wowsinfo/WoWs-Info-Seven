@@ -7,7 +7,9 @@ class AppProvider with ChangeNotifier {
   late bool _darkMode;
   bool get darkMode => _darkMode;
 
-  late MaterialColor _themeColour;
+  late AppThemeColour _themeColour;
+  MaterialColor get themeColour => _themeColour.colour;
+
   late ThemeData _themeData;
   ThemeData get themeData => _themeData;
 
@@ -18,14 +20,13 @@ class AppProvider with ChangeNotifier {
 
   AppProvider() {
     _darkMode = _userRepository.darkMode;
-    final themeColour = AppThemeColour(index: _userRepository.themeColour);
-    _themeColour = themeColour.colour;
+    _themeColour = AppThemeColour(index: _userRepository.themeColour);
     _themeData = _generateThemeData();
     _locale = Locale(_userRepository.appLanguage);
   }
 
   ThemeData _generateThemeData() {
-    final color = _themeColour;
+    final color = _themeColour.colour;
     return ThemeData(
       primarySwatch: color,
       primaryColor: color,
@@ -53,7 +54,9 @@ class AppProvider with ChangeNotifier {
   }
 
   void updateThemeColour(MaterialColor colour) {
-    _themeColour = colour;
+    _themeColour = AppThemeColour.fromColour(colour);
+    _userRepository.themeColour = _themeColour.index;
+
     _themeData = _generateThemeData();
     notifyListeners();
   }

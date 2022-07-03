@@ -90,8 +90,6 @@ class AppThemeColour {
     Colors.green,
     Colors.lightGreen,
     Colors.lime,
-    Colors.yellow,
-    Colors.amber,
     // Orange is removed
     Colors.deepOrange,
     Colors.brown,
@@ -113,5 +111,9 @@ class AppThemeColour {
 
   AppThemeColour({int index = defaultIndex}) {
     _colour = colourList[index];
+  }
+
+  factory AppThemeColour.fromColour(MaterialColor colour) {
+    return AppThemeColour(index: colourList.indexOf(colour));
   }
 }

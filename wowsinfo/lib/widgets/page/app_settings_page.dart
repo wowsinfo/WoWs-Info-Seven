@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:wowsinfo/foundation/helpers/utils.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
 import 'package:wowsinfo/providers/app_provider.dart';
+import 'package:wowsinfo/repositories/user_repository.dart';
+import 'package:wowsinfo/widgets/shared/max_width_box.dart';
 
 class AppSettingsPage extends StatefulWidget {
   const AppSettingsPage({Key? key}) : super(key: key);
@@ -45,13 +48,11 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                   child: Container(
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Colors.red,
+                      color: app.themeColour,
                     ),
                   ),
                 ),
-                onTap: () {
-                  app.updateThemeColour(Colors.yellow);
-                },
+                onTap: () => showThemeColours(),
               ),
               const Divider(),
               ListTile(
@@ -84,6 +85,35 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                 },
               ),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void showThemeColours() {
+    const colours = AppThemeColour.colourList;
+    final provider = Provider.of<AppProvider>(context, listen: false);
+    final count = Utils(context).getItemCount(4, 2, 300);
+    // show all colours in a grid
+    showDialog(
+      context: context,
+      builder: (context) => Dialog(
+        child: MaxWidthBox(
+          child: GridView.count(
+            shrinkWrap: true,
+            crossAxisCount: count,
+            children: colours
+                .map(
+                  (e) => InkWell(
+                    child: Container(color: e),
+                    onTap: () {
+                      provider.updateThemeColour(e);
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                )
+                .toList(growable: false),
           ),
         ),
       ),
