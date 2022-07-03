@@ -18,14 +18,12 @@ class ShipPage extends StatefulWidget {
 }
 
 class _ShipPageState extends State<ShipPage> {
-  late final _provider = ShipProvider(context, widget.special);
-
   @override
   Widget build(BuildContext context) {
     // 199 will fit 3 ships on most screens
     final itemCount = Utils.of(context).getItemCount(8, 2, 119);
-    return ChangeNotifierProvider.value(
-      value: _provider,
+    return ChangeNotifierProvider(
+      create: (_) => ShipProvider(context, widget.special),
       builder: (context, widget) => Scaffold(
         appBar: AppBar(
           title: Text(Localisation.of(context).wiki_warships),
@@ -35,16 +33,20 @@ class _ShipPageState extends State<ShipPage> {
             child: buildGridView(itemCount),
           ),
         ),
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: () => _provider.showFilter(),
-          icon: const Icon(Icons.filter_alt),
-          label: Consumer<ShipProvider>(
-            builder: (context, provider, child) => Text(
-              provider.filterString,
-            ),
-          ),
-        ),
+        floatingActionButton: buildFAB(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      ),
+    );
+  }
+
+  Widget buildFAB() {
+    return Consumer<ShipProvider>(
+      builder: (context, provider, child) => FloatingActionButton.extended(
+        onPressed: () => provider.showFilter(),
+        icon: const Icon(Icons.filter_alt),
+        label: Text(
+          provider.filterString,
+        ),
       ),
     );
   }
