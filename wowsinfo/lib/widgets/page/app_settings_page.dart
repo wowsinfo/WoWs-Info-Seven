@@ -26,9 +26,20 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
           builder: (context, app, child) => Column(
             children: [
               _DropdownListTile(
-                options: ['A', 'B', 'C'],
+                options: const [
+                  _DropdownValue(value: 0, title: 'English'),
+                  _DropdownValue(value: 1, title: 'Русский'),
+                  _DropdownValue(value: 2, title: 'Deutsch'),
+                  _DropdownValue(value: 3, title: 'Français'),
+                  _DropdownValue(value: 4, title: 'Español'),
+                  _DropdownValue(value: 5, title: 'Italiano'),
+                  _DropdownValue(value: 6, title: '日本語'),
+                  _DropdownValue(value: 7, title: '中文'),
+                  _DropdownValue(value: 8, title: 'Português'),
+                  _DropdownValue(value: 10, title: 'Українська'),
+                ],
                 title: Text(Localisation.of(context).setting_game_server),
-                value: 'A',
+                value: 0,
                 onChanged: (value) {},
               ),
               const Divider(),
@@ -57,23 +68,26 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
               ),
               const Divider(),
               ListTile(
-                title:
-                    Text(Localisation.of(context).settings_app_send_feedback),
+                title: Text(
+                  Localisation.of(context).settings_app_send_feedback,
+                ),
                 subtitle: Text(
                   Localisation.of(context).settings_app_send_feedback_subtitle,
                 ),
                 onTap: () => App.launch(App.emailToLink),
               ),
               ListTile(
-                title:
-                    Text(Localisation.of(context).settings_app_report_issues),
+                title: Text(
+                  Localisation.of(context).settings_app_report_issues,
+                ),
                 subtitle: const Text(App.newIssueLink),
                 onTap: () => App.launch(App.newIssueLink),
               ),
               const Divider(),
               ListTile(
-                title:
-                    Text(Localisation.of(context).settings_open_source_github),
+                title: Text(
+                  Localisation.of(context).settings_open_source_github,
+                ),
                 subtitle: const Text(App.githubLink),
                 onTap: () => App.launch(App.githubLink),
               ),
@@ -122,8 +136,18 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
   }
 }
 
+class _DropdownValue<T> {
+  const _DropdownValue({
+    required this.value,
+    required this.title,
+  });
+
+  final String title;
+  final T value;
+}
+
 /// A customised [ListTile] that displays a dropdown menu in the subtitle.
-class _DropdownListTile extends StatelessWidget {
+class _DropdownListTile<T> extends StatelessWidget {
   const _DropdownListTile({
     Key? key,
     required this.options,
@@ -132,10 +156,10 @@ class _DropdownListTile extends StatelessWidget {
     required this.onChanged,
   }) : super(key: key);
 
-  final List<String> options;
-  final String value;
+  final List<_DropdownValue<T>> options;
+  final T value;
   final Widget title;
-  final void Function(String?) onChanged;
+  final void Function(T?) onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -167,14 +191,15 @@ class _DropdownListTile extends StatelessWidget {
       title: title,
       subtitle: AbsorbPointer(
         child: DropdownButtonHideUnderline(
-          child: DropdownButton<String>(
+          child: DropdownButton<T>(
             key: dropdownButtonKey,
             isExpanded: true,
             isDense: true, // shrink the dropdown button
             focusColor: Colors.transparent, // hides the focus within dropdown
             value: value,
             items: options
-                .map((e) => DropdownMenuItem<String>(value: e, child: Text(e)))
+                .map((e) =>
+                    DropdownMenuItem<T>(value: e.value, child: Text(e.title)))
                 .toList(growable: false),
             onChanged: onChanged,
           ),
