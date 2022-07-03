@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
+import 'package:wowsinfo/providers/app_provider.dart';
 
 class AppSettingsPage extends StatefulWidget {
   const AppSettingsPage({Key? key}) : super(key: key);
@@ -16,56 +18,71 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
         title: Text(Localisation.of(context).app_name),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            _DropdownListTile(
-              options: ['A', 'B', 'C'],
-              title: Text(Localisation.of(context).setting_game_server),
-              value: 'A',
-              onChanged: (value) {},
-            ),
-            const Divider(),
-            CheckboxListTile(
-              title: Text(Localisation.of(context).settings_app_dark_mode),
-              value: true,
-              onChanged: (checked) {},
-            ),
-            ListTile(
-              title: Text(Localisation.of(context).settings_app_theme_colour),
-              subtitle: Container(
-                color: Colors.blue,
-                height: 24,
+        child: Consumer<AppProvider>(
+          builder: (context, app, child) => Column(
+            children: [
+              _DropdownListTile(
+                options: ['A', 'B', 'C'],
+                title: Text(Localisation.of(context).setting_game_server),
+                value: 'A',
+                onChanged: (value) {},
               ),
-              onTap: () {},
-            ),
-            const Divider(),
-            ListTile(
-              title: Text(Localisation.of(context).settings_app_send_feedback),
-              subtitle: Text(
-                Localisation.of(context).settings_app_send_feedback_subtitle,
+              const Divider(),
+              CheckboxListTile(
+                title: Text(Localisation.of(context).settings_app_dark_mode),
+                value: app.darkMode,
+                onChanged: (checked) {
+                  if (checked == null) return;
+                  app.updateDarkMode(checked);
+                },
               ),
-              onTap: () {},
-            ),
-            ListTile(
-              title: Text(Localisation.of(context).settings_app_report_issues),
-              subtitle: Text('TODO: add the github link here'),
-              onTap: () {},
-            ),
-            const Divider(),
-            ListTile(
-              title: Text(Localisation.of(context).settings_open_source_github),
-              subtitle: Text('TODO: add the github link here'),
-              onTap: () {},
-            ),
-            ListTile(
-              title: Text(
-                Localisation.of(context).settings_open_source_licence,
+              ListTile(
+                title: Text(Localisation.of(context).settings_app_theme_colour),
+                trailing: SizedBox(
+                  height: 36,
+                  width: 36,
+                  // a coloured circle
+                  child: Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+                onTap: () {},
               ),
-              onTap: () {
-                showAboutDialog(context: context);
-              },
-            ),
-          ],
+              const Divider(),
+              ListTile(
+                title:
+                    Text(Localisation.of(context).settings_app_send_feedback),
+                subtitle: Text(
+                  Localisation.of(context).settings_app_send_feedback_subtitle,
+                ),
+                onTap: () {},
+              ),
+              ListTile(
+                title:
+                    Text(Localisation.of(context).settings_app_report_issues),
+                subtitle: Text('TODO: add the github link here'),
+                onTap: () {},
+              ),
+              const Divider(),
+              ListTile(
+                title:
+                    Text(Localisation.of(context).settings_open_source_github),
+                subtitle: Text('TODO: add the github link here'),
+                onTap: () {},
+              ),
+              ListTile(
+                title: Text(
+                  Localisation.of(context).settings_open_source_licence,
+                ),
+                onTap: () {
+                  showAboutDialog(context: context);
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

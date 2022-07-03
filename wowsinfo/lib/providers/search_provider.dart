@@ -39,6 +39,7 @@ class SearchProvider with ChangeNotifier {
     return input == _input;
   }
 
+  /// The listener callback of the [_searchController].
   void _onTextChanged() {
     // cancel previous timer
     _timer?.cancel();

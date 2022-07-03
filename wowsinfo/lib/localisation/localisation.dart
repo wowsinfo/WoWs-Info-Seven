@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -22,6 +21,28 @@ class Localisation {
     }
 
     return i10n;
+  }
+
+  /// Decide the data language based on the device language.
+  static String decideLang({String? customLang}) {
+    final lang = customLang ?? Intl.getCurrentLocale();
+    final logger = Logger('Localisation|decideLang');
+    logger.info('System locale is $lang');
+    final langCode = lang.toLowerCase();
+    if (validGameLanguages.contains(langCode)) {
+      return langCode;
+    }
+
+    if (langCode.contains('_')) {
+      final localeCode = langCode.split('_')[0];
+      if (validGameLanguages.contains(localeCode)) {
+        logger.info('Using locale `$localeCode`');
+        return localeCode;
+      }
+    }
+
+    logger.warning('Unsupported locale $langCode, falling back to en');
+    return 'en';
   }
 
   /// The shared instance of [Localisation].
@@ -85,31 +106,11 @@ class Localisation {
       return MapEntry(key, (value as Map).cast<String, String>());
     });
 
-    _gameLang = _decideLang(Intl.getCurrentLocale());
+    _gameLang = decideLang();
     timer.log(message: 'Decoded lang.json');
 
     _initialised = true;
     _logger.info('Localisation initialised');
-  }
-
-  /// Decide the data language based on the device language.
-  String _decideLang(String lang) {
-    _logger.info('System locale is $lang');
-    final langCode = lang.toLowerCase();
-    if (validGameLanguages.contains(langCode)) {
-      return langCode;
-    }
-
-    if (langCode.contains('_')) {
-      final localeCode = langCode.split('_')[0];
-      if (validGameLanguages.contains(localeCode)) {
-        _logger.info('Using locale `$localeCode`');
-        return localeCode;
-      }
-    }
-
-    _logger.warning('Unsupported locale $langCode, falling back to en');
-    return 'en';
   }
 
   /// Update the data language. The app language won't change.

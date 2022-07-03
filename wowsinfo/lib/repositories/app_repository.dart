@@ -15,4 +15,6 @@ class AppRepository {
   void inject(StoreInterface store) {
     _store = store;
   }
+
+  // TODO: maybe cache PR once a while in case the app is not updated
 }

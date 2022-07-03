@@ -2,7 +2,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:logging/logging.dart';
+import 'package:provider/provider.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
+import 'package:wowsinfo/providers/app_provider.dart';
 import 'package:wowsinfo/widgets/page/debug_page.dart';
 
 class WoWsInfoApp extends StatelessWidget {
@@ -11,17 +13,20 @@ class WoWsInfoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     setupListeners(context);
-    return MaterialApp(
-      title: 'WoWs Info',
-      scrollBehavior: WoWsInfocrollBehavior(),
-      localizationsDelegates: Localisation.localizationsDelegates,
-      supportedLocales: Localisation.supportedLocales,
-      theme: ThemeData(
-        primarySwatch: Colors.red,
-        // brightness: Brightness.dark,
-      ),
-      home: const GlobalShortcuts(
-        child: DebugPage(),
+    return ChangeNotifierProvider(
+      create: (_) => AppProvider(),
+      child: Consumer<AppProvider>(
+        builder: (context, app, child) => MaterialApp(
+          title: 'WoWs Info',
+          scrollBehavior: WoWsInfocrollBehavior(),
+          localizationsDelegates: Localisation.localizationsDelegates,
+          supportedLocales: Localisation.supportedLocales,
+          theme: app.themeData,
+          locale: app.locale,
+          home: const GlobalShortcuts(
+            child: DebugPage(),
+          ),
+        ),
       ),
     );
   }

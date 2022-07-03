@@ -1,5 +1,5 @@
-import 'package:wowsinfo/models/wargaming/search_result.dart';
-import 'package:wowsinfo/models/wowsinfo/id_entry.dart';
+import 'package:flutter/material.dart';
+import 'package:wowsinfo/localisation/localisation.dart';
 
 import 'stores/store_interface.dart';
 
@@ -37,12 +37,16 @@ class UserRepository {
     _store = store;
   }
 
-  /// The app language, TODO: use system locale as the default here not English
-  String get appLanguage => _store.get(_appLanguageKey) as String? ?? 'en';
+  final String _defaultLanguage = Localisation.decideLang();
+
+  /// The app language
+  String get appLanguage =>
+      _store.get(_appLanguageKey) as String? ?? _defaultLanguage;
   set appLanguage(String value) => _store.set(_appLanguageKey, value);
 
-  /// The data language, TODO: same as above but need to make sure it is supported by the API
-  String get dataLanguage => _store.get(_dataLanguageKey) as String? ?? 'en';
+  /// The data language
+  String get dataLanguage =>
+      _store.get(_dataLanguageKey) as String? ?? _defaultLanguage;
   set dataLanguage(String value) => _store.set(_dataLanguageKey, value);
 
   /// Check if a user is set as favourite
@@ -61,10 +65,53 @@ class UserRepository {
   set gameServer(int value) => _store.set(_gameServerKey, value);
 
   /// The current theme colour of the app
-  String get themeColour => _store.get(_themeColourKey) as String? ?? 'red';
-  set themeColour(String value) => _store.set(_themeColourKey, value);
+  int get themeColour =>
+      _store.get(_themeColourKey) as int? ?? AppThemeColour.defaultIndex;
+  set themeColour(int index) => _store.set(_themeColourKey, index);
 
   /// Check if the app should be in dark mode
   bool get darkMode => _store.get(_darkModeKey) as bool? ?? false;
   set darkMode(bool value) => _store.set(_darkModeKey, value);
+}
+
+/// Save supported theme colours as an index
+class AppThemeColour {
+  /// All supported theme colours
+  static const colourList = [
+    Colors.red,
+    Colors.pink,
+    Colors.purple,
+    Colors.deepPurple,
+    Colors.indigo,
+    Colors.blue,
+    Colors.lightBlue,
+    Colors.cyan,
+    Colors.teal,
+    Colors.green,
+    Colors.lightGreen,
+    Colors.lime,
+    Colors.yellow,
+    Colors.amber,
+    // Orange is removed
+    Colors.deepOrange,
+    Colors.brown,
+    Colors.grey,
+    Colors.blueGrey,
+  ];
+
+  static const int defaultIndex = 0;
+
+  // This is the main theme colour
+  late MaterialColor _colour;
+  MaterialColor get colour => _colour;
+  set colour(MaterialColor c) {
+    if (c == _colour) return;
+    _colour = c;
+  }
+
+  int get index => colourList.indexOf(_colour);
+
+  AppThemeColour({int index = defaultIndex}) {
+    _colour = colourList[index];
+  }
 }
