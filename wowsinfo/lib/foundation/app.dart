@@ -3,13 +3,18 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class App {
+  static const appVersion = '1.7.0';
   static const githubLink = 'https://github.com/WoWs-Info/WoWs-Info-Seven';
   static const appstoreLink = 'https://itunes.apple.com/app/id1202750166';
   static const playstoreLink =
       'https://play.google.com/store/apps/details?id=com.yihengquan.wowsinfo';
   static const latestRelease = '$githubLink/releases/latest';
+  static const newIssueLink = '$githubLink/issues/new';
+  static const emailToLink =
+      'mailto:development.henryquan@gmail.com?subject=[WoWs Info $appVersion] ';
 
   /// The shared instance of the App.
   static final App instance = App._init();
@@ -104,6 +109,15 @@ class App {
           );
         },
       );
+    }
+  }
+
+  static void launch(String url) async {
+    final canLaunch = await canLaunchUrlString(url);
+    if (canLaunch) {
+      await launchUrlString(url);
+    } else {
+      assert(false, 'Could not launch $url');
     }
   }
 }

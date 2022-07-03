@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:wowsinfo/foundation/app.dart';
 import 'package:wowsinfo/foundation/helpers/utils.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
 import 'package:wowsinfo/providers/app_provider.dart';
@@ -61,20 +62,20 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                 subtitle: Text(
                   Localisation.of(context).settings_app_send_feedback_subtitle,
                 ),
-                onTap: () {},
+                onTap: () => App.launch(App.emailToLink),
               ),
               ListTile(
                 title:
                     Text(Localisation.of(context).settings_app_report_issues),
-                subtitle: Text('TODO: add the github link here'),
-                onTap: () {},
+                subtitle: const Text(App.newIssueLink),
+                onTap: () => App.launch(App.newIssueLink),
               ),
               const Divider(),
               ListTile(
                 title:
                     Text(Localisation.of(context).settings_open_source_github),
-                subtitle: Text('TODO: add the github link here'),
-                onTap: () {},
+                subtitle: const Text(App.githubLink),
+                onTap: () => App.launch(App.githubLink),
               ),
               ListTile(
                 title: Text(
