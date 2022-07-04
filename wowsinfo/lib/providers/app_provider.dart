@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:logging/logging.dart';
 import 'package:wowsinfo/repositories/user_repository.dart';
 
 /// The top level provider of the entire app.
@@ -18,11 +19,13 @@ class AppProvider with ChangeNotifier {
 
   final UserRepository _userRepository = UserRepository.instance;
 
+  final _logger = Logger('AppProvider');
   AppProvider() {
     _darkMode = _userRepository.darkMode;
     _themeColour = AppThemeColour(index: _userRepository.themeColour);
     _themeData = _generateThemeData();
     _locale = Locale(_userRepository.appLanguage);
+    _logger.fine('AppProvider created successfully.');
   }
 
   ThemeData _generateThemeData() {
@@ -41,6 +44,7 @@ class AppProvider with ChangeNotifier {
   }
 
   void updateDarkMode(bool darkMode) {
+    _logger.info('updated DarkMode to $darkMode');
     _userRepository.darkMode = darkMode;
     _darkMode = darkMode;
 
@@ -49,11 +53,13 @@ class AppProvider with ChangeNotifier {
   }
 
   void updateLocale(Locale locale) {
+    _logger.info('updated Locale to ${locale.languageCode}');
     _locale = locale;
     notifyListeners();
   }
 
   void updateThemeColour(MaterialColor colour) {
+    _logger.info('updated ThemeColour to ${colour.toString()}');
     _themeColour = AppThemeColour.fromColour(colour);
     _userRepository.themeColour = _themeColour.index;
 

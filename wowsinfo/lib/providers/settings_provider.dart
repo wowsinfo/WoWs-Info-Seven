@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:logging/logging.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
 import 'package:wowsinfo/repositories/user_repository.dart';
 import 'package:wowsinfo/widgets/page/app_settings_page.dart';
 
 class SettingsProvider with ChangeNotifier {
+  final _logger = Logger('SettingsProvider');
   final BuildContext _context;
   final UserRepository _userRepository = UserRepository.instance;
 
@@ -28,6 +30,7 @@ class SettingsProvider with ChangeNotifier {
   final colours = AppThemeColour.colourList;
 
   void updateServer(int index) {
+    _logger.info('Updating server to ${servers[index].title}');
     _server = index;
     _userRepository.gameServer = _server;
     notifyListeners();

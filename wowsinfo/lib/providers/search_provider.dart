@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:wowsinfo/models/wargaming/search_result.dart';
 import 'package:wowsinfo/models/wowsinfo/game_server.dart';
+import 'package:wowsinfo/repositories/user_repository.dart';
 import 'package:wowsinfo/services/wargaming/wargaming_service.dart';
 
 class SearchProvider with ChangeNotifier {
@@ -14,6 +15,11 @@ class SearchProvider with ChangeNotifier {
       _onTextChanged();
     });
   }
+
+  final _userRepository = UserRepository.instance;
+  late final _service = WargamingService(
+    GameServer.fromIndex(_userRepository.gameServer),
+  );
 
   String _input = '';
   bool get canClear => _input.isNotEmpty;
@@ -31,9 +37,6 @@ class SearchProvider with ChangeNotifier {
 
   List<ClanResult> get clans => _clans;
   List<PlayerResult> get players => _players;
-
-  // TODO: read from settings and this value should be provided.
-  final service = WargamingService(GameServer(GameServer.defaultServer));
 
   bool _isSameInput(String input) {
     return input == _input;
@@ -85,7 +88,7 @@ class SearchProvider with ChangeNotifier {
 
   void _searchClan(String query) async {
     _logger.info('Searching for clan $query');
-    final result = await service.searchClan(query);
+    final result = await _service.searchClan(query);
     if (result.isNotEmpty) {
       final clanList = result.data;
       if (clanList != null) {
@@ -98,7 +101,7 @@ class SearchProvider with ChangeNotifier {
 
   void _searchPlayer(String query) async {
     _logger.info('Searching for player $query');
-    final result = await service.searchPlayer(query);
+    final result = await _service.searchPlayer(query);
     if (result.isNotEmpty) {
       final playerList = result.data;
       if (playerList != null) {
