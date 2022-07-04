@@ -4,6 +4,7 @@ import 'package:wowsinfo/foundation/app.dart';
 import 'package:wowsinfo/foundation/helpers/utils.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
 import 'package:wowsinfo/providers/app_provider.dart';
+import 'package:wowsinfo/providers/settings_provider.dart';
 import 'package:wowsinfo/repositories/user_repository.dart';
 import 'package:wowsinfo/widgets/shared/max_width_box.dart';
 
@@ -15,56 +16,60 @@ class AppSettingsPage extends StatefulWidget {
 }
 
 class _AppSettingsPageState extends State<AppSettingsPage> {
+  late final _settings = SettingsProvider(context);
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(Localisation.of(context).app_name),
-      ),
-      body: SingleChildScrollView(
-        child: Consumer<AppProvider>(
-          builder: (context, app, child) => Column(
+    return ChangeNotifierProvider.value(
+      value: _settings,
+      builder: (context, child) => Scaffold(
+        appBar: AppBar(
+          title: Text(Localisation.of(context).app_name),
+        ),
+        body: SingleChildScrollView(
+          child: Column(
             children: [
-              _DropdownListTile(
-                options: const [
-                  _DropdownValue(value: 0, title: 'English'),
-                  _DropdownValue(value: 1, title: 'Русский'),
-                  _DropdownValue(value: 2, title: 'Deutsch'),
-                  _DropdownValue(value: 3, title: 'Français'),
-                  _DropdownValue(value: 4, title: 'Español'),
-                  _DropdownValue(value: 5, title: 'Italiano'),
-                  _DropdownValue(value: 6, title: '日本語'),
-                  _DropdownValue(value: 7, title: '中文'),
-                  _DropdownValue(value: 8, title: 'Português'),
-                  _DropdownValue(value: 10, title: 'Українська'),
-                ],
-                title: Text(Localisation.of(context).setting_game_server),
-                value: 0,
-                onChanged: (value) {},
+              Consumer<SettingsProvider>(
+                builder: (context, settings, child) => _DropdownListTile(
+                  options: settings.servers,
+                  title: Text(Localisation.of(context).setting_game_server),
+                  value: settings.serverValue,
+                  onChanged: (value) => settings.updateServer(value as int),
+                ),
               ),
               const Divider(),
-              CheckboxListTile(
-                title: Text(Localisation.of(context).settings_app_dark_mode),
-                value: app.darkMode,
-                onChanged: (checked) {
-                  if (checked == null) return;
-                  app.updateDarkMode(checked);
-                },
-              ),
-              ListTile(
-                title: Text(Localisation.of(context).settings_app_theme_colour),
-                trailing: SizedBox(
-                  height: 36,
-                  width: 36,
-                  // a coloured circle
-                  child: Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: app.themeColour,
+              Consumer<AppProvider>(
+                builder: (context, app, child) => Column(
+                  children: [
+                    CheckboxListTile(
+                      title: Text(
+                        Localisation.of(context).settings_app_dark_mode,
+                      ),
+                      value: app.darkMode,
+                      onChanged: (checked) {
+                        if (checked == null) return;
+                        app.updateDarkMode(checked);
+                      },
                     ),
-                  ),
+                    ListTile(
+                      title: Text(
+                        Localisation.of(context).settings_app_theme_colour,
+                      ),
+                      trailing: SizedBox(
+                        height: 36,
+                        width: 36,
+                        // a coloured circle
+                        child: Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: app.themeColour,
+                          ),
+                        ),
+                      ),
+                      onTap: () => showThemeColours(),
+                    ),
+                  ],
                 ),
-                onTap: () => showThemeColours(),
               ),
               const Divider(),
               ListTile(
@@ -107,9 +112,11 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
   }
 
   void showThemeColours() {
-    const colours = AppThemeColour.colourList;
     final provider = Provider.of<AppProvider>(context, listen: false);
+
+    final colours = _settings.colours;
     final count = Utils(context).getItemCount(4, 2, 300);
+
     // show all colours in a grid
     showDialog(
       context: context,
@@ -136,8 +143,8 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
   }
 }
 
-class _DropdownValue<T> {
-  const _DropdownValue({
+class DropdownValue<T> {
+  const DropdownValue({
     required this.value,
     required this.title,
   });
@@ -156,7 +163,7 @@ class _DropdownListTile<T> extends StatelessWidget {
     required this.onChanged,
   }) : super(key: key);
 
-  final List<_DropdownValue<T>> options;
+  final List<DropdownValue<T>> options;
   final T value;
   final Widget title;
   final void Function(T?) onChanged;

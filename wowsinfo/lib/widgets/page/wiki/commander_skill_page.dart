@@ -44,7 +44,7 @@ class _CommanderSkillPageState extends State<CommanderSkillPage> {
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.refresh),
-        onPressed: () {},
+        onPressed: () => _provider.reset(),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
@@ -143,6 +143,9 @@ class _CommanderSkillPageState extends State<CommanderSkillPage> {
   ) {
     final icon = skill.name;
     final selected = isSelected(skill);
+
+    final darkMode = Theme.of(context).brightness == Brightness.dark;
+    final color = darkMode ? Colors.white : Colors.black87;
     return InkWell(
       onTap: () => onTap(skill),
       onLongPress: () => onLongPress(skill),
@@ -151,6 +154,7 @@ class _CommanderSkillPageState extends State<CommanderSkillPage> {
           border: Border.all(
             width: 1.0,
             style: selected ? BorderStyle.solid : BorderStyle.none,
+            color: color,
           ),
           borderRadius: const BorderRadius.all(Radius.circular(8.0)),
         ),
@@ -158,7 +162,7 @@ class _CommanderSkillPageState extends State<CommanderSkillPage> {
           width: 80,
           child: Image.asset(
             'gamedata/app/assets/skills/$icon.png',
-            color: Colors.black87,
+            color: color,
           ),
         ),
       ),
