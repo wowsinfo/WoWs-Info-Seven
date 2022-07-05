@@ -2,10 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
+import 'package:wowsinfo/foundation/app.dart';
 import 'package:wowsinfo/models/wargaming/search_result.dart';
 import 'package:wowsinfo/models/wowsinfo/game_server.dart';
 import 'package:wowsinfo/repositories/user_repository.dart';
 import 'package:wowsinfo/services/wargaming/wargaming_service.dart';
+import 'package:wowsinfo/widgets/page/clan/clan_page.dart';
 
 class SearchProvider with ChangeNotifier {
   final _logger = Logger('SearchProvider');
@@ -83,6 +85,20 @@ class SearchProvider with ChangeNotifier {
     // min 3 characters for players
     if (length > 2) {
       _searchPlayer(query);
+    }
+  }
+
+  void onResultSelected(BuildContext context, SearchResult result) {
+    if (result is ClanResult) {
+      Navigator.of(context).push(
+        App.platformPageRoute(
+          builder: (context) {
+            return ClanPage(clan: result);
+          },
+        ),
+      );
+    } else if (result is PlayerResult) {
+      Navigator.pushNamed(context, '/player', arguments: result.accountId);
     }
   }
 
