@@ -132,6 +132,7 @@ class SearchPage extends StatelessWidget {
   Widget renderGrid(BuildContext context, List<SearchResult> result) {
     final count = Utils(context).getItemCount(6, 1, 300);
     final width = MediaQuery.of(context).size.width;
+    final provider = Provider.of<SearchProvider>(context, listen: false);
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
       children: result
@@ -140,7 +141,7 @@ class SearchPage extends StatelessWidget {
                 child: ListTile(
                   title: Text(e.displayName),
                   trailing: Text(e.id),
-                  onTap: () {},
+                  onTap: () => provider.onResultSelected(context, e),
                 ),
               ))
           .toList(growable: false),

@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:wowsinfo/models/wargaming/clan_information.dart';
 import 'package:wowsinfo/models/wargaming/player_achievement.dart';
 import 'package:wowsinfo/models/wargaming/player_information.dart';
 import 'package:wowsinfo/models/wargaming/search_result.dart';
@@ -73,5 +74,13 @@ class WargamingService extends BaseService {
       '$baseUrl/account/achievements/$_applicationId&account_id=$accountId',
     );
     return decodeObject(result, PlayerAchievement.fromJson);
+  }
+
+  /// Get a clan's information by [clanId].
+  ApiResult<ClanInformation> getClanInformation(String clanId) async {
+    final result = await getObject(
+      '$baseUrl/clans/info/$_applicationId&clan_id=$clanId&extra=members',
+    );
+    return decodeObject(result, ClanInformation.fromJson);
   }
 }
