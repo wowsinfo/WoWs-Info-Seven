@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:wowsinfo/models/wowsinfo/timestamp.dart';
 
 @immutable
 class ClanInformation {
@@ -25,9 +26,9 @@ class ClanInformation {
   final int? membersCount;
   final String? name;
   final String? creatorName;
-  final int? createdAt;
+  final TimeStampDate? createdAt;
   final String? tag;
-  final int? updatedAt;
+  final TimeStampDate? updatedAt;
   final String? leaderName;
   final List<int>? membersIds;
   final int? creatorId;
@@ -35,36 +36,56 @@ class ClanInformation {
   final Map<String, ClanMember>? members;
   final String? oldName;
   final bool? isClanDisbanded;
-  final int? renamedAt;
+  final TimeStampDate? renamedAt;
   final String? oldTag;
   final int? leaderId;
   final String? description;
 
-  factory ClanInformation.fromJson(Map<String, dynamic> json) =>
-      ClanInformation(
-        membersCount: json['members_count'],
-        name: json['name'],
-        creatorName: json['creator_name'],
-        createdAt: json['created_at'],
-        tag: json['tag'],
-        updatedAt: json['updated_at'],
-        leaderName: json['leader_name'],
-        membersIds: json['members_ids'] == null
+  factory ClanInformation.fromJson(Map<String, dynamic> json) {
+    if (json.isEmpty) return const ClanInformation();
+
+    final clan = json.values.first;
+    if (clan is Map<String, dynamic>) {
+      return ClanInformation(
+        membersCount: clan['members_count'],
+        name: clan['name'],
+        creatorName: clan['creator_name'],
+        createdAt: clan['created_at'] == null
             ? null
-            : List<int>.from(json['members_ids']),
-        creatorId: json['creator_id'],
-        clanId: json['clan_id'],
-        members: json['members'] == null
+            : TimeStampDate(clan['created_at']),
+        tag: clan['tag'],
+        updatedAt: clan['updated_at'] == null
             ? null
-            : Map.from(json['members']).map((k, v) =>
+            : TimeStampDate(clan['updated_at']),
+        leaderName: clan['leader_name'],
+        membersIds: clan['members_ids'] == null
+            ? null
+            : List<int>.from(clan['members_ids']),
+        creatorId: clan['creator_id'],
+        clanId: clan['clan_id'],
+        members: clan['members'] == null
+            ? null
+            : Map.from(clan['members']).map((k, v) =>
                 MapEntry<String, ClanMember>(k, ClanMember.fromJson(v))),
-        oldName: json['old_name'],
-        isClanDisbanded: json['is_clan_disbanded'],
-        renamedAt: json['renamed_at'],
-        oldTag: json['old_tag'],
-        leaderId: json['leader_id'],
-        description: json['description'],
+        oldName: clan['old_name'],
+        isClanDisbanded: clan['is_clan_disbanded'],
+        renamedAt: clan['renamed_at'] == null
+            ? null
+            : TimeStampDate(clan['renamed_at']),
+        oldTag: clan['old_tag'],
+        leaderId: clan['leader_id'],
+        description: clan['description'],
       );
+    }
+
+    assert(false, 'Clan is valid, but there is no information');
+    return const ClanInformation();
+  }
+
+  @override
+  String toString() {
+    return 'ClanInformation(membersCount: $membersCount, name: $name, creatorName: $creatorName, createdAt: $createdAt, tag: $tag, updatedAt: $updatedAt, leaderName: $leaderName, membersIds: $membersIds, creatorId: $creatorId, clanId: $clanId, members: $members, oldName: $oldName, isClanDisbanded: $isClanDisbanded, renamedAt: $renamedAt, oldTag: $oldTag, leaderId: $leaderId, description: $description)';
+  }
 }
 
 @immutable
@@ -77,7 +98,7 @@ class ClanMember {
   });
 
   final String? role;
-  final int? joinedAt;
+  final TimeStampDate? joinedAt;
   final int? accountId;
   final String? accountName;
 
@@ -93,7 +114,8 @@ class ClanMember {
 
   factory ClanMember.fromJson(Map<String, dynamic> json) => ClanMember(
         role: json['role'],
-        joinedAt: json['joined_at'],
+        joinedAt:
+            json['joined_at'] == null ? null : TimeStampDate(json['joined_at']),
         accountId: json['account_id'],
         accountName: json['account_name'],
       );

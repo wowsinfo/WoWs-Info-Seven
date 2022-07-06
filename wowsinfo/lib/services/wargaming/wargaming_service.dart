@@ -79,7 +79,7 @@ class WargamingService extends BaseService {
   /// Get a clan's information by [clanId].
   ApiResult<ClanInformation> getClanInformation(String clanId) async {
     final result = await getObject(
-      '$baseUrl/clans/info/$_applicationId&clan_id=$clanId&extra=members',
+      '$baseUrl/clans/info/$_applicationId&clan_id=$clanId&extra=members&fields=-members_ids',
     );
     return decodeObject(result, ClanInformation.fromJson);
   }
