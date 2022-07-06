@@ -46,5 +46,6 @@ class ClanProvider with ChangeNotifier {
   String get creatorName => _info?.creatorName ?? '-';
   String get leaderName => _info?.leaderName ?? '-';
   String? get description => _info?.description;
+  int get memberCount => _info?.membersCount ?? 0;
   Iterable<ClanMember>? get members => _info?.members?.values;
 }
