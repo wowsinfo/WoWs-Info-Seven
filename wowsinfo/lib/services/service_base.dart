@@ -68,7 +68,7 @@ abstract class BaseService {
         return ServiceResult(errorMessage: 'HTTP Error: $errorCode');
       }
     } catch (e, stackTrace) {
-      _logger.severe('getObject exception', e, stackTrace);
+      _logger.severe('getObject exception\n$e\n$stackTrace');
       // TODO: we can add a properly localised error message here
       return ServiceResult(errorMessage: e.toString());
     }
