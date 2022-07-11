@@ -1,8 +1,8 @@
+import 'package:charts_flutter/flutter.dart' hide TextStyle, Axis;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wowsinfo/foundation/app.dart';
 import 'package:wowsinfo/foundation/colours.dart';
-import 'package:wowsinfo/models/gamedata/ability.dart';
 import 'package:wowsinfo/models/gamedata/consumable.dart';
 import 'package:wowsinfo/models/gamedata/modernization.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
@@ -276,7 +276,7 @@ class _ShipMainBattery extends StatelessWidget {
   Widget build(BuildContext context) {
     final provider = Provider.of<ShipInfoProvider>(context);
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -318,6 +318,20 @@ class _ShipMainBattery extends StatelessWidget {
               provider.gunName,
               style: Theme.of(context).textTheme.titleLarge,
             ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) => Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Dialog(
+                    child: LineChart(provider.penetrationSeries),
+                  ),
+                ),
+              );
+            },
+            child: Text("TODO: show ap penetration curve"),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,

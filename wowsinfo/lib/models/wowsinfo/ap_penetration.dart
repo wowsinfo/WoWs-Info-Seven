@@ -25,11 +25,11 @@ const _step = 0.1; // time step
 /// modified by HenryQuan
 @immutable
 class ApPenetration {
-  const ApPenetration(
-    this.info,
-    this.range,
-    this.verticalAngle,
-  );
+  const ApPenetration({
+    required this.info,
+    required this.range,
+    required this.verticalAngle,
+  });
 
   final ArmorPiecingInfo info;
   final double range;
@@ -82,7 +82,7 @@ class ApPenetration {
         t += _step;
       }
 
-      if (x > range * 1.2) break;
+      if (x > range * 1.1) break;
       // TODO: consider ricochet and also maybe we should set a max distance
 
       final distance = sqrt(pow(vX, 2.0) + pow(vY, 2.0));

@@ -1,9 +1,9 @@
 import 'package:charts_flutter/flutter.dart';
 
 /// A name and a value
-class ChartValue {
-  String name;
-  num value;
+class ChartValue<T, V> {
+  T name;
+  V value;
 
   ChartValue(this.name, this.value);
 }
@@ -32,13 +32,13 @@ class ChartUtils {
   static final winrateColour = Color.fromHex(code: '#4CAF50');
   static final battleColour = Color.fromHex(code: '#FF9800');
 
-  static List<Series<ChartValue, String>> convert(
+  static List<Series<ChartValue<T, V>, T>> convert<T, V>(
     String id, {
-    required List<ChartValue> values,
+    required List<ChartValue<T, V>> values,
     required Color color,
-    required String Function(ChartValue, int?) domainFn,
-    required num? Function(ChartValue, int?) measureFn,
-    required String Function(ChartValue, int?) labelFormatter,
+    required T Function(ChartValue<T, V>, int?) domainFn,
+    required num? Function(ChartValue<T, V>, int?) measureFn,
+    required String Function(ChartValue<T, V>, int?)? labelFormatter,
   }) {
     return [
       Series(
@@ -52,11 +52,11 @@ class ChartUtils {
     ];
   }
 
-  static List<Series<ChartValue, String>> convertDefault(
+  static List<Series<ChartValue<T, num>, T>> convertDefault<T>(
     String id, {
-    required List<ChartValue> values,
+    required List<ChartValue<T, num>> values,
     required Color color,
-    required String Function(ChartValue, int?) labelFormatter,
+    required String Function(ChartValue<T, num>, int?)? labelFormatter,
   }) {
     return convert(
       id,

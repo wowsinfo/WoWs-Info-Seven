@@ -12,9 +12,9 @@ void main() {
   );
 
   const pen = ApPenetration(
-    info,
-    15650.0,
-    40.0,
+    info: info,
+    range: 15650.0,
+    verticalAngle: 40.0,
   );
 
   test('test ap penetration angles', () {

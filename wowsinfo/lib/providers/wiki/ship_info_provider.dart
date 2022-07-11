@@ -1,11 +1,15 @@
+import 'package:charts_flutter/flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:wowsinfo/extensions/number.dart';
+import 'package:wowsinfo/foundation/helpers/chart_utils.dart';
 import 'package:wowsinfo/models/gamedata/consumable.dart';
 import 'package:wowsinfo/models/gamedata/game_info.dart';
 import 'package:wowsinfo/models/gamedata/modernization.dart';
+import 'package:wowsinfo/models/gamedata/projectile.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
 import 'package:wowsinfo/models/gamedata/ship_additional.dart';
+import 'package:wowsinfo/models/wowsinfo/ap_penetration.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_module_selection.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_modules.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_upgrades.dart';
@@ -166,6 +170,79 @@ class ShipInfoProvider with ChangeNotifier {
       shells.add(shell);
     }
     return shells;
+  }
+
+  // AP Penetration
+  late ApPenetrationInfo? _penInfo = _getCurrentPenetration();
+  ApPenetrationInfo? _getCurrentPenetration() {
+    // get the projectile
+    final gun = _mainGunInfo?.guns.first;
+    if (gun == null) return null;
+
+    ArmorPiecingInfo? apInfo;
+    Projectile? ap;
+    for (final ammo in gun.ammo) {
+      final ammoInfo = GameRepository.instance.projectileOf(ammo);
+      if (ammoInfo == null) continue;
+
+      if (ammoInfo.ammoType != 'AP') continue;
+      _logger.info(ammoInfo.ammoType);
+      ap = ammoInfo;
+      apInfo = ap.ap;
+      break;
+    }
+
+    if (ap == null) return null;
+    if (apInfo == null) return null;
+
+    // TODO: angle shouldn't be fixed here
+    return ApPenetration(
+      info: apInfo,
+      range: _mainGunInfo?.range.toDouble() ?? 0.0,
+      verticalAngle: 40,
+    ).calculatePenetration();
+  }
+
+  // provide the series data
+  List<Series<ChartValue, int>> get penetrationSeries => _penetrationSeries;
+  late List<Series<ChartValue, int>> _penetrationSeries =
+      _getPenetrationSeries();
+  List<Series<ChartValue, int>> _getPenetrationSeries() {
+    final penInfo = _penInfo;
+    if (penInfo == null) return [];
+    final penValues = penInfo.penetration;
+    final penDists = penInfo.distance;
+    final shellTime = penInfo.time;
+
+    final List<ChartValue<int, double>> pValues = [];
+    final List<ChartValue<int, double>> tValues = [];
+    for (var i = 0; i < penValues.length; i++) {
+      pValues.add(ChartValue(
+        penDists[i].toInt(),
+        penValues[i],
+      ));
+
+      tValues.add(ChartValue(
+        penDists[i].toInt(),
+        shellTime[i],
+      ));
+    }
+
+    final penSeries = ChartUtils.convertDefault(
+      'penetration',
+      values: pValues,
+      color: ChartUtils.winrateColour,
+      labelFormatter: (value, index) => value.name.toString(),
+    );
+
+    final timeSeries = ChartUtils.convertDefault(
+      'time',
+      values: tValues,
+      color: ChartUtils.damageColour,
+      labelFormatter: (value, index) => value.name.toString(),
+    );
+
+    return penSeries + timeSeries;
   }
 
   // Secondaries

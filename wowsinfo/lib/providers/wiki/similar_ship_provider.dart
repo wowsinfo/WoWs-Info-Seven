@@ -10,6 +10,8 @@ import 'package:wowsinfo/models/gamedata/ship.dart';
 import 'package:wowsinfo/models/wowsinfo/counter.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
 
+typedef SimilarChartValue = ChartValue<String, num>;
+
 class SimilarShipProvider with ChangeNotifier {
   final _logger = Logger('SimilarShipProvider');
   final Ship _ship;
@@ -65,10 +67,10 @@ class SimilarShipProvider with ChangeNotifier {
     final frags = AverageCounter();
     final winrate = AverageCounter();
     final battles = TotalCounter();
-    final List<ChartValue> damageChart = [];
-    final List<ChartValue> fragsChart = [];
-    final List<ChartValue> winrateChart = [];
-    final List<ChartValue> battlesChart = [];
+    final List<SimilarChartValue> damageChart = [];
+    final List<SimilarChartValue> fragsChart = [];
+    final List<SimilarChartValue> winrateChart = [];
+    final List<SimilarChartValue> battlesChart = [];
 
     // similar ships don't include the source ship
     final allShips = _similarShips..add(_ship);
