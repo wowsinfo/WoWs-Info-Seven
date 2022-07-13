@@ -326,12 +326,74 @@ class _ShipMainBattery extends StatelessWidget {
                 builder: (context) => Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Dialog(
-                    child: LineChart(provider.penetrationSeries),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: LineChart(
+                        provider.penetrationSeries,
+                        // add mm to the y-axis
+                        primaryMeasureAxis: NumericAxisSpec(
+                          // start from 300
+                          tickProviderSpec: StaticNumericTickProviderSpec(
+                            [
+                              TickSpec(
+                                300,
+                                label: '300',
+                              ),
+                              TickSpec(
+                                400,
+                                label: '400',
+                              ),
+                              TickSpec(
+                                500,
+                                label: '500',
+                              ),
+                              TickSpec(
+                                600,
+                                label: '600',
+                              ),
+                              TickSpec(
+                                700,
+                                label: '700',
+                              ),
+                              TickSpec(
+                                800,
+                                label: '800',
+                              ),
+                              TickSpec(
+                                900,
+                                label: '900',
+                              ),
+                              TickSpec(
+                                1000,
+                                label: '1000',
+                              ),
+                            ],
+                          ),
+                          tickFormatterSpec: BasicNumericTickFormatterSpec(
+                            (mm) =>
+                                '${mm?.toInt()} ${Localisation.instance.millimeter}',
+                          ),
+                        ),
+                        // add m to the x-axis
+                        secondaryMeasureAxis: NumericAxisSpec(
+                          tickFormatterSpec: BasicNumericTickFormatterSpec(
+                            (sec) =>
+                                '${sec?.toInt()} ${Localisation.instance.second}',
+                          ),
+                        ),
+                        domainAxis: NumericAxisSpec(
+                          tickFormatterSpec: BasicNumericTickFormatterSpec(
+                            (m) =>
+                                '${(m?.toInt() ?? 0) / 1000} ${Localisation.instance.kilometer}',
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               );
             },
-            child: Text("TODO: show ap penetration curve"),
+            child: const Text("TODO: show ap penetration curve"),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,

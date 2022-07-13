@@ -32,7 +32,7 @@ class ChartUtils {
   static final winrateColour = Color.fromHex(code: '#4CAF50');
   static final battleColour = Color.fromHex(code: '#FF9800');
 
-  static List<Series<ChartValue<T, V>, T>> convert<T, V>(
+  static Series<ChartValue<T, V>, T> convert<T, V>(
     String id, {
     required List<ChartValue<T, V>> values,
     required Color color,
@@ -40,19 +40,17 @@ class ChartUtils {
     required num? Function(ChartValue<T, V>, int?) measureFn,
     required String Function(ChartValue<T, V>, int?)? labelFormatter,
   }) {
-    return [
-      Series(
-        id: id,
-        data: values,
-        domainFn: domainFn,
-        measureFn: measureFn,
-        labelAccessorFn: labelFormatter,
-        colorFn: (v, _) => color,
-      ),
-    ];
+    return Series(
+      id: id,
+      data: values,
+      domainFn: domainFn,
+      measureFn: measureFn,
+      labelAccessorFn: labelFormatter,
+      colorFn: (v, _) => color,
+    );
   }
 
-  static List<Series<ChartValue<T, num>, T>> convertDefault<T>(
+  static Series<ChartValue<T, num>, T> convertDefault<T>(
     String id, {
     required List<ChartValue<T, num>> values,
     required Color color,

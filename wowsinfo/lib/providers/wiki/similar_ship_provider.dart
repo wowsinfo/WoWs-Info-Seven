@@ -118,35 +118,43 @@ class SimilarShipProvider with ChangeNotifier {
 
     // sort the value to make it easier to read
     damageChart.sort((a, b) => b.value.compareTo(a.value));
-    _damageSeries = ChartUtils.convertDefault(
-      'damage',
-      values: damageChart,
-      color: ChartUtils.damageColour,
-      labelFormatter: (v, _) => v.value.toDecimalString(),
-    );
+    _damageSeries = [
+      ChartUtils.convertDefault(
+        'damage',
+        values: damageChart,
+        color: ChartUtils.damageColour,
+        labelFormatter: (v, _) => v.value.toDecimalString(),
+      )
+    ];
 
     fragsChart.sort((a, b) => b.value.compareTo(a.value));
-    _fragsSeries = ChartUtils.convertDefault(
-      'frags',
-      values: fragsChart,
-      color: ChartUtils.fragsColour,
-      labelFormatter: (v, _) => v.value.toDecimalString(),
-    );
+    _fragsSeries = [
+      ChartUtils.convertDefault(
+        'frags',
+        values: fragsChart,
+        color: ChartUtils.fragsColour,
+        labelFormatter: (v, _) => v.value.toDecimalString(),
+      )
+    ];
 
     winrateChart.sort((a, b) => b.value.compareTo(a.value));
-    _winrateSeries = ChartUtils.convertDefault(
-      'winrate',
-      values: winrateChart,
-      color: ChartUtils.winrateColour,
-      labelFormatter: (v, _) => v.value.asPercentString(),
-    );
+    _winrateSeries = [
+      ChartUtils.convertDefault(
+        'winrate',
+        values: winrateChart,
+        color: ChartUtils.winrateColour,
+        labelFormatter: (v, _) => v.value.asPercentString(),
+      )
+    ];
 
     battlesChart.sort((a, b) => b.value.compareTo(a.value));
-    _battleSeries = ChartUtils.convertDefault(
-      'battles',
-      values: battlesChart,
-      color: ChartUtils.battleColour,
-      labelFormatter: (v, _) => v.value.toDecimalString(),
-    );
+    _battleSeries = [
+      ChartUtils.convertDefault(
+        'battles',
+        values: battlesChart,
+        color: ChartUtils.battleColour,
+        labelFormatter: (v, _) => v.value.toDecimalString(),
+      )
+    ];
   }
 }

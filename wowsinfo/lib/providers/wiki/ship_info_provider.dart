@@ -16,6 +16,8 @@ import 'package:wowsinfo/models/wowsinfo/ship_upgrades.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
 
+const _secondaryMeasureAxisId = 'secondaryMeasureAxisId';
+
 /// For the individual ship information.
 class ShipInfoProvider with ChangeNotifier {
   final _logger = Logger('ShipInfoProvider');
@@ -240,9 +242,9 @@ class ShipInfoProvider with ChangeNotifier {
       values: tValues,
       color: ChartUtils.damageColour,
       labelFormatter: (value, index) => value.name.toString(),
-    );
+    )..setAttribute(measureAxisIdKey, _secondaryMeasureAxisId); // a fixed key
 
-    return penSeries + timeSeries;
+    return [penSeries, timeSeries];
   }
 
   // Secondaries
