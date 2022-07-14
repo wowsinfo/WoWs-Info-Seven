@@ -7,6 +7,7 @@ import 'package:wowsinfo/widgets/page/app_settings_page.dart';
 import 'package:wowsinfo/widgets/page/search_page.dart';
 import 'package:wowsinfo/widgets/page/wiki/achievement_page.dart';
 import 'package:wowsinfo/widgets/page/wiki/commander_skill_page.dart';
+import 'package:wowsinfo/widgets/page/wiki/ship/compare_ship_page.dart';
 import 'package:wowsinfo/widgets/page/wiki/ship/ship_page.dart';
 import 'package:wowsinfo/widgets/page/wiki/ship/ship_penetration_dialog.dart';
 import 'package:wowsinfo/widgets/page/wiki/upgrade_page.dart';
@@ -85,6 +86,16 @@ class _DebugPageState extends State<DebugPage> {
                   );
                 },
                 child: Text(Localisation.of(context).wiki_warships),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    App.platformPageRoute(
+                      builder: (_) => const CompareShipPage(),
+                    ),
+                  );
+                },
+                child: const Text('Compare'),
               ),
               TextButton(
                 onPressed: () {
