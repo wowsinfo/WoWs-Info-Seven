@@ -230,6 +230,7 @@ class ShipInfoProvider with ChangeNotifier {
       ));
     }
 
+    // TODO: add the proper name
     final penSeries = ChartUtils.convertDefault(
       'penetration',
       values: pValues,

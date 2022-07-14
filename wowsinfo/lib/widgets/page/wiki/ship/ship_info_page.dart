@@ -328,6 +328,9 @@ class _ShipMainBattery extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: LineChart(
                       provider.penetrationSeries,
+                      behaviors: [
+                        SeriesLegend(position: BehaviorPosition.bottom),
+                      ],
                       // add mm to the y-axis
                       primaryMeasureAxis: NumericAxisSpec(
                         // start from 300
@@ -380,8 +383,8 @@ class _ShipMainBattery extends StatelessWidget {
             },
             child: const Text("TODO: show ap penetration curve"),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+          Wrap(
+            alignment: WrapAlignment.spaceAround,
             children: [
               for (final shell in provider.shells) _renderShell(context, shell),
             ],
