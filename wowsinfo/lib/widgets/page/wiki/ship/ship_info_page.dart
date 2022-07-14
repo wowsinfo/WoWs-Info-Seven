@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:charts_flutter/flutter.dart' hide TextStyle, Axis;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +17,7 @@ import 'package:wowsinfo/localisation/localisation.dart';
 import 'package:wowsinfo/providers/wiki/similar_ship_provider.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
 import 'package:wowsinfo/widgets/page/wiki/ship/ship_module_dialog.dart';
+import 'package:wowsinfo/widgets/page/wiki/ship/ship_penetration_dialog.dart';
 import 'package:wowsinfo/widgets/page/wiki/ship/similar_ship_list.dart';
 import 'package:wowsinfo/widgets/shared/asset_image_loader.dart';
 import 'package:wowsinfo/widgets/shared/text_with_caption.dart';
@@ -94,7 +97,7 @@ class _ShipInfoPageState extends State<ShipInfoPage>
                   ),
                 ),
               if (_provider.renderHull) const _ShipSurvivabilty(),
-              if (_provider.renderMainGun) const _ShipMainBattery(),
+              if (_provider.renderMainGun) _ShipMainBattery(ship: widget.ship),
               if (_provider.renderSecondaryGun) const _ShipSecondaries(),
               if (_provider.renderTorpedo) const _ShipTorpedo(),
               if (_provider.renderAirDefense) const _ShipAirDefense(),
@@ -270,7 +273,12 @@ class _ShipSurvivabilty extends StatelessWidget {
 }
 
 class _ShipMainBattery extends StatelessWidget {
-  const _ShipMainBattery({Key? key}) : super(key: key);
+  const _ShipMainBattery({
+    Key? key,
+    required this.ship,
+  }) : super(key: key);
+
+  final Ship ship;
 
   @override
   Widget build(BuildContext context) {
@@ -321,65 +329,7 @@ class _ShipMainBattery extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              showDialog(
-                context: context,
-                builder: (context) => Dialog(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: LineChart(
-                      provider.penetrationSeries,
-                      behaviors: [
-                        SeriesLegend(position: BehaviorPosition.bottom),
-                      ],
-                      // add mm to the y-axis
-                      primaryMeasureAxis: NumericAxisSpec(
-                        // start from 300
-                        tickProviderSpec: provider.buildPenetrationSpec(12),
-                        tickFormatterSpec: BasicNumericTickFormatterSpec(
-                          (mm) =>
-                              '${mm?.toInt()}${Localisation.instance.millimeter}',
-                        ),
-                        renderSpec: GridlineRendererSpec(
-                          labelStyle: TextStyleSpec(
-                            color: provider.getThemePalette(),
-                          ),
-                        ),
-                      ),
-                      // add m to the x-axis
-                      secondaryMeasureAxis: NumericAxisSpec(
-                        tickFormatterSpec: BasicNumericTickFormatterSpec(
-                          (sec) =>
-                              '${sec?.toInt()}${Localisation.instance.second}',
-                        ),
-                        // fixed 12 specs
-                        tickProviderSpec: const BasicNumericTickProviderSpec(
-                          desiredTickCount: 12,
-                        ),
-                        renderSpec: GridlineRendererSpec(
-                          labelStyle: TextStyleSpec(
-                            color: provider.getThemePalette(),
-                          ),
-                        ),
-                      ),
-                      domainAxis: NumericAxisSpec(
-                        tickFormatterSpec: BasicNumericTickFormatterSpec(
-                          (m) =>
-                              '${(m ?? 0) ~/ 1000}${Localisation.instance.kilometer}',
-                        ),
-                        tickProviderSpec: provider.buildDistanceSpec(),
-                        renderSpec: GridlineRendererSpec(
-                          lineStyle: const LineStyleSpec(
-                            color: MaterialPalette.transparent,
-                          ),
-                          labelStyle: TextStyleSpec(
-                            color: provider.getThemePalette(),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              );
+              showShipPenetrationDialog(context, ship);
             },
             child: const Text("TODO: show ap penetration curve"),
           ),

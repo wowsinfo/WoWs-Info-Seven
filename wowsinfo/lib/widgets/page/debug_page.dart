@@ -8,6 +8,7 @@ import 'package:wowsinfo/widgets/page/search_page.dart';
 import 'package:wowsinfo/widgets/page/wiki/achievement_page.dart';
 import 'package:wowsinfo/widgets/page/wiki/commander_skill_page.dart';
 import 'package:wowsinfo/widgets/page/wiki/ship/ship_page.dart';
+import 'package:wowsinfo/widgets/page/wiki/ship/ship_penetration_dialog.dart';
 import 'package:wowsinfo/widgets/page/wiki/upgrade_page.dart';
 import 'package:wowsinfo/widgets/shared/filter_ship_dialog.dart';
 
@@ -57,6 +58,8 @@ class _DebugPageState extends State<DebugPage> {
         child: CircularProgressIndicator(),
       );
     }
+
+    final elbing = GameRepository.instance.shipOf('4074649392');
 
     return Center(
       child: Wrap(
@@ -130,6 +133,10 @@ class _DebugPageState extends State<DebugPage> {
               TextButton(
                 onPressed: () => showFilterShipDialog(context, (_) {}),
                 child: const Text('Ship Filter Dialog'),
+              ),
+              TextButton(
+                onPressed: () => showShipPenetrationDialog(context, elbing!),
+                child: const Text('Elbing Penetration Dialog'),
               ),
             ],
           ),
