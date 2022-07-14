@@ -198,6 +198,7 @@ class ShipModules {
   ShipModuleHolder<Aircraft>? get diveBomberInfo =>
       _valueAt(_diveBomberInfo, _moduleSelection.diveBomberIndex);
 
+  /// TODO: this is quite heavy, how to separate it into smaller parts?
   void unpackModules() {
     final shipModules = _ship.components;
     for (final module in _ship.modules.entries) {

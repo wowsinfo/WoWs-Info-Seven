@@ -2,6 +2,7 @@ import 'package:charts_flutter/flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:wowsinfo/foundation/helpers/chart_utils.dart';
+import 'package:wowsinfo/foundation/helpers/time_tracker.dart';
 import 'package:wowsinfo/models/gamedata/projectile.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
 import 'package:wowsinfo/models/wowsinfo/ap_penetration.dart';
@@ -17,9 +18,11 @@ class ShipPenetrationProvider {
   final Ship _ship;
   late final _shipModules = ShipModules(_ship);
   ShipPenetrationProvider(this._context, this._ship) {
+    TimeTracker tracker = TimeTracker();
     // TODO: how to possibily get ship main gun info without doing the full unpacking???
     _shipModules.unpackModules();
     _mainGunInfo = _shipModules.gunInfo?.data;
+    tracker.log(message: 'Unpacked modules'); // 3ms on a i5-9400
   }
 
   GunInfo? _mainGunInfo;
