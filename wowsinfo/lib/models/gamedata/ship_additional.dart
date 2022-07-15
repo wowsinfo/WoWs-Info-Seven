@@ -10,8 +10,8 @@ class ShipAdditional {
   });
 
   final int damage;
-  final double frags;
-  final double winrate;
+  final num frags;
+  final num winrate;
   final int? battles;
 
   factory ShipAdditional.fromJson(Map<String, dynamic> json) => ShipAdditional(
