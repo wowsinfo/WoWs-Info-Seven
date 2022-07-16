@@ -35,61 +35,68 @@ class _ShipFilterDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     final provider = Provider.of<FilterShipProvider>(context);
     return Dialog(
-      child: SingleChildScrollView(
-        child: MaxWidthBox(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0),
-                child: renderListTitle(
-                  context,
-                  Localisation.instance.shipNameFilterName,
+      child: MaxWidthBox(
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: renderListTitle(
+                        context,
+                        Localisation.instance.shipNameFilterName,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: TextField(
+                        controller: nameController,
+                        // remove underline
+                        decoration: const InputDecoration(
+                          border: InputBorder.none,
+                          hintText: '...',
+                        ),
+                      ),
+                    ),
+                    const Divider(),
+                    renderListTitle(
+                        context, Localisation.instance.tierFilterName),
+                    renderTierList(context),
+                    const Divider(),
+                    renderListTitle(
+                      context,
+                      Localisation.instance.shipTypeFilterName,
+                    ),
+                    renderTypeList(context),
+                    const Divider(),
+                    renderListTitle(context, provider.regionFilterName),
+                    renderRegionList(context),
+                  ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: TextField(
-                  controller: nameController,
-                  // remove underline
-                  decoration: const InputDecoration(
-                    border: InputBorder.none,
-                    hintText: '...',
-                  ),
+            ),
+            const Divider(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                IconButton(
+                  onPressed: () => provider.resetAll(),
+                  icon: const Icon(Icons.refresh),
                 ),
-              ),
-              const Divider(),
-              renderListTitle(context, Localisation.instance.tierFilterName),
-              renderTierList(context),
-              const Divider(),
-              renderListTitle(
-                context,
-                Localisation.instance.shipTypeFilterName,
-              ),
-              renderTypeList(context),
-              const Divider(),
-              renderListTitle(context, provider.regionFilterName),
-              renderRegionList(context),
-              const Divider(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  IconButton(
-                    onPressed: () => provider.resetAll(),
-                    icon: const Icon(Icons.refresh),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      onFilter(provider.onFilter(nameController.text));
-                      Navigator.of(context).pop();
-                    },
-                    icon: const Icon(Icons.check),
-                  ),
-                ],
-              )
-            ],
-          ),
+                IconButton(
+                  onPressed: () {
+                    onFilter(provider.onFilter(nameController.text));
+                    Navigator.of(context).pop();
+                  },
+                  icon: const Icon(Icons.check),
+                ),
+              ],
+            )
+          ],
         ),
       ),
     );
