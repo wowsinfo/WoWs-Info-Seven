@@ -773,9 +773,12 @@ class _ShipConsumables extends StatelessWidget {
     final name = consumable.name;
     final type = consumable.type;
     print('$name $type');
+    // TODOL this should be updated.
     final info = GameRepository.instance.abilityOf(name);
     assert(info != null, 'Consumable is not found');
     final ability = info?.abilities[type];
+    // there can be an iconIDs
+    final icon = ability?.iconIDs ?? name;
     final description = Localisation.instance.stringOf(info?.description) ?? '';
     final abilityModifier = ability.toString();
     return InkWell(
@@ -789,7 +792,7 @@ class _ShipConsumables extends StatelessWidget {
         );
       },
       child: AssetImageLoader(
-        name: 'gamedata/app/assets/consumables/$name.png',
+        name: 'gamedata/app/assets/consumables/$icon.png',
       ),
     );
   }

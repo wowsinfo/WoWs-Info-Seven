@@ -151,6 +151,7 @@ class Localisation {
       langKey = prefix + langKey;
     }
     final rawString = _lang[_gameLang]![langKey];
+    _logger.fine('raw - $rawString');
     if (rawString == null) {
       _logger.severe('Language key $langKey not found');
       return null;
@@ -163,15 +164,17 @@ class Localisation {
     // put constants into the string if needed
     // check if value has %(key) in it
     var formattedString = rawString;
-    final regex = RegExp(r'%\((.*?)\)s');
+
+    // it can be s or d, not sure what's the difference
+    final regex = RegExp(r'%\((.*?)\)[s|d]');
     final matches = regex.allMatches(rawString);
     for (final match in matches) {
       final key = match.group(1);
-      if (key == null) {
+      final orginalString = match.group(0);
+      if (key == null || orginalString == null) {
         _logger.severe('Invalid match, key is null');
         continue;
       }
-
       // the key doesn't include _percent at the end
       final constantKey = key.replaceAll('_percent', '');
       var constantValue = constants[constantKey];
@@ -182,8 +185,9 @@ class Localisation {
         constantValue = '${(number * 100).toDecimalString()}%';
       }
 
+      _logger.info('Replacing $orginalString with $constantValue');
       formattedString = formattedString.replaceAll(
-        '%($key)s',
+        orginalString,
         constantValue.toString(),
       );
     }
