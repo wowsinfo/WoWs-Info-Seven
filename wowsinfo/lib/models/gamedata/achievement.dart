@@ -9,6 +9,7 @@ class Achievement {
     required this.type,
     required this.id,
     required this.constants,
+    this.added,
   });
 
   final String icon;
@@ -16,6 +17,7 @@ class Achievement {
   final String description;
   final List<String> type;
   final int id;
+  final int? added;
 
   /// This field can be empty. The number can be int or double.
   final Map<String, dynamic> constants;
@@ -28,6 +30,7 @@ class Achievement {
         id: json['id'],
         constants: Map.from(json['constants'])
             .map((k, v) => MapEntry<String, dynamic>(k, v)),
+        added: json['added'],
       );
 
   @override

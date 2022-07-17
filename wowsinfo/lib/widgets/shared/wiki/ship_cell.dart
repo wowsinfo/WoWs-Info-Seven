@@ -14,12 +14,14 @@ class ShipCell extends StatelessWidget {
     this.width,
     this.hero,
     this.onTap,
+    this.isNew,
   }) : super(key: key);
 
   final String icon;
   final double? height;
   final double? width;
   final bool? hero;
+  final bool? isNew;
 
   final String name;
   final bool isPremium;
@@ -31,7 +33,13 @@ class ShipCell extends StatelessWidget {
   Widget build(BuildContext context) {
     final cell = Column(
       children: [
-        ShipIcon(icon: icon, height: height, width: width, hero: hero),
+        ShipIcon(
+          icon: icon,
+          height: height,
+          width: width,
+          hero: hero,
+          isNew: isNew,
+        ),
         ShipName(name, isPremium: isPremium, isSpecial: isSpecial),
       ],
     );

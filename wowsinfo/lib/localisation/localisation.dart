@@ -190,6 +190,11 @@ class Localisation {
         orginalString,
         constantValue.toString(),
       );
+
+      // check if there are still %(key) in the string
+      if (formattedString.contains('%(')) {
+        assert(false, 'Still have %(key) in the string');
+      }
     }
 
     return formattedString;

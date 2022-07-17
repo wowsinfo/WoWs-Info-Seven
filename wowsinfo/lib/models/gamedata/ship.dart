@@ -54,6 +54,7 @@ class Ship implements ShipFilterInterface {
     this.nextShips,
     required this.modules,
     required this.components,
+    this.added,
   });
 
   @override
@@ -79,6 +80,7 @@ class Ship implements ShipFilterInterface {
   final List<int>? nextShips;
   final Map<String, List<ShipModuleInfo>> modules;
   final Map<String, dynamic> components;
+  final int? added;
 
   /// Convert to tier symbol, [tier] starts from 1.
   String get tierString => GameInfo.tiers[tier - 1];
@@ -140,6 +142,7 @@ class Ship implements ShipFilterInterface {
           ),
         ),
         components: Map.from(json['components']),
+        added: json['added'],
       );
 }
 

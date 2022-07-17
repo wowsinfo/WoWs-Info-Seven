@@ -71,6 +71,7 @@ class _ShipPageState extends State<ShipPage> {
               name: '${curr.tierString} $shipName',
               isPremium: curr.isPremium,
               isSpecial: curr.isSpecial,
+              isNew: curr.added == 1,
               onTap: () {
                 Navigator.of(context).push(
                   App.platformPageRoute(

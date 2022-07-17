@@ -7,6 +7,7 @@ import 'package:wowsinfo/repositories/game_repository.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
 import 'package:wowsinfo/widgets/shared/asset_image_loader.dart';
 import 'package:wowsinfo/widgets/shared/max_width_box.dart';
+import 'package:wowsinfo/widgets/shared/new_item_indicator.dart';
 import 'package:wowsinfo/widgets/shared/placeholder.dart';
 
 class AchievementPage extends StatelessWidget {
@@ -42,10 +43,16 @@ class AchievementPage extends StatelessWidget {
           final curr = _achievements[index];
           final imageName = curr.icon;
           return InkWell(
-            child: FittedBox(
-              child: AssetImageLoader(
-                name: 'gamedata/app/assets/achievements/$imageName.png',
-              ),
+            child: Stack(
+              fit: StackFit.passthrough,
+              children: [
+                FittedBox(
+                  child: AssetImageLoader(
+                    name: 'gamedata/app/assets/achievements/$imageName.png',
+                  ),
+                ),
+                if (curr.added == 1) const NewItemIndicator(),
+              ],
             ),
             onTap: () {
               showInfo(context, curr);
