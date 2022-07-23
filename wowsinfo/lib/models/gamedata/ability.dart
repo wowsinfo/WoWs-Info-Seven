@@ -15,6 +15,7 @@ class Ability {
     required this.type,
     required this.abilities,
     required this.abilityList,
+    this.alter,
   });
 
   final String nation;
@@ -28,6 +29,7 @@ class Ability {
   // TODO: we shouldn't do this because in the future, we need the actual value
   final Map<String, Modifiers> abilities;
   final List<Modifiers> abilityList;
+  final Map<String, AbilityAlter>? alter;
 
   String descriptionOf(int index) {
     final ability = abilityList[index];
@@ -48,6 +50,28 @@ class Ability {
             MapEntry<String, Modifiers>(key, Modifiers.fromJson(value))),
         abilityList: List.from(
             json['abilities'].values.map((e) => Modifiers.fromJson(e))),
+        alter: json['alter'] == null
+            ? null
+            : Map.from(json['alter']).map((k, v) =>
+                MapEntry<String, AbilityAlter>(k, AbilityAlter.fromJson(v))),
+      );
+}
+
+// There might be alter name and description in one ability.
+// Like smoke, short smoke and the moving smoke.
+@immutable
+class AbilityAlter {
+  const AbilityAlter({
+    required this.name,
+    required this.description,
+  });
+
+  final String name;
+  final String description;
+
+  factory AbilityAlter.fromJson(Map<String, dynamic> json) => AbilityAlter(
+        name: json['name'],
+        description: json['description'],
       );
 }
 

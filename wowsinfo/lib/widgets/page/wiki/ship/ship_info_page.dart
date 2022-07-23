@@ -817,21 +817,43 @@ class _ShipConsumables extends StatelessWidget {
   Widget renderConsumable(BuildContext context, Consumable consumable) {
     final name = consumable.name;
     final type = consumable.type;
-    print('$name $type');
-    // TODOL this should be updated.
+    // TODO: this needs to be in the provider, no logic in the UI
     final info = GameRepository.instance.abilityOf(name);
-    assert(info != null, 'Consumable is not found');
-    final ability = info?.abilities[type];
+    if (info == null) {
+      assert(false, 'Consumable is not found');
+      return Container();
+    }
+
+    final ability = info.abilities[type];
+
+    final String icon;
+    final String description;
+    final String displayName;
+
     // there can be an iconIDs
-    final icon = ability?.iconIDs ?? name;
-    final description = Localisation.instance.stringOf(info?.description) ?? '';
+    final iconID = ability?.iconIDs;
+    if (iconID == null) {
+      icon = name;
+      description = Localisation.instance.stringOf(info.description) ?? '';
+      displayName = Localisation.instance.stringOf(info.name) ?? '';
+    } else {
+      icon = iconID;
+      final alter = info.alter?[iconID];
+      if (alter == null) {
+        assert(false, "Alter isn't found in the ability");
+        return Container();
+      }
+      description = Localisation.instance.stringOf(alter.description) ?? '';
+      displayName = Localisation.instance.stringOf(alter.name) ?? '';
+    }
+
     final abilityModifier = ability.toString();
     return InkWell(
       onTap: () {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: Text(Localisation.instance.stringOf(info?.name) ?? '-'),
+            title: Text(displayName),
             content: Text('$description\n\n$abilityModifier'),
           ),
         );

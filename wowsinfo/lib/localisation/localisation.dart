@@ -151,7 +151,7 @@ class Localisation {
       langKey = prefix + langKey;
     }
     final rawString = _lang[_gameLang]![langKey];
-    _logger.fine('raw - $rawString');
+    // _logger.fine('raw - $rawString');
     if (rawString == null) {
       _logger.severe('Language key $langKey not found');
       return null;

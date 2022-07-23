@@ -3,6 +3,11 @@ import 'package:logging/logging.dart';
 import 'package:wowsinfo/extensions/number.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
 
+/// Keys shouldn't be shown
+const List<String> _blackList = [
+  'affectedClasses',
+];
+
 /// Those keys contain values like 1.2, 0.7. The base line is 1.0.
 /// All strings with coeff is considered as a percentage, they won't be added here.
 /// `Coef`, `Multiplier`, `Factor`, `Time`, `Prob` are included by default
@@ -35,7 +40,7 @@ const List<String> _coeffList = [
 ];
 
 /// Zero is the baseline, but it is a negative value.
-const _negativeCoeff = [
+const List<String> _negativeCoeff = [
   'SGRepairTime',
 ];
 
@@ -50,11 +55,17 @@ const List<String> _coeffListZero = [
   'burnChanceFactorSmall',
   'rocketBurnChanceBonus',
   'regenerationRate',
+  'boostCoeff', // engine boost
 ];
 
 // The value is a number meaning adding +7% for example
-const _addPercent = [
+const List<String> _addPercent = [
   'uwCoeffBonus',
+];
+
+/// The value is like 0.005 but it should be 0.5%
+const List<String> _rawPercent = [
+  'regenerationHPSpeed',
 ];
 
 /// Addtional count like +1 all consumables
@@ -66,6 +77,10 @@ const List<String> _additionalList = [
 ];
 
 // `dist` is for distance
+const List<String> _distList = [
+  'radius',
+];
+
 // `time` is for time
 const List<String> _timeList = [
   'workTime',
@@ -328,6 +343,9 @@ class Modifiers {
     for (final entry in raw.entries) {
       // the original key is needed for checking in a predefined list
       final keyOriginal = entry.key;
+      if (_blackList.contains(keyOriginal)) continue;
+
+      logger.fine('keyOriginal: $keyOriginal');
       final key = keyOriginal.toLowerCase();
 
       final value = entry.value;
@@ -381,7 +399,8 @@ class Modifiers {
 
         if (_timeList.contains(keyOriginal)) {
           final double time = value.toDouble();
-          valueString = '$langString: ${time.toDecimalString()}s\n';
+          valueString =
+              '$langString: ${time.toDecimalString()} ${Localisation.instance.second}\n';
         } else if (_additionalList.contains(keyOriginal) ||
             key.contains('additional') ||
             key.contains('extra')) {
@@ -402,9 +421,13 @@ class Modifiers {
           final positive = coeff > 1.0;
           final percent = (coeff - 1).abs().toPercentString();
           valueString = '$langString: ${positive ? '+' : '-'}$percent\n';
-        } else if (key.contains('dist')) {
+        } else if (key.contains('dist') || _distList.contains(keyOriginal)) {
           final double dist = value.toDouble();
-          valueString = '$langString: ${(dist / 33.35).toDecimalString()}km\n';
+          valueString =
+              '$langString: ${(dist / 33.35).toDecimalString()} ${Localisation.instance.kilometer}\n';
+        } else if (_rawPercent.contains(keyOriginal)) {
+          final double percent = value.toDouble();
+          valueString = '$langString: ${percent.toPercentString()}\n';
         } else {
           logger.warning('Unknown modifier: $keyOriginal');
           if (value == -1) {
@@ -414,7 +437,7 @@ class Modifiers {
           }
         }
 
-        logger.info('Ship type: $shipType');
+        // logger.info('Ship type: $shipType');
         if (description.contains(valueString.trim())) continue;
         // if this modifier for all ship types are the same, don't add things like [Battleship]
         if (shipType == null || stringValueMap.length == 1) {
