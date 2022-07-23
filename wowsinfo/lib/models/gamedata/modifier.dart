@@ -57,6 +57,7 @@ const List<String> _coeffListZero = [
   'rocketBurnChanceBonus',
   'regenerationRate',
   'boostCoeff', // engine boost
+  'artilleryBurnChanceBonus',
 ];
 
 // The value is a number meaning adding +7% for example
@@ -341,6 +342,23 @@ class Modifiers {
   // Save a copy of the raw data for the desciption
   final Map<String, dynamic> raw;
 
+  /// Join two modifiers together.
+  Modifiers merge(Modifiers other) {
+    final Map<String, dynamic> output = {...raw};
+    for (final entry in other.raw.entries) {
+      final key = entry.key;
+      final value = entry.value;
+      if (output[key] != null) {
+        // only add up if it is a number
+        if (value is num) output[key] *= value;
+      } else {
+        // add this value
+        output[key] = value;
+      }
+    }
+    return Modifiers.fromJson(output);
+  }
+
   @override
   String toString() {
     final logger = Logger('Modifiers');
@@ -404,8 +422,7 @@ class Modifiers {
         final shipType = item.type;
         final String valueString;
 
-        // 0 or 1 means there is no change
-        if (value == 0 || value == 1.0) continue;
+        if (value == 0) continue;
 
         if (_timeList.contains(keyOriginal)) {
           final double time = value.toDouble();
@@ -1033,29 +1050,38 @@ class ModifierShipType {
       ModifierShipTypeHolder(
         key: key,
         type: 'AIRCARRIER',
-        value: airCarrier,
+        value: _validate(airCarrier),
       ),
       ModifierShipTypeHolder(
         key: key,
         type: 'AUXILIARY',
-        value: auxiliary,
+        value: _validate(auxiliary),
       ),
       ModifierShipTypeHolder(
         key: key,
         type: 'BATTLESHIP',
-        value: battleship,
+        value: _validate(battleship),
       ),
       ModifierShipTypeHolder(
         key: key,
         type: 'CRUISER',
-        value: cruiser,
+        value: _validate(cruiser),
       ),
       ModifierShipTypeHolder(
         key: key,
         type: 'DESTROYER',
-        value: destroyer,
+        value: _validate(destroyer),
       ),
     ];
+  }
+
+  // Make sure 1.0 is not passed in here, it can cause some issues.
+  // When it is 0, +0% or -0% will be displayed. This isn't expected.
+  /// TODO: move this to game data?
+  num? _validate(num? value) {
+    if (value == null) return 0;
+    if (value == 1) return 0;
+    return value;
   }
 
   bool isEmpty() {

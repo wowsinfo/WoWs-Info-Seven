@@ -127,7 +127,12 @@ class _CommanderSkillPageState extends State<CommanderSkillPage> {
                   );
                 },
               ),
-              const SizedBox(height: 50),
+              // try out descriptions
+              Text(
+                provider.selectedDescriptions,
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 70),
             ],
           ),
         );

@@ -57,14 +57,35 @@ class CommanderSkillProvider with ChangeNotifier {
 
   int _selectedPoints = 0;
   final List<ShipSkill> _selectedSkills = [];
+  String get selectedDescriptions {
+    if (_selectedSkills.isEmpty) return '';
+    return _selectedSkills
+        .map((skill) {
+          final commanderSkill = GameRepository.instance.skillOf(skill.name);
+          if (commanderSkill == null) return null;
+          return commanderSkill.modifiers.merge(
+            commanderSkill.logicTrigger.modifiers,
+          );
+        })
+        .where((skill) => skill != null)
+        .reduce((prev, curr) => prev!.merge(curr!))
+        .toString();
+  }
+
   bool isSkillSelected(ShipSkill skill) => _selectedSkills.contains(skill);
 
   void selectSkill(ShipSkill skill) {
     if (_selectedSkills.contains(skill)) {
       _logger.fine('Skill already selected: $skill');
       // remove from the selection
-      _selectedPoints -= skill.tier;
       _selectedSkills.remove(skill);
+      // if this is the only skill selected for the tier, remove eveything below it
+      if (_selectedSkills.any((s) => s.tier == skill.tier) == false) {
+        _selectedSkills.removeWhere((s) => s.tier > skill.tier);
+      }
+      // update the points
+      _selectedPoints =
+          _selectedSkills.fold(0, (prev, curr) => prev + curr.tier);
       notifyListeners();
       return;
     }
