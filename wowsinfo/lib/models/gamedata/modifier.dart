@@ -37,6 +37,7 @@ const List<String> _coeffList = [
   'planeSpawnTime',
   'planeRegenerationRate',
   'shootShift',
+  'gmShotDelay', // custom reload booster modifier
 ];
 
 /// Zero is the baseline, but it is a negative value.
@@ -79,6 +80,11 @@ const List<String> _additionalList = [
 // `dist` is for distance
 const List<String> _distList = [
   'radius',
+];
+
+/// raw distance like 7500.0 to 7.5km
+const List<String> _rawDistList = [
+  'acousticWaveRadius',
 ];
 
 // `time` is for time
@@ -428,6 +434,10 @@ class Modifiers {
         } else if (_rawPercent.contains(keyOriginal)) {
           final double percent = value.toDouble();
           valueString = '$langString: ${percent.toPercentString()}\n';
+        } else if (_rawDistList.contains(keyOriginal)) {
+          final double dist = value.toDouble();
+          valueString =
+              '$langString: ${(dist / 1000).toDecimalString()} ${Localisation.instance.kilometer}\n';
         } else {
           logger.warning('Unknown modifier: $keyOriginal');
           if (value == -1) {
