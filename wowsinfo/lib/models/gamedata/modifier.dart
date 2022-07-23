@@ -401,7 +401,8 @@ class Modifiers {
         final shipType = item.type;
         final String valueString;
 
-        if (value == 0) continue;
+        // 0 or 1 means there is no change
+        if (value == 0 || value == 1.0) continue;
 
         if (_timeList.contains(keyOriginal)) {
           final double time = value.toDouble();

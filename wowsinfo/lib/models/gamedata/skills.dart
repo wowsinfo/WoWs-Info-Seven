@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:wowsinfo/localisation/localisation.dart';
 import 'package:wowsinfo/models/gamedata/modifier.dart';
 
 @immutable
@@ -11,6 +12,7 @@ class CommanderSkill {
     required this.skillType,
     required this.uiTreatAsTrigger,
     required this.name,
+    required this.description,
   });
 
   final LogicTrigger logicTrigger;
@@ -20,8 +22,17 @@ class CommanderSkill {
   final int skillType;
   final bool uiTreatAsTrigger;
   final String name;
+  final String description;
 
-  String get descriptions => '$modifiers${logicTrigger.modifiers}';
+  String get fullDescriptions {
+    final partial = '$modifiers$logicTrigger';
+    final skillDescription = Localisation.instance.stringOf(description);
+    final list = [
+      skillDescription,
+      partial,
+    ]..removeWhere((e) => e == null);
+    return list.map((e) => e!.trim()).join('\n').trim();
+  }
 
   factory CommanderSkill.fromJson(Map<String, dynamic> json) => CommanderSkill(
         logicTrigger: LogicTrigger.fromJson(json['LogicTrigger']),
@@ -31,6 +42,7 @@ class CommanderSkill {
         skillType: json['skillType'],
         uiTreatAsTrigger: json['uiTreatAsTrigger'],
         name: json['name'],
+        description: json['description'],
       );
 }
 
@@ -67,6 +79,22 @@ class LogicTrigger {
   final Modifiers modifiers;
   final String triggerDescIds;
   final String triggerType;
+
+  @override
+  String toString() {
+    final triggerDescription = Localisation.instance.stringOf(triggerDescIds);
+    final triggerTypeDescription = Localisation.instance.stringOf(
+      triggerType.toUpperCase(),
+      prefix: 'IDS_SKILL_TRIGGER_',
+    );
+
+    final list = [
+      triggerDescription,
+      triggerTypeDescription,
+      modifiers.toString(),
+    ]..removeWhere((e) => e == null);
+    return list.join('\n');
+  }
 
   factory LogicTrigger.fromJson(Map<String, dynamic> json) => LogicTrigger(
         burnCount: json['burnCount'],

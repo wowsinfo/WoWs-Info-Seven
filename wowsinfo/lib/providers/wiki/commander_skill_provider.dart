@@ -115,7 +115,7 @@ class CommanderSkillProvider with ChangeNotifier {
       context: _context,
       builder: (context) => AlertDialog(
         title: Text(skillName ?? '-'),
-        content: Text(commanderSkill.descriptions),
+        content: Text(commanderSkill.fullDescriptions),
         actions: [
           TextButton(
             child: const Text('Close'),
