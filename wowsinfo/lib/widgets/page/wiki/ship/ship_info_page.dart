@@ -848,6 +848,7 @@ class _ShipConsumables extends StatelessWidget {
     }
 
     final abilityModifier = ability.toString();
+    final consumableCount = ability?.consumableCount;
     return InkWell(
       onTap: () {
         showDialog(
@@ -858,8 +859,13 @@ class _ShipConsumables extends StatelessWidget {
           ),
         );
       },
-      child: AssetImageLoader(
-        name: 'gamedata/app/assets/consumables/$icon.png',
+      child: Column(
+        children: [
+          AssetImageLoader(
+            name: 'gamedata/app/assets/consumables/$icon.png',
+          ),
+          if (consumableCount != null) Text(consumableCount),
+        ],
       ),
     );
   }

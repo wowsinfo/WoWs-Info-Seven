@@ -342,6 +342,13 @@ class Modifiers {
   // Save a copy of the raw data for the desciption
   final Map<String, dynamic> raw;
 
+  String? get consumableCount {
+    final count = numConsumables;
+    if (count == null) return null;
+    if (count == -1) return '∞';
+    return count.toString();
+  }
+
   /// Join two modifiers together.
   Modifiers merge(Modifiers other) {
     final Map<String, dynamic> output = {...raw};
