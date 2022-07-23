@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:wowsinfo/models/gamedata/game_info.dart';
+import 'package:wowsinfo/models/gamedata/modifier.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_filter.dart';
 
 import 'consumable.dart';
@@ -190,6 +191,7 @@ class GunInfo {
     required this.guns,
     this.far,
     this.bubbles,
+    this.burst,
   });
 
   final double range;
@@ -197,6 +199,7 @@ class GunInfo {
   final List<WeaponInfo> guns;
   final AuraInfo? far;
   final AirBubbles? bubbles;
+  final Burst? burst;
 
   factory GunInfo.fromJson(Map<String, dynamic> json) => GunInfo(
         range: json['range'],
@@ -207,6 +210,33 @@ class GunInfo {
         bubbles: json['bubbles'] == null
             ? null
             : AirBubbles.fromJson(json['bubbles']),
+      );
+}
+
+class Burst {
+  Burst({
+    required this.burstReloadTime,
+    required this.fullReloadTime,
+    this.modifiers,
+    required this.shotIntensity,
+    required this.shotsCount,
+  });
+
+  final int burstReloadTime;
+  final int fullReloadTime;
+  final Modifiers? modifiers;
+  final int shotIntensity;
+  final int shotsCount;
+
+  factory Burst.fromJson(Map<String, dynamic> json) => Burst(
+        burstReloadTime: json['burstReloadTime'],
+        fullReloadTime: json['fullReloadTime'],
+        // This is just an empty {} for some burst fires
+        modifiers: (json['modifiers'] as Map).isNotEmpty
+            ? Modifiers.fromJson(json['modifiers'])
+            : null,
+        shotIntensity: json['shotIntensity'],
+        shotsCount: json['shotsCount'],
       );
 }
 
