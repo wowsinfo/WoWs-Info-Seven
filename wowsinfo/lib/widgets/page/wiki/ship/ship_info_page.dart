@@ -321,6 +321,8 @@ class _ShipMainBattery extends StatelessWidget {
               ),
             ],
           ),
+          if (provider.hasBurstFire)
+            _renderBurstFire(context, provider.burstFireHolder),
           Center(
             child: Text(
               provider.gunName,
@@ -338,7 +340,7 @@ class _ShipMainBattery extends StatelessWidget {
             children: [
               for (final shell in provider.shells) _renderShell(context, shell),
             ],
-          )
+          ),
         ],
       ),
     );
@@ -377,6 +379,49 @@ class _ShipMainBattery extends StatelessWidget {
           TextWithCaption(
             title: Localisation.of(context).warship_weapon_ap_overmatch,
             value: shell.overmatch!,
+          ),
+      ],
+    );
+  }
+
+  Widget _renderBurstFire(BuildContext context, BurstFireHolder? holder) {
+    if (holder == null) {
+      assert(false, "Burst fire holder shouldn't be null here, not expected");
+      return Container();
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Center(
+          child: Text(
+            Localisation.instance.burstFire,
+            style: Theme.of(context).textTheme.headline6,
+          ),
+        ),
+        Wrap(
+          alignment: WrapAlignment.spaceAround,
+          children: [
+            TextWithCaption(
+              title: Localisation.instance.burstFireCount,
+              value: holder.shots,
+            ),
+            TextWithCaption(
+              title: Localisation.instance.burstFireInterval,
+              value: holder.interval,
+            ),
+            TextWithCaption(
+              title: Localisation.instance.burstFireReload,
+              value: holder.reload,
+            ),
+          ],
+        ),
+        if (holder.modifiers != null)
+          Center(
+            child: Text(
+              holder.modifiers!,
+              textAlign: TextAlign.center,
+            ),
           ),
       ],
     );

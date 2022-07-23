@@ -210,6 +210,7 @@ class GunInfo {
         bubbles: json['bubbles'] == null
             ? null
             : AirBubbles.fromJson(json['bubbles']),
+        burst: json['burst'] == null ? null : Burst.fromJson(json['burst']),
       );
 }
 
@@ -222,10 +223,10 @@ class Burst {
     required this.shotsCount,
   });
 
-  final int burstReloadTime;
-  final int fullReloadTime;
+  final double burstReloadTime;
+  final double fullReloadTime;
   final Modifiers? modifiers;
-  final int shotIntensity;
+  final double shotIntensity;
   final int shotsCount;
 
   factory Burst.fromJson(Map<String, dynamic> json) => Burst(

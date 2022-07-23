@@ -130,6 +130,29 @@ class ShipInfoProvider with ChangeNotifier {
   String get gunName =>
       Localisation.instance.stringOf(_shipModules.gunInfo?.module?.name) ?? '-';
 
+  bool get hasBurstFire => _mainGunInfo?.burst != null;
+  Burst? get burst => _mainGunInfo?.burst;
+  BurstFireHolder? get burstFireHolder => _extractBurstFire(burst);
+  BurstFireHolder? _extractBurstFire(Burst? burst) {
+    if (burst == null) return null;
+    return BurstFireHolder(
+      reload:
+          _format(burst.fullReloadTime, suffix: Localisation.instance.second),
+      interval:
+          _format(burst.burstReloadTime, suffix: Localisation.instance.second),
+      shots: _format(burst.shotsCount),
+      modifiers: burst.modifiers?.toString(),
+    );
+  }
+
+  // String get burstShots => _format(burst?.shotsCount);
+  // String get burstReloadTime =>
+  //     _format(burst?.burstReloadTime, suffix: Localisation.instance.second);
+  // String get burstFullReloadTime =>
+  //     _format(burst?.fullReloadTime, suffix: Localisation.instance.second);
+  // // Only for certain ships like Conde
+  // String? get burstModifier => burst?.modifiers?.toString();
+
   List<ShellHolder> get shells => _extractShells(_mainGunInfo);
   List<ShellHolder> _extractShells(GunInfo? gunInfo) {
     if (gunInfo == null) return [];
@@ -390,6 +413,20 @@ class ShellHolder {
   String? damage;
   String? penetration;
   String? overmatch;
+}
+
+class BurstFireHolder {
+  BurstFireHolder({
+    required this.reload,
+    required this.interval,
+    required this.shots,
+    this.modifiers,
+  });
+
+  final String reload;
+  final String interval;
+  final String shots;
+  final String? modifiers;
 }
 
 class SecondaryGunHolder {

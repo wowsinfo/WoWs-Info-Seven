@@ -261,6 +261,15 @@ class Localisation {
   String get shellPenetration =>
       _get('ARTILLERY_ALPHA_PIERCING', prefix: _shipParam);
   String get shellFireChance => _get('ARTILLERY_BURN_PROB', prefix: _shipParam);
+  // Burst fire mode
+  String get burstFire => _get('BURST_FIRE_NAME', prefix: _shipParam);
+  String get burstFireCount =>
+      _get('BURST_FIRE_SALVO_COUNT', prefix: _shipParam);
+  String get burstFireInterval =>
+      _get('BURST_FIRE_SALVO_SHOT_DELAY', prefix: _shipParam);
+  // The full reload after burst fire mode usually 30s to 40s
+  String get burstFireReload =>
+      _get('BURST_FIRE_RELOAD_TIME', prefix: _shipParam);
 
   // Secondary battery
   String get secondaryBattery => _get('ATBA_SHORT', prefix: _shipParam);
