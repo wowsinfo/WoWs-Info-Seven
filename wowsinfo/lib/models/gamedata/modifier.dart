@@ -376,7 +376,7 @@ class Modifiers {
       }
 
       // check all modifiers are the same string
-      final stringValueMap = valueMap
+      final stringSet = valueMap
           .map((e) {
             final valueKey = e.fullKey;
             return Localisation.instance.stringOf(
@@ -386,6 +386,9 @@ class Modifiers {
           })
           .toSet()
           .toList();
+
+      // check if all values are the same as well
+      final valueSet = valueMap.map((e) => e.value).toSet().toList();
 
       for (final item in valueMap) {
         final valueKey = item.fullKey;
@@ -451,7 +454,9 @@ class Modifiers {
         // logger.info('Ship type: $shipType');
         if (description.contains(valueString.trim())) continue;
         // if this modifier for all ship types are the same, don't add things like [Battleship]
-        if (shipType == null || stringValueMap.length == 1) {
+        // make sure all values are the same as well
+        if (shipType == null ||
+            (stringSet.length == 1 && valueSet.length == 1)) {
           // make sure there is no duplications
           description += valueString;
         } else {
