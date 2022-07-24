@@ -634,8 +634,12 @@ class _ShipSpecial extends StatelessWidget {
               style: Theme.of(context).textTheme.headline6,
             ),
           ),
-          Center(child: Text(provider.specialDescription)),
-          Center(child: Text(provider.specialModifier)),
+          Center(
+            child: Text(
+              provider.specialDescription,
+              textAlign: TextAlign.center,
+            ),
+          ),
           Wrap(
             alignment: WrapAlignment.spaceAround,
             spacing: 16,
@@ -649,6 +653,12 @@ class _ShipSpecial extends StatelessWidget {
                 value: provider.specialHitsRequired,
               ),
             ],
+          ),
+          Center(
+            child: Text(
+              provider.specialModifier,
+              textAlign: TextAlign.center,
+            ),
           ),
         ],
       ),
