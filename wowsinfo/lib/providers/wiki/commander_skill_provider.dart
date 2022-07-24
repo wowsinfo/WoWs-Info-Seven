@@ -69,7 +69,13 @@ class CommanderSkillProvider with ChangeNotifier {
         })
         .where((skill) => skill != null)
         .reduce((prev, curr) => prev!.merge(curr!))
-        .toString();
+        .toString()
+        .split('\n')
+        // there are skills for like battleships, we don't want to show it if it is currently a destroyer
+        .where((line) =>
+            !line.contains(')') ||
+            (line.contains(')') && line.contains(_selectedTab)))
+        .join('\n');
   }
 
   bool isSkillSelected(ShipSkill skill) => _selectedSkills.contains(skill);

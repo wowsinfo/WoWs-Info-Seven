@@ -729,6 +729,31 @@ class _ShipDepthCharge extends StatelessWidget {
               style: Theme.of(context).textTheme.headline6,
             ),
           ),
+          Wrap(
+            alignment: WrapAlignment.spaceAround,
+            spacing: 16,
+            children: [
+              TextWithCaption(
+                  title: Localisation.instance.bombDamage,
+                  value: provider.depthChargeDamage),
+              TextWithCaption(
+                title: Localisation.of(context).warship_weapon_configuration,
+                value: provider.depthChargeConfig,
+              ),
+              TextWithCaption(
+                title: Localisation.instance.reloadTime,
+                value: provider.depthChargeReload,
+              ),
+              TextWithCaption(
+                title: Localisation.instance.shellFireChance,
+                value: provider.depthChargeBurnChance,
+              ),
+              TextWithCaption(
+                title: Localisation.instance.floodChance,
+                value: provider.depthChargeFloodChance,
+              ),
+            ],
+          ),
         ],
       ),
     );
