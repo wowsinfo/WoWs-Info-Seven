@@ -24,12 +24,12 @@ class CommanderSkill {
   final String name;
   final String description;
 
+  String get partialDescription => '$modifiers$logicTrigger';
+  String? get skillDescription => Localisation.instance.stringOf(description);
   String get fullDescriptions {
-    final partial = '$modifiers$logicTrigger';
-    final skillDescription = Localisation.instance.stringOf(description);
     final list = [
       skillDescription,
-      partial,
+      partialDescription,
     ]..removeWhere((e) => e == null);
     return list.map((e) => e!.trim()).join('\n').trim();
   }

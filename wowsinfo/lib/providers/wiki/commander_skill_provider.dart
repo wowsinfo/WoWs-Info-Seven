@@ -59,9 +59,14 @@ class CommanderSkillProvider with ChangeNotifier {
   final List<ShipSkill> _selectedSkills = [];
   String get selectedDescriptions {
     if (_selectedSkills.isEmpty) return '';
-    return _selectedSkills
+    var additionalDecription = '';
+    final skillDescription = _selectedSkills
         .map((skill) {
           final commanderSkill = GameRepository.instance.skillOf(skill.name);
+          final passiveSkill = commanderSkill?.skillDescription;
+          if (passiveSkill != null) {
+            additionalDecription += '\n$passiveSkill';
+          }
           if (commanderSkill == null) return null;
           return commanderSkill.modifiers.merge(
             commanderSkill.logicTrigger.modifiers,
@@ -76,6 +81,8 @@ class CommanderSkillProvider with ChangeNotifier {
             !line.contains(')') ||
             (line.contains(')') && line.contains(_selectedTab)))
         .join('\n');
+    additionalDecription.trim();
+    return '$additionalDecription\n\n$skillDescription';
   }
 
   bool isSkillSelected(ShipSkill skill) => _selectedSkills.contains(skill);

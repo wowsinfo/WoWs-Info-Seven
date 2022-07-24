@@ -476,13 +476,15 @@ class Modifiers {
         }
 
         // logger.info('Ship type: $shipType');
-        if (description.contains(valueString.trim())) continue;
-        // if this modifier for all ship types are the same, don't add things like [Battleship]
-        // make sure all values are the same as well
+        final sameForAll = (stringSet.length == 1 && valueSet.length == 1);
         if (shipType == null ||
-            (stringSet.length == 1 && valueSet.length == 1)) {
-          // make sure there is no duplications
+            (sameForAll && !description.contains(valueString.trim()))) {
+          // make sure there is no duplications and add only one
+          // if this modifier for all ship types are the same, don't add things like [Battleship]
           description += valueString;
+        } else if (sameForAll) {
+          // don't add the same string multiple times
+          continue;
         } else {
           final shipTypeString =
               Localisation.instance.stringOf(shipType, prefix: 'IDS_');

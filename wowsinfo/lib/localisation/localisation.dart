@@ -152,8 +152,8 @@ class Localisation {
     }
     final rawString = _lang[_gameLang]![langKey];
     // _logger.fine('raw - $rawString');
-    if (rawString == null) {
-      _logger.severe('Language key $langKey not found');
+    if (rawString == null || rawString.trim().isEmpty) {
+      _logger.severe('Language key $langKey not found or empty');
       return null;
     }
 
