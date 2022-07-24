@@ -15,6 +15,7 @@ class ShipModuleSelection {
   int _selectedAirSupport = 0;
   int _selectedAirDefense = 0;
   int _selectedDepthCharge = 0;
+  int _selectedSpecial = 0;
 
   int _selectedFighter = 0;
   int _selectedSkipBomber = 0;
@@ -31,6 +32,7 @@ class ShipModuleSelection {
   int get airSupportIndex => _selectedAirSupport;
   int get airDefenseIndex => _selectedAirDefense;
   int get depthChargeIndex => _selectedDepthCharge;
+  int get specialIndex => _selectedSpecial;
 
   int get fighterIndex => _selectedFighter;
   int get skipBomberIndex => _selectedSkipBomber;
@@ -51,6 +53,7 @@ class ShipModuleSelection {
     _selectedAirSupport = selection.airSupportIndex;
     _selectedAirDefense = selection.airDefenseIndex;
     _selectedDepthCharge = selection.depthChargeIndex;
+    _selectedSpecial = selection.specialIndex;
 
     _selectedFighter = selection.fighterIndex;
     _selectedSkipBomber = selection.skipBomberIndex;

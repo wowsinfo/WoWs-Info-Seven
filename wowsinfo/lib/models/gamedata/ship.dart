@@ -214,8 +214,9 @@ class GunInfo {
       );
 }
 
+@immutable
 class Burst {
-  Burst({
+  const Burst({
     required this.burstReloadTime,
     required this.fullReloadTime,
     this.modifiers,
@@ -317,6 +318,59 @@ class FireControlInfo {
       FireControlInfo(
         maxDistCoef: json['maxDistCoef'],
         sigmaCountCoef: json['sigmaCountCoef'],
+      );
+}
+
+@immutable
+class SpecialsInfo {
+  const SpecialsInfo({
+    required this.rageMode,
+  });
+
+  final RageMode rageMode;
+
+  factory SpecialsInfo.fromJson(Map<String, dynamic> json) => SpecialsInfo(
+        rageMode: RageMode.fromJson(json['rageMode']),
+      );
+}
+
+/// The F key for tier 11s
+@immutable
+class RageMode {
+  const RageMode({
+    required this.boostDuration,
+    required this.decrementCount,
+    required this.decrementDelay,
+    required this.decrementPeriod,
+    required this.gunsForSalvo,
+    this.modifiers,
+    required this.radius,
+    required this.rageModeName,
+    required this.requiredHits,
+  });
+
+  final num boostDuration;
+  final int decrementCount;
+  final num decrementDelay;
+  final num decrementPeriod;
+  final int gunsForSalvo;
+  final Modifiers? modifiers;
+  final num radius;
+  final String rageModeName;
+  final int requiredHits;
+
+  factory RageMode.fromJson(Map<String, dynamic> json) => RageMode(
+        boostDuration: json['boostDuration'],
+        decrementCount: json['decrementCount'],
+        decrementDelay: json['decrementDelay'],
+        decrementPeriod: json['decrementPeriod'],
+        gunsForSalvo: json['gunsForSalvo'],
+        modifiers: json['modifiers'] == null
+            ? null
+            : Modifiers.fromJson(json['modifiers']),
+        radius: json['radius'],
+        rageModeName: json['rageModeName'],
+        requiredHits: json['requiredHits'],
       );
 }
 

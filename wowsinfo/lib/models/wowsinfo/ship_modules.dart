@@ -23,6 +23,7 @@ enum ShipModuleType {
   skipBomber,
   torpedoBomber,
   diveBomber,
+  special,
   unknown;
 
   /// The key from the GameData
@@ -53,6 +54,8 @@ enum ShipModuleType {
       case ShipModuleType.torpedoBomber:
       case ShipModuleType.diveBomber:
         return ''; // aircrafts are special so they don't need a key
+      case ShipModuleType.special:
+        return 'specials';
       case ShipModuleType.unknown:
         throw ArgumentError('Unknown module type: $this');
     }
@@ -88,6 +91,8 @@ enum ShipModuleType {
         return Localisation.instance.torpedoBomber;
       case ShipModuleType.diveBomber:
         return Localisation.instance.diveBomber;
+      case ShipModuleType.special:
+        return '';
       case ShipModuleType.unknown:
         throw ArgumentError('Unknown module type: $this');
     }
@@ -112,6 +117,7 @@ class ShipModules {
   final List<ShipModuleHolder<AirSupportInfo>> _airSupportInfo = [];
   final List<ShipModuleHolder<AirDefense>> _airDefenseInfo = [];
   final List<ShipModuleHolder<DepthChargeInfo>> _depthChargeInfo = [];
+  final List<ShipModuleHolder<SpecialsInfo>> _specialsInfo = [];
 
   // aircrafts
   final List<ShipModuleHolder<Aircraft>> _fighterInfo = [];
@@ -188,6 +194,8 @@ class ShipModules {
       _valueAt(_airDefenseInfo, _moduleSelection.airDefenseIndex);
   ShipModuleHolder<DepthChargeInfo>? get depthChargeInfo =>
       _valueAt(_depthChargeInfo, _moduleSelection.depthChargeIndex);
+  ShipModuleHolder<SpecialsInfo>? get specialsInfo =>
+      _valueAt(_specialsInfo, _moduleSelection.specialIndex);
 
   ShipModuleHolder<Aircraft>? get fighterInfo =>
       _valueAt(_fighterInfo, _moduleSelection.fighterIndex);
@@ -241,6 +249,8 @@ class ShipModules {
                 ShipModuleType.secondary, GunInfo.fromJson, _secondaryInfo.add);
             addModule(
                 ShipModuleType.pinger, PingerInfo.fromJson, _pingerInfo.add);
+            addModule(ShipModuleType.special, SpecialsInfo.fromJson,
+                _specialsInfo.add);
 
             // There can be multiple of guns & torps. However, they can be the
             // same although having different names. It is only accurate from

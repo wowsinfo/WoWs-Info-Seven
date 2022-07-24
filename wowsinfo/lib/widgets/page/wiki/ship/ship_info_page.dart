@@ -98,6 +98,7 @@ class _ShipInfoPageState extends State<ShipInfoPage>
                 ),
               if (_provider.renderHull) const _ShipSurvivabilty(),
               if (_provider.renderMainGun) _ShipMainBattery(ship: widget.ship),
+              if (_provider.renderSpecials) const _ShipSpecial(),
               if (_provider.renderSecondaryGun) const _ShipSecondaries(),
               if (_provider.renderTorpedo) const _ShipTorpedo(),
               if (_provider.renderAirDefense) const _ShipAirDefense(),
@@ -613,6 +614,45 @@ class _ShipAirDefense extends StatelessWidget {
         ],
       ),
     ];
+  }
+}
+
+class _ShipSpecial extends StatelessWidget {
+  const _ShipSpecial({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final provider = Provider.of<ShipInfoProvider>(context);
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Center(
+            child: Text(
+              provider.specialName,
+              style: Theme.of(context).textTheme.headline6,
+            ),
+          ),
+          Center(child: Text(provider.specialDescription)),
+          Center(child: Text(provider.specialModifier)),
+          Wrap(
+            alignment: WrapAlignment.spaceAround,
+            spacing: 16,
+            children: [
+              TextWithCaption(
+                title: Localisation.instance.actionTime,
+                value: provider.specialDuration,
+              ),
+              TextWithCaption(
+                title: Localisation.instance.requiredHits,
+                value: provider.specialHitsRequired,
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }
 

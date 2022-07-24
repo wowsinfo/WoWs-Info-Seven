@@ -306,6 +306,8 @@ class Localisation {
 
   String get airSupport => _get('AIRSUPPORT', prefix: _shipParam);
   String get depthCharge => _get('DEPTH_CHARGE', prefix: _shipParam);
+  String get actionTime => _get('WORK_TIME', prefix: _shipParam);
+  String get requiredHits => _get('IDS_PARAMS_MODIFIER_REQUIREDHITS_RAGEMODE');
 
   // Upgrades
   String get upgrades => _get('MODERNIZATIONS', prefix: 'IDS_');

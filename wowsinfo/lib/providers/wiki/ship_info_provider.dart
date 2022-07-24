@@ -315,6 +315,24 @@ class ShipInfoProvider with ChangeNotifier {
           .stringOf('IDS_${_torpedoInfo?.launchers[0].ammo[0]}') ??
       '';
 
+  // Specials (tier 11s only for now)
+  SpecialsInfo? get _specialsInfo => _shipModules.specialsInfo?.data;
+  bool get renderSpecials => _specialsInfo != null;
+  RageMode? get _rageMode => _specialsInfo?.rageMode;
+  String get specialName =>
+      Localisation.instance.stringOf(_rageMode?.rageModeName.toUpperCase(),
+          prefix: 'IDS_DOCK_RAGE_MODE_TITLE_') ??
+      '';
+  String get specialDescription =>
+      Localisation.instance.stringOf(_rageMode?.rageModeName.toUpperCase(),
+          prefix: 'IDS_DOCK_RAGE_MODE_DESCRIPTION_') ??
+      '';
+  String get specialModifier => _rageMode?.modifiers?.toString() ?? '';
+  String get specialDuration =>
+      _format(_rageMode?.boostDuration, suffix: Localisation.instance.second);
+  String get specialHitsRequired =>
+      _format(_specialsInfo?.rageMode.requiredHits);
+
   // Air Defense, it is coming from main battery, secondaries and AA guns
   AirDefense? get _airDefense => _shipModules.airDefenseInfo?.data;
   bool get renderAirDefense => airDefenses.isNotEmpty;
