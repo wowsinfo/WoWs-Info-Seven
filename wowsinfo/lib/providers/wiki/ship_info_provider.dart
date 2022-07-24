@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:wowsinfo/extensions/number.dart';
+import 'package:wowsinfo/models/gamedata/aircraft.dart';
 import 'package:wowsinfo/models/gamedata/consumable.dart';
 import 'package:wowsinfo/models/gamedata/game_info.dart';
 import 'package:wowsinfo/models/gamedata/modernization.dart';
+import 'package:wowsinfo/models/gamedata/projectile.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
 import 'package:wowsinfo/models/gamedata/ship_additional.dart';
 import 'package:wowsinfo/models/wowsinfo/ship_module_selection.dart';
@@ -129,6 +131,7 @@ class ShipInfoProvider with ChangeNotifier {
       _format(_gun?.rotation, suffix: Localisation.instance.second);
   String get gunName =>
       Localisation.instance.stringOf(_shipModules.gunInfo?.module?.name) ?? '-';
+  String get gunSigma => _format(_mainGunInfo?.sigma, suffix: 'σ');
 
   bool get hasBurstFire => _mainGunInfo?.burst != null;
   Burst? get burst => _mainGunInfo?.burst;
@@ -299,6 +302,11 @@ class ShipInfoProvider with ChangeNotifier {
         holder.speed = _format(speed, suffix: Localisation.instance.knot);
       }
 
+      final floodChance = ammoInfo.floodChance;
+      if (floodChance != null) {
+        holder.floodChance = _percent(floodChance);
+      }
+
       // 2.6854 is the scale WG uses in game
       final reaction = (visibility ?? 0) / (speed ?? 1) / 2.6854 * 1000;
       if (reaction > 0) {
@@ -401,6 +409,48 @@ class ShipInfoProvider with ChangeNotifier {
   String get planeVisibility =>
       _format(_visibility?.plane, suffix: Localisation.instance.kilometer);
 
+  // Air support
+  AirSupportInfo? get _airSupport => _shipModules.airSupportInfo?.data;
+  bool get renderAirSupport => _airSupport != null;
+  String get airSupportName =>
+      Localisation.instance.stringOf(_airSupport?.name) ?? '';
+  String get airSupportCharges => _format(_airSupport?.chargesNum);
+  String get airSupportReload =>
+      _format(_airSupport?.reload, suffix: Localisation.instance.second);
+  // TODO: to be fixed this is incorrect
+  String get airSupportRange =>
+      _format(_airSupport?.range, suffix: Localisation.instance.kilometer);
+  Aircraft? get _airSupportPlane =>
+      GameRepository.instance.aircraftOf(_airSupport?.plane ?? '');
+  String get airSupportPlaneHealth => _format(_airSupportPlane?.health);
+  // attackCount is actually the bomb count here
+  String get airSupportBombs =>
+      _format(_airSupportPlane?.aircraft?.attackCount);
+  String get airSupportTotalPlanes => _format(_airSupportPlane?.totalPlanes);
+  // Get the bomb name from the aircraft
+  Projectile? get _aircraftBomb => GameRepository.instance
+      .projectileOf(_airSupportPlane?.aircraft?.bombName ?? '');
+  String get airSupportBombDamage => _format(_aircraftBomb?.damage);
+  String get airSupportBombBurnChance => _percent(_aircraftBomb?.burnChance);
+  String get airSupportBombFloodChance => _percent(_aircraftBomb?.floodChance);
+  String get airSupportBombPeneration => _format(
+        _aircraftBomb?.penHe ?? _aircraftBomb?.penSAP,
+        suffix: Localisation.instance.millimeter,
+      );
+
+  // Depth charge
+  DepthChargeInfo? get _depthCharge => _shipModules.depthChargeInfo?.data;
+  bool get renderDepthCharge => _depthCharge != null;
+  String get depthChargeReload =>
+      _format(_depthCharge?.reload, suffix: Localisation.instance.second);
+  String get depthChargeConfig =>
+      '${_format(_depthCharge?.groups)} x ${_format(_depthCharge?.bombs)}';
+  Projectile? get _depathChargeAmmo =>
+      GameRepository.instance.projectileOf(_depthCharge?.ammo ?? '');
+  String get depthChargeDamage => _format(_depathChargeAmmo?.damage);
+  String get depthChargeBurnChance => _percent(_depathChargeAmmo?.burnChance);
+  String get depthChargeFloodChance => _percent(_depathChargeAmmo?.floodChance);
+
   // Upgrades
   bool get hasUpgrades => _shipUpgrades.modernizations.isNotEmpty;
   List<List<Modernization>> get upgrades => _shipUpgrades.modernizationsBySlot;
@@ -471,6 +521,7 @@ class TorpedoHolder {
   String? visibility;
   String? speed;
   String? reactionTime;
+  String? floodChance;
 }
 
 class AirDefenseHolder {

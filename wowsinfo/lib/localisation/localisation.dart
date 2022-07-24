@@ -240,6 +240,7 @@ class Localisation {
   String get diveBomber => _get('DIVEBOMBER', prefix: _moduleType);
 
   static const _shipParam = 'IDS_SHIP_PARAM_';
+  static const _paramModifier = 'IDS_PARAMS_MODIFIER_';
   String get maximumRange => _get('MAX_DIST', prefix: _shipParam);
   String get reloadTime => _get('SHOT_DELAY', prefix: _shipParam);
   String get rotationTime => _get('ROTATION_TIME', prefix: _shipParam);
@@ -282,6 +283,7 @@ class Localisation {
   String get torpedoDamage => _get('TORPEDO_DAMAGE', prefix: _shipParam);
   String get torpedoDetection =>
       _get('TORPEDO_VISIBILITY_DIST', prefix: _shipParam);
+  String get floodChance => _get('FLOODCHANCEFACTOR', prefix: _paramModifier);
 
   // AA
   String get airDefense => _get('AIR_DEFENSE', prefix: _shipParam);
@@ -290,6 +292,17 @@ class Localisation {
   String get airBubbleDamage =>
       _get('AA_BUBBLE_DAMAGE_IN_A_SECOND', prefix: _shipParam);
   String get aaRange => _get('AA_RANGE', prefix: _shipParam);
+
+  // Air support
+  static const _airSupportParams = 'IDS_SHIP_PARAM_AIR_SUPPORT_';
+  String get numberOfBombs =>
+      _get('NUM_BOMBS_ON_PLANE', prefix: _airSupportParams);
+  String get availableFlights =>
+      _get('NUM_SQUADRONS', prefix: _airSupportParams);
+  String get airSupportTotalPlanes =>
+      _get('NUM_PLANES_IN_CHARGE', prefix: _airSupportParams);
+  String get bombDamage => _get('BOMB_DAMAGE', prefix: _airSupportParams);
+  String get planeHealth => _get('PLANEHEALTH', prefix: _paramModifier);
 
   // Mobility
   String get mobility => _get('MOBILITY', prefix: _shipParam);
@@ -307,7 +320,8 @@ class Localisation {
   String get airSupport => _get('AIRSUPPORT', prefix: _shipParam);
   String get depthCharge => _get('DEPTH_CHARGE', prefix: _shipParam);
   String get actionTime => _get('WORK_TIME', prefix: _shipParam);
-  String get requiredHits => _get('IDS_PARAMS_MODIFIER_REQUIREDHITS_RAGEMODE');
+  String get requiredHits =>
+      _get('REQUIREDHITS_RAGEMODE', prefix: _paramModifier);
 
   // Upgrades
   String get upgrades => _get('MODERNIZATIONS', prefix: 'IDS_');

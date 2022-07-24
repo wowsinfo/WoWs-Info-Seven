@@ -286,20 +286,23 @@ class DepthChargeInfo {
 class AirSupportInfo {
   const AirSupportInfo({
     required this.name,
+    required this.chargesNum,
+    required this.plane,
     required this.reload,
-    required this.bombs,
     required this.range,
   });
 
   final String name;
+  final num chargesNum;
+  final String plane;
   final num reload;
-  final int bombs;
   final double range;
 
   factory AirSupportInfo.fromJson(Map<String, dynamic> json) => AirSupportInfo(
         name: json['name'],
+        chargesNum: json['chargesNum'],
+        plane: json['plane'],
         reload: json['reload'],
-        bombs: json['bombs'],
         range: json['range'],
       );
 }

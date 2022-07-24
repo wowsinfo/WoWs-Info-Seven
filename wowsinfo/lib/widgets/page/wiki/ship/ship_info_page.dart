@@ -102,6 +102,8 @@ class _ShipInfoPageState extends State<ShipInfoPage>
               if (_provider.renderSecondaryGun) const _ShipSecondaries(),
               if (_provider.renderTorpedo) const _ShipTorpedo(),
               if (_provider.renderAirDefense) const _ShipAirDefense(),
+              if (_provider.renderAirSupport) const _ShipAirSupport(),
+              if (_provider.renderDepthCharge) const _ShipDepthCharge(),
               if (_provider.renderMobility) const _ShipMobility(),
               if (_provider.renderVisibility) const _ShipVisibility(),
               if (_provider.hasUpgrades) const _ShipUpgrades(),
@@ -320,6 +322,10 @@ class _ShipMainBattery extends StatelessWidget {
                 title: Localisation.instance.gunRotationTime,
                 value: provider.gunRotationTime,
               ),
+              TextWithCaption(
+                title: 'Sigma',
+                value: provider.gunSigma,
+              ),
             ],
           ),
           if (provider.hasBurstFire)
@@ -328,6 +334,7 @@ class _ShipMainBattery extends StatelessWidget {
             child: Text(
               provider.gunName,
               style: Theme.of(context).textTheme.titleLarge,
+              textAlign: TextAlign.center,
             ),
           ),
           ElevatedButton(
@@ -561,6 +568,10 @@ class _ShipTorpedo extends StatelessWidget {
             title: Localisation.instance.torpedoSpeed,
             value: info.speed ?? '-',
           ),
+          TextWithCaption(
+            title: Localisation.instance.floodChance,
+            value: info.floodChance ?? '-',
+          ),
         ],
       ),
     ];
@@ -614,6 +625,113 @@ class _ShipAirDefense extends StatelessWidget {
         ],
       ),
     ];
+  }
+}
+
+class _ShipAirSupport extends StatelessWidget {
+  const _ShipAirSupport({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final provider = Provider.of<ShipInfoProvider>(context);
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Center(
+            child: Text(
+              Localisation.instance.airSupport,
+              style: Theme.of(context).textTheme.headline6,
+            ),
+          ),
+          Center(
+            child: Text(
+              provider.airSupportName,
+              style: Theme.of(context).textTheme.headline6,
+            ),
+          ),
+          Wrap(
+            alignment: WrapAlignment.spaceAround,
+            spacing: 16,
+            children: [
+              TextWithCaption(
+                title: Localisation.instance.reloadTime,
+                value: provider.airSupportReload,
+              ),
+              TextWithCaption(
+                title: Localisation.instance.availableFlights,
+                value: provider.airSupportCharges,
+              ),
+              TextWithCaption(
+                title: Localisation.instance.airSupportTotalPlanes,
+                value: provider.airSupportTotalPlanes,
+              ),
+              TextWithCaption(
+                title: Localisation.instance.planeHealth,
+                value: provider.airSupportPlaneHealth,
+              ),
+              TextWithCaption(
+                title: Localisation.instance.maximumRange,
+                value: provider.airSupportRange,
+              ),
+            ],
+          ),
+          Wrap(
+            alignment: WrapAlignment.spaceAround,
+            spacing: 16,
+            children: [
+              TextWithCaption(
+                title: Localisation.instance.numberOfBombs,
+                value: provider.airSupportBombs,
+              ),
+              TextWithCaption(
+                title: Localisation.instance.bombDamage,
+                value: provider.airSupportBombDamage,
+              ),
+              if (provider.airSupportBombPeneration != '-')
+                TextWithCaption(
+                  title: Localisation.instance.shellPenetration,
+                  value: provider.airSupportBombPeneration,
+                ),
+              if (provider.airSupportBombBurnChance != '-')
+                TextWithCaption(
+                  title: Localisation.instance.shellFireChance,
+                  value: provider.airSupportBombBurnChance,
+                ),
+              if (provider.airSupportBombFloodChance != '-')
+                TextWithCaption(
+                  title: Localisation.instance.floodChance,
+                  value: provider.airSupportBombFloodChance,
+                ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ShipDepthCharge extends StatelessWidget {
+  const _ShipDepthCharge({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final provider = Provider.of<ShipInfoProvider>(context);
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Center(
+            child: Text(
+              Localisation.instance.depthCharge,
+              style: Theme.of(context).textTheme.headline6,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 
