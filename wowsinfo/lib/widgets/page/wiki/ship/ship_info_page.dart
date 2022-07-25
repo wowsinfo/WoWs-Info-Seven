@@ -86,7 +86,7 @@ class _ShipInfoPageState extends State<ShipInfoPage>
                 costCR: _provider.costCR,
                 costGold: _provider.costGold,
                 additional: _provider.shipAdditional,
-                description: _provider.description,
+                description: _provider.testModifiers,
               ),
               if (_provider.canChangeModules)
                 Consumer<ShipInfoProvider>(

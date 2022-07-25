@@ -39,6 +39,8 @@ const List<String> _coeffList = [
   'shootShift',
   'gmShotDelay', // custom reload booster modifier
   'planeEmptyReturnSpeed',
+  'collisionDamageApply',
+  'collisionDamageNerf',
 ];
 
 /// Zero is the baseline, but it is a negative value.

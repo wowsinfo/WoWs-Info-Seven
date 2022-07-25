@@ -79,15 +79,28 @@ class ShipInfoProvider with ChangeNotifier {
         .where((e) => e != null)
         .reduce((a, b) => a?.merge(b));
 
+    final consumables = _ship.consumables.expand((e) => e);
+    final consumableModifiers = consumables
+        .map((e) => GameRepository.instance
+            .abilityOf(e.name)
+            ?.abilityList
+            .reduce((a, b) => a.merge(b)))
+        .where((e) => e != null)
+        .reduce((a, b) => a?.merge(b));
+
     // all of them should be valid
-    if (flagModifiers == null || skills == null) {
+    if (flagModifiers == null ||
+        skills == null ||
+        consumableModifiers == null) {
       assert(false, 'All modifiers should be valid');
     }
 
-    return [flagModifiers, upgradeModifiers, skills]
+    return [flagModifiers, upgradeModifiers, skills, consumableModifiers]
         .where((e) => e != null)
         .reduce((a, b) => a?.merge(b));
   }
+
+  String get testModifiers => _allModifiers.toString();
 
   String get title => '$shipIcon ${_ship.id}';
   String get tier => GameInfo.tiers[_ship.tier - 1];
