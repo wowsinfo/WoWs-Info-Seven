@@ -27,6 +27,8 @@ class Exterior {
   final Modifiers? modifiers;
   final String type;
 
+  bool get isFlag => type == 'Flags';
+
   factory Exterior.fromJson(Map<String, dynamic> json) => Exterior(
         id: json['id'],
         name: json['name'],

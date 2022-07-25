@@ -342,6 +342,8 @@ class Modifiers {
   // Save a copy of the raw data for the desciption
   final Map<String, dynamic> raw;
 
+  bool get isNotEmpty => raw.isNotEmpty;
+
   String? get consumableCount {
     final count = numConsumables;
     if (count == null) return null;

@@ -18,11 +18,10 @@ import 'package:wowsinfo/localisation/localisation.dart';
 class ShipInfoProvider with ChangeNotifier {
   final _logger = Logger('ShipInfoProvider');
 
-  final BuildContext _context;
   final Ship _ship;
   late final _shipModules = ShipModules(_ship);
   late final _shipUpgrades = ShipUpgrades(_ship);
-  ShipInfoProvider(this._context, this._ship) {
+  ShipInfoProvider(this._ship) {
     _shipModules.unpackModules();
     _shipUpgrades.unpackUpgrades();
   }

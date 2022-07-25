@@ -46,6 +46,7 @@ class GameRepository {
   late final List<Ship> shipList;
   late final List<String> shipRegionList;
   late final List<String> shipTypeList;
+  late final List<Flag> usefulFlagList;
 
   /// Load wowsinfo.json from /gamedata/app/data/
   Future<void> initialise() async {
@@ -140,6 +141,12 @@ class GameRepository {
     shipRegionList.sort();
     shipTypeList = _gameInfo.types;
     shipTypeList.sort();
+
+    // get all flags which have a modifier
+    usefulFlagList = exteriorList
+        .where((e) => e.isFlag && (e.modifiers?.isNotEmpty ?? false))
+        .toList()
+      ..sort((a, b) => b.id.compareTo(a.id));
   }
 
   /// Get an alias string by its key.
