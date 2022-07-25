@@ -414,7 +414,9 @@ class Modifiers {
 
       // check if all values are the same as well
       final valueSet = valueMap.map((e) => e.value).toSet().toList();
-
+      // remove 0 because it has no meaning
+      valueSet.removeWhere((e) => e.toDouble() == 0.0);
+      logger.info(valueSet);
       for (final item in valueMap) {
         final valueKey = item.fullKey;
         final langString = Localisation.instance.stringOf(
@@ -474,6 +476,10 @@ class Modifiers {
             valueString = '$langString: $value\n';
           }
         }
+
+        // remove this line if we have -0%
+        // TODO: sometimes, even -0% may have some meanings
+        // if (valueString.contains('-0%')) continue;
 
         // logger.info('Ship type: $shipType');
         final sameForAll = (stringSet.length == 1 && valueSet.length == 1);
