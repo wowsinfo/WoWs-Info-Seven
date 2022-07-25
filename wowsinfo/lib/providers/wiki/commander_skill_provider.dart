@@ -73,7 +73,7 @@ class CommanderSkillProvider with ChangeNotifier {
           );
         })
         .where((skill) => skill != null)
-        .reduce((prev, curr) => prev!.merge(curr!))
+        .reduce((prev, curr) => prev?.merge(curr))
         .toString()
         .split('\n')
         // there are skills for like battleships, we don't want to show it if it is currently a destroyer
@@ -81,7 +81,8 @@ class CommanderSkillProvider with ChangeNotifier {
             !line.contains(')') ||
             (line.contains(')') && line.contains(_selectedTab)))
         .join('\n');
-    additionalDecription.trim();
+    // remove extra spaces
+    additionalDecription = additionalDecription.replaceAll('\n\n', '\n').trim();
     return '$additionalDecription\n\n$skillDescription';
   }
 

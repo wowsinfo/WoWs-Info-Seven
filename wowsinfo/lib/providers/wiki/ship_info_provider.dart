@@ -5,6 +5,7 @@ import 'package:wowsinfo/models/gamedata/aircraft.dart';
 import 'package:wowsinfo/models/gamedata/consumable.dart';
 import 'package:wowsinfo/models/gamedata/game_info.dart';
 import 'package:wowsinfo/models/gamedata/modernization.dart';
+import 'package:wowsinfo/models/gamedata/modifier.dart';
 import 'package:wowsinfo/models/gamedata/projectile.dart';
 import 'package:wowsinfo/models/gamedata/ship.dart';
 import 'package:wowsinfo/models/gamedata/ship_additional.dart';
@@ -57,6 +58,35 @@ class ShipInfoProvider with ChangeNotifier {
     if (value == null) return '-';
     final calculated = (value + offset).toDecimalString();
     return '${value.toDecimalString()} - $calculated';
+  }
+
+  Modifiers? get _allModifiers {
+    final flags = GameRepository.instance.usefulFlagList;
+    final flagModifiers = flags
+        .map((e) => e.modifiers)
+        .where((e) => e != null)
+        .reduce((a, b) => a?.merge(b));
+
+    final upgrades = _shipUpgrades.modernizations;
+    final upgradeModifiers =
+        upgrades.map((e) => e.modifiers).reduce((a, b) => a.merge(b));
+
+    final commanderSKills = GameRepository.instance.commanderSkills[_ship.type];
+    // flatten the list of lists into a single list
+    final skills = commanderSKills
+        ?.expand((e) => e)
+        .map((e) => GameRepository.instance.skillOf(e.name)?.modifiers)
+        .where((e) => e != null)
+        .reduce((a, b) => a?.merge(b));
+
+    // all of them should be valid
+    if (flagModifiers == null || skills == null) {
+      assert(false, 'All modifiers should be valid');
+    }
+
+    return [flagModifiers, upgradeModifiers, skills]
+        .where((e) => e != null)
+        .reduce((a, b) => a?.merge(b));
   }
 
   String get title => '$shipIcon ${_ship.id}';

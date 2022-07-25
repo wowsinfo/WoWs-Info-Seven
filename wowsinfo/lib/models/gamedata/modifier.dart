@@ -38,6 +38,7 @@ const List<String> _coeffList = [
   'planeRegenerationRate',
   'shootShift',
   'gmShotDelay', // custom reload booster modifier
+  'planeEmptyReturnSpeed',
 ];
 
 /// Zero is the baseline, but it is a negative value.
@@ -61,7 +62,7 @@ const List<String> _coeffListZero = [
 ];
 
 // The value is a number meaning adding +7% for example
-const List<String> _addPercent = [
+const List<String> _numberPercent = [
   'uwCoeffBonus',
 ];
 
@@ -76,6 +77,10 @@ const List<String> _additionalList = [
   'AAExtraBubbles',
   'AAInnerExtraBubbles',
   'additionalConsumables',
+  'torpedoBomberAimingTime',
+  'fighterAimingTime',
+  'skipBomberAimingTime',
+  'dcNumPacksBonus',
 ];
 
 // `dist` is for distance
@@ -86,6 +91,7 @@ const List<String> _distList = [
 /// raw distance like 7500.0 to 7.5km
 const List<String> _rawDistList = [
   'acousticWaveRadius',
+  'visionXRayTorpedoDist',
 ];
 
 // `time` is for time
@@ -352,14 +358,27 @@ class Modifiers {
   }
 
   /// Join two modifiers together.
-  Modifiers merge(Modifiers other) {
+  Modifiers merge(Modifiers? other) {
+    if (other == null) {
+      assert(false, 'Modifiers.merge(null)');
+      return this;
+    }
+
     final Map<String, dynamic> output = {...raw};
     for (final entry in other.raw.entries) {
       final key = entry.key;
       final value = entry.value;
       if (output[key] != null) {
         // only add up if it is a number
-        if (value is num) output[key] *= value;
+        if (value is num) {
+          if (_additionalList.contains(key)) {
+            // It is rare to add up
+            output[key] += value;
+          } else {
+            // mostly, it is multiplication
+            output[key] *= value;
+          }
+        }
       } else {
         // add this value
         output[key] = value;
@@ -413,18 +432,37 @@ class Modifiers {
           })
           .toSet()
           .toList();
+      stringSet.removeWhere((e) => e == null || e.isEmpty);
 
       // check if all values are the same as well
       final valueSet = valueMap.map((e) => e.value).toSet().toList();
       // remove 0 because it has no meaning
-      valueSet.removeWhere((e) => e.toDouble() == 0.0);
-      logger.info(valueSet);
+      valueSet.removeWhere((e) => e == 0.0);
       for (final item in valueMap) {
         final valueKey = item.fullKey;
-        final langString = Localisation.instance.stringOf(
+        final String? langString;
+
+        final langKeys = Localisation.instance.findKeyWith(
           valueKey,
           prefix: 'IDS_PARAMS_MODIFIER_',
         );
+
+        if (langKeys.isEmpty) continue;
+        if (langKeys.length == 1) {
+          langString = Localisation.instance.get(langKeys.first);
+        } else if (langKeys.length == 2) {
+          // This might be a skill, get the longer key
+          final longerKey = langKeys.first.length > langKeys.last.length
+              ? langKeys.first
+              : langKeys.last;
+          langString = Localisation.instance.get(longerKey);
+        } else {
+          // too many keys, use the original one
+          langString = Localisation.instance.stringOf(
+            valueKey,
+            prefix: 'IDS_PARAMS_MODIFIER_',
+          );
+        }
 
         // this might be some missing event modifiers
         if (langString == null) continue;
@@ -439,13 +477,22 @@ class Modifiers {
           final double time = value.toDouble();
           valueString =
               '$langString: ${time.toDecimalString()} ${Localisation.instance.second}\n';
+        } else if (_numberPercent.contains(keyOriginal)) {
+          final double percent = value.toDouble() / 100;
+          valueString = '$langString: +${percent.toPercentString()}\n';
         } else if (_additionalList.contains(keyOriginal) ||
             key.contains('additional') ||
             key.contains('extra')) {
           final double extra = value.toDouble();
           // although it is `additional`, it can be NEGATIVE
           final sign = extra >= 0 ? '+' : '-';
-          valueString = '$langString: $sign${extra.abs().toDecimalString()}\n';
+          final tempString =
+              '$langString: $sign${extra.abs().toDecimalString()}';
+          if (key.contains('time')) {
+            valueString = '$tempString ${Localisation.instance.second}\n';
+          } else {
+            valueString = '$tempString\n';
+          }
         } else if (_coeffListZero.contains(keyOriginal)) {
           final double coeff = value.toDouble();
           valueString = '$langString: +${coeff.toPercentString()}\n';
@@ -459,6 +506,10 @@ class Modifiers {
           final positive = coeff > 1.0;
           final percent = (coeff - 1).abs().toPercentString();
           valueString = '$langString: ${positive ? '+' : '-'}$percent\n';
+        } else if (_rawDistList.contains(keyOriginal)) {
+          final double dist = value.toDouble();
+          valueString =
+              '$langString: ${(dist / 1000).toDecimalString()} ${Localisation.instance.kilometer}\n';
         } else if (key.contains('dist') || _distList.contains(keyOriginal)) {
           final double dist = value.toDouble();
           valueString =
@@ -466,10 +517,6 @@ class Modifiers {
         } else if (_rawPercent.contains(keyOriginal)) {
           final double percent = value.toDouble();
           valueString = '$langString: ${percent.toPercentString()}\n';
-        } else if (_rawDistList.contains(keyOriginal)) {
-          final double dist = value.toDouble();
-          valueString =
-              '$langString: ${(dist / 1000).toDecimalString()} ${Localisation.instance.kilometer}\n';
         } else {
           logger.warning('Unknown modifier: $keyOriginal');
           if (value == -1) {

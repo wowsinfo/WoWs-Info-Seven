@@ -53,7 +53,7 @@ class _ShipInfoPageState extends State<ShipInfoPage>
   @override
   void initState() {
     super.initState();
-    _provider = ShipInfoProvider(context, widget.ship);
+    _provider = ShipInfoProvider(widget.ship);
     _similarProvider = SimilarShipProvider(widget.ship);
     _scrollProvider = ScrollProvider(
       scroll: _scrollController,

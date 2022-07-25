@@ -128,6 +128,42 @@ class Localisation {
     _gameLang = language;
   }
 
+  /// This is used when we need to find the alter key
+  List<String> findKeyWith(
+    String search, {
+    String? prefix,
+  }) {
+    var searchUpper = search.toUpperCase();
+    if (prefix != null) {
+      searchUpper = prefix + searchUpper;
+    }
+
+    final result = <String>[];
+    final langKeys = _lang[_gameLang]?.keys;
+    if (langKeys == null) return [];
+    for (final key in langKeys) {
+      if (key.contains(searchUpper)) result.add(key);
+    }
+    return result;
+  }
+
+  /// This method gets the string directly with a key
+  String? get(String key) {
+    if (!_initialised) {
+      _logger.severe('Localisation not initialised');
+      return null;
+    }
+    if (_lang[_gameLang] == null) {
+      _logger.warning('Language $_gameLang is not supported');
+      return null;
+    }
+    if (_lang[_gameLang]?[key] == null) {
+      _logger.warning('Key $key is not supported');
+      return null;
+    }
+    return _lang[_gameLang]?[key];
+  }
+
   /// Get the localized string by the key.
   /// Format the string with the given [constants].
   /// Pass in [prefix] if needed (It will be added to the key).
