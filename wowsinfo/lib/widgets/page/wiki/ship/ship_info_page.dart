@@ -86,7 +86,7 @@ class _ShipInfoPageState extends State<ShipInfoPage>
                 costCR: _provider.costCR,
                 costGold: _provider.costGold,
                 additional: _provider.shipAdditional,
-                description: _provider.testModifiers,
+                description: _provider.description,
               ),
               if (_provider.canChangeModules)
                 Consumer<ShipInfoProvider>(
@@ -175,6 +175,7 @@ class _ShipTitleSection extends StatelessWidget {
             ShipIcon(
               icon: icon,
               height: 128,
+              hero: true,
             ),
             Center(
               child: Text(name, style: Theme.of(context).textTheme.titleLarge),

@@ -68,6 +68,7 @@ class _ShipPageState extends State<ShipPage> {
           return FittedBox(
             child: ShipCell(
               icon: imageName,
+              hero: true,
               name: '${curr.tierString} $shipName',
               isPremium: curr.isPremium,
               isSpecial: curr.isSpecial,
