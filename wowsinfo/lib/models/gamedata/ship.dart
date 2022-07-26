@@ -408,6 +408,8 @@ class PingerInfo {
   final num lifeTime2;
   final num speed;
 
+  num get rangeInKm => range / 1000;
+
   factory PingerInfo.fromJson(Map<String, dynamic> json) => PingerInfo(
         reload: json['reload'],
         range: json['range'],
@@ -424,18 +426,23 @@ class HullInfo {
     this.protection,
     required this.visibility,
     required this.mobility,
+    this.submarineBattery,
   });
 
   final num health;
   final double? protection;
   final VisibilityInfo visibility;
   final MobilityInfo mobility;
+  final SubmarineBatteryInfo? submarineBattery;
 
   factory HullInfo.fromJson(Map<String, dynamic> json) => HullInfo(
         health: json['health'],
         protection: json['protection'],
         visibility: VisibilityInfo.fromJson(json['visibility']),
         mobility: MobilityInfo.fromJson(json['mobility']),
+        submarineBattery: json['submarineBattery'] == null
+            ? null
+            : SubmarineBatteryInfo.fromJson(json['submarineBattery']),
       );
 }
 
@@ -486,6 +493,23 @@ class VisibilityInfo {
         submarine: json['submarine'],
         seaFireCoeff: json['seaFireCoeff'],
         planeFireCoeff: json['planeFireCoeff'],
+      );
+}
+
+@immutable
+class SubmarineBatteryInfo {
+  const SubmarineBatteryInfo({
+    required this.capacity,
+    required this.regen,
+  });
+
+  final int capacity;
+  final num regen;
+
+  factory SubmarineBatteryInfo.fromJson(Map<String, dynamic> json) =>
+      SubmarineBatteryInfo(
+        capacity: json['capacity'],
+        regen: json['regen'],
       );
 }
 

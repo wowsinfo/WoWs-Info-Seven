@@ -287,6 +287,31 @@ class ShipInfoProvider with ChangeNotifier {
     return guns;
   }
 
+  // Pinger
+  PingerInfo? get _pingerInfo => _shipModules.pingerInfo?.data;
+  bool get renderPinger => _pingerInfo != null;
+  String get pingerRange =>
+      _format(_pingerInfo?.rangeInKm, suffix: Localisation.instance.kilometer);
+  String get pingerReloadTime =>
+      _format(_pingerInfo?.reload, suffix: Localisation.instance.second);
+  String get pingerSpeed =>
+      _format(_pingerInfo?.speed, suffix: Localisation.instance.meterPerSecond);
+  String get pingerDuration =>
+      '${_format(_pingerInfo?.lifeTime1, suffix: Localisation.instance.second)} | ${_format(_pingerInfo?.lifeTime2, suffix: Localisation.instance.second)}';
+
+  // Submarine battery
+  SubmarineBatteryInfo? get _submarineBatteryInfo =>
+      _hullInfo?.submarineBattery;
+  bool get renderSubmarineBattery => _submarineBatteryInfo != null;
+  String get submarineBatteryCapacity =>
+      _format(_submarineBatteryInfo?.capacity,
+          suffix: Localisation.instance.unit);
+  // TODO: this is fixed for now, may change in the future
+  String get submarineBatteryUseRate =>
+      _format(1.0, suffix: Localisation.instance.unit);
+  String get submarineBatteryRegen => _format(_submarineBatteryInfo?.regen,
+      suffix: Localisation.instance.unitPerSecond);
+
   // Torpedo
   TorpedoInfo? get _torpedoInfo => _shipModules.torpedoInfo?.data;
   bool get renderTorpedo => _torpedoInfo != null;

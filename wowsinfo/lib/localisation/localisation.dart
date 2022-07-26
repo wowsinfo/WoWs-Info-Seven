@@ -255,6 +255,8 @@ class Localisation {
   String get kilogram => _get('KILOGRAMM', prefix: 'IDS_');
   String get knot => _get('KNOT', prefix: 'IDS_');
   String get meterPerSecond => _get('METER_SECOND', prefix: 'IDS_');
+  String get unit => _get('UNITS', prefix: 'IDS_');
+  String get unitPerSecond => _get('UNITS_SECOND', prefix: 'IDS_');
 
   static const _shipFilter = 'IDS_CAROUSEL_APPLIED_FILTER_HINT_';
   String get regionFilterName => _get('nation', prefix: _shipFilter);
@@ -281,6 +283,7 @@ class Localisation {
   String get reloadTime => _get('SHOT_DELAY', prefix: _shipParam);
   String get rotationTime => _get('ROTATION_TIME', prefix: _shipParam);
   String get shellWeight => _get('AMMO_BULLET_MASS', prefix: _shipParam);
+  String get diveCapacity => _get('BATTERY', prefix: _shipParam);
 
   // Durability
   String get durability => _get('DURABILITY', prefix: _shipParam);
@@ -310,6 +313,17 @@ class Localisation {
 
   // Secondary battery
   String get secondaryBattery => _get('ATBA_SHORT', prefix: _shipParam);
+
+  // Sonar
+  String get pingerDuration => _get('WAVE_DURATION', prefix: _shipParam);
+
+  // Battery
+  String get diveCapcity => _get('BATTERY', prefix: _shipParam);
+  String get batteryMaxCapacity =>
+      _get('BATTERY_MAX_CAPACITY', prefix: _shipParam);
+  String get batteryConsumption =>
+      _get('BATTERY_CONSUMPTION_RATE', prefix: _shipParam);
+  String get bateryRegen => _get('BATTERY_REGEN_RATE', prefix: _shipParam);
 
   // Torpedo
   String get torpedoRange => _get('TORPEDO_MAX_DIST', prefix: _shipParam);

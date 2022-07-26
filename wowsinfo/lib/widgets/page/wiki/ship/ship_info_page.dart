@@ -100,6 +100,8 @@ class _ShipInfoPageState extends State<ShipInfoPage>
               if (_provider.renderMainGun) _ShipMainBattery(ship: widget.ship),
               if (_provider.renderSpecials) const _ShipSpecial(),
               if (_provider.renderSecondaryGun) const _ShipSecondaries(),
+              if (_provider.renderPinger) const _ShipPinger(),
+              if (_provider.renderSubmarineBattery) const _ShipBattery(),
               if (_provider.renderTorpedo) const _ShipTorpedo(),
               if (_provider.renderAirDefense) const _ShipAirDefense(),
               if (_provider.renderAirSupport) const _ShipAirSupport(),
@@ -495,6 +497,92 @@ class _ShipSecondaries extends StatelessWidget {
         ],
       ),
     ];
+  }
+}
+
+class _ShipPinger extends StatelessWidget {
+  const _ShipPinger({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final provider = Provider.of<ShipInfoProvider>(context);
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Center(
+            child: Text(
+              Localisation.instance.sonar,
+              style: Theme.of(context).textTheme.headline6,
+            ),
+          ),
+          Wrap(
+            alignment: WrapAlignment.spaceAround,
+            spacing: 16,
+            children: [
+              TextWithCaption(
+                title: Localisation.instance.reloadTime,
+                value: provider.pingerReloadTime,
+              ),
+              TextWithCaption(
+                title: Localisation.instance.pingerDuration,
+                value: provider.pingerDuration,
+              ),
+              TextWithCaption(
+                title: Localisation.instance.shellVelocity,
+                value: provider.pingerSpeed,
+              ),
+              TextWithCaption(
+                title: Localisation.instance.maximumRange,
+                value: provider.pingerRange,
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ShipBattery extends StatelessWidget {
+  const _ShipBattery({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final provider = Provider.of<ShipInfoProvider>(context);
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Center(
+            child: Text(
+              Localisation.instance.diveCapacity,
+              style: Theme.of(context).textTheme.headline6,
+            ),
+          ),
+          Wrap(
+            alignment: WrapAlignment.spaceAround,
+            spacing: 16,
+            children: [
+              TextWithCaption(
+                title: Localisation.instance.batteryMaxCapacity,
+                value: provider.submarineBatteryCapacity,
+              ),
+              TextWithCaption(
+                title: Localisation.instance.batteryConsumption,
+                value: provider.submarineBatteryUseRate,
+              ),
+              TextWithCaption(
+                title: Localisation.instance.bateryRegen,
+                value: provider.submarineBatteryRegen,
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }
 
