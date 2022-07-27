@@ -600,6 +600,7 @@ class AirBubbles {
     required this.minRange,
     required this.maxRange,
     required this.spawnTime,
+    required this.hitChance,
     required this.damage,
   });
 
@@ -609,6 +610,7 @@ class AirBubbles {
   final double minRange;
   final double maxRange;
   final double spawnTime;
+  final double hitChance;
   final num damage;
 
   factory AirBubbles.fromJson(Map<String, dynamic> json) => AirBubbles(
@@ -618,6 +620,7 @@ class AirBubbles {
         minRange: json['minRange'],
         maxRange: json['maxRange'],
         spawnTime: json['spawnTime'],
+        hitChance: json['hitChance'],
         damage: json['damage'],
       );
 }

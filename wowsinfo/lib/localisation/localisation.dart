@@ -342,6 +342,8 @@ class Localisation {
   String get airBubbleDamage =>
       _get('AA_BUBBLE_DAMAGE_IN_A_SECOND', prefix: _shipParam);
   String get aaRange => _get('AA_RANGE', prefix: _shipParam);
+  String get hitChance => _get('AA_BUBBLE_HITCHANCE', prefix: _shipParam);
+  String get bubbleExplosion => _get('AA_EXPL_COUNT', prefix: _shipParam);
 
   // Air support
   static const _airSupportParams = 'IDS_SHIP_PARAM_AIR_SUPPORT_';

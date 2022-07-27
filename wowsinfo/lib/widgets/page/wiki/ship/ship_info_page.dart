@@ -684,10 +684,37 @@ class _ShipAirDefense extends StatelessWidget {
               style: Theme.of(context).textTheme.headline6,
             ),
           ),
+          for (final bubble in provider.airBubbles)
+            renderAirBubble(context, bubble),
           for (final aa in provider.airDefenses)
             ...renderAirDefense(context, aa),
         ],
       ),
+    );
+  }
+
+  Wrap renderAirBubble(BuildContext context, AirBubbleHolder info) {
+    return Wrap(
+      alignment: WrapAlignment.spaceAround,
+      spacing: 16,
+      children: [
+        TextWithCaption(
+          title: Localisation.instance.bubbleExplosion,
+          value: info.explosions,
+        ),
+        TextWithCaption(
+          title: Localisation.instance.gunDamage,
+          value: info.damage,
+        ),
+        TextWithCaption(
+          title: Localisation.instance.hitChance,
+          value: info.hitChance,
+        ),
+        TextWithCaption(
+          title: Localisation.instance.aaRange,
+          value: info.range,
+        ),
+      ],
     );
   }
 
@@ -704,12 +731,16 @@ class _ShipAirDefense extends StatelessWidget {
         spacing: 16,
         children: [
           TextWithCaption(
-            title: Localisation.instance.aaRange,
-            value: info.range ?? '-',
+            title: Localisation.instance.gunDamage,
+            value: info.damage,
           ),
           TextWithCaption(
-            title: Localisation.instance.gunDamage,
-            value: info.damage ?? '-',
+            title: Localisation.instance.hitChance,
+            value: info.hitChance,
+          ),
+          TextWithCaption(
+            title: Localisation.instance.aaRange,
+            value: info.range,
           ),
         ],
       ),

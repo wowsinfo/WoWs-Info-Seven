@@ -34,11 +34,14 @@ class ShipInfoProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  String _rawPercent(num? value) {
+    if (value == null) return '-';
+    return value.asPercentString();
+  }
+
   String _percent(num? value) {
     if (value == null) return '-';
-    // some might be 0.35 instead of 35.0
-    if (value < 1) return value.toPercentString();
-    return value.asPercentString();
+    return value.toPercentString();
   }
 
   String _format(num? value, {String suffix = ''}) {
@@ -128,7 +131,7 @@ class ShipInfoProvider with ChangeNotifier {
   HullInfo? get _hullInfo => _shipModules.hullInfo?.data;
   bool get renderHull => _hullInfo != null;
   String get health => _format(_hullInfo?.health);
-  String get torpedoProtection => _percent(_hullInfo?.protection);
+  String get torpedoProtection => _rawPercent(_hullInfo?.protection);
 
   // Main battery
   GunInfo? get _mainGunInfo => _shipModules.gunInfo?.data;
@@ -373,7 +376,7 @@ class ShipInfoProvider with ChangeNotifier {
 
       final floodChance = ammoInfo.floodChance;
       if (floodChance != null) {
-        holder.floodChance = _percent(floodChance);
+        holder.floodChance = _rawPercent(floodChance);
       }
 
       // 2.6854 is the scale WG uses in game
@@ -418,6 +421,33 @@ class ShipInfoProvider with ChangeNotifier {
         _mainGunInfo,
         _secondaryInfo,
       );
+  List<AirBubbleHolder> get airBubbles => _extractAirBubbles(
+        _mainGunInfo,
+        _secondaryInfo,
+      );
+
+  List<AirBubbleHolder> _extractAirBubbles(
+    GunInfo? mainGunInfo,
+    GunInfo? secondaryInfo,
+  ) {
+    final List<AirBubbleHolder> airBubbles = [];
+    final mainBubble = mainGunInfo?.bubbles;
+    final secondaryBubble = secondaryInfo?.bubbles;
+
+    for (final bubble in [mainBubble, secondaryBubble]) {
+      if (bubble == null) continue;
+      final holder = AirBubbleHolder(
+        damage: _format(bubble.damage),
+        explosions: '${bubble.inner} + ${bubble.outer}',
+        hitChance: _percent(bubble.hitChance),
+        range:
+            '${_format(bubble.minRange)}- ${_format(bubble.maxRange, suffix: Localisation.instance.kilometer)}',
+      );
+      airBubbles.add(holder);
+    }
+
+    return airBubbles;
+  }
 
   List<AirDefenseHolder> _extractAirDefenses(
     AirDefense? airDefense,
@@ -429,21 +459,7 @@ class ShipInfoProvider with ChangeNotifier {
     final near = airDefense?.near;
     final far = airDefense?.far;
     final mainFar = mainGunInfo?.far;
-    final mainBubble = mainGunInfo?.bubbles;
     final secondaryFar = secondaryInfo?.far;
-    final secondaryBubble = secondaryInfo?.bubbles;
-
-    for (final bubble in [mainBubble, secondaryBubble]) {
-      if (bubble == null) continue;
-      final holder = AirDefenseHolder(
-        name: 'TODO',
-      );
-
-      holder.range =
-          _format(bubble.maxRange, suffix: Localisation.instance.kilometer);
-      holder.damage = _format(bubble.damage);
-      airDefenses.add(holder);
-    }
 
     for (final aa in [near, mid, far, mainFar, secondaryFar]) {
       if (aa == null) continue;
@@ -474,10 +490,15 @@ class ShipInfoProvider with ChangeNotifier {
             count += gunInfo.count;
           }
 
-          final holder = AirDefenseHolder(name: '$count x $each $name');
-          holder.range =
-              _format(aaInfo.maxRange, suffix: Localisation.instance.kilometer);
-          holder.damage = _format(aaInfo.damage);
+          final holder = AirDefenseHolder(
+            name: '$count x $each $name',
+            damage: _format(aaInfo.dps),
+            hitChance: _percent(aaInfo.hitChance),
+            range: _format(
+              aaInfo.maxRange,
+              suffix: Localisation.instance.kilometer,
+            ),
+          );
           airDefenses.add(holder);
         }
       }
@@ -527,7 +548,8 @@ class ShipInfoProvider with ChangeNotifier {
       .projectileOf(_airSupportPlane?.aircraft?.bombName ?? '');
   String get airSupportBombDamage => _format(_aircraftBomb?.damage);
   String get airSupportBombBurnChance => _percent(_aircraftBomb?.burnChance);
-  String get airSupportBombFloodChance => _percent(_aircraftBomb?.floodChance);
+  String get airSupportBombFloodChance =>
+      _rawPercent(_aircraftBomb?.floodChance);
   String get airSupportBombPeneration => _format(
         _aircraftBomb?.penHe ?? _aircraftBomb?.penSAP,
         suffix: Localisation.instance.millimeter,
@@ -544,7 +566,8 @@ class ShipInfoProvider with ChangeNotifier {
       GameRepository.instance.projectileOf(_depthCharge?.ammo ?? '');
   String get depthChargeDamage => _format(_depathChargeAmmo?.damage);
   String get depthChargeBurnChance => _percent(_depathChargeAmmo?.burnChance);
-  String get depthChargeFloodChance => _percent(_depathChargeAmmo?.floodChance);
+  String get depthChargeFloodChance =>
+      _rawPercent(_depathChargeAmmo?.floodChance);
 
   // Upgrades
   bool get hasUpgrades => _shipUpgrades.modernizations.isNotEmpty;
@@ -623,9 +646,27 @@ class TorpedoHolder {
 class AirDefenseHolder {
   AirDefenseHolder({
     required this.name,
+    required this.damage,
+    required this.range,
+    required this.hitChance,
   });
 
   final String name;
-  String? damage;
-  String? range;
+  final String damage;
+  final String range;
+  final String hitChance;
+}
+
+class AirBubbleHolder {
+  AirBubbleHolder({
+    required this.damage,
+    required this.range,
+    required this.hitChance,
+    required this.explosions,
+  });
+
+  final String damage;
+  final String range;
+  final String hitChance;
+  final String explosions;
 }
