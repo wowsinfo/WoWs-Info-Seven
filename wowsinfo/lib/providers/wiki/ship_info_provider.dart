@@ -161,7 +161,7 @@ class ShipInfoProvider with ChangeNotifier {
     List<String> config = [];
     // int total = 0;
     for (final gun in guns) {
-      config.add('${gun.each} x ${gun.count}');
+      config.add('${gun.count} x ${gun.each}');
       // total += gun.each * gun.count;
     }
 
@@ -259,8 +259,9 @@ class ShipInfoProvider with ChangeNotifier {
       final ammoInfo = GameRepository.instance.projectileOf(ammo);
       if (ammoInfo == null) continue;
 
+      final config = '${gun.count} x ${gun.each}';
       final holder = SecondaryGunHolder(
-        name: Localisation.instance.stringOf(ammo, prefix: 'IDS_') ?? '-',
+        name: '$config ${Localisation.instance.stringOf(ammo, prefix: 'IDS_')}',
       );
 
       holder.burnChance = _percent(ammoInfo.burnChance);
@@ -269,6 +270,7 @@ class ShipInfoProvider with ChangeNotifier {
           _format(ammoInfo.speed, suffix: Localisation.instance.meterPerSecond);
       holder.reloadTime =
           _format(gun.reload, suffix: Localisation.instance.second);
+      holder.config = config;
 
       switch (ammoInfo.ammoType) {
         case 'HE':
@@ -575,6 +577,7 @@ class SecondaryGunHolder {
   String? damage;
   String? penetration;
   String? velocity;
+  String? config;
 }
 
 class TorpedoHolder {
