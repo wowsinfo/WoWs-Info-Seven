@@ -197,7 +197,7 @@ class GunInfo {
   final double range;
   final double sigma;
   final List<WeaponInfo> guns;
-  final AuraInfo? far;
+  final List<AuraInfo>? far;
   final AirBubbles? bubbles;
   final Burst? burst;
 
@@ -206,7 +206,9 @@ class GunInfo {
         sigma: json['sigma'],
         guns: List<WeaponInfo>.from(
             json['guns'].map((x) => WeaponInfo.fromJson(x))),
-        far: json['far'] == null ? null : AuraInfo.fromJson(json['far']),
+        far: json['far'] == null
+            ? null
+            : List<AuraInfo>.from(json['far'].map((x) => AuraInfo.fromJson(x))),
         bubbles: json['bubbles'] == null
             ? null
             : AirBubbles.fromJson(json['bubbles']),
@@ -570,15 +572,22 @@ class AirDefense {
     this.far,
   });
 
-  final AuraInfo? medium;
-  final AuraInfo? near;
-  final AuraInfo? far;
+  final List<AuraInfo>? medium;
+  final List<AuraInfo>? near;
+  final List<AuraInfo>? far;
 
   factory AirDefense.fromJson(Map<String, dynamic> json) => AirDefense(
-        medium:
-            json['medium'] == null ? null : AuraInfo.fromJson(json['medium']),
-        near: json['near'] == null ? null : AuraInfo.fromJson(json['near']),
-        far: json['far'] == null ? null : AuraInfo.fromJson(json['far']),
+        medium: json['medium'] == null
+            ? null
+            : List<AuraInfo>.from(
+                json['medium'].map((x) => AuraInfo.fromJson(x))),
+        near: json['near'] == null
+            ? null
+            : List<AuraInfo>.from(
+                json['near'].map((x) => AuraInfo.fromJson(x))),
+        far: json['far'] == null
+            ? null
+            : List<AuraInfo>.from(json['far'].map((x) => AuraInfo.fromJson(x))),
       );
 }
 
@@ -622,6 +631,7 @@ class AuraInfo {
     required this.damage,
     required this.rof,
     required this.dps,
+    required this.guns,
   });
 
   final double minRange;
@@ -630,6 +640,7 @@ class AuraInfo {
   final num damage;
   final double rof;
   final num dps;
+  final List<AuraGuns> guns;
 
   factory AuraInfo.fromJson(Map<String, dynamic> json) => AuraInfo(
         minRange: json['minRange'],
@@ -638,5 +649,32 @@ class AuraInfo {
         damage: json['damage'],
         rof: json['rof'],
         dps: json['dps'],
+        guns:
+            List<AuraGuns>.from(json['guns'].map((x) => AuraGuns.fromJson(x))),
+      );
+}
+
+@immutable
+class AuraGuns {
+  const AuraGuns({
+    required this.ammo,
+    required this.name,
+    required this.each,
+    required this.count,
+    required this.reload,
+  });
+
+  final String ammo;
+  final String name;
+  final int each;
+  final int count;
+  final double reload;
+
+  factory AuraGuns.fromJson(Map<String, dynamic> json) => AuraGuns(
+        ammo: json['ammo'],
+        name: json['name'],
+        each: json['each'],
+        count: json['count'],
+        reload: json['reload'],
       );
 }

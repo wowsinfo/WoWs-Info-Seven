@@ -445,16 +445,42 @@ class ShipInfoProvider with ChangeNotifier {
       airDefenses.add(holder);
     }
 
-    for (final aa in [mainFar, secondaryFar, far, mid, near]) {
+    for (final aa in [near, mid, far, mainFar, secondaryFar]) {
       if (aa == null) continue;
-      final holder = AirDefenseHolder(
-        name: 'TODO',
-      );
+      for (final aaInfo in aa) {
+        // some guns may have the same name, but different code name so merge them here
+        Map<String, List<AuraGuns>> aaGuns = {};
+        for (final gun in aaInfo.guns) {
+          final name = Localisation.instance.stringOf(gun.name);
+          if (name == null) continue;
+          if (!aaGuns.containsKey(name)) {
+            aaGuns[name] = [gun];
+          } else {
+            aaGuns[name]?.add(gun);
+          }
+        }
 
-      holder.range =
-          _format(aa.maxRange, suffix: Localisation.instance.kilometer);
-      holder.damage = _format(aa.damage);
-      airDefenses.add(holder);
+        for (final gunEntry in aaGuns.entries) {
+          final name = gunEntry.key;
+          final gunList = gunEntry.value;
+          if (gunList.isEmpty) {
+            assert(false, 'No guns found for $name');
+            continue;
+          }
+
+          int count = 0;
+          final int each = gunList.first.each;
+          for (final gunInfo in gunList) {
+            count += gunInfo.count;
+          }
+
+          final holder = AirDefenseHolder(name: '$count x $each $name');
+          holder.range =
+              _format(aaInfo.maxRange, suffix: Localisation.instance.kilometer);
+          holder.damage = _format(aaInfo.damage);
+          airDefenses.add(holder);
+        }
+      }
     }
 
     return airDefenses;
@@ -600,7 +626,6 @@ class AirDefenseHolder {
   });
 
   final String name;
-  String? configuration;
   String? damage;
   String? range;
 }
