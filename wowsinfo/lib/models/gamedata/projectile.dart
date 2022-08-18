@@ -92,7 +92,7 @@ class ArmorPiecingInfo {
   final num weight;
   final double drag;
   final num velocity;
-  final double krupp;
+  final num krupp;
 
   factory ArmorPiecingInfo.fromJson(Map<String, dynamic> json) =>
       ArmorPiecingInfo(
