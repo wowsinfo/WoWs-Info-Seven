@@ -12,8 +12,7 @@ if res.status_code == 200:
         f.close()
 
     print("=> Write to personal_rating.json")
-    os.system(
-        "git commit -am '{} update personal rating'".format(datetime.datetime.now()))
+    os.system('git commit -am "{} update personal rating"'.format(datetime.datetime.now()))
     os.system("git push origin API")
     # webbrowser.open('https://github.com/HenryQuan/WoWs-Info-End/commits/API')
 else:
