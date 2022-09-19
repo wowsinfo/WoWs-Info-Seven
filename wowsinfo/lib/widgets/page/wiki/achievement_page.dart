@@ -5,6 +5,7 @@ import 'package:wowsinfo/foundation/helpers/utils.dart';
 import 'package:wowsinfo/models/gamedata/achievement.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
+import 'package:wowsinfo/widgets/animation/popup_box.dart';
 import 'package:wowsinfo/widgets/shared/asset_image_loader.dart';
 import 'package:wowsinfo/widgets/shared/max_width_box.dart';
 import 'package:wowsinfo/widgets/shared/new_item_indicator.dart';
@@ -42,21 +43,23 @@ class AchievementPage extends StatelessWidget {
         itemBuilder: (context, index) {
           final curr = _achievements[index];
           final imageName = curr.icon;
-          return InkWell(
-            child: Stack(
-              fit: StackFit.passthrough,
-              children: [
-                FittedBox(
-                  child: AssetImageLoader(
-                    name: 'data/live/app/assets/achievements/$imageName.png',
+          return PopupBox(
+            child: InkWell(
+              child: Stack(
+                fit: StackFit.passthrough,
+                children: [
+                  FittedBox(
+                    child: AssetImageLoader(
+                      name: 'data/live/app/assets/achievements/$imageName.png',
+                    ),
                   ),
-                ),
-                if (curr.added == 1) const NewItemIndicator(),
-              ],
+                  if (curr.added == 1) const NewItemIndicator(),
+                ],
+              ),
+              onTap: () {
+                showInfo(context, curr);
+              },
             ),
-            onTap: () {
-              showInfo(context, curr);
-            },
           );
         });
   }

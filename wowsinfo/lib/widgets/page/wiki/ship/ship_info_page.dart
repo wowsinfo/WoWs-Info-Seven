@@ -16,6 +16,7 @@ import 'package:wowsinfo/providers/wiki/ship_info_provider.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
 import 'package:wowsinfo/providers/wiki/similar_ship_provider.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
+import 'package:wowsinfo/widgets/animation/popup_column.dart';
 import 'package:wowsinfo/widgets/page/wiki/ship/ship_module_dialog.dart';
 import 'package:wowsinfo/widgets/page/wiki/ship/ship_penetration_dialog.dart';
 import 'package:wowsinfo/widgets/page/wiki/ship/similar_ship_list.dart';
@@ -76,7 +77,6 @@ class _ShipInfoPageState extends State<ShipInfoPage>
         body: SingleChildScrollView(
           controller: _scrollController,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               _ShipTitleSection(
                 icon: _provider.shipIcon,
@@ -88,30 +88,36 @@ class _ShipInfoPageState extends State<ShipInfoPage>
                 additional: _provider.shipAdditional,
                 description: _provider.description,
               ),
-              if (_provider.canChangeModules)
-                Consumer<ShipInfoProvider>(
-                  builder: (context, value, child) => _ShipModuleButton(
-                    title: 'Change Ship Modules',
-                    shipModules: value.moduleList,
-                    selection: value.selection,
-                  ),
-                ),
-              if (_provider.renderHull) const _ShipSurvivabilty(),
-              if (_provider.renderMainGun) _ShipMainBattery(ship: widget.ship),
-              if (_provider.renderSpecials) const _ShipSpecial(),
-              if (_provider.renderSecondaryGun) const _ShipSecondaries(),
-              if (_provider.renderPinger) const _ShipPinger(),
-              if (_provider.renderSubmarineBattery) const _ShipBattery(),
-              if (_provider.renderTorpedo) const _ShipTorpedo(),
-              if (_provider.renderAirDefense) const _ShipAirDefense(),
-              if (_provider.renderAirSupport) const _ShipAirSupport(),
-              if (_provider.renderDepthCharge) const _ShipDepthCharge(),
-              if (_provider.renderMobility) const _ShipMobility(),
-              if (_provider.renderVisibility) const _ShipVisibility(),
-              if (_provider.hasUpgrades) const _ShipUpgrades(),
-              if (_provider.hasNextShip) const _ShipNextShip(),
-              if (_provider.hasConsumables) const _ShipConsumables(),
-              Container(height: 64),
+              PopupColumn(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  if (_provider.canChangeModules)
+                    Consumer<ShipInfoProvider>(
+                      builder: (context, value, child) => _ShipModuleButton(
+                        title: 'Change Ship Modules',
+                        shipModules: value.moduleList,
+                        selection: value.selection,
+                      ),
+                    ),
+                  if (_provider.renderHull) const _ShipSurvivabilty(),
+                  if (_provider.renderMainGun)
+                    _ShipMainBattery(ship: widget.ship),
+                  if (_provider.renderSpecials) const _ShipSpecial(),
+                  if (_provider.renderSecondaryGun) const _ShipSecondaries(),
+                  if (_provider.renderPinger) const _ShipPinger(),
+                  if (_provider.renderSubmarineBattery) const _ShipBattery(),
+                  if (_provider.renderTorpedo) const _ShipTorpedo(),
+                  if (_provider.renderAirDefense) const _ShipAirDefense(),
+                  if (_provider.renderAirSupport) const _ShipAirSupport(),
+                  if (_provider.renderDepthCharge) const _ShipDepthCharge(),
+                  if (_provider.renderMobility) const _ShipMobility(),
+                  if (_provider.renderVisibility) const _ShipVisibility(),
+                  if (_provider.hasUpgrades) const _ShipUpgrades(),
+                  if (_provider.hasNextShip) const _ShipNextShip(),
+                  if (_provider.hasConsumables) const _ShipConsumables(),
+                  Container(height: 64),
+                ],
+              ),
             ],
           ),
         ),
