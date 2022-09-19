@@ -1044,7 +1044,7 @@ class _ShipUpgrades extends StatelessWidget {
 
   Widget renderUpgrade(BuildContext context, Modernization upgrade) {
     final name = upgrade.icon;
-    return AssetImageLoader(name: 'gamedata/app/assets/upgrades/$name.png');
+    return AssetImageLoader(name: 'data/live/app/assets/upgrades/$name.png');
   }
 }
 
@@ -1175,7 +1175,7 @@ class _ShipConsumables extends StatelessWidget {
       child: Column(
         children: [
           AssetImageLoader(
-            name: 'gamedata/app/assets/consumables/$icon.png',
+            name: 'data/live/app/assets/consumables/$icon.png',
           ),
           if (consumableCount != null) Text(consumableCount),
         ],

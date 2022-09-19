@@ -83,7 +83,7 @@ class Localisation {
   late final Map<String, Map<String, String>> _lang;
   late String _gameLang;
 
-  /// Load wowsinfo.json from /gamedata/app/data/
+  /// Load wowsinfo.json from /data/live/app/data/
   Future<void> initialise() async {
     if (_initialised) {
       _logger.severe('Localisation already initialised');
@@ -94,7 +94,7 @@ class Localisation {
 
     // load the language file
     final langString = await rootBundle.loadString(
-      'gamedata/app/lang/lang.json',
+      'data/live/app/lang/lang.json',
       cache: false,
     );
     timer.log(message: 'Loaded lang.json');

@@ -20,7 +20,7 @@ class ShipIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final fullIcon = 'gamedata/app/assets/ships/$icon.png';
+    final fullIcon = 'data/live/app/assets/ships/$icon.png';
     final box = SizedBox(
       height: height ?? 80,
       width: width,
@@ -29,7 +29,7 @@ class ShipIcon extends StatelessWidget {
         children: [
           AssetImageLoader(
             name: fullIcon,
-            placeholder: 'gamedata/app/assets/ships/_default.png',
+            placeholder: 'data/live/app/assets/ships/_default.png',
           ),
           if (isNew ?? false) const NewItemIndicator(),
         ],

@@ -50,6 +50,8 @@ app.*.map.json
 
 # all JSON files
 **/*.json
+# the commander skill doesn't change that much
+!**/skills.json
 
 # generated files by i10n
 desiredFileName.txt

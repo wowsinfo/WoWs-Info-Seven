@@ -166,7 +166,7 @@ class _CommanderSkillPageState extends State<CommanderSkillPage> {
         child: SizedBox(
           width: 80,
           child: Image.asset(
-            'gamedata/app/assets/skills/$icon.png',
+            'data/live/app/assets/skills/$icon.png',
             color: color,
           ),
         ),

@@ -48,7 +48,7 @@ class AchievementPage extends StatelessWidget {
               children: [
                 FittedBox(
                   child: AssetImageLoader(
-                    name: 'gamedata/app/assets/achievements/$imageName.png',
+                    name: 'data/live/app/assets/achievements/$imageName.png',
                   ),
                 ),
                 if (curr.added == 1) const NewItemIndicator(),

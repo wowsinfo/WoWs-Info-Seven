@@ -48,7 +48,7 @@ class GameRepository {
   late final List<String> shipTypeList;
   late final List<Flag> usefulFlagList;
 
-  /// Load wowsinfo.json from /gamedata/app/data/
+  /// Load wowsinfo.json from /data/live/app/data/
   Future<void> initialise() async {
     if (_initialised) {
       _logger.severe('GameRepository already initialised');
@@ -59,7 +59,7 @@ class GameRepository {
 
     // load game data
     final jsonString = await rootBundle.loadString(
-      'gamedata/app/data/wowsinfo.json',
+      'data/live/app/data/wowsinfo.json',
       cache: false,
     );
     timer.log(message: 'Loaded wowsinfo.json');
@@ -103,7 +103,7 @@ class GameRepository {
 
     // load commander skills
     final commanderSkills = await rootBundle.loadString(
-      'gamedata/app/data/skills.json',
+      'assets/skills.json',
       cache: false,
     );
     timer.log(message: 'Loaded skills.json');

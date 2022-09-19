@@ -44,7 +44,7 @@ class UpgradePage extends StatelessWidget {
         return InkWell(
           child: FittedBox(
             child: AssetImageLoader(
-              name: 'gamedata/app/assets/upgrades/$imageName.png',
+              name: 'data/live/app/assets/upgrades/$imageName.png',
             ),
           ),
           onTap: () {
