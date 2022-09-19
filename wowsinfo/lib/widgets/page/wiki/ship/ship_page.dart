@@ -4,6 +4,7 @@ import 'package:wowsinfo/foundation/app.dart';
 import 'package:wowsinfo/foundation/helpers/utils.dart';
 import 'package:wowsinfo/providers/wiki/ship_provider.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
+import 'package:wowsinfo/widgets/animation/popup_box.dart';
 import 'package:wowsinfo/widgets/shared/wiki/ship_cell.dart';
 
 import 'ship_info_page.dart';
@@ -18,6 +19,8 @@ class ShipPage extends StatefulWidget {
 }
 
 class _ShipPageState extends State<ShipPage> {
+  final _scrollController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
     // 199 will fit 3 ships on most screens
@@ -30,6 +33,7 @@ class _ShipPageState extends State<ShipPage> {
         ),
         body: SafeArea(
           child: Scrollbar(
+            controller: _scrollController,
             child: buildGridView(itemCount),
           ),
         ),
@@ -55,6 +59,8 @@ class _ShipPageState extends State<ShipPage> {
     // Display everything
     return Consumer<ShipProvider>(
       builder: (context, provider, child) => GridView.builder(
+        cacheExtent: 0, // 0 to show the animation immediately
+        controller: _scrollController,
         padding: const EdgeInsets.only(bottom: 64),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: itemCount,
@@ -65,21 +71,23 @@ class _ShipPageState extends State<ShipPage> {
           final curr = provider.shipList[index];
           final imageName = curr.index;
           final shipName = Localisation.instance.stringOf(curr.name) ?? '';
-          return FittedBox(
-            child: ShipCell(
-              icon: imageName,
-              hero: true,
-              name: '${curr.tierString} $shipName',
-              isPremium: curr.isPremium,
-              isSpecial: curr.isSpecial,
-              isNew: curr.added == 1,
-              onTap: () {
-                Navigator.of(context).push(
-                  App.platformPageRoute(
-                    builder: (_) => ShipInfoPage(ship: curr),
-                  ),
-                );
-              },
+          return PopupBox(
+            child: FittedBox(
+              child: ShipCell(
+                icon: imageName,
+                hero: true,
+                name: '${curr.tierString} $shipName',
+                isPremium: curr.isPremium,
+                isSpecial: curr.isSpecial,
+                isNew: curr.added == 1,
+                onTap: () {
+                  Navigator.of(context).push(
+                    App.platformPageRoute(
+                      builder: (_) => ShipInfoPage(ship: curr),
+                    ),
+                  );
+                },
+              ),
             ),
           );
         },

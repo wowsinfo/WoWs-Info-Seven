@@ -31,6 +31,7 @@ const _specialShipGroups = [
   'disabled',
   'clan',
   'unavailable',
+  'coopOnly',
 ];
 
 @immutable

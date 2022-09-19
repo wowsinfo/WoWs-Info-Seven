@@ -45,6 +45,8 @@ dependencies:
   share_plus: ^4.0.10
   data_table_2: ^2.3.5
 
+  animations: ^2.0.4
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -72,7 +74,7 @@ flutter:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
-  assets:
+  assets: 
     - data/live/app/assets/achievements/
     - data/live/app/assets/camouflages/
     - data/live/app/assets/consumables/
