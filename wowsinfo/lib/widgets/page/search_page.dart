@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:wowsinfo/extensions/list.dart';
 import 'package:wowsinfo/foundation/helpers/utils.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
 import 'package:wowsinfo/models/wargaming/search_result.dart';
 import 'package:wowsinfo/providers/search_provider.dart';
+import 'package:wowsinfo/widgets/animation/debut_effect.dart';
 import 'package:wowsinfo/widgets/shared/icon_ink_well.dart';
 
 class SearchPage extends StatelessWidget {
@@ -104,7 +106,7 @@ class SearchPage extends StatelessWidget {
               provider.numOfClans,
             ),
           ),
-          renderGrid(context, provider.clans),
+          renderWrap(context, provider.clans),
         ],
       ),
     );
@@ -123,28 +125,36 @@ class SearchPage extends StatelessWidget {
               provider.numOfPlayers,
             ),
           ),
-          renderGrid(context, provider.players),
+          renderWrap(context, provider.players),
         ],
       ),
     );
   }
 
-  Widget renderGrid(BuildContext context, List<SearchResult> result) {
+  Widget renderWrap(BuildContext context, List<SearchResult> result) {
     final count = Utils(context).getItemCount(6, 1, 300);
     final width = MediaQuery.of(context).size.width;
     final provider = Provider.of<SearchProvider>(context, listen: false);
+    final itemSize = result.length.toDouble();
+
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
-      children: result
-          .map((e) => SizedBox(
-                width: width / count,
-                child: ListTile(
-                  title: Text(e.displayName),
-                  trailing: Text(e.id),
-                  onTap: () => provider.onResultSelected(context, e),
-                ),
-              ))
-          .toList(growable: false),
+      children: result.enumerate().map((item) {
+        final index = item.key;
+        final value = item.value;
+        return DebutEffect(
+          keepAlive: false,
+          intervalStart: index / itemSize,
+          child: SizedBox(
+            width: width / count,
+            child: ListTile(
+              title: Text(value.displayName),
+              trailing: Text(value.id),
+              onTap: () => provider.onResultSelected(context, value),
+            ),
+          ),
+        );
+      }).toList(growable: false),
     );
   }
 }

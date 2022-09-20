@@ -23,7 +23,10 @@ class AssetImageLoader extends StatelessWidget {
           );
         }
 
-        return Image.asset(placeholder!);
+        return FadeInImage.assetNetwork(
+          placeholder: placeholder!,
+          image: name,
+        );
       },
     );
   }
