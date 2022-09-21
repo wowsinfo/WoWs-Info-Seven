@@ -45,43 +45,6 @@ class App {
   /// Check if this device is IOS or MacOS
   static final bool isApple = !isWeb && (isIOS || Platform.isMacOS);
 
-  static const maxDialogWidth = 500.0;
-
-  /// TODO: need to make sure the size changes and not fixed
-  Size screenSize() {
-    return MediaQuery.of(_context).size;
-  }
-
-  /// From https://stackoverflow.com/a/53912090
-  bool isTablet() {
-    // Desktop is always true
-    if (isDesktop) return true;
-
-    // This is for iPhone, iPad and Android phones & tablets
-    final size = screenSize();
-    final width = size.width;
-    final height = size.height;
-
-    final diagonal = sqrt(width * width + height * height);
-
-    var isTablet = diagonal > 1100.0;
-    return isTablet;
-  }
-
-  /// Check if the device is iPhone 8 size (375 x 667)
-  bool isPhone8() {
-    final size = screenSize();
-    final width = size.width;
-    return width <= 375;
-  }
-
-  /// Check if the device is iPhone X size (320 x 568)
-  bool isPhoneSE() {
-    final size = screenSize();
-    final width = size.width;
-    return width <= 320;
-  }
-
   /// Platform specific page route to distinguish between mobile and desktop.
   static PageRoute platformPageRoute({
     required Widget Function(BuildContext context) builder,
