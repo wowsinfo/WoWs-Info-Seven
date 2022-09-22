@@ -18,12 +18,10 @@ class SimilarShipList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ConstrainedBox(
-      constraints: const BoxConstraints(
-        maxHeight: 134,
-      ),
+    return SafeArea(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
         children: [
           SizedBox(
             child: Padding(
@@ -49,17 +47,18 @@ class SimilarShipList extends StatelessWidget {
                 children: ships.map((ship) {
                   final name = Localisation.instance.stringOf(ship.name);
                   return ShipCell(
-                      icon: ship.index,
-                      name: name ?? '',
-                      isPremium: ship.isPremium,
-                      isSpecial: ship.isSpecial,
-                      onTap: () {
-                        Navigator.of(context).push(
-                          App.platformPageRoute(
-                            builder: (_) => ShipInfoPage(ship: ship),
-                          ),
-                        );
-                      });
+                    icon: ship.index,
+                    name: name ?? '',
+                    isPremium: ship.isPremium,
+                    isSpecial: ship.isSpecial,
+                    onTap: () {
+                      Navigator.of(context).push(
+                        App.platformPageRoute(
+                          builder: (_) => ShipInfoPage(ship: ship),
+                        ),
+                      );
+                    },
+                  );
                 }).toList(growable: false),
               ),
             ),

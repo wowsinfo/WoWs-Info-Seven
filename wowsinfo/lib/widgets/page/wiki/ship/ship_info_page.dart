@@ -1,7 +1,5 @@
-import 'dart:ui';
-
-import 'package:charts_flutter/flutter.dart' hide TextStyle, Axis;
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
 import 'package:wowsinfo/foundation/app.dart';
 import 'package:wowsinfo/foundation/colours.dart';
@@ -16,7 +14,6 @@ import 'package:wowsinfo/providers/wiki/ship_info_provider.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
 import 'package:wowsinfo/providers/wiki/similar_ship_provider.dart';
 import 'package:wowsinfo/repositories/game_repository.dart';
-import 'package:wowsinfo/widgets/animation/popup_column.dart';
 import 'package:wowsinfo/widgets/page/wiki/ship/ship_module_dialog.dart';
 import 'package:wowsinfo/widgets/page/wiki/ship/ship_penetration_dialog.dart';
 import 'package:wowsinfo/widgets/page/wiki/ship/similar_ship_list.dart';
@@ -71,26 +68,27 @@ class _ShipInfoPageState extends State<ShipInfoPage>
         ChangeNotifierProvider.value(value: _scrollProvider),
       ],
       builder: (context, _) => Scaffold(
-        appBar: AppBar(
-          title: Text(_provider.title),
-        ),
-        body: SingleChildScrollView(
+        bottomNavigationBar: buildSimilarShips(),
+        body: CustomScrollView(
           controller: _scrollController,
-          child: Column(
-            children: [
-              _ShipTitleSection(
-                icon: _provider.shipIcon,
-                name: _provider.shipNameWithTier,
-                region: _provider.region,
-                type: _provider.type,
-                costCR: _provider.costCR,
-                costGold: _provider.costGold,
-                additional: _provider.shipAdditional,
-                description: _provider.description,
-              ),
-              PopupColumn(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
+          slivers: [
+            SliverAppBar(
+              title: Text(_provider.title),
+              floating: true,
+            ),
+            SliverMasonryGrid(
+              delegate: SliverChildListDelegate(
+                [
+                  _ShipTitleSection(
+                    icon: _provider.shipIcon,
+                    name: _provider.shipNameWithTier,
+                    region: _provider.region,
+                    type: _provider.type,
+                    costCR: _provider.costCR,
+                    costGold: _provider.costGold,
+                    additional: _provider.shipAdditional,
+                    description: _provider.description,
+                  ),
                   if (_provider.canChangeModules)
                     Consumer<ShipInfoProvider>(
                       builder: (context, value, child) => _ShipModuleButton(
@@ -115,13 +113,16 @@ class _ShipInfoPageState extends State<ShipInfoPage>
                   if (_provider.hasUpgrades) const _ShipUpgrades(),
                   if (_provider.hasNextShip) const _ShipNextShip(),
                   if (_provider.hasConsumables) const _ShipConsumables(),
-                  Container(height: 64),
+                  Container(height: 32)
                 ],
               ),
-            ],
-          ),
+              gridDelegate:
+                  const SliverSimpleGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 500,
+              ),
+            )
+          ],
         ),
-        bottomNavigationBar: buildSimilarShips(),
       ),
     );
   }
@@ -129,6 +130,7 @@ class _ShipInfoPageState extends State<ShipInfoPage>
   Widget? buildSimilarShips() {
     if (!_similarProvider.hasSimilarShips) return null;
 
+    // Animated offset change
     return Consumer<ScrollProvider>(
       builder: (context, value, child) => AnimatedSwitcher(
         // TODO: improve the animation here, it should slide down
@@ -172,7 +174,7 @@ class _ShipTitleSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return Card(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -257,28 +259,30 @@ class _ShipSurvivabilty extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ShipInfoProvider>(context);
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          Text(
-            Localisation.instance.durability,
-            style: Theme.of(context).textTheme.titleLarge,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              TextWithCaption(
-                title: Localisation.instance.health,
-                value: provider.health,
-              ),
-              TextWithCaption(
-                title: Localisation.instance.torpedoProtection,
-                value: provider.torpedoProtection,
-              ),
-            ],
-          ),
-        ],
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Text(
+              Localisation.instance.durability,
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                TextWithCaption(
+                  title: Localisation.instance.health,
+                  value: provider.health,
+                ),
+                TextWithCaption(
+                  title: Localisation.instance.torpedoProtection,
+                  value: provider.torpedoProtection,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -295,70 +299,74 @@ class _ShipMainBattery extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ShipInfoProvider>(context);
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Center(
-            child: Text(
-              Localisation.instance.artillery,
-              style: Theme.of(context).textTheme.headline6,
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Center(
+              child: Text(
+                Localisation.instance.artillery,
+                style: Theme.of(context).textTheme.headline6,
+              ),
             ),
-          ),
-          Wrap(
-            alignment: WrapAlignment.spaceAround,
-            spacing: 16,
-            children: [
-              TextWithCaption(
-                title: Localisation.instance.gunReloadTime,
-                value: provider.gunReloadTime,
-              ),
-              TextWithCaption(
-                title: Localisation.instance.gunRange,
-                value: provider.gunRange,
-              ),
-              // TODO: this doesn't align as expected
-              TextWithCaption(
-                title: Localisation.of(context).warship_weapon_configuration,
-                value: provider.gunConfiguration,
-              ),
-              TextWithCaption(
-                title: Localisation.instance.gunDispersion,
-                value: '',
-              ),
-              TextWithCaption(
-                title: Localisation.instance.gunRotationTime,
-                value: provider.gunRotationTime,
-              ),
-              TextWithCaption(
-                title: 'Sigma',
-                value: provider.gunSigma,
-              ),
-            ],
-          ),
-          if (provider.hasBurstFire)
-            _renderBurstFire(context, provider.burstFireHolder),
-          Center(
-            child: Text(
-              provider.gunName,
-              style: Theme.of(context).textTheme.titleLarge,
-              textAlign: TextAlign.center,
+            Wrap(
+              alignment: WrapAlignment.spaceAround,
+              spacing: 16,
+              children: [
+                TextWithCaption(
+                  title: Localisation.instance.gunReloadTime,
+                  value: provider.gunReloadTime,
+                ),
+                TextWithCaption(
+                  title: Localisation.instance.gunRange,
+                  value: provider.gunRange,
+                ),
+                // TODO: this doesn't align as expected
+                TextWithCaption(
+                  title: Localisation.of(context).warship_weapon_configuration,
+                  value: provider.gunConfiguration,
+                ),
+                TextWithCaption(
+                  title: Localisation.instance.gunDispersion,
+                  value: '',
+                ),
+                TextWithCaption(
+                  title: Localisation.instance.gunRotationTime,
+                  value: provider.gunRotationTime,
+                ),
+                TextWithCaption(
+                  title: 'Sigma',
+                  value: provider.gunSigma,
+                ),
+              ],
             ),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              showShipPenetrationDialog(context, ship);
-            },
-            child: const Text("TODO: show ap penetration curve"),
-          ),
-          Wrap(
-            alignment: WrapAlignment.spaceAround,
-            children: [
-              for (final shell in provider.shells) _renderShell(context, shell),
-            ],
-          ),
-        ],
+            if (provider.hasBurstFire)
+              _renderBurstFire(context, provider.burstFireHolder),
+            Center(
+              child: Text(
+                provider.gunName,
+                style: Theme.of(context).textTheme.titleLarge,
+                textAlign: TextAlign.center,
+              ),
+            ),
+            TextButton.icon(
+              icon: const Icon(Icons.bar_chart_sharp),
+              onPressed: () {
+                showShipPenetrationDialog(context, ship);
+              },
+              label: const Text('show ap penetration curve'),
+            ),
+            Wrap(
+              alignment: WrapAlignment.spaceAround,
+              children: [
+                for (final shell in provider.shells)
+                  _renderShell(context, shell),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -451,20 +459,22 @@ class _ShipSecondaries extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ShipInfoProvider>(context);
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Center(
-            child: Text(
-              '${Localisation.instance.secondaryBattery} (${provider.secondaryRange})',
-              style: Theme.of(context).textTheme.headline6,
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Center(
+              child: Text(
+                '${Localisation.instance.secondaryBattery} (${provider.secondaryRange})',
+                style: Theme.of(context).textTheme.headline6,
+              ),
             ),
-          ),
-          for (final gun in provider.secondaryGuns)
-            ...renderSecondaries(context, gun),
-        ],
+            for (final gun in provider.secondaryGuns)
+              ...renderSecondaries(context, gun),
+          ],
+        ),
       ),
     );
   }
@@ -513,40 +523,42 @@ class _ShipPinger extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ShipInfoProvider>(context);
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Center(
-            child: Text(
-              Localisation.instance.sonar,
-              style: Theme.of(context).textTheme.headline6,
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Center(
+              child: Text(
+                Localisation.instance.sonar,
+                style: Theme.of(context).textTheme.headline6,
+              ),
             ),
-          ),
-          Wrap(
-            alignment: WrapAlignment.spaceAround,
-            spacing: 16,
-            children: [
-              TextWithCaption(
-                title: Localisation.instance.reloadTime,
-                value: provider.pingerReloadTime,
-              ),
-              TextWithCaption(
-                title: Localisation.instance.pingerDuration,
-                value: provider.pingerDuration,
-              ),
-              TextWithCaption(
-                title: Localisation.instance.shellVelocity,
-                value: provider.pingerSpeed,
-              ),
-              TextWithCaption(
-                title: Localisation.instance.maximumRange,
-                value: provider.pingerRange,
-              ),
-            ],
-          ),
-        ],
+            Wrap(
+              alignment: WrapAlignment.spaceAround,
+              spacing: 16,
+              children: [
+                TextWithCaption(
+                  title: Localisation.instance.reloadTime,
+                  value: provider.pingerReloadTime,
+                ),
+                TextWithCaption(
+                  title: Localisation.instance.pingerDuration,
+                  value: provider.pingerDuration,
+                ),
+                TextWithCaption(
+                  title: Localisation.instance.shellVelocity,
+                  value: provider.pingerSpeed,
+                ),
+                TextWithCaption(
+                  title: Localisation.instance.maximumRange,
+                  value: provider.pingerRange,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -558,36 +570,38 @@ class _ShipBattery extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ShipInfoProvider>(context);
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Center(
-            child: Text(
-              Localisation.instance.diveCapacity,
-              style: Theme.of(context).textTheme.headline6,
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Center(
+              child: Text(
+                Localisation.instance.diveCapacity,
+                style: Theme.of(context).textTheme.headline6,
+              ),
             ),
-          ),
-          Wrap(
-            alignment: WrapAlignment.spaceAround,
-            spacing: 16,
-            children: [
-              TextWithCaption(
-                title: Localisation.instance.batteryMaxCapacity,
-                value: provider.submarineBatteryCapacity,
-              ),
-              TextWithCaption(
-                title: Localisation.instance.batteryConsumption,
-                value: provider.submarineBatteryUseRate,
-              ),
-              TextWithCaption(
-                title: Localisation.instance.bateryRegen,
-                value: provider.submarineBatteryRegen,
-              ),
-            ],
-          ),
-        ],
+            Wrap(
+              alignment: WrapAlignment.spaceAround,
+              spacing: 16,
+              children: [
+                TextWithCaption(
+                  title: Localisation.instance.batteryMaxCapacity,
+                  value: provider.submarineBatteryCapacity,
+                ),
+                TextWithCaption(
+                  title: Localisation.instance.batteryConsumption,
+                  value: provider.submarineBatteryUseRate,
+                ),
+                TextWithCaption(
+                  title: Localisation.instance.bateryRegen,
+                  value: provider.submarineBatteryRegen,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -599,38 +613,40 @@ class _ShipTorpedo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ShipInfoProvider>(context);
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Center(
-            child: Text(
-              Localisation.instance.torpedoes,
-              style: Theme.of(context).textTheme.headline6,
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Center(
+              child: Text(
+                Localisation.instance.torpedoes,
+                style: Theme.of(context).textTheme.headline6,
+              ),
             ),
-          ),
-          Wrap(
-            alignment: WrapAlignment.spaceAround,
-            spacing: 16,
-            children: [
-              TextWithCaption(
-                title: Localisation.instance.torpedoReloadTime,
-                value: provider.torpedoReloadTime,
-              ),
-              TextWithCaption(
-                title: Localisation.of(context).warship_weapon_configuration,
-                value: provider.torpedoConfiguration,
-              ),
-              TextWithCaption(
-                title: Localisation.instance.torpedoRotationTime,
-                value: provider.torpedoRotationTime,
-              ),
-            ],
-          ),
-          for (final torp in provider.torpedoes)
-            ...renderTorpedoInfo(context, torp),
-        ],
+            Wrap(
+              alignment: WrapAlignment.spaceAround,
+              spacing: 16,
+              children: [
+                TextWithCaption(
+                  title: Localisation.instance.torpedoReloadTime,
+                  value: provider.torpedoReloadTime,
+                ),
+                TextWithCaption(
+                  title: Localisation.of(context).warship_weapon_configuration,
+                  value: provider.torpedoConfiguration,
+                ),
+                TextWithCaption(
+                  title: Localisation.instance.torpedoRotationTime,
+                  value: provider.torpedoRotationTime,
+                ),
+              ],
+            ),
+            for (final torp in provider.torpedoes)
+              ...renderTorpedoInfo(context, torp),
+          ],
+        ),
       ),
     );
   }
@@ -679,22 +695,24 @@ class _ShipAirDefense extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ShipInfoProvider>(context);
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Center(
-            child: Text(
-              Localisation.instance.airDefense,
-              style: Theme.of(context).textTheme.headline6,
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Center(
+              child: Text(
+                Localisation.instance.airDefense,
+                style: Theme.of(context).textTheme.headline6,
+              ),
             ),
-          ),
-          for (final bubble in provider.airBubbles)
-            renderAirBubble(context, bubble),
-          for (final aa in provider.airDefenses)
-            ...renderAirDefense(context, aa),
-        ],
+            for (final bubble in provider.airBubbles)
+              renderAirBubble(context, bubble),
+            for (final aa in provider.airDefenses)
+              ...renderAirDefense(context, aa),
+          ],
+        ),
       ),
     );
   }
@@ -760,79 +778,81 @@ class _ShipAirSupport extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ShipInfoProvider>(context);
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Center(
-            child: Text(
-              Localisation.instance.airSupport,
-              style: Theme.of(context).textTheme.headline6,
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Center(
+              child: Text(
+                Localisation.instance.airSupport,
+                style: Theme.of(context).textTheme.headline6,
+              ),
             ),
-          ),
-          Center(
-            child: Text(
-              provider.airSupportName,
-              style: Theme.of(context).textTheme.headline6,
+            Center(
+              child: Text(
+                provider.airSupportName,
+                style: Theme.of(context).textTheme.headline6,
+              ),
             ),
-          ),
-          Wrap(
-            alignment: WrapAlignment.spaceAround,
-            spacing: 16,
-            children: [
-              TextWithCaption(
-                title: Localisation.instance.reloadTime,
-                value: provider.airSupportReload,
-              ),
-              TextWithCaption(
-                title: Localisation.instance.availableFlights,
-                value: provider.airSupportCharges,
-              ),
-              TextWithCaption(
-                title: Localisation.instance.airSupportTotalPlanes,
-                value: provider.airSupportTotalPlanes,
-              ),
-              TextWithCaption(
-                title: Localisation.instance.planeHealth,
-                value: provider.airSupportPlaneHealth,
-              ),
-              TextWithCaption(
-                title: Localisation.instance.maximumRange,
-                value: provider.airSupportRange,
-              ),
-            ],
-          ),
-          Wrap(
-            alignment: WrapAlignment.spaceAround,
-            spacing: 16,
-            children: [
-              TextWithCaption(
-                title: Localisation.instance.numberOfBombs,
-                value: provider.airSupportBombs,
-              ),
-              TextWithCaption(
-                title: Localisation.instance.bombDamage,
-                value: provider.airSupportBombDamage,
-              ),
-              if (provider.airSupportBombPeneration != '-')
+            Wrap(
+              alignment: WrapAlignment.spaceAround,
+              spacing: 16,
+              children: [
                 TextWithCaption(
-                  title: Localisation.instance.shellPenetration,
-                  value: provider.airSupportBombPeneration,
+                  title: Localisation.instance.reloadTime,
+                  value: provider.airSupportReload,
                 ),
-              if (provider.airSupportBombBurnChance != '-')
                 TextWithCaption(
-                  title: Localisation.instance.shellFireChance,
-                  value: provider.airSupportBombBurnChance,
+                  title: Localisation.instance.availableFlights,
+                  value: provider.airSupportCharges,
                 ),
-              if (provider.airSupportBombFloodChance != '-')
                 TextWithCaption(
-                  title: Localisation.instance.floodChance,
-                  value: provider.airSupportBombFloodChance,
+                  title: Localisation.instance.airSupportTotalPlanes,
+                  value: provider.airSupportTotalPlanes,
                 ),
-            ],
-          ),
-        ],
+                TextWithCaption(
+                  title: Localisation.instance.planeHealth,
+                  value: provider.airSupportPlaneHealth,
+                ),
+                TextWithCaption(
+                  title: Localisation.instance.maximumRange,
+                  value: provider.airSupportRange,
+                ),
+              ],
+            ),
+            Wrap(
+              alignment: WrapAlignment.spaceAround,
+              spacing: 16,
+              children: [
+                TextWithCaption(
+                  title: Localisation.instance.numberOfBombs,
+                  value: provider.airSupportBombs,
+                ),
+                TextWithCaption(
+                  title: Localisation.instance.bombDamage,
+                  value: provider.airSupportBombDamage,
+                ),
+                if (provider.airSupportBombPeneration != '-')
+                  TextWithCaption(
+                    title: Localisation.instance.shellPenetration,
+                    value: provider.airSupportBombPeneration,
+                  ),
+                if (provider.airSupportBombBurnChance != '-')
+                  TextWithCaption(
+                    title: Localisation.instance.shellFireChance,
+                    value: provider.airSupportBombBurnChance,
+                  ),
+                if (provider.airSupportBombFloodChance != '-')
+                  TextWithCaption(
+                    title: Localisation.instance.floodChance,
+                    value: provider.airSupportBombFloodChance,
+                  ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -892,44 +912,46 @@ class _ShipSpecial extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ShipInfoProvider>(context);
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Center(
-            child: Text(
-              provider.specialName,
-              style: Theme.of(context).textTheme.headline6,
-            ),
-          ),
-          Center(
-            child: Text(
-              provider.specialDescription,
-              textAlign: TextAlign.center,
-            ),
-          ),
-          Wrap(
-            alignment: WrapAlignment.spaceAround,
-            spacing: 16,
-            children: [
-              TextWithCaption(
-                title: Localisation.instance.actionTime,
-                value: provider.specialDuration,
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Center(
+              child: Text(
+                provider.specialName,
+                style: Theme.of(context).textTheme.headline6,
               ),
-              TextWithCaption(
-                title: Localisation.instance.requiredHits,
-                value: provider.specialHitsRequired,
-              ),
-            ],
-          ),
-          Center(
-            child: Text(
-              provider.specialModifier,
-              textAlign: TextAlign.center,
             ),
-          ),
-        ],
+            Center(
+              child: Text(
+                provider.specialDescription,
+                textAlign: TextAlign.center,
+              ),
+            ),
+            Wrap(
+              alignment: WrapAlignment.spaceAround,
+              spacing: 16,
+              children: [
+                TextWithCaption(
+                  title: Localisation.instance.actionTime,
+                  value: provider.specialDuration,
+                ),
+                TextWithCaption(
+                  title: Localisation.instance.requiredHits,
+                  value: provider.specialHitsRequired,
+                ),
+              ],
+            ),
+            Center(
+              child: Text(
+                provider.specialModifier,
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -941,36 +963,38 @@ class _ShipMobility extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ShipInfoProvider>(context);
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Center(
-            child: Text(
-              Localisation.instance.mobility,
-              style: Theme.of(context).textTheme.headline6,
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Center(
+              child: Text(
+                Localisation.instance.mobility,
+                style: Theme.of(context).textTheme.headline6,
+              ),
             ),
-          ),
-          Wrap(
-            alignment: WrapAlignment.spaceAround,
-            spacing: 16,
-            children: [
-              TextWithCaption(
-                title: Localisation.instance.rudderTime,
-                value: provider.rudderTime,
-              ),
-              TextWithCaption(
-                title: Localisation.instance.maxSpeed,
-                value: provider.maxSpeed,
-              ),
-              TextWithCaption(
-                title: Localisation.instance.turningRadius,
-                value: provider.turninRadius,
-              ),
-            ],
-          ),
-        ],
+            Wrap(
+              alignment: WrapAlignment.spaceAround,
+              spacing: 16,
+              children: [
+                TextWithCaption(
+                  title: Localisation.instance.rudderTime,
+                  value: provider.rudderTime,
+                ),
+                TextWithCaption(
+                  title: Localisation.instance.maxSpeed,
+                  value: provider.maxSpeed,
+                ),
+                TextWithCaption(
+                  title: Localisation.instance.turningRadius,
+                  value: provider.turninRadius,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -982,32 +1006,34 @@ class _ShipVisibility extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ShipInfoProvider>(context);
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Center(
-            child: Text(
-              Localisation.instance.visibility,
-              style: Theme.of(context).textTheme.headline6,
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Center(
+              child: Text(
+                Localisation.instance.visibility,
+                style: Theme.of(context).textTheme.headline6,
+              ),
             ),
-          ),
-          Wrap(
-            alignment: WrapAlignment.spaceAround,
-            spacing: 16,
-            children: [
-              TextWithCaption(
-                title: Localisation.instance.airDetection,
-                value: provider.planeVisibility,
-              ),
-              TextWithCaption(
-                title: Localisation.instance.seaDetection,
-                value: provider.seaVisibility,
-              ),
-            ],
-          ),
-        ],
+            Wrap(
+              alignment: WrapAlignment.spaceAround,
+              spacing: 16,
+              children: [
+                TextWithCaption(
+                  title: Localisation.instance.airDetection,
+                  value: provider.planeVisibility,
+                ),
+                TextWithCaption(
+                  title: Localisation.instance.seaDetection,
+                  value: provider.seaVisibility,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -1019,7 +1045,7 @@ class _ShipUpgrades extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ShipInfoProvider>(context);
-    return Center(
+    return Card(
       child: Column(
         children: [
           Text(
@@ -1060,22 +1086,24 @@ class _ShipNextShip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ShipInfoProvider>(context);
-    return Column(
-      children: [
-        Text(
-          Localisation.instance.nextShip,
-          style: Theme.of(context).textTheme.headline6,
-        ),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: provider.nextShips.map((ship) {
-              return renderNextShip(context, ship);
-            }).toList(growable: false),
+    return Card(
+      child: Column(
+        children: [
+          Text(
+            Localisation.instance.nextShip,
+            style: Theme.of(context).textTheme.headline6,
           ),
-        )
-      ],
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: provider.nextShips.map((ship) {
+                return renderNextShip(context, ship);
+              }).toList(growable: false),
+            ),
+          )
+        ],
+      ),
     );
   }
 
@@ -1104,32 +1132,34 @@ class _ShipConsumables extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ShipInfoProvider>(context);
-    return Column(
-      children: [
-        Text(
-          Localisation.instance.consumables,
-          style: Theme.of(context).textTheme.headline6,
-        ),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: provider.consumables.map((consumables) {
-              assert(
-                consumables.isNotEmpty,
-                'There should be at least one consumable',
-              );
-
-              return Column(
-                children: [
-                  for (final consumable in consumables)
-                    renderConsumable(context, consumable),
-                ],
-              );
-            }).toList(growable: false),
+    return Card(
+      child: Column(
+        children: [
+          Text(
+            Localisation.instance.consumables,
+            style: Theme.of(context).textTheme.headline6,
           ),
-        ),
-      ],
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: provider.consumables.map((consumables) {
+                assert(
+                  consumables.isNotEmpty,
+                  'There should be at least one consumable',
+                );
+
+                return Column(
+                  children: [
+                    for (final consumable in consumables)
+                      renderConsumable(context, consumable),
+                  ],
+                );
+              }).toList(growable: false),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
