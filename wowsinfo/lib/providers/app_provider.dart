@@ -34,9 +34,10 @@ class AppProvider with ChangeNotifier {
       primarySwatch: color,
       primaryColor: color,
       brightness: _darkMode ? Brightness.dark : Brightness.light,
-      floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: color,
-      ),
+      // floatingActionButtonTheme: FloatingActionButtonThemeData(
+      //   backgroundColor: color,
+      // ),
+      useMaterial3: true,
       checkboxTheme: CheckboxThemeData(
         fillColor: MaterialStateProperty.all(color),
       ),
