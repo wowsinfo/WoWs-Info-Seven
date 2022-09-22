@@ -108,8 +108,12 @@ class ShipInfoProvider with ChangeNotifier {
   String get title => '$shipIcon ${_ship.id}';
   String get tier => GameInfo.tiers[_ship.tier - 1];
 
-  String get shipName {
-    final name = Localisation.instance.stringOf(_ship.name);
+  String? get shipName {
+    return Localisation.instance.stringOf(_ship.name);
+  }
+
+  String get shipNameWithTier {
+    final name = shipName;
     if (name == null) return '-';
     return '$tier $name';
   }

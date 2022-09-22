@@ -23,14 +23,15 @@ class _CompareShipPageState extends State<CompareShipPage> {
       ),
       body: ChangeNotifierProvider.value(
         value: _provider,
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: DataTable2(
+        child: Consumer<CompareShipProvider>(
+          builder: (context, provider, child) => Padding(
+            padding: const EdgeInsets.all(16),
+            child: DataTable2(
               columnSpacing: 12,
               horizontalMargin: 12,
               minWidth: 600,
               fixedLeftColumns: 1,
-              columns: [
+              columns: const [
                 DataColumn2(
                   label: Text('Column A'),
                   size: ColumnSize.L,
@@ -50,15 +51,17 @@ class _CompareShipPageState extends State<CompareShipPage> {
                   numeric: true,
                 ),
               ],
-              rows: List<DataRow>.generate(
-                  100,
-                  (index) => DataRow(cells: [
-                        DataCell(Text('A' * (10 - index % 10))),
-                        DataCell(Text('B' * (10 - (index + 5) % 10))),
-                        DataCell(Text('C' * (15 - (index + 5) % 10))),
-                        DataCell(Text('D' * (15 - (index + 10) % 10))),
-                        DataCell(Text(((index + 0.1) * 25.4).toString()))
-                      ]))),
+              rows: provider.ships
+                  .map((e) => DataRow(cells: [
+                        DataCell(Text(e.shipName ?? '')),
+                        DataCell(Text(e.health)),
+                        DataCell(Text(e.gunReloadTime)),
+                        DataCell(Text(e.gunRange)),
+                        DataCell(Text(e.gunConfiguration)),
+                      ]))
+                  .toList(),
+            ),
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(

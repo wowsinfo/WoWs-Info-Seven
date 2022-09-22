@@ -46,6 +46,7 @@ dependencies:
   data_table_2: ^2.3.5
 
   animations: ^2.0.4
+  equatable: ^2.0.0
 
 dev_dependencies:
   flutter_test:

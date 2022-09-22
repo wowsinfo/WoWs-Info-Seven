@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:logging/logging.dart';
 import 'package:wowsinfo/localisation/localisation.dart';
 
@@ -10,7 +11,7 @@ abstract class ShipFilterInterface {
 }
 
 /// Filter ships with conditions
-class ShipFilter {
+class ShipFilter extends Equatable {
   // empty lists are not allowed
   ShipFilter({
     required this.name,
@@ -64,4 +65,7 @@ class ShipFilter {
   String toString() {
     return 'ShipFilter{shipName: $name, tierList: $tiers, regionList: $regions, typeList: $types}';
   }
+
+  @override
+  List<Object?> get props => [name, tiers, regions, types];
 }

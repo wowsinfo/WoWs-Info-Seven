@@ -80,7 +80,7 @@ class _ShipInfoPageState extends State<ShipInfoPage>
             children: [
               _ShipTitleSection(
                 icon: _provider.shipIcon,
-                name: _provider.shipName,
+                name: _provider.shipNameWithTier,
                 region: _provider.region,
                 type: _provider.type,
                 costCR: _provider.costCR,
