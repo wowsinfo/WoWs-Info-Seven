@@ -1,8 +1,10 @@
 import requests
-import webbrowser
 import os
 import datetime
+import time
 
+# wait for a delay
+time.sleep(60)
 link = 'https://wows-numbers.com/personal/rating/expected/json/'
 res = requests.get(link)
 if res.status_code == 200:
